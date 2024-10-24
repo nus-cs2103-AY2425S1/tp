@@ -244,27 +244,11 @@ public class AddAssignmentCommandTest {
 
         @Override
         public void setTutorials(TutorialList tutorials) {
-
             throw new AssertionError("This method should not be called.");
         }
 
-    }
-
-    /**
-     * A Model stub that contains a single assignment.
-     */
-    private class ModelStubWithAssignment extends ModelStub {
-        private final Assignment assignment;
-
-        ModelStubWithAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            this.assignment = assignment;
-        }
-
-        @Override
-        public boolean hasAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            return this.assignment.equals(assignment);
+        public String listTutorials() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -289,6 +273,24 @@ public class AddAssignmentCommandTest {
         @Override
         public AssignmentList getAssignmentList() {
             return new AssignmentList();
+        }
+    }
+
+    /**
+     * A Model stub that contains a single assignment.
+     */
+    private class ModelStubWithAssignment extends ModelStub {
+        private final Assignment assignment;
+
+        ModelStubWithAssignment(Assignment assignment) {
+            requireNonNull(assignment);
+            this.assignment = assignment;
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            requireNonNull(assignment);
+            return this.assignment.equals(assignment);
         }
     }
 }

@@ -160,7 +160,7 @@ public class ModelManagerTest {
 
         assertFalse(modelManager.hasTutorial(tutorial));
 
-        TutorialId noneTutorialClass = TutorialId.none();
+        TutorialId noneTutorialId = TutorialId.none();
         Student updatedStudent1 = modelManager.getAddressBook().getStudentList().stream()
                 .filter(s -> s.isSameStudent(ALICE))
                 .findFirst().orElse(null);
@@ -168,8 +168,8 @@ public class ModelManagerTest {
                 .filter(s -> s.isSameStudent(BENSON))
                 .findFirst().orElse(null);
 
-        assertEquals(updatedStudent1.getTutorialId(), noneTutorialClass);
-        assertEquals(updatedStudent2.getTutorialId(), noneTutorialClass);
+        assertEquals(updatedStudent1.getTutorialId(), noneTutorialId);
+        assertEquals(updatedStudent2.getTutorialId(), noneTutorialId);
     }
 
     @Test

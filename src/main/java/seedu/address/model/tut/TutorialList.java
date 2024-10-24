@@ -134,4 +134,19 @@ public class TutorialList {
         TutorialList otherList = (TutorialList) other;
         return this.tutorials.equals(otherList.tutorials);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        int j = 0;
+        for (int i = 0; i < tutorials.size(); i++) {
+            if (tutorials.get(i).equals(Tutorial.none())) {
+                continue;
+            }
+            sb.append(j + 1).append(". ").append(tutorials.get(i).toString()).append("\n");
+            j = j + 1;
+        }
+        return sb.toString();
+    }
+
 }

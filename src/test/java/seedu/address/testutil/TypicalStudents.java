@@ -94,6 +94,11 @@ public class TypicalStudents {
             .withPresentDates(SAMPLE_PRESENT_DATES)
             .build();
 
+    public static final Student AMY_NO_TUTORIAL_ID = new StudentBuilder().withName(VALID_NAME_AMY)
+            .withStudentId(VALID_STUDENTID_AMY).withTutorialId("-1")
+            .withPresentDates(SAMPLE_PRESENT_DATES)
+            .build();
+
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB)
             .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB)
             .withPresentDates(SAMPLE_PRESENT_DATES)

@@ -42,7 +42,7 @@ public class AttendCommandTest {
     }
 
     @Test
-    public void constructor_nullTutorialClass_throwsNullPointerException() {
+    public void constructor_nullTutorialId_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("1001"), null, new Date()));
     }
 
@@ -75,7 +75,7 @@ public class AttendCommandTest {
 
     @Test
     public void execute_attendanceRecordingFails_throwsCommandException() {
-        ModelStubWithoutTutorialClass modelStub = new ModelStubWithoutTutorialClass();
+        ModelStubWithoutTutorialId modelStub = new ModelStubWithoutTutorialId();
         StudentId studentId = new StudentId("1001");
         TutorialId tutorialId = TutorialId.of("1001");
         Date date = new Date();
@@ -251,6 +251,9 @@ public class AttendCommandTest {
         }
 
         @Override
+        public String listTutorials() {
+            throw new AssertionError("This method should not be called.");
+        }
         public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }
@@ -315,7 +318,7 @@ public class AttendCommandTest {
     /**
      * A Model stub without tutorial class
      */
-    private class ModelStubWithoutTutorialClass extends ModelStub {
+    private class ModelStubWithoutTutorialId extends ModelStub {
         private final List<Tutorial> tutorials = new ArrayList<>();
 
         @Override

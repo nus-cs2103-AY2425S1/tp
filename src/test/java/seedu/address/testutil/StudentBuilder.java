@@ -72,7 +72,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code TutorialClass} of the {@code Student} that we are building.
+     * Sets the {@code TutorialId} of the {@code Student} that we are building.
      */
     public StudentBuilder withTutorialId(String tutorialId) {
         this.tutorialId = TutorialId.of(tutorialId);

@@ -197,11 +197,11 @@ public class ModelManager implements Model {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
-        TutorialId updatedTutorialClass = editStudentDescriptor.getTutorialId()
+        TutorialId updatedTutorialId = editStudentDescriptor.getTutorialId()
                 .orElse(studentToEdit.getTutorialId());
         PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
 
-        return new Student(updatedName, updatedStudentId, updatedTutorialClass, updatedDates);
+        return new Student(updatedName, updatedStudentId, updatedTutorialId, updatedDates);
     }
 
     @Override
@@ -215,6 +215,9 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String listTutorials() {
+        return getTutorialList().toString();
+    }
     public void setTutorials(TutorialList tutorials) {
         this.tutorials.resetData(tutorials);
     }
