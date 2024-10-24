@@ -11,6 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+
+import static seedu.address.logic.parser.CliSyntax.*;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -42,6 +45,9 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_WEDDING + "1";
+            + PREFIX_ADDRESS + "123 Main St "
+            + PREFIX_TAG + "Groom "
+            + PREFIX_TAG + "Wedding1";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
@@ -77,7 +83,7 @@ public class AddCommand extends Command {
         generateWeddingJobs(model);
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     public void generateWeddingJobs(Model model) {
@@ -94,19 +100,11 @@ public class AddCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddCommand)) {
             return false;
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
     }
 }
