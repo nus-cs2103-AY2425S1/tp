@@ -11,16 +11,23 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class Listings
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
 Class Buyer
 Class Seller
+Class UniqueListingList
+Class Region
+Class Area
+Class Price
+Class Listing
+Class Address
+Class Name
 
 Class I #FFFFFF
 }
@@ -35,22 +42,36 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> "1" Listings
+
 UserPrefs .up.|> ReadOnlyUserPrefs
+Seller .up.|> Person
+Buyer .up.|> Person
 
 AddressBook *--> "1" UniquePersonList
+Listings *--> "1" UniqueListingList
 UniquePersonList --> "~* all" Person
+UniqueListingList --> "~* all" Listing
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 Person *--> "*" Tag
+Listing *--> Name
+Listing *--> Address
+Listing *--> Price
+Listing *--> Area
+Listing *--> Region
+Listing --> "*" Buyer
+Listing *--> Seller
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+Name -[hidden]left-> Address
+Address -[hidden]left-> Seller
+
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml
