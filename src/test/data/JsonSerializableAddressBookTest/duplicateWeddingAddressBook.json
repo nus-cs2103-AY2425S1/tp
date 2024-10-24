@@ -8,5 +8,24 @@
   }],
   "vendors": [],
   "tags": ["florist", "chef"],
-  "weddings": ["Wedding July 2026", "Wedding 1", "Wedding July 2026", "Paula's Wedding"]
+  "weddings": [
+    {
+      "weddingName": "Wedding August 2029",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    },
+    {
+      "weddingName": "Wedding August 2029",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }
+  ]
 }

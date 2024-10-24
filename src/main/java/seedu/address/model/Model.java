@@ -104,15 +104,21 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException if {@code personPredicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> personPredicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code tagPredicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException if {@code tagPredicate} is null.
      */
     void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code weddingPredicate}.
+     * @throws NullPointerException if {@code weddingPredicate} is null.
+     */
+    void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate);
 
     /**
      * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.

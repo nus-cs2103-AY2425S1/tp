@@ -7,5 +7,15 @@
   } ],
   "vendors": [],
   "tags": ["florist", " "],
-  "weddings": ["Wedding 19"]
+  "weddings": [
+    {
+      "weddingName": "Wedding August 2029",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }
+  ]
 }
