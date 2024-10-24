@@ -38,6 +38,7 @@ public class PersonListPanel extends UiPart<Region> {
 
         // Wait for the personListView to be initialized
         Platform.runLater(() -> {
+            assert(personListView != null);
             setupAutoScroll(personList);
         });
     }
