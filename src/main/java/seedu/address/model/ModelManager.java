@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -152,6 +153,12 @@ public class ModelManager implements Model {
         Objects.requireNonNull(job);
         return addressBook.getPersonList().stream()
                 .anyMatch(person -> person.getJob().equals(job));
+    }
+
+    @Override
+    public void setPersons(List<Person> persons) {
+        this.addressBook.setPersons(persons);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

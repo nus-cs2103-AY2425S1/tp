@@ -40,13 +40,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
-    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -84,6 +77,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+
+    /**
+     * Replaces the current list of persons with the given list.
+     */
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
     }
 
     /**
