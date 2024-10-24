@@ -1,12 +1,14 @@
 .background {
     -fx-background-color: #2B3A67; /* Deep blue background */
 }
+.pane-with-border {
+    -fx-background-color: #ADD8E6;
+}
 
 .result-display {
     -fx-font-size: 12pt; /* Increase font size for better visibility */
     -fx-font-family: "Segoe UI", sans-serif; /* Use a clean, modern font */
     -fx-text-fill: #1E90FF; /* Dodger blue color for the text */
-    -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-border-width: 0px;
     -fx-border-color: transparent;
@@ -92,6 +94,18 @@
     -fx-border-width: 1;
 }
 
+/* Styling for cards when not selected and hovered over */
+.list-cell:filled:hover {
+    -fx-background-color: #2B3A67; /* darker blue on hover */
+    -fx-cursor: hand;
+}
+
+/* Styling for cards when selected and hovered over */
+.list-cell:selected:hover {
+    -fx-background-color: #FF8C00; /* Dark orange when selected and hovered */
+    -fx-cursor: hand;
+}
+
 .list-cell .label {
     -fx-text-fill: white;
 }
@@ -145,8 +159,8 @@
     -fx-background-radius: 3;
 }
 
-/* TagListPanel Styling */
-.tag-list-panel {
+/* Panel Styling */
+.tag-list-panel, .person-list-panel {
     -fx-background-color: #2B3A67; /* Deep blue for consistency */
     -fx-padding: 10px;
     -fx-border-color: #FF8C00; /* Darker orange border */
@@ -157,19 +171,11 @@
 
 /* TagCard Styling */
 .tag-card {
-    -fx-background-color: #3e7b91; /* Subdued blue tone */
     -fx-padding: 8px;
-    -fx-border-color: #FFA500; /* Orange border to make it pop */
     -fx-border-width: 1;
     -fx-border-radius: 10;
-    -fx-background-radius: 10;
     -fx-margin: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
-}
-
-.person-card:hover, .tag-card:hover {
-    -fx-background-color: #2B3A67; /* darker blue on hover */
-    -fx-cursor: hand;
 }
 
 .label:hover {
