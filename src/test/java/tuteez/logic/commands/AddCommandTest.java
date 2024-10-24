@@ -26,9 +26,8 @@ import tuteez.model.ReadOnlyUserPrefs;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.lesson.Lesson;
-import tuteez.testutil.PersonBuilder;
-
 import javafx.beans.property.ObjectProperty;
+import tuteez.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
