@@ -14,8 +14,8 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.scheme.Fasscheme;
-import seedu.address.model.scheme.Scfascheme;
+import seedu.address.model.scheme.MoeFinancialAssistanceScheme;
+import seedu.address.model.scheme.StudentCareFeeAssistanceScheme;
 
 public class SchemeCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook3(), new UserPrefs());
@@ -30,14 +30,16 @@ public class SchemeCommandTest {
 
     @Test
     public void execute_allSchemeAvail_success() {
-        CommandResult expectedCommandResult = new CommandResult("1. " + Fasscheme.SCHEME_NAME + "\n"
-                + "2. " + Scfascheme.SCHEME_NAME + "\n", false, false);
+        CommandResult expectedCommandResult = new CommandResult("1. "
+                + MoeFinancialAssistanceScheme.SCHEME_NAME + "\n"
+                + "2. " + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n", false, false);
         assertCommandSuccess(new SchemeCommand(INDEX_SECOND_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_oneSchemeAvail_success() {
-        CommandResult expectedCommandResult = new CommandResult("1. " + Scfascheme.SCHEME_NAME + "\n",
+        CommandResult expectedCommandResult = new CommandResult("1. "
+                + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n",
                 false, false);
         assertCommandSuccess(new SchemeCommand(INDEX_THIRD_PERSON), model, expectedCommandResult, expectedModel);
     }
