@@ -106,7 +106,7 @@ public class EditCommand extends Command {
         Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedTags, updatedHasPaid);
+                updatedTags, updatedHasPaid, personToEdit.getFrequency());
     }
 
     @Override

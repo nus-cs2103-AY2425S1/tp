@@ -13,10 +13,12 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Person;
 
 public class UnpaidCommandTest {
@@ -28,6 +30,7 @@ public class UnpaidCommandTest {
         Person personToMarkUnpaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
         descriptor.setHasNotPaid();
+        descriptor.setFrequencyToZero();
         UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_UNPAID_PERSON_SUCCESS,
@@ -36,7 +39,8 @@ public class UnpaidCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
+                false, personToMarkUnpaid.getFrequency());
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
@@ -69,7 +73,8 @@ public class UnpaidCommandTest {
 
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
+                false, personToMarkUnpaid.getFrequency());
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
@@ -122,6 +127,33 @@ public class UnpaidCommandTest {
         UnpaidCommand unpaidCommand = new UnpaidCommand(targetIndex, descriptor);
         String expected = UnpaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, unpaidCommand.toString());
+    }
+
+    @Test
+    public void unpaidPersonDescriptor_equals() {
+        UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
+
+        // same object -> returns true
+        assertTrue(descriptor.equals(descriptor));
+
+        // different types -> returns false
+        assertFalse(descriptor.equals(1));
+
+        // null -> returns false
+        assertFalse(descriptor.equals(null));
+
+        assertFalse(descriptor.equals(new UnpaidCommand.UnpaidPersonDescriptor()));
+    }
+
+    @Test
+    public void unpaidPersonDescriptor_toString() {
+        UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
+        descriptor.setHasNotPaid();
+        String expected = new ToStringBuilder(descriptor)
+                .add("hasNotPaid", false)
+                .add("frequency", new Frequency("0"))
+                .toString();
+        assertEquals(expected, descriptor.toString());
     }
 
     private void showNoPerson(Model model) {

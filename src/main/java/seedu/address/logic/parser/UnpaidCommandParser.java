@@ -23,6 +23,7 @@ public class UnpaidCommandParser implements Parser<UnpaidCommand> {
             Index index = ParserUtil.parseIndex(args);
             UnpaidPersonDescriptor unpaidPersonDescriptor = new UnpaidPersonDescriptor();
             unpaidPersonDescriptor.setHasNotPaid(); // Change this to false for Unpaid
+            unpaidPersonDescriptor.setFrequencyToZero();
             return new UnpaidCommand(index, unpaidPersonDescriptor);
         } catch (ParseException pe) {
             throw new ParseException(

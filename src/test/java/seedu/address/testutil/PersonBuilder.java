@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -23,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_BIRTHDAY = "11 09 2001";
     public static final Boolean DEFAULT_HASPAID = false;
-
+    public static final String DEFAULT_FREQUENCY = "0";
     private Name name;
     private Phone phone;
     private Email email;
@@ -31,6 +32,7 @@ public class PersonBuilder {
     private Birthday birthday;
     private Set<Tag> tags;
     private Boolean hasPaid;
+    private Frequency frequency;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,6 +45,7 @@ public class PersonBuilder {
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         tags = new HashSet<>();
         hasPaid = DEFAULT_HASPAID;
+        frequency = new Frequency(DEFAULT_FREQUENCY);
     }
 
     /**
@@ -56,6 +59,7 @@ public class PersonBuilder {
         birthday = personToCopy.getBirthday();
         tags = new HashSet<>(personToCopy.getTags());
         hasPaid = personToCopy.getHasPaid();
+        frequency = personToCopy.getFrequency();
     }
 
     /**
@@ -114,8 +118,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Frequency} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFrequency(String frequency) {
+        this.frequency = new Frequency(frequency);
+        return this;
+    }
     public Person build() {
-        return new Person(name, phone, email, address, birthday, tags, hasPaid);
+        return new Person(name, phone, email, address, birthday, tags, hasPaid, frequency);
     }
 
 }

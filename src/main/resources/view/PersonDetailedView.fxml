@@ -46,6 +46,7 @@
         <Label fx:id="birthday" text="\$birthday" styleClass="label-small" />
         <Label fx:id="address" text="\$address" styleClass="label-small" />
         <Label fx:id="hasPaid" text="\$hasPaid" styleClass="label-small" />
+        <Label fx:id="frequency" text="\$frequency" styleClass="label-small" />
     </VBox>
 
     <FlowPane fx:id="tags" hgap="10" vgap="5" alignment="CENTER"/>

@@ -48,6 +48,10 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Birthday: ")
                 .append(person.getBirthday())
+                .append("; HasPaid: ")
+                .append(person.getHasPaid() ? "Yes" : "No")
+                .append("; Policy Renewal Frequency: ")
+                .append(person.getFrequency() + " month(s)")
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

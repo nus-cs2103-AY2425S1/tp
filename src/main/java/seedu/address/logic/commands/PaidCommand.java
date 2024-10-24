@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Person;
 
 
@@ -25,14 +27,15 @@ public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the person identified by the index number to have made payment.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Marks the person identified by the index number to have made "
+            + "payment and updates the policy renewal frequency.\n"
+            + "Parameters: INDEX (must be a positive integer) " + " " + PREFIX_FREQUENCY + "FREQUENCY\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_FREQUENCY + "3";
 
+    public static final String MESSAGE_NO_FREQUENCY = "Please provide a policy renewal frequency";
     public static final String MESSAGE_PAID_PERSON_SUCCESS = "Marked Person: %1$s";
-
     private final Index index;
-
     private final PaidPersonDescriptor paidPersonDescriptor;
 
     /**
@@ -44,7 +47,7 @@ public class PaidCommand extends Command {
         requireNonNull(paidPersonDescriptor);
 
         this.index = index;
-        this.paidPersonDescriptor = new PaidCommand.PaidPersonDescriptor(paidPersonDescriptor);
+        this.paidPersonDescriptor = new PaidPersonDescriptor(paidPersonDescriptor);
     }
 
     @Override
@@ -72,9 +75,11 @@ public class PaidCommand extends Command {
         assert personToPay != null;
 
         Boolean updatedHasPaid = true;
+        Frequency updatedFrequency = paidPersonDescriptor.getFrequency().orElse(personToPay.getFrequency());
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
-                personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(), updatedHasPaid);
+                personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(),
+                updatedHasPaid, updatedFrequency);
     }
 
     @Override
@@ -105,6 +110,7 @@ public class PaidCommand extends Command {
      */
     public static class PaidPersonDescriptor {
         private Boolean hasPaid;
+        private Frequency frequency;
 
         public PaidPersonDescriptor() {}
 
@@ -113,7 +119,8 @@ public class PaidCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public PaidPersonDescriptor(PaidPersonDescriptor toCopy) {
-            toCopy.setHasPaid();
+            setHasPaid();
+            setFrequency(toCopy.frequency);
         }
 
         public void setHasPaid() {
@@ -122,6 +129,13 @@ public class PaidCommand extends Command {
 
         public Optional<Boolean> getHasPaid() {
             return Optional.ofNullable(hasPaid);
+        }
+
+        public void setFrequency(Frequency frequency) {
+            this.frequency = frequency;
+        }
+        public Optional<Frequency> getFrequency() {
+            return Optional.ofNullable(frequency);
         }
 
         @Override
@@ -136,13 +150,15 @@ public class PaidCommand extends Command {
             }
 
             PaidCommand.PaidPersonDescriptor otherPaidPersonDescriptor = (PaidCommand.PaidPersonDescriptor) other;
-            return Objects.equals(hasPaid, otherPaidPersonDescriptor.hasPaid);
+            return Objects.equals(hasPaid, otherPaidPersonDescriptor.hasPaid)
+                   && Objects.equals(frequency, otherPaidPersonDescriptor.frequency);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("hasPaid", hasPaid)
+                    .add("frequency", frequency)
                     .toString();
         }
     }
