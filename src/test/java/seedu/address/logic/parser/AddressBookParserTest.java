@@ -20,6 +20,7 @@ import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -143,6 +144,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void trackCommand_track() throws Exception {
+        assertTrue(parser.parseCommand(TrackCommand.COMMAND_WORD + " student") instanceof TrackCommand);
+    }
+
+    @Test
+    public void parseCommand_deletetag() throws Exception {
+        assertTrue(parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD + " 1" + " t/test") instanceof DeleteTagCommand);
     }
 
 }
