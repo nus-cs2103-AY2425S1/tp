@@ -20,9 +20,9 @@ public class FindCommand extends Command {
     public static final String COMMAND_ALIAS = "f";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive).\n"
             + "Parameters: [n/nameKeyword] [r/roleKeyword] [t/telegramKeyword] [f/] ...\n"
-            + "Example: " + COMMAND_WORD + " n/alice tan n/bob r/member n/charlie t/ccharliee";
+            + "Example: " + COMMAND_WORD + " n/bernice yu n/charlotte r/member t/davidLi";
 
     private final NameContainsKeywordsPredicate namePredicate;
 

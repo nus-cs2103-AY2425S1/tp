@@ -9,49 +9,64 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAttendanceCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SwitchCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
+import seedu.address.logic.commands.ViewCommand;
 
 /**
  * Controller for a help page.
  */
 public class HelpWindow extends UiPart<Stage> {
-
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HELP_MESSAGE = "Copy the link for the complete user guide  ---> ";
-
-    public static final String HELP_USAGE = "===============================\n"
-            + "         Quick Command Summary\n"
-            + "===============================\n"
-            + "1. Help\n"
-            + "   Displays help information.\n"
-            + "   Format: help\n\n"
-            + "2. Add a Person\n"
-            + "   Adds a new contact to the record.\n"
-            + "   Format: add n/NAME p/PHONE e/EMAIL t/TELEGRAM r/ROLE ([f/])\n\n"
-            + "3. List All Persons\n"
-            + "   Displays all contacts.\n"
-            + "   Format: list\n\n"
-            + "4. Edit a Person\n"
-            + "   Edits an existing contact by index.\n"
-            + "   Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE] ([f/] / [nf/])\n\n"
-            + "5. Find by Name or Role or Telegram or Favourites\n"
-            + "   Finds contacts whose names, roles or telegram contain the specified keywords or\n"
-            + "   if they are marked as favourites.\n"
-            + "   Format: find [n/NAME] [r/ROLE] [t/TELEGRAM] [f/]\n\n"
-            + "6. View contact by telegram handle\n"
-            + "   View detailed information of a contact with the specified telegram handle\n"
-            + "   Format: view t/TELEGRAM\n\n"
-            + "7. Delete a Person\n"
-            + "   Deletes a contact by index.\n"
-            + "   Format: delete INDEX\n\n"
-            + "8. Clear All Entries\n"
-            + "   Clears all contacts from the address book.\n"
-            + "   Format: clear\n\n"
-            + "9. Exit\n"
-            + "   Exits the application.\n"
-            + "   Format: exit";
-
+    public static final String HELP_USAGE;
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final String[] commandMessageUsages = {
+        AddCommand.MESSAGE_USAGE,
+        ClearCommand.MESSAGE_USAGE,
+        DeleteCommand.MESSAGE_USAGE,
+        EditCommand.MESSAGE_USAGE,
+        ExitCommand.MESSAGE_USAGE,
+        FindCommand.MESSAGE_USAGE,
+        HelpCommand.MESSAGE_USAGE,
+        ListAttendanceCommand.MESSAGE_USAGE,
+        ListCommand.MESSAGE_USAGE,
+        MarkAttendanceCommand.MESSAGE_USAGE,
+        SortCommand.MESSAGE_USAGE,
+        SwitchCommand.MESSAGE_USAGE,
+        UnmarkAttendanceCommand.MESSAGE_USAGE,
+        ViewCommand.MESSAGE_USAGE
+    };
+
+    static {
+        StringBuilder helpMessageBuilder = new StringBuilder("""
+                ===============================
+                Command Summary
+                ===============================
+                """);
+        for (int i = 0; i < commandMessageUsages.length; i++) {
+            String[] parts = commandMessageUsages[i].split(":", 2);
+            helpMessageBuilder.append(String.format("%d. %s:\n", i + 1, parts[0].trim()));
+            if (parts.length > 1) {
+                helpMessageBuilder.append("\t").append(parts[1].trim().replace("\n", "\n\t")).append("\n\n");
+            } else {
+                helpMessageBuilder.append("\n");
+            }
+        }
+        HELP_USAGE = helpMessageBuilder.toString();
+    }
 
     @FXML
     private Button copyButton;
@@ -71,6 +86,8 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         helpUsage.setText(HELP_USAGE);
+        root.setMinWidth(600);
+        root.setMinHeight(400);
     }
 
     /**

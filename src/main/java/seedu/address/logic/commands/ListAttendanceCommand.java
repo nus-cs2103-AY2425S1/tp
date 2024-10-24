@@ -12,6 +12,7 @@ import seedu.address.model.person.RoleIsMemberPredicate;
 public class ListAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "attendance";
     public static final String COMMAND_ALIAS = "atd";
+    public static final String MESSAGE_USAGE = "TODO ATTENDANCE USAGE";
 
     private static final RoleIsMemberPredicate memberFilter = new RoleIsMemberPredicate();
 
