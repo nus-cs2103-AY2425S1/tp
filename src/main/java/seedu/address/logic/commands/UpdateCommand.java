@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_APPOINTMENT_TAKEN;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
@@ -58,18 +60,16 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example1: " + COMMAND_WORD + " S1234567Z "
+            + "Example 1: " + COMMAND_WORD + " S1234567Z "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
-            + "Example2: " + COMMAND_WORD + " 1 "
+            + "Example 2: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_SAME_NRIC = "Multiple persons with the same NRIC found. Please specify further.";
-    public static final String MESSAGE_APPOINTMENT_TAKEN = "There is an existing appointment at that timeslot";
 
     private final Nric nric;
     private final Index index;

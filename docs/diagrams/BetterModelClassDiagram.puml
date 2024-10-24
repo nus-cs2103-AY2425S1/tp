@@ -6,10 +6,12 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
+
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
+Tag -right-> "1" BloodType
 UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
@@ -17,5 +19,10 @@ Person -up-> "*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Email
+Person *--> Age
+Person *--> Nric
+Person *--> Gender
+Person *--> Appointment
 Person *--> Address
+
 @enduml
