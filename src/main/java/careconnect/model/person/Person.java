@@ -2,6 +2,7 @@ package careconnect.model.person;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +57,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Date getAppointmentDate() {
+        return appoinementDate;
     }
 
     /**
