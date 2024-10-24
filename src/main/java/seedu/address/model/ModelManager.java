@@ -146,6 +146,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

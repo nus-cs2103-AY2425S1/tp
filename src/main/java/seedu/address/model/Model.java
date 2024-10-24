@@ -106,4 +106,18 @@ public interface Model {
      * @throws seedu.address.model.VersionedAddressBook.InvalidRedoException if there is no state to redo to.
      */
     void redoAddressBook();
+
+    /**
+     * Returns {@code true} if there are states to undo in the address book.
+     *
+     * @return {@code true} if undo is possible, {@code false} otherwise.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Returns {@code true} if there are states to redo in the address book.
+     *
+     * @return {@code true} if redo is possible, {@code false} otherwise.
+     */
+    boolean canRedoAddressBook();
 }
