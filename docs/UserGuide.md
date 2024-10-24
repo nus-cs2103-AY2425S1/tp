@@ -177,14 +177,14 @@ Examples:
 
 Sorts the list of persons being viewed by name or date of last visit in ascending or descending order.
 
-Format: `sort paramater/order`
+Format: `sort parameter/order`
 
 * Sorts the displayed list of persons according to the specified order.
-* Order can be specified as ascending by leaving the order blank or **asc**, **ascending**
-* Order can be specified as descending by **descending** or **desc**
+* Order can be specified as ascending by leaving the order blank or **asc**/**ascending**
+* Order can be specified as descending by **descending**/**desc**
 
 Examples:
-* `sort n/` sorts name in ascending order.
+* `sort n/` sorts by name in ascending order.
 * `sort d/descending` sorts by date of last visit in descending order.
 
 ### Clearing all entries : `clear`
