@@ -239,4 +239,26 @@ public class ParserUtilTest {
     public void parseGithub_withInvalidUsername_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseGithub(INVALID_GITHUB));
     }
+
+    @Test
+    public void parseWeek_withValidWeek_success() throws ParseException {
+        String testString = "1";
+        assertEquals(ParserUtil.parseWeek(testString), 1);
+    }
+    @Test
+    public void parseWeek_withInvalidWeek_success() throws ParseException {
+        String testString = "14";
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(testString));
+    }
+
+    @Test
+    public void parseWeek_withNegativeWeek_success() throws ParseException {
+        String testString = "-3";
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(testString));
+    }
+    @Test
+    public void parseWeek_withInvalidInput_success() throws ParseException {
+        String testString = "negative";
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(testString));
+    }
 }

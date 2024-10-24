@@ -36,6 +36,7 @@ class JsonAdaptedPerson {
     private final String github;
     private final String assignmentName;
     private final Float assignmentScore;
+    private final List<Integer> attendance = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +46,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("telegram") String telegram, @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("github") String github, @JsonProperty("assignment") String assignment,
-                             @JsonProperty("assignmentScore") Float assignmentScore) {
+                             @JsonProperty("assignmentScore") Float assignmentScore,
+                             @JsonProperty("attendance") List<Integer> attendance) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +59,9 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.github = github;
+        if (attendance != null) {
+            this.attendance.addAll(attendance); // Add attendance data
+        }
     }
 
     /**
@@ -75,6 +80,8 @@ class JsonAdaptedPerson {
         Assignment assignment = source.getAssignment();
         assignmentName = assignment != null ? assignment.assignmentName : null; // Get assignment name
         assignmentScore = assignment != null ? assignment.score : null;
+        attendance.addAll(source.getWeeksPresent());
+
     }
 
     /**
@@ -143,9 +150,11 @@ class JsonAdaptedPerson {
         if (assignmentName != null && assignmentScore != null) {
             modelAssignment = new Assignment(assignmentName, assignmentScore); // Create Assignment object
         }
+        Set<Integer> modelAttendance = new HashSet<>(attendance); // Convert List to Set for the model
+
         return new Person(
-                modelName, modelPhone, modelEmail,
-                modelAddress, modelTelegram, modelTags, modelGithub, modelAssignment);
+                modelName, modelPhone,
+                modelAddress, modelEmail, modelTelegram, modelGithub, modelAssignment, modelAttendance, modelTags);
     }
 
 }
