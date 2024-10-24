@@ -38,7 +38,7 @@ public class ListCommand extends Command {
      *                  This parameter is only relevant if sortField is not null.
      */
     public ListCommand(String sortField, boolean isReverse) {
-        this.sortField = sortField;
+        this.sortField = sortField == null ? "name" : sortField.toLowerCase();
         this.isReverse = isReverse;
     }
 
