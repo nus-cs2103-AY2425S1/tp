@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -19,9 +20,12 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PinCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -107,6 +111,34 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD.toUpperCase()) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD.toUpperCase() + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased()) instanceof ViewCommand);
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD.toUpperCase()
+                + " " + INDEX_FIRST_PERSON.getOneBased()) instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        ExportCommand command = (ExportCommand) parser.parseCommand(
+                ExportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
+        ExportCommand commandUpperCase = (ExportCommand) parser.parseCommand(
+                ExportCommand.COMMAND_WORD.toUpperCase() + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
+        assertEquals(new ExportCommand(FILE_TYPE_CSV), command);
+        assertEquals(new ExportCommand(FILE_TYPE_CSV), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_pin() throws Exception {
+        PinCommand command = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        PinCommand commandUpperCase = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD.toUpperCase() + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new PinCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new PinCommand(INDEX_FIRST_PERSON), commandUpperCase);
     }
 
     @Test

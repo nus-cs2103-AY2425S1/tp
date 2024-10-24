@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
@@ -77,9 +76,14 @@ public class ContactDetails extends UiPart<Region> {
             notesList.getChildren().add(notesHeader);
         }
 
-        person.getNotes().stream()
-            .sorted(Comparator.comparing(Note::getNote))
-            .forEach(note -> addNote(note.getNote()));
+        int index = 1;
+        for (Note note : person.getNotes()) {
+            Label label = new Label(index + ". " + note.getNote());
+            label.setId("notes-label");
+            notesList.getChildren().add(label);
+
+            index++;
+        }
     }
 
     /**
