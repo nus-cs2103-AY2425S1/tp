@@ -14,6 +14,7 @@ start
 :User adds application\n(executes ApplyCommand);
 
 If () then ([Command is invalid])
+    :Displays message for invalid command format;
 
     else ([else])
 
