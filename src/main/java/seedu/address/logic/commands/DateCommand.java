@@ -2,12 +2,15 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Date;
@@ -23,43 +26,91 @@ public class DateCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date of the person identified "
-            + "by the index number used in the last person listing. "
+            + "by their name, phone and/or email "
             + "Existing date will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_DATE + "[DATE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " n/John Doe"
             + PREFIX_DATE + "12 October 2024";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s";
+    public static final String MESSAGE_ARGUMENTS = "Person: %1$s, Date: %2$s";
     public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
     public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found.";
+    public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
 
-    private final Index index;
+    private final Optional<String> name;
+    private final Optional<String> phone;
+    private final Optional<String> email;
     private final Date date;
 
     /**
-     * @param index of the person in the filtered person list to edit the date
+     * @param name of the person to identify person to update
+     * @param phone of the person to identify person to update
+     * @param email of the person to identify person to update
      * @param date of the person to be updated to
      */
-    public DateCommand(Index index, Date date) {
-        requireAllNonNull(index, date);
+    public DateCommand(Optional<String> name, Optional<String> phone, Optional<String> email, Date date) {
+        requireAllNonNull(date);
 
-        this.index = index;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
         this.date = date;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireAllNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        // Filter persons based on provided criteria
+        List<Person> matchingPersons = lastShownList.stream()
+                .filter(person -> matches(person))
+                .collect(Collectors.toList());
+
+        // Handle different cases of matches
+        if (matchingPersons.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_PERSON_FOUND);
         }
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (matchingPersons.size() > 1) {
+            throw new CommandException(MESSAGE_MULTIPLE_PERSONS_FOUND);
+        }
+
+        Person personToEdit = matchingPersons.get(0);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTag(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    /**
+     * Checks if a person matches the criteria provided in the delete command.
+     */
+    private boolean matches(Person person) {
+        boolean matches = true;
+
+        // If name is provided, check if it matches
+        if (name.isPresent()) {
+            matches &= person.getName().fullName.equalsIgnoreCase(name.get());
+        }
+
+        // If phone is provided, check if it matches
+        if (phone.isPresent()) {
+            matches &= person.getPhone().value.equals(phone.get());
+        }
+
+        // If email is provided, check if it matches
+        if (email.isPresent()) {
+            matches &= person.getEmail().value.equalsIgnoreCase(email.get());
+        }
+
+        return matches;
     }
 
     /**
@@ -83,8 +134,10 @@ public class DateCommand extends Command {
             return false;
         }
 
-        DateCommand e = (DateCommand) other;
-        return index.equals(e.index)
-                && date.equals(e.date);
+        DateCommand otherDateCommand = (DateCommand) other;
+        return name.equals(otherDateCommand.name)
+                && phone.equals(otherDateCommand.phone)
+                && email.equals(otherDateCommand.email)
+                && date.equals(otherDateCommand.date);
     }
 }
