@@ -155,4 +155,10 @@ public interface Model {
 
     /** Updates the filter of the filtered company list to filter by the given {@code predicate}. */
     void updateFilteredCompanyList(Predicate<Company> predicate);
+
+    /**
+     * Updates the filtered job and person lists to show only the jobs and persons
+     * that are linked to the specified company.
+     */
+    void showLinkedJobsAndPersonsByCompany(Company company);
 }
