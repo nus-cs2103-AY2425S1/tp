@@ -45,7 +45,7 @@ public class AddLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getAddressBook().getPersonList();
         Person personToUpdate = null;
 
         // Find the person by identity number
