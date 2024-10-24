@@ -20,6 +20,10 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+tasks.withType(JavaExec) {
+    jvmArgs = ['-ea']
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
