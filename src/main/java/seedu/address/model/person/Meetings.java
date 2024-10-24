@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.MeetingNotFoundException;
 import seedu.address.model.person.exceptions.TimeClashException;
 
 /**
@@ -50,6 +51,26 @@ public class Meetings {
     }
 
     /**
+     * Finds the index of the meeting to delete from the list.
+     *
+     * @param toDelete Meeting to be deleted.
+     * @return A valid index from 0 to size of list.
+     */
+    public int findIndexOfMeetingToDelete(Meeting toDelete) {
+        int index = -1;
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).equals(toDelete)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            throw new MeetingNotFoundException();
+        }
+        return index;
+    }
+
+    /**
      * Sorts the list of meetings by startTime.
      */
     public void sortMeetingsByStartTime() {
@@ -74,8 +95,24 @@ public class Meetings {
         sortMeetingsByStartTime();
     }
 
+    /**
+     * Delete's a meeting from the list.
+     *
+     * @param toDelete The meeting to be deleted.
+     */
+    public void deleteMeeting(Meeting toDelete) {
+        requireNonNull(toDelete);
+        int index = findIndexOfMeetingToDelete(toDelete);
+        internalList.remove(index);
+        sortMeetingsByStartTime();
+    }
+
     public Meeting getMeeting(int index) {
         return internalList.get(index);
+    }
+
+    public int getMeetingsCount() {
+        return internalList.size();
     }
 
     @Override

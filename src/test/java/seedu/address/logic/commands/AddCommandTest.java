@@ -168,6 +168,21 @@ public class AddCommandTest {
         public String listMeetings() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getMeetingSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteMeeting(Person target, Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Meeting getMeeting(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
