@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,7 +72,8 @@ public class UnmarkPresentAllCommandTest {
         model.addStudent(student2);
         UnmarkPresentAllCommand command = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
 
-        String expectedMessage = String.format(UnmarkPresentAllCommand.MESSAGE_SUCCESS, validTutorialGroup, validDate);
+        String expectedMessage = String.format(UnmarkPresentAllCommand.MESSAGE_SUCCESS, validTutorialGroup,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(validDate));
         Student unmarkedStudent1 = new StudentBuilder().withName("John Doe")
                 .withStudentNumber("A1234567M")
                 .withTutorialGroup("A01").build();
