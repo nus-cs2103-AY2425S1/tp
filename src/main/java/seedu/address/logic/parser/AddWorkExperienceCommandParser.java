@@ -35,6 +35,10 @@ public class AddWorkExperienceCommandParser implements Parser<AddWorkExperienceC
             }
         }
 
+        // Assert that both indexString and workExperienceString are not null
+        assert indexString != null : "Index string should not be null";
+        assert workExperienceString != null : "Work experience string should not be null";
+
         if (indexString == null || workExperienceString == null || workExperienceString.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddWorkExperienceCommand.MESSAGE_USAGE));
@@ -44,8 +48,14 @@ public class AddWorkExperienceCommandParser implements Parser<AddWorkExperienceC
             // Parse the index
             Index index = ParserUtil.parseIndex(indexString);
 
+            // Assert that the parsed index is not null
+            assert index != null : "Parsed index should not be null";
+
             // Parse the WorkExp object
             WorkExp workExp = ParserUtil.parseWorkExp(workExperienceString);
+
+            // Assert that the parsed WorkExp is not null
+            assert workExp != null : "Parsed WorkExp should not be null";
 
             // Return the new AddWorkExperience command
             return new AddWorkExperienceCommand(index, workExp);
