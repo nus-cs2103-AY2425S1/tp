@@ -20,8 +20,8 @@ Class Email
 Class IdentityNumber
 Class Name
 Class Phone
-Class Tag
 Class Log
+Class Tag
 
 Class I #FFFFFF
 }
@@ -41,6 +41,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 
+' Position of Log and Tag swapped.
 ' Added Tag and Log to diagram
 ' Adjust the exit points of diamonds from the Person class to avoid clutter
 Person *--> Name
@@ -48,8 +49,8 @@ Person *--> Phone
 Person *--> IdentityNumber
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
 Person *--> "*" Log
+Person *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
