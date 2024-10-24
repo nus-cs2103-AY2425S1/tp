@@ -41,6 +41,10 @@ public class CsvConverters {
         @Override
         protected Object convert(String value) {
             String[] goodsDetails = value.split(",", 2);
+
+            if (goodsDetails.length != 2) {
+                throw new IllegalArgumentException("Goods details must contain a name and a category");
+            }
             GoodsName goodsName = new GoodsName(goodsDetails[0]);
             GoodsCategories category = GoodsCategories.valueOf(goodsDetails[1]);
             return new Goods(goodsName, category);

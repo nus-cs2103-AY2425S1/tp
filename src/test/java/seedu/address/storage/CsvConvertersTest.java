@@ -17,7 +17,7 @@ import seedu.address.model.person.Name;
 public class CsvConvertersTest {
 
     @Test
-    public void testGoodsDateConverter_validDate() {
+    public void goodsDateConverter_validDate_success() {
         CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
         String csvDate = "2021-01-01T00:00";
         Date expectedDate = new Date("2021-01-01 00:00");
@@ -26,7 +26,7 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void testGoodsDateConverter_invalidDate() {
+    public void goodsDateConverter_invalidDate_throwDateTimeParseException() {
         CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
         String invalidDate = "invalid-date";
         assertThrows(DateTimeParseException.class, () -> {
@@ -35,7 +35,24 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void testPersonNameConverter_validName() {
+    public void goodsDateConverter_nullDate_throwNullPointerException() {
+        CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
+        assertThrows(NullPointerException.class, () -> {
+            converter.convert(null);
+        });
+    }
+
+    @Test
+    public void goodsDateConverter_incorrectDateFormat_throwIllegalArgumentException() {
+        CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
+        String incorrectDateFormat = "2021-01-01";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(incorrectDateFormat);
+        });
+    }
+
+    @Test
+    public void personNameConverter_validName_success() {
         CsvConverters.PersonNameConverter converter = new CsvConverters.PersonNameConverter();
         String csvName = "John Doe";
         Name expectedName = new Name(csvName);
@@ -44,7 +61,7 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void testPersonNameConverter_nullName() {
+    public void personNameConverter_nullName_throwNullPointerException() {
         CsvConverters.PersonNameConverter converter = new CsvConverters.PersonNameConverter();
         assertThrows(NullPointerException.class, () -> {
             converter.convert(null);
@@ -52,7 +69,25 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void testGoodsConverter_validGoods() {
+    public void personNameConverter_invalidName_throwIllegalArgumentException() {
+        CsvConverters.PersonNameConverter converter = new CsvConverters.PersonNameConverter();
+        String invalidName = "John@Doe";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(invalidName);
+        });
+    }
+
+    @Test
+    public void personNameConverter_blankName_throwIllegalArgumentException() {
+        CsvConverters.PersonNameConverter converter = new CsvConverters.PersonNameConverter();
+        String invalidName = " ";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(invalidName);
+        });
+    }
+
+    @Test
+    public void goodsConverter_validGoods_success() {
         CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
         String csvGoods = "Apple,CONSUMABLES";
         GoodsName goodsName = new GoodsName("Apple");
@@ -63,16 +98,43 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void testGoodsConverter_invalidGoods() {
+    public void goodsConverter_missingGoodsCategory_throwIllegalArgumentException() {
         CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
-        String invalidGoods = "Apple";
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+        String invalidGoods = "Apple,";
+        assertThrows(IllegalArgumentException.class, () -> {
             converter.convert(invalidGoods);
         });
     }
 
     @Test
-    public void testGoodsConverter_convertToWrite() {
+    public void goodsConverter_missingGoodsName_throwIllegalArgumentException() {
+        CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
+        String invalidGoods = ",CONSUMABLES";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(invalidGoods);
+        });
+    }
+
+    @Test
+    public void goodsConverter_invalidGoodsCategory_throwIllegalArgumentException() {
+        CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
+        String invalidGoods = "Apple,consume";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(invalidGoods);
+        });
+    }
+
+    @Test
+    public void goodsConverter_missingSeparator_throwIllegalArgumentException() {
+        CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
+        String invalidGoods = "Appleconsume";
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convert(invalidGoods);
+        });
+    }
+
+    @Test
+    public void goodsConverter_convertToWrite_success() {
         CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
         GoodsName goodsName = new GoodsName("Apple");
         GoodsCategories category = GoodsCategories.CONSUMABLES;

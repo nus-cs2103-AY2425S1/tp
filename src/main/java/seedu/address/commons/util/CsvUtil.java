@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.CsvToBeanFilter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
@@ -34,10 +35,25 @@ public class CsvUtil {
      * @param clazz the class of the objects to be read from the CSV file
      * @param <T> the type of the objects to be read from the CSV file
      * @return an Optional containing a list of objects read from the CSV file,
-     *      or Optional.empty() if the file does not exist
      * @throws DataLoadingException if there is an error reading the CSV file
      */
     public static <T> Optional<List<T>> readCsvFile(Path filePath, Class<T> clazz) throws DataLoadingException {
+        return readCsvFile(filePath, clazz, null);
+    }
+
+    /**
+     * Reads a CSV file and returns a list of objects of the specified class.
+     *
+     * @param filePath the path to the CSV file
+     * @param clazz the class of the objects to be read from the CSV file
+     * @param filter the filter to be applied to the CSV file
+     * @param <T> the type of the objects to be read from the CSV file
+     * @return an Optional containing a list of objects read from the CSV file,
+     *      or Optional.empty() if the file does not exist
+     * @throws DataLoadingException if there is an error reading the CSV file
+     */
+    public static <T> Optional<List<T>> readCsvFile(Path filePath, Class<T> clazz, CsvToBeanFilter filter)
+            throws DataLoadingException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -48,6 +64,7 @@ public class CsvUtil {
         try (FileReader reader = new FileReader(filePath.toFile())) {
             List<T> beans = new CsvToBeanBuilder<T>(reader)
                     .withType(clazz)
+                    .withFilter(filter)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
                     .build()
                     .parse();
