@@ -48,10 +48,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Date of birth: ")
                 .append(person.getDateOfBirth())
+                .append("; Priority: ")
+                .append(person.getPriority())
                 .append("; Income: ")
                 .append(person.getIncome())
-                .append("; Priority: ")
-                .append(person.getPriority());
+                .append("; Family size: ")
+                .append(person.getFamilySize());
 
         String remark = person.getRemark().value;
         if (!remark.isEmpty()) {

@@ -18,11 +18,11 @@ public class GetCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsGetCommand() {
         // multiple leading and trailing whitespaces
         GetCommand expectedGetCommand =
                 new GetCommand(PARAMS_ARRAY_FIRST);
-        assertParseSuccess(parser, " p/ e/  ", expectedGetCommand);
+        assertParseSuccess(parser, " phone email  ", expectedGetCommand);
     }
 
 }

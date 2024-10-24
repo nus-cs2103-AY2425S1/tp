@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -46,6 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_OF_BIRTH_BOB = "3 Jan 1989";
     public static final double VALID_INCOME_AMY = 1500.32;
     public static final double VALID_INCOME_BOB = 1300;
+    public static final int VALID_FAMILY_SIZE_AMY = 1;
+    public static final int VALID_FAMILY_SIZE_BOB = 9;
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -65,6 +68,8 @@ public class CommandTestUtil {
     public static final String DATE_OF_BIRTH_DESC_BOB = " " + PREFIX_DATE_OF_BIRTH + VALID_DATE_OF_BIRTH_BOB;
     public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
     public static final String INCOME_DESC_BOB = " " + PREFIX_INCOME + VALID_INCOME_BOB;
+    public static final String FAMILY_SIZE_DESC_AMY = " " + PREFIX_FAMILY_SIZE + VALID_FAMILY_SIZE_AMY;
+    public static final String FAMILY_SIZE_DESC_BOB = " " + PREFIX_FAMILY_SIZE + VALID_FAMILY_SIZE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -76,6 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "99 Dec 0001"; // invalid date
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + -323.32323;
+    public static final String INVALID_FAMILY_SIZE_DESC = " " + PREFIX_FAMILY_SIZE + 0;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
