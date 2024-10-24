@@ -29,13 +29,19 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
+        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedConfirmationMessage, model);
+
+        // Now we confirm the deletion
+        ConfirmationYesCommand confirmationCommand = new ConfirmationYesCommand();
+
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(confirmationCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -53,6 +59,12 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
+        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedConfirmationMessage, model);
+
+        // Now we confirm the deletion
+        ConfirmationYesCommand confirmationCommand = new ConfirmationYesCommand();
+
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
@@ -60,7 +72,7 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(confirmationCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

@@ -8,6 +8,20 @@ import careconnect.model.Model;
  */
 public abstract class Command {
 
+    public static final String CONFIRMATION_MESSAGE =
+            "This action is irreversible. Press y to continue, or n to cancel.";
+    protected static final CommandStack STACK = new CommandStack();
+
+    protected final boolean requireConfirmation;
+
+    protected Command() {
+        this.requireConfirmation = false;
+    }
+
+    protected Command(boolean requireConfirmation) {
+        this.requireConfirmation = requireConfirmation;
+    }
+
     /**
      * Executes the command and returns the result message.
      *

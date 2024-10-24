@@ -16,6 +16,8 @@ import careconnect.logic.commands.AddLogCommand;
 import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.Command;
 import careconnect.logic.commands.CommandResult;
+import careconnect.logic.commands.ConfirmationNoCommand;
+import careconnect.logic.commands.ConfirmationYesCommand;
 import careconnect.logic.commands.DeleteCommand;
 import careconnect.logic.commands.DeleteLogCommand;
 import careconnect.logic.commands.EditCommand;
@@ -68,6 +70,8 @@ public class LogicManager implements Logic {
             DeleteLogCommand.COMMAND_WORD,
             TagCommand.COMMAND_WORD,
             UntagCommand.COMMAND_WORD,
+            ConfirmationYesCommand.COMMAND_WORD,
+            ConfirmationNoCommand.COMMAND_WORD,
             SetAppointmentCommand.COMMAND_WORD
     ));
 

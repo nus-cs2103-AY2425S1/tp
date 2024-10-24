@@ -48,6 +48,13 @@ public class DeleteLogCommand extends Command {
      *     with {@code logIndex} for the person with {@code personIndex}
      */
     public DeleteLogCommand(Index personIndex, Index logIndex) {
+        super(true);
+        this.personIndex = personIndex;
+        this.logIndex = logIndex;
+    }
+
+    private DeleteLogCommand(Index personIndex, Index logIndex, boolean requireConfirmation) {
+        super(requireConfirmation);
         this.personIndex = personIndex;
         this.logIndex = logIndex;
     }
@@ -84,6 +91,12 @@ public class DeleteLogCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_LOG_INDEX);
         }
 
+        if (this.requireConfirmation) {
+            // Add a DeleteLogCommand to the stack
+            Command.STACK.add(new DeleteLogCommand(personIndex, logIndex, false));
+            return new CommandResult(Command.CONFIRMATION_MESSAGE,
+                    false, false, personIndex.getZeroBased());
+        }
         Person personToDeleteLog = lastShownList.get(personIndex.getZeroBased());
         Person personWithoutLog = createPersonWithoutLog(personToDeleteLog, logIndex);
         model.setPerson(personToDeleteLog, personWithoutLog);
