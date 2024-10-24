@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-##### **Use case: View all information on a contact**
+##### **Use case: View all information about a contact**
 
 **MSS**
 

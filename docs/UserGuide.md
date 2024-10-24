@@ -30,7 +30,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `view 2` : Views all the information on the 2nd contact shown in the current list.
+   * `view 2` : Displays all the information on the 2nd contact shown in the current list.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/06-01-2024` : Adds a contact named `John Doe` to the SocialBook.
 
@@ -113,11 +113,11 @@ Pops up a window containing all the information that has been saved on this pers
 
 Format: `view INDEX`
 
-* This command only works to `view` a single person. Trying to key in more than 1 index will result in an error message.
+* This command only allows the user to `view` one person at a time. Trying to key in more than 1 index will result in an error message.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
 
 Examples:
-* `view 1` will bring up the help window for the first person in the displayed list. <br>
+* `view 1` will bring up the view window for the first person in the displayed list. <br>
  ![result of `view 1`](images/viewOneResult.png)
 
 
