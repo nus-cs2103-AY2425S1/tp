@@ -43,6 +43,8 @@ public class HireCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToHire = model.findPersonByNameAndJob(this.name, job);
+        Person personHired = new Person(personToHire.getName(), personToHire.getJob(), personToHire.getPhone()
+        , personToHire.getEmail(), personToHire.getTags());
 
         if (personToHire == null) {
             if (!model.isJobPresent(job)) {
@@ -55,7 +57,8 @@ public class HireCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALREADY_HIRED, this.name));
         }
 
-        personToHire.markAsHired();
+        personHired.markAsHired();
+        model.setPerson(personToHire, personHired);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.name));
     }
