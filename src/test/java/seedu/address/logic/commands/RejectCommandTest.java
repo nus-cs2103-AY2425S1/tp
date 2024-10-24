@@ -41,11 +41,12 @@ public class RejectCommandTest {
         RejectCommand rejectCommand = new RejectCommand(validPerson.getName(), validPerson.getJob());
         rejectCommand.execute(model);
 
+        Person validPersonRejected = model.findPersonByNameAndJob(validPerson.getName(), validPerson.getJob());
         // Check the status and tags of the person
-        assertEquals("rejected", validPerson.getStatus());
-        assertTrue(validPerson.getTags().contains(Person.TAG_REJECTED));
-        assertFalse(validPerson.getTags().contains(Person.DEFAULT_TAG_PENDING));
-        assertFalse(validPerson.getTags().contains(Person.TAG_HIRED));
+        assertEquals("rejected", validPersonRejected.getStatus());
+        assertTrue(validPersonRejected.getTags().contains(Person.TAG_REJECTED));
+        assertFalse(validPersonRejected.getTags().contains(Person.DEFAULT_TAG_PENDING));
+        assertFalse(validPersonRejected.getTags().contains(Person.TAG_HIRED));
     }
 
     @Test
@@ -118,12 +119,13 @@ public class RejectCommandTest {
         RejectCommand rejectCommand = new RejectCommand(validPerson.getName(), validPerson.getJob());
         rejectCommand.execute(model);
 
+        Person validPersonRejected = model.findPersonByNameAndJob(validPerson.getName(), validPerson.getJob());
         // Check the status and tags of the person
-        assertEquals("rejected", validPerson.getStatus());
-        assertTrue(validPerson.getTags().contains(Person.TAG_REJECTED));
-        assertFalse(validPerson.getTags().contains(Person.DEFAULT_TAG_PENDING));
-        assertFalse(validPerson.getTags().contains(Person.TAG_HIRED));
-        assertTrue(validPerson.getTags().contains(new Tag("interviewed")));
+        assertEquals("rejected", validPersonRejected.getStatus());
+        assertTrue(validPersonRejected.getTags().contains(Person.TAG_REJECTED));
+        assertFalse(validPersonRejected.getTags().contains(Person.DEFAULT_TAG_PENDING));
+        assertFalse(validPersonRejected.getTags().contains(Person.TAG_HIRED));
+        assertTrue(validPersonRejected.getTags().contains(new Tag("interviewed")));
     }
 
     @Test
