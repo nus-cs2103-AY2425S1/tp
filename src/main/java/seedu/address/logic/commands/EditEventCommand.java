@@ -96,7 +96,7 @@ public class EditEventCommand extends Command {
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getEventName());
         EventDescription updatedDescription = editEventDescriptor.getDescription()
-                        .orElse(eventToEdit.getEventDescription());
+                .orElse(eventToEdit.getEventDescription());
         EventDuration updatedDuration = editEventDescriptor.getDuration().orElse(eventToEdit.getEventDuration());
 
         return new Event(updatedName, updatedDescription, updatedDuration, eventToEdit.getEventId());
