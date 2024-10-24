@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -135,9 +134,6 @@ public class LoginWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         logger.info("Forcibly exiting HR Helper");
-        getRoot().close();
-        primaryStage.close();
-        Platform.exit();
         System.exit(0);
     }
 }

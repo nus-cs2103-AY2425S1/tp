@@ -1,6 +1,9 @@
 package seedu.address.authentication;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -10,15 +13,29 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Credentials {
     private static final Logger logger = LogsCenter.getLogger(Credentials.class);
-    // private final File credentials;
-    private final String username = "test";
-    private final String password = "password1";
+    private final String credentials;
 
     /**
      * Create a Credential Manager
      */
-    public Credentials(String filepath) {
-        // this.credentials = new File(filepath);
+    public Credentials(String filePath) {
+        this.credentials = filePath;
+    }
+
+    /**
+     * Process Credentials
+     * @param file
+     * @return users
+     */
+    private HashMap<String, String> processFile(InputStreamReader file) {
+        HashMap<String, String> users = new HashMap<>();
+        Scanner s = new Scanner(file);
+        while (s.hasNextLine()) {
+            String[] details = s.nextLine().split(" ");
+            users.put(details[0], details[1]);
+        }
+        s.close();
+        return users;
     }
 
     /**
@@ -27,19 +44,12 @@ public class Credentials {
      */
     private HashMap<String, String> readCredentials() {
         logger.info("reading credentials");
-        HashMap<String, String> users = new HashMap<>();
-        // try {
-        //     Scanner s = new Scanner(credentials);
-        //     while (s.hasNextLine()) {
-        //         String[] details = s.nextLine().split(" ");
-        //         users.put(details[0], details[1]);
-        //     }
-        //    s.close();
-        // } catch (FileNotFoundException e) {
-        //     logger.info(e.toString());
-        // }
-        users.put(username, password);
-        return users;
+        InputStream file = getClass().getResourceAsStream(credentials);
+        if (file == null) {
+            logger.info("Credentials not found!");
+            return new HashMap<>();
+        }
+        return processFile(new InputStreamReader(file));
     }
 
     /**
@@ -49,12 +59,14 @@ public class Credentials {
      * @return True if such user is found
      */
     public boolean findUser(String username, String password) {
+        assert username != null : "username should not be null";
+        assert password != null : "password should not be null";
         logger.info("find user");
         HashMap<String, String> credentials = readCredentials();
         if (!credentials.containsKey(username)) {
             logger.info("user not found");
             return false;
         }
-        return credentials.get(username).equals(password);
+        return credentials.get(username).equals(Hashing.hash(password));
     }
 }
