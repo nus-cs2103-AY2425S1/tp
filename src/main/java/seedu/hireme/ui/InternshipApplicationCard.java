@@ -7,11 +7,11 @@ import javafx.scene.layout.Region;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of an {@code InternshipApplication}.
  */
-public class InternshipCard extends UiPart<Region> {
+public class InternshipApplicationCard extends UiPart<Region> {
 
-    private static final String FXML = "InternshipListCard.fxml";
+    private static final String FXML = "InternshipApplicationListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,7 +21,7 @@ public class InternshipCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final InternshipApplication internship;
+    public final InternshipApplication internshipApplication;
 
     @FXML
     private HBox cardPane;
@@ -37,15 +37,15 @@ public class InternshipCard extends UiPart<Region> {
     private Label email;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code InternshipApplicationCard} with the given {@code InternshipApplication} and index to display.
      */
-    public InternshipCard(InternshipApplication internship, int displayedIndex) {
+    public InternshipApplicationCard(InternshipApplication internshipApplication, int displayedIndex) {
         super(FXML);
-        this.internship = internship;
+        this.internshipApplication = internshipApplication;
         id.setText(displayedIndex + ". ");
-        name.setText(internship.getCompany().getName().getValue());
-        email.setText(internship.getCompany().getEmail().getValue());
-        role.setText(internship.getRole().getValue());
-        date.setText(internship.getDateOfApplication().getValue().toString());
+        name.setText(internshipApplication.getCompany().getName().getValue());
+        email.setText(internshipApplication.getCompany().getEmail().getValue());
+        role.setText(internshipApplication.getRole().getValue());
+        date.setText(internshipApplication.getDateOfApplication().getValue().toString());
     }
 }
