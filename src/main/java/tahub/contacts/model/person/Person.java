@@ -4,11 +4,16 @@ import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import tahub.contacts.commons.util.ToStringBuilder;
+import tahub.contacts.logic.Logic;
+import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tag.Tag;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Represents a Person in the address book.
@@ -103,6 +108,36 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
+    }
+
+    /**
+     * Returns the list of SCAs associated with the student in given logic.
+     *
+     * @param logic the logic to get the SCAs from
+     * @return the list of SCAs associated with the student in given logic
+     */
+    public StudentCourseAssociationList getStudentCourseAssociations(Logic logic) {
+        return logic.getStudentScas(this);
+    }
+
+    /**
+     * Returns the list of courses taken by the student in given logic.
+     *
+     * @param logic the logic to get the courses from
+     * @return the list of courses taken by the student in given logic
+     */
+    public UniqueCourseList getCourses(Logic logic) {
+        return logic.getStudentCourses(this);
+    }
+
+    /**
+     * Returns the list of tutorials attended by the student in given logic.
+     *
+     * @param logic the logic to get the tutorials from
+     * @return the list of tutorials attended by the student in given logic
+     */
+    public List<Tutorial> getTutorials(Logic logic) {
+        return logic.getStudentTutorials(this);
     }
 
     @Override

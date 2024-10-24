@@ -1,6 +1,7 @@
 package tahub.contacts.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
@@ -8,7 +9,10 @@ import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.ReadOnlyAddressBook;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * API of the Logic component
@@ -33,6 +37,30 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /**
+     * Returns the SCA list that contains the given student.
+     *
+     * @param student the student to get the SCA list for
+     * @return the SCA list that contains the given student
+     */
+    StudentCourseAssociationList getStudentScas(Person student);
+
+    /**
+     * Returns the course list taken by a given student.
+     *
+     * @param student the student to get the course list for
+     * @return the course list that contains the given student
+     */
+    UniqueCourseList getStudentCourses(Person student);
+
+    /**
+     * Returns the tutorial list taken by a given student.
+     *
+     * @param student the student to get the tutorial list for
+     * @return the tutorial list that contains the given student
+     */
+    List<Tutorial> getStudentTutorials(Person student);
+    
     /**
      * Returns the user prefs' address book file path.
      */
