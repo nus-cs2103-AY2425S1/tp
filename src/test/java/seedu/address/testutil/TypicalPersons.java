@@ -38,8 +38,10 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withBuyProperty(PROPERTY_APARTMENT_WITH_TAG)
+            .withBuyProperty(PROPERTY_HDB)
             .withSellProperty(PROPERTY_BTO_WITH_TAG)
+            .withPropertyBought(PROPERTY_CONDO_WITH_TAG)
+            .withPropertySold(PROPERTY_OTHERPROPERTY)
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -51,8 +53,12 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withBuyProperty(PROPERTY_HDB)
             .withBuyProperty(PROPERTY_BTO)
+            .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_CONDO_WITH_TAG)
-            .withSellProperty(PROPERTY_CONDO_WITH_MULTIPLE_TAGS).build();
+            .withPropertySold(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
+            .withPropertySold(PROPERTY_CONDO_WITH_MULTIPLE_TAGS)
+            .withPropertyBought(PROPERTY_APARTMENT_WITH_TAG)
+            .withPropertyBought(PROPERTY_HDB_WITH_MULTIPLE_TAGS).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person CARRINE = new PersonBuilder().withName("Carrine Kurry").withPhone("95352544")
@@ -65,6 +71,7 @@ public class TypicalPersons {
             .withEmail("danielle@example.com").withAddress("11th street").withTags("friends")
             .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS)
+            .withSellProperty(PROPERTY_CONDO_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_OTHERPROPERTY)
             .withBuyProperty(PROPERTY_HDB_WITH_MULTIPLE_TAGS)
             .withBuyProperty(new PropertyToBuyBuilder().build()).build();

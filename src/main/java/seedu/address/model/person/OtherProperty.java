@@ -24,6 +24,10 @@ public class OtherProperty extends Property {
         super(postalCode, unitNumber, price, tags);
     }
 
+    public OtherProperty(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, actualPrice, tags);
+    }
+
     @Override
     public boolean equals(Object otherProperty) {
         if (this == otherProperty) {

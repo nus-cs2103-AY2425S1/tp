@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
+import seedu.address.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -53,7 +55,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code Properties} for display to the user.
+     * Formats the {@code BuyingProperties} and {@code SellingProperties} for display to the user.
      */
     public static String formatProperties(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -72,6 +74,18 @@ public class Messages {
         );
 
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code Propertu} for display to the user when a property is bought or sold.
+     */
+    public static String formatProperty(Property property) {
+        String formattedTags = property.getTags().stream()
+                .map(Tag::toString) // Convert each Tag object to its String representation
+                .collect(Collectors.joining(", ")); // Join with a comma and space
+        String actualPrice = (property.getActualPrice() != null) ? property.getActualPrice().value : "null";
+        return "Postal Code: " + property.getPostalCode() + "; " + " Unit Number: " + property.getUnitNumber()
+                + "; " + " Price: " + actualPrice + "; Tags: " + formattedTags;
     }
 
 }
