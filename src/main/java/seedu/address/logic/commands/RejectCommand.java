@@ -58,7 +58,8 @@ public class RejectCommand extends Command {
         }
 
         if (personToReject.isRejected()) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED, name));
+            throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED,
+                    personToReject.getName()));
         }
 
         Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone(),
@@ -67,7 +68,7 @@ public class RejectCommand extends Command {
         model.setPerson(personToReject, personRejected);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
-                this.name));
+                personToReject.getName()));
     }
 
     public Name getName() {

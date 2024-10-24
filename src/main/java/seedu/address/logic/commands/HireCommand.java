@@ -52,7 +52,8 @@ public class HireCommand extends Command {
         }
 
         if (personToHire.isHired()) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED, this.name));
+            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED,
+                    personToHire.getName()));
         }
 
         Person personHired = new Person(personToHire.getName(), personToHire.getJob(), personToHire.getPhone(),
@@ -60,7 +61,7 @@ public class HireCommand extends Command {
         personHired.markAsHired();
         model.setPerson(personToHire, personHired);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.name));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personHired.getName()));
     }
 
     public Name getName() {
