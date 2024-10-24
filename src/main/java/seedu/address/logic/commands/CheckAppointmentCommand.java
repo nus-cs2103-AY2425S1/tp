@@ -45,32 +45,27 @@ public class CheckAppointmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
+
         if (doctorToCheckAppointment == null) {
+            // Throw an exception if the doctor is not found
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        LocalDate appointmentDateTime;
-        String appointmentDetails;
-        throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToCheckAppointment.getName()));
+        if (date == null) {
+            throw new CommandException(String.format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
+        }
 
-        // TODO UPDATE
-        //        if (date != null) {
-        //            appointmentDateTime = date;
-        //            appointmentDetails = doctorToCheckAppointment
-        //            .getOneDayDoctorAppointment(appointmentDateTime, doctorId);
-        //        } else {
-        //            throw new CommandException(String
-        //            .format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
-        //        }
-        //
-        //        if (appointmentDetails == null || appointmentDetails.isEmpty()) {
-        //            throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND,
-        //            doctorToCheckAppointment.getName()));
-        //        }
-        //        return new CommandResult(appointmentDetails);
+        String appointmentDetails = doctorToCheckAppointment.getStringAppointmentsForDay(date);
+
+        if (appointmentDetails == null || appointmentDetails.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToCheckAppointment.getName()));
+        }
+
+        return new CommandResult(appointmentDetails);
     }
 
     @Override
@@ -90,4 +85,5 @@ public class CheckAppointmentCommand extends Command {
         return doctorId == (e.doctorId)
                 && (date == null ? e.date == null : date.equals(e.date));
     }
+
 }
