@@ -164,6 +164,12 @@ Using `FindCommand`, we list contacts which are in the meeting based on UID.
 
 <puml src="diagrams/MeetingContactsSequenceDiagram.puml"/>
 
+### Add meetings to a schedule feature
+
+Using `AddScheduleCommand`, we add a meeting to a schedule.
+
+<puml src="diagrams/AddScheduleSequenceDiagram.puml"/>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
