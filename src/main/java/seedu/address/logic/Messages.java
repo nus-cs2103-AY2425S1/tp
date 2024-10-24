@@ -46,6 +46,8 @@ public class Messages {
                 .append(person.getEmail().map(Email::toString).orElse("N/A"))
                 .append("; Telegram Handle: ")
                 .append(person.getTelegramHandle())
+                .append("; Module Name: ")
+                .append(person.getModuleName())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
