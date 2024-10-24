@@ -15,7 +15,7 @@ public class Module {
 
     private static final int MIN_GRADE = 0;
     private static final int MAX_GRADE = 100;
-    private static final int UNGRADED = 0;
+    private static final int UNGRADED = -1;
     public final String module;
     private int grade;
     private boolean isGraded;
@@ -53,10 +53,10 @@ public class Module {
      * @return true if grade is a valid value, between (0 - 100).
      */
     public static boolean isValidGrade(int grade) {
-        return grade >= MIN_GRADE && grade <= MAX_GRADE;
+        return (grade >= MIN_GRADE && grade <= MAX_GRADE) || grade == UNGRADED;
     }
-    public int getGrade() {
-        return grade;
+    public String getGrade() {
+        return grade == UNGRADED ? "Ungraded" : String.valueOf(grade);
     }
     public String getModule() {
         return module;
@@ -70,7 +70,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return '[' + module + " | Grade: " + (grade == 0 ? "Ungraded" : grade) + ']';
+        return '[' + module + " | Grade: " + (grade == UNGRADED ? "Ungraded" : grade) + ']';
     }
 
     @Override

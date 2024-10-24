@@ -20,7 +20,7 @@ class JsonAdaptedModule {
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("module") String module, @JsonProperty("grade") Integer grade) {
         this.module = module;
-        this.grade = (grade != null) ? grade : 0;
+        this.grade = grade;
     }
 
     /**
@@ -28,7 +28,11 @@ class JsonAdaptedModule {
      */
     public JsonAdaptedModule(Module source) {
         module = source.module;
-        grade = source.getGrade();
+        if ("Ungraded".equals(source.getGrade())) {
+            grade = -1;
+        } else {
+            grade = Integer.parseInt(source.getGrade());
+        }
     }
     public String getModule() {
         return module;

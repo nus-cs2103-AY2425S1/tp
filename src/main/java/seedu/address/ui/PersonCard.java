@@ -60,10 +60,10 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.module))
-                .forEach(module -> {
-                    Label moduleLabel = new Label(module.module);
+                .forEach(moduleCode -> {
+                    Label moduleLabel = new Label(moduleCode.module);
                     modules.getChildren().add(moduleLabel);
-                    Label gradeLabel = new Label("(" + module.getGrade() + ")");
+                    Label gradeLabel = new Label("(" + moduleCode.getGrade() + ")");
                     grades.getChildren().add(gradeLabel);
                 });
         gender.textFillProperty().bind(

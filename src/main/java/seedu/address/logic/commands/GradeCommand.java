@@ -72,8 +72,6 @@ public class GradeCommand extends Command {
         Module module = moduleToGrade.get();
         module.assignGrade(grade);
         List<Module> updatedModules = new ArrayList<>(personToGrade.getModules());
-        updatedModules.remove(module);
-        updatedModules.add(module);
         Person updatedPerson = new Person(personToGrade.getName(), personToGrade.getPhone(),
                 personToGrade.getGender(), new HashSet<>(updatedModules),
                 new HashSet<>(personToGrade.getTags()));
