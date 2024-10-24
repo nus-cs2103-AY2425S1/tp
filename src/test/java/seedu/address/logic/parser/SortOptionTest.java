@@ -25,7 +25,7 @@ public class SortOptionTest {
         SortOption sortOptionName = SortOption.fromString("name");
         assertEquals(SortOption.NAME, sortOptionName);
         assertEquals("name", sortOptionName.toString());
-        assertEquals("Person", sortOptionName.getRoleAsString());
+        assertEquals("person", sortOptionName.getRoleAsString());
         assertEquals(Person.class, sortOptionName.getRelatedClass());
 
         // Valid sort option: "hours"
@@ -70,7 +70,7 @@ public class SortOptionTest {
     public void testRoleAndRelatedClass() {
         // Testing role and related class for "name"
         SortOption sortOptionName = SortOption.NAME;
-        assertEquals("Person", sortOptionName.getRoleAsString());
+        assertEquals("person", sortOptionName.getRoleAsString());
         assertEquals(Person.class, sortOptionName.getRelatedClass());
 
         // Testing role and related class for "hours"
