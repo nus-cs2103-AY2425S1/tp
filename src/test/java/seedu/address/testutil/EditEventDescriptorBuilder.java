@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
 
 /**
  * A utility class to help with building EditEventDescriptor objects.
