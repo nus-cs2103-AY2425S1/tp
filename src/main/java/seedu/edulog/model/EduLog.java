@@ -115,6 +115,7 @@ public class EduLog implements ReadOnlyEduLog {
     public void markStudent(Student student) {
         requireNonNull(student);
         student.mark();
+        setStudent(student, student);
     }
 
     /**
@@ -122,6 +123,9 @@ public class EduLog implements ReadOnlyEduLog {
      */
     public void markAllStudents() {
         students.forEach(Student::mark);
+        for (Student student : students) {
+            setStudent(student, student);
+        }
     }
 
     /**
@@ -132,6 +136,7 @@ public class EduLog implements ReadOnlyEduLog {
     public void unmarkStudent(Student student) {
         requireNonNull(student);
         student.unmark();
+        setStudent(student, student);
     }
 
     /**
@@ -139,6 +144,9 @@ public class EduLog implements ReadOnlyEduLog {
      */
     public void unmarkAllStudents() {
         students.forEach(Student::unmark);
+        for (Student student : students) {
+            setStudent(student, student);
+        }
     }
 
     // ------------------ lesson-level operations -----------------------
