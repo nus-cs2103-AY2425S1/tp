@@ -37,7 +37,7 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
 
-   * `appointment-list` : Lists all scheduled appointments.
+   * `appointment-list` : Lists all upcoming scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
@@ -141,9 +141,9 @@ Examples:
 
 ### Viewing upcoming appointments: `appointment-list`
 
-Lists all upcoming appointments 
+Lists all upcoming appointments in the order of the earliest next upcoming appointment.
 
-Format: `appointment-list [DATE_AND_TIME]`
+Format: `appointment-list [d/DATE_AND_TIME]`
 
 * By default this will only show appointments that are in the future (compared to local time now).
 * The optional date and time fields act as filters.
@@ -152,8 +152,8 @@ Format: `appointment-list [DATE_AND_TIME]`
 
 Examples:
 * `appointment-list`
-* `appointment-list 2024-10-17`
-* `appointment-list 2024-10-18 1000`
+* `appointment-list d/2024-10-17`
+* `appointment-list d/2024-10-18 1000`
 
 ### Listing all persons : `list`
 
@@ -287,7 +287,7 @@ Action | Format, Examples
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
-**Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
+**Appointment List** | `appointment-list [d/DATE_AND_TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
 **View** | `view [NAME]`
