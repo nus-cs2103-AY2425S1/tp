@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.awt.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -22,7 +21,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
@@ -106,8 +104,10 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                     .parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
             isUpdated = true;
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updatePersonDescriptor::setTags);
-
+        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updatePersonDescriptor::setTags);
+            isUpdated = true;
+        }
         if (!isUpdated) {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_EDITED);
         }

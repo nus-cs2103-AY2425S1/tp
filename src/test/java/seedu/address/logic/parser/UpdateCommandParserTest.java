@@ -176,6 +176,7 @@ public class UpdateCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
+        System.out.println(userInput);
         descriptor = new UpdatePersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new UpdateCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
