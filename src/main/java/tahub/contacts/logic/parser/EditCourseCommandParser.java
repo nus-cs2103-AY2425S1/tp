@@ -36,20 +36,9 @@ public class EditCourseCommandParser implements Parser<EditCourseCommand> {
         assert argMultimap.getValue(PREFIX_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_NAME).isPresent();
 
-        CourseCode courseCodeToEdit;
+        CourseCode courseCodeToEdit = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
         EditCourseDescriptor editCourseDescriptor = new EditCourseDescriptor();
-
-        try {
-            courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage(), e);
-        }
-
-        try {
-            editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage(), e);
-        }
+        editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
 
         if (!editCourseDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCourseCommand.MESSAGE_COURSE_NOT_EDITED);

@@ -33,23 +33,10 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         assert argMultimap.getValue(PREFIX_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_NAME).isPresent();
 
-        CourseCode courseCode;
-        CourseName courseName;
-
-        try {
-            courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage(), e);
-        }
-
-        try {
-            courseName = ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get());
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage(), e);
-        }
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        CourseName courseName = ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get());
 
         Course course = new Course(courseCode, courseName);
-
         return new CourseCommand(course);
     }
 

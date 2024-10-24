@@ -23,12 +23,13 @@ import tahub.contacts.logic.LogicManager;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tag.Tag;
 import tahub.contacts.model.tutorial.Tutorial;
-import tahub.contacts.storage.Storage;
 import tahub.contacts.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -70,14 +71,13 @@ public class PersonTest {
     public void getStudentCourseAssociations_validStudent_returnsCorrectScas() {
         Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
                 new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         Tutorial tutorial = new Tutorial("T01", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         Model model = new ModelManager();
         model.addSca(sca);
-        Storage storage = null; // Replace with actual Storage implementation if available
-        Logic logic = new LogicManager(model, storage);
+        Logic logic = new LogicManager(model, null);
 
         StudentCourseAssociationList scaList = student.getStudentCourseAssociations(logic);
         assertEquals(1, scaList.asUnmodifiableObservableList().size());
@@ -88,8 +88,8 @@ public class PersonTest {
     public void getCourses_validStudent_returnsCorrectCourses() {
         Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
                 new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
-        Course course1 = new Course("CS1010", "Introduction to CS");
-        Course course2 = new Course("CS2020", "Data Structures");
+        Course course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Course course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
         Tutorial tutorial1 = new Tutorial("T01", course1);
         Tutorial tutorial2 = new Tutorial("T02", course2);
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial1);
@@ -98,8 +98,7 @@ public class PersonTest {
         Model model = new ModelManager();
         model.addSca(sca1);
         model.addSca(sca2);
-        Storage storage = null; // Replace with actual Storage implementation if available
-        Logic logic = new LogicManager(model, storage);
+        Logic logic = new LogicManager(model, null);
 
         UniqueCourseList courseList = student.getCourses(logic);
         assertEquals(2, courseList.asUnmodifiableObservableList().size());
@@ -111,7 +110,7 @@ public class PersonTest {
     public void getTutorials_validStudent_returnsCorrectTutorials() {
         Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
                 new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         Tutorial tutorial1 = new Tutorial("T01", course);
         Tutorial tutorial2 = new Tutorial("T02", course);
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial1);

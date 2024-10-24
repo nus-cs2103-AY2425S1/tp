@@ -28,6 +28,8 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
@@ -149,7 +151,7 @@ public class LogicManagerTest {
     @Test
     public void getStudentScas_validStudent_returnsCorrectScas() {
         Person student = new PersonBuilder(AMY).withTags().build();
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         Tutorial tutorial = new Tutorial("T01", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
         model.addSca(sca);
@@ -161,8 +163,8 @@ public class LogicManagerTest {
     @Test
     public void getStudentCourses_validStudent_returnsCorrectCourses() {
         Person student = new PersonBuilder(AMY).withTags().build();
-        Course course1 = new Course("CS1010", "Introduction to CS");
-        Course course2 = new Course("CS2020", "Data Structures");
+        Course course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Course course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
         Tutorial tutorial1 = new Tutorial("T01", course1);
         Tutorial tutorial2 = new Tutorial("T02", course2);
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial1);
@@ -178,7 +180,7 @@ public class LogicManagerTest {
     @Test
     public void getStudentTutorials_validStudent_returnsCorrectTutorials() {
         Person student = new PersonBuilder(AMY).withTags().build();
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         Tutorial tutorial1 = new Tutorial("T01", course);
         Tutorial tutorial2 = new Tutorial("T02", course);
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial1);
