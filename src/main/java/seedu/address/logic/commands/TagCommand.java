@@ -94,7 +94,7 @@ public class TagCommand extends Command {
                     CreateTagCommand createTagCommand = new CreateTagCommand(tag);
                     createTagCommand.execute(model);
                 } else {
-                    throw new CommandException(MESSAGE_TAG_NOT_FOUND + ".\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT);
+                    throw new CommandException(MESSAGE_TAG_NOT_FOUND + "\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT);
                 }
             }
         }

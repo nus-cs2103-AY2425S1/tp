@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CreateWeddingCommandParser.arePrefixesPresent;
+import static seedu.address.logic.parser.wedding.CreateWeddingCommandParser.arePrefixesPresent;
 
 import java.util.HashSet;
 import java.util.Set;
