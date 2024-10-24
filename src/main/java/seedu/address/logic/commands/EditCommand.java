@@ -36,6 +36,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,7 +127,8 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority,
-                updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedFamilySize, updatedTags);
+                updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedFamilySize, updatedTags,
+                UpdatedAt.now());
     }
 
     public Index getIndex() {

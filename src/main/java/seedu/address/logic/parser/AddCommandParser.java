@@ -26,6 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,7 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, priority, remark, dateOfBirth, income, familySize,
-                tagList);
+                tagList, UpdatedAt.now());
 
         return new AddCommand(person);
     }
