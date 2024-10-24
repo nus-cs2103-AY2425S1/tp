@@ -149,6 +149,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a new Event : `new`
+
+Adds a new Event to address book.
+
+Format: `new EVENT NAME`
+
+* Event name cannot be blank
+
+Examples:
+* `new Sumo Bot Festival`
+* `new RC Horror Night`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -173,6 +185,10 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Navigating through command history
+The `up` and `down` arrow keys can be used to navigate through your command history. When you press the up arrow, the command box displays the previous commands you have executed, allowing you to re-run or edit past commands 
+without retyping them. Pressing the down arrow lets you move forward through the command history, returning to more recent commands.
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -202,6 +218,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**new** | `new EVENT NAME`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
