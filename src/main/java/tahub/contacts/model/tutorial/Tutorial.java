@@ -14,7 +14,7 @@ public class Tutorial {
 
     public static final String TUTORIAL_ID_MESSAGE_CONSTRAINTS =
             "Tutorial Id should start with T, followed by exactly 2 digits between 01 and 99"
-                    + "e.g., T05, T56 or T98";
+                    + ", e.g., T05, T56 or T98";
     /**
      * Represents the regex pattern for validating course codes.
      * The course code should start with 'T', followed by a number from 01 to 99, as per NUS's

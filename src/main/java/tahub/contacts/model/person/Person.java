@@ -59,7 +59,7 @@ public class Person {
                 new Name("generic"),
                 new Phone("99999999"),
                 new Email("local@domain.tld"),
-                new Address("404 Address Not Found"),
+                new Address("Generic Address St."),
                 new HashSet<>()
         );
     }
