@@ -22,7 +22,7 @@ import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.EditVendorCommand;
 import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.commons.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.vendor.Description;
-import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 

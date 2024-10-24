@@ -26,7 +26,7 @@ public class CreateVendorCommand extends CreateCommand {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: "
-            + COMMAND_WORD + " "
+            + COMMAND_WORD + " " + PREFIX_VENDOR + " "
             + PREFIX_NAME + "Adam's Bakery "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_DESCRIPTION + "Pastries and cakes, bake in a day "

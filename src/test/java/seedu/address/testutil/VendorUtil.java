@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.vendor.Vendor;
 
 /**
