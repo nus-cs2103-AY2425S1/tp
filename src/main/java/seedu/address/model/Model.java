@@ -110,4 +110,26 @@ public interface Model {
      * Returns the next command.
      */
     CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult);
+
+    /**
+     * Checks whether it is possible to perform undo operations in address book.
+     * @return true if undo can be performed, false otherwise.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Checks whether it is possible to perform redo operations in address book.
+     * @return true if redo can be performed, false otherwise.
+     */
+    boolean canRedoAddressBook();
+
+    /**
+     * Reverses the most recent undo action.
+     */
+    void undoAddressBook();
+
+    /**
+     * Reverts the last changes in the Address Book
+     */
+    void redoAddressBook();
 }
