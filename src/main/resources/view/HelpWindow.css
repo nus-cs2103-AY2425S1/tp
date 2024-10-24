@@ -1,19 +1,57 @@
-#copyButton, #helpMessage {
+
+*{
+    -fx-font-family: Comfortaa;
+}
+/* Make the label and button text stand out */
+#helpMessage, #copyButton {
     -fx-text-fill: white;
 }
 
+/* Modern button style */
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #007BFF; /* Modern blue accent color */
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-text-fill: white; /* White text */
+    -fx-font-weight: bold; /* Bolder text for buttons */
+    -fx-padding: 8 15; /* Increased padding for larger button */
+    -fx-cursor: hand; /* Pointer cursor on hover */
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #0056b3; /* Darker blue on hover */
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #003d80; /* Even darker when clicked */
 }
 
+/* Background color for the message container */
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 10; /* More padding for cleaner layout */
+}
+
+/* Modern table look */
+#helpTable {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-table-cell-border-color: transparent; /* Remove grid lines */
+    -fx-border-radius: 10; /* Rounded corners for the table */
+    -fx-padding: 10;
+}
+
+/* Table column header style */
+.table-view .column-header-background {
+    -fx-background-color: #f2f2f2; /* Light gray for headers */
+    -fx-font-weight: bold; /* Bold header text */
+    -fx-border-color: #dddddd; /* Light border between headers */
+}
+
+/* Hover effect for table rows */
+.table-view .cell:hover {
+    -fx-background-color: gray; /* Light hover effect on rows */
+}
+
+/* Focused row styling */
+.table-view .focused .cell {
+    -fx-background-color: #e0f7fa; /* Highlighted row when focused */
 }

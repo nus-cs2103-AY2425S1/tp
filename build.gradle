@@ -7,13 +7,16 @@ plugins {
 }
 
 mainClassName = 'seedu.address.Main'
-
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+run {
+    enableAssertions = true
 }
 
 checkstyle {
