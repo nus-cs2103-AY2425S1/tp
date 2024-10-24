@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Description;
-import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 
 public class ParserUtilTest {
@@ -93,14 +93,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseEventName_validValueWithoutWhitespace_returnsEventName() throws Exception {
-        seedu.address.model.event.Name expectedName = new seedu.address.model.event.Name(VALID_EVENT_NAME);
+        Name expectedName = new Name(VALID_EVENT_NAME);
         assertEquals(expectedName, ParserUtil.parseEventName(VALID_EVENT_NAME));
     }
 
     @Test
     public void parseEventName_validValueWithWhitespace_returnsTrimmedEventName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_EVENT_NAME + WHITESPACE;
-        seedu.address.model.event.Name expectedName = new seedu.address.model.event.Name(VALID_EVENT_NAME);
+        Name expectedName = new Name(VALID_EVENT_NAME);
         assertEquals(expectedName, ParserUtil.parseEventName(nameWithWhitespace));
     }
 

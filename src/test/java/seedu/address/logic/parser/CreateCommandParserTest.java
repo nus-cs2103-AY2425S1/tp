@@ -22,7 +22,7 @@ import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 

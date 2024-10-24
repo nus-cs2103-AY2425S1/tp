@@ -33,9 +33,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CreateVendorCommand;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Description;
-import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
