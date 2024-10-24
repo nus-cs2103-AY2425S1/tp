@@ -9,7 +9,6 @@ public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = "Notes should be alphanumeric.";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
-    public static final String NO_EXISTING_NOTE = "There is no note with this index.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     private String note;

@@ -16,7 +16,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes note of an existing person in the addressbook.
+ * Deletes note of an existing person in the address book.
  */
 public class DeleteNotesCommand extends Command {
 
@@ -67,7 +67,7 @@ public class DeleteNotesCommand extends Command {
 
         // if there are no notes with this index
         if (noteIndex.getOneBased() > notesToEdit.size()) {
-            throw new CommandException(Note.NO_EXISTING_NOTE);
+            throw new CommandException(Messages.NO_EXISTING_NOTE);
         }
 
         // remove the specified note
