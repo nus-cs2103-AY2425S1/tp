@@ -18,7 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROJECT_STATU
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_STATUS_DESC_PAID;
-import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_STATUS_DESC_UNPAID;
+import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_STATUS_DESC_PENDING;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_STATUS_DESC_COMPLETE;
@@ -31,7 +31,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PAID;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_UNPAID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PENDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_STATUS_COMPLETE;
@@ -136,13 +136,13 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + PROJECT_STATUS_DESC_IN_PROGRESS
-                + PAYMENT_STATUS_DESC_UNPAID + CLIENT_STATUS_ACTIVE + DEADLINE_DESC_AMY;
+                + PAYMENT_STATUS_DESC_PENDING + CLIENT_STATUS_ACTIVE + DEADLINE_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
-                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
+                .withPaymentStatus(VALID_PAYMENT_STATUS_PENDING)
                 .withClientStatus(VALID_CLIENT_STATUS_ACTIVE)
                 .withDeadline(VALID_DEADLINE_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

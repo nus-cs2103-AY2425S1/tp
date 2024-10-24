@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PROJECT_STATUS = "in progress";
-    public static final String DEFAULT_PAYMENT_STATUS = "unpaid";
+    public static final String DEFAULT_PAYMENT_STATUS = "pending";
     public static final String DEFAULT_CLIENT_STATUS = "active";
     public static final String DEFAULT_DEADLINE = "10-10-2024";
 

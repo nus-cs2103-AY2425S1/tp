@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "15-10-2024"
   }, {
@@ -17,7 +17,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "20-10-2024"
   }, {
@@ -27,7 +27,7 @@
     "address" : "wall street",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "10-11-2024"
   }, {
@@ -37,7 +37,7 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "20-11-2024"
   }, {
@@ -47,7 +47,7 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "09-09-2024"
   }, {
@@ -57,7 +57,7 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "08-08-2024"
   }, {
@@ -67,7 +67,7 @@
     "address" : "4th street",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "07-07-2024"
   } ]

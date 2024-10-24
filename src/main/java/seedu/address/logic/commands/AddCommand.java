@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
             + PREFIX_PROJECT_STATUS + "in progress "
-            + PREFIX_PAYMENT_STATUS + "unpaid "
+            + PREFIX_PAYMENT_STATUS + "pending "
             + PREFIX_CLIENT_STATUS + "active"
             + PREFIX_DEADLINE + "20-10-2024";
 

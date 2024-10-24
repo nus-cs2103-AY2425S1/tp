@@ -43,7 +43,7 @@ public class Person {
         this.projectStatus = (projectStatus != null)
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
         this.paymentStatus = (paymentStatus != null)
-                ? paymentStatus : new PaymentStatus("unpaid"); // Default value
+                ? paymentStatus : new PaymentStatus("pending"); // Default value
         this.clientStatus = (clientStatus != null)
                 ? clientStatus : new ClientStatus("active"); // Default value
         this.deadline = deadline;

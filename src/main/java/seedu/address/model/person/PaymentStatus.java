@@ -5,21 +5,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's payment status in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)} (String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)}
  */
 public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Payment Status should be 'paid', 'unpaid', 'p, 'u', '0' (for paid), '1' (for unpaid) (case insensitive)";
-
-    private static final String UNPAID = "unpaid";
+            "Payment Status should be 'pending', 'partial', 'paid', 'late' (case insensitive)";
+    public static final String NO_PAYMENT_STATUS = "__No_Payment_Status__";
+    private static final String LATE = "late";
     private static final String PAID = "paid";
-    private static final String U_SHORT = "u";
-    private static final String P_SHORT = "p";
-    private static final String UNPAID_NUMERIC = "1";
-    private static final String PAID_NUMERIC = "0";
-
-    public final boolean isPaid;
+    private static final String PARTIAL = "partial";
+    private static final String PENDING = "pending";
+    public final String value;
 
     /**
      * Constructs a {@code PaymentStatus}.
@@ -28,8 +25,12 @@ public class PaymentStatus {
      */
     public PaymentStatus(String status) {
         requireNonNull(status);
-        checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
-        isPaid = parseStatus(status);
+        if (status.equals(NO_PAYMENT_STATUS)) {
+            value = parseStatus("");
+        } else {
+            checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
+            value = parseStatus(status);
+        }
     }
 
     /**
@@ -37,27 +38,35 @@ public class PaymentStatus {
      */
     public static boolean isValidPaymentStatus(String test) {
         return test.equalsIgnoreCase(PAID)
-                || test.equalsIgnoreCase(UNPAID)
-                || test.equalsIgnoreCase(P_SHORT)
-                || test.equalsIgnoreCase(U_SHORT)
-                || test.equals(PAID_NUMERIC)
-                || test.equals(UNPAID_NUMERIC);
+                || test.equalsIgnoreCase(PENDING)
+                || test.equalsIgnoreCase(PARTIAL)
+                || test.equalsIgnoreCase(LATE);
     }
 
     /**
      * Parses the payment status string into a boolean.
      * @param status The payment status string.
-     * @return {@code true} if the status is "complete", {@code false} if it is "in progress".
+     * @return The payment status as a string.
      */
-    private static boolean parseStatus(String status) {
-        return status.equalsIgnoreCase(PAID)
-                || status.equalsIgnoreCase(P_SHORT)
-                || status.equals(PAID_NUMERIC);
+    private static String parseStatus(String status) {
+        switch (status.toLowerCase()) {
+        case PENDING:
+            return PENDING;
+        case PARTIAL:
+            return PARTIAL;
+        case PAID:
+            return PAID;
+        case LATE:
+            return LATE;
+        default:
+            return status;
+        }
+
     }
 
     @Override
     public String toString() {
-        return isPaid ? PAID : UNPAID;
+        return value;
     }
 
     @Override
@@ -71,12 +80,11 @@ public class PaymentStatus {
         }
 
         PaymentStatus otherStatus = (PaymentStatus) other;
-        return isPaid == otherStatus.isPaid;
+        return value.equals(otherStatus.value);
     }
 
     @Override
     public int hashCode() {
-        return Boolean.hashCode(isPaid);
+        return value.hashCode();
     }
-
 }

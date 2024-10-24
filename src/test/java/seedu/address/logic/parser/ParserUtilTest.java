@@ -43,7 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PROJECT_STATUS = "in progress";
     private static final String VALID_PROJECT_STATUS_2 = "completed";
-    private static final String VALID_PAYMENT_STATUS = "unpaid";
+    private static final String VALID_PAYMENT_STATUS = "pending";
     private static final String VALID_PAYMENT_STATUS_2 = "paid";
     private static final String VALID_CLIENT_STATUS = "active";
     private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
