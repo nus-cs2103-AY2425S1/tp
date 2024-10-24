@@ -8,7 +8,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
@@ -36,6 +38,18 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
+    private AnchorPane leftPage;
+
+    @FXML
+    private AnchorPane rightPage;
+
+    @FXML
+    private StackPane binderPlaceholder;
+
+    @FXML
+    private VBox loopParent;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -49,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane calendarDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +83,14 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        primaryStage.getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
+            double newWidth = newValue.doubleValue();
+            leftPage.setPrefWidth((newWidth - binderPlaceholder.getWidth()) / 2);
+            rightPage.setPrefWidth((newWidth - binderPlaceholder.getWidth()) / 2);
+        });
+
+
     }
 
     public Stage getPrimaryStage() {
@@ -110,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanel = new StudentListPanel(logic.getStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,6 +146,13 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        CalendarView calendarView = new CalendarView();
+        calendarDisplayPlaceholder.getChildren().add(calendarView.getRoot());
+
+        Binder binder = new Binder(primaryStage.getScene().getHeight());
+        binderPlaceholder.getChildren().add(binder.getRoot());
+        binder.addListener();
     }
 
     /**

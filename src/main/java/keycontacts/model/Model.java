@@ -2,6 +2,7 @@ package keycontacts.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -17,6 +18,9 @@ import keycontacts.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    Comparator<Student> COMPARATOR_SORT_BY_NAME = (student1, student2) -> student1.getName()
+            .compareTo(student2.getName());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,12 +96,13 @@ public interface Model {
     ArrayList<Student> getStudentsInGroup(Group targetGroup);
 
     /** Returns an unmodifiable view of the filtered student list */
-    ObservableList<Student> getFilteredStudentList();
+    ObservableList<Student> getStudentList();
+
+    void filterStudentList(Predicate<Student> predicate);
 
     /**
-     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the sorted student list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
      */
-    void updateFilteredStudentList(Predicate<Student> predicate);
-
+    void sortStudentList(Comparator<Student> comparator);
 }

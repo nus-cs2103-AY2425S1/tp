@@ -1,96 +1,30 @@
-.background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+* {
+    -fx-primary-color: derive(#1d1d1d, 20%);
 }
 
 .label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
-    -fx-opacity: 0.9;
-}
-
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.text-field {
-    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
 }
 
-.tab-pane {
-    -fx-padding: 0 0 0 1;
-}
-
-.tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
-    -fx-min-height: 0;
-    -fx-max-height: 0;
-}
-
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+.label-day {
     -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
+    -fx-font-size: 14px;
 }
 
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
+.label-hour {
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-translate-y: -8px;
 }
 
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
-}
-
-.split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+.icon {
+    -fx-translate-y: 2px;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .list-cell {
@@ -133,13 +67,43 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: -fx-primary-color;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: -fx-primary-color;
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+}
+
+.calendar {
+    -fx-border-width: 1;
+    -fx-border-color: white
+}
+
+.page-content {
+    -fx-border-color: dimgrey;
+    -fx-border-width: 2;
+}
+
+.horizontal-space {
+    -fx-border-color: dimgrey;
+    -fx-border-width: 1 0 0 0;
+}
+
+.vertical-space {
+    -fx-border-color: white;
+    -fx-border-width: 0 1 0 0;
+}
+
+.horizontal-space-first {
+    -fx-border-color: white;
+    -fx-border-width: 0;
+}
+
+.day-container {
+    -fx-border-color: white;
+    -fx-border-width: 0 1 0 0;
 }
 
 .status-bar {
@@ -193,7 +157,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .menu-bar .label {
@@ -282,7 +246,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .scroll-bar .thumb {
@@ -300,11 +264,11 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 0 8 0 8;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 8 0 8 0;
 }
 
 #cardPane {
@@ -335,4 +299,20 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
+}
+
+.group-chip {
+    -fx-background-color: darkblue;
+    -fx-background-radius: 20;
+    -fx-padding: 2 5 2 5;
+}
+
+.label-calendar-header {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.label-calendar-block {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
 }

@@ -168,23 +168,42 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
-### Locating students by name: `find`
+### Locating students: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose personal details match inputs
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [g/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
+* Prefixes other than `n/`, `p/`, `a/`, `g/` will be ignored.
+* Any keyword before the first valid prefix will be ignored
+* Only the name, phone number, address, and grade level is searched.
+* Partial inclusion of keyword will be considered a match
+* Students matching all field will be returned (i.e. `AND` search).
+  e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Sort students
+
+Sorts students with personal details
+
+Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [g/ASC or DESC]`
+
+* The order of prefixes DOES matter. If there are ties in first field, it will use later fields to tie-break.
+* Prefixes other than `n/`, `/p`, `a/`, `g/` will be ignored.
+* Only name, phone number, address, and grade level are valid fields to be sorted against
+* The sorting order must be `ASC` or  `DESC`, and is case-insensitive
+
+To clear the sorting conditions, use command `sort clear`
+
+Examples:
+* `sort n/ASC` sorts the students by name in ascending order.
+* `sort g/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks with name in ascending order
 
 ### Deleting a student : `delete`
 

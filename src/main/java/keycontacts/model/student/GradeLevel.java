@@ -3,7 +3,7 @@ package keycontacts.model.student;
 /**
  * Represents a Student's grade level field in the student object.
  */
-public class GradeLevel {
+public class GradeLevel implements Comparable<GradeLevel> {
 
     public static final String MESSAGE_CONSTRAINTS = "Grade level should only contain alphanumeric characters "
             + "and spaces, exam board (e.g. ABRSM, Trinity) "
@@ -70,6 +70,11 @@ public class GradeLevel {
      * @return
      */
     public static boolean isValidGradeLevel(String gradeLevel) {
-        return gradeLevel.matches("^[a-zA-Z0-9 ]{1,50} [1-9]|1[0-2]$");
+        return gradeLevel.matches("^[a-zA-Z0-9 ]{1,50} ([1-9]|1[0-2])$");
+    }
+
+    @Override
+    public int compareTo(GradeLevel o) {
+        return this.toString().compareTo(o.toString());
     }
 }

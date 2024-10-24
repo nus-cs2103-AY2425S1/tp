@@ -71,7 +71,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -103,7 +103,8 @@ public class EditCommand extends Command {
             model.setStudent(studentToEdit,
                     editedStudent.withLessons(groupRegularLesson, groupCancelledLessons, groupMakeupLessons));
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        model.filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
 

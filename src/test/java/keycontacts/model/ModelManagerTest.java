@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.GuiSettings;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
+import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 import keycontacts.testutil.StudentDirectoryBuilder;
 
 public class ModelManagerTest {
@@ -89,8 +90,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getStudentList().remove(0));
     }
 
     @Test
@@ -118,12 +119,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentStudentDirectory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        FindStudentDescriptor findStudentDescriptor = new FindStudentDescriptorBuilder()
+                .withName(ALICE.getName().fullName).build();
+        modelManager.filterStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
         assertFalse(modelManager.equals(new ModelManager(studentDirectory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        modelManager.filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

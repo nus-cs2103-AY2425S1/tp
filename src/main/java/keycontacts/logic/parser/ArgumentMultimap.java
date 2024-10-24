@@ -55,6 +55,10 @@ public class ArgumentMultimap {
         return new ArrayList<>(argMultimap.get(prefix));
     }
 
+    public List<Prefix> getAllPrefixes() {
+        return new ArrayList<>(argMultimap.keySet());
+    }
+
     /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
@@ -81,6 +85,14 @@ public class ArgumentMultimap {
      */
     public boolean arePrefixesPresent(Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if at least one of the prefixes contains non-empty
+     * {@code Optional} values, false otherwise.
+     */
+    public boolean anyPrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> getValue(prefix).isPresent());
     }
 
     /**

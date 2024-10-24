@@ -14,16 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.StudentDirectory;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -125,24 +125,25 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         StudentDirectory expectedStudentDirectory = new StudentDirectory(actualModel.getStudentDirectory());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedStudentDirectory, actualModel.getStudentDirectory());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredList, actualModel.getStudentList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s student directory.
      */
     public static void showStudentAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getStudentList().size());
 
-        Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Student student = model.getStudentList().get(targetIndex.getZeroBased());
+        FindStudentDescriptorBuilder builder = new FindStudentDescriptorBuilder();
+        builder.withName(student.getName().fullName);
+        model.filterStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
 
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
 }

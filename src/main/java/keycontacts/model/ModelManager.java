@@ -5,12 +5,14 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
 import keycontacts.model.lesson.Lesson;
@@ -25,7 +27,9 @@ public class ModelManager implements Model {
 
     private final StudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
+    private final ObservableList<Student> studentList;
     private final FilteredList<Student> filteredStudents;
+    private final SortedList<Student> sortedFilteredStudents;
 
     /**
      * Initializes a ModelManager with the given studentDirectory and userPrefs.
@@ -38,6 +42,9 @@ public class ModelManager implements Model {
         this.studentDirectory = new StudentDirectory(studentDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentDirectory.getStudentList());
+        sortedFilteredStudents = new SortedList<>(filteredStudents);
+
+        studentList = sortedFilteredStudents;
     }
 
     public ModelManager() {
@@ -105,7 +112,7 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(Student student) {
         studentDirectory.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -130,18 +137,24 @@ public class ModelManager implements Model {
     //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the
+     * internal list of
      * {@code versionedStudentDirectory}
      */
     @Override
-    public ObservableList<Student> getFilteredStudentList() {
-        return filteredStudents;
+    public ObservableList<Student> getStudentList() {
+        return studentList;
     }
 
     @Override
-    public void updateFilteredStudentList(Predicate<Student> predicate) {
+    public void filterStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortStudentList(Comparator<Student> comparator) {
+        sortedFilteredStudents.setComparator(comparator);
     }
 
     @Override
