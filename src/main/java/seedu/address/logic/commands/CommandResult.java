@@ -20,7 +20,7 @@ public class CommandResult {
     private final boolean exit;
 
     /** The previous command prompts the user for confirmation */
-    private final boolean prompt;
+    private final boolean hasPrompt;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -29,7 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.prompt = false;
+        this.hasPrompt = false;
     }
 
     /**
@@ -39,7 +39,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.prompt = isPrompt;
+        this.hasPrompt = isPrompt;
     }
 
     /**
@@ -62,8 +62,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isPrompt() {
-        return prompt;
+    public boolean hasPrompt() {
+        return hasPrompt;
     }
 
     @Override
