@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        PersonDetails personDetails = new PersonDetails(logic.getPersonToDisplay());
+        personDetails = new PersonDetails(logic.getPersonToDisplay());
         personDetailsPlaceholder.getChildren().add(personDetails.getRoot());
     }
 
@@ -170,6 +170,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleShowPerson() {
+        personDetails.updateDetails(logic.getPersonToDisplay());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -191,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPerson()) {
+                handleShowPerson();
             }
 
             return commandResult;
