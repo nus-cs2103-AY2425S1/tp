@@ -168,7 +168,7 @@ Upon execution, `AddCommand` first queries the supplied model if it contains a d
 The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
 
-<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
 `AddressBookParser` first obtains the keyword from the user's input.
 `AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
@@ -192,6 +192,20 @@ Refer to AddSequenceDiagram for how `AddressBookParser` creates FilterCommandPar
 A new filter command is then created with a `StatusPredicate`.
 
 Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
+
+
+### Delete an internship application
+The implementation of the command command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user input string.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
+
+`AddressBookParser` first obtains the index from the user's input.
+`AddressBookParser` ensures that there is at least 1 keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the user input.
+`DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
+
+Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
