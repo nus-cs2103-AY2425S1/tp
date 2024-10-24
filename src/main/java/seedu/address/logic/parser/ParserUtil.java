@@ -153,12 +153,8 @@ public class ParserUtil {
             return null;
         }
         String trimmedBudget = budget.trim();
-
-        String budgetWithoutDecimal = trimmedBudget.replace(".", "");
-        if (budgetWithoutDecimal.length() > 15) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
-        }
         double budgetValue;
+
         try {
             budgetValue = Double.parseDouble(trimmedBudget);
         } catch (NumberFormatException e) {

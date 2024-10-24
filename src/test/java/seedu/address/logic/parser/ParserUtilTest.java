@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -45,6 +46,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_RSVP = "ACCEPTED";
     private static final String VALID_COMPANY = "The Florist";
+    private static final Double VALID_BUDGET = 1000.01;
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -245,6 +247,24 @@ public class ParserUtilTest {
         String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
         Company expectedCompany = new Company(VALID_COMPANY);
         assertEquals(expectedCompany, ParserUtil.parseCompany(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseBudget_throwsNullPointerException() throws ParseException {
+        assertEquals(null, ParserUtil.parseBudget((String) null));
+    }
+
+    @Test
+    public void parseBudget_validValueWithoutWhitespace_returnsBudget() throws Exception {
+        Budget expectedBudget = new Budget(VALID_BUDGET);
+        assertEquals(expectedBudget, ParserUtil.parseBudget(VALID_BUDGET.toString()));
+    }
+
+    @Test
+    public void parseBudget_validValueWithWhitespace_returnsBudget() throws Exception {
+        String budgetWithWhitespace = WHITESPACE + VALID_BUDGET + WHITESPACE;
+        Budget expectedBudget = new Budget(VALID_BUDGET);
+        assertEquals(expectedBudget, ParserUtil.parseBudget(budgetWithWhitespace));
     }
 
     @Test

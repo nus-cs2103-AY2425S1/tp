@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -42,7 +44,24 @@ public class Budget {
         // Check 2dp or less
         BigDecimal budgetDecimal = BigDecimal.valueOf(test);
         int scale = budgetDecimal.scale();
-        return scale <= 2;
+        if (scale <= 2) {
+            return false;
+        }
+
+        String budgetString = String.valueOf(test);
+
+        // Check if it is scientific notation
+        if (budgetString.contains("E")) {
+            return false;
+        }
+
+        // Check if it has more than 15 digits
+        String budgetWithoutDecimal = budgetString.replace(".", "");
+        if (budgetWithoutDecimal.length() > 15) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
