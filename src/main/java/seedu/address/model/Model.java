@@ -79,6 +79,21 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if the person is linked to the specified event.
+     * @param person
+     * @param event
+     * @return
+     */
+    boolean isPersonLinkedToEvent(Person person, Event event);
+
+    /**
+     * Links the given person {@code person} with {@code event}.
+     * {@code person} must exist in the address book.
+     * {@code event} must exist in the address book.
+     */
+    void linkPersonToEvent(Person person, Event event);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -111,6 +126,11 @@ public interface Model {
      * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
      */
     void setEvent(Event target, Event editedEvent);
+
+    /**
+     * Returns the event with the same name as {@code event}.
+     */
+    Event getEventByName(Event event);
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();

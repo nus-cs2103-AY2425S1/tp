@@ -45,11 +45,9 @@ public class Event {
         return location;
     }
 
-
     public DateTime getStartTime() {
         return startTime;
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -60,7 +58,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name.
+     * Returns true if both events have the same name and address and startTime.
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
@@ -69,7 +67,9 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName());
+                && otherEvent.getName().equals(getName())
+                && otherEvent.getLocation().equals(getLocation())
+                && otherEvent.getStartTime().equals(getStartTime());
     }
 
     /**
