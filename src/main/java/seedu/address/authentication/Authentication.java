@@ -4,7 +4,8 @@ package seedu.address.authentication;
  * Handles the authentication function.
  */
 public class Authentication {
-    private static final Credentials credentials = new Credentials("./credentials.txt");
+    private static final Credentials credentials = new Credentials("/config/credentials.txt");
+
     /**
      * Checks if user is allowed to log in.
      * Returns True if allowed, false if not.

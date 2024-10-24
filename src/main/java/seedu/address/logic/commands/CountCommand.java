@@ -48,6 +48,7 @@ public class CountCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null : "Model must  not be null";
         Predicate<Person> predicate = getFilterPredicate();
 
         List<Person> filteredList = model.getFilteredPersonList().stream()
@@ -91,6 +92,7 @@ public class CountCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        assert other != null : "Object must not be null";
         if (other == this) {
             return true;
         }

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -21,21 +22,32 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
     private final PersonDetailsWindow personDetailsWindow;
+
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList} and {@code PersonDetailsWindow}.
+     *
+     * @param personList          The observable list of persons to display.
+     * @param personDetailsWindow The window to display person details.
      */
     public PersonListPanel(ObservableList<Person> personList, PersonDetailsWindow personDetailsWindow) {
         super(FXML);
         this.personDetailsWindow = personDetailsWindow;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+
+        // Ensure the ListView can receive key events
+        personListView.setFocusTraversable(true);
+        personListView.requestFocus();
+
         setEventHandlers();
     }
+
     /**
      * Sets event handlers for the person list view.
      */
     private void setEventHandlers() {
-        this.personListView.setOnMouseClicked(this::handlePersonClick);
+        personListView.setOnMouseClicked(this::handlePersonClick);
+        personListView.setOnKeyPressed(this::handleKeyPress);
     }
 
     /**
@@ -44,6 +56,30 @@ public class PersonListPanel extends UiPart<Region> {
      * @param event The mouse event.
      */
     private void handlePersonClick(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            openPersonDetailsWindow();
+        }
+    }
+
+    /**
+     * Handles key press events on the person list view.
+     *
+     * @param event The key event.
+     */
+    private void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+        case ENTER:
+            openPersonDetailsWindow();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Opens the PersonDetailsWindow for the selected person.
+     */
+    private void openPersonDetailsWindow() {
         Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             personDetailsWindow.show(selectedPerson);
@@ -66,5 +102,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

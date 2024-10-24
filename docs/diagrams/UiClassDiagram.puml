@@ -5,29 +5,30 @@ skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
-Class LoginWindow
+    Class "<<interface>>\nUi" as Ui
+    Class "{abstract}\nUiPart" as UiPart
+    Class UiManager
+    Class MainWindow
+    Class HelpWindow
+    Class ResultDisplay
+    Class PersonListPanel
+    Class PersonCard
+    Class StatusBarFooter
+    Class CommandBox
+    Class LoginWindow
+    Class PersonDetailsWindow
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+    Class HiddenModel #FFFFFF
 }
 
 package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+    Class HiddenLogic #FFFFFF
 }
 
 package Authentication <<Rectangle>> {
-Class HiddenAuthentication #FFFFFF
+    Class HiddenAuthentication #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -41,8 +42,10 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" PersonDetailsWindow
 
 PersonListPanel -down-> "*" PersonCard
+PersonListPanel --> "1" PersonDetailsWindow
 
 MainWindow -left-|> UiPart
 
@@ -53,6 +56,7 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+PersonDetailsWindow --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
@@ -65,4 +69,7 @@ CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
+
+PersonDetailsWindow --> "1" Logic
+
 @enduml
