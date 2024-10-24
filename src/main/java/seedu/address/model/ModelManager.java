@@ -14,8 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
-import seedu.address.model.event.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.DuplicateAssignException;
+import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 

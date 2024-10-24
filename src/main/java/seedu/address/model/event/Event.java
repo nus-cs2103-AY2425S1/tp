@@ -182,14 +182,19 @@ public class Event {
                 .toString();
     }
 
-    public boolean isOverlapping(Event event) {
+    /**
+     * Checks if this event has any overlap with another event.
+     * @param event to be checked against
+     * @return boolean
+     */
+    public boolean isOverlappingWith(Event event) {
 
         if (!this.date.isSameDate(event.getDate())) {
             return false;
         }
 
-        return !(endTime.isBefore(event.startTime) ||
-                startTime.isAfter(event.endTime));
+        return !(endTime.isBefore(event.startTime)
+                || startTime.isAfter(event.endTime));
     }
 
 }

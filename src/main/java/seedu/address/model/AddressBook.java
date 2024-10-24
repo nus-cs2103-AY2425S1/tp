@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**

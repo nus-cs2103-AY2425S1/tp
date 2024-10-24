@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.event.exceptions.OverlappingAssignException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -51,26 +51,48 @@ public class EventManager {
      */
     public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
             OverlappingAssignException {
+
         if (event.getVolunteers().contains(volunteer.getName().fullName)) {
             throw new DuplicateAssignException();
-        } if (hasOverlap(volunteer.getEvents(), event)) {
-            throw new OverlappingAssignException();
+        }
+        for (Event e : getEventsFromListOfNames(volunteer.getEvents())) {
+            if (e.isOverlappingWith(event)) {
+                throw new OverlappingAssignException();
+            }
         }
         event.assignVolunteer(volunteer.getName().fullName);
     }
 
-    public boolean hasOverlap(List<String> eventNames, Event event) {
+    /**
+     * Retreives an event object from the events list using its name.
+     * @param eventName Event name to search for
+     * @return Event object retrieved from list
+     * @throws EventNotFoundException if event with the provided name does not exist within the events list.
+     */
 
+    public Event getEventFromName(String eventName) throws EventNotFoundException {
         for (Event e : events) {
-            if (!eventNames.contains(e.getName().toString())) {
-                continue;
-            }
-            if (e.isOverlapping(event)) {
-                return true;
+            if (e.getName().toString().equals(eventName)) {
+                return e;
             }
         }
-        return false;
+        throw new EventNotFoundException();
     }
+
+
+    /**
+     * Returns a list of event objects using a provided list of event names.
+     * @param eventNames String list of event names.
+     * @return Event list of events.
+     */
+    public List<Event> getEventsFromListOfNames(List<String> eventNames) {
+        ArrayList<Event> events = new ArrayList<>();
+        for (String s : eventNames) {
+            events.add(getEventFromName(s));
+        }
+        return events;
+    }
+
 
     /**
      * Unassigns a volunteer from an event.
