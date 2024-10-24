@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -180,5 +181,19 @@ public class ModelManagerTest {
     @Test
     public void getFilteredGoods() {
         // TODO: Implement this
+    }
+
+    @Test
+    public void deleteGoods_removedGoods() {
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withGoodsName(new GoodsName("Calbee"))
+                .withSupplierName(ALICE.getName())
+                .build();
+        modelManager.addPerson(ALICE);
+        modelManager.addGoods(goodsReceipt);
+        modelManager.deleteGoods(goodsReceipt.getGoods().getReadableGoodsName());
+        List<GoodsReceipt> goodsList = modelManager
+                .getFilteredGoods(r -> r.getGoods().getReadableGoodsName().equals("Calbee"));
+        assertEquals(goodsList.size(), 0);
     }
 }
