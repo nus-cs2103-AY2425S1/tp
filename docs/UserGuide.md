@@ -47,6 +47,7 @@
 
   .headers {
     font-weight: 900;
+    margin-top: 128px
   }
 
   .content {
@@ -176,6 +177,10 @@
   .toc-btns:hover::before {
     width: calc(100%);
     background: linear-gradient(90deg, var(--code-bg-color) 0%, var(--primary-bg-color) 50%);
+  }
+
+  .last-component {
+    margin-bottom: 128px;
   }
 </style>
 
@@ -576,6 +581,7 @@
 
   <br>
   <br>
+
   Format: `promote INDEX CONTRACT_END_DATE`
 
   * Promote the potential hire at the specified `INDEX` to an employee with the specified `CONTRACT_END_DATE`.
@@ -616,6 +622,7 @@
 
   <br>
   <br>
+
   Format: `sort name` or `sort date`
 
   Sorts the list by either the name of the contact or the contract end date.
@@ -734,3 +741,5 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 </div>
+
+<div class="last-component"></div>
