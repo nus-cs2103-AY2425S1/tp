@@ -11,6 +11,7 @@ participant ":Event" as E #lightgreen
 
 user --> L: "new ..."
 L-> A: addressBookParser.parseCommand("new...")
+create P
 A -> P: .parse(arguments)
 
 create B
