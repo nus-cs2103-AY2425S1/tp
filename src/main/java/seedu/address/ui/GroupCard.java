@@ -34,10 +34,6 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label studentClass;
-    @FXML
-    private Label phone;
-    @FXML
     private FlowPane members;
 
     /**

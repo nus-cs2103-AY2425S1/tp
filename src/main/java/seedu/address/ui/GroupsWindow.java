@@ -64,7 +64,7 @@ public class GroupsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing groups.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
