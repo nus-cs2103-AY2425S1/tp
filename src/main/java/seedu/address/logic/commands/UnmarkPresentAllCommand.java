@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -56,7 +57,8 @@ public class UnmarkPresentAllCommand extends Command {
         for (Student student : studentsFromSpecifiedTutorialGroup) {
             student.markAttendance(date, "a");
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup, date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
     }
 
     @Override
