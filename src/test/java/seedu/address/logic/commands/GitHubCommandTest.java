@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -194,6 +195,11 @@ public class GitHubCommandTest {
 
         @Override
         public Github getGitHubUsername(Name name) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Optional<Person> getPerson(Name name) {
             throw new AssertionError("This method should not be called");
         }
     }

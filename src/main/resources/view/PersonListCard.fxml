@@ -40,6 +40,7 @@
       </padding>
       <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram"/>
       <Label fx:id="github" styleClass="cell_small_label" text="\$Github" />
+      <FlowPane fx:id="weekLabel" />
     </VBox>
   </GridPane>
 </HBox>

@@ -168,7 +168,6 @@ public class LogicManagerTest {
         JsonPredefinedAssignmentDataStorage predefinedAssignmentDataStorage =
                 new JsonPredefinedAssignmentDataStorage(
                         temporaryFolder.resolve("asign"));
-
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override

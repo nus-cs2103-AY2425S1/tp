@@ -30,6 +30,7 @@ public class Person {
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Assignment assignment;
+    private Set<Integer> weeksPresent;
 
     /**
      * Every field must be present and not null.
@@ -50,6 +51,8 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.github = github;
+        this.weeksPresent = new HashSet<>();
+
     }
 
     /**
@@ -74,6 +77,41 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.assignment = assignment;
+        this.weeksPresent = new HashSet<>();
+    }
+
+    /**
+     * Constructs a new Person object
+     *
+     * @param name the name of the person.
+     * @param phone the phone number of the person.
+     * @param address the address of the person.
+     * @param email the email of the person.
+     * @param telegram the telegram ID of the person.
+     * @param github the github username of the person.
+     * @param assignment the assignment of the person.
+     * @param weeksPresent the weeks present.
+     * @param tags the tags for that person.
+     */
+    public Person(Name name,
+                  Phone phone,
+                  Address address,
+                  Email email,
+                  Telegram telegram,
+                  Github github,
+                  Assignment assignment,
+                  Set<Integer> weeksPresent,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+        this.github = github;
+        this.telegram = telegram;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.assignment = assignment;
+        this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
 
@@ -116,6 +154,10 @@ public class Person {
 
     public Github getGithub() {
         return github;
+    }
+
+    public Set<Integer> getWeeksPresent() {
+        return this.weeksPresent;
     }
 
     /**
@@ -199,6 +241,7 @@ public class Person {
                 .add("tags", tags)
                 .add("github", github)
                 .add("assignment", assignment)
+                .add("weeks present", weeksPresent)
                 .toString();
     }
 
