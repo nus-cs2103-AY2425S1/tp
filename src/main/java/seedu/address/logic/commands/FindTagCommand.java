@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
-import java.util.List;
+import java.util.logging.Logger;
+
 
 public class FindTagCommand extends Command {
     public static final String COMMAND_WORD = "findtag";
@@ -17,12 +18,16 @@ public class FindTagCommand extends Command {
 
     private final TagContainsKeywordsPredicate predicate;
 
+    private static final Logger logger = LogsCenter.getLogger(FindTagCommand.class);
+
     public FindTagCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("Executing FindTagCommand...");
+
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
