@@ -38,7 +38,7 @@ public class WeddingBuilder {
     }
 
     /**
-     * Initializes the WeddingBuilder with the data of {@code personToCopy}.
+     * Initializes the WeddingBuilder with the data of {@code weddingToCopy}.
      */
     public WeddingBuilder(Wedding weddingToCopy) {
         weddingName = weddingToCopy.getWeddingName();
@@ -49,7 +49,7 @@ public class WeddingBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Wedding} that we are building.
+     * Sets the {@code WeddingName} of the {@code Wedding} that we are building.
      */
     public WeddingBuilder withName(String name) {
         this.weddingName = new WeddingName(name);
@@ -73,7 +73,7 @@ public class WeddingBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Wedding} that we are building.
      */
     public WeddingBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -81,7 +81,7 @@ public class WeddingBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Person} that we are building.
+     * Sets the {@code Date} of the {@code Wedding} that we are building.
      */
     public WeddingBuilder withDate(String date) {
         this.date = date;
