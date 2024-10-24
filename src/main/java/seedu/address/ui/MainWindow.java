@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.commands.ClientUtil.findViewPerson;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ClientUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -205,7 +204,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowClient()) {
-                Person targetClient = findViewPerson(commandText, logic);
+                Person targetClient = ClientUtil.findViewPerson(commandText, logic);
                 handleShowClient(targetClient);
             }
 
