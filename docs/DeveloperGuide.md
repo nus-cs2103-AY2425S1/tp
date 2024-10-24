@@ -87,9 +87,14 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+[//]: # (Here's a &#40;partial&#41; class diagram of the `Logic` component:)
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+[//]: # ()
+[//]: # (<img src="images/LogicClassDiagram.png" width="550"/>)
+
+Here is a fuller diagram of how the `Logic` component might interact with adjacent classes:
+
+<img src="images/FullerLogicClassDiagram.png"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
