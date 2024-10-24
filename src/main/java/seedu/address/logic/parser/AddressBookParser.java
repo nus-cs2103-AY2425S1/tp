@@ -26,7 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewTuteeChartCommand;
+import seedu.address.logic.commands.ViewTutorChartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -110,8 +110,8 @@ public class AddressBookParser {
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
 
-        case ViewTuteeChartCommand.COMMAND_WORD:
-            return new ViewTuteeChartCommand();
+        case ViewTutorChartCommand.COMMAND_WORD:
+            return new ViewTutorChartCommand();
 
         case FindSubjectCommand.COMMAND_WORD:
             return new FindSubjectCommandParser().parse(arguments);
