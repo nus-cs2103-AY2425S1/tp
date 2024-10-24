@@ -64,7 +64,7 @@ public class ExportCommandTest {
         // Act
         File src = tempSrcPath.toFile();
         File dst = tempDstPath.toFile();
-        System.out.println(dst);
+
         ExportCommand exportCommand = new ExportCommand(dst, src, tempKeyPath);
         CommandResult result = exportCommand.execute(model);
 
