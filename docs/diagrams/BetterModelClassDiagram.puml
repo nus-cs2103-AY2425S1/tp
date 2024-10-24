@@ -17,6 +17,6 @@ Person -up-> "*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> JobCode
+Person *--> Address
 Person *--> Remark
 @enduml
