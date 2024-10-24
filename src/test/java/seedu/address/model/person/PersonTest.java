@@ -41,13 +41,22 @@ public class PersonTest {
     @Test
     public void withUpdatedPublicAddress_existingNetwork_updatesAddress() {
         PublicAddress newBtcAddress =
-                PublicAddressFactory.createPublicAddress(Network.BTC, "newBtcAddress", "btcLabel1");
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_2, "btcLabel1");
         Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
 
         assertEquals(2, updatedPerson.getPublicAddresses().get(Network.BTC).size());
         assertTrue(updatedPerson.getPublicAddresses().get(Network.BTC).contains(newBtcAddress));
         assertFalse(updatedPerson.getPublicAddresses().get(Network.BTC).contains(btcAddress1));
         assertTrue(updatedPerson.getPublicAddresses().get(Network.BTC).contains(btcAddress2));
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_existingNetworkCapitaliseLabel_returnsEqualPerson() {
+        PublicAddress newBtcAddress =
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "BTCLABEL1");
+        Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
+
+        assertEquals(person, updatedPerson);
     }
 
     @Test

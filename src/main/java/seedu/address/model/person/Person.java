@@ -95,7 +95,7 @@ public class Person {
         return publicAddresses
                 .getOrDefault(network, Collections.emptySet())
                 .stream()
-                .anyMatch(addr -> addr.label.equalsIgnoreCase(label));
+                .anyMatch(addr -> addr.label.equals(label));
     }
 
     /**
@@ -122,7 +122,7 @@ public class Person {
 
     private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
         return addresses.stream()
-                .map(addr -> addr.label.equalsIgnoreCase(newAddress.label)
+                .map(addr -> addr.label.equals(newAddress.label)
                              ? newAddress
                              : addr)
                 .collect(Collectors.toSet());
