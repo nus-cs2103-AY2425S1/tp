@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.filename.Filename;
-import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.LoadArchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

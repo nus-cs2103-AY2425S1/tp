@@ -13,19 +13,18 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 
 /**
  * Lists all archive files in the archive folder.
  */
 public class ListArchiveFilesCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(ListArchiveFilesCommand.class);
-
     public static final String COMMAND_WORD = "listArchives";
 
     public static final String MESSAGE_SUCCESS = "Listed all archive files.";
     public static final String MESSAGE_NO_ARCHIVE = "No archive files found.";
     public static final String MESSAGE_FAILURE = "Failed to find archive files. Please try again later.";
+
+    private static final Logger logger = LogsCenter.getLogger(ListArchiveFilesCommand.class);
 
     @Override
     public CommandResult execute(Model model) {

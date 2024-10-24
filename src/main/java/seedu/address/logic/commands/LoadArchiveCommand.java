@@ -19,8 +19,6 @@ import seedu.address.storage.JsonAddressBookStorage;
  * Loads an archive file and sets it as the current address book.
  */
 public class LoadArchiveCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(LoadArchiveCommand.class);
-
     public static final String COMMAND_WORD = "loadArchive";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads an archive file.\n"
             + "Parameters: FILENAME\n"
@@ -29,6 +27,8 @@ public class LoadArchiveCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Loaded archive file: %1$s";
     public static final String MESSAGE_NOT_FOUND = "Archive file not found: %1$s";
     public static final String MESSAGE_FAILURE = "Failed to load archive file: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger(LoadArchiveCommand.class);
 
     private final Filename archiveFilename;
 
