@@ -85,7 +85,8 @@ public class AbstractEditCommand extends Command {
     private CommandResult saveEditedPerson(
             Model model,
             Person personToEdit,
-            Person editedPerson
+            Person editedPerson,
+            String successMessage
     ) throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -93,7 +94,7 @@ public class AbstractEditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(successMessage, Messages.format(editedPerson)));
     }
 
     /**
@@ -106,7 +107,7 @@ public class AbstractEditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Person personToEdit = getPersonToEdit(model);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        return saveEditedPerson(model, personToEdit, editedPerson);
+        return saveEditedPerson(model, personToEdit, editedPerson, MESSAGE_EDIT_PERSON_SUCCESS);
     }
 
     /**
@@ -119,11 +120,12 @@ public class AbstractEditCommand extends Command {
      */
     CommandResult execute(
             Model model,
-            BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson
+            BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson,
+            String successMessage
     ) throws CommandException {
         Person personToEdit = getPersonToEdit(model);
         Person editedPerson = makeEditedPerson.apply(personToEdit, editPersonDescriptor);
-        return saveEditedPerson(model, personToEdit, editedPerson);
+        return saveEditedPerson(model, personToEdit, editedPerson, successMessage);
     }
 
     @Override
@@ -279,6 +281,7 @@ public class AbstractEditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(publicAddresses, otherEditPersonDescriptor.publicAddresses)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
