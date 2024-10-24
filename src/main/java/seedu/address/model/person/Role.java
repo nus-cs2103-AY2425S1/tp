@@ -5,13 +5,25 @@ package seedu.address.model.person;
  * Provides utility methods for converting a string into a Role and for validating if a string is a valid Role.
  */
 public enum Role {
-    VOLUNTEER,
-    DONOR,
-    PARTNER,
-    PERSON;
+    VOLUNTEER(Volunteer.class),
+    DONOR(Donor.class),
+    PARTNER(Partner.class),
+    PERSON(Person.class);
 
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid role. Valid roles are: Volunteer, Donor, Partner, Person..";
+
+    private final Class<? extends Person> relatedClass;
+
+    /**
+     * Constructs a {@code Role}.
+     *
+     * @param relatedClass  The class associated with the role.
+     */
+    Role(Class<? extends Person> relatedClass) {
+        this.relatedClass = relatedClass;
+    }
+
     /**
      * Returns the Role corresponding to the given string.
      * Throws an IllegalArgumentException if no matching Role is found.
@@ -52,5 +64,14 @@ public enum Role {
      */
     public String toLowerCase() {
         return name().toLowerCase();
+    }
+
+    /**
+     * Returns the class related to this role.
+     *
+     * @return The related class.
+     */
+    public Class<? extends Person> getRelatedClass() {
+        return relatedClass;
     }
 }
