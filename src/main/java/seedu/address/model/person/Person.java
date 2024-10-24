@@ -69,7 +69,7 @@ public class Person {
     }
 
     /**
-     * Check is Person is a member
+     * Check if Person is a member
      * @return true is Person has a role "member"
      */
     public boolean isMember() {
