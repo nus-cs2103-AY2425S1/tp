@@ -17,7 +17,7 @@ public abstract class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the item identified by the index number used in the displayed item list.\n"
             + "Parameters: " + PREFIX_VENDOR + " INDEX or "
-            + PREFIX_EVENT + " INDEX (must be a positive integer)" + "\n"
+            + PREFIX_EVENT + " INDEX (INDEX must be a positive integer)" + "\n"
             + "Example to delete a vendor: " + COMMAND_WORD + " " + PREFIX_VENDOR + " 1" + "\n"
             + "Example to delete an event: " + COMMAND_WORD + " " + PREFIX_EVENT + " 1" + "\n";
 

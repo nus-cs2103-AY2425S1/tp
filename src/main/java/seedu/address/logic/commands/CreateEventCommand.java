@@ -17,7 +17,7 @@ import seedu.address.model.event.Event;
 public class CreateEventCommand extends CreateCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new event in the address book.\n"
             + "Parameters: "
-            + PREFIX_EVENT + "<empty> "
+            + PREFIX_EVENT + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE" + "\n"
             + "Example: "
