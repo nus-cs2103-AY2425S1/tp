@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_TUTORIAL_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -30,9 +32,8 @@ public class CloseTutorialCommand extends Command {
             + PREFIX_TUTORIAL + "Chemistry";
 
     public static final String MESSAGE_CLOSE_TUTORIAL_SUCCESS = "Successfully closed tutorial: %1$s class";
-    public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
 
-    private final Tutorial toClose;
+    private final Tutorial toCloseTutorial;
 
     /**
      * Constructs a {@code CloseTutorialCommand} with the specified tutorial to close.
@@ -41,7 +42,7 @@ public class CloseTutorialCommand extends Command {
      */
     public CloseTutorialCommand(Tutorial tutorial) {
         requireNonNull(tutorial);
-        toClose = tutorial;
+        toCloseTutorial = tutorial;
     }
 
     /**
@@ -56,13 +57,19 @@ public class CloseTutorialCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasTutorial(toClose)) {
-            throw new CommandException(String.format(MESSAGE_TUTORIAL_NOT_FOUND, toClose.getSubject()));
+        if (!model.hasTutorial(toCloseTutorial)) {
+            throw new CommandException(String.format(MESSAGE_TUTORIAL_NOT_FOUND, toCloseTutorial.getSubject()));
         }
 
-        Tutorial tutorialToCloseFromList = model.getTutorial(toClose);
+        List<Tutorial> fullTutorialList = model.getTutorialList();
+        Tutorial tutorialToCloseFromList = fullTutorialList.stream()
+                .filter(eachTutorial -> eachTutorial.equals(toCloseTutorial))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(
+                        String.format(MESSAGE_TUTORIAL_NOT_FOUND, toCloseTutorial.getSubject())));
+
         removeStudentsFromTutorialParticipation(model, tutorialToCloseFromList);
-        model.closeTutorial(tutorialToCloseFromList);
+        model.deleteTutorial(tutorialToCloseFromList);
 
         return new CommandResult(String.format(
                 MESSAGE_CLOSE_TUTORIAL_SUCCESS,
