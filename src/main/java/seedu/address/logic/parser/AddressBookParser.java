@@ -15,7 +15,7 @@ import seedu.address.logic.commands.personcommands.AddPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditPersonCommand;
 import seedu.address.logic.commands.personcommands.ExitCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.commands.personcommands.SearchPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -29,7 +29,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-        "(?<commandWord>\\S+)(\\s+(?<modelType>\\S+)?(\\s+(?<arguments>.*)?)?)?"
+        "(?<commandWord>\\S+)(?<combined>\\s+(?<modelType>\\S+)?(?<arguments>.*)?)?"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -51,8 +51,8 @@ public class AddressBookParser {
         final String modelTypeShortHand = matcher.group("modelType");
         final ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
         final String arguments = (modelType == ModelType.NEITHER)
-                ? " " + modelTypeShortHand : " " + matcher.group("arguments");
-        // todo Not sure why spaces need to be added but it doesn't work without them
+                ? matcher.group("combined")
+                : matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
@@ -73,7 +73,7 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindPersonCommand.COMMAND_WORD:
             return new FindCommandParser().parse(modelType, arguments);
 
         case ListCommand.COMMAND_WORD:
