@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +47,7 @@ public class Person implements Appointmentable {
         this.remark = remark;
         this.tags.addAll(tags);
         this.id = new Id(role).getIdValue();
+        this.appointments = new ArrayList<>();
     }
 
     public Person(Name name, int id, String role, Phone phone, Email email,
@@ -252,7 +254,9 @@ public class Person implements Appointmentable {
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Appointments: ");
-        getAppointments().forEach(builder::append);
+        if (getAppointments() != null) {
+            getAppointments().forEach(builder::append);
+        }
         builder.append(getAppointments())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
