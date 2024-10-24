@@ -133,8 +133,13 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+        try {
+            CommandResult result = command.execute(actualModel);
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage, result.getTopPanelDisplayType());
+            assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
     }
 
     /**
