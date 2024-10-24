@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
@@ -70,34 +72,43 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         // Create an UpdatePersonDescriptor from the arguments
         UpdateCommand.UpdatePersonDescriptor updatePersonDescriptor = new UpdatePersonDescriptor();
 
+        boolean isUpdated = false;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             updatePersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             updatePersonDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             updatePersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             updatePersonDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             updatePersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             updatePersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             updatePersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            isUpdated = true;
         }
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
             updatePersonDescriptor.setAppointment(ParserUtil
                     .parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
+            isUpdated = true;
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updatePersonDescriptor::setTags);
 
-        if (!updatePersonDescriptor.isAnyFieldEdited()) {
+        if (!isUpdated) {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_EDITED);
         }
 
