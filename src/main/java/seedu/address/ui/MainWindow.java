@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             if (!commandResult.isShowChart()) {
-                logger.info("CLearing chart");
+                logger.info("Clearing chart");
                 chartPlaceholder.getChildren().clear();
             }
             logger.info("Result: " + commandResult.getFeedbackToUser());

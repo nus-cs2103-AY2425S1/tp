@@ -10,6 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 public class ViewTuteeChartCommandTest {
     private Model model;
@@ -24,8 +25,25 @@ public class ViewTuteeChartCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewTuteeChartCommand(), model, commandHistory,
-                ViewTuteeChartCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(ViewTutorChartCommand.MESSAGE_SUCCESS, false, false,
+                true, model.getFilteredPersonList().toArray(new Person[0]));
+
+        assertCommandSuccess(new ViewTutorChartCommand(), model, commandHistory,
+                expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ViewTutorChartCommand viewTutorChartCommand = new ViewTutorChartCommand();
+        // same object -> returns true
+        assert(viewTutorChartCommand.equals(viewTutorChartCommand));
+        // same values -> returns true
+        ViewTutorChartCommand viewTutorChartCommandCopy = new ViewTutorChartCommand();
+        assert(viewTutorChartCommand.equals(viewTutorChartCommandCopy));
+        // different types -> returns false
+        assert(!viewTutorChartCommand.equals(1));
+        // null -> returns false
+        assert(!viewTutorChartCommand.equals(null));
     }
 
 }
