@@ -117,9 +117,6 @@ public class EditMeetingCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        // Is a similar update meeting list method required? Ask peter TODO
-
         return new CommandResult(String.format(MESSAGE_EDIT_MEETING_SUCCESS, editedMeeting));
     }
 
