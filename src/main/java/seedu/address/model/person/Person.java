@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.exam.Exam;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +33,7 @@ public class Person {
     private final EcName ecName;
     private final EcNumber ecNumber;
     private final Set<Exam> exams = new HashSet<>();
+    private final Set<Submission> submissions = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
     private final HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
 
@@ -39,10 +41,10 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags,
-                HashMap<AbsentDate, AbsentReason> attendances) {
+            StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags,
+            HashMap<AbsentDate, AbsentReason> attendances, Set<Submission> submissions) {
         requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
-                tags, attendances);
+                tags, attendances, submissions);
 
         this.name = name;
         this.phone = phone;
@@ -54,6 +56,7 @@ public class Person {
         this.ecName = ecName;
         this.ecNumber = ecNumber;
         this.exams.addAll(exams);
+        this.submissions.addAll(submissions);
         this.tags.addAll(tags);
         for (Map.Entry<AbsentDate, AbsentReason> entry : attendances.entrySet()) {
             this.attendances.put(
@@ -167,6 +170,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable submission set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -221,7 +232,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
-                tags, attendances);
+                tags, attendances, submissions);
     }
 
     @Override
@@ -237,6 +248,7 @@ public class Person {
                 .add("emergency contact name", ecName)
                 .add("emergency contact number", ecNumber)
                 .add("exams", exams)
+                .add("submissions", submissions)
                 .add("tags", tags)
                 .toString();
     }

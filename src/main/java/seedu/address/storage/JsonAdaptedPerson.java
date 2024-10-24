@@ -25,6 +25,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,6 +47,7 @@ class JsonAdaptedPerson {
     private final Map<String, String> attendances;
 
     private final List<JsonAdaptedExam> exams = new ArrayList<>();
+    private final List<JsonAdaptedSubmission> submissions = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -53,14 +55,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
-                             @JsonProperty("class") String studentClass,
-                             @JsonProperty("emergency contact name") String ecName,
-                             @JsonProperty("emergency contact number") String ecNumber,
-                             @JsonProperty("exams") List<JsonAdaptedExam> exams,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("attendances") Map<String, String> attendances) {
+             @JsonProperty("email") String email, @JsonProperty("address") String address,
+             @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
+             @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
+             @JsonProperty("emergency contact number") String ecNumber,
+             @JsonProperty("exams") List<JsonAdaptedExam> exams,
+             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+             @JsonProperty("attendances") Map<String, String> attendances,
+             @JsonProperty("submissions") List<JsonAdaptedSubmission> submissions) {
 
         this.name = name;
         this.phone = phone;
@@ -73,6 +75,9 @@ class JsonAdaptedPerson {
         this.ecNumber = ecNumber;
         if (exams != null) {
             this.exams.addAll(exams);
+        }
+        if (submissions != null) {
+            this.submissions.addAll(submissions);
         }
         if (tags != null) {
             this.tags.addAll(tags);
@@ -100,6 +105,9 @@ class JsonAdaptedPerson {
         exams.addAll(source.getExams().stream()
                 .map(JsonAdaptedExam::new)
                 .collect(Collectors.toList()));
+        submissions.addAll(source.getSubmissions().stream()
+                .map(JsonAdaptedSubmission::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -118,6 +126,10 @@ class JsonAdaptedPerson {
         final List<Exam> personExams = new ArrayList<>();
         for (JsonAdaptedExam exam : exams) {
             personExams.add(exam.toModelType());
+        }
+        final List<Submission> personSubmissions = new ArrayList<>();
+        for (JsonAdaptedSubmission submission : submissions) {
+            personSubmissions.add(submission.toModelType());
         }
 
         final List<Tag> personTags = new ArrayList<>();
@@ -202,6 +214,9 @@ class JsonAdaptedPerson {
         final EcNumber modelEcNumber = new EcNumber(ecNumber);
 
         final Set<Exam> modelExams = new HashSet<>(personExams);
+
+        final Set<Submission> modelSubmissions = new HashSet<>(personSubmissions);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final HashMap<AbsentDate, AbsentReason> modelAttendances = new HashMap<>();
@@ -224,6 +239,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEcName, modelEcNumber, modelExams, modelTags, modelAttendances);
+                modelStudentClass, modelEcName, modelEcNumber, modelExams, modelTags,
+                modelAttendances, modelSubmissions);
     }
 }

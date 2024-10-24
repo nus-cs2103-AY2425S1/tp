@@ -69,7 +69,7 @@ public class AddAttendanceCommand extends Command {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
-                personToEdit.getExams(), personToEdit.getTags(), newAttendances);
+                personToEdit.getExams(), personToEdit.getTags(), newAttendances, personToEdit.getSubmissions());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

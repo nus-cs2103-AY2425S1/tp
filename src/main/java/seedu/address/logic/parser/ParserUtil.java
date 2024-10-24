@@ -21,6 +21,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -176,6 +177,36 @@ public class ParserUtil {
             throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
         }
         return new EcNumber(trimmedEmergencyPhone);
+    }
+
+    /**
+     * Parses a {@code String submission} into a {@code Submission}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submission} is invalid.
+     */
+    public static Submission parseSubmission(String submission) throws ParseException {
+        requireNonNull(submission);
+        String trimmedSubmission = submission.trim();
+        if (!Submission.isValidSubmissionName(trimmedSubmission)) {
+            throw new ParseException(Submission.NAME_MESSAGE_CONSTRAINTS);
+        }
+        return new Submission(trimmedSubmission);
+    }
+
+    /**
+     * Parses a {@code String submissionStatus} into a {@code String submissionStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submissionStatus} is invalid.
+     */
+    public static String parseSubmissionStatus(String submissionStatus) throws ParseException {
+        requireNonNull(submissionStatus);
+        String trimmedSubmissionStatus = submissionStatus.trim();
+        if (!Submission.isValidSubmissionStatus(trimmedSubmissionStatus)) {
+            throw new ParseException(Submission.STATUS_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedSubmissionStatus;
     }
 
     /**

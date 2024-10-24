@@ -19,6 +19,7 @@ import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Person;
+import seedu.address.model.submission.Submission;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -73,6 +74,12 @@ public class PersonCard extends UiPart<Region> {
     private TableColumn<Exam, String> examNameColumn;
     @FXML
     private TableColumn<Exam, String> examScoreColumn;
+    @FXML
+    private TableView<Submission> tableView3;
+    @FXML
+    private TableColumn<Submission, String> submissionNameColumn;
+    @FXML
+    private TableColumn<Submission, String> submissionStatusColumn;
 
 
     /**
@@ -95,6 +102,10 @@ public class PersonCard extends UiPart<Region> {
         examNameColumn.setCellValueFactory(new PropertyValueFactory<>("examName"));
         examScoreColumn.setCellValueFactory(new PropertyValueFactory<>("examScore"));
         tableView2.setItems(FXCollections.observableArrayList(person.getExams()));
+
+        submissionNameColumn.setCellValueFactory(new PropertyValueFactory<>("submissionName"));
+        submissionStatusColumn.setCellValueFactory(new PropertyValueFactory<>("submissionStatus"));
+        tableView3.setItems(FXCollections.observableArrayList(person.getSubmissions()));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -32,6 +32,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -72,9 +73,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Exam> examList = Collections.emptySet();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
+        Set<Submission> submissionList = Collections.emptySet();
 
         Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName,
-                ecNumber, examList, tagList, attendances);
+                ecNumber, examList, tagList, attendances, submissionList);
 
         return new AddCommand(person);
     }

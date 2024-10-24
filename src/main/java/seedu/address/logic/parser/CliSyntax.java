@@ -20,5 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ECNUMBER = new Prefix("ep/");
     public static final Prefix PREFIX_ABSENT_DATE = new Prefix("aa/");
     public static final Prefix PREFIX_ABSENT_REASON = new Prefix("ar/");
+    public static final Prefix PREFIX_SUBMISSION = new Prefix("sm/");
+    public static final Prefix PREFIX_SUBMISSION_STATUS = new Prefix("ss/");
 
 }
