@@ -20,4 +20,5 @@ Person *--> Email
 Person *--> Address
 Person *--> University
 Person *--> Major
+Person *--> Interest
 @enduml
