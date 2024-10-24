@@ -46,7 +46,9 @@ public class TelegramUsername {
      * @return A TelegramUsername instance with no username.
      */
     public static TelegramUsername empty() {
-        return new TelegramUsername(null);
+        TelegramUsername empty = new TelegramUsername(null);
+        assert empty.telegramUsername == null : "Empty username must have null value";
+        return empty;
     }
 
     /**
@@ -54,6 +56,9 @@ public class TelegramUsername {
      * @param test the string to test
      */
     public static boolean isValidTelegramHandle(String test) {
+        if (test == null) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

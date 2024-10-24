@@ -1,5 +1,8 @@
 package tuteez.logic.commands;
 
+import java.util.logging.Logger;
+
+import tuteez.commons.core.LogsCenter;
 import tuteez.model.Model;
 
 /**
@@ -14,8 +17,11 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private static final Logger logger = LogsCenter.getLogger(HelpCommand.class);
+
     @Override
     public CommandResult execute(Model model) {
+        logger.info("Executing help command. Displaying help window.");
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }
