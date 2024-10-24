@@ -4,15 +4,30 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
 package Storage as StoragePackage {
+
+Class "<<interface>>\nStorage" as Storage
+Class StorageManager
+
+package "TransactionBook Storage" #F4F6F6{
+Class "<<interface>>\nTransactionBookStorage" as TransactionBookStorage
+Class JsonTransactionBookStorage
+Class JsonSerializableTransactionBook
+Class JsonAdaptedTransaction
+Class JsonAdaptedAmount
+Class JsonAdaptedCategory
+}
 
 package "UserPrefs Storage" #F4F6F6{
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
 
 package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
@@ -22,22 +37,32 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
-}
-
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
+StorageManager -right-> "1" AddressBookStorage
+StorageManager -right-> "1" UserPrefsStorage
+StorageManager --> "1" TransactionBookStorage
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage --|> AddressBookStorage
+Storage --|> UserPrefsStorage
+Storage --|> TransactionBookStorage
+Storage ..> Model
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonTransactionBookStorage .up.|> TransactionBookStorage
+JsonTransactionBookStorage ..> JsonSerializableTransactionBook
+JsonSerializableTransactionBook --> "*" JsonAdaptedTransaction
+JsonAdaptedTransaction --> "1" JsonAdaptedAmount
+JsonAdaptedTransaction --> "*" JsonAdaptedCategory
+
+
 
 @enduml
