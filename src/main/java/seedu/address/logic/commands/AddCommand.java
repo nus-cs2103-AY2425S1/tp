@@ -75,6 +75,15 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    public Person getToAdd() {
+        return toAdd;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
