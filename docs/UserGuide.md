@@ -75,20 +75,31 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a supplier: `add`
 
-Adds a person to the address book.
+Adds a supplier to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A supplier can have any number of tags and products (including 0)
 </box>
 
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `add` and `-s` is compulsory
+- Duplicate supplier will not be added again
+  </box>
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+* `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
+
+Expected output:
+* `New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products breadrice`
+* `New person added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products soap`
 
 ### Listing all persons : `list`
 
@@ -144,6 +155,32 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a delivery: `add`
+
+Adds a delivery to the address book.
+
+Format: `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST`
+
+<box type="tip" seamless>
+
+**Tip:** Day and month of date must be in double digits!
+</box>
+
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `add` and `-d` is compulsory
+- Duplicate delivery will not be added again
+</box>
+
+Examples:
+* `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+* `add -d on/19-12-2024 08:00 s/2 pro/soap q/10 units c/39.50`
+
+Expected output:
+* `New delivery added: John Doe; Date & time: 18-06-2024 17:00; Product: bread; Quantity: 500 g; Cost: 5.50; Status: PENDING`
+* `New delivery added: Betsy Crowe; Date & time: 19-12-2024 08:00; Product: soap; Quantity: 10 units; Cost: 39.50; Status: PENDING`
 
 ### Clearing all entries : `clear`
 

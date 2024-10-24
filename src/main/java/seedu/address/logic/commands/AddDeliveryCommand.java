@@ -28,17 +28,17 @@ public class AddDeliveryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
             + " : Adds a delivery to the address book. "
             + "Parameters: "
-            + PREFIX_DATETIME + " dd-mm-yyyy hh:mm "
-            + PREFIX_SUPPLIER_INDEX + " SUPPLIER_INDEX "
-            + PREFIX_PRODUCT + " PRODUCT "
-            + PREFIX_QUANTITY + " QUANTITY kg/g/litres/ml/units "
-            + PREFIX_COST + " COST\n"
+            + PREFIX_DATETIME + "dd-mm-yyyy hh:mm "
+            + PREFIX_SUPPLIER_INDEX + "SUPPLIER_INDEX "
+            + PREFIX_PRODUCT + "PRODUCT "
+            + PREFIX_QUANTITY + "QUANTITY kg/g/litres/ml/units "
+            + PREFIX_COST + "COST\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
-            + PREFIX_DATETIME + " 18-06-2024 17:00 "
-            + PREFIX_SUPPLIER_INDEX + " 1 "
-            + PREFIX_PRODUCT + " bread "
-            + PREFIX_QUANTITY + " 500 g "
-            + PREFIX_COST + " 25.50 ";
+            + PREFIX_DATETIME + "18-06-2024 17:00 "
+            + PREFIX_SUPPLIER_INDEX + "1 "
+            + PREFIX_PRODUCT + "bread "
+            + PREFIX_QUANTITY + "500 g "
+            + PREFIX_COST + "25.50 ";
     public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
     private final Delivery deliveryToAdd;
