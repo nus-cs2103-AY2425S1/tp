@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -18,6 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +30,7 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_NAME + "<NEW EVENT NAME>] "
             + "[" + PREFIX_DATE + "<yyyy-mm-dd>] "
             + "[" + PREFIX_ATTENDEES + "<PERSON INDICES> | "
+            + "[" + PREFIX_LOCATION + "<NEW LOCATION NAME> | "
             + "[" + PREFIX_REMOVE_ATTENDEE + "<PERSON INDICES> ] \n"
             + "Example: "
             + COMMAND_WORD + " "
@@ -40,6 +38,7 @@ public class UpdateCommand extends Command {
             + PREFIX_NAME + "New Year's Party "
             + PREFIX_DATE + "2025-01-01"
             + PREFIX_ATTENDEES + "1 2 4 5"
+            + PREFIX_LOCATION + "Marine Parade Road #12-34"
             + PREFIX_REMOVE_ATTENDEE + "3 6";
 
     public static final String MESSAGE_SUCCESS = "Event has been updated: %1$s";
@@ -48,6 +47,7 @@ public class UpdateCommand extends Command {
 
     private final String newName;
     private final LocalDate newDate;
+    private final Address newLocation;
     private final Set<Index> addIndices;
     private final Set<Index> removeIndices;
     private final Index indexToUpdate;
@@ -57,11 +57,13 @@ public class UpdateCommand extends Command {
      */
     public UpdateCommand(String newName,
                          LocalDate newDate,
+                         Address newLocation,
                          Set<Index> addIndices,
                          Set<Index> removeIndices,
                          Index indexToUpdate) {
         this.newName = newName;
         this.newDate = newDate;
+        this.newLocation = newLocation;
         this.indexToUpdate = indexToUpdate;
         this.addIndices = addIndices;
         this.removeIndices = removeIndices;
@@ -87,6 +89,7 @@ public class UpdateCommand extends Command {
         newEvent = new Event(
                 newName.isEmpty() ? oldEvent.getEventName() : newName,
                 newDate == null ? oldEvent.getDate() : newDate,
+                newLocation == null ? oldEvent.getLocation() : newLocation,
                 changedAttendees);
 
         assert newEvent != null;
@@ -134,6 +137,7 @@ public class UpdateCommand extends Command {
         return newName.equals(otherUpdateCommand.newName)
                 && (indexToUpdate == otherUpdateCommand.indexToUpdate)
                 && (newDate == otherUpdateCommand.newDate)
+                && (newLocation.equals(otherUpdateCommand.newLocation))
                 && (addIndices.equals(otherUpdateCommand.addIndices))
                 && (removeIndices.equals(otherUpdateCommand.removeIndices));
     }
@@ -143,6 +147,7 @@ public class UpdateCommand extends Command {
         return new ToStringBuilder(this)
                 .add("newName", newName)
                 .add("newDate", newDate)
+                .add("newLocation", newLocation)
                 .add("indexToUpdate", indexToUpdate)
                 .add("addIndices", addIndices)
                 .add("removeIndices", removeIndices)

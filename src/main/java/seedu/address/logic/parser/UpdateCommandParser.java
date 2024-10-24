@@ -1,11 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -16,6 +12,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
 
 /**
  * Parses input arguments and creates a new UpdateCommand object
@@ -31,6 +28,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         PREFIX_DATE,
         PREFIX_ATTENDEES,
         PREFIX_REMOVE_ATTENDEE,
+            PREFIX_LOCATION
     };
 
     /**
@@ -63,10 +61,11 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         Index indexToUpdate = parseIndex(argMultimap);
         String name = parseName(argMultimap);
         LocalDate date = parseDate(argMultimap);
+        Address location = parseLocation(argMultimap);
         Set<Index> addIndices = parseAttendeeIndices(argMultimap, PREFIX_ATTENDEES);
         Set<Index> removeIndices = parseAttendeeIndices(argMultimap, PREFIX_REMOVE_ATTENDEE);
 
-        return new UpdateCommand(name, date, addIndices, removeIndices, indexToUpdate);
+        return new UpdateCommand(name, date, location, addIndices, removeIndices, indexToUpdate);
     }
 
     /**
@@ -133,6 +132,25 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             }
         }
         return date;
+    }
+
+    /**
+     * Parses and returns the new location of the event.
+     *
+     * @param argMultimap The map of arguments to their values.
+     * @return The new location of the event.
+     * @throws ParseException If the supplied location is empty or invalid.
+     */
+    private Address parseLocation(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+            try {
+                return ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LOCATION).get());
+            } catch (ParseException e) {
+                throw new ParseException(String.format("Invalid location format. \n%1$s",
+                        UpdateCommand.MESSAGE_USAGE), e);
+            }
+        }
+        return null;
     }
 
     /**
