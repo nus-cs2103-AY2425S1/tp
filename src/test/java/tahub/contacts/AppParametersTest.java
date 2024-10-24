@@ -20,6 +20,7 @@ import javafx.application.Application;
 import tahub.contacts.commons.core.Config;
 import tahub.contacts.commons.util.ConfigUtil;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonStudentCourseAssociationListStorage;
 import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.StorageManager;
@@ -39,7 +40,10 @@ public class AppParametersTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonUniqueCourseListStorage courseListStorage =
                 new JsonUniqueCourseListStorage(temporaryFolder.resolve("courseList.json"));
-        StorageManager storageManager = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
+        JsonStudentCourseAssociationListStorage scaListStorage =
+                new JsonStudentCourseAssociationListStorage(temporaryFolder.resolve("courseList.json"));
+        StorageManager storageManager = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage,
+                scaListStorage);
         mainApp = new MainApp();
     }
 

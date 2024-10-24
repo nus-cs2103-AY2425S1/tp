@@ -19,6 +19,7 @@ import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,7 +27,8 @@ import tahub.contacts.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList(),
+            new StudentCourseAssociationList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +38,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList(),
+                model.getScaList());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -60,7 +63,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList(),
+                model.getScaList());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

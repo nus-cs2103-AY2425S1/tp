@@ -23,6 +23,7 @@ import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.course.exceptions.CourseNotFoundException;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -226,10 +227,11 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         UniqueCourseList courseList = new UniqueCourseList();
+        StudentCourseAssociationList scaList = new StudentCourseAssociationList();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, courseList);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, courseList);
+        modelManager = new ModelManager(addressBook, userPrefs, courseList, scaList);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, courseList, scaList);
         assertEquals(modelManager, modelManagerCopy);
 
         // null -> returns false
@@ -239,12 +241,12 @@ public class ModelManagerTest {
         assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs, courseList));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs, courseList, scaList));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs, courseList));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs, courseList, scaList));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -252,6 +254,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs, courseList));
+        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs, courseList, scaList));
     }
 }

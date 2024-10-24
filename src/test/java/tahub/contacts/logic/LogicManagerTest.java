@@ -27,6 +27,7 @@ import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonStudentCourseAssociationListStorage;
 import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.StorageManager;
@@ -49,7 +50,10 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonUniqueCourseListStorage courseListStorage =
                 new JsonUniqueCourseListStorage(temporaryFolder.resolve("courseList.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
+        JsonStudentCourseAssociationListStorage scaListStorage = new JsonStudentCourseAssociationListStorage(
+                temporaryFolder.resolve("courseList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                courseListStorage, scaListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -120,7 +124,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonUniqueCourseListStorage courseListStorage =
                 new JsonUniqueCourseListStorage(temporaryFolder.resolve("ExceptionCourseList.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
+        JsonStudentCourseAssociationListStorage scaListStorage = new JsonStudentCourseAssociationListStorage(
+                temporaryFolder.resolve("ExceptionCourseList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                courseListStorage, scaListStorage);
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command

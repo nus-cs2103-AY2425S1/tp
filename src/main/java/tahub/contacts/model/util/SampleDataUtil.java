@@ -16,7 +16,10 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tag.Tag;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -68,5 +71,16 @@ public class SampleDataUtil {
         sampleCourseList.add(new Course(new CourseCode("CS1010"), new CourseName("Introduction to Computer Science")));
         sampleCourseList.add(new Course(new CourseCode("MA1521"), new CourseName("Calculus I")));
         return sampleCourseList;
+    }
+
+    public static StudentCourseAssociationList getSampleScaList() {
+        StudentCourseAssociationList sampleScalist = new StudentCourseAssociationList();
+        sampleScalist.add(new StudentCourseAssociation(getSamplePersons()[0],
+                getSampleCourseList().getCourseList().get(0),
+                new Tutorial("T01", getSampleCourseList().getCourseList().get(0))));
+        sampleScalist.add(new StudentCourseAssociation(getSamplePersons()[1],
+                getSampleCourseList().getCourseList().get(1),
+                new Tutorial("T01", getSampleCourseList().getCourseList().get(1))));
+        return sampleScalist;
     }
 }

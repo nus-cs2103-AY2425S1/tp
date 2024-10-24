@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
@@ -21,7 +22,6 @@ class JsonAdaptedStudentCourseAssociation {
     private final JsonAdaptedCourse course;
     private final JsonAdaptedTutorial tutorial;
     private final JsonAdaptedAttendance attendance;
-    private final JsonSerializableGradingSystem grades;
 
     /**
      * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given
@@ -32,13 +32,11 @@ class JsonAdaptedStudentCourseAssociation {
             @JsonProperty("student") JsonAdaptedPerson student,
             @JsonProperty("course") JsonAdaptedCourse course,
             @JsonProperty("tutorial") JsonAdaptedTutorial tutorial,
-            @JsonProperty("attendance") JsonAdaptedAttendance attendance,
-            @JsonProperty("grades") JsonSerializableGradingSystem grades) {
+            @JsonProperty("attendance") JsonAdaptedAttendance attendance) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
         this.attendance = attendance;
-        this.grades = grades;
     }
 
     /**
@@ -50,7 +48,6 @@ class JsonAdaptedStudentCourseAssociation {
         this.course = new JsonAdaptedCourse(source.getCourse());
         this.tutorial = new JsonAdaptedTutorial(source.getTutorial());
         this.attendance = new JsonAdaptedAttendance(source.getAttendance());
-        this.grades = new JsonSerializableGradingSystem(source.getGrades());
     }
 
     /**
@@ -90,13 +87,8 @@ class JsonAdaptedStudentCourseAssociation {
                     JsonAdaptedAttendance.class.getSimpleName()));
         }
         final Attendance attendanceModel = this.attendance.toModelType();
-        // Checks if the GradingSystem is valid
-        if (this.grades == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                JsonSerializableGradingSystem.class.getSimpleName()));
-        }
-        final JsonSerializableGradingSystem gradesModel = this.grades;
+
         return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
-                gradesModel.toModelType(), attendanceModel);
+                new GradingSystem(), attendanceModel);
     }
 }
