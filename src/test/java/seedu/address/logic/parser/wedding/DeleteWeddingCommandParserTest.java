@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.wedding;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEDDING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -12,16 +12,16 @@ import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CreateWeddingCommand;
+import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.model.wedding.WeddingName;
 
-public class CreateWeddingCommandParserTest {
-    private CreateWeddingCommandParser parser = new CreateWeddingCommandParser();
+public class DeleteWeddingCommandParserTest {
+    private DeleteWeddingCommandParser parser = new DeleteWeddingCommandParser();
 
     @Test
     public void parse_validWedding_success() {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + WEDDING_DESC_AMY,
-                new CreateWeddingCommand(AMY_WEDDING));
+                new DeleteWeddingCommand(AMY_WEDDING));
     }
 
     @Test
@@ -38,14 +38,14 @@ public class CreateWeddingCommandParserTest {
     @Test
     public void parse_emptyWeddingName_failure() {
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                CreateWeddingCommand.MESSAGE_USAGE);
+                DeleteWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_WEDDING_AMY, expectedMessage);
     }
 
     @Test
     public void parse_emptyString_failure() {
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                CreateWeddingCommand.MESSAGE_USAGE);
+                DeleteWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, PREAMBLE_WHITESPACE, expectedMessage);
     }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,24 +15,24 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AssignWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateWeddingCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListWeddingsCommand;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UnassignWeddingCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.wedding.AssignWeddingCommand;
+import seedu.address.logic.commands.wedding.CreateWeddingCommand;
+import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.ListWeddingsCommand;
+import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
@@ -64,8 +64,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -73,8 +73,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -107,8 +107,8 @@ public class AddressBookParserTest {
     public void parseCommand_tag() throws Exception {
         HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
                 new Tag(new TagName("gym"))));
-        String userInput = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " t/gym t/colleague";
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        String userInput = TagCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " t/gym t/colleague";
+        TagCommand expectedCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
 
         TagCommand command = (TagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
@@ -118,8 +118,8 @@ public class AddressBookParserTest {
     public void parseCommand_untag() throws Exception {
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
                 new Tag(new TagName("gym"))));
-        String userInput = UntagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " t/gym t/colleague";
-        UntagCommand expectedCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+        String userInput = UntagCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " t/gym t/colleague";
+        UntagCommand expectedCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
 
         UntagCommand command = (UntagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
@@ -169,9 +169,9 @@ public class AddressBookParserTest {
     public void parseCommand_assignWedding() throws Exception {
         HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 19")),
                 new Wedding(new WeddingName("Joe's Wedding"))));
-        String userInput = AssignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        String userInput = AssignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                 + " w/Wedding 19 w/Joe's Wedding";
-        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToAdd);
+        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(INDEX_FIRST, weddingsToAdd);
 
         AssignWeddingCommand command = (AssignWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
@@ -181,9 +181,9 @@ public class AddressBookParserTest {
     public void parseCommand_unassignWedding() throws Exception {
         HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 19")),
                 new Wedding(new WeddingName("Joe's Wedding"))));
-        String userInput = UnassignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        String userInput = UnassignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                 + " w/Wedding 19 w/Joe's Wedding";
-        UnassignWeddingCommand expectedCommand = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
+        UnassignWeddingCommand expectedCommand = new UnassignWeddingCommand(INDEX_FIRST, weddingsToRemove);
 
         UnassignWeddingCommand command = (UnassignWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);

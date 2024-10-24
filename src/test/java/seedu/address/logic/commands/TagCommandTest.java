@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -28,13 +29,13 @@ public class TagCommandTest {
 
     @Test
     public void execute_validTagsUnfilteredList_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague"))));
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
 
         // Ensure the model has the tag before adding it to the person
         model.addTag(new Tag(new TagName("colleague")));
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
 
         String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
                 "colleague", personToEdit.getName().toString());
@@ -62,16 +63,16 @@ public class TagCommandTest {
                 new Phone("99999999"),
                 new Email("test@example.com"),
                 new Address("123, Test Street"),
-                new HashSet<>(Arrays.asList(new Tag(new TagName("family")))),
+                new HashSet<>(List.of(new Tag(new TagName("family")))),
                 new HashSet<>()
         );
         model.addTag(new Tag(new TagName("family")));
-        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()), personWithTags);
         model.addTag(new Tag(new TagName("colleague")));
         model.addTag(new Tag(new TagName("gym")));
         HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
                 new Tag(new TagName("gym"))));
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
         String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
                 "gym, colleague", personWithTags.getName().toString());
 
@@ -94,7 +95,7 @@ public class TagCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague"))));
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, tagsToAdd);
 
@@ -105,8 +106,8 @@ public class TagCommandTest {
 
     @Test
     public void execute_nonExistentTag_failure() {
-        HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("nonExistentTag"))));
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("nonExistentTag"))));
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
         String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND;
 
         CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
