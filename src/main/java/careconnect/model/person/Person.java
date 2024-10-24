@@ -106,8 +106,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
-        // Logs not included as they are not part of the identity of a person
+                && tags.equals(otherPerson.tags)
+                && logs.equals(otherPerson.logs);
     }
 
     @Override
