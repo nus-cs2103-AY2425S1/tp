@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyMeetUpList;
 
 /**
- * Represents a storage for {@link seedu.address.model.MeetUp}.
+ * Represents a storage for {@link seedu.address.model.meetup}.
  */
 public interface MeetUpListStorage {
 
@@ -26,7 +26,7 @@ public interface MeetUpListStorage {
     Optional<ReadOnlyMeetUpList> readMeetUpList() throws DataLoadingException;
 
     /**
-     * @see #getMeetUpFilePath()
+     * @see #getMeetUpListFilePath()
      */
     Optional<ReadOnlyMeetUpList> readMeetUpList(Path filePath) throws DataLoadingException;
 

@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Phone;
+import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
@@ -183,6 +184,33 @@ public class ParserUtil {
             throw new ParseException(seedu.address.model.meetup.To.MESSAGE_CONSTRAINTS);
         }
         return new To(meetUpTo);
+    }
+
+    /**
+     * Parses a {@code String addedBuyer} into a {@code AddedBuyer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code addedBuyer} is invalid.
+     */
+    public static AddedBuyer parseAddedBuyer(String addedBuyer) throws ParseException {
+        requireNonNull(addedBuyer);
+        String trimmedAddedBuyer = addedBuyer.trim();
+        if (!AddedBuyer.isValidBuyerName(trimmedAddedBuyer)) {
+            throw new ParseException(AddedBuyer.MESSAGE_CONSTRAINTS);
+        }
+        return new AddedBuyer(trimmedAddedBuyer);
+    }
+
+    /**
+     * Parses {@code Collection<String> addedBuyers} into a {@code Set<AddedBuyer>}.
+     */
+    public static Set<AddedBuyer> parseAddedBuyers(Collection<String> addedBuyers) throws ParseException {
+        requireNonNull(addedBuyers);
+        final Set<AddedBuyer> addedBuyerSet = new HashSet<>();
+        for (String addedBuyer: addedBuyers) {
+            addedBuyerSet.add(parseAddedBuyer(addedBuyer));
+        }
+        return addedBuyerSet;
     }
 
 }
