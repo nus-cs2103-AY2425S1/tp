@@ -629,26 +629,34 @@ testers are expected to do more *exploratory* testing.
 ### Finding a person
 
 1. Finding a person
-   1. Test case: `find all john`<br>
-      Expected: Number of people listed found shown in the status message. Displays the list of people found.
+   1. Test case: `find e n/John`<br>
+   Expected: Number of employees with name `John` listed found shown in the status message.
+   Displays the list of employees found.
 
-   2. Test case: `find ph john`<br>
-            Expected: Number of potential hires listed found shown in the status message. Displays the list of potential hires found.
+   2. Test case: `find ph p/12345678`<br>
+   Expected: Number of potential hires with phone number `12345678` listed found shown in the status message. 
+   Displays the list of potential hires found.
 
-   3. Test case: `find e john`<br>
-            Expected: Number of employees listed shown in the status message. Displays the list of employees found.
+   3. Test case: `find all e/john@example.com`<br>
+   Expected: Number of employees and potential hires with email `john@example.com` listed shown in the status message.
+   Displays the list of persons found.
+   
+   4. Test case: `find e d/IT r/SWE`<br>
+   Expected: Number of employees with department `IT` and role `SWE` listed shown in the status message.
+   Displays the list of employees found
 
-   4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
-            Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
+   5. Test case: `Find e n/john`, `Find ph p/12345678`, `Find all john@example.com`<br>
+   Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
 
-   5. Test case: `find all`, `find e`, `find ph`<br>
-      Expected: Incorrect command format. Status message shows the correct usage of Find command.
+   6. Test case: `find e`, `find ph`, `find all`<br>
+   Expected: Incorrect command format due to missing keywords. Status message shows the correct usage of Find command.
 
-   6. Test case: `find ALL john`, `find E john`, `find PH john`<br>
-            Expected: Incorrect command format. Status message shows the correct usage of Find command.
+   7. Test case: `find E n/john`, `find PH n/john`, `find ALL n/john`<br>
+   Expected: Incorrect command format due to capitalisation of parameter.
+   Status message shows the correct usage of Find command.
 
-   7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
-            Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
+   8. Other incorrect find commands to try: `find aLL n/john`, `find pH n/john`, `find a`, `...`<br>
+   Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
 ### Demoting an employee
 
