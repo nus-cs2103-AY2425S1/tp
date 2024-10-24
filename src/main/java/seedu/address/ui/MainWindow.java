@@ -6,11 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,29 +34,26 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
-
+    private VBox leftPartition;
     @FXML
-    private MenuItem helpMenuItem;
-
+    private VBox rightPartition;
+    @FXML
+    private HBox horizontalContainer;
+    @FXML
+    private StackPane commandBoxPlaceholder;
     @FXML
     private StackPane personListPanelPlaceholder;
-
+    @FXML
+    private StackPane appointmentListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-    @FXML
-    private StackPane bannerPlaceholder;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Image image;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -71,7 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
+        // setAccelerators();
 
         helpWindow = new HelpWindow();
     }
@@ -80,9 +77,11 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
-    private void setAccelerators() {
+    /*
+     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
+     }
+     */
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -118,8 +117,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        // Use of chatGPT to learn how to set the widths of the panels to be fixed by proportion.
+        // Prompt: Given a HBox of 2 stackpanes how to make both widths resize accordingly.
+        horizontalContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double totalWidth = newVal.doubleValue(); // Get the new width
+            leftPartition.setPrefWidth(totalWidth * 0.8); // Set to 80%
+            rightPartition.setPrefWidth(totalWidth * 0.2); // Set to 20%
+        });
+
+        fillPersonsAndAppointments();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -129,6 +135,14 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void fillPersonsAndAppointments() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        appointmentListPanel = new AppointmentListPanel(logic.getSortedAppointmentList());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
     }
 
     /**
@@ -156,6 +170,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void show() {
+        primaryStage.setMinHeight(800);
+        primaryStage.setMinWidth(1200);
         primaryStage.show();
     }
 

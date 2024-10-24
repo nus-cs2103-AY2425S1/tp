@@ -118,7 +118,7 @@ public class ModelManagerTest {
         ObservableList<Person> expectedList = FXCollections.observableArrayList(CARL, BENSON);
 
         // create the actual list
-        modelManager.filterAppointmentList(new AppointmentContainsDatePredicate(
+        modelManager.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(
                 LocalDate.parse("23-10-2024", DATE_FORMATTER)));
         ObservableList<Person> actualList = modelManager.getSortedAppointmentList();
 
@@ -155,7 +155,7 @@ public class ModelManagerTest {
 
         // different filteredList of appointments -> return false
         LocalDate date = LocalDate.parse("23-10-2024", DATE_FORMATTER);
-        modelManager.filterAppointmentList(new AppointmentContainsDatePredicate(date));
+        modelManager.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(date));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

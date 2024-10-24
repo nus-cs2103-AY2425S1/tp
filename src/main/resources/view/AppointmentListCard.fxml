@@ -18,6 +18,7 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
+
       <HBox alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
@@ -29,14 +30,16 @@
       </HBox>
       <Label fx:id="patientId" styleClass="cell_small_label" text="\$patientId" />
       <Label fx:id="ward" styleClass="cell_small_label" text="\$ward" />
-<!--      Use of ChatGPT to learn how to add labels together in a HBox.-->
-<!--      Prompt used: was wondering if i can make the appointment row made of 3 different labels, in 1 row-->
-      <!-- New HBox for appointment -->
-      <HBox fx:id="appointmentBox" spacing="5" translateY="5.0">
+      <VBox fx:id="appointmentBox">
         <Label fx:id="appointmentDescription" styleClass="blueLabel"/>
-        <Label fx:id="appointmentStart" styleClass="greenLabel"/>
-        <Label fx:id="appointmentEnd" styleClass="purpleLabel"/>
-      </HBox>
+        <Label fx:id="appointmentDuration" styleClass="purpleLabel"/>
+        <padding>
+          <Insets top="5" />
+        </padding>
+      </VBox>
     </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
   </GridPane>
 </HBox>
