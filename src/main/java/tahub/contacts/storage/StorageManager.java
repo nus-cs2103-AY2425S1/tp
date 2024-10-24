@@ -120,13 +120,16 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<StudentCourseAssociationList> readScaList() throws DataLoadingException {
-        return readScaList(scaListStorage.getScaListFilePath());
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Optional<StudentCourseAssociationList> readScaList(Path filePath) throws DataLoadingException {
+    public Optional<StudentCourseAssociationList> readScaList(
+            Path filePath,
+            ReadOnlyAddressBook addressBook,
+            UniqueCourseList courseList) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return scaListStorage.readScaList(filePath);
+        return scaListStorage.readScaList(filePath, addressBook, courseList);
     }
 
     @Override

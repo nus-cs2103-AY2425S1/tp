@@ -12,6 +12,8 @@ import tahub.contacts.commons.exceptions.DataLoadingException;
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.commons.util.FileUtil;
 import tahub.contacts.commons.util.JsonUtil;
+import tahub.contacts.model.ReadOnlyAddressBook;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
@@ -32,18 +34,16 @@ public class JsonStudentCourseAssociationListStorage {
         return filePath;
     }
 
-    public Optional<StudentCourseAssociationList> readScaList() throws DataLoadingException {
-        return readScaList(filePath);
-    }
-
     /**
-     * Similar to {@link #readScaList()}.
-     *
+     * Returns StudentCourseAssociationList data as a {@link StudentCourseAssociationList}.
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<StudentCourseAssociationList> readScaList(Path filePath) throws DataLoadingException {
+    public Optional<StudentCourseAssociationList> readScaList(Path filePath, ReadOnlyAddressBook addressBook,
+                                                              UniqueCourseList courseList) throws DataLoadingException {
         requireNonNull(filePath);
+        requireNonNull(addressBook);
+        requireNonNull(courseList);
 
         Optional<JsonSerializableStudentCourseAssociationList> jsonScaList = JsonUtil.readJsonFile(
                 filePath, JsonSerializableStudentCourseAssociationList.class);
@@ -52,15 +52,15 @@ public class JsonStudentCourseAssociationListStorage {
         }
 
         try {
-            return Optional.of(jsonScaList.get().toModelType());
+            return Optional.of(jsonScaList.get().toModelType(addressBook, courseList));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
         }
     }
 
-    public void saveScaList(StudentCourseAssociationList addressBook) throws IOException {
-        saveScaList(addressBook, filePath);
+    public void saveScaList(StudentCourseAssociationList scaList) throws IOException {
+        saveScaList(scaList, filePath);
     }
 
     /**
@@ -68,12 +68,12 @@ public class JsonStudentCourseAssociationListStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveScaList(StudentCourseAssociationList addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveScaList(StudentCourseAssociationList scaList, Path filePath) throws IOException {
+        requireNonNull(scaList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableStudentCourseAssociationList(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableStudentCourseAssociationList(scaList), filePath);
     }
 
 }
