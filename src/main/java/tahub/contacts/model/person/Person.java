@@ -157,4 +157,13 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
+
+    /**
+     * Shortened string representation of this {@link Person}. Only includes the matriculation number.
+     *
+     * @return String representation in {@code [matricNumber]} form
+     */
+    public String toStringShort() {
+        return "[" + matricNumber.toString() + "]";
+    }
 }

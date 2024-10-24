@@ -185,4 +185,9 @@ public class StudentCourseAssociation {
 
         return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
     }
+
+    @Override
+    public String toString() {
+        return student.toStringShort() + " - " + course.toString() + " - " + tutorial.toString();
+    }
 }

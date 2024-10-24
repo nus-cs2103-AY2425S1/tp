@@ -83,4 +83,9 @@ public class Tutorial {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(this.tutorialId, this.course);
     }
+
+    Override
+    public String toString() {
+        return tutorialId;
+    }
 }
