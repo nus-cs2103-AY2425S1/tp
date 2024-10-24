@@ -273,6 +273,9 @@ In order to add a remark to a student, the user must provide a number representi
 #### Example invocation sequence for RemarkCommand
 <puml src="diagrams/RemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark` Command" />
 
+#### Example activity diagram for RemarkCommand
+<puml src="diagrams/add-remark/RemarkCommandActivityDiagram.puml" alt="Activities inside the Logic Component for the 
+`remark` Command" />
 
 ### \[Proposed\] Undo/redo feature
 
