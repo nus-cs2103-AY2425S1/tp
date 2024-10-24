@@ -33,6 +33,10 @@ public class DietaryPreference {
         value = dietaryPreference;
     }
 
+    public DietaryPreference() {
+        value = "";
+    }
+
     /**
      * Returns true if a given string is a valid dietary preference.
      */
