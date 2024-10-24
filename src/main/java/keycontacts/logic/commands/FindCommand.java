@@ -138,7 +138,6 @@ public class FindCommand extends Command {
         /**
          * Returns true if given student's field contains the non-empty
          * field value of this descriptor.
-         * 
          * @param student
          * @return
          */
