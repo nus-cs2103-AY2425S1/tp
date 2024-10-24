@@ -7,15 +7,15 @@ participant ":Model" as Model MODEL_COLOR
 participant ":VersionedClientHub" as VersionedClientHub MODEL_COLOR
 end box
 
-[-> Model : undoAddressBook()
+[-> Model : undoClientHub()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedClientHub : undo()
+activate VersionedClientHub
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyClientHub)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedClientHub -> VersionedClientHub :resetData(ReadOnlyClientHub)
+VersionedClientHub --> Model :
+deactivate VersionedClientHub
 
 [<-- Model
 deactivate Model

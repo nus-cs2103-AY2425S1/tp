@@ -16,9 +16,9 @@ public class FindNameCommand extends Command {
     public static final String COMMAND_WORD = "fn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain all of "
-            + "the prefix of the specified keywords (case-insensitive) and displays them as a list with index "
-            + "numbers.\n"
-            + "Parameters: KEYWORDS...\n"
+            + "the prefix of the specified keywords (case-insensitive, and alphabets only) and displays them as a "
+            + "list with index numbers.\n"
+            + "Parameters: KEYWORDS\n"
             + "Example: " + COMMAND_WORD + "alice";
 
     private final NameContainsKeywordsPredicate predicate;
