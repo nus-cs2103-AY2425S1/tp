@@ -13,12 +13,15 @@ import seedu.academyassist.logic.commands.AddCommand;
 import seedu.academyassist.logic.commands.ClearCommand;
 import seedu.academyassist.logic.commands.Command;
 import seedu.academyassist.logic.commands.DeleteCommand;
+import seedu.academyassist.logic.commands.DetailCommand;
 import seedu.academyassist.logic.commands.EditCommand;
 import seedu.academyassist.logic.commands.ExitCommand;
+import seedu.academyassist.logic.commands.FilterCommand;
 import seedu.academyassist.logic.commands.FindCommand;
 import seedu.academyassist.logic.commands.HelpCommand;
 import seedu.academyassist.logic.commands.ListCommand;
 import seedu.academyassist.logic.commands.SortCommand;
+import seedu.academyassist.logic.commands.TrackSubjectCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 
 /**
@@ -85,10 +88,18 @@ public class AcademyAssistParser {
         case AddClassCommand.COMMAND_WORD:
             return new AddClassCommandParser().parse(arguments);
 
+        case TrackSubjectCommand.COMMAND_WORD:
+            return new TrackSubjectCommand();
+
+        case DetailCommand.COMMAND_WORD:
+            return new DetailCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

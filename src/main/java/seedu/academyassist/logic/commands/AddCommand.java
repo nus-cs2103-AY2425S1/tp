@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_IC + "IC "
             + PREFIX_YEARGROUP + "YEARGROUP "
-            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_SUBJECT + "SUBJECT " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

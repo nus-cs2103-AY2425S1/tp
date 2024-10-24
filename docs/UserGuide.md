@@ -12,7 +12,7 @@ title: AcademyAssist User Guide
 
 3. [Features](#features)
    * [Adding a student](#adding-a-student--add)
-   * [Deleting a student](#deleting-a-student--del)
+   * [Deleting a student](#deleting-a-student--delete)
    * [Editing a student](#editing-a-student--edit)
    * [Viewing all student](#viewing-all-students--view)
    * [Finding a student](#finding-a-student--find)
@@ -28,15 +28,15 @@ title: AcademyAssist User Guide
 6. [Command summary](#command-summary)
 
 ## Introduction
-Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers. 
-This desktop application is designed to streamline your administrative tasks, allowing you to focus more 
+Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
+This desktop application is designed to streamline your administrative tasks, allowing you to focus more
 on what truly matters - educating and nurturing young minds.
 
-AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical 
-User Interface (GUI).** This hybrid approach ensures that you can manage your student database with 
-lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a 
-seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet 
-powerful enough for experts. With features like quick student addition, easy information retrieval, 
+AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
+User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
+lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a
+seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet
+powerful enough for experts. With features like quick student addition, easy information retrieval,
 and automated data saving, AcademyAssist is set to revolutionize how you manage your tuition center.
 
 Let's embark on this journey to simpler, faster, and more effective student management!
@@ -56,10 +56,10 @@ Let's embark on this journey to simpler, faster, and more effective student mana
 
 4. Double-click the file to start the app.
 
-5. For first time users, a help window appears automatically and details of some basic features are shown. 
+5. For first time users, a help window appears automatically and details of some basic features are shown.
 
 6. Type the command in the command box and press Enter to execute it. For example, to bring up the help window
-again, type `help` and press Enter. 
+again, type `help` and press Enter.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -70,19 +70,16 @@ again, type `help` and press Enter.
 <div markdown="block" class="alert alert-info">
 
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
-  e.g `delete IC_NUMBER` means the user has to enter the IC number of the student to be deleted.
-
-* Items in square brackets are optional.
-  e.g `add n/NAME... [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will 
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will
 be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
 lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
@@ -91,18 +88,21 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 Adds a new student to the tuition center management system.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT`
 
 * `NAME` should be 1-100 characters long and contain only alphabets and spaces.
 * `PHONE_NUMBER` should be an 8-digit number.
-* `EMAIL` is optional and should follow the format username@domain.
-* `ADDRESS` is optional.
+* `EMAIL` is compulsory and should follow the format username@domain.
+* `ADDRESS` is compulsory.
 * `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
-* `TAG` is optional. 
+* `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
+secondary school years 7 - 13).
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
+within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
+as the same).
 
 Examples:
-* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T3848559A s/Science t/student`
+* `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
 
 ![Add Success Message](/images/add.png)
 
@@ -110,12 +110,13 @@ Examples:
 
 Removes a student from the tuition center management system.
 
-Format: `delete IC_NUMBER`
+Format: `delete STUDENT_ID`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
 
 Examples:
-* `delete T0211234D`
+* `delete S00001`
 
 ![Delete Success Message](/images/delete.png)
 
@@ -123,15 +124,16 @@ Examples:
 
 Edits an existing student's details in the system.
 
-Format: `edit IC_NUMBER FIELD/NEW_VALUE`
+Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
 
 Examples:
-* `edit S1234567A a/New_Address`
-* `edit T1234567D p/91234567 a/New_Address`
+* `edit S00001 a/New_Address`
+* `edit s00002 p/91234567 a/New_Address`
 
 ![Edit Success Message](/images/edit.png)
 
@@ -149,8 +151,8 @@ Finds students whose names contain any of the given keywords.
 
 Format: `find NAME [MORE_NAMES]`
 
-* The search is case-insensitive.
-* Only the name is searched.
+* The search is case-insensitive (i.e. John, JOHN, john are all treated the same way).
+* You can only search for a student by their name.
 * Students matching at least one keyword will be returned.
 
 Examples:
@@ -163,13 +165,15 @@ Examples:
 
 Adds a class to an existing student's record.
 
-Format: `addc i/IC_NUMBER s/SUBJECT`
+Format: `addc STUDENT_ID s/SUBJECT`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
+  (i.e. science, SCIENCE, Science are treated the same way).
 
 Examples:
-* `addc i/S1234567A s/Science`
+* `addc S00001 s/Science`
 
 ![addc Success Message](/images/addc.png)
 
@@ -233,10 +237,10 @@ to know the details, it's designed to be easy for both computers and humans to r
 
 Your information is important, so here are some tips to keep it secure:
 
-1. **Make Backups**: It's always a good idea to have an extra copy of your data. Once a week, 
+1. **Make Backups**: It's always a good idea to have an extra copy of your data. Once a week,
 why not copy your AcademyAssist file to a USB drive or cloud storage?
 
-2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend 
+2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend
 it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
 
 
@@ -250,7 +254,7 @@ message explaining what's wrong.
 2. **Use Your Backup**: This is where your backup copy comes in handy. You can replace the problematic
 file with your backup to get back on track.
 
-Remember, AcademyAssist is here to make managing student information easy and stress-free. 
+Remember, AcademyAssist is here to make managing student information easy and stress-free.
 If you ever have questions about your data, just ask - we're always happy to help!
 
 
@@ -259,22 +263,22 @@ If you ever have questions about your data, just ask - we're always happy to hel
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AcademyAssist folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                           |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT t/TAG` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
-| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                            |
-| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                                   |
-| **View** | `view`                                                                                                                                                                     |
-| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                        |
-| **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                            |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                     |
-| **Clear** | `clear`                                                                                                                                                                    |
-| **Help** | `help`                                                                                                                                                                     |
-| **Exit** | `exit`                                                                                                                                                                     |
+| Action | Format, Examples                                                                                                                                                                        |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
+| **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
+| **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
+| **View** | `view`                                                                                                                                                                                  |
+| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
+| **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
+| **Clear** | `clear`                                                                                                                                                                                 |
+| **Help** | `help`                                                                                                                                                                                  |
+| **Exit** | `exit`                                                                                                                                                                                  |

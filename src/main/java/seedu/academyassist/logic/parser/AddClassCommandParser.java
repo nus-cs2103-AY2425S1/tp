@@ -3,6 +3,8 @@ package seedu.academyassist.logic.parser;
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.Set;
+
 import seedu.academyassist.logic.commands.AddClassCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.person.StudentId;
@@ -27,12 +29,11 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT); // Only can add one class at a time.
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getPreamble());
 
         try {
-            Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-            return new AddClassCommand(studentId, subject);
+            Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(CliSyntax.PREFIX_SUBJECT));
+            return new AddClassCommand(studentId, subjects);
         } catch (ParseException pe) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
