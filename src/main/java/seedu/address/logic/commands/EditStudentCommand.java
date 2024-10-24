@@ -103,7 +103,7 @@ public class EditStudentCommand extends Command {
                 .orElse(personToEdit.getStudentNumber());
 
         return new Student(updatedName, updatedPhone, updatedTutorialGroup,
-                updatedStudentNumber, personToEdit.getAssignments());
+                updatedStudentNumber, personToEdit.getAssignments(), personToEdit.getAttendanceRecord());
     }
 
     @Override

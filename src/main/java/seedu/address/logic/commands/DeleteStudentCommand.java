@@ -35,7 +35,6 @@ public class DeleteStudentCommand extends Command {
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
 
     private final Name name;
-
     private final StudentNumber studentNumber;
     private Student studentToDelete;
     private int index;
