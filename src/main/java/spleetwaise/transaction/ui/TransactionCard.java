@@ -1,8 +1,9 @@
 package spleetwaise.transaction.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import spleetwaise.address.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -22,18 +23,18 @@ public class TransactionCard extends UiPart<Region> {
 
     public final Transaction transaction;
 
-    @javafx.fxml.FXML
-    private HBox cardPane;
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label status;
     @FXML
     private Label amount;
     @FXML
     private Label description;
     @FXML
-    private Label date;
+    private Label month;
+    @FXML
+    private Label day;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -41,10 +42,19 @@ public class TransactionCard extends UiPart<Region> {
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
-        id.setText(displayedIndex + ". ");
-        name.setText(transaction.getPerson().getName().fullName);
-        amount.setText(transaction.getAmount().toString());
+        month.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("MMM")));
+        day.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("d")));
+        name.setText(displayedIndex + ". " + transaction.getPerson().getName().fullName);
         description.setText(transaction.getDescription().toString());
-        date.setText(transaction.getDate().toString());
+        if (transaction.getAmount().isNegative()) {
+            status.setText("you owe");
+            status.setStyle("-fx-text-fill: red;");
+            amount.setStyle("-fx-text-fill: red;");
+        } else {
+            status.setText("owes you");
+            status.setStyle("-fx-text-fill: green;");
+            amount.setStyle("-fx-text-fill: green;");
+        }
+        amount.setText("$" + transaction.getAmount().toString());
     }
 }

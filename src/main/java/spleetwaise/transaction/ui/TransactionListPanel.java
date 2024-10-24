@@ -29,6 +29,11 @@ public class TransactionListPanel extends UiPart<Region> {
         transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());
     }
 
+    public void updateTransactionList(ObservableList<Transaction> transactionList) {
+        transactionListView.setItems(transactionList);
+        transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Transaction} using a {@code TransactionCard}.
      */

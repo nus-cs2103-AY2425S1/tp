@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:id="rightPanel">
+    <VBox spacing="15" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <Label text="Transactions" styleClass="title"/>
+
+        <HBox spacing="10" styleClass="total-balance">
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Total balance"/>
+                <Label fx:id="youOwnLabel"  text="You owe $97.32" styleClass="label, owed-text"/>
+                <Label fx:id="ownYouLabel" text="You are owed $1550.50" styleClass="label, owes-you-text"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="filterIcon" text="Y" styleClass="filter-icon"/>
+        </HBox>
+
+        <StackPane fx:id="transactionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+    </VBox>
+</AnchorPane>

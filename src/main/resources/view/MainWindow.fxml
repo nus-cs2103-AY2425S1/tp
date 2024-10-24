@@ -33,8 +33,8 @@
                     </Menu>
                 </MenuBar>
 
-                <SplitPane fx:id="mainSplitPane" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="leftPane" prefWidth="50.0" maxWidth="1080">
+                <SplitPane VBox.vgrow="ALWAYS">
+                    <VBox prefWidth="50.0" maxWidth="1080">
                         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
                             <padding>
                                 <Insets top="5" right="10" bottom="5" left="10"/>
@@ -57,14 +57,11 @@
                         </VBox>
                     </VBox>
 
-                    <VBox fx:id="rightPane" prefWidth="50.0" maxWidth="1080">
-                        <VBox fx:id="transactionList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
-                              VBox.vgrow="ALWAYS">
-                            <padding>
-                                <Insets top="10" right="10" bottom="10" left="10"/>
-                            </padding>
-                            <StackPane fx:id="transactionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-                        </VBox>
+                    <VBox prefWidth="50.0" maxWidth="1080">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <StackPane fx:id="rightPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </SplitPane>
 

@@ -5,12 +5,10 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.LogsCenter;
@@ -18,7 +16,7 @@ import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.transaction.ui.TransactionListPanel;
+import spleetwaise.transaction.ui.RightPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -34,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private final HelpWindow helpWindow;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private TransactionListPanel transactionListPanel;
+    private RightPanel rightPanel;
     private ResultDisplay resultDisplay;
 
     @FXML
@@ -47,22 +45,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane transactionListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private SplitPane mainSplitPane;
-
-    @FXML
-    private VBox leftPane;
-
-    @FXML
-    private VBox rightPane;
+    private StackPane rightPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -128,8 +117,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        transactionListPanel = new TransactionListPanel(logic.getFilteredTransactionList());
-        transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
+        rightPanel = new RightPanel(logic.getFilteredTransactionList());
+        rightPanelPlaceholder.getChildren().add(rightPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
