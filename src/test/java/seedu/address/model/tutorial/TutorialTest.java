@@ -67,7 +67,7 @@ public class TutorialTest {
 
     @Test
     public void toString_validTutorial_success() {
-        String expectedString = "Tutorial{subject=Mathematics}";
+        String expectedString = Tutorial.class.getCanonicalName() + "{subject=Mathematics}";
         assertEquals(expectedString, tutorial1.toString());
     }
 
