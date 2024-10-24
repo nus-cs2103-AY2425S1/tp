@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "%1$s\nEdited Person: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -90,7 +90,10 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        String changeDescription = getChangesDescription(personToEdit, editedPerson);
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, changeDescription, Messages.format(editedPerson)));
     }
 
     /**
@@ -111,6 +114,47 @@ public class EditCommand extends Command {
         return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
                 Optional.ofNullable(updatedAddress),
                 updatedTags, updatedModuleRoleMap);
+    }
+
+    /**
+     * Returns a description of the changes made to the person.
+     */
+    public static String getChangesDescription(Person personBefore, Person personAfter) {
+        StringBuilder changeDescription = new StringBuilder("Change(s) made: \n");
+        boolean isChanged = false;
+        if (!personBefore.getName().equals(personAfter.getName())) {
+            isChanged = true;
+            changeDescription.append("Name: ").append(personBefore.getName()).append(" -> ")
+                    .append(personAfter.getName()).append("\n");
+        }
+        if (!personBefore.getPhone().equals(personAfter.getPhone())) {
+            isChanged = true;
+            changeDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
+                    .append(personAfter.getPhone()).append("\n");
+        }
+        if (!personBefore.getEmail().equals(personAfter.getEmail())) {
+            isChanged = true;
+            changeDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
+                    .append(personAfter.getEmail()).append("\n");
+        }
+        if (!personBefore.getAddress().equals(personAfter.getAddress())) {
+            isChanged = true;
+            changeDescription.append("Address: ")
+                    .append(personBefore.getAddress().map(Object::toString).orElse("<no address>")).append(" -> ")
+                    .append(personAfter.getAddress().map(Object::toString).orElse("<no address>")).append("\n");
+        }
+        if (!personBefore.getTags().equals(personAfter.getTags())) {
+            isChanged = true;
+            changeDescription.append("Tags: ").append(personBefore.getTags()).append(" -> ")
+                    .append(personAfter.getTags()).append("\n");
+        }
+        if (!personBefore.getModuleRoleMap().equals(personAfter.getModuleRoleMap())) {
+            isChanged = true;
+            changeDescription.append(EditModuleRoleOperation.getModuleCodeChangeDescription(
+                    personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
+        }
+
+        return isChanged ? changeDescription.toString() : "No changes made.";
     }
 
     @Override
