@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -41,7 +42,7 @@ public class DeleteTransactionCommand extends Command {
         }
 
         Person selected = lastShownList.get(CURRENT_PERSON.getZeroBased());
-        List<Transaction> transactions = model.getFilteredTransactionList();
+        List<Transaction> transactions = new ArrayList<>(model.getFilteredTransactionList());
         if (transactions.isEmpty()) {
             transactions = selected.getTransactions();
         }
