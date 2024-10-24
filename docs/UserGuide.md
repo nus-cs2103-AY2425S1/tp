@@ -16,9 +16,11 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
     - [Adding a person](#adding-a-person--add)
     - [Listing all patients](#listing-all-patients--list)
     - [Editing a patient](#editing-a-patient--edit)
+    - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
     - [Searching patients by field](#searching-patients-by-field--find)
     - [Deleting a person](#deleting-a-person--delete)
     - [Adding an appointment to a person](#adding-an-appointment-to-a-person--make_appt)
+    - [Deleting an appointment from a person](#deleting-an-appointment-from-a-person-del_appt)
     - [List all person appointment](#list-all-person-appointment--schedule_all)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
@@ -140,6 +142,20 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+### Adding notes to a patient : `addNotes`
+
+Adds notes to an existing person in the address book.
+
+Format: `addNotes INDEX pn/NOTES`
+
+* Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `addNotes 1 pn/Patient is prone to falling`
+*  `addNotes 2 pn/Patient requires frequent checkups`
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Viewing a patient's details: `view`
 
 Displays more details about a specific patient listed.
@@ -215,6 +231,18 @@ Format: `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_
 Examples:
 * `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
   1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Deleting an Appointment from a person: `del_appt`
+
+Deletes an appointment from a person
+
+Format: `del_appt INDEX`
+
+* Deletes the appointment for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 [Back to Table of Contents](#table-of-contents)
 
