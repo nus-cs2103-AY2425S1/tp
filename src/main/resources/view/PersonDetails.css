@@ -1,0 +1,124 @@
+/* Style for the VBox that contains all the labels */
+VBox {
+    -fx-spacing: 10; /* Add space between labels */
+    -fx-padding: 20; /* Add padding around the VBox */
+    -fx-background-color: #2C3531; /* Dark green background */
+    -fx-border-color: #116466; /* Teal border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Generic label styling */
+Label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
+    -fx-text-fill: #D9B08C;
+    /* Beige text color */
+}
+#nameLabel {
+    -fx-font-size: 14pt;
+}
+
+/* Add hover effects to labels */
+Label:hover {
+    -fx-text-fill: #D1E8E2; /* Lighter teal color on hover */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+Separator {
+   -fx-border-width: 0px;
+   -fx-border-color: #D9B08C;
+   -fx-background-fill: #D9B08C;
+}
+
+ScrollPane {
+   -fx-background-color: #2C3531;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #2C3531; /* Set the viewport to your dark color */
+}
+
+#historyLabel {
+  -fx-background-color: #2C3531; /* Background matches the ScrollPane */
+    -fx-text-fill: #D9B08C; /* Text color for contrast (light color against dark background) */
+    -fx-padding: 10; /* Add some padding around the text */
+    -fx-font-size: 14px; /* Optional: Adjust the font size for better readability */
+    -fx-border-color: #D9B08C; /* Optional: Adding a subtle border to the label */
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
+}
+
+/* Add a drop shadow effect to the VBox */
+VBox {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 2, 2);
+}
+
+/* Styling for the FlowPane that contains tags */
+#tags {
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+    -fx-padding: 5;
+    -fx-border-color: #2C3531; /* Teal border for tags */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #2C3531;
+}
+#tags .label {
+    -fx-background-color: #116466; /* Teal background */
+    -fx-text-fill: #D9B08C; /* Beige text */
+    -fx-padding: 3 8;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-font-size: 10pt;
+}
+
+.favourite-tag {
+    -fx-background-color: #d47a2b !important; /* Ensure this is applied */
+    -fx-text-fill: white !important;          /* Ensure this is applied */
+}
+
+
+/* General ScrollBar Styling */
+.scroll-bar {
+    -fx-background-color: transparent;  /* Background of the scroll bar */
+}
+
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #116466; /* Color for the buttons on vertical scroll bar */
+}
+
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #116466; /* Color for the buttons on horizontal scroll bar */
+}
+
+/* Styling the track */
+.scroll-bar .track {
+    -fx-background-color: #D1E8E2; /* Color for the scroll bar track */
+}
+
+/* Styling the thumb (draggable part) */
+.scroll-bar .thumb {
+    -fx-background-color: #FFCB9A;  /* Thumb color */
+    -fx-background-radius: 5px;  /* Rounded corners */
+    -fx-padding: 5px;  /* Add some padding inside the thumb */
+}
+
+/* Hover effect on the thumb */
+.scroll-bar .thumb:hover {
+    -fx-background-color: #D9B08C; /* Change color on hover */
+}
+
+/* Styling for the ScrollBar Buttons */
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Optionally, you can hide the scroll bar when not needed */
+.scroll-bar:horizontal {
+    -fx-opacity: 0.5; /* Transparency for horizontal scroll bar */
+}
+
+.scroll-bar:vertical {
+    -fx-opacity: 0.7; /* Transparency for vertical scroll bar */
+}
