@@ -1,9 +1,8 @@
 @startuml
-skinparam class {
-    BackgroundColor #ADD8E6
-    ArrowColor #0000FF
-    BorderColor #000080
-}
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
 
 Command <|-- ListCommand
 
