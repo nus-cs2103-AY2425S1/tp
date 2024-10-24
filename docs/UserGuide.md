@@ -172,12 +172,6 @@ Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 * The `ASK` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
 * The `BID` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
 
-> [!NOTE]
-> No duplicate properties are allowed. Duplicate properties are checked based on 
-> 1. if either of two properties are of LANDED type, then the comparison is done based on postal code.
-> 2. if the two properties are CONDO and HDB type, then the comparison is done based on postal code.
-> 3. if the two properties are both CONDO or HDB type, then the comparison is done based on postal code and unit.
-
 Examples:
 * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
 
@@ -221,9 +215,6 @@ Format: `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
 * The `TYPE` is case-insensetive HDB, CONDO or LANDED.
 * The `MATCHING_PRICE` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
-
-> [!IMPORTANT]
-> At least one optional prefix needs to be present for any filtering to be possible.
 
 Examples:
 * `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
