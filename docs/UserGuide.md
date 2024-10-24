@@ -262,12 +262,14 @@ _Details coming soon ..._
 
 | Action       | Format, Examples                                                                                                                                                      |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
 | **List**     | `list`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
-| **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                        |
+| **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
+| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                                         |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
