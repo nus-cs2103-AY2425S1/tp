@@ -66,7 +66,7 @@ public class AutoSuggestionTextField extends TextField {
         // Listen for text changes
         textProperty().addListener((obs, oldText, newText) -> {
             if (newText != null && !newText.isEmpty()) {
-                showSuggestions(newText);
+                showSuggestions(newText.split("\\s+")[0]);
                 double height = calculateListViewHeight(textFlowItems);
                 double width = calculateListViewWidth(textFlowItems);
                 suggestionList.setPrefHeight(height);
