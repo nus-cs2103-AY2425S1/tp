@@ -55,7 +55,7 @@ public class AddTeacherCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {

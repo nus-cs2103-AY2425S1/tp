@@ -74,7 +74,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -245,7 +245,6 @@ public class EditCommand extends Command {
 
         public void setClasses(Set<String> classes) {
             this.classes = (classes != null) ? new HashSet<>(classes) : null;
-            System.out.println(classes);
         }
 
         public Optional<Set<String>> getClasses() {

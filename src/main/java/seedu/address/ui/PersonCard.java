@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        String formattedGender = person.getGender().value == "male" ? "Male" : "Female";
+        String formattedGender = person.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + person.getPhone().value);
         address.setText("📍 " + person.getAddress().value);

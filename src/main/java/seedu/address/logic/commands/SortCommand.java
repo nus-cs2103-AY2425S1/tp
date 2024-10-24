@@ -28,7 +28,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(model.getFilteredPersonList());

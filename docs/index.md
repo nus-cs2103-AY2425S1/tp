@@ -4,7 +4,7 @@ title: EduConnect
 ---
 
 [![Java CI](https://github.com/AY2425S1-CS2103T-F12-2/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2425S1-CS2103T-F12-2/tp/actions)
-[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F12-2/team-repo/branch/master/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/AY2425S1-CS2103T-F12-2/team-repo)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F12-2/tp/branch/master/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/AY2425S1-CS2103T-F12-2/tp)
 
 ![Ui](images/Ui.png)
 

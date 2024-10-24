@@ -41,7 +41,7 @@ public class AddTeacherCommandTest {
         CommandResult commandResult = new AddTeacherCommand(validTeacher).executeCommand(modelStub);
 
         assertEquals(String.format(AddTeacherCommand.MESSAGE_SUCCESS, Messages.format(validTeacher)),
-                commandResult.getFeedbackToUser());
+        commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTeacher), modelStub.teachersAdded);
     }
 
@@ -185,10 +185,13 @@ public class AddTeacherCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+
         @Override
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
