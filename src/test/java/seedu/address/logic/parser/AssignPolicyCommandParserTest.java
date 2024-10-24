@@ -2,13 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGN_POLICY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AssignPolicyCommand;
-
+import seedu.address.model.person.Payment;
 
 public class AssignPolicyCommandParserTest {
 
@@ -24,5 +25,8 @@ public class AssignPolicyCommandParserTest {
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n"
                 + AssignPolicyCommand.MESSAGE_USAGE));
 
+        //invalid insurance field
+        assertParseFailure(parser, "1" + INVALID_ASSIGN_POLICY, String.format(Payment.MESSAGE_CONSTRAINTS + "\n"
+                + AssignPolicyCommand.MESSAGE_USAGE));
     }
 }

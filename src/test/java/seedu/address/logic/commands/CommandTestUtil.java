@@ -56,6 +56,8 @@ public class CommandTestUtil {
     public static final String VALID_INSURANCE_PAYMENT = "2025-12-12 349.00";
     public static final String VALID_INSURANCE_PAYMENT_DATE = "2025-12-12";
     public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
+    public static final String INVALID_INSURANCE_AMOUNT_DUE = "349.00asdd";
+
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -83,6 +85,10 @@ public class CommandTestUtil {
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
             + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
             + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+    public static final String INVALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE
+            + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+            + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+            + PREFIX_PAYMENT_AMOUNT + INVALID_INSURANCE_AMOUNT_DUE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
