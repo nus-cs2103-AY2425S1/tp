@@ -145,6 +145,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting multiple people : `mass_delete`
+Deletes multiple specified contacts from the address book using their displayed indices.
+
+Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
+
+* Deletes the persons at the specified indices.
+* Each index refers to the index number shown in the displayed person list.
+* All indices must be positive integers 1, 2, 3, … Invalid indices will be filtered out
+
+Examples:
+* `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in the address book.
+* `find Betsy` followed by `mass_delete 1 3 a` deletes the 1st and 3rd persons in the results of the find command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -199,6 +212,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Mass Delete** | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
