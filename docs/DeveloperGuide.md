@@ -620,4 +620,4 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case:
 
-    1. Expected:
+    1. Expected: 
