@@ -56,6 +56,9 @@ public class CalendarView extends UiPart<Region> {
     @FXML
     private VBox sun;
 
+    @FXML
+    private Label calendarHeader;
+
     /**
      * Default constructor to initialize the {@code CalendarView}
      */
