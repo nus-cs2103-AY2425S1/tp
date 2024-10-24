@@ -80,6 +80,12 @@ public class TypicalPersons {
             .withEmail("jakers@example.com").withAddress("nus drive")
             .withHealthServices("vaccination").build();
 
+    public static final Person KEANU = new PersonBuilder().withName("Keanu Reeves").withNric("S9975483H").withSex("M")
+            .withBirthdate("1997-11-30").withHealthServices("vaccination").withPhone("86526969")
+            .withEmail("keanureeves@example.com").withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+")
+            .withNokName("Mila Kunis").withNokPhone("84126990").withAllergy("peanuts").withHealthRisk("LOW")
+            .withHealthRecord("diabetes").withNote("Patient has previous gunshot wound to chest").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -96,6 +102,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, KEANU));
     }
 }

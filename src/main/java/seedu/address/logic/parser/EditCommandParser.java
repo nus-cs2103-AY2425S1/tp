@@ -55,7 +55,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.WRONG_NRIC), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX, PREFIX_PHONE,
@@ -92,7 +92,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setNokName(ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).get()));
         }
         if (argMultimap.getValue(PREFIX_NOKPHONE).isPresent()) {
-            editPersonDescriptor.setNokPhone(ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editPersonDescriptor.setNokPhone(ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
             editPersonDescriptor.setAllergy(ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get()));
@@ -108,14 +108,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
-        parseHealthServicesForEdit(argMultimap.getAllValues(PREFIX_HEALTHSERVICE))
-                .ifPresent(editPersonDescriptor::setHealthServices);
-        parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).ifPresent(editPersonDescriptor::setAppts);
+        if (argMultimap.getValue(PREFIX_HEALTHSERVICE).isPresent()) {
+            editPersonDescriptor.setHealthServices(parseHealthServicesForEdit(
+                    argMultimap.getAllValues(PREFIX_HEALTHSERVICE)).get());
+        }
+        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
+            editPersonDescriptor.setAppts(parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).get());
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
         return new EditCommand(nric, editPersonDescriptor);
     }
 
