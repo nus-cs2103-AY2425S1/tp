@@ -34,6 +34,16 @@ public class EventBuilder {
     }
 
     /**
+     * Initializes the EventBuilder with the data of {@code eventToCopy}.
+     */
+    public EventBuilder(Event eventToCopy) {
+        name = eventToCopy.getName();
+        address = eventToCopy.getLocation();
+        startTime = eventToCopy.getStartTime();
+        tags = new HashSet<>(eventToCopy.getTags());
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Event} that we are building.
      */
     public EventBuilder withName(String name) {

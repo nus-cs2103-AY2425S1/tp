@@ -1,5 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ART_EXHIBIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOOK_FAIR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ART_EXHIBIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOOK_FAIR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_ART_EXHIBIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BOOK_FAIR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CULTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LITERATURE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +47,15 @@ public class TypicalEvents {
 
     public static final Event ICE_CREAM_FEST = new EventBuilder().withName("Ice Cream Festival")
             .withAddress("5, Clarke Quay").withStartTime("2024-12-01 14:00").build();
+
+    public static final Event ART_EXHIBIT = new EventBuilder().withName(VALID_NAME_ART_EXHIBIT)
+            .withAddress(VALID_ADDRESS_ART_EXHIBIT).withStartTime(VALID_START_TIME_ART_EXHIBIT)
+            .withTags(VALID_TAG_CULTURE).build();
+
+    public static final Event BOOK_FAIR = new EventBuilder().withName(VALID_NAME_BOOK_FAIR)
+            .withAddress(VALID_ADDRESS_BOOK_FAIR).withStartTime(VALID_START_TIME_BOOK_FAIR)
+            .withTags(VALID_TAG_CULTURE, VALID_TAG_LITERATURE).build();
+
     private TypicalEvents() {} //prevents instantiation
 
     /**
