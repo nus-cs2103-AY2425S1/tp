@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalProducts.APPLE;
 import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import static seedu.address.testutil.TypicalSuppliers.BENSON;
@@ -127,5 +129,43 @@ public class AutoCompleteCommandTest {
         );
         assertEquals(String.join(AutoCompleteCommand.SUGGESTIONS_DELIMITER, expectedCompletions),
             result.getFeedbackToUser());
+    }
+
+    @Test
+    public void equals() {
+        AutoCompleteCommand autoCompleteCommand1 = new AutoCompleteCommand("A",
+            CliSyntax.PREFIX_SUPPLIER_NAME.getPrefix());
+        AutoCompleteCommand autoCompleteCommand2 = new AutoCompleteCommand("A",
+            CliSyntax.PREFIX_SUPPLIER_NAME.getPrefix());
+        AutoCompleteCommand autoCompleteCommand3 = new AutoCompleteCommand("B",
+            CliSyntax.PREFIX_SUPPLIER_NAME.getPrefix());
+        AutoCompleteCommand autoCompleteCommand4 = new AutoCompleteCommand("A",
+            CliSyntax.PREFIX_PRODUCT_NAME.getPrefix());
+
+        // Reflexivity
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand1));
+
+        // Symmetry
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand2));
+        assertTrue(autoCompleteCommand2.equals(autoCompleteCommand1));
+
+        // Transitivity
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand2));
+        assertTrue(autoCompleteCommand2.equals(autoCompleteCommand1));
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand1));
+
+        // Consistency
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand2));
+        assertTrue(autoCompleteCommand1.equals(autoCompleteCommand2));
+
+        // Non-nullity
+        assertFalse(autoCompleteCommand1.equals(null));
+
+        // Different Types
+        assertFalse(autoCompleteCommand1.equals(new Object()));
+
+        // Different Values
+        assertFalse(autoCompleteCommand1.equals(autoCompleteCommand3));
+        assertFalse(autoCompleteCommand1.equals(autoCompleteCommand4));
     }
 }
