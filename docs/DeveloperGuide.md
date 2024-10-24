@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: View all contacts**
+##### **Use case: View all contacts**
 
 **MSS**
 
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Add a contact**
+##### **Use case: Add a contact**
 
 **MSS**
 
@@ -376,7 +376,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a contact**
+##### **Use case: View all information about a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. SocialBook shows the list of all contacts
+3. User requests to view all the information of a specific contact in the list
+4. SocialBook displays the requested information to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no contacts available.
+
+  Use case ends.
+
+* 3a. The given index is non-numerical.
+
+    * 3a1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given index is out of bounds.
+
+    * 3b1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+
+##### **Use case: Delete a contact**
 
 **MSS**
 
@@ -399,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Edit a contact**
+##### **Use case: Edit a contact**
 
 **MSS**
 
@@ -430,7 +459,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
     Use case resumes at step 2.
 
-**Use case: Find a contact**
+##### **Use case: Find a contact**
 
 **MSS**
 
@@ -455,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add remarks to a contact**
+##### **Use case: Add remarks to a contact**
 
 **MSS**
 
