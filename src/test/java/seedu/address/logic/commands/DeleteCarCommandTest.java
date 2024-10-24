@@ -30,7 +30,8 @@ public class DeleteCarCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
         // Step 1: Create a person with a car
-        Person personWithCar = new PersonBuilder().withCar("SGX1234B", "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
+        Person personWithCar = new PersonBuilder().withCar("SGX1234B",
+                "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
 
         // Step 2: Create a model stub that contains the person
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personWithCar);
