@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -182,7 +183,7 @@ public class JsonAdaptedTransaction {
         a = amount.toModelType();
         d = new Description(description);
         dt = new Date(date);
-        HashSet<Category> mc = new HashSet<>(txnCategories);
+        Set<Category> mc = new HashSet<>(txnCategories);
 
         return new Transaction(id, p, a, d, dt, mc);
     }
