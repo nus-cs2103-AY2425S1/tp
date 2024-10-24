@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.TimeClashException;
 
 /**
- * A list of meetings that ensures no overlaps in timings of all the meetings and does not allow nulls.
+ * A list of meetings that ensures no    overlaps in timings of all the meetings and does not allow nulls.
  * A meeting clashes if the start time and end time overlaps with any meetings in the list.
  * A meeting clash is determined using the {@code Meeting#isOverlap(Meeting)}. Thus, before every meeting is added to
  * the list, Meeting#isOverlap(Meeting) is used to check for overlap.
@@ -22,7 +22,7 @@ public class Meetings {
 
     private final ObservableList<Meeting> internalList = FXCollections.observableArrayList();
 
-    public static final String MESSAGE_NO_MEETINGS = "You don't have a meeting arranged with this Udder";
+    public final static String MESSAGE_NO_MEETINGS = "You don't have a meeting arranged with this Udder";
     /**
      * Returns true if the meeting clashes with any of the meetings in the list.
      */
