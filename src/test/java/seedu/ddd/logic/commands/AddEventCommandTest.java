@@ -225,7 +225,7 @@ public class AddEventCommandTest {
         @Override
         public ObservableList<Displayable> getDisplayedList() {
             throw new AssertionError("This method should not be called.");
-        }        
+        }
 
         @Override
         public void updateFilteredContactList(Predicate<Contact> predicate) {
