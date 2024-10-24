@@ -24,10 +24,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
-    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
-    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
-    public static final String MESSAGE_CLIENTS_LISTED_OVERVIEW = "%1$d clients listed!";
-    public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendors listed!";
+    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contact(s) listed!";
+    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d event(s) listed!";
+    public static final String MESSAGE_CLIENTS_LISTED_OVERVIEW = "%1$d client(s) listed!";
+    public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendor(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified";
