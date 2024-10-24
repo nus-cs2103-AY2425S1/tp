@@ -145,6 +145,39 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
+### Marking a delivery : `mark -d`
+
+Marks the specified delivery from the address book with the specified `STATUS`.
+
+Format: `mark -d INDEX STATUS`
+
+* Marks the delivery at the specified `INDEX` with the specified `STATUS`.
+* The index refers to the index number shown in the displayed delivery list.
+* The status refers to the delivery status of a delivery shown in the displayed delivery list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The status **must be one of the following:** PENDING, DELIVERED, CANCELLED. Note that the status is not case-sensitive.
+
+
+Examples:
+* `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
+* `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
+
+
+### Deleting a delivery : `delete -d`
+
+Deletes the specified delivery from the address book.
+
+Format: `delete -d INDEX`
+
+* Deletes the delivery at the specified `INDEX`.
+* The index refers to the index number shown in the displayed delivery list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
+* `find -d /pro bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
