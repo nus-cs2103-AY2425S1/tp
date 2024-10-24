@@ -34,8 +34,8 @@
           </Menu>
         </MenuBar>
 
-        <!-- SplitPane for Person List and DisplayCard -->
-        <SplitPane>
+        <!-- SplitPane to place person list and display card side by side -->
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.3">
           <!-- Left: Person List -->
           <StackPane fx:id="personListPanelPlaceholder" minWidth="340" prefWidth="340" />
 

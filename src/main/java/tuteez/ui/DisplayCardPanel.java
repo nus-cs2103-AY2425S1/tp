@@ -3,8 +3,8 @@ package tuteez.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -22,26 +22,29 @@ public class DisplayCardPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> displayCardListView;
 
-    private ObservableList<Person> lastViewedPersonList;
+    private ObjectProperty<Optional<Person>> lastViewedPerson;
 
     /**
-     * Creates an empty {@code DisplayCardPanel}.
+     * Creates a {@code DisplayCardPanel} that listens to the lastViewedPerson property.
      */
-    public DisplayCardPanel() {
+    public DisplayCardPanel(ObjectProperty<Optional<Person>> lastViewedPerson) {
         super(FXML);
-        lastViewedPersonList = FXCollections.observableArrayList();
-        displayCardListView.setItems(lastViewedPersonList);
+        this.lastViewedPerson = lastViewedPerson;
+        displayCardListView.setItems(FXCollections.observableArrayList());
+
+        lastViewedPerson.addListener((observable, oldPerson, newPerson) -> updateDisplayCard(newPerson));
+
         displayCardListView.setCellFactory(listView -> new DisplayCardListViewCell());
     }
 
     /**
-     * Sets a new {@code DisplayCard} in the panel.
+     * Updates the display card with the new person information.
      *
      * @param personToDisplay The person whose details will be displayed.
      */
-    public void setDisplayCard(Optional<Person> personToDisplay) {
-        lastViewedPersonList.clear();
-        personToDisplay.ifPresent(lastViewedPersonList::add);
+    private void updateDisplayCard(Optional<Person> personToDisplay) {
+        displayCardListView.getItems().clear();
+        personToDisplay.ifPresent(displayCardListView.getItems()::add);
     }
 
     /**
@@ -50,15 +53,12 @@ public class DisplayCardPanel extends UiPart<Region> {
     class DisplayCardListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
-            System.out.println("UpdateItem called - Person: " + person + ", Empty: " + empty);
             super.updateItem(person, empty);
 
             if (empty || person == null) {
-                System.out.println("Setting graphic to null");
                 setGraphic(null);
                 setText(null);
             } else {
-                System.out.println("Setting new DisplayCard");
                 setGraphic(new DisplayCard(Optional.of(person)).getRoot());
             }
         }

@@ -6,6 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <HBox>
     <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-        <ListView fx:id="displayCardListView" VBox.vgrow="ALWAYS" />
+        <ListView fx:id="displayCardListView" />
     </VBox>
 </HBox>

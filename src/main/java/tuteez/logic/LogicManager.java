@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.commons.core.LogsCenter;
@@ -73,7 +74,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Optional<Person> getLastViewedPerson() {
+    public ObjectProperty<Optional<Person>> getLastViewedPerson() {
         return model.getLastViewedPerson();
     }
 

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.model.person.Name;
@@ -97,7 +98,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /** Returns an unmodifiable view of the person's details */
-    Optional<Person> getLastViewedPerson();
+    ObjectProperty<Optional<Person>> getLastViewedPerson();
 
     /**
      * Updates the lastViewedPerson after a DisplayCommand is called.

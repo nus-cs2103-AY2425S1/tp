@@ -123,8 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        displayCardPanel = new DisplayCardPanel();
-        displayCardPanel.setDisplayCard(logic.getLastViewedPerson());
+        displayCardPanel = new DisplayCardPanel(logic.getLastViewedPerson());
         displayCardPanelPlaceholder.getChildren().add(displayCardPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
