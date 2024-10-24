@@ -13,19 +13,21 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your DDD.
+3. Copy the file to the folder you want to use as the _home folder_ for your DDD.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar dreamdaydesigner.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar dreamdaydesigner.jar` command to run the application.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
+![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list -c` : Lists all clients.
@@ -40,7 +42,7 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,11 +52,19 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 
 **Notes about the command format:**<br>
 
+Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax). 
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
 
 * `-CONTACT_FLAG` can be either `-v` or `-c` for commands allowing specifying of contact type.
   e.g. in `list -CONTACT_FLAG`, `-CONTACT_FLAG` can allow for filtering all vendors with `-v` or clients with `-c`.
+
+* Parameters wrapped in square brackets are optional arguments.<br>
+  e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
+
+* Parameters wrapped in curly brackets are mutually exclusive arguments (i.e. only 1 should be specified).<br>
+  {FILE_1|FILE_2}
 
 * `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
   e.g. `MM/dd/yyyy`: 10/13/2024m; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
@@ -77,67 +87,147 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format:
+```
+help
+```
 
 ### Create a new contact: `add`
 
-Add new contact (client or vendor) to contact list.
+Adds a new contact (client or vendor).
 
 Format:
+```
+add {-c d/DATE | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
+```
 
-`add -CONTACT_FLAG n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE (only if adding vendor) d/WEDDING_DATE (only if adding client) [t/TAG]...`
+Parameters:
+* `-c`: create a client (only 1 of -c or -v should be specified)
+* `-v`: create a vendor (only 1 of -c or -v should be specified)
+* `d/DATE`: date of client's event (must be specified if `-c` is specified)
+* `s/SERVICE`: service provided by vendor (must be specified if `-v` is specified)
+* `n/NAME`: name of contact
+* `p/PHONE`: phone number of contact
+* `e/EMAIL`: email address of contact
+* `a/ADDRESS`: address of contact
+* `t/TAG`: tag(s) associated with the contact
 
 <box type="tip" seamless>
-
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget`
-* `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets`
+* `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 d/2024-12-15 t/budget`
+* `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
-### Locating contacts by field: `list`
+### Create a new event: `event`
 
-View all contacts based on field input.
+Adds a new event.
 
 Format:
-`list -CONTACT_FLAG n/[NAME] id/[CONTACT_ID]`
+```
+event des/DESCRIPTION c/CLIENT ... v/VENDOR ...
+```
 
-* The `-CONTACT_FLAG` is optional. Both vendors and clients will be listed if not specified.
+Parameters:
+* `des/DESCRIPTION`: description of event
+* `c/CLIENT`: list of client IDs
+* `v/VENDOR`: list of vendor IDs
+
+Examples:
+* `event des/Wedding c/0 v/1 v/2`
+
+### View contacts: `list`
+
+List contacts (can specify filters).
+
+Format:
+```
+list [{-c | -v | -e}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] {[d/DATE] | [s/SERVICE]} [t/TAG ...] [id/ID]
+```
+
+Parameters:
+* `-c`: list clients (only 1 of -c, -v or -e should be specified)
+* `-v`: list vendors (only 1 of -c, -v or -e should be specified)
+* `-e`: list events (only 1 of -c, -v or -e should be specified)
+* `n/NAME`: name of contact
+* `p/PHONE`: phone number of contact
+* `e/EMAIL`: email address of contact
+* `a/ADDRESS`: address of contact
+* `d/DATE`: date of client's event (can only be specified if `-c` is specified)
+* `s/SERVICE`: service provided by vendor (can only be specified if `-c` is specified)
+* `t/TAG`: tag(s) associated with the contact
+* `id/ID`: ID of the contact
+
+Example:
+* `list -c n/Jane`
+* `list -v s/catering`
+* `list -e des/wedding`
+
+Notes:
+* If no arguments are specified, `list` will list all contacts.
+* The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
 * Both the `n/[NAME]` and `id/[CONTACT_ID]` are optional. Leaving both out will list all.
-* The name keyword search is case-sensitive. e.g `hans` will not match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The name keyword search is case-sensitive. e.g `hans` will not match `Hans`.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all fields keyword will be returned (i.e. `AND` search).
 
-Example: `list -c n/Alice`
+### Editing a contact
 
-* Lists all clients with the name field 'Alice'.
+Edit an existing contact.
 
-### Deleting a person : `delete`
+Format:
+```
+edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] {[d/DATE] | [s/SERVICE]} [t/TAG ...]
+```
 
-Deletes the specified person from the address book.
+Parameters:
+- `INDEX`: one-based index position of the contact
+- `id/ID`: ID of the target contact
+- `n/NAME`: edited name of contact
+- `p/PHONE`: edited phone number of contact
+- `e/EMAIL`: edited email address of contact
+- `a/ADDRESS`: edited address of contact
+- `d/DATE`: edited date of client's event (can only be specified if the contact is a client)
+- `s/SERVICE`: edited service provided by vendor (can only be specified if the contact is a vendor)
+- `t/TAG`: edited tag(s) associated with the contact
+
+Notes:
+* Only one of `INDEX` or `id/ID` should be specified.
+
+Examples:
+* `edit 1 p/91234567`
+* `edit id/0 p/91234567 e/johndoe@example.com`
+
+### Deleting a contact : `delete`
+
+Deletes a contact.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Parameters:
+- `INDEX`: one-based index position of the contact
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `list -c n/Jane` followed by `delete 1` deletes the 1st person in the results of the `list` command.
+* `delete 1`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from DDD.
+Clears all entries.
 
-Format: `clear`
+Format:
+```
+clear
+```
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Format:
+```
+exit
+```
 
 ### Editing the data file
 
@@ -168,12 +258,18 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                                   |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Create Client Contact** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS d/WEDDING_DATE [t/TAG]...` <br> e.g., `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets`         |
-| **Create Vendor Contact** | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG]...` <br> e.g., `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` |
-| **Clear**                 | `clear`                                                                                                                                                                                            |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
-| **List**                  | `list -CONTACT_FLAG n/[NAME] id/[CONTACT_ID]` <br> e.g., `list -c n/Jane`                                                                                                                          |
-| **List All**              | `list`                                                                                                                                                                                             |
-| **Help**                  | `help`                                                                                                                                                                                             |
+| Action             | Format                                                          | Example                                                                                     |
+|--------------------|-----------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Create Client**  | `add -c d/DATE n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`    | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 d/2024-12-15 t/budget`          |
+| **Create Vendor**  | `add -v s/SERVICE n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]` | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
+| **Create Event**   | `event des/DESCRIPTION c/CLIENT ... v/VENDOR ...`               | `event des/Wedding c/0 v/1 v/2`                                                             |
+| **Clear**          | `clear`                                                         | `clear`                                                                                     |
+| **Delete**         | `delete INDEX`                                                  | `delete 1`                                                                                  |
+| **List Clients**   | `list -c [n/NAME]`                                              | `list -c n/Jane`                                                                            |
+| **List Vendors**   | `list -v [s/SERVICE]`                                           | `list -v s/catering`                                                                        |
+| **List Events**    | `list -e [des/DESCRIPTION]`                                     | `list -e des/wedding`                                                                       |
+| **List All**       | `list`                                                          | `list`                                                                                      |
+| **Edit by Index**  | `edit INDEX [p/PHONE]`                                          | `edit 1 p/91234567`                                                                         |
+| **Edit by ID**     | `edit id/ID [p/PHONE] [e/EMAIL]`                                | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
+| **Delete Contact** | `delete INDEX`                                                  | `delete 1`                                                                                  |
+| **Help**           | `help`                                                          | `help`                                                                                      |

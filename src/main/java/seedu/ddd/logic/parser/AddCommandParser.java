@@ -59,7 +59,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
             contactType = VENDOR;
         } else {
-            throw new ParseException(AddCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)

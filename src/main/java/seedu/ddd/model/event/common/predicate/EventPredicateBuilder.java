@@ -45,7 +45,7 @@ public class EventPredicateBuilder {
             String trimmedArgs = argMultimap.getValue(PREFIX_DESC).get().trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_EVENT_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
             }
             String[] descriptionKeywords = trimmedArgs.split("\\s+");
             combinedPredicate = combinedPredicate.and(
@@ -59,7 +59,7 @@ public class EventPredicateBuilder {
             String trimmedArgs = argMultimap.getValue(PREFIX_ID).get();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_EVENT_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
             }
             EventId eventId = new EventId(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));

@@ -90,7 +90,7 @@ public class ContactPredicateBuilder {
             String trimmedArgs = argMultimap.getValue(PREFIX_PHONE).get();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_EVENT_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
             Phone phoneNumber = new Phone(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new ContactPhonePredicate(phoneNumber));
@@ -103,7 +103,7 @@ public class ContactPredicateBuilder {
             String trimmedArgs = argMultimap.getValue(PREFIX_ID).get();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_EVENT_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
             Id id = new Id(Integer.parseInt(trimmedArgs));
             combinedPredicate = combinedPredicate.and(new ContactIdPredicate(id));
