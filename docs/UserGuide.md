@@ -71,19 +71,22 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Adding a person: `add`
+## Managing Contacts
+### Adding a person: `add person`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add person n/Betsy Crowe e/betsycrowe@example.com a/Crowe Apartment p/1234567 t/Celebrity`
+
+![result for 'add person'](images/add_person.png)
 
 ### Listing all persons : `list person`
 
@@ -95,21 +98,11 @@ Example: Calling `list person` would yield the following output
 
 ![result for 'list person'](images/list_person.png)
 
-### Listing all events: `list event`
-
-Shows a list of all events in the address book.
-
-Format: `list event`
-
-Example: Calling `list event` would yield the following output
-
-![result for 'list event'](images/list_event.png)
-
-### Editing a person : `edit`
+### Editing a person : `edit person`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -119,8 +112,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+![result for 'edit person'](images/edit_person.png)
 
 ### Locating persons by name: `find person`
 
@@ -141,6 +136,105 @@ Examples:
 
 ![result for 'find john betsy'](images/findJohnBetsyResult.png)
 
+### Viewing person by name: `view person`
+
+Views the comprehensive details, which includes address and email address, of a specific person 
+whose name exactly matches the given keywords.
+
+Format: `view person KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `john` will match `John`
+* The order of the keywords matters. e.g. `John Doe` will match `John Doe` but not `Doe John`
+* Only the **full name** is searched.
+* Only full words will be matched. e.g. `John` will not match `Johnny`
+* Persons matching all keywords exactly will be returned. e.g. `John Doe` will return `John Doe`
+
+Examples:
+
+* `view person Betsy Crowe` returns the details for `Betsy Crowe`
+* `view person John Doe` returns the details for `John Doe`
+
+![result for 'view john doe'](images/viewJohnDoeResult.png)
+
+### Filtering person by tag: `filter person`
+
+Filters persons based on the exact tag provided, ensuring only persons with that tag are displayed.
+
+Format: `filter person TAG`
+
+* The search is case-insensitive. e.g. `celebrity` will match `Celebrity`.
+* Only exact full-word matches will return a result. 
+  e.g. `Hair` will return `Hair` but not `Hairdresser`
+
+Examples:
+
+* `filter person Hairdresser` returns the person with tag `HairDresser`.
+* `filter person Celebrity` returns the person with tag `Celebrity`.
+
+![result for 'filter celebrity'](images/filterCelebrityResult.png)
+
+### Deleting a person : `delete person`
+
+Deletes the specified person from the address book.
+
+Format: `delete person INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list person` followed by `delete person 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+
+![result for 'delete person'](images/delete_person.png)
+
+## Managing Events
+### Adding an event: `add event`
+
+Adds an event to TalentHub.
+
+Format: `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+An event can have any number of points of contact (including 0)
+</div>
+
+Examples:
+* `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe`
+* `add event n/Hair Cut t/2022-03-27 v/John's Salon c/Betsy Crowe`
+
+![result for 'add event'](images/add_event.png)
+
+### Listing all events: `list event`
+
+Shows a list of all events in the address book.
+
+Format: `list event`
+
+Example: Calling `list event` would yield the following output
+
+![result for 'list event'](images/list_event.png)
+
+### Editing an event : `edit event`
+
+Edits an existing event in the address book.
+
+Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* * When editing points of contact, the existing points of contact of the person will be removed i.e adding of points of contact is not cumulative.
+* You can remove all the person’s points of contact by typing `p/` without
+  specifying any points of contact after it.
+
+Examples:
+*  `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
+*  `edit event 2 n/Movie Screening t/` Edits the name of the 2nd event to be `Movie Screening` and clears all existing points of contact.
+
+![result for 'edit event'](images/edit_event.png)
+
 ### Locating events by name: `find event`
 
 Finds events whose names contain any of the given keywords.
@@ -160,29 +254,9 @@ Examples:
 
 ![result for 'find hair oscars'](images/findHairOscarsResult.png)
 
-### Viewing person by name: `view person`
-
-Views the comprehensive details, which includes address and email address, of a specific person 
-whose name exactly matches the given keywords.
-
-Format: `view person KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `john` will match `John`
-* The order of the keywords matters. e.g. `John Doe` will match `John Doe` but not `Doe John`
-* Only the **full name** is searched.
-* Only full words will be matched. e.g. `John` will not match `Johnny`
-* Persons matching all keywords exactly will be returned. e.g. `John Doe` will return `John Doe`
-
-Examples:
-
-* `view person Betsy Crowe` returns the details for `Betsy Crowe`<br>
-* `view person John Doe` returns the details for `John Doe`
-
-![result for 'view john doe'](images/viewJohnDoeResult.png)
-
 ### Viewing event by name: `view event`
 
-Views the comprehensive details, which includes points of contact, of a specific event whose 
+Views the comprehensive details, which includes points of contact, of a specific event whose
 name exactly matches the given keywords.
 
 Format: `view event KEYWORD [MORE_KEYWORDS]`
@@ -197,39 +271,22 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `view event Oscars` returns the details for `Oscars`
-* `view event Hair Cut` returns the details for `Hair Cut`<br>
-  
+* `view event Hair Cut` returns the details for `Hair Cut`
+
 ![result for 'view hair cut'](images/viewHairCutResult.png)
-
-### Filtering person by tag: `filter person`
-
-Filters persons based on the exact tag provided, ensuring only persons with that tag are displayed.
-
-Format: `filter person TAG`
-
-* The search is case-insensitive. e.g. `celebrity` will match `Celebrity`.
-* Only exact full-word matches will return a result. 
-  e.g. `Hair` will return `Hair` but not `Hairdresser`
-
-Examples:
-
-* `filter person Hairdresser` returns the persons with tag `HairDresser`.
-* `filter person Celcbrity` returns the persons with tag `Celebrity`.
-
-![result for 'filter celebrity'](images/filterCelebrityResult.png)
 
 ### Filtering events by celebrity name: `filter event`
 
-Filters events based on the exact celebrity name provided, 
+Filters events based on the exact celebrity name provided,
 ensuring that only events associated with that celebrity are displayed.
 
 Format: `filter event CELEBRITY_NAME`
 
 * The search is case-insensitive. e.g. `betsy crowe` will match `Betsy Crowe`
 * The order of the keywords matters. e.g. `Betsy Crowe` will not match `Crowe Betsy`
-* Only the **full celebrity name** is searched. 
+* Only the **full celebrity name** is searched.
 * Only full name will be matched. e.g. `Bet` will not match `Betsy`
-* Persons matching all keywords exactly will be returned. 
+* Persons matching all keywords exactly will be returned.
   e.g. `Betsy` will match `Betsy` but not `Betsy Crowe`
 
 Examples:
@@ -239,21 +296,23 @@ Examples:
 
 ![result for 'filter betsy crowe'](images/filterBetsyCroweResult.png)
 
+### Deleting an event : `delete event`
 
-### Deleting a person : `delete`
+Deletes the specified event from the address book.
 
-Deletes the specified person from the address book.
+Format: `delete event INDEX`
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list event` followed by `delete event 2` deletes the 2nd event in the address book.
+* `find Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find` command.
 
+![result for 'delete event'](images/delete_event.png)
+
+## Utility Commands
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
