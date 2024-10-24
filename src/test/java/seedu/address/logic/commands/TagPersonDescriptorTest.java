@@ -8,15 +8,15 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_DOE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.TagCommand.TagPersonDescriptor;
-import seedu.address.testutil.TagPersonDescriptorBuilder;
+import seedu.address.logic.commands.RoleCommand.PersonWithRoleDescriptor;
+import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
 
 public class TagPersonDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        TagPersonDescriptor descriptorWithSameValues = new TagPersonDescriptor(DESC_DOE);
+        PersonWithRoleDescriptor descriptorWithSameValues = new PersonWithRoleDescriptor(DESC_DOE);
         assertTrue(DESC_DOE.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -25,22 +25,22 @@ public class TagPersonDescriptorTest {
         // different values -> returns false
         assertFalse(DESC_DOE.equals(DESC_BOB));
 
-        // different tag -> returns false
-        TagPersonDescriptor editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTags("colleague").build();
-        assertFalse(DESC_DOE.equals(editedDoe));
+        // different role -> returns false
+        PersonWithRoleDescriptor DoeWithRole = new PersonWithRoleDescriptorBuilder(DESC_DOE).withRole("colleague").build();
+        assertFalse(DESC_DOE.equals(DoeWithRole));
 
-        // different tag (multiple tags) -> returns false
-        editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTags("friend", "husband").build();
-        assertFalse(DESC_DOE.equals(editedDoe));
+        // different role (multiple tags) -> returns false
+        DoeWithRole = new PersonWithRoleDescriptorBuilder(DESC_DOE).withRole("friend").build();
+        assertFalse(DESC_DOE.equals(DoeWithRole));
     }
 
 
     @Test
     public void toStringMethod() {
-        TagPersonDescriptor tagPersonDescriptor = new TagPersonDescriptor();
-        String expected = TagPersonDescriptor.class.getCanonicalName()
-                + "{name=null, phone=null, email=null, address=null, tags=null}";
-        assertEquals(expected, tagPersonDescriptor.toString());
+        PersonWithRoleDescriptor personWithRoleDescriptor = new PersonWithRoleDescriptor();
+        String expected = PersonWithRoleDescriptor.class.getCanonicalName()
+                + "{name=null, phone=null, email=null, address=null, role=null}";
+        assertEquals(expected, personWithRoleDescriptor.toString());
     }
 
 }

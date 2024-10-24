@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 /**
  * Filters and lists all persons in address book whose tags contain any of the argument keywords.
@@ -20,9 +20,9 @@ public class FilterCommand extends Command {
             + "Parameters: t/TAG [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " t/friends t/family";
 
-    private final TagContainsKeywordsPredicate predicate;
+    private final RoleContainsKeywordsPredicate predicate;
 
-    public FilterCommand(TagContainsKeywordsPredicate predicate) {
+    public FilterCommand(RoleContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

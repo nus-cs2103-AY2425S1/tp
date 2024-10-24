@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 public class FilterCommandParserTest {
 
@@ -29,7 +29,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_justPrefix_throwsParseException() {
-        assertParseFailure(parser, "t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
     }
 
@@ -37,10 +37,10 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "family")));
-        assertParseSuccess(parser, "t/friends t/family", expectedFilterCommand);
+                new FilterCommand(new RoleContainsKeywordsPredicate(Arrays.asList("friends", "family")));
+        assertParseSuccess(parser, "r/friends r/family", expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n t/friends \n \t t/family  \t", expectedFilterCommand);
+        assertParseSuccess(parser, " \n r/friends \n \t r/family  \t", expectedFilterCommand);
     }
 }

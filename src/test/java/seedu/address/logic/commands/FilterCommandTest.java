@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -27,10 +27,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        TagContainsKeywordsPredicate firstPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("friend"));
-        TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("colleague"));
+        RoleContainsKeywordsPredicate firstPredicate =
+                new RoleContainsKeywordsPredicate(Collections.singletonList("friend"));
+        RoleContainsKeywordsPredicate secondPredicate =
+                new RoleContainsKeywordsPredicate(Collections.singletonList("colleague"));
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -55,7 +55,7 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagContainsKeywordsPredicate predicate = preparePredicate("t/ ");
+        RoleContainsKeywordsPredicate predicate = preparePredicate("t/ ");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends gym colleague");
+        RoleContainsKeywordsPredicate predicate = preparePredicate("friends gym colleague");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,10 +73,10 @@ public class FilterCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code RoleContainsKeywordsPredicate}.
      */
-    private TagContainsKeywordsPredicate preparePredicate(String userInput) {
+    private RoleContainsKeywordsPredicate preparePredicate(String userInput) {
         System.out.println(Arrays.asList(userInput.split("\\s+")));
-        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

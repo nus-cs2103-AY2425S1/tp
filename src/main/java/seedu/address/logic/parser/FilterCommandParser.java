@@ -6,14 +6,14 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private static final Prefix TAG_PREFIX = CliSyntax.PREFIX_TAG;
+    private static final Prefix TAG_PREFIX = CliSyntax.PREFIX_ROLE;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -38,6 +38,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        return new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
+        return new FilterCommand(new RoleContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
 }
