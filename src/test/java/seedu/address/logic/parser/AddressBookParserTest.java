@@ -26,10 +26,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkVipCommand;
 import seedu.address.logic.commands.SearchNameCommand;
+import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -82,6 +84,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_searchtag() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        SearchTagCommand command = (SearchTagCommand) parser.parseCommand(
+                SearchTagCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -89,9 +99,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        // Ensure normal list command works
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+
+        // Test with the "list vip" command
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " vip") instanceof ListCommand);
+
+        // Optional: If "list 3" should throw a ParseException, handle it accordingly
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
+
 
     @Test
     public void parseCommand_markVip() throws Exception {

@@ -28,16 +28,16 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="vip" styleClass="cell_big_label" text=" VIP ">
+          <font>
+            <Font name="System Bold" size="12.0" />
+          </font>
+        </Label>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-         <Label fx:id="vip" text="VIP">
-            <font>
-               <Font name="System Bold" size="12.0" />
-            </font>
-         </Label>
       <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
     </VBox>
       <rowConstraints>
