@@ -210,8 +210,8 @@ public class EditCommand extends Command {
         private Note note;
         private Name nokName;
         private Phone nokPhone;
-        private Set<HealthService> healthServices = new HashSet<>();
-        private List<Appt> appts = new ArrayList<>();
+        private Set<HealthService> healthServices;
+        private List<Appt> appts;
 
         public EditPersonDescriptor() {}
 
