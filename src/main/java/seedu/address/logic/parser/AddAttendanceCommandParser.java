@@ -35,12 +35,9 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
                     AddAttendanceCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        AbsentDate absentDate;
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        AbsentDate absentDate = ParserUtil.parseAbsentDate(argMultimap.getValue(PREFIX_ABSENT_DATE).get());
         AbsentReason absentReason;
-
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        absentDate = ParserUtil.parseAbsentDate(argMultimap.getValue(PREFIX_ABSENT_DATE).get());
         if (argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
             absentReason = ParserUtil.parseAbsentReason(argMultimap.getValue(PREFIX_ABSENT_REASON).get());
         } else {
