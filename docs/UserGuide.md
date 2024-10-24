@@ -117,33 +117,55 @@ Format: `help`
 
 Adds a new candidate to TalentSG.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex/EXPERIENCE st/STATUS note/NOTE  [t/TAG]...`
 
 #### Constraints
 
 - **NAME**: Up to 20 characters, no special characters.
 - **PHONE_NUMBER**: Numeric.
 - **EMAIL**: Valid email format.
-- **SKILLS**: Comma-separated values, e.g., `Java,Python`.
-- **STATUS**: Predefined statuses (Active, Shortlisted, etc.).
-- **EXPERIENCE**: Brief description.
-- **DESIRED_ROLE**: Desired job position.
-- **Tags**: Optional and can be multiple.
+- **ADDRESS**: Valid address, should not be blank.
+- **SKILLS**: Comma-separated values, e.g. `Java, Python`.
+- **STATUS**: Predefined statuses (Applied, Screening, Interview Scheduled, Interviewed, Offer, Onboarding, Hired, Rejected).
+- **EXPERIENCE**: Valid experience, should not be blank.
+- **DESIRED_ROLE**: Desired job position, should not be blank.
+- **Tags**: Optional and can be multiple, e.g. `t/friends t/owesMoney`.
 
-[⚠️ **Caution**]: The "Required Information" cannot be empty.
+[⚠️ **Caution**]: The required information except tags cannot be empty.
 
 **Example**:
 
-`add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Manager`
+`add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dr/Software Engineer s/Java, Python, C++ ex/Project Manager at Google from 2010-2020 st/Interviewed note/Super confident t/friends t/owesMoney`
 
+**Image Example**
+
+Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
+
+Before the add command ran:
+<br><img src="images/AddCommandBefore.png" width = "300">
+
+After the add command ran:
+<br><img src="images/AddCommandAfter.png" width = "300">
+
+[⚠️ **Caution**]: You cannot add the same candidate twice. (same name and phone)
 
 ---
 
 ### 📃 Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all applicants in TalentSG.
 
 Format: `list`
+
+**Image Example**
+
+Command: ` list `
+
+Before the list command ran:
+<br><img src="images/ListCommandBefore.png" width = "300">
+
+After the list command ran:
+<br><img src="images/ListCommandAfter.png" width = "300">
 
 ---
 
@@ -223,6 +245,16 @@ Removes a candidate from TalentSG.
 - `list` followed by `delete 2`: Deletes the second candidate.
 - `find Betsy` followed by `delete 1`: Deletes the first candidate in the search results.
 
+**Image Example**
+
+Command: ` delete 2 `
+
+Before the find command ran:
+<br><img src="images/DeleteCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/DeleteCommandAfter.png" width = "300">
+
 [⚠️ **Caution**]: Deleted entries cannot be recovered.
 
 ---
@@ -242,6 +274,16 @@ Filters candidates based on their status.
 
 - `filter st/Active`: Displays all active candidates.
 - `filter st/Shortlisted`: Shows candidates marked as shortlisted.
+
+**Image Example**
+
+Command: ` filter screening `
+
+Before the find command ran:
+<br><img src="images/FilterCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/FilterCommandAfter.png" width = "300">
 
 ---
 

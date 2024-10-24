@@ -155,6 +155,53 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Feature
+
+#### `AddCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of adding a person into TalentSG.
+
+<img src="images/AddCommandSequenceDiagram.png" width="550" />
+
+#### Key Components
+- `AddCommand`: Executes the addition operation based on the user's input.
+- `AddCommandParser`: Parses user input to create an `AddCommand` object.
+- `LogicManager`: Invokes the `AddCommand` to execute the addition operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `AddCommand` object based on the user input.
+
+#### Component Interaction Details
+1. The user executes the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
+2. The `AddCommandParser` interprets the input.
+3. An `AddCommand` object is created.
+4. The `LogicManager` invokes the execute method of AddCommand.
+5. The execute method of `AddCommand` invokes the `addPerson` method in `Model` property to create new contact with the new `Person` object.
+6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
+7. The UI reflects this new list with added `Person`.
+
+
+### Delete Feature ###
+
+#### `Delete Feature` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of deleting a person from TalentSG.
+
+#### Key Components
+- `DeleteCommand`: Executes the deletion operation based on the user's input.
+- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
+- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
+
+#### Component Interaction Details
+1. The user executes the command `delete 2`, intending to delete a person with index 2 in the contact list.
+2. The `DeleteCommandParser` interprets the input.
+3. A `DeleteCommand` object is created.
+4. The `LogicManager` invokes the execute method of DeleteCommand.
+5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the contact of the `Person` object.
+6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
+7. The UI reflects this new list with deleted `Person`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
