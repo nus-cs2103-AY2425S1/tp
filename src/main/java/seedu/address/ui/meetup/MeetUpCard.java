@@ -1,7 +1,10 @@
 package seedu.address.ui.meetup;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.meetup.MeetUp;
@@ -34,6 +37,8 @@ public class MeetUpCard extends UiPart<Region> {
     private Label from;
     @FXML
     private Label to;
+    @FXML
+    private FlowPane addedBuyers;
 
     /**
      * Creates a {@code MeetUpCode} with the given {@code MeetUp} and index to display.
@@ -46,6 +51,9 @@ public class MeetUpCard extends UiPart<Region> {
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toString());
         to.setText(meetUp.getTo().toString());
+        meetUp.getAddedBuyers().stream()
+                .sorted(Comparator.comparing(buyer -> buyer.addedBuyerName))
+                .forEach(addedBuyer -> addedBuyers.getChildren().add(new Label(addedBuyer.addedBuyerName)));
 
         if (overlap) {
             from.setStyle("-fx-text-fill: red;");
