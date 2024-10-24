@@ -125,8 +125,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         meetings.addMeeting(m);
     }
 
+    public void deleteMeeting(Meeting m) {
+        meetings.deleteMeeting(m);
+    }
+
+    public Meeting getMeeting(int index) {
+        return meetings.getMeeting(index);
+    }
+
     public String listMeetings() {
         return meetings.toString();
+    }
+
+    public int getMeetingSize() {
+        return meetings.getMeetingsCount();
     }
 
     public ObservableList<Meeting> getMeetingList() {

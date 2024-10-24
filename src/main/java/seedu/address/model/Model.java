@@ -92,5 +92,19 @@ public interface Model {
      */
     void addMeeting(Person target, Meeting meeting) throws CommandException;
 
+    /**
+     * Deletes a given meeting with a person.
+     */
+    void deleteMeeting(Person target, Meeting meeting);
+
+    /**
+     * Gets a Meeting object given the index.
+     *
+     * @return Meeting object.
+     */
+    Meeting getMeeting(int index);
+
+    int getMeetingSize();
+
     String listMeetings();
 }
