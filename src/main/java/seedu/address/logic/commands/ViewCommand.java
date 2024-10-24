@@ -18,6 +18,8 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
+    public static final String COMMAND_WORD_SHORT = "v";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose NRIC matches the specified "
             + "NRIC and displays the details.\n"
             + "Parameters: " + PREFIX_NRIC + "NRIC (Nine characters, first and last alphabet, others digits)\n"

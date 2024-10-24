@@ -19,6 +19,8 @@ public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appointment";
 
+    public static final String COMMAND_WORD_SHORT = "appt";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets an appointment for the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer), a/APPOINTMENT (in the format DD-MM-YYYY HH:MM)\n"
