@@ -31,7 +31,7 @@ public enum SortOption {
 
         @Override
         public String getRole() {
-            return "volunteer";
+            return VOLUNTEER_ROLE;
         }
 
         @Override
@@ -46,6 +46,9 @@ public enum SortOption {
 
     public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
 
+    public static final String VOLUNTEER_ROLE = "volunteer";
+    public static final String PERSON_ROLE = "Person";
+
     private final String value;
     private final String role;
     private final Class<? extends Person> relatedClass;
@@ -57,7 +60,7 @@ public enum SortOption {
      */
     SortOption(String value) {
         this.value = value;
-        role = "Person";
+        role = PERSON_ROLE;
         relatedClass = Person.class;
     }
 
