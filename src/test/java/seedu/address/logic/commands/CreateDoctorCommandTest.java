@@ -24,9 +24,9 @@ import seedu.address.testutil.PersonBuilder;
 public class CreateDoctorCommandTest {
 
     @Test
-    public void execute_Doctor_addSuccessful() throws Exception {
+    public void executeDoctorAddSuccessful() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-        modelStub.clearList();  // Clear the list
+        modelStub.clearList(); // Clear the list
 
         Person validDoctor = new PersonBuilder().buildDoctor();
 
@@ -37,18 +37,17 @@ public class CreateDoctorCommandTest {
     }
 
     @Test
-    public void execute_Multiple_Doctor_addFailure() {
+    public void executeMultipleDoctorAddFailure() {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
         Person validDoctor = new PersonBuilder().buildDoctor();
-        modelStub.addPerson(validDoctor);  // Add first doctor
+        modelStub.addPerson(validDoctor); // Add first doctor
 
         assertThrows(
-                CommandException.class,  // expected exception type
-                CreateDoctorCommand.MESSAGE_DUPLICATE_PERSON,  // expected message
-                () -> new CreateDoctorCommand(validDoctor).execute(modelStub)  // executable
-        );
+                CommandException.class, // expected exception type
+                CreateDoctorCommand.MESSAGE_DUPLICATE_PERSON, // expected message
+                () -> new CreateDoctorCommand(validDoctor).execute(modelStub)); // executable
     }
 
 
