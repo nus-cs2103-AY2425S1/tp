@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
@@ -91,7 +92,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_applicationStatus() throws Exception {
-        assertTrue(parser.parseCommand(ApplicationStatusCommand.COMMAND_WORD) instanceof ApplicationStatusCommand);
+        final String status = "Some status";
+        ApplicationStatusCommand command = (ApplicationStatusCommand) parser.parseCommand(
+                ApplicationStatusCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_COMPANY.getOneBased() + " " + PREFIX_APPLICATION_STATUS + status);
+        assertEquals(new ApplicationStatusCommand(INDEX_FIRST_COMPANY, status), command);
     }
 
     @Test
