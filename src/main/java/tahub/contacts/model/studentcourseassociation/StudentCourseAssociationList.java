@@ -3,12 +3,14 @@ package tahub.contacts.model.studentcourseassociation;
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.tutorial.Tutorial;
 
@@ -218,5 +220,53 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the filtered SCA containing student.
+     *
+     * @param student the student to filter by
+     * @return the filtered SCA containing student
+     */
+    public StudentCourseAssociationList filterScasByStudent(Person student) {
+        StudentCourseAssociationList filteredScas = new StudentCourseAssociationList();
+        for (StudentCourseAssociation sca : internalList) {
+            if (sca.getStudent().equals(student)) {
+                filteredScas.add(sca);
+            }
+        }
+        return filteredScas;
+    }
+
+    /**
+     * Returns the list of courses associated with a student in the SCA list.
+     *
+     * @param student the student to retrieve courses from
+     * @return the list of courses associated with a student in the SCA list
+     */
+    public UniqueCourseList filterCoursesByStudent(Person student) {
+        UniqueCourseList filteredCourses = new UniqueCourseList();
+        for (StudentCourseAssociation sca : internalList) {
+            if (sca.getStudent().equals(student)) {
+                filteredCourses.add(sca.getCourse());
+            }
+        }
+        return filteredCourses;
+    }
+
+    /**
+     * Returns the list of tutorials associated with a student in the SCA list.
+     *
+     * @param student the student to retrieve tutorials from
+     * @return the list of tutorials associated with a student in the SCA list
+     */
+    public List<Tutorial> filterTutorialsByStudent(Person student) {
+        List<Tutorial> filteredTutorials = new ArrayList<>();
+        for (StudentCourseAssociation sca : internalList) {
+            if (sca.getStudent().equals(student)) {
+                filteredTutorials.add(sca.getTutorial());
+            }
+        }
+        return filteredTutorials;
     }
 }
