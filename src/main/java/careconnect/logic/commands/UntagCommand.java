@@ -16,6 +16,7 @@ import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -67,6 +68,7 @@ public class UntagCommand extends Command {
         Address address = personToDeleteTag.getAddress();
         ArrayList<Log> logs = new ArrayList<>(personToDeleteTag.getLogs());
         Set<Tag> updatedTags = new HashSet<Tag>(personToDeleteTag.getTags());
+        AppointmentDate appointmentDate = personToDeleteTag.getAppointmentDate();
         if (updatedTags.contains(tagToDelete)) {
             updatedTags.remove(tagToDelete);
         } else {
@@ -74,7 +76,7 @@ public class UntagCommand extends Command {
                     tagToDelete, personToDeleteTag.getName()));
         }
 
-        return new Person(name, phone, email, address, updatedTags, logs);
+        return new Person(name, phone, email, address, updatedTags, logs, appointmentDate);
     }
 
     @Override

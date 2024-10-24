@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -30,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private ArrayList<Log> logs;
+    private AppointmentDate appointmentDate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         logs = new ArrayList<>();
+        appointmentDate = new AppointmentDate();
     }
 
     /**
@@ -53,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         logs = new ArrayList<>(personToCopy.getLogs());
+        appointmentDate = personToCopy.getAppointmentDate();
     }
 
     /**
@@ -88,6 +92,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the (@code AppointmentDate} of the {code Person} that we are building.
+     */
+    public PersonBuilder withAppointmentDate(AppointmentDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -106,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, logs);
+        return new Person(name, phone, email, address, tags, logs, appointmentDate);
     }
 
 }

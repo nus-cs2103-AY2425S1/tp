@@ -31,6 +31,11 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$careconnect" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <Label styleClass="label-title" text="Next Appointment: "/>
+        <Label fx:id="appointmentDate" styleClass="cell_small_label" text="\$appointmentDate" />
+      </HBox>
+
     </VBox>
   </GridPane>
 </HBox>

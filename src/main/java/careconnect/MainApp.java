@@ -19,6 +19,7 @@ import careconnect.model.ModelManager;
 import careconnect.model.ReadOnlyAddressBook;
 import careconnect.model.ReadOnlyUserPrefs;
 import careconnect.model.UserPrefs;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.util.SampleDataUtil;
 import careconnect.storage.AddressBookStorage;
 import careconnect.storage.JsonAddressBookStorage;
@@ -54,6 +55,10 @@ public class MainApp extends Application {
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
         initLogging(config);
+
+        // Setting AppointmentDate formatter to be strict
+        // Perhaps can be made into userprefs in the future
+        AppointmentDate.DATE_FORMAT.setLenient(false);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);

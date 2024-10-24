@@ -8,6 +8,7 @@ import careconnect.logic.commands.AddCommand;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -52,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Initialises logs to an empty list when person is first added
         ArrayList<Log> logs = new ArrayList<>();
 
-        Person person = new Person(name, phone, email, address, tagList, logs);
+        Person person = new Person(name, phone, email, address, tagList, logs, new AppointmentDate());
 
         return new AddCommand(person);
     }
