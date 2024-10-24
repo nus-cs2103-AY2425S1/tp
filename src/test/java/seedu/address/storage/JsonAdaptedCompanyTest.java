@@ -127,7 +127,7 @@ public class JsonAdaptedCompanyTest {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_URL, VALID_STATUS, VALID_TAGS, VALID_BOOKMARK, VALID_REMARK);
         String expectedMessage = CareerPageUrl.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalArgumentException.class, expectedMessage, company::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
 
     @Test

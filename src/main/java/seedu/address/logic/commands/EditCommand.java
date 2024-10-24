@@ -258,15 +258,13 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("career page url", careerPageUrl)
-                    .add("tags", tags)
-                    .add("remark", remark)
-                    .toString();
+            return EditCompanyDescriptor.class.getSimpleName() + "{name=" + getName().orElse(null)
+                    + ", phone=" + getPhone().orElse(null)
+                    + ", email=" + getEmail().orElse(null)
+                    + ", address=" + getAddress().orElse(null)
+                    + ", career page url=" + getCareerPageUrl().orElse(null)
+                    + ", tags=" + getTags().orElse(null)
+                    + ", remark=" + getRemark().orElse(null) + "}";
         }
     }
 }
