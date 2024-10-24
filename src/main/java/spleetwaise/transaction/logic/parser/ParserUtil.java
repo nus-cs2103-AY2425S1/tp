@@ -87,24 +87,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String indexStr} into a {@code int}. Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code indexStr} is invalid.
-     */
-    public static int parseIndex(String indexStr) throws ParseException {
-        requireNonNull(indexStr);
-        indexStr = indexStr.trim();
-        int index;
-        try {
-            index = Integer.parseInt(indexStr);
-        } catch (NumberFormatException e) {
-            throw new ParseException("Index is not in integer form");
-        }
-
-        return index;
-    }
-
-    /**
      * Parses a {@code String catStr} into a {@code Category} that represents the category.
      * Leading and trailing whitespaces will be trimmed and capitalized
      */
