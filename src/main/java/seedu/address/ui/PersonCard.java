@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.tag.Tag.BLOOD_TYPE_PREFIX;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -8,9 +10,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
-import static seedu.address.model.tag.Tag.BLOOD_TYPE_PREFIX;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -21,12 +20,12 @@ public class PersonCard extends UiPart<Region> {
     private static final String CSS_THEME_APPT = "-fx-font-family: \"Segoe UI\";\n"
             + "    -fx-font-size: 13px;";
 
-    private static final String CSS_THEME_BLOODTYPE = "    -fx-text-fill: white;\n" +
-            "    -fx-background-color: #d06651;\n" +
-            "    -fx-padding: 1 3 1 3;\n" +
-            "    -fx-border-radius: 2;\n" +
-            "    -fx-background-radius: 2;\n" +
-            "    -fx-font-size: 11;";
+    private static final String CSS_THEME_BLOODTYPE = "    -fx-text-fill: white;\n"
+            + "    -fx-background-color: #d06651;\n"
+            + "    -fx-padding: 1 3 1 3;\n"
+            + "    -fx-border-radius: 2;\n"
+            + "    -fx-background-radius: 2;\n"
+            + "    -fx-font-size: 11;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -100,7 +99,7 @@ public class PersonCard extends UiPart<Region> {
         } else if (person.getAppointment().hasNotPassed()) {
             appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #f0c44a;"); // Yellow
         } else {
-            appointment.setStyle(CSS_THEME_APPT+ " -fx-text-fill: white;"); // White
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: white;"); // White
         }
     }
 }

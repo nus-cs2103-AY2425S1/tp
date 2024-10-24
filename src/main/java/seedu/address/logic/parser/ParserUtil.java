@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.tag.Tag.BLOOD_TYPE_PREFIX;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
