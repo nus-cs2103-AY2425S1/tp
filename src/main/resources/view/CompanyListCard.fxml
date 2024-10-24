@@ -30,11 +30,6 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
         <Region HBox.hgrow="ALWAYS"/>
         <ImageView fx:id="favouriteStar" fitHeight="24" fitWidth="24"/>
-<!--        <ImageView fx:id="favoriteStar" fitHeight="24" fitWidth="24">-->
-<!--          <image>-->
-<!--            <Image url="@/images/cat2.png" />-->
-<!--          </image>-->
-<!--        </ImageView>-->
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="status" />
