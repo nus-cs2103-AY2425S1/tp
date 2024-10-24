@@ -16,6 +16,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.edit.AddModuleRoleOperation;
+import seedu.address.logic.commands.edit.DeleteModuleRoleOperation;
 import seedu.address.logic.commands.edit.EditModuleRoleOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -360,7 +361,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEditModuleRoleOperation_invalidInput_throwsParseException() {
+    public void parseEditModuleRoleOperation_validDeleteOperation_returnsDeleteModuleRoleOperation() throws Exception {
+        String input = "-CS1101S-student MA1521";
+        EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
+
+        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
+        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
+        EditModuleRoleOperation expected = new DeleteModuleRoleOperation(new ModuleRoleMap(expectedMap));
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseEditModuleRoleOperation_invalidAddOperation_throwsParseException() {
         // Invalid operation type
         String invalidOperationType = "=CS1101S-student";
         assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidOperationType));
@@ -373,5 +387,24 @@ public class ParserUtilTest {
         // Invalid role type
         String invalidRoleType = "+CS1101S-role";
         assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidRoleType));
+    }
+
+    @Test
+    public void parseEditModuleRoleOperation_invalidDeleteOperation_throwsParseException() {
+        // Invalid operation type
+        String invalidOperationType = "=CS1101S-student";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidOperationType));
+        // Invalid format
+        String invalidFormat = "-CS1101S-student-";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidFormat));
+        // Invalid module code
+        String invalidModuleCode = "-1234-student";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidModuleCode));
+        // Invalid role type
+        String invalidRoleType = "-CS1101S-role";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidRoleType));
+        // Mixed add and delete
+        String mixedAddAndDelete = "+CS1101S-student -MA1521-student";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(mixedAddAndDelete));
     }
 }

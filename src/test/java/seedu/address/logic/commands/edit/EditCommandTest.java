@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BETTY;
@@ -28,7 +31,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RoleType;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,7 +57,9 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BETTY).withTags(VALID_TAG_FRIEND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditCommand.getChangesDescription(lastPerson, editedPerson),
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
@@ -66,7 +73,10 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditCommand.getChangesDescription(model.getFilteredPersonList().get(0), editedPerson),
+                Messages.format(editedPerson)
+        );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -87,7 +97,9 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditCommand.getChangesDescription(lastPerson, editedPerson),
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
@@ -100,7 +112,9 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditCommand.getChangesDescription(editedPerson, editedPerson),
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -116,7 +130,9 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditCommand.getChangesDescription(personInFilteredList, editedPerson),
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -206,4 +222,35 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void getChangeDescription_hasChanges_success() {
+        // changed all fields
+        Person person = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_AMY).withEmptyAddress()
+                .withTags(VALID_TAG_HUSBAND).withModuleRoleMap(new ModuleCode("MA1522"), RoleType.TUTOR).build();
+
+        Person editedPerson = new PersonBuilder().withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_BETTY)
+                .withEmail(VALID_EMAIL_BETTY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR).build();
+
+        String expected = "Change(s) made: "
+                + "\nName: " + person.getName() + " -> " + editedPerson.getName()
+                + "\nPhone: " + person.getPhone() + " -> " + editedPerson.getPhone()
+                + "\nEmail: " + person.getEmail() + " -> " + editedPerson.getEmail()
+                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>")
+                + " -> " + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
+                + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
+                + "\n" + EditModuleRoleOperation.getModuleCodeChangeDescription(
+                        person.getModuleRoleMap(),
+                        editedPerson.getModuleRoleMap()) + "\n";
+
+        assertEquals(expected, EditCommand.getChangesDescription(person, editedPerson));
+    }
+
+    @Test
+    public void getChangeDescription_noChanges_success() {
+        Person person = new PersonBuilder().build();
+        String expected = "No changes made.";
+        assertEquals(expected, EditCommand.getChangesDescription(person, person));
+    }
 }
