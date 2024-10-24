@@ -63,7 +63,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         ReminderAddressBookStorage reminderAddressBookStorage = new JsonReminderAddressBookStorage(userPrefs
-                                                                .getAddressBookFilePath());
+                                                                .getReminderAddressBookFilePath());
 
         storage = new StorageManager(addressBookStorage, userPrefsStorage, reminderAddressBookStorage);
 
