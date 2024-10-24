@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -89,6 +91,32 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_SENIOR).build();
         assertFalse(ALICE.equals(editedAlice));
     }
+
+    @Test
+    public void addGrade_immutabilityCheck() {
+        // Create initial person and make a copy
+        Person originalPerson = new PersonBuilder(ALICE).build();
+        Person copyOfOriginal = new PersonBuilder(ALICE).build();
+
+        // Add a grade to the original person
+        Grade newGrade = new Grade("Midterm", 85.0F, 30.0F);
+        Person updatedPerson = originalPerson.addGrade(newGrade);
+
+        // Check that the original person remains unchanged
+        assertEquals(copyOfOriginal, originalPerson,
+                "Original person should remain unchanged after adding a grade to the updated person");
+
+        // Verify that the updated person is different from the original
+        assertNotEquals(updatedPerson, originalPerson,
+                "Updated person should differ from the original person after adding a grade");
+
+        // Verify the new grade is present in the updated person but not in the original
+        assertEquals(newGrade, updatedPerson.getGradeList().getGrade(newGrade.getTestName()),
+                "Updated person should contain the newly added grade");
+        assertNull(originalPerson.getGradeList().getGrade(newGrade.getTestName()),
+                "Original person should not contain the newly added grade");
+    }
+
 
     @Test
     public void toStringMethod() {
