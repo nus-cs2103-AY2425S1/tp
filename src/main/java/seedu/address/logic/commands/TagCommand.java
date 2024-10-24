@@ -28,6 +28,7 @@ public class TagCommand extends Command {
             + "1 " + PREFIX_TAG + "needs consult";
 
     public static final String MESSAGE_SUCCESS = "New tag(s) added";
+    public static final String MESSAGE_TAG_ALREADY_EXISTS = "Tag(s) already exist";
     private final Index targetIndex;
     private final Set<Tag> newTags;
 
@@ -50,6 +51,12 @@ public class TagCommand extends Command {
         }
 
         Person person = lastShownList.get(targetIndex.getZeroBased());
+        Boolean tagExists = model.tagExists(person, newTags);
+
+        if (tagExists) {
+            throw new CommandException(MESSAGE_TAG_ALREADY_EXISTS);
+        }
+
         model.addTag(person, newTags);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
     }

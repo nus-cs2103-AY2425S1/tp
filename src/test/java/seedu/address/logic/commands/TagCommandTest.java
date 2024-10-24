@@ -51,6 +51,18 @@ public class TagCommandTest {
      */
 
     @Test
+    public void execute_duplicateTag_throwsCommandException() {
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Tag tag = new Tag("friends");
+        Set<Tag> tags = Set.of(tag);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+
+        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_TAG_ALREADY_EXISTS);
+    }
+
+    @Test
     public void execute_invalidIndex_throwsCommandException() {
 
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
