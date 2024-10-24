@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# TechConnect User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -18,26 +18,29 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    1. [Viewing help : `help`](#viewing-help--help)
    2. [Adding a company: `add`](#adding-a-company-add)
    3. [Listing all companies : `list`](#listing-all-companies--list)
-   4. [Editing a company : `edit`](#editing-a-company--edit)
-   5. [Locating companies by name: `find`](#locating-companies-by-name-find)
-   6. [Deleting a company : `delete`](#deleting-a-company--delete)
-   7. [Clearing all entries : `clear`](#clearing-all-entries--clear)
-   8. [Exiting the program : `exit`](#exiting-the-program--exit)
+   4. [Bookmarking a company : `bookmark`](#bookmarking-a-company-bookmark)
+   5. [Removing a bookmarked company : `removebm`](#removing-a-bookmark-from-a-bookmarked-company-removebm)
+   6. [Listing all bookmarked companies : `bmlist`](#listing-all-bookmarked-companies-bmlist)
+   7. [Editing a company : `edit`](#editing-a-company--edit)
+   8. [Locating companies by name: `find`](#locating-companies-by-name-find)
+   9. [Deleting a company : `delete`](#deleting-a-company--delete)
+   10. [Clearing all entries : `clear`](#clearing-all-entries--clear)
+   11. [Exiting the program : `exit`](#exiting-the-program--exit)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all companies.
@@ -50,7 +53,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +67,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/bigTech`, `t/bigTech t/BigCompany` etc.
@@ -154,6 +157,32 @@ t/period_summer_2025`
 Shows a list of all companies in the address book.
 
 Format: `list`
+
+### Bookmarking a company: `bookmark`
+
+Bookmarks a company in the address book.
+
+Format: `bookmark INDEX`
+
+* Bookmarks the company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+### Removing a bookmark from a bookmarked company: `removebm`
+
+Removes a company from the list of bookmarked companies in the address book.
+
+Format: `removebm INDEX`
+
+* Removes a bookmark from a bookmarked company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+### Listing all bookmarked companies: `bmlist`
+
+Shows a list of all the bookmarked companies in the address book.
+
+Format: `bmlist`
 
 ### Editing a company : `edit`
 
@@ -254,12 +283,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action                        | Format, Examples                                                                                                                                                     |
+|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Bookmark**                  | `bookmark INDEX`<br> e.g., `bookmark 2`                                                                                                                              |
+| **Remove bookmark**           | `removebm INDEX`<br> e.g., `removebm 2`                                                                                                                            |
+| **Clear**                     | `clear`                                                                                                                                                              |
+| **Delete**                    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Edit**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                          |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**                      | `list`                                                                                                                                                               |
+| **List bookmarked companies** | `bmlist` |
+| **Help**                      | `help`                                                                                                                                                               |
