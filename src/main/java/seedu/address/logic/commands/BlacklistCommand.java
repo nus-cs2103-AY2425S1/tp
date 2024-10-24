@@ -62,7 +62,7 @@ public class BlacklistCommand extends Command {
         }
 
         Person personToBlacklist = lastShownList.get(index.getZeroBased());
-        Person blacklistedPerson = createBlacklistedPerson(personToBlacklisted);
+        Person blacklistedPerson = createBlacklistedPerson(personToBlacklist);
 
         model.setPerson(personToBlacklist, blacklistedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
