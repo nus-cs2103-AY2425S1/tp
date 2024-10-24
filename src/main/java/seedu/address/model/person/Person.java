@@ -104,6 +104,20 @@ public class Person {
     }
 
     /**
+     * Returns the description of the person's appointment if it exists.
+     *
+     * @return the description of the appointment as a {@code String},
+     *         or {@code null} if the person does not have an appointment.
+     */
+    public String getAppointmentDescription() {
+        if (this.appointment == null) {
+            return null;
+        }
+
+        return appointment.getDescription();
+    }
+
+    /**
      * Returns the start time of the person's appointment if it exists.
      *
      * @return the start time of the appointment as a {@code LocalDateTime},
