@@ -10,6 +10,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
@@ -55,7 +56,7 @@ public class AddCustomerOrderCommand extends Command {
         Person person = Person.getGuest();
 
         for (Person p : personList) {
-            if (Objects.equals(phoneNumber, person.getPhone().toString())){
+            if (p.getPhone().equals(new Phone(phoneNumber))) {
                  person = p;
             }
         }
