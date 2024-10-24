@@ -64,12 +64,12 @@ public class StudentTest {
     @Test
     public void getSubjectString_validSubject_returnsSubjectString() {
         Student student = new StudentBuilder().withSubjects("Mathematics").build();
-        assertEquals("[Mathematics]", student.getSubjectString());
+        assertEquals("[Mathematics]", student.getSubjects().toString());
     }
 
     @Test
     public void getClassesString_validClasses_returnsClassesString() {
         Student student = new StudentBuilder().withClasses("Class A", "Class B").build();
-        assertEquals("Class A, Class B", student.getClassesString());
+        assertEquals("Class A, Class B", student.getClasses().toString());
     }
 }

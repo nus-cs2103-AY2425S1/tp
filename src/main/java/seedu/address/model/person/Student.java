@@ -12,6 +12,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private final DaysAttended daysAttended;
+
     /**
      * Every field must be present and not null.
      *
@@ -25,8 +27,9 @@ public class Student extends Person {
      * @param classes  Set of class names the student is attending
      */
     public Student(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
-                   Set<Subject> subjects, Set<String> classes) {
+                   Set<Subject> subjects, Set<String> classes, DaysAttended daysAttended) {
         super(name, gender, phone, email, address, addStudentTag(tags), subjects, classes);
+        this.daysAttended = daysAttended;
     }
 
     private static Set<Tag> addStudentTag(Set<Tag> tags) {
@@ -35,16 +38,9 @@ public class Student extends Person {
         return modifiedTags;
     }
 
-    @Override
-    public String getSubjectString() {
-        return getSubjects().toString();
+    public DaysAttended getDaysAttended() {
+        return daysAttended;
     }
-
-    @Override
-    public String getClassesString() {
-        return String.join(", ", getClasses());
-    }
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -59,7 +55,9 @@ public class Student extends Person {
                 .append("; Subject: ")
                 .append(getSubjects())
                 .append("; Classes: ")
-                .append(String.join(", ", getClasses()));
+                .append(String.join(", ", getClasses()))
+                .append("; Days attended: ")
+                .append(getDaysAttended());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -87,12 +85,34 @@ public class Student extends Person {
                 && otherStudent.getAddress().equals(getAddress())
                 && otherStudent.getSubjects().equals(getSubjects())
                 && otherStudent.getClasses().equals(getClasses())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getDaysAttended().equals(getDaysAttended());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getGender(), getPhone(), getEmail(), getAddress(),
-            getSubjects(), getClasses(), getTags());
+            getSubjects(), getClasses(), getTags(), getDaysAttended());
+    }
+
+    /**
+     * Marks the attendance of the student.
+     */
+    public void markAttendance() {
+        this.daysAttended.increment();
+    }
+
+    /**
+     * Unmarks the attendance of the student.
+     */
+    public void unmarkAttendance() {
+        this.daysAttended.decrement();
+    }
+
+    /**
+     * Resets the attendance of the student.
+     */
+    public void resetAttendance() {
+        this.daysAttended.reset();
     }
 }

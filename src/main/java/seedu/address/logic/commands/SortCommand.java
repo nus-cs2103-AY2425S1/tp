@@ -21,9 +21,9 @@ public class SortCommand extends Command {
             + "Parameters: name/subject/classes\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    private final Comparator<? extends Person> comparator;
+    private final Comparator<? super Person> comparator;
 
-    public SortCommand(Comparator<? extends Person> comparator) {
+    public SortCommand(Comparator<? super Person> comparator) {
         this.comparator = comparator;
     }
 
@@ -32,7 +32,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(model.getFilteredPersonList());
-        sortedList.sort((Comparator<? super Person>) comparator);
+        sortedList.sort(comparator);
         model.setFilteredPersonList(sortedList);
         return new CommandResult("List sorted successfully.");
     }

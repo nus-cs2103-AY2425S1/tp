@@ -3,13 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Gender;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Student;
-import seedu.address.model.person.Subject;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +18,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Mathematics";
+    private static final Integer DEFAULT_DAYS_ATTENDED = 0;
 
     private Name name;
     private Phone phone;
@@ -33,6 +28,7 @@ public class StudentBuilder {
     private Set<Subject> subjects;
     private Set<Tag> tags;
     private Set<String> classes;
+    private DaysAttended daysAttended;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -46,6 +42,7 @@ public class StudentBuilder {
         subjects = new HashSet<>(SampleDataUtil.getSubjectSet(DEFAULT_SUBJECT));
         tags = new HashSet<>();
         classes = new HashSet<>();
+        daysAttended = new DaysAttended(DEFAULT_DAYS_ATTENDED);
     }
 
     /**
@@ -60,6 +57,7 @@ public class StudentBuilder {
         subjects = studentToCopy.getSubjects();
         tags = new HashSet<>(studentToCopy.getTags());
         classes = new HashSet<>(studentToCopy.getClasses());
+        daysAttended = studentToCopy.getDaysAttended();
     }
 
     /**
@@ -126,8 +124,13 @@ public class StudentBuilder {
         return this;
     }
 
+    public StudentBuilder withDaysAttended(Integer daysAttended) {
+        this.daysAttended = new DaysAttended(daysAttended);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, gender, phone, email, address, tags, subjects, classes);
+        return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
     }
 
 }

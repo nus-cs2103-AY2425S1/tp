@@ -102,12 +102,12 @@ public class PersonTest {
     @Test
     public void getSubjectString_defaultValue_returnsEmptyString() {
         // Test the default implementation of getSubjectString in Person
-        assertEquals("", ALICE.getSubjectString());
+        assertEquals("", ALICE.getSubjects().toString());
     }
 
     @Test
     public void getClassesString_defaultValue_returnsEmptyString() {
         // Test the default implementation of getClassesString in Person
-        assertEquals("", ALICE.getClassesString());
+        assertEquals("", ALICE.getClasses().toString());
     }
 }

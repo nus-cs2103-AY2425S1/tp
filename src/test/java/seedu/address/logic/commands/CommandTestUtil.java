@@ -2,14 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -40,6 +33,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final int VALID_ATTENDANCE_AMY = 10;
+    public static final int VALID_ATTENDANCE_BOB = 10;
+
     public static final String VALID_SUBJECT_AMY = "Mathematics";
     public static final String VALID_SUBJECT_BOB = "Physics";
     public static final String VALID_CLASSES_AMY = "8H";
@@ -63,6 +59,8 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String CLASS_DESC_AMY = " " + PREFIX_CLASSES + VALID_CLASSES_AMY;
     public static final String CLASS_DESC_BOB = " " + PREFIX_CLASSES + VALID_CLASSES_BOB;
+    public static final String ATTENDANCE_DESC_AMY = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_AMY;
+    public static final String ATTENDANCE_DESC_BOB = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "unknown"; // 'unknown' is not a valid gender
@@ -72,6 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "*"; // '*' is not a valid subject
     public static final String INVALID_CLASSES_DESC = " " + PREFIX_CLASSES + "*"; // '*' is not a valid class
+    public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ATTENDANCE + "-1"; // negative attendance not allowed
 
     public static final String VALID_NAME_MICHAEL = "Michael Tan";
     public static final String VALID_GENDER_MICHAEL = "male";
@@ -82,6 +81,7 @@ public class CommandTestUtil {
     public static final String VALID_CLASSES_MICHAEL = "7A, 7B";
     public static final String VALID_TAG_HARDWORKING = "hardworking";
     public static final String VALID_TAG_ATHLETE = "athlete";
+    public static final String VALID_ATTENDANCE_MICHAEL = "10";
 
     // Constants for Chris
     public static final String VALID_NAME_CHRIS = "Chris Lim";
@@ -90,6 +90,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_CHRIS = "311, Lorong Ave 2, #02-25";
     public static final String VALID_SUBJECT_CHRIS = "Math";
     public static final String VALID_CLASSES_CHRIS = "7C, 7B";
+    public static final String VALID_ATTENDANCE_CHRIS = "10";
 
     // Descriptions for fields for Michael
     public static final String NAME_DESC_MICHAEL = " " + PREFIX_NAME + VALID_NAME_MICHAEL;
@@ -101,6 +102,8 @@ public class CommandTestUtil {
     public static final String CLASSES_DESC_MICHAEL = " " + PREFIX_CLASSES + VALID_CLASSES_MICHAEL;
     public static final String TAG_DESC_HARDWORKING = " " + PREFIX_TAG + VALID_TAG_HARDWORKING;
     public static final String TAG_DESC_ATHLETE = " " + PREFIX_TAG + VALID_TAG_ATHLETE;
+    public static final String ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_MICHAEL;
+    public static final String INVALID_ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + "-1";
 
     // Descriptions for fields for Chris
     public static final String NAME_DESC_CHRIS = " " + PREFIX_NAME + VALID_NAME_CHRIS;
@@ -109,6 +112,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_CHRIS = " " + PREFIX_ADDRESS + VALID_ADDRESS_CHRIS;
     public static final String SUBJECT_DESC_CHRIS = " " + PREFIX_SUBJECT + VALID_SUBJECT_CHRIS;
     public static final String CLASSES_DESC_CHRIS = " " + PREFIX_CLASSES + VALID_CLASSES_CHRIS;
+    public static final String ATTENDANCE_DESC_CHRIS = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_CHRIS;
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
