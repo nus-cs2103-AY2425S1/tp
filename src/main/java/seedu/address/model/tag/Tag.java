@@ -25,11 +25,10 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
         if (ParserUtil.isValidBloodType(tagName)) {
-            this.tagName = BLOOD_TYPE_PREFIX + tagName;
             this.isBloodType = true;
         } else {
-            this.tagName = tagName;
             this.isBloodType = false;
         }
     }

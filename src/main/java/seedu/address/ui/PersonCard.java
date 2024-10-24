@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.tag.Tag.BLOOD_TYPE_PREFIX;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -15,8 +17,15 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String CSS_THEME = "-fx-font-family: \"Segoe UI\";\n"
+    private static final String CSS_THEME_APPT = "-fx-font-family: \"Segoe UI\";\n"
             + "    -fx-font-size: 13px;";
+
+    private static final String CSS_THEME_BLOODTYPE = "    -fx-text-fill: white;\n"
+            + "    -fx-background-color: #d06651;\n"
+            + "    -fx-padding: 1 3 1 3;\n"
+            + "    -fx-border-radius: 2;\n"
+            + "    -fx-background-radius: 2;\n"
+            + "    -fx-font-size: 11;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -50,6 +59,8 @@ public class PersonCard extends UiPart<Region> {
     private Label appointment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane bloodType;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -67,27 +78,28 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email : " + person.getEmail().value);
         appointment.setText("Appointment : " + person.getAppointment().dateTime);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName)) // Ensure getTagName() method exists in Tag class
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName); // Ensure getTagName() method exists in Tag class
+                    Label tagLabel = null;
 
                     if (tag.isBloodType) {
-                        tagLabel.setStyle("-fx-background-color: #ff0500; -fx-text-fill: white;");
+                        tagLabel = new Label(BLOOD_TYPE_PREFIX + tag.tagName);
+                        tagLabel.setStyle(CSS_THEME_BLOODTYPE);
                     } else {
-                        tagLabel.getStyleClass().add("normal-tag");
+                        tagLabel = new Label(tag.tagName);
                     }
-
                     tags.getChildren().add(tagLabel);
+
                 });
 
         if (person.getAppointment().isToday()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;"); // Green
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #86ff1c;"); // Green
         } else if (person.getAppointment().hasPassed()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;"); // Red
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ff0500;"); // Red
         } else if (person.getAppointment().hasNotPassed()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;"); // Yellow
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #f0c44a;"); // Yellow
         } else {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: white;"); // White
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: white;"); // White
         }
     }
 }
