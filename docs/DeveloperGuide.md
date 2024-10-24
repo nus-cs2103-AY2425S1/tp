@@ -158,6 +158,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Statistics feature
+The `statistics` feature follows the sequence diagram here:
+<puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
+
+Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the
+address book and processes it within the statistics feature. 
+It uses a helper class called JobCodeStatistics that stores the number of applicants in each interview stage for that
+job code.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
