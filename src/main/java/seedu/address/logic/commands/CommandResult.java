@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Model;
+import seedu.address.ui.CommandBox;
 
 /**
  * Represents the result of a command execution.
@@ -29,13 +32,24 @@ public class CommandResult {
     private String history;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Function that should be run after prompting the user for confirmation.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history) {
+    private final Function<Model, CommandResult> continuationFunction;
+
+    private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history,
+                          Function<Model, CommandResult> continuationFunction) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.history = history;
+        this.continuationFunction = continuationFunction;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history) {
+        this(feedbackToUser, showHelp, exit, history, null);
     }
 
     /**
@@ -43,7 +57,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, "");
+        this(feedbackToUser, false, false, "", null);
     }
 
     /**
@@ -52,8 +66,18 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, String history) {
-        this(feedbackToUser, false, false, history);
+        this(feedbackToUser, false, false, history, null);
     }
+
+    /**
+     * Constructs a {@code CommandResult} that represents a request to prompt user for confirmation.
+     *
+     * @param feedbackToUser message that is displayed to user during prompt
+     * @param continuationFunction function that will be applied if user confirms the prompt
+     */
+    public CommandResult(String feedbackToUser, Function<Model, CommandResult> continuationFunction) {
+        this(feedbackToUser, false, false, "", continuationFunction);
+    };
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -65,6 +89,13 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Checks if the user should be prompted for confirmation.
+     */
+    public boolean isPromptConfirmation() {
+        return continuationFunction != null;
     }
 
     public String getHistory() {
