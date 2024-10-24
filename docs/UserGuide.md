@@ -325,13 +325,23 @@ Examples:
 
 ![result for 'delete event'](images/delete_event.png)
 
+### Clearing all events : `clear event`
+
+Clears all event entries from the address book.
+
+Format: `clear event`
+
+![result for 'clear event'](images/clear_event.png)
+
 ## Utility Commands
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear all`
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `clear all`
+
+![result for 'clear all'](images/clear_all.png)
 
 ### Exiting the program : `exit`
 
@@ -389,32 +399,33 @@ _Details coming soon ..._
 
 ### Managing Contacts
 
-| Action     | Format, Examples                                                                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
-| **Delete** | `delete person INDEX`<br> e.g., `delete person 3`                                                                                                                       |
-| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                               |
-| **Filter** | `filter person TAG`<br> e.g., `filter person Celebrity`                                                                                                                 |
-| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find person James Jake`                                                                                                |
-| **List**   | `list person`                                                                                                                                                           |
-| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br> e.g., `view person Jake Doe`                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                       |
+| ---------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity`|
+| **Delete** | `delete person INDEX`<br> e.g., `delete person 3`                                                                                                                      |
+| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                              |
+| **Filter** | `filter person TAG`<br> e.g., `filter person Celebrity`                                                                                                                |
+| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find person James Jake`                                                                                               |
+| **List**   | `list person`                                                                                                                                                          |
+| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br> e.g., `view person Jake Doe`                                                                                                 |
 
 ### Managing Events
 
-| Action     | Format, Examples                                                                                                                                                 |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Action     | Format, Examples                                                                                                                                                |
+| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
-| **Delete** | `delete event INDEX`<br> e.g., `delete event 3`                                                                                                                  |
-| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                         |
-| **Filter** | `filter event CELEBRITY_NAME`<br> e.g., `filter event Jim Bob`                                                                                                   |
-| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Hair Oscars`                                                                                          |
-| **List**   | `list event`                                                                                                                                                     |
-| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br> e.g., `view event Oscars`                                                                                               |
+| **Clear** | `clear event`                                                                                                                                                   |
+| **Delete** | `delete event INDEX`<br> e.g., `delete event 3`                                                                                                                 |
+| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                        |
+| **Filter** | `filter event CELEBRITY_NAME`<br> e.g., `filter event Jim Bob`                                                                                                  |
+| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Hair Oscars`                                                                                         |
+| **List**   | `list event`                                                                                                                                                    |
+| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br> e.g., `view event Oscars`                                                                                              |
 
 ### Utility Commands
 
 | Action    | Format, Examples |
-| --------- | ---------------- |
-| **Clear** | `clear`          |
+| --------- |------------------|
+| **Clear** | `clear all`      |
 | **Exit**  | `exit`           |
 | **Help**  | `help`           |
