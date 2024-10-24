@@ -8,6 +8,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: red;
     -fx-opacity: 0.9;
+    -fx-opacity: 0.9;
 }
 
 .label-bright {
@@ -57,7 +58,7 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
+        black
         transparent
         transparent
         transparent;
@@ -77,8 +78,9 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #EDE7DA;
-    -fx-border-color: transparent transparent transparent transparent;
+    -fx-background-color: black;
+    -fx-border-color: black black black black;
+    -fx-pref-width: 2px;
 }
 
 .split-pane {
@@ -140,6 +142,7 @@
 
 .stack-pane {
      -fx-background-color:#C0C0C0 ;
+     -fx-background-radius: 5px;
 }
 
 .pane-with-border {
@@ -156,19 +159,19 @@
 
 .status-warning {
     -fx-background-color: #FFA500;
-    -fx-padding: 4px;
+    -fx-padding: 6px;
     -fx-background-radius: 10px;
 }
 
 .status-error {
-    -fx-background-color: #FA8072;
-    -fx-padding: 4px;
+    -fx-background-color: #D17575;
+    -fx-padding: 6px;
     -fx-background-radius: 10px;
 }
 
 .status-success {
-    -fx-background-color: #98FF98;
-    -fx-padding: 4px;
+    -fx-background-color: #9CC38E;
+    -fx-padding: 6px;
     -fx-background-radius: 10px;
 }
 
@@ -417,3 +420,4 @@
     -fx-background-radius: 30;
     -fx-font-size: 11;
 }
+
