@@ -17,7 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -79,7 +79,7 @@ public class ImportCommand extends Command {
                 case "student":
                     String studentId = values[2].trim();
                     if (!studentId.isEmpty()) {
-                        Student student = new Student(name, new StudentID(studentId), phone, email, address, tagSet);
+                        Student student = new Student(name, new StudentId(studentId), phone, email, address, tagSet);
                         if (!model.hasPerson(student)) {
                             new AddStudentCommand(student).execute(model);
                             successCount++;

@@ -81,7 +81,7 @@ public class TagCommand extends Command {
 
         if (personToEdit instanceof Student) {
             Student studentToEdit = (Student) personToEdit;
-            return new Student(studentToEdit.getName(), studentToEdit.getStudentID(), studentToEdit.getPhone(),
+            return new Student(studentToEdit.getName(), studentToEdit.getStudentId(), studentToEdit.getPhone(),
                     studentToEdit.getEmail(), studentToEdit.getAddress(), updatedTags
             );
         } else {
