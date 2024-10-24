@@ -8,9 +8,7 @@ package Logic as LogicPackage {
 
 package "Parser Classes" as ParserClasses{
 }
-Class XYZCommand {
-    - String: dsa
-}
+Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 
