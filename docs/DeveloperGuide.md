@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. However, `DialogBox` inherits from `HBox`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -83,6 +83,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+`CommandBox` holds a reference towards `AutocompleteParser` which helps parses user input for a list of suggestions to show to the user.
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -295,25 +296,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice to have) - `*`
 
-| Priority | As a …​  | I want to …​                                     | So that I can…​                                                |
-|----------|----------|--------------------------------------------------|----------------------------------------------------------------|
-| `* * *`  | educator | add students into the database                   | easily refer to their information when needed                  |
-| `* * *`  | educator | list all students to view the number of students | collate that information                                       |
-| `* * *`  | educator | delete a student                                 | remove entries that I no longer need                           |
-| `* * *`  | educator | find a person by name                            | find the relevant person without scrolling through a long list |
-| `* *`    | educator | clear all information                            | start anew for a new academic year                             |
-| `* *`    | educator | update details easily when there are changes     | have the most updated information                              |
-| `* *`    | educator | categorize students into groups                  |                                                                |
-| `* *`    | educator | record students grades for tests and assignments |                                                                |
-| `* *`    | educator | view a summary of each student's grade           |                                                                |
-| `* *`    | educator | tag students with relevant labels                | prioritize students based on their status                      |
-| `* *`    | educator | record notes on student behaviour                | easily track issues related to their behaviour                 |
-| `* *`    | educator | archive old student data                         | keep my AB clean while being able to retrieve old information  |
-| `*`      | educator | set learning goals                               | track their progress towards these goals                       |
-| `*`      | educator | undo/redo any changes                            | avoid re-entering the data during a mis-entry                  |
-| `*`      | educator | export student data                              | share the information with others                              |
-| `*`      | educator | keep track of meetings with students             | keep track of my commitments                                   |
-| `*`      | educator | see sample data                                  | try out the app's feature without adding my own student data   |
+| Priority | As a …​  | I want to …​                                              | So that I can…​                                                |
+|----------|----------|-----------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | educator | add students into the database                            | easily refer to their information when needed                  |
+| `* * *`  | educator | list all students to view the number of students          | collate that information                                       |
+| `* * *`  | educator | delete a student                                          | remove entries that I no longer need                           |
+| `* * *`  | educator | find a person by name                                     | find the relevant person without scrolling through a long list |
+| `* *`    | educator | clear all information                                     | start anew for a new academic year                             |
+| `* *`    | educator | update details easily when there are changes              | have the most updated information                              |
+| `* *`    | educator | categorize students into groups                           |                                                                |
+| `* *`    | educator | record students grades for tests and assignments          |                                                                |
+| `* *`    | educator | view a summary of each student's grade                    |                                                                |
+| `* *`    | educator | tag students with relevant labels                         | prioritize students based on their status                      |
+| `* *`    | educator | record notes on student behaviour                         | easily track issues related to their behaviour                 |
+| `* *`    | educator | archive old student data                                  | keep my AB clean while being able to retrieve old information  |
+| `*`      | educator | set learning goals                                        | track their progress towards these goals                       |
+| `*`      | educator | undo/redo any changes                                     | avoid re-entering the data during a mis-entry                  |
+| `*`      | educator | see a list of suggested commands when typing out commands | easily type in the commands that I want and reduce typos       |
+| `*`      | educator | export student data                                       | share the information with others                              |
+| `*`      | educator | keep track of meetings with students                      | keep track of my commitments                                   |
+| `*`      | educator | see sample data                                           | try out the app's feature without adding my own student data   |
 
 
 
