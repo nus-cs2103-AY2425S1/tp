@@ -25,7 +25,7 @@ public class ThemePreference {
      * Default theme will be light
      */
     public ThemePreference() {
-        this.theme = loadThemePreference().orElse("light");
+        this.theme = loadThemePreference().orElse("LIGHT");
     }
 
     /**
