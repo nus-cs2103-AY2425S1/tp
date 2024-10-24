@@ -247,9 +247,9 @@ Examples:
 * `sort n/descending` will sort by persons names alphabetically in descending order
   ![result for 'sort descending'](images/sortDescendingResult.png)
 * `sort sch/ascending` will sort by schedule in ascending order
-  ![result for 'sort and sort ascending'](images/sortResult.png)
+  ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
 * `sort sch/descending` will sort by schedule in descending order
-  ![result for 'sort descending'](images/sortDescendingResult.png)
+  ![result for 'sort descending'](images/sortByScheduleDesc.png)
 
 ### Clearing all entries : `clear`
 
