@@ -12,6 +12,7 @@ package States <<rectangle>> {
     class State3 as "<u>ab3:AddressBook</u>"
 }
 
+
 State1 -[hidden]right-> State2
 State2 -[hidden]right-> State3
 
