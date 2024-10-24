@@ -14,7 +14,10 @@
         <!-- Name label with large font size and centered -->
         <Label fx:id="name" styleClass="cell_name_label" text="Name: \$name"
                style="-fx-font-size: 40pt; -fx-font-weight: bold;"
-               alignment="CENTER" />
+               alignment="CENTER"
+               wrapText="true"
+               textAlignment="CENTER"
+               maxWidth="400" />
 
         <!-- Status label with lighter blue background -->
         <Label fx:id="status" styleClass="cell_small_label" text="Status: \$status"
@@ -24,7 +27,23 @@
         <Label fx:id="job" styleClass="cell_small_label" text="Job: \$job"
                style="-fx-background-color: #90ee90; -fx-padding: 5; -fx-background-radius: 5;" />
 
-        <!-- Add a Region for spacing between Job and Contact -->
+        <!-- Add a Region for spacing between Introduction and Background -->
+        <Region prefHeight="20" /> <!-- Adjust the height as needed for spacing -->
+
+        <!-- Contact Section -->
+        <Label styleClass="cell_header_label" text="Background" style="-fx-font-size: 14pt; -fx-font-weight: bold;" />
+
+        <!-- Interview Score -->
+        <Label fx:id="interviewScore" styleClass="cell_small_label" text="interviewScore: \$interviewScore" />
+
+        <!-- Skills -->
+        <Label fx:id="skills" styleClass="cell_small_label" text="Skills: \$skills"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
+
+        <!-- Add a Region for spacing between Background and Contact -->
         <Region prefHeight="20" /> <!-- Adjust the height as needed for spacing -->
 
         <!-- Contact Section -->
@@ -35,5 +54,9 @@
 
         <!-- Email label -->
         <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email" />
+
+        <!-- Add a Region for spacing between Contact and Skills -->
+        <Region prefHeight="20" />
+
     </VBox>
 </ScrollPane>
