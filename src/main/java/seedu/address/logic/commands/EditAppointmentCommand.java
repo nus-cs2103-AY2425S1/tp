@@ -101,6 +101,30 @@ public class EditAppointmentCommand extends Command {
         return new Appointment(updatedName, updatedNric, updatedStartTime, updatedEndTime);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditAppointmentCommand)) {
+            return false;
+        }
+
+        EditAppointmentCommand otherEditAppointmentCommand = (EditAppointmentCommand) other;
+        return patientNric.equals(otherEditAppointmentCommand.patientNric)
+                && editAppointmentDescriptor.equals(otherEditAppointmentCommand.editAppointmentDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("nric", patientNric)
+                .add("editAppointmentDescriptor", editAppointmentDescriptor)
+                .toString();
+    }
+
     /**
      * Stores the details to edit the appointment with. Each non-empty field value will
      * replace the

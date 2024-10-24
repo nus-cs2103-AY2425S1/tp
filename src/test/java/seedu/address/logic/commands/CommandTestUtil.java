@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditAppointmentDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -51,6 +52,14 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "PATIENT";
     public static final String VALID_ROLE_BOB = "CAREGIVER";
     public static final String VALID_NOTE = "Note text";
+
+    public static final String VALID_DATE_APPOINTMENT_AMY = "20/10/2025";
+    public static final String VALID_START_TIME_APPOINTMENT_AMY = "10:00";
+    public static final String VALID_END_TIME_APPOINTMENT_AMY = "11:00";
+
+    public static final String VALID_DATE_APPOINTMENT_BOB = "19/10/2025";
+    public static final String VALID_START_TIME_APPOINTMENT_BOB = "09:00";
+    public static final String VALID_END_TIME_APPOINTMENT_BOB = "10:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -82,6 +91,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_APPOINTMENT_AMY;
+    public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_APPOINTMENT_BOB;
+
     public static final String VALID_DATE_APPOINTMENT = "22/10/2025"; // Example date in DD/MM/YYYY format
     public static final String VALID_START_TIME_APPOINTMENT = "10:00"; // Example start time in HH:mm format
 
@@ -97,16 +109,25 @@ public class CommandTestUtil {
 
     public static final String VALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT;
     public static final String VALID_START_TIME_DESC_APPOINTMENT = " " + PREFIX_START_TIME
-        + VALID_START_TIME_APPOINTMENT;
+            + VALID_START_TIME_APPOINTMENT;
     public static final String VALID_END_TIME_DESC_APPOINTMENT = " " + PREFIX_END_TIME + VALID_END_TIME_APPOINTMENT;
+
+    public static final String VALID_DATE_DESC_APPOINTMENT_AMY = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_AMY;
+    public static final String VALID_START_TIME_DESC_APPOINTMENT_AMY = " " + PREFIX_START_TIME
+            + VALID_START_TIME_APPOINTMENT_AMY;
+    public static final String VALID_END_TIME_DESC_APPOINTMENT_AMY = " " + PREFIX_END_TIME
+            + VALID_END_TIME_APPOINTMENT_AMY;
+
+    public static final String VALID_DATE_DESC_APPOINTMENT_BOB = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_BOB;
+    public static final String VALID_START_TIME_DESC_APPOINTMENT_BOB = " " + PREFIX_START_TIME
+            + VALID_START_TIME_APPOINTMENT_BOB;
+    public static final String VALID_END_TIME_DESC_APPOINTMENT_BOB = " " + PREFIX_END_TIME
+            + VALID_END_TIME_APPOINTMENT_BOB;
 
     public static final String VALID_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
 
     public static final String INVALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE
-        + INVALID_DATE_APPOINTMENT; // Invalid date format in YYYY/MM/DD format
-
-
-
+            + INVALID_DATE_APPOINTMENT; // Invalid date format in YYYY/MM/DD format
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)
@@ -115,6 +136,17 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_APPOINTMENT_AMY = new EditAppointmentDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withNric(VALID_NRIC_AMY)
+                .withStartTime(VALID_DATE_DESC_APPOINTMENT_AMY + VALID_START_TIME_DESC_APPOINTMENT_AMY)
+                .withEndTime(VALID_DATE_DESC_APPOINTMENT_AMY + VALID_END_TIME_DESC_APPOINTMENT_AMY).build();
+        DESC_APPOINTMENT_BOB = new EditAppointmentDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withNric(VALID_NRIC_BOB)
+                .withStartTime(VALID_DATE_DESC_APPOINTMENT_BOB + VALID_START_TIME_DESC_APPOINTMENT_BOB)
+                .withEndTime(VALID_DATE_DESC_APPOINTMENT_BOB + VALID_END_TIME_DESC_APPOINTMENT_BOB).build();
     }
 
     /**
@@ -149,8 +181,8 @@ public class CommandTestUtil {
      * {@code CommandResult} to be of a certain type.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel, boolean showHelp, boolean exit,
-                                            boolean findPerson) {
+            Model expectedModel, boolean showHelp, boolean exit,
+            boolean findPerson) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, showHelp, exit, findPerson);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
