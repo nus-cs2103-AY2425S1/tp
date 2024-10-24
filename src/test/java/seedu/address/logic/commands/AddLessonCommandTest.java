@@ -24,8 +24,6 @@ public class AddLessonCommandTest {
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
 
-    // estelle add ur test case here xie xie
-
     @Test
     public void execute_outOfBoundsTuteeIndexUnfilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
