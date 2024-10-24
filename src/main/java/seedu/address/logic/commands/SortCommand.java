@@ -23,7 +23,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SORT_SUCCESS = "Sorted by %s";
 
     public static final String MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND =
-            "No %ss found. The list remains unsorted.";
+            "No %ss found. The list is reset to its default order.";
 
     public final SortOption sortOption;
 
