@@ -108,6 +108,11 @@ public interface Model {
     void undoCampusConnect();
 
     /**
+     * Restore state before previous undo actions of users
+     */
+    void redoCampusConnect();
+
+    /**
      * Save current state of model before execution.
      */
     void saveCurrentCampusConnect();

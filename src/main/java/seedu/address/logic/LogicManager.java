@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CampusConnectParser;
@@ -99,6 +100,9 @@ public class LogicManager implements Logic {
     }
 
     private boolean shouldSaveCampusConnect(Command c) {
-        return !(c.equals(new UndoCommand()) || c instanceof ListCommand || c instanceof AbstractFindCommand);
+        return !c.equals(new UndoCommand())
+                && !c.equals(new RedoCommand())
+                && !(c instanceof ListCommand)
+                && !(c instanceof AbstractFindCommand);
     }
 }
