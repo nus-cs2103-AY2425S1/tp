@@ -28,6 +28,7 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
+    public static final String MESSAGE_INVALID_ID = "Invalid ID.";
 
 
     private final IdentityNumber identityNumber;
