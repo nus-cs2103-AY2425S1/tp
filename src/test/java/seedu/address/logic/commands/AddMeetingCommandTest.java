@@ -39,6 +39,8 @@ public class AddMeetingCommandTest {
                 model.getClientBook(), model.getMeetingBook());
         expectedModel.addMeeting(validMeeting);
 
+        System.out.println(Messages.format(validMeeting));
+
         assertCommandSuccess(new AddMeetingCommand(validMeeting), model,
                 String.format(AddMeetingCommand.MESSAGE_SUCCESS, Messages.format(validMeeting)),
                 expectedModel);
