@@ -226,7 +226,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             assertEquals(expectedUserMessage + typingMessage, chatArea.getText());
         });
 
-        waitFor(Duration.seconds(3));
+        waitFor(Duration.seconds(1));
         interact(() -> {
             String finalResponse = "Assistant: Hi there! How can I assist you today?\n";
             assertEquals(expectedUserMessage + finalResponse, chatArea.getText());
@@ -322,7 +322,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             robot.clickOn(userInput);
             robot.write(message);
             robot.type(KeyCode.ENTER);
-            waitFor(Duration.seconds(2));
+            waitFor(Duration.seconds(1));
         }
 
         String expectedResponses =

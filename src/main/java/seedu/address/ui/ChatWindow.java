@@ -58,10 +58,10 @@ public class ChatWindow {
                     new KeyFrame(Duration.seconds(0.5), e -> {
                         chatArea.appendText(".");
                     }),
-                    new KeyFrame(Duration.seconds(0.5), e -> {
+                    new KeyFrame(Duration.seconds(0.75), e -> {
                         chatArea.appendText(".");
                     }),
-                    new KeyFrame(Duration.seconds(0.5), e -> {
+                    new KeyFrame(Duration.seconds(1), e -> {
                         String chatText = chatArea.getText();
                         chatText = chatText.replace(typingMessage, "");
                         chatText = chatText.replace("..", "");
