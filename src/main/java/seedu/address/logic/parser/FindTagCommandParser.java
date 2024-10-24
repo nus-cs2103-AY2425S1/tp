@@ -1,13 +1,16 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.commands.FindTagCommand;
-import seedu.address.model.tag.TagContainsKeywordsPredicate;
-
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.FindTagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
+
+/**
+ * Parses input arguments and creates a new {@code FindTagCommand} object.
+ */
 public class FindTagCommandParser implements Parser<FindTagCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindTagCommand

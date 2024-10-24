@@ -1,13 +1,18 @@
 package seedu.address.logic.commands;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
-import java.util.logging.Logger;
 
 
+/**
+ * Finds and lists all persons in the address book whose tags contain any of the specified keywords.
+ * Keyword matching is case-insensitive.
+ */
 public class FindTagCommand extends Command {
     public static final String COMMAND_WORD = "findtag";
 
@@ -16,9 +21,9 @@ public class FindTagCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " friend work";
 
-    private final TagContainsKeywordsPredicate predicate;
-
     private static final Logger logger = LogsCenter.getLogger(FindTagCommand.class);
+
+    private final TagContainsKeywordsPredicate predicate;
 
     public FindTagCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;

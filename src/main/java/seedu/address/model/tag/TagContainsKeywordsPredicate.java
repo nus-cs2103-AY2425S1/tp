@@ -2,8 +2,13 @@ package seedu.address.model.tag;
 
 import java.util.List;
 import java.util.function.Predicate;
+
 import seedu.address.model.person.Person;
 
+/**
+ * Tests whether a {@code Person}'s tags contain any of the specified keywords.
+ * Keyword matching is case-insensitive.
+ */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
