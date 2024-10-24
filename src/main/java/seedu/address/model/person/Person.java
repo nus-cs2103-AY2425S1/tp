@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -137,6 +138,19 @@ public class Person implements Comparable<Person> {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    /**
+     * Returns true if the person has all the tags in the provided tag list.
+     *
+     * @param tagList The list of tags to check against the person's tags.
+     * @return true if the person has all the tags in the tagList, false otherwise.
+     */
+    public boolean hasAllTags(Set<Tag> tagList) {
+        requireNonNull(tagList);
+
+        return tags.containsAll(tagList);
+    }
+
 
     /**
      * Returns true if both persons have the same name.

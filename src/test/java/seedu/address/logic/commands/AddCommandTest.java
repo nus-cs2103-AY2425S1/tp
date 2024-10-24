@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -139,6 +141,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,6 +213,7 @@ public class AddCommandTest {
         public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
             throw new AssertionError("This method should not be called.");
         }
+
 
     }
 

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +25,8 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
-
 
 public class AddressBookTest {
 
@@ -128,6 +129,17 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList(Set<Tag> tags) {
+            if (tags == null) {
+                return FXCollections.unmodifiableObservableList(persons);
+            }
+
+            return FXCollections.unmodifiableObservableList(
+                    persons.filtered(person -> person.hasAllTags(tags))
+            );
         }
 
         @Override

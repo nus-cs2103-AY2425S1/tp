@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -11,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
-
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -57,6 +58,9 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the filtered AddressBook as list */
+    ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

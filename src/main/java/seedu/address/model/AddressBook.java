@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.shortcut.UniqueShortCutList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -154,6 +156,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredPersonList(Set<Tag> tagList) {
+        return persons.asUnmodifiableFilteredObservableList(tagList);
     }
 
     @Override
