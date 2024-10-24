@@ -8,10 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -46,6 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        //Parse all arguments
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
@@ -56,11 +57,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = new Note("");
         TaskList taskList = new TaskList();
 
+        //Parse optional arguments
         Level level = new Level("NONE NONE");
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         }
-
         Set<Subject> subjectList = new HashSet<>();
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             if (argMultimap.getValue(PREFIX_LEVEL).isEmpty()) {
@@ -76,12 +77,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(person);
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
+
 
 }
