@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
         Person person = model
                 .findPerson(p -> p.getName().equals(targetName))
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND));
+        assert model.hasPerson(person);
         model.deletePerson(person);
         return new CommandResult(String.format("Deleted Person: %s", person.getName()));
     }
@@ -44,11 +45,10 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetName.equals(otherDeleteCommand.targetName);
     }
 
