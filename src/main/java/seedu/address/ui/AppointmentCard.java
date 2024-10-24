@@ -25,8 +25,6 @@ public class AppointmentCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private HBox cardPane;
-    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -35,19 +33,9 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label ward;
     @FXML
-    private Label diagnosis;
-    @FXML
-    private Label medication;
-    @FXML
-    private Label notes;
-    @FXML
     private Label appointmentDescription;
     @FXML
     private Label appointmentDuration;
-    @FXML
-    private Label appointmentStart;
-    @FXML
-    private Label appointmentEnd;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,22 +48,6 @@ public class AppointmentCard extends UiPart<Region> {
         patientId.setText("ID: " + person.getId().value);
         ward.setText("Ward: " + person.getWard().value);
         setAppointmentFields(person);
-        /*
-        diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
-        medication.setText("Medication: " + person.getMedication().value);
-        notes.setText("Notes: " + (person.getNotes().toString().isEmpty() ? "-" : person.getNotes().value));
-        */
-
-        /*
-        id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-         */
     }
 
     private void setAppointmentFields(Person person) {

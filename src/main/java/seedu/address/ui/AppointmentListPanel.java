@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of appointments.
  */
 public class AppointmentListPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentListPanel.fxml";
@@ -21,18 +21,18 @@ public class AppointmentListPanel extends UiPart<Region> {
     private ListView<Person> appointmentListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code AppointmentListPanel} with the given {@code ObservableList}.
      */
     public AppointmentListPanel(ObservableList<Person> personList) {
         super(FXML);
         appointmentListView.setItems(personList);
-        appointmentListView.setCellFactory(listView -> new PersonListViewCell());
+        appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    static class AppointmentListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -45,5 +45,4 @@ public class AppointmentListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

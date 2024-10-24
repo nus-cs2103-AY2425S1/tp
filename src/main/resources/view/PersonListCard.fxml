@@ -41,8 +41,5 @@
         <Label fx:id="appointmentEnd" styleClass="purpleLabel"/>
       </HBox>
     </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
   </GridPane>
 </HBox>

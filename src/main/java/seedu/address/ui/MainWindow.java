@@ -49,10 +49,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane commandBoxPlaceholder;
     @FXML
-    private MenuItem helpMenuItem;
-    @FXML
-    private VBox personList;
-    @FXML
     private StackPane personListPanelPlaceholder;
     @FXML
     private StackPane appointmentListPanelPlaceholder;
@@ -60,12 +56,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
     @FXML
     private StackPane statusbarPlaceholder;
-    @FXML
-    private StackPane bannerPlaceholder;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Image image;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
