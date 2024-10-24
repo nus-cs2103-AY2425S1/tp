@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.TimeClashException;
 
 public class MeetingsTest {
@@ -19,8 +20,11 @@ public class MeetingsTest {
     private Name name = new Name("A Valid Name");
     private Meeting defaultMeeting = new Meeting(name, startTime, endTime, location);
 
+    public MeetingsTest() throws CommandException {
+    }
+
     @Test
-    public void isClash() {
+    public void test_isClash() {
         assertFalse(new Meetings().isClash(defaultMeeting)); // empty Meeting
 
         Meetings meetings = new Meetings();
@@ -31,7 +35,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void add_clashMeeting_throwsTimeClashException() {
+    public void tadd_clashMeeting_throwsTimeClashException() {
         Meetings meetings = new Meetings();
         meetings.addMeeting(defaultMeeting);
         assertThrows(TimeClashException.class, () -> meetings.addMeeting(defaultMeeting));
@@ -44,7 +48,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void equals() {
+    public void test_equals() {
         Meetings meetings = new Meetings();
         meetings.addMeeting(defaultMeeting);
 
@@ -68,7 +72,14 @@ public class MeetingsTest {
         String otherLocation = "Other Valid Location";
         Name otherName = new Name("Other Valid Name");
 
-        Meeting otherMeeting = new Meeting(otherName, otherStartTime, otherEndTime, otherLocation);
+        Meeting otherMeeting;
+
+        try {
+            otherMeeting = new Meeting(otherName, otherStartTime, otherEndTime, otherLocation);
+        } catch (CommandException e) {
+            throw new RuntimeException("Error while creating the meeting: " + e.getMessage(), e);
+        }
+
         Meetings differentMeetings = new Meetings();
         differentMeetings.addMeeting(otherMeeting);
 

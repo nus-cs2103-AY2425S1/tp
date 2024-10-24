@@ -2,12 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -24,69 +24,62 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.TimeClashException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
-
+public class ScheduleCommandTest {
+    private Index index = Index.fromZeroBased(0);
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private LocalDateTime startTime = LocalDateTime.parse("30-07-2024 11:00", formatter);
+    private LocalDateTime endTime = LocalDateTime.parse("30-07-2024 12:00", formatter);
+    private String location = "A Valid Location";
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, startTime, endTime, location));
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(index, null, endTime, location));
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(index, startTime, null, location));
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(index, startTime, endTime, null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_meetingAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingMeetingAdded modelStub = new ScheduleCommandTest.ModelStubAcceptingMeetingAdded();
+        Person person = new PersonBuilder().build();
+        Meeting validMeeting = new Meeting(person.getName(), startTime, endTime, location);;
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new ScheduleCommand(index, startTime, endTime, location).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(ScheduleCommand.MESSAGE_SUCCESS, person.getName(), Messages.format(validMeeting)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validMeeting), modelStub.meetingsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_meetingClash_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 9, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 10, 9, 10, 0);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        try {
+            Meeting existingMeeting = new Meeting(validPerson.getName(), startTime, endTime, "Location A");
+
+            ModelStubWithMeeting modelStub = new ModelStubWithMeeting(validPerson, existingMeeting);
+
+            LocalDateTime newStartTime = LocalDateTime.of(2024, 10, 9, 9, 30);
+            LocalDateTime newEndTime = LocalDateTime.of(2024, 10, 9, 10, 30);
+            ScheduleCommand scheduleCommand = new ScheduleCommand(Index.fromZeroBased(0), newStartTime,
+                    newEndTime, "Location B");
+
+            assertThrows(CommandException.class, "Meeting times overlap", () -> scheduleCommand.execute(modelStub));
+        } catch (TimeClashException | CommandException e) {
+            // This should not happen in the setup phase
+            throw new RuntimeException(e);
+        }
     }
 
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
-    }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -160,7 +153,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addMeeting(Person target, Meeting meeting) {
+        public void addMeeting(Person target, Meeting meeting) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,14 +189,17 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single person and meeting under the person.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithMeeting extends ModelStub {
         private final Person person;
+        private final ArrayList<Meeting> meetings = new ArrayList<>();
 
-        ModelStubWithPerson(Person person) {
+        ModelStubWithMeeting(Person person, Meeting meeting) {
             requireNonNull(person);
+            requireNonNull(meeting);
             this.person = person;
+            this.meetings.add(meeting);
         }
 
         @Override
@@ -211,13 +207,32 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public void addMeeting(Person person, Meeting meeting) throws CommandException {
+            requireNonNull(meeting);
+            for (Meeting existingMeeting : meetings) {
+                if (existingMeeting.isOverlap(meeting)) {
+                    throw new CommandException("Meeting times overlap");
+                }
+            }
+            meetings.add(meeting);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableList(Arrays.asList(person));
+        }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the Meeting being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingMeetingAdded extends ModelStub {
+        private ArrayList<Meeting> meetingsAdded = new ArrayList<>();
+        private ArrayList<Person> personsAdded = new ArrayList<>();
+        private Person person = new PersonBuilder().build();
+
 
         @Override
         public boolean hasPerson(Person person) {
@@ -232,9 +247,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            personsAdded.add(person);
+            return javafx.collections.FXCollections.observableList(personsAdded);
+        }
+
+        @Override
+        public void addMeeting(Person person, Meeting meeting) {
+            requireNonNull(meeting);
+            requireNonNull(person);
+            meetingsAdded.add(meeting);
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
-
 }

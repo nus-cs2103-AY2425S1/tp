@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "l:ListCommand" as ListCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("list")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(list")
+activate AddressBookParser
+
+create ListCommand
+AddressBookParser -> ListCommand
+activate ListCommand
+
+ListCommand --> AddressBookParser : l
+deactivate ListCommand
+
+AddressBookParser --> LogicManager : l
+deactivate AddressBookParser
+
+LogicManager -> ListCommand : execute(m)
+activate ListCommand
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : r
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

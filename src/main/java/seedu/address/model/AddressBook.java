@@ -125,8 +125,38 @@ public class AddressBook implements ReadOnlyAddressBook {
         meetings.addMeeting(m);
     }
 
+    public void deleteMeeting(Meeting m) {
+        meetings.deleteMeeting(m);
+    }
+
+    public Meeting getMeeting(int index) {
+        return meetings.getMeeting(index);
+    }
+
+    /**
+     * Returns true if addressbook already contains (@code meeting).
+     */
+    public boolean hasMeeting(Meeting m) {
+        requireNonNull(m);
+        return meetings.contains(m);
+    }
+
+    /**
+     * Replaces the given meeting {@code target} in the list with {@code editedMeeting}.
+     * {@code target} must exist in the address book.
+     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in address book.
+     */
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireNonNull(editedMeeting);
+        meetings.setMeeting(target, editedMeeting);
+    }
+
     public String listMeetings() {
         return meetings.toString();
+    }
+
+    public int getMeetingSize() {
+        return meetings.getMeetingsCount();
     }
 
     public ObservableList<Meeting> getMeetingList() {
