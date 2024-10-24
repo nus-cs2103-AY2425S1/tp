@@ -1,0 +1,21 @@
+@startuml
+actor User as u
+
+u -> SaveSortPreferenceCommandParser : parse(arguments)
+SaveSortPreferenceCommandParser -> SaveSortPreferenceCommand : new SaveSortPreferenceCommand(sortPreference)
+u -> LogicManager : execute("svp")
+LogicManager -> AddressBookParser : parseCommand("svp high")
+AddressBookParser -> SaveSortPreferenceCommandParser : parse(arguments)
+SaveSortPreferenceCommandParser -> SaveSortPreferenceCommand : create SaveSortPreferenceCommand("high")
+
+SaveSortPreferenceCommand -> LogicManager : returns SaveSortPreferenceCommand
+LogicManager -> ModelManager : SaveSortPreferenceCommand.execute()
+ModelManager -> UserPrefs : setSortPreference("high")
+ModelManager -> ModelManager : applySavedSortPreference()
+ModelManager -> PriorityHighToLowComparator : new PriorityHighToLowComparator()
+ModelManager -> ModelManager : updateSortedPersonList(PriorityHighToLowComparator)
+
+SaveSortPreferenceCommand -> LogicManager : return CommandResult(MESSAGE_SUCCESS)
+LogicManager -> u : display success message
+
+@enduml
