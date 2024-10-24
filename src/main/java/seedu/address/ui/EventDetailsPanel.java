@@ -23,7 +23,7 @@ import seedu.address.model.vendor.Vendor;
 public class EventDetailsPanel extends UiPart<Region> {
     private static final String FXML = "EventDetailsPanel.fxml";
     private Event event;
-    private Logic logic;
+    private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(VendorDetailsPanel.class);
 
     @FXML
@@ -42,38 +42,50 @@ public class EventDetailsPanel extends UiPart<Region> {
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
-    public EventDetailsPanel(ObservableObjectValue<Event> event, Logic logic) {
+    public EventDetailsPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
-
         assignedVendors = FXCollections.observableArrayList();
 
-        event.addListener((observable, oldValue, newValue) -> {
-            showEventDetails();
-            setEvent(newValue);
+        ObservableObjectValue<Event> observableEvent = logic.getViewedEvent();
+        setEvent(observableEvent.get());
+        showEventDetails();
+        updateAssignedVendors();
 
-            // Update assignedVendors when event is changed
+        observableEvent.addListener((observable, oldValue, newValue) -> {
+            setEvent(newValue);
+            showEventDetails();
             updateAssignedVendors();
         });
 
-        logic.addAssociationChangeListener((ListChangeListener<? super Association>) change -> {
+        ObservableList<Association> associations = logic.getAssociationList();
+        associations.addListener((ListChangeListener<? super Association>) change -> {
             updateAssignedVendors();
         });
 
         VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors");
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
-
     }
 
     private void setEvent(Event event) {
         this.event = event;
-        name.setText(event.getName().fullName);
-        date.setText(event.getDate().toString());
+        if (event != null) {
+            name.setText(event.getName().fullName);
+            date.setText(event.getDate().toString());
+        } else {
+            name.setText("");
+            date.setText("");
+        }
     }
 
     private void showEventDetails() {
-        detailsHolder.setVisible(true);
-        noEventMsg.setVisible(false);
+        if (event == null) {
+            detailsHolder.setVisible(false);
+            noEventMsg.setVisible(true);
+        } else {
+            detailsHolder.setVisible(true);
+            noEventMsg.setVisible(false);
+        }
     }
 
     private void updateAssignedVendors() {

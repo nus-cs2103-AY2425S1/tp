@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -107,9 +106,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void addAssociationChangeListener(ListChangeListener<? super Association> listener) {
-        // Add the listener to the association list in the model
-        model.getAssociationList().addListener(listener);
+    public ObservableList<Association> getAssociationList() {
+        return model.getAssociationList();
     }
 
     @Override

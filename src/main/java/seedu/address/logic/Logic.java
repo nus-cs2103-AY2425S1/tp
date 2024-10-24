@@ -3,7 +3,6 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.beans.value.ObservableObjectValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -56,7 +55,8 @@ public interface Logic {
     /** Returns list of associated vendors */
     ObservableList<Vendor> getAssociatedVendors(Event event);
 
-    void addAssociationChangeListener(ListChangeListener<? super Association> listener);
+    /** Returns list of associations */
+    ObservableList<Association> getAssociationList();
 
     /**
      * Returns the user prefs' address book file path.

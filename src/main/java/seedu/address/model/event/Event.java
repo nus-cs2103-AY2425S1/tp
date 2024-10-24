@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.UniqueId;
 
 /**
  * Represents an Event in EventTory.
@@ -11,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Event {
     private final Name name;
     private final Date date;
+    private final UniqueId id;
 
     /**
      * Constructor for an Event.
@@ -20,8 +22,13 @@ public class Event {
      */
     public Event(Name name, Date date) {
         requireAllNonNull(name, date);
+        this.id = new UniqueId();
         this.name = name;
         this.date = date;
+    }
+
+    public UniqueId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -33,7 +40,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name.
+     * Returns true if both events have the same id.
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
@@ -42,7 +49,7 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName());
+                && otherEvent.getId().equals(getId());
     }
 
     @Override
@@ -56,12 +63,12 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name) && date.equals(otherEvent.date);
+        return id.equals(otherEvent.id) && name.equals(otherEvent.name) && date.equals(otherEvent.date);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() + date.hashCode();
+        return id.hashCode() + name.hashCode() + date.hashCode();
     }
 
     @Override

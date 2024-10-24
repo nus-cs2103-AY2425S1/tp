@@ -44,22 +44,24 @@ public class VendorDetailsPanel extends UiPart<Region> {
     /**
      * Creates a {@code VendorDetailsPanel} with the given {@code ObservableObjectValue<Vendor>} and {@code Logic}.
      */
-    public VendorDetailsPanel(ObservableObjectValue<Vendor> vendor, Logic logic) {
+    public VendorDetailsPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
-
         assignedEvents = FXCollections.observableArrayList();
 
-        vendor.addListener((observable, oldValue, newValue) -> {
-            showVendorDetails();
-            setVendor(newValue);
+        ObservableObjectValue<Vendor> observableVendor = logic.getViewedVendor();
+        setVendor(observableVendor.get());
+        showVendorDetails();
+        updateAssignedEvents();
 
-            // Update assignedEvents when the vendor changes
+        observableVendor.addListener((observable, oldValue, newValue) -> {
+            setVendor(newValue);
+            showVendorDetails();
             updateAssignedEvents();
         });
 
-        // Listen for changes in associations and update assigned events accordingly
-        logic.addAssociationChangeListener((ListChangeListener<? super Association>) change -> {
+        ObservableList<Association> associations = logic.getAssociationList();
+        associations.addListener((ListChangeListener<? super Association>) change -> {
             updateAssignedEvents();
         });
 
@@ -69,14 +71,25 @@ public class VendorDetailsPanel extends UiPart<Region> {
 
     private void setVendor(Vendor vendor) {
         this.vendor = vendor;
-        name.setText(vendor.getName().fullName);
-        phone.setText(vendor.getPhone().value);
-        description.setText(vendor.getDescription().value);
+        if (vendor != null) {
+            name.setText(vendor.getName().fullName);
+            phone.setText(vendor.getPhone().value);
+            description.setText(vendor.getDescription().value);
+        } else {
+            name.setText("");
+            phone.setText("");
+            description.setText("");
+        }
     }
 
     private void showVendorDetails() {
-        detailsHolder.setVisible(true);
-        noVendorMsg.setVisible(false);
+        if (vendor == null) {
+            detailsHolder.setVisible(false);
+            noVendorMsg.setVisible(true);
+        } else {
+            detailsHolder.setVisible(true);
+            noVendorMsg.setVisible(false);
+        }
     }
 
     /**

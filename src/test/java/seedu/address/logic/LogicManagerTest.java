@@ -21,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -156,7 +157,8 @@ public class LogicManagerTest {
     @Test
     public void getAssociation_newAssociation_updateSuccessful() {
         ObjectProperty<Association> observedState = new SimpleObjectProperty<>();
-        logic.addAssociationChangeListener((ListChangeListener<? super Association>) change -> {
+        ObservableList<Association> associations = logic.getAssociationList();
+        associations.addListener((ListChangeListener<? super Association>) change -> {
             if (change.next() && change.wasAdded()) {
                 observedState.set(change.getAddedSubList().get(0));
             }
