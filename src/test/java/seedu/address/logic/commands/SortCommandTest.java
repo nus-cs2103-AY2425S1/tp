@@ -92,7 +92,7 @@ public class SortCommandTest {
         SortOption sortOption = SortOption.HOURS;
         SortCommand sortCommand = new SortCommand(sortOption);
 
-        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, sortOption.getRole());
+        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, sortOption.getRoleAsString());
 
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
 

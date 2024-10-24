@@ -136,6 +136,7 @@ Format: `sort [s/SORT_OPTION]`
 * `name`: Sorts contacts alphabetically by name.
 * `hours`: Sorts volunteers by hours contributed.
 * `donations`: Sorts donors by donation amount
+* `end_date`: Sorts partners by partnership end date.
 </box>
 
 Examples:
@@ -295,6 +296,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
 **List**   | `list`
+**Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **View Group**   | `viewGroup g/GROUP_NAME`

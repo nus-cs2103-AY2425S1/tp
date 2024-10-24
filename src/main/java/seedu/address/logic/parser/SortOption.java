@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Donor;
+import seedu.address.model.person.Partner;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Volunteer;
 import seedu.address.model.person.comparators.NameComparator;
 import seedu.address.model.person.comparators.RoleComparator;
@@ -31,8 +33,8 @@ public enum SortOption {
         }
 
         @Override
-        public String getRole() {
-            return VOLUNTEER_ROLE;
+        public String getRoleAsString() {
+            return Role.VOLUNTEER.toLowerCase();
         }
 
         @Override
@@ -47,13 +49,29 @@ public enum SortOption {
         }
 
         @Override
-        public String getRole() {
-            return "donor";
+        public String getRoleAsString() {
+            return Role.DONOR.toLowerCase();
         }
 
         @Override
         public Class<? extends Person> getRelatedClass() {
             return Donor.class;
+        }
+    },
+    PARTNERSHIP_END_DATE("end_date") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new RoleComparator<>(Partner.class);
+        }
+
+        @Override
+        public String getRoleAsString() {
+            return Role.PARTNER.toLowerCase();
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Partner.class;
         }
     };
     // Add more sorting options here if needed
@@ -63,11 +81,8 @@ public enum SortOption {
 
     public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
 
-    public static final String VOLUNTEER_ROLE = "volunteer";
-    public static final String PERSON_ROLE = "Person";
-
     private final String value;
-    private final String role;
+    private final Role role;
     private final Class<? extends Person> relatedClass;
 
     /**
@@ -77,14 +92,20 @@ public enum SortOption {
      */
     SortOption(String value) {
         this.value = value;
-        role = PERSON_ROLE;
+        role = Role.PERSON;
         relatedClass = Person.class;
     }
 
-    public String getRole() {
-        return role;
+    /*
+     * Returns the role associated to the enum as a string
+     */
+    public String getRoleAsString() {
+        return role.toLowerCase();
     }
 
+    /*
+     * Returns the class related to the enum
+     */
     public Class<? extends Person> getRelatedClass() {
         return relatedClass;
     }
