@@ -24,20 +24,20 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filterss all matching persons with"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all matching persons with"
             + "the specified keywords and displays them as a list with index numbers.\n"
             + "Parameters: [" + PREFIX_NAME + "NAME] "
-                    + "[" + PREFIX_PHONE + "PHONE] "
-                    + "[" + PREFIX_EMAIL + "EMAIL] "
-                    + "[" + PREFIX_ADDRESS + "ADDRESS] "
-                    + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
-                    + "[" + PREFIX_SEX + "SEX] "
-                    + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
-                    + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
-                    + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
-                    + "[" + PREFIX_TAG + "TAG]...\n"
-                    + "Example: " + COMMAND_WORD + PREFIX_NAME + "Bob "
-                    + PREFIX_PHONE + "90123445";
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
+            + "[" + PREFIX_SEX + "SEX] "
+            + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
+            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
+            + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Bob "
+            + PREFIX_PHONE + "90123445";
 
     private final PersonPredicate predicate;
 

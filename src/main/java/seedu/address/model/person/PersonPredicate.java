@@ -7,7 +7,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Name, Phone, Email, Address, RegisterNumber, Sex, Class, EcName, EcNumber, Tag}
+ * matches any of the keywords given.
  */
 public class PersonPredicate implements Predicate<Person> {
     private final List<String> names;
@@ -25,16 +26,16 @@ public class PersonPredicate implements Predicate<Person> {
      * Constructs a {@code PersonPredicate} with the given attributes to filter persons.
      * Each attribute is represented as a list, and the predicate will test if a person matches
      * any of the specified values for each attribute.
-     * @param names
-     * @param phones
-     * @param emails
-     * @param addresses
-     * @param registerNumbers
-     * @param sexes
-     * @param classes
-     * @param ecNames
-     * @param ecNumbers
-     * @param tags
+     * @param names A list of {@code name} to filter by.
+     * @param phones A list of {@code phone} to filter by.
+     * @param emails A list of {@code email} to filter by.
+     * @param addresses A list of {@code address} to filter by.
+     * @param registerNumbers A list of {@code registerNumber} to filter by.
+     * @param sexes A list of {@code sex} to filter by.
+     * @param classes A list of {@code studentClass} to filter by.
+     * @param ecNames A list of {@code ecName} to filter by.
+     * @param ecNumbers A list of {@code ecNumber} to filter by.
+     * @param tags A list of {@code tag} to filter by.
      */
     public PersonPredicate(List<String> names, List<String> phones, List<String> emails,
                    List<String> addresses, List<String> registerNumbers, List<String> sexes,
@@ -51,6 +52,15 @@ public class PersonPredicate implements Predicate<Person> {
         this.tags = tags;
     }
 
+    /**
+     * Tests if the given {@code Person} matches the specified filter criteria. The method evaluates multiple
+     * attributes of the person, such as name, phone, email, address, register number, sex, class,
+     * emergency contact details, and tags. If any attribute filter is empty, it will be treated as an empty value
+     * for that field, meaning any value will match.
+     * However, if all the attributes are empty, the test will return false as there will be no filtering in that case
+     * @param person the input argument.
+     * @return boolean value depending on whether the values and the keywords match
+     */
     @Override
     public boolean test(Person person) {
 

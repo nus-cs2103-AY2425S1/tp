@@ -106,8 +106,8 @@ public class FilterCommandTest {
     private PersonPredicate preparePredicate(String userInput) {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_REGISTER_NUMBER, PREFIX_SEX,
-                        PREFIX_STUDENT_CLASS, PREFIX_ECNAME, PREFIX_ECNUMBER, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_REGISTER_NUMBER, PREFIX_SEX,
+                PREFIX_STUDENT_CLASS, PREFIX_ECNAME, PREFIX_ECNUMBER, PREFIX_TAG);
 
         List<String> names = argMultimap.getAllValues(PREFIX_NAME).stream().map(String::trim).toList();
         List<String> phones = argMultimap.getAllValues(PREFIX_PHONE).stream().map(String::trim).toList();

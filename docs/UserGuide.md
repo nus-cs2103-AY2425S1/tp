@@ -113,15 +113,14 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `filter`
+### Filtering persons by name: `filter`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose attributes contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -130,8 +129,9 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
-* `filter p/99999999` returns `Alex Yeoh`
-![Screenshot 2024-10-24 at 7.01.50 AM.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2F41%2Fy53ybypj0yzd6r29qhbp4m7w0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_AJuTOG%2FScreenshot%202024-10-24%20at%207.01.50%E2%80%AFAM.png)
+* `filter p/99999999` returns `Alex Yeoh` 
+* This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
+![filter_by_phone.png](images%2Ffilter_by_phone.png)
 
 ### Deleting a person : `delete`
 
