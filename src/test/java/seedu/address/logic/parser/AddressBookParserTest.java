@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -25,8 +26,11 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetAttendanceByTgCommand;
+import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -129,6 +133,55 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 EditStudentCommand.COMMAND_WORD + " 1 n/John Doe") instanceof EditStudentCommand);
     }
+
+    @Test
+    public void parseCommand_markAttendance() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(MarkAttendanceCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                MarkAttendanceCommand.COMMAND_WORD + " n/John Doe d/2024-10-01 pr/p")
+                instanceof MarkAttendanceCommand);
+    }
+
+    @Test
+    public void parseCommand_getAttendance() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetAttendanceCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(GetAttendanceCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                GetAttendanceCommand.COMMAND_WORD + " n/John Doe d/2019-01-01")
+                instanceof GetAttendanceCommand);
+    }
+
+    @Test
+    public void parseCommand_getAttendanceByTg() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetAttendanceByTgCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(GetAttendanceByTgCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                GetAttendanceByTgCommand.COMMAND_WORD + " tg/G16") instanceof GetAttendanceByTgCommand);
+    }
+
+    @Test
+    public void parseCommand_addAssignment() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(AddAssignmentCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                AddAssignmentCommand.COMMAND_WORD + " n/John a/Homework 1 d/2024-12-12")
+                instanceof AddAssignmentCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteAssignment() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAssignmentCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(DeleteAssignmentCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                DeleteAssignmentCommand.COMMAND_WORD + " n/John a/Homework 1") instanceof DeleteAssignmentCommand);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
@@ -24,20 +27,27 @@ public class StudentBuilder {
     public static final String DEFAULT_TUTORIAL_GROUP = "G01";
     public static final String DEFAULT_STUDENT_NUMBER = "A1234568A";
 
-    //=====================================Assignment fields=================================================
+    //=====================================Assignment default values=================================================
     public static final String DEFAULT_ASSIGNMENT_NAME = "Assignment 1";
     public static final String DEFAULT_DEADLINE = "2021-10-10";
     public static final String DEFAULT_SUBMISSION_STATUS = "Y";
     public static final String DEFAULT_GRADING_STATUS = "Y";
     public static final String DEFAULT_GRADE = "95";
 
+    //========================Attendance default values ====================
+    public static final String DEFAULT_ATTENDANCE_DATE = "2020-01-01";
+    public static final String DEFAULT_ATTENDANCE_STATUS = "p";
 
+    //=====================Identity fields==========================
     private Name name;
     private Phone phone;
     private TutorialGroup tutorialGroup;
     private StudentNumber studentNumber;
 
     private List<Assignment> assignments;
+
+    //=============Attendance Fields==============
+    private List<AttendanceRecord> attendanceRecords;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -56,6 +66,10 @@ public class StudentBuilder {
                 new Grade(DEFAULT_GRADE)
         );
         assignments.add(assignment);
+        attendanceRecords = new ArrayList<>();
+        Attendance attendance = new Attendance(DEFAULT_ATTENDANCE_STATUS);
+        AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDate.parse(DEFAULT_ATTENDANCE_DATE), attendance);
+        attendanceRecords.add(attendanceRecord);
     }
 
     /**
@@ -67,6 +81,7 @@ public class StudentBuilder {
         tutorialGroup = studentToCopy.getTutorialGroup();
         studentNumber = studentToCopy.getStudentNumber();
         assignments = studentToCopy.getAssignments();
+        attendanceRecords = studentToCopy.getAttendanceRecord();
     }
 
     /**
@@ -116,6 +131,17 @@ public class StudentBuilder {
         assignments.add(assignment);
         return this;
     }
+
+    /**
+     * Sets the {@code AttendanceRecord} of the {@code StudentTest} that we are building.
+     */
+    public StudentBuilder withAttendanceRecord(LocalDate date, String status) {
+        Attendance attendance = new Attendance(status);
+        AttendanceRecord attendanceRecord = new AttendanceRecord(date, attendance);
+        attendanceRecords.add(attendanceRecord);
+        return this;
+    }
+
 
     public Student build() {
         return new Student(name, phone, tutorialGroup, studentNumber);

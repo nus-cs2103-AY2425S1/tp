@@ -8,8 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGNMENT_DE
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GRADE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_MISSING_LETTER;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_N;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_Y;
@@ -19,9 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_80;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_N;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_Y;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_HUGH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -34,7 +30,6 @@ import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Name;
-import seedu.address.model.student.StudentNumber;
 
 public class DeleteAssignmentCommandParserTest {
     private DeleteAssignmentCommandParser parser = new DeleteAssignmentCommandParser();
@@ -136,32 +131,5 @@ public class DeleteAssignmentCommandParserTest {
         assertParseFailure(parser,
                 "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAssignmentCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidStudentNumber_failure() {
-        assertParseFailure(parser,
-                NAME_DESC_BOB + ASSIGNMENT_DESC_MATH + " "
-                        + PREFIX_STUDENT_NUMBER + INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS,
-                StudentNumber.MESSAGE_CONSTRAINTS);
-
-        assertParseFailure(parser,
-                NAME_DESC_BOB + ASSIGNMENT_DESC_MATH + " "
-                        + PREFIX_STUDENT_NUMBER + INVALID_STUDENT_NUMBER_MISSING_LETTER,
-                StudentNumber.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
-    public void parse_validStudentNumber_success() {
-        Name name = new Name(VALID_NAME_BOB);
-        AssignmentQuery assignmentQuery = new AssignmentQuery(
-                new AssignmentName(VALID_ASSIGNMENT_MATH),
-                null, null, null, null);
-        StudentNumber studentNumber = new StudentNumber(VALID_STUDENT_NUMBER_HUGH);
-
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + ASSIGNMENT_DESC_MATH + " "
-                        + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_HUGH,
-                new DeleteAssignmentCommand(name, assignmentQuery, studentNumber));
     }
 }

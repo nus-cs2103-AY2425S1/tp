@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -203,7 +205,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Student> getAllStudentsByName(Name name) {
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
             throw new AssertionError("This method should not be called.");
         }
 
