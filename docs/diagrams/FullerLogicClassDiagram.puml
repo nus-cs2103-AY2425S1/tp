@@ -5,7 +5,7 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
-    Class "<<interface>>\nLogic" as Logic
+    Class "<<interface>>\nLogic" as LogicClass
     Class LogicManager
 
     package Commands {
@@ -28,26 +28,26 @@ package Logic {
 }
 
 package Model {
-    Class "<<interface>>\nModel" as Model
+    Class "<<interface>>\nModel" as ModelClass
     Class Person
 }
 
 package Storage {
-    Class "<<interface>>\nStorage" as Storage
+    Class "<<interface>>\nStorage" as StorageClass
 }
 
 ' Logic relationships
-LogicManager .up.|> Logic
+LogicManager .up.|> LogicClass
 LogicManager -right-> "1" AddressBookParser
 LogicManager .down.> CommandResult
 LogicManager .> Command : executes >
-LogicManager --> Model
-LogicManager --> Storage
+LogicManager --> ModelClass
+LogicManager --> StorageClass
 
 ' Command relationships
 Command <|-- XYZCommand
 Command .up.> CommandResult : creates >
-Command .right.> Model : uses >
+Command .right.> ModelClass : uses >
 
 ' Parser relationships
 Parser <|.. XYZCommandParser
@@ -62,10 +62,10 @@ ParserUtil .> Prefix
 ArgumentTokenizer .> Prefix
 
 ' Cross-package relationships
-Logic ..> CommandResult
+LogicClass ..> CommandResult
 Command ..> Person : manipulates >
-Model ..> Person : manages >
+ModelClass ..> Person : manages >
 
 ' Hidden relationships for layout
-Storage -[hidden]- Model
+Storage -[hidden]- ModelClass
 @enduml
