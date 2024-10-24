@@ -23,6 +23,8 @@ import careconnect.logic.commands.ExitCommand;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.commands.HelpCommand;
 import careconnect.logic.commands.ListCommand;
+import careconnect.logic.commands.TagCommand;
+import careconnect.logic.commands.UntagCommand;
 import careconnect.logic.commands.ViewCommand;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.AddressBookParser;
@@ -62,7 +64,9 @@ public class LogicManager implements Logic {
             ListCommand.COMMAND_WORD,
             ViewCommand.COMMAND_WORD,
             AddLogCommand.COMMAND_WORD,
-            DeleteLogCommand.COMMAND_WORD
+            DeleteLogCommand.COMMAND_WORD,
+            TagCommand.COMMAND_WORD,
+            UntagCommand.COMMAND_WORD
     ));
 
     /**

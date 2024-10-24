@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.StringUtil;
@@ -162,5 +163,14 @@ public class ParserUtil {
             throw new ParseException(Log.MESSAGE_CONSTRAINTS);
         }
         return trimmedRemark;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap,
+                                              Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

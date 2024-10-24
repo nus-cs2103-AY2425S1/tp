@@ -2,7 +2,6 @@ package careconnect.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import careconnect.logic.Messages;
 import careconnect.logic.commands.AddCommand;
@@ -22,15 +21,6 @@ import careconnect.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap,
-                                              Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
@@ -42,7 +32,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
+        if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {

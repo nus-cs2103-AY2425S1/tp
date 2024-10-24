@@ -99,7 +99,7 @@ public class DeleteLogCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteLogCommand )) {
+        if (!(other instanceof DeleteLogCommand)) {
             return false;
         }
         DeleteLogCommand otherDeleteLogCommand = (DeleteLogCommand) other;

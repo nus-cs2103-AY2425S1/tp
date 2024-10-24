@@ -4,7 +4,6 @@ import static careconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Date;
-import java.util.stream.Stream;
 
 import careconnect.commons.core.index.Index;
 import careconnect.logic.Messages;
@@ -17,15 +16,6 @@ import careconnect.model.log.Log;
  * Parses input arguments and creates a new AddLogCommand object
  */
 public class AddLogCommandParser implements Parser<AddLogCommand> {
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap,
-                                              Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddLogCommand
@@ -47,7 +37,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
                     AddLogCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_REMARK)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_REMARK)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddLogCommand.MESSAGE_USAGE));
         }
