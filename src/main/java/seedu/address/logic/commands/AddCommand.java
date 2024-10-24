@@ -48,6 +48,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String COMMAND_SUMMARY_ACTION = "Add";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…\n"
+            + ":a -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":add -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
+                   + "Clementi Rd, 1234665 -t friend -r My favourite colleague";
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("add", "a");
     private final Person toAdd;

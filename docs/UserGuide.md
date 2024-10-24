@@ -69,9 +69,8 @@ tasks done faster than traditional GUI apps.
 
 ### Viewing help : `:help`
 
-Shows a message explaning how to access the help page.
+Shows a command cheatsheet, as well as a link to access the user guide.
 
-![help message](images/helpMessage.png)
 
 Format: `:help`
 
@@ -226,12 +225,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `:add -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
-**Clear** | `clear`
-**Delete** | `:rm -i INDEX`<br> e.g., `:rm -i 3`
-**Edit** | `:edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
-**Find** | `:find INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`:find -n James Lee -e jameslee@example.com`
-**List** | `:list`
-**Help** | `help`
+| Action     | Format                                                                                                                         | Examples                                                                                                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`                             <br/> | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
+| **Clear**  | `:clear`                                                                                                                       | `:clear`                                                                                                                                        |
+| **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX`                                                                                          | `:remove -i 3`<br/>`:rm -i 3`                                                                                                                   |
+| **Edit**   | `:edit INDEX -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG…​`<br/>`:ed INDEX -n NAME...`                                 | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
+| **Find**   | `:find KEYWORD [MORE_KEYWORDS]`                                                                                                | `:find James Jake`                                                                                                                              |                                                                                                                                                 |
+| **List**   | `:list`<br/>`:ls`                                                                                                              | `:list`<br/>`:ls`                                                                                                                               |
+| **Help**   | `:help`                                                                                                                        | `:help`                                                                                                                                         |
+| **Exit**   | `:exit`                                                                                                                        | `:exit`                                                                                                                                         |
