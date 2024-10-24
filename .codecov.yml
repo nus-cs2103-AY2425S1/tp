@@ -1,0 +1,4 @@
+# .codecov.yml
+coverage:
+  ignore:
+    - "src/main/java/seedu/address/ui/ContactDisplay.java" # Exclude a specific file
