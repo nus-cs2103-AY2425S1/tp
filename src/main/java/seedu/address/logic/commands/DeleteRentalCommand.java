@@ -30,6 +30,9 @@ public class DeleteRentalCommand extends Command {
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_RENTAL_INDEX + "3";
     public static final String MESSAGE_DELETE_RENTAL_SUCCESS = "Deleted Rental Information: %1$s";
+    public static final String MESSAGE_PROMPT = "This will delete the rental information:\n"
+            + "%1$s\n"
+            + "Confirm command? (y/n)";
 
     private final Index clientIndex;
     private final Index rentalIndex;
@@ -53,13 +56,22 @@ public class DeleteRentalCommand extends Command {
         }
 
         Client targetClient = lastShownList.get(clientIndex.getZeroBased());
-        List<RentalInformation> rentalInformationList = new ArrayList<>(targetClient.getRentalInformation());
+        List<RentalInformation> rentalInformationList = targetClient.getRentalInformation();
 
         if (rentalIndex.getZeroBased() >= rentalInformationList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_RENTAL_DISPLAYED_INDEX);
         }
 
-        RentalInformation targetRental = rentalInformationList.remove(rentalIndex.getZeroBased());
+        RentalInformation targetRental = rentalInformationList.get(rentalIndex.getZeroBased());
+
+        return new CommandResult(String.format(MESSAGE_PROMPT, Messages.formatRentalInformation(targetRental)),
+                () -> confirmDelete(model, targetClient, rentalIndex));
+    }
+
+    private CommandResult confirmDelete(Model model, Client targetClient, Index rentalIndex) {
+        List<RentalInformation> rentalInformationList = new ArrayList<>(targetClient.getRentalInformation());
+        RentalInformation rentalToDelete = rentalInformationList.remove(rentalIndex.getZeroBased());
+
         Client updatedClient = new Client(targetClient.getName(), targetClient.getPhone(), targetClient.getEmail(),
                 targetClient.getTags(), rentalInformationList);
 
@@ -69,7 +81,7 @@ public class DeleteRentalCommand extends Command {
         model.setLastViewedClient(updatedClient);
 
         return new CommandResult(String.format(MESSAGE_DELETE_RENTAL_SUCCESS,
-                Messages.formatRentalInformation(targetRental)));
+                Messages.formatRentalInformation(rentalToDelete)));
     }
 
     @Override
