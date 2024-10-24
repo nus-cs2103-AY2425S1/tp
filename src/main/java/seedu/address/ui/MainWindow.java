@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -24,11 +25,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final Set<String> CONFIRM_WORDS = Set.of("y", "yes");
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private boolean isPrompt = false; // Tracks if this MainWindow is currently waiting for confirmation from user
+    private CommandResult lastCommandResult = null; // Tracks the most recent CommandResult
 
     // Independent Ui parts residing in this Ui container
     private CommandBox commandBox;
@@ -118,7 +122,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // TODO: replace dummy data with real rental information
         rentalInformationListPanel = new RentalInformationListPanel(logic.getVisibleRentalInformationList(),
                 logic.getVisibleClient());
         rentalInformationListPanelPlaceholder.getChildren().add(rentalInformationListPanel.getRoot());
@@ -184,8 +187,21 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
+            CommandResult commandResult;
+            if (!isPrompt) {
+                commandResult = logic.execute(commandText);
+            } else {
+                commandResult = checkConfirmation(commandText);
+            }
+            lastCommandResult = commandResult;
+
+            if (commandResult.isPromptConfirmation()) {
+                logger.info("Prompt: " + commandResult.getFeedbackToUser());
+                isPrompt = true;
+            } else {
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+            }
+
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             commandBox.setFeedbackToUser(commandResult.getHistory());
 
@@ -203,5 +219,21 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private CommandResult checkConfirmation(String userInput) throws CommandException {
+        isPrompt = false;
+
+        if (!isConfirmation(userInput)) {
+            return new CommandResult("Command cancelled");
+        }
+        return lastCommandResult.confirmPrompt();
+    }
+
+    /**
+     * Checks if the given user input corresponds to user confirming a prompt.
+     */
+    private boolean isConfirmation(String userInput) {
+        return CONFIRM_WORDS.contains(userInput.trim().toLowerCase());
     }
 }

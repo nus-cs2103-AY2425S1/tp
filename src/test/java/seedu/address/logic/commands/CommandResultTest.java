@@ -36,6 +36,9 @@ public class CommandResultTest {
 
         // different history value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, "FAKE DATA")));
+
+        // different isPromptConfirmation -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", () -> null)));
     }
 
     @Test
@@ -61,7 +64,8 @@ public class CommandResultTest {
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit()
-                + ", history=" + commandResult.getHistory() + "}";
+                + ", history=" + commandResult.getHistory()
+                + ", promptConfirmation=" + commandResult.isPromptConfirmation() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }
