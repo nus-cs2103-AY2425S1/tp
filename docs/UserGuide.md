@@ -129,7 +129,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Names will match if the keyword is found in any part of the name. For example, `Ha` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -137,6 +137,24 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by name: `finddoc`
+
+Finds persons by checking if their doctor's names contain any of the provided keywords.
+
+Format: `finddoc KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the doctor's name is searched.
+* Names will match if the keyword is found in any part of the doctor's name. For example, `Ha` will match `Hans`
+* Persons matching at least one keyword in their doctor's name will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return persons whose doctors are `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `finddoc John` returns persons with doctors `john` and `John Doe`
+* `finddoc tan ed` returns persons with doctors `Tan Wei Ming`, `Ed Sheeran`<br>
+  ![result for 'finddoc tan ed'](images/finddoc-tan-ed.png)
 
 ### Deleting a person : `delete`
 
@@ -241,6 +259,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                             |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                             |
+| **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran` |
 | **Undo**   | `undo`                                                                                                                                                                                                                 |
 | **Redo**   | `redo`                                                                                                                                                                                                                 |
 | **List**   | `list`                                                                                                                                                                                                                 |
