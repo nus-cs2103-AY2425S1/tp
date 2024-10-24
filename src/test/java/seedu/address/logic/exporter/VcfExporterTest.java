@@ -13,10 +13,11 @@ import java.net.URL;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalPersons.CHARLIE;
+import static seedu.address.testutil.TypicalPersons.*;
 
 public class VcfExporterTest {
-    private static final String ALICE_VCF_FILE_PATH = "charlie.vcf";
+    private static final String CHARLIE_VCF_FILE_PATH = "charlie.vcf";
+    private static final String PEOPLE_VCF_FILE_PATH = "people.vcf";
 
     private VcfExporter vcfExporter;
 
@@ -52,6 +53,22 @@ public class VcfExporterTest {
     }
 
     @Test
+    public void export_empty_createsEmptyFile() {
+        // Assert that the file does not exist at first
+        Path exportPath = vcfExporter.getExportPath();
+        assertFalse(FileUtil.isFileExists(exportPath));
+
+        AddressBook addressBook = new AddressBook();
+        assertDoesNotThrow(() -> vcfExporter.exportAddressBook(addressBook));
+
+        try {
+            assertTrue(FileUtil.readFromFile(exportPath).isEmpty());
+        } catch (IOException ie) {
+            fail(ie);
+        }
+    }
+
+    @Test
     public void export_onePerson_createsPersonVcf() {
         // Assert that the file does not exist at first
         Path exportPath = vcfExporter.getExportPath();
@@ -65,7 +82,32 @@ public class VcfExporterTest {
         // Assert that the file exists now
         assertTrue(FileUtil.isFileExists(exportPath));
         try {
-            String expectedValue = readTestFile(ALICE_VCF_FILE_PATH);
+            String expectedValue = readTestFile(CHARLIE_VCF_FILE_PATH);
+            String actualValue = FileUtil.readFromFile(exportPath);
+
+            assertEquals(expectedValue, actualValue);
+        } catch (IOException ie) {
+            fail(ie);
+        }
+    }
+
+    @Test
+    public void export_multiplePeople_createsPeopleVcf() {
+        // Assert that the file does not exist at first
+        Path exportPath = vcfExporter.getExportPath();
+        assertFalse(FileUtil.isFileExists(exportPath));
+
+        // Export creates a file with the person's details
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(AMY);
+        addressBook.addPerson(BOB);
+        addressBook.addPerson(CHARLIE);
+        assertDoesNotThrow(() -> vcfExporter.exportAddressBook(addressBook));
+
+        // Assert that the file exists now
+        assertTrue(FileUtil.isFileExists(exportPath));
+        try {
+            String expectedValue = readTestFile(PEOPLE_VCF_FILE_PATH);
             String actualValue = FileUtil.readFromFile(exportPath);
 
             assertEquals(expectedValue, actualValue);

@@ -1,0 +1,28 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Amy Bee
+TEL:91111111
+EMAIL:amy@example.com
+ADR:;;Block 312\, Amy Street 1
+CATEGORIES:friend
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Bob Choo
+TEL:62222222
+EMAIL:bob@example.com
+ADR:;;Block 123\, Bobby Street 3
+CATEGORIES:friend,husband
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Charlie Dee
+TEL:81111111
+EMAIL:charlie@example.com
+ADR:;;Block 987\, Charlie Street 2
+CATEGORIES:friend
+NOTE:likes cats
+END:VCARD
