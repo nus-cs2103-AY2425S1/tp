@@ -2,10 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CreatePatientCommand.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.commands.CreatePatientCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -21,71 +22,33 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class ViewHistoryCommandTest {
-
-    private final LocalDateTime appointmentTime1 = LocalDateTime.of(2024, 12, 31, 12, 0);
-    private final LocalDateTime appointmentTime2 = LocalDateTime.of(2024, 12, 31, 13, 0);
-    private final String appointmentRemark = "Follow-up check";
+public class CreatePatientCommandTest {
 
     @Test
-    public void execute_validPatientWithHistory_returnsHistory() throws Exception {
+    public void executePatientAddSuccessful() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-        modelStub.clearList();
+        modelStub.clearList(); // Clear the list
 
         Person validPatient = new PersonBuilder().buildPatient();
-        Person validDoctor = new PersonBuilder().buildDoctor();
-        modelStub.addPerson(validDoctor);
-        modelStub.addPerson(validPatient);
-        modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
-        modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
 
-        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), appointmentTime1);
-        CommandResult result = command.execute(modelStub);
+        CommandResult commandResult = new CreatePatientCommand(validPatient).execute(modelStub);
 
-        String expected = String.format("Appointment: %s for %s (patient id) "
-                        + "with %s (doctor id). Remarks: %s",
-                appointmentTime1, validPatient.getId(),
-                validDoctor.getId(), appointmentRemark);
-
-        assertEquals(expected, result.getFeedbackToUser());
+        assertEquals(String.format(MESSAGE_SUCCESS, validPatient.getId(), Messages.format(validPatient)),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_patientWithInvalidIndex_throwsCommandException() {
+    public void executeMultiplePatientAddFailure() {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
-        Person validPatient = new PersonBuilder().buildPatient();
-        Person validDoctor = new PersonBuilder().buildDoctor();
-        modelStub.addPerson(validDoctor);
+        Person validPatient = new PersonBuilder().buildDoctor();
+        modelStub.addPerson(validPatient); // Add first patient
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-                new ViewHistoryCommand(validPatient.getId(), appointmentTime1).execute(modelStub));
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_PERSON, () ->
+                new CreatePatientCommand(validPatient).execute(modelStub));
     }
 
-    @Test
-    public void execute_validPatientWithoutDateTime_throwsCommandException() throws Exception {
-        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-        modelStub.clearList();
-
-        Person validPatient = new PersonBuilder().buildPatient();
-        Person validDoctor = new PersonBuilder().buildDoctor();
-        modelStub.addPerson(validDoctor);
-        modelStub.addPerson(validPatient);
-        modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
-        modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
-
-        String expected = String.format("Appointment: %s for %s (patient id)" + " "
-                        + "with %s (doctor id). Remarks: %s\n"
-                        + "Appointment: %s for %s (patient id)" + " "
-                        + "with %s (doctor id). Remarks: %s\n",
-                appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark,
-                appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
-
-        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), null);
-        CommandResult result = command.execute(modelStub);
-        assertEquals(expected, result.getFeedbackToUser());
-    }
 
     private class ModelStub implements Model {
         @Override
@@ -180,7 +143,7 @@ public class ViewHistoryCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithAppointment extends ViewHistoryCommandTest.ModelStub {
+    private class ModelStubWithAppointment extends CreatePatientCommandTest.ModelStub {
         private final Person patient;
         private final Person doctor;
 
@@ -216,7 +179,7 @@ public class ViewHistoryCommandTest {
     /**
      * A Model stub that always accept the appointment being added.
      */
-    public class ModelStubAcceptingAppointmentAdded extends ViewHistoryCommandTest.ModelStub {
+    public class ModelStubAcceptingAppointmentAdded extends CreatePatientCommandTest.ModelStub {
 
         private final ArrayList<Person> personList = new ArrayList<>();
 
@@ -264,21 +227,6 @@ public class ViewHistoryCommandTest {
         }
         public void addPersonToList(Person person) {
             personList.add(person);
-        }
-
-        @Override
-        public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-            for (Person person : allPersons) {
-                if (person.getId() == id) {
-                    return person;
-                }
-            }
-            return null; // Return null if no person is found with the specified ID
-        }
-
-        public void addAppointment(LocalDateTime time, Person patient, Person doctor, String remark) {
-            doctor.addAppointment(time, patient.getId(), doctor.getId(), remark);
-            patient.addAppointment(time, patient.getId(), doctor.getId(), remark);
         }
     }
 

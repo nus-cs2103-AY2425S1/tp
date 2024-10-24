@@ -31,6 +31,8 @@ public class AddNotesCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Successfully "
             + "added notes: %s to patient of ID: %d.";
+    public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
+            + "add notes! Check the id entered!";
     private final int patientId;
     private final String additionalNotes;
 
@@ -52,6 +54,9 @@ public class AddNotesCommand extends Command {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
+        if (patientToAddNotes == null) {
+            throw new CommandException(MESSAGE_ADD_NOTES_FAILURE);
+        }
         patientToAddNotes.addNotes(additionalNotes);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -59,6 +64,22 @@ public class AddNotesCommand extends Command {
         return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS, additionalNotes, patientId
         ));
     }
+    @Override
+    public boolean equals(Object other) {
+        // Shortcuts: reference equality
+        if (other == this) {
+            return true;
+        }
 
+        // instanceof check and cast
+        if (!(other instanceof AddNotesCommand)) {
+            return false;
+        }
 
+        AddNotesCommand otherCommand = (AddNotesCommand) other;
+
+        // Compare patientId and additionalNotes
+        return patientId == otherCommand.patientId
+                && additionalNotes.equals(otherCommand.additionalNotes);
+    }
 }

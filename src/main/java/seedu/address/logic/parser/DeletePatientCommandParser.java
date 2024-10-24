@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.util.stream.Stream;
@@ -36,7 +35,7 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
         try {
             patientId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
-            throw new ParseException(MESSAGE_INVALID_ID, e);
+            throw new ParseException(e.getMessage());
         }
         return new DeletePatientCommand(patientId);
     }

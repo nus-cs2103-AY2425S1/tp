@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -48,7 +49,11 @@ public class ParserUtil {
      * @throws InvalidIdException if the specified person id is invalid.
      */
     public static int parsePersonId(String id) throws InvalidIdException {
+        requireNonNull(id);
         String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new InvalidIdException(Id.MESSAGE_CONSTRAINTS);
+        }
         return Integer.parseInt(trimmedId);
     }
 

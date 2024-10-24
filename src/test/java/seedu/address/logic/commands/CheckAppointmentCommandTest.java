@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CheckAppointmentCommand.MESSAGE_NO_APPOINTMENT_FOUND;
+import static seedu.address.logic.commands.CheckAppointmentCommand.MESSAGE_NO_DATE_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -13,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -21,14 +24,16 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class ViewHistoryCommandTest {
+public class CheckAppointmentCommandTest {
+
 
     private final LocalDateTime appointmentTime1 = LocalDateTime.of(2024, 12, 31, 12, 0);
     private final LocalDateTime appointmentTime2 = LocalDateTime.of(2024, 12, 31, 13, 0);
+    private final LocalDate appointmentDate = LocalDate.of(2024, 12, 31);
     private final String appointmentRemark = "Follow-up check";
 
     @Test
-    public void execute_validPatientWithHistory_returnsHistory() throws Exception {
+    public void execute_validDoctorWithAppointment_returnsAppointments() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
@@ -39,32 +44,51 @@ public class ViewHistoryCommandTest {
         modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
         modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
 
-        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), appointmentTime1);
+        CheckAppointmentCommand command = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult result = command.execute(modelStub);
 
-        String expected = String.format("Appointment: %s for %s (patient id) "
-                        + "with %s (doctor id). Remarks: %s",
-                appointmentTime1, validPatient.getId(),
-                validDoctor.getId(), appointmentRemark);
+        String expectedMessage = String.format("Appointments on %s:\n"
+                                        + "Appointment: %s for %s (patient id)" + " "
+                                        + "with %s (doctor id). Remarks: %s\n"
+                                        + "Appointment: %s for %s (patient id)" + " "
+                                        + "with %s (doctor id). Remarks: %s\n",
+                appointmentDate, appointmentTime1, validPatient.getId(),
+                validDoctor.getId(), appointmentRemark, appointmentTime2,
+                validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
-        assertEquals(expected, result.getFeedbackToUser());
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_patientWithInvalidIndex_throwsCommandException() {
+    public void execute_doctorWithNoAppointments_throwsCommandException() {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
         Person validPatient = new PersonBuilder().buildPatient();
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validDoctor);
+        modelStub.addPerson(validPatient);
+
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NO_APPOINTMENT_FOUND, validDoctor.getName()), () ->
+                new CheckAppointmentCommand(validDoctor.getId(), appointmentDate).execute(modelStub));
+    }
+
+    @Test
+    public void execute_doctorWithInvalidIndex_throwsCommandException() {
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        modelStub.clearList();
+
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPerson(validPatient);
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-                new ViewHistoryCommand(validPatient.getId(), appointmentTime1).execute(modelStub));
+                        new CheckAppointmentCommand(validDoctor.getId(), appointmentDate).execute(modelStub));
     }
 
     @Test
-    public void execute_validPatientWithoutDateTime_throwsCommandException() throws Exception {
+    public void execute_validDoctorWithoutDateTime_throwsCommandException() {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
@@ -75,16 +99,9 @@ public class ViewHistoryCommandTest {
         modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
         modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
 
-        String expected = String.format("Appointment: %s for %s (patient id)" + " "
-                        + "with %s (doctor id). Remarks: %s\n"
-                        + "Appointment: %s for %s (patient id)" + " "
-                        + "with %s (doctor id). Remarks: %s\n",
-                appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark,
-                appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
-
-        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), null);
-        CommandResult result = command.execute(modelStub);
-        assertEquals(expected, result.getFeedbackToUser());
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NO_DATE_TIME, validDoctor.getName()), () ->
+                new CheckAppointmentCommand(validDoctor.getId(), null).execute(modelStub));
     }
 
     private class ModelStub implements Model {
@@ -180,7 +197,7 @@ public class ViewHistoryCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithAppointment extends ViewHistoryCommandTest.ModelStub {
+    private class ModelStubWithAppointment extends CheckAppointmentCommandTest.ModelStub {
         private final Person patient;
         private final Person doctor;
 
@@ -216,7 +233,7 @@ public class ViewHistoryCommandTest {
     /**
      * A Model stub that always accept the appointment being added.
      */
-    public class ModelStubAcceptingAppointmentAdded extends ViewHistoryCommandTest.ModelStub {
+    public class ModelStubAcceptingAppointmentAdded extends CheckAppointmentCommandTest.ModelStub {
 
         private final ArrayList<Person> personList = new ArrayList<>();
 
@@ -266,16 +283,6 @@ public class ViewHistoryCommandTest {
             personList.add(person);
         }
 
-        @Override
-        public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-            for (Person person : allPersons) {
-                if (person.getId() == id) {
-                    return person;
-                }
-            }
-            return null; // Return null if no person is found with the specified ID
-        }
-
         public void addAppointment(LocalDateTime time, Person patient, Person doctor, String remark) {
             doctor.addAppointment(time, patient.getId(), doctor.getId(), remark);
             patient.addAppointment(time, patient.getId(), doctor.getId(), remark);
@@ -283,3 +290,4 @@ public class ViewHistoryCommandTest {
     }
 
 }
+
