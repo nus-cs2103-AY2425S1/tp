@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -219,6 +221,21 @@ public class ModelManager implements Model {
     @Override
     public StudentCourseAssociationList getScaList() {
         return scaList;
+    }
+
+    @Override
+    public StudentCourseAssociationList getStudentScas(Person student) {
+        return scaList.filterScasByStudent(student);
+    }
+
+    @Override
+    public UniqueCourseList getStudentCourses(Person student) {
+        return scaList.filterCoursesByStudent(student);
+    }
+
+    @Override
+    public List<Tutorial> getStudentTutorials(Person student) {
+        return scaList.filterTutorialsByStudent(student);
     }
 
     @Override

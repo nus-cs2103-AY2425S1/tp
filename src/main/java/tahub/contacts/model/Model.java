@@ -1,6 +1,7 @@
 package tahub.contacts.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * The API of the Model component.
@@ -120,4 +122,28 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the SCA list that contains the given student.
+     *
+     * @param student the student to get the SCA list for
+     * @return the SCA list that contains the given student
+     */
+    StudentCourseAssociationList getStudentScas(Person student);
+
+    /**
+     * Returns the course list taken by a given student.
+     *
+     * @param student the student to get the course list for
+     * @return the course list that contains the given student
+     */
+    UniqueCourseList getStudentCourses(Person student);
+
+    /**
+     * Returns the tutorial list taken by a given student.
+     *
+     * @param student the student to get the tutorial list for
+     * @return the tutorial list that contains the given student
+     */
+    List<Tutorial> getStudentTutorials(Person student);
 }

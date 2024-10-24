@@ -12,6 +12,8 @@ import static tahub.contacts.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,9 +23,17 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.person.Address;
+import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
+import tahub.contacts.model.person.Name;
 import tahub.contacts.model.course.exceptions.CourseNotFoundException;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
+import tahub.contacts.model.person.Person;
+import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -255,5 +265,56 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs, courseList, scaList));
+    }
+
+    @Test
+    public void getStudentScas_validStudent_returnsCorrectScas() {
+        Person student = new Person(new MatriculationNumber("A1234567X"),
+                new Name("Alice"), new Phone("12345678"), new Email("student1@example.com"),
+                new Address("123 Street"), new HashSet<>());
+        Course course = new Course("CS1010", "Introduction to CS");
+        Tutorial tutorial = new Tutorial("T01", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        modelManager.addSca(sca);
+
+        StudentCourseAssociationList scaList = modelManager.getStudentScas(student);
+        assertTrue(scaList.has(sca));
+    }
+
+    @Test
+    public void getStudentCourses_validStudent_returnsCorrectCourses() {
+        Person student = new Person(new MatriculationNumber("A1234567X"),
+                new Name("Alice"), new Phone("12345678"), new Email("student1@example.com"),
+                new Address("123 Street"), new HashSet<>());
+        Course course1 = new Course("CS1010", "Introduction to CS");
+        Course course2 = new Course("CS2020", "Data Structures");
+        Tutorial tutorial1 = new Tutorial("T01", course1);
+        Tutorial tutorial2 = new Tutorial("T02", course2);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial2);
+        modelManager.addSca(sca1);
+        modelManager.addSca(sca2);
+
+        UniqueCourseList courseList = modelManager.getStudentCourses(student);
+        assertTrue(courseList.hasCourse(course1));
+        assertTrue(courseList.hasCourse(course2));
+    }
+
+    @Test
+    public void getStudentTutorials_validStudent_returnsCorrectTutorials() {
+        Person student = new Person(new MatriculationNumber("A1234567X"),
+                new Name("Alice"), new Phone("12345678"), new Email("student1@example.com"),
+                new Address("123 Street"), new HashSet<>());
+        Course course = new Course("CS1010", "Introduction to CS");
+        Tutorial tutorial1 = new Tutorial("T01", course);
+        Tutorial tutorial2 = new Tutorial("T02", course);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial2);
+        modelManager.addSca(sca1);
+        modelManager.addSca(sca2);
+
+        List<Tutorial> tutorials = modelManager.getStudentTutorials(student);
+        assertTrue(tutorials.contains(tutorial1));
+        assertTrue(tutorials.contains(tutorial2));
     }
 }

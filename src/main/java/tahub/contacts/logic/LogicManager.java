@@ -3,6 +3,7 @@ package tahub.contacts.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -17,6 +18,8 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.storage.Storage;
 
 /**
@@ -72,6 +75,21 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public StudentCourseAssociationList getStudentScas(Person student) {
+        return model.getStudentScas(student);
+    }
+
+    @Override
+    public UniqueCourseList getStudentCourses(Person student) {
+        return model.getStudentCourses(student);
+    }
+
+    @Override
+    public List<Tutorial> getStudentTutorials(Person student) {
+        return model.getStudentTutorials(student);
     }
 
     @Override
