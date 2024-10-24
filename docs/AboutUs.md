@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Daron Oh
 
-<img src="images/daronoh.png" width="200px">
+<img src="images/kyouscrap.png" width="200px">
 
 [[github](http://github.com/daronoh)]
 [[portfolio](team/daronoh.md)]

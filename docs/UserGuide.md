@@ -94,7 +94,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients in WardWatch.
 
 Format: `list`
 
@@ -115,6 +115,19 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Viewing a patient's details: `view`
+
+Displays more details about a specific patient listed.
+
+Format: `view INDEX`
+
+* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Displays additional information such as a patient's `ward`, `diagnosis`, `medication` and `notes(if any)`.
+
+Examples:
+* `view 2` to view the 2nd patient's details.
+![result for 'view 2'](images/viewResult.png)
+
 ### Searching patients by field: `find`
 
 Finds patients whose specified field contain any of the given keywords.
@@ -124,17 +137,24 @@ Format: `find FIELD/ KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Able to search any field, but only one field at a time.
-* To specify the field, use the first letter of the desired field (lowercased) followed by a `/`.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Valid fields for `find` Command:
+
+* Name: Use `n/` to search by patient name.
+* ID: Use `i/` to search by patient ID.
+* Ward: Use `w/` to search by ward.
+* Diagnosis: Use `d/` to search by diagnosis.
+* Medication: Use `m/` to search by medication.
 
 Examples:
 * `find n/ John` returns `john` and `John Doe`
 * `find w/ B1` returns all patients in ward B1
 * `find i/ Dave` returns an empty list
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
+![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
 
 ### Deleting a person : `delete`
 
