@@ -89,7 +89,7 @@ public class AddNotesCommandTest {
 
         // Set up the valid note and index for use in execution
         Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
-        Index validIndex = Index.fromZeroBased(0);
+        Index validIndex = INDEX_FIRST_PERSON;
 
         AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
 
