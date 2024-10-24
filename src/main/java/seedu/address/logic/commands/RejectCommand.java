@@ -57,11 +57,12 @@ public class RejectCommand extends Command {
         }
 
         if (personToReject.isRejected()) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED, name));
+            throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED,
+                    personToReject.getName()));
         }
         personToReject.markAsRejected();
         return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
-                this.name));
+                personToReject.getName()));
     }
 
     public Name getName() {
