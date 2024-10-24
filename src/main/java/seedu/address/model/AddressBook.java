@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -124,6 +126,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
+    }
+
+    /**
+     * Replaces the given consultation {@code target} in the list with {@code editedConsult}.
+     * {@code target} must exist in TAHub.
+     */
+    public void setConsult(Consultation target, Consultation editedConsult) {
+        requireAllNonNull(target, editedConsult);
+
+        int index = consults.indexOf(target);
+        if (index == -1) {
+            throw new ConsultationNotFoundException();
+        }
+
+        consults.set(index, editedConsult);
     }
 
     /**

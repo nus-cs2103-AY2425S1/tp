@@ -103,6 +103,15 @@ public interface Model {
      */
     void addConsult(Consultation consult);
 
+    /**
+     * Replaces the given Consultation {@code target} with {@code editedConsult}.
+     * {@code target} must exist in TAHub.
+     *
+     * @param target Target consultation to replace.
+     * @param editedConsult Consultation instance to replace the target with.
+     */
+    void setConsult(Consultation target, Consultation editedConsult);
+
     /** Returns an unmodifiable view of the filtered consultation list */
     ObservableList<Consultation> getFilteredConsultationList();
 

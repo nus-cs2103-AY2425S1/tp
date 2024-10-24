@@ -1,11 +1,14 @@
 package seedu.address.model.consultation;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Represents a Consultation in the system.
@@ -32,6 +35,20 @@ public class Consultation {
         this.time = time;
 
         this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
+    }
+
+    /**
+     * Constructs a copy of the given consultation.
+     * Creates new instances of date, time and the student list (not the students) to
+     * reduce the risk of accidental mutation.
+     *
+     * @param consultation The consultation to copy.
+     */
+    public Consultation(Consultation consultation) {
+        requireNonNull(consultation);
+        this.date = new Date(consultation.getDate().getValue());
+        this.time = new Time(consultation.getTime().getValue());
+        this.students = new ArrayList<>(consultation.getStudents());
     }
 
     /**
@@ -68,6 +85,9 @@ public class Consultation {
      * @param student The student to add.
      */
     public void addStudent(Student student) {
+        if (hasStudent(student)) {
+            throw new DuplicateStudentException();
+        }
         students.add(student);
     }
 

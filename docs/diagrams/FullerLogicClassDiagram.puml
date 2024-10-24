@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic {
+    Class "<<interface>>\nLogic" as LogicClass
+    Class LogicManager
+
+    package Commands {
+        Class "{abstract}\nCommand" as Command
+        Class CommandResult
+        Class XYZCommand
+        note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+    }
+
+    package "Parser Classes" {
+        Class "<<interface>>\nParser" as Parser
+        Class AddressBookParser
+        Class XYZCommandParser
+        Class ArgumentMultimap
+        Class ArgumentTokenizer
+        Class ParserUtil
+        Class Prefix
+        Class CliSyntax
+    }
+}
+
+package Model {
+    Class "<<interface>>\nModel" as ModelClass
+    Class Person
+}
+
+package Storage {
+    Class "<<interface>>\nStorage" as StorageClass
+}
+
+' Logic relationships
+LogicManager .up.|> LogicClass
+LogicManager -right-> "1" AddressBookParser
+LogicManager .down.> CommandResult
+LogicManager .> Command : executes >
+LogicManager --> ModelClass
+LogicManager --> StorageClass
+
+' Command relationships
+Command <|-- XYZCommand
+Command .up.> CommandResult : creates >
+Command .right.> ModelClass : uses >
+
+' Parser relationships
+Parser <|.. XYZCommandParser
+AddressBookParser .down.> XYZCommandParser : creates >
+XYZCommandParser ..> ArgumentMultimap
+XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> ParserUtil
+XYZCommandParser ..> XYZCommand : creates >
+ArgumentTokenizer .> ArgumentMultimap
+CliSyntax ..> Prefix
+ParserUtil .> Prefix
+ArgumentTokenizer .> Prefix
+
+' Cross-package relationships
+LogicClass ..> CommandResult
+Command ..> Person : manipulates >
+ModelClass ..> Person : manages >
+
+' Hidden relationships for layout
+Storage -[hidden]- ModelClass
+@enduml
