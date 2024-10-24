@@ -35,6 +35,7 @@ administrators.
 
 
 ***
+<div style="page-break-after: always;"></div>
 
 ## 1. Installation
 
@@ -64,6 +65,7 @@ administrators.
 1. Refer to the [Features](#features) below for details of each command.
 
 ***
+<div style="page-break-after: always;"></div>
 
 ## 2. Command Instructions
 
