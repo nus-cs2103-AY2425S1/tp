@@ -39,7 +39,6 @@ public class DeleteMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MEETING_INDEX);
         }
 
-
         Meeting toDelete = model.getMeeting(targetIndex.getZeroBased());
         Name target = toDelete.getPersonToMeet();
         Person personToDeleteMeeting = null;

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateMeetingException;
 import seedu.address.model.person.exceptions.MeetingNotFoundException;
 import seedu.address.model.person.exceptions.TimeClashException;
 
@@ -83,6 +85,8 @@ public class Meetings {
      */
     public void addMeeting(Meeting toAdd) {
         requireNonNull(toAdd);
+        System.out.println(internalList);
+        System.out.println(toAdd);
         if (isClash(toAdd)) {
             throw new TimeClashException();
         }
@@ -109,6 +113,43 @@ public class Meetings {
 
     public Meeting getMeeting(int index) {
         return internalList.get(index);
+    }
+
+    /**
+     * Returns true if the internal list contains a given (@code meeting).
+     */
+    public boolean contains(Meeting meeting) {
+        requireNonNull(meeting);
+        return internalList.stream().anyMatch(meeting::equals);
+    }
+
+    /**
+     * Replaces the meeting {@code target} in the list with {@code editedMeeting}.
+     * {@code target} must exist in the list.
+     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in the list.
+     */
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireAllNonNull(target, editedMeeting);
+
+        boolean isClash = internalList.stream()
+                .filter(meeting -> !meeting.equals(target))
+                .anyMatch(editedMeeting::isOverlap);
+
+        if (isClash) {
+            throw new TimeClashException();
+        }
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new MeetingNotFoundException();
+        }
+
+        if (!target.equals(editedMeeting) && contains(editedMeeting)) {
+            throw new DuplicateMeetingException();
+        }
+
+        internalList.set(index, editedMeeting);
+        sortMeetingsByStartTime();
     }
 
     public int getMeetingsCount() {
