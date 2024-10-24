@@ -19,7 +19,7 @@ public class StatusBarFooter extends UiPart<Region> {
     private Label contactCountLabel;
 
     /**
-     * Creates a {@code StatusBarFooter} with the given {@code Path}.
+     * Creates a {@code StatusBarFooter} with the given {@code Path}
      */
     public StatusBarFooter(Path saveLocation, int contactCount) {
         super(FXML);
