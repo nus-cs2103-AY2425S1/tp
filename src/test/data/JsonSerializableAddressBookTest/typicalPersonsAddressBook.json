@@ -10,7 +10,8 @@
     "class": "1A",
     "emergency contact name": "Joe Hardy",
     "emergency contact number": "26283728",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "attendances" : {}
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -21,7 +22,8 @@
     "class": "2B",
     "emergency contact name": "John Boone",
     "emergency contact number": "92837201",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "attendances" : {"16-10-2024": "Family Emergency"}
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -32,7 +34,8 @@
     "class": "3C",
     "emergency contact name": "James Dol",
     "emergency contact number": "",
-    "tags" : [ ]
+    "tags" : [ ],
+    "attendances" : {}
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -43,7 +46,8 @@
     "class": "4D",
     "emergency contact name": "",
     "emergency contact number": "",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "attendances" : {}
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -54,7 +58,8 @@
     "class": "3E",
     "emergency contact name": "",
     "emergency contact number": "",
-    "tags" : [ ]
+    "tags" : [ ],
+    "attendances" : {}
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -65,7 +70,8 @@
     "class": "2A",
     "emergency contact name": "",
     "emergency contact number": "",
-    "tags" : [ ]
+    "tags" : [ ],
+    "attendances" : {}
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -76,6 +82,7 @@
     "class": "1A",
     "emergency contact name": "",
     "emergency contact number": "",
-    "tags" : [ ]
+    "tags" : [ ],
+    "attendances" : {}
   } ]
 }

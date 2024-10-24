@@ -338,11 +338,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's name to the StudentManagerPro. 
+1.  User gives the command to add a student's name to the StudentManagerPro.
 2.  System validates the input's format.
 3.  System validates the input.
-4.  System adds the student to the system. 
-5.  System adds the student name to the student profile. 
+4.  System adds the student to the system.
+5.  System adds the student name to the student profile.
 6.  System confirms the success by displaying a success message.
     Use case ends.
 
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User gives the command to add a student's email to a student's profile in the StudentManagerPro.
 2.  System validates the input's format.
 3.  System validates the input.
-4.  System adds the email to the student profile in the system. 
+4.  System adds the email to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
@@ -425,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid register number command format, with no 
+    * 2a1. System displays an error message to ask for a valid register number command format, with no
       special characters.
       Use case ends.
 
@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid class command format, with no 
+    * 2a1. System displays an error message to ask for a valid class command format, with no
       special characters.
       Use case ends.
 
@@ -674,7 +674,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid name command format, with no 
+    * 2a1. System displays an error message to ask for a valid name command format, with no
       special characters.
       Use case ends.
 

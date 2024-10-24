@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -73,7 +74,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -81,7 +82,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB
-                + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -89,7 +90,7 @@ public class AddCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-                + TAG_DESC_FRIEND;
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -193,6 +194,7 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY + STUDENT_CLASS_DESC_AMY, new AddCommand(expectedPerson));
+
     }
 
     @Test

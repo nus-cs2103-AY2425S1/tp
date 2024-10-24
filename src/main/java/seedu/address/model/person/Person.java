@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,14 +31,18 @@ public class Person {
     private final Address address;
     private final EcName ecName;
     private final EcNumber ecNumber;
+    private final Set<Exam> exams = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
+                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags,
+                HashMap<AbsentDate, AbsentReason> attendances) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
+                tags, attendances);
 
         this.name = name;
         this.phone = phone;
@@ -46,7 +53,14 @@ public class Person {
         this.studentClass = studentClass;
         this.ecName = ecName;
         this.ecNumber = ecNumber;
+        this.exams.addAll(exams);
         this.tags.addAll(tags);
+        for (Map.Entry<AbsentDate, AbsentReason> entry : attendances.entrySet()) {
+            this.attendances.put(
+                    new AbsentDate(entry.getKey().toString()),
+                    new AbsentReason(entry.getValue().toString())
+            );
+        }
     }
 
     public Name getName() {
@@ -141,6 +155,10 @@ public class Person {
         return ecNumber;
     }
 
+    public Set<Exam> getExams() {
+        return exams;
+    }
+
     /**
      * Returns representation of EcNumber in the GUI
      */
@@ -154,6 +172,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public HashMap<AbsentDate, AbsentReason> getAttendances() {
+        return attendances;
     }
 
     /**
@@ -198,7 +220,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecNumber, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
+                tags, attendances);
     }
 
     @Override
@@ -213,6 +236,7 @@ public class Person {
                 .add("class", studentClass)
                 .add("emergency contact name", ecName)
                 .add("emergency contact number", ecNumber)
+                .add("exams", exams)
                 .add("tags", tags)
                 .toString();
     }
