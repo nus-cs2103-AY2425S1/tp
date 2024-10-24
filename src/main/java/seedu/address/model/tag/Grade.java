@@ -11,7 +11,7 @@ import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
 
 /**
  * Represents a Grade in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidGradeIndex(String)}
+ * Guarantees: immutable; index is valid as declared in {@link #isValidGradeIndex(String)}
  */
 public class Grade {
     public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 5";

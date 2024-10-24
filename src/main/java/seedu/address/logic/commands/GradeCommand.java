@@ -61,8 +61,8 @@ public class GradeCommand extends Command {
         }
         Student studentToEdit = (Student) personToEdit;
         Student editedPerson = new Student(studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                studentToEdit.getAddress(), studentToEdit.getParentName(), studentToEdit.getParentPhone(),
-                studentToEdit.getParentEmail(), grade, personToEdit.getTags());
+                studentToEdit.getAddress(), studentToEdit.getEducation(), grade, studentToEdit.getParentName(),
+                studentToEdit.getParentPhone(), studentToEdit.getParentEmail(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
