@@ -22,6 +22,7 @@ Class Name
 Class Phone
 Class Tag
 Class DateTime
+Class PersonEventManager
 
 Class I #FFFFFF
 }
@@ -36,6 +37,7 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" PersonEventManager
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -62,4 +64,7 @@ Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Event
+
+PersonEventManager <-- Person
+PersonEventManager <-- Event
 @enduml
