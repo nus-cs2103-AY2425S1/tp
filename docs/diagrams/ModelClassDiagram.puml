@@ -19,9 +19,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class NameContainsKeywordsPredicate
+Class PhoneNumberContainsKeywordPredicate
+Class TagContactContainsKeywordPredicate
 Class BuyingProperties
 Class SellingProperties
-
 Class Property
 Class "<<enumeration>>\nHousingType" as HousingType
 Class PostalCode
@@ -72,5 +74,10 @@ Address -[hidden]right-> Email
 Email -[hidden]right-> BuyingProperties
 BuyingProperties -[hidden]right-> SellingProperties
 
+
+ModelManager --> "~* add" Person
+ModelManager --> "~* delete" Person
+ModelManager --> "~* filtered (by name, phone, tags)" Person
+ModelManager --> "~* pinned" Person
 ModelManager -----> "~* filtered" Person
 @enduml
