@@ -26,7 +26,7 @@ public class EditWeddingCommand extends Command {
     public static final String COMMAND_WORD = "editw";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": edits wedding \n"
+            + ": Edits wedding \n"
             + "Parameters: INDEX (must be a positive integer) " + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Pb&J " + PREFIX_DATE + "21/03/2024";
