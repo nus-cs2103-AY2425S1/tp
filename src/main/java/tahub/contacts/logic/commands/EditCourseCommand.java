@@ -57,7 +57,7 @@ public class EditCourseCommand extends Command {
         requireNonNull(model);
         UniqueCourseList courseList = model.getCourseList();
 
-        if (!courseList.containsCourseWithCourseCode(courseCode)) {
+        if (courseList.containsCourseWithCourseCode(courseCode)) {
             throw new CommandException(Messages.MESSAGE_NO_EXISTING_COURSE);
         }
 

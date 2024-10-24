@@ -147,4 +147,22 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    public Person getPersonByMatricNumber(String matricNumber) {
+        for (Person person : internalList) {
+            if (person.getMatricNumber().toString().equals(matricNumber)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    public Person getPersonByMatricNumber(MatriculationNumber matricNumber) {
+        for (Person person : internalList) {
+            if (person.getMatricNumber().equals(matricNumber)) {
+                return person;
+            }
+        }
+        return null;
+    }
 }

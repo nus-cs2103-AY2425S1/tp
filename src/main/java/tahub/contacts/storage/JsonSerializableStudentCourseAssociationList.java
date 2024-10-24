@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
+import tahub.contacts.model.ReadOnlyAddressBook;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
@@ -20,15 +22,15 @@ class JsonSerializableStudentCourseAssociationList {
 
     public static final String MESSAGE_DUPLICATE_SCA = "SCA list contains duplicate item(s).";
 
-    private final List<JsonAdaptedStudentCourseAssociation> scas = new ArrayList<>();
+    private List<JsonAdaptedStudentCourseAssociation> scas = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableUniqueCourseList} with the given sca.
+     * Constructs a {@code JsonSerializableStudentCourseAssociationList} with the given SCAs.
      */
     @JsonCreator
-    public JsonSerializableStudentCourseAssociationList(@JsonProperty("sca")
-                                                            List<JsonAdaptedStudentCourseAssociation> sca) {
-        this.scas.addAll(sca);
+    public JsonSerializableStudentCourseAssociationList(@JsonProperty("scas")
+                                                            List<JsonAdaptedStudentCourseAssociation> scas) {
+        this.scas = (scas != null) ? scas : new ArrayList<>();
     }
 
     /**
@@ -41,18 +43,15 @@ class JsonSerializableStudentCourseAssociationList {
     }
 
     /**
-     * Converts this into the model's {@code StudentCourseAssociationList} object.
+     * Converts this SCA list into the model's {@code StudentCourseAssociationList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public StudentCourseAssociationList toModelType() throws IllegalValueException {
+    public StudentCourseAssociationList toModelType(ReadOnlyAddressBook addressBook,
+                                                    UniqueCourseList courseList) throws IllegalValueException {
         StudentCourseAssociationList scaList = new StudentCourseAssociationList();
-        for (JsonAdaptedStudentCourseAssociation jsonAdaptedCourse : scas) {
-            StudentCourseAssociation sca = jsonAdaptedCourse.toModelType();
-
-
-
-
+        for (JsonAdaptedStudentCourseAssociation jsonAdaptedSca : scas) {
+            StudentCourseAssociation sca = jsonAdaptedSca.toModelType(addressBook, courseList);
             if (scaList.has(sca)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCA);
             }
