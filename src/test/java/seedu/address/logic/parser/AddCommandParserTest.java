@@ -168,28 +168,28 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + JOB_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + JOB_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + INTERVIEW_SCORE_DESC_BOB, expectedMessage);
 
         // missing job prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_JOB_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_JOB_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + INTERVIEW_SCORE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + JOB_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + JOB_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
+                + INTERVIEW_SCORE_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + JOB_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + JOB_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
+                + INTERVIEW_SCORE_DESC_BOB, expectedMessage);
 
         // missing interview score prefix
         assertParseFailure(parser, NAME_DESC_BOB + JOB_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_INTERVIEW_SCORE_BOB, expectedMessage);
+                + VALID_INTERVIEW_SCORE_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_JOB_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_JOB_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
+                + VALID_INTERVIEW_SCORE_BOB, expectedMessage);
     }
 
     @Test
