@@ -30,6 +30,7 @@ public class ShowAllListingsCommand extends Command {
         if (model.getFilteredListingList().isEmpty()) {
             throw new CommandException(MESSAGE_NO_LISTINGS_IN_LIST);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false,
+                true, false);
     }
 }

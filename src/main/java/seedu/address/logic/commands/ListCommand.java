@@ -21,6 +21,7 @@ public class ListCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CLIENT_IN_LIST);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false,
+                false, true);
     }
 }
