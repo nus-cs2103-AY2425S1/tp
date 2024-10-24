@@ -63,8 +63,13 @@ public class FindCommandParser implements Parser<Command> {
 
         // Check if the input starts with "n/", "p/", "a/", or "c/".
         if (trimmedArgs.startsWith(PREFIX_NAME)) {
+            String stringName = trimmedArgs.substring(PREFIX_NAME.length()).trim();
             String[] nameKeywords = trimmedArgs.substring(PREFIX_NAME.length()).trim().split("\\s+");
             if (nameKeywords.length == 0 || nameKeywords[0].isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
+            }
+            if (!stringName.matches("^[a-zA-Z\\s\\(\\)]+$")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
             }

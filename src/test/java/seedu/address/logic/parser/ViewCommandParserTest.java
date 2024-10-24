@@ -32,4 +32,14 @@ public class ViewCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validArgsWithParenthesis_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        ViewCommand expectedFindCommand =
+                new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob(NUS)")));
+        assertParseSuccess(parser, "Alice Bob(NUS)", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n Alice \n \t Bob(NUS)  \t", expectedFindCommand);
+    }
 }
