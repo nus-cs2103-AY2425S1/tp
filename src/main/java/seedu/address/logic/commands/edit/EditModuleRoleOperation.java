@@ -40,6 +40,12 @@ public abstract class EditModuleRoleOperation {
 
     /**
      * Returns a description of the change in module roles.
+     * Example:
+     * Change(s) made:
+     * Name: Alex -> Bob
+     * Phone: 99889988 -> 10102222
+     * Module role(s) added: MA1521-Tutor
+     *
      * @param moduleRoleMapBefore The module role map before the change.
      * @param moduleRoleMapAfter The module role map after the change.
      * @return A description of the change in module roles.
@@ -66,10 +72,10 @@ public abstract class EditModuleRoleOperation {
         }
         List<String> finalDescription = new ArrayList<>();
         if (hasAdded) {
-            finalDescription.add("Module role added: " + stringBuilderAdded.toString().strip());
+            finalDescription.add("Module role(s) added: " + stringBuilderAdded.toString().strip());
         }
         if (hasDeleted) {
-            finalDescription.add("Module role deleted: " + stringBuilderDeleted.toString().strip());
+            finalDescription.add("Module role(s) deleted: " + stringBuilderDeleted.toString().strip());
         }
 
         return String.join("\n", finalDescription);

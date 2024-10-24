@@ -91,7 +91,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        String changeDescription = getChangeDescription(personToEdit, editedPerson);
+        String changeDescription = getChangesDescription(personToEdit, editedPerson);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_PERSON_SUCCESS, changeDescription, Messages.format(editedPerson)));
     }
@@ -118,8 +118,8 @@ public class EditCommand extends Command {
     /**
      * Returns a description of the changes made to the person.
      */
-    public static String getChangeDescription(Person personBefore, Person personAfter) {
-        StringBuilder changeDescription = new StringBuilder("Changes made: \n");
+    public static String getChangesDescription(Person personBefore, Person personAfter) {
+        StringBuilder changeDescription = new StringBuilder("Change(s) made: \n");
         boolean isChanged = false;
         if (!personBefore.getName().equals(personAfter.getName())) {
             isChanged = true;

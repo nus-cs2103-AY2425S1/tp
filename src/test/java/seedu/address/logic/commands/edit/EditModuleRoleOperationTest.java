@@ -62,7 +62,7 @@ public class EditModuleRoleOperationTest {
         String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
-        String expectedDescription = "Module role added: "
+        String expectedDescription = "Module role(s) added: "
                 + new ModuleRolePair(new ModuleCode("CS2102"), RoleType.PROFESSOR);
         assertEquals(actualDescription, expectedDescription);
     }
@@ -80,7 +80,7 @@ public class EditModuleRoleOperationTest {
         String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
-        String expectedDescription = "Module role deleted: "
+        String expectedDescription = "Module role(s) deleted: "
                 + new ModuleRolePair(new ModuleCode("CS2101"), RoleType.TUTOR);
         assertEquals(actualDescription, expectedDescription);
     }
@@ -98,9 +98,9 @@ public class EditModuleRoleOperationTest {
         String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
-        String expectedDescription = "Module role added: "
+        String expectedDescription = "Module role(s) added: "
                 + new ModuleRolePair(new ModuleCode("CS2102"), RoleType.PROFESSOR)
-                + "\nModule role deleted: "
+                + "\nModule role(s) deleted: "
                 + new ModuleRolePair(new ModuleCode("CS2101"), RoleType.TUTOR);
         assertEquals(actualDescription, expectedDescription);
     }
