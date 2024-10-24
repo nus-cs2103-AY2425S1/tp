@@ -5,7 +5,6 @@ import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
 import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
-import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
