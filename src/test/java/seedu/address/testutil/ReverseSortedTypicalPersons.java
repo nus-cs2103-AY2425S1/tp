@@ -21,32 +21,32 @@ import seedu.address.model.person.Person;
 /**
  * A utility class containing a list of unsorted {@code Person} objects to be used in tests.
  */
-public class UnsortedTypicalPersons {
+public class ReverseSortedTypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withRole("student")
-            .withTags("friends").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Carl Meier").withPhone("87652533")
-            .withRole("student")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+            .withRole("parent")
+            .withEmail("anna@example.com").withAddress("4th street").build();
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+            .withRole("sTuDenT")
+            .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withRole("student")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
+    public static final Person DANIEL = new PersonBuilder().withName("Carl Meier").withPhone("87652533")
+            .withRole("student")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+            .withRole("Student")
+            .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRole("Student")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withRole("sTuDenT")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRole("Student")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withRole("parent")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253").withRole("student")
+            .withTags("friends").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -65,21 +65,21 @@ public class UnsortedTypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
-    private UnsortedTypicalPersons() {
+    private ReverseSortedTypicalPersons() {
     } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getUnsortedTypicalAddressBook() {
+    public static AddressBook getReverseSortedTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getUnsortedTypicalPersons()) {
+        for (Person person : getReverseSortedTypicalPersons()) {
             ab.addPerson(person);
         }
         return ab;
     }
 
-    public static List<Person> getUnsortedTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, ELLE, BENSON, DANIEL, FIONA, CARL, GEORGE));
+    public static List<Person> getReverseSortedTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
     }
 }
