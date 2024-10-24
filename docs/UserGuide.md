@@ -256,5 +256,6 @@ _Details coming soon ..._
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
 | **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
