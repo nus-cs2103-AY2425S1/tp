@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.SetThresholdCommandParser.MESSAGE_INVALID_STOCK_LEVEL;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,7 +58,7 @@ public class UpdateStockLevelCommandParserTest {
 
         // missing values with prefix present
         assertParseFailure(parser, " pr/ stk/1000", ProductName.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " pr/Product stk/", ProductName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " pr/Product stk/", MESSAGE_INVALID_STOCK_LEVEL);
     }
 
     @Test
@@ -67,9 +67,9 @@ public class UpdateStockLevelCommandParserTest {
         assertParseFailure(parser, " pr/Product#1 stk/1000", ProductName.MESSAGE_CONSTRAINTS);
 
         // invalid stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 stk/abc", ProductName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " pr/Product1 stk/abc", MESSAGE_INVALID_STOCK_LEVEL);
 
-        // both invalid
+        // both invalid - should throw product name constraint first
         assertParseFailure(parser, " pr/Product#1 stk/abc", ProductName.MESSAGE_CONSTRAINTS);
     }
 

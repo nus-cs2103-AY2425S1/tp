@@ -1,11 +1,17 @@
 package seedu.address.model;
 
+
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +21,7 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,7 +38,7 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+        requireNonNull(addressBook);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -117,14 +124,32 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<String> getAllTags() {
+        Set<String> tagSet = new HashSet<>();
+
+        for (Product product : addressBook.getProductList()) {
+            tagSet.addAll(product.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet()));
+        }
+
+        for (Supplier supplier : addressBook.getSupplierList()) {
+            tagSet.addAll(supplier.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet()));
+        }
+
+        List<String> allTags = new ArrayList<>(tagSet);
+        Collections.sort(allTags); // Optional: sort alphabetically
+        return allTags;
+    }
+
+    @Override
     public void setSupplier(Supplier target, Supplier editedSupplier) {
-        requireAllNonNull(target, editedSupplier);
+        requireNonNull(target);
+        requireNonNull(editedSupplier);
         addressBook.setSupplier(target, editedSupplier);
     }
 
     @Override
     public void setProduct(Product target, Product editedProduct) {
-        requireAllNonNull(target, editedProduct);
+        requireNonNull(target);
         addressBook.setProduct(target, editedProduct);
     }
 

@@ -18,7 +18,7 @@ import seedu.address.model.product.ProductName;
  */
 public class UpdateMaxStockLevelCommand extends Command {
 
-    public static final String COMMAND_WORD = "update_maxstock";
+    public static final String COMMAND_WORD = CommandWords.UPDATE_MAX_STOCK_LEVEL_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the products identified "
             + "by the product name used in the displayed product list. "

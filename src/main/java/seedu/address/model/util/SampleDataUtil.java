@@ -9,6 +9,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
+import seedu.address.model.product.StockLevel;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
@@ -66,7 +67,7 @@ public class SampleDataUtil {
      */
     public static Set<Product> getProductSet(String... strings) {
         return Arrays.stream(strings)
-                .map(name -> new Product(new ProductName(name)))
+                .map(name -> new Product(new ProductName(name), new StockLevel(0, 0, 0)))
                 .collect(Collectors.toSet());
     }
 

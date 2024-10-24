@@ -178,8 +178,8 @@ Format: `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 Example Commands:
 - `assign Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
 
-> **Important**:  
-> The product and supplier must already exist in the system before you can assign them.  
+> **Important**:
+> The product and supplier must already exist in the system before you can assign them.
 > Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
 
 > **Note:**
@@ -193,8 +193,8 @@ Format: `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 Example Commands:
 - `unassign Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
 
-> **Important**:  
-> The product and supplier must already exist in the system before you can assign them.  
+> **Important**:
+> The product and supplier must already exist in the system before you can assign them.
 > Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
 
 > **Note:**

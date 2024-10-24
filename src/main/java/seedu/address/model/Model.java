@@ -1,5 +1,6 @@
 package seedu.address.model;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ public interface Model {
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
+    List<String> getAllTags();
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
