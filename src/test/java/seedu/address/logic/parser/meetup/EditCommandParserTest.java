@@ -6,11 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_ADDED_BUYER_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_FROM_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_INFO_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_NAME_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_NAME_DESC_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_TO_DESC_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_ADDED_PERSON_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
@@ -19,10 +21,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NET
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -41,7 +43,7 @@ import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String ADDED_BUYER_EMPTY = " " + PREFIX_ADDED_BUYER;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -72,7 +74,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 a/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 v/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -93,13 +95,14 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_MEETUP;
         String userInput = targetIndex.getOneBased() + MEETUP_NAME_DESC_NETWORKING + MEETUP_INFO_DESC_NETWORKING
-                + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING;
+                + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_ADDED_BUYER_DESC_NETWORKING;
 
         EditCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
                 .withName(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING)
                 .withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING)
+                .withAddedBuyer(VALID_MEETUP_ADDED_PERSON_BETTY)
                 .build();
 
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -110,11 +113,13 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsButNameAndInfoSpecified_success() {
         Index targetIndex = INDEX_FIRST_MEETUP;
-        String userInput = targetIndex.getOneBased() + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING;
+        String userInput = targetIndex.getOneBased()
+                + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_ADDED_BUYER_DESC_NETWORKING;
 
         EditCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
                 .withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING)
+                .withAddedBuyer(VALID_MEETUP_ADDED_PERSON_BETTY)
                 .build();
 
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

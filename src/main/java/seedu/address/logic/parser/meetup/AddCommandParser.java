@@ -1,11 +1,13 @@
 package seedu.address.logic.parser.meetup;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.meetup.AddCommand;
@@ -15,11 +17,13 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
+
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -32,9 +36,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -44,8 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Info info = ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
         From from = ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get());
+        Set<AddedBuyer> addedBuyersList = ParserUtil.parseAddedBuyers(argMultimap.getAllValues(PREFIX_ADDED_BUYER));
 
-        MeetUp meetUp = new MeetUp(name, info, from, to);
+        MeetUp meetUp = new MeetUp(name, info, from, to, addedBuyersList);
 
         return new AddCommand(meetUp);
     }

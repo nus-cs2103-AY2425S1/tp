@@ -38,9 +38,6 @@ public class MeetUpCommandParser extends CommandParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        //case FilterCommand.COMMAND_WORD:
-        //  return new FilterCommandParser().parse(arguments);
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 

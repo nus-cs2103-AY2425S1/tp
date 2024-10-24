@@ -3,16 +3,23 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * Represents a Property's asking price in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
 public class AskingPrice {
 
+    public static final String MESSAGE_CONSTRAINTS = "Asking price of property (to the nearest SGD). "
+            + "It should be a positive integer more than 0 and can contain commas at the right positions "
+            + "(exactly 3 digits after each comma)"
+            + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). "
+            + "It must not be blank.";
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Asking prices should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "^0*([1-9]\\d*|[1-9]\\d{0,2}(,\\d{3})*)$";
+
     public final String value;
 
     /**
@@ -23,7 +30,7 @@ public class AskingPrice {
     public AskingPrice(String askingPrice) {
         requireNonNull(askingPrice);
         checkArgument(isValidPrice(askingPrice), MESSAGE_CONSTRAINTS);
-        value = askingPrice;
+        value = formatNumber(askingPrice);
     }
 
     /**
@@ -31,6 +38,18 @@ public class AskingPrice {
      */
     public static boolean isValidPrice(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private static String formatNumber(String input) {
+        // Remove any existing commas
+        String numberWithoutCommas = input.replaceAll(",", "");
+
+        // Parse the string as a long to handle larger numbers
+        long number = Long.parseLong(numberWithoutCommas);
+
+        // Format the number with commas
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return numberFormat.format(number);
     }
 
     @Override
