@@ -16,7 +16,6 @@ public class Type {
     /**
      * Specifies allowed property types
      */
-    private static final Logger logger = LogsCenter.getLogger(Type.class);
     public static final String MESSAGE_CONSTRAINTS =
             "Type can only be case-insensetive HDB, CONDO, LANDED";
     public static final String VALIDATION_REGEX = String.format("^(?i)(%s)$", String.join("|",
@@ -24,6 +23,7 @@ public class Type {
                     .map(Enum::name)
                     .toArray(String[]::new)
     ));
+    private static final Logger logger = LogsCenter.getLogger(Type.class);
     public final String value;
 
     /**

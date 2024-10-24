@@ -12,10 +12,10 @@ import seedu.address.commons.core.LogsCenter;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Bid {
-    private static final Logger logger = LogsCenter.getLogger(Bid.class);
     public static final String MESSAGE_CONSTRAINTS =
             "Bid price should be an integer";
     public static final String VALIDATION_REGEX = "\\d+";
+    private static final Logger logger = LogsCenter.getLogger(Bid.class);
     public final String value;
 
     /**

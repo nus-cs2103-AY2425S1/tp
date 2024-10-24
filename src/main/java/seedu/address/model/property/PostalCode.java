@@ -12,10 +12,10 @@ import seedu.address.commons.core.LogsCenter;
  * Guarantees: immutable; postal code is valid as declared in {@link #isValidPostalCode(String)}.
  */
 public class PostalCode {
-    private static final Logger logger = LogsCenter.getLogger(PostalCode.class);
     public static final String MESSAGE_CONSTRAINTS =
             "Postal Code numbers should only contain positive numbers, and it should be exactly 6 digits long";
     public static final String VALIDATION_REGEX = "\\d{6}";
+    private static final Logger logger = LogsCenter.getLogger(PostalCode.class);
     public final String value;
 
     /**

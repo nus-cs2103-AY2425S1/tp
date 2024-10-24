@@ -26,8 +26,6 @@ import seedu.address.model.property.Unit;
  * Extends {@link Command} and uses its functionality to add a specific type of property: {@code Property}.
  */
 public class AddPropertyCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(AddPropertyCommand.class);
-
     public static final String COMMAND_WORD = "addproperty";
 
     public static final String MESSAGE_USAGE = String
@@ -41,6 +39,7 @@ public class AddPropertyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists in the address book";
+    private static final Logger logger = LogsCenter.getLogger(AddPropertyCommand.class);
 
     private final Property toAdd;
 
@@ -49,7 +48,7 @@ public class AddPropertyCommand extends Command {
      */
     public AddPropertyCommand(Property property) {
         requireNonNull(property);
-        assert property != null: "Property cannot be null";
+        assert property != null : "Property cannot be null";
         logger.info("AddProperty object created for: " + property);
         toAdd = property;
     }
@@ -65,7 +64,7 @@ public class AddPropertyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert toAdd != null: "Property cannot be null";
+        assert toAdd != null : "Property cannot be null";
         logger.info("Execution begining for " + toAdd);
 
         if (model.hasProperty(toAdd)) {

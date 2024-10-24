@@ -15,8 +15,8 @@ public class MatchingPrice {
     public static final String MESSAGE_CONSTRAINTS =
             "Matching price should be an integer";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
     private static final Logger logger = LogsCenter.getLogger(MatchingPrice.class);
+    public final String value;
 
     /**
      * Constructs a {@code MatchingPrice}.

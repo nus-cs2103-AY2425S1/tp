@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.property.Ask;
 import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.PropertyType;
 import seedu.address.model.property.Type;

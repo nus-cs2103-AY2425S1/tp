@@ -16,8 +16,6 @@ import seedu.address.model.property.Type;
  * Filters properties based on their optional {@code PropertyType} and {@code MatchingPrice}.
  */
 public class FilterPropertyCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(FilterPropertyCommand.class);
-
     /** The command word to trigger the filtering action. */
     public static final String COMMAND_WORD = "filterproperty";
 
@@ -35,6 +33,7 @@ public class FilterPropertyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed filtered properties";
     public static final String MESSAGE_UNSUCCESS = "Filtered properties failed";
+    private static final Logger logger = LogsCenter.getLogger(FilterPropertyCommand.class);
 
     /** The type used for filtering. */
     private Type type;
@@ -48,7 +47,7 @@ public class FilterPropertyCommand extends Command {
      * @throws NullPointerException If the provided client is null.
      */
     public FilterPropertyCommand(Type type, MatchingPrice lteObj, MatchingPrice gteObj) {
-        assert type != null || lteObj != null || gteObj != null: "At least one command must be present";
+        assert type != null || lteObj != null || gteObj != null : "At least one command must be present";
         logger.info("Filter property object created");
         this.type = type;
         /* Creates the upper bound of the MatchingPrice */
@@ -66,7 +65,7 @@ public class FilterPropertyCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert type != null || lteObj != null || gteObj != null: "At least one command must be present";
+        assert type != null || lteObj != null || gteObj != null : "At least one command must be present";
         logger.info("Property filtering begining");
         String typeString = type == null ? "" : type.toString();
         int lte = lteObj == null ? Integer.MAX_VALUE : lteObj.toInteger();

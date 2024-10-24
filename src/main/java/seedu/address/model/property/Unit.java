@@ -12,7 +12,7 @@ import seedu.address.commons.core.LogsCenter;
  * Guarantees: immutable; unit is valid as declared in {@link #isValidUnit(String)}.
  */
 public class Unit {
-    private static final Logger logger = LogsCenter.getLogger(Unit.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(Unit.class);
     public static final Unit DEFAULT_LANDED_UNIT =
             new Unit("00-00");
     public static final String MESSAGE_CONSTRAINTS =
@@ -27,12 +27,12 @@ public class Unit {
      * @param unit A valid unit number.
      */
     public Unit(String unit) {
-        logger.info("Creating Unit object: " + unit);
+        LOGGER.info("Creating Unit object: " + unit);
         requireNonNull(unit);
         assert unit != null : "Unit string cannot be null";
         checkArgument(isValidUnit(unit), MESSAGE_CONSTRAINTS);
         assert isValidUnit(unit) != false : "Unit string must be at least two digit integers delimited by -";
-        logger.info("Unit object created: " + unit);
+        LOGGER.info("Unit object created: " + unit);
         value = unit;
     }
 
