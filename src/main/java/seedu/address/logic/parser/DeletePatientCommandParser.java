@@ -36,7 +36,7 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
         try {
             patientId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
-            throw new ParseException(MESSAGE_INVALID_ID, e);
+            throw new ParseException(e.getMessage());
         }
         return new DeletePatientCommand(patientId);
     }

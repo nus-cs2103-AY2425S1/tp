@@ -24,8 +24,9 @@ public class DeletePatientCommand extends Command {
             + PREFIX_ID + "1234";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Successfully "
-            + "deleted a patient";;
-
+            + "deleted a patient";
+    public static final String MESSAGE_DELETE_PATIENT_FAILURE = "Unable to "
+            + "delete a patient, check the id entered!";
     private final int patientId;
 
     public DeletePatientCommand(int patientId) {
@@ -39,6 +40,9 @@ public class DeletePatientCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
         Person patientToDelete = model.getFilteredPatientById(allPersons, patientId);
+        if (patientToDelete == null) {
+            throw new CommandException(MESSAGE_DELETE_PATIENT_FAILURE);
+        }
         model.deletePerson(patientToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
