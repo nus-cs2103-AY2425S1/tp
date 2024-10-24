@@ -52,6 +52,11 @@ public class TypicalContacts {
             .withPhone("8482131")
             .withEmail("ida@example.com").withAddress("Chicago Ave").build();
 
+    public static final Company ABANK = new CompanyBuilder().withName("Amazing Bank")
+            .withIndustry("Banking")
+            .withPhone("84871319")
+            .withEmail("abank@example.com").withAddress("Money Fly").withTags("loyalPartner", "reliable").build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY)
             .withStudentID(VALID_STUDENTID_AMY)
@@ -90,6 +95,6 @@ public class TypicalContacts {
      * Returns a list of typical companies.
      */
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(HOON, IDA));
+        return new ArrayList<>(Arrays.asList(HOON, IDA, ABANK));
     }
 }

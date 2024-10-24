@@ -323,13 +323,13 @@ _{More to be added}_
 - 2a. The given arguments are invalid.
 
   - 2a1. AdmiNUS shows an error message for the specific invalid field.
-    
+  
     Use case resumes at step 2.
 
 - 3a. Contact with the same phone number already exists.
 
   - 3a1. AdmiNUS shows an error message about duplicate contact.
-    
+  
     Use case resumes at step 2.
 
 **Use case 2: Delete a contact**
@@ -359,10 +359,10 @@ _{More to be added}_
 
 **MSS**
 
-1. User requests to list contacts. 
-2. AdmiNUS shows a list of contacts. 
-3. User selects a contact to edit. 
-4. User enters updated contact information. 
+1. User requests to list contacts.
+2. AdmiNUS shows a list of contacts.
+3. User selects a contact to edit.
+4. User enters updated contact information.
 5. AdmiNUS updates the contact and displays a success message.
 
     Use case ends.
@@ -377,9 +377,9 @@ _{More to be added}_
    Use case ends.
 
 **Extensions**
-- 2a. No contacts match the specified category. 
-  - 2a1. AdmiNUS displays an error message and an empty list. 
-    
+- 2a. No contacts match the specified category.
+  - 2a1. AdmiNUS displays an error message and an empty list.
+  
     Use case ends.
 ---
 

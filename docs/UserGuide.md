@@ -153,7 +153,7 @@ Format: `track CATEGORY`
 * Allows users to filter or sort contacts by `CATEGORY`, such as students or companies, making it easier to track specific groups
 
 Examples:
-* `track student` finds contacts with category `student` 
+* `track student` finds contacts with category `student`
 * `track company` finds contacts with category `company`
 
 ### Deleting a contact : `delete`

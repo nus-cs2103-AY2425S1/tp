@@ -48,6 +48,15 @@
       "email": "ida@example.com",
       "address": "Chicago Ave",
       "tags": []
+    },
+    {
+      "name": "Amazing Bank",
+      "category": "Company",
+      "industry": "Banking",
+      "phone": "84871319",
+      "email": "abank@example.com",
+      "address": "Money Fly",
+      "tags": ["loyalPartner", "reliable"]
     }
   ]
 }
