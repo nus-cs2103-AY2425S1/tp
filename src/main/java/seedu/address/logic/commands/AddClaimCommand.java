@@ -92,4 +92,22 @@ public class AddClaimCommand extends Command {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddClaimCommand)) {
+            return false;
+        }
+
+        AddClaimCommand otherAddClaimCommand = (AddClaimCommand) other;
+        return index.equals(otherAddClaimCommand.index)
+                && insuranceId == otherAddClaimCommand.insuranceId
+                && claimId.equals(otherAddClaimCommand.claimId)
+                && claimAmount == otherAddClaimCommand.claimAmount;
+    }
 }
