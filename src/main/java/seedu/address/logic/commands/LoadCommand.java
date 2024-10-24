@@ -11,4 +11,9 @@ public class LoadCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
     }
+
+    @Override
+    public void undo(Model model) {
+
+    }
 }

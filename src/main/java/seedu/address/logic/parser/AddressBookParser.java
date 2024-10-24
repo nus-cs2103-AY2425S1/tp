@@ -22,6 +22,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnfavouriteGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -94,6 +95,9 @@ public class AddressBookParser {
 
         case LoadCommand.COMMAND_WORD:
             return new LoadCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         case FavouriteGameCommand.COMMAND_WORD:
             return new FavouriteGameCommandParser().parse(arguments);

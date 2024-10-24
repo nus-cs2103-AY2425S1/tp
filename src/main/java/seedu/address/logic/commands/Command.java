@@ -17,4 +17,9 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    /**
+     * Undoes the command.
+     */
+    public abstract void undo(Model model);
+
 }

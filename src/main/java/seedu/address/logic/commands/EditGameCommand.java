@@ -53,6 +53,9 @@ public class EditGameCommand extends Command {
     private final String gameName;
     private final EditGameDescriptor editGameDescriptor;
 
+    private Game gameToEdit;
+    private Person personToEdit;
+
     /**
      * @param index of the person in the filtered person list to edit
      * @param editGameDescriptor details to edit the game with
@@ -76,9 +79,9 @@ public class EditGameCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        personToEdit = lastShownList.get(index.getZeroBased());
         Map<String, Game> gameMap = personToEdit.getGames();
-        Game gameToEdit = gameMap.get(gameName);
+        gameToEdit = gameMap.get(gameName);
         if (gameToEdit == null) {
             throw new CommandException("That game doesn't exist for this user...");
         }
@@ -87,8 +90,17 @@ public class EditGameCommand extends Command {
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        Map<String, Game> gameMap = personToEdit.getGames();
+        gameMap.put(gameName, gameToEdit);
+        model.setPerson(personToEdit, personToEdit);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
