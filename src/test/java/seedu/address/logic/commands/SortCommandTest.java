@@ -89,10 +89,10 @@ public class SortCommandTest {
 
         expectedModel = new ModelManager(addressBookWithoutVolunteers, new UserPrefs());
 
-        SortCommand sortCommand = new SortCommand(SortOption.HOURS);
+        SortOption sortOption = SortOption.HOURS;
+        SortCommand sortCommand = new SortCommand(sortOption);
 
-        String entityType = "Volunteer";
-        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, entityType.toLowerCase());
+        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, sortOption.getRole());
 
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
 
