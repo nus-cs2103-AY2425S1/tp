@@ -76,6 +76,8 @@ public class MarkAttendanceByStudentCommand extends Command {
 
         tutorialAttended.getAttendanceList().add(attendance);
 
+        //show changes on UI
+        model.setPerson(studentToMarkAttendance, studentToMarkAttendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
