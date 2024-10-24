@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
@@ -26,8 +29,9 @@ import seedu.internbuddy.logic.commands.ExitCommand;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
+import seedu.internbuddy.logic.commands.UpdateCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
-import seedu.internbuddy.model.application.Application;
+import seedu.internbuddy.model.application.AppStatus;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.testutil.CompanyBuilder;
@@ -47,11 +51,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_apply() throws Exception {
-        Application application = SWE_APPLICATION;
         ApplyCommand command = (ApplyCommand) parser.parseCommand(ApplyCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_COMPANY.getOneBased() + " " + PREFIX_NAME + "Full Stack Engineer" + " "
                 + PREFIX_DESCRIPTION + "Requires: ReactJS and ExpressJS");
-        assertEquals(new ApplyCommand(INDEX_FIRST_COMPANY, application), command);
+        assertEquals(new ApplyCommand(INDEX_FIRST_COMPANY, SWE_APPLICATION), command);
     }
 
     @Test
@@ -100,6 +103,16 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_update() throws Exception {
+        UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
+                + PREFIX_COMPANY_INDEX + INDEX_FIRST_COMPANY.getOneBased() + " "
+                + PREFIX_APP_INDEX + INDEX_FIRST_COMPANY.getOneBased() + " "
+                + PREFIX_APP_STATUS + "OA");
+        AppStatus appStatus = new AppStatus("OA");
+        assertEquals(new UpdateCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_COMPANY, appStatus), command);
     }
 
     @Test

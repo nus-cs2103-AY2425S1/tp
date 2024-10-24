@@ -1,7 +1,9 @@
 package seedu.internbuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
@@ -39,11 +41,10 @@ public class ApplyCommandTest {
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        Application validApplication = SWE_APPLICATION;
-        ApplyCommand applyCommand = new ApplyCommand(INDEX_FIRST_COMPANY, validApplication);
+        ApplyCommand applyCommand = new ApplyCommand(INDEX_FIRST_COMPANY, SWE_APPLICATION);
 
         // same object -> returns true
-        assertEquals(applyCommand, applyCommand);
+        assertTrue(applyCommand.equals(applyCommand));
     }
 
     @Test
@@ -53,6 +54,6 @@ public class ApplyCommandTest {
         ApplyCommand applyCommand2 = new ApplyCommand(INDEX_SECOND_COMPANY, validApplication);
 
         // different objects -> returns false
-        assertEquals(false, applyCommand1.equals(applyCommand2));
+        assertNotEquals(applyCommand1, applyCommand2);
     }
 }

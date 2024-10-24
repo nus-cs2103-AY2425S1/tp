@@ -38,6 +38,8 @@ public class WithdrawCommand extends Command {
      * @param applicationIndex of the application in the company to withdraw
      */
     public WithdrawCommand(Index companyIndex, Index applicationIndex) {
+        requireNonNull(companyIndex);
+        requireNonNull(applicationIndex);
         this.companyIndex = companyIndex;
         this.applicationIndex = applicationIndex;
     }
