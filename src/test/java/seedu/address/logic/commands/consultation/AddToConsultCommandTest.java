@@ -3,6 +3,7 @@ package seedu.address.logic.commands.consultation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,8 @@ public class AddToConsultCommandTest {
     private final Index validIndex = Index.fromOneBased(1);
     private final ObservableList<Name> studentNames = FXCollections.observableArrayList(new Name("John Doe"),
         new Name("Harry Ng"));
+    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(new Name("John Doe"),
+            new Name("John Doe"));
 
     @Test
     public void execute_addStudentsToConsult_success() throws Exception {
@@ -57,16 +60,37 @@ public class AddToConsultCommandTest {
         assertThrows(CommandException.class, () -> command.execute(modelStub));
     }
 
+    @Test
+    public void execute_duplicateStudent_throwsCommandException() throws Exception {
+        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
+        AddToConsultCommand command = new AddToConsultCommand(validIndex, duplicateStudentNames);
+        assertThrows(CommandException.class, () -> command.execute(modelStub));
+    }
+
     // Model stub that contains a consultation and can return students by name
     private class ModelStubWithConsultation extends ModelStub {
+
         private final Consultation consultation = new Consultation(
                 new seedu.address.model.consultation.Date("2024-10-20"),
                 new seedu.address.model.consultation.Time("14:00"),
                 FXCollections.observableArrayList());
 
+        private ArrayList<Consultation> consults;
+
+        ModelStubWithConsultation() {
+            this.consults = new ArrayList<>();
+            this.consults.add(consultation);
+        }
+
+        @Override
+        public void setConsult(Consultation target, Consultation editedConsult) {
+            int index = this.consults.indexOf(target);
+            this.consults.set(index, editedConsult);
+        }
+
         @Override
         public ObservableList<Consultation> getFilteredConsultationList() {
-            return FXCollections.observableArrayList(consultation);
+            return FXCollections.observableArrayList(consults);
         }
 
         @Override

@@ -154,10 +154,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setConsult(Consultation target, Consultation newConsult) {
+        requireAllNonNull(target, newConsult);
+        addressBook.setConsult(target, newConsult);
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
         return addressBook.hasConsult(consult);
     }
-    //=========== Consultation Methods =============================================================
 
     @Override
     public Optional<Student> findStudentByName(Name name) {
