@@ -23,7 +23,7 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Matches a contact to a job.
  */
 public class MatchCommand extends Command {
 
@@ -42,8 +42,8 @@ public class MatchCommand extends Command {
     private final Index jobIndex;
 
     /**
-     * @param contactIndex Index of the contact in the filtered person list to match
-     * @param jobIndex Index of the job in the filtered contact list to match
+     * @param contactIndex Index of the contact in the filtered person list to match.
+     * @param jobIndex Index of the job in the filtered contact list to match.
      */
     public MatchCommand(Index contactIndex, Index jobIndex) {
         requireNonNull(contactIndex);
