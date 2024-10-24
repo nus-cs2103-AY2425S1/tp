@@ -35,7 +35,8 @@ public class InfoCommand extends Command {
         }
         Person personToShowInfo = lastShownList.get(targetIndex.getZeroBased());
         DetailedPersonCardWindow.setPerson(personToShowInfo);
-        return new CommandResult(String.format(MESSAGE_INFO_PERSON_SUCCESS + personToShowInfo.getName()), false, false, false, true, false);
+        return new CommandResult(String.format(MESSAGE_INFO_PERSON_SUCCESS
+                + personToShowInfo.getName()), false, false, false, true, false);
     }
 
     @Override
