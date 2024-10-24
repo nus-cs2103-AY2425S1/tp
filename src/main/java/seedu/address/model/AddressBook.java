@@ -1,21 +1,27 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicate students are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueStudentList students;
+    private final ObservableList<Consultation> consults;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +31,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        students = new UniqueStudentList();
+        consults = FXCollections.observableArrayList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the data in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -41,11 +48,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setStudents(List<Student> students) {
+        this.students.setStudents(students);
+    }
+
+    /**
+     * Replaces the contents of the consultation list with {@code consults}.
+     */
+    public void setConsults(List<Consultation> consults) {
+        this.consults.setAll(consults);
     }
 
     /**
@@ -54,44 +68,97 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setStudents(newData.getStudentList());
+        setConsults(newData.getConsultList());
     }
 
-    //// person-level operations
+    //// student-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Returns true if a consult with the same details as the given consult exists in TAHub.
+     * @param consult The consultation to search for.
+     * @return True if a consultation is found.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public boolean hasConsult(Consultation consult) {
+        requireNonNull(consult);
+        return consults.contains(consult);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Adds a student to the address book.
+     * The student must not already exist in the address book.
+     */
+    public void addStudent(Student p) {
+        students.add(p);
+    }
+
+    /**
+     * Adds a consultation to the address book and sorts the list by date.
+     */
+    public void addConsult(Consultation consult) {
+        consults.add(consult);
+
+        // Sort by date first, and by time if the dates are the same
+        consults.sort((c1, c2) -> {
+            int dateComparison = c1.getDate().compareTo(c2.getDate());
+            if (dateComparison == 0) {
+                return c1.getTime().compareTo(c2.getTime()); // Compare by time if dates are the same
+            }
+            return dateComparison; // Otherwise, compare by date
+        });
+    }
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The student identity of {@code editedStudent} must not be the same
+     * as another existing student in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireNonNull(editedStudent);
 
-        persons.setPerson(target, editedPerson);
+        students.setStudent(target, editedStudent);
+    }
+
+    /**
+     * Replaces the given consultation {@code target} in the list with {@code editedConsult}.
+     * {@code target} must exist in TAHub.
+     */
+    public void setConsult(Consultation target, Consultation editedConsult) {
+        requireAllNonNull(target, editedConsult);
+
+        int index = consults.indexOf(target);
+        if (index == -1) {
+            throw new ConsultationNotFoundException();
+        }
+
+        consults.set(index, editedConsult);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeStudent(Student key) {
+        students.remove(key);
+    }
+
+    /**
+     * Removes {@code consult} from this {@code AddressBook}.
+     * {@code consult} must exist in TAHub.
+     *
+     * @param consult The consult to be removed.
+     */
+    public void removeConsult(Consultation consult) {
+        consults.remove(consult);
     }
 
     //// util methods
@@ -99,13 +166,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("students", students)
+                .add("consults", consults)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Student> getStudentList() {
+        return students.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Consultation> getConsultList() {
+        return FXCollections.unmodifiableObservableList(consults);
     }
 
     @Override
@@ -120,11 +192,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return students.equals(otherAddressBook.students)
+                && consults.equals(otherAddressBook.consults);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(students, consults);
     }
 }
