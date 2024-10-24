@@ -15,7 +15,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import com.sun.java.accessibility.util.AccessibilityListenerList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -57,7 +56,7 @@ public class PersonTest {
     }
 
     @Test
-    public void GuiDisplayedAttributeTest() {
+    public void guiDisplayedAttributeTest() {
         Person p = ALICE;
 
         // name in gui
