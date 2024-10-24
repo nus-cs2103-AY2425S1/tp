@@ -50,7 +50,6 @@ public class DeleteAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Ensure the appointment exists before proceeding.
         if (!model.hasAppointment(appointmentToDelete)) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT_ID);
         }

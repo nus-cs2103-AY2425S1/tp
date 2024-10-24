@@ -20,18 +20,21 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
      */
     @Override
     public DeleteAppointmentCommand parse(String args) throws ParseException {
+        Index index;
         try {
-            Index index = ParserUtil.parseId(args.trim());
-            Integer id = index.getZeroBased();
-            Appointment appointment = Appointment.getAppointmentById(id);
-            if (appointment == null) {
-                throw new ParseException(DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID);
-            }
-            return new DeleteAppointmentCommand(appointment);
+            index = ParserUtil.parseIndex(args.trim());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE), pe);
         }
+
+        Integer id = index.getOneBased();
+        Appointment appointment = Appointment.getAppointmentById(id);
+
+        if (appointment == null) {
+            // ID format is correct but no appointment with this ID exists
+            throw new ParseException(DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID);
+        }
+        return new DeleteAppointmentCommand(appointment);
     }
 }
-
