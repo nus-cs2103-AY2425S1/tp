@@ -1,10 +1,14 @@
-#copyButton, #helpMessage, {
-    -fx-text-fill: white;
+#helpMessage{
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: #7D0DC3;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-weight: bold;
+    -fx-background-color: #a232ea;
 }
+
 
 #copyButton:hover {
     -fx-background-color: #570987;
@@ -15,7 +19,25 @@
 }
 
 #helpMessageContainer {
-    -fx-background-color: #383838;
+    -fx-background-color: #ffffff;
+}
+
+#moreInfoContainer {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-min-height: 80;
+}
+
+.helpMessageWrapper{
+    -fx-background-color: #dedede;
+    -fx-min-height: 5;
+    -fx-min-width: 100;
+    -fx-content-display: CENTER;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 15;
+
 }
 
 .commandContainer {
@@ -29,14 +51,20 @@
 /*-fx-font-family: "Segoe UI Semibold";*/
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 20px;
-    -fx-text-fill: #D397F8;
+    -fx-text-fill: #000000;
     -fx-font-weight: bold;
 }
 
 .commandLabel {
-.cell_small_label {
-    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Andale Mono";
     -fx-font-size: 15px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
+
+.commandWrapper {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-pref-width: 300;
+    -fx-pref-height: 100;
 }

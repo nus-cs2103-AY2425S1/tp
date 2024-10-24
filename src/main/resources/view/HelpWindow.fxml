@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.ScrollPane?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -20,9 +21,16 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <VBox fx:id="helpMessageContainer" prefHeight="690" prefWidth="660" >
+
+      <VBox fx:id="helpMessageContainer" prefHeight="700" prefWidth="800" >
+
+        <!-- Help message and copy button -->
         <VBox VBox.vgrow="NEVER">
+          <VBox.margin>
+            <Insets top="20" />  <!-- Adds space above the VBox -->
+          </VBox.margin>
           <HBox fx:id="moreInfoContainer" alignment="CENTER">
+            <HBox styleClass="helpMessageWrapper">
             <children>
               <Label fx:id="helpMessage" alignment="CENTER" text="Label">
                 <HBox.margin>
@@ -41,92 +49,137 @@
             <padding>
               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
             </padding>
+            </HBox>
           </HBox>
         </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" >
-          <Label fx:id="addHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="addHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
-          <Label fx:id="listHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="listHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
-          <Label fx:id="editHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="editHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="deleteHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="deleteHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="clearHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="clearHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="fnHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="fnHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="fpHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="fpHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="faHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="faHelp" alignment="CENTER_LEFT" styleClass="cel_small_label" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="fcHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="fcHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="sortHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="sortHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="viewHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="viewHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
-          <Label fx:id="exitHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
-          <Label fx:id="exitHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </VBox>
+
+        <!-- Commands for ClientHub -->
+        <ScrollPane style="-fx-background-color: white; -fx-border-color: transparent;" fitToWidth="true" fitToHeight="true">
+          <VBox style="-fx-background-color: white; -fx-border-color: transparent;" spacing="14">
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="addHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="addHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="listHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="listHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="editHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="editHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="deleteHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="deleteHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="clearHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="clearHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fnHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fnHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fpHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fpHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="faHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="faHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fcHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fcHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="sortHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="sortHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="viewHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="viewHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="exitHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="exitHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+          </VBox>
+        </ScrollPane>
+
+
       </VBox>
     </Scene>
   </scene>
