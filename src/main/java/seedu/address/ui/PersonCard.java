@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
             detailedPersonCardWindow.close();
         }
         DetailedPersonCardWindow.setPerson(person);
-        DetailedPersonCardWindow detailedPersonCardWindow = new DetailedPersonCardWindow();
+        detailedPersonCardWindow = new DetailedPersonCardWindow();
         detailedPersonCardWindow.show();
     }
 }
