@@ -39,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
         TutorialId tutorialId = argMultimap.getValue(PREFIX_TUTORIALID).isPresent()
                 ? ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get())
-                : TutorialId.of("1001"); // waiting Jing Min for of("-1")
+                : TutorialId.of("-1"); // waiting Jing Min for of("-1")
         Student student = new Student(name, studentId, tutorialId, null);
         return new AddCommand(student, tutorialId);
     }
