@@ -48,7 +48,7 @@
             <MenuItem mnemonicParsing="false" text="Filter by Tags" onAction="#handleAdvancedFilterByTags" />
           </Menu>
           <Menu mnemonicParsing="false" text="Export">
-            <MenuItem mnemonicParsing="false" text="Export to CSV" />
+            <MenuItem mnemonicParsing="false" text="Export to CSV" onAction="#handleExport" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
