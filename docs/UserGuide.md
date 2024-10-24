@@ -231,6 +231,19 @@ Format: `deleteGroup g/GROUP_NAME`
 * Deletes group named `GROUP_NAME`
 * Group named `GROUP_NAME` must exist.
 
+### Listing groups: `listGroups`
+
+Lists out all existing Group names.
+
+Format: `listGroups`
+
+### Getting emails: `email`
+
+Copies to system clipboard the emails of all persons in the
+current list, separated by commas.
+
+Format: `email`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -286,3 +299,5 @@ Action     | Format, Examples
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **View Group**   | `viewGroup g/GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
+**List Groups**  | `listGroups`
+**Get Emails**   | `email`
