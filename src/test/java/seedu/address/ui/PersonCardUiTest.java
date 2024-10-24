@@ -23,17 +23,20 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 public class PersonCardUiTest extends ApplicationTest {
 
     private PersonCard personCard;
-    private Person samplePerson;
+    private Person sampleBuyer;
+    private Person sampleSeller;
 
     @BeforeEach
     public void setUp() throws TimeoutException {
@@ -51,10 +54,11 @@ public class PersonCardUiTest extends ApplicationTest {
     @Override
     public void start(Stage stage) {
         // Create a sample Person object for testing
-        samplePerson = createSamplePerson();
+        sampleBuyer = createSampleBuyer();
+        sampleSeller = createSampleSeller();
 
         // Instantiate PersonCard to be tested, passing in the sample Person and a displayed index of 1
-        personCard = new PersonCard(samplePerson, 1);
+        personCard = new PersonCard(sampleBuyer, 1);
 
         // Set the scene for JavaFX testing
         stage.setScene(personCard.getRoot().getScene());
@@ -68,10 +72,10 @@ public class PersonCardUiTest extends ApplicationTest {
 
         // Check if the displayed ID, name, phone, email, and other labels are correct
         assertEquals("1. ", personCard.getId().getText());
-        assertEquals("John Doe", personCard.getName().getText());
+        assertEquals("John Buyer", personCard.getName().getText());
         assertEquals("91234567", personCard.getPhone().getText());
-        assertEquals("johndoe@example.com", personCard.getEmail().getText());
-        assertEquals("Date: 2023-01-01, From: 10:00, To: 11:00", personCard.getAppointment().getText());
+        assertEquals("buyer@example.com", personCard.getEmail().getText());
+        assertEquals("Date: 2023-01-01 (From: 10:00 To: 11:00)", personCard.getAppointment().getText());
         assertEquals("NUS", personCard.getProperty().getText());
 
         // Check if the tags are correctly displayed
@@ -89,7 +93,7 @@ public class PersonCardUiTest extends ApplicationTest {
     void personCard_throwsIllegalArgumentExceptionForInvalidPhone() {
         // Use assertThrows to verify that IllegalArgumentException is thrown for an invalid phone number
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new Person(
+            new Buyer(
                     new Name("Invalid Phone"),
                     new Phone("12"), // Invalid phone number (less than 3 digits)
                     new Email("invalid@example.com"),
@@ -107,27 +111,45 @@ public class PersonCardUiTest extends ApplicationTest {
     @Test
     void personCard_handlesDifferentIndexes() {
         // Test PersonCard with various indexes
-        PersonCard personCardIndex5 = new PersonCard(samplePerson, 5);
+        PersonCard personCardIndex5 = new PersonCard(sampleBuyer, 5);
         assertEquals("5. ", personCardIndex5.getId().getText());
 
-        PersonCard personCardIndex10 = new PersonCard(samplePerson, 10);
+        PersonCard personCardIndex10 = new PersonCard(sampleBuyer, 10);
         assertEquals("10. ", personCardIndex10.getId().getText());
     }
 
+
     /**
-     * Helper method to create a sample Person object for testing.
+     * Helper method to create a sample Buyer object for testing.
      */
-    private Person createSamplePerson() {
+    private Person createSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
         tagSet.add(new Tag("colleagues"));
 
-        return new Person(
-                new Name("John Doe"),
+        return new Buyer(
+                new Name("John Buyer"),
                 new Phone("91234567"),
-                new Email("johndoe@example.com"),
+                new Email("buyer@example.com"),
                 tagSet,
                 new Appointment(new Date("2023-01-01"), new From("10:00"), new To("11:00")),
+                new Property("NUS")
+        );
+    }
+
+    /**
+     * Helper method to create a sample Seller object for testing.
+     */
+    private Person createSampleSeller() {
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag("clients"));
+
+        return new Seller(
+                new Name("John Seller"),
+                new Phone("98765432"),
+                new Email("seller@example.com"),
+                tagSet,
+                new Appointment(new Date("2023-01-02"), new From("11:00"), new To("12:00")),
                 new Property("NUS")
         );
     }

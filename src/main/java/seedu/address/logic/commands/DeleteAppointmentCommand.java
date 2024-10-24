@@ -12,8 +12,10 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Deletes a client's appointment identified by the client's name.
@@ -56,13 +58,30 @@ public class DeleteAppointmentCommand extends Command {
 
         Person personToDeleteAppointment = model.getPersonByName(targetName);
         if (!lastShownList.contains(personToDeleteAppointment)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
+
+            if (closestMatch != null) {
+                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            }
         }
 
-        Person personWithoutAppointment = new Person(personToDeleteAppointment.getName(),
-                personToDeleteAppointment.getPhone(), personToDeleteAppointment.getEmail(),
-                personToDeleteAppointment.getTags(), new Appointment(new Date(""), new From(""), new To("")),
-                personToDeleteAppointment.getProperty());
+        Person personWithoutAppointment;
+
+        if (personToDeleteAppointment instanceof Buyer) {
+            Buyer buyer = (Buyer) personToDeleteAppointment;
+            personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
+                    buyer.getEmail(), buyer.getTags(),
+                    new Appointment(new Date(""), new From(""), new To("")),
+                    buyer.getProperty());
+        } else { // Must be a Seller
+            Seller seller = (Seller) personToDeleteAppointment;
+            personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
+                    seller.getEmail(), seller.getTags(),
+                    new Appointment(new Date(""), new From(""), new To("")),
+                    seller.getProperty());
+        }
         model.setPerson(personToDeleteAppointment, personWithoutAppointment);
 
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
