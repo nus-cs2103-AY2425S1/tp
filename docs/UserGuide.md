@@ -59,7 +59,7 @@ Start here if you are new to HRConnect.
 
 2. Download the latest .jar file from \[here\](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for your AddressBook. **This folder will be used to store saved data and preferences.**
+3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
 4. **Double click the .jar file** in the folder you placed.
 
@@ -434,17 +434,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HRConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Return to Top](#table-of-contents)
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HRConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 [Return to Top](#table-of-contents)
@@ -461,7 +461,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ![rootFileStructure.png](images/rootFileStructure.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see this data file anywhere.<br>
 **A**: You may need to run the app for the first time to generate these files.
