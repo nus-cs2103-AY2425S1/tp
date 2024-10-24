@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +19,8 @@ import seedu.address.model.tag.Tag;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
+    public static final String MESSAGE_SUPPORT = "filter does not support Name, Email or Phone\n" +
+            "filter only supports Tag and RSVP Status";
     private final Set<Predicate<Person>> predicateSet = new HashSet<>();
 
     /**
@@ -29,11 +30,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_RSVP_STATUS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE);
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
+        checkInputs(argMultimap);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_RSVP_STATUS);
         Set<Tag> tagSet = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -44,5 +46,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     public Set<Predicate<Person>> getPredicateSet() {
         return this.predicateSet;
+    }
+
+    public void checkInputs(ArgumentMultimap argMultimap) throws ParseException{
+        if (argMultimap.contains(PREFIX_EMAIL) || argMultimap.contains(PREFIX_NAME)
+                || argMultimap.contains(PREFIX_PHONE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_SUPPORT));
+        }
     }
 }
