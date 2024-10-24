@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AggGradeCommand.MESSAGE_OPERATION_CONSTRAINTS;
+import static seedu.address.logic.commands.AggGradeCommand.OPERATION_TRANSLATE;
 import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
 import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AggGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.AttendanceList;
@@ -236,5 +239,22 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parsers {@code String value} into a valid AggGrade operation.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if operation is invalid
+     */
+    public static AggGradeCommand.Operation parseAggGradeOperation(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        if (!OPERATION_TRANSLATE.containsKey(trimmedValue)) {
+            throw new ParseException(MESSAGE_OPERATION_CONSTRAINTS);
+        }
+
+        return OPERATION_TRANSLATE.get(trimmedValue);
     }
 }
