@@ -290,10 +290,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​              | I want to …​            | So that I can…​                                                                                                 |
 |---------|----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians                                                      
+| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians                                                      |
 | `* * *` | new user             | search for a student's name        | find relevant student(s) easily                                                                                 |
 | `* * *` | new user             | delete students' entries     | remove students that I am no longer teaching                                                                    |
-| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively                                                           
+| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively                       |
 | `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
 | `* * *` | new user             | organise my students' contact details                        | find my students' by certain categories easily                                                                  |
 | `* * *` | new user             | have an option to store the address of the students                        | easily go to the student's house if the tuition session is in person                                            |
@@ -358,8 +358,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword 
-2. App displays all students address book in alphabetical order 
+1. User types keyword
+2. App displays all students address book in alphabetical order
 3. Use case ends
 
 **Use case: UC3 - Delete a person**
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message. 
+  - 3b1 AddressBook shows an error message.
   - 3b2. Use case resumes from step 2
 
 
