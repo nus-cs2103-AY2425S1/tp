@@ -17,15 +17,12 @@ import seedu.address.model.person.AppointmentDateFilter;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
-
-
-
 /**
  * Filters the patients based on their appointment dates and health services.
  */
 public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters patients based on their appointment dates and"
             + " healthservices. Parameters : "
