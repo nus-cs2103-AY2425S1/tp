@@ -15,8 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_DESC_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -28,9 +26,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-    private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             EditAppointmentCommand.MESSAGE_USAGE);
