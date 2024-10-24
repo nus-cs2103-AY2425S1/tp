@@ -151,5 +151,4 @@ public class Appointment {
                 .add("sickness", getSickness())
                 .toString();
     }
-
 }

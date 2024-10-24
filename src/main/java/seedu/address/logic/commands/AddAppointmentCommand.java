@@ -69,7 +69,7 @@ public class AddAppointmentCommand extends AddCommand {
     @Override
     protected void addEntity(Model model) throws CommandException {
         Optional<Person> personOptional = model.findPerson(personId);
-        if (!personOptional.isPresent()) {
+        if (personOptional.isEmpty()) {
             throw new CommandException(getPersonIdDoesNotExistMessage());
         }
         model.addAppointment(personOptional.get(), toAdd);

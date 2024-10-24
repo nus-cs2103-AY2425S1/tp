@@ -157,7 +157,7 @@ The `Storage` component,
   * data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
   * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
-  * data is saved in `JsonAppointmnetBookStorage` which inherits from interface `AppointmentBookStorage`.
+  * data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
   * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
 * User Preference data:
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
@@ -300,6 +300,20 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Data storage and files**
+- The data of the patients and appointments is stored in the `data` folder.
+  - Patient data is stored in `data/addressbook.json`.
+  - Appointment data is stored in `data/appointmentbook.json`.
+
+<box type="warning" seamless>
+
+**Note:**
+For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
+is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
