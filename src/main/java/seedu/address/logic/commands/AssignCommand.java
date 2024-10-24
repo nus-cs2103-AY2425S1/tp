@@ -84,4 +84,19 @@ public class AssignCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (other instanceof AssignCommand) {
+            AssignCommand otherAssignCommand = (AssignCommand) other;
+            return volunteerIndex.equals(otherAssignCommand.volunteerIndex)
+                    && eventIndex.equals(otherAssignCommand.eventIndex);
+        } else {
+            return false;
+        }
+    }
 }

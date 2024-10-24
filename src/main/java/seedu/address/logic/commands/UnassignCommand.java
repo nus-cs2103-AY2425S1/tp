@@ -75,4 +75,19 @@ public class UnassignCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof UnassignCommand) {
+            UnassignCommand otherCommand = (UnassignCommand) other;
+            return volunteerIndex.equals(otherCommand.volunteerIndex)
+                    && eventIndex.equals(otherCommand.eventIndex);
+        } else {
+            return false;
+        }
+    }
 }
