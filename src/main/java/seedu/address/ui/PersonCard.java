@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static DetailedPersonCardWindow detailedPersonCardWindow;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -75,6 +76,9 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void handleMouseClick(MouseEvent event) {
+        if (detailedPersonCardWindow != null) {
+            detailedPersonCardWindow.close();
+        }
         DetailedPersonCardWindow.setPerson(person);
         DetailedPersonCardWindow detailedPersonCardWindow = new DetailedPersonCardWindow();
         detailedPersonCardWindow.show();
