@@ -20,12 +20,12 @@ public class CheckClientCommand extends Command {
     public static final String COMMAND_WORD = "check-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks In/ Out a Client identified by the index number used in the displayed Clients list.\n"
+            + ": Checks In/ Out the indexed Client.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_CHECK_IN_CLIENT_SUCCESS = "Checked In Client: %1$s";
-    public static final String MESSAGE_CHECK_OUT_CLIENT_SUCCESS = "Checked Out Client: %1$s";
+    public static final String MESSAGE_CHECK_IN_CLIENT_SUCCESS = "Checked In Client: %s (VRN: %s).";
+    public static final String MESSAGE_CHECK_OUT_CLIENT_SUCCESS = "Checked Out Client: %s (VRN: %s).";
     public static final String MESSAGE_NO_CAR_TO_CHECK = "No Car associated to Client to Check In.";
 
     private final Index targetIndex;
@@ -53,9 +53,11 @@ public class CheckClientCommand extends Command {
         model.setPerson(clientToCheck, clientToCheck); // Line required to update GUI.
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (clientToCheck.isServicing()) {
-            return new CommandResult(String.format(MESSAGE_CHECK_IN_CLIENT_SUCCESS, Messages.format(clientToCheck)));
+            return new CommandResult(String.format(MESSAGE_CHECK_IN_CLIENT_SUCCESS,
+                    clientToCheck.getName()));
         }
-        return new CommandResult(String.format(MESSAGE_CHECK_OUT_CLIENT_SUCCESS, Messages.format(clientToCheck)));
+        return new CommandResult(String.format(MESSAGE_CHECK_OUT_CLIENT_SUCCESS,
+                clientToCheck.getName(), clientToCheck.getVrn()));
     }
 
     @Override

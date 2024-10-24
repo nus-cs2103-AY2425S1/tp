@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.car.Car;
+import seedu.address.model.car.Vrn;
 import seedu.address.model.issue.Issue;
 
 /**
@@ -86,6 +87,10 @@ public class Person {
 
     public Car getCar() {
         return car;
+    }
+
+    public Vrn getVrn() {
+        return this.getCar().getVrn();
     }
 
     /**

@@ -16,25 +16,28 @@ import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a Car to a person already present in the MATER address book.
+ * Adds a Car to a Client in the MATER address book.
  */
 public class AddCarCommand extends Command {
 
     public static final String COMMAND_WORD = "add-car";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new car to the client of the index provided, with the details provided by the user.\n"
-            + "User must not currently have a car.\n"
-            + "The index must be a positive integer. \n"
+            + ": Adds a Car to the indexed Client, who must not be associated to a Car.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER "
+            + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER "
+            + PREFIX_MAKE + " VEHICLE MAKE "
+            + PREFIX_MODEL + " VEHICLE MODEL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_VRN + "SGX1234B "
+            + PREFIX_VRN + "SJH9514P "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
             + PREFIX_MODEL + "Corolla ";
 
-    public static final String MESSAGE_USER_ALREADY_HAS_CAR = "This person already has a car.";
-    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added: %s";
-    public static final String MESSAGE_SAME_CAR_ALREADY_EXISTS = "This car already exists in the address book";
+    public static final String MESSAGE_USER_ALREADY_HAS_CAR = "Client is already associated to a Car.";
+    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added to Client: %s (VRN: %s).";
+    public static final String MESSAGE_SAME_CAR_ALREADY_EXISTS = "Car already exists in MATER.";
 
     private final Index index;
     private final Car carToAdd;
@@ -83,7 +86,7 @@ public class AddCarCommand extends Command {
         // This method call effectively replaces the old user with the new user with a car.
         model.setPerson(personToAddCarTo, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, carToAdd));
+        return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, updatedPerson.getName(), carToAdd.getVrn()));
     }
 
     @Override

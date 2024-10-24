@@ -37,14 +37,14 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing Client in the MATER address book.
  */
 public class EditClientCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-client";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the indexed client. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -57,13 +57,14 @@ public class EditClientCommand extends Command {
             + "[" + PREFIX_MODEL + "VEHICLE MODEL] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_CAR_DOES_NOT_EXIST = "This person does not have a car to edit.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_CAR = "This car already exists in the address book.";
-    public static final String MESSAGE_NO_CAR_TO_EDIT_ISSUES = "This person does not have a car to edit issues to";
+            + PREFIX_VRN + "SNP5701C";
+    public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client in MATER: %s.";
+    public static final String MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR = "Edited Client in MATER: %s (VRN: %s).";
+    public static final String MESSAGE_NOT_EDITED = "At least one field must be edited.";
+    public static final String MESSAGE_CAR_DOES_NOT_EXIST = "Client does not have a Car to edit.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
+    public static final String MESSAGE_DUPLICATE_CAR = "Car already exists in MATER.";
+    public static final String MESSAGE_NO_CAR_TO_EDIT_ISSUES = "Client does not have a Car to edit Issues.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -126,8 +127,16 @@ public class EditClientCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        System.out.println(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        String message;
+        if (editedPerson.getCar() == null) {
+            message = String.format(MESSAGE_EDIT_CLIENT_SUCCESS,
+                    editedPerson.getName());
+        } else {
+            message = String.format(MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR,
+                    editedPerson.getName(), editedPerson.getVrn());
+        }
+        return new CommandResult(message);
     }
 
     /**

@@ -53,8 +53,8 @@ public class EditClientCommandTest {
             editPersonDescriptor, editCarDescriptor,
             true, false);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS,
+                editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutCar.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(modelWithoutCar.getFilteredPersonList().get(0), editedPerson);
@@ -75,8 +75,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(
                 indexLastPerson, descriptor, new EditCarDescriptor(), true, false);
 
-        String expectedMessage = String.format(
-                EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR,
+                editedPerson.getName(), editedPerson.getVrn());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
@@ -93,8 +93,8 @@ public class EditClientCommandTest {
         Person editedPerson = model.getFilteredPersonList()
             .get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(
-                EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR,
+                editedPerson.getName(), editedPerson.getVrn());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -111,8 +111,8 @@ public class EditClientCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_RACHEL).build(),
                 new EditCarDescriptor(), true, false);
 
-        String expectedMessage = String.format(
-                EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR,
+                editedPerson.getName(), editedPerson.getVrn());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

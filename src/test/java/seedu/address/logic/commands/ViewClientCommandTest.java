@@ -25,14 +25,7 @@ public class ViewClientCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewClientCommand viewClientCommand = new ViewClientCommand(INDEX_FIRST_PERSON);
-        String carDetails = personToView.getCar() == null ? "No car details available" : "VRN: "
-                + personToView.getCar().getVrn() + "\nVIN: " + personToView.getCar().getVin() + "\nMake: "
-                + personToView.getCar().getCarMake() + "\nModel: " + personToView.getCar().getCarModel();
-        String expectedMessage = String.format(ViewClientCommand.MESSAGE_SUCCESS,
-                personToView.getName(),
-                personToView.getPhone(), personToView.getEmail(),
-                personToView.getAddress(),
-                carDetails);
+        String expectedMessage = String.format(ViewClientCommand.MESSAGE_VIEW_CLIENT_SUCCESS, personToView.getName());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         CommandResult expectedCommandResult = new CommandResult(
             expectedMessage, false, false, true, personToView

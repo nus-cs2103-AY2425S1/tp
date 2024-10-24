@@ -36,7 +36,7 @@ public class AddCarCommandTest {
     @Test
     public void execute_addCarToEligiblePerson_success() throws Exception {
         Person validPerson = new PersonBuilder().build();
-        Car validCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"),
+        Car validCar = new Car(new Vrn("SJH9514P"), new Vin("KMHGH4JH3EU073801"),
                 new CarMake("Toyota"), new CarModel("Corolla"));
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         modelStub.addPerson(validPerson); // Add person to the stub model
@@ -44,7 +44,8 @@ public class AddCarCommandTest {
         AddCarCommand addCarCommand = new AddCarCommand(Index.fromOneBased(1), validCar);
         CommandResult commandResult = addCarCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS, validCar), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS, validPerson.getName(), validCar.getVrn()),
+                commandResult.getFeedbackToUser());
     }
 
     @Test

@@ -11,19 +11,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the MATER address book.
+ * Adds a Client to the MATER address book.
  */
 public class AddClientCommand extends Command {
 
     public static final String COMMAND_WORD = "add-client";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Client to MATER. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -38,17 +37,17 @@ public class AddClientCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_VRN + "SGX1234B "
+            + PREFIX_VRN + "SJH9514P "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
             + PREFIX_MODEL + "Corolla ";
 
     public static final String VEHICLE_DETAILS_MISSING =
-            "Vehicle details are missing. Please provide all vehicle details. \n" + MESSAGE_USAGE;
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_SUCCESS_WITH_CAR = "with VIN: ";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_NO_CAR_TO_ADD_ISSUES = "This person does not have a car to add issues to";
+            "Vehicle details are missing. Please provide all vehicle details.\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_SUCCESS = "New Client added to MATER: %s.";
+    public static final String MESSAGE_SUCCESS_WITH_CAR = "New Client added to MATER: %s (VRN: %s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
+    public static final String MESSAGE_NO_CAR_TO_ADD_ISSUES = "Client does not have a Car to add Issues.";
 
     private final Person toAdd;
 
@@ -57,7 +56,6 @@ public class AddClientCommand extends Command {
      */
     public AddClientCommand(Person person) {
         requireNonNull(person);
-        System.out.println(person);
         toAdd = person;
     }
 
@@ -70,21 +68,22 @@ public class AddClientCommand extends Command {
         }
 
         if (model.hasCar(toAdd.getCar())) {
-            throw new CommandException("This car already exists in the address book");
+            throw new CommandException("Car already exists in MATER.");
         }
 
-        // check if there is a car to add issues to
-        if (toAdd.getCar() == null && toAdd.getIssues().size() > 0) {
+        // Check if there is a Car to add Issues to.
+        if (toAdd.getCar() == null && !toAdd.getIssues().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CAR_TO_ADD_ISSUES);
         }
 
         model.addPerson(toAdd);
 
-        String message = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
-        if (toAdd.getCar() != null) {
-            message += MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd);
+        String message;
+        if (toAdd.getCar() == null) {
+            message = String.format(MESSAGE_SUCCESS, toAdd.getName());
+        } else {
+            message = String.format(MESSAGE_SUCCESS_WITH_CAR, toAdd.getName(), toAdd.getVrn());
         }
-
         return new CommandResult(message);
     }
 

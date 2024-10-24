@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -41,7 +40,7 @@ public class AddClientCommandTest {
 
         CommandResult commandResult = new AddClientCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddClientCommand.MESSAGE_SUCCESS, validPerson.getName()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
