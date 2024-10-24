@@ -6,7 +6,7 @@ the convenience of a Graphical User Interface (GUI), EduTUTU allows you to manag
 efficiency. Whether you’re handling student registrations, updating records, or searching for students, EduTUTU helps 
 you complete these tasks more quickly than traditional applications, making it an ideal solution for tuition center 
 administrators.
----
+
 ## Table of Contents
 
 1. [Installation](#1-installation)
@@ -26,7 +26,6 @@ administrators.
     - [2.13 Bar Chart](#213-bar-chart)
 3. [FAQs](#3-faqs)
 
----
 
 
 ## 1. Installation
