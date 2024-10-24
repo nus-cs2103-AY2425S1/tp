@@ -24,7 +24,7 @@ public class EditNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edit the note of the person identified "
-            + "by the index number used in the last person listing. "
+            + "by the person index number used on the left display panel. "
             + "The note will replace the currently stored note at the specified index.\n"
             + "Parameters: INDEX i/[NOTE_INDEX] n/[NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
@@ -79,14 +79,17 @@ public class EditNotesCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message
-     * the remark is added to or removed from
+     * Generates a command execution success message the remark is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_EDIT_NOTES_SUCCESS, Messages.format(personToEdit));
     }
 
+    /**
+     * Updates the notes of the given person with the given notes
+     * {@code personToEdit, notesToEdit}.
+     */
     private Person updateNote(Person personToEdit, Set<Note> notesToEdit) {
         // Convert Set to List for indexed access
         List<Note> notesList = new ArrayList<>(notesToEdit);

@@ -17,8 +17,7 @@ import seedu.address.model.person.Note;
 public class EditNotesCommandParser implements Parser<EditNotesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * EditNotesCommand
+     * Parses the given {@code String} of arguments in the context of the EditNotesCommand
      * and returns a EditNotesCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
@@ -32,7 +31,6 @@ public class EditNotesCommandParser implements Parser<EditNotesCommand> {
         Index noteIndex;
         Note note;
         try {
-
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
 
             String noteIndexName = argMultimap.getValue(PREFIX_NOTES_INDEX).orElse("");
