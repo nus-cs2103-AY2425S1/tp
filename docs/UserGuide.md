@@ -30,7 +30,7 @@ AdmiNUS is a **desktop app for managing contacts, optimized for use via a Comman
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/viewContactUI.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -81,6 +81,8 @@ Shows a message explaining the various commands available. In addition, there is
 
 Format: `help`
 
+![](images/helpCommandUI.png)
+
 ### Adding a contact: `student` or `company`
 
 Adds a contact to the address book.
@@ -109,12 +111,11 @@ Show the details of a contact.
 
 Format: `view INDEX`
 
-* View the details of the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-
 Example: 
 
 * `view 1` shows the details of the first contact in the list.
 
+![](images/viewContactUI.png)
 //add screenshot here
 
 ### Editing a contact: `edit`
