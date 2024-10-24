@@ -19,6 +19,7 @@ public class EventId {
      */
     public EventId(int eventId) {
         AppUtil.checkArgument(isValidEventId(eventId), MESSAGE_CONSTRAINTS);
+        assert eventId >= 0;
         this.eventId = eventId;
     }
 
