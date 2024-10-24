@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.StockLevel;
 
 /**
  * An UI component that displays information of a {@code Product}.
@@ -38,10 +39,15 @@ public class ProductCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().toString());
-        stockLevel.setText("Stock Level: " + product.getStockLevel());
+
+        // Retrieve StockLevel object
+        StockLevel stock = product.getStockLevel();
+
+        stockLevel.setText("Stock Level: " + stock.getStockLevel());
+        minStockLevel.setText("Min Stock Level: " + stock.getMinStockLevel());
+        maxStockLevel.setText("Max Stock Level: " + stock.getMaxStockLevel());
+
         supplierName.setText("Supplier: " + (product.isAssigned() ? product.getSupplierName().toString() : "None"));
-        minStockLevel.setText("Min Stock Level: " + product.getMinStockLevel());
-        maxStockLevel.setText("Max Stock Level: " + product.getMaxStockLevel());
     }
 
     @Override

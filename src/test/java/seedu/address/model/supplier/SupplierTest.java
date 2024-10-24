@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
+import seedu.address.model.product.StockLevel;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.SupplierBuilder;
 
@@ -62,14 +63,14 @@ public class SupplierTest {
 
     @Test
     public void hasProduct_productInList_returnsTrue() {
-        Product product = new Product(new ProductName("Test Product"));
+        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0));
         Supplier supplier = new SupplierBuilder().withProducts(SampleDataUtil.getProductSet("Test Product")).build();
         assertTrue(supplier.hasProduct(product));
     }
 
     @Test
     public void hasProduct_productNotInList_returnsFalse() {
-        Product product = new Product(new ProductName("Test Product"));
+        Product product = new Product(new ProductName("Test Product"), new StockLevel(0, 0, 0));
         Supplier supplier = new SupplierBuilder().build();
         assertFalse(supplier.hasProduct(product));
     }

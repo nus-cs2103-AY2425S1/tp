@@ -15,38 +15,37 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Product {
-    private final seedu.address.model.product.ProductName name;
-
+    private final ProductName name;
     private Name supplierName;
-
-    private int stockLevel;
-    private int minStockLevel;
-    private int maxStockLevel;
-
+    private final StockLevel stockLevel;
     private final Set<Tag> tags = new HashSet<>(); // TODO: Implement storage of tags
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Product} with the specified name and default stock levels.
      */
-    public Product(seedu.address.model.product.ProductName name) {
+    public Product(ProductName name) {
         requireAllNonNull(name);
         this.name = name;
-        this.tags.addAll(tags);
-        this.stockLevel = 0;
-        this.minStockLevel = Integer.MAX_VALUE;
-        this.maxStockLevel = 0;
+        this.stockLevel = new StockLevel(0, Integer.MAX_VALUE, 0); // Default values
     }
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Product} with the specified name and stock levels.
      */
-    public Product(seedu.address.model.product.ProductName name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Product(ProductName name, StockLevel stockLevel) {
+        requireAllNonNull(name, stockLevel);
         this.name = name;
+        this.stockLevel = stockLevel;
+    }
+
+    /**
+     * Constructs a {@code Product} with the specified name, stock levels, and tags.
+     */
+    public Product(ProductName name, StockLevel stockLevel, Set<Tag> tags) {
+        requireAllNonNull(name, stockLevel, tags);
+        this.name = name;
+        this.stockLevel = stockLevel;
         this.tags.addAll(tags);
-        this.stockLevel = 0;
-        this.minStockLevel = Integer.MAX_VALUE;
-        this.maxStockLevel = 0;
     }
 
     /**
@@ -64,6 +63,14 @@ public class Product {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return new HashSet<>(tags); // Return a copy to preserve encapsulation
+    }
+
+    /**
      * Returns true if the product is assigned to a supplier.
      */
     public boolean isAssigned() {
@@ -77,63 +84,26 @@ public class Product {
         return this.supplierName;
     }
 
-    /**
-     * Returns the stock level of the product.
-     */
-    public int getStockLevel() {
-        return stockLevel;
-    }
-
-    /**
-     * Sets the stock level of the product.
-     */
-    public void setStockLevel(int stockLevel) {
-        this.stockLevel = stockLevel;
-    }
-
-    /**
-     * Returns the minimum stock level of the product.
-     */
-    public int getMinStockLevel() {
-        return minStockLevel;
-    }
-
-    /**
-     * Sets the minimum stock level of the product.
-     */
-    public void setMinStockLevel(int minStockLevel) {
-        this.minStockLevel = minStockLevel;
-    }
-
-    /**
-     * Returns the maximum stock level of the product.
-     */
-    public int getMaxStockLevel() {
-        return maxStockLevel;
-    }
-
-    /**
-     * Sets the maximum stock level of the product.
-     */
-    public void setMaxStockLevel(int maxStockLevel) {
-        this.maxStockLevel = maxStockLevel;
-    }
-
     public ProductName getName() {
         return name;
+    }
+
+    /**
+     * Returns the stock level object of the product.
+     */
+    public StockLevel getStockLevel() {
+        return stockLevel;
     }
 
     /**
      * Returns true if both products have the same name.
      * This defines a weaker notion of equality between two products.
      */
-    public boolean isSameProduct(Product otherSupplier) {
-        if (otherSupplier == this) {
+    public boolean isSameProduct(Product otherProduct) {
+        if (otherProduct == this) {
             return true;
         }
-
-        return otherSupplier != null
-                && otherSupplier.getName().equals(getName());
+        return otherProduct != null && otherProduct.getName().equals(getName());
     }
 
     /**
@@ -142,32 +112,30 @@ public class Product {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Product)) {
+        } else if (!(other instanceof Product)) {
             return false;
         }
-
         Product otherProduct = (Product) other;
-        return name.equals(otherProduct.name) && stockLevel == otherProduct.stockLevel
-            && ((this.supplierName == null && otherProduct.supplierName == null)
-            || supplierName.equals(otherProduct.supplierName));
+        return name.equals(otherProduct.name)
+                && Objects.equals(supplierName, otherProduct.supplierName)
+                && stockLevel.equals(otherProduct.stockLevel)
+                && tags.equals(otherProduct.tags);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        // TODO: Add supplier/stockLevel?
-        return Objects.hash(name);
+        return Objects.hash(name, supplierName, stockLevel, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("stockLevel", stockLevel)
+                .add("supplierName", supplierName)
+                .add("tags", tags)
                 .toString();
     }
 }
