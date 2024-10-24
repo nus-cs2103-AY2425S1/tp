@@ -32,7 +32,6 @@ public class Main {
         // The warning however, can be safely ignored. Thus, the following log informs
         // the user (if looking at the log output) that the said warning appearing in the log
         // can be ignored.
-        assert false;
         logger.warning("The warning about Unsupported JavaFX configuration below (if any) can be ignored.");
         Application.launch(MainApp.class, args);
     }
