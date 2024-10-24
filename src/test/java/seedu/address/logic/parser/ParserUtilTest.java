@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.event.Date;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Description;
-import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 
 public class ParserUtilTest {
@@ -79,29 +79,6 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
-    }
-
-    @Test
-    public void parseEventName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventName(null));
-    }
-
-    @Test
-    public void parseEventName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEventName(INVALID_EVENT_NAME));
-    }
-
-    @Test
-    public void parseEventName_validValueWithoutWhitespace_returnsEventName() throws Exception {
-        seedu.address.model.event.Name expectedName = new seedu.address.model.event.Name(VALID_EVENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseEventName(VALID_EVENT_NAME));
-    }
-
-    @Test
-    public void parseEventName_validValueWithWhitespace_returnsTrimmedEventName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_EVENT_NAME + WHITESPACE;
-        seedu.address.model.event.Name expectedName = new seedu.address.model.event.Name(VALID_EVENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseEventName(nameWithWhitespace));
     }
 
     @Test

@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.commons.name.Name;
+
 public class EventTest {
 
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
