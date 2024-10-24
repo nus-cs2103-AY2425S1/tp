@@ -50,13 +50,10 @@ public class MarkPaidCommand extends Command {
 
         Person personToMarkPayment = lastShownList.get(targetIndex.getZeroBased());
         Payment updatedPayment = calculatePayment(personToMarkPayment.getPayment(), fees);
-        Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
-                personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                updatedPayment, personToMarkPayment.getParticipation(), personToMarkPayment.getTags());
+        personToMarkPayment.setPayment(updatedPayment);
 
-        model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(personToMarkPayment)));
     }
 
     @Override

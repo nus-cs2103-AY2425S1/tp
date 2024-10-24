@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class UnEnrollCommand extends Command {
         }
         Tutorial tutorial = optionalTutorial.get();
 
-        Participation p = new seedu.address.model.participation.Participation(student, tutorial);
+        Participation p = new seedu.address.model.participation.Participation(student, tutorial, new ArrayList<>());
         if (!(tutorial.hasParticipation(p) || student.hasParticipation(p) || model.hasParticipation(p))) {
             throw new CommandException(MESSAGE_NO_SUCH_PARTICIPATION);
         }

@@ -75,17 +75,12 @@ public class MarkAttendanceByStudentCommand extends Command {
 
         tutorialAttended.getAttendanceList().add(attendance);
 
-        Person markedStudent = new Person(
-                studentToMarkAttendance.getName(), studentToMarkAttendance.getPhone(),
-                studentToMarkAttendance.getEmail(), studentToMarkAttendance.getAddress(),
-                studentToMarkAttendance.getPayment(), studentToMarkAttendance.getParticipation(),
-                studentToMarkAttendance.getTags());
-
-        model.setPerson(studentToMarkAttendance, markedStudent);
+        //show changes on UI
+        model.setPerson(studentToMarkAttendance, studentToMarkAttendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
-                Messages.format(markedStudent)));
+                Messages.format(studentToMarkAttendance)));
     }
 
     @Override
