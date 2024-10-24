@@ -7,6 +7,9 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.DetailContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -49,8 +53,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_archive() throws Exception {
-        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
-        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD + " 3") instanceof ArchiveCommand);
+        String archiveCommand = ArchiveCommand.COMMAND_WORD + " pa/mybook.json";
+        assertTrue(parser.parseCommand(archiveCommand) instanceof ArchiveCommand);
     }
 
     @Test
@@ -93,6 +97,19 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_load() throws Exception {
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestLoading.json");
+        Files.createFile(tempFile);
+        assertTrue(parser.parseCommand(LoadCommand.COMMAND_WORD
+                + " pa/TestLoading.json") instanceof LoadCommand);
+        Files.deleteIfExists(tempFile);
     }
 
     @Test

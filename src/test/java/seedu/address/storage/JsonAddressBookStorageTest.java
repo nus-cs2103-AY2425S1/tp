@@ -65,7 +65,7 @@ public class JsonAddressBookStorageTest {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         Path archivePath = testFolder.resolve("ArchiveAddressBook.json");
         AddressBook original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath, archivePath);
+        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
         jsonAddressBookStorage.saveAddressBook(original, filePath);
@@ -90,7 +90,6 @@ public class JsonAddressBookStorageTest {
         jsonAddressBookStorage.saveArchivedAddressBook(original, archivePath);
         ReadOnlyAddressBook readBackArchive = jsonAddressBookStorage.readAddressBook(archivePath).get();
         assertEquals(original, new AddressBook(readBackArchive));
-        assertEquals(archivePath, jsonAddressBookStorage.getArchivedAddressBookFilePath());
     }
 
     @Test
