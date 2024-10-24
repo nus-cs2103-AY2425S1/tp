@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("/delete " + index)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("/delete " + index)
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -27,7 +27,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse(index)
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -49,7 +49,13 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteItem(1)
+DeleteCommand -> Model : get ia at index - 1
+activate Model
+
+Model --> DeleteCommand : ia
+deactivate Model
+
+DeleteCommand -> Model : deleteItem(ia)
 activate Model
 
 Model --> DeleteCommand
