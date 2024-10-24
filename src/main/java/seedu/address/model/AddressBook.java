@@ -11,6 +11,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.wedding.UniqueWeddingList;
 import seedu.address.model.wedding.Wedding;
 
@@ -22,6 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final UniqueTaskList tasks;
     private final UniqueWeddingList weddings;
 
     /*
@@ -34,6 +37,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        tasks = new UniqueTaskList();
         weddings = new UniqueWeddingList();
     }
 
@@ -47,6 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
         initialiseTags();
         initialiseWeddings();
+        initialiseTasks();
     }
 
     //// list overwrite operations
@@ -60,6 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setTags(newData.getTagList());
         setWeddings(newData.getWeddingList());
+        setTasks(newData.getTaskList());
     }
 
     /**
@@ -76,6 +82,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setWeddings(List<Wedding> weddings) {
         this.weddings.setWeddings(weddings);
+    }
+
+    /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
     }
 
     //// person-level operations
@@ -134,6 +148,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.contains(tag);
     }
 
+
+    /**
+     * Adds a task to the Wedlinker.
+     * The task must not already exist in the Wedlinker.
+     * @param task A {@code Task} object to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Returns true if a task with the same description as {@code task} exists in the Wedlinker.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     */
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+        tasks.setTask(target, editedTask);
+    }
+
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTask(Task key) {
+        tasks.remove(key);
+    }
+
     /**
      * Adds a wedding to the Wedlinker
      * The wedding must not already exist in the Wedlinker
@@ -142,6 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addWedding(Wedding wedding) {
         weddings.add(wedding);
     }
+
 
     /**
      * Replaces the given wedding {@code target} in the list with {@code editedWedding}.
@@ -213,6 +265,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Creates any tasks that is attached to a person but not initialised.
+     * This function is only to be used when loading from Storage.
+     */
+    public void initialiseTasks() {
+        for (Person person : persons) {
+            Set<Task> taskForPerson = person.getTasks();
+            for (Task task : taskForPerson) {
+                if (!this.hasTask(task)) {
+                    this.addTask(task);
+                }
+            }
+        }
+    }
+
+    /**
      * Creates any weddings attached to a person but not initialised.
      * This function is only to be used when loading from Storage.
      */
@@ -244,6 +311,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
     }
 
     @Override

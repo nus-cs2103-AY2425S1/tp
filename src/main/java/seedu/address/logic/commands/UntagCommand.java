@@ -92,7 +92,8 @@ public class UntagCommand extends Command {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 updatedTags,
-                personToEdit.getWeddings());
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

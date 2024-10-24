@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,8 @@ import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicat
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.keywordspredicate.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditWeddingDescriptorBuilder;
@@ -61,6 +64,8 @@ public class CommandTestUtil {
     public static final String VALID_WEDDING_AMY = VALID_NAME_AMY.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_BOB = VALID_NAME_BOB.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_CLIVE = VALID_NAME_CLIVE.split(" ")[0] + "'s Wedding";
+    public static final String VALID_TASK_TODO = "todo: Different Task";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -191,5 +196,19 @@ public class CommandTestUtil {
         model.updateFilteredWeddingList(new WeddingContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
 
         assertEquals(1, model.getFilteredWeddingList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitDescription = task.getDescription().split("\\s+");
+        model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitDescription[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 }

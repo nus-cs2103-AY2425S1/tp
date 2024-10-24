@@ -105,7 +105,8 @@ public class AssignWeddingCommand extends Command {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 personToEdit.getTags(),
-                updatedWeddings);
+                updatedWeddings,
+                personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
