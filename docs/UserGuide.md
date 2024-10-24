@@ -224,8 +224,7 @@ acceptable range). Therefore, edit the data file only if you are confident that 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
-contains the data of your previous VBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous VBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -246,7 +245,7 @@ contains the data of your previous VBook home folder.
 | **Edit**   | `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br/>`:ed INDEX -n NAME...`                               | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
 | **Exit**   | `:exit`                                                                                                                        | `:exit`                                                                                                                                         |
 | **Export** | `:export`                                                                                                                      | `:export`                                                                                                                                       |
-| **Find**   | `:find KEYWORD [MORE_KEYWORDS]`                                                                                                | `:find James Jake`                                                                                                                              |                                                                                                                                                 |
+| **Find**   | `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`                                                                | `:find -n david -l serangoon`                                                                                                                   |                                                                                                                                                 |
 | **Help**   | `:help`                                                                                                                        | `:help`                                                                                                                                         |
 | **List**   | `:list`<br/>`:ls`                                                                                                              | `:list`<br/>`:ls`                                                                                                                               |
 | **Redo**   | `:redo`                                                                                                                        | `:redo`                                                                                                                                         |
