@@ -65,11 +65,10 @@ public class RestaurantCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> prices.getChildren().add(new Label(tag.tagName)));
 
-        // Add or remove the highlighted borders based on whether the restaurant is a favorite
         if (restaurant.isFavourite()) {
-            cardPane.setStyle("-fx-border-color: #ffeb3b;-fx-border-width: 2;");
+            cardPane.getStyleClass().add("favourite");
         } else {
-            cardPane.setStyle("");
+            cardPane.getStyleClass().remove("favourite");
         }
     }
 }
