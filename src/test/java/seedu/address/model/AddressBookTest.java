@@ -20,8 +20,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.association.Association;
-import javafx.collections.ObservableSet;
-import javafx.util.Pair;
 import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
