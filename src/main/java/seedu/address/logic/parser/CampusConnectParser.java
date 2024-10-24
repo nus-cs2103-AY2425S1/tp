@@ -85,6 +85,9 @@ public class CampusConnectParser {
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

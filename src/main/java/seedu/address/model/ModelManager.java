@@ -189,6 +189,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void redoCampusConnect() {
+        ReadOnlyCampusConnect newCampusConnect = campusConnect.recoverUndoneState();
+        this.setCampusConnect(newCampusConnect);
+    }
+
+    @Override
     public void saveCurrentCampusConnect() {
         campusConnect.saveCurrentState();
     }

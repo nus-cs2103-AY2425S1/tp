@@ -19,6 +19,8 @@ public class CampusConnect implements ReadOnlyCampusConnect {
 
     private final UniquePersonList persons;
     private final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
+    private final Stack<ReadOnlyCampusConnect> future = new Stack<>();
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -48,6 +50,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     public void saveCurrentState() {
         ReadOnlyCampusConnect newCampusConnect = new CampusConnect(this);
         prev.add(newCampusConnect);
+        future.clear();
     }
 
     /**
@@ -56,6 +59,21 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     public ReadOnlyCampusConnect recoverPreviousState() {
         if (!prev.isEmpty()) {
             ReadOnlyCampusConnect out = prev.pop();
+            future.push(new CampusConnect(this));
+            assert out != null;
+            return out;
+        } else {
+            return new CampusConnect(this);
+        }
+    }
+
+    /**
+     * Recover previously undone states
+     */
+    public ReadOnlyCampusConnect recoverUndoneState() {
+        if (!future.isEmpty()) {
+            ReadOnlyCampusConnect out = future.pop();
+            prev.push(new CampusConnect(this));
             assert out != null;
             return out;
         } else {

@@ -180,6 +180,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void redoCampusConnect() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void saveCurrentCampusConnect() {
             throw new AssertionError("This method should not be called");
         }
