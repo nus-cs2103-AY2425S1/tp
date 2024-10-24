@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +21,10 @@ public class Appointment {
      * @param dateTimeString A valid appointment date string.
      */
     public Appointment(String dateTimeString) {
-        requireNonNull(dateTimeString);
+        if (dateTimeString == null) {
+            this.value = null;
+            return;
+        }
         this.value = LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 
