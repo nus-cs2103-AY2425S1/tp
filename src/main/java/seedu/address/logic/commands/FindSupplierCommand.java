@@ -22,8 +22,8 @@ public class FindSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + PREFIX_SUPPLIER + ": Finds all suppliers whose name, "
-            + "company and product contains the specified keyword (case-insensitive) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_SUPPLIER + ": Finds all suppliers "
+            + "whose name, company and product contains the specified keyword (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
             + "Parameters:\n"
             + PREFIX_NAME + "KEYWORD "
@@ -53,8 +53,8 @@ public class FindSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Predicate<Person> combindedPredicate = listOfPredicates.stream().reduce(x -> true, Predicate::and);
-        model.updateFilteredPersonList(combindedPredicate);
+        Predicate<Person> combinedPredicate = listOfPredicates.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredPersonList(combinedPredicate);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_SUPPLIERS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
