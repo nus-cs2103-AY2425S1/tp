@@ -78,6 +78,7 @@ public class EditCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         // no prefix
         assertParseFailure(parser, " a", EDIT_MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " ve1", EDIT_MESSAGE_INVALID_FORMAT);
 
         // multiple prefixes
         assertParseFailure(parser, " v/1 e/1", EDIT_MESSAGE_INVALID_FORMAT);

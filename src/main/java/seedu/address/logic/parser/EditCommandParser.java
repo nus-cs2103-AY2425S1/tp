@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
@@ -39,29 +40,33 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_DESCRIPTION, PREFIX_TAG,
-                PREFIX_EVENT, PREFIX_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_EVENT);
 
         if (!(argMultimap.exactlyOnePrefixPresent(PREFIX_VENDOR, PREFIX_EVENT))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME,
-                PREFIX_PHONE, PREFIX_DESCRIPTION,
-                PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR, PREFIX_EVENT);
 
         final boolean isEventEdit = argMultimap.getValue(PREFIX_EVENT).isPresent();
 
         if (isEventEdit) {
-            return parseEditEventCommand(argMultimap);
+            return parseEditEventCommand(args);
         } else {
-            return parseEditVendorCommand(argMultimap);
+            return parseEditVendorCommand(args);
         }
     }
 
-    private EditVendorCommand parseEditVendorCommand(ArgumentMultimap argMultimap) throws ParseException {
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditVendorCommand
+     * and returns an EditVendorCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    private EditVendorCommand parseEditVendorCommand(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_DESCRIPTION, PREFIX_TAG);
         Index index;
 
         try {
@@ -70,6 +75,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditVendorCommand.MESSAGE_USAGE),
                     pe);
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DESCRIPTION);
 
         EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor();
 
@@ -92,7 +99,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditVendorCommand(index, editVendorDescriptor);
     }
 
-    private EditEventCommand parseEditEventCommand(ArgumentMultimap argMultimap) throws ParseException {
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditEventCommand
+     * and returns an EditEventCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    private EditEventCommand parseEditEventCommand(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT, PREFIX_NAME, PREFIX_DATE);
         Index index;
 
         try {
@@ -101,6 +115,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEventCommand.MESSAGE_USAGE),
                     pe);
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE);
 
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
 

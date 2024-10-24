@@ -31,11 +31,10 @@ public class EditEventCommand extends EditCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_DATE + "DATE] "
+            + "Parameters: " + PREFIX_EVENT + "INDEX (must be a positive integer)" + " <other event parameters>" + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + "1 "
-            + PREFIX_DATE + "2025-10-10 ";
+            + PREFIX_NAME + "John Baby Shower" + " "
+            + PREFIX_DATE + "2021-10-10";
 
     private final EditEventDescriptor editEventDescriptor;
 
