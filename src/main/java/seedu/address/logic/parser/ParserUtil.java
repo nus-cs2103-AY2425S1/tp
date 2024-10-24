@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Appointment;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -206,11 +207,15 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String trimmedTagName = tag.trim();
+
+        if (isValidBloodType(trimmedTagName)) {
+            return new Tag(trimmedTagName);
+        } else if (!Tag.isValidTagName(trimmedTagName)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        return new Tag(trimmedTagName);
     }
 
     /**
@@ -219,9 +224,35 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        boolean hasBloodTypeTag = false;
+
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+
+            // Check if it's a blood type tag
+            if (isValidBloodType(tag.tagName)) {
+                if (hasBloodTypeTag) {
+                    throw new ParseException("Only one blood type tag is allowed.");
+                }
+                hasBloodTypeTag = true;
+            }
+            tagSet.add(tag);
         }
         return tagSet;
+    }
+
+    /**
+     * Checks if the given tag name is a valid blood type.
+     *
+     * @param tagName the name of the tag to check for validity as a blood type.
+     * @return {@code true} if the tag name is a valid blood type; {@code false} otherwise.
+     */
+    public static boolean isValidBloodType(String tagName) {
+        for (BloodType bloodType : BloodType.values()) {
+            if (bloodType.getDisplayValue().equals(tagName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
