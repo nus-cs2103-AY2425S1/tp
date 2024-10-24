@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -202,6 +204,11 @@ public class ParserUtil {
 
         } catch (IllegalArgumentException e) {
             throw new ParseException(Wedding.MESSAGE_CONSTRAINTS);
+        }
+        String[] indexArray = personIndexString.split("\\s+");
+        Set<String> inputIndexSet = new HashSet<>(List.of(indexArray));
+        if (inputIndexSet.size() != indexArray.length) {
+            throw new ParseException("Duplicate contact indexes specified after " + PREFIX_CONTACT.getPrefix());
         }
 
         return personIndexSet;
