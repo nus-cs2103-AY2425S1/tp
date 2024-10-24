@@ -105,7 +105,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01T00:00\","
                 + "\"1\","
-                + "\"Supplier\"";
+                + "\"Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
