@@ -210,6 +210,39 @@ Expected output:
 * `New delivery added: John Doe; Date & time: 18-06-2024 17:00; Product: bread; Quantity: 500 g; Cost: 5.50; Status: PENDING`
 * `New delivery added: Betsy Crowe; Date & time: 19-12-2024 08:00; Product: soap; Quantity: 10 units; Cost: 39.50; Status: PENDING`
 
+
+### Marking a delivery : `mark -d`
+
+Marks the specified delivery from the address book with the specified `STATUS`.
+
+Format: `mark -d INDEX STATUS`
+
+* Marks the delivery at the specified `INDEX` with the specified `STATUS`.
+* The index refers to the index number shown in the displayed delivery list.
+* The status refers to the delivery status of a delivery shown in the displayed delivery list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The status **must be one of the following:** PENDING, DELIVERED, CANCELLED. Note that the status is not case-sensitive.
+
+
+Examples:
+* `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
+* `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
+
+
+### Deleting a delivery : `delete -d`
+
+Deletes the specified delivery from the address book.
+
+Format: `delete -d INDEX`
+
+* Deletes the delivery at the specified `INDEX`.
+* The index refers to the index number shown in the displayed delivery list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
+* `find -d /pro bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -259,12 +292,28 @@ _Details coming soon ..._
 
 ## Command summary
 
+### Supplier Commands
+
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**Delete** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**Mark**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+
+
+### Delivery Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**Delete** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**Mark**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+
+
+### General Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
