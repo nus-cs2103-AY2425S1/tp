@@ -2,11 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
@@ -27,36 +30,35 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
-
-        if (!argMultimap.getValue(PREFIX_FIELD).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
-        }
-
-        String fieldAndKeywords = argMultimap.getValue(PREFIX_FIELD).get();
-        String field;
-        List<String> keywords;
-
-        field = ParserUtil.parseField(fieldAndKeywords);
-        keywords = ParserUtil.parseSearchKeywords(fieldAndKeywords);
-
-        switch (field) {
-        case "Address":
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new AddressContainsKeywordsPredicate(keywords));
-        case "Email":
-            return new SearchCommand(new EmailContainsKeywordsPredicate(keywords));
-        case "Name":
-            return new SearchCommand(new NameContainsKeywordsPredicate(keywords));
-        case "Phone":
-            return new SearchCommand(new PhoneContainsKeywordsPredicate(keywords));
-        case "Tags":
-            return new SearchCommand(new TagContainsKeywordsPredicate(keywords));
-        default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
+            return new SearchCommand(new EmailContainsKeywordsPredicate(keywords));
+        }
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
+            return new SearchCommand(new NameContainsKeywordsPredicate(keywords));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
+            return new SearchCommand(new PhoneContainsKeywordsPredicate(keywords));
+        }
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
+            return new SearchCommand(new TagContainsKeywordsPredicate(keywords));
+        }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
     }
 }
