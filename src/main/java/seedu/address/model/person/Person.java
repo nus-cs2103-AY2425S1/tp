@@ -101,32 +101,6 @@ public class Person implements Appointmentable {
         return appointments;
     }
 
-<<<<<<< HEAD
-    public String getHistoryBase() {
-        return History.getHistoryDataBase();
-    }
-
-    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
-    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
-        try {
-            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            String time = "DateTime: " + dateTime.format(formatter);
-            return time + " " + appointment.toString();
-        } catch (AppNotFoundException e) {
-            return e.getMessage();
-        }
-    }
-
-    public String getPatientHistory(Id patientId) {
-        String appointments = history.getAllPatientsAppointments(patientId);
-        return appointments; // Assuming the Appointment class has a toString() method for formatting
-    }
-
-    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
-        return history.getDoctorAppointmentsForDay(date, doctorId);
-    }
-=======
     //    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
     //    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
     //        try {
@@ -147,7 +121,6 @@ public class Person implements Appointmentable {
     //            return "No appointment found for the given date and doctor.";
     //        }
     //    }
->>>>>>> master
 
 
     /**
@@ -322,3 +295,5 @@ public class Person implements Appointmentable {
         return builder.toString();
     }
 }
+
+
