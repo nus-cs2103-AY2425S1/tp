@@ -60,7 +60,7 @@ public interface Logic {
      * @return the tutorial list that contains the given student
      */
     List<Tutorial> getStudentTutorials(Person student);
-    
+
     /**
      * Returns the user prefs' address book file path.
      */
