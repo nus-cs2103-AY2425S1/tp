@@ -23,6 +23,8 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    systemProperty 'java.awt.headless', 'true'
+
 }
 
 task coverage(type: JacocoReport) {
