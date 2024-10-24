@@ -34,7 +34,7 @@ public class AddLogCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + CliSyntax.PREFIX_REMARK + "REMARK "
-            + "[" + CliSyntax.PREFIX_DATE + "DATE]...\n"
+            + "[" + CliSyntax.PREFIX_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_REMARK + "First meetup. "
             + CliSyntax.PREFIX_DATE + "2019-10-15 14:00";
@@ -57,7 +57,7 @@ public class AddLogCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToAddLog}
      */
     private static Person createPersonWithNewLog(Person personToAddLog, Log newLog) {
-        assert personToAddLog != null;
+        requireNonNull(personToAddLog != null);
 
         Name name = personToAddLog.getName();
         Phone phone = personToAddLog.getPhone();
@@ -95,19 +95,19 @@ public class AddLogCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddLogCommand otherAddCommand)) {
+        if (!(other instanceof AddLogCommand)) {
             return false;
         }
+        AddLogCommand otherAddLogCommand = (AddLogCommand) other;
 
-        return targetIndex.equals(otherAddCommand.targetIndex);
+        return targetIndex.equals(otherAddLogCommand.targetIndex)
+                && log.equals(otherAddLogCommand.log);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("date", log.getDate())
-                .add("remark", log.getRemark())
+                .add("log", log)
                 .toString();
     }
 

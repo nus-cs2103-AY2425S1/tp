@@ -3,6 +3,7 @@ package careconnect.testutil;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
@@ -98,7 +99,9 @@ public class PersonBuilder {
      * Sets the {@code Logs} of the {@code Person} that we are building.
      */
     public PersonBuilder withLogs(ArrayList<Log> logs) {
-        this.logs = logs;
+        this.logs = logs.stream()
+                .map(log -> new Log(log.getDate(), log.getRemark()))
+                .collect(Collectors.toCollection(ArrayList::new));
         return this;
     }
 

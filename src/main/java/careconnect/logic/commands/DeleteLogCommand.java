@@ -55,7 +55,7 @@ public class DeleteLogCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToDeleteLog}
      */
     private Person createPersonWithoutLog(Person personToDeleteLog, Index deletedLogIndex) {
-        assert personToDeleteLog != null;
+        requireNonNull(personToDeleteLog);
 
         Name name = personToDeleteLog.getName();
         Phone phone = personToDeleteLog.getPhone();
@@ -99,9 +99,10 @@ public class DeleteLogCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteLogCommand otherDeleteLogCommand)) {
+        if (!(other instanceof DeleteLogCommand )) {
             return false;
         }
+        DeleteLogCommand otherDeleteLogCommand = (DeleteLogCommand) other;
 
         return personIndex.equals(otherDeleteLogCommand.personIndex)
                 && deletedLog.equals(otherDeleteLogCommand.deletedLog);
@@ -110,8 +111,7 @@ public class DeleteLogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("personIndex", personIndex)
-                .add("logIndex", logIndex)
+                .add("log", deletedLog)
                 .toString();
     }
 }
