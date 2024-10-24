@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Inherits from Person and includes the end date of partnership with NGO.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Partner extends Person {
+public class Partner extends Person implements Comparable<Partner> {
 
     private final Date partnershipEndDate;
     /**
@@ -84,5 +84,10 @@ public class Partner extends Person {
     @Override
     public Role getRole() {
         return Role.PARTNER;
+    }
+
+    @Override
+    public int compareTo(Partner other) {
+        return this.partnershipEndDate.compareTo(other.partnershipEndDate);
     }
 }
