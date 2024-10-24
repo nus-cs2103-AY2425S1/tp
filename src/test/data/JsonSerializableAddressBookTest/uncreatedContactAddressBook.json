@@ -1,4 +1,5 @@
 {
+  "_comment": "AddressBook save file which contains the same Contact values as in TypicalAddressBooks#getTypicalAddressBook()",
   "contacts" : [ {
     "type" : "client",
     "name" : "Alice Pauline",
@@ -8,7 +9,7 @@
     "date" : "2000-01-01",
     "tags" : [ "friends" ],
     "id" : 1,
-    "eventIds": [0, 1]
+    "eventIds": [0]
   }, {
     "type" : "vendor",
     "name" : "Benson Meier",
@@ -28,7 +29,7 @@
     "date" : "2000-01-01",
     "tags" : [ ],
     "id" : 3,
-    "eventIds": [0, 1]
+    "eventIds": [0]
   }, {
     "type" : "vendor",
     "name" : "Daniel Meier",
@@ -39,18 +40,48 @@
     "tags" : [ "friends" ],
     "id": 4,
     "eventIds": [0, 1]
+  }, {
+    "type" : "client",
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "date" : "2000-01-01",
+    "tags" : [ ],
+    "id" : 5,
+    "eventIds": [1]
+  }, {
+    "type" : "client",
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "date" : "2000-12-31",
+    "tags" : [ ],
+    "id" : 6,
+    "eventIds": [1]
+  }, {
+    "type" : "vendor",
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "service" : "catering",
+    "tags" : [ ],
+    "id" : 7,
+    "eventIds": [1]
   } ],
   "events" : [ {
     "description": "This is wedding A",
     "eventId": 0,
     "clientIds": [1, 3],
-    "vendorIds": [2, 4]
+    "vendorIds": [2, 10]
   }, {
-    "description": "This is wedding A",
+    "description": "This is wedding B",
     "eventId": 1,
-    "clientIds": [1, 3],
-    "vendorIds": [2, 4]
-  } ],
-  "nextContactId": 5,
+    "clientIds": [5, 6],
+    "vendorIds": [2, 4, 7]
+  }],
+  "nextContactId": 8,
   "nextEventId": 2
 }

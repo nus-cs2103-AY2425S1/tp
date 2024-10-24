@@ -56,7 +56,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_FIRST_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
-        Contact editedContact = (Contact) new ClientBuilder().withId(targeContact.getId().id).build();
+        Contact editedContact = (Contact) new ClientBuilder().withId(targeContact.getId().contactId).build();
         EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(targetIndex, editContactDescriptor);
 
@@ -72,7 +72,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_FIRST_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
-        Client editedContact = (Client) new ClientBuilder().withId(targeContact.getId().id).build();
+        Client editedContact = (Client) new ClientBuilder().withId(targeContact.getId().contactId).build();
         EditClientDescriptor editClientDescriptor = new EditClientDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
 
@@ -88,7 +88,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_SECOND_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
-        Vendor editedContact = (Vendor) new VendorBuilder().withId(targeContact.getId().id).build();
+        Vendor editedContact = (Vendor) new VendorBuilder().withId(targeContact.getId().contactId).build();
         EditVendorDescriptor editClientDescriptor = new EditVendorDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
 
@@ -175,7 +175,7 @@ public class EditCommandTest {
         Contact editedContact = clientBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND).build();
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).withId(targetContact.getId().id).build();
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).withId(targetContact.getId().contactId).build();
         EditCommand editCommand = new EditCommand(null, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,

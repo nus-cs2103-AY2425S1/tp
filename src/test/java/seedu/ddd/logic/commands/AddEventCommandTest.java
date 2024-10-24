@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.AddEventCommand.MESSAGE_DUPLICATE_EVENT;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_CLIENT_ID_SET;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_CLIENT_CONTACT_ID_SET;
 import static seedu.ddd.testutil.EventBuilder.DEFAULT_DESCRIPTION;
 import static seedu.ddd.testutil.EventBuilder.DEFAULT_EVENT_ID;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_VENDOR_ID_SET;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_VENDOR_CONTACT_ID_SET;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.ClientBuilder;
@@ -41,25 +41,25 @@ public class AddEventCommandTest {
     @Test
     public void constructor_nullClientIds_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddEventCommand(null,
-                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
+                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
     }
 
     @Test
     public void constructor_nullVendorIds_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
                 null, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
     }
 
     @Test
     public void constructor_nullDescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
-                DEFAULT_VENDOR_ID_SET, null, DEFAULT_EVENT_ID));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, null, DEFAULT_EVENT_ID));
     }
 
     @Test
     public void constructor_nullEventId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
-                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, null));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, null));
     }
 
     @Test
@@ -67,8 +67,8 @@ public class AddEventCommandTest {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddEventCommand(DEFAULT_CLIENT_ID_SET,
-                        DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID).execute(modelStub);
+        CommandResult commandResult = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID).execute(modelStub);
 
         assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
                 commandResult.getFeedbackToUser());
@@ -78,8 +78,8 @@ public class AddEventCommandTest {
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        AddEventCommand addEventCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET,
-                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID);
+        AddEventCommand addEventCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID);
         ModelStub modelStub = new ModelStubWithEvent();
 
         assertThrows(CommandException.class,
@@ -88,17 +88,17 @@ public class AddEventCommandTest {
 
     @Test
     public void equals() {
-        AddEventCommand addEventOneCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
-                new Description("Description 1"), DEFAULT_EVENT_ID);
-        AddEventCommand addEventTwoCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
-                new Description("Description 2"), DEFAULT_EVENT_ID);
+        AddEventCommand addEventOneCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 1"), DEFAULT_EVENT_ID);
+        AddEventCommand addEventTwoCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 2"), DEFAULT_EVENT_ID);
 
         // same object -> returns true
         assertTrue(addEventOneCommand.equals(addEventOneCommand));
 
         // same values -> returns true
-        AddEventCommand addEventOneCommandCopy = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
-                new Description("Description 1"), DEFAULT_EVENT_ID);
+        AddEventCommand addEventOneCommandCopy = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
+                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 1"), DEFAULT_EVENT_ID);
         assertTrue(addEventOneCommand.equals(addEventOneCommandCopy));
 
         // different types -> returns false
@@ -173,12 +173,12 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(Id id) {
+        public boolean hasClientId(ContactId contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasVendorId(Id id) {
+        public boolean hasVendorId(ContactId contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -198,7 +198,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public Contact getContact(Id id) {
+        public Contact getContact(ContactId contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -267,20 +267,20 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(Id id) {
-            requireNonNull(id);
-            return id.equals(new Id(ClientBuilder.DEFAULT_ID));
+        public boolean hasClientId(ContactId contactId) {
+            requireNonNull(contactId);
+            return contactId.equals(new ContactId(ClientBuilder.DEFAULT_ID));
         }
 
         @Override
-        public boolean hasVendorId(Id id) {
-            requireNonNull(id);
-            return id.equals(new Id(VendorBuilder.DEFAULT_ID));
+        public boolean hasVendorId(ContactId contactId) {
+            requireNonNull(contactId);
+            return contactId.equals(new ContactId(VendorBuilder.DEFAULT_ID));
         }
 
         @Override
-        public Contact getContact(Id id) {
-            if (id.equals(new Id(VALID_ID_AMY))) {
+        public Contact getContact(ContactId contactId) {
+            if (contactId.equals(new ContactId(VALID_ID_AMY))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();
@@ -312,20 +312,20 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(Id id) {
-            requireNonNull(id);
-            return id.equals(new Id(ClientBuilder.DEFAULT_ID));
+        public boolean hasClientId(ContactId contactId) {
+            requireNonNull(contactId);
+            return contactId.equals(new ContactId(ClientBuilder.DEFAULT_ID));
         }
 
         @Override
-        public boolean hasVendorId(Id id) {
-            requireNonNull(id);
-            return id.equals(new Id(VendorBuilder.DEFAULT_ID));
+        public boolean hasVendorId(ContactId contactId) {
+            requireNonNull(contactId);
+            return contactId.equals(new ContactId(VendorBuilder.DEFAULT_ID));
         }
 
         @Override
-        public Contact getContact(Id id) {
-            if (id.equals(new Id(VALID_ID_AMY))) {
+        public Contact getContact(ContactId contactId) {
+            if (contactId.equals(new ContactId(VALID_ID_AMY))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();

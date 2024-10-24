@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.testutil.EventBuilder;
 
-public class EventIdPredicateTest {
+public class EventContactIdPredicateTest {
     @Test
     public void equals() {
         EventId firstId = new EventId(1);

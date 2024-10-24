@@ -7,7 +7,8 @@
     "address" : "Blk 123 Bukit Merah St 7",
     "date" : "abc123",
     "tags" : [ "vegetarian", "budget" ],
-    "id" : 0
+    "id" : 0,
+    "eventIds": []
   } ],
   "events": [],
   "nextContactId" : 1,

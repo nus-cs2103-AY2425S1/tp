@@ -7,7 +7,7 @@ import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class EventIdTest {
+public class EventContactIdTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
