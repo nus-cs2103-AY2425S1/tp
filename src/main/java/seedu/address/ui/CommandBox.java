@@ -1,13 +1,17 @@
 package seedu.address.ui;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.commandpopup.AutoSuggestionTextField;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -20,9 +24,10 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     private CommandHistory commandHistory = new CommandHistory();
+    private final SortedSet<String> entries;
 
     @FXML
-    private TextField commandTextField;
+    private AutoSuggestionTextField commandTextField;
 
 
 
@@ -32,6 +37,8 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.entries = new TreeSet<>();
+        commandTextField.setCommandBox(this);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -58,11 +65,12 @@ public class CommandBox extends UiPart<Region> {
         });
     }
 
+
     /**
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    public void handleCommandEntered() {
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
@@ -94,7 +102,7 @@ public class CommandBox extends UiPart<Region> {
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
-
+        commandTextField.hidePopup();
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
