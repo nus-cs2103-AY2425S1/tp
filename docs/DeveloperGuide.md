@@ -119,7 +119,7 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
+<img src="images/BackupSequenceDiagram.png" width="450" />
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
