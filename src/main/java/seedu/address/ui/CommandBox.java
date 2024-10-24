@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,16 +40,50 @@ public class CommandBox extends UiPart<Region> {
         suggestionTextField.setMouseTransparent(true);
         suggestionTextField.setFocusTraversable(false);
 
-        // Add listeners for real-time command detection
+        // Make suggestion text field transparent and match command text field
+        suggestionTextField.setStyle("-fx-background-color: transparent;");
+        suggestionTextField.fontProperty().bind(commandTextField.fontProperty());
+
+        // Bind suggestion width to command width
+        suggestionTextField.prefWidthProperty().bind(commandTextField.widthProperty());
+
+        // Add listeners for real-time command detection and positioning
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             setStyleToDefault();
             updateSuggestion(newValue);
         });
+
+        // This ensures suggestion updates when the text layout changes
+        commandTextField.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            updateSuggestionPosition();
+        });
     }
 
-    private void updateSuggestion(String text) {
-        String suggestion = suggestions.checkAllCommands(text);
-        suggestionTextField.setText(suggestion);
+    private void updateSuggestion(String currentText) {
+        String fullSuggestion = suggestions.checkAllCommands(currentText);
+
+        if (fullSuggestion.isEmpty() || !fullSuggestion.startsWith(currentText)) {
+            suggestionTextField.setText("");
+            return;
+        }
+
+        // Only show the remaining part of the suggestion
+        String remainingSuggestion = fullSuggestion.substring(currentText.length());
+        suggestionTextField.setText(remainingSuggestion);
+
+        updateSuggestionPosition();
+    }
+
+    private void updateSuggestionPosition() {
+        String currentText = commandTextField.getText();
+
+        // Get the text width using a Text node for accurate measurement
+        Text text = new Text(currentText);
+        text.setFont(commandTextField.getFont());
+        double textWidth = text.getLayoutBounds().getWidth();
+
+        // Position the suggestion text field
+        suggestionTextField.setTranslateX( textWidth);
     }
 
     /**

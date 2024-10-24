@@ -19,7 +19,7 @@ public enum Commands {
     TAGWEDDING("tagw", "tagw INDEX/NAME w/WEDDING r/ROLE ", new String[]{"w/", "r/"}),
     EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [w/WEDDING]",
             new String[]{"n/", "p/", "e/", "a/", "w/"}),
-    VIEWWEDDING("vieww", "vieww NAME", new String[]{}),
+    VIEWWEDDING("vieww", "vieww INDEX/NAME", new String[]{}),
 
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
     TAGGING("tag", "tag INDEX/NAME [t/TAG...]", new String[]{"t/"});
