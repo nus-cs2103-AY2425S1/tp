@@ -72,4 +72,19 @@ public class FilterCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return this.tagSet.equals(otherFilterCommand.tagSet) && this.statusSet.equals(otherFilterCommand.statusSet);
+    }
 }
