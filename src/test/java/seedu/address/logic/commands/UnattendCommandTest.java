@@ -75,7 +75,7 @@ public class UnattendCommandTest {
 
     @Test
     public void execute_tutorialDoesNotExist_failure() {
-        TutorialId nonExistentTutorialId = TutorialId.of("9999");
+        TutorialId nonExistentTutorialId = TutorialId.of("T9999");
 
         UnattendCommand command = new UnattendCommand(aliceId, nonExistentTutorialId, date);
 

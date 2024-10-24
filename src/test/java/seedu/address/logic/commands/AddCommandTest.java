@@ -65,22 +65,22 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateStudentId_throwsCommandException() {
         // Setup model with existing student having the same ID
-        Student existingStudent = new StudentBuilder().withStudentId("1001").build();
+        Student existingStudent = new StudentBuilder().withStudentId("A1001000U").build();
         AddCommand addCommand = new AddCommand(existingStudent, TUTORIAL_ID);
 
-        Student newStudent = new StudentBuilder().withName("Different name").withStudentId("1001").build();
+        Student newStudent = new StudentBuilder().withName("Different name").withStudentId("A1001000U").build();
         ModelStub modelStub = new ModelStubWithStudent(newStudent);
 
         // Assert that the expected exception is thrown
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_STUDENTID + "1001", () -> addCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_STUDENTID + "A1001000U", () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void execute_invalidTutorial_throwsCommandException() {
-        TutorialId tutorialId = TutorialId.of("10000");
-        Student validStudent = new Student(new Name("ABC"), new StudentId("1999"),
-                TutorialId.of("100"), null);
+        TutorialId tutorialId = TutorialId.of("T1000");
+        Student validStudent = new Student(new Name("ABC"), new StudentId("A1999999U"),
+                TutorialId.of("T1001"), null);
         AddCommand addCommand = new AddCommand(validStudent, tutorialId);
         ModelStub modelStub = new ModelStubWithStudent(ALICE);
 

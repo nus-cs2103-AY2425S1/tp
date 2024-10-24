@@ -38,26 +38,28 @@ public class AttendCommandTest {
 
     @Test
     public void constructor_nullStudentId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendCommand(null, TutorialId.of("1001"), new Date()));
+        assertThrows(NullPointerException.class, () -> new AttendCommand(null, TutorialId.of("T1001"),
+                new Date()));
     }
 
     @Test
     public void constructor_nullTutorialId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("1001"), null, new Date()));
+        assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("A1001000U"), null,
+                new Date()));
     }
 
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("1001"),
-                TutorialId.of("1001"), null));
+        assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("A1001000U"),
+                TutorialId.of("T1001"), null));
     }
 
     @Test
     public void execute_attendanceRecordedSuccessfully() throws Exception {
         // Arrange
         ModelStubAcceptingAttendanceRecorded modelStub = new ModelStubAcceptingAttendanceRecorded();
-        StudentId studentId = new StudentId("1001");
-        TutorialId tutorialId = TutorialId.of("1001");
+        StudentId studentId = new StudentId("A1001000U");
+        TutorialId tutorialId = TutorialId.of("T1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 
@@ -75,9 +77,9 @@ public class AttendCommandTest {
 
     @Test
     public void execute_attendanceRecordingFails_throwsCommandException() {
+        StudentId studentId = new StudentId("A1001000U");
+        TutorialId tutorialId = TutorialId.of("T1001");
         ModelStubWithoutTutorialId modelStub = new ModelStubWithoutTutorialId();
-        StudentId studentId = new StudentId("1001");
-        TutorialId tutorialId = TutorialId.of("1001");
         Date date = new Date();
 
         AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
@@ -88,10 +90,10 @@ public class AttendCommandTest {
     @Test
     public void equals_test() throws Exception {
         // Arrange
-        StudentId studentId1 = new StudentId("1001");
-        StudentId studentId2 = new StudentId("1002");
-        TutorialId tutorialId1 = TutorialId.of("1001");
-        TutorialId tutorialId2 = TutorialId.of("1002");
+        StudentId studentId1 = new StudentId("A1001000U");
+        StudentId studentId2 = new StudentId("A1002000U");
+        TutorialId tutorialId1 = TutorialId.of("T1001");
+        TutorialId tutorialId2 = TutorialId.of("T1002");
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
         Date date2 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/22");
 
@@ -113,8 +115,8 @@ public class AttendCommandTest {
     @Test
     public void toString_test() throws Exception {
         // Arrange
-        StudentId studentId = new StudentId("1001");
-        TutorialId tutorialId = TutorialId.of("1001");
+        StudentId studentId = new StudentId("A1001000U");
+        TutorialId tutorialId = TutorialId.of("T1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 
@@ -341,7 +343,7 @@ public class AttendCommandTest {
     /**
      * Helper class to represent an attendance record for testing purposes.
      */
-    private class AttendanceRecord {
+    private static class AttendanceRecord {
         private final StudentId studentId;
         private final TutorialId tutorialId;
         private final Date date;
@@ -357,10 +359,9 @@ public class AttendCommandTest {
             if (this == other) {
                 return true;
             }
-            if (!(other instanceof AttendanceRecord)) {
+            if (!(other instanceof AttendanceRecord otherRecord)) {
                 return false;
             }
-            AttendanceRecord otherRecord = (AttendanceRecord) other;
             return studentId.equals(otherRecord.studentId)
                     && tutorialId.equals(otherRecord.tutorialId)
                     && date.equals(otherRecord.date);

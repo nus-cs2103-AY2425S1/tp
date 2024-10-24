@@ -23,7 +23,7 @@ public class AddTutCommand extends Command {
             + PREFIX_TUT_ID + "id\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUT_NAME + "CS1010 "
-            + PREFIX_TUT_ID + "1011";
+            + PREFIX_TUT_ID + "T1001";
     private final Tutorial toAdd;
 
     /**

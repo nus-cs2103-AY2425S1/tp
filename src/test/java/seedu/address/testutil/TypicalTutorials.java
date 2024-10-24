@@ -10,9 +10,9 @@ import seedu.address.model.tut.TutorialList;
  */
 public class TypicalTutorials {
 
-    public static final Tutorial TUTORIAL1 = Tutorial.of(new TutName("TutorialOne"), TutorialId.of("1000"));
-    public static final Tutorial TUTORIAL2 = Tutorial.of(new TutName("TutorialTwo"), TutorialId.of("1001"));
-    public static final Tutorial TUTORIAL3 = Tutorial.of(new TutName("TutorialThree"), TutorialId.of("1002"));
+    public static final Tutorial TUTORIAL1 = Tutorial.of(new TutName("TutorialOne"), TutorialId.of("T1000"));
+    public static final Tutorial TUTORIAL2 = Tutorial.of(new TutName("TutorialTwo"), TutorialId.of("T1001"));
+    public static final Tutorial TUTORIAL3 = Tutorial.of(new TutName("TutorialThree"), TutorialId.of("T1002"));
 
     /**
      * Returns an {@code TutorialList} with typical tutorials.

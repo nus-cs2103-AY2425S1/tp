@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AttendCommandParser" as AttendCommandParser LOGIC_COLOR
+participant "command:AttendCommand" as AttendCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+participant "studentId:StudentId" as StudentId LOGIC_COLOR
+participant "tutorialId:TutorialId" as TutorialId LOGIC_COLOR
+participant "tutDate:Date" as Date LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("attend s/A1234567U\nc/T1001 d/2024/02/21")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("attend s/A1234567U\nc/T1001 d/2024/02/21")
+activate AddressBookParser
+
+create AttendCommandParser
+AddressBookParser -> AttendCommandParser
+activate AttendCommandParser
+
+AttendCommandParser --> AddressBookParser
+deactivate AttendCommandParser
+
+AddressBookParser -> AttendCommandParser : parse("s/A1234567U\nc/T1001 d/2024/02/21")
+activate AttendCommandParser
+
+create StudentId
+AttendCommandParser -> StudentId
+activate StudentId
+
+StudentId --> AttendCommandParser : studentId
+deactivate StudentId
+
+create TutorialId
+AttendCommandParser -> TutorialId :
+activate TutorialId
+
+TutorialId --> AttendCommandParser : tutorialId
+deactivate TutorialId
+
+create Date
+AttendCommandParser -> Date :
+activate Date
+
+Date --> AttendCommandParser : tutDate
+deactivate Date
+
+create AttendCommand
+AttendCommandParser -> AttendCommand : AttendCommand(studentId, tutorialId, tutDate)
+activate AttendCommand
+
+AttendCommand --> AttendCommandParser :
+deactivate AttendCommand
+
+AttendCommandParser --> AddressBookParser : command
+deactivate AttendCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AttendCommandParser -[hidden]-> AddressBookParser
+destroy AttendCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> AttendCommand : execute(model)
+activate AttendCommand
+
+AttendCommand -> Model : setStudentAttendance(studentId, tutorialId, tutDate)
+activate Model
+
+Model --> AttendCommand
+deactivate Model
+
+create CommandResult
+AttendCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AttendCommand
+deactivate CommandResult
+
+AttendCommand --> LogicManager : commandResult
+deactivate AttendCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
