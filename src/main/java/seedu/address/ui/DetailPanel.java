@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Person;
 
-
 /**
  * A Detail Panel that displays individual person details in the UI.
  * This class is responsible for handling the display of personal information such as name, email, phone number, etc.
@@ -81,9 +80,9 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
 
-        meetings.setText("Meetings\t:\n" + "(coming in v1.4)");
-        // when it's ready, put person.getMeetings()
+        meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
     }
+
 
     /**
      * Event that triggers when a (new) person is selected by user.
