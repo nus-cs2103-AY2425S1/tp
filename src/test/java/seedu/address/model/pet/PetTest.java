@@ -22,6 +22,15 @@ public class PetTest {
         // same object -> returns true
         assertTrue(BELLA.isSamePet(BELLA));
 
+        // name differs in case, all other attributes same -> returns true
+        Pet editedFluffy = new PetBuilder(FLUFFY).withName(VALID_NAME_FLUFFY.toLowerCase()).build();
+        assertTrue(FLUFFY.isSamePet(editedFluffy));
+
+        // name has trailing spaces, all other attributes same -> returns true
+        String nameWithTrailingSpaces = VALID_NAME_FLUFFY + " ";
+        editedFluffy = new PetBuilder(FLUFFY).withName(nameWithTrailingSpaces).build();
+        assertTrue(FLUFFY.isSamePet(editedFluffy));
+
         // null -> returns false
         assertFalse(BELLA.isSamePet(null));
 
@@ -33,15 +42,6 @@ public class PetTest {
         // different name, all other attributes same -> returns false
         editedBella = new PetBuilder(BELLA).withName(VALID_NAME_FLUFFY).build();
         assertFalse(BELLA.isSamePet(editedBella));
-
-        // name differs in case, all other attributes same -> returns false
-        Pet editedFluffy = new PetBuilder(FLUFFY).withName(VALID_NAME_FLUFFY.toLowerCase()).build();
-        assertFalse(FLUFFY.isSamePet(editedFluffy));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_FLUFFY + " ";
-        editedFluffy = new PetBuilder(FLUFFY).withName(nameWithTrailingSpaces).build();
-        assertFalse(FLUFFY.isSamePet(editedFluffy));
     }
 
     @Test

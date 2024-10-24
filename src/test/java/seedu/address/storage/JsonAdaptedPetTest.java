@@ -26,6 +26,7 @@ public class JsonAdaptedPetTest {
     private static final String INVALID_SEX = "female";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String VALID_UID = MAX.getUniqueID();
     private static final String VALID_NAME = MAX.getName().toString();
     private static final String VALID_AGE = MAX.getAge().toString();
     private static final String VALID_BREED = MAX.getBreed().toString();
@@ -42,16 +43,26 @@ public class JsonAdaptedPetTest {
     }
 
     @Test
+    public void toModelType_nullUniqueId_throwsIllegalValueException() {
+        JsonAdaptedPet pet = new JsonAdaptedPet(null, VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX,
+                VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "UniqueId");
+        assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(INVALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX, VALID_TAGS);
+                new JsonAdaptedPet(VALID_UID, INVALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX,
+                        VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPet pet = new JsonAdaptedPet(null, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX, VALID_TAGS);
+        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_UID, null, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -59,14 +70,16 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_invalidBreed_throwsIllegalValueException() {
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, INVALID_BREED, VALID_AGE, VALID_SEX, VALID_TAGS);
+                new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, INVALID_BREED, VALID_AGE, VALID_SEX,
+                        VALID_TAGS);
         String expectedMessage = Breed.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
     public void toModelType_nullBreed_throwsIllegalValueException() {
-        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, null, VALID_AGE, VALID_SEX, VALID_TAGS);
+        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, null, VALID_AGE, VALID_SEX,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Breed.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -74,14 +87,16 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_invalidSpecies_throwsIllegalValueException() {
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(VALID_NAME, INVALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX, VALID_TAGS);
+                new JsonAdaptedPet(VALID_UID, VALID_NAME, INVALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX,
+                        VALID_TAGS);
         String expectedMessage = Species.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
     public void toModelType_nullSpecies_throwsIllegalValueException() {
-        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, null, VALID_BREED, VALID_AGE, VALID_SEX, VALID_TAGS);
+        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_UID, VALID_NAME, null, VALID_BREED, VALID_AGE, VALID_SEX,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Species.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -89,14 +104,16 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_invalidAge_throwsIllegalValueException() {
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, VALID_BREED, INVALID_AGE, VALID_SEX, VALID_TAGS);
+                new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, VALID_BREED, INVALID_AGE, VALID_SEX,
+                        VALID_TAGS);
         String expectedMessage = Age.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
     public void toModelType_nullAge_throwsIllegalValueException() {
-        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, VALID_BREED, null, VALID_SEX, VALID_TAGS);
+        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, VALID_BREED, null, VALID_SEX,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -104,14 +121,16 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_invalidSex_throwsIllegalValueException() {
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, INVALID_SEX, VALID_TAGS);
+                new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, INVALID_SEX,
+                        VALID_TAGS);
         String expectedMessage = Sex.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
     public void toModelType_nullSex_throwsIllegalValueException() {
-        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, null, VALID_TAGS);
+        JsonAdaptedPet pet = new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, null,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Sex.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -121,7 +140,8 @@ public class JsonAdaptedPetTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPet pet =
-                new JsonAdaptedPet(VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX, invalidTags);
+                new JsonAdaptedPet(VALID_UID, VALID_NAME, VALID_SPECIES, VALID_BREED, VALID_AGE, VALID_SEX,
+                        invalidTags);
         assertThrows(IllegalValueException.class, pet::toModelType);
     }
 

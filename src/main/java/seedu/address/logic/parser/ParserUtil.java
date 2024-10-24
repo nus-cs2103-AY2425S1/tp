@@ -112,7 +112,7 @@ public class ParserUtil {
         if (!seedu.address.model.pet.Name.isValidName(trimmedPetName)) {
             throw new ParseException(seedu.address.model.pet.Name.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.pet.Name(trimmedPetName);
+        return new seedu.address.model.pet.Name(capitalizeEachWord(trimmedPetName));
     }
 
     /**
@@ -233,7 +233,7 @@ public class ParserUtil {
         if (!Age.isValidAge(trimmedAge)) {
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
-        return new Age(trimmedAge);
+        return new Age(capitalizeEachWord(trimmedAge));
     }
 
     /**
@@ -248,7 +248,7 @@ public class ParserUtil {
         if (!Breed.isValidBreed(trimmedBreed)) {
             throw new ParseException(Breed.MESSAGE_CONSTRAINTS);
         }
-        return new Breed(trimmedBreed);
+        return new Breed(capitalizeEachWord(trimmedBreed));
     }
 
     /**
@@ -268,7 +268,7 @@ public class ParserUtil {
         } else if (trimmedSex.equalsIgnoreCase("f")) {
             return new Sex("Female");
         }
-        return new Sex(trimmedSex);
+        return new Sex(capitalizeEachWord(trimmedSex));
     }
 
     /**
@@ -283,7 +283,7 @@ public class ParserUtil {
         if (!Species.isValidSpecies(trimmedSpecies)) {
             throw new ParseException(Species.MESSAGE_CONSTRAINTS);
         }
-        return new Species(trimmedSpecies);
+        return new Species(capitalizeEachWord(trimmedSpecies));
     }
 
     /**
@@ -313,5 +313,24 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Helper function to capitalize the first letter of each word
+     * while converting the rest of the characters to lowercase.
+     *
+     * @param input The string to be formatted.
+     * @return A string with each word's first letter capitalized and the rest in lowercase.
+     */
+    public static String capitalizeEachWord(String input) {
+        String[] words = input.toLowerCase().split("\\s+");
+        StringBuilder formattedName = new StringBuilder();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                formattedName.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1))
+                        .append(" ");
+            }
+        }
+        return formattedName.toString().trim();
+    }
 
 }

@@ -45,7 +45,7 @@ public class PetCard extends UiPart<Region> {
         super(FXML);
         this.pet = pet;
         id.setText(displayedIndex + ". ");
-        name.setText(pet.getName().name);
+        name.setText(pet.getName().name + " uid: " + pet.getUniqueID());
         species.setText(pet.getSpecies().value);
         breed.setText(pet.getBreed().value);
         age.setText(pet.getAge().value);

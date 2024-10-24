@@ -2,6 +2,7 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.capitalizeEachWord;
 
 /**
  * Represents a Pet's sex in PawPatrol.
@@ -23,7 +24,7 @@ public class Sex {
     public Sex(String sex) {
         requireNonNull(sex);
         checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
-        value = sex;
+        value = capitalizeEachWord(sex);
     }
 
     /**
