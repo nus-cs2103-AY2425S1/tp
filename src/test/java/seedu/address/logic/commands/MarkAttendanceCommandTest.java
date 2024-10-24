@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -41,7 +42,8 @@ public class MarkAttendanceCommandTest {
         CommandResult result = command.execute(modelStub);
 
         assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
-                        validStudent.getTutorialGroup(), attendance, date), result.getFeedbackToUser());
+                        validStudent.getTutorialGroup(), attendance,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
     }
 
     @Test
