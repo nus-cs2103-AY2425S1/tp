@@ -50,7 +50,6 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
-        
         window.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
