@@ -109,7 +109,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withAppointments(VALID_APPOINTMENT_ONE).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .withAppointments(VALID_APPOINTMENT_ONE).addAppointment("11/11/2025 1200")
+                .build();
         EditCommand editCommand = new EditCommand(model.getFilteredPersonList().get(0).getName(),
                 new EditPersonDescriptorBuilder().withAppointments(VALID_APPOINTMENT_ONE).build());
 

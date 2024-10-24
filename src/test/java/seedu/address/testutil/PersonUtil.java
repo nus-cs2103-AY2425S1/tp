@@ -61,6 +61,14 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getAge().ifPresent(age -> sb.append(PREFIX_AGE).append(age.value).append(" "));
         descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.value).append(" "));
+        if (descriptor.getAppointments().isPresent()) {
+            Set<Appointment> appointments = descriptor.getAppointments().get();
+            if (appointments.isEmpty()) {
+                sb.append(PREFIX_APPOINTMENT).append(" ");
+            } else {
+                appointments.forEach(ap -> sb.append(PREFIX_APPOINTMENT).append(ap.toString()).append(" "));
+            }
+        }
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

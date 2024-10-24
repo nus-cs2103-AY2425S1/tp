@@ -26,14 +26,14 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withAge("24").withSex("Female")
-            .withTags("friends").build();
+            .withTags("friends").addAppointment("11/11/2025 1200").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withAge("37").withSex("Male")
+            .withTags("owesMoney", "friends").addAppointment("01/01/2026 1200")
             .withTags("owesMoney", "friends")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")

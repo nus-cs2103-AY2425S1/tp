@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalNames.NAME_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -29,12 +32,17 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StarCommand;
 import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Range;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithCriteriaPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.NoteDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
+
+
 
 public class AddressBookParserTest {
 
@@ -94,6 +102,19 @@ public class AddressBookParserTest {
     public void parseCommand_export() throws Exception {
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " 3") instanceof ExportCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        List<Range<?>> ranges = new ArrayList<>();
+        Range<Integer> ageRange = new Range<>(10, 99);
+        Range<LocalDate> dateRange = new Range<LocalDate>(LocalDate.of(2025, 1, 1), LocalDate.of(2026, 12, 30));
+        ranges.add(ageRange);
+        ranges.add(dateRange);
+        PersonWithCriteriaPredicate predicate = new PersonWithCriteriaPredicate(ranges);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + "b/ 10-99" + " " + "ap/ 01/01/2025-30/12/2026");
+        assertEquals(new FilterCommand(predicate), command);
     }
 
     @Test

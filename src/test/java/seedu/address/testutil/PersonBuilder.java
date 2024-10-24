@@ -89,6 +89,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder addAppointment(String appointment) {
+        this.appointments.add(new Appointment(appointment));
+        return this;
+    }
+
+    /**
      * Parses the {@code appointments} into a {@code Set<Appointment>}
      * and set it to the {@code Person} that we are building.
      */
@@ -136,6 +144,8 @@ public class PersonBuilder {
         this.sex = new Sex(sex);
         return this;
     }
+
+
 
     /**
      * Sets the {@code Sex} of the {@code Person} that we are building.

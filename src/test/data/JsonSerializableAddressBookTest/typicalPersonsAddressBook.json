@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "age" : "24",
     "sex" : "Female",
+    "appointments": ["11/11/2025 1200"],
     "tags" : [ "friends" ],
     "note": {
       "medication": [ ],
@@ -21,6 +22,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "age" : "37",
     "sex" : "Male",
+    "appointments": ["01/01/2026 1200"],
     "tags" : [ "owesMoney", "friends" ],
     "note": {
       "medication": [ ],

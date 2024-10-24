@@ -3,6 +3,7 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,6 +27,10 @@ public class Appointment {
         requireNonNull(appointment);
         checkArgument(isValidAppointment(appointment), MESSAGE_CONSTRAINTS);
         this.appointment = LocalDateTime.parse(appointment, FORMATTER);
+    }
+
+    public LocalDate getAppointmentDate() {
+        return appointment.toLocalDate();
     }
 
     /**
