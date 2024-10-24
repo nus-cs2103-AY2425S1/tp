@@ -220,6 +220,10 @@ public class AddCommandTest {
             personsAdded.add(person);
         }
 
+        public void commitAddressBook() {
+            // do nothing
+        }
+
         @Override
         public ReadOnlyAddressBook getVersionedAddressBook() {
             return new AddressBook();

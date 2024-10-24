@@ -27,10 +27,21 @@ public class RedoCommandTest {
     @Test
     public void execute_redoAddPerson_success() {
         Person validPerson = new PersonBuilder().build();
+
+        // Add the person and commit the change
         model.addPerson(validPerson);
+        model.commitAddressBook();
+
+        // Undo the add
         model.undoAddressBook();
+
+        // Set up the expected model to match the state after redo
         expectedModel.addPerson(validPerson);
+
+        // Execute the redo command
         CommandResult result = new RedoCommand().execute(model);
+
+        // Verify the results
         assertEquals(RedoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
@@ -38,21 +49,52 @@ public class RedoCommandTest {
     public void execute_redoEditPerson_success() {
         Person originalPerson = new PersonBuilder().build();
         Person editedPerson = new PersonBuilder().withName("Edited Name").build();
+
+        // Add the original person and commit the change
         model.addPerson(originalPerson);
+        model.commitAddressBook();
+
+        // Edit the person and commit the change
         model.setPerson(originalPerson, editedPerson);
+        model.commitAddressBook();
+
+        // Undo the edit
         model.undoAddressBook();
-        expectedModel.addPerson(editedPerson);
+
+        // Set up the expected model to match the state after redo
+        expectedModel.addPerson(originalPerson);
+        expectedModel.setPerson(originalPerson, editedPerson);
+
+        // Execute the redo command
         CommandResult result = new RedoCommand().execute(model);
+
+        // Verify the results
         assertEquals(RedoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
     @Test
     public void execute_redoDeletePerson_success() {
-        Person validPerson = new PersonBuilder().build();
-        model.addPerson(validPerson);
-        model.deletePerson(validPerson);
+        Person personToDelete = new PersonBuilder().build();
+
+        // Add the person and commit the change
+        model.addPerson(personToDelete);
+        model.commitAddressBook();
+
+        // Delete the person and commit the change
+        model.deletePerson(personToDelete);
+        model.commitAddressBook();
+
+        // Undo the delete
         model.undoAddressBook();
+
+        // Set up the expected model to match the state after redo
+        expectedModel.addPerson(personToDelete);
+        expectedModel.deletePerson(personToDelete);
+
+        // Execute the redo command
         CommandResult result = new RedoCommand().execute(model);
+
+        // Verify the results
         assertEquals(RedoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
