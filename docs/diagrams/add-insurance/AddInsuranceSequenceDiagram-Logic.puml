@@ -1,0 +1,70 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddInsuranceCommandParser" as AddInsuranceCommandParser LOGIC_COLOR
+participant "a:AddInsuranceCommand" as AddInsuranceCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("addInsurance 1 iid/0")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addInsurance 1 iid/0")
+activate AddressBookParser
+
+create AddInsuranceCommandParser
+AddressBookParser -> AddInsuranceCommandParser
+activate AddInsuranceCommandParser
+
+AddInsuranceCommandParser --> AddressBookParser
+deactivate AddInsuranceCommandParser
+
+AddressBookParser -> AddInsuranceCommandParser : parse("1 iid/0")
+activate AddInsuranceCommandParser
+
+create AddInsuranceCommand
+AddInsuranceCommandParser -> AddInsuranceCommand
+activate AddInsuranceCommand
+
+AddInsuranceCommand --> AddInsuranceCommandParser
+deactivate AddInsuranceCommand
+
+AddInsuranceCommandParser --> AddressBookParser : a
+deactivate AddInsuranceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddInsuranceCommandParser -[hidden]-> AddressBookParser
+destroy AddInsuranceCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddInsuranceCommand : execute(m)
+activate AddInsuranceCommand
+
+AddInsuranceCommand -> Model : Add insurance plan to client
+activate Model
+
+Model --> AddInsuranceCommand
+deactivate Model
+
+create CommandResult
+AddInsuranceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddInsuranceCommand
+deactivate CommandResult
+
+AddInsuranceCommand --> LogicManager : r
+deactivate AddInsuranceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+
