@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPawPatrol;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -43,6 +44,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of pets */
     ObservableList<Pet> getFilteredPetList();
+
+    /** Returns an unmodifiable view of the filtered list of links */
+    ObservableList<Link> getFilteredLinkList();
 
     /**
      * Returns the user prefs' PawPatrol file path.

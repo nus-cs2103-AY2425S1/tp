@@ -173,6 +173,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered pet list */
     ObservableList<Pet> getFilteredPetList();
 
+    /** Returns an unmodifiable view of the filtered link list */
+    public ObservableList<Link> getFilteredLinkList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

@@ -30,7 +30,6 @@ public class ListBothCommand extends ListCommand {
         model.updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(ListBothCommand.MESSAGE_SUCCESS);
         return c;
     }
 
