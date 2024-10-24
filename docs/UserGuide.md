@@ -11,12 +11,6 @@ administrators.
 
 ## Table of Contents
 
-## Table of Contents
-
-## Table of Contents
-
-## Table of Contents
-
 1. [Installation](#1-installation)
 2. [Command Instructions](#2-command-instructions)
    - [2.1 Viewing Help](#21-viewing-help--help)
