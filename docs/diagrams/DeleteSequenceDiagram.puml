@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete John")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete John")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -27,14 +27,14 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("John")
 activate DeleteCommandParser
 
 create DeleteCommand
 DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser :
+DeleteCommand --> DeleteCommandParser
 deactivate DeleteCommand
 
 DeleteCommandParser --> AddressBookParser : d
@@ -49,21 +49,33 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+alt Person not found
+    DeleteCommand -> LogicManager : throw CommandException
+else Duplicate person detected
+    DeleteCommand -> Model : updateFilteredPersonListWithDuplicates("John")
+        activate Model
 
-Model --> DeleteCommand
-deactivate Model
+        Model --> DeleteCommand
+        deactivate Model
 
-create CommandResult
-DeleteCommand -> CommandResult
-activate CommandResult
+        DeleteCommand -> LogicManager : CommandResult("Duplicate persons found. Please delete by index.")
+else Valid person
+    DeleteCommand -> Model : deletePerson("John")
+    activate Model
 
-CommandResult --> DeleteCommand
-deactivate CommandResult
+    Model --> DeleteCommand
+    deactivate Model
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+    create CommandResult
+    DeleteCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> DeleteCommand
+    deactivate CommandResult
+
+    DeleteCommand --> LogicManager : r
+    deactivate DeleteCommand
+end
 
 [<--LogicManager
 deactivate LogicManager
