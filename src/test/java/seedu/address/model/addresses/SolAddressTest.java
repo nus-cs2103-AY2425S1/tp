@@ -36,32 +36,18 @@ public class SolAddressTest {
 
     @Test
     public void isValidPublicAddress_validInputs_returnsTrue() {
-        assertTrue(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
-                VALID_LABEL_1));
-        assertTrue(new SolAddress(VALID_PUBLIC_ADDRESS_2, VALID_LABEL_2).isValidPublicAddress(VALID_PUBLIC_ADDRESS_2,
-                VALID_LABEL_2));
+        assertTrue(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1));
+        assertTrue(new SolAddress(VALID_PUBLIC_ADDRESS_2, VALID_LABEL_2).isValidPublicAddress(VALID_PUBLIC_ADDRESS_2));
     }
 
     @Test
     public void isValidPublicAddress_emptyAddress_returnsFalse() {
-        assertFalse(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress("", VALID_LABEL_1));
-    }
-
-    @Test
-    public void isValidPublicAddress_emptyLabel_returnsFalse() {
-        assertFalse(
-                new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1, ""));
+        assertFalse(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(""));
     }
 
     @Test
     public void isValidPublicAddress_blankAddress_returnsFalse() {
-        assertFalse(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(" ", VALID_LABEL_1));
-    }
-
-    @Test
-    public void isValidPublicAddress_blankLabel_returnsFalse() {
-        assertFalse(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
-                " "));
+        assertFalse(new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(" "));
     }
 
     @Test

@@ -161,7 +161,7 @@ public class ParserUtil {
     public static String parsePublicAddressLabel(String label) throws ParseException {
         requireNonNull(label);
         if (!PublicAddress.isValidPublicAddressLabel(label)) {
-            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            throw new ParseException(PublicAddress.MESSAGE_LABEL_CONSTRAINTS);
         }
         return label.strip();
     }
