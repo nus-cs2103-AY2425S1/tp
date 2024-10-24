@@ -14,9 +14,9 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
+Person *--> "1" Name
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
 Person *--> TelegramHandle
 Person *--> ContactType
 Person *--> ModuleName
