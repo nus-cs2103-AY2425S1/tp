@@ -36,10 +36,10 @@ public class DescriptionTest {
         assertFalse(Description.isValidDescription("@TestEvent")); // special characters
         assertFalse(Description.isValidDescription("Event@123")); // contains special character
         assertFalse(Description.isValidDescription("123@456!")); // multiple special characters
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
 
         // valid description
+        assertTrue(Description.isValidDescription("")); // empty string
+        assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription("Birthday Party")); // alphanumeric with spaces
         assertTrue(Description.isValidDescription("Event 2024")); // alphanumeric with numbers
         assertTrue(Description.isValidDescription("SimpleEvent")); // alphanumeric, no spaces
