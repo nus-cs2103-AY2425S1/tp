@@ -49,11 +49,6 @@
         </content>
     </ScrollPane>
 
-    <Label text="History:" />
-    <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="437.0">
-        <content>
-            <Label fx:id="historyLabel" wrapText="true" />
-        </content>
-    </ScrollPane>
+    <FlowPane fx:id="historyLabel" text="History:" />
 </children>
 </VBox>

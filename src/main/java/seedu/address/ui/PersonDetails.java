@@ -14,12 +14,10 @@ import seedu.address.model.person.Person;
  * all features for the person object, and displays the details line by line.
  */
 public class PersonDetails {
-    private static final String SEPARATOR = "______________________________"
-            + "_________________________________\n\n";
     @FXML
     private Label birthdayLabel;
     @FXML
-    private Label historyLabel;
+    private FlowPane historyLabel;
     @FXML
     private Label remarkLabel;
     @FXML
@@ -56,10 +54,11 @@ public class PersonDetails {
         StringBuilder historyText = new StringBuilder();
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
             historyText.append(date.toString()).append(": \n");
-            historyText.append(String.join(", \n", activities)).append("\n" + SEPARATOR); // Separate each entry
+            historyText.append(String.join(", \n", activities)).append("\n");
+            Label history = new Label(historyText.toString());
+            historyLabel.getChildren().add(history);
         });
 
-        historyLabel.setText(historyText.toString());
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
