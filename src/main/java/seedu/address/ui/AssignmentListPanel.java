@@ -47,17 +47,4 @@ public class AssignmentListPanel extends UiPart<Region> {
         }
     }
 
-    /**
-     * Returns true if the help window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isVisible();
-    }
-
-    /**
-     * Hides the help window.
-     */
-    public void hide() {
-        getRoot().setVisible(false);
-    }
 }

@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.project.ProjectId;
+import seedu.address.ui.DisplayType;
 
 /**
  * Unassign person from a project
@@ -73,13 +74,15 @@ public class UnassignCommand extends Command {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
 
+        String commandMessage;
         if (assignmentId != null) {
             model.deleteAssignment(assignmentId);
-            return new CommandResult(String.format(MESSAGE_SUCCESS_ASSIGNMENT_ID, assignmentId));
+            commandMessage = String.format(MESSAGE_SUCCESS_ASSIGNMENT_ID, assignmentId);
         } else {
             model.deleteAssignment(projectId, employeeId);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, employeeId, projectId));
+            commandMessage = String.format(MESSAGE_SUCCESS, employeeId, projectId);
         }
+        return new CommandResult(commandMessage, DisplayType.ASSIGNMENT_LIST);
     }
 
     @Override

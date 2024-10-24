@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.ui.DisplayType;
 
 /**
  * Clears the address book of all projects.
@@ -18,6 +19,6 @@ public class ClearProjectCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBookProject(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, DisplayType.PROJECT_LIST);
     }
 }
