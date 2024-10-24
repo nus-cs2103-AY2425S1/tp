@@ -2,6 +2,7 @@ package seedu.hireme.logic.commands;
 
 import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,6 +45,11 @@ public class AddCommandIntegrationTest {
 
         assertCommandFailure(new AddCommand(applicationInList), model,
                 AddCommand.MESSAGE_DUPLICATE_APPLICATION);
+    }
+
+    @Test
+    public void execute_nullInternshipApplication_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, null, () -> new AddCommand(null));
     }
 
 }
