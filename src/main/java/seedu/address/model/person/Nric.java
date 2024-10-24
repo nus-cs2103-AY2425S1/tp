@@ -11,7 +11,7 @@ public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS = "NRIC should adhere to the following format and constraints:\n"
             + "1. The NRIC must be 9 characters long.\n"
-            + "2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'.\n"
+            + "2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)\n"
             + "   - 'S' and 'T' are for Singapore Citizens and Permanent Residents.\n"
             + "   - 'F' and 'G' are for Foreigners.\n"
             + "3. The next 7 characters must be digits.\n"
@@ -29,7 +29,7 @@ public class Nric {
     public Nric(String value) {
         requireNonNull(value);
         checkArgument(isValidNric(value), MESSAGE_CONSTRAINTS);
-        this.value = value;
+        this.value = value.toUpperCase();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Nric {
         }
 
         // Check if the first character is 'S', 'T', 'F', or 'G'
-        char firstChar = nric.charAt(0);
+        char firstChar = nric.toUpperCase().charAt(0);
         if (firstChar != 'S' && firstChar != 'T' && firstChar != 'F' && firstChar != 'G') {
             return false;
         }
@@ -54,7 +54,7 @@ public class Nric {
         }
 
         // Get the checksum letter (the last character)
-        char checksumLetter = nric.charAt(8);
+        char checksumLetter = nric.toUpperCase().charAt(8);
 
         // Declare the weights array as per NRIC checksum calculation
         int[] weights = {2, 7, 6, 5, 4, 3, 2};
@@ -92,6 +92,10 @@ public class Nric {
     @Override
     public String toString() {
         return value;
+    }
+
+    public String maskNric() {
+        return "*****" + value.substring(value.length() - 4);
     }
 
     @Override

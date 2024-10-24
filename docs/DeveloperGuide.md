@@ -678,17 +678,17 @@ Use case ends.
    - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
    - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
 
-3. **No-DBMS**  
+3. **No-DBMS**
    - **Category:** Technical Requirements
    - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
    - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
 
-4. **Human-Editable File**  
+4. **Human-Editable File**
    - **Category:** Data Requirements
    - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
    - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
 
-5. **Single-User**  
+5. **Single-User**
    - **Category:** User Constraints
    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.

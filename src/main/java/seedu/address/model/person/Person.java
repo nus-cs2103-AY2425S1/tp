@@ -1,13 +1,17 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +35,13 @@ public class Person {
     // Dependents
     private final Set<Nric> caregivers = new HashSet<>();
     private final Set<Nric> patients = new HashSet<>();
+
+    private final Set<Appointment> appointments = new HashSet<>();
+
+
+    private final List<Note> notes = new ArrayList<>();
+
+
 
     /**
      * Every field must be present and not null.
@@ -106,7 +117,22 @@ public class Person {
     public boolean hasPatient(Nric patient) {
         return patients.contains(patient);
     }
+    public boolean hasRole(Role role) {
+        return this.roles.contains(role);
+    }
+    public boolean hasTag(Tag tag) {
+        return this.tags.contains(tag);
+    }
 
+    /**
+     * Returns true if {@code Name} of this {@code Person} contains {@code Name} of parameter
+     */
+    public boolean hasName(Name name) {
+        return this.name.fullName.toUpperCase().contains(name.fullName.toUpperCase());
+    }
+    public boolean hasNric(Nric nric) {
+        return this.nric.equals(nric);
+    }
     public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);
     }
@@ -175,6 +201,25 @@ public class Person {
     }
 
     /**
+     * Returns an immutable list of notes, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Note> getNotes() {
+        return List.copyOf(notes);
+    }
+
+    /**
+     * Adds a note to this person.
+     *
+     * @param note the note to add.
+     */
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.add(note);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -185,6 +230,42 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getNric().equals(getNric());
+    }
+
+    /**
+     * Returns an immutable set of appointments, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments() {
+        return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
+     * Adds an appointment to the list of appointments.
+     *
+     * @param appointment The appointment to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    /**
+     * Returns true if the person has the specified appointment.
+     * @param appointment The appointment to be checked.
+     * @return true if the person has the specified appointment.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        return appointments.contains(appointment);
+    }
+
+    /**
+     * Removes the specified appointment from the list of appointments if the appointment is present.
+     *
+     * @param appointment The appointment to be removed.
+     */
+    public void removeAppointment(Appointment appointment) {
+        appointments.remove(appointment);
     }
 
     /**
