@@ -9,8 +9,10 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
@@ -36,6 +38,37 @@ public class UniqueContactList implements Iterable<Contact> {
     public boolean contains(Contact toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameContact);
+    }
+
+    /**
+     * Returns true if the list contains a client with the id as the given argument.
+     */
+    public boolean containsClientId(Id idToCheck) {
+        requireNonNull(idToCheck);
+        return internalList.stream()
+                .filter(contact -> contact instanceof Client)
+                .map(contact -> (Client) contact)
+                .anyMatch(client -> idToCheck.equals(client.getId()));
+    }
+
+    /**
+     * Returns true if the list contains a vendor with the id as the given argument.
+     */
+    public boolean containsVendorId(Id idToCheck) {
+        requireNonNull(idToCheck);
+        return internalList.stream()
+                .filter(contact -> contact instanceof Vendor)
+                .map(contact -> (Vendor) contact)
+                .anyMatch(vendor -> idToCheck.equals(vendor.getId()));
+    }
+
+    /**
+     * Gets a contact from the list.
+     * The contact must already exist in the list.
+     */
+    public Contact get(Id id) {
+        requireNonNull(id);
+        return internalList.stream().filter(contact -> id.equals(contact.getId())).findFirst().get();
     }
 
     /**

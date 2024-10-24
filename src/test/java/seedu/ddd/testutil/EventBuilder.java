@@ -4,9 +4,13 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DESCRIPTION_WEDDING
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EVENT_ID_WEDDING_AMY;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -16,23 +20,32 @@ import seedu.ddd.model.event.common.EventId;
  * A utility class to help with building Event objects.
  */
 public class EventBuilder {
-    public static final String DEFAULT_DESCRIPTION = VALID_DESCRIPTION_WEDDING_AMY;
-    public static final String DEFAULT_EVENT_ID = VALID_EVENT_ID_WEDDING_AMY;
-    private Description description;
-    private EventId eventId;
-    private List<Client> clients;
-    private List<Vendor> vendors;
+    public static final Description DEFAULT_DESCRIPTION = new Description(VALID_DESCRIPTION_WEDDING_AMY);
+    public static final Description DEFAULT_DESCRIPTION_TWO = new Description(VALID_DESCRIPTION_WEDDING_AMY);
+    public static final EventId DEFAULT_EVENT_ID = new EventId(VALID_EVENT_ID_WEDDING_AMY);
+    public static final List<Client> DEFAULT_CLIENT_LIST =
+            new ArrayList<>(Collections.singletonList(new ClientBuilder().build()));
+    public static final List<Vendor> DEFAULT_VENDOR_LIST =
+            new ArrayList<>(Collections.singletonList(new VendorBuilder().build()));
+    public static final Set<Client> DEFAULT_CLIENT_SET =
+            new HashSet<>(Collections.singletonList(new ClientBuilder().build()));
+
+    public static final Set<Vendor> DEFAULT_VENDOR_SET =
+            new HashSet<>(Collections.singletonList(new VendorBuilder().build()));
+    public static final Set<Id> DEFAULT_CLIENT_ID_SET =
+            new HashSet<>(Collections.singletonList(new Id(ClientBuilder.DEFAULT_ID)));
+
+    public static final Set<Id> DEFAULT_VENDOR_ID_SET =
+            new HashSet<>(Collections.singletonList(new Id(VendorBuilder.DEFAULT_ID)));
+    private Description description = DEFAULT_DESCRIPTION;
+    private EventId eventId = DEFAULT_EVENT_ID;
+    private List<Client> clients = new ArrayList<>(DEFAULT_CLIENT_LIST);
+    private List<Vendor> vendors = new ArrayList<>(DEFAULT_VENDOR_LIST);
 
     /**
      * Creates a {@code EventBuilder} with the default details.
      */
     public EventBuilder() {
-        description = new Description(DEFAULT_DESCRIPTION);
-        eventId = new EventId(DEFAULT_EVENT_ID);
-        clients = new ArrayList<>();
-        clients.add(new ClientBuilder().build());
-        vendors = new ArrayList<>();
-        vendors.add(new VendorBuilder().build());
     }
 
     /**

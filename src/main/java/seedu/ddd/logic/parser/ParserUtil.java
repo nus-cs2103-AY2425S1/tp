@@ -16,6 +16,7 @@ import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
+import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -24,6 +25,8 @@ import seedu.ddd.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final String MESSAGE_INVALID_ID = "Id is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -129,6 +132,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedDesc = desc.trim();
+        if (!Description.isValidDescription(trimmedDesc)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDesc);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -167,5 +185,17 @@ public class ParserUtil {
             throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
         return new Id(id);
+    }
+
+    /**
+     * Parses {@code Collection<String> clientIds} into a {@code Set<Id>}.
+     */
+    public static Set<Id> parseIds(Collection<String> ids) throws ParseException {
+        requireNonNull(ids);
+        final Set<Id> idSet = new HashSet<>();
+        for (String id : ids) {
+            idSet.add(parseId(id));
+        }
+        return idSet;
     }
 }

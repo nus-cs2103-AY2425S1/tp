@@ -23,6 +23,7 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.VendorBuilder;
@@ -108,7 +109,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -167,6 +168,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasClientId(Id id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasVendorId(Id id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
@@ -178,6 +189,11 @@ public class AddCommandTest {
 
         @Override
         public void deleteEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Contact getContact(Id id) {
             throw new AssertionError("This method should not be called.");
         }
 
