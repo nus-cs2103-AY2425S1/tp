@@ -114,10 +114,11 @@ class JsonAdaptedPerson {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-//        if (((Integer.parseInt(id) % 2) == 1) && (role != "doctor")
-//                || ((Integer.parseInt(id) % 2 == 0) && (role != "patient"))) {
-//            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-//        }
+
+        if (((Integer.parseInt(id) % 2) == 1) && !(role.toLowerCase().equals("doctor"))
+                || ((Integer.parseInt(id) % 2 == 0) && !(role.toLowerCase().equals("patient")))) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
 
         final int modelId = Integer.parseInt(id);
         final String modelRole = role;
