@@ -20,6 +20,7 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedModuleRoleMap
 }
 
 }
@@ -39,5 +40,7 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson -> "1" JsonAdaptedModuleRoleMap
+JsonAdaptedTag -right[hidden]- JsonAdaptedModuleRoleMap
 
 @enduml
