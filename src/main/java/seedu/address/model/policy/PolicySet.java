@@ -49,7 +49,7 @@ public class PolicySet implements Set<Policy> {
     private static void requireClassPolicyType(Object obj) {
         if (!(obj instanceof PolicyType)) {
             throw new ClassCastException("Expected a PolicyType instance but received "
-                    + obj == null ? "null" : obj.getClass().getName() + ".");
+                    + (obj == null ? "null" : obj.getClass().getName()) + ".");
         }
     }
 
@@ -79,8 +79,16 @@ public class PolicySet implements Set<Policy> {
 
         int index = hash(policy.getType());
         if (policies[index] != null) {
-            return false;
+            Policy existingPolicy = policies[index];
+
+            if (existingPolicy.getType().equals(policy.getType())) {
+                return false;
+            }
+
+            throw new IllegalArgumentException("Different policy types cannot occupy the same index: "
+                    + policy.getType() + " vs " + existingPolicy.getType());
         }
+
         policies[index] = policy;
         return true;
     }

@@ -163,7 +163,6 @@ public class PolicySetTest {
 
         assertThrows(NullPointerException.class, () -> policies.remove(null));
     }
-
     @Test
     public void removeAll_goodInputs_success() {
         final PolicySet policies = new PolicySet();
@@ -189,6 +188,7 @@ public class PolicySetTest {
         noDuplicatePolicies.add(life.getType());
         assertFalse(policies.removeAll(noDuplicatePolicies));
     }
+
 
     @Test
     public void removeAll_nullInputs_throwsNullPointerException() {
