@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_UNIQUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT_AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -25,11 +26,13 @@ public class EditAppointmentCommandTest {
     public void equals() {
 
         final EditAppointmentCommand standardCommand = new EditAppointmentCommand(new Nric(VALID_NRIC_AMY),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY,
                 DESC_APPOINTMENT_AMY);
 
         // same values -> returns true
         EditAppointmentDescriptor copyDescriptor = new EditAppointmentDescriptor(DESC_APPOINTMENT_AMY);
         EditAppointmentCommand commandWithSameValues = new EditAppointmentCommand(new Nric(VALID_NRIC_AMY),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY,
                 copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -43,16 +46,19 @@ public class EditAppointmentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different nric -> returns false
-        assertFalse(standardCommand.equals(new EditAppointmentCommand(new Nric(VALID_NRIC_BOB), DESC_APPOINTMENT_AMY)));
+        assertFalse(standardCommand.equals(new EditAppointmentCommand(new Nric(VALID_NRIC_BOB),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY, DESC_APPOINTMENT_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditAppointmentCommand(new Nric(VALID_NRIC_AMY), DESC_APPOINTMENT_BOB)));
+        assertFalse(standardCommand.equals(new EditAppointmentCommand(new Nric(VALID_NRIC_AMY),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY, DESC_APPOINTMENT_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(new Nric(VALID_NRIC_UNIQUE),
+                VALID_START_DATE_TIME_APPOINTMENT_AMY,
                 editAppointmentDescriptor);
         String expected = EditAppointmentCommand.class.getCanonicalName() + "{nric=" + VALID_NRIC_UNIQUE
                 + ", editAppointmentDescriptor="

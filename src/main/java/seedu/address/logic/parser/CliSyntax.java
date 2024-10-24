@@ -20,6 +20,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_START_TIME = new Prefix("start/");
     public static final Prefix PREFIX_END_TIME = new Prefix("end/");
     public static final Prefix PREFIX_NOTE = new Prefix("note/");
-
+    public static final Prefix PREFIX_FIND_NRIC = new Prefix("findnric/");
+    public static final Prefix PREFIX_FIND_DATE = new Prefix("finddate/");
+    public static final Prefix PREFIX_FIND_START_TIME = new Prefix("findstart/");
 
 }

@@ -39,18 +39,21 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
     public static final String MESSAGE_INVALID_TIME = "Invalid time. Please use the HH:MM format";
     public static final String MESSAGE_NO_APPOINTMENT = "This appointment does not exist in CareLink";
-    private final Nric patientNric;
+    private final Nric findPatientNric;
+    private final LocalDateTime findStartDateTime;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
      * Constructs a EditAppointmentCommand object
-     * @param patientNric
-     * @param date
-     * @param startTime
+     * @param findPatientNric
+     * @param findStartDateTime
+     * @param editAppointmentDescriptor
      */
-    public EditAppointmentCommand(Nric patientNric, EditAppointmentDescriptor editAppointmentDescriptor) {
-        requireAllNonNull(patientNric, editAppointmentDescriptor);
-        this.patientNric = patientNric;
+    public EditAppointmentCommand(Nric findPatientNric, LocalDateTime findStartDateTime,
+            EditAppointmentDescriptor editAppointmentDescriptor) {
+        requireAllNonNull(findPatientNric, findStartDateTime, editAppointmentDescriptor);
+        this.findPatientNric = findPatientNric;
+        this.findStartDateTime = findStartDateTime;
         this.editAppointmentDescriptor = editAppointmentDescriptor;
     }
 
@@ -63,11 +66,10 @@ public class EditAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person patient = model.getPerson(patientNric);
+        Person patient = model.getPerson(findPatientNric);
 
         Appointment appointmentToEdit = model.getAppointmentForPersonAndTime(patient,
-                editAppointmentDescriptor.getStartTime()
-                        .orElseThrow(() -> new CommandException("Start time is not specified")));
+                findStartDateTime);
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, new EditAppointmentDescriptor());
 
         if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
@@ -113,14 +115,14 @@ public class EditAppointmentCommand extends Command {
         }
 
         EditAppointmentCommand otherEditAppointmentCommand = (EditAppointmentCommand) other;
-        return patientNric.equals(otherEditAppointmentCommand.patientNric)
+        return findPatientNric.equals(otherEditAppointmentCommand.findPatientNric)
                 && editAppointmentDescriptor.equals(otherEditAppointmentCommand.editAppointmentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("nric", patientNric)
+                .add("nric", findPatientNric)
                 .add("editAppointmentDescriptor", editAppointmentDescriptor)
                 .toString();
     }

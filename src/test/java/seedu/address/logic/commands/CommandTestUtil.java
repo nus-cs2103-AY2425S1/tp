@@ -16,6 +16,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +38,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -56,10 +62,22 @@ public class CommandTestUtil {
     public static final String VALID_DATE_APPOINTMENT_AMY = "20/10/2025";
     public static final String VALID_START_TIME_APPOINTMENT_AMY = "10:00";
     public static final String VALID_END_TIME_APPOINTMENT_AMY = "11:00";
+    public static final LocalDateTime VALID_START_DATE_TIME_APPOINTMENT_AMY = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_AMY, DATE_FORMATTER),
+            LocalTime.parse(VALID_START_TIME_APPOINTMENT_AMY, TIME_FORMATTER));
+    public static final LocalDateTime VALID_END_DATE_TIME_APPOINTMENT_AMY = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_AMY, DATE_FORMATTER),
+            LocalTime.parse(VALID_END_TIME_APPOINTMENT_AMY, TIME_FORMATTER));
 
     public static final String VALID_DATE_APPOINTMENT_BOB = "19/10/2025";
     public static final String VALID_START_TIME_APPOINTMENT_BOB = "09:00";
     public static final String VALID_END_TIME_APPOINTMENT_BOB = "10:00";
+    public static final LocalDateTime VALID_START_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
+            LocalTime.parse(VALID_START_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
+    public static final LocalDateTime VALID_END_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
+            LocalTime.parse(VALID_END_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -96,6 +114,9 @@ public class CommandTestUtil {
 
     public static final String VALID_DATE_APPOINTMENT = "22/10/2025"; // Example date in DD/MM/YYYY format
     public static final String VALID_START_TIME_APPOINTMENT = "10:00"; // Example start time in HH:mm format
+    public static final LocalDateTime VALID_START_DATE_TIME_APPOINTMENT = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT, DATE_FORMATTER),
+            LocalTime.parse(VALID_START_TIME_APPOINTMENT, TIME_FORMATTER));
 
     public static final String INVALID_DATE_APPOINTMENT = "2025/10/10"; // Invalid date format in YYYY/MM/DD format
     public static final String VALID_END_TIME_APPOINTMENT = "11:00"; // Example end time in HH:mm format
