@@ -131,12 +131,10 @@ public class ExportCommand extends Command {
             } catch (FileAlreadyExistsException e) {
                 // If file exists in home directory and force flag is not set
                 // Delete the data directory file and throw exception
-                logger.warning("File exists in home directory, cleaning up data file: " + dataFilePath);
                 Files.deleteIfExists(dataFilePath);
                 throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, homeFilePath));
             } catch (IOException e) {
                 // If home directory copy fails for other reasons, return success with data file only
-                logger.warning("Failed to copy to home directory: " + e.getMessage());
                 return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), dataFilePath),
                         COMMAND_TYPE);
             }
@@ -145,9 +143,8 @@ public class ExportCommand extends Command {
             // Clean up any partially created files
             try {
                 Files.deleteIfExists(dataFilePath);
-                logger.fine("Cleaned up partial data file: " + dataFilePath);
             } catch (IOException ignored) {
-                logger.fine("Failed to clean up partial data file: " + dataFilePath);
+                // Ignore cleanup errors
             }
             throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
         }
