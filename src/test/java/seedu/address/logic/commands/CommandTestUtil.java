@@ -135,7 +135,7 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            CommandResult expectedCommandResult = new CommandResult(expectedMessage, result.getTopPanelDisplayType());
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage, result.getDisplayType());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

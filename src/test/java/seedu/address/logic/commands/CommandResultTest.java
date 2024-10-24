@@ -30,7 +30,7 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
-        // different topPanelDisplayType value -> returns false
+        // different displayType value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", DisplayType.PERSON_LIST)));
 
         // different showHelp value -> returns false
@@ -50,7 +50,7 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-        // different topPanelDisplayType value -> returns different hashcode
+        // different displayType value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", DisplayType.PERSON_LIST).hashCode());
 
         // different showHelp value -> returns different hashcode
@@ -66,7 +66,7 @@ public class CommandResultTest {
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", topPanelDisplayType=" + commandResult.getTopPanelDisplayType()
+                + commandResult.getFeedbackToUser() + ", displayType=" + commandResult.getDisplayType()
                 + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());

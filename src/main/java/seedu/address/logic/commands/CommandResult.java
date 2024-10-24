@@ -15,7 +15,7 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Enum indicating which list should be shown to the user for the top panel. */
-    private final DisplayType topPanelDisplayType;
+    private final DisplayType displayType;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -26,10 +26,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, DisplayType topPanelDisplayType, boolean showHelp,
+    public CommandResult(String feedbackToUser, DisplayType displayType, boolean showHelp,
             boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.topPanelDisplayType = topPanelDisplayType;
+        this.displayType = displayType;
         this.showHelp = showHelp;
         this.exit = exit;
     }
@@ -44,18 +44,18 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * {@code topPanelDisplayType}, and other fields set to their default value.
+     * {@code displayType}, and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, DisplayType topPanelDisplayType) {
-        this(feedbackToUser, topPanelDisplayType, false, false);
+    public CommandResult(String feedbackToUser, DisplayType displayType) {
+        this(feedbackToUser, displayType, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public DisplayType getTopPanelDisplayType() {
-        return topPanelDisplayType;
+    public DisplayType getDisplayType() {
+        return displayType;
     }
 
     public boolean isShowHelp() {
@@ -79,21 +79,21 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && topPanelDisplayType == otherCommandResult.topPanelDisplayType
+                && displayType == otherCommandResult.displayType
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, topPanelDisplayType, showHelp, exit);
+        return Objects.hash(feedbackToUser, displayType, showHelp, exit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("topPanelDisplayType", topPanelDisplayType)
+                .add("displayType", displayType)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();
