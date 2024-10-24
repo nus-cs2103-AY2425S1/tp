@@ -185,7 +185,6 @@ public class ModelManager implements Model {
     @Override
     public void updateEvent(Event newEvent, int oldEventIndex) {
         requireAllNonNull(newEvent, oldEventIndex);
-
         eventBook.updateEvent(newEvent, oldEventIndex);
     }
 

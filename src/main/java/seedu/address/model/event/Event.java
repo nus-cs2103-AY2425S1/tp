@@ -32,7 +32,6 @@ public class Event {
         requireAllNonNull(eventName, date, attendees);
         this.eventName = eventName;
         this.date = date;
-
         this.attendees.addAll(attendees);
     }
 
