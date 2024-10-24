@@ -67,7 +67,7 @@ public class ContactSet {
      * Retrieves person of the specified role.
      *
      * @param role person of this role.
-     * @return Optional<Person>of role.
+     * @return Optional person of role.
      */
     public Optional<Person> getPersonOfRole(Tag role) {
         requireNonNull(role);
