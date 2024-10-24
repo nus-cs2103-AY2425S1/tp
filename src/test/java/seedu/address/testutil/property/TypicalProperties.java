@@ -29,7 +29,7 @@ public class TypicalProperties {
             .withLocation("Clementi").withPhone("98765432").withAskingPrice("1500000")
             .withPropertyType("Condominium").build();
     public static final Property CARL = new PropertyBuilder().withLandlordName("Carl Kurz").withPhone("95352563")
-            .withAskingPrice("1500000").withPropertyType("HDB").build();
+            .withLocation("Aljunied").withAskingPrice("1500000").withPropertyType("HDB").build();
     public static final Property DANIEL = new PropertyBuilder().withLandlordName("Daniel Meier").withPhone("87652533")
             .withLocation("Bukit Timah").withAskingPrice("3500000").withPropertyType("Terrace").build();
     public static final Property ELLE = new PropertyBuilder().withLandlordName("Elle Meyer").withPhone("92822224")

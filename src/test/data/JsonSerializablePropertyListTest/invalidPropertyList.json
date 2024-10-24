@@ -1,0 +1,10 @@
+{
+  "properties": [ {
+    "name": "Han Muster",
+    "phone": "9482424",
+    "location": "Clementi",
+    "askingPrice": "1,000,abc",
+    "propertyType": "HDB"
+  } ]
+}
+

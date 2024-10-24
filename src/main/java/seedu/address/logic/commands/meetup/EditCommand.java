@@ -90,7 +90,8 @@ public class EditCommand extends Command {
 
         model.setMeetUp(meetUpToEdit, editedMeetUp);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
-        return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)));
+        return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)),
+                false, false, true, false, false);
     }
 
     /**
