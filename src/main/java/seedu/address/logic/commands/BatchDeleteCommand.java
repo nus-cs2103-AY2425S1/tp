@@ -38,6 +38,7 @@ public class BatchDeleteCommand extends Command {
      * Initializes command to batch delete all person with tags from the address book.
      *
      * @param tags Tags belonging to a person.
+     * @param predicate Predicate to find all people with specified tags.
      */
     public BatchDeleteCommand(Set<Tag> tags, PersonContainsTagsPredicate predicate) {
         requireNonNull(tags);

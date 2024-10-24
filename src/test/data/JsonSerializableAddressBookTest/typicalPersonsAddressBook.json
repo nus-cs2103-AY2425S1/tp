@@ -27,6 +27,14 @@
   }, {
     "name" : "Carl Meier",
     "role" : "student",
+    "role" : "parent",
+    "phone" : "876452533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tags" : [ "omg" ]
+  }, {
+    "name" : "Daniel Meier",
+    "role" : "parent",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
