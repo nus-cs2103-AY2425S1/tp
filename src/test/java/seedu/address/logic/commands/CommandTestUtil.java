@@ -43,6 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_TUTORIAL_GROUP_DIDDY = "G04";
     public static final String VALID_STUDENT_NUMBER_HUGH = "A1234567A";
     public static final String VALID_STUDENT_NUMBER_DIDDY = "A7654321A";
+    public static final String INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS = "A76B";
+    public static final String INVALID_STUDENT_NUMBER_MISSING_LETTER = "A7654321";
 
     public static final String NAME_DESC_HUGH = " " + PREFIX_NAME + VALID_NAME_HUGH;
     public static final String NAME_DESC_DIDDY = " " + PREFIX_NAME + VALID_NAME_DIDDY;

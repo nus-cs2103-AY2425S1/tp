@@ -135,6 +135,6 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
     List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
 
-
+    ObservableList<Student> getAllStudentsByName(Name name);
 
 }
