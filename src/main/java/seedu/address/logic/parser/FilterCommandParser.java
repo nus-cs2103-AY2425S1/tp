@@ -21,6 +21,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FilterCommand.FilterPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Module;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,7 +49,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         FilterPersonDescriptor filterPersonDescriptor = new FilterPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            filterPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            filterPersonDescriptor.setName(isNameValid(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get())));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             filterPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
@@ -100,5 +101,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns name if the name contains one word.
+     * @throws ParseException If the name contains more than one word.
+     */
+    private Name isNameValid(Name name) throws ParseException {
+        String[] words = name.fullName.split("\\s+");
+        if (words.length != 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        return name;
     }
 }

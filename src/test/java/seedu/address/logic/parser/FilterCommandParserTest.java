@@ -1,16 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FilterCommand.FilterPersonDescriptor;
-import seedu.address.model.person.Gender;
-import seedu.address.model.person.Module;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.FilterPersonDescriptorBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
@@ -36,6 +25,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FilterCommand.FilterPersonDescriptor;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Module;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.FilterPersonDescriptorBuilder;
+
 
 public class FilterCommandParserTest {
 
