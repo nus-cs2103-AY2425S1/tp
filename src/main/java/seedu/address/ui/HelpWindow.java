@@ -98,16 +98,18 @@ public class HelpWindow extends UiPart<Stage> {
         ObservableList<HelpCommand> data =
                 FXCollections.observableArrayList(new HelpCommand("Add",
                                 "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
-                        new HelpCommand("Clear", "`clear`"),
-                        new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
+                        new HelpCommand("Delete", "`delete INDEX`"),
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
                                 + "[e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
                         new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME]"
                                 + " [s/SKILLLEVEL] [r/ROLE]​`"),
                         new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., "
                                 + "`find James Jake`"),
+                        new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("List", "`list`"),
-                        new HelpCommand("Help", "`help`")
+                        new HelpCommand("Help", "`help`"),
+                        new HelpCommand("Save", "`save`"),
+                        new HelpCommand("Load", "`load`")
                 );
 
         // Add data to the table
