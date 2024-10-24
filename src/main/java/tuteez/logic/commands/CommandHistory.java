@@ -49,7 +49,7 @@ public class CommandHistory {
             logger.info("Retrieved previous command: " + previousCommand);
             return previousCommand;
         }
-        logger.warning("No previous command available.");
+        logger.info("No previous command available.");
         return null; // No previous command available
     }
 
@@ -65,7 +65,7 @@ public class CommandHistory {
             return nextCommand;
         }
         currentIndex = history.size();
-        logger.warning("No next command available. Resetting to end of history.");
+        logger.info("No next command available.");
         return "";
     }
 
