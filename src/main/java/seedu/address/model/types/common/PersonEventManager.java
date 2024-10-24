@@ -80,7 +80,7 @@ public class PersonEventManager {
      * @param editedPerson
      */
     public static void setPersonForAllEvents(Person target, Person editedPerson) {
-        if (eventPersonMap.keySet()== null) {
+        if (eventPersonMap.keySet() == null) {
             return;
         }
 
