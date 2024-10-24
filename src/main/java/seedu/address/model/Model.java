@@ -33,7 +33,7 @@ public interface Model {
     /**
      * Sets the command to be saved.
      */
-    void setSaveCommand(Command command);
+    void setSavedCommand(Command command);
 
     /**
      * Returns true if there is a saved command.

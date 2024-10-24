@@ -194,7 +194,7 @@ public class ModelManager implements Model {
      * @param command The command to be saved.
      */
     @Override
-    public void setSaveCommand(Command command) {
+    public void setSavedCommand(Command command) {
         this.savedCommand = command;
     }
 

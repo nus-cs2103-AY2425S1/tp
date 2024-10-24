@@ -2,44 +2,49 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "identity number" : "S0211145D",
+    "identityNumber" : "S0211145D",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "logs" : []
+    "logs" : [ ]
   }, {
     "name" : "Benson Meier",
-    "identity number" : "S6642654H",
+    "identityNumber" : "S6642654H",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "logs" : []
+    "logs": [
+      {
+        "appointmentDate" : "19 Oct 2024",
+        "entry" : "Doctor's Appointment"
+      }
+    ]
   }, {
     "name" : "Carl Kurz",
-    "identity number" : "S9844952C",
+    "identityNumber" : "S9844952C",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "logs" : []
+    "logs" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "identity number" : "S6914918I",
+    "identityNumber" : "S6914918I",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "logs" : []
+    "logs" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "identity number" : "S5602975C",
+    "identityNumber" : "S5602975C",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "logs" : []
+    "logs" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "identity number" : "S7761327G",
@@ -47,14 +52,14 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "logs" : []
+    "logs" : [ ]
   }, {
     "name" : "George Best",
-    "identity number" : "S7468515C",
+    "identityNumber" : "S7468515C",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "logs" : []
+    "logs" : [ ]
   } ]
 }

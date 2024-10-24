@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
@@ -23,9 +22,9 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a log to the person identified by the Identification Number in the person list.\n"
-            + "Parameters: i/ IDENTIFICATION NUMBER (must be 9 characters long) l/ APPT DATE|ENTRY\n"
-            + "Format of APPT DATE: yyyy-MM-dd\n"
-            + "Example: " + COMMAND_WORD + " /i S1234567Z /l 2024-10-17|Doctor's appointment\n";
+            + "Parameters: i/ IDENTIFICATION NUMBER d/DATE l/LOG ENTRY\n"
+            + "Format of APPT DATE: dd MMM yyyy\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Oct 2024 l/First visit to the clinic\n";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
@@ -37,10 +36,9 @@ public class AddLogCommand extends Command {
     /**
      * Creates an AddLogCommand to add the specified log to the person.
      */
-    public AddLogCommand(IdentityNumber identityNumber, String date, String entry) {
+    public AddLogCommand(IdentityNumber identityNumber, Log log) {
         this.identityNumber = identityNumber;
-        AppointmentDate appointmentDate = new AppointmentDate(date);
-        this.log = new Log(appointmentDate, entry); // Assuming Log class has a constructor accepting date and entry
+        this.log = log;
     }
 
     @Override

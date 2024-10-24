@@ -44,7 +44,8 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         person.getLogs().stream().forEach(
-                log -> sb.append(PREFIX_LOG + log.getAppointmentDate() + " | " + log.toDetailedString() + "\n")
+                log -> sb.append(PREFIX_LOG + log.getAppointmentDate().toString()
+                        + " | " + log.toDetailedString() + "\n")
         );
         return sb.toString();
     }

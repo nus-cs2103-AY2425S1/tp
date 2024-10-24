@@ -41,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String VALID_LOG_FIRST_VISIT = "2024-01-20|First visit";
-    public static final String VALID_LOG_SECOND_VISIT = "2024-10-25|Second visit";
+    public static final String VALID_LOG_FIRST_VISIT = "22 May 2024|First visit";
+    public static final String VALID_LOG_SECOND_VISIT = "22 Jun 2024|Second visit";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String IDENTITY_NUMBER_DESC_AMY = " " + PREFIX_IDENTITY_NUMBER + VALID_IDENTITY_NUMBER_AMY;
@@ -60,12 +60,14 @@ public class CommandTestUtil {
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_IDENTITY_NUMBER_DESC = " " + PREFIX_NAME + "S123Z"; // too short
+    public static final String INVALID_IDENTITY_NUMBER_DESC = " " + PREFIX_IDENTITY_NUMBER + "S123Z"; // too short
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_LOG_DESC = " " + PREFIX_NAME + "2024-01-20 First visit"; // '|' missing
+    public static final String INVALID_LOG_ENTRY_DESC = " " + PREFIX_LOG + "2024-01-20"; // missing entry
+    public static final String INVALID_LOG_DATE_DESC = " " + PREFIX_LOG + "20 May 2024|"; // missing entry
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

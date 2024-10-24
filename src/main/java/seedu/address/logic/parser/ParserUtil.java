@@ -151,13 +151,15 @@ public class ParserUtil {
 
         String[] parts = logDetails.split("\\|", 2); // Split into two parts only
         if (parts.length < 2) {
-            throw new ParseException("Log details must be in the format 'date|details'.");
+            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
         }
 
         AppointmentDate appointmentDate = new AppointmentDate(parts[0].trim());
 
         String details = parts[1].trim();
-
+        if (details.isEmpty()) {
+            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+        }
         return new Log(appointmentDate, details);
     }
 
