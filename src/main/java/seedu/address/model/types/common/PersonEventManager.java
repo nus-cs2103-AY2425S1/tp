@@ -38,6 +38,7 @@ public class PersonEventManager {
     }
 
     /**
+
      * Adds the person to the specified event.
      * @param event
      * @param person

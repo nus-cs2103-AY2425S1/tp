@@ -133,7 +133,7 @@ public class ModelManager implements Model {
         requireAllNonNull(person, event);
         PersonEventManager.addPersonToEvent(person, event);
     }
-
+  
     //=========== Filtered Person List Accessors =============================================================
 
     /**
