@@ -19,6 +19,8 @@ public abstract class UiPart<T> {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
+    public UiPart() {}
+
     /**
      * Constructs a UiPart with the specified FXML file URL.
      * The FXML file must not specify the {@code fx:controller} attribute.

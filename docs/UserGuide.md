@@ -197,6 +197,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
+**Confirmation Requirement:**
+
+A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
+You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
+and the person will not be deleted.
+
+![deleteConfirmation.png](images%2FdeleteConfirmation.png)
+
 ### Sorting list based on Appointment Dates : `sort`
 
 Sorts the persons in the address book on the basis of their appointment dates.
@@ -204,6 +213,7 @@ Sorts the persons in the address book on the basis of their appointment dates.
 Format: `sort`
 
 * No other parameters should be supplied.
+
 
 ### Starring a person : `star`
 
@@ -239,11 +249,22 @@ Examples:
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+
+**Confirmation Requirement:**
+
+A confirmation window will appear before clearing all contacts in MediContact, 
+asking you to confirm if you are sure you want to proceed. 
+You must select “OK” to clear the address book. If you select “Cancel,” 
+the action will be aborted, and the address book will remain unchanged.
+
+![clearConfirmation.png](images%2FclearConfirmation.png)
 
 ### Exporting the contacts : `export`
 
@@ -252,6 +273,7 @@ Exports contact info in file path `data/addressbook.json`.
 Format: `export`
 
 - Locate file `addressbook.json` under the folder `data` that will be added to the current folder of `addressbook.jar` upon executing `export`.
+
 
 ### Exiting the program : `exit`
 

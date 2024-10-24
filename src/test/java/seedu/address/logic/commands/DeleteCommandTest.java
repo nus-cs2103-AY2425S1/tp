@@ -31,12 +31,25 @@ public class DeleteCommandTest {
     public void execute_validIndex_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index targetIndex = INDEX_FIRST_PERSON;
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndex_cancelled() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Index targetIndex = INDEX_FIRST_PERSON;
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, false);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_CANCELLED, personToDelete.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -55,13 +68,27 @@ public class DeleteCommandTest {
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Name targetName = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand = new DeleteCommand(targetName, true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetName);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+
+    @Test
+    public void execute_validName_cancelled() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name targetName = personToDelete.getName();
+        DeleteCommand deleteCommand = new DeleteCommand(targetName, false);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_CANCELLED, targetName);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
