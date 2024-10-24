@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
+import seedu.academyassist.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -19,17 +20,35 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+ 
     /** Number of students taking each subject should be shown to the user. */
     private final boolean showSubjectTracker;
+
+    /** The specific student detail should be shown to the user. */
+    private final boolean showDetailWindow;
+
+    /** The specific student to display his or her detail */
+    private final Person personToShow;
+
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSubjectTracker) {
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSubjectTracker, boolean showDetailWindow,
+                         Person personToShow) {
+
         this.feedbackToUser = requireNonNull(feedbackToUser);
+
+        if (showDetailWindow) {
+            requireNonNull(personToShow, "Person cannot be null when showing detail window");
+        }
+
         this.showHelp = showHelp;
         this.exit = exit;
         this.showSubjectTracker = showSubjectTracker;
+        this.showDetailWindow = showDetailWindow;
+        this.personToShow = personToShow;
     }
 
     /**
@@ -37,7 +56,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false,
+                false, null);
     }
 
     public String getFeedbackToUser() {
@@ -54,6 +74,13 @@ public class CommandResult {
 
     public boolean isShowSubjectTracker() {
         return showSubjectTracker;
+
+    public boolean isShowDetailWindow() {
+        return showDetailWindow;
+    }
+
+    public Person getPersonToShow() {
+        return personToShow;
     }
 
     @Override
@@ -72,11 +99,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showSubjectTracker == otherCommandResult.showSubjectTracker;
+                && showDetailWindow == otherCommandResult.showDetailWindow;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showSubjectTracker);
+        return Objects.hash(feedbackToUser, showHelp, exit, showSubjectTracker,
+                            showDetailWindow, personToShow);
     }
 
     @Override
@@ -86,6 +115,8 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("showSubjectTracker", showSubjectTracker)
+                .add("showDetailWindow", showDetailWindow)
+                .add("personToShow", personToShow)
                 .toString();
     }
 

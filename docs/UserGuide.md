@@ -70,10 +70,7 @@ again, type `help` and press Enter.
 <div markdown="block" class="alert alert-info">
 
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
-  e.g `delete IC_NUMBER` means the user has to enter the IC number of the student to be deleted.
-
-* Items in square brackets are optional.
-  e.g `add n/NAME... [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -91,18 +88,21 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 Adds a new student to the tuition center management system.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT`
 
 * `NAME` should be 1-100 characters long and contain only alphabets and spaces.
 * `PHONE_NUMBER` should be an 8-digit number.
-* `EMAIL` is optional and should follow the format username@domain.
-* `ADDRESS` is optional.
+* `EMAIL` is compulsory and should follow the format username@domain.
+* `ADDRESS` is compulsory.
 * `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
-* `TAG` is optional.
+* `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
+secondary school years 7 - 13).
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
+within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
+as the same).
 
 Examples:
-* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T3848559A s/Science t/student`
+* `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
 
 ![Add Success Message](/images/add.png)
 
@@ -110,12 +110,13 @@ Examples:
 
 Removes a student from the tuition center management system.
 
-Format: `delete IC_NUMBER`
+Format: `delete STUDENT_ID`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
 
 Examples:
-* `delete T0211234D`
+* `delete S00001`
 
 ![Delete Success Message](/images/delete.png)
 
@@ -123,15 +124,16 @@ Examples:
 
 Edits an existing student's details in the system.
 
-Format: `edit IC_NUMBER FIELD/NEW_VALUE`
+Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is 
+automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
 
 Examples:
-* `edit S1234567A a/New_Address`
-* `edit T1234567D p/91234567 a/New_Address`
+* `edit S00001 a/New_Address`
+* `edit s00002 p/91234567 a/New_Address`
 
 ![Edit Success Message](/images/edit.png)
 
@@ -149,8 +151,8 @@ Finds students whose names contain any of the given keywords.
 
 Format: `find NAME [MORE_NAMES]`
 
-* The search is case-insensitive.
-* Only the name is searched.
+* The search is case-insensitive (i.e. John, JOHN, john are all treated the same way).
+* You can only search for a student by their name.
 * Students matching at least one keyword will be returned.
 
 Examples:
@@ -163,13 +165,15 @@ Examples:
 
 Adds a class to an existing student's record.
 
-Format: `addc i/IC_NUMBER s/SUBJECT`
+Format: `addc STUDENT_ID s/SUBJECT`
 
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
+  (i.e. science, SCIENCE, Science are treated the same way).
 
 Examples:
-* `addc i/S1234567A s/Science`
+* `addc S00001 s/Science`
 
 ![addc Success Message](/images/addc.png)
 
@@ -266,15 +270,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                           |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT t/TAG` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
-| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                            |
-| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                                   |
-| **View** | `view`                                                                                                                                                                     |
-| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                        |
-| **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                            |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                     |
-| **Clear** | `clear`                                                                                                                                                                    |
-| **Help** | `help`                                                                                                                                                                     |
-| **Exit** | `exit`                                                                                                                                                                     |
+| Action | Format, Examples                                                                                                                                                                        |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
+| **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
+| **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
+| **View** | `view`                                                                                                                                                                                  |
+| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
+| **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
+| **Clear** | `clear`                                                                                                                                                                                 |
+| **Help** | `help`                                                                                                                                                                                  |
+| **Exit** | `exit`                                                                                                                                                                                  |

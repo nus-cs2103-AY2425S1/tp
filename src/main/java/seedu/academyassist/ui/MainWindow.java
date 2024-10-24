@@ -16,6 +16,7 @@ import seedu.academyassist.logic.Logic;
 import seedu.academyassist.logic.commands.CommandResult;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
+import seedu.academyassist.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TrackSubjectWindow trackSubjectWindow;
+    private PersonDetailWindow personDetailWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -68,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         trackSubjectWindow = new TrackSubjectWindow(logic.getModel());
+        personDetailWindow = new PersonDetailWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -174,6 +177,17 @@ public class MainWindow extends UiPart<Stage> {
             trackSubjectWindow.show();
         } else {
             trackSubjectWindow.focus();
+     
+     /**
+     * Open the detail window of the person or focuses on it if it's already opened.
+     * @param person
+     */
+    @FXML
+    private void handleDetailWindow(Person person) {
+        if (!personDetailWindow.isShowing()) {
+            personDetailWindow.show(person);
+        } else {
+            personDetailWindow.focus();
         }
     }
 
@@ -202,6 +216,9 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowSubjectTracker()) {
                 handleTrackSubject();
+
+            if (commandResult.isShowDetailWindow()) {
+                handleDetailWindow(commandResult.getPersonToShow());
             }
 
             return commandResult;
