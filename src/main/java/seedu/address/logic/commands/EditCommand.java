@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -27,7 +29,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
+import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,6 +46,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_STUDENTID + "STUDENTID] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -53,6 +59,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CANNOT_EDIT_STUDENT_INDUSTRY =
+            "Industry field cannot be edited for a student contact.";
+    public static final String MESSAGE_CANNOT_EDIT_COMPANY_STUDENTID =
+            "Student ID field cannot be edited for a company contact.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -79,6 +89,17 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        // Check if the person to edit is a Student and if the industry field is being edited
+        if (personToEdit instanceof Student && editPersonDescriptor.getIndustry().isPresent()) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_STUDENT_INDUSTRY);
+        }
+
+        // Check if the person to edit is a Company and if the student id field is being edited
+        if (personToEdit instanceof Company && editPersonDescriptor.getStudentID().isPresent()) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_COMPANY_STUDENTID);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -98,7 +119,8 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        String updatedCategory = personToEdit.getCategoryDisplayName();
+        StudentID updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentID());
+        Industry updatedIndustry = editPersonDescriptor.getIndustry().orElse(personToEdit.getIndustry());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -109,7 +131,7 @@ public class EditCommand extends Command {
             Student studentToEdit = (Student) personToEdit;
             return new Student(
                     updatedName,
-                    studentToEdit.getStudentID(),
+                    updatedID,
                     updatedPhone,
                     updatedEmail,
                     updatedAddress,
@@ -119,7 +141,7 @@ public class EditCommand extends Command {
             Company companyToEdit = (Company) personToEdit;
             return new Company(
                     updatedName,
-                    companyToEdit.getIndustry(),
+                    updatedIndustry,
                     updatedPhone,
                     updatedEmail,
                     updatedAddress,
@@ -160,7 +182,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private String category;
+        private StudentID studentID;
+        private Industry industry;
         private Phone phone;
         private Email email;
         private Address address;
@@ -174,7 +197,8 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setCategory(toCopy.category);
+            setStudentID(toCopy.studentID);
+            setIndustry(toCopy.industry);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -185,7 +209,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, studentID, industry, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -196,13 +220,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setCategory(String category) {
-            this.category = category;
-        }
+        public void setStudentID(StudentID studentID) { this.studentID = studentID; }
 
-        public String getCategory() {
-            return category;
-        }
+        public Optional<StudentID> getStudentID() { return Optional.ofNullable(studentID); }
+
+        public void setIndustry(Industry industry) { this.industry = industry; }
+
+        public Optional<Industry> getIndustry() { return Optional.ofNullable(industry); }
 
         public void setPhone(Phone phone) {
             this.phone = phone;
@@ -258,6 +282,8 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(studentID, otherEditPersonDescriptor.studentID)
+                    && Objects.equals(industry, otherEditPersonDescriptor.industry)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -268,6 +294,8 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("studentid", studentID)
+                    .add("industry", industry)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
