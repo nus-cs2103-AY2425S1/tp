@@ -18,6 +18,7 @@ public class HelpContentManager {
 
     public HelpContentManager() {
         initializeContents();
+        assert !contentMap.isEmpty() : "Content map should be initialized with values";
     }
 
     /** Initializes the help content sections and populates the content map with predefined help content. */
@@ -196,6 +197,11 @@ public class HelpContentManager {
                 | Paid   | `paid INDEX` | `paid 3` |
                 | Unpaid | `unpaid INDEX` | `unpaid 3` |
                 """);
+
+        // Ensure critical content exists
+        assert contentMap.get("Introduction") != null : "Introduction content should not be null";
+        assert contentMap.get("Quick Start") != null : "Quick Start content should not be null";
+        assert contentMap.get("Command Summary") != null : "Command Summary content should not be null";
     }
 
     /**
@@ -204,6 +210,7 @@ public class HelpContentManager {
      * @return The content for the given section.
      */
     public String getContent(String key) {
+        assert key != null && !key.isEmpty() : "Key for content retrieval should not be null or empty";
         return contentMap.get(key);
     }
 
@@ -212,21 +219,14 @@ public class HelpContentManager {
      * @return An observable list with the section titles for the help window.
      */
     public ObservableList<String> getTableOfContents() {
-        return FXCollections.observableArrayList(
-                "Introduction",
-                "Quick Start",
-                "Command Format Guidelines",
-                "Adding a Contact",
-                "Listing All Contacts",
-                "Editing a Contact",
-                "Finding Contacts",
-                "Deleting a Contact",
-                "Clearing All Entries",
-                "Marking a Person as Paid/Unpaid",
-                "Saving and Editing Data",
-                "Exiting the Program",
-                "Command Summary"
-        );
+        ObservableList<String> tocList = FXCollections.observableArrayList(
+                "Introduction", "Quick Start", "Command Format Guidelines", "Adding a Contact",
+                "Listing All Contacts", "Editing a Contact", "Finding Contacts", "Deleting a Contact",
+                "Clearing All Entries", "Marking a Person as Paid/Unpaid", "Saving and Editing Data",
+                "Exiting the Program", "Command Summary");
+
+        assert !tocList.isEmpty() : "Table of Contents should not be empty";
+        return tocList;
     }
 
     /**
@@ -239,6 +239,9 @@ public class HelpContentManager {
     public void initializeCommandSummaryData(TableView<String[]> table, TableColumn<String[],
             String> actionColumn, TableColumn<String[],
             String> formatColumn, TableColumn<String[], String> exampleColumn) {
+
+        assert table != null : "TableView should not be null";
+        assert actionColumn != null && formatColumn != null && exampleColumn != null : "Table columns should not be null";
 
         actionColumn.setCellValueFactory(
                 cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[0]));
@@ -264,6 +267,7 @@ public class HelpContentManager {
                 new String[]{"Unpaid", "unpaid INDEX", "unpaid 3"}
         );
 
+        assert !commandSummaryData.isEmpty() : "Command summary data should not be empty";
         table.setItems(commandSummaryData);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }

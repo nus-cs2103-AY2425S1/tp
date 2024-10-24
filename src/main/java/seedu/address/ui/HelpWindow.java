@@ -50,6 +50,12 @@ public class HelpWindow extends UiPart<Stage> {
         this.contentManager = new HelpContentManager();
         this.logicManager = new HelpLogicManager(contentManager);
         initializeUiComponents();
+
+        assert contentManager != null : "HelpContentManager should be initialized";
+        assert logicManager != null : "HelpLogicManager should be initialized";
+        assert tocListView != null : "Table of Contents ListView should be initialized";
+        assert commandSummaryTable != null : "Command Summary Table should be initialized";
+        assert helpContentFlow != null : "HelpContentFlow should be initialized";
     }
 
     public HelpWindow() {
@@ -105,6 +111,7 @@ public class HelpWindow extends UiPart<Stage> {
         setupTocListView();
         setupCommandSummary();
         updateTextFlow(contentManager.getContent("Introduction"));
+        assert tocListView.getItems() != null : "TOC ListView items should not be null";
 
         tocListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -118,17 +125,20 @@ public class HelpWindow extends UiPart<Stage> {
      * @param content The content to display in the TextFlow.
      */
     public void updateTextFlow(String content) {
+        assert content != null : "Content to display in TextFlow should not be null";
         helpContentFlow.getChildren().clear();
         logicManager.formatTextFlow(content, helpContentFlow);
     }
 
     public void setupTocListView() {
         tocListView.setItems(contentManager.getTableOfContents());
+        assert tocListView.getItems() != null && !tocListView.getItems().isEmpty() : "TOC should have items";
     }
 
     /** Sets up the command summary TableView with its columns. */
     public void setupCommandSummary() {
         contentManager.initializeCommandSummaryData(commandSummaryTable, actionColumn, formatColumn, exampleColumn);
+        assert commandSummaryTable.getItems() != null : "Command summary data should be initialized";
         commandSummaryTable.setVisible(false);
     }
 
@@ -143,6 +153,7 @@ public class HelpWindow extends UiPart<Stage> {
      * @param key The key representing the help topic.
      */
     public void displayHelpContent(String key) {
+        assert key != null && !key.isEmpty() : "Help content key should not be null or empty";
         commandSummaryTable.setVisible(false);
         updateTextFlow(contentManager.getContent(key));
     }

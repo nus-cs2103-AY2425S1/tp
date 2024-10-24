@@ -15,6 +15,7 @@ public class HelpLogicManager {
     private final HelpContentManager contentManager;
 
     public HelpLogicManager(HelpContentManager contentManager) {
+        assert contentManager != null : "HelpContentManager should not be null";
         this.contentManager = contentManager;
     }
 
@@ -24,6 +25,8 @@ public class HelpLogicManager {
      * @param helpWindow The HelpWindow where the content will be displayed.
      */
     public void handleTocSelection(String selectedItem, HelpWindow helpWindow) {
+        assert selectedItem != null && !selectedItem.isEmpty() : "Selected TOC item should not be null or empty";
+        assert helpWindow != null : "HelpWindow should not be null";
         if ("Command Summary".equals(selectedItem)) {
             helpWindow.displayCommandSummary();
         } else {
@@ -35,6 +38,9 @@ public class HelpLogicManager {
      * Formats the TextFlow with content, adding hyperlinks where necessary.
      */
     public void formatTextFlow(String content, TextFlow helpContentFlow) {
+        assert content != null && !content.isEmpty() : "Content should not be null or empty";
+        assert helpContentFlow != null : "TextFlow should not be null";
+
         helpContentFlow.getChildren().clear();
         String[] parts = content.split("\n", 2);
         String titleText = parts[0];
@@ -56,7 +62,9 @@ public class HelpLogicManager {
      * Adds hyperlinks for the "Quick Start" section.
      */
     private void addQuickStartHyperlinks(TextFlow helpContentFlow) {
-        // Step 1: Create text and hyperlink components
+
+        assert helpContentFlow != null : "TextFlow should not be null";
+
         Text beforeLink1 = new Text("1. Ensure you have Java ");
         Hyperlink javaLink = new Hyperlink("17");
         javaLink.setOnAction(e -> openHyperlink("https://www.oracle.com/java/technologies/downloads/#java17"));
@@ -74,7 +82,6 @@ public class HelpLogicManager {
                 + "\n\n4. Run the application using `java -jar fart_in_a.jar`."
                 + "\n\n5. Type commands in the command box and press Enter.");
 
-        // Step 2: Add all components to the TextFlow
         helpContentFlow.getChildren().addAll(
                 beforeLink1, javaLink, afterLink1, oracleLink, afterOracleLink,
                 beforeLink2, jarLink, instructions
@@ -85,6 +92,10 @@ public class HelpLogicManager {
      * Processes text and applies formatting for backticks as inline code.
      */
     public void processTextWithBackticks(String text, TextFlow helpContentFlow) {
+
+        assert text != null && !text.isEmpty() : "Text should not be null or empty";
+        assert helpContentFlow != null : "TextFlow should not be null";
+
         String[] segments = text.split("`");
         boolean isCode = false;
 
@@ -105,6 +116,9 @@ public class HelpLogicManager {
      * Opens a hyperlink in the system's default browser.
      */
     public void openHyperlink(String url) {
+
+        assert url != null && !url.isEmpty() : "URL should not be null or empty";
+
         try {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().browse(new URI(url));
