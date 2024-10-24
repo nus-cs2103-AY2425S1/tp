@@ -90,7 +90,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getLastViewedPerson_noPersonViewed_returns_emptyOptional() {
+    public void getLastViewedPerson_noPersonViewed_returnsEmptyOptional() {
         assertEquals(Optional.empty(), logic.getLastViewedPerson().get());
     }
 
