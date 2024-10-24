@@ -20,7 +20,7 @@ public class AbsentReason {
     public final String absentReason;
 
     /**
-     * Constructs an {@code AbsentDate}
+     * Constructs an {@code AbsentReason}
      *
      * @param absentReason A reason why student is absent.
      */
