@@ -11,9 +11,9 @@ public abstract class SortCommand extends Command {
 
     public static final String MESSAGE_FORMAT = COMMAND_WORD + " (name/date)";
 
-    public static final String MESSAGAE_EXAMPLE = COMMAND_WORD + " name";
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " name";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
             + "\nFormat: " + MESSAGE_FORMAT
-            + "\nExample: " + MESSAGAE_EXAMPLE;
+            + "\nExample: " + MESSAGE_EXAMPLE;
 }

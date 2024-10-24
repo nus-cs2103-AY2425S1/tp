@@ -30,9 +30,13 @@
                     <items>
                         <MenuButton mnemonicParsing="false" text="List of Commands">
                             <items>
+                                <MenuItem fx:id="clearMenuItem" mnemonicParsing="false" text="clear"/>
+                                <SeparatorMenuItem />
                                 <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="delete"/>
                                 <SeparatorMenuItem />
                                 <MenuItem fx:id="demoteMenuItem" mnemonicParsing="false" text="demote"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="editMenuItem" mnemonicParsing="false" text="edit"/>
                                 <SeparatorMenuItem />
                                 <MenuItem fx:id="employeeMenuItem" mnemonicParsing="false" text="employee"/>
                                 <SeparatorMenuItem />
@@ -47,6 +51,8 @@
                                 <MenuItem fx:id="potentialMenuItem" mnemonicParsing="false" text="potential"/>
                                 <SeparatorMenuItem />
                                 <MenuItem fx:id="promoteMenuItem" mnemonicParsing="false" text="promote"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="sortMenuItem" mnemonicParsing="false" text="sort"/>
                             </items>
                         </MenuButton>
                     </items>
@@ -59,10 +65,16 @@
                                 <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
                                       GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="clearText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <Text fx:id="deleteText" styleClass="text-command"/>
                                     </HBox>
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <Text fx:id="demoteText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="editText" styleClass="text-command"/>
                                     </HBox>
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <Text fx:id="employeeText" styleClass="text-command"/>
@@ -84,6 +96,9 @@
                                     </HBox>
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <Text fx:id="promoteText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="sortText" styleClass="text-command"/>
                                     </HBox>
                                 </VBox>
                             </GridPane>

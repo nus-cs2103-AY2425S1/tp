@@ -22,122 +22,83 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DemoteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EmployeeCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PotentialCommand;
+import seedu.address.logic.commands.PromoteCommand;
+import seedu.address.logic.commands.SortCommand;
+
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String DELETE_COMMAND =
-            """
-            delete
+    public static final String CLEAR_COMMAND = ClearCommand.COMMAND_WORD
+            + "\nFormat: " + ClearCommand.COMMAND_WORD
+            + "\nPurpose: " + ClearCommand.MESSAGE_PURPOSE
+            + "\nExample: " + ClearCommand.COMMAND_WORD;
+    public static final String DELETE_COMMAND = DeleteCommand.COMMAND_WORD
+            + "\nFormat: " + DeleteCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + DeleteCommand.MESSAGE_PURPOSE
+            + "\nExample: " + DeleteCommand.MESSAGE_EXAMPLE;
 
-            Format: delete (e or ph) INDEX
+    public static final String DEMOTE_COMMAND = DemoteCommand.COMMAND_WORD
+            + "\nFormat: " + DemoteCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + DemoteCommand.MESSAGE_PURPOSE
+            + "\nExample: " + DemoteCommand.MESSAGE_EXAMPLE;
 
-            Purpose: Deletes the entry of the index in the current \
-            list that is being displayed. The 2nd parameter (e or ph) must \
-            correspond to the type of entry in the index.
+    public static final String EDIT_COMMAND = EditCommand.COMMAND_WORD
+            + "\nFormat: " + EditCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + EditCommand.MESSAGE_PURPOSE
+            + "\nExample: " + EditCommand.MESSAGE_EXAMPLE;
 
-            Example: delete e 1
-            """;
-    public static final String DEMOTE_COMMAND =
-            """
-            demote
+    public static final String EMPLOYEE_COMMAND = EmployeeCommand.COMMAND_WORD
+                    + "\nFormat: " + EmployeeCommand.MESSAGE_FORMAT
+                    + "\nPurpose: " + EmployeeCommand.MESSAGE_PURPOSE
+                    + "\nExample: " + EmployeeCommand.MESSAGE_EXAMPLE;
 
-            Format: demote NAME
+    public static final String EXIT_COMMAND = ExitCommand.COMMAND_WORD
+                    + "\nFormat: " + ExitCommand.COMMAND_WORD
+                    + "\nPurpose: " + ExitCommand.MESSAGE_PURPOSE
+                    + "\nExample: " + ExitCommand.COMMAND_WORD;
 
-            Purpose: Change the status of an employee in the list to a \
-            potential hire.
+    public static final String FIND_COMMAND = FindCommand.COMMAND_WORD
+            + "\nFormat: " + FindCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + FindCommand.MESSAGE_PURPOSE
+            + "\nExample: " + FindCommand.MESSAGE_EXAMPLE;
+    public static final String HELP_COMMAND = HelpCommand.COMMAND_WORD
+            + "\nFormat: " + HelpCommand.COMMAND_WORD
+            + "\nPurpose: " + HelpCommand.MESSAGE_PURPOSE
+            + "\nExample: " + HelpCommand.COMMAND_WORD;
 
-            Example: demote John Doe
-            """;
-    public static final String EMPLOYEE_COMMAND =
-            """
-            employee
 
-            Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
-            d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE
+    public static final String LIST_COMMAND = ListCommand.COMMAND_WORD
+            + "\nFormat: " + ListCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + ListCommand.MESSAGE_PURPOSE
+            + "\nExample: " + ListCommand.MESSAGE_EXAMPLE;
 
-            Purpose: Adds an entry in the employee list with the \
-            corresponding information.
+    public static final String POTENTIAL_COMMAND = PotentialCommand.COMMAND_WORD
+            + "\nFormat: " + PotentialCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + PotentialCommand.MESSAGE_PURPOSE
+            + "\nExample: " + PotentialCommand.MESSAGE_EXAMPLE;
 
-            Example: employee n/John Doe p/81234567 e/johndoe@gmail.com \
-            a/21 Lower Kent Ridge Rd d/Department of informatics \
-            r/Head of Informatics ced/2021-01-21
-            """;
+    public static final String PROMOTE_COMMAND = PromoteCommand.COMMAND_WORD
+            + "\nFormat: " + PromoteCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + PromoteCommand.MESSAGE_PURPOSE
+            + "\nExample: " + PromoteCommand.MESSAGE_EXAMPLE;
 
-    public static final String EXIT_COMMAND =
-            """
-            exit
-
-            Format: exit
-
-            Purpose: Terminates the program.
-
-            Example: exit
-            """;
-
-    public static final String FIND_COMMAND =
-            """
-            find
-
-            Format: find (e or ph or all) KEYWORD(S)
-
-            Purpose: Displays a list of entries that contains the keyword(s) \
-            in the corresponding employee and/or potential hire list.
-
-            Example: find e John
-            """;
-    public static final String HELP_COMMAND =
-            """
-            help
-
-            Format: help
-
-            Purpose: Displays a window containing all the format of all \
-            commands, its purpose and an example on how to use them.
-
-            Example: help
-            """;
-
-    public static final String LIST_COMMAND =
-            """
-            list
-
-            Format: list (e or ph or all)
-
-            Purpose: Displays a list of entries with their information in \
-            the corresponding employee and/or potential hire list.
-
-            Example: list e
-            """;
-
-    public static final String POTENTIAL_COMMAND =
-            """
-            potential
-
-            Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
-            d/DEPARTMENT r/ROLE
-
-            Purpose: Adds an entry in the potential hire list with the \
-            corresponding information.
-
-            Example: potential n/John Doe p/81234567 e/johndoe@gmail.com \
-            a/21 Lower Kent Ridge Rd d/Department of informatics \
-            r/Head of Informatics
-            """;
-
-    public static final String PROMOTE_COMMAND =
-            """
-            promote
-
-            Format: promote NAME
-
-            Purpose: Change the status of a potential hire in the list \
-            to an employee.
-
-            Example: promote John Doe
-            """;
+    public static final String SORT_COMMAND = SortCommand.COMMAND_WORD
+            + "\nFormat: " + SortCommand.MESSAGE_FORMAT
+            + "\nPurpose: " + SortCommand.MESSAGE_PURPOSE
+            + "\nExample: " + SortCommand.MESSAGE_EXAMPLE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -153,23 +114,30 @@ public class HelpWindow extends UiPart<Stage> {
      * To be updated when new commands are added
      */
     private static final String[] ARRAY_OF_COMMAND_STRING = {
+        CLEAR_COMMAND,
         DELETE_COMMAND,
         DEMOTE_COMMAND,
+        EDIT_COMMAND,
         EMPLOYEE_COMMAND,
         EXIT_COMMAND,
         FIND_COMMAND,
         HELP_COMMAND,
         LIST_COMMAND,
         POTENTIAL_COMMAND,
-        PROMOTE_COMMAND
+        PROMOTE_COMMAND,
+        SORT_COMMAND
     };
 
-    private int numOfCommands;
+    private final int numOfCommands;
 
+    @FXML
+    private Text clearText;
     @FXML
     private Text deleteText;
     @FXML
     private Text demoteText;
+    @FXML
+    private Text editText;
     @FXML
     private Text employeeText;
     @FXML
@@ -184,6 +152,8 @@ public class HelpWindow extends UiPart<Stage> {
     private Text potentialText;
     @FXML
     private Text promoteText;
+    @FXML
+    private Text sortText;
 
     /**
      * Collection of Text objects to be added into HelpWindow.fxml.
@@ -191,20 +161,28 @@ public class HelpWindow extends UiPart<Stage> {
      * To be updated together with adding a Text component in HelpWindow.fxml when new commands are added.
      */
     private final Text[] arrayText = {
+        clearText,
         deleteText,
         demoteText,
+        editText,
         employeeText,
         exitText,
         findText,
         helpText,
         listText,
         potentialText,
-        promoteText
+        promoteText,
+        sortText
     };
+
+    @FXML
+    private MenuItem clearMenuItem;
     @FXML
     private MenuItem deleteMenuItem;
     @FXML
     private MenuItem demoteMenuItem;
+    @FXML
+    private MenuItem editMenuItem;
     @FXML
     private MenuItem employeeMenuItem;
     @FXML
@@ -219,6 +197,8 @@ public class HelpWindow extends UiPart<Stage> {
     private MenuItem potentialMenuItem;
     @FXML
     private MenuItem promoteMenuItem;
+    @FXML
+    private MenuItem sortMenuItem;
 
     /**
      * Collection of MenuItem objects to be added into HelpWindow.fxml.
@@ -226,15 +206,18 @@ public class HelpWindow extends UiPart<Stage> {
      * To be updated together with adding a MenuItem component in HelpWindow.fxml when new commands are added.
      */
     private final MenuItem[] arrayMenuItem = {
+        clearMenuItem,
         deleteMenuItem,
         demoteMenuItem,
+        editMenuItem,
         employeeMenuItem,
         exitMenuItem,
         findMenuItem,
         helpMenuItem,
         listMenuItem,
         potentialMenuItem,
-        promoteMenuItem
+        promoteMenuItem,
+        sortMenuItem
     };
 
     @FXML
