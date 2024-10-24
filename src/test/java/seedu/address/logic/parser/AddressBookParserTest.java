@@ -12,12 +12,15 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AbstractEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPublicAddressCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,6 +31,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -46,6 +50,22 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addPublicAddress() throws Exception {
+        final String publicAddress = "Some public address.";
+        AddPublicAddressCommand command = (AddPublicAddressCommand) parser.parseCommand(
+                AddPublicAddressCommand.COMMAND_WORD + " "
+                        + "1 "
+                        + PREFIX_PUBLIC_ADDRESS + publicAddress + " "
+                        + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "wallet1");
+
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setPublicAddresses(Map.of(Network.BTC, Set.of(new BtcAddress(publicAddress, "wallet1"))));
+
+        assertEquals(new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor), command);
     }
 
     @Test
