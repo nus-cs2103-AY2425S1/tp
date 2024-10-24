@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -31,30 +35,26 @@ public class SearchCommandParserTest {
     public void parse_validArgsForAddressField_returnsSearchCommand() {
         SearchCommand expectedSearchCommand =
                 new SearchCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Avenue", "Street")));
-        assertParseSuccess(parser, "search by/Address Avenue Street", expectedSearchCommand);
+        assertParseSuccess(parser, "search a/Avenue Street", expectedSearchCommand);
     }
 
     @Test
     public void parse_invalidArgsForAddressField_returnsSearchCommand() {
-        SearchCommand expectedSearchCommand =
-                new SearchCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Avenue", "Street")));
         assertParseFailure(parser, "search Address Avenue Street",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_duplicateArgsForAddressField_returnsSearchCommand() {
-        SearchCommand expectedSearchCommand =
-                new SearchCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Avenue", "Street")));
-        assertParseFailure(parser, "search by/Address by/Address",
-                MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+        assertParseFailure(parser, "search a/ a/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_ADDRESS);
     }
 
     @Test
     public void parse_validArgsForEmailField_returnsSearchCommand() {
         SearchCommand expectedSearchCommand =
                 new SearchCommand(new EmailContainsKeywordsPredicate(Arrays.asList("example", "test.com")));
-        assertParseSuccess(parser, "search by/Email example test.com", expectedSearchCommand);
+        assertParseSuccess(parser, "search e/example test.com", expectedSearchCommand);
     }
 
     @Test
@@ -65,15 +65,15 @@ public class SearchCommandParserTest {
 
     @Test
     public void parse_duplicateArgsForEmailField_throwsParseException() {
-        assertParseFailure(parser, "search by/Email by/Email",
-                MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+        assertParseFailure(parser, "search e/ e/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_EMAIL);
     }
 
     @Test
     public void parse_validArgsForNameField_returnsSearchCommand() {
         SearchCommand expectedSearchCommand =
                 new SearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("John", "Doe")));
-        assertParseSuccess(parser, "search by/Name John Doe", expectedSearchCommand);
+        assertParseSuccess(parser, "search n/John Doe", expectedSearchCommand);
     }
 
     @Test
@@ -84,15 +84,15 @@ public class SearchCommandParserTest {
 
     @Test
     public void parse_duplicateArgsForNameField_throwsParseException() {
-        assertParseFailure(parser, "search by/Name by/Name",
-                MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+        assertParseFailure(parser, "search n/ n/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_NAME);
     }
 
     @Test
     public void parse_validArgsForPhoneField_returnsSearchCommand() {
         SearchCommand expectedSearchCommand =
                 new SearchCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "67890")));
-        assertParseSuccess(parser, "search by/Phone 12345 67890", expectedSearchCommand);
+        assertParseSuccess(parser, "search p/12345 67890", expectedSearchCommand);
     }
 
     @Test
@@ -103,15 +103,15 @@ public class SearchCommandParserTest {
 
     @Test
     public void parse_duplicateArgsForPhoneField_throwsParseException() {
-        assertParseFailure(parser, "search by/Phone by/Phone",
-                MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+        assertParseFailure(parser, "search p/ p/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_PHONE);
     }
 
     @Test
     public void parse_validArgsForTagField_returnsSearchCommand() {
         SearchCommand expectedSearchCommand =
                 new SearchCommand(new TagContainsKeywordsPredicate(Arrays.asList("VIP", "Friend")));
-        assertParseSuccess(parser, "search by/Tags VIP Friend", expectedSearchCommand);
+        assertParseSuccess(parser, "search t/VIP Friend", expectedSearchCommand);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class SearchCommandParserTest {
 
     @Test
     public void parse_duplicateArgsForTagField_throwsParseException() {
-        assertParseFailure(parser, "search by/Tags by/Tags",
-                MESSAGE_DUPLICATE_FIELDS + PREFIX_FIELD);
+        assertParseFailure(parser, "search t/ t/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_TAG);
     }
 }
