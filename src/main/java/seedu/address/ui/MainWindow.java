@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -43,6 +45,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
     @FXML
+    private VBox personList;
+    @FXML
     private StackPane personListPanelPlaceholder;
     @FXML
     private StackPane appointmentListPanelPlaceholder;
@@ -56,6 +60,10 @@ public class MainWindow extends UiPart<Stage> {
     private ImageView imageView;
     @FXML
     private Image image;
+    @FXML
+    private Label appointmentsTitle;
+    @FXML
+    private Label personsTitle;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -117,6 +125,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        appointmentsTitle.setText("Appointments");
+        personsTitle.setText("Persons");
+
+        // Use of chatGPT to learn how to set the widths of the panels to be fixed by proportion.
+        // Prompt: Given a HBox of 2 stackpanes how to make both widths resize accordingly.
+        personList.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double totalWidth = newVal.doubleValue(); // Get the new width
+            appointmentListPanelPlaceholder.setPrefWidth(totalWidth * 0.3); // Set to 30%
+            personListPanelPlaceholder.setPrefWidth(totalWidth * 0.7); // Set to 70%
+        });
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 

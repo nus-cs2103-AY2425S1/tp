@@ -29,12 +29,12 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <Label fx:id="patientId" styleClass="cell_small_label" text="\$patientId" />
-      <HBox fx:id="appointmentBox" spacing="5" translateY="5.0">
+      <Label fx:id="ward" styleClass="cell_small_label" text="\$ward" />
+      <VBox fx:id="appointmentBox">
         <Label fx:id="appointmentDescription" />
         <Label fx:id="appointmentStart" />
         <Label fx:id="appointmentEnd" />
-      </HBox>
-      <Label fx:id="ward" styleClass="cell_small_label" text="\$ward" />
+      </VBox>
     </VBox>
       <rowConstraints>
          <RowConstraints />
