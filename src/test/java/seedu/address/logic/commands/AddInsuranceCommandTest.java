@@ -39,7 +39,7 @@ class AddInsuranceCommandTest {
     public void execute_validIndexValidInsuranceId_success() throws Exception {
         // DANIEL (fourth client) does not have basic insurance plan
         Client originalClient = model.getFilteredClientList().get(INDEX_FOURTH_CLIENT.getZeroBased());
-        InsurancePlansManager originalInsurancePlanManager = originalClient.getInsurancePlansManager();
+        InsurancePlansManager originalInsurancePlansManager = originalClient.getInsurancePlansManager();
 
         // Assume valid insurance plan
         int validInsuranceId = 0;
@@ -55,11 +55,11 @@ class AddInsuranceCommandTest {
         String expectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                 planToBeAdded, Messages.format(updatedClient));
 
-        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlanManager.createCopy();
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(planToBeAdded);
 
         assertInsuranceCommandSuccess(addInsuranceCommand, model, expectedMessage,
-                originalInsurancePlanManager, updatedInsurancePlansManager);
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     /**
@@ -71,7 +71,7 @@ class AddInsuranceCommandTest {
     public void execute_multipleInsurancePlans_success() throws Exception {
         // ELLE (fifth client) does not have any insurance plans
         Client originalClient = model.getFilteredClientList().get(INDEX_FIFTH_CLIENT.getZeroBased());
-        InsurancePlansManager originalInsurancePlanManager = originalClient.getInsurancePlansManager();
+        InsurancePlansManager originalInsurancePlansManager = originalClient.getInsurancePlansManager();
 
         // Add first insurance plan (basic insurance plan)
         int firstInsuranceId = 0;
@@ -86,11 +86,11 @@ class AddInsuranceCommandTest {
         String firstExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                 firstPlan, Messages.format(clientWithFirstPlan));
 
-        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlanManager.createCopy();
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(firstPlan);
 
         assertInsuranceCommandSuccess(firstAddCommand, model, firstExpectedMessage,
-                originalInsurancePlanManager, updatedInsurancePlansManager);
+                originalInsurancePlansManager, updatedInsurancePlansManager);
 
         // Second insurance plan (travel insurance plan)
         int secondInsuranceId = 1;
@@ -108,7 +108,7 @@ class AddInsuranceCommandTest {
         updatedInsurancePlansManager.addPlan(secondPlan);
 
         assertInsuranceCommandSuccess(secondAddCommand, model, secondExpectedMessage,
-                originalInsurancePlanManager, updatedInsurancePlansManager);
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     /**

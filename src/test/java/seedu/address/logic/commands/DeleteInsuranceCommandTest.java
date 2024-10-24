@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlansManager;
@@ -32,17 +33,16 @@ class DeleteInsuranceCommandTest {
      * @throws InsurancePlanException if the insurance plan deletion fails due to internal errors.
      */
     @Test
-    public void execute_validIndexUnfilteredList_success() throws InsurancePlanException {
+    public void execute_validIndexUnfilteredList_success() throws InsurancePlanException, ClaimException {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
-        InsurancePlansManager insurancePlansManager = clientToEdit.getInsurancePlansManager();
-        InsurancePlan insurancePlan = insurancePlansManager.getInsurancePlan(0);
+        InsurancePlansManager originalInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+        InsurancePlan insurancePlan = originalInsurancePlansManager.getInsurancePlan(0);
 
         DeleteInsuranceCommand deleteInsuranceCommand = new DeleteInsuranceCommand(INDEX_THIRD_CLIENT, 0);
 
-        InsurancePlansManager updatedInsurancePlansManager = new InsurancePlansManager(
-                insurancePlansManager.toString());
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.deletePlan(insurancePlan);
 
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
@@ -52,7 +52,8 @@ class DeleteInsuranceCommandTest {
 
         expectedModel.setClient(clientToEdit, updatedClient);
 
-        assertCommandSuccess(deleteInsuranceCommand, model, expectedMessage, expectedModel);
+        assertInsuranceCommandSuccess(deleteInsuranceCommand, model, expectedMessage,
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     /**
