@@ -47,7 +47,7 @@ public class GradeList {
 
         // Check if the total weightage exceeds 100%
         if (totalWeightage > 100) {
-            throw new RuntimeException("Total weightage exceeds 100%");
+            throw new IllegalStateException("Total weightage exceeds 100%");
         }
 
         newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
