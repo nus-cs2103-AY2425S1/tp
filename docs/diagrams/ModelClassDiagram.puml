@@ -16,9 +16,11 @@ Class UniqueCompanyList
 Class Company
 Class Address
 Class Email
+Class CareerPageUrl
 Class Name
 Class Phone
 Class Tag
+Class Bookmark
 Class DifficultyTag
 Class SalaryTag
 Class PeriodTag
@@ -46,6 +48,12 @@ UniqueCompanyList --> "~* all" Company
 Company *--> Name
 Company *--> Phone
 Company *--> Email
+Company *--> Bookmark
+Company *--> CareerPageUrl
+Company *--> Address
+Company *--> "*" Tag
+Company *--> Phone
+Company *--> Email
 Company *--> Address
 Company *--> "*" Tag
 
@@ -61,6 +69,8 @@ UniqueCompanyList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+CareerPageUrl -[hidden]right-> Bookmark
+Bookmark -[hidden]right-> Tag
 
 ModelManager --> "~* filtered" Company
 @enduml
