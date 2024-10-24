@@ -68,7 +68,7 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -131,19 +131,88 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Searching by a specified field : `search` 
+
+Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
+
+Format: `search by/FIELD KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Only the specified field is searched.
+* Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `search by/Name alice bob charlie`
+* `search by/Tag friend colleague`
+* `search by/Address street avenue`
+* `search by/Phone 98765432 12345678`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` / `delete CONTACT_NAME`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` / with name `CONTACT_NAME`.
+* `CONTACT_NAME` refers to the name of the contact (Case-insensitive).
+* If there are multiple contacts with the same name, `delete CONTACT_NAME` will fail.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete john doe` will delete the contact with name `john doe` (Case-insensitive) if there is only one contact with that name.
+
+### Deleting multiple people : `mass_delete`
+Deletes multiple specified contacts from the address book using their displayed indices.
+
+Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
+
+* Deletes the persons at the specified indices.
+* Each index refers to the index number shown in the displayed person list.
+* All indices must be positive integers 1, 2, 3, … Invalid indices will be filtered out
+
+Examples:
+* `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in the address book.
+* `find Betsy` followed by `mass_delete 1 3 a` deletes the 1st and 3rd persons in the results of the find command.
+
+### Exporting all contacts: `export`
+
+Exports all persons in the addressbook into a csv file located in the data folder.
+
+Format: `export`
+
+### Importing persons: `import`
+
+Reads the specified file to import from and adds the persons to the addressbook.
+
+Format: `import FILENAME`
+
+Examples:
+* `import contacts.csv` adds persons stored in `contacts.csv` to the addressbook.
+* The file has to be located in the data folder
+* The specified file name has to exactly match the name of the file to import from
+
+### Adding an event: `add_event`
+
+Adds an event to the address book.
+
+Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
+
+* The date inputs must be in the format `YYYY-MM-DD`.
+
+Examples:
+* `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
+* `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
+
+### Listing all events : `list_events`
+
+Shows a list of all events in the address book.
+
+Format: `list_events`
 
 ### Clearing all entries : `clear`
 
@@ -194,12 +263,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action             | Format, Examples
+-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**          | `clear`
+**Delete**         | `delete INDEX`<br> e.g., `delete 3`
+**Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
+**Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
+**List**           | `list`
+**Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
+**List Events**    | `list_events`
+**Help**           | `help`
+**Export**         | `export`
+**Import**         | `import FILENAME`<br> e.g., `import contacts.csv`
