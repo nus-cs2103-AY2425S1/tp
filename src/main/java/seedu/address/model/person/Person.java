@@ -194,6 +194,15 @@ public class Person {
     }
 
     /**
+     * Deletes an appointment from the person's list of appointments.
+     *
+     * @param appt
+     */
+    public void deleteAppt(Appt appt) {
+        appts.remove(appt);
+    }
+
+    /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}
      * if modification is attempted.
