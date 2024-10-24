@@ -1,10 +1,12 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam stereotypePosition top
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":BuyerListParser" as BuyerListParser LOGIC_COLOR
+participant "AbcliParser" as AbcliParser<<class>>LOGIC_COLOR
+participant ":BuyerCommandParser" as BuyerCommandParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +19,20 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> BuyerListParser : parseCommand("delete 1")
-activate BuyerListParser
+LogicManager -> AbcliParser : parseCommand("delete 1")
+activate AbcliParser
+
+AbcliParser -> BuyerCommandParser : parseCommand("delete", "1")
+activate BuyerCommandParser
 
 create DeleteCommandParser
-BuyerListParser -> DeleteCommandParser
+BuyerCommandParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> BuyerListParser
+DeleteCommandParser --> BuyerCommandParser
 deactivate DeleteCommandParser
 
-BuyerListParser -> DeleteCommandParser : parse("1")
+BuyerCommandParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,14 +42,17 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser :
 deactivate DeleteCommand
 
-DeleteCommandParser --> BuyerListParser : d
+DeleteCommandParser --> BuyerCommandParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> BuyerListParser
+DeleteCommandParser -[hidden]-> BuyerCommandParser
 destroy DeleteCommandParser
 
-BuyerListParser --> LogicManager : d
-deactivate BuyerListParser
+BuyerCommandParser --> AbcliParser : d
+deactivate BuyerCommandParser
+
+AbcliParser --> LogicManager : d
+deactivate AbcliParser
 
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
