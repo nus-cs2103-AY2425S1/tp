@@ -12,9 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.PostalContainsKeywordsPredicate;
+import seedu.address.model.person.*;
 
 public class FindCommandParserTest {
 
@@ -47,6 +45,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "123000 123456", expectedFindCommand);
         assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
     }
+
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
