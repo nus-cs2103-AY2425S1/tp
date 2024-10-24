@@ -46,6 +46,8 @@ public class Messages {
                 .append(student.getAddress())
                 .append("; Tags: ");
         student.getTags().forEach(builder::append);
+        builder.append("; fee ").append(student.getFee());
+
         return builder.toString();
     }
 

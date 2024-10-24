@@ -25,9 +25,11 @@ public class Student {
     private final seedu.edulog.model.student.Address address;
     private final Set<Tag> tags = new HashSet<>();
     private boolean hasPaid = false;
+    private final Fee fee;
 
     /**
-     * Every field must be present and not null except isPresent.
+     * Every field must be present and not null except isPresent. I suggest
+     * we keep this constructor so that we do not break all the test cases
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -36,6 +38,22 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.hasPaid = false;
+        this.fee = new Fee(100);
+
+    }
+
+    /**
+     * New constructor with Fee
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Fee fee) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.fee = fee;
         this.hasPaid = false;
     }
 
@@ -70,6 +88,10 @@ public class Student {
      */
     public boolean getHasPaid() {
         return hasPaid;
+    }
+
+    public Fee getFee() {
+        return fee;
     }
 
     /**
@@ -120,7 +142,8 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
-                && hasPaid == otherStudent.hasPaid;
+                && hasPaid == otherStudent.hasPaid
+                && fee.equals(otherStudent.fee);
     }
 
     @Override
@@ -138,6 +161,7 @@ public class Student {
                 .add("edulog", address)
                 .add("tags", tags)
                 .add("hasPaid", hasPaid)
+                .add("fee", fee)
                 .toString();
     }
 
