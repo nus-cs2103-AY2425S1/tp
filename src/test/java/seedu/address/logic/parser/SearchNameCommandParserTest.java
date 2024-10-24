@@ -8,23 +8,24 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SearchNameCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-public class SearchCommandParserTest {
+public class SearchNameCommandParserTest {
 
-    private SearchCommandParser parser = new SearchCommandParser();
+    private SearchNameCommandParser parser = new SearchNameCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchNameCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        SearchCommand expectedFindCommand =
-                new SearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        SearchNameCommand expectedFindCommand =
+                new SearchNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
