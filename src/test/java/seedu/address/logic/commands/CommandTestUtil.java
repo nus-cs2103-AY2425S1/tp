@@ -57,6 +57,7 @@ public class CommandTestUtil {
     public static final String VALID_PROPERTY_TYPE_BOB = "HDB";
     public static final String VALID_LOCATION_AMY = "Clementi";
     public static final String VALID_LOCATION_BOB = "Jurong East";
+    public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,7 +77,7 @@ public class CommandTestUtil {
     public static final String MEETUP_FROM_DESC_NETWORKING = " " + PREFIX_FROM + VALID_MEETUP_FROM_NETWORKING;
     public static final String MEETUP_TO_DESC_PITCH = " " + PREFIX_TO + VALID_MEETUP_TO_PITCH;
     public static final String MEETUP_TO_DESC_NETWORKING = " " + PREFIX_TO + VALID_MEETUP_TO_NETWORKING;
-
+    public static final String MEETUP_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_MEETUP_NAME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -91,7 +92,8 @@ public class CommandTestUtil {
     public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
     public static final String INVALID_MEETUP_TO_DESC_TWO = " " + PREFIX_TO + "03/02/2025 2988"; // Not valid date
     public static final String INVALID_MEETUP_INFO_DESC = " " + PREFIX_INFO; // Empty info not allowed
-
+    public static final String INVALID_TAG_FOR_FIND_MEETUP = "vfnivsd/";
+    public static final String INVALID_FIND_MEETUP_DESC = " " + INVALID_TAG_FOR_FIND_MEETUP + VALID_FIND_MEETUP_NAME;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

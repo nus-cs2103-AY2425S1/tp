@@ -66,20 +66,66 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+## General
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Clearing all entries : `clear`
 
+Clears all entries from the buyer list.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+BuyerList data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
+
+Note: By default, the storage folder is set to a folder named `package` in the home folder.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the JSON files to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Switching parser modes : `switch`
+
+Switches the parser mode to the specified parser mode.
+
+Format: `switch PARSER_MODE`
+
+* Switches the parser mode to the specified `PARSER_MODE`.
+* The parser mode takes 3 types:
+* `b` for buyers
+* `m` for meet-ups
+* `p` for properties
+* The default parser mode is set to `b`.
+
+Examples:
+* Upon entering the application, the parser mode is set to `b`.
+* `switch` followed by `m` switches the parser mode to meet-ups.
+
+## Buyers
 ### Adding a buyer: `add`
 
 Adds a buyer to the buyer list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/<buyer,seller> [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A buyer can have any number of tags (including 0)
@@ -89,22 +135,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer`
 * `add n/Betsy Crowe t/friend u/seller e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all buyers : `list`
+### Viewing all buyers : `view`
 
 Shows a list of all buyers in the buyer list.
 
-Format: `list`
-
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.2**
-
-You will be able to view all people or filter by your contact type in the buyer list.
-
-Format: `view [t/<buyer,seller>]`
-
-Examples:
-* `view t/buyer`
-* `view`
-</div>
+Format: `view`
 
 ### Editing a buyer : `edit`
 
@@ -123,7 +158,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Locating buyers by name: `find`
+### Locating buyer contacts: `find`
 
 Finds buyers whose names contain any of the given keywords.
 
@@ -155,41 +190,123 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd buyer in the buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
 
-### Clearing all entries : `clear`
+## Meet Up
+### Adding a meetup: `add`
 
-Clears all entries from the buyer list.
+Adds a meet-up to the meet-up list.
 
-Format: `clear`
+Format: `add n/MEETUP_NAME i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-BuyerList data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-BuyerList data are saved automatically as a JSON file `[JAR file location]/data/buyerlist.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, BuyerList will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the BuyerList to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<div markdown="span" class="alert alert-primary">
+MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
 </div>
-
-### Meet up `[coming in v1.2]`
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.2**
-
-You will be able to schedule a meet-up event with your contacts.
-
-Format: `meetup n/NAME i/INFO`
 
 Examples:
-* `meetup n/kennylewi i/Property viewing on saturday`
+* `add n/Product Pitch i/Product pitch for James at MBS from/2024-10-31 13:00 to/2024-10-31 15:30`
+* `add n/Show buyer 3 houses i/Meet with James Jimes to show him 3 houses that fit his expectations from/2024-10-30 09:30 to/2024-10-30 10:30`
+
+### Viewing all meet-ups : `view`
+
+Shows a list of all meet-ups in the meet-up list.
+
+Format: `view`
+
+<div>
+
+Examples:
+* `view` will show you all meet-ups in the meet-up list.
 </div>
+
+### Editing a meet-up : `edit`
+
+Edits an existing meet-up in the meet-up list.
+
+Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
+
+<div markdown="span" class="alert alert-primary">
+MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
+</div>
+
+* Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields need to be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+
+### Locating meet-ups by name: `find`
+
+Finds meet-ups whose meet-up names contain any of the given keywords.
+
+Format: `find KEYWORD`
+
+* The search is case-insensitive. e.g `meet` will match `Meet`
+* Only the meet-up name is searched.
+* Keyword will be matched to full words and sentences e.g. `meet` will match `meetup` and `meet with Jack`
+
+Examples:
+* `find Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+
+### Deleting a meet-up : `delete`
+
+Deletes the specified meet-up from the buyer list.
+
+Format: `delete INDEX`
+
+* Deletes the meet-up at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meet-up list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
+* `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
+
+## Properties
+### Adding a property: `add`
+
+Adds a property to the property list.
+
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER l/LOCATION a/ASKING_PRICE t/PROPERTY_TYPE`
+
+Examples:
+* `add n/John p/87152433 l/Paya Lebar a/200,000 t/Condominium`
+
+### Viewing all properties : `view`
+
+Shows a list of all properties in the property list.
+
+Format: `view`
+
+### Editing a property : `edit`
+
+Edits an existing property in the property list.
+
+Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/LOCATION] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
+
+* Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed property list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd buyer to be `Betsy Crower`.
+
+### Locating Properties: `find`
+
+Find property based on its attributes.
+
+Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/LOCATION] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Buyers matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `n/Hans Bo` will return property linked with `Hans Gruber`, `Bo Yang`.
+
+Examples:
+* `find n/John t/HDB 5 Room` returns `john` and `John Doe`
+
+
 
 <br>_More features coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
@@ -208,7 +325,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command summary (To be Updated)
 
 Action | Format, Examples
 --------|------------------
