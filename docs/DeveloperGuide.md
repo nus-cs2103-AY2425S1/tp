@@ -104,8 +104,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
-1. The `ContactCommandParser` will create the specific `ContactCommandParser` corresponding to the execution.
-   In this case, a `DeleteContactCommandParser` will be created to parse the command.
+1. The `ContactCommandParser` will create the specific `ContactCommandParser` corresponding to the execution. In this case, a `DeleteContactCommandParser` will be created to parse the command.
 1. This results in a `Command` object, specifically a `DeleteContactCommand` in this case, which is executed by the`LogicManager`.<br>
    (Note that DeleteContactCommand` is a subclass of `ContactCommand` which is a subclass of `Command`)
 1. The command can communicate with the `Model` when it is executed, in this case, to delete a person.<br>
