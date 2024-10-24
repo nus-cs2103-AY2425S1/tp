@@ -5,42 +5,56 @@
     "job" : "Software Engineer L1",
     "phone" : "94351253",
     "email" : "alice@example.com",
+    "skills": [ "python", "java" ],
+    "interviewScore": "5.0",
     "tags" : [ "friends", "pending" ]
   }, {
     "name" : "Benson Meier",
     "job" : "Software Engineer L2",
     "phone" : "98765432",
     "email" : "johnd@example.com",
+    "skills": [ "python" ],
+    "interviewScore": "6.0",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "job" : "Software Engineer L3",
     "phone" : "95352563",
     "email" : "heinz@example.com",
+    "skills": [ "python" ],
+    "interviewScore": "5.0",
     "tags" : [ "hired" ]
   }, {
     "name" : "Daniel Meier",
     "job" : "Software Engineer L4",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
+    "skills": [ "python", "java", "ruby" ],
+    "interviewScore": "4.0",
     "tags" : [ "friends", "rejected" ]
   }, {
     "name" : "Elle Meyer",
     "job" : "Software Engineer L5",
     "phone" : "9482224",
     "email" : "werner@example.com",
+    "skills": [ "python" ],
+    "interviewScore": "9.1",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "job" : "Software Engineer L6",
     "phone" : "9482427",
     "email" : "lydia@example.com",
+    "skills": [ "html", "css" ],
+    "interviewScore": "4.4",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "job" : "Software Engineer L7",
     "phone" : "9482442",
     "email" : "anna@example.com",
+    "skills": [ "python", "java", "C" ],
+    "interviewScore": "9.9",
     "tags" : [ ]
   } ]
 }

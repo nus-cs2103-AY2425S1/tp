@@ -12,10 +12,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 
@@ -90,8 +92,9 @@ public class CommandResultTest {
     @Test
     void showPerson_shouldReturnPerson_whenViewIsSet() {
         Set<Tag> tags = new HashSet<>();
+        Set<Skill> skills = new HashSet<>();
         Person person = new Person(new Name("John"), new Job("Software Engineer"), new Phone("12345678"),
-                new Email("helloworld123@gmail.com"), tags);
+                new Email("helloworld123@gmail.com"), skills, new InterviewScore("5.7"), tags);
         CommandResult commandResult = new CommandResult("Feedback", true, person);
         Person result = commandResult.showPerson();
         assertTrue(person.equals(result),

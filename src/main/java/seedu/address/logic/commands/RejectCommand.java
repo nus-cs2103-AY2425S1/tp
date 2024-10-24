@@ -63,7 +63,8 @@ public class RejectCommand extends Command {
         }
 
         Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone(),
-                personToReject.getEmail(), personToReject.getTags());
+                personToReject.getEmail(), personToReject.getSkills(), personToReject.getInterviewScore(),
+                personToReject.getTags());
         personRejected.markAsRejected();
         model.setPerson(personToReject, personRejected);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

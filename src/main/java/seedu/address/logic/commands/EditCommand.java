@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,10 +24,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_JOB + "JOB] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_SKILLS + "SKILL] "
+            + "[" + PREFIX_INTERVIEW_SCORE + "INTERVIEW SCORE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,9 +105,12 @@ public class EditCommand extends Command {
         Job updatedJob = editPersonDescriptor.getJob().orElse(personToEdit.getJob());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
+        InterviewScore updatedInterviewScore = editPersonDescriptor.getInterviewScore()
+                .orElse(personToEdit.getInterviewScore());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedTags);
+        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
+                updatedInterviewScore, updatedTags);
     }
 
     @Override
@@ -137,19 +146,23 @@ public class EditCommand extends Command {
         private Job job;
         private Phone phone;
         private Email email;
+        private Set<Skill> skills;
+        private InterviewScore interviewScore;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code skills} and {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setJob(toCopy.job);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setSkills(toCopy.skills);
+            setInterviewScore(toCopy.interviewScore);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, job, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, job, phone, email, skills, interviewScore, tags);
         }
 
         public void setName(Name name) {
@@ -193,6 +206,31 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code skills} to this object's {@code skills}.
+         * A defensive copy of {@code skills} is used internally.
+         */
+        public void setSkills(Set<Skill> skills) {
+            this.skills = (skills != null) ? new HashSet<>(skills) : null;
+        }
+
+        /**
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code skills} is null.
+         */
+        public Optional<Set<Skill>> getSkills() {
+            return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
+        }
+
+        public void setInterviewScore(InterviewScore interviewScore) {
+            this.interviewScore = interviewScore;
+        }
+
+        public Optional<InterviewScore> getInterviewScore() {
+            return Optional.ofNullable(interviewScore);
+        }
+
+        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
@@ -225,6 +263,8 @@ public class EditCommand extends Command {
                     && Objects.equals(job, otherEditPersonDescriptor.job)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(skills, otherEditPersonDescriptor.skills)
+                    && Objects.equals(interviewScore, otherEditPersonDescriptor.interviewScore)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -235,6 +275,8 @@ public class EditCommand extends Command {
                     .add("job", job)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("skills", skills)
+                    .add("interview score", interviewScore)
                     .add("tags", tags)
                     .toString();
         }

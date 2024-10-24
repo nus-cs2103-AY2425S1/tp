@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -81,7 +82,8 @@ public class AddCommandTest {
     public void execute_personWithMissingOptionalFields_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new Person(new Name("Alice"), new Job("Software Engineer"), new Phone("85355255"),
-                new Email("alice@example.com"), new HashSet<>());
+                new Email("alice@example.com"), new HashSet<>(),
+                new InterviewScore("4.5"), new HashSet<>());
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 

@@ -48,6 +48,10 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
+                .append("; Skills: ");
+        person.getSkills().forEach(builder::append);
+        builder.append("; InterviewScore: ")
+                .append(person.getInterviewScore())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

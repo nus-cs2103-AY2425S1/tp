@@ -28,12 +28,14 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <FlowPane fx:id="skills" hgap="5" />
       <FlowPane fx:id="tags" hgap="5" />
       <HBox alignment="CENTER_LEFT">
         <Label fx:id="job" styleClass="job-label" text="\$job" />
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="interviewScore" styleClass="cell_small_label" text="\$interviewScore" />
     </VBox>
   </GridPane>
 </HBox>

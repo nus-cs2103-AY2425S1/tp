@@ -3,11 +3,13 @@
     "name": "Valid Person",
     "job" : "Valid Job",
     "phone": "9482424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "interviewScore": "5.0"
   }, {
     "name": "Person With Invalid Phone Field",
     "job" : "Valid Job",
     "phone": "948asdf2424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "interviewScore": "5.0"
   } ]
 }

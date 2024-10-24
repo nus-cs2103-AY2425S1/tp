@@ -4,11 +4,15 @@
     "job" : "Software Engineer L1",
     "phone": "94351253",
     "email": "alice@example.com",
+    "skills": ["python", "java"],
+    "interviewScore": "5.0",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "job" : "Software Engineer L1",
     "phone": "94351253",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "interviewScore": "5.0",
+    "skills": ["python", "java"]
   } ]
 }

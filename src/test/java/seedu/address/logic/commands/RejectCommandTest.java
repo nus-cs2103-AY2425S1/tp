@@ -14,10 +14,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 public class RejectCommandTest {
 
@@ -30,6 +32,8 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);
@@ -52,6 +56,8 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("rejected")))
         );
         model.addPerson(validPerson);
@@ -69,6 +75,8 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("john@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
 
@@ -84,6 +92,8 @@ public class RejectCommandTest {
                 new Job("Data Analyst"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);
@@ -100,6 +110,8 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("pending"), new Tag("interviewed")))
         );
         model.addPerson(validPerson);
@@ -123,6 +135,8 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);
