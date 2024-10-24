@@ -16,12 +16,10 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.contact.commands.FindCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonIsRolePredicate;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Vendor;
@@ -85,9 +83,9 @@ public class SearchCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        PersonIsRolePredicate predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer()));
+        SearchCommand searchCommand = new SearchCommand(predicate);
+        String expected = SearchCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, searchCommand.toString());
     }
 }
