@@ -103,17 +103,14 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed 
-   to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this 
-   case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands 
-   related to lessons will use `LessonCommandParser`.
-2. The `ContactCommandParser` will create the specific `ContactCommandParser` corresponding to the 
-   execution. In this case, a `DeleteContactCommandParser` will be created to parse the command.
-3. This results in a `Command` object, specifically a `DeleteContactCommand` in this case, which is executed by the`LogicManager`.<br>
+1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
+1. The `ContactCommandParser` will create the specific `ContactCommandParser` corresponding to the execution.
+   In this case, a `DeleteContactCommandParser` will be created to parse the command.
+1. This results in a `Command` object, specifically a `DeleteContactCommand` in this case, which is executed by the`LogicManager`.<br>
    (Note that DeleteContactCommand` is a subclass of `ContactCommand` which is a subclass of `Command`)
-4. The command can communicate with the `Model` when it is executed, in this case, to delete a person.<br>
+1. The command can communicate with the `Model` when it is executed, in this case, to delete a person.<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back 
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back 
    from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
