@@ -37,8 +37,10 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
+          <SplitPane fx:id="personGoodsSplitPanePlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
+
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">

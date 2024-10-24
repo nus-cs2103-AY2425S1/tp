@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -189,8 +190,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate) {
+        requireNonNull(predicate);
+        filteredReceipts.setPredicate(predicate);
+    }
+
+    @Override
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
         filteredReceipts.setPredicate(predicate);
         return this.goodsList.findReceipts(predicate);
+    }
+
+    @Override
+    public void deleteGoods(String goodsName) {
+        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getReadableGoodsName(), goodsName));
     }
 }

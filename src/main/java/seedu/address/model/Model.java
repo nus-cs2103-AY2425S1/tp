@@ -117,6 +117,12 @@ public interface Model {
      */
     void addGoods(GoodsReceipt goodsReceipt);
 
+    /**
+     * Deletes all the goods which match the GoodsName given.
+     * @param goodsName The GoodsName indicating the goods to be deleted.
+     */
+    void deleteGoods(String goodsName);
+
     /** Returns an unmodifiable view of the filtered goodsReceipt list */
     ObservableList<GoodsReceipt> getFilteredReceiptsList();
 
@@ -124,4 +130,10 @@ public interface Model {
      * Filters a list of goods by the given {@code predicate}.
      */
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Updates the filter of the filtered goods receipts list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
 }
