@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
@@ -14,12 +16,13 @@ public class DateAbsentPredicate implements Predicate<Person> {
     private final LocalDateTime classDate;
 
     public DateAbsentPredicate(LocalDateTime classDate) {
+        requireNonNull(classDate);
         this.classDate = classDate;
     }
 
     @Override
     public boolean test(Person person) {
-        return new Attendance(false).equals(person.getAttendanceList().getMap().getOrDefault(classDate, null));
+        return person.hasAttendanceOn(classDate);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class DateAbsentPredicate implements Predicate<Person> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Absent on", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(classDate))
+                .add("Absent on", DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate))
                 .toString();
     }
 }

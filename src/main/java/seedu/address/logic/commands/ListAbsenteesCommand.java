@@ -24,6 +24,7 @@ public class ListAbsenteesCommand extends Command {
     private final DateAbsentPredicate predicate;
 
     public ListAbsenteesCommand(DateAbsentPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
