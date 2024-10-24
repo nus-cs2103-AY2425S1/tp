@@ -28,7 +28,7 @@ public class CommandUtil {
         if (index.getZeroBased() >= currDisplayedList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else if (index.getZeroBased() == CommandUtil.filterAll) {
-            return currDisplayedList;
+            return new ArrayList<>(currDisplayedList);
         } else {
             personList.add(currDisplayedList.get(index.getZeroBased()));
         }
