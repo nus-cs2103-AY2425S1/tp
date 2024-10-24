@@ -68,7 +68,7 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -193,6 +193,24 @@ Examples:
 * The file has to be located in the data folder
 * The specified file name has to exactly match the name of the file to import from
 
+### Adding an event: `add_event`
+
+Adds an event to the address book.
+
+Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
+
+* The date inputs must be in the format `YYYY-MM-DD`.
+
+Examples:
+* `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
+* `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
+
+### Listing all events : `list_events`
+
+Shows a list of all events in the address book.
+
+Format: `list_events`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -242,16 +260,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Mass Delete** | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Search** | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
-**List**   | `list`
-**Help**   | `help`
-**Export** | `export`
-**Import** | `import FILENAME`<br> e.g., `import contacts.csv`
+Action             | Format, Examples
+-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**          | `clear`
+**Delete**         | `delete INDEX`<br> e.g., `delete 3`
+**Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
+**Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
+**List**           | `list`
+**Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
+**List Events**    | `list_events`
+**Help**           | `help`
+**Export**         | `export`
+**Import**         | `import FILENAME`<br> e.g., `import contacts.csv`
