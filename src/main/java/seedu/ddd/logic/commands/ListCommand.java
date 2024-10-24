@@ -40,8 +40,8 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(predicate);
         model.updateFilteredEventList(CLEAR_EVENTS);
+        model.updateFilteredContactList(predicate);
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactList().size()));
     }
