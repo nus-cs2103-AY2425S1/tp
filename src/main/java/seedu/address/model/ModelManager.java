@@ -129,7 +129,7 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
-  
+
     //=========== Listings ================================================================================
 
     @Override
@@ -212,7 +212,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredListings.setPredicate(predicate);
     }
-  
+
     /**
      * Returns the listing with the same name as {@code name} exists in the address book.
      */

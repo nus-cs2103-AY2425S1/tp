@@ -49,8 +49,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).buildBuyer();
         // .withTags(VALID_TAG_HUSBAND)
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<Listing> dummyListings = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(newPersons, dummyListings);
+        AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -86,8 +85,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + ", "
-                + "listings=" + addressBook.getListingList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -96,21 +94,14 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<Listing> listings = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Listing> listings) {
+        AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
-            this.listings.setAll(listings);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
-        }
-
-        @Override
-        public ObservableList<Listing> getListingList() {
-            return listings;
         }
     }
 
