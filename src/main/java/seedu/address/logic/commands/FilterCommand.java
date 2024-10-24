@@ -31,7 +31,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all persons whose details contain all "
             + "the specified keywords (case-insensitive) as condition and display them as  a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + "n/joe m/MA1521";
+            + "Example: " + COMMAND_WORD + " n/joe m/MA1521";
 
     private final FilterPersonDescriptor filterPersonDescriptor;
     private final FilterPredicate predicate;
