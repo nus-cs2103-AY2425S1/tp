@@ -22,7 +22,7 @@ public class DateAbsentPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.hasAttendanceOn(classDate);
+        return person.isAbsentOn(classDate);
     }
 
     @Override

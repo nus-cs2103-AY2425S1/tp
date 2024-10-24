@@ -68,8 +68,8 @@ public class Person {
         return attendanceList;
     }
 
-    public boolean hasAttendanceOn(LocalDateTime date) {
-        return new Attendance(true).equals(attendanceList.getAttendance(date));
+    public boolean isAbsentOn(LocalDateTime date) {
+        return new Attendance(false).equals(attendanceList.getAttendance(date));
     }
 
     /**
