@@ -54,15 +54,19 @@ public class ViewPersonPanel extends UiPart<Region> {
         interviewScore.setText("Interview Score : " + person.getInterviewScore().interviewScore);
         Set<Skill> skillsSet = person.getSkills();
         StringBuilder skillsText = new StringBuilder();
-        for (Skill skill : skillsSet) {
-            skillsText.append(skill.skillName).append(", ");
-        }
 
-        if (!skillsText.isEmpty()) {
-            skillsText.setLength(skillsText.length() - 2);
+        if (skillsSet.isEmpty()) {
+            skillsText.append("None");
+        } else {
+            for (Skill skill : skillsSet) {
+                skillsText.append(skill.skillName).append(", ");
+            }
+            if (!skillsText.isEmpty()) {
+                skillsText.setLength(skillsText.length() - 2);
+            }
         }
+        skills.setText("Skills: " + skillsText.toString());
 
-        skills.setText("Skills : " + skillsText.toString());
         Set<Tag> tags = person.getTags();
         if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
             status.setText("Status : " + Person.DEFAULT_TAG_PENDING.tagName);
