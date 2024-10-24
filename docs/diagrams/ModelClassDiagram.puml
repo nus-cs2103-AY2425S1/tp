@@ -49,7 +49,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Student *--> Grade
-Student <-> Parent
+Student "child" <-right-> "parent"Parent:"                     "
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
