@@ -1,44 +1,118 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ddd.logic.commands.AddEventCommand.MESSAGE_DUPLICATE_EVENT;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalDescriptions.DESCRIPTION_FIRST;
-import static seedu.ddd.testutil.TypicalIds.getTypicalIdsAsSet;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_CLIENT_ID_SET;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_DESCRIPTION;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_EVENT_ID;
+import static seedu.ddd.testutil.EventBuilder.DEFAULT_VENDOR_ID_SET;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
+import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.EventBuilder;
+import seedu.ddd.testutil.VendorBuilder;
 
 public class AddEventCommandTest {
     @Test
     public void constructor_nullClientIds_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddEventCommand(null,
-                getTypicalIdsAsSet(), DESCRIPTION_FIRST));
+                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
     }
 
     @Test
     public void constructor_nullVendorIds_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(getTypicalIdsAsSet(),
-                null, DESCRIPTION_FIRST));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+                null, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
     }
 
     @Test
     public void constructor_nullDescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(getTypicalIdsAsSet(),
-                getTypicalIdsAsSet(), null));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+                DEFAULT_VENDOR_ID_SET, null, DEFAULT_EVENT_ID));
     }
+
+    @Test
+    public void constructor_nullEventId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, null));
+    }
+
+    @Test
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
+
+        CommandResult commandResult = new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+                        DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID).execute(modelStub);
+
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
+                commandResult.getFeedbackToUser());
+
+        assertEquals(List.of(validEvent), modelStub.eventsAdded);
+    }
+
+    @Test
+    public void execute_duplicateEvent_throwsCommandException() {
+        AddEventCommand addEventCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET,
+                DEFAULT_VENDOR_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID);
+        ModelStub modelStub = new ModelStubWithEvent();
+
+        assertThrows(CommandException.class,
+                MESSAGE_DUPLICATE_EVENT, () -> addEventCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        AddEventCommand addEventOneCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
+                new Description("Description 1"), DEFAULT_EVENT_ID);
+        AddEventCommand addEventTwoCommand = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
+                new Description("Description 2"), DEFAULT_EVENT_ID);
+
+        // same object -> returns true
+        assertTrue(addEventOneCommand.equals(addEventOneCommand));
+
+        // same values -> returns true
+        AddEventCommand addEventOneCommandCopy = new AddEventCommand(DEFAULT_CLIENT_ID_SET, DEFAULT_VENDOR_ID_SET,
+                new Description("Description 1"), DEFAULT_EVENT_ID);
+        assertTrue(addEventOneCommand.equals(addEventOneCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addEventOneCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addEventOneCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(addEventOneCommand.equals(addEventTwoCommand));
+    }
+
+
 
     /**
      * A default model stub that have all the methods failing.
@@ -166,39 +240,86 @@ public class AddEventCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub with Amy, Bob and one singleEvent.
      */
-    private class ModelStubWithContact extends ModelStub {
-        private final Contact contact;
+    private class ModelStubWithEvent extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>(Collections.singletonList(new EventBuilder().build()));
 
-        ModelStubWithContact(Contact contact) {
-            requireNonNull(contact);
-            this.contact = contact;
+        @Override
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
-        public boolean hasContact(Contact contact) {
-            requireNonNull(contact);
-            return this.contact.isSameContact(contact);
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
+        }
+
+        @Override
+        public boolean hasClientId(Id id) {
+            requireNonNull(id);
+            return id.equals(new Id(ClientBuilder.DEFAULT_ID));
+        }
+
+        @Override
+        public boolean hasVendorId(Id id) {
+            requireNonNull(id);
+            return id.equals(new Id(VendorBuilder.DEFAULT_ID));
+        }
+
+        @Override
+        public Contact getContact(Id id) {
+            if (id.equals(new Id(VALID_ID_AMY))) {
+                return new ClientBuilder().build();
+            }
+            return new VendorBuilder().build();
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
 
+
     /**
-     * A Model stub that always accept the event being added.
+     * A Model stub with Amy and Bob.
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
-        final ArrayList<Contact> contactsAdded = new ArrayList<>();
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasContact(Contact contact) {
-            requireNonNull(contact);
-            return contactsAdded.stream().anyMatch(contact::isSameContact);
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
-        public void addContact(Contact contact) {
-            requireNonNull(contact);
-            contactsAdded.add(contact);
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
+        }
+
+        @Override
+        public boolean hasClientId(Id id) {
+            requireNonNull(id);
+            return id.equals(new Id(ClientBuilder.DEFAULT_ID));
+        }
+
+        @Override
+        public boolean hasVendorId(Id id) {
+            requireNonNull(id);
+            return id.equals(new Id(VendorBuilder.DEFAULT_ID));
+        }
+
+        @Override
+        public Contact getContact(Id id) {
+            if (id.equals(new Id(VALID_ID_AMY))) {
+                return new ClientBuilder().build();
+            }
+            return new VendorBuilder().build();
         }
 
         @Override
