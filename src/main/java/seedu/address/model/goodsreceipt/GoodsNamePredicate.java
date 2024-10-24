@@ -14,6 +14,8 @@ public class GoodsNamePredicate implements Predicate<GoodsReceipt> {
 
     @Override
     public boolean test(GoodsReceipt goodsData) {
-        return goodsData.getGoods().getReadableGoodsName().contains(name);
+        // Make it caps insensitive
+        String actualGoodsName = goodsData.getGoods().getReadableGoodsName().toLowerCase();
+        return actualGoodsName.contains(name.toLowerCase());
     }
 }
