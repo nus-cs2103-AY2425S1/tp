@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class AddConcertContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": links the person identified "
             + "by the index number used in the displayed person list to the concert identified by the "
             + "index number used in the displayed concert list.\n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_PERSON + "PERSON_INDEX (must be a positive integer) "
              + PREFIX_CONCERT + "CONCERT_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "1";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + "1";
 
     public static final String MESSAGE_LINK_PERSON_SUCCESS = "Linked Person: %1$s to Concert: %2$s";
     public static final String MESSAGE_DUPLICATE_CONCERTCONTACT =

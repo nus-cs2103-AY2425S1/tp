@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class DeleteConcertContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_PERSON + " PERSON_INDEX (must be a positive integer) "
             + PREFIX_CONCERT + "CONCERT_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "2";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + "2";
 
-    public static final String MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS = "Deleted Person: %1$s from Concert: %1$s";
+    public static final String MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS = "Deleted Person: %1$s from Concert: %2$s";
 
     private final Index indexC;
     private final Index indexP;
