@@ -5,6 +5,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,15 +32,8 @@ public class DeleteSessionCommandParser implements Parser<DeleteSessionCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSessionCommand.MESSAGE_USAGE));
         }
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
-        List<Index> memberIndexes = argMultimap.getAllValues(PREFIX_MEMBER).stream()
-                .map(value -> {
-                    try {
-                        return ParserUtil.parseIndex(value);
-                    } catch (ParseException e) {
-                        throw new IllegalArgumentException("Invalid member index: " + value);
-                    }
-                })
-                .collect(Collectors.toList());
+        // No indices error is already handled by the nature of parseIndices
+        Set<Index> memberIndexes = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER));
         return new DeleteSessionCommand(name, memberIndexes);
     }
 

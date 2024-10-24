@@ -84,14 +84,15 @@ public class MemberBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code sessions} into a {@code Set<Session>} and set it to the {@code Member} that we are building.
+     */
+    public MemberBuilder withSessions(Session ... sessions) {
+        this.sessions = SampleDataUtil.getSessionSet(sessions);
+        return this;
+    }
+
     public Member build() {
         return new Member(name, telegram, room, tags, points, sessions);
-    }
-    /**
-     * Parses the {@code session} into a {@code Set<Session>} and set it to the {@code Member} that we are building.
-     */
-    public MemberBuilder withSession(Session session) {
-        this.sessions.add(session);
-        return this;
     }
 }

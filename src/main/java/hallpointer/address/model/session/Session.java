@@ -44,7 +44,7 @@ public class Session {
     }
 
     /**
-     * Returns true if both sessions have the same name.
+     * Returns true if both sessions have the same name (not case-sensitive).
      * This defines a weaker notion of equality between two sessions.
      */
     public boolean isSameSession(Session otherSession) {

@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
@@ -35,15 +36,16 @@ public class DeleteSessionCommand extends Command {
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
     public static final String MESSAGE_DELETE_SESSION_FAIL = "Error: Session %1$s does not exist in member %2$s.";
 
-    private final List<Index> memberIndexes;
+    private final Set<Index> memberIndexes;
     private final SessionName sessionName;
 
     /**
      * Creates a DeleteSessionCommand to delete the specified session from the specified list of users.
      *
      * @param sessionName The name of the session to delete.
+     * @param memberIndexes The indexes of the members in the list the session can be found in.
      */
-    public DeleteSessionCommand(SessionName sessionName, List<Index> memberIndexes) {
+    public DeleteSessionCommand(SessionName sessionName, Set<Index> memberIndexes) {
         requireNonNull(sessionName);
         requireNonNull(memberIndexes);
         this.memberIndexes = memberIndexes;
@@ -94,7 +96,7 @@ public class DeleteSessionCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("delete", sessionName.toString())
+                .add("delete", sessionName)
                 .toString();
     }
 

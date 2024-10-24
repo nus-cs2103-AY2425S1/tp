@@ -146,7 +146,7 @@ public class Member {
     }
 
     /**
-     * Returns true if both members have the same name.
+     * Returns true if both members have the same name (not case-sensitive).
      * This is used to check for duplicates in the address book.
      */
     public boolean isSameMember(Member otherMember) {

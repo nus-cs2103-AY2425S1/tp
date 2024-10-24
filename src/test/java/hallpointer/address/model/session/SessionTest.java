@@ -24,27 +24,32 @@ public class SessionTest {
         assertThrows(NullPointerException.class, () -> new Session(validSessionName, null, validPoints));
         assertThrows(NullPointerException.class, () -> new Session(validSessionName, validDate, null));
         assertThrows(NullPointerException.class, () -> new Session(null, null, null));
-
     }
 
     @Test
     public void isSameSession() {
         Session session = new SessionBuilder(REHEARSAL).build();
 
-        // same session -> returns true
-        assertTrue(session.isSameSession(session));
-
-        // different session with same name -> returns true
-        Session updatedSession = new SessionBuilder(REHEARSAL).withDate("20 Jan 2025").build();
-        assertTrue(session.isSameSession(updatedSession));
-
-        // different session with different name -> returns false
-        updatedSession = new SessionBuilder(REHEARSAL)
-                .withSessionName("Rehearsal 2").build();
-        assertFalse(session.isSameSession(updatedSession));
-
         // null -> returns false
         assertFalse(session.isSameSession(null));
+
+        // same object -> returns true
+        assertTrue(session.isSameSession(session));
+
+        // same name, all other attributes different -> returns true
+        Session updatedSession = new SessionBuilder(REHEARSAL)
+                .withDate("20 Jan 2025").withPoints("123").build();
+        assertTrue(session.isSameSession(updatedSession));
+
+        // different name, all other attributes same -> returns false
+        updatedSession = new SessionBuilder(REHEARSAL)
+                .withSessionName("Meeting").build();
+        assertFalse(session.isSameSession(updatedSession));
+
+        // name differs in case, all other attributes different -> returns true
+        updatedSession = new SessionBuilder(REHEARSAL)
+                .withSessionName("reHEARSAL W1").withDate("20 Jan 2025").withPoints("123").build();
+        assertTrue(session.isSameSession(updatedSession));
     }
 
     @Test
