@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.product.StockLevel;
@@ -7,6 +10,8 @@ import seedu.address.model.product.exceptions.InvalidMaxStockLevelException;
 import seedu.address.model.product.exceptions.InvalidMinStockLevelException;
 import seedu.address.model.product.exceptions.InvalidStockLevelException;
 import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Product objects.
@@ -22,12 +27,14 @@ public class ProductBuilder {
     private int currentStock;
     private int minStock;
     private int maxStock;
+    private Set<Tag> tags;
 
     /**
-     * Initializes the ProductBuilder with default values.
+     * Creates a {@code ProductBuilder} with the default details.
      */
     public ProductBuilder() {
         name = new ProductName(DEFAULT_NAME);
+        tags = new HashSet<>();
         currentStock = DEFAULT_CURRENT_STOCK;
         minStock = DEFAULT_MIN_STOCK;
         maxStock = DEFAULT_MAX_STOCK;
@@ -41,6 +48,7 @@ public class ProductBuilder {
         currentStock = productToCopy.getStockLevel().getStockLevel();
         minStock = productToCopy.getStockLevel().getMinStockLevel();
         maxStock = productToCopy.getStockLevel().getMaxStockLevel();
+        tags = new HashSet<>(productToCopy.getTags());
     }
 
     /**
@@ -48,6 +56,14 @@ public class ProductBuilder {
      */
     public ProductBuilder withName(String name) {
         this.name = new ProductName(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Product} that we are building.
+     */
+    public ProductBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -72,6 +88,16 @@ public class ProductBuilder {
      */
     public ProductBuilder withMaxStock(int maxStock) {
         this.maxStock = maxStock;
+        return this;
+    }
+
+    /**
+     * Sets the {@code StockLevel} of the {@code Product} that we are building.
+     */
+    public ProductBuilder withStockLevel(StockLevel stockLevel) {
+        this.currentStock = stockLevel.getStockLevel();
+        this.minStock = stockLevel.getMinStockLevel();
+        this.maxStock = stockLevel.getMaxStockLevel();
         return this;
     }
 

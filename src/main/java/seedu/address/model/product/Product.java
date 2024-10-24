@@ -2,6 +2,7 @@ package seedu.address.model.product;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,6 +50,14 @@ public class Product {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Removes assigned supplier and assignment status.
      */
     public void unsetSupplier() {
@@ -60,14 +69,6 @@ public class Product {
      */
     public void setSupplierName(Name supplierName) {
         this.supplierName = supplierName;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return new HashSet<>(tags); // Return a copy to preserve encapsulation
     }
 
     /**
@@ -88,6 +89,20 @@ public class Product {
         return name;
     }
 
+    /**
+     * Returns the current stock level of the product.
+     */
+    public void setMaxStockLevel(int maxStockLevel) {
+        stockLevel.setMaxStockLevel(maxStockLevel);
+    }
+
+    public int getMaxStockLevel() {
+        return stockLevel.getMaxStockLevel();
+    }
+
+    public void setStockLevel(int currentStockLevel) {
+        stockLevel.setStockLevel(currentStockLevel);
+    }
     /**
      * Returns the stock level object of the product.
      */

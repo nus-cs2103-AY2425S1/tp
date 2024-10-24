@@ -14,7 +14,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public class DeleteSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "DELETE_SUPPLIER";
+    public static final String COMMAND_WORD = CommandWords.DELETE_SUPPLIER_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a supplier from InvenTrack. "
             + "Parameters: n/SUPPLIER_NAME\n"

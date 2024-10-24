@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private boolean lastResultDisplayAutoComplete = false;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -181,11 +183,23 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText, Boolean autoComplete)
+            throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText, autoComplete);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+
+            if (commandResult.getResultDisplay()) {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+                lastResultDisplayAutoComplete = autoComplete;
+            }
+
+            if ((commandResult.getUpdateCommandBox() || !(commandResult.getResultDisplay()
+                || commandResult.getUpdateCommandBox())) && lastResultDisplayAutoComplete) {
+                resultDisplay.setFeedbackToUser("");
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

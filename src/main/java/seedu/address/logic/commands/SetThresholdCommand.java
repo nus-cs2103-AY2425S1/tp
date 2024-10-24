@@ -22,7 +22,7 @@ import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
  */
 public class SetThresholdCommand extends Command {
 
-    public static final String COMMAND_WORD = "threshold";
+    public static final String COMMAND_WORD = CommandWords.SET_THRESHOLD_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the minimum and/or maximum stock levels of the product identified "
