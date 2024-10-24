@@ -104,11 +104,15 @@ public interface Model {
 
     void removeAppointment(Appointment oldAppointment, Person person);
 
+    void editAppointment(Appointment appointment, Person person, Appointment newAppointment);
+
     List<Appointment> getAllAppointments();
 
     List<Appointment> getAppointmentsForPerson(Person person);
 
     Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime);
+
+    boolean hasAppointment(Appointment appointment);
 
     void addNoteToPerson(Note note, Person person);
 }
