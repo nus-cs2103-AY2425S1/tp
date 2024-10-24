@@ -49,8 +49,6 @@ deactivate AddressBookParser
 LogicManager -> TagCommand : execute()
 activate TagCommand
 
-
-
 TagCommand -> Model : setPerson(personToTag, personWithTags)
 activate Model
 Model --> TagCommand
@@ -70,7 +68,6 @@ deactivate CommandResult
 
 TagCommand --> LogicManager : r
 deactivate TagCommand
-
 
 [<--LogicManager
 deactivate LogicManager
