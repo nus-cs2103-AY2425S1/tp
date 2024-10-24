@@ -21,6 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SCHEDULE_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_SCHEDULE_TIME = new Prefix("st/");
     public static final Prefix PREFIX_BEGIN = new Prefix("b/");
-    public static final Prefix PREFIX_END = new Prefix("e/");
+    public static final Prefix PREFIX_END = new Prefix("en/");
 
 }
