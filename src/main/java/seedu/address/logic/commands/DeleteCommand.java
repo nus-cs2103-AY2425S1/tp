@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
         // Find the person by identity number
@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
 
         // If person was not found, throw an exception
         if (personToDelete == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
         model.deletePerson(personToDelete);

@@ -45,21 +45,7 @@ public class AddLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToUpdate = null;
-
-        // Find the person by identity number
-        for (Person person : lastShownList) {
-            if (person.getIdentityNumber().equals(identityNumber)) {
-                personToUpdate = person;
-                break;
-            }
-        }
-
-        // If person was not found, throw an exception
-        if (personToUpdate == null) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
-        }
+        Person personToUpdate = getPerson(model);
 
         // Create a new Set of logs that includes the new log
         Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
@@ -80,6 +66,25 @@ public class AddLogCommand extends Command {
         model.setPerson(personToUpdate, updatedPerson);
 
         return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, updatedPerson.getName()));
+    }
+
+    private Person getPerson(Model model) throws CommandException {
+        List<Person> lastShownList = model.getPersonList();
+        Person personToUpdate = null;
+
+        // Find the person by identity number
+        for (Person person : lastShownList) {
+            if (person.getIdentityNumber().equals(identityNumber)) {
+                personToUpdate = person;
+                break;
+            }
+        }
+
+        // If person was not found, throw an exception
+        if (personToUpdate == null) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
+        }
+        return personToUpdate;
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.log.Log;
@@ -64,5 +65,12 @@ public class ListLogsCommand extends Command {
 
         // Since ListLogsCommand relies soley on id, last check to compare only id
         return identityNumber.equals(e.identityNumber);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("identityNumber", identityNumber)
+                .toString();
     }
 }

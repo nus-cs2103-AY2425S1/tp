@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_UNABLE_TO_EDIT_LOG = "Logs cannot be edited!";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "NRIC: %1$s not found in system, perhaps there was a typo.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
