@@ -125,6 +125,14 @@ How the parsing works:
 * All `XYZContactCommandParser` and `XYZLessonCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the
   `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Extra Pointers about parsing:
+
+* For basic one-word commands like `help`, `exit`, and `clear`, they are handled directly within the `parseCommand` function in `TutorEaseParser` without the need for a dedicated parser.
+These simple commands are omitted in the Parser classes diagram to enhance clarity and reduce clutter.
+* Various contact and lesson command parsers are represented as `XYZContactCommandParser` and `XYZLessonCommandParser`, respectively. 
+However, their behaviour varies slightly depending on the function. For example, `ArgumentMultimap` is used exclusively in parsers for add, delete, and edit commands, 
+while `ArgumentTokenizer` is only used in parsers for add and edit commands.Not specifying every parser reduces clutter and conveys the high-level message concisely.
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
