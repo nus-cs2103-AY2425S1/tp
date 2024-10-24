@@ -37,8 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
-      
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_MODULE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -50,10 +49,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             editPersonDescriptor.setModuleChanges(new Module(modules[0]), new Module(modules[1]));
         } else {
-            if (argMultimap.getValue(PREFIX_STUDENTID).isPresent()) {
-                editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID)
-                        .get()));
-            }
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }

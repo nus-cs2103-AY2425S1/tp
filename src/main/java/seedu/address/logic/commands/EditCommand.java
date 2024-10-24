@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "by the studentId assigned to the corresponding student. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: ID (must be a valid and existing 8-digit ID) "
-            + "[" + PREFIX_STUDENTID + "ID] "
+            + "[ID] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -105,7 +105,6 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
         assert personToEdit != null;
-        StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -140,8 +139,8 @@ public class EditCommand extends Command {
             }
         }
 
-        Person editedPerson = new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCourse, updatedTag, updatedModules);
+        Person editedPerson = new Person(personToEdit.getStudentId(), updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedCourse, updatedTag, updatedModules);
 
         return editedPerson;
     }
@@ -193,7 +192,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setStudentId(toCopy.studentId);
+            setStudentId(null);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -317,8 +316,7 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(studentId, otherEditPersonDescriptor.studentId)
-                    && Objects.equals(name, otherEditPersonDescriptor.name)
+            return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)

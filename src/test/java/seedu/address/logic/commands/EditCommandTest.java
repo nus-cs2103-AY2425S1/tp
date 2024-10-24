@@ -54,6 +54,8 @@ public class EditCommandTest {
         String expectedMessage = EditCommand.MESSAGE_MODULE_NOT_FOUND;
         assertThrows(CommandException.class, () -> editCommand.execute(model), expectedMessage);
     }
+
+
     @Test
     public void execute_editModuleWithoutGrade_success() throws Exception {
         Person originalPerson = TypicalPersons.BENSON;
@@ -124,7 +126,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withStudentId("22223333").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
         EditCommand editCommand = new EditCommand(studentId, descriptor);
