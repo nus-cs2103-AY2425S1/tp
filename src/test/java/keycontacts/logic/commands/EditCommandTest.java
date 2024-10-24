@@ -36,7 +36,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
+        Student firstStudent = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        // do not test with a different group here, this is under group sync testing
+        Student editedStudent = new StudentBuilder().withGroup(firstStudent.getGroup().groupName).build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
@@ -50,7 +52,8 @@ public class EditCommandTest {
                 .withName(editedStudent.getName().toString())
                 .withPhone(editedStudent.getPhone().toString())
                 .withAddress(editedStudent.getAddress().toString())
-                .withGradeLevel(editedStudent.getGradeLevel().toString()).build();
+                .withGradeLevel(editedStudent.getGradeLevel().toString())
+                .withGroup(editedStudent.getGroup().toString()).build();
 
         expectedModel.setStudent(studentToEdit, expectedEditedStudent);
 

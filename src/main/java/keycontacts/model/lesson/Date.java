@@ -16,7 +16,8 @@ public class Date implements Comparable<Date> {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter DATE_TIME_FORMATTER_DISPLAY = DateTimeFormatter.ofPattern("MMM dd, yyyy");
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
-    private final LocalDate date;
+
+    public final LocalDate value;
 
     /**
      * Constructs a {@code Date} object.
@@ -26,32 +27,28 @@ public class Date implements Comparable<Date> {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, DATE_TIME_FORMATTER);
+        this.value = LocalDate.parse(date, DATE_TIME_FORMATTER);
     }
 
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
     @Override
     public String toString() {
-        return date.format(DATE_TIME_FORMATTER);
+        return value.format(DATE_TIME_FORMATTER);
     }
 
     /**
      * Returns the date in a user-friendly display format.
      */
     public String toDisplay() {
-        return date.format(DATE_TIME_FORMATTER_DISPLAY);
+        return value.format(DATE_TIME_FORMATTER_DISPLAY);
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return value.hashCode();
     }
 
     @Override
@@ -66,18 +63,18 @@ public class Date implements Comparable<Date> {
         }
 
         Date otherDate = (Date) other;
-        return date.equals(otherDate.date);
+        return value.equals(otherDate.value);
     }
 
     @Override
     public int compareTo(Date other) {
-        return this.date.compareTo(other.date);
+        return this.value.compareTo(other.value);
     }
 
     /**
      * Returns a {@code Day} object which the date falls on.
      */
     public Day convertToDay() {
-        return new Day(date.getDayOfWeek().name());
+        return new Day(value.getDayOfWeek().name());
     }
 }

@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -62,13 +63,19 @@ public class MakeupLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
-        Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
-        model.setStudent(studentToUpdate, updatedStudent);
+        // try to update everything first
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withAddedMakeupLesson(makeupLesson));
+        }
 
         Set<Lesson> clashingLessons = model.getClashingLessons();
         if (!clashingLessons.isEmpty()) { // if there are clashing lessons
-            model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
+            // revert all updates
+            for (Student groupStudent : studentsInGroup) {
+                model.setStudent(groupStudent.withAddedMakeupLesson(makeupLesson), groupStudent);
+            }
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
                     clashingLessons.stream()
                             .filter(lesson -> lesson != makeupLesson)
@@ -76,7 +83,7 @@ public class MakeupLessonCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
-                Messages.format(updatedStudent)));
+                Messages.format(studentToUpdate)));
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -58,7 +59,7 @@ public class FindStudentDescriptorTest {
     public void testMatches() {
         FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "", "", "");
         Student student = new Student(new Name("John"), new Phone("12345678"), new Address("123 Street"),
-                new GradeLevel("ABRSM 3"));
+                new GradeLevel("ABRSM 3"), new Group(""));
 
         assertTrue(descriptor.matches(student));
 

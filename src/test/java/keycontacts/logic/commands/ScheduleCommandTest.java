@@ -28,7 +28,7 @@ public class ScheduleCommandTest {
     private final Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
     private final RegularLesson regularLesson = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())
             .getRegularLesson();
-    private final String updatedEndTime = regularLesson.getEndTime().getTime().plusMinutes(1).toString();
+    private final String updatedEndTime = regularLesson.getEndTime().value.plusMinutes(1).toString();
     private final RegularLesson updatedRegularLesson =
             new RegularLessonBuilder(regularLesson).withEndTime(updatedEndTime).build();
 

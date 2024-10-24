@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -15,6 +16,7 @@ import javafx.collections.transformation.SortedList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
 import keycontacts.model.lesson.Lesson;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -25,9 +27,9 @@ public class ModelManager implements Model {
 
     private final StudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
-    private final ObservableList<Student> sortedFilteredStudent;
+    private final ObservableList<Student> studentList;
     private final FilteredList<Student> filteredStudents;
-    private final SortedList<Student> sortedStudents;
+    private final SortedList<Student> sortedFilteredStudents;
 
     /**
      * Initializes a ModelManager with the given studentDirectory and userPrefs.
@@ -40,17 +42,16 @@ public class ModelManager implements Model {
         this.studentDirectory = new StudentDirectory(studentDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentDirectory.getStudentList());
-        sortedStudents = new SortedList<>(filteredStudents);
+        sortedFilteredStudents = new SortedList<>(filteredStudents);
 
-        sortedFilteredStudent = sortedStudents;
+        studentList = sortedFilteredStudents;
     }
 
     public ModelManager() {
         this(new StudentDirectory(), new UserPrefs());
     }
 
-    // =========== UserPrefs
-    // ==================================================================================
+    //=========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -85,8 +86,7 @@ public class ModelManager implements Model {
         userPrefs.setStudentDirectoryFilePath(studentDirectoryFilePath);
     }
 
-    // =========== StudentDirectory
-    // ================================================================================
+    //=========== StudentDirectory ================================================================================
 
     @Override
     public void setStudentDirectory(ReadOnlyStudentDirectory studentDirectory) {
@@ -127,8 +127,14 @@ public class ModelManager implements Model {
         return studentDirectory.getClashingLessons();
     }
 
-    // =========== Filtered Student List Accessors
-    // =============================================================
+    @Override
+    public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+        requireNonNull(targetGroup);
+
+        return studentDirectory.getStudentsInGroup(targetGroup);
+    }
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the
@@ -137,7 +143,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Student> getStudentList() {
-        return sortedFilteredStudent;
+        return studentList;
     }
 
     @Override
@@ -148,7 +154,7 @@ public class ModelManager implements Model {
 
     @Override
     public void sortStudentList(Comparator<Student> comparator) {
-        sortedStudents.setComparator(comparator);
+        sortedFilteredStudents.setComparator(comparator);
     }
 
     @Override

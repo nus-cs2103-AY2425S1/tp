@@ -30,9 +30,9 @@ public class StudentComparatorTest {
         GradeLevel student2GradeLevel = new GradeLevel("ABRSM 2");
         GradeLevel student3GradeLevel = new GradeLevel("Trinity 1");
 
-        student1 = new Student(student1Name, student1Phone, student1Address, student1GradeLevel);
-        student2 = new Student(student2Name, student2Phone, student2Address, student2GradeLevel);
-        student3 = new Student(student3Name, student3Phone, student3Address, student3GradeLevel);
+        student1 = new Student(student1Name, student1Phone, student1Address, student1GradeLevel, new Group(""));
+        student2 = new Student(student2Name, student2Phone, student2Address, student2GradeLevel, new Group(""));
+        student3 = new Student(student3Name, student3Phone, student3Address, student3GradeLevel, new Group(""));
     }
 
     @Test

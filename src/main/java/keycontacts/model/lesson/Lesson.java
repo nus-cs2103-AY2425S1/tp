@@ -33,7 +33,7 @@ public abstract class Lesson {
     public abstract boolean isClashing(MakeupLesson makeupLesson);
 
     public static boolean isValidTimePair(Time startTime, Time endTime) {
-        return startTime.getTime().isBefore(endTime.getTime());
+        return startTime.value.isBefore(endTime.value);
     }
 
     public Time getStartTime() {

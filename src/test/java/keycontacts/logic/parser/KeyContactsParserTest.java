@@ -80,7 +80,7 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("n/foo", "a/bar", "g/baz");
+        List<String> keywords = Arrays.asList("n/foo", "a/bar", "gl/baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("foo")

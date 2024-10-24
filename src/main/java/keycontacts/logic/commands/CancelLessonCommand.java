@@ -5,6 +5,7 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,27 +64,30 @@ public class CancelLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
         Optional<MakeupLesson> makeupLessonOptional = studentToUpdate.findMakeupLesson(date, startTime);
         if (makeupLessonOptional.isPresent()) {
-            Student updatedStudent = studentToUpdate.withoutMakeupLesson(makeupLessonOptional.get());
-            model.setStudent(studentToUpdate, updatedStudent);
+            // cancelling a makeup lesson
+            for (Student groupStudent : studentsInGroup) {
+                model.setStudent(groupStudent, groupStudent.withoutMakeupLesson(makeupLessonOptional.get()));
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS,
-                    date.toDisplay(), startTime, Messages.format(updatedStudent)));
+                    date.toDisplay(), startTime, Messages.format(studentToUpdate)));
         }
 
-        studentToUpdate.matchesLesson(date, startTime);
-
+        // cancelling a regular lesson
         if (!studentToUpdate.matchesLesson(date, startTime)) {
             throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
         }
 
         CancelledLesson cancelledLesson = new CancelledLesson(date);
-        Student updatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
-        model.setStudent(studentToUpdate, updatedStudent);
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withAddedCancelledLesson(cancelledLesson));
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                date.toDisplay(), startTime, Messages.format(updatedStudent)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toDisplay(), startTime,
+                Messages.format(studentToUpdate)));
     }
 
     @Override

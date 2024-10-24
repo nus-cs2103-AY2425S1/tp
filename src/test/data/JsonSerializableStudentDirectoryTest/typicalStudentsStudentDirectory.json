@@ -5,6 +5,7 @@
     "phone" : "94351253",
     "address" : "123, Jurong West Ave 6, #08-111",
     "gradeLevel": "ABRSM 2",
+    "group": "Alice's Group",
     "pianoPieces": [ "Etude" ],
     "regularLesson": {
       "lessonDay": "MONDAY",
@@ -22,6 +23,7 @@
     "phone" : "98765432",
     "address" : "311, Clementi Ave 2, #02-25",
     "gradeLevel": "RSL 3",
+    "group": "Benson's Group",
     "pianoPieces": [ "Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2" ],
     "regularLesson": {
       "lessonDay": "TUESDAY",
@@ -39,6 +41,7 @@
     "phone" : "95352563",
     "address" : "wall street",
     "gradeLevel": "ABRSM 1",
+    "group": "Carl's Group",
     "pianoPieces": [ "Clair de Lune", "Le Sapin Op. 75 No. 5" ],
     "regularLesson": {
       "lessonDay": "WEDNESDAY",
@@ -56,6 +59,7 @@
     "phone" : "87652533",
     "address" : "10th street",
     "gradeLevel": "ABRSM 3",
+    "group": "Daniel's Group",
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "THURSDAY",
@@ -73,6 +77,7 @@
     "phone" : "9482224",
     "address" : "michegan ave",
     "gradeLevel": "IMEB 1",
+    "group": "",
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "FRIDAY",
@@ -90,6 +95,7 @@
     "phone" : "9482427",
     "address" : "little tokyo",
     "gradeLevel": "RCM 2",
+    "group": "",
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "SATURDAY",
@@ -107,6 +113,7 @@
     "phone" : "9482442",
     "address" : "4th street",
     "gradeLevel": "LCM 3",
+    "group": "",
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "SUNDAY",

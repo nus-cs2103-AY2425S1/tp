@@ -28,6 +28,7 @@ public class Student {
     private final Phone phone;
     private final Address address;
     private final GradeLevel gradeLevel;
+    private final Group group;
 
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
@@ -39,12 +40,15 @@ public class Student {
      * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel) {
-        requireAllNonNull(name, phone, address, gradeLevel);
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel, Group group) {
+        requireAllNonNull(name, phone, address, gradeLevel, group);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gradeLevel = gradeLevel;
+        this.group = group;
+
+        // by default, students are created with no regular lesson
         this.regularLesson = null;
     }
 
@@ -52,14 +56,15 @@ public class Student {
      * Constructor for a new student with non-default student associations. Identity and data fields must be
      * present and not null.
      */
-    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel, Group group,
                    Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
                    Set<MakeupLesson> makeupLessons) {
-        requireAllNonNull(name, phone, address, gradeLevel, pianoPieces, cancelledLessons, makeupLessons);
+        requireAllNonNull(name, phone, address, gradeLevel, group, pianoPieces, cancelledLessons, makeupLessons);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gradeLevel = gradeLevel;
+        this.group = group;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
         this.cancelledLessons.addAll(cancelledLessons);
@@ -80,6 +85,10 @@ public class Student {
 
     public GradeLevel getGradeLevel() {
         return gradeLevel;
+    }
+
+    public Group getGroup() {
+        return group;
     }
 
     /**
@@ -124,8 +133,7 @@ public class Student {
      * Returns user-friendly display string of the {@code regularLesson}.
      */
     public String getRegularLessonDisplay() {
-        return getRegularLessonOptional().map(RegularLesson::toDisplay)
-                .orElse("No regular lesson scheduled");
+        return getRegularLessonOptional().map(RegularLesson::toDisplay).orElse(RegularLesson.MESSAGE_NO_REGULAR_LESSON);
     }
 
     /**
@@ -135,12 +143,14 @@ public class Student {
         Name updatedName = editStudentDescriptor.getName().orElse(name);
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
-        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
+        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(gradeLevel);
+        Group updatedGroup = editStudentDescriptor.getGroup().orElse(group);
 
         return new Updater().withName(updatedName)
                 .withPhone(updatedPhone)
                 .withAddress(updatedAddress)
                 .withGradeLevel(updatedGradeLevel)
+                .withGroup(updatedGroup)
                 .update();
     }
 
@@ -173,7 +183,7 @@ public class Student {
     }
 
     /**
-     * Returns a new student with an additional {@code CancelledLesson}.
+     * Creates and returns a new student with an additional {@code cancelledLesson}.
      */
     public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
         Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
@@ -212,6 +222,18 @@ public class Student {
     }
 
     /**
+     * Creates and returns a new {@code Student} with the {@code regularLesson}, {@code cancelledLessons}
+     * and {@code makeupLessons}.
+     */
+    public Student withLessons(RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
+                               Set<MakeupLesson> makeupLessons) {
+        return new Updater().withRegularLesson(regularLesson)
+                .withCancelledLessons(cancelledLessons)
+                .withMakeupLessons(makeupLessons)
+                .update();
+    }
+
+    /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
      */
@@ -245,6 +267,7 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
+                && group.equals(otherStudent.group)
                 && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
                 && cancelledLessons.equals(otherStudent.cancelledLessons)
                 && makeupLessons.equals(otherStudent.makeupLessons);
@@ -253,7 +276,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+        return Objects.hash(name, phone, address, gradeLevel, group, pianoPieces, regularLesson,
             cancelledLessons, makeupLessons);
     }
 
@@ -264,6 +287,7 @@ public class Student {
                 .add("phone", phone)
                 .add("address", address)
                 .add("gradeLevel", gradeLevel)
+                .add("group", group)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
                 .add("cancelledLessons", cancelledLessons)
@@ -281,7 +305,7 @@ public class Student {
     }
 
     /**
-     * Returns an {@code Optional<MakeupLesson>} if the student has a makeup lesson matching the paramters.
+     * Returns an {@code Optional<MakeupLesson>} if the student has a makeup lesson matching the parameters.
      */
     public Optional<MakeupLesson> findMakeupLesson(Date date, Time startTime) {
         return this.getMakeupLessons()
@@ -299,6 +323,7 @@ public class Student {
         private Phone phone = Student.this.phone;
         private Address address = Student.this.address;
         private GradeLevel gradeLevel = Student.this.gradeLevel;
+        private Group group = Student.this.group;
         private Set<PianoPiece> pianoPieces = new HashSet<>(Student.this.pianoPieces);
         private RegularLesson regularLesson = Student.this.regularLesson;
         private Set<CancelledLesson> cancelledLessons = new HashSet<>(Student.this.cancelledLessons);
@@ -324,6 +349,11 @@ public class Student {
             return this;
         }
 
+        private Updater withGroup(Group group) {
+            this.group = group;
+            return this;
+        }
+
         private Updater withPianoPieces(Set<PianoPiece> pianoPieces) {
             this.pianoPieces = pianoPieces;
             return this;
@@ -345,7 +375,7 @@ public class Student {
         }
 
         private Student update() {
-            return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons,
+            return new Student(name, phone, address, gradeLevel, group, pianoPieces, regularLesson, cancelledLessons,
                     makeupLessons);
         }
     }

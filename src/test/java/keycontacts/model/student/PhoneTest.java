@@ -64,6 +64,6 @@ public class PhoneTest {
         String testPhone = "999";
         Phone phone = new Phone(testPhone);
 
-        assertEquals(phone.hashCode(), testPhone.hashCode());
+        assertEquals(testPhone.hashCode(), phone.hashCode());
     }
 }

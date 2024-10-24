@@ -33,7 +33,7 @@ public class Day {
             "sun", "SUNDAY"
     );
 
-    private final DayOfWeek day;
+    public final DayOfWeek value;
 
     /**
      * Constructs a {@code Day}.
@@ -43,7 +43,7 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        this.day = convertToDayOfWeek(day);
+        this.value = convertToDayOfWeek(day);
     }
 
     /**
@@ -62,13 +62,9 @@ public class Day {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public DayOfWeek getDay() {
-        return day;
-    }
-
     @Override
     public String toString() {
-        return day.toString();
+        return value.toString();
     }
 
     @Override
@@ -83,12 +79,12 @@ public class Day {
         }
 
         Day otherDay = (Day) other;
-        return day.equals(otherDay.day);
+        return value.equals(otherDay.value);
     }
 
     @Override
     public int hashCode() {
-        return day.hashCode();
+        return value.hashCode();
     }
 
 }

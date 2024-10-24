@@ -1,6 +1,7 @@
 package keycontacts.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -8,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.model.lesson.Lesson;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -16,9 +18,6 @@ import keycontacts.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
-
-    Comparator<Student> COMPARATOR_SORT_BY_NAME = (student1, student2) -> student1.getName()
-            .compareTo(student2.getName());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -59,11 +58,6 @@ public interface Model {
     ReadOnlyStudentDirectory getStudentDirectory();
 
     /**
-     * Returns a {@Code ClashResult} object containing details of lesson clashes.
-     */
-    Set<Lesson> getClashingLessons();
-
-    /**
      * Returns true if a student with the same identity as {@code student} exists in the student directory.
      */
     boolean hasStudent(Student student);
@@ -87,6 +81,16 @@ public interface Model {
      * as another existing student in the directory.
      */
     void setStudent(Student target, Student editedStudent);
+
+    /**
+     * Returns a {@Code ClashResult} object containing details of lesson clashes.
+     */
+    Set<Lesson> getClashingLessons();
+
+    /**
+     * Gets all students in the student directory who are part of {@code targetGroup}
+     */
+    ArrayList<Student> getStudentsInGroup(Group targetGroup);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getStudentList();

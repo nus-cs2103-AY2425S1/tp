@@ -6,7 +6,9 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import keycontacts.commons.core.index.Index;
@@ -40,7 +42,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson at %1$s for student: %2$s";
     public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
-    public static final String MESSAGE_CLASHING_LESSON = "Could not create lesson due to clash with lesson: %1$s.";
+    public static final String MESSAGE_LESSON_CLASH = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index index;
     private final RegularLesson regularLesson;
@@ -64,19 +66,23 @@ public class ScheduleCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
-        Student updatedStudentWithCancelledLessons = studentToUpdate.withRegularLesson(regularLesson);
-        if (studentToUpdate.equals(updatedStudentWithCancelledLessons)) {
+        if (studentToUpdate.getRegularLessonOptional().equals(Optional.ofNullable(regularLesson))) {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
         }
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
-        // rescheduling a regular lesson clears all cancelled lessons as well
-        Student updatedStudent = updatedStudentWithCancelledLessons.withoutCancelledLessons();
-        model.setStudent(studentToUpdate, updatedStudent);
+        // try to update first
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withRegularLesson(regularLesson).withoutCancelledLessons());
+        }
 
         Set<Lesson> clashingLessons = model.getClashingLessons();
         if (!clashingLessons.isEmpty()) { // if there are clashing lessons
-            model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
-            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
+            // revert all updates
+            for (Student groupStudent : studentsInGroup) {
+                model.setStudent(groupStudent.withRegularLesson(regularLesson).withoutCancelledLessons(), groupStudent);
+            }
+            throw new CommandException(String.format(MESSAGE_LESSON_CLASH,
                     clashingLessons.stream()
                             .filter(lesson -> lesson != regularLesson)
                             .findFirst().get().toDisplay()));

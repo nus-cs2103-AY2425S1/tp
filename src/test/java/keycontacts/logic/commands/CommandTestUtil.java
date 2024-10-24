@@ -4,6 +4,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_GRADE_LEVEL_AMY = "RSL 2";
     public static final String VALID_GRADE_LEVEL_BOB = "ABRSM 3";
+    public static final String VALID_GROUP_AMY = "Amy's Group";
+    public static final String VALID_GROUP_BOB = "Bob's Group";
     public static final String VALID_PIANO_PIECE_BEETHOVEN = "Für Elise";
     public static final String VALID_PIANO_PIECE_PACHELBEL = "Canon in D";
     public static final String VALID_DAY = "Monday";
@@ -52,6 +55,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String GRADE_LEVEL_DESC_AMY = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_AMY;
     public static final String GRADE_LEVEL_DESC_BOB = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_BOB;
+    public static final String GROUP_DESC_AMY = " " + PREFIX_GROUP + VALID_GROUP_AMY;
+    public static final String GROUP_DESC_BOB = " " + PREFIX_GROUP + VALID_GROUP_BOB;
     public static final String PIANO_PIECE_DESC_BEETHOVEN = " " + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_BEETHOVEN;
     public static final String PIANO_PIECE_DESC_PACHELBEL = " " + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_PACHELBEL;
     public static final String VALID_DAY_DESC = " " + PREFIX_DAY + VALID_DAY;

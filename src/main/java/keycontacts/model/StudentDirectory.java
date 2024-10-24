@@ -2,6 +2,7 @@ package keycontacts.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 import keycontacts.model.student.UniqueStudentList;
 
@@ -117,13 +119,27 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      */
     public Set<Lesson> getClashingLessons() {
         ObservableList<Student> students = this.getStudentList();
-        Stream<Lesson> clashingLessonsStream1 = students.stream()
+        ArrayList<Student> uniqueGroupStudents = new ArrayList<>();
+        for (Student student : students) {
+            boolean groupPresent = false;
+            for (Student uniqueGroupStudent: uniqueGroupStudents) {
+                if (student.getGroup().isSameGroup(uniqueGroupStudent.getGroup())) {
+                    groupPresent = true;
+                }
+            }
+
+            if (!groupPresent) {
+                uniqueGroupStudents.add(student);
+            }
+        }
+
+        Stream<Lesson> clashingLessonsStream1 = uniqueGroupStudents.stream()
                 .flatMap(student -> student.getMakeupLessons().stream())
                 .flatMap(ml -> checkAgainstMakeupLessons(ml).stream());
-        Stream<Lesson> clashingLessonsStream2 = students.stream()
+        Stream<Lesson> clashingLessonsStream2 = uniqueGroupStudents.stream()
                 .flatMap(student -> student.getMakeupLessons().stream())
                 .flatMap(ml -> checkAgainstRegularLessons(ml).stream());
-        Stream<Lesson> clashingLessonsStream3 = students.stream()
+        Stream<Lesson> clashingLessonsStream3 = uniqueGroupStudents.stream()
                 .map(student -> student.getRegularLesson())
                 .flatMap(rl -> checkAgainstRegularLessons(rl).stream());
         return Stream.concat(clashingLessonsStream1,
@@ -185,6 +201,52 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
                 .findFirst();
     }
 
+    public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+        ObservableList<Student> students = this.getStudentList();
+        ArrayList<Student> studentsInGroup = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getGroup().isSameGroup(targetGroup)) {
+                studentsInGroup.add(student);
+            }
+        }
+
+        return studentsInGroup;
+    }
+
+    /**
+     * Used by {@code JsonSerializableStudentDirectory} to check for any students in the same group with different
+     * lessons.
+     */
+    public boolean hasGroupSyncErrors() {
+        ObservableList<Student> students = this.getStudentList();
+        for (Student student : students) {
+            for (Student otherStudent: students) {
+                // skip if it is the same student
+                if (student == otherStudent) {
+                    continue;
+                }
+
+                if (student.getGroup().isSameGroup(otherStudent.getGroup())) {
+                    // check regular lesson
+                    if (!student.getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())) {
+                        return true;
+                    }
+
+                    // check cancelled lessons
+                    if (!student.getMakeupLessons().equals(otherStudent.getMakeupLessons())) {
+                        return true;
+                    }
+
+                    // check makeup lessons
+                    if (!student.getMakeupLessons().equals(otherStudent.getMakeupLessons())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //// util methods
 
     @Override
@@ -210,8 +272,8 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
             return false;
         }
 
-        StudentDirectory otherAddressBook = (StudentDirectory) other;
-        return students.equals(otherAddressBook.students);
+        StudentDirectory otherStudentDirectory = (StudentDirectory) other;
+        return students.equals(otherStudentDirectory.students);
     }
 
     @Override

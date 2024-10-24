@@ -3,13 +3,20 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -24,12 +31,14 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_GRADE_LEVEL + "GRADE_LEVEL\n"
+            + PREFIX_GRADE_LEVEL + "GRADE_LEVEL "
+            + "[" + PREFIX_GROUP + "GROUP]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_GRADE_LEVEL + "RSL 2 ";
+            + PREFIX_GRADE_LEVEL + "RSL 2 "
+            + PREFIX_GROUP + "Group 1 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the student directory";
@@ -52,7 +61,15 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addStudent(toAdd);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(toAdd.getGroup());
+        if (studentsInGroup.isEmpty()) {
+            model.addStudent(toAdd);
+        } else {
+            RegularLesson groupRegularLesson = studentsInGroup.get(0).getRegularLesson();
+            Set<CancelledLesson> groupCancelledLessons = studentsInGroup.get(0).getCancelledLessons();
+            Set<MakeupLesson> groupMakeupLessons = studentsInGroup.get(0).getMakeupLessons();
+            model.addStudent(toAdd.withLessons(groupRegularLesson, groupCancelledLessons, groupMakeupLessons));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

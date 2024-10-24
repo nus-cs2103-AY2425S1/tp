@@ -16,6 +16,7 @@ import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -31,6 +32,7 @@ public class JsonAdaptedStudent {
     private final String phone;
     private final String address;
     private final String gradeLevel;
+    private final String group;
     private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
     private final List<JsonAdaptedMakeupLesson> makeupLessons = new ArrayList<>();
     private final JsonAdaptedRegularLesson regularLesson;
@@ -42,7 +44,7 @@ public class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("address") String address, @JsonProperty("gradeLevel") String gradeLevel,
-            @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
+            @JsonProperty("group") String group, @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
             @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson,
             @JsonProperty("cancelledLessons") List<JsonAdaptedCancelledLesson> cancelledLessons,
             @JsonProperty("makeupLessons") List<JsonAdaptedMakeupLesson> makeupLessons) {
@@ -50,6 +52,7 @@ public class JsonAdaptedStudent {
         this.phone = phone;
         this.address = address;
         this.gradeLevel = gradeLevel;
+        this.group = group;
         if (pianoPieces != null) {
             this.pianoPieces.addAll(pianoPieces);
         }
@@ -70,6 +73,7 @@ public class JsonAdaptedStudent {
         phone = source.getPhone().value;
         address = source.getAddress().value;
         gradeLevel = source.getGradeLevel().value;
+        group = source.getGroup().groupName;
         pianoPieces.addAll(source.getPianoPieces().stream()
                 .map(JsonAdaptedPianoPiece::new)
                 .collect(Collectors.toList()));
@@ -138,6 +142,15 @@ public class JsonAdaptedStudent {
         }
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
 
+        final Group modelGroup;
+        if (group == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+        }
+        if (!Group.isValidGroupName(group)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
+        modelGroup = new Group(group);
+
         final Set<PianoPiece> modelPianoPieces = new HashSet<>(studentPianoPieces);
 
         final RegularLesson modelRegularLesson;
@@ -150,7 +163,7 @@ public class JsonAdaptedStudent {
 
         final Set<CancelledLesson> modelCancelledLessons = new HashSet<>(studentCancelledLessons);
 
-        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces,
+        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelGroup, modelPianoPieces,
                 modelRegularLesson, modelCancelledLessons, modelMakeupLessons);
     }
 

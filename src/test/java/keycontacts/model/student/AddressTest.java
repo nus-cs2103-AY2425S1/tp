@@ -60,6 +60,6 @@ public class AddressTest {
         String testAddress = "Test address";
         Address address = new Address(testAddress);
 
-        assertEquals(address.hashCode(), testAddress.hashCode());
+        assertEquals(testAddress.hashCode(), address.hashCode());
     }
 }
