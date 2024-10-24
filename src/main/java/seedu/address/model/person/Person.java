@@ -140,9 +140,9 @@ public class Person {
             return true;
         }
 
-            return otherPerson != null
-                    && (otherPerson.getEmail().equals(getEmail()) || otherPerson.getPhone().equals(getPhone()));
-        }
+        return otherPerson != null
+                && (otherPerson.getEmail().equals(getEmail()) || otherPerson.getPhone().equals(getPhone()));
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.

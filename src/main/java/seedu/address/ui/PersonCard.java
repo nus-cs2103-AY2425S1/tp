@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
