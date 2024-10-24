@@ -154,10 +154,9 @@
     top: 0;
     left: 0;
     position: absolute;
-    width: 5px;
+    width: 10px;
     height: 100%;
-    /* background-color: var(--code-bg-color); */
-    background: linear-gradient(90deg, var(--code-bg-color) 0%, var(--primary-bg-color) 100%);
+    background: linear-gradient(90deg, var(--code-bg-color) 0%, var(--primary-bg-color) 50%);
     transition: width 0.3s ease;
     z-index: 0;
     margin-left: 0;
@@ -173,10 +172,6 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-
-  /* .toc-btns:hover {
-    background-color: var(--hover-bg-color);
-  } */
 
   .toc-btns:hover::before {
     width: calc(100%);
