@@ -55,13 +55,13 @@ public class ChatWindow {
             userInput.setDisable(true);
 
             Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(0.25), e -> {
-                        chatArea.appendText(".");
-                    }),
                     new KeyFrame(Duration.seconds(0.5), e -> {
                         chatArea.appendText(".");
                     }),
                     new KeyFrame(Duration.seconds(0.75), e -> {
+                        chatArea.appendText(".");
+                    }),
+                    new KeyFrame(Duration.seconds(1), e -> {
                         String chatText = chatArea.getText();
                         chatText = chatText.replace(typingMessage, "");
                         chatText = chatText.replace("..", "");
