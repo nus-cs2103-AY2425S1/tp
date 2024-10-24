@@ -5,11 +5,10 @@
 
 ### Project: Project TeleTutors
 
-A
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * 
 
-* **New Feature**: 
+* **New Feature**: Added the ability to undo/redo previous commands.
+
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -19,7 +18,7 @@ A
 
 
 * **Documentation**:
-  * 
+
 
 * **Community**:
   *

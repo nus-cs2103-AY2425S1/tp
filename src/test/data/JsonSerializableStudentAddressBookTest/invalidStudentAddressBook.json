@@ -1,0 +1,10 @@
+{
+  "students" : [ {
+    "name" : "Hugh",
+    "phone" : "83322191",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G22",
+    "studentNumber" : "A02728888888888888888goo"
+  }]
+}
