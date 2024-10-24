@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_TELEHANDLE_BOB = "@bob321";
     public static final String VALID_CONTACTTYPE_AMY = "work";
     public static final String VALID_CONTACTTYPE_BOB = "personal";
+    public static final String VALID_MODNAME_AMY = "CS1101S";
+    public static final String VALID_MODNAME_BOB = "CS1231S";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -52,6 +55,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String CONTACTTYPE_DESC_AMY = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_AMY;
     public static final String CONTACTTYPE_DESC_BOB = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_BOB;
+    public static final String MODNAME_DESC_AMY = " " + PREFIX_MOD + VALID_MODNAME_AMY;
+    public static final String MODNAME_DESC_BOB = " " + PREFIX_MOD + VALID_MODNAME_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -59,7 +64,9 @@ public class CommandTestUtil {
     public static final String INVALID_TELEHANDLE_DESC = " " + PREFIX_TELEHANDLE + "bob123"; // missing '@' symbol
     public static final String INVALID_CONTACTTYPE_DESC = " " + PREFIX_CONTACTTYPE
             + "misc."; // must be work or personal
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not a2llowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_MODNAME_DESC = " " + PREFIX_MOD + "ABCDEFG";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

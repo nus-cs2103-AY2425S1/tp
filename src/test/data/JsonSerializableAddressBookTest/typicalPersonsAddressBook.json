@@ -5,6 +5,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "telegramHandle" : "@alicepauline",
+    "moduleName" : "CFG1002",
     "tags" : [ "friends" ],
     "contactType" : "WORK"
   }, {
@@ -12,6 +13,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "telegramHandle" : "@bensonmeier",
+    "moduleName" : "SC1101E",
     "tags" : [ "owesMoney", "friends" ],
     "contactType" : "WORK"
   }, {
@@ -19,6 +21,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "telegramHandle" : "@carlkurz",
+    "moduleName" : "GEA1000",
     "tags" : [ ],
     "contactType" : "WORK"
   }, {
@@ -26,6 +29,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "telegramHandle" : "@danielmeier",
+    "moduleName" : "HSI1000",
     "tags" : [ "friends" ],
     "contactType" : "PERSONAL"
   }, {
@@ -33,6 +37,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "telegramHandle" : "@ellemeyer",
+    "moduleName" : "CS2103T",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   }, {
@@ -40,6 +45,7 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "telegramHandle" : "@fionakunz",
+    "moduleName" : "CS2101",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   }, {
@@ -47,6 +53,7 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "telegramHandle" : "@georgebest",
+    "moduleName" : "CS2109",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   } ]

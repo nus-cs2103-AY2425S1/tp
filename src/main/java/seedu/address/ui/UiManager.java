@@ -11,6 +11,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.storage.ThemePreference;
 
 /**
  * The manager of the UI component.
@@ -41,6 +42,9 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
+            // feed theme controller with the scene and stage
+            ThemePreference themePreference = new ThemePreference();
+            ThemeController.setUp(mainWindow.getScene(), mainWindow.getPrimaryStage(), themePreference);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
