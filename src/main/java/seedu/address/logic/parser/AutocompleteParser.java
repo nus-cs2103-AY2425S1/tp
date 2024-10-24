@@ -15,6 +15,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
@@ -36,7 +38,9 @@ public class AutocompleteParser {
         FindCommand.COMMAND_WORD,
         ListCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD,
-        HelpCommand.COMMAND_WORD
+        HelpCommand.COMMAND_WORD,
+        UndoCommand.COMMAND_WORD,
+        RedoCommand.COMMAND_WORD,
     };
 
     /**
