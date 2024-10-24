@@ -19,15 +19,15 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private Name name;
+    private Phone phone;
+    private Email email;
 
     // Data fields
-    private final Address address;
-    private final Payment payment;
-    private final List<Participation> participationList;
-    private final Set<Tag> tags = new HashSet<>();
+    private Address address;
+    private Payment payment;
+    private List<Participation> participationList;
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -81,6 +81,30 @@ public class Person {
 
     public String getAddressValue() {
         return address.value;
+    }
+
+    public void setName(Name changedName) {
+        this.name = changedName;
+    }
+
+    public void setPhone(Phone changedPhone) {
+        this.phone = changedPhone;
+    }
+
+    public void setEmail(Email changedEmail) {
+        this.email = changedEmail;
+    }
+
+    public void setAddress(Address changedAddress) {
+        this.address = changedAddress;
+    }
+
+    public void setPayment(Payment changedPayment) {
+        this.payment = changedPayment;
+    }
+
+    public void setParticipationList(List<Participation> changedList) {
+        this.participationList = changedList;
     }
 
     /**
