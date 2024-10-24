@@ -38,17 +38,26 @@ public class RightPanel extends UiPart<Region> {
     private Label filterIcon;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code RightPanel} with the given {@code ObservableList<Transaction>} to display.
      */
-    public RightPanel(ObservableList<Transaction> txns) {
+    public RightPanel() {
         super(FXML);
-        youOwnLabel.setText("You owe $" + calculateBalance(txns, Amount::isNegative).toString());
-        ownYouLabel.setText("You are owned $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
+        ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
+        updateBalances();
 
         transactionListPanel = new TransactionListPanel(txns);
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
         filterIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
+    }
+
+    /**
+     * Updates the balance labels based on the current transactions.
+     */
+    public void updateBalances() {
+        ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
+        youOwnLabel.setText("You owe $" + calculateBalance(txns, Amount::isNegative).toString());
+        ownYouLabel.setText("You are owned $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
     }
 
     /**

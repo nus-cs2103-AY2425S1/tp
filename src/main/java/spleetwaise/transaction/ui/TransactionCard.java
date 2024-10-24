@@ -37,7 +37,7 @@ public class TransactionCard extends UiPart<Region> {
     private Label day;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
      */
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);

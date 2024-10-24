@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        rightPanel = new RightPanel(logic.getFilteredTransactionList());
+        rightPanel = new RightPanel();
         rightPanelPlaceholder.getChildren().add(rightPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -186,6 +186,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (logic.isTransactionCommand(commandText)) {
+                rightPanel.updateBalances();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
