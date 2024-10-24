@@ -16,10 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.DuplicateEventException;
-import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
