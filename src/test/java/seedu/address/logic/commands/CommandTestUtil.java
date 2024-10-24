@@ -21,6 +21,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
 
 /**
@@ -51,6 +52,7 @@ public class CommandTestUtil {
     // empty string not allowed for description
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION;
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12-12-12"; // wrong date format
 
     public static final String VALID_NAME_WEDDING = "Wedding";
     public static final String VALID_NAME_BIRTHDAY = "Birthday";
@@ -69,13 +71,14 @@ public class CommandTestUtil {
     public static final String TAG_DESC_CHARITY = " " + PREFIX_TAG + VALID_TAG_CHARITY;
     public static final String TAG_DESC_WEDDING = " " + PREFIX_TAG + VALID_TAG_WEDDING;
     public static final String TAG_DESC_BIRTHDAY = " " + PREFIX_TAG + VALID_TAG_BIRTHDAY;
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "24th January 2024"; // invalid date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditVendorDescriptor DESC_AMY;
-    public static final EditCommand.EditVendorDescriptor DESC_BOB;
+    public static final EditVendorCommand.EditVendorDescriptor DESC_AMY;
+    public static final EditVendorCommand.EditVendorDescriptor DESC_BOB;
+    public static final EditEventCommand.EditEventDescriptor DESC_BIRTHDAY;
+    public static final EditEventCommand.EditEventDescriptor DESC_WEDDING;
 
     static {
         DESC_AMY = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -84,6 +87,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDescription(VALID_DESCRIPTION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BIRTHDAY = new EditEventDescriptorBuilder().withName(VALID_NAME_BIRTHDAY)
+                .withDate(VALID_DATE_BIRTHDAY).build();
+        DESC_WEDDING = new EditEventDescriptorBuilder().withName(VALID_NAME_WEDDING)
+                .withDate(VALID_DATE_WEDDING).build();
     }
 
     /**

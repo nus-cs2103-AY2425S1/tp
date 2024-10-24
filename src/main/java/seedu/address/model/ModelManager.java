@@ -146,6 +146,13 @@ public class ModelManager implements Model {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
+
     // =========== Assigning vendors and events =============================================================
 
     @Override

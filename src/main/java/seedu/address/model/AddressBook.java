@@ -199,7 +199,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(event);
     }
 
-    // TODO add method to update existing Event with new Event object
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.

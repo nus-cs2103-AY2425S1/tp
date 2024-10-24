@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.vendor.Description;
