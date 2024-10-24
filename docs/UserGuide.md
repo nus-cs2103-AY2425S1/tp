@@ -155,7 +155,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
-## Adding an emergency contact : `addec`
+### Adding an emergency contact : `addec`
 
 Adds an emergency contact to a specified person in the address book.
 
