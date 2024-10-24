@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class ModuleRoleMap
 
 Class I #FFFFFF
 }
@@ -40,8 +41,9 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> "0..1"Address
 Person *--> "*" Tag
+Person *--> "*" ModuleRoleMap
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
