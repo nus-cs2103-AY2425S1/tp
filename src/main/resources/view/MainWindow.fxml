@@ -38,12 +38,12 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+        <VBox VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="120" prefHeight="120" maxHeight="120">
           <padding>
             <Insets top="5" right="10" bottom="10" left="10" />
           </padding>
-        </StackPane>
+        </VBox>
 
         <HBox fx:id="contactLists" VBox.vgrow="ALWAYS" styleClass="pane-with-border" spacing="-3">
           <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">

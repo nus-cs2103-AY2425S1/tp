@@ -65,10 +65,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane vendorListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
+    private VBox resultDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
