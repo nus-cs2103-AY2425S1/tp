@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -48,11 +47,12 @@ public class MarkAttendanceByTutorialCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
+        Tutorial tutorial = new Tutorial("Math");
         MarkAttendanceByTutorialCommand markAttendanceCommand = new MarkAttendanceByTutorialCommand(
-                new Tutorial("Math"), "12/12/2024");
-        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName() + "{targetIndex="
-                + targetIndex + "}";
+                tutorial, "12/12/2024");
+        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName()
+                + "{tutorial=" + tutorial + ", "
+                + "attendance=12/12/2024}";
         assertEquals(expected, markAttendanceCommand.toString());
     }
 }
