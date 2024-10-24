@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -95,13 +96,13 @@ public class AddwCommand extends Command {
 
     public Person selectClientWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
-        List<Person> filteredList = model.getFilteredPersonList();
+        List<Person> filteredPersonList = model.getFilteredPersonList();
 
-        if (filteredList.isEmpty()) {
+        if (filteredPersonList.isEmpty()) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_INVALID_PERSON);
-        } else if (filteredList.size() == 1) {
-            return filteredList.get(0);
+        } else if (filteredPersonList.size() == 1) {
+            return filteredPersonList.get(0);
         } else {
             throw new CommandException(MESSAGE_DUPLICATE_HANDLING);
         }
