@@ -45,7 +45,7 @@ public class SampleDataUtil {
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"),
                 getWeddingSet(),
-                getTaskSet("Order wedding cake")),
+                getTaskSet("todo: Order wedding cake")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"),
