@@ -9,11 +9,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_HUGH;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 
 
@@ -31,12 +34,21 @@ public class TypicalStudents {
             .withPhone(VALID_PHONE_HUGH).withTutorialGroup(VALID_TUTORIAL_GROUP_HUGH)
             .withStudentNumber(VALID_STUDENT_NUMBER_HUGH).build();
 
+
     //============================Students with Assignments============================================================
     public static final Student ALICE = new StudentBuilder().withName("Alice Smith")
             .withPhone("81234567").withTutorialGroup("B11")
             .withStudentNumber("A0123456M")
             .withAssignment("Assignment 1", "2021-10-10",
                     "Y", "Y", "95").build();
+
+    static {
+        //Adding attendance records for ALICE
+        AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDate.parse("2023-10-01"),
+                new Attendance("p"));
+        ALICE.addAttendanceRecord(attendanceRecord);
+    }
+
     public static final Student BOB = new StudentBuilder().withName("Bob Tan")
             .withPhone("91234567").withTutorialGroup("C21")
             .withStudentNumber("A0654321X")

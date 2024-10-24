@@ -174,7 +174,6 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
     }
 
     /**
@@ -222,15 +221,8 @@ public class DeleteStudentCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            // Student student = (Student) person;
             return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
-        }
 
-
-        @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
         }
 
         @Override
