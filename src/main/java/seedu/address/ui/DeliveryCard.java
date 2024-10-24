@@ -70,5 +70,10 @@ public class DeliveryCard extends UiPart<Region> {
 
         //Can be removed
         archive.setText(delivery.getArchive().toString());
+
+        // Update the card style based on the archive status
+        if (delivery.isArchived()) {
+            cardPane.getStyleClass().add("archived");
+        }
     }
 }

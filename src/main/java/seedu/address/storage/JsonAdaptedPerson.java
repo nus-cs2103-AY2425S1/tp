@@ -16,6 +16,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Worker;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,8 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String role;
+    private final JsonAdaptedWorker worker;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedDelivery> deliveries = new ArrayList<>();
@@ -36,13 +40,19 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("deliveries") List<JsonAdaptedDelivery> deliveries) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("role") String role,
+                             @JsonProperty("worker") JsonAdaptedWorker worker,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("deliveries") List<JsonAdaptedDelivery> deliveries) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.role = role;
+        this.worker = worker;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -59,6 +69,8 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        role = source.getRole().getValue();
+        worker = new JsonAdaptedWorker(source.getWorker());
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -108,6 +120,16 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        final Role modelRole = new Role(role);
+
+        if (worker == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Worker.class.getSimpleName()));
+        }
+        final Worker modelWorker = worker.toModelType();
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -118,8 +140,9 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Person person = new Person(modelName, modelPhone, modelEmail, modelRole, modelAddress, modelTags);
         person.setDeliveryList(personDeliveries);
+        person.setWorker(modelWorker);
 
         return person;
     }

@@ -19,4 +19,6 @@ public class TypicalIndexes {
             INDEX_FIRST, INDEX_SECOND));
     public static final List<Index> INDEX_SECOND_THIRD_LIST = new ArrayList<>(Arrays.asList(
             INDEX_SECOND, INDEX_THIRD));
+    public static final List<Index> INDEX_DUPLICATES_LIST = new ArrayList<>(Arrays.asList(
+            INDEX_FIRST, INDEX_SECOND, INDEX_SECOND, INDEX_THIRD));
 }
