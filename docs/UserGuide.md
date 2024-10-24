@@ -167,7 +167,7 @@ Format: `get PARAMETERS`
 Examples:
 * `list` followed by `get phone EMAIL` gets the phone numbers followed by the emails of the people in SocialBook.
 * `list` followed by `get pHone phone` gets only one set of the phone numbers of the people in SocialBook.
-* `find p/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
+* `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 
