@@ -19,7 +19,11 @@ public class CreateEventCommand extends CreateCommand {
             + "Parameters: "
             + PREFIX_EVENT + "<empty> "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DATE + "DATE";
+            + PREFIX_DATE + "DATE" + "\n"
+            + "Example: "
+            + COMMAND_WORD + " " + PREFIX_EVENT + " "
+            + PREFIX_NAME + "John Baby Shower "
+            + PREFIX_DATE + "2021-10-10";
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
