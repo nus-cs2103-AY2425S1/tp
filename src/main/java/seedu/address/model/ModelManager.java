@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
+ * This class manages the address book data and handles user preferences.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,7 +25,10 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook and user preferences.
+     *
+     * @param addressBook The address book to be managed.
+     * @param userPrefs   The user preferences for the application.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -134,17 +138,20 @@ public class ModelManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Undid last action in address book.");
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Redid last action in address book.");
     }
 
     @Override
     public void saveAddressBook() {
         versionedAddressBook.save();
+        logger.info("Saved the current state of the address book.");
     }
 
     @Override
