@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CheckAppointmentCommand.MESSAGE_NO_APPOINTMENT_FOUND;
+import static seedu.address.logic.commands.CheckAppointmentCommand.MESSAGE_NO_DATE_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -41,10 +43,8 @@ public class CheckAppointmentCommandTest {
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validDoctor);
         modelStub.addPerson(validPatient);
-
-        LocalDate appointmentDate = LocalDate.of(2024, 12, 31);
-        validPatient.addAppointment(appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
-        validPatient.addAppointment(appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
+        modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
+        modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
 
         CheckAppointmentCommand command = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult result = command.execute(modelStub);
@@ -61,24 +61,50 @@ public class CheckAppointmentCommandTest {
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
-//    @Test
-//    public void execute_doctorWithNoAppointments_throwsCommandException() {
-//        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-//        modelStub.clearList();
-//
-//        Person validPatient = new PersonBuilder().buildPatient();
-//        Person validDoctor = new PersonBuilder().buildDoctor();
-//        modelStub.addPerson(validDoctor);
-//        modelStub.addPerson(validPatient);
-//
-//        CommandException thrown = org.junit.jupiter.api.Assertions.assertThrows(CommandException.class, () -> {
-//            command.execute(modelStub);
-//        });
-//
-//        assertEquals(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctor.getName()), thrown.getMessage());
-//    }
+    @Test
+    public void execute_doctorWithNoAppointments_throwsCommandException() {
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        modelStub.clearList();
 
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPerson(validDoctor);
+        modelStub.addPerson(validPatient);
 
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NO_APPOINTMENT_FOUND, validDoctor.getName()), () ->
+                new CheckAppointmentCommand(validDoctor.getId(), appointmentDate).execute(modelStub));
+    }
+
+    @Test
+    public void execute_doctorWithInvalidIndex_throwsCommandException() {
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        modelStub.clearList();
+
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPerson(validPatient);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                        new CheckAppointmentCommand(validDoctor.getId(), appointmentDate).execute(modelStub));
+    }
+
+    @Test
+    public void execute_validDoctorWithoutDateTime_throwsCommandException() {
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        modelStub.clearList();
+
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPerson(validDoctor);
+        modelStub.addPerson(validPatient);
+        modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
+        modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
+
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NO_DATE_TIME, validDoctor.getName()), () ->
+                new CheckAppointmentCommand(validDoctor.getId(), null).execute(modelStub));
+    }
 
     private class ModelStub implements Model {
         @Override
@@ -257,6 +283,11 @@ public class CheckAppointmentCommandTest {
         }
         public void addPersonToList(Person person) {
             personList.add(person);
+        }
+
+        public void addAppointment(LocalDateTime time, Person patient, Person doctor, String remark) {
+            doctor.addAppointment(time, patient.getId(), doctor.getId(), remark);
+            patient.addAppointment(time, patient.getId(), doctor.getId(), remark);
         }
     }
 
