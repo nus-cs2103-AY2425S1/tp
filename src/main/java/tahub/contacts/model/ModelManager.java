@@ -14,6 +14,8 @@ import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final StudentCourseAssociationList scaList;
     private final UserPrefs userPrefs;
     private final UniqueCourseList courseList;
     private final FilteredList<Person> filteredPersons;
@@ -29,7 +32,10 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniqueCourseList courseList) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs,
+                        UniqueCourseList courseList,
+                        StudentCourseAssociationList scaList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -37,11 +43,12 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.courseList = courseList;
+        this.scaList = scaList;
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new UniqueCourseList());
+        this(new AddressBook(), new UserPrefs(), new UniqueCourseList(), new StudentCourseAssociationList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -170,6 +177,41 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Student Course Association List Accessors ==========================================================
+
+    @Override
+    public Path getScaListFilePath() {
+        return userPrefs.getCourseListFilePath();
+    }
+
+    @Override
+    public void setScaListFilePath(Path courseListFilePath) {
+        requireNonNull(courseListFilePath);
+        userPrefs.setCourseListFilePath(courseListFilePath);
+    }
+
+    @Override
+    public boolean hasSca(StudentCourseAssociation sca) {
+        requireNonNull(sca);
+        return scaList.has(sca);
+    }
+
+    @Override
+    public void deleteSca(StudentCourseAssociation target) {
+        scaList.remove(target);
+    }
+
+    @Override
+    public void addSca(StudentCourseAssociation sca) {
+        scaList.add(sca);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public StudentCourseAssociationList getScaList() {
+        return scaList;
     }
 
     @Override

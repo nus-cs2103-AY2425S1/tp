@@ -32,6 +32,9 @@ class JsonSerializableGradingSystem {
      * Converts a given {@code GradingSystem} into this class for Jackson use.
      */
     public JsonSerializableGradingSystem(GradingSystem source) {
+        if (source == null) {
+            return;
+        }
         grades.addAll(source.getAllGrades().entrySet().stream()
                               .map(entry -> new JsonAdaptedGrade(
                                       new Grade(entry.getKey(), entry.getValue(),

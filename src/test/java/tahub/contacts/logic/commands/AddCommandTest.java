@@ -25,6 +25,8 @@ import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -121,6 +123,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getScaListFilePath() {
+            return null;
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -128,6 +135,11 @@ public class AddCommandTest {
         @Override
         public void setCourseListFilePath(Path courseListFilePath) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setScaListFilePath(Path scaListFilePath) {
+
         }
 
         @Override
@@ -151,8 +163,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addSca(StudentCourseAssociation sca) {
+
+        }
+
+        @Override
         public UniqueCourseList getCourseList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudentCourseAssociationList getScaList() {
+            return null;
         }
 
         @Override
@@ -171,8 +193,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteSca(StudentCourseAssociation target) {
+
+        }
+
+        @Override
         public void addCourse(Course course) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSca(StudentCourseAssociation sca) {
+            return false;
         }
 
         @Override

@@ -20,13 +20,20 @@ import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), model.getCourseList());
+    private Model model =
+            new ModelManager(
+                    getTypicalAddressBook(),
+                    new UserPrefs(),
+                    new UniqueCourseList(),
+                    new StudentCourseAssociationList());
+    private Model expectedModel =
+            new ModelManager(getTypicalAddressBook(), new UserPrefs(), model.getCourseList(), model.getScaList());
 
     @Test
     public void equals() {

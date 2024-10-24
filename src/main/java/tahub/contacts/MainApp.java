@@ -22,9 +22,11 @@ import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.util.SampleDataUtil;
 import tahub.contacts.storage.AddressBookStorage;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonStudentCourseAssociationListStorage;
 import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.Storage;
@@ -62,7 +64,9 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         JsonUniqueCourseListStorage courseListStorage =
                 new JsonUniqueCourseListStorage(userPrefs.getCourseListFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
+        JsonStudentCourseAssociationListStorage scaListStorage =
+                new JsonStudentCourseAssociationListStorage(userPrefs.getScaListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage, scaListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -109,7 +113,22 @@ public class MainApp extends Application {
             initialCourseList = new UniqueCourseList();
         }
 
-        return new ModelManager(initialData, userPrefs, initialCourseList);
+        Optional<StudentCourseAssociationList> scaListOptional;
+        StudentCourseAssociationList initialScaList;
+        try {
+            scaListOptional = storage.readScaList(userPrefs.getScaListFilePath());
+            if (scaListOptional.isEmpty()) {
+                logger.info("Creating a new sca list in the " + storage.getScaListFilePath()
+                        + " file, populated with a sample SCA list.");
+            }
+            initialScaList = scaListOptional.orElseGet(SampleDataUtil::getSampleScaList);
+        } catch (DataLoadingException e) {
+            logger.warning("SCA list file at " + storage.getScaListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty sca list.");
+            initialScaList = new StudentCourseAssociationList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialCourseList, initialScaList);
     }
 
     private void initLogging(Config config) {

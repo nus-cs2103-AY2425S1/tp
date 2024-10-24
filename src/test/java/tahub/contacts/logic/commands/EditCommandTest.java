@@ -26,6 +26,7 @@ import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.testutil.EditPersonDescriptorBuilder;
 import tahub.contacts.testutil.PersonBuilder;
 
@@ -34,7 +35,8 @@ import tahub.contacts.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList(),
+            new StudentCourseAssociationList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +47,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel =
-                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList());
+                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
+                        model.getScaList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -67,7 +70,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel =
-                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList());
+                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
+                        model.getScaList());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -81,7 +85,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel =
-                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList());
+                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
+                        model.getScaList());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -98,7 +103,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel =
-                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList());
+                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
+                        model.getScaList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
