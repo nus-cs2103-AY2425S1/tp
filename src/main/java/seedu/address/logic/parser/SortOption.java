@@ -8,9 +8,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Donor;
+import seedu.address.model.person.Partner;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Volunteer;
 import seedu.address.model.person.comparators.NameComparator;
-import seedu.address.model.person.comparators.VolunteerComparator;
+import seedu.address.model.person.comparators.RoleComparator;
 
 /**
  * Contains valid sorting options for the sort command.
@@ -25,7 +29,49 @@ public enum SortOption {
     HOURS("hours") {
         @Override
         public Comparator<Person> getComparator() {
-            return new VolunteerComparator();
+            return new RoleComparator<>(Volunteer.class);
+        }
+
+        @Override
+        public String getRoleAsString() {
+            return Role.VOLUNTEER.toLowerCase();
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Volunteer.class;
+        }
+    },
+    DONATION("donations") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new RoleComparator<>(Donor.class);
+        }
+
+        @Override
+        public String getRoleAsString() {
+            return Role.DONOR.toLowerCase();
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Donor.class;
+        }
+    },
+    PARTNERSHIP_END_DATE("end_date") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new RoleComparator<>(Partner.class);
+        }
+
+        @Override
+        public String getRoleAsString() {
+            return Role.PARTNER.toLowerCase();
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Partner.class;
         }
     };
     // Add more sorting options here if needed
@@ -36,6 +82,8 @@ public enum SortOption {
     public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
 
     private final String value;
+    private final Role role;
+    private final Class<? extends Person> relatedClass;
 
     /**
      * Constructs a {@code SortOption}.
@@ -44,6 +92,22 @@ public enum SortOption {
      */
     SortOption(String value) {
         this.value = value;
+        role = Role.PERSON;
+        relatedClass = Person.class;
+    }
+
+    /*
+     * Returns the role associated to the enum as a string
+     */
+    public String getRoleAsString() {
+        return role.toLowerCase();
+    }
+
+    /*
+     * Returns the class related to the enum
+     */
+    public Class<? extends Person> getRelatedClass() {
+        return relatedClass;
     }
 
     /**

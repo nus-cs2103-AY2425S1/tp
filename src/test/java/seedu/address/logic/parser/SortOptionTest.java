@@ -5,6 +5,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Volunteer;
+
 /**
  * Contains unit tests for {@code SortOption}.
  */
@@ -22,11 +25,15 @@ public class SortOptionTest {
         SortOption sortOptionName = SortOption.fromString("name");
         assertEquals(SortOption.NAME, sortOptionName);
         assertEquals("name", sortOptionName.toString());
+        assertEquals("person", sortOptionName.getRoleAsString());
+        assertEquals(Person.class, sortOptionName.getRelatedClass());
 
         // Valid sort option: "hours"
         SortOption sortOptionHours = SortOption.fromString("hours");
         assertEquals(SortOption.HOURS, sortOptionHours);
         assertEquals("hours", sortOptionHours.toString());
+        assertEquals("volunteer", sortOptionHours.getRoleAsString());
+        assertEquals(Volunteer.class, sortOptionHours.getRelatedClass());
 
         // Valid sort option with different casing: "NaMe"
         SortOption sortOptionNameCase = SortOption.fromString("NaMe");
@@ -57,5 +64,18 @@ public class SortOptionTest {
 
         // Invalid sort option: partially invalid
         assertThrows(IllegalArgumentException.class, () -> SortOption.fromString(partiallyInvalidOption));
+    }
+
+    @Test
+    public void testRoleAndRelatedClass() {
+        // Testing role and related class for "name"
+        SortOption sortOptionName = SortOption.NAME;
+        assertEquals("person", sortOptionName.getRoleAsString());
+        assertEquals(Person.class, sortOptionName.getRelatedClass());
+
+        // Testing role and related class for "hours"
+        SortOption sortOptionHours = SortOption.HOURS;
+        assertEquals("volunteer", sortOptionHours.getRoleAsString());
+        assertEquals(Volunteer.class, sortOptionHours.getRelatedClass());
     }
 }

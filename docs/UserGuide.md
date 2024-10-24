@@ -126,15 +126,17 @@ Format: `sort [s/SORT_OPTION]`
 * You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
 * If no sort option is provided, `sort` will restore the list to its original order (i.e. the order in which contacts were added).
 * The sort order remains active until you apply a new sort option.
+* For *role-specific* sort options (e.g. `hours`):
+  * Role contacts are sorted by the relevant criterion. 
+  * Non-role contacts are placed at the back.
 
 <box type="tip" seamless>
 
 **Tip:** Supported sort options include:
-* `name`: 
-  * Sorts contacts alphabetically by name.
-* `hours`: 
-  * Sorts volunteers by the number of hours they've contributed in ascending order. 
-  * Non-volunteers are placed at the back.
+* `name`: Sorts contacts alphabetically by name.
+* `hours`: Sorts volunteers by hours contributed.
+* `donations`: Sorts donors by donation amount
+* `end_date`: Sorts partners by partnership end date.
 </box>
 
 Examples:
@@ -230,6 +232,19 @@ Format: `deleteGroup g/GROUP_NAME`
 * Deletes group named `GROUP_NAME`
 * Group named `GROUP_NAME` must exist.
 
+### Listing groups: `listGroups`
+
+Lists out all existing Group names.
+
+Format: `listGroups`
+
+### Getting emails: `email`
+
+Copies to system clipboard the emails of all persons in the
+current list, separated by commas.
+
+Format: `email`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -281,7 +296,10 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
 **List**   | `list`
+**Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **View Group**   | `viewGroup g/GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
+**List Groups**  | `listGroups`
+**Get Emails**   | `email`
