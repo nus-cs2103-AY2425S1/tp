@@ -24,6 +24,7 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tag.Tag;
 import tahub.contacts.model.tutorial.Tutorial;
 
@@ -101,7 +102,7 @@ public class StudentCourseAssociationListTest {
         @Test
         @DisplayName("throws runtime exception if SCA is not in list but inputs are valid")
         public void throwsRuntimeException_ScaNotInListInputsValid() {
-            assertThrows(RuntimeException.class, () -> scaList.getFromStrings(
+            assertThrows(ScaNotFoundException.class, () -> scaList.getFromStrings(
                     "A1234567X", "AB2000", "T02"));
         }
     }

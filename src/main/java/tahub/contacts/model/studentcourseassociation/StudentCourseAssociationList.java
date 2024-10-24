@@ -15,6 +15,7 @@ import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tutorial.Tutorial;
 
 /**
@@ -156,7 +157,7 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
                         && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
                 )
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException(notFoundErrorMessage));
+                .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
     }
 
     /**
