@@ -31,6 +31,7 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="roomNumberIndicator" styleClass="cell_medium_label" text="Room number:" />
       <Label fx:id="roomNumber" styleClass="cell_small_label" text="\$roomNumber" />
       <Label fx:id="emergencyContact" styleClass="cell_medium_label" text="Emergency contact:" />
       <Label fx:id="emergencyContactName" styleClass="cell_small_label" text="\$emergencyContactName" />
