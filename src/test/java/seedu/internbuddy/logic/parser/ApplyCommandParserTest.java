@@ -6,7 +6,6 @@ import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.logic.commands.ApplyCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.application.AppStatus;
@@ -25,9 +24,8 @@ public class ApplyCommandParserTest {
         Description expectedDescription = new Description("Develop web applications");
         AppStatus expectedAppStatus = new AppStatus("APPLIED");
         Application expectedApplication = new Application(expectedName, expectedDescription, expectedAppStatus);
-        Index expectedIndex = INDEX_FIRST_COMPANY;
 
-        ApplyCommand expectedCommand = new ApplyCommand(expectedIndex, expectedApplication);
+        ApplyCommand expectedCommand = new ApplyCommand(INDEX_FIRST_COMPANY, expectedApplication);
 
         assertEquals(expectedCommand, parser.parse(userInput));
     }
@@ -39,9 +37,8 @@ public class ApplyCommandParserTest {
         Description expectedDescription = new Description("Develop user interfaces");
         AppStatus expectedAppStatus = new AppStatus("APPLIED"); // Default app status
         Application expectedApplication = new Application(expectedName, expectedDescription, expectedAppStatus);
-        Index expectedIndex = INDEX_FIRST_COMPANY;
 
-        ApplyCommand expectedCommand = new ApplyCommand(expectedIndex, expectedApplication);
+        ApplyCommand expectedCommand = new ApplyCommand(INDEX_FIRST_COMPANY, expectedApplication);
 
         assertEquals(expectedCommand, parser.parse(userInput));
     }
