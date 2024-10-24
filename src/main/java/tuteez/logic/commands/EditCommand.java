@@ -49,11 +49,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM USERNAME] "
-            + "[" + PREFIX_TAG + "TAG]"
+            + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_LESSON + "LESSON]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + PREFIX_EMAIL + "johnd@gmail.com\n"
             + "Note: Input values can be blank only for optional parameters in order to delete the existing value.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
