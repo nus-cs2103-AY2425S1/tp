@@ -18,7 +18,6 @@
                 <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
                 <HBox spacing="20"/>
-                <Label fx:id="role" styleClass="rounded_label"/>
             </HBox>
             <Line fx:id="underline" stroke="#FFD700" strokeWidth="2" />
             <HBox spacing="5">
@@ -42,8 +41,5 @@
                 <Label fx:id="seller" styleClass="cell_small_label" text="\$seller" textFill="#C2C4C6" />
             </HBox>
         </VBox>
-        <rowConstraints>
-            <RowConstraints />
-        </rowConstraints>
     </GridPane>
 </HBox>
