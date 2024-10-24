@@ -1,10 +1,8 @@
 package seedu.address.ui.meetup;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -13,11 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.ui.UiPart;
-
-import java.util.List;
 
 /**
  * Panel containing the list of buyers.

@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
                 new PropertyList(model.getPropertyList()));
         expectedModel.addMeetUp(meetUp);
         CommandResult expectedCommandResult = new CommandResult(String.format(
-                AddCommand.MESSAGE_SUCCESS, Messages.format(meetUp), false, false, true, false, false));
+                AddCommand.MESSAGE_SUCCESS, Messages.format(meetUp)), false, false, true, false, false);
 
         assertCommandSuccess(new AddCommand(meetUp), model, expectedCommandResult, expectedModel);
     }

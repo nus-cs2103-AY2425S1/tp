@@ -18,13 +18,13 @@ import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
  * TODO JAVADOC + ENTIRE DOCUMENTATION
  * A list of meet ups that enforces uniqueness between its elements and does not allow nulls.
  * A meet ups is considered unique by comparing using {@code Buyer#isSameBuyer(Buyer)}. As such, adding and updating
- * of buyers uses Buyer#isSameBuyer(Buyer) for equality so as to ensure that the buyer being added or updated is
- * unique in terms of identity in the UniqueBuyerList. However, the removal of a buyer uses Buyer#equals(Object) so
- * as to ensure that the buyer with exactly the same fields will be removed.
+ * of meet-ups uses Buyer#isSameBuyer(Buyer) for equality so as to ensure that the meet-up being added or updated is
+ * unique in terms of identity in the UniqueBuyerList. However, the removal of a meet-up uses Buyer#equals(Object) so
+ * as to ensure that the meet-up with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Buyer#isSameBuyer(Buyer)
+ * @see MeetUp#isSameMeetUp(MeetUp)
  */
 public class UniqueMeetUpList implements Iterable<MeetUp> {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -74,8 +74,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     }
 
     /**
-     * Removes the equivalent buyer from the list.
-     * The buyer must exist in the list.
+     * Removes the equivalent meet-up from the list.
+     * The meet-up must exist in the list.
      */
     public void remove(MeetUp toRemove) {
         requireNonNull(toRemove);
@@ -90,8 +90,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     }
 
     /**
-     * Replaces the contents of this list with {@code buyers}.
-     * {@code buyers} must not contain duplicate buyers.
+     * Replaces the contents of this list with {@code meet-ups}.
+     * {@code meet-ups} must not contain duplicate meet-ups.
      */
     public void setMeetUps(List<MeetUp> meetUps) {
         requireAllNonNull(meetUps);

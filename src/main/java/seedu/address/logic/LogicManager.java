@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = AbcliParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        
+
         try {
             storage.saveBuyerList(model.getBuyerList());
             storage.saveMeetUpList(model.getMeetUpList());

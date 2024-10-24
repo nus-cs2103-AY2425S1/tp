@@ -89,7 +89,8 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showMeetUpList == otherCommandResult.showMeetUpList
-                && showBuyerList == otherCommandResult.showBuyerList;
+                && showBuyerList == otherCommandResult.showBuyerList
+                && showPropertyList == otherCommandResult.showPropertyList;
     }
 
     @Override
