@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a Car belonging to a person already present in the MATER address book.
@@ -20,14 +20,14 @@ public class DeleteCarCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the car currently belonging to the client of the index provided.\n"
-            + "User must already have a car. The index must be a positive integer.\n"
-            + "User's car cannot be currently checked-in in order to be deleted.\n"
+            + "Client must already have a car. The index must be a positive integer.\n"
+            + "Client's car cannot be currently checked-in in order to be deleted.\n"
             + "Example: " + COMMAND_WORD  + " 1 ";
 
     public static final String MESSAGE_USER_IS_CHECKED_IN = "This person's car is currently checked in.";
     public static final String MESSAGE_DELETE_CAR_SUCCESS =
             "Car deleted successfully from index %s: VRN: %s, VIN: %s, Make: %s, Model: %s";
-    public static final String MESSAGE_USER_HAS_NO_CAR = "This user has no car to delete.";
+    public static final String MESSAGE_USER_HAS_NO_CAR = "This person has no car to delete.";
 
     private final Index index;
 
