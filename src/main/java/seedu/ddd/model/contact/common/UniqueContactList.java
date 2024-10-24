@@ -64,7 +64,7 @@ public class UniqueContactList implements Iterable<Contact> {
 
     /**
      * Gets a contact from the list.
-     * The contact must not already exist in the list.
+     * The contact must already exist in the list.
      */
     public Contact get(Id id) {
         requireNonNull(id);

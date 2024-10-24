@@ -188,7 +188,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> clientIds} into a {@code Set<Client>}.
+     * Parses {@code Collection<String> clientIds} into a {@code Set<Id>}.
      */
     public static Set<Id> parseIds(Collection<String> ids) throws ParseException {
         requireNonNull(ids);
