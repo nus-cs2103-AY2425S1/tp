@@ -33,13 +33,13 @@ public class CsvExporter implements Exporter {
         Path exportPath = getExportPath();
         FileUtil.createIfMissing(exportPath);
 
-        StringJoiner sj = new StringJoiner("\n");
+        StringJoiner sj = new StringJoiner(System.lineSeparator());
         sj.add(CSV_HEADERS);
 
         addressBook.getPersonList()
                 .forEach(person -> sj.add(convertToCsv(person)));
 
-        FileUtil.writeToFile(exportPath, sj + "\n");
+        FileUtil.writeToFile(exportPath, sj + System.lineSeparator());
     }
 
     /**
