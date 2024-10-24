@@ -1,7 +1,6 @@
-package seedu.address.model.person;
+package seedu.address.model.person.keywordspredicate;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,17 +9,17 @@ import seedu.address.model.wedding.Wedding;
 /**
  * Tests that a {@code Person}'s {@code Wedding} matches any of the keywords given.
  */
-public class WeddingContainsKeywordsPredicate implements Predicate<Wedding> {
-    private final List<String> keywords;
+public class WeddingContainsKeywordsPredicate extends TraitContainsKeywordsPredicate<Wedding> {
 
     public WeddingContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        super(keywords);
     }
 
     @Override
     public boolean test(Wedding wedding) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(wedding.getWeddingName().toString(), keyword));
+                .anyMatch(keyword ->
+                        StringUtil.containsPartialWordIgnoreCase(wedding.getWeddingName().toString(), keyword));
     }
 
     @Override

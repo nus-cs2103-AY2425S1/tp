@@ -9,23 +9,30 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AssignWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateWeddingCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UnassignWeddingCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.wedding.AssignWeddingCommand;
+import seedu.address.logic.commands.wedding.CreateWeddingCommand;
+import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.EditWeddingCommand;
+import seedu.address.logic.commands.wedding.ListWeddingsCommand;
+import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.wedding.AssignWeddingCommandParser;
+import seedu.address.logic.parser.wedding.CreateWeddingCommandParser;
+import seedu.address.logic.parser.wedding.DeleteWeddingCommandParser;
+import seedu.address.logic.parser.wedding.EditWeddingCommandParser;
+import seedu.address.logic.parser.wedding.UnassignWeddingCommandParser;
 
 /**
  * Parses user input.
@@ -66,10 +73,12 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD -> new ClearCommand();
         case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD -> new ListCommand();
+        case ListWeddingsCommand.COMMAND_WORD -> new ListWeddingsCommand();
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         case CreateTagCommand.COMMAND_WORD -> new CreateTagCommandParser().parse(arguments);
         case DeleteTagCommand.COMMAND_WORD -> new DeleteTagCommandParser().parse(arguments);
+        case EditWeddingCommand.COMMAND_WORD -> new EditWeddingCommandParser().parse(arguments);
         case CreateWeddingCommand.COMMAND_WORD -> new CreateWeddingCommandParser().parse(arguments);
         case DeleteWeddingCommand.COMMAND_WORD -> new DeleteWeddingCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD -> new TagCommandParser().parse(arguments);
