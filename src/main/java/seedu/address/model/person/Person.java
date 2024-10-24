@@ -25,7 +25,6 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Telegram telegram;
-    private final FavouriteStatus isFavourite;
 
     // Data fields
     private final Set<Role> roles = new HashSet<>();
