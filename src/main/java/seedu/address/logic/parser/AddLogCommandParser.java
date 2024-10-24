@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddLogCommand.MESSAGE_INVALID_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
@@ -27,33 +28,35 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IDENTITY_NUMBER, PREFIX_LOG, PREFIX_DATE);
 
+        // Check if all fields' prefix are present
         if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || argMultimap.getValue(PREFIX_LOG).isEmpty()
                 || argMultimap.getValue(PREFIX_DATE).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE));
         }
 
+        IdentityNumber identityNumber;
+
+        // Check if identity number exists
         try {
             // Parse identity number
-            IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
+            identityNumber = ParserUtil.parseIdentityNumber(
                     argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
-
-            // Parse date
-            String date = argMultimap.getValue(PREFIX_DATE).get();
-            AppointmentDate appointmentDate = new AppointmentDate(date);
-
-            // Parse log
-            String entry = argMultimap.getValue(PREFIX_LOG).get();
-
-            // Create log object
-            Log log = new Log(appointmentDate, entry);
-
-            // Create and return AddLogCommand with parsed values
-            return new AddLogCommand(identityNumber, log);
-
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_ID);
         }
+
+        // Parse date
+        String date = argMultimap.getValue(PREFIX_DATE).get();
+        AppointmentDate appointmentDate = new AppointmentDate(date);
+
+        // Parse log
+        String entry = argMultimap.getValue(PREFIX_LOG).get();
+
+        // Create log object
+        Log log = new Log(appointmentDate, entry);
+
+        // Create and return AddLogCommand with parsed values
+        return new AddLogCommand(identityNumber, log);
     }
 }
