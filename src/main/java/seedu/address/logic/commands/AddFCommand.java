@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
@@ -38,7 +37,6 @@ public class AddFCommand extends Command {
             + PREFIX_SEX + "SEX "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_HEALTHSERVICE + "HEALTHSERVICE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
             + "[" + PREFIX_NOKNAME + "NEXT-OF-KIN NAME] "
@@ -54,8 +52,6 @@ public class AddFCommand extends Command {
             + PREFIX_SEX + "M "
             + PREFIX_PHONE + "81234567 "
             + PREFIX_EMAIL + "johndoe123@gmail.com "
-            + PREFIX_HEALTHSERVICE + "Blood Test "
-            + PREFIX_HEALTHSERVICE + "Vaccination "
             + PREFIX_ADDRESS + "Block 123, NUS Road, S123123 "
             + PREFIX_BLOODTYPE + "A+ "
             + PREFIX_NOKNAME + "Jack Doe "
