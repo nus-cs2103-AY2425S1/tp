@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import careconnect.commons.util.ToStringBuilder;
 import careconnect.logic.Messages;
 import careconnect.model.Model;
-import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
+import careconnect.model.person.NameAndAddressAndTagsContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -20,9 +20,9 @@ public class FindCommand extends Command {
             + "Parameters: n/ NAME [MORE_NAMES] a/ ADDRESS [MORE_ADDRESSES]...\n"
             + "Example: " + COMMAND_WORD + " n/ alice bob charlie a/Serangoon";
 
-    private final NameAndAddressContainsKeywordPredicate predicate;
+    private final NameAndAddressAndTagsContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameAndAddressContainsKeywordPredicate predicate) {
+    public FindCommand(NameAndAddressAndTagsContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

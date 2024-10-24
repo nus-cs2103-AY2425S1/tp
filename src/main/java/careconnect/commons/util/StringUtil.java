@@ -70,6 +70,18 @@ public class StringUtil {
         return preppedSentence.contains(preppedPartialWord);
     }
 
+    public static boolean stringSameIgnoreCase(String s1, String s2) {
+        requireNonNull(s1);
+        requireNonNull(s2);
+
+        String preppedS1 = s1.trim().toLowerCase();
+        String preppedS2 = s2.trim().toLowerCase();
+        checkArgument(!preppedS2.isEmpty(), "both word parameters cannot be empty");
+        checkArgument(!preppedS1.isEmpty(), "both word parameters cannot be empty");
+
+        return preppedS1.equals(preppedS2);
+    }
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */
