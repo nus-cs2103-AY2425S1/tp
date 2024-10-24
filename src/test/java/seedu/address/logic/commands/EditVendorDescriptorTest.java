@@ -72,7 +72,8 @@ public class EditVendorDescriptorTest {
                 + editVendorDescriptor.getEmail().orElse(null) + ", address="
                 + editVendorDescriptor.getAddress().orElse(null) + ", tags="
                 + editVendorDescriptor.getTags().orElse(null) + ", company="
-                + editVendorDescriptor.getCompany().orElse(null) + "}";
+                + editVendorDescriptor.getCompany().orElse(null) + ", budget="
+                + editVendorDescriptor.getBudget().orElse(null) + "}";
         assertEquals(expected, editVendorDescriptor.toString());
     }
 }

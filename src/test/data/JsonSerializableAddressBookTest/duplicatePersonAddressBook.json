@@ -6,6 +6,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "rsvp": "PENDING",
+    "relation": "W",
     "tags": [ "friends" ]
   }, {
     "type": "Guest",
@@ -13,6 +14,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
+    "relation": "W",
     "rsvp": "PENDING"
   } ]
 }

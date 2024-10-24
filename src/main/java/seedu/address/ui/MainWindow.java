@@ -9,7 +9,9 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -48,16 +50,22 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private HBox contactLists;
+
+    @FXML
+    private VBox guestList;
+
+    @FXML
+    private VBox vendorList;
+
+    @FXML
     private StackPane guestListPanelPlaceholder;
 
     @FXML
     private StackPane vendorListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
+    private VBox resultDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -124,6 +132,9 @@ public class MainWindow extends UiPart<Stage> {
 
         vendorListPanel = new PersonListPanel(logic.getFilteredVendorList(), "Vendors");
         vendorListPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+
+        HBox.setHgrow(guestList, Priority.ALWAYS);
+        HBox.setHgrow(vendorList, Priority.ALWAYS);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

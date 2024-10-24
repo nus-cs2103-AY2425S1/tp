@@ -7,6 +7,7 @@
     "email": "ava.johnson@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "rsvp": "ACCEPTED",
+    "relation": "W",
     "tags": ["friends"]
   }, {
     "type": "Guest",
@@ -15,6 +16,7 @@
     "email": "brian.lee@example.com",
     "address": "311, Clementi Ave 2, #02-25",
     "rsvp": "PENDING",
+    "relation": "H",
     "tags": ["owesMoney", "friends"]
   }, {
     "type": "Guest",
@@ -23,6 +25,7 @@
     "email": "cameron.white@example.com",
     "address": "wall street",
     "rsvp": "DECLINED",
+    "relation": "W",
     "tags": [ ]
   }, {
     "type": "Guest",
@@ -31,6 +34,7 @@
     "email": "david.brown@example.com",
     "address": "10th street",
     "rsvp": "ACCEPTED",
+    "relation": "H",
     "tags": ["friends"]
   }, {
     "type": "Guest",
@@ -39,6 +43,7 @@
     "email": "ella.thompson@example.com",
     "address": "michegan ave",
     "rsvp": "PENDING",
+    "relation": "W",
     "tags": [ ]
   }, {
     "type": "Guest",
@@ -47,6 +52,7 @@
     "email": "gavin.kim@example.com",
     "address": "4th street",
     "rsvp": "ACCEPTED",
+    "relation": "H",
     "tags": [ ]
   }]
 }

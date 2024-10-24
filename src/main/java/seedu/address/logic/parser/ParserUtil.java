@@ -13,10 +13,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
@@ -111,7 +113,7 @@ public class ParserUtil {
      * Parses a {@code String rsvp} into an {@code Rsvp}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code rsvp} is invalid.
      */
     public static Rsvp parseRsvp(String rsvp) throws ParseException {
         if (rsvp == null) {
@@ -122,6 +124,23 @@ public class ParserUtil {
             throw new ParseException(Rsvp.MESSAGE_CONSTRAINTS);
         }
         return new Rsvp(trimmedRsvp);
+    }
+
+    /**
+     * Parses a {@code String relation} into an {@code Relation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relation} is invalid.
+     */
+    public static Relation parseRelation(String relation) throws ParseException {
+        if (relation == null) {
+            return null;
+        }
+        String trimmedRelation = relation.trim();
+        if (!Relation.isValidRelation(trimmedRelation)) {
+            throw new ParseException(Relation.MESSAGE_CONSTRAINTS);
+        }
+        return new Relation(trimmedRelation);
     }
 
     /**
@@ -139,6 +158,23 @@ public class ParserUtil {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
         return new Company(trimmedCompany);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Budget parseBudget(String budget) throws ParseException {
+        if (budget == null) {
+            return null;
+        }
+        String trimmedBudget = budget.trim();
+        if (!Budget.isValidBudget(trimmedBudget)) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
+        return new Budget(trimmedBudget);
     }
 
     /**

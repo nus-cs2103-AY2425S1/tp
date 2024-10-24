@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 
@@ -39,6 +40,7 @@ public class EditGuestDescriptorBuilder {
         descriptor.setAddress(guest.getAddress());
         descriptor.setTags(guest.getTags());
         descriptor.setRsvp(guest.getRsvp());
+        descriptor.setRelation(guest.getRelation());
     }
 
     /**
@@ -88,6 +90,14 @@ public class EditGuestDescriptorBuilder {
      */
     public EditGuestDescriptorBuilder withRsvp(String rsvp) {
         descriptor.setRsvp(new Rsvp(rsvp));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Relation} of the {@code EditGuestDescriptor} that we are building.
+     */
+    public EditGuestDescriptorBuilder withRelation(String relation) {
+        descriptor.setRelation(new Relation(relation));
         return this;
     }
 

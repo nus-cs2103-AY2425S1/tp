@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,14 +32,21 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, String title) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new PersonListViewCell()); // map each item to a display cell
         titleLabel.setText(title);
+
+        // Wait for the personListView to be initialized
+        Platform.runLater(() -> {
+            assert(personListView != null);
+            logger.info("Setting up auto scroll mechanism");
+            setupAutoScroll(personList);
+        });
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    static class PersonListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -46,9 +55,34 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonListCard(person, getIndex() + 1).getRoot());
             }
         }
     }
 
+    private void setupAutoScroll(ObservableList<Person> personList) {
+        personListView.getItems().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                System.out.println(change.getAddedSubList());
+                if (change.wasAdded()) {
+                    Platform.runLater(() -> {
+                        personListView.scrollTo(change.getTo());
+                        personListView.getSelectionModel().select(change.getTo() - 1);
+                    });
+                    break;
+                }
+                if (change.wasRemoved()) {
+                    Platform.runLater(() -> {
+                        int removalIndex = change.getFrom();
+                        if (removalIndex >= personList.size()) {
+                            removalIndex = Math.max(0, personList.size() - 1);
+                        }
+                        personListView.scrollTo(removalIndex);
+                        personListView.getSelectionModel().select(removalIndex);
+                    });
+                    break;
+                }
+            }
+        });
+    }
 }

@@ -15,7 +15,7 @@ import seedu.address.model.person.Vendor;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonListCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -49,7 +49,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonListCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -58,18 +58,33 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        Label extraLabel;
-        if (person instanceof Guest g) {
-            extraLabel = new Label("RSVP: " + g.getRsvp().value);
+        if (person instanceof Guest) {
+            Guest g = (Guest) person;
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp().value);
+            addLabel(rsvpLabel);
+
+            Label relationLabel = new Label("Relation: " + g.getRelation());
+            addLabel(relationLabel);
         } else {
             Vendor v = (Vendor) person;
-            extraLabel = new Label("Company: " + v.getCompany().value);
+            Label companyLabel = new Label("Company: " + v.getCompany().value);
+            addLabel(companyLabel);
+
+            Label budgetLabel = new Label("Budget: $" + v.getBudget().toString());
+            addLabel(budgetLabel);
         }
-        extraLabel.getStyleClass().add("cell_small_label");
-        cardPaneContents.getChildren().add(extraLabel);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Adds a label to the cardPaneContents with a specific style class.
+     * @param label The Label to be added to the UI.
+     */
+    public void addLabel(Label label) {
+        label.getStyleClass().add("cell_small_label");
+        cardPaneContents.getChildren().add(label);
     }
 }

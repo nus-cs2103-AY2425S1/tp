@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,6 +25,7 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 
@@ -43,6 +45,7 @@ public class EditGuestCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_RSVP + "RSVP] "
+            + "[" + PREFIX_RELATION + "RELATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -80,8 +83,10 @@ public class EditGuestCommand extends Command {
         Address updatedAddress = editGuestDescriptor.getAddress().orElse(guestToEdit.getAddress());
         Set<Tag> updatedTags = editGuestDescriptor.getTags().orElse(guestToEdit.getTags());
         Rsvp updatedRsvp = editGuestDescriptor.getRsvp().orElse(guestToEdit.getRsvp());
+        Relation updatedRelation = editGuestDescriptor.getRelation().orElse(guestToEdit.getRelation());
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRsvp);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedRsvp, updatedRelation);
     }
 
     @Override
