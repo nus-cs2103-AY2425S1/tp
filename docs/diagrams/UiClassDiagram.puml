@@ -12,7 +12,16 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
-Class PersonCard
+Class PersonCard {
+  - Label name
+  - Label id
+  - Label phone
+  - Label address
+  - Label email
+  - ImageView phoneIcon
+  - ImageView addressIcon
+  - ImageView emailIcon
+}
 Class StatusBarFooter
 Class CommandBox
 }
