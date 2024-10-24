@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTUAL_PRICE;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.BoughtPropertyCommand;
 import seedu.address.logic.commands.SoldPropertyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Price;
@@ -36,6 +37,12 @@ public class SoldPropertyCommandParser implements Parser<SoldPropertyCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
+
+        if (!argMultimap.getValue(PREFIX_ACTUAL_PRICE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    BoughtPropertyCommand.MESSAGE_USAGE + "\nActual price is required."));
+        }
+
         Price actualPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_ACTUAL_PRICE).get());
 
         return new SoldPropertyCommand(personIndex, propertyIndex, actualPrice);

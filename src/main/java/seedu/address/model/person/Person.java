@@ -211,7 +211,7 @@ public class Person {
      * Returns the {@code Property} purchased with its updated price.
      *
      * @param index One based Index of property bought in the list of properties to buy.
-     * @param actualPrice {@code Optional<Price>} of the actual price of the property provided by the user.
+     * @param actualPrice {@code Price} of the actual price of the property provided by the user.
      */
     public Property getBoughtProperty(Index index, Price actualPrice) {
         Property propertyToBeUpdated = buyingProperties.get(index.getZeroBased());

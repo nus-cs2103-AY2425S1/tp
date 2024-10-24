@@ -34,6 +34,12 @@ public class BoughtPropertyCommandParser implements Parser<BoughtPropertyCommand
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
+
+        if (!argMultimap.getValue(PREFIX_ACTUAL_PRICE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    BoughtPropertyCommand.MESSAGE_USAGE + "\nActual price is required."));
+        }
+
         Price actualPrice = ParserUtil.parseBuyingPrice(argMultimap.getValue(PREFIX_ACTUAL_PRICE).get());
 
         return new BoughtPropertyCommand(personIndex, propertyIndex, actualPrice);

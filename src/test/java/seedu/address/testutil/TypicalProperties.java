@@ -8,14 +8,14 @@ import seedu.address.model.person.Property;
 public class TypicalProperties {
 
     public static final Property PROPERTY_HDB = new PropertyToBuyBuilder().withHousingType("h")
-            .withPostalCode("522522").withUnitNumber("10-01").withPrice("1500000").build();
+            .withPostalCode("522522").withUnitNumber("10-01").withPrice("1500000").withActualPrice("1010101").build();
     public static final Property PROPERTY_HDB_WITH_MULTIPLE_TAGS = new PropertyToBuyBuilder().withHousingType("h")
             .withPostalCode("599977").withUnitNumber("17-61").withPrice("5000000").withActualPrice("2000000")
             .withTags("luxury", "private pool").build();
     public static final Property PROPERTY_BTO = new PropertyToBuyBuilder().withHousingType("b")
-            .withPostalCode("533255").withUnitNumber("11-21").withPrice("2000000").build();
+            .withPostalCode("533255").withUnitNumber("11-21").withPrice("2000000").withActualPrice("1010101").build();
     public static final Property PROPERTY_BTO_WITH_TAG = new PropertyToBuyBuilder().withHousingType("b")
-            .withPostalCode("587977").withUnitNumber("16-65").withPrice("6500000")
+            .withPostalCode("587977").withUnitNumber("16-65").withPrice("6500000").withActualPrice("1010101")
             .withTags("nice scenery").build();
     public static final Property PROPERTY_CONDO_WITH_TAG = new PropertyToBuyBuilder().withHousingType("c")
             .withPostalCode("544488").withUnitNumber("12-33").withPrice("2500000").withTags("spacious")
@@ -31,7 +31,7 @@ public class TypicalProperties {
             .withTags("private lift").build();
     public static final Property PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS = new PropertyToBuyBuilder()
             .withHousingType("o").withPostalCode("577755").withUnitNumber("15-41").withPrice("4000000")
-            .withTags("penthouse", "sea view").build();
+            .withActualPrice("1010101").withTags("penthouse", "sea view").build();
     public static final Property PROPERTY_OTHERPROPERTY = new PropertyToBuyBuilder().withHousingType("o")
             .withPostalCode("588866").withUnitNumber("16-51").withPrice("4500000").withActualPrice("3000000").build();
 }
