@@ -20,9 +20,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -122,6 +125,44 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
+
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
+    }
+
+    @Test
+    public void parseCommand_import() throws Exception {
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " someFile.csv");
+        assertEquals(new ImportCommand("someFile.csv"), command);
+    }
+
+    @Test
+    public void parseCommand_editEvent() throws Exception {
+        // Assuming you have a method to get a valid event ID, replace `1` with the actual ID if necessary
+        int eventId = 1; // This should be the ID of the event you want to edit
+        Event event = new EventBuilder().build();
+
+        // Create the EditEventDescriptor with the details you want to edit
+        EditEventCommand.EditEventDescriptor descriptor = new EditEventCommand.EditEventDescriptor();
+        descriptor.setName(event.getEventName());
+        descriptor.setDescription(event.getEventDescription());
+        descriptor.setDuration(event.getEventDuration());
+
+        // Create the command string using the event ID and the descriptor details
+        String commandString = EditEventCommand.COMMAND_WORD + " " + eventId + " "
+                + EventUtil.getEditEventDetails(descriptor);
+
+        // Parse the command string
+        EditEventCommand command = (EditEventCommand) parser.parseCommand(commandString);
+
+        // Check if the parsed command matches the expected command
+        assertEquals(new EditEventCommand(eventId, descriptor), command);
+    }
+
 }
