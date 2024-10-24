@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-client 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete-client 1` Command" />
 
 <box type="info" seamless>
 
@@ -101,8 +101,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -214,9 +214,44 @@ The following activity diagram summarizes what happens when a user executes a `v
   * Cons: List of clients will be replaced by the Client details, extra effort to list Clients again.
 
 
-### Check in/ out feature
+### Check in/out feature
 
-_{Explain here how the check in/out feature will be implemented}_
+#### Implementation
+
+The **Check Client** mechanism is facilitated by `CheckClientCommand` extending the `Command` family of classes, as elaborated in the Logic component of MATER. Additionally, it requires the following operations:
+
+* `CheckClientCommandParser#parse()` - Given the argument succeeding the `check-client` command, parses the appropriate index to `CheckClientCommand`.
+* `CheckClientCommand#execute()` - Given the list of Clients, identifies the indexed Client and toggles the "checked-in" status of the Client's car. A car is either 'checked-in' or 'checked-out'.
+
+Given below is an example usage scenario and details on how the **Check Client** mechanism behaves at each step.
+
+**Step 1**: The user launches the application, where all clients are listed by default.
+
+**Step 2**: The user executes `check-client 1` command to toggle the "checked-in" status of the car for the first Client in the list.
+
+**Step 3**: If the Client has a car associated, their car's "checked-in" status is toggled, and the success message indicating the action is displayed. If the Client does not have a car associated, an error message indicating there is **"No Car associated to Client to Check In"** is displayed.
+
+**Step 4**: The user may toggle the "checked-in" the status of other clients by providing the relevant index of the client they wish to edit the status of.
+
+The following sequence diagram shows how a `check-client` operation goes through the `Logic` component:
+
+<puml src="diagrams/CheckClientSequenceDiagram.puml" alt="CheckClientSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user executes a `check-client` command:
+
+<puml src="diagrams/CheckClientActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How Check Client executes:**
+
+* **Alternative 1 (current choice):** Toggles the "checked-in" status of the car for the given Client and displays a success or error message.
+    * Pros: Easy to implement and understand. The success message clearly indicates whether a Client’s car has been checked in or out.
+    * Cons: Does not allow for more detailed tracking or history of each check-in/out event for a Client's car.
+
+* **Alternative 2:** Records every check-in/out event with a timestamp.
+    * Pros: Provides more detailed tracking and a history of all check-in/out events.
+    * Cons: More complex to implement and may require additional UI elements to display the history of actions for each Client.
 
 
 --------------------------------------------------------------------------------------------------------------------

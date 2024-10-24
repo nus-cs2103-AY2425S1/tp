@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCarCommand;
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.CheckClientCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -97,6 +98,12 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListClientCommand.COMMAND_WORD) instanceof ListClientCommand);
         assertTrue(parser.parseCommand(ListClientCommand.COMMAND_WORD + " 3") instanceof ListClientCommand);
+    }
+
+    @Test
+    public void parseCommand_addCar() throws Exception {
+        assertTrue(parser.parseCommand(AddCarCommand.COMMAND_WORD + " 2 vrn/SGX1234B "
+                + "vin/KMHGH4JH3EU073801 make/Honda model/Civic") instanceof AddCarCommand);
     }
 
     @Test

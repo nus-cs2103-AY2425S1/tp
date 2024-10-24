@@ -25,3 +25,5 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 docs/_markbind/logs/
+docs/diagrams/ForumTestActivityDiagram.puml
+docs/diagrams/ForumTestActivityDiagram2.puml
