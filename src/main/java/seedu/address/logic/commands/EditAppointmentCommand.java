@@ -70,7 +70,7 @@ public class EditAppointmentCommand extends Command {
 
         Appointment appointmentToEdit = model.getAppointmentForPersonAndTime(patient,
                 findStartDateTime);
-        Appointment editedAppointment = createEditedAppointment(appointmentToEdit, new EditAppointmentDescriptor());
+        Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor);
 
         if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
             throw new CommandException(MESSAGE_NO_APPOINTMENT);

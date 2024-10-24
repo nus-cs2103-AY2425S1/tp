@@ -80,12 +80,12 @@ public class CommandTestUtil {
     public static final String VALID_DATE_APPOINTMENT_BOB = "19/10/2025";
     public static final String VALID_START_TIME_APPOINTMENT_BOB = "09:00";
     public static final String VALID_END_TIME_APPOINTMENT_BOB = "10:00";
-    // public static final LocalDateTime VALID_START_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
-    //         LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
-    //         LocalTime.parse(VALID_START_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
-    // public static final LocalDateTime VALID_END_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
-    //         LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
-    //         LocalTime.parse(VALID_END_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
+    public static final LocalDateTime VALID_START_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
+            LocalTime.parse(VALID_START_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
+    public static final LocalDateTime VALID_END_DATE_TIME_APPOINTMENT_BOB = LocalDateTime.of(
+            LocalDate.parse(VALID_DATE_APPOINTMENT_BOB, DATE_FORMATTER),
+            LocalTime.parse(VALID_END_TIME_APPOINTMENT_BOB, TIME_FORMATTER));
     public static final String VALID_DATE_APPOINTMENT_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_BOB;
     public static final String VALID_START_TIME_APPOINTMENT_DESC_BOB = " " + PREFIX_START_TIME
             + VALID_START_TIME_APPOINTMENT_BOB;
