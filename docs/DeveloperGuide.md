@@ -433,12 +433,12 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC5 - List buyers, sellers, clients or properties**
+**Use case: UC5 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
 
 MSS:
 
-1. Real Estate Agent requests to view a list of buyers, sellers, clients or properties
-2. ClientGrid will respond with the corresponding list
+1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
+2. ClientGrid will display the corresponding list with each entry presented inside a card
 
 Use case ends.
 
