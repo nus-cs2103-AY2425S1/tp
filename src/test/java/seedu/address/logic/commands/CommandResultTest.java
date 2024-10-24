@@ -52,16 +52,20 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false, -1).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true,
+                false, false, false, -1).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false, -1).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                true, false, false, -1).hashCode());
 
         // different list value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true, -1).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, true, -1).hashCode());
 
         // different personIndex value returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, false, 0).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, false, 0).hashCode());
     }
 
     @Test
