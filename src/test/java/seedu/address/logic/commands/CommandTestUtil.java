@@ -127,15 +127,14 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withNric(VALID_NRIC_AMY).withSex(VALID_SEX_AMY).withBirthDate(VALID_BIRTHDATE_AMY)
-                .withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST).withPhone(VALID_PHONE_AMY)
-                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBloodType(VALID_BLOODTYPE_AMY)
-                .withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY).withAllergy(VALID_ALLERGY_AMY)
-                .withHealthRisk(VALID_HEALTHRISK_AMY).withHealthRecord(VALID_HEALTHRECORD_AMY)
-                .withAppts(VALID_APPOINTMENT_AMY).withNote(VALID_NOTE_AMY).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withBloodType(VALID_BLOODTYPE_AMY).withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY)
+                .withAllergy(VALID_ALLERGY_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
+                .withHealthRecord(VALID_HEALTHRECORD_AMY).withAppts(VALID_APPOINTMENT_AMY)
+                .withNote(VALID_NOTE_AMY).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB).withBirthDate(VALID_BIRTHDATE_BOB)
-                .withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST, VALID_HEALTHSERVICE_VACCINATION)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withBloodType(VALID_BLOODTYPE_BOB).withNokName(VALID_NOKNAME_BOB).withNokPhone(VALID_NOKPHONE_BOB)
                 .withAllergy(VALID_ALLERGY_BOB).withHealthRisk(VALID_HEALTHRISK_BOB)

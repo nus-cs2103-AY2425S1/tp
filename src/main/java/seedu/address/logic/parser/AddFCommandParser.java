@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
@@ -19,12 +18,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddFCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Appt;
@@ -53,12 +50,12 @@ public class AddFCommandParser implements Parser<AddFCommand> {
      */
     public AddFCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
-                PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_HEALTHSERVICE, PREFIX_ADDRESS, PREFIX_ALLERGY,
+                PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_ALLERGY,
                 PREFIX_BLOODTYPE, PREFIX_HEALTHRECORD, PREFIX_NOTE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
                 PREFIX_HEALTHRISK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE, PREFIX_EMAIL,
-                PREFIX_PHONE, PREFIX_HEALTHSERVICE)
+                PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFCommand.MESSAGE_USAGE));
         }
@@ -71,8 +68,6 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Birthdate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get());
-        Set<HealthService> healthServicesList = ParserUtil.parseHealthServices(
-                argMultimap.getAllValues(PREFIX_HEALTHSERVICE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
@@ -87,7 +82,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
         List<Appt> appts = new ArrayList<>();
 
-        Person person = new Person(name, nric, birthDate, sex, healthServicesList, phone, email, address, allergy,
+        Person person = new Person(name, nric, birthDate, sex, phone, email, address, allergy,
                 bloodType, healthRIsk, healthRecord, note, nokName, nokPhone, appts);
 
         return new AddFCommand(person);

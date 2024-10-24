@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -51,13 +50,13 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecified_success() {
         Person editedPerson = new PersonBuilder().withName("Keanu Reeves Tan").withNric("S9712385J").withSex("M")
-                .withBirthdate("1997-11-30").withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST).withPhone("86526969")
+                .withBirthdate("1997-11-30").withPhone("86526969")
                 .withEmail("keanureeves@example.com").withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+")
                 .withNokName("Mila Kunis").withNokPhone("84126990").withAllergy("peanuts, cake").withHealthRisk("LOW")
                 .withHealthRecord("diabetes").withNote("Patient has previous gunshot wound to chest").build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Keanu Reeves Tan")
-                .withNric("S9712385J").withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST).withAllergy("peanuts, cake")
+                .withNric("S9712385J").withAllergy("peanuts, cake")
                 .build();
         EditCommand editCommand = new EditCommand(targetPerson.getNric(), descriptor);
 

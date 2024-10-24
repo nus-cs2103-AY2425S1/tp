@@ -1,11 +1,8 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Appt;
@@ -20,7 +17,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -49,7 +45,6 @@ public class PersonBuilder {
     private Nric nric;
     private Birthdate birthdate;
     private Sex sex;
-    private Set<HealthService> healthServices;
     private Address address;
     private Allergy allergy;
     private BloodType bloodType;
@@ -73,7 +68,6 @@ public class PersonBuilder {
         nric = new Nric(DEFAULT_NRIC);
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
-        healthServices = new HashSet<>();
         allergy = new Allergy(DEFAULT_ALLERGY);
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
@@ -95,7 +89,6 @@ public class PersonBuilder {
         nric = personToCopy.getNric();
         birthdate = personToCopy.getBirthdate();
         sex = personToCopy.getSex();
-        healthServices = new HashSet<>(personToCopy.getHealthServices());
         allergy = personToCopy.getAllergy();
         bloodType = personToCopy.getBloodType();
         healthRisk = personToCopy.getHealthRisk();
@@ -165,14 +158,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code HealthServices} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withHealthServices(String... healthServices) {
-        this.healthServices = SampleDataUtil.getHealthServiceSet(healthServices);
-        return this;
-    }
-
-    /**
      * Sets the {@code Allergy} of the {@code Person} that we are building.
      */
     public PersonBuilder withAllergy(String allergy) {
@@ -232,7 +217,7 @@ public class PersonBuilder {
      * Builds a person based on the fields that were set.
      */
     public Person build() {
-        return new Person(name, nric, birthdate, sex, healthServices, phone, email, address, allergy, bloodType,
+        return new Person(name, nric, birthdate, sex, phone, email, address, allergy, bloodType,
                 healthRisk, healthRecord, note, nokName, nokPhone, appts);
     }
 

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
@@ -33,7 +32,7 @@ public class PersonTest {
 
         // same nric, all other attributes different -> returns True
         Person editedAlice = new PersonBuilder(BOB).withNric(VALID_NRIC_ALICE).withSex(VALID_SEX_BOB)
-                .withBirthdate(VALID_BIRTHDATE_BOB).withHealthServices(VALID_HEALTHSERVICE_VACCINATION).build();
+                .withBirthdate(VALID_BIRTHDATE_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different nric, all other attributes same -> returns false
@@ -78,7 +77,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
                 + ", sex=" + ALICE.getSex() + ", birthdate=" + ALICE.getBirthdate() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", Health Services=" + ALICE.getHealthServices() + "}";
+                + ", email=" + ALICE.getEmail() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
