@@ -51,5 +51,4 @@ deactivate Model
 Command --> Logic : CommandResult
 deactivate Command
 
-
 @enduml
