@@ -104,6 +104,7 @@ class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 
+    //Todo
     @Disabled("Works fine on pc but throws a null pointer exception in github")
     @Test
     void toModelType_nullSickness_throwsIllegalValueException() {
@@ -119,6 +120,7 @@ class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 
+    //Todo
     @Disabled("Works fine on pc but throws a null pointer exception in github")
     @Test
     void toModelType_nullMedicine_throwsIllegalValueException() {
