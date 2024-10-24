@@ -7,6 +7,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.logic.commands.meetup.DeleteCommand;
 import seedu.address.logic.commands.meetup.EditCommand;
+import seedu.address.logic.commands.meetup.FindCommand;
 import seedu.address.logic.commands.meetup.ViewCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,6 +40,9 @@ public class MeetUpCommandParser extends CommandParser {
 
         //case FilterCommand.COMMAND_WORD:
         //  return new FilterCommandParser().parse(arguments);
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
