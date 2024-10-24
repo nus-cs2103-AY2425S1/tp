@@ -10,10 +10,10 @@ import seedu.address.ui.DisplayType;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListPersonCommand extends ListCommand {
+public class ListPersonsCommand extends ListCommand {
 
     // Command word using the 'list' prefix + 'person'
-    public static final String COMMAND_WORD = COMMAND_PREFIX + "person";
+    public static final String COMMAND_WORD = COMMAND_PREFIX + "persons";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
