@@ -6,7 +6,7 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 
 /**
- * Tests that a {@code Student}'s {@code Name} matches any of the keywords
+ * Tests that a {@code Student}'s {@code Name} matches all of the keywords
  * given.
  */
 public class StudentDescriptorMatchesPredicate implements Predicate<Student> {

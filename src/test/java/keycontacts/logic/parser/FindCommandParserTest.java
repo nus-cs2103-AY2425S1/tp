@@ -40,11 +40,4 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " Alice Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
-
-    public static void main(String[] args) {
-        FindCommandParserTest test = new FindCommandParserTest();
-        test.parse_emptyArg_throwsParseException();
-        test.parse_validArgs_returnsFindCommand();
-    }
-
 }

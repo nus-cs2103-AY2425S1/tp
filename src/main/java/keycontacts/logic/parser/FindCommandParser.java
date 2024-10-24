@@ -17,21 +17,23 @@ import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * Parses the given {@code String} of arguments in the context of the
+     * FindCommand
      * and returns a FindCommand object for execution.
+     * 
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (args.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
+                PREFIX_GRADE_LEVEL);
 
-        if (!argMultimap.anyPrefixesPresent(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL)) {
+        if ((!argMultimap.anyPrefixesPresent(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_GRADE_LEVEL))
+                || argMultimap.isPreamblePresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -40,16 +42,16 @@ public class FindCommandParser implements Parser<FindCommand> {
         FindStudentDescriptor findStudentDescriptor = new FindStudentDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            findStudentDescriptor.setName(argMultimap.getValue(PREFIX_NAME).get());
+            findStudentDescriptor.setName(argMultimap.getValue(PREFIX_NAME).get().trim());
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            findStudentDescriptor.setPhone(argMultimap.getValue(PREFIX_PHONE).get());
+            findStudentDescriptor.setPhone(argMultimap.getValue(PREFIX_PHONE).get().trim());
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            findStudentDescriptor.setAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            findStudentDescriptor.setAddress(argMultimap.getValue(PREFIX_ADDRESS).get().trim());
         }
         if (argMultimap.getValue(PREFIX_GRADE_LEVEL).isPresent()) {
-            findStudentDescriptor.setGradeLevel(argMultimap.getValue(PREFIX_GRADE_LEVEL).get());
+            findStudentDescriptor.setGradeLevel(argMultimap.getValue(PREFIX_GRADE_LEVEL).get().trim());
         }
 
         return new FindCommand(new StudentDescriptorMatchesPredicate(findStudentDescriptor));

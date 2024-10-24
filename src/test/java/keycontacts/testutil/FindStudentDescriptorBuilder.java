@@ -18,7 +18,7 @@ public class FindStudentDescriptorBuilder {
     }
 
     /**
-     * Returns a {@code EditStudentDescriptor} with fields containing
+     * Returns a {@code FindStudentDescriptor} with fields containing
      * {@code student}'s details
      */
     public FindStudentDescriptorBuilder(Student student) {
@@ -30,7 +30,7 @@ public class FindStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditStudentDescriptor} that we are
+     * Sets the {@code Name} of the {@code FindStudentDescriptor} that we are
      * building.
      */
     public FindStudentDescriptorBuilder withName(String name) {
@@ -39,7 +39,7 @@ public class FindStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditStudentDescriptor} that we are
+     * Sets the {@code Phone} of the {@code FindStudentDescriptor} that we are
      * building.
      */
     public FindStudentDescriptorBuilder withPhone(String phone) {
@@ -48,7 +48,7 @@ public class FindStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditStudentDescriptor} that we are
+     * Sets the {@code Address} of the {@code FindStudentDescriptor} that we are
      * building.
      */
     public FindStudentDescriptorBuilder withAddress(String address) {
@@ -57,7 +57,7 @@ public class FindStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code GradeLevel} of the {@code EditStudentDescriptor} that we are
+     * Sets the {@code GradeLevel} of the {@code FindStudentDescriptor} that we are
      * building.
      */
     public FindStudentDescriptorBuilder withGradeLevel(String gradeLevel) {

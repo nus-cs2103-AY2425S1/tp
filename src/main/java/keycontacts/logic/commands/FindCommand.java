@@ -9,7 +9,8 @@ import keycontacts.model.student.Student;
 import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 
 /**
- * Finds and lists all students in the student directory whose name contains any of the argument keywords.
+ * Finds and lists all students in the student directory whose name contains any
+ * of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
@@ -18,8 +19,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: Name, Address, Phone Number, Grade Level...\n"
+            + "Example: " + COMMAND_WORD + " [prefix/keyword]";
 
     private final StudentDescriptorMatchesPredicate predicate;
 
@@ -137,22 +138,23 @@ public class FindCommand extends Command {
         /**
          * Returns true if given student's field contains the non-empty
          * field value of this descriptor.
+         * 
          * @param student
          * @return
          */
         public boolean matches(Student student) {
             boolean matches = true;
             if (!name.isEmpty()) {
-                matches = matches && student.getName().fullName.contains(name);
+                matches = matches && student.getName().fullName.toLowerCase().contains(name.toLowerCase());
             }
             if (!address.isEmpty()) {
-                matches = matches && student.getAddress().value.contains(address);
+                matches = matches && student.getAddress().value.toLowerCase().contains(address.toLowerCase());
             }
             if (!phone.isEmpty()) {
-                matches = matches && student.getPhone().value.contains(phone);
+                matches = matches && student.getPhone().value.toLowerCase().contains(phone.toLowerCase());
             }
             if (!gradeLevel.isEmpty()) {
-                matches = matches && student.getGradeLevel().value.contains(gradeLevel);
+                matches = matches && student.getGradeLevel().value.toLowerCase().contains(gradeLevel.toLowerCase());
             }
             return matches;
         }
