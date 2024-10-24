@@ -34,6 +34,13 @@ public class EventListPanel extends UiPart<Region> {
     }
 
     /**
+     * Set the header of the event list panel.
+     */
+    public void setHeader(String headerText) {
+        header.setText(headerText);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
     class EventListViewCell extends ListCell<Event> {

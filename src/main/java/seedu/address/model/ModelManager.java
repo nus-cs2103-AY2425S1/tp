@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.association.Association;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.ui.UiState;
@@ -108,7 +109,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteVendor(Vendor target) {
+    public void deleteVendor(Vendor target) throws AssociationDeleteException {
         addressBook.removeVendor(target);
     }
 
@@ -132,7 +133,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteEvent(Event target) {
+    public void deleteEvent(Event target) throws AssociationDeleteException {
         addressBook.removeEvent(target);
     }
 

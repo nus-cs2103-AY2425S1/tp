@@ -34,6 +34,13 @@ public class VendorListPanel extends UiPart<Region> {
     }
 
     /**
+     * Set the header of the vendor list panel.
+     */
+    public void setHeader(String headerText) {
+        header.setText(headerText);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Vendor} using a {@code VendorCard}.
      */
     class VendorListViewCell extends ListCell<Vendor> {

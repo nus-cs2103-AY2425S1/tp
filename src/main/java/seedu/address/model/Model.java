@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.association.Association;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.ui.UiState;
@@ -67,7 +68,7 @@ public interface Model {
     /**
      * Deletes the given vendor. The vendor must exist in the address book.
      */
-    void deleteVendor(Vendor target);
+    void deleteVendor(Vendor target) throws AssociationDeleteException;
 
     /**
      * Adds the given vendor. {@code vendor} must not already exist in the address book.
@@ -139,7 +140,7 @@ public interface Model {
     /**
      * Deletes the given event. The event must exist in the address book.
      */
-    void deleteEvent(Event target);
+    void deleteEvent(Event target) throws AssociationDeleteException;
 
     /**
      * Adds the given event. {@code event} must not already exist in the address book.

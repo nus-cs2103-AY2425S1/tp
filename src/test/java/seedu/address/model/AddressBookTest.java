@@ -20,6 +20,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.association.Association;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -146,6 +149,38 @@ public class AddressBookTest {
                 + "events=" + addressBook.getEventList()
                 + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void removeVendor_vendorNotAssociated_success() {
+        addressBook.addVendor(ALICE);
+        addressBook.removeVendor(ALICE);
+        assertFalse(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
+    public void removeVendor_vendorIsAssociatedWithEvent_throwsAssociationDeleteException() {
+        addressBook.addVendor(ALICE);
+        addressBook.addEvent(testEvent);
+        addressBook.assignVendorToEvent(ALICE, testEvent);
+
+        assertThrows(AssociationDeleteException.class, () -> addressBook.removeVendor(ALICE));
+    }
+
+    @Test
+    public void removeEvent_eventNotAssociated_success() {
+        addressBook.addEvent(testEvent);
+        addressBook.removeEvent(testEvent);
+        assertFalse(addressBook.hasEvent(testEvent));
+    }
+
+    @Test
+    public void removeEvent_eventIsAssociatedWithVendor_throwsAssociationDeleteException() {
+        addressBook.addVendor(ALICE);
+        addressBook.addEvent(testEvent);
+        addressBook.assignVendorToEvent(ALICE, testEvent);
+
+        assertThrows(AssociationDeleteException.class, () -> addressBook.removeEvent(testEvent));
     }
 
     @Test

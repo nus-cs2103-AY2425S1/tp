@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+// TODO: Uncomment when event implement tags
+// import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
@@ -8,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -36,6 +39,8 @@ public class EventDetailsPanel extends UiPart<Region> {
     private GridPane detailsHolder;
     @FXML
     private StackPane detailsChildrenPlaceholder;
+    @FXML
+    private FlowPane tags;
 
     private ObservableList<Vendor> assignedVendors;
 
@@ -76,6 +81,9 @@ public class EventDetailsPanel extends UiPart<Region> {
             name.setText("");
             date.setText("");
         }
+        // TODO: Uncomment when event implement tags
+        // event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+        // .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     private void showEventDetails() {

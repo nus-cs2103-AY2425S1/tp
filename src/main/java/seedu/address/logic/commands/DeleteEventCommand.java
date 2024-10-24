@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 
 /**
@@ -24,6 +25,8 @@ public class DeleteEventCommand extends DeleteCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + "1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS =
+        "Deletion failed as vendors are assigned to Event: %1$s";
 
     /**
      * Creates a DeleteEventCommand to delete the event at the specified
@@ -46,7 +49,14 @@ public class DeleteEventCommand extends DeleteCommand {
         }
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteEvent(eventToDelete);
+
+        try {
+            model.deleteEvent(eventToDelete);
+        } catch (AssociationDeleteException ae) {
+            throw new CommandException(String.format(MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS,
+                Messages.format(eventToDelete)));
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 
