@@ -25,7 +25,7 @@ Class Job
 
 Class UniqueWeddingList
 Class Wedding
-Class DateTime
+Class Date
 Class Venue
 Class WeddingName
 
@@ -65,8 +65,10 @@ Address -[hidden]right-> Email
 WeddingBook *--> "1" UniqueWeddingList
 UniqueWeddingList --> "~* all" Wedding
 Wedding *--> WeddingName
-Wedding *--> DateTime
-Wedding *--> Venue
+Wedding *--> Date
+Wedding *---> Venue
+
+Venue -up-|> Address
 
 ModelManager --> "~* filtered" Person
 

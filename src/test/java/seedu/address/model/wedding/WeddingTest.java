@@ -21,7 +21,7 @@ public class WeddingTest {
 
         // same wedding name, different venue and datetime -> returns true
         Wedding editedWeddingOne = new WeddingBuilder(WEDDING_ONE).withVenue("Botanic Gardens")
-                .withDatetime("15/03/2024").build();
+                .withDate("15/03/2024").build();
         assertTrue(WEDDING_ONE.isSameWedding(editedWeddingOne));
 
         // different wedding name, all other attributes same -> returns false
@@ -65,14 +65,14 @@ public class WeddingTest {
         assertFalse(WEDDING_ONE.equals(editedWeddingOne));
 
         // different datetime -> returns false
-        editedWeddingOne = new WeddingBuilder(WEDDING_ONE).withDatetime("15/03/2024").build();
+        editedWeddingOne = new WeddingBuilder(WEDDING_ONE).withDate("15/03/2024").build();
         assertFalse(WEDDING_ONE.equals(editedWeddingOne));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Wedding.class.getCanonicalName() + "{weddingName=" + WEDDING_ONE.getWeddingName()
-                + ", venue=" + WEDDING_ONE.getVenue() + ", datetime=" + WEDDING_ONE.getDatetime() + "}";
+                + ", venue=" + WEDDING_ONE.getVenue() + ", date=" + WEDDING_ONE.getDate() + "}";
         assertTrue(WEDDING_ONE.toString().equals(expected));
     }
 }

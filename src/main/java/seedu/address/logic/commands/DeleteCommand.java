@@ -15,9 +15,10 @@ import seedu.address.model.person.Person;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD
+            + ": Deletes the person identified by the name used in the address book.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the name used in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: n/NAME\n"
             + "Example: " + COMMAND_WORD + " n/Li Sirui";
 

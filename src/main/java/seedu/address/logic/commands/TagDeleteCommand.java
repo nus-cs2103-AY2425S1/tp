@@ -23,9 +23,10 @@ import seedu.address.model.wedding.Wedding;
 public class TagDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the specified tag from the person identified "
-            + "by their name. "
+            + "by their name. ";
+    public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: "
             + "tag-delete n/NAME t/[TAG]\n"
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "

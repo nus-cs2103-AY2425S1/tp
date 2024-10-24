@@ -9,14 +9,34 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddWeddingCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.FilterByJobCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.TagAddCommand;
+import seedu.address.logic.commands.TagDeleteCommand;
+
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-
+    public static final String COMMAND_SUMMARY =
+            AddCommand.COMMAND_FUNCTION + '\n'
+            + AddWeddingCommand.COMMAND_FUNCTION + '\n'
+            + DeleteCommand.COMMAND_FUNCTION + '\n'
+            + EditCommand.COMMAND_FUNCTION + '\n'
+            + FilterByJobCommand.COMMAND_FUNCTION + '\n'
+            + FindCommand.COMMAND_FUNCTION + '\n'
+            + HelpCommand.COMMAND_FUNCTION + '\n'
+            + TagAddCommand.COMMAND_FUNCTION + '\n'
+            + TagDeleteCommand.COMMAND_FUNCTION + '\n';
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w13-4.github.io/tp/index.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = COMMAND_SUMMARY
+            + "\nFor further details please refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
