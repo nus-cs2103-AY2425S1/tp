@@ -40,11 +40,9 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-<<<<<<< HEAD
-=======
+
         // Add the "customer" tag explicitly
         tagList.add(new Tag("customer"));
->>>>>>> edit-gui
 
         Customer customer = new Customer(name, phone, email, address, preference, information, remark, tagList);
 
