@@ -52,20 +52,6 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
     }
 
-    /**
-     * TODO: Not sure if this is allowed but somehow need this in order for "default sort event" to work.
-     * Also added javafx-swing in dependencies.
-     *
-     * Problem: The constructor of UniqueEventList creates a timeline that continuously
-     * re-sorts events, especially in the case when an event's status changes to "Completed".
-     * If JavaFX is not initialized, this results in a java.lang.NullPointerException:
-     * Cannot invoke "com.sun.glass.ui.Timer.resume()" because "this.pulseTimer" is null.
-     */
-    //    @BeforeAll
-    //    public static void initJfxRuntime() {
-    //        new JFXPanel(); // This will initialize the JavaFX runtime.
-    //    }
-
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";

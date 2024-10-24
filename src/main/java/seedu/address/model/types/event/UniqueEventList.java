@@ -32,16 +32,14 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
-    /**
-     * Periodically sorts the events especially when an event becomes completed.
-     */
-    //    public UniqueEventList() {
-    //        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
-    //                javafx.util.Duration.minutes(1));
-    //        eventReSortTimeline.play();
-    //    }
+    public UniqueEventList() {
+    }
 
-    private void sortEvents() {
+    /**
+     * Resorts Events
+     */
+    public void sortEvents() {
+        System.out.println("events sorted");
         internalList.sort((event1, event2) -> {
             long remainingTime1 = getEventTimeRemaining(event1);
             long remainingTime2 = getEventTimeRemaining(event2);
@@ -123,6 +121,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.set(index, editedEvent);
+        sortEvents();
     }
 
     /**
@@ -139,6 +138,7 @@ public class UniqueEventList implements Iterable<Event> {
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortEvents();
     }
 
     /**
@@ -152,6 +152,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+        sortEvents();
     }
 
     /**
