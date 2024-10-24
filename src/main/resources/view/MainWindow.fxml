@@ -20,7 +20,7 @@
     <Scene>
       <stylesheets>
         <URL value="@LightTheme.css" />
-        <URL value="@DarkExtensions.css" />
+        <URL value="@LightExtensions.css" />
       </stylesheets>
 
       <VBox>
