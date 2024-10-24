@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-// import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
@@ -43,13 +40,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label rateAndPaidAmountAndOwedAmount;
 
-
-
-
-    // used to display blue color tags.
-    @FXML
-    private FlowPane tags;
-
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
@@ -65,12 +55,5 @@ public class StudentCard extends UiPart<Region> {
         rateAndPaidAmountAndOwedAmount.setText("Rate: $" + student.getRate().toString() + "/h, "
             + "Paid: $" + student.getPaidAmount().toString() + ", "
                 + "Owed: $" + student.getOwedAmount().toString());
-
-        // This is the code to show blue tags. I will comment it out instead of deleting it.
-        /*
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-                */
     }
 }
