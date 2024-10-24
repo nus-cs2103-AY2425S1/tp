@@ -56,12 +56,13 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+
+    //// Person-related methods ////
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
-
-    boolean hasTutorial(Tutorial tutorial);
 
     /**
      * Deletes the given person.
@@ -69,14 +70,11 @@ public interface Model {
      */
     void deletePerson(Person target);
 
-
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
-
-    void addTutorial(Tutorial tutorial);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -84,6 +82,55 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+
+    //// Tutorial-related methods ////
+
+    /**
+     * Returns true if a tutorial with the same identity as {@code tutorial} exists in the address book.
+     */
+    boolean hasTutorial(Tutorial tutorial);
+
+    /**
+     * Closes/Deletes the given tutorial.
+     * The tutorial must exist in the address book.
+     */
+    void closeTutorial(Tutorial tutorial);
+
+    /**
+     * Retrieves the given tutorial in the list with the same identity.
+     * The tutorial must exist in the address book.
+     */
+    Tutorial getTutorial(Tutorial tutorial);
+
+    /**
+     * Creates/Adds the given tutorial.
+     * {@code tutorial} must not already exist in the address book.
+     */
+    void createTutorial(Tutorial tutorial);
+
+    /** Returns an unmodifiable view of the filtered tutorial list */
+    ObservableList<Tutorial> getFilteredTutorialList();
+
+    /**
+     * Updates the filter of the filtered tutorial list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTutorialList(Predicate<Tutorial> predicate);
+
+
+
+    //// Participation-related methods ////
 
     boolean hasParticipation(Participation participation);
 
@@ -99,21 +146,4 @@ public interface Model {
      */
     void deleteParticipation(Participation target);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /** Returns an unmodifiable view of the filtered tutorial list */
-    ObservableList<Tutorial> getFilteredTutorialList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the filter of the filtered tutorial list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredTutorialList(Predicate<Tutorial> predicate);
 }

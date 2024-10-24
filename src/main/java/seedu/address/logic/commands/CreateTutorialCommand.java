@@ -8,6 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tutorial.Tutorial;
 
+/**
+ * Creates/Adds a new tutorial in the address book.
+ */
 public class CreateTutorialCommand extends Command {
 
     public static final String COMMAND_WORD = "createtut";
@@ -27,6 +30,14 @@ public class CreateTutorialCommand extends Command {
         toAdd = tutorial;
     }
 
+    /**
+     * Executes the command to create a new tutorial. If the tutorial already exists,
+     * an error will be thrown.
+     *
+     * @param model {@code Model} which the command operates on.
+     * @return CommandResult which indicates the success of creating tutorial.
+     * @throws CommandException if the tutorial already exists in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -35,7 +46,7 @@ public class CreateTutorialCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TUTORIAL);
         }
 
-        model.addTutorial(toAdd);
+        model.createTutorial(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS_TUTORIAL, Messages.formatTutorial(toAdd)));
     }
 }
