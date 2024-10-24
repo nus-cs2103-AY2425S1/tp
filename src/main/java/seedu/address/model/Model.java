@@ -88,7 +88,7 @@ public interface Model {
     /**
      * Returns the person in the address book with the given name.
      *
-     * @param name The Name to search for
+     * @param name The name to search for
      * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
      */
     Optional<Person> getPerson(Name name);

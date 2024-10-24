@@ -34,10 +34,10 @@ public class MarkCommand extends Command {
     private final Name name;
 
     /**
-     * Constuctor for MarkCommand
+     * Constuctor for MarkCommand.
      *
-     * @param name the name of the student
-     * @param week the week number
+     * @param name the name of the student to be marked
+     * @param week the week number in which the student is being marked as present
      */
     public MarkCommand(Name name, int week) {
         this.name = name;

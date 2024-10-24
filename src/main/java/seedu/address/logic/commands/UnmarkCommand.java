@@ -35,9 +35,9 @@ public class UnmarkCommand extends Command {
     private final Name name;
 
     /**
-     * Constuctor for UnmarkCommand
+     * Constuctor for UnmarkCommand.
      *
-     * @param name the name of the student
+     * @param name the name of the student to be unmarked
      * @param week the week number
      */
     public UnmarkCommand(Name name, int week) {
