@@ -124,4 +124,17 @@ public interface Model {
      * @param target The person whose priority level is to be reset.
      */
     void resetPersonPriority(Person target);
+
+    /**
+     * Updates the tasks associated with the given person.
+     * @param oldPerson The person whose tasks are to be updated.
+     * @param newPerson The person with the updated tasks.
+     */
+    void updateTasksForPerson(Person oldPerson, Person newPerson);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     */
+    void setTask(Task target, Task editedTask);
 }
