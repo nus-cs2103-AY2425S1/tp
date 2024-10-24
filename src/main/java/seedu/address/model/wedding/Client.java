@@ -10,7 +10,8 @@ public class Client {
     private final Person person;
 
     public Client(Person person) {
-        this.person = person;
+        this.person = new Person(person.getName(), person.getPhone(),
+                person.getEmail(), person.getAddress(), person.getRole(), null);
     }
 
     public Person getPerson() {
@@ -20,6 +21,10 @@ public class Client {
     @Override
     public String toString() {
         return person.toString();
+    }
+
+    public void setOwnWedding(Wedding wedding) {
+        this.person.setOwnWedding(wedding);
     }
 
     @Override

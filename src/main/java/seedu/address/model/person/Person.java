@@ -27,7 +27,7 @@ public class Person {
     private final Tag role;
 
     private final Set<Tag> tags = new HashSet<>(); // to remove
-    private final Wedding ownWedding;
+    private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
@@ -55,6 +55,10 @@ public class Person {
         this.address = address;
         this.role = role;
         this.ownWedding = ownWedding;
+    }
+
+    public void setOwnWedding(Wedding wedding) {
+        ownWedding = wedding;
     }
 
     public Name getName() {
@@ -91,6 +95,14 @@ public class Person {
 
     public Set<Wedding> getWeddingJobs() {
         return weddingJobs;
+    }
+
+    public void addWeddingJob(Wedding wedding) {
+        if (ownWedding == null || !ownWedding.isSameWedding(wedding)){
+            weddingJobs.add(wedding);
+        } else {
+            throw new IllegalArgumentException("Cannot add own wedding as a job.");
+        }
     }
 
     /**
@@ -154,8 +166,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, ownWedding, weddingJobs);
+        return Objects.hash(name, phone, email, address);
     }
 
     @Override

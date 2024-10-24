@@ -20,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueWeddingList weddings;
 
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -65,9 +66,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
         setWeddings(newData.getWeddingList());
+        setPersons(newData.getPersonList());
     }
 
     //// person-level operations
@@ -178,6 +178,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Wedding> getWeddingList() {
         return weddings.asUnmodifiableObservableList();
     }
+
 
     @Override
     public boolean equals(Object other) {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of wedding that enforces uniqueness between its elements and does not allow nulls.
@@ -21,7 +22,9 @@ import javafx.collections.ObservableList;
  *
  * @see Wedding#isSameWedding(Wedding)
  */
+
 public class UniqueWeddingList implements Iterable<Wedding> {
+
     private final ObservableList<Wedding> internalList = FXCollections.observableArrayList();
     private final ObservableList<Wedding> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -77,22 +80,26 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         }
     }
 
-    public void setWeddings(UniqueWeddingList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code weddings}.
-     * {@code persons} must not contain duplicate weddings.
+     * {@code weddings} must not contain duplicate weddings.
      */
     public void setWeddings(List<Wedding> weddings) {
         requireAllNonNull(weddings);
         if (!weddingsAreUnique(weddings)) {
-            // throw new DuplicateWeddingException();
+            //throw new DuplicateWeddingException();
         }
 
         internalList.setAll(weddings);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code weddings}.
+     * {@code weddings} must not contain duplicate weddings.
+     */
+    public void setWeddings(UniqueWeddingList replacement) {
+        requireAllNonNull(replacement.internalList);
+        internalList.setAll(replacement.internalList);
     }
 
     /**

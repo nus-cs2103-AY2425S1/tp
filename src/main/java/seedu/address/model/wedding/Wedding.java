@@ -16,18 +16,19 @@ public class Wedding {
     private Client client;
     private Date date;
     private Venue venue;
-    private ContactSet contactSet;
-
     /**
      * Constructs a {@code Wedding}.
      */
     public Wedding(Name name, Client client, Date date, Venue venue) {
-        requireAllNonNull(name, client);
+        requireAllNonNull(name);
         this.name = name;
         this.client = client;
         this.date = date;
         this.venue = venue;
-        this.contactSet = new ContactSet();
+    }
+
+    public void addClient(Person person) {
+        this.client = new Client(person);
     }
 
     public Name getName() {
@@ -55,24 +56,6 @@ public class Wedding {
     }
 
     /**
-     * Adds a role and person to the ContactMap for this wedding.
-     * Validates that the person being added is not a spouse (husband or wife).
-     *
-     * @param person The person who will have the role.
-     * @throws IllegalArgumentException If the person is a spouse or if the role is already assigned.
-     */
-    public void addRoleToSet(Person person) {
-        if (person.isSamePerson(client.getPerson())) {
-            throw new IllegalArgumentException("This person is a client and cannot have another role.");
-        }
-
-        if (person.getRole() == null) {
-            throw new IllegalArgumentException("This person does not have a role.");
-        }
-
-        contactSet.addToMap(person.getRole(), person);
-    }
-    /**
      * Returns true if both weddings have the same identity.
      */
     public boolean isSameWedding(Wedding otherWedding) {
@@ -86,7 +69,6 @@ public class Wedding {
                 .add("client", client)
                 .add("date", date)
                 .add("venue", venue)
-                .add("contactSet", contactSet)
                 .toString();
     }
 
@@ -102,14 +84,12 @@ public class Wedding {
 
         Wedding otherWedding = (Wedding) other;
         return name.equals(otherWedding.name)
-               && client.equals(otherWedding.client)
                && date.equals(otherWedding.date)
-               && venue.equals(otherWedding.venue)
-               && contactSet.equals(otherWedding.contactSet);
+               && venue.equals(otherWedding.venue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, client, date, venue, contactSet);
+        return Objects.hash(name, date, venue);
     }
 }
