@@ -141,6 +141,104 @@ public class ChatWindowUiTest extends ApplicationTest {
         assertEquals("", chatArea.getText());
     }
 
+    @Test
+    public void getResponse_keywordCaseVariations_success() {
+        interact(() -> {
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("Hello"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("HELLO"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hElLo"));
+        });
+    }
+
+    @Test
+    public void getResponse_punctuationHandling_success() {
+        interact(() -> {
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello?"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi!"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey..."));
+        });
+    }
+
+    @Test
+    public void getResponse_multipleWordsWithKeywords_success() {
+        interact(() -> {
+            assertEquals("Sure! What do you need help with?",
+                    chatWindow.getResponse("Can you help me with my homework?"));
+            assertEquals("Love is not about possession; it's about appreciation of \n"
+                    + "the journey we share together, hand in hand through \n"
+                    + "the beautiful chaos of life.", chatWindow.getResponse("I love coding!"));
+        });
+    }
+
+    @Test
+    public void getResponse_repeatedKeywords_success() {
+        interact(() -> {
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello hello"));
+            assertEquals("You're welcome! Always happy to help.", chatWindow.getResponse("thank you thank you"));
+        });
+    }
+
+    @Test
+    public void getResponse_longInput_failure() {
+        String expected = "I'm sorry, I didn't understand that. Can you please \n"
+                + "rephrase?";
+        interact(() -> {
+            String longInput = "This is a very long input that doesn't "
+                    + "really mean anything and is just a string of words.";
+            assertEquals(expected, chatWindow.getResponse(longInput));
+        });
+    }
+
+    @Test
+    public void getResponse_boundaryTests_success() {
+        interact(() -> {
+            String input = "a";
+            String expected = "I'm sorry, I didn't understand that. Can you please \n"
+                    + "rephrase?";
+            assertEquals(expected, chatWindow.getResponse(input));
+
+            String longInput = "a".repeat(1000);
+            assertEquals(expected, chatWindow.getResponse(longInput));
+        });
+    }
+
+    @Test
+    public void getResponse_similarUserMessages_success() {
+        interact(() -> {
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("say hello"));
+            assertEquals("You're welcome! Always happy to help.", chatWindow.getResponse("thanks for your help"));
+            assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("I am leaving now, bye!"));
+        });
+    }
+
+    @Test
+    public void handleRapidInput_success() {
+        FxRobot robot = new FxRobot();
+
+        String[] messages = {"hello", "help", "thanks", "love", "goodbye"};
+        for (String message : messages) {
+            robot.clickOn(userInput);
+            robot.write(message);
+            robot.type(KeyCode.ENTER);
+            waitFor(Duration.seconds(4));
+        }
+
+        String expectedResponses =
+                "You: hello\n"
+                + "Assistant: Hi there! How can I assist you today?\n"
+                + "You: help\n"
+                + "Assistant: Sure! What do you need help with?\n"
+                + "You: thanks\n"
+                + "Assistant: You're welcome! Always happy to help.\n"
+                + "You: love\n"
+                + "Assistant: Love is not about possession; it's about appreciation of \n"
+                + "the journey we share together, hand in hand through \n"
+                + "the beautiful chaos of life.\n"
+                + "You: goodbye\n"
+                + "Assistant: Goodbye! Have a great day!\n";
+        assertEquals(expectedResponses, chatArea.getText());
+    }
+
     private void waitFor(Duration duration) {
         try {
             Thread.sleep((long) duration.toMillis());
@@ -149,4 +247,3 @@ public class ChatWindowUiTest extends ApplicationTest {
         }
     }
 }
-

@@ -52,6 +52,8 @@ public class ChatWindow {
             String typingMessage = "Assistant is typing";
             chatArea.appendText(typingMessage);
 
+            userInput.setDisable(true);
+
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1), e -> {
                         chatArea.appendText(".");
@@ -67,6 +69,7 @@ public class ChatWindow {
 
                         String response = getResponse(message);
                         chatArea.appendText("Assistant: " + response + "\n");
+                        userInput.setDisable(false);
                     })
             );
 
@@ -88,28 +91,34 @@ public class ChatWindow {
                 || Pattern.compile("\\bh+i+\\b").matcher(message).find()
                 || Pattern.compile("\\bh+e+y+\\b").matcher(message).find()) {
             return "Hi there! How can I assist you today?";
-        } else if (Pattern.compile("\\bb+y+e+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(g+o+o+d+b+y+|b+y+e+|b+y+|bye|goodbye)\\b")
+                .matcher(message).find()) {
             return "Goodbye! Have a great day!";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b")
+                .matcher(message).find()) {
             return "This is how to add a buyer!\n"
                     + "buyer n/{name} p/{phone number} e/{email}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b").matcher(message).find()) {
-            return "We categorise clients into buyers and sellers for clarify of our users!\n"
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
+                .matcher(message).find()) {
+            return "We categorise clients into buyers and sellers for clarity of our users!\n"
                     + "Maybe consider:\n"
                     + "• Adding a buyer\n"
                     + "• Adding a seller";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*s+e+l+e+r+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*s+e+l+e+r+\\b")
+                .matcher(message).find()) {
             return "This is how to add a seller!\n"
                     + "seller n/{name} p/{phone number} e/{email}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
+                .matcher(message).find()) {
             return "This is how to add an appointment!\n"
                     + "apt {index} d/{date} fr/{start time} to/{end time}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*p+r+o+p+e+r+t+y+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*p+r+o+p+e+r+t+y+\\b")
+                .matcher(message).find()) {
             return "This is how to add a property!\n"
                     + "prop {index} prop/{date} fr/{address}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
-            return "We categorise clients into buyers and sellers for clarify of our users!\n"
+            return "We categorise clients into buyers and sellers for clarity of our users!\n"
                     + "Maybe consider:\n"
                     + "• Deleting a buyer\n"
                     + "• Deleting a seller";
@@ -129,8 +138,8 @@ public class ChatWindow {
                 .matcher(message).find()) {
             return "This is how to delete a property!\n"
                     + "delprop n/{name}";
-        } else if (Pattern.compile("\\bt+h+a+n+k+\\b").matcher(message).find()
-                || Pattern.compile("\\bt+h+a+n+k+\\s+you\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\bt+h+a+n+k+|t+h+a+n+k+\\s+y+o+u+|t+h+a+n+k+\\s+u+\\b")
+                .matcher(message).find()) {
             return "You're welcome! Always happy to help.";
         } else if (Pattern.compile("\\bl+o+v+e+\\b").matcher(message).find()) {
             return "Love is not about possession; it's about appreciation of \n"
