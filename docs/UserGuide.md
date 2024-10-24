@@ -253,7 +253,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Reminder : `remind`
+### Getting a reminder for today : `remind`
 
 Get a reminder on all your lessons scheduled for `today`. Automatically reminds you when you launch the app.
 
