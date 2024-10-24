@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.StackPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -27,12 +28,13 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <StackPane fx:id="tagPane" maxWidth="55" maxHeight="10">
+        <Label fx:id="tag" styleClass="cell_small_label" text="\$tag" />
+      </StackPane>
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="course" styleClass="cell_small_label" text="\$course" />
+      <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
     </VBox>
   </GridPane>
 </HBox>
