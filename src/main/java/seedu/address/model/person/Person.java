@@ -22,17 +22,17 @@ public class Person {
     private final Gender gender;
 
     // Data fields
-    private final Module module;
+    private final Set<Module> modules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Gender gender, Module module, Set<Tag> tags) {
-        requireAllNonNull(name, phone, gender, module, tags);
+    public Person(Name name, Phone phone, Gender gender, Set<Module> modules, Set<Tag> tags) {
+        requireAllNonNull(name, phone, gender, modules, tags);
         this.name = name;
         this.phone = phone;
-        this.module = module;
+        this.modules.addAll(modules);
         this.tags.addAll(tags);
         this.gender = gender;
     }
@@ -49,8 +49,8 @@ public class Person {
         return gender;
     }
 
-    public Module getModule() {
-        return module;
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(modules);
     }
 
     /**
@@ -92,14 +92,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && module.equals(otherPerson.module)
+                && modules.equals(otherPerson.modules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, module, tags);
+        return Objects.hash(name, phone, modules, tags);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("gender", gender)
-                .add("module", module)
+                .add("modules", modules)
                 .add("tags", tags)
                 .toString();
     }

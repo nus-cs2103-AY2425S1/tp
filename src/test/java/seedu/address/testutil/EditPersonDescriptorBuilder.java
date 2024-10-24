@@ -35,7 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setGender(person.getGender());
-        descriptor.setModule(person.getModule());
+        descriptor.setModules(person.getModules());
         descriptor.setTags(person.getTags());
     }
 
@@ -56,10 +56,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Module} of the {@code EditPersonDescriptor} that we are building.
+     * Parses the {@code modules} into a {@code Set<module>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
      */
-    public EditPersonDescriptorBuilder withModule(String module) {
-        descriptor.setModule(new Module(module));
+    public EditPersonDescriptorBuilder withModules(String... modules) {
+        Set<Module> moduleSet = Stream.of(modules).map(Module::new).collect(Collectors.toSet());
+        descriptor.setModules(moduleSet);
         return this;
     }
 

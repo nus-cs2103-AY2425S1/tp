@@ -27,7 +27,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String gender;
-    private final String module;
+    private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +35,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("gender") String gender, @JsonProperty("module") String module,
+                             @JsonProperty("gender") String gender,
+                             @JsonProperty("modules") List<JsonAdaptedModule> modules,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
-        this.module = module;
+        if (modules != null) {
+            this.modules.addAll(modules);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +56,9 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().gender;
-        module = source.getModule().value;
+        modules.addAll(source.getModules().stream()
+                .map(JsonAdaptedModule::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,6 +75,10 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<Module> personModules = new ArrayList<>();
+        for (JsonAdaptedModule module : modules) {
+            personModules.add(module.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -93,17 +102,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
         final Gender modelGender = new Gender(gender);
-
-        if (module == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
-        }
-        if (!Module.isValidModule(module)) {
-            throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
-        }
-        final Module modelModule = new Module(module);
-
+        final Set<Module> modelModules = new HashSet<>(personModules);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelGender, modelModule, modelTags);
+        return new Person(modelName, modelPhone, modelGender, modelModules, modelTags);
     }
-
 }

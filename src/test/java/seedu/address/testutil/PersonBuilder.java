@@ -24,7 +24,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Gender gender;
-    private Module module;
+    private Set<Module> modules;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +34,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         gender = new Gender(DEFAULT_GENDER);
-        module = new Module(DEFAULT_MODULE);
+        modules = new HashSet<>();
+        modules.add(new Module(DEFAULT_MODULE));
         tags = new HashSet<>();
     }
 
@@ -45,7 +46,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         gender = personToCopy.getGender();
-        module = personToCopy.getModule();
+        modules = new HashSet<>(personToCopy.getModules());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -76,8 +77,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Module} of the {@code Person} that we are building.
      */
-    public PersonBuilder withModule(String module) {
-        this.module = new Module(module);
+    public PersonBuilder withModules(String modules) {
+        this.modules = SampleDataUtil.getModuleSet(modules);
         return this;
     }
 
@@ -90,7 +91,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, gender, module, tags);
+        return new Person(name, phone, gender, modules, tags);
     }
 
 }

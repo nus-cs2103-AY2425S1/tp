@@ -3,9 +3,13 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parsePathWithCheck;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +18,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -23,12 +28,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_MODULE = " ";
     private static final String INVALID_TAG = "#friend";
-
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_MODULE = "CS2103T";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String INVALID_PATH_1 = "notjson";
+    private static final String INVALID_PATH_2 = "have/";
+    private static final String VALID_PATH = "TestingParser.json";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -105,7 +112,43 @@ public class ParserUtilTest {
 
     @Test
     public void parseModule_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_MODULE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseModule(INVALID_MODULE));
+    }
+    @Test
+    public void parseModule_validValueWithoutWhitespace_returnsModule() throws Exception {
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE));
+    }
+
+    @Test
+    public void parseModule_validValueWithWhitespace_returnsTrimmedModule() throws Exception {
+        String moduleWithWhitespace = WHITESPACE + VALID_MODULE + WHITESPACE;
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(moduleWithWhitespace));
+    }
+
+    @Test
+    public void parseModules_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModules(null));
+    }
+
+    @Test
+    public void parseModules_collectionWithInvalidModules_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModules(Arrays.asList(VALID_MODULE, INVALID_MODULE)));
+    }
+
+    @Test
+    public void parseModules_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseModules(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseModules_collectionWithValidModules_returnsModuleSet() throws Exception {
+        Set<Module> actualModuleSet = ParserUtil.parseModules(Arrays.asList(VALID_MODULE, VALID_MODULE));
+        Set<Module> expectedModuleSet = new HashSet<>(Arrays.asList(new Module(VALID_MODULE),
+                new Module(VALID_MODULE)));
+
+        assertEquals(expectedModuleSet, actualModuleSet);
     }
 
     @Test
@@ -153,4 +196,35 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+    @Test
+    public void parsePathWithCheck_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePathWithCheck((String) null));
+    }
+
+    @Test
+    public void parsePathWithCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(VALID_PATH));
+    }
+
+    @Test
+    public void parsePathWithCheck_valid_path() throws Exception {
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestingParser.json");
+        Files.createFile(tempFile);
+        assertEquals(tempFile, parsePathWithCheck(VALID_PATH));
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void parsePathWithoutCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_2));
+    }
+
+
 }

@@ -41,14 +41,12 @@ public class GenderTest {
     @Test
     public void getGenderWithSymbol() {
         Gender gender = new Gender("male");
-        assertEquals("male" + MALE_SYMBOL, gender.getGenderWithSymbol());
-        assertNotEquals("male" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
-        assertNotEquals("female" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertEquals(MALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals(FEMALE_SYMBOL, gender.getGenderWithSymbol());
         assertNotEquals("male", gender.getGenderWithSymbol());
         gender = new Gender("female");
-        assertEquals("female" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
-        assertNotEquals("male" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
-        assertNotEquals("female" + MALE_SYMBOL, gender.getGenderWithSymbol());
+        assertEquals(FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals(MALE_SYMBOL, gender.getGenderWithSymbol());
         assertNotEquals("female", gender.getGenderWithSymbol());
     }
 

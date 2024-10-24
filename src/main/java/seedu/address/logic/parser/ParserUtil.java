@@ -2,12 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
@@ -94,7 +99,17 @@ public class ParserUtil {
         }
         return new Module(trimmedModuleName);
     }
-
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String module : modules) {
+            moduleSet.add(parseModule(module));
+        }
+        return moduleSet;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -120,5 +135,36 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String path} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     * */
+
+    public static Path parsePathWithCheck(String path) throws ParseException {
+        requireNonNull(path);
+        path = path.trim();
+        final Path parsedPath = Paths.get("archived", path);
+        if (!path.endsWith(".json") || path.contains("/") || !Files.exists(parsedPath)
+                || !Files.isRegularFile(parsedPath)) {
+            throw new ParseException(LoadCommand.MESSAGE_USAGE);
+        }
+        return parsedPath;
+    }
+
+    /**
+     * Parses a {@code String path} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     * */
+
+    public static Path parsePathWithoutCheck(String path) throws ParseException {
+        requireNonNull(path);
+        path = path.trim();
+        final Path parsedPath = Paths.get("archived", path);
+        if (!path.endsWith(".json") || path.contains("/")) {
+            throw new ParseException(ArchiveCommand.MESSAGE_USAGE);
+        }
+        return parsedPath;
     }
 }

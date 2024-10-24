@@ -18,6 +18,7 @@ public interface UserPrefsStorage {
      */
     Path getUserPrefsFilePath();
 
+
     /**
      * Returns UserPrefs data from storage.
      * Returns {@code Optional.empty()} if storage file is not found.

@@ -97,11 +97,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Module updatedModule = editPersonDescriptor.getModule().orElse(personToEdit.getModule());
+        Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedGender,
-                updatedModule, updatedTags);
+                updatedModules, updatedTags);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Gender gender;
-        private Module module;
+        private Set<Module> modules;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
-            setModule(toCopy.module);
+            setModules(toCopy.modules);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +157,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, gender, module, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, gender, modules, tags);
         }
 
         public void setName(Name name) {
@@ -176,12 +176,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setModule(Module module) {
-            this.module = module;
+        public void setModules(Set<Module> modules) {
+            this.modules = (modules != null) ? new HashSet<>(modules) : null;
         }
 
-        public Optional<Module> getModule() {
-            return Optional.ofNullable(module);
+        public Optional<Set<Module>> getModules() {
+            return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
         public void setGender(Gender gender) {
@@ -224,7 +224,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
-                    && Objects.equals(module, otherEditPersonDescriptor.module)
+                    && Objects.equals(modules, otherEditPersonDescriptor.modules)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -234,7 +234,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("gender", gender)
-                    .add("module", module)
+                    .add("modules", modules)
                     .add("tags", tags)
                     .toString();
         }

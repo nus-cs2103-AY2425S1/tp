@@ -8,8 +8,11 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,6 +29,7 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+    public static final String LOAD_ERROR_FORMAT = "Could not load date due to the following error: %s";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -46,11 +50,15 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        ReadOnlyAddressBook original = model.getAddressBook();
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        archiveIfNeeded(command, storage, model);
+
         commandResult = command.execute(model);
 
         try {
+            updateModelWithStorage(command, storage, model);
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
@@ -84,5 +92,29 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    private void updateModelWithStorage(Command command, Storage storage, Model model) throws CommandException {
+        try {
+            if (command instanceof LoadCommand) {
+                model.setAddressBook(storage.readAddressBook(((LoadCommand) command).getLoadPath()).get());
+            }
+        } catch (DataLoadingException e) {
+            throw new CommandException(String.format(LOAD_ERROR_FORMAT, e.getMessage()), e);
+        }
+
+    }
+
+    private void archiveIfNeeded(Command command, Storage storage, Model model) throws CommandException {
+        try {
+            ReadOnlyAddressBook original = model.getAddressBook();
+            if (command instanceof ArchiveCommand) {
+                storage.saveArchivedAddressBook(original, ((ArchiveCommand) command).getArchivePath());
+            }
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
     }
 }

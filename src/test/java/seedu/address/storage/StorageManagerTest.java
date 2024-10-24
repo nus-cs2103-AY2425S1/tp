@@ -48,21 +48,25 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void addressBookReadSaveArchive() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         AddressBook original = getTypicalAddressBook();
+
         storageManager.saveAddressBook(original);
+        storageManager.saveArchivedAddressBook(original, getTempFilePath("TestArchive"));
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyAddressBook retrievedArchive =
+                storageManager.readArchivedAddressBook(getTempFilePath("TestArchive")).get();
         assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new AddressBook(retrievedArchive));
     }
 
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
-
 }

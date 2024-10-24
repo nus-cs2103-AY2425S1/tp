@@ -1,7 +1,7 @@
 [![Java CI](https://github.com/AY2425S1-CS2103T-W10-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W10-4/tp/actions/workflows/gradle.yml)[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W10-4/tp/graph/badge.svg?token=ISBALRKKO7)](https://codecov.io/gh/AY2425S1-CS2103T-W10-4/tp)
 
 # StoreClass
-**StoreClass** is a project done by Software Engineering (SE) students. <br> 
+**StoreClass** is a project done by Software Engineering (SE) students. <br>
 
 ![Ui](docs/images/Ui.png)
 

@@ -49,7 +49,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different module -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModule(VALID_MODULE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModules(VALID_MODULE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -63,8 +63,8 @@ public class EditPersonDescriptorTest {
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", gender="
-                + editPersonDescriptor.getGender().orElse(null) + ", module="
-                + editPersonDescriptor.getModule().orElse(null) + ", tags="
+                + editPersonDescriptor.getGender().orElse(null) + ", modules="
+                + editPersonDescriptor.getModules().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

@@ -51,6 +51,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items with `...`​ after them can be used multiple times.<br>
+    e.g. `m/MODULE...​` can be used as `m/CS2101`, `m/CS2101 m/CS2103T` etc.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -76,15 +79,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) and modules.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 g/male m/CS2103T`
-* `add n/Betsy Crowe t/friend g/female p/1234567 m/MA1522 t/criminal`
+* `add n/Betsy Crowe t/friend g/female p/1234567 m/MA1522 m/CS2103T t/criminal`
 
 ### Listing all persons : `list`
 
@@ -111,20 +114,21 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe` _(search by name)_
+* `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
+* `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -140,6 +144,41 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Archiving data files `archive`
+
+Archive the current address book to the specific file name.
+
+The archived file and be found at `archived/FILENAME`.
+
+Format: `archive pa/PATH`
+
+Example: `archive pa/mybook.json`
+
+The file name must ends with ".json" and must not contain any slash "/".
+
+#### Warning
+
+All the entries in the current address book will be cleared.
+
+### Load data files `load`
+
+Load the current address book to the specific file name.
+
+This command will only load from a folder named `archived` which is in the same folder as the `jar` file.
+
+The archived file and be found at `load/FILENAME`.
+
+Format: `load pa/PATH`
+
+Example: `load pa/mybook.json`
+
+The file name must ends with ".json", must not contain any slash "/" and must point to an existing address book .json file.
+
+#### Warning
+Avoid loading non-address book .json files as it may result in unexpected behaviours
+
+All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
 
 ### Clearing all entries : `clear`
 
@@ -166,9 +205,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,10 +227,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/22224444 m/CS2103T t/friend t/colleague`
+**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/22224444 m/CS2103T m/CS2101 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Archive** | `archive`

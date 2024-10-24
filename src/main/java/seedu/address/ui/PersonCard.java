@@ -39,8 +39,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label module;
-    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane modules;
@@ -58,9 +56,11 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        modules.getChildren().add(new Label(person.getModule().value));
+        person.getModules().stream()
+                .sorted(Comparator.comparing(module -> module.module))
+                .forEach(module -> modules.getChildren().add(new Label(module.module)));
         gender.textFillProperty().bind(
-                Bindings.when(gender.textProperty().isEqualTo("male ♂"))
+                Bindings.when(gender.textProperty().isEqualTo("♂"))
                         .then(Color.LIGHTBLUE)
                         .otherwise(Color.PINK));
     }

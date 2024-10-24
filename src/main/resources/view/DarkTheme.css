@@ -76,15 +76,18 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+.split-pane > .split-pane-divider {
+    -fx-background-color: #18181B;
+    -fx-border-color: #18181B;
+    -fx-border-width: 2;
+    -fx-padding: 0;
 }
 
 .split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+    -fx-background-color: #18181B;
 }
 
 .list-view {
@@ -127,8 +130,9 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: #010504;
+    -fx-font-weight: bold;
 }
 
 .cell_small_label {
@@ -147,8 +151,14 @@
      -fx-border-top-width: 1px;
 }
 
+.pane-with-border .scrollPane {
+     -fx-background-color: #27272a;
+     -fx-border-color: #27272a;
+     -fx-border-top-width: 1px;
+}
+
 .status-bar {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #18181B;
 }
 
 .result-display {
@@ -164,9 +174,9 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #E0F2FE;
     -fx-padding: 4px;
-    -fx-pref-height: 30px;
+    -fx-pref-height: 20px;
 }
 
 .status-bar-with-border {
@@ -194,17 +204,16 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #E0F2FE;
 }
 
 .menu-bar {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #18181B;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font: bold 12pt "Inter";
+    -fx-text-fill: #E0F2FE;
     -fx-opacity: 0.9;
 }
 
@@ -287,11 +296,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #0F172A;
     -fx-background-insets: 3;
 }
 
@@ -313,33 +322,41 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-background-color: #334155;
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
 }
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: #E0F2FE;
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #1E293B;
     -fx-background-insets: 0;
-    -fx-border-color: transparent transparent #4b5563 transparent;
+    -fx-border-color: transparent;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-size: 14pt;
+    -fx-prompt-text-fill: #E0F2FE;
+    -fx-text-fill: #E0F2FE;
 }
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+.scroll-pane {
+    -fx-background-color: #475569;
     -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #475569;
+    -fx-border-radius: 0;
 }
 
 #tags {
@@ -357,14 +374,25 @@
 }
 
 #modules .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-font-family: "Noto Sans";
     -fx-background-color: #ea580c;
-    -fx-padding: 5;
+    -fx-padding: 7;
     -fx-border-insets: 3;
     -fx-background-insets: 3;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
     -fx-font-size: 16;
+}
+
+#personListLabel {
+    -fx-background-color: #0F172A;
+    -fx-padding: 20;
+}
+
+#personListLabel .label {
+    -fx-text-fill: #E0F2FE;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }
