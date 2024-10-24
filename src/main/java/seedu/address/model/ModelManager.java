@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Delivery> filteredDeliveries;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredDeliveries = new FilteredList<>(null);
     }
 
     public ModelManager() {
@@ -145,9 +147,21 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Delivery List Accessors =============================================================
     @Override
     public void addDelivery(Person person, Delivery delivery) {
         person.addDelivery(delivery);
+    }
+
+    @Override
+    public ObservableList<Delivery> getFilteredDeliveryList() {
+        return filteredDeliveries;
+    }
+
+    @Override
+    public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+        requireNonNull(predicate);
+        filteredDeliveries.setPredicate(predicate);
     }
 
     @Override

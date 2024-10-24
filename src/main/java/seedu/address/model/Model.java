@@ -103,4 +103,8 @@ public interface Model {
      * Adds the given delivery.
      */
     void addDelivery(Person person, Delivery delivery);
+
+    ObservableList<Delivery> getFilteredDeliveryList();
+
+    void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 }
