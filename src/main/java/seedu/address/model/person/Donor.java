@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
  * Inherits from Person and includes donated amount from the donor.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Donor extends Person {
+public class Donor extends Person implements Comparable<Donor> {
 
     private final DonatedAmount donatedAmount;
 
@@ -88,4 +88,13 @@ public class Donor extends Person {
         return Role.DONOR;
     }
 
+    /**
+     * Compares this Donor to another Donor based on donated amount
+     *
+     * @param donor the object to be compared.
+     */
+    @Override
+    public int compareTo(Donor donor) {
+        return this.donatedAmount.compareTo(donor.donatedAmount);
+    }
 }

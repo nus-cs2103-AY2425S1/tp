@@ -126,15 +126,16 @@ Format: `sort [s/SORT_OPTION]`
 * You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
 * If no sort option is provided, `sort` will restore the list to its original order (i.e. the order in which contacts were added).
 * The sort order remains active until you apply a new sort option.
+* For *role-specific* sort options (e.g. `hours`):
+  * Role contacts are sorted by the relevant criterion. 
+  * Non-role contacts are placed at the back.
 
 <box type="tip" seamless>
 
 **Tip:** Supported sort options include:
-* `name`: 
-  * Sorts contacts alphabetically by name.
-* `hours`: 
-  * Sorts volunteers by the number of hours they've contributed in ascending order. 
-  * Non-volunteers are placed at the back.
+* `name`: Sorts contacts alphabetically by name.
+* `hours`: Sorts volunteers by hours contributed.
+* `donations`: Sorts donors by donation amount
 </box>
 
 Examples:

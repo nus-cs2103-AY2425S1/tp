@@ -8,10 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Donor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Volunteer;
 import seedu.address.model.person.comparators.NameComparator;
-import seedu.address.model.person.comparators.VolunteerComparator;
+import seedu.address.model.person.comparators.RoleComparator;
 
 /**
  * Contains valid sorting options for the sort command.
@@ -26,7 +27,7 @@ public enum SortOption {
     HOURS("hours") {
         @Override
         public Comparator<Person> getComparator() {
-            return new VolunteerComparator();
+            return new RoleComparator<>(Volunteer.class);
         }
 
         @Override
@@ -37,6 +38,22 @@ public enum SortOption {
         @Override
         public Class<? extends Person> getRelatedClass() {
             return Volunteer.class;
+        }
+    },
+    DONATION("donations") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new RoleComparator<>(Donor.class);
+        }
+
+        @Override
+        public String getRole() {
+            return "donor";
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Donor.class;
         }
     };
     // Add more sorting options here if needed
