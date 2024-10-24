@@ -11,6 +11,8 @@ import java.util.Set;
 
 import seedu.address.model.person.Person;
 
+import seedu.address.model.person.Address;
+
 
 /**
  * Represents an event that a {@code Person} is or was involved in.
@@ -20,6 +22,7 @@ public class Event {
     private final String eventName;
     private final LocalDate date;
     private final Set<Person> attendees = new HashSet<>();
+    private Address location;
 
     /**
      * Constructs an {@code Event}.
@@ -28,11 +31,12 @@ public class Event {
      * @param date A valid date.
      * @param attendees A set of {@code Person} attending the event.
      */
-    public Event(String eventName, LocalDate date, Set<Person> attendees) {
-        requireAllNonNull(eventName, date, attendees);
+    public Event(String eventName, LocalDate date, Set<Person> attendees, Address location) {
+        requireAllNonNull(eventName, date, attendees, location);
         this.eventName = eventName;
         this.date = date;
         this.attendees.addAll(attendees);
+        this.location = location;
     }
 
     public String getEventName() {
@@ -51,8 +55,9 @@ public class Event {
         return attendees.contains(person);
     }
 
-    // TODO: Implement Location for Event, then update equality to check for
-    //       name, date, and location
+    public Address getLocation() {
+        return location;
+    }
 
 
     /**
@@ -66,7 +71,8 @@ public class Event {
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getDate().equals(getDate())
-                && otherEvent.getAttendees().equals(getAttendees());
+                && otherEvent.getAttendees().equals(getAttendees())
+                && location.equals(otherEvent.location);
     }
 
     @Override
