@@ -108,7 +108,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Test
     public void getResponse_deleteKeyword_success() {
         interact(() -> {
-            assertEquals("I assume you are having trouble with the delete command.\n" 
+            assertEquals("I assume you are having trouble with the delete command.\n"
                     + "Can you help specify which you are referring to?\n"
                     + "• Deleting a buyer/seller client profile\n"
                     + "• Deleting an appointment\n"
