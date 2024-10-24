@@ -136,7 +136,7 @@ class JsonAdaptedPerson {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                         StudentId.class.getSimpleName()));
             }
-            if (!StudentId.isValidID(studentID)) {
+            if (!StudentId.isValidId(studentID)) {
                 throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
             }
             final StudentId modelStudentId = new StudentId(studentID);
