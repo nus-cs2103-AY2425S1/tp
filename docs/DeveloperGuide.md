@@ -101,7 +101,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example. 
+The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example.
 
 <puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
 
@@ -344,9 +344,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The given index is not of the correct person type.
-   
+
    * 3b1. StaffSync shows an error message.
-   
+
       Use case resumes at step 2.
 
 **Use Case: Add an employee**
@@ -640,13 +640,13 @@ testers are expected to do more *exploratory* testing.
    Displays the list of employees found.
 
    2. Test case: `find ph p/12345678`<br>
-   Expected: Number of potential hires with phone number `12345678` listed found shown in the status message. 
+   Expected: Number of potential hires with phone number `12345678` listed found shown in the status message.
    Displays the list of potential hires found.
 
    3. Test case: `find all e/john@example.com`<br>
    Expected: Number of employees and potential hires with email `john@example.com` listed shown in the status message.
    Displays the list of persons found.
-   
+
    4. Test case: `find e d/IT r/SWE`<br>
    Expected: Number of employees with department `IT` and role `SWE` listed shown in the status message.
    Displays the list of employees found

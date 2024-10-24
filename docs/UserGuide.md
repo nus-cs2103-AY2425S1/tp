@@ -308,7 +308,7 @@
 
   <div class="command-content">
   Clears all entries from StaffSync.
-  
+
   <br>
   <br>
 
@@ -374,11 +374,11 @@
   * `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
   <div class="box box-warn" type="warning" seamless>
-    
+
   **Common Mistakes:**
   * `list ph` followed by `demote 2` - cannot demote a potential hire
   * `demote 0` - invalid index number
-  * `demote 3` but only have 2 entries - invalid index number, index out of list size 
+  * `demote 3` but only have 2 entries - invalid index number, index out of list size
   </div class="box">
   </div>
 </details>
@@ -406,7 +406,7 @@
   * Existing values will be updated to the input values.
 
   <div class="box" type="tip" seamless>
-  
+
   **Tip:** It is not possible to edit the contract end date of a potential hire
   </div class="box">
 
@@ -436,7 +436,7 @@
   Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
 
   <div class="box" type="tip" seamless>
-    
+
   **Tip:** All fields are mandatory
   </div class="box">
 
@@ -560,7 +560,7 @@
   Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
 
   <div class="box" type="tip" seamless>
-    
+
   **Tip:** All fields are mandatory
   </div class="box">
 
@@ -599,7 +599,7 @@
   * `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 
   <div class="box box-warn" type="warning" seamless>
-    
+
   **Common Mistakes:**
   * `promote 2 12-20-2025` - the contract end date is in the wrong date format
   * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
@@ -689,11 +689,11 @@ StaffSync data are saved in the hard disk automatically after any command that c
 
 ### **Editing the data file**
 <div class="sub-content">
-  
+
   StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-  
+
 <div class="box box-warn" type="warning" seamless>
-  
+
 **Caution:**
 If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -705,9 +705,9 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 ### **Archiving data files `[coming in v2.0]`**
 <div class="sub-content">
-  
+
 _Details coming soon ..._
-  
+
 </div>
 </div>
 
