@@ -503,7 +503,7 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The data should be stored locally in a JSON file.
-3.  The data should be stored in a way that complies with the Cliental Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/Cliental-data-protection-act)]
+3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)]
 4.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The app should display results within 2 seconds when searching for a client.
