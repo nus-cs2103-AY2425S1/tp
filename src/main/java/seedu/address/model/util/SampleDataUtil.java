@@ -14,6 +14,7 @@ import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagBuilder;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,7 +25,7 @@ public class SampleDataUtil {
         return new Company[] {
             new Company(new Name("Google"), new Phone("00000001"), new Email("google@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new CareerPageUrl("www.google-careers.com"),
-                    getTagSet("bigTech"), DEFAULT_BOOKMARK),
+                    getTagSet("Salary: Low", "WLB: High"), DEFAULT_BOOKMARK),
             new Company(new Name("Grab"), new Phone("00000002"), new Email("grab@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new CareerPageUrl("www.grab-jobs.com"),
                     getTagSet("bigTech", "transport"), DEFAULT_BOOKMARK),
@@ -55,9 +56,20 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
+
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(tag -> new TagBuilder().build(tagFormatter(tag))) // Use TagBuilder
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Helps Formats the Strings in getTagSet to a buildable string input
+     */
+    private static String tagFormatter(String tagValue) {
+        String[] parts = tagValue.split(":");
+        String key = parts[0].trim();
+        //Remove the empty space at index 0, and replace empty space with _ to simulate the tagging command
+        String value = parts.length > 1 ? "_" + parts[1].stripLeading().replace("-", "_") : "";
+        return key + value;
+    }
 }

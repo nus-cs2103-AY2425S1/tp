@@ -65,7 +65,7 @@ class JsonAdaptedCompany {
         careerPageUrl = source.getCareerPageUrl().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+                .map(tag -> new JsonAdaptedTag(tag))
                 .collect(Collectors.toList()));
         isBookmark = source.getIsBookmark();
     }
@@ -79,7 +79,7 @@ class JsonAdaptedCompany {
      */
     public Company toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
+        for (JsonAdaptedTag tag : this.tags) {
             personTags.add(tag.toModelType());
         }
 
