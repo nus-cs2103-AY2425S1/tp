@@ -14,14 +14,6 @@ import seedu.address.model.listing.Listing;
 public class ListingCard extends UiPart<Region> {
     private static final String FXML = "ListingListCard.fxml";
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
     public final Listing listing;
 
     @FXML
@@ -52,13 +44,17 @@ public class ListingCard extends UiPart<Region> {
         super(FXML);
         this.listing = listing;
         id.setText(displayedIndex + ". ");
-        name.setText(listing.getName().fullName);
+        initializeName();
         initializeUnderline();
         initializePrice();
         initializeArea();
-        region.setText(listing.getRegion().toString());
-        address.setText(listing.getAddress().toString());
-        seller.setText(listing.getSeller().getName().fullName);
+        initializeRegion();
+        initializeAddress();
+        initializeSeller();
+    }
+
+    private void initializeName() {
+        name.setText(listing.getName().fullName);
     }
 
     private void initializeUnderline() {
@@ -72,6 +68,18 @@ public class ListingCard extends UiPart<Region> {
 
     private void initializeArea() {
         area.setText(String.format("%s m²", listing.getArea().toString()));
+    }
+
+    private void initializeRegion() {
+        region.setText(listing.getRegion().toString());
+    }
+
+    private void initializeAddress() {
+        address.setText(listing.getAddress().toString());
+    }
+
+    private void initializeSeller() {
+        seller.setText(listing.getSeller().getName().fullName);
     }
 
     // Getter methods for private fields
