@@ -57,8 +57,8 @@ HelpWindow -down-|> UiPart
 PersonCard .down.> Model
 ContactDetails .down.> Model
 
-UiManager -left-> Logic
-MainWindow -left-> Logic
+UiManager -right-> Logic
+MainWindow -right-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- SearchBox
