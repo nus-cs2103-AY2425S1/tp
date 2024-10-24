@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.name.Name;
 
 /**
  * Represents an Event in EventTory.
