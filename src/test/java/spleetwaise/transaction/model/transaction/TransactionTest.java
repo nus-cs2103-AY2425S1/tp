@@ -78,7 +78,7 @@ public class TransactionTest {
         txn2 = new Transaction(testPerson, testAmount, testDescription, testDate2, testCategories);
         assertNotEquals(txn1, txn2);
 
-        HashSet<Category> testCategories2 = new HashSet<>(List.of(new Category("EXTRA")));
+        Set<Category> testCategories2 = new HashSet<>(List.of(new Category("EXTRA")));
         txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories2);
         assertNotEquals(txn1, txn2);
 
@@ -118,6 +118,4 @@ public class TransactionTest {
                 txn1.toString()
         );
     }
-
-
 }
