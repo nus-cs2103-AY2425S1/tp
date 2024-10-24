@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -14,15 +15,15 @@ import seedu.address.model.tag.Tag;
  */
 public class Customer extends Person {
 
-    private final List<CustomerOrder> openCustomerOrders; // stores a list of open/unfulfilled customer orders
-    private final Information information; // stores additional information about the customer
+    private final List<CustomerOrder> openCustomerOrders; // Stores a list of open/unfulfilled customer orders.
+    private final Information information; // Stores additional information about the customer.
 
     /**
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
-                    DietaryPreference preference, Information information, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, preference, remark, tags);
+                    Information information, Remark remark, Set<Tag> tags) {
+        super(name, phone, email, address, remark, tags);
         this.information = information;
         this.openCustomerOrders = new ArrayList<>();
     }
@@ -66,10 +67,10 @@ public class Customer extends Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder(super.toString());
-        builder.append(" Information: ")
-                .append(getInformation());
+        builder.append(" Information: ").append(getInformation());
         return builder.toString();
     }
 }
+
 
 

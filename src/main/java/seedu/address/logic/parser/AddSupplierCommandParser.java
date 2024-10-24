@@ -22,9 +22,9 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
      */
     public AddSupplierCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PREFERENCE, PREFIX_INGREDIENTS_SUPPLIED, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INGREDIENTS_SUPPLIED, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PREFERENCE, PREFIX_INGREDIENTS_SUPPLIED)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INGREDIENTS_SUPPLIED)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE));
         }
 
@@ -32,12 +32,13 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        DietaryPreference preference = ParserUtil.parsePreference(argMultimap.getValue(PREFIX_PREFERENCE).get());
         Ingredients ingredientsSupplied = ParserUtil.parseIngredients(argMultimap.getValue(PREFIX_INGREDIENTS_SUPPLIED).get());
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Add the "supplier" tag explicitly
+        tagList.add(new Tag("supplier"));
 
-        Supplier supplier = new Supplier(name, phone, email, address, preference, ingredientsSupplied, remark, tagList);
+        Supplier supplier = new Supplier(name, phone, email, address, ingredientsSupplied, remark, tagList);
 
         return new AddSupplierCommand(supplier);
     }

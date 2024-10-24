@@ -47,6 +47,23 @@ public abstract class OrderList<T extends Order> {
     }
 
 
+    /**
+     * Retrieves an order at the specified index.
+     *
+     * @param index The index of the order to retrieve (0-based index).
+     * @return The order at the specified index.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public T getOrderByIndex(int index) {
+        assert index >= 0 : "Index should be non-negative";
+
+        if (index < 0 || index >= orders.size()) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+
+        return orders.get(index);
+    }
+
     public T findOrderByPhoneNumber(String phoneNumber) {
         assert phoneNumber != null : "Phone number cannot be null";
         for (T order : orders) {
