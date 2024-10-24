@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'techconnect.jar'
 }
 
+tasks.withType(Jar) {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
 defaultTasks 'clean', 'test'
