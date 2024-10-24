@@ -34,7 +34,7 @@ public class TypicalAssociations {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Association association : getTypicalAssociations()) {
-            ab.assignVendorToEvent(getTypicalVendorById(association.getVendorId()), 
+            ab.assignVendorToEvent(getTypicalVendorById(association.getVendorId()),
                                    getTypicalEventById(association.getEventId()));
         }
         return ab;

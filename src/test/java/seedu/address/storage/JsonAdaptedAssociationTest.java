@@ -12,10 +12,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class JsonAdaptedAssociationTest {
 
     private static final String INVALID_ID = "invalid-uuid";
-    
+
     private static final String VALID_VENDOR_ID_AMY = AMY_WEDDING.getVendorId().toString();
     private static final String VALID_EVENT_ID_WEDDING = AMY_WEDDING.getEventId().toString();
-    
+
     @Test
     public void toModelType_validAssociationDetails_returnsAssociation() throws Exception {
         JsonAdaptedAssociation association = new JsonAdaptedAssociation(AMY_WEDDING);
