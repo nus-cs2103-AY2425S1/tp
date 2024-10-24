@@ -7,8 +7,6 @@ import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.UniqueListingList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -19,7 +17,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueListingList listings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,7 +27,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        listings = new UniqueListingList();
     }
 
     public AddressBook() {}
@@ -54,21 +50,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the listing list with {@code listings}.
-     * {@code listings} must not contain duplicate listings.
-     */
-    public void setListings(List<Listing> listings) {
-        this.listings.setListings(listings);
-    }
-
-    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setListings(newData.getListingList());
     }
 
     //// person-level operations
@@ -82,27 +69,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a listing with the same identity as {@code listing} exists in the address book.
-     */
-    public boolean hasListing(Listing listing) {
-        requireNonNull(listing);
-        return listings.contains(listing);
-    }
-
-    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
-    }
-
-    /**
-     * Adds a listing to the address book.
-     * The listing must not already exist in the address book.
-     */
-    public void addListing(Listing l) {
-        listings.add(l);
     }
 
     /**
@@ -117,31 +88,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given listing {@code target} in the list with {@code editedListing}.
-     * {@code target} must exist in the address book.
-     * The listing identity of {@code editedListing} must not be the same
-     * as another existing listing in the address book.
-     */
-    public void setListing(Listing target, Listing editedListing) {
-        requireNonNull(editedListing);
-
-        listings.setListing(target, editedListing);
-    }
-
-    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeListing(Listing key) {
-        listings.remove(key);
     }
 
     //// util methods
@@ -150,17 +101,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
-                .add("listings", listings)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    public ObservableList<Listing> getListingList() {
-        return listings.asUnmodifiableObservableList();
     }
 
     @Override
@@ -175,8 +121,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons)
-                && listings.equals(otherAddressBook.listings);
+        return persons.equals(otherAddressBook.persons);
     }
 
     @Override
