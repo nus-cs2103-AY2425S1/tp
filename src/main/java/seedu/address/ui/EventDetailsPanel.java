@@ -71,8 +71,8 @@ public class EventDetailsPanel extends UiPart<Region> {
         this.event = event;
         name.setText(event.getName().fullName);
         date.setText(event.getDate().toString());
-         event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
-         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     private void showEventDetails() {

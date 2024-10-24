@@ -3,18 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_WEDDING;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BIRTHDAY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_WEDDING;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CHARITY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CONFERENCE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_WEDDING;
@@ -22,30 +17,22 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CHARITY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CONFERENCE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalEvents.BIRTHDAY;
 import static seedu.address.testutil.TypicalEvents.WEDDING;
-import static seedu.address.testutil.TypicalVendors.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CreateEventCommand;
-import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
-import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.VendorBuilder;
-
 
 public class CreateEventCommandParserTest {
 

@@ -20,9 +20,9 @@ import seedu.address.testutil.EventBuilder;
 
 public class EventTest {
 
-    Name name = new Name(VALID_NAME_WEDDING);
-    Date date = new Date(VALID_DATE_WEDDING);
-    Set<Tag> tags = new HashSet<>();
+    private Name name = new Name(VALID_NAME_WEDDING);
+    private Date date = new Date(VALID_DATE_WEDDING);
+    private Set<Tag> tags = new HashSet<>();
 
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
