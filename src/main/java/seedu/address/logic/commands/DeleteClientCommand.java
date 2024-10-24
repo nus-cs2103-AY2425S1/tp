@@ -26,6 +26,9 @@ public class DeleteClientCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
 
+    public static final String MESSAGE_PROMPT = "This will delete the client: %1$s\n"
+            + "Confirm command? (y/n)";
+
     private final Index targetIndex;
 
     public DeleteClientCommand(Index targetIndex) {
@@ -42,6 +45,12 @@ public class DeleteClientCommand extends Command {
         }
 
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        return new CommandResult(String.format(MESSAGE_PROMPT, Messages.format(clientToDelete)),
+                () -> confirmDelete(model, clientToDelete));
+    }
+
+    private CommandResult confirmDelete(Model model, Client clientToDelete) {
         model.deletePerson(clientToDelete);
 
         if (clientToDelete.equals(model.getLastViewedClient())) {
