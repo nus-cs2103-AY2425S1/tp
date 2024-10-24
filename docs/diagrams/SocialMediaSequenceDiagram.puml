@@ -1,0 +1,106 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SocialMediaCommandParser" as SocialMediaCommandParser LOGIC_COLOR
+participant "s:SocialMediaCommand" as SocialMediaCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "personToEdit:Person" as Person MODEL_COLOR
+participant "editedPerson:Person" as PersonEdited MODEL_COLOR
+participant "sm:SocialMedia" as SocialMedia MODEL_COLOR
+end box
+
+[-> LogicManager : execute("socialMedia 1 ig/username")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("socialMedia 1 ig/username")
+activate AddressBookParser
+
+create SocialMediaCommandParser
+AddressBookParser -> SocialMediaCommandParser
+activate SocialMediaCommandParser
+
+SocialMediaCommandParser --> AddressBookParser
+deactivate SocialMediaCommandParser
+
+AddressBookParser -> SocialMediaCommandParser : parse("1 ig/username")
+activate SocialMediaCommandParser
+
+create SocialMediaCommand
+SocialMediaCommandParser -> SocialMediaCommand
+activate SocialMediaCommand
+
+SocialMediaCommand --> SocialMediaCommandParser :
+deactivate SocialMediaCommand
+
+SocialMediaCommandParser --> AddressBookParser : s
+deactivate SocialMediaCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SocialMediaCommandParser -[hidden]-> AddressBookParser
+destroy SocialMediaCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SocialMediaCommand : execute(m)
+activate SocialMediaCommand
+
+SocialMediaCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> SocialMediaCommand : lastShownList
+deactivate Model
+
+SocialMediaCommand -> Person: getName(), ..., getTags()
+activate Person
+
+Person --> SocialMediaCommand : name, ... , tags
+deactivate Person
+
+create PersonEdited
+SocialMediaCommand -> PersonEdited : Person(name, ... , tags)
+activate PersonEdited
+
+PersonEdited --> SocialMediaCommand
+deactivate PersonEdited
+
+create SocialMedia
+SocialMediaCommand -> SocialMedia : SocialMedia(username, instagram)
+activate SocialMedia
+
+SocialMedia --> SocialMediaCommand
+deactivate SocialMedia
+
+SocialMediaCommand -> PersonEdited : setSocialMedia(sm)
+activate PersonEdited
+
+PersonEdited --> SocialMediaCommand
+deactivate PersonEdited
+
+SocialMediaCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> SocialMediaCommand
+deactivate Model
+
+create CommandResult
+SocialMediaCommand -> CommandResult: CommandResult(sucessMsg, sm)
+activate CommandResult
+
+CommandResult --> SocialMediaCommand
+deactivate CommandResult
+
+SocialMediaCommand --> LogicManager : r
+deactivate SocialMediaCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
