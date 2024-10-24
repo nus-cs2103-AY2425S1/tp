@@ -62,13 +62,11 @@ public class CloseTutorialCommand extends Command {
         }
 
         List<Tutorial> fullTutorialList = model.getTutorialList();
-        Optional<Tutorial> matchingTutorial = fullTutorialList.stream()
+        Tutorial tutorialToCloseFromList = fullTutorialList.stream()
                 .filter(eachTutorial -> eachTutorial.equals(toCloseTutorial))
-                .findFirst();
-        if (matchingTutorial.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_TUTORIAL_NOT_FOUND, toCloseTutorial.getSubject()));
-        }
-        Tutorial tutorialToCloseFromList = matchingTutorial.get();
+                .findFirst()
+                .orElseThrow(() -> new CommandException(
+                        String.format(MESSAGE_TUTORIAL_NOT_FOUND, toCloseTutorial.getSubject())));
 
         removeStudentsFromTutorialParticipation(model, tutorialToCloseFromList);
         model.deleteTutorial(tutorialToCloseFromList);
