@@ -16,8 +16,6 @@ import seedu.address.model.person.Person;
  */
 public class SortCommand extends Command {
 
-    private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
-
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -35,6 +33,8 @@ public class SortCommand extends Command {
             "Sort contacts using L for low to high order and H for high to low order";
 
     public static final String MESSAGE_SORT_SUCCESS = "Contacts sorted by %1$s in %2$s order";
+
+    private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
 
     private final String field;
     private final String order;
