@@ -14,7 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Industry;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,13 +58,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static StudentID parseStudentID(String studentID) throws ParseException {
+    public static StudentId parseStudentID(String studentID) throws ParseException {
         requireNonNull(studentID);
         String trimmedID = studentID.trim();
-        if (!StudentID.isValidID(trimmedID)) {
-            throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(trimmedID)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentID(trimmedID);
+        return new StudentId(trimmedID);
     }
 
     /**

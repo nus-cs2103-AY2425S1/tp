@@ -31,7 +31,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,7 +119,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        StudentID updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentID());
+        StudentId updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentId());
         Industry updatedIndustry = editPersonDescriptor.getIndustry().orElse(personToEdit.getIndustry());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -182,7 +182,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private StudentID studentID;
+        private StudentId studentID;
         private Industry industry;
         private Phone phone;
         private Email email;
@@ -220,13 +220,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setStudentID(StudentID studentID) { this.studentID = studentID; }
+        public void setStudentID(StudentId studentID) {
+            this.studentID = studentID;
+        }
 
-        public Optional<StudentID> getStudentID() { return Optional.ofNullable(studentID); }
+        public Optional<StudentId> getStudentID() {
+            return Optional.ofNullable(studentID);
+        }
 
-        public void setIndustry(Industry industry) { this.industry = industry; }
+        public void setIndustry(Industry industry) {
+            this.industry = industry;
+        }
 
-        public Optional<Industry> getIndustry() { return Optional.ofNullable(industry); }
+        public Optional<Industry> getIndustry() {
+            return Optional.ofNullable(industry);
+        }
 
         public void setPhone(Phone phone) {
             this.phone = phone;

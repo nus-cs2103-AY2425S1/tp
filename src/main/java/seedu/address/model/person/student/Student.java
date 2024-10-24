@@ -20,34 +20,36 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
-    private final StudentID studentID;
+    private final StudentId studentId;
     private int attendance;
 
     /**
      * Create a new student object
      * @param name
-     * @param studentID
+     * @param studentId
      * @param phone
      * @param email
      * @param address
      * @param tags
      */
-    public Student(Name name, StudentID studentID, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Student(Name name, StudentId studentId, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        requireAllNonNull(studentID);
-        this.studentID = studentID;
+        requireAllNonNull(studentId);
+        this.studentId = studentId;
         attendance = 0;
     }
     @Override
-    public StudentID getStudentID() {
-        return studentID;
+    public StudentId getStudentId() {
+        return studentId;
     }
     /**
      * Return null as student does not have an industry
      * @return null
      */
     @Override
-    public Industry getIndustry() { return null; }
+    public Industry getIndustry() {
+        return null;
+    }
 
     public void incrementAttendance() {
         attendance++;
@@ -61,7 +63,7 @@ public class Student extends Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", super.getName())
-                .add("student id", studentID)
+                .add("student id", studentId)
                 .add("phone", super.getPhone())
                 .add("email", super.getEmail())
                 .add("address", super.getAddress())
