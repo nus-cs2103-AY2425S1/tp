@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
             "Budget should be a non-negative number with up to 2 decimal places. ";
-    public static final String VALIDATION_REGEX = "\\d*(\\.\\d{1,2})?";
+    public static final String VALIDATION_REGEX = "\\d*(\\.\\d{0,2})?";
     public final String value;
 
     /**
@@ -22,14 +22,30 @@ public class Budget {
         requireNonNull(budget);
         checkArgument(isValidBudget(budget), MESSAGE_CONSTRAINTS);
 
+        // Fixes "."
+        if (budget.equals(".")) {
+            value = "0.00";
+            return;
+        }
+
+        // Fixes "x"
         if (!budget.contains(".")) {
             budget += ".00";
         }
 
         String[] parts = budget.split("\\.");
+        // Fixes "x."
+        if (parts.length == 1) {
+            value = budget + "00";
+            return;
+        }
+
+        // Fixes ".xx"
         if (parts[0].isEmpty()) {
             budget = "0" + budget;
         }
+
+        // Fixes "x.x"
         if (parts[1].length() == 1) {
             budget += "0";
         }

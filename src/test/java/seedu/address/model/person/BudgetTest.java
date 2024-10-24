@@ -15,7 +15,7 @@ public class BudgetTest {
 
     @Test
     public void constructor_invalidBudget_throwsIllegalArgumentException() {
-        double invalidBudget = -1;
+        String invalidBudget = "-1";
         assertThrows(IllegalArgumentException.class, () -> new Budget(invalidBudget));
     }
 
@@ -25,22 +25,31 @@ public class BudgetTest {
         assertThrows(NullPointerException.class, () -> Budget.isValidBudget(null));
 
         // invalid budget numbers
-        assertFalse(Budget.isValidBudget(-1.0)); // negative values
-        assertFalse(Budget.isValidBudget(0.12345)); // more than 2dp
-         assertFalse(Budget.isValidBudget(123456789101234.56)); // more than 15 characters at parser util instead
+        assertFalse(Budget.isValidBudget("-1.0")); // negative values
+        assertFalse(Budget.isValidBudget("0.12345")); // more than 2dp
+        assertFalse(Budget.isValidBudget("0.1.1")); // more than 1 .
+        assertFalse(Budget.isValidBudget("a")); // invalid string
+        assertFalse(Budget.isValidBudget("")); // empty string
+        assertFalse(Budget.isValidBudget(" ")); // whitespace string
+        assertFalse(Budget.isValidBudget(" . ")); // whitespace string
+        assertFalse(Budget.isValidBudget("238213798213281 2132132321")); // space between string
+
+
 
         // valid budget numbers
-        assertTrue(Budget.isValidBudget(0.0)); // exactly 3 numbers
-        assertTrue(Budget.isValidBudget(9312153.03));
-        assertTrue(Budget.isValidBudget(1242938420331.23)); // 15 characters
+        assertTrue(Budget.isValidBudget("0.0"));
+        assertTrue(Budget.isValidBudget(".03"));
+        assertTrue(Budget.isValidBudget("1242938420331"));
+        assertTrue(Budget.isValidBudget("1."));
+        assertTrue(Budget.isValidBudget("."));
     }
 
     @Test
     public void equals() {
-        Budget budget = new Budget(999.0);
+        Budget budget = new Budget("999.0");
 
         // same values -> returns true
-        assertTrue(budget.equals(new Budget(999.0)));
+        assertTrue(budget.equals(new Budget("999.0")));
 
         // same object -> returns true
         assertTrue(budget.equals(budget));
@@ -49,9 +58,9 @@ public class BudgetTest {
         assertFalse(budget.equals(null));
 
         // different types -> returns false
-        assertFalse(budget.equals("hello"));
+        assertFalse(budget.equals(999));
 
         // different values -> returns false
-        assertFalse(budget.equals(new Budget(995.0)));
+        assertFalse(budget.equals(new Budget("995.0")));
     }
 }

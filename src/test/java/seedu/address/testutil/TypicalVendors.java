@@ -35,7 +35,7 @@ public class TypicalVendors {
             .withPhone("94351253")
             .withCompany("companyName")
             .withTags("friends")
-            .withBudget(5000.00)
+            .withBudget("5000.00")
             .build();
 
     public static final Vendor BRIAN = new VendorBuilder().withName("Brian Lee")
@@ -44,7 +44,7 @@ public class TypicalVendors {
             .withPhone("98765432")
             .withCompany("companyName")
             .withTags("owesMoney", "friends")
-            .withBudget(3500.00)
+            .withBudget("3500.00")
             .build();
 
     public static final Vendor CAM = new VendorBuilder().withName("Cameron White")
@@ -52,7 +52,7 @@ public class TypicalVendors {
             .withEmail("cameron.white@example.com")
             .withCompany("companyName")
             .withAddress("wall street")
-            .withBudget(2500.00)
+            .withBudget("2500.00")
             .build();
 
     public static final Vendor DAVID = new VendorBuilder().withName("David Brown")
@@ -61,7 +61,7 @@ public class TypicalVendors {
             .withAddress("10th street")
             .withCompany("companyName")
             .withTags("friends")
-            .withBudget(2000.00)
+            .withBudget("2000.00")
             .build();
 
     public static final Vendor ELLA = new VendorBuilder().withName("Ella Thompson")
@@ -69,7 +69,7 @@ public class TypicalVendors {
             .withEmail("ella.thompson@example.com")
             .withCompany("companyName")
             .withAddress("michegan ave")
-            .withBudget(4500.00)
+            .withBudget("4500.00")
             .build();
 
     public static final Vendor GAVIN = new VendorBuilder().withName("Gavin Kim")
@@ -77,7 +77,7 @@ public class TypicalVendors {
             .withEmail("gavin.kim@example.com")
             .withCompany("companyName")
             .withAddress("4th street")
-            .withBudget(3000.00)
+            .withBudget("3000.00")
             .build();
 
     // Manually added - Guest's details found in {@code CommandTestUtil}

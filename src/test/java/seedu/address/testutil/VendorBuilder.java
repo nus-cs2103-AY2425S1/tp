@@ -40,7 +40,7 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     /**
      * Sets the {@code Company} of the {@code Vendor} that we are building.
      */
-    public VendorBuilder withBudget(Double budget) {
+    public VendorBuilder withBudget(String budget) {
         this.budget = new Budget(budget);
         return this;
     }
