@@ -9,7 +9,7 @@ import spleetwaise.transaction.model.transaction.Category;
 /**
  * Jackson-friendly version of {@link Category}.
  */
-class JsonAdaptedCategory {
+public class JsonAdaptedCategory {
 
     private final String category;
 
@@ -36,10 +36,10 @@ class JsonAdaptedCategory {
     /**
      * Converts this Jackson-friendly adapted category object into the model's {@code Category} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted cat.
      */
     public Category toModelType() throws IllegalValueException {
-        if (!Category.isValidTagName(category)) {
+        if (!Category.isValidCatName(category)) {
             throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
         return new Category(category);

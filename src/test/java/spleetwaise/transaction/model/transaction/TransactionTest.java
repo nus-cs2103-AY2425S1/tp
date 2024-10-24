@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,7 @@ public class TransactionTest {
                 testDescription, null, testCategories
         ));
         assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount,
-                testDescription, null, null
+                testDescription, testDate, null
         ));
     }
 
@@ -53,7 +55,6 @@ public class TransactionTest {
         Transaction txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories);
 
         assertEquals(txn1, txn2);
-
         assertEquals(txn1, txn1);
     }
 
@@ -77,6 +78,10 @@ public class TransactionTest {
         txn2 = new Transaction(testPerson, testAmount, testDescription, testDate2, testCategories);
         assertNotEquals(txn1, txn2);
 
+        HashSet<Category> testCategories2 = new HashSet<>(List.of(new Category("EXTRA")));
+        txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories2);
+        assertNotEquals(txn1, txn2);
+
         assertNotEquals(null, txn1);
     }
 
@@ -86,6 +91,12 @@ public class TransactionTest {
         Transaction t1 = txnBuilder.build();
         Transaction t2 = txnBuilder.withId("420yolo").build();
         assertFalse(t1.hasSameId(t2));
+    }
+
+    @Test
+    public void containsValidCategory() {
+        Transaction txn = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories);
+        assertTrue(txn.containsCategory(new Category("FOOD")));
     }
 
     @Test

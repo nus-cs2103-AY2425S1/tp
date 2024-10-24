@@ -22,14 +22,14 @@ public class Category {
      */
     public Category(String category) {
         requireNonNull(category);
-        AppUtil.checkArgument(isValidTagName(category), MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidCatName(category), MESSAGE_CONSTRAINTS);
         this.category = category;
     }
 
     /**
      * Returns true if a given string is a valid category format.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidCatName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

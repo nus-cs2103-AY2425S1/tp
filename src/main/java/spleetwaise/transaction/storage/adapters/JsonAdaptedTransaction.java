@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -89,7 +88,7 @@ public class JsonAdaptedTransaction {
         this.description = transaction.getDescription().toString();
         this.date = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
         this.categories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     /**

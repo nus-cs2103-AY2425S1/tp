@@ -90,7 +90,7 @@ public class ParserUtil {
     public static Category parseCategory(String catStr) throws ParseException {
         requireNonNull(catStr);
         String trimmedCategory = catStr.trim().toUpperCase();
-        if (!Category.isValidTagName(trimmedCategory)) {
+        if (!Category.isValidCatName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
         return new Category(trimmedCategory);

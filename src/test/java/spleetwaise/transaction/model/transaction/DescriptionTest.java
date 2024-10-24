@@ -60,7 +60,6 @@ public class DescriptionTest {
         Description desc2 = new Description("not same");
 
         assertFalse(desc1.equals(desc2));
-
         assertFalse(desc1.equals(null));
     }
 }

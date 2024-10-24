@@ -81,8 +81,14 @@ public class AddCommandTest {
         Transaction testTxn2 = new Transaction(
                 TypicalPersons.BOB, testAmount, testDescription, testDate, testCategories);
         AddCommand cmd2 = new AddCommand(testTxn2);
+        Transaction testTxn3 = new Transaction(
+                TypicalPersons.BOB, testAmount, testDescription, testDate,
+                new HashSet<>(List.of(new Category("EXTRA"))));
+        AddCommand cmd3 = new AddCommand(testTxn3);
 
         assertNotEquals(cmd1, cmd2);
+        assertNotEquals(cmd1, cmd3);
+        assertNotEquals(cmd2, cmd3);
     }
 
     @Test

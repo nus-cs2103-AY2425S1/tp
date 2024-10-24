@@ -1,5 +1,6 @@
 package spleetwaise.transaction.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -16,16 +17,20 @@ public class CategoryTest {
         assertThrows(NullPointerException.class, () -> new Category(testString));
     }
 
-
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
+    public void constructor_invalidCatName_throwsIllegalArgumentException() {
         String invalidCatName = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Category(invalidCatName));
     }
 
     @Test
-    public void isValidTagName() {
+    public void isValidCatName() {
         // null cat name
-        Assert.assertThrows(NullPointerException.class, () -> Category.isValidTagName(null));
+        Assert.assertThrows(NullPointerException.class, () -> Category.isValidCatName(null));
+    }
+
+    @Test
+    public void validCatName() {
+        assertEquals(testCat, new Category("FOOD"));
     }
 }

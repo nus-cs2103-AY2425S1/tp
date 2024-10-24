@@ -33,10 +33,8 @@ public class Transaction {
      * @param date        The date the transaction has taken place.
      * @param categories  The categories the transaction has.
      */
-    public Transaction(
-            String id, Person person, Amount amount, Description description, Date date,
-            Set<Category> categories
-    ) {
+    public Transaction(String id, Person person, Amount amount, Description description, Date date,
+                       Set<Category> categories) {
         CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
@@ -77,6 +75,13 @@ public class Transaction {
 
     public Date getDate() {
         return date;
+    }
+
+    /**
+     * Returns a boolean value if the transaction contains the category
+     */
+    public boolean containsCategory(Category category) {
+        return categories.contains(category);
     }
 
     /**
