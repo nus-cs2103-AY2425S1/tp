@@ -7,12 +7,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.stage.Stage?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.StackPane?>
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/23.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -21,16 +20,16 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <VBox fx:id="helpMessageContainer">
-        <StackPane>
+      <VBox fx:id="helpMessageContainer" prefHeight="690" prefWidth="660" >
+        <VBox VBox.vgrow="NEVER">
           <HBox fx:id="moreInfoContainer" alignment="CENTER">
             <children>
-              <Label fx:id="helpMessage" text="Label" alignment="CENTER">
+              <Label fx:id="helpMessage" alignment="CENTER" text="Label">
                 <HBox.margin>
                   <Insets right="5.0" />
                 </HBox.margin>
               </Label>
-              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" alignment="CENTER">
+              <Button fx:id="copyButton" alignment="CENTER" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
                 <HBox.margin>
                   <Insets left="5.0" />
                 </HBox.margin>
@@ -43,79 +42,91 @@
               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
             </padding>
           </HBox>
-        </StackPane>
-        <StackPane fx:id="addHelpContainer" VBox.vgrow="NEVER">
-          <Label fx:id="addHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" >
+          <Label fx:id="addHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="addHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="listHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="listHelp" alignment="CENTER_LEFT"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+          <Label fx:id="listHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="listHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="editHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="editHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+          <Label fx:id="editHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="editHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="deleteHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="deleteHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="deleteHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="deleteHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="clearHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="clearHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="clearHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="clearHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="findNameHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="findNameHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="fnHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="fnHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="findPhoneHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="findPhoneHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="fpHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="fpHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="findAddressHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT" >
-          <Label fx:id="findAddressHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="faHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="faHelp" alignment="CENTER_LEFT" styleClass="cel_small_label" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="findClientTypeHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="findClientTypeHelp" ></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="fcHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="fcHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="sortHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="sortHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="sortHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="sortHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="viewHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="viewHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="viewHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="viewHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
-        <StackPane fx:id="exitHelpContainer" VBox.vgrow="NEVER" alignment="CENTER_LEFT">
-          <Label fx:id="exitHelp"></Label>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER">
+          <Label fx:id="exitHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+          <Label fx:id="exitHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
+        </VBox>
       </VBox>
     </Scene>
   </scene>

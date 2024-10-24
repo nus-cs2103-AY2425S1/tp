@@ -1,5 +1,4 @@
-#copyButton, #helpMessage, #addHelp, #listHelp, #editHelp, #deleteHelp, #clearHelp, #findNameHelp, #findPhoneHelp,
-#findAddressHelp, #findClientTypeHelp, #sortHelp, #viewHelp, #exitHelp {
+#copyButton, #helpMessage, {
     -fx-text-fill: white;
 }
 
@@ -17,4 +16,27 @@
 
 #helpMessageContainer {
     -fx-background-color: #383838;
+}
+
+.commandContainer {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.headerLabel {
+/*-fx-font-family: "Segoe UI Semibold";*/
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #D397F8;
+    -fx-font-weight: bold;
+}
+
+.commandLabel {
+.cell_small_label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+}
 }
