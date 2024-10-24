@@ -52,7 +52,10 @@ public class AddScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null : "Model cannot be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null && !lastShownList.isEmpty() : "Person list cannot be null or empty";
 
         // Check if all contact indices are valid
         for (Index i : contactIndexes) {
