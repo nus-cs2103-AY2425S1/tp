@@ -71,7 +71,8 @@ public class DeleteTagCommand extends Command {
                                         person.getEmail(),
                                         person.getAddress(),
                                         personTags,
-                                        person.getWeddings()
+                                        person.getWeddings(),
+                                        person.getTasks()
                                 );
                                 model.setPerson(person, newPerson);
                                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

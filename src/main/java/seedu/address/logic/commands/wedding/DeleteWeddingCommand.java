@@ -75,7 +75,8 @@ public class DeleteWeddingCommand extends Command {
                                         person.getEmail(),
                                         person.getAddress(),
                                         person.getTags(),
-                                        personWeddings
+                                        personWeddings,
+                                        person.getTasks()
                                 );
                                 model.setPerson(person, newPerson);
                                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
