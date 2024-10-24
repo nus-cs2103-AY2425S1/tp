@@ -215,6 +215,10 @@ public class Person {
                 && otherPerson.getNric().equals(getNric());
     }
 
+    public int compareTo(Person other) {
+        return this.getName().compareTo(other.getName());
+    }
+
     // public void showDetails() {
 
     // }

@@ -49,6 +49,10 @@ public class CommandResult {
         this(feedbackToUser, null, false, null, false, false);
     }
 
+    public CommandResult(String feedbackToUser, String keyword) {
+        this(feedbackToUser, keyword, false, null, false, false);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }

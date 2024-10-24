@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +18,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.FilteredAppointment.FilteredAppointment;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
 /**
@@ -66,7 +70,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
@@ -182,6 +185,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the Filtered Appointments
+     */
+    @FXML
+    public void showAppts(TreeSet<FilteredAppointment> appts) {
+        FilteredApptListPanel apptListPanel = new FilteredApptListPanel(appts);
+        guiPanelPlaceholder.getChildren().remove(0);
+        guiPanelPlaceholder.getChildren().add(apptListPanel.getRoot());
+    }
+
+    /**
      * Hides the Patient Info Panel.
      */
     @FXML
@@ -232,6 +245,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPatientInfo()) {
                 showPatientInfo(commandResult.getPatient());
+            }
+
+            if (commandResult.getKeyword() != null && commandResult.getKeyword().equals("appts")) {
+                showAppts(logic.getFilteredAppts());
             } else {
                 hidePatientInfo();
             }

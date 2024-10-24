@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
+import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
 /**
@@ -64,11 +65,6 @@ public class Appt {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-    }
-
     public boolean isOn(LocalDate date) {
         return dateTime.toLocalDate().isEqual(date);
     }
@@ -110,5 +106,10 @@ public class Appt {
         HealthService service = dateFilter.getHealthService();
 
         return isBetweenDates(startDate, endDate) && isSameService(service);
+    }
+
+    @Override
+    public String toString() {
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
