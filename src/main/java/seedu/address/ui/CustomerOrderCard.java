@@ -33,6 +33,8 @@ public class CustomerOrderCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label items;
+    @FXML
+    private Label status;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -44,5 +46,6 @@ public class CustomerOrderCard extends UiPart<Region> {
         phone.setText(order.getPhoneNumber());
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
+        status.setText(order.getStatus().toString());
     }
 }
