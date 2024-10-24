@@ -89,9 +89,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        // Ensure normal list command works
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+
+        // Test with the "list vip" command
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " vip") instanceof ListCommand);
+
+        // Optional: If "list 3" should throw a ParseException, handle it accordingly
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
+
 
     @Test
     public void parseCommand_markVip() throws Exception {
