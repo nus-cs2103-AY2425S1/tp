@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmployeeId;
@@ -48,6 +49,9 @@ public class ParserUtilTest {
 
     private static final String VALID_PROJECT_ID = "A0276123K";
     private static final String VALID_PROJECT_NAME = "Project Alpha";
+
+    private static final String VALID_ASSIGNMENT_ID = "1";
+    private static final String INVALID_ASSIGNMENT_ID = "A";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -309,5 +313,16 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_PROJECT_NAME + WHITESPACE;
         ProjectName expectedProjectName = new ProjectName(VALID_PROJECT_NAME);
         assertEquals(expectedProjectName, ParserUtil.parseProjectName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseAssignmentId_validValue_returnTrimmedAssignmentId() throws Exception {
+        AssignmentId expectedAssignmentId = new AssignmentId(VALID_ASSIGNMENT_ID);
+        assertEquals(expectedAssignmentId, ParserUtil.parseAssignmentId(VALID_ASSIGNMENT_ID));
+    }
+
+    @Test
+    public void parseAssignmentId_collectionWithInvalidSkills_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentId(INVALID_ASSIGNMENT_ID));
     }
 }
