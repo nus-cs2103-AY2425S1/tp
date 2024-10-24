@@ -19,12 +19,21 @@ import seedu.address.model.UserPrefs;
 public class ArchiveCommandTest {
     @BeforeEach
     public void setUp() throws IOException {
-        FileUtil.createIfMissing(new UserPrefs().getAddressBookFilePath());
+        FileUtil.createIfMissing(new ModelManager().getAddressBookFilePath());
     }
 
     @AfterEach
     public void tearDown() throws IOException {
-        Files.deleteIfExists(new UserPrefs().getAddressBookFilePath());
+        Files.deleteIfExists(new ModelManager().getAddressBookFilePath());
+
+        // Delete all files in the archive directory
+        Files.walk(new ModelManager().getAddressBookFilePath().getParent())
+                .map(java.nio.file.Path::toFile)
+                .forEach(file -> {
+                    if (!file.delete()) {
+                        file.deleteOnExit();
+                    }
+                });
     }
 
     @Test
