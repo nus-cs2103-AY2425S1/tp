@@ -21,7 +21,7 @@ public class SortCommand extends Command {
             + ": Sorts all students in the student directory by the specified field in specified order.\n"
             + "Parameters: Name, Address, Phone Number, Grade Level\n"
             + "Command: " + COMMAND_WORD + " [prefix/[ASC or DESC]]\n"
-            + "Example: " + COMMAND_WORD + PREFIX_GRADE_LEVEL + "/ASC " + PREFIX_NAME + "/DESC";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE_LEVEL + "/ASC " + PREFIX_NAME + "/DESC";
 
     private final StudentComparator comparator;
 

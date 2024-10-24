@@ -28,7 +28,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Alice" + PREFIX_PHONE + "91234567";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Alice " + PREFIX_PHONE + "91234567";
 
     private final StudentDescriptorMatchesPredicate predicate;
 

@@ -176,7 +176,7 @@ Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_L
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
-* Prefixes other than `n/`, `p/`, `a/`, `gl` will be ignored.
+* Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
 * Any keyword before the first valid prefix will be ignored
 * Only the name, phone number, address, and grade level is searched.
 * Partial inclusion of keyword will be considered a match

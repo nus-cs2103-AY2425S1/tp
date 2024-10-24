@@ -25,14 +25,14 @@ public class SampleDataUtil {
 
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new GradeLevel("ABRSM 1"), new Group(""), PianoPiece.getPianoPieceSet("Canon in D"),
+                    new GradeLevel("ABRSM 1"), new Group("Alex's Group"), PianoPiece.getPianoPieceSet("Canon in D"),
                     new RegularLesson(new Day("Monday"), new Time("14:00"), new Time("16:00")),
                     CancelledLesson.getCancelledLessonSet("14-10-2024"),
                     MakeupLesson.getMakeupLessonSet(new String[]{"14-10-2024"}, new String[]{"10:00"},
                             new String[]{"12:00"})),
             new Student(new Name("Bernice Yu"), new Phone("99272758"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new GradeLevel("RSL 2"),
-                     new Group(""), PianoPiece.getPianoPieceSet("Moonlight Sonata"),
+                     new Group("Bernice's Group"), PianoPiece.getPianoPieceSet("Moonlight Sonata"),
                     new RegularLesson(new Day("Tuesday"), new Time("14:00"), new Time("16:00")),
                     CancelledLesson.getCancelledLessonSet("15-10-2024"), new HashSet<>()),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"),
