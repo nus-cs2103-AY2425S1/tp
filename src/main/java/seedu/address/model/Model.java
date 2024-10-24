@@ -84,4 +84,26 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Saves the current state of the address book.
+     * This allows the current state to be restored via undo or redo operations.
+     */
+    void saveAddressBook();
+
+    /**
+     * Restores the previous state of the address book.
+     * This allows the user to undo the last change made to the address book.
+     *
+     * @throws seedu.address.model.VersionedAddressBook.InvalidUndoException if there is no previous state to undo to.
+     */
+    void undoAddressBook();
+
+    /**
+     * Restores the next state of the address book that was undone.
+     * This allows the user to redo the last undone change.
+     *
+     * @throws seedu.address.model.VersionedAddressBook.InvalidRedoException if there is no state to redo to.
+     */
+    void redoAddressBook();
 }
