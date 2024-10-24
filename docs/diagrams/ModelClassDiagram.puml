@@ -12,8 +12,15 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
+
+Class UniqueWeddingList
+Class Wedding
+Class WeddingName
+Class WeddingDate
+
 Class UniquePersonList
 Class Person
+Class PersonId
 Class Address
 Class Email
 Class Name
@@ -24,6 +31,7 @@ Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
+
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
@@ -35,20 +43,29 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+AddressBook *-down-> "1" UniquePersonList
+AddressBook *-down-> "1" UniqueWeddingList
 UniquePersonList --> "~* all" Person
+UniqueWeddingList ---> "~* all" Wedding
+Person *--> PersonId
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+Wedding *--> "*" PersonId
+Wedding --> "1" WeddingName
+Wedding --> "1" WeddingDate
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+
+ModelManager --> "~* filtered" Wedding
+ModelManager --> "~* filtered" Person
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
 @enduml
