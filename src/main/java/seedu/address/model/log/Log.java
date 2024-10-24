@@ -54,6 +54,13 @@ public class Log {
     }
 
     /**
+     * Returns the String-formatted version of appointmentDate.
+     */
+    public String getAppointmentDateString() {
+        return appointmentDate.toString();
+    }
+
+    /**
      * Return to string in the format "date|description" for JsonStorage
      */
     public String toStorageString() {

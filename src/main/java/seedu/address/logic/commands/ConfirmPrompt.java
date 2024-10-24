@@ -23,7 +23,7 @@ public class ConfirmPrompt extends Command {
         requireNonNull(model);
         model.setSavedCommand(savedCommand);
 
-        return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true);
+        return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false, -1);
     }
 
     @Override

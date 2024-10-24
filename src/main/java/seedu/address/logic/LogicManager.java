@@ -88,9 +88,10 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Log> getFilteredSessionLog() {
-        return model.getFilteredLogList();
+    public ObservableList<Log> getSessionLog(int personIndex) {
+        return model.getSessionLog(personIndex);
     }
+
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();

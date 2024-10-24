@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of logs */
-    ObservableList<Log> getFilteredSessionLog();
+    ObservableList<Log> getSessionLog(int personIndex);
 
     /**
      * Returns the user prefs' address book file path.

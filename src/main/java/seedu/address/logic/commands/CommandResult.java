@@ -19,35 +19,39 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should list the logs. */
+    private final boolean list;
+
+    // ^ NEW: might not the best as well, but there is a need to bring out more information
+    // to the GUI layer so we can update and reflect the sessionlog. please think of a better way
+
+    /** The application should use the index returned. */ // NEW: I dont think this is a good implementation.
+    private final int personIndex;
+
     /** The previous command prompts the user for confirmation */
     private final boolean hasPrompt;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.hasPrompt = false;
-    }
 
-    /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt,
+                         boolean list, int personIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.list = list;
+        this.personIndex = personIndex;
         this.hasPrompt = isPrompt;
     }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false, -1);
     }
 
     public String getFeedbackToUser() {
@@ -61,6 +65,17 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
+
+    public boolean isList() {
+        return list;
+    }
+
+    // might need more validation to check if personIndex > -1 before retrieving?
+    public int getPersonIndex() {
+        return personIndex;
+    }
+
 
     public boolean hasPrompt() {
         return hasPrompt;
@@ -80,12 +95,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && list == otherCommandResult.list
+                && personIndex == otherCommandResult.personIndex
+                && hasPrompt == otherCommandResult.hasPrompt;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, list, personIndex, hasPrompt);
     }
 
     @Override
@@ -94,6 +112,9 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("prompt", hasPrompt)
+                .add("list", list)
+                .add("personIndex", personIndex)
                 .toString();
     }
 
