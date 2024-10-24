@@ -177,8 +177,9 @@ Edits a note of a person in the address book.
 Format: `editnotes INDEX i/NOTE_INDEX n/[NOTES]`
 
 - Edits the note at the specified `NOTE_INDEX` of the person at the specified `INDEX`.
-- Both indexes refers to the index number shown in the displayed person list.
-- Both indexes **must be a positive integer** 1, 2, 3, …​
+-The index refers to the index number shown in the displayed person list. 
+- The note index refers to the index number shown in the notes list of the contact details of the displayed person.
+- The index and notes index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
