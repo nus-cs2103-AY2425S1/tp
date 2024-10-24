@@ -85,10 +85,10 @@ UniqueAppointmentList --> "~* all" Appointment
 Appointment *--> "1" Date
 Appointment *--> "1" Time
 
-Doctor .right.|> Person
+Doctor -right-|> Person
 Doctor *--> "1" Specialty
 
-Patient .left.|> Person
+Patient -left-|> Person
 Patient *--> "1" DateOfBirth
 Patient *--> "1" Gender
 
