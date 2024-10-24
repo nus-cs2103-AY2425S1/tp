@@ -75,6 +75,19 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getBackupAddressBookFilePath() {
+        return userPrefs.getBackupAddressBookFilePath();
+    }
+
+    @Override
+    public void setBackupAddressBookFilePath(Path backupAddressBookFilePath) {
+        requireNonNull(backupAddressBookFilePath);
+        userPrefs.setBackupAddressBookFilePath(backupAddressBookFilePath);
+    }
+
+
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -111,6 +124,24 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void savePersonToDelete(Person person) {
+        addressBook.savePersonToDelete(person);
+    }
+
+    @Override
+    public boolean checkRestorable() {
+        return addressBook.checkRestorable();
+    }
+    @Override
+    public void makeNotRestorable() {
+        addressBook.makeNotRestorable();
+    }
+    @Override
+    public Person getLastDeletedPerson() {
+        return addressBook.getLastDeletedPerson();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +157,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonList(String order, Boolean toSortBySchedule) {
+        addressBook.sortPersons(order, toSortBySchedule);
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
     }
 
     @Override

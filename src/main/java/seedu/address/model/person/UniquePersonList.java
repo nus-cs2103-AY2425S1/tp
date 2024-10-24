@@ -2,7 +2,10 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.SortCommand.ASCENDING;
+import static seedu.address.logic.commands.SortCommand.DESCENDING;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -96,6 +99,58 @@ public class UniquePersonList implements Iterable<Person> {
 
         internalList.setAll(persons);
     }
+
+    /**
+     * Sorts persons in the address book by their names or schedules in ascending or descending order.
+     *
+     * @param order the sorting order, either <code>asc</code> or <code>desc</code>.
+     * @param toSortBySchedule a {@code Boolean} indicating whether to sort by schedule (<code>true</code>)
+     *                         or by name (<code>false</code>).
+     * @throws NullPointerException if <code>order</code> is {@code null}.
+     * @throws AssertionError if <code>order</code> is not either <code>asc</code> or <code>desc</code>.
+     */
+    public void sortPersons(String order, Boolean toSortBySchedule) {
+        //the order string given will always be either "asc" or "desc"
+        assert order.equals("asc") || order.equals("desc");
+        requireNonNull(order);
+        Comparator<Person> comparator;
+        if (toSortBySchedule) {
+            comparator = sortBySchedule(order);
+        } else {
+            comparator = Comparator.comparing(person -> person.getName().fullName);
+            if (order.equals(DESCENDING)) {
+                comparator = comparator.reversed();
+            }
+        }
+        internalList.sort(comparator);
+    }
+    /**
+     * Generates a Comparator for sorting Person objects by their schedule's date and time.
+     *
+     * @param order a {@code String} indicating the sorting order.
+     *              Must be either <code>asc</code> or <code>desc</code>.
+     * @return a {@link Comparator} that can be used to sort {@link Person} objects by their schedule's date and time.
+     * @throws NullPointerException if <code>order</code> is {@code null}.
+     * @throws AssertionError if <code>order</code> is not either <code>asc</code> or <code>desc</code>.
+     */
+    public Comparator<Person> sortBySchedule(String order) {
+        assert order.equals("asc") || order.equals("desc");
+        requireNonNull(order);
+        Comparator<Person> comparator;
+        if (order.equals(ASCENDING)) {
+            comparator = Comparator.comparing((Person person) -> {
+                Schedule schedule = person.getSchedule();
+                return schedule.getDateTime();
+            }, Comparator.nullsLast(Comparator.naturalOrder()));
+        } else {
+            comparator = Comparator.comparing((Person person) -> {
+                Schedule schedule = person.getSchedule();
+                return schedule.getDateTime();
+            }, Comparator.nullsFirst(Comparator.naturalOrder())).reversed();
+        }
+        return comparator;
+    }
+
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

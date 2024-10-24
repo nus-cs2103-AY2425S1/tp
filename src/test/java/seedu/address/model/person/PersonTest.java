@@ -7,6 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -88,12 +91,26 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different scheduleName -> returns false
+        editedAlice = new PersonBuilder(ALICE).withScheduleName(VALID_SCHEDULE_NAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different scheduleDate -> returns false
+        editedAlice = new PersonBuilder(ALICE).withScheduleDate(VALID_SCHEDULE_DATE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different scheduleTime -> returns false
+        editedAlice = new PersonBuilder(ALICE).withScheduleTime(VALID_SCHEDULE_TIME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", schedule=" + ALICE.getSchedule() + ", tags=" + ALICE.getTags()
+                + ", socialmedia=" + ALICE.getSocialMedia() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

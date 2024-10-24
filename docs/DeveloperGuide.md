@@ -268,7 +268,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * small business owners
-* sole proprietors 
+* sole proprietors
 
 **Value proposition**: Since these businesses are single-individual teams, keeping track of different stakeholders alone is a hassle. These individuals work on their computers at least for their networking purposes, making the product compatible with their existing workflows. The product is an easy-to-use contact management app that manages customers, business partners and suppliers.
 
@@ -315,14 +315,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list contacts
+2.  BlitzBiz shows a list of contacts
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  BlitzBiz deletes the person
 
     Use case ends.
 
@@ -338,13 +338,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a contact
+2.  BlitzBiz requests for name, phone number, and email address minimally
+3.  User enters contact details
+4.  BlitzBiz asks for confirmation
+5.  User confirms
+6.  BlitzBiz adds the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The entered details do not follow the correct format.
+   *  3a1. BlitzBiz requests for the correct details.
+      3a2. User enters new details.
+      Steps 3a1-3a2 are repeated until the data entered are correct.
+      Use case resumes from step 4.
+
+* *a. At any time, User chooses to cancel the transfer.
+      *a1. BlitzBiz requests to confirm the cancellation.
+      *a2. User confirms the cancellation.
+      Use case ends.
+
+**Use case: Find contacts by name**
+
+**MSS**
+
+1.  User requests to view a contact by name
+2.  BlitzBiz requests for a prefix of the contact name
+3.  User enters name prefix
+4.  BlitzBiz displays all contacts containing the prefix in their name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+   *  3a1. BlitzBiz displays an error message.
+      3a2. User enters new command.
+      Steps 3a1-3a2 are repeated until the command format entered is correct.
+      Use case resumes from step 4.
+
+* 4a. There are no contacts containing the prefix in their name.
+      4a1. BlitzBiz informs the user that there were no matches found.
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to load within 4 seconds while holding up to 1000 contacts.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should have an uptime of 99.9%.
+5.  The product must be intuitive to people without technical background.
+6.  For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
+7.  The program should have a size of less than 100MB even with 1000 contacts.
+8.  The application should function fully when offline.
+9.  When a user executes a command there should be clear feedback on whether the task was successful.
+10. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
 
 *{More to be added}*
 

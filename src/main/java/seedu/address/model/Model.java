@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_DO_NOT_SHOW_ALL_PERSONS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -40,14 +41,23 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' backup address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAddressBookFilePath(Path backupAddressBookFilePath);
+
+    Path getBackupAddressBookFilePath();
+
+    /**
+     * Sets the user prefs' backup address book file path.
+     */
+    void setBackupAddressBookFilePath(Path backupAddressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
+
+
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
@@ -84,4 +94,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void savePersonToDelete(Person person);
+    boolean checkRestorable();
+    void makeNotRestorable();
+    Person getLastDeletedPerson();
+
+    /**
+     * Sorts the filter of the filtered person list in alphabetical order
+     */
+    void sortFilteredPersonList(String order, Boolean toSortBySchedule);
+
+    ObservableList<Person> getPersonList();
 }
