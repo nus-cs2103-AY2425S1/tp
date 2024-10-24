@@ -17,6 +17,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -102,6 +103,17 @@ public class EditEventCommandTest {
 
         // Expect a CommandException to be thrown
         assertThrows(CommandException.class, () -> editEventCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals_differentDescriptors_returnsFalse() {
+        EditEventDescriptor descriptor1 = new EditEventDescriptor();
+        descriptor1.setName(new EventName("Event 1"));
+
+        EditEventDescriptor descriptor2 = new EditEventDescriptor();
+        descriptor2.setName(new EventName("Event 2"));
+
+        assertFalse(descriptor1.equals(descriptor2));
     }
 
     // Model stub that always indicates the event does not exist
