@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
 
@@ -72,6 +73,13 @@ public interface Model {
      * @return List of students who have schedule conflicts with the given student.
      */
     public List<Student> getClashingStudents(Student student);
+
+    /**
+     * Retrieves a list of students with whom {@code student} has lessons on the day.
+     * @param day The day to check for.
+     * @return List of students scheduled to have lesson on that day.
+     */
+    public List<Student> getScheduledStudents(Days day);
 
     /**
      * Deletes the given student.

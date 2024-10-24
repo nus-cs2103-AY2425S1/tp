@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.StudentBuilder;
@@ -114,6 +115,25 @@ public class AddressBookTest {
         ArrayList<Student> testList = new ArrayList<>();
         testList.add(ALICE);
         assertEquals(addressBook.getClashingStudents(HOON), testList);
+    }
+
+    @Test
+    public void getScheduledStudents_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.getScheduledStudents(null));
+    }
+
+    @Test
+    public void getScheduledStudents_noLessonScheduled_returnsEmptyList() {
+        addressBook.addStudent(ALICE);
+        assertEquals(addressBook.getScheduledStudents(Days.MONDAY), new ArrayList<>());
+    }
+
+    @Test
+    public void getScheduledStudents_someScheduled_returnsCorrectList() {
+        addressBook.addStudent(ALICE);
+        ArrayList<Student> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(addressBook.getScheduledStudents(Days.SUNDAY), testList);
     }
 
     @Test

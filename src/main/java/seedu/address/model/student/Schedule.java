@@ -168,5 +168,9 @@ public class Schedule {
         String[] split = time.split("-");
         return LocalTime.parse(split[2], TIME_FORMAT);
     }
+
+    public String getTime() {
+        return startTimeValue.toString() + " - " + endTimeValue.toString();
+    }
 }
 

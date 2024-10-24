@@ -183,9 +183,23 @@ Examples:
 </markdown>
 </box>
 
+### Receiving payment from a student : `pay`
 
+Updates the amount of tuition fee paid by the specified student after a lesson.
 
+Format: `pay INDEX hr/HOURS_PAID`
 
+Example:
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
+  ![payResult.png](images/payResult.png)
+
+<box type="important" header="#### Constraints">
+
+1. The index refers to the index number shown in the displayed student list.
+2. The index **must be a positive integer** 1, 2, 3, …​
+3. Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
+</box>
 
 ### Recording unpaid tuition fee of a student: `owe`
 
@@ -239,20 +253,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Receiving payment from a student : `pay`
+### Getting a reminder for today : `remind`
 
-Updates the amount of tuition fee paid by the specified student after a lesson.
+Get a reminder on all your lessons scheduled for `today`. Automatically reminds you when you launch the app.
 
-Format: `pay INDEX hr/HOURS_PAID`
+Format: `remind`
 
-Example: 
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
-    ![payResult.png](images/payResult.png)
+<box type="tip" header="##### Tips">
 
-<box type="important" header="#### Constraints">
-<markdown>
-Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-</markdown>
+If you would like to see your schedule for other days, you can use the [`find` command](#finding-students-information-find) 
+to find your schedule for a specific day of the week.
+
 </box>
 
 ### Clearing all entries : `clear`
@@ -315,5 +326,6 @@ Action     | Format, Examples
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
+**Remind**   | `remind`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`

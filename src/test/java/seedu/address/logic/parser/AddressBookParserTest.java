@@ -29,6 +29,7 @@ import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Days;
@@ -210,6 +211,18 @@ public class AddressBookParserTest {
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
+    }
+
+    @Test
+    public void parseCommand_remind() throws Exception {
+        assertTrue(parser.parseCommand(RemindCommand.COMMAND_WORD) instanceof RemindCommand);
+        assertTrue(parser.parseCommand(RemindCommand.COMMAND_WORD + " 3") instanceof RemindCommand);
+    }
+
+    @Test
+    public void parseCommand_remindRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(RemindCommand.COMMAND_WORD_RANDOM_CASE) instanceof RemindCommand);
+        assertTrue(parser.parseCommand(RemindCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof RemindCommand);
     }
 
     @Test

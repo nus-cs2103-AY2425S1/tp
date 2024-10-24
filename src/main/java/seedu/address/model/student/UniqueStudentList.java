@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +55,21 @@ public class UniqueStudentList implements Iterable<Student> {
     public List<Student> getClashes(Student toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().filter(toCheck::isClash).toList();
+    }
+
+    /**
+     * Returns a list of students with lesson scheduled on the day.
+     * @param day The day to check for.
+     * @return List of students with lessons scheduled on the day.
+     */
+    public List<Student> getScheduledOnDay(Days day) {
+        requireNonNull(day);
+        return internalList.stream().filter(isScheduledOnDay(day)).toList();
+    }
+
+
+    private Predicate<Student> isScheduledOnDay(Days day) {
+        return student -> student.getSchedule().dayValue == day;
     }
 
     /**
