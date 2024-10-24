@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 0.7
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam groupInheritance 5
+package "Command Classes"{
+
+Class "{abstract}\nCommand" as Command
+Class AddCommand
+Class ClearCommand
+Class DeleteCommand
+Class EditCommand
+Class ExitCommand
+Class ExportCommand
+Class FilterCommand
+Class FindCommand
+Class HelpCommand
+Class ListCommand
+Class NoteCommand
+Class SortCommand
+Class StarCommand
+Class UnstarCommand
+
+}
+
+
+Command -.up.|> CommandResult
+AddCommand -up----|> Command
+ClearCommand -up-|> Command
+DeleteCommand -up---|> Command
+EditCommand -up--|> Command
+ExitCommand -up---|> Command
+ExportCommand -up--|> Command
+FilterCommand -up--|> Command
+FindCommand -up---|> Command
+HelpCommand -up---|> Command
+ListCommand -up--|> Command
+NoteCommand -up---|> Command
+SortCommand -up--|> Command
+StarCommand -up---|> Command
+UnstarCommand -up-|> Command
+
+
+@enduml
+
