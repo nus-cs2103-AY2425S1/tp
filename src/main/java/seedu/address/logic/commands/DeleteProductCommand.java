@@ -14,7 +14,7 @@ import seedu.address.model.product.ProductName;
  */
 public class DeleteProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_product";
+    public static final String COMMAND_WORD = CommandWords.DELETE_PRODUCT_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a product from InvenTrack. "
             + "Parameters: n/PRODUCT_NAME\n"

@@ -15,7 +15,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public class ViewSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_supplier";
+    public static final String COMMAND_WORD = CommandWords.VIEW_SUPPLIER_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all suppliers whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

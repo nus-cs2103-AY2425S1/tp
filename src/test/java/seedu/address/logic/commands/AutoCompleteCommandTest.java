@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import static seedu.address.testutil.TypicalSuppliers.BENSON;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,22 +37,7 @@ public class AutoCompleteCommandTest {
         AutoCompleteCommand autoCompleteCommand = new AutoCompleteCommand("", null);
         CommandResult result = autoCompleteCommand.execute(model);
 
-        List<String> expectedCompletions = new ArrayList<>(Arrays.asList(
-            AddProductCommand.COMMAND_WORD,
-            AddSupplierCommand.COMMAND_WORD,
-            AssignProductCommand.COMMAND_WORD,
-            ClearCommand.COMMAND_WORD,
-            DeleteProductCommand.COMMAND_WORD,
-            DeleteSupplierCommand.COMMAND_WORD,
-            EditCommand.COMMAND_WORD,
-            ExitCommand.COMMAND_WORD,
-            HelpCommand.COMMAND_WORD,
-            ViewAllSupplierCommand.COMMAND_WORD,
-            SetThresholdCommand.COMMAND_WORD,
-            UnassignProductCommand.COMMAND_WORD,
-            ViewProductCommand.COMMAND_WORD,
-            ViewSupplierCommand.COMMAND_WORD
-        ));
+        List<String> expectedCompletions = CommandWords.getCommandWords();
         java.util.Collections.sort(expectedCompletions);
         if (expectedCompletions.size() > AutoCompleteCommand.MAX_SUGGESTIONS) {
             expectedCompletions = expectedCompletions.subList(0, AutoCompleteCommand.MAX_SUGGESTIONS);
