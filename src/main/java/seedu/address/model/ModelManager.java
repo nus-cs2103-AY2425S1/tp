@@ -118,6 +118,12 @@ public class ModelManager implements Model {
         return addressBook.hasAppointment(appointment);
     }
 
+    @Override
+    public void addAppointment(Appointment appointment) {
+        addressBook.addAppointment(appointment);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

@@ -90,4 +90,10 @@ public interface Model {
      * Returns true if an appointment with the same identity as {@code appointment} exists in the address book.
      */
     boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not already exist in the address book.
+     */
+    void addAppointment(Appointment appointment);
 }

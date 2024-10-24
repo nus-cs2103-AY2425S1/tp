@@ -92,6 +92,7 @@ public class AddAppointmentCommand extends Command {
         model.setPerson(patientToEdit, editedPatient);
         model.setPerson(doctorToEdit, editedDoctor);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.addAppointment(appointmentToAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(appointmentToAdd)));
     }
