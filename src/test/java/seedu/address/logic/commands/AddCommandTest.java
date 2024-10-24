@@ -167,6 +167,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setSortPreference(String sortPreference) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void applySavedSortPreference() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void addReminder(Reminder reminder, Person person) {
             person.getReminderList().addReminder(reminder);
         }

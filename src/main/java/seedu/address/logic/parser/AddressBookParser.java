@@ -19,6 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SaveSortPreferenceCommand;
 import seedu.address.logic.commands.SortByDateCommand;
 import seedu.address.logic.commands.SortByPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -86,6 +87,9 @@ public class AddressBookParser {
 
         case SortByPriorityCommand.COMMAND_WORD, SortByPriorityCommand.ALT_COMMAND_WORD:
             return new SortByPriorityCommandParser().parse(arguments);
+
+        case SaveSortPreferenceCommand.COMMAND_WORD, SaveSortPreferenceCommand.ALT_COMMAND_WORD:
+            return new SaveSortPreferenceCommandParser().parse(arguments);
 
         case AddReminderCommand.COMMAND_WORD, AddReminderCommand.ALT_COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
