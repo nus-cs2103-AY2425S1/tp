@@ -164,7 +164,8 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 16px 0 0 16px;
-    -fx-background-color: #fff;
+
+
 }
 
 .list-cell {
@@ -173,6 +174,7 @@
     -fx-padding: 8px;
     -fx-background-radius: 16px;
     -fx-background-insets: 8px;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:even {
