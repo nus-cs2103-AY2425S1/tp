@@ -103,9 +103,11 @@ public class MainApp extends Application {
         try {
             scheduleListOptional = scheduleStorage.readScheduleList();
             if (!scheduleListOptional.isPresent()) {
-                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath());
+                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath()
+                        + " populated with a sample ScheduleList.");
             }
-            initialScheduleList = scheduleListOptional.orElse(new ScheduleList());
+            initialScheduleList = scheduleListOptional
+                    .orElse(SampleDataUtil.getSampleScheduleList(initialData));
             if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType()) {
                 scheduleStorage.handleCorruptedFile();
             }
