@@ -7,7 +7,8 @@
     "address" : "Blk 123 Bukit Merah St 7",
     "date" : "2000-01-01",
     "tags" : [ "vegetarian", "budget" ],
-    "id" : 0
+    "id" : 0,
+    "eventIds": []
   }, {
     "type" : "client",
     "name" : "abc",
@@ -16,7 +17,8 @@
     "address" : "Blk 123 Bukit Merah St 7",
     "date" : "2000-01-01",
     "tags" : [ "vegetarian", "budget" ],
-    "id" : 1
+    "id" : 1,
+    "eventIds": []
   } ],
   "events": [],
   "nextContactId" : 2,

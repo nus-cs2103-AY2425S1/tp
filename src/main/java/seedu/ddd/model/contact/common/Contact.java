@@ -4,10 +4,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -17,7 +20,7 @@ import seedu.ddd.model.tag.Tag;
 public abstract class Contact implements Displayable {
 
     // Identity fields
-    private final Id id;
+    private final ContactId contactId;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -25,18 +28,19 @@ public abstract class Contact implements Displayable {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Event> events = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id) {
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ContactId contactId) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.id = id;
+        this.contactId = contactId;
     }
 
     public Name getName() {
@@ -56,15 +60,36 @@ public abstract class Contact implements Displayable {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable {@code Tag} set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-    public Id getId() {
-        return id;
+    public ContactId getId() {
+        return contactId;
     }
+    /**
+     * Returns an immutable {@code EventId} set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<EventId> getEventIds() {
+        return Collections.unmodifiableSet(events.stream().map(Event::getEventId).collect(Collectors.toSet()));
+    }
+    /**
+    * Returns an immutable {@code Event} set, which throws {@code UnsupportedOperationException}
+    * if modification is attempted.
+    */
+    public Set<Event> getEvents() {
+        return Collections.unmodifiableSet(events);
+    }
+
+    /**
+     * Adds an {@code Event} related to the {@code Contact}
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    };
 
     /**
      * Returns true if both persons have the same name.
@@ -105,7 +130,7 @@ public abstract class Contact implements Displayable {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, id);
+        return Objects.hash(name, phone, email, address, tags, contactId);
     }
 
     @Override
@@ -116,7 +141,7 @@ public abstract class Contact implements Displayable {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("id", id)
+                .add("id", contactId)
                 .toString();
     }
 

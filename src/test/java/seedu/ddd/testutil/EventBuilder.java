@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -32,11 +32,11 @@ public class EventBuilder {
 
     public static final Set<Vendor> DEFAULT_VENDOR_SET =
             new HashSet<>(Collections.singletonList(new VendorBuilder().build()));
-    public static final Set<Id> DEFAULT_CLIENT_ID_SET =
-            new HashSet<>(Collections.singletonList(new Id(ClientBuilder.DEFAULT_ID)));
+    public static final Set<ContactId> DEFAULT_CLIENT_CONTACT_ID_SET =
+            new HashSet<>(Collections.singletonList(new ContactId(ClientBuilder.DEFAULT_ID)));
 
-    public static final Set<Id> DEFAULT_VENDOR_ID_SET =
-            new HashSet<>(Collections.singletonList(new Id(VendorBuilder.DEFAULT_ID)));
+    public static final Set<ContactId> DEFAULT_VENDOR_CONTACT_ID_SET =
+            new HashSet<>(Collections.singletonList(new ContactId(VendorBuilder.DEFAULT_ID)));
     private Description description = DEFAULT_DESCRIPTION;
     private EventId eventId = DEFAULT_EVENT_ID;
     private List<Client> clients = new ArrayList<>(DEFAULT_CLIENT_LIST);

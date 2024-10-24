@@ -13,10 +13,11 @@ import java.util.Set;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;
 
@@ -38,7 +39,8 @@ public class ClientBuilder {
     private Address address;
     private Date date;
     private Set<Tag> tags;
-    private Id id;
+    private ContactId contactId;
+    private Set<EventId> eventIds;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -50,7 +52,8 @@ public class ClientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
-        id = new Id(DEFAULT_ID);
+        contactId = new ContactId(DEFAULT_ID);
+        eventIds = new HashSet<>();
     }
 
     /**
@@ -63,7 +66,8 @@ public class ClientBuilder {
         address = clientToCopy.getAddress();
         date = clientToCopy.getDate();
         tags = new HashSet<>(clientToCopy.getTags());
-        id = clientToCopy.getId();
+        contactId = clientToCopy.getId();
+        eventIds = new HashSet<>(clientToCopy.getEventIds());
     }
 
     /**
@@ -115,15 +119,23 @@ public class ClientBuilder {
     }
 
     /**
-     * Sets the {@code ID} of the {@code Client} that we are building.
+     * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
     public ClientBuilder withId(int id) {
-        this.id = new Id(id);
+        this.contactId = new ContactId(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code EventIds} associated to the {@code Client} that we are building.
+     */
+    public ClientBuilder withEventIds(int ... eventIds) {
+        this.eventIds = SampleDataUtil.getEventIdSet(eventIds);
         return this;
     }
 
     public Client build() {
-        return new Client(name, phone, email, address, date, tags, id);
+        return new Client(name, phone, email, address, date, tags, contactId);
     }
 
 }

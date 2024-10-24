@@ -45,7 +45,7 @@ public class ClientCard extends DisplayedCard {
         this.client = client;
 
         name.setText(String.format("%s. %s", displayedIndex, client.getName().fullName));
-        id.setText(String.format("Client: #%d", client.getId().id));
+        id.setText(String.format("Client: #%d", client.getId().contactId));
 
         phone.setText(String.format("📞  Phone Number: %s", client.getPhone()));
         email.setText(String.format("📫  Email: %s", client.getEmail()));

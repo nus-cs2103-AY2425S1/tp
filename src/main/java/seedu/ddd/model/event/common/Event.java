@@ -13,6 +13,8 @@ import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
@@ -47,6 +49,16 @@ public class Event implements Displayable {
     }
 
     /**
+     * Alternative constructor that defers the loading of clients and vendors
+     */
+    public Event(Description description, EventId eventId) {
+        this.description = description;
+        this.eventId = eventId;
+        this.clients = new ArrayList<>();
+        this.vendors = new ArrayList<>();
+    }
+
+    /**
      * Returns true if it is a valid event, which means there must
      * be at least one {@code Client} in clients list.
      * @param testList The {@code ArrayList} of {@code Client} at the constructor.
@@ -56,21 +68,73 @@ public class Event implements Displayable {
     }
 
     /**
-     * Returns the clients list.
-     * @return An {@code ArrayList} of {@code Client}.
+     * Returns the contact list.
+     * @return A {@code List} of {@code Contacts}.
+     */
+    public List<Contact> getContacts() {
+        List<Contact> contacts = new ArrayList<>();
+        contacts.addAll(clients);
+        contacts.addAll(vendors);
+        return Collections.unmodifiableList(contacts);
+    }
+
+    /**
+     * Adds a{@code Client} to an {@code Event}
+     * If the current event is not stored in the client's set of events,
+     * it will add the association
+     */
+    public void addClient(Client client) {
+        clients.add(client);
+        Set<Event> events = client.getEvents();
+        if (!events.contains(this)) {
+            client.addEvent(this);
+        }
+    }
+
+    /**
+     * Adds a{@code Vendor} to an {@code Event}
+     * If the current event is not stored in the vendor's set of events,
+     * it will add the association
+     */
+    public void addVendor(Vendor vendor) {
+        vendors.add(vendor);
+        Set<Event> events = vendor.getEvents();
+        if (!events.contains(this)) {
+            vendor.addEvent(this);
+        }
+    }
+
+    /**
+     * Returns the client list.
+     * @return A {@code List} of {@code Clients}.
      */
     public List<Client> getClients() {
         return Collections.unmodifiableList(clients);
     }
 
     /**
-     * Returns the vendors list.
-     * @return An {@code ArrayList} of {@code Vendor}.
+     * Returns the vendor list.
+     * @return A {@code List} of {@code Vendors}.
      */
     public List<Vendor> getVendors() {
         return Collections.unmodifiableList(vendors);
     }
 
+    /**
+     * Returns the list of client ids.
+     * @return A {@code List} of {@code ContactId}.
+     */
+    public List<ContactId> getClientIds() {
+        return clients.stream().map(Contact::getId).toList();
+    }
+
+    /**
+     * Returns the list of vendor ids.
+     * @return A {@code List} of {@code ContactId}.
+     */
+    public List<ContactId> getVendorIds() {
+        return vendors.stream().map(Contact::getId).toList();
+    }
     /**
      * Returns the event description.
      * @return A {@code String} which represents the description of the event.

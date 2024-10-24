@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.EventId;
 
@@ -39,10 +39,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESC);
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESC).get());
-        Set<Id> clientIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_CLIENTS));
-        Set<Id> vendorIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_VENDORS));
+        Set<ContactId> clientContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_CLIENTS));
+        Set<ContactId> vendorContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_VENDORS));
 
-        return new AddEventCommand(clientIds, vendorIds, description, new EventId(AddressBook.getNextEventId()));
+        return new AddEventCommand(clientContactIds, vendorContactIds, description,
+                new EventId(AddressBook.getNextEventId()));
     }
 
     /**

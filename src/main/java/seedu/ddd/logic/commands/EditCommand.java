@@ -27,8 +27,8 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
@@ -95,11 +95,11 @@ public class EditCommand extends Command {
 
             contactToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            Id targetId = editContactDescriptor.getId().get();
-            assert targetId != null;
+            ContactId targetContactId = editContactDescriptor.getId().get();
+            assert targetContactId != null;
 
             for (Contact contact : model.getFilteredContactList()) {
-                if (contact.getId().equals(targetId)) {
+                if (contact.getId().equals(targetContactId)) {
                     contactToEdit = contact;
                     break;
                 }
@@ -216,7 +216,7 @@ public class EditCommand extends Command {
         protected Email email;
         protected Address address;
         protected Set<Tag> tags;
-        protected Id id;
+        protected ContactId contactId;
 
         public EditContactDescriptor() {}
 
@@ -230,7 +230,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setId(toCopy.id);
+            setId(toCopy.contactId);
         }
 
         /**
@@ -289,12 +289,12 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setId(Id id) {
-            this.id = id;
+        public void setId(ContactId contactId) {
+            this.contactId = contactId;
         }
 
-        public Optional<Id> getId() {
-            return Optional.ofNullable(id);
+        public Optional<ContactId> getId() {
+            return Optional.ofNullable(contactId);
         }
 
         /**
@@ -321,7 +321,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
                     && Objects.equals(tags, otherEditContactDescriptor.tags)
-                    && Objects.equals(id, otherEditContactDescriptor.id);
+                    && Objects.equals(contactId, otherEditContactDescriptor.contactId);
         }
 
         @Override
@@ -332,7 +332,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
-                    .add("id", id)
+                    .add("id", contactId)
                     .toString();
         }
     }
@@ -393,7 +393,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditClientDescriptor.address)
                     && Objects.equals(date, otherEditClientDescriptor.date)
                     && Objects.equals(tags, otherEditClientDescriptor.tags)
-                    && Objects.equals(id, otherEditClientDescriptor.id);
+                    && Objects.equals(contactId, otherEditClientDescriptor.contactId);
         }
 
         @Override
@@ -405,7 +405,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("date", date)
                     .add("tags", tags)
-                    .add("id", id)
+                    .add("id", contactId)
                     .toString();
         }
     }
@@ -466,7 +466,7 @@ public class EditCommand extends Command {
                     && Objects.equals(service, otherEditVendorDescriptor.service)
                     && Objects.equals(address, otherEditVendorDescriptor.address)
                     && Objects.equals(tags, otherEditVendorDescriptor.tags)
-                    && Objects.equals(id, otherEditVendorDescriptor.id);
+                    && Objects.equals(contactId, otherEditVendorDescriptor.contactId);
         }
 
         @Override
@@ -478,7 +478,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("service", service)
                     .add("tags", tags)
-                    .add("id", id)
+                    .add("id", contactId)
                     .toString();
         }
     }

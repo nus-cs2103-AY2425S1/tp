@@ -2,16 +2,18 @@ package seedu.ddd.model.contact.client;
 
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -30,10 +32,10 @@ public class Client extends Contact {
      * @param address A valid address.
      * @param date    A valid date.
      * @param tags    A set of tags associated with the client.
-     * @param id      A valid id.
+     * @param contactId      A valid id.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, Id id) {
-        super(name, phone, email, address, tags, id);
+    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, ContactId contactId) {
+        super(name, phone, email, address, tags, contactId);
         requireAllNonNull(date);
         this.date = date;
     }
@@ -98,5 +100,12 @@ public class Client extends Contact {
                 .add("id", this.getId())
                 .toString();
     }
-
+    @Override
+    public void addEvent(Event event) {
+        super.addEvent(event);
+        List<Client> clients = event.getClients();
+        if (!clients.contains(this)) {
+            event.addClient(this);
+        }
+    }
 }

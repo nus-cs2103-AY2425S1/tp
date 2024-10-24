@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -30,9 +30,10 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
         @JsonProperty("address") String address,
         @JsonProperty("service") String service,
         @JsonProperty("tags") List<JsonAdaptedTag> tags,
-        @JsonProperty("id") int id
+        @JsonProperty("id") int id,
+        @JsonProperty("eventIds") List<JsonAdaptedEventId> eventIds
     ) {
-        super(name, phone, email, address, tags, id);
+        super(name, phone, email, address, tags, id, eventIds);
         this.service = service;
     }
 
@@ -45,8 +46,8 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
     }
 
     @Override
-    public Vendor createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
-            throws IllegalValueException {
+    public Vendor createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            ContactId contactId) throws IllegalValueException {
         if (service == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Service.class.getSimpleName()));
         }
@@ -54,6 +55,6 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
             throw new IllegalValueException(Service.MESSAGE_CONSTRAINTS);
         }
         final Service modelService = new Service(service);
-        return new Vendor(name, phone, email, address, modelService, tags, id);
+        return new Vendor(name, phone, email, address, modelService, tags, contactId);
     }
 }

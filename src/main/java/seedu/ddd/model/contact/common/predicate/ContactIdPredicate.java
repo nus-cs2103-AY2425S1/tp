@@ -4,20 +4,20 @@ import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 
 /**
  * Tests that a {@code Contact}'s {@code Id} matches the given id.
  */
 public class ContactIdPredicate implements Predicate<Contact> {
-    private final Id id;
+    private final ContactId contactId;
 
-    public ContactIdPredicate(Id id) {
-        this.id = id;
+    public ContactIdPredicate(ContactId contactId) {
+        this.contactId = contactId;
     }
     @Override
     public boolean test(Contact contact) {
-        return contact.getId().equals(this.id);
+        return contact.getId().equals(this.contactId);
     }
     @Override
     public boolean equals(Object other) {
@@ -31,10 +31,10 @@ public class ContactIdPredicate implements Predicate<Contact> {
         }
 
         ContactIdPredicate otherContactIdPredicate = (ContactIdPredicate) other;
-        return id.equals(otherContactIdPredicate.id);
+        return contactId.equals(otherContactIdPredicate.contactId);
     }
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("id", id).toString();
+        return new ToStringBuilder(this).add("id", contactId).toString();
     }
 }

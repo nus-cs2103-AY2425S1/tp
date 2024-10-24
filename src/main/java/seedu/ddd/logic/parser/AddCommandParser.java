@@ -25,9 +25,9 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.ContactType;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -83,16 +83,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Id id = new Id(AddressBook.getNextContactId());
+        ContactId contactId = new ContactId(AddressBook.getNextContactId());
 
         Contact contact;
 
         if (contactType == VENDOR) {
             Service service = ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get());
-            contact = new Vendor(name, phone, email, address, service, tagList, id);
+            contact = new Vendor(name, phone, email, address, service, tagList, contactId);
         } else {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            contact = new Client(name, phone, email, address, date, tagList, id);
+            contact = new Client(name, phone, email, address, date, tagList, contactId);
         }
 
         return new AddCommand(contact);

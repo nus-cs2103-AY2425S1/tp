@@ -10,8 +10,8 @@ import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
@@ -29,9 +29,10 @@ class JsonAdaptedClient extends JsonAdaptedContact {
         @JsonProperty("address") String address,
         @JsonProperty("date") String date,
         @JsonProperty("tags") List<JsonAdaptedTag> tags,
-        @JsonProperty("id") int id
+        @JsonProperty("id") int id,
+        @JsonProperty("eventIds") List<JsonAdaptedEventId> eventIds
     ) {
-        super(name, phone, email, address, tags, id);
+        super(name, phone, email, address, tags, id, eventIds);
         this.date = date;
     }
 
@@ -44,8 +45,8 @@ class JsonAdaptedClient extends JsonAdaptedContact {
     }
 
     @Override
-    public Client createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
-            throws IllegalValueException {
+    public Client createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        ContactId contactId) throws IllegalValueException {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -53,6 +54,6 @@ class JsonAdaptedClient extends JsonAdaptedContact {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
-        return new Client(name, phone, email, address, modelDate, tags, id);
+        return new Client(name, phone, email, address, modelDate, tags, contactId);
     }
 }
