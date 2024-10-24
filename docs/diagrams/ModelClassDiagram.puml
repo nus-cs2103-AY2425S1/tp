@@ -23,7 +23,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Relationship
 Class Event
 
 Class I #FFFFFF
@@ -47,12 +47,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 EventBook *--> "1" UniqueEventList
 UniquePersonList --> "~* all" Person
-UniqueEventList --> "~* all" Event
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Relationship
 Event *--> Name
 Event *--> Address
 Event *--> "*" Person : attendees
@@ -60,10 +58,6 @@ Event *--> "*" Person : attendees
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 UniqueEventList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Event
