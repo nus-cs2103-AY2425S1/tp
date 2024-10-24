@@ -1,12 +1,17 @@
 package seedu.address.ui;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -22,6 +27,10 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextArea commandTextArea;
+    @FXML
+    private FontIcon commandTextIcon;
+    @FXML
+    private HBox commandTextContainer;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -33,7 +42,16 @@ public class CommandBox extends UiPart<Region> {
         commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> {
             setStyleToDefault();
         });
-        initaliseEventHandler();
+
+        commandTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                setStyleToFocused();
+            } else {
+                setStyleToUnfocused();
+            }
+        });
+
+        initialiseEventHandler();
     }
 
     /**
@@ -59,7 +77,27 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
+        commandTextIcon.setIconColor(Color.WHITE);
         commandTextArea.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextArea.setStyle("-fx-text-fill: white;");
+    }
+
+    /** Sets the command box style to indicate the command box is focused. */
+    private void setStyleToFocused() {
+        commandTextIcon.setIconColor(Color.WHITE);
+        if (commandTextArea.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+        commandTextArea.setStyle("-fx-text-fill: white;");
+    }
+
+    /** Sets the command box style to indicate the command box is not focused. */
+    private void setStyleToUnfocused() {
+        commandTextIcon.setIconColor(Color.GREY);
+        if (commandTextArea.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+        commandTextArea.setStyle("-fx-text-fill: grey;");
     }
 
     /**
@@ -89,7 +127,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Initialises the Event Handler for the input of commands.
      */
-    private void initaliseEventHandler() {
+    private void initialiseEventHandler() {
         commandTextArea.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case ENTER:

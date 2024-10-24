@@ -55,7 +55,7 @@ public class DeleteCommand extends Command {
         if (confirmationReceived.equals(requiresConfirmation)) {
             return this.execute(model);
         }
-        return new CommandResult(MESSAGE_DELETE_CONFIRMATION, false, false, true, null, false);
+        return new CommandResult(MESSAGE_DELETE_CONFIRMATION, false, false, false, null, true);
     }
 
     @Override

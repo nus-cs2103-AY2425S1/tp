@@ -39,8 +39,9 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithTierAndRemark_success() {
-        Person validPerson = new PersonBuilder().withTier("GOLD").withRemark("big brained").build();
+    public void execute_newPersonWithTierAndRemarkAndStatus_success() {
+        Person validPerson =
+                new PersonBuilder().withTier("GOLD").withRemark("big brained").withStatus("urgent").build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 

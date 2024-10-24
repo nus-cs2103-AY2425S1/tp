@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandCommons.EMPTY_PERSON;
+
 import seedu.address.model.Model;
 
 /**
@@ -16,6 +18,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, null, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, EMPTY_PERSON, false);
     }
 }

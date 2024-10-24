@@ -20,8 +20,8 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@css/DarkTheme.css" />
+        <URL value="@css/Extensions.css" />
       </stylesheets>
 
       <VBox>

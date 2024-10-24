@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -109,6 +110,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAppendedRemark(String remark) {
         descriptor.setAppendedRemark(new Remark(remark));
+        return this;
+    }
+
+    /**
+     * Sets the {@code status} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new Status(status));
         return this;
     }
 

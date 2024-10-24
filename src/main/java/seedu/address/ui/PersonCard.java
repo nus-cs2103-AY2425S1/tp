@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.status.Status;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -41,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane assignedTier;
     @FXML
+    private FlowPane assignedStatus;
+    @FXML
     private VBox cardFields;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,15 +53,16 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         createFields();
+        createStatus();
         createTier();
     }
     private void createFields() {
         name.setText(person.getName().fullName);
-        phone.setText("Phone:", person.getPhone().value);
-        address.setText("Address:", person.getAddress().value);
-        email.setText("Email:", person.getEmail().value);
-        job.setText("Job:", person.getJob().value);
-        income.setText("Income:", person.getIncome().toString());
+        phone.setFields(PersonCardField.ICON_LITERAL_PHONE, person.getPhone().value);
+        address.setFields(PersonCardField.ICON_LITERAL_ADDRESS, person.getAddress().value);
+        email.setFields(PersonCardField.ICON_LITERAL_EMAIL, person.getEmail().value);
+        job.setFields(PersonCardField.ICON_LITERAL_JOB, person.getJob().value);
+        income.setFields(PersonCardField.ICON_LITERAL_INCOME, person.getIncome().toString());
         remark.setText(person.getRemark().value);
         cardFields.getChildren().addAll(phone, address, email, job, income);
     }
@@ -76,5 +80,22 @@ public class PersonCard extends UiPart<Region> {
 
         // Add the label to the FlowPane
         assignedTier.getChildren().add(tierLabel);
+    }
+
+    private void createStatus() {
+        Label statusLabel = new Label(person.getStatus().toParsableString());
+
+        // Apply a different style class based on the status value
+        Status.StatusEnum status = person.getStatus().status;
+        switch (status) {
+        case NONE -> statusLabel.getStyleClass().add("none-status");
+        case NON_URGENT -> statusLabel.getStyleClass().add("nonUrgent-status");
+        case URGENT -> statusLabel.getStyleClass().add("urgent-status");
+        default -> statusLabel = null;
+        }
+        if (statusLabel != null) {
+            assignedStatus.getChildren().add(statusLabel);
+
+        }
     }
 }

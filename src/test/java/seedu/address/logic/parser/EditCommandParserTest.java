@@ -15,11 +15,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEW_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_GOLD;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_REJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -30,6 +32,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_NON_URGENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_GOLD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -54,6 +57,7 @@ import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -100,11 +104,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_INCOME_DESC, Income.MESSAGE_CONSTRAINTS);
-        // invalid new remark which is negative
-        assertParseFailure(parser, "1" + INVALID_NEW_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS);
         // invalid new remark which is empty
-        assertParseFailure(parser, "1" + INVALID_APPEND_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NEW_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
         // invalid appended remark which is empty
+        assertParseFailure(parser, "1" + INVALID_APPEND_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
@@ -117,6 +122,11 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
                 + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+
+        // multiple invalid values but with purely optional fields, only the first in order of logical parsing is
+        // captured
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC + INVALID_TIER_DESC
+                + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Tier.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -183,6 +193,7 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
         // tier
         userInput = targetIndex.getOneBased() + TIER_DESC_GOLD;
         descriptor = new EditPersonDescriptorBuilder().withTier(VALID_TIER_GOLD).build();
@@ -198,6 +209,12 @@ public class EditCommandParserTest {
         // remark append
         userInput = targetIndex.getOneBased() + APPEND_REMARK_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withAppendedRemark(VALID_REMARK_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // status
+        userInput = targetIndex.getOneBased() + STATUS_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withStatus(VALID_STATUS_NON_URGENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -219,7 +236,7 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TIER_DESC_GOLD + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TIER_DESC_GOLD
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TIER_DESC_REJECT;

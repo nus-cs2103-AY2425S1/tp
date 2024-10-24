@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -16,14 +17,13 @@ import seedu.address.model.tier.Tier;
  */
 public class PersonBuilder {
 
+    // defaults shown here belong to mandatory fields, and are hence not present in CommandCommons
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOB = "Engineer";
     public static final int DEFAULT_INCOME = 0;
-    public static final String DEFAULT_TIER = CommandCommons.DEFAULT_TIER;
-    public static final String DEFAULT_REMARK = CommandCommons.DEFAULT_REMARK;
 
     private Name name;
     private Phone phone;
@@ -33,6 +33,7 @@ public class PersonBuilder {
     private Income income;
     private Tier tier;
     private Remark remark;
+    private Status status;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,8 +45,9 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         job = new Job(DEFAULT_JOB);
         income = new Income(DEFAULT_INCOME);
-        tier = new Tier(DEFAULT_TIER);
-        remark = new Remark(DEFAULT_REMARK);
+        tier = new Tier(CommandCommons.DEFAULT_TIER);
+        remark = new Remark(CommandCommons.DEFAULT_REMARK);
+        status = new Status(CommandCommons.DEFAULT_STATUS);
     }
 
     /**
@@ -60,6 +62,7 @@ public class PersonBuilder {
         income = personToCopy.getIncome();
         tier = personToCopy.getTier();
         remark = personToCopy.getRemark();
+        status = personToCopy.getStatus();
     }
 
     /**
@@ -71,10 +74,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tier} into a {@code Set<Tier>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTier(String tier) {
-        this.tier = new Tier(tier);
+    public PersonBuilder withPhone(String phone) {
+        this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmail(String email) {
+        this.email = new Email(email);
         return this;
     }
 
@@ -94,7 +105,6 @@ public class PersonBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code Income} of the {@code Person} that we are building.
      */
@@ -102,34 +112,32 @@ public class PersonBuilder {
         this.income = new Income(income);
         return this;
     }
-
-
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Parses the {@code tier} into a {@code Set<Tier>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withTier(String tier) {
+        this.tier = new Tier(tier);
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }
 
+    /**
+     * Sets the {@code status} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, job, income, tier, remark);
+        return new Person(name, phone, email, address, job, income, tier, remark, status);
     }
 
 }

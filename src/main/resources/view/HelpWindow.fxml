@@ -17,7 +17,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@HelpWindow.css" />
+        <URL value="@css/HelpWindow.css" />
       </stylesheets>
 
       <VBox fx:id="mainContainer" alignment="CENTER" spacing="10" styleClass="help-window">

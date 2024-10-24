@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandCommons.EMPTY_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback",
-                false, false, false, null, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, EMPTY_PERSON, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -31,11 +31,11 @@ public class CommandResultTest {
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
-                true, false, false, null, false)));
+                true, false, false, EMPTY_PERSON, false)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
-                false, true, false, null, false)));
+                false, true, false, EMPTY_PERSON, false)));
     }
 
     @Test
@@ -50,11 +50,11 @@ public class CommandResultTest {
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                true, false, false, null, false).hashCode());
+                true, false, false, EMPTY_PERSON, false).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                false, true, false, null, false).hashCode());
+                false, true, false, EMPTY_PERSON, false).hashCode());
     }
 
     @Test

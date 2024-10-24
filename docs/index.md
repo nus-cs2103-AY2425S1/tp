@@ -8,10 +8,9 @@ title: AgentAssist
 
 ![Ui](images/Ui.png)
 
-**AgentAssist is a desktop application, designed for banking sales agents to help with managing their contact 
-details.** 
-While it 
-has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**AgentAssist is a desktop application, designed for banking sales agents to help with managing their contact
+details.**
+While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using AgentAssist, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.
   html#quick-start).
