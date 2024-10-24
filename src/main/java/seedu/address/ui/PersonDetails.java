@@ -53,9 +53,7 @@ public class PersonDetails {
         remarkLabel.setText(person.getRemark().value);
 
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-            StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
-            historyText.append(String.join(", \n", activities));
-            Label historyLabel = new Label(historyText.toString());
+            Label historyLabel = new Label(date.toString() + ": \n" + String.join(", \n", activities));
             history.getChildren().add(historyLabel);
         });
 
