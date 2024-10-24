@@ -29,7 +29,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_AVAILABLE_FIELDS = "Available fields to sort by: Name, NumProp";
 
     public static final String MESSAGE_INVALID_ORDER =
-            "Sort contacts using L for ascending order and H for descending order";
+            "Sort contacts using L for low to high order and H for high to low order";
 
     public static final String MESSAGE_SORT_SUCCESS = "Contacts sorted by %1$s in %2$s order";
 
@@ -54,7 +54,7 @@ public class SortCommand extends Command {
         Comparator<Person> comparator;
         switch (field.toLowerCase()) {
         case "name":
-            comparator = Comparator.comparing(person -> person.getName().fullName);
+            comparator = Comparator.comparing(person -> person.getName().getLowerCaseName());
             break;
         case "numprop":
             comparator = Comparator.comparingInt(Person::getTotalNumProps);

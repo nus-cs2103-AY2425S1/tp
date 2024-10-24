@@ -38,6 +38,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the name in lower case.
+     */
+    public String getLowerCaseName() {
+        return fullName.toLowerCase();
+    }
 
     @Override
     public String toString() {
