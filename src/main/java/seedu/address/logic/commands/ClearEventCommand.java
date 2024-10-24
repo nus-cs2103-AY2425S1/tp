@@ -10,6 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.ui.CommandDetailChange;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Clears all events of the address book
@@ -32,6 +34,6 @@ public class ClearEventCommand extends ClearCommand {
         newAddressBook.setEvents(eventList);
 
         model.setAddressBook(newAddressBook);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 }
