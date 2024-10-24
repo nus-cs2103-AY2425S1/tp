@@ -44,6 +44,12 @@ public class AddLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        for (Log existingLog : model.getFilteredLogList()) {
+            if (existingLog.equals(log)) {
+                throw new CommandException("This log already exists!");
+            }
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
         Person personToUpdate = null;
 
