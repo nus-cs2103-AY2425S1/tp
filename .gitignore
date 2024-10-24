@@ -13,6 +13,7 @@
 /bin
 
 # Storage/log files
+/exports/
 /data/
 /config.json
 /preferences.json

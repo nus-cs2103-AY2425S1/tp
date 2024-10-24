@@ -123,8 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         contactDetailsPanel = new ContactDetails(logic.getFocusedPerson());
         contactDetailsPanelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanel.setContactDetailsPanel(contactDetailsPanel);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -153,18 +152,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the contact details panel for the seleted contact.
-     */
-    public void handlePanelUpdate() {
-        contactDetailsPanel.setPerson(logic.getFocusedPerson());
-    }
-
-    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
+            helpWindow.fillInnerParts();
             helpWindow.show();
         } else {
             helpWindow.focus();
@@ -197,10 +190,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isUpdatePanel()) {
-                handlePanelUpdate();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

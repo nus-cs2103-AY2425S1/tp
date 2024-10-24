@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -21,42 +22,28 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
-    private ContactDetails contactDetails;
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, ObjectProperty<Person> focusedPerson) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
         // Add event handler
-        personListView.setOnMouseClicked(this::handleListViewClick);
-    }
-
-    /**
-     * Sets the contactDetails panel.
-     *
-     * @param contactDetails The contactDetails object to be stored.
-     */
-    public void setContactDetailsPanel(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
-
-        // Logging here to verify the setter works
-        logger.finer("ContactDetails reference: " + this.contactDetails);
+        personListView.setOnMouseClicked(event -> handleListViewClick(event, focusedPerson));
     }
 
     /**
      * When user clicks on a person, the details plane changes.
      */
-    private void handleListViewClick(MouseEvent event) {
+    private void handleListViewClick(MouseEvent event, ObjectProperty<Person> focusedPerson) {
         // Get the index of the clicked item
         int index = personListView.getSelectionModel().getSelectedIndex();
         Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
 
         if (index != -1) {
-            contactDetails.setPerson(selectedPerson);
+            focusedPerson.set(selectedPerson);
             logger.info("Clicked on person: " + selectedPerson + " at index " + index);
         } else {
             logger.info("Clicked on an empty area of the ListView");

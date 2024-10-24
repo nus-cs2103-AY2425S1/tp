@@ -1,14 +1,15 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,8 +19,6 @@ public class ContactDetails extends UiPart<Region> {
 
     private static final String FXML = "ContactDetails.fxml";
     private final Logger logger = LogsCenter.getLogger(ContactDetails.class);
-
-    private Person person;
 
     @FXML
     private HBox contactDetailsPanel;
@@ -45,20 +44,46 @@ public class ContactDetails extends UiPart<Region> {
     /**
      * Creates a {@code ContactDetailsPanel} with the given {@code Person} information.
      */
-    public ContactDetails(Person person) {
+    public ContactDetails(ObjectProperty<Person> person) {
         super(FXML);
-        this.person = person;
+        person.addListener((observable, oldValue, newValue) -> displayPerson(newValue));
+    }
+
+    private void addNote(String note) {
+        Label label = new Label("• " + note);
+        // TODO: use classes instead
+        label.setId("notes-label");
+        notesList.getChildren().add(label);
     }
 
     /**
      * Sets the person object as the contact to be displayed on the panel.
      *
      * @param person The person object to be updated onto the panel.
-     */
-    public void setPerson(Person person) {
-        this.person = person;
-        this.clearPanel();
-        this.setPanelInformation();
+    */
+    private void displayPerson(Person person) {
+        logger.info("Displaying info of " + person.toString());
+        clearPanel();
+
+        name.setText(person.getName().fullName);
+        phoneNo.setText("Mobile: " + person.getPhone().toString());
+        email.setText("Email: " + person.getEmail().toString());
+        address.setText("Address: " + person.getAddress().toString());
+
+        if (!person.getNotes().isEmpty()) {
+            Label notesHeader = new Label("Notes");
+            notesHeader.setId("notes-header");
+            notesList.getChildren().add(notesHeader);
+        }
+
+        int index = 1;
+        for (Note note : person.getNotes()) {
+            Label label = new Label(index + ". " + note.getNote());
+            label.setId("notes-label");
+            notesList.getChildren().add(label);
+
+            index++;
+        }
     }
 
     /**
@@ -72,33 +97,5 @@ public class ContactDetails extends UiPart<Region> {
         address.setText("");
         notes.setText("");
         notesList.getChildren().clear();
-    }
-
-    /**
-     * Adds the contact details of the person into the panel.
-     */
-    private void setPanelInformation() {
-        // Update with new person details if person is not null
-        if (person != null) {
-            logger.info("Displaying info of " + person.toString());
-
-            name.setText(person.getName().fullName);
-            phoneNo.setText("Mobile: " + person.getPhone().toString());
-            email.setText("Email: " + person.getEmail().toString());
-            address.setText("Address: " + person.getAddress().toString());
-
-            if (!person.getNotes().isEmpty()) {
-                Label notesHeader = new Label("Notes");
-                notesHeader.setId("notes-header");
-                notesList.getChildren().add(notesHeader);
-                person.getNotes().stream()
-                        .sorted(Comparator.comparing(note -> note.getNote()))
-                        .forEach(note -> {
-                            Label label = new Label("• " + note.getNote());
-                            label.setId("notes-label");
-                            notesList.getChildren().add(label);
-                        });
-            }
-        }
     }
 }

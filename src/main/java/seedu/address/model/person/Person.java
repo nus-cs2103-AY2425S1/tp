@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ObjectPropertyBase;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -79,6 +81,29 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Wraps the Person so that it becomes an ObjectProperty
+     *
+     * @param person the person to wrap around
+     * @return an ObjectProperty of the person
+     * @see ObjectProperty
+     */
+    public static ObjectProperty<Person> personProperty(Person person) {
+        ObjectProperty<Person> property = new ObjectPropertyBase<>() {
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "";
+            }
+        };
+        property.set(person);
+        return property;
     }
 
     /**

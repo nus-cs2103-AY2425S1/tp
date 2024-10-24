@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -47,7 +48,7 @@ public interface Logic {
     /**
      * Returns the person who will be focused on.
      */
-    Person getFocusedPerson();
+    ObjectProperty<Person> getFocusedPerson();
 
     /**
      * Set the user prefs' GUI settings.
