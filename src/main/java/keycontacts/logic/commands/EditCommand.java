@@ -88,7 +88,7 @@ public class EditCommand extends Command {
         if (studentsInGroup.isEmpty()) {
             // this means the edited student does not share a group with anyone
 
-            // handle the case where the student's is removed from a group
+            // handle the case where the student is removed from a group
             // in this case we clear the student's lessons (as they are being removed from the group)
             if (!studentToEdit.getGroup().isNoGroup()
                     && !editedStudent.getGroup().isSameGroup(studentToEdit.getGroup())) {
