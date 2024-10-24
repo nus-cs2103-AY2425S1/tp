@@ -1,0 +1,73 @@
+//@author Aditya Joshi
+//adapted from https://github.com/AY2324S1-CS2103T-F08-3/tp/blob/master/docs/diagrams/EditSequenceDiagram.puml
+//with slight modifications
+
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "r:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("args")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("args")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("args")
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser : r
+deactivate EditCommand
+
+EditCommandParser --> AddressBookParser : r
+deactivate EditCommandParser
+
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+EditCommand -> Model : editPerson(Person)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand : result
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
