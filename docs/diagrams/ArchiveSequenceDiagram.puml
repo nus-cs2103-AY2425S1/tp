@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ArchiveCommandParser" as ArchiveCommandParser LOGIC_COLOR
+participant "a:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant "<<class>>\nInspectWindow" as InspectWindow UI_COLOR
+end box
+
+[-> LogicManager : execute("archive 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("archive 1")
+activate AddressBookParser
+
+create ArchiveCommandParser
+AddressBookParser -> ArchiveCommandParser
+activate ArchiveCommandParser
+
+ArchiveCommandParser --> AddressBookParser
+deactivate ArchiveCommandParser
+
+AddressBookParser -> ArchiveCommandParser : parse("1")
+activate ArchiveCommandParser
+
+create ArchiveCommand
+ArchiveCommandParser -> ArchiveCommand
+activate ArchiveCommand
+
+ArchiveCommand --> ArchiveCommandParser :
+deactivate ArchiveCommand
+
+ArchiveCommandParser --> AddressBookParser : a
+deactivate ArchiveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ArchiveCommandParser -[hidden]-> AddressBookParser
+destroy ArchiveCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> ArchiveCommand : execute(m)
+activate ArchiveCommand
+
+ArchiveCommand -> InspectWindow : getInspectedPerson()
+activate InspectWindow
+
+InspectWindow --> ArchiveCommand : inspectedPerson
+deactivate InspectWindow
+
+ArchiveCommand -> ArchiveCommand : archiveDeliveries(...)
+activate ArchiveCommand
+
+ArchiveCommand -> Person : deleteDelivery(targetIndex)
+activate Person
+
+Person -[hidden]-> ArchiveCommand
+
+ArchiveCommand -> Person : addDelivery(deliveryToArchive)
+
+Person -[hidden]-> ArchiveCommand
+deactivate Person
+
+ArchiveCommand --> ArchiveCommand
+deactivate ArchiveCommand
+
+create CommandResult
+ArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ArchiveCommand
+deactivate CommandResult
+
+ArchiveCommand --> LogicManager : r
+deactivate ArchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
