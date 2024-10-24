@@ -32,6 +32,7 @@ public class Volunteer {
      * @param phone The phone number of the volunteer.
      * @param email The email address of the volunteer.
      * @param availableDate The date the volunteer is available.
+     * @param involvedIn The list of events the volunteer has.
      */
     public Volunteer(Name name, Phone phone, Email email, Date availableDate, List<String> involvedIn) {
         requireAllNonNull(name, phone, email, availableDate);
@@ -91,7 +92,7 @@ public class Volunteer {
             return true;
         }
         return otherVolunteer != null
-                && otherVolunteer.getName().equals(getName());
+                && otherVolunteer.getName().isSameName(getName());
     }
 
     /**
