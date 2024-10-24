@@ -59,6 +59,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_ADD_PARENT_TO_NON_STUDENT = "Unable to add parent-related field to non-student!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,6 +79,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -85,6 +87,11 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (!(personToEdit instanceof Student) && editPersonDescriptor.containsParentField()) {
+            throw new CommandException(MESSAGE_ADD_PARENT_TO_NON_STUDENT);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         if (personToEdit instanceof Student studentToEdit) {
             editedPerson = createEditedPerson(studentToEdit, editPersonDescriptor);
@@ -192,6 +199,13 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, parentName, parentPhone, parentEmail);
+        }
+
+        /**
+         * Returns true if at least one parent field is edited.
+         */
+        public boolean containsParentField() {
+            return CollectionUtil.isAnyNonNull(parentName, parentPhone, parentEmail);
         }
 
         public void setName(Name name) {

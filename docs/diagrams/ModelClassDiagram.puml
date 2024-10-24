@@ -44,11 +44,11 @@ AddressBook *--> "1" ArchivedPersonList
 ArchivedPersonList --> "~* all" Person
 UniquePersonList --> "~* all" Person
 Person *--> "1" Name
-Person *--> "1"Phone
-Person *--> "1"Email
-Person *--> "1"Address
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "*" Tag
-Student *--> "1"Grade
+Student *--> "1" Grade
 Student "child" <-right-> "parent"Parent:"                     "
 
 Person -[hidden]up--> I
