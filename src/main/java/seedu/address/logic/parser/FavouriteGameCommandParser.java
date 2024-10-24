@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FavouriteGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -23,7 +24,8 @@ public class FavouriteGameCommandParser implements Parser<FavouriteGameCommand> 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException("invalid cmd");
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    FavouriteGameCommand.MESSAGE_USAGE), pe);
         }
 
         gameName = argMultimap.getValue(PREFIX_GAME).orElse("");
