@@ -163,7 +163,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        final Remark remark = new Remark("Test remark command");
         SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " "
                 + PREFIX_NAME);
         assertEquals(new SortCommand(PersonComparator.NAME, true), command);
