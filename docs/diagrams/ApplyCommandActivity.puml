@@ -1,0 +1,28 @@
+@startuml
+skinparam {
+  backgroundColor white
+
+  ArrowColor black
+  ArrowThickness 2
+
+  ActivityBackgroundColor green
+  ActivityBorderColor #2980B9
+  ActivityFontColor white
+}
+
+start
+:User adds application\n(executes ApplyCommand);
+
+If () then ([Command is invalid])
+    :Displays message for invalid command format;
+
+    else ([else])
+
+        :Gets company by index;
+        :Adds application to the company;
+        :Display updated list of companies;
+
+        endif
+
+stop
+@enduml

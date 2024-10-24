@@ -187,6 +187,9 @@ Step 4. The changes are committed to the address book by calling `AddressBook#se
 
 <puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
 
+Below displays an activity diagram that explains roughly what happens when a user tries to add an applcation:
+<puml src="diagrams/ApplyCommandActivity.puml" alt="ApplyCommandActivity" />
+
 #### Design considerations:
 
 **Aspect: How to store the applications:**
