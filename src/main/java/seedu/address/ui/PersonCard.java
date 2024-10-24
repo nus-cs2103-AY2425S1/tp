@@ -60,13 +60,17 @@ public class PersonCard extends UiPart<Region> {
 
         Label extraLabel;
         if (person instanceof Guest g) {
-            extraLabel = new Label("RSVP: " + g.getRsvp().value);
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp());
+            Label relationLabel = new Label("Relation: " + g.getRelation());
+            relationLabel.getStyleClass().add("cell_small_label");
+            rsvpLabel.getStyleClass().add("cell_small_label");
+            cardPaneContents.getChildren().add(rsvpLabel);
+            cardPaneContents.getChildren().add(relationLabel);
         } else {
             Vendor v = (Vendor) person;
             extraLabel = new Label("Company: " + v.getCompany().value);
+            cardPaneContents.getChildren().add(extraLabel);
         }
-        extraLabel.getStyleClass().add("cell_small_label");
-        cardPaneContents.getChildren().add(extraLabel);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

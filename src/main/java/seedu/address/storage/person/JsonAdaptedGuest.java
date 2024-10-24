@@ -12,6 +12,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.JsonAdaptedTag;
@@ -22,6 +23,7 @@ import seedu.address.storage.JsonAdaptedTag;
  */
 public class JsonAdaptedGuest extends JsonAdaptedPerson {
     private final String rsvp;
+    private final String relation;
 
     /**
      * Constructs a {@code JsonAdaptedGuest} with the given guest details.
@@ -33,10 +35,12 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("rsvp") String rsvp,
+            @JsonProperty("relation") String relation,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         setType(type);
         this.rsvp = rsvp;
+        this.relation = relation;
     }
 
     /**
@@ -45,6 +49,7 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
     public JsonAdaptedGuest(Guest source) {
         super(source);
         this.rsvp = source.getRsvp().value;
+        this.relation = source.getRelation().relation;
     }
 
     /**
@@ -57,10 +62,19 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
         if (rsvp == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rsvp.class.getSimpleName()));
         }
+
+        if (relation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Relation.class.getSimpleName()));
+        }
     }
 
     public Rsvp getModelRsvp() {
         return new Rsvp(rsvp);
+    }
+
+    public Relation getModelRelation() {
+        return new Relation(relation);
     }
 
     /**
@@ -76,6 +90,7 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
         Address modelAddress = getModelAddress();
         Set<Tag> modelTags = getModelTags();
         Rsvp modelRsvp = getModelRsvp();
-        return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRsvp);
+        Relation modelRelation = getModelRelation();
+        return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRsvp, modelRelation);
     }
 }

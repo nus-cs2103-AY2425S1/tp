@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,8 +34,8 @@ public class EditGuestCommandParser implements Parser<EditGuestCommand> {
     public EditGuestCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RSVP,
-                        PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_RSVP, PREFIX_RELATION, PREFIX_TAG);
 
         Index index;
 
@@ -44,7 +45,8 @@ public class EditGuestCommandParser implements Parser<EditGuestCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGuestCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RSVP);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_RSVP, PREFIX_RELATION);
 
         EditGuestDescriptor editGuestDescriptor = new EditGuestDescriptor();
 
@@ -62,6 +64,9 @@ public class EditGuestCommandParser implements Parser<EditGuestCommand> {
         }
         if (argMultimap.getValue(PREFIX_RSVP).isPresent()) {
             editGuestDescriptor.setRsvp(ParserUtil.parseRsvp(argMultimap.getValue(PREFIX_RSVP).get()));
+        }
+        if (argMultimap.getValue(PREFIX_RELATION).isPresent()) {
+            editGuestDescriptor.setRelation(ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editGuestDescriptor::setTags);
 

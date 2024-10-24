@@ -71,7 +71,8 @@ public class EditGuestDescriptorTest {
                 + editGuestDescriptor.getEmail().orElse(null) + ", address="
                 + editGuestDescriptor.getAddress().orElse(null) + ", tags="
                 + editGuestDescriptor.getTags().orElse(null) + ", RSVP="
-                + editGuestDescriptor.getRsvp().orElse(null) + "}";
+                + editGuestDescriptor.getRsvp().orElse(null) + ", Relation="
+                + editGuestDescriptor.getRelation().orElse(null) + "}";
         assertEquals(expected, editGuestDescriptor.toString());
     }
 }
