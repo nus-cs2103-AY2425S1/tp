@@ -25,6 +25,7 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_AUTOCOMPLETE_OPTIONS = "No available commands match for"
             + " autocomplete! \n%1$s";
+    public static final String MESSAGE_TAG_NOT_FOUND_IN_PERSON = "Warning: tag %1$s not found in person %2$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

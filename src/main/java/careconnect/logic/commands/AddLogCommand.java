@@ -57,7 +57,7 @@ public class AddLogCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToAddLog}
      */
     private static Person createPersonWithNewLog(Person personToAddLog, Log newLog) {
-        requireNonNull(personToAddLog != null);
+        requireNonNull(personToAddLog);
 
         Name name = personToAddLog.getName();
         Phone phone = personToAddLog.getPhone();
