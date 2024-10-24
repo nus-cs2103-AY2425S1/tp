@@ -93,6 +93,7 @@ public class Restaurant {
         if (price == null) {
             return Collections.emptySet();
         }
+        assert price != null : "Price should not be null";
         return Collections.singleton(price);
     }
 
