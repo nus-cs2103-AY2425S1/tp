@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.list_commands;
+package seedu.address.logic.commands.listcommands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showAssignmentAtIndex;

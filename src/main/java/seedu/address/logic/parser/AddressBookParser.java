@@ -22,11 +22,11 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.list_commands.ListAssignmentsCommand;
-import seedu.address.logic.commands.list_commands.ListPersonCommand;
-import seedu.address.logic.commands.list_commands.ListProjectCommand;
-import seedu.address.logic.commands.list_commands.ListProjectMembersCommand;
 import seedu.address.logic.commands.UnassignCommand;
+import seedu.address.logic.commands.listcommands.ListAssignmentsCommand;
+import seedu.address.logic.commands.listcommands.ListPersonCommand;
+import seedu.address.logic.commands.listcommands.ListProjectCommand;
+import seedu.address.logic.commands.listcommands.ListProjectMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

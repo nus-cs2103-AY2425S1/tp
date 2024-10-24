@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.list_commands;
+package seedu.address.logic.commands.listcommands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,7 +9,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentProjectPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.ui.DisplayType;
 
 /**
@@ -45,7 +44,8 @@ public class ListProjectMembersCommand extends ListCommand {
         );
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED, filteredAssignments.size()), DisplayType.PERSON_LIST);
+                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED,
+                        filteredAssignments.size()), DisplayType.PERSON_LIST);
     }
 
     @Override
