@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box APPLY APPLY_COLOR_T1
+participant ":LogicManager" as LogicManager APPLY_COLOR
+participant ":AddressBookParser" as AddressBookParser APPLY_COLOR
+participant "command:ApplyCommand" as ApplyCommand APPLY_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("apply 1 n/...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand()
+activate AddressBookParser
+
+create ApplyCommand
+AddressBookParser -> ApplyCommand
+activate ApplyCommand
+
+ApplyCommand --> AddressBookParser
+deactivate ApplyCommand
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> ApplyCommand : execute()
+activate ApplyCommand
+
+ApplyCommand -> Model : execute()
+activate Model
+
+Model --> ApplyCommand
+deactivate Model
+
+ApplyCommand --> LogicManager : result
+deactivate ApplyCommand
+ApplyCommand -[hidden]-> LogicManager : result
+destroy ApplyCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
