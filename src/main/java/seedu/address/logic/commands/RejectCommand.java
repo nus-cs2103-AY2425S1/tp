@@ -49,6 +49,8 @@ public class RejectCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToReject = model.findPersonByNameAndJob(name, job);
+        Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone()
+                , personToReject.getEmail(), personToReject.getTags());
 
         if (personToReject == null) {
             if (!model.isJobPresent(job)) {
@@ -60,7 +62,9 @@ public class RejectCommand extends Command {
         if (personToReject.isRejected()) {
             throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED, name));
         }
-        personToReject.markAsRejected();
+
+        personRejected.markAsRejected();
+        model.setPerson(personToReject, personRejected);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
                 this.name));
