@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showWeddingAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEDDING;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
@@ -40,14 +40,14 @@ public class ListWeddingCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        int numberOfPersons = model.getAddressBook().getPersonList().size();
-        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
-        if (numberOfPersons == 0) {
-            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_EMPTY, expectedModel);
+        showWeddingAtIndex(model, INDEX_FIRST_WEDDING);
+        int numberOfWeddings = model.getWeddingBook().getWeddingList().size();
+        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your address book";
+        if (numberOfWeddings == 0) {
+            assertCommandSuccess(new ListWeddingCommand(), model, ListWeddingCommand.MESSAGE_EMPTY, expectedModel);
         } else {
-            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS
-                    + numberOfContacts, expectedModel);
+            assertCommandSuccess(new ListWeddingCommand(), model, ListWeddingCommand.MESSAGE_SUCCESS
+                    + numberOfEvents, expectedModel);
         }
     }
 
