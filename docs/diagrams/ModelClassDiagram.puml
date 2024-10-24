@@ -19,7 +19,6 @@ Package Model as ModelPackage <<Rectangle>> {
         Class Email
         Class Name
         Class Phone
-        Class Tag
     }
 
     Package "Wedding " {
@@ -31,6 +30,7 @@ Package Model as ModelPackage <<Rectangle>> {
 
     Package "Tag " {
         Class UniqueTagList
+        Class Tag
         Class TagName
     }
 
@@ -65,8 +65,6 @@ UniqueWeddingList ---> "~* all" Wedding
 Wedding *--> "1" WeddingName
 Wedding *--> "2" Person
 Wedding *--> "1" WeddingAddress
-
-WeddingName <-- Wedding
 
 UniqueTagList --> "* all" Tag
 
