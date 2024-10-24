@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
+    private boolean isInitialized = false; // Add this flag
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
@@ -36,7 +37,9 @@ public class PersonListPanel extends UiPart<Region> {
         titleLabel.setText(title);
 
         // Wait for the personListView to be initialized
-        Platform.runLater(this::setupAutoScroll);
+        Platform.runLater(() -> {
+            setupAutoScroll(personList);
+        });
     }
 
     /**
@@ -56,17 +59,29 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
-    private void setupAutoScroll() {
+    private void setupAutoScroll(ObservableList<Person> personList) {
         personListView.getItems().addListener((ListChangeListener<Person>) change -> {
             while (change.next()) {
-                if (change.wasAdded()) {
+                if (change.wasAdded() && isInitialized) {
                     Platform.runLater(() -> {
                         personListView.scrollTo(change.getTo());
                         personListView.getSelectionModel().select(change.getTo() - 1);
                     });
                     break;
                 }
+                if (change.wasRemoved()) {
+                    Platform.runLater(() -> {
+                        int removalIndex = change.getFrom();
+                        if (removalIndex >= personList.size()) {
+                            removalIndex = Math.max(0, personList.size() - 1);
+                        }
+                        personListView.scrollTo(removalIndex);
+                        personListView.getSelectionModel().select(removalIndex);
+                    });
+                    break;
+                }
             }
         });
+        isInitialized = true;
     }
 }
