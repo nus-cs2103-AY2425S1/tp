@@ -48,11 +48,12 @@ public class MarkAttendanceByTutorialCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
+        Tutorial tutorial = new Tutorial("Math");
         MarkAttendanceByTutorialCommand markAttendanceCommand = new MarkAttendanceByTutorialCommand(
-                new Tutorial("Math"), "12/12/2024");
-        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName() + "{targetIndex="
-                + targetIndex + "}";
+                tutorial, "12/12/2024");
+        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName()
+                + "{tutorial=" + tutorial + ", "
+                + "attendance=12/12/2024}";
         assertEquals(expected, markAttendanceCommand.toString());
     }
 }
