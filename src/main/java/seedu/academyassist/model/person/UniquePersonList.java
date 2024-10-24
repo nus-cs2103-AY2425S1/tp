@@ -208,4 +208,10 @@ public class UniquePersonList implements Iterable<Person> {
         ));
     }
 
+    /**
+     * Sorts the internal list of persons by their studentIds in-place.
+     */
+    public void sortPersonsById() {
+        internalList.sort(Comparator.comparing(person -> person.getStudentId().toString()));
+    }
 }

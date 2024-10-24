@@ -116,6 +116,13 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     /**
+     * Sorts persons in this address book by studentId, in alphabetical order.
+     */
+    public void sortPersonsById() {
+        persons.sortPersonsById();
+    }
+
+    /**
      * Returns True if this {@code AddressBook} contains Person with given {@code Ic}
      */
     public boolean hasPersonWithIc(Ic ic) {
@@ -221,5 +228,6 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     public int hashCode() {
         return persons.hashCode();
     }
+
 
 }

@@ -3,7 +3,9 @@ package seedu.academyassist.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academyassist.commons.core.LogsCenter;
@@ -35,6 +37,10 @@ public class PersonDetailWindow extends UiPart<Stage> {
     private Label address;
     @FXML
     private Label subject;
+    @FXML
+    private Label closeWindowMessage;
+    @FXML
+    private Scene scene;
 
     /**
      * Creates a new PersonDetailWindow.
@@ -43,6 +49,7 @@ public class PersonDetailWindow extends UiPart<Stage> {
      */
     public PersonDetailWindow(Stage root) {
         super(FXML, root);
+        addKeyEventHandler(root);
     }
 
     /**
@@ -77,7 +84,7 @@ public class PersonDetailWindow extends UiPart<Stage> {
         LOGGER.fine(String.format("Showing details of student %s", studentId));
 
         // Display the student details
-        studentId.setText("Student ID: " + person.getStudentId().value);
+        studentId.setText("Student ID:" + person.getStudentId().value);
         name.setText("Name: " + person.getName().fullName);
         ic.setText("IC: " + person.getIc().value);
         yearGroup.setText("Year: " + person.getYearGroup().value);
@@ -85,7 +92,7 @@ public class PersonDetailWindow extends UiPart<Stage> {
         email.setText("Email: " + person.getEmail().value);
         address.setText("Address: " + person.getAddress().value);
         subject.setText("Subject(s) taken: " + person.getSubjects().toString());
-
+        closeWindowMessage.setText("\nPress 'B' to close this window");
 
         getRoot().show();
         getRoot().centerOnScreen();
@@ -110,5 +117,32 @@ public class PersonDetailWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Close the person detail window.
+     */
+    private void closeWindow() {
+        getRoot().close();
+    }
+
+    /**
+     * Add key event handler to the root stage.
+     * @param root The root stage to add the key event handler to.
+     */
+    private void addKeyEventHandler(Stage root) {
+        if (root.getScene() == null) {
+            root.setScene(scene);
+        } else {
+            scene = root.getScene();
+        }
+
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.B) {
+                LOGGER.fine("Closing student details window with key press");
+                closeWindow();
+                event.consume();
+            }
+        });
     }
 }

@@ -48,4 +48,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the Model instance.
+     */
+    Model getModel();
 }
