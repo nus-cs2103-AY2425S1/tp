@@ -249,11 +249,11 @@ public class ParserUtilTest {
         String noDuplicateIndexes = "1 2 3";
         Set<Index> expectedIndexesSet = Set.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3));
         List<Index> expectedIndexes = expectedIndexesSet.stream()
-                .sorted()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
                 .collect(Collectors.toList());
         Set<Index> actualIndexesSet = ParserUtil.parsePersonIndexString(noDuplicateIndexes);
         List<Index> actualIndexes = actualIndexesSet.stream()
-                .sorted()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
                 .collect(Collectors.toList());
         assertEquals(expectedIndexes, actualIndexes);
     }
