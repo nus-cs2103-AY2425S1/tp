@@ -104,8 +104,7 @@ public class JsonAdaptedStudentCourseAssociationTest {
         JsonAdaptedTutorial validTutorial = new JsonAdaptedTutorial(VALID_TUTORIAL_ID, validCourse);
 
         StudentCourseAssociation sca = new StudentCourseAssociation(validPerson.toModelType(),
-                validCourse.toModelType(), validTutorial.toModelType(), new GradingSystem(),
-                VALID_ATTENDANCE.toModelType());
+                validCourse.toModelType(), validTutorial.toModelType(), VALID_ATTENDANCE.toModelType());
         JsonAdaptedStudentCourseAssociation adaptedSca = new JsonAdaptedStudentCourseAssociation(sca);
         assertEquals(sca, adaptedSca.toModelType());
     }

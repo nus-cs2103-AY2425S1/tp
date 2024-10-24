@@ -65,16 +65,14 @@ class StudentCourseAssociationTest {
         StudentCourseAssociation sca2 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1);
         assertEquals(sca1, sca2);
 
-        StudentCourseAssociation sca3 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1); // Same primary keys
+        StudentCourseAssociation sca3 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1, ATTENDANCE_EXAMPLE_1); // Same primary keys
         assertEquals(sca1, sca3);
     }
 
     @Test
     public void isSameScaDifferentConstructor() {
         StudentCourseAssociation sca1 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1);
-        StudentCourseAssociation sca2 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1); // Same primary keys
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(TEST_PERSON_1, TEST_COURSE_1, TEST_TUTORIAL_1, ATTENDANCE_EXAMPLE_1); // Same primary keys
         assertEquals(sca1, sca2);
     }
 
@@ -91,26 +89,6 @@ class StudentCourseAssociationTest {
         assertNotEquals(sca1, sca2);
     }
 
-    //=========== Constructor with GradingSystem and Attendance =======================================================
-    @Test
-    public void testConstructorWithAllFields() {
-        Person student = new Person(
-                new MatriculationNumber("A1234567A"),
-                new Name("Prof Alex Siow"),
-                new Phone("12345678"),
-                new Email("alexs@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course(new CourseCode("CS2100"), new CourseName("Computer Organisation"));
-        Tutorial tutorial = new Tutorial("T1", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-
-        assertSame(student, sca.getStudent());
-        assertSame(course, sca.getCourse());
-        assertSame(tutorial, sca.getTutorial());
-    }
     @Test
     public void testEqualsMethod() {
         Person student = new Person(
@@ -124,17 +102,14 @@ class StudentCourseAssociationTest {
         Course course = new Course(new CourseCode("CS3230"), new CourseName("Design and Analysis of Algorithms"));
         Tutorial tutorial = new Tutorial("T2", course);
 
-        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         assertEquals(sca1, sca2);
 
         Tutorial differentTutorial = new Tutorial("T3", course);
         StudentCourseAssociation sca3 = new StudentCourseAssociation(
-                student, course, differentTutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+                student, course, differentTutorial, ATTENDANCE_EXAMPLE_1);
         assertFalse(sca1.equals(sca3));
     }
     @Test
@@ -149,11 +124,8 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
         Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
-        GradingSystem grades = sca.getGrades();
-        assertNotNull(grades);
     }
     @Test
     public void testConstructorWithDifferentCourseAndTutorial() {
@@ -167,8 +139,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course(new CourseCode("IS1103"), new CourseName("Computing and Society"));
         Tutorial tutorial = new Tutorial("T5", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         Course courseDiff = new Course(new CourseCode("IS1108"), new CourseName("Unethical Computing"));
         Tutorial tutorialDiff = new Tutorial("T77", course);
@@ -193,10 +164,8 @@ class StudentCourseAssociationTest {
         Course course2 = new Course(new CourseCode("IS1122"), new CourseName("Digital Transformation"));
         Tutorial tutorial = new Tutorial("T6", course1);
 
-        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial, ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial, ATTENDANCE_EXAMPLE_1);
         assertFalse(sca1.equals(sca2));
     }
     @Test
@@ -211,114 +180,9 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course(new CourseCode("IS1131"), new CourseName("Financial Management"));
         Tutorial tutorial = new Tutorial("T14", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         Course retrievedCourse = sca.getCourse();
         assertSame(course, retrievedCourse);
-    }
-
-    @Test
-    void testAddGrade() {
-        Person student = new Person(
-                new MatriculationNumber("A1234556J"),
-                new Name("Prof John Doe"),
-                new Phone("12345678"),
-                new Email("johndoe@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course(new CourseCode("IS1131"), new CourseName("Financial Management"));
-        Tutorial tutorial = new Tutorial("T7", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-
-        sca.addGrade("Midterm", 85.0);
-        assertEquals(85.0, sca.getGrade("Midterm"), 0.001);
-    }
-
-    @Test
-    void testGetLetterGrade() {
-        Person student = new Person(
-                new MatriculationNumber("A1234556J"),
-                new Name("Prof John Doe"),
-                new Phone("12345678"),
-                new Email("johndoe@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course(new CourseCode("IS2102"), new CourseName("Financial Management"));
-        Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-    }
-
-    @Test
-    void testSetAssessmentWeight() {
-        Person student = new Person(
-                new MatriculationNumber("A1234556J"),
-                new Name("Prof John Doe"),
-                new Phone("12345678"),
-                new Email("johndoe@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course(new CourseCode("IS1131"), new CourseName("Financial Management"));
-        Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-
-        sca.addGrade("Midterm", 85.0);
-        sca.addGrade("Final", 95.0);
-        sca.setAssessmentWeight("Midterm", 0.4);
-        sca.setAssessmentWeight("Final", 0.6);
-
-        assertEquals(91.0, sca.getOverallScore(), 0.001);
-    }
-
-    @Test
-    void testGetOverallScore() {
-        Person student = createTestPerson("A1234567K", "Prof Kelly Tan");
-        Course course = new Course(new CourseCode("IS1131"), new CourseName("Financial Management"));
-        Tutorial tutorial = new Tutorial("T8", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-
-        sca.addGrade("Midterm", 85.0);
-        sca.addGrade("Final", 95.0);
-        sca.setAssessmentWeight("Midterm", 0.4);
-        sca.setAssessmentWeight("Final", 0.6);
-
-        assertEquals(91.0, sca.getOverallScore(), 0.001);
-    }
-
-    @Test
-    void testGetAllGrades() {
-        Person student = createTestPerson("A1234567L", "Prof Lim Ah Seng");
-        Course course = new Course(new CourseCode("IS1131"), new CourseName("Financial Management"));
-        Tutorial tutorial = new Tutorial("T9", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial,
-                new GradingSystem(), ATTENDANCE_EXAMPLE_1);
-
-        sca.addGrade("Midterm", 85.0);
-        sca.addGrade("Final", 95.0);
-
-        Map<String, Double> allGrades = sca.getAllGrades();
-        assertEquals(2, allGrades.size());
-        assertTrue(allGrades.containsKey("Midterm"));
-        assertTrue(allGrades.containsKey("Final"));
-        assertEquals(85.0, allGrades.get("Midterm"), 0.001);
-        assertEquals(95.0, allGrades.get("Final"), 0.001);
-    }
-
-    private Person createTestPerson(String matriculationNumber, String name) {
-        return new Person(
-                new MatriculationNumber(matriculationNumber),
-                new Name(name),
-                new Phone("12345678"),
-                new Email(name.toLowerCase().replace(" ", "") + "@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
     }
 }

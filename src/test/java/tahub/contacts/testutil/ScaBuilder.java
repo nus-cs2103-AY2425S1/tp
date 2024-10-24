@@ -36,7 +36,7 @@ public class ScaBuilder {
         );
         Course course = new Course(new CourseCode("CS1000"), new CourseName("Computer Testing"));
         Tutorial tutorial = new Tutorial("T1", course);
-        return new StudentCourseAssociation(student, course, tutorial, new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        return new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
     }
 
     /**
@@ -53,6 +53,6 @@ public class ScaBuilder {
         );
         Course course = new Course(new CourseCode("CS1001"), new CourseName("Computer Testing"));
         Tutorial tutorial = new Tutorial("T1", course);
-        return new StudentCourseAssociation(student, course, tutorial, new GradingSystem(), ATTENDANCE_EXAMPLE_1);
+        return new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
     }
 }

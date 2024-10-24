@@ -1,10 +1,7 @@
 package tahub.contacts.model.studentcourseassociation;
 
-import java.util.Map;
-
 import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.tutorial.Tutorial;
 
@@ -20,7 +17,6 @@ public class StudentCourseAssociation {
      * May be null, if this TA is not the student's tutorial TA.
      */
     private final Tutorial tutorial;
-    private final GradingSystem grades;
     private final Attendance attendance;
 
     /**
@@ -37,7 +33,6 @@ public class StudentCourseAssociation {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        this.grades = new GradingSystem();
         this.attendance = new Attendance();
     }
 
@@ -50,15 +45,12 @@ public class StudentCourseAssociation {
      * @param student the student associated with this association
      * @param course the course associated with this association
      * @param tutorial the tutorial associated with this association
-     * @param gradingSystem the GradingSystem used to manage this student's grades for the associated course
      * @param attendance the Attendance instance associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial,
-                                    GradingSystem gradingSystem, Attendance attendance) {
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial, Attendance attendance) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        this.grades = gradingSystem;
         this.attendance = attendance;
     }
 
@@ -84,56 +76,6 @@ public class StudentCourseAssociation {
         return tutorial;
     }
 
-    //=========== Grade ==================================================================================
-
-    /**
-     * Retrieves the grading system associated with this StudentCourseAssociation.
-     *
-     * @return the grading system used to manage student grades for the associated course
-     */
-    public GradingSystem getGrades() {
-        return grades;
-    }
-
-    /**
-     * Adds a grade for a specific assessment.
-     *
-     * @param assessmentName the name of the assessment
-     * @param score the score achieved
-     */
-    public void addGrade(String assessmentName, double score) {
-        grades.addGrade(assessmentName, score);
-    }
-
-    /**
-     * Sets the weight for a specific assessment.
-     *
-     * @param assessmentName the name of the assessment
-     * @param weight the weight of the assessment in the overall grade calculation
-     */
-    public void setAssessmentWeight(String assessmentName, double weight) {
-        grades.setAssessmentWeight(assessmentName, weight);
-    }
-
-    /**
-     * Gets the grade for a specific assessment.
-     *
-     * @param assessmentName the name of the assessment
-     * @return the grade for the assessment as a percentage, or -1.0 if not found
-     */
-    public double getGrade(String assessmentName) {
-        return grades.getGrade(assessmentName);
-    }
-
-    /**
-     * Gets the overall score for this StudentCourseAssociation.
-     *
-     * @return the overall score as a percentage
-     */
-    public double getOverallScore() {
-        return grades.getOverallScore();
-    }
-
     //=========== Attendance ==================================================================================
 
     /**
@@ -146,15 +88,6 @@ public class StudentCourseAssociation {
     }
 
     //=========== Utility ==================================================================================
-
-    /**
-     * Retrieves all assessment grades.
-     *
-     * @return a Map containing all assessment names and their corresponding scores
-     */
-    public Map<String, Double> getAllGrades() {
-        return grades.getAllGrades();
-    }
 
     /**
      * Compares this StudentCourseAssociation with the specified object for equality.

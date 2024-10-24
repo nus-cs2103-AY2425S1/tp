@@ -88,7 +88,6 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Attendance attendanceModel = this.attendance.toModelType();
 
-        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
-                new GradingSystem(), attendanceModel);
+        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel, attendanceModel);
     }
 }
