@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.security.cert.CertificateNotYetValidException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +7,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
@@ -17,7 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
 
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Student objects.
  */
 public class StudentBuilder {
 
@@ -51,7 +49,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Initializes the StudentBuilder with the data of {@code personToCopy}.
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
@@ -113,6 +111,9 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code AttendanceCount} of the {@code Student} that we are building.
+     */
     public StudentBuilder withAttendanceCount(String attendanceCount) {
         this.attendanceCount = new AttendanceCount(attendanceCount);
         return this;
