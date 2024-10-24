@@ -11,6 +11,7 @@ import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -21,15 +22,19 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private JsonUniqueCourseListStorage courseListStorage;
+    private JsonStudentCourseAssociationListStorage scaListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          JsonUniqueCourseListStorage courseListStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage,
+                          UserPrefsStorage userPrefsStorage,
+                          JsonUniqueCourseListStorage courseListStorage,
+                          JsonStudentCourseAssociationListStorage scaListStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.courseListStorage = courseListStorage;
+        this.scaListStorage = scaListStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -105,5 +110,33 @@ public class StorageManager implements Storage {
     public void saveCourseList(UniqueCourseList courseList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         courseListStorage.saveCourseList(courseList, filePath);
+    }
+
+    //===== student course association list methods =====
+    @Override
+    public Path getScaListFilePath() {
+        return scaListStorage.getScaListFilePath();
+    }
+
+    @Override
+    public Optional<StudentCourseAssociationList> readScaList() throws DataLoadingException {
+        return readScaList(scaListStorage.getScaListFilePath());
+    }
+
+    @Override
+    public Optional<StudentCourseAssociationList> readScaList(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return scaListStorage.readScaList(filePath);
+    }
+
+    @Override
+    public void saveScaList(StudentCourseAssociationList scaList) throws IOException {
+        saveScaList(scaList, scaListStorage.getScaListFilePath());
+    }
+
+    @Override
+    public void saveScaList(StudentCourseAssociationList scaList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        scaListStorage.saveScaList(scaList, filePath);
     }
 }

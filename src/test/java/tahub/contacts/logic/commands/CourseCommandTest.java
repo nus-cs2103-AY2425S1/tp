@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -23,6 +24,8 @@ import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 public class CourseCommandTest {
 
@@ -123,8 +126,18 @@ public class CourseCommandTest {
         }
 
         @Override
+        public void setScaListFilePath(Path scaListFilePath) {
+
+        }
+
+        @Override
         public java.nio.file.Path getCourseListFilePath() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getScaListFilePath() {
+            return null;
         }
 
         @Override
@@ -148,8 +161,18 @@ public class CourseCommandTest {
         }
 
         @Override
+        public void addSca(StudentCourseAssociation sca) {
+
+        }
+
+        @Override
         public UniqueCourseList getCourseList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudentCourseAssociationList getScaList() {
+            return null;
         }
 
         @Override
@@ -168,8 +191,18 @@ public class CourseCommandTest {
         }
 
         @Override
+        public void deleteSca(StudentCourseAssociation target) {
+
+        }
+
+        @Override
         public void addCourse(Course course) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSca(StudentCourseAssociation sca) {
+            return false;
         }
 
         @Override

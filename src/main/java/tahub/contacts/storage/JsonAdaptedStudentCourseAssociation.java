@@ -91,9 +91,9 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Attendance attendanceModel = this.attendance.toModelType();
         // Checks if the GradingSystem is valid
-        if (this.grades == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                JsonSerializableGradingSystem.class.getSimpleName()));
+        if (this.grades == null) { //bypass this check
+            return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
+                    null, attendanceModel);
         }
         final JsonSerializableGradingSystem gradesModel = this.grades;
         return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
