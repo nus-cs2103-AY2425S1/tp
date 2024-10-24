@@ -14,6 +14,8 @@ Package Model as ModelPackage <<Rectangle>>{
 
     Class UniquePersonList
 
+    Class UniqueAppointmentList
+
     Class Person {
         - Name name
         - Phone phone
@@ -30,7 +32,14 @@ Package Model as ModelPackage <<Rectangle>>{
     Class Patient {
             - Gender gender
             - DateOfBirth dateofbirth
-            + Doctor(Name, Phone, Email, Address, Specialty, Set<Tag>)
+            + Patient(Name, Phone, Email, Address, Gender, DateOfBirth, Set<Tag>)
+    }
+
+    Class Appointment {
+            - Doctor doctor
+            - Patient patient
+            - Date date
+            - Time time
     }
 
     Class Address
@@ -41,6 +50,9 @@ Package Model as ModelPackage <<Rectangle>>{
     Class Specialty
     Class DateOfBirth
     Class Gender
+
+    Class Date
+    Class Time
 
     Class I #FFFFFF
 }
@@ -68,6 +80,11 @@ Person *--> DateOfBirth
 Person *--> Specialty
 Person *--> Gender
 
+AddressBook *--> "1" UniqueAppointmentList
+UniqueAppointmentList --> "~* all" Appointment
+Appointment *--> "1" Date
+Appointment *--> "1" Time
+
 Doctor .right.|> Person
 Doctor *--> "1" Specialty
 
@@ -83,4 +100,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Appointment
 @enduml
