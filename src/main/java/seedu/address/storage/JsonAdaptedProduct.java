@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,6 +24,7 @@ class JsonAdaptedProduct {
     private final int stockLevel;
     private final int minStockLevel;
     private final int maxStockLevel;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
@@ -37,6 +41,9 @@ class JsonAdaptedProduct {
         this.stockLevel = stockLevel;
         this.minStockLevel = minStockLevel;
         this.maxStockLevel = maxStockLevel;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -85,7 +92,6 @@ class JsonAdaptedProduct {
             }
             product.setSupplierName(new Name(supplierName));
         }
-
         return product;
     }
 }
