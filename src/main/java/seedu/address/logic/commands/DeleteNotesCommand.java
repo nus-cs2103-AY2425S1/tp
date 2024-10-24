@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -83,10 +84,11 @@ public class DeleteNotesCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        model.setFocusedPerson(this.index);
+        ObjectProperty<Person> focusedPerson = model.getFocusedPerson();
+        focusedPerson.set(personToEdit);
 
         return new CommandResult(String.format(generateSuccessMessage(editedPerson), index.getOneBased()),
-                false, false, true);
+                false, false);
     }
 
     /**
