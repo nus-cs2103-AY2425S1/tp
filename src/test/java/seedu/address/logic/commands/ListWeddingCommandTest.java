@@ -30,7 +30,7 @@ public class ListWeddingCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         int numberOfWeddings = model.getWeddingBook().getWeddingList().size();
-        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your address book";
+        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your wedding book";
         if (numberOfWeddings == 0) {
             assertCommandSuccess(new ListWeddingCommand(), model, ListWeddingCommand.MESSAGE_EMPTY, expectedModel);
         } else {
@@ -43,7 +43,7 @@ public class ListWeddingCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showWeddingAtIndex(model, INDEX_FIRST_WEDDING);
         int numberOfWeddings = model.getWeddingBook().getWeddingList().size();
-        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your address book";
+        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your wedding book";
         if (numberOfWeddings == 0) {
             assertCommandSuccess(new ListWeddingCommand(), model, ListWeddingCommand.MESSAGE_EMPTY, expectedModel);
         } else {
