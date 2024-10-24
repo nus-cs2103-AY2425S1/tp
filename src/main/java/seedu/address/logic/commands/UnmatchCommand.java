@@ -56,8 +56,8 @@ public class UnmatchCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownPeronList = model.getFilteredPersonList();
-        if (contactIndex.getZeroBased() >= lastShownPeronList.size()) {
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        if (contactIndex.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
 
@@ -66,7 +66,7 @@ public class UnmatchCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
 
-        Person contactToUnmatch = lastShownPeronList.get(contactIndex.getZeroBased());
+        Person contactToUnmatch = lastShownPersonList.get(contactIndex.getZeroBased());
         Job jobToUnmatch = lastShownJobList.get(jobIndex.getZeroBased());
 
         assert contactToUnmatch != null;
