@@ -30,11 +30,11 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
     * `list` : Lists all volunteers and events in the VolunSync database.
 
-    * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
+    * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
 
     * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
-    * `/e new n/ Flag Day s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28` : Creates a new record for an event named `Flag Day` to the VolunSync database.
+    * `/e new n/Food collection l/NTUC d/2024-11-29 s/00:00 e/23:59 des/Collecting unsold food from NTUC for distribution` : Creates a new record for an event named `Food collection` to the VolunSync database.
 
     * `/e del 3` : Deletes the third event from the list of events.
 
@@ -96,7 +96,7 @@ Exits the program.
 
 Format: `exit`
 
-### Volunteer-related Commands
+## Volunteer-related Commands
 
 ### Adding a volunteer: `/v new`
 
@@ -165,7 +165,7 @@ Examples:
 * `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
 
 
-### Event-related Commands
+## Event-related Commands
 
 ### Adding an event: `/e new`
 
