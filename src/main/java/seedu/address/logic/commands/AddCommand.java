@@ -6,12 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Adds a person to the address book.
@@ -26,14 +33,15 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]\n"
+            + "[" + PREFIX_WEDDING + "WEDDING]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_WEDDING + "1";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
@@ -41,13 +49,15 @@ public class AddCommand extends Command {
     public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
 
     private final Person toAdd;
+    private final Set<Index> weddingIndices = new HashSet<>();
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddCommand(Person person, Set<Index> weddingIndices) {
         requireNonNull(person);
         toAdd = person;
+        this.weddingIndices.addAll(weddingIndices);
     }
 
     @Override
@@ -64,8 +74,18 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_EMAIL_EXIST);
         }
 
+        generateWeddingJobs(model);
+
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    public void generateWeddingJobs(Model model) {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+
+        for (Index index : weddingIndices) {
+            toAdd.addWeddingJob(weddingList.get(index.getZeroBased()));
+        }
     }
 
     @Override
