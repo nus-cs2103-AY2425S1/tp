@@ -136,7 +136,8 @@ public class ApartmentTest {
 
     @Test
     public void toString_success() {
-        String expectedString = "Apartment Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000; Tags: [Tag1]";
+        String expectedString = "Apartment Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000;  "
+                + "Actual Price: 0; Tags: [Tag1]";
         assertEquals(expectedString, apartment1.toString());
     }
 }

@@ -99,7 +99,8 @@ public class CondoTest {
 
         Condo condo = new Condo(postalCode, unitNumber, price, tags);
 
-        String expectedString = "Condo Postal Code: 567510;  Unit Number: 10-65;  Price: 1500000; Tags: [Spacious]";
+        String expectedString = "Condo Postal Code: 567510;  Unit Number: 10-65;  Price: 1500000;  "
+                + "Actual Price: 0; Tags: [Spacious]";
         assertEquals(expectedString, condo.toString());
     }
 }

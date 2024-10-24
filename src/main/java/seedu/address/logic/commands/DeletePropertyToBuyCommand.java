@@ -124,9 +124,16 @@ public class DeletePropertyToBuyCommand extends Command {
         ObservableList<Property> updatedListOfBuyingProperties = (ObservableList<Property>)
                 editPersonDescriptor.getBuyingProperties()
                 .orElse(personToEdit.getListOfBuyingProperties());
+        ObservableList<Property> updatedListOfPropertiesSold = (ObservableList<Property>)
+                editPersonDescriptor.getPropertiesSold()
+                        .orElse(personToEdit.getListOfPropertiesSold());
+        ObservableList<Property> updatedListOfPropertiesBought = (ObservableList<Property>)
+                editPersonDescriptor.getPropertiesBought()
+                        .orElse(personToEdit.getListOfPropertiesBought());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedListOfSellingProperties, updatedListOfBuyingProperties);
+                updatedListOfSellingProperties, updatedListOfBuyingProperties,
+                updatedListOfPropertiesSold, updatedListOfPropertiesBought);
     }
 
     @Override
@@ -167,6 +174,8 @@ public class DeletePropertyToBuyCommand extends Command {
         private Set<Tag> tags;
         private ObservableList<Property> sellingProperties;
         private ObservableList<Property> buyingProperties;
+        private ObservableList<Property> propertiesSold;
+        private ObservableList<Property> propertiesBought;
 
         public EditPersonPropertyToBuyDescriptor() {}
 
@@ -182,6 +191,8 @@ public class DeletePropertyToBuyCommand extends Command {
             setTags(toCopy.tags);
             setSellingProperties(toCopy.sellingProperties);
             setBuyingProperties(toCopy.buyingProperties);
+            setPropertiesSold(toCopy.propertiesSold);
+            setPropertiesBought(toCopy.propertiesBought);
         }
 
         /**
@@ -267,6 +278,25 @@ public class DeletePropertyToBuyCommand extends Command {
             }
         }
 
+        public void setPropertiesBought(List<Property> propertiesBought) {
+            this.propertiesBought = (propertiesBought != null) ? FXCollections.observableArrayList(propertiesBought)
+                    : null;
+        }
+
+        public Optional<List<Property>> getPropertiesBought() {
+            return Optional.ofNullable(propertiesBought);
+        }
+
+
+        public void setPropertiesSold(List<Property> propertiesSold) {
+            this.propertiesSold = (propertiesSold != null) ? FXCollections.observableArrayList(propertiesSold)
+                    : null;
+        }
+
+        public Optional<List<Property>> getPropertiesSold() {
+            return Optional.ofNullable(propertiesSold);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -285,7 +315,9 @@ public class DeletePropertyToBuyCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.deepEquals(sellingProperties, otherEditPersonDescriptor.sellingProperties)
-                    && Objects.deepEquals(buyingProperties, otherEditPersonDescriptor.buyingProperties);
+                    && Objects.deepEquals(buyingProperties, otherEditPersonDescriptor.buyingProperties)
+                    && Objects.deepEquals(propertiesSold, otherEditPersonDescriptor.propertiesSold)
+                    && Objects.deepEquals(propertiesBought, otherEditPersonDescriptor.propertiesBought);
         }
 
         @Override
@@ -298,6 +330,8 @@ public class DeletePropertyToBuyCommand extends Command {
                     .add("tags", tags)
                     .add("properties-to-sell", sellingProperties)
                     .add("properties-to-buy", buyingProperties)
+                    .add("properties-sold", propertiesSold)
+                    .add("properties-bought", propertiesBought)
                     .toString();
         }
     }

@@ -34,6 +34,9 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedProperty> sellProperties = new ArrayList<>();
     private final List<JsonAdaptedProperty> buyProperties = new ArrayList<>();
+    private final List<JsonAdaptedProperty> soldProperties = new ArrayList<>();
+    private final List<JsonAdaptedProperty> boughtProperties = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -43,7 +46,9 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("sellProperties") List<JsonAdaptedProperty> sellProperties,
-                             @JsonProperty("buyProperties") List<JsonAdaptedProperty> buyProperties) {
+                             @JsonProperty("buyProperties") List<JsonAdaptedProperty> buyProperties,
+                             @JsonProperty("soldProperties") List<JsonAdaptedProperty> soldProperties,
+                             @JsonProperty("boughtProperties") List<JsonAdaptedProperty> boughtProperties) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +61,12 @@ class JsonAdaptedPerson {
         }
         if (buyProperties != null) {
             this.buyProperties.addAll(buyProperties);
+        }
+        if (soldProperties != null) {
+            this.soldProperties.addAll(soldProperties);
+        }
+        if (boughtProperties != null) {
+            this.boughtProperties.addAll(boughtProperties);
         }
     }
 
@@ -74,6 +85,12 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
         buyProperties.addAll(source.getListOfBuyingProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        soldProperties.addAll(source.getListOfPropertiesSold().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        boughtProperties.addAll(source.getListOfPropertiesBought().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
     }
@@ -97,6 +114,16 @@ class JsonAdaptedPerson {
         final List<Property> personBuyProperties = new ArrayList<>();
         for (JsonAdaptedProperty property : buyProperties) {
             personBuyProperties.add(property.toModelType());
+        }
+
+        final List<Property> personSoldProperties = new ArrayList<>();
+        for (JsonAdaptedProperty property : soldProperties) {
+            personSoldProperties.add(property.toModelType());
+        }
+
+        final List<Property> personBoughtProperties = new ArrayList<>();
+        for (JsonAdaptedProperty property : boughtProperties) {
+            personBoughtProperties.add(property.toModelType());
         }
 
         if (name == null) {
@@ -138,9 +165,13 @@ class JsonAdaptedPerson {
 
         //final ObservableList<Property> modelBuyProperties = new ArrayList<>(personBuyProperties);
         final ObservableList<Property> modelBuyProperties = FXCollections.observableArrayList(personBuyProperties);
+        final ObservableList<Property> modelSoldProperties = FXCollections.observableArrayList(personSoldProperties);
+        final ObservableList<Property> modelBoughtProperties = FXCollections
+                .observableArrayList(personBoughtProperties);
+
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelSellProperties, modelBuyProperties);
+                modelSellProperties, modelBuyProperties, modelSoldProperties, modelBoughtProperties);
     }
 
 }

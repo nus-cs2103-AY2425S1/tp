@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -107,9 +106,13 @@ public class EditCommand extends Command {
                 personToEdit.getListOfSellingProperties();
         ObservableList<Property> buyingProperties = (ObservableList<Property>)
                 personToEdit.getListOfBuyingProperties();
+        ObservableList<Property> propertiesSold = (ObservableList<Property>)
+                personToEdit.getListOfPropertiesSold();
+        ObservableList<Property> propertiesBought = (ObservableList<Property>)
+                personToEdit.getListOfPropertiesBought();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, sellingProperties,
-                buyingProperties);
+                buyingProperties, propertiesSold, propertiesBought);
     }
 
     @Override
@@ -146,8 +149,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private List<Property> sellingProperties = new ArrayList<>();
-        private List<Property> buyingProperties = new ArrayList<>();
 
         public EditPersonDescriptor() {}
 

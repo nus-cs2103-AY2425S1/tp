@@ -136,7 +136,8 @@ public class BtoTest {
 
     @Test
     public void toString_success() {
-        String expectedString = "Bto Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000; Tags: [Tag1]";
+        String expectedString = "Bto Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000;  "
+                + "Actual Price: 0; Tags: [Tag1]";
         assertEquals(expectedString, bto1.toString());
     }
 }

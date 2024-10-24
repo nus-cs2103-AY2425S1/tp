@@ -124,9 +124,16 @@ public class DeletePropertyToSellCommand extends Command {
         ObservableList<Property> updatedListOfBuyingProperties = (ObservableList<Property>)
                 editPersonDescriptor.getBuyingProperties()
                 .orElse(personToEdit.getListOfBuyingProperties());
+        ObservableList<Property> updatedListOfPropertiesSold = (ObservableList<Property>)
+                editPersonDescriptor.getPropertiesSold()
+                        .orElse(personToEdit.getListOfPropertiesSold());
+        ObservableList<Property> updatedListOfPropertiesBought = (ObservableList<Property>)
+                editPersonDescriptor.getPropertiesBought()
+                        .orElse(personToEdit.getListOfPropertiesBought());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedListOfSellingProperties, updatedListOfBuyingProperties);
+                updatedListOfSellingProperties, updatedListOfBuyingProperties,
+                updatedListOfPropertiesSold, updatedListOfPropertiesBought);
     }
 
     @Override
@@ -167,6 +174,8 @@ public class DeletePropertyToSellCommand extends Command {
         private Set<Tag> tags;
         private ObservableList<Property> sellingProperties;
         private ObservableList<Property> buyingProperties;
+        private ObservableList<Property> propertiesSold;
+        private ObservableList<Property> propertiesBought;
 
         public EditPersonPropertyToSellDescriptor() {}
 
@@ -182,6 +191,8 @@ public class DeletePropertyToSellCommand extends Command {
             setTags(toCopy.tags);
             setSellingProperties(toCopy.sellingProperties);
             setBuyingProperties(toCopy.buyingProperties);
+            setPropertiesSold(toCopy.propertiesSold);
+            setPropertiesBought(toCopy.propertiesBought);
         }
 
         /**
@@ -274,6 +285,25 @@ public class DeletePropertyToSellCommand extends Command {
             if (sellingProperties.size() > 0) {
                 sellingProperties.remove(propertyIndex.getZeroBased());
             }
+        }
+
+        public void setPropertiesBought(List<Property> propertiesBought) {
+            this.propertiesBought = (propertiesBought != null) ? FXCollections.observableArrayList(propertiesBought)
+                    : null;
+        }
+
+        public Optional<List<Property>> getPropertiesBought() {
+            return Optional.ofNullable(propertiesBought);
+        }
+
+
+        public void setPropertiesSold(List<Property> propertiesSold) {
+            this.propertiesSold = (propertiesSold != null) ? FXCollections.observableArrayList(propertiesSold)
+                    : null;
+        }
+
+        public Optional<List<Property>> getPropertiesSold() {
+            return Optional.ofNullable(propertiesSold);
         }
 
         @Override

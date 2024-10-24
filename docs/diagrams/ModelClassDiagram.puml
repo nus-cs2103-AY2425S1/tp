@@ -9,6 +9,9 @@ Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class AddressBookStatistics
+Class UniqueSellingPropertyList
+Class UniqueBuyingPropertyList
 Class ModelManager
 Class UserPrefs
 
@@ -29,6 +32,7 @@ Class "<<enumeration>>\nHousingType" as HousingType
 Class PostalCode
 Class UnitNumber
 Class Price
+Class ActualPrice
 
 Class I #FFFFFF
 }
@@ -46,6 +50,10 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" AddressBookStatistics
+AddressBookStatistics --> UniqueSellingPropertyList
+AddressBookStatistics --> UniqueBuyingPropertyList
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
@@ -62,6 +70,7 @@ Property *--> HousingType
 Property *--> PostalCode
 Property *--> UnitNumber
 Property *--> Price
+Property *--> ActualPrice
 Property *--> "*" Tag
 
 Person -[hidden]up--> I
@@ -73,6 +82,7 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 Email -[hidden]right-> BuyingProperties
 BuyingProperties -[hidden]right-> SellingProperties
+AddressBookStatistics -[hidden]right-> UniquePersonList
 
 
 ModelManager --> "~* add" Person
