@@ -19,6 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Buyer
+Class Seller
 
 Class I #FFFFFF
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.listing;
 
+import static java.util.Objects.requireNonNull;
+
 import java.math.BigDecimal;
 
 /**
@@ -10,8 +12,10 @@ public class Price {
     private final String formattedValue;
     private final BigDecimal rawValue;
 
-    // Parse the formatted value into mil, k, etc.
-    // e.g. 5 mil, 600k
+
+    //Future Extension:
+    //Parse the formatted value into mil, k, etc.
+    //e.g. 5 mil, 600k
 
     /**
      * Constructs a {@code Price}.
@@ -20,6 +24,7 @@ public class Price {
      * @param rawValue       The raw price value, represented as a {@code BigDecimal}.
      */
     public Price(String formattedValue, BigDecimal rawValue) {
+        requireNonNull(formattedValue);
         this.formattedValue = formattedValue;
         this.rawValue = rawValue;
     }

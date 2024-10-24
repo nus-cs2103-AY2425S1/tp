@@ -14,14 +14,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 
 public class AddPropertyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -30,10 +33,23 @@ public class AddPropertyCommandTest {
         Person personToAddProperty = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         AddPropertyCommand addPropertyCommand = new AddPropertyCommand(INDEX_FIRST_PERSON, property);
 
-        Person personWithAddedProperty = new Person(personToAddProperty.getName(),
-                personToAddProperty.getPhone(), personToAddProperty.getEmail(), personToAddProperty.getTags(),
-                personToAddProperty.getAppointment(), property);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personWithAddedProperty;
+        if (personToAddProperty instanceof Buyer) {
+            personWithAddedProperty = new Buyer(personToAddProperty.getName(),
+                    personToAddProperty.getPhone(),
+                    personToAddProperty.getEmail(),
+                    personToAddProperty.getTags(),
+                    personToAddProperty.getAppointment(),
+                    property);
+        } else {
+            personWithAddedProperty = new Seller(personToAddProperty.getName(),
+                    personToAddProperty.getPhone(),
+                    personToAddProperty.getEmail(),
+                    personToAddProperty.getTags(),
+                    personToAddProperty.getAppointment(),
+                    property);
+        }
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
         String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS,
                 property, Messages.format(personWithAddedProperty));
@@ -58,10 +74,23 @@ public class AddPropertyCommandTest {
         Person personToAddProperty = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         AddPropertyCommand addPropertyCommand = new AddPropertyCommand(INDEX_FIRST_PERSON, property);
 
-        Person personWithAddedProperty = new Person(personToAddProperty.getName(),
-                personToAddProperty.getPhone(), personToAddProperty.getEmail(), personToAddProperty.getTags(),
-                personToAddProperty.getAppointment(), property);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personWithAddedProperty;
+        if (personToAddProperty instanceof Buyer) {
+            personWithAddedProperty = new Buyer(personToAddProperty.getName(),
+                    personToAddProperty.getPhone(),
+                    personToAddProperty.getEmail(),
+                    personToAddProperty.getTags(),
+                    personToAddProperty.getAppointment(),
+                    property);
+        } else {
+            personWithAddedProperty = new Seller(personToAddProperty.getName(),
+                    personToAddProperty.getPhone(),
+                    personToAddProperty.getEmail(),
+                    personToAddProperty.getTags(),
+                    personToAddProperty.getAppointment(),
+                    property);
+        }
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
         String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS,
                 property, Messages.format(personWithAddedProperty));

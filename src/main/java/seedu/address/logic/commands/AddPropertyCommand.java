@@ -11,8 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 
 /**
  * Adds a property to an existing person in the address book.
@@ -28,8 +30,8 @@ public class AddPropertyCommand extends Command {
             + PREFIX_PROPERTY + "[property]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROPERTY + "37B Clementi Rd.";
-    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Added %1$s to Person: %2$s";
-    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Removed property from Person: %1$s";
+    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Assigned %1$s to %2$s";
+    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Removed assigned property for %1$s";
 
     private final Index index;
     private final Property property;
@@ -61,8 +63,16 @@ public class AddPropertyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getTags(), personToEdit.getAppointment(), property);
+        Person editedPerson;
+        if (personToEdit instanceof Buyer) {
+            editedPerson = new Buyer(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+            );
+        } else {
+            editedPerson = new Seller(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+            );
+        }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

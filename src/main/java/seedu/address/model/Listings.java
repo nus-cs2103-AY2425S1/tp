@@ -1,15 +1,18 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.Objects;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.UniqueListingList;
 
-import java.util.List;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Represents Listings of the user
+ */
 public class Listings implements ReadOnlyListings {
     private final UniqueListingList listings;
 
@@ -76,7 +79,8 @@ public class Listings implements ReadOnlyListings {
     /**
      * Replaces the given listing {@code listing} in the list with {@code editedListing}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedListing} must not be the same as another existing listing in the address book.
+     * The person identity of {@code editedListing} must not be the same
+     * as another existing listing in the address book.
      */
     public void setListing(Listing listing, Listing editedListing) {
         requireNonNull(editedListing);

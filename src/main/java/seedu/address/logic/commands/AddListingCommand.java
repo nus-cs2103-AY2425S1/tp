@@ -1,24 +1,32 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.listing.Area;
-import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
-import seedu.address.model.listing.Address;
-import seedu.address.model.person.Person;
-
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.listing.Address;
+import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.Price;
+import seedu.address.model.listing.Region;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
+/**
+ * Adds a listing to the address book.
+ */
 public class AddListingCommand extends Command {
 
     public static final String COMMAND_WORD = "listing";
@@ -59,13 +67,13 @@ public class AddListingCommand extends Command {
      */
     public AddListingCommand(Name listingName, Price price, Area area, Address address, Region region,
                                 Name seller, Set<Name> buyers) {
-       this.listingName = listingName;
-       this.price = price;
-       this.area = area;
-       this.address = address;
-       this.region = region;
-       this.seller = seller;
-       this.buyers = buyers;
+        this.listingName = listingName;
+        this.price = price;
+        this.area = area;
+        this.address = address;
+        this.region = region;
+        this.seller = seller;
+        this.buyers = buyers;
     }
 
     @Override
@@ -88,6 +96,7 @@ public class AddListingCommand extends Command {
         }
 
         Listing toAdd = new Listing(listingName, address, price, area, region, seller, personBuyers);
+        model.addListing(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

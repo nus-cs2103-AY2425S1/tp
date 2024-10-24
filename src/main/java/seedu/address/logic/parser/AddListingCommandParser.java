@@ -1,22 +1,28 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddListingCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.listing.Address;
-import seedu.address.model.listing.Area;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-
-
-
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.AddListingCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.listing.Address;
+import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Price;
+import seedu.address.model.listing.Region;
+import seedu.address.model.person.Name;
 
+/**
+ * Parses input arguments and creates a new AddListingCommand object
+ */
 public class AddListingCommandParser implements Parser<AddListingCommand> {
 
     /**
@@ -27,7 +33,7 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
     public AddListingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
-                        PREFIX_REGION, PREFIX_SELLER);
+                        PREFIX_REGION, PREFIX_SELLER, PREFIX_BUYER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
                 PREFIX_SELLER)
@@ -42,7 +48,7 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
         Name sellerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SELLER).get());
-        Set<Name> buyerNameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Name> buyerNameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_BUYER));
 
         return new AddListingCommand(name, price, area, address, region, sellerName, buyerNameList);
     }

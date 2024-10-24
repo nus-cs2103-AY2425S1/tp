@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.commands.AddClientProfile;
+import seedu.address.logic.commands.AddBuyerProfile;
+import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +20,11 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddClientProfile.COMMAND_WORD + " " + getPersonDetails(person);
+        if (person instanceof Buyer) {
+            return AddBuyerProfile.COMMAND_WORD + " " + getPersonDetails(person);
+        } else {
+            return AddSellerProfile.COMMAND_WORD + " " + getPersonDetails(person);
+        }
     }
 
     /**

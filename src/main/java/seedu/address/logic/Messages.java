@@ -22,6 +22,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_PERSON_INPUT = "Please enter an existing client name!";
     public static final String MISSING_CLIENT_NAME = "Please enter a client name!";
+    public static final String MESSAGE_SUGGESTION = "Did you mean \"%s\"?";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
