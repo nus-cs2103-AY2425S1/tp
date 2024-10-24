@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -31,19 +31,20 @@ public class RetrievePublicAddressCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a " + PREFIX_PUBLIC_ADDRESS + "BTC",
+        assertParseFailure(parser, "a " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrievePublicAddressCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidNetworkWithoutTag_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK", Network.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "INVALID_NETWORK",
+                Network.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidNetworkWithTag_throwsParseException() {
         assertParseFailure(parser,
-                "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK" + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
+                "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "INVALID_NETWORK" + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
                 Network.MESSAGE_CONSTRAINTS);
     }
 
@@ -53,7 +54,7 @@ public class RetrievePublicAddressCommandParserTest {
         Network expectedNetwork = Network.BTC;
         RetrievePublicAddressCommand expectedCommand = new RetrievePublicAddressCommand(expectedIndex, expectedNetwork);
 
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC", expectedCommand);
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC", expectedCommand);
     }
 
     @Test
@@ -64,14 +65,16 @@ public class RetrievePublicAddressCommandParserTest {
         RetrievePublicAddressCommand expectedCommand =
                 new RetrievePublicAddressCommand(expectedIndex, expectedNetwork, expectedLabel);
 
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
+        assertParseSuccess(parser,
+                "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
                 expectedCommand);
     }
 
     @Test
     public void parse_duplicatePrefixes_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS + "ETH",
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PUBLIC_ADDRESS));
+        assertParseFailure(parser,
+                "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_NETWORK + "ETH",
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PUBLIC_ADDRESS_NETWORK));
     }
 
 }

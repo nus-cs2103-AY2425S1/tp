@@ -63,8 +63,8 @@ public class CommandTestUtil {
             "3DHSS7YojEruwgjcGCEEQL7qnBcijqimWE"; //this is a real BTC public address
 
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final AbstractEditCommand.EditPersonDescriptor DESC_AMY;
+    public static final AbstractEditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

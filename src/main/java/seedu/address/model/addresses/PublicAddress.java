@@ -1,6 +1,7 @@
 package seedu.address.model.addresses;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
@@ -11,16 +12,10 @@ public abstract class PublicAddress {
 
     public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_LABEL_CONSTRAINTS =
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_PA_REGEX = "[^\\s].*"; // TODO: Update regex
-    public static final String VALIDATION_PAT_REGEX = "[^\\s].*"; // TODO: Update regex
-
+    public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
 
     public final String publicAddress;
 
@@ -33,34 +28,38 @@ public abstract class PublicAddress {
      * @param label         An identifier for the PublicAddress
      */
     public PublicAddress(String publicAddress, String label) {
-        checkArgument(isValidPublicAddress(publicAddress), MESSAGE_CONSTRAINTS);
+        requireAllNonNull(publicAddress, label);
+        checkArgument(isValidPublicAddressLabel(label), getMessageConstraints());
+
+        if (!isValidPublicAddress(publicAddress)) {
+            throw new IllegalArgumentException(getMessageConstraints());
+        }
+
         this.publicAddress = publicAddress;
         this.label = label;
-    }
-
-    /**
-     * Returns true if a given string is a valid public address.
-     */
-    public static boolean isValidPublicAddress(String test) {
-        return test.matches(VALIDATION_PA_REGEX);
     }
 
     /**
      * Returns true if a given string is a valid public address label.
      */
     public static boolean isValidPublicAddressLabel(String test) {
-        return test.matches(VALIDATION_PAT_REGEX);
+        return test.matches(VALIDATION_LABEL_REGEX);
     }
 
     /**
-     * Checks if the network is valid
-     *
-     * @param network A string representation of the network
-     * @return Network A enum of the network
+     * Returns true if a given string is a valid public address.
      */
-    public static Network isValidNetworkName(String network) {
-        return Network.valueOf(network);
-    }
+    protected abstract boolean isValidPublicAddress(String publicAddress);
+
+    /**
+     * Returns message for constraints of public address fields.
+     */
+    protected abstract String getMessageConstraints();
+
+    /**
+     * Returns the network type of the public address instance.
+     */
+    public abstract Network getNetwork();
 
     public abstract Network getNetwork();
 

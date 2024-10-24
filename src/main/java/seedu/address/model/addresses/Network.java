@@ -4,7 +4,9 @@ package seedu.address.model.addresses;
  * Represents supported cryptocurrency networks.
  */
 public enum Network {
-    BTC;
+    BTC,
+    ETH,
+    SOL;
 
-    public static final String MESSAGE_CONSTRAINTS = "Network not supported. Currently supported: BTC";
+    public static final String MESSAGE_CONSTRAINTS = "Network not supported. Currently supported: BTC, ETH, SOL";
 }

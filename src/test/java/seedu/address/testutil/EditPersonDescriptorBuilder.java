@@ -1,10 +1,17 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.AbstractEditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -78,6 +85,25 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code publicAddresses} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPublicAddress(String network, String label, String publicAddress) {
+        Map<Network, Set<PublicAddress>> currentAddresses =
+                new HashMap<>(descriptor.getPublicAddresses().orElse(Map.of()));
+
+        try {
+            Set<PublicAddress> currentAddressesForNetwork =
+                    new HashSet<>(currentAddresses.getOrDefault(ParserUtil.parseNetwork(network), Set.of()));
+            currentAddressesForNetwork.add(ParserUtil.parsePublicAddress(publicAddress, label, network));
+            currentAddresses.putIfAbsent(ParserUtil.parseNetwork(network), currentAddressesForNetwork);
+            descriptor.setPublicAddresses(currentAddresses);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid public address");
+        }
         return this;
     }
 
