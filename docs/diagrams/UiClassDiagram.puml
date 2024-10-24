@@ -7,7 +7,7 @@ skinparam classBackgroundColor UI_COLOR
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
-Class "<<enumeration>>\nUiState"
+Class "<<enumeration>>\nUiState" as UiState
 Class UiManager
 Class MainWindow
 Class HelpWindow
@@ -38,12 +38,12 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "1" HelpWindow
-MainWindow --> "0..1" DetailsDisplay
 
-PersonListPanel -down-> "*" PersonCard
+PersonListPanel -down-> "                    *" PersonCard
 PersonListPanel -down-> "*" PersonTaskCard
+PersonListPanel -left-> "1" UiState
 
-MainWindow -left-|> UiPart
+MainWindow --|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
@@ -53,17 +53,23 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 DetailsDisplay --|> UiPart
 
+
+MainWindow .down.> DetailsDisplay
+MainWindow .down.> UiState
 PersonCard ..> Model
 DetailsDisplay ..> Model
-PersonTaskCard ..> Model
+PersonTaskCard .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-DetailsDisplay -[hidden]left- PersonListPanel
-PersonListPanel -[hidden]left- HelpWindow
+PersonListPanel -[hidden]left- UiState
+UiState -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+UiState -[hidden]down- PersonCard
+UiPart -[hidden]down- Model
+
 
 MainWindow -[hidden]-|> UiPart
 @enduml
