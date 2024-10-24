@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void filterAppointmentList(Predicate<Person> predicate) {
+        public void updateFilteredAppointmentList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

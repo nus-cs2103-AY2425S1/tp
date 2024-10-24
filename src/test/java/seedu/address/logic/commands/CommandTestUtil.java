@@ -165,12 +165,12 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showAppointmentAtIndex(Model model, Index targetIndex) {
-        model.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertTrue(targetIndex.getZeroBased() < model.getSortedAppointmentList().size());
 
         Person person = model.getSortedAppointmentList().get(targetIndex.getZeroBased());
         final LocalDate date = person.getAppointmentStart().toLocalDate();
-        model.filterAppointmentList(new AppointmentContainsDatePredicate(date));
+        model.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(date));
     }
 
 }

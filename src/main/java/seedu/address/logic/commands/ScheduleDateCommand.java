@@ -36,7 +36,7 @@ public class ScheduleDateCommand extends Command {
         model.updateFilteredAppointmentList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
-                        model.getFilteredAppointmentList().size(),
+                        model.getSortedAppointmentList().size(),
                         predicate.getPredicateDate()));
     }
 

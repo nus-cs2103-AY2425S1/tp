@@ -93,5 +93,5 @@ public interface Model {
     /**
      * Updates the filter of the sorted appointment list to filter by the given {@code predicate}.
      */
-    void filterAppointmentList(Predicate<Person> predicate);
+    void updateFilteredAppointmentList(Predicate<Person> predicate);
 }
