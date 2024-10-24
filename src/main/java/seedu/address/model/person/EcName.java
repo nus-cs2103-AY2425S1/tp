@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class EcName implements Comparable<EcName> {
 
+    public static final String MESSAGE_GUI = "Emergency Contact Name: %1$s";
     public static final String MESSAGE_CONSTRAINTS =
             "Emergency contact names should only contain alphanumeric characters and spaces, "
             + "and it can be blank if no contact name is provided.";

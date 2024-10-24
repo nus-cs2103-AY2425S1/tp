@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -19,6 +21,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -177,6 +180,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String submission} into a {@code Submission}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submission} is invalid.
+     */
+    public static Submission parseSubmission(String submission) throws ParseException {
+        requireNonNull(submission);
+        String trimmedSubmission = submission.trim();
+        if (!Submission.isValidSubmissionName(trimmedSubmission)) {
+            throw new ParseException(Submission.NAME_MESSAGE_CONSTRAINTS);
+        }
+        return new Submission(trimmedSubmission);
+    }
+
+    /**
+     * Parses a {@code String submissionStatus} into a {@code String submissionStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submissionStatus} is invalid.
+     */
+    public static String parseSubmissionStatus(String submissionStatus) throws ParseException {
+        requireNonNull(submissionStatus);
+        String trimmedSubmissionStatus = submissionStatus.trim();
+        if (!Submission.isValidSubmissionStatus(trimmedSubmissionStatus)) {
+            throw new ParseException(Submission.STATUS_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedSubmissionStatus;
+    }
+
+    /**
      * Parses a {@code String exam} into a {@code Exam}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -232,6 +265,37 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String absentDate} into a {@code AbsentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentDate} is invalid.
+     */
+    public static AbsentDate parseAbsentDate(String absentDate) throws ParseException {
+        requireNonNull(absentDate);
+        String trimmedAbsentDate = absentDate.trim();
+        if (!AbsentDate.isValidAbsentDate(trimmedAbsentDate)) {
+            throw new ParseException(AbsentDate.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentDate(trimmedAbsentDate);
+    }
+
+    /**
+     * Parses a {@code String absentReason} into a {@code AbsentReason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentReason} is invalid.
+     */
+    public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
+        requireNonNull(absentReason);
+        String trimmedAbsentReason = absentReason.trim();
+        if (!AbsentReason.isValidAbsentReason(trimmedAbsentReason)) {
+            throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentReason(trimmedAbsentReason);
+    }
+
 
     /**
      * Parse {@code String attribute} into a {@code SortAttribute}.

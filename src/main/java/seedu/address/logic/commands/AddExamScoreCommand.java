@@ -63,7 +63,7 @@ public class AddExamScoreCommand extends Command {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
-                updatedExams, personToEdit.getTags());
+                updatedExams, personToEdit.getTags(), personToEdit.getAttendances(), personToEdit.getSubmissions());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, Messages.format(editedPerson)));

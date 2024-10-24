@@ -43,7 +43,22 @@
       <Label fx:id="ecNumber" styleClass="cell_small_label" text="\$emergency contact number" />
     </VBox>
 
-    <TableView fx:id="tableView" stylesheets="@tableStyle.css" GridPane.columnIndex="1" GridPane.rowSpan="1">
+    <TableView fx:id="tableView1" stylesheets="@TableStyle.css" GridPane.columnIndex="1">
+      <columns>
+        <TableColumn fx:id="absentDateColumn" text="absent date" prefWidth="100">
+          <cellValueFactory>
+            <PropertyValueFactory property="absentDate" />
+          </cellValueFactory>
+        </TableColumn>
+        <TableColumn fx:id="absentReasonColumn" text="absent reason" prefWidth="150">
+          <cellValueFactory>
+            <PropertyValueFactory property="absentReason" />
+          </cellValueFactory>
+        </TableColumn>
+      </columns>
+    </TableView>
+
+    <TableView fx:id="tableView2" stylesheets="@TableStyle.css" GridPane.columnIndex="2">
       <columns>
         <TableColumn fx:id="examNameColumn" text="exam" prefWidth="100">
           <cellValueFactory>
@@ -53,6 +68,21 @@
         <TableColumn fx:id="examScoreColumn" text="exam score" prefWidth="100">
           <cellValueFactory>
             <PropertyValueFactory property="examScore" />
+          </cellValueFactory>
+        </TableColumn>
+      </columns>
+    </TableView>
+
+    <TableView fx:id="tableView3" stylesheets="@TableStyle.css" GridPane.columnIndex="3">
+      <columns>
+        <TableColumn fx:id="submissionNameColumn" text="submission" prefWidth="100">
+          <cellValueFactory>
+            <PropertyValueFactory property="submissionName" />
+          </cellValueFactory>
+        </TableColumn>
+        <TableColumn fx:id="submissionStatusColumn" text="status" prefWidth="100">
+          <cellValueFactory>
+            <PropertyValueFactory property="submissionStatus" />
           </cellValueFactory>
         </TableColumn>
       </columns>
