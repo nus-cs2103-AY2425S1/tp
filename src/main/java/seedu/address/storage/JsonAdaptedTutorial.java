@@ -30,7 +30,7 @@ public class JsonAdaptedTutorial {
     @JsonCreator
     public JsonAdaptedTutorial(
             @JsonProperty("tutName") String tutName,
-            @JsonProperty("tutorialClassName") String tutorialId,
+            @JsonProperty("tutorialId") String tutorialId,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
             @JsonProperty("tutDates") List<JsonAdaptedTutDate> tutDates) {
         this.tutName = tutName;
@@ -73,7 +73,7 @@ public class JsonAdaptedTutorial {
         }
 
         if (tutorialId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialClass"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialId"));
         }
 
         final TutorialId modelTutorialClass = TutorialId.of(tutorialId);
@@ -88,6 +88,7 @@ public class JsonAdaptedTutorial {
         }
 
         Tutorial tutorial = Tutorial.of(modelTutName, modelTutorialClass);
+
         for (Student student : modelStudents) {
             tutorial.add(student);
         }

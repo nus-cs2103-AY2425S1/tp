@@ -152,6 +152,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public boolean setStudentAbsent(StudentId target, TutorialId tut, Date date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
@@ -185,6 +190,11 @@ public class AddAssignmentCommandTest {
         @Override
         public String listAssignments() {
             return "";
+        }
+
+        @Override
+        public void setAssignments(AssignmentList assignments) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -237,23 +247,8 @@ public class AddAssignmentCommandTest {
             return null;
         }
 
-    }
-
-    /**
-     * A Model stub that contains a single assignment.
-     */
-    private class ModelStubWithAssignment extends ModelStub {
-        private final Assignment assignment;
-
-        ModelStubWithAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            this.assignment = assignment;
-        }
-
-        @Override
-        public boolean hasAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            return this.assignment.equals(assignment);
+        public void setTutorials(TutorialList tutorials) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -278,6 +273,24 @@ public class AddAssignmentCommandTest {
         @Override
         public AssignmentList getAssignmentList() {
             return new AssignmentList();
+        }
+    }
+
+    /**
+     * A Model stub that contains a single assignment.
+     */
+    private class ModelStubWithAssignment extends ModelStub {
+        private final Assignment assignment;
+
+        ModelStubWithAssignment(Assignment assignment) {
+            requireNonNull(assignment);
+            this.assignment = assignment;
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            requireNonNull(assignment);
+            return this.assignment.equals(assignment);
         }
     }
 }

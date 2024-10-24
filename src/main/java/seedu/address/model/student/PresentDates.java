@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import seedu.address.model.student.exceptions.StudentNotInTutDateException;
 import seedu.address.model.tut.TutDate;
 
 /**
@@ -49,6 +50,14 @@ public class PresentDates {
     public void setAttendance(TutDate tutDate) {
         requireNonNull(tutDate);
         dates.add(tutDate);
+    }
+
+    public void setAbsent(TutDate tutDate) {
+        requireNonNull(tutDate);
+        if (!dates.contains(tutDate)) {
+            throw new StudentNotInTutDateException();
+        }
+        dates.remove(tutDate);
     }
 
     public ObservableSet<TutDate> getDates() {

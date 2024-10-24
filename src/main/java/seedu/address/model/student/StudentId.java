@@ -44,11 +44,10 @@ public class StudentId {
             return true;
         }
 
-        if (!(other instanceof StudentId)) {
+        if (!(other instanceof StudentId otherId)) {
             return false;
         }
 
-        StudentId otherId = (StudentId) other;
         return value.equals(otherId.value);
     }
 

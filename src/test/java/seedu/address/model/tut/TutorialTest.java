@@ -13,6 +13,7 @@ import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.AMY;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -90,36 +91,6 @@ public class TutorialTest {
         // Try adding again
         TUTORIAL_SAMPLE.add(aliceCopy);
         assertEquals(TUTORIAL_SAMPLE.getStudents().size(), initialSize);
-    }
-
-    @Test
-    public void markAttendance_newTutorialDate_success() {
-        Student alice = new StudentBuilder(ALICE).build();
-        TUTORIAL_SAMPLE.add(alice);
-
-        TUTORIAL_SAMPLE.markAttendance(alice, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
-    }
-
-    @Test
-    public void markAttendance_existingTutorialDate_success() {
-        Student alice = new StudentBuilder(ALICE).build();
-        TUTORIAL_SAMPLE.add(alice);
-        TUTORIAL_SAMPLE.addTutorialDate(TUT_DATE);
-
-        TUTORIAL_SAMPLE.markAttendance(alice, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
-    }
-
-    @Test
-    public void markAttendance_studentNotInTutorial_addsStudent() {
-        Student newStudent = new StudentBuilder().withName("Bob").build();
-
-        TUTORIAL_SAMPLE.markAttendance(newStudent, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.getStudents().contains(newStudent));
-        assertTrue(TUT_DATE.getStudentIDs().contains(newStudent.getStudentId()));
     }
 
     @Test
@@ -248,7 +219,7 @@ public class TutorialTest {
 
     @Test
     public void getTutName_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutName);
+        assertEquals(NONE.getTutName(), new TutName("empty"));
     }
 
     @Test
@@ -265,8 +236,7 @@ public class TutorialTest {
 
     @Test
     public void getTutorialDate_noneTest() {
-        assertThrows(NoTutorialException.class, ()
-                -> NONE.getTutorialDate(new Date()));
+        assertEquals(NONE.getTutorialDate(new Date()), new TutDate(new Date()));
     }
 
     @Test
@@ -277,18 +247,12 @@ public class TutorialTest {
 
     @Test
     public void getTutDates_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutDates);
+        assertEquals(NONE.getTutDates(), new ArrayList<>());
     }
 
     @Test
     public void getTutorialClass_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutorialId);
-    }
-
-    @Test
-    public void markAttendance_noneTest() {
-        assertThrows(NoTutorialException.class, ()
-                -> NONE.markAttendance(ALICE, TUT_DATE));
+        assertEquals(NONE.getTutorialId(), TutorialId.none());
     }
 
     @Test

@@ -12,9 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
@@ -163,9 +166,42 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean setStudentAbsent(StudentId target, TutorialId tut, Date date) {
+        return tutorials.getTutorials().stream()
+                .filter(s -> s.getTutorialId().equals(tut))
+                .findFirst()
+                .map(tutorial -> tutorial.setAbsent(date, target))
+                .orElse(false);
+    }
+
+    @Override
     public void deleteTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
+        tutorials.getTutorials()
+                .stream()
+                .filter(t -> t.equals(tutorial))
+                .forEach(t -> t.getStudents()
+                        .forEach(s -> {
+                            EditCommand.EditStudentDescriptor editStudentDescriptor =
+                                    new EditCommand.EditStudentDescriptor();
+                            editStudentDescriptor.setTutorialId(TutorialId.none());
+                            Student editedStudent = createEditedStudent(s, editStudentDescriptor);
+                            addressBook.setStudent(s, editedStudent);
+                        }));
         tutorials.deleteTutorial(tutorial);
+    }
+
+    private static Student createEditedStudent(Student studentToEdit,
+                                               EditCommand.EditStudentDescriptor editStudentDescriptor) {
+        assert studentToEdit != null;
+
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        TutorialId updatedTutorialClass = editStudentDescriptor.getTutorialId()
+                .orElse(studentToEdit.getTutorialId());
+        PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
+
+        return new Student(updatedName, updatedStudentId, updatedTutorialClass, updatedDates);
     }
 
     @Override
@@ -181,6 +217,9 @@ public class ModelManager implements Model {
     @Override
     public String listTutorials() {
         return getTutorialList().toString();
+    }
+    public void setTutorials(TutorialList tutorials) {
+        this.tutorials.resetData(tutorials);
     }
 
     //=========== Assignment ================================================================================
@@ -227,6 +266,11 @@ public class ModelManager implements Model {
     @Override
     public String listAssignments() {
         return assignmentList.toString();
+    }
+
+    @Override
+    public void setAssignments(AssignmentList assignments) {
+        this.assignmentList.resetData(assignments);
     }
 
     //=========== Filtered Student List (student ID)

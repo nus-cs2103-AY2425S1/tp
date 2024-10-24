@@ -17,7 +17,7 @@ public class JsonAdaptedAssignment {
 
     private final String title;
     private final String dueDate;
-    private final HashMap<Integer, Boolean> indexToStatusMap;
+    private final HashMap<String, Boolean> indexToStatusMap;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given assignment details.
@@ -26,7 +26,7 @@ public class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(
             @JsonProperty("title") String title,
             @JsonProperty("dueDate") String dueDate,
-            @JsonProperty("indexToStatusMap") HashMap<Integer, Boolean> indexToStatusMap) {
+            @JsonProperty("indexToStatusMap") HashMap<String, Boolean> indexToStatusMap) {
         this.title = title;
         this.dueDate = dueDate;
         this.indexToStatusMap = new HashMap<>(indexToStatusMap);
@@ -65,7 +65,7 @@ public class JsonAdaptedAssignment {
         return dueDate;
     }
 
-    public HashMap<Integer, Boolean> getIndexToStatusMap() {
+    public HashMap<String, Boolean> getIndexToStatusMap() {
         return indexToStatusMap;
     }
 

@@ -19,9 +19,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_validAssignmentDetails_returnsAssignment() throws IllegalValueException {
-        HashMap<Integer, Boolean> validStatuses = new HashMap<>();
-        validStatuses.put(1, true);
-        validStatuses.put(2, false);
+        HashMap<String, Boolean> validStatuses = new HashMap<>();
+        validStatuses.put("1", true);
+        validStatuses.put("2", false);
 
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(VALID_TITLE, VALID_DUE_DATE, validStatuses);
         Assignment assignment = jsonAssignment.toModelType();
@@ -33,8 +33,8 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_nullTitle_throwsIllegalValueException() {
-        HashMap<Integer, Boolean> validStatuses = new HashMap<>();
-        validStatuses.put(1, true);
+        HashMap<String, Boolean> validStatuses = new HashMap<>();
+        validStatuses.put("1", true);
 
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(null, VALID_DUE_DATE, validStatuses);
         assertThrows(IllegalValueException.class, jsonAssignment::toModelType);
@@ -42,8 +42,8 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_nullDueDate_throwsIllegalValueException() {
-        HashMap<Integer, Boolean> validStatuses = new HashMap<>();
-        validStatuses.put(1, true);
+        HashMap<String, Boolean> validStatuses = new HashMap<>();
+        validStatuses.put("1", true);
 
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(VALID_TITLE, null, validStatuses);
         assertThrows(IllegalValueException.class, jsonAssignment::toModelType);
@@ -51,8 +51,8 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_invalidDueDate_throwsIllegalValueException() {
-        HashMap<Integer, Boolean> validStatuses = new HashMap<>();
-        validStatuses.put(1, true);
+        HashMap<String, Boolean> validStatuses = new HashMap<>();
+        validStatuses.put("1", true);
 
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(VALID_TITLE, INVALID_DUE_DATE, validStatuses);
         assertThrows(IllegalValueException.class, jsonAssignment::toModelType);
@@ -60,7 +60,7 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_emptyStatusMap_returnsAssignmentWithEmptyStatusMap() throws IllegalValueException {
-        HashMap<Integer, Boolean> emptyStatuses = new HashMap<>();
+        HashMap<String, Boolean> emptyStatuses = new HashMap<>();
 
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(VALID_TITLE, VALID_DUE_DATE, emptyStatuses);
         Assignment assignment = jsonAssignment.toModelType();
@@ -72,9 +72,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void constructorFromAssignment_validAssignment_returnsJsonAdaptedAssignment() {
-        HashMap<Integer, Boolean> statuses = new HashMap<>();
-        statuses.put(1, true);
-        statuses.put(2, false);
+        HashMap<String, Boolean> statuses = new HashMap<>();
+        statuses.put("1", true);
+        statuses.put("2", false);
 
         Assignment assignment = new Assignment(VALID_TITLE, LocalDateTime.parse(VALID_DUE_DATE), statuses);
         JsonAdaptedAssignment jsonAssignment = new JsonAdaptedAssignment(assignment);

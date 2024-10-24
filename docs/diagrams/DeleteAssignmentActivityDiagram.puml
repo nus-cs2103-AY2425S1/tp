@@ -1,0 +1,20 @@
+@startuml
+
+start
+:User deletes assignment;
+:new page;
+if () then ([Empty Title])
+else ([Else])
+    :Construct delete assignment command;
+    :Execute delete assignment command;
+    if () then ([Assignment title doesn't exist])
+    else([else])
+       :Delete assignment from the assignment list;
+       :Return successful command result;
+       :Save assignments into json storage file;
+    endif
+endif
+:Display result;
+stop
+
+@enduml

@@ -23,8 +23,8 @@ public class TypicalAssignments {
         Assignment assignment2 = new Assignment("Assignment 2",
                 LocalDateTime.of(2024, 10, 10, 23, 59));
         for (int i = 1001; i < 1010; i++) {
-            assignment1.markStatus(i, i % 2 != 0);
-            assignment2.markStatus(i, i % 2 == 0);
+            assignment1.markStatus(Integer.toString(i), i % 2 != 0);
+            assignment2.markStatus(Integer.toString(i), i % 2 == 0);
         }
         AssignmentList assignmentList = new AssignmentList();
         assignmentList.addAssignment(assignment1);

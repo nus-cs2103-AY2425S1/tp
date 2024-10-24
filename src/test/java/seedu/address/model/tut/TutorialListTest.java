@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.testutil.Assert;
 
 
 public class TutorialListTest {
@@ -83,9 +84,15 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         TUTORIAL1.add(ALICE);
         tutorialList.addTutorial(TUTORIAL1);
-        assertTrue(tutorialList.getTutorials().get(0).studentInList(ALICE));
+        assertTrue(tutorialList.getTutorials()
+                .stream()
+                .filter(t -> t.equals(TUTORIAL1))
+                .anyMatch(s -> s.studentInList(ALICE)));
         tutorialList.deleteStudent(ALICE);
-        assertFalse(tutorialList.getTutorials().get(0).studentInList(ALICE));
+        assertFalse(tutorialList.getTutorials()
+                .stream()
+                .filter(t -> t.equals(TUTORIAL1))
+                .anyMatch(s -> s.studentInList(ALICE)));
     }
 
     @Test
@@ -109,7 +116,9 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
         tutorialList.assignStudent(ALICE, TUTORIAL_ID);
-        assertTrue(tutorialList.getTutorials().get(0).getStudents().contains(ALICE));
+        assertTrue(tutorialList.getTutorials().stream()
+                .filter(t -> t.equals(TUTORIAL2))
+                .anyMatch(s -> s.studentInList(ALICE)));
     }
 
     @Test
@@ -144,5 +153,16 @@ public class TutorialListTest {
         // Verify that the toString method matches the expected output
         assertEquals(expectedString, tutorialList.toString());
     }
+    public void resetData_null_throwsNullPointerException() {
+        TutorialList tutorials = new TutorialList();
+        Assert.assertThrows(NullPointerException.class, () -> tutorials.resetData(null));
+    }
 
+    @Test
+    public void resetData_withValidTutorials_replacesData() {
+        TutorialList tutorials = new TutorialList();
+        TutorialList newData = getTypicalTutorialList();
+        tutorials.resetData(newData);
+        assertEquals(newData, tutorials);
+    }
 }

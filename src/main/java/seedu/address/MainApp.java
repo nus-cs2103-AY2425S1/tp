@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.AssignmentStorage;
@@ -95,7 +98,6 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(AddressBook::new);
-
             assignmentListOptional = storage.readAssignments();
             if (assignmentListOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAssignmentFilePath()
@@ -109,6 +111,7 @@ public class MainApp extends Application {
                         + " populated with empty tutorial list.");
             }
             tutorialData = tutorialListOptional.orElseGet(TutorialList::new);
+            synchronizeStudentsInTutorials(initialData, tutorialData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
@@ -117,7 +120,40 @@ public class MainApp extends Application {
             tutorialData = new TutorialList();
         }
 
+        try {
+            storage.saveAddressBook(initialData);
+            storage.saveAssignments(assignmentData);
+            storage.saveTutorials(tutorialData);
+        } catch (IOException e) {
+            logger.warning("Data couldn't be saved!");
+        }
+
         return new ModelManager(initialData, userPrefs, assignmentData, tutorialData);
+    }
+
+    /**
+     * Synchronizes the students in the tutorials with the students in the address book.
+     * Ensures that the student instances in the tutorials are the same as those in the address book.
+     *
+     * @param addressBook The address book containing the list of students.
+     * @param tutorialList The list of tutorials to synchronize.
+     */
+    private void synchronizeStudentsInTutorials(ReadOnlyAddressBook addressBook, TutorialList tutorialList) {
+        for (Tutorial tutorial : tutorialList.getTutorials()) {
+            List<Student> studentsInTutorial = tutorial.getStudents();
+            for (int i = 0; i < studentsInTutorial.size(); i++) {
+                Student studentInTutorial = studentsInTutorial.get(i);
+                Optional<Student> matchingStudent = addressBook.getStudentList().stream()
+                        .filter(s -> s.getStudentId().equals(studentInTutorial.getStudentId()))
+                        .findFirst();
+                if (matchingStudent.isPresent()) {
+                    studentsInTutorial.set(i, matchingStudent.get());
+                } else {
+                    logger.warning("Student with ID " + studentInTutorial.getStudentId()
+                            + " in tutorial " + tutorial.getTutorialId() + " not found in AddressBook.");
+                }
+            }
+        }
     }
 
     private void initLogging(Config config) {

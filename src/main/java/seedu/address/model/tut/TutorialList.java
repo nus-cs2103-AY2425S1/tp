@@ -21,6 +21,7 @@ public class TutorialList {
      */
     public TutorialList() {
         this.tutorials = new ArrayList<>();
+        tutorials.add(Tutorial.none());
     }
 
     /**
@@ -31,6 +32,9 @@ public class TutorialList {
     public TutorialList(ArrayList<Tutorial> tutorials) {
         requireNonNull(tutorials);
         this.tutorials = tutorials;
+        if (!tutorials.contains(Tutorial.none())) {
+            tutorials.add(Tutorial.none());
+        }
     }
 
     /**
@@ -109,6 +113,15 @@ public class TutorialList {
                 .forEach(t -> t.deleteStudent(student));
     }
 
+    /**
+     * Resets the existing data of this {@code TutorialList} with {@code newData}.
+     */
+    public void resetData(TutorialList newData) {
+        requireNonNull(newData);
+        this.tutorials.clear();
+        this.tutorials.addAll(newData.tutorials);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -124,8 +137,13 @@ public class TutorialList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        int j = 0;
         for (int i = 0; i < tutorials.size(); i++) {
-            sb.append(i + 1).append(". ").append(tutorials.get(i).toString()).append("\n");
+            if (tutorials.get(i).equals(Tutorial.none())) {
+                continue;
+            }
+            sb.append(j + 1).append(". ").append(tutorials.get(i).toString()).append("\n");
+            j = j + 1;
         }
         return sb.toString();
     }

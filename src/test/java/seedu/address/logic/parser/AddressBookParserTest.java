@@ -4,18 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCEDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AttendCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 // import seedu.address.logic.commands.EditCommand;
 // import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
@@ -24,10 +31,13 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTutorialCommand;
+import seedu.address.logic.commands.UnattendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 // import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialId;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 
@@ -55,6 +65,41 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
+    @Test
+    public void parseCommand_attend() throws Exception {
+        String userInput = AttendCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENTID + "1001 "
+                + PREFIX_TUTORIALID + "1001 "
+                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+
+        Command command = parser.parseCommand(userInput);
+
+        StudentId expectedStudentId = new StudentId("1001");
+        TutorialId expectedTutorialId = TutorialId.of("1001");
+        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+
+        AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialId, expectedDate);
+
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_absent() throws Exception {
+        String userInput = UnattendCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENTID + "1001 "
+                + PREFIX_TUTORIALID + "1001 "
+                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+
+        Command command = parser.parseCommand(userInput);
+
+        StudentId expectedStudentId = new StudentId("1001");
+        TutorialId expectedTutorialId = TutorialId.of("1001");
+        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+
+        UnattendCommand expectedCommand = new UnattendCommand(expectedStudentId, expectedTutorialId, expectedDate);
+
+        assertEquals(expectedCommand, command);
+    }
     /*
     @Test
     public void parseCommand_edit() throws Exception {
@@ -111,5 +156,4 @@ public class AddressBookParserTest {
         // Test parsing the "listTut" command with extra arguments (it should still parse as ListTutorialCommand)
         assertTrue(parser.parseCommand(ListTutorialCommand.COMMAND_WORD + " 3") instanceof ListTutorialCommand);
     }
-
 }

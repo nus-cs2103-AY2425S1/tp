@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.exceptions.StudentNotInTutDateException;
 
 /**
  * A class representing a tutorial date. Each {@code TutDate} object holds a specific {@link Date}
@@ -42,6 +43,29 @@ public class TutDate {
     public void add(StudentId student) {
         requireNonNull(student);
         students.add(student);
+    }
+
+    /**
+     * Removes a student from the list of students for the tutorial session.
+     *
+     * @param student The {@code StudentId} of the student to be removed.
+     * @throws StudentNotInTutDateException if the student is not found in the list of students.
+     * @throws NullPointerException if the provided {@code student} is {@code null}.
+     */
+    public void remove(StudentId student) {
+        requireNonNull(student);
+        if (!students.contains(student)) {
+            throw new StudentNotInTutDateException();
+        }
+        students.remove(student);
+    }
+
+    public boolean isEmptyStudent() {
+        return students.isEmpty();
+    }
+
+    public boolean isInTutDate(StudentId studentId) {
+        return students.contains(studentId);
     }
 
     /**

@@ -3,6 +3,7 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
@@ -30,6 +31,15 @@ public class AssignmentList {
     public AssignmentList(ArrayList<Assignment> assignments) {
         requireNonNull(assignments);
 
+        //to avoid duplicate assignments in arraylist
+        HashSet<Assignment> uniqueAssignments = new HashSet<>();
+        for (Assignment assignment : assignments) {
+            requireNonNull(assignment);
+            if (uniqueAssignments.contains(assignment)) {
+                throw new DuplicateAssignmentException();
+            }
+            uniqueAssignments.add(assignment);
+        }
         this.assignments = assignments;
     }
 
@@ -86,7 +96,7 @@ public class AssignmentList {
         StringBuilder completedList = new StringBuilder("Students who have completed: \n");
         StringBuilder uncompletedList = new StringBuilder("Students who have not completed: \n");
         for (Student student : studentList) {
-            if (targetAssignment.getStatus(Integer.parseInt(student.getStudentId().value))) {
+            if (targetAssignment.getStatus(student.getStudentId().value)) {
                 completedList.append(student.getName()).append(", ");
             } else {
                 uncompletedList.append(student.getName()).append(", ");
@@ -107,7 +117,7 @@ public class AssignmentList {
     public void setStatus(Assignment assignment, Student targetStudent, boolean newStatus)
             throws AssignmentNotFoundException {
         Assignment targetAssignment = getAssignment(assignment);
-        int studentId = Integer.parseInt(targetStudent.getStudentId().value);
+        String studentId = targetStudent.getStudentId().value;
         targetAssignment.markStatus(studentId, newStatus);
     }
 
@@ -123,6 +133,15 @@ public class AssignmentList {
                 .filter(assignment::equals)
                 .findFirst()
                 .orElseThrow(AssignmentNotFoundException::new);
+    }
+
+    /**
+     * Resets the existing data of this {@code AssignmentList} with {@code newData}.
+     */
+    public void resetData(AssignmentList newData) {
+        requireNonNull(newData);
+        assignments.clear();
+        assignments.addAll(newData.assignments);
     }
 
     @Override

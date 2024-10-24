@@ -2,23 +2,30 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL3;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
@@ -123,10 +130,130 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void assignTutorial_fail() {
+    public void assignTutorialTest_fail() {
         assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_ID));
     }
 
+    @Test
+    public void deleteTutorialTest_fail() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteTutorial(null));
+    }
+
+    @Test
+    public void deleteTutorialTest_success() {
+        AddressBook addressBook = new AddressBook();
+        TutorialList tutorialList = new TutorialList();
+        modelManager = new ModelManager(addressBook, new UserPrefs(), new AssignmentList(), tutorialList);
+
+        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialId.of("1000"));
+        tutorial.add(ALICE);
+        tutorial.add(BENSON);
+
+        modelManager.addTutorial(tutorial);
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BENSON);
+
+        assertTrue(modelManager.hasTutorial(tutorial));
+
+        modelManager.deleteTutorial(tutorial);
+
+        assertFalse(modelManager.hasTutorial(tutorial));
+
+        TutorialId noneTutorialClass = TutorialId.none();
+        Student updatedStudent1 = modelManager.getAddressBook().getStudentList().stream()
+                .filter(s -> s.isSameStudent(ALICE))
+                .findFirst().orElse(null);
+        Student updatedStudent2 = modelManager.getAddressBook().getStudentList().stream()
+                .filter(s -> s.isSameStudent(BENSON))
+                .findFirst().orElse(null);
+
+        assertEquals(updatedStudent1.getTutorialId(), noneTutorialClass);
+        assertEquals(updatedStudent2.getTutorialId(), noneTutorialClass);
+    }
+
+    @Test
+    public void setStudentAttendance_validInputs_returnsTrue() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(BOB, TUTORIAL1.getTutorialId());
+
+        boolean result = modelManager.setStudentAttendance(BOB.getStudentId(), TUTORIAL1.getTutorialId(), date);
+        assertTrue(result);
+    }
+
+    @Test
+    public void setStudentAttendance_studentNotInTutorial_returnFalse() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL3);
+
+        modelManager.assignStudent(ALICE, TUTORIAL3.getTutorialId());
+
+        boolean result = modelManager.setStudentAttendance(BOB.getStudentId(), TUTORIAL3.getTutorialId(), date);
+        assertFalse(result);
+    }
+
+    @Test
+    public void setStudentAbsent_validInputs_returnsTrue() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(ALICE, TUTORIAL1.getTutorialId());
+
+        modelManager.setStudentAttendance(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        boolean result = modelManager.setStudentAbsent(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void setStudentAbsent_studentNotInTutorial_returnFalse() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(ALICE, TUTORIAL1.getTutorialId());
+
+        modelManager.setStudentAttendance(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        boolean result = modelManager.setStudentAbsent(BOB.getStudentId(), TUTORIAL1.getTutorialId(), date);
+        assertFalse(result);
+    }
+
+    private static Date getTodayDateWithoutTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
@@ -138,25 +265,25 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs,
-                assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs,
+                assignmentList, tutorialList));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs, assignmentList, tutorialList));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -164,7 +291,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs,
-                assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs,
+                assignmentList, tutorialList));
     }
 }

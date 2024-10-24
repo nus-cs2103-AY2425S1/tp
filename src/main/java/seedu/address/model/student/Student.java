@@ -71,6 +71,11 @@ public class Student {
     public void setAttendance(TutDate tutDate) {
         presentDates.get().setAttendance(tutDate);
     }
+
+    public void setAbsent(TutDate tutDate) {
+        presentDates.get().setAbsent(tutDate);
+    }
+
     /**
      * Returns true if both students have the same student id.
      * This defines a weaker notion of equality between two students.
@@ -95,11 +100,10 @@ public class Student {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Student)) {
+        if (!(other instanceof Student otherStudent)) {
             return false;
         }
 
-        Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
                 && studentId.equals(otherStudent.studentId)
                 && tutorialId.equals(otherStudent.tutorialId);

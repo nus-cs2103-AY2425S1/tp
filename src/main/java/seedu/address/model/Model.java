@@ -85,6 +85,10 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
+    /**
+     * Mark the given student as present.
+     * {@code student} must exist in the tutorial class.
+     */
     boolean setStudentAttendance(StudentId target, TutorialId tut, Date date);
 
     /** Returns an unmodifiable view of the filtered student list */
@@ -152,6 +156,11 @@ public interface Model {
     String listAssignments();
 
     /**
+     * Replaces assignment data with the data in {@code assignments}.
+     */
+    void setAssignments(AssignmentList assignments);
+
+    /**
      * Delete the specified tutorial class.
      * The tutorial class must exist in the tutorial list.
      *
@@ -162,7 +171,13 @@ public interface Model {
     /**
      * Returns true if a student with the specified studentId exists.
      */
-    public boolean hasStudentWithId(StudentId studentId);
+    boolean hasStudentWithId(StudentId studentId);
+
+    /**
+     * Mark the given student as absent.
+     * {@code student} must exist in the tutorial class on the given date.
+     */
+    boolean setStudentAbsent(StudentId studentId, TutorialId tutorialId, Date tutDate);
 
     /**
      * Assign student to specified tutorial.
@@ -171,6 +186,9 @@ public interface Model {
      * @param tutorialId The tutorial class that student will be assigned to.
      */
     void assignStudent(Student student, TutorialId tutorialId);
-
     String listTutorials();
+    /**
+     * Replaces tutorial data with the data in {@code tutorials}.
+     */
+    void setTutorials(TutorialList tutorials);
 }

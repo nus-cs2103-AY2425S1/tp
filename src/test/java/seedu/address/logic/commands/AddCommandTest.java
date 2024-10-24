@@ -190,6 +190,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean setStudentAbsent(StudentId target, TutorialId tut, Date date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
@@ -255,6 +260,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setAssignments(AssignmentList assignments) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
@@ -274,7 +284,9 @@ public class AddCommandTest {
         public String listTutorials() {
             return null;
         }
-
+        public void setTutorials(TutorialList tutorials) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
