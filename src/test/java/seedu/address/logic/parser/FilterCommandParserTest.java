@@ -7,14 +7,14 @@ import static seedu.address.logic.parser.FilterCommandParser.MESSAGE_SUPPORT;
 import static seedu.address.testutil.TypicalTags.COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class FilterCommandParserTest {
 
@@ -36,7 +36,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_mixTagsAndRSVPStatus_success() {
+    public void parse_mixTagsAndRsvpStatus_success() {
         tags.add(FRIENDS);
         statuses.add(RsvpStatus.COMING);
         assertParseSuccess(parser, " t/friends s/1", new FilterCommand(tags, statuses));
@@ -51,13 +51,13 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_RSVPStatus_success() {
+    public void parse_RsvpStatus_success() {
         statuses.add(RsvpStatus.COMING);
         assertParseSuccess(parser, " s/1", new FilterCommand(tags, statuses));
     }
 
     @Test
-    public void parse_multipleRSVPStatus_failure() {
+    public void parse_multipleRsvpStatus_failure() {
         String expectedMessage = "Multiple values specified for the following single-valued field(s): s/";
         assertParseFailure(parser, " s/1 s/2", expectedMessage);
     }

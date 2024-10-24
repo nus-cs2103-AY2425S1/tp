@@ -7,6 +7,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -14,10 +18,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Predicate;
 
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
