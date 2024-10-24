@@ -47,7 +47,15 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "weddings" : [ "Wedding 2"]
+    "weddings" : [ {
+      "weddingName": "Wedding 2",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
