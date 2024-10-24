@@ -27,8 +27,9 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        String trimmedName = name.trim();
+        checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
+        fullName = trimmedName;
     }
 
     /**
@@ -56,7 +57,25 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
+    }
+
+    /**
+     * Returns true if both names are the same, ignoring case and leading/trailing spaces.
+     * This method compares the full name of both {@code Name} objects after trimming whitespace
+     * and performs a case-insensitive comparison.
+     *
+     * @param otherName The other {@code Name} to compare with.
+     * @return true if both names are the same (ignoring case and whitespace), false otherwise.
+     */
+    public boolean isSameName(Name otherName) {
+        if (otherName == this) {
+            return true; // same object
+        }
+        if (otherName == null) {
+            return false; // null check
+        }
+        return this.fullName.trim().equalsIgnoreCase(otherName.fullName.trim());
     }
 
     @Override
