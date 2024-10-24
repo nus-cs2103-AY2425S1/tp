@@ -25,7 +25,7 @@ public class DeleteNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Delete the note of the person identified "
-            + "by the index number used in the last person listing and the index of the note.\n"
+            + "by the index number used in the person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "i/[NOTE_INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1 "
