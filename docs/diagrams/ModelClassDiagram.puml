@@ -15,12 +15,20 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
-Class Email
+Class EmergencyContact
+Class LessonTime
+Class Level
 Class Name
+Class Note
 Class Phone
-Class Tag
+Class Subject
+Class TaskList
+Class Task
+Class TaskDescription
+Class TaskDeadline
 
 Class I #FFFFFF
+Class J #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -37,18 +45,33 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> "1"Name
+Person *--> "1"Phone
+Person *--> "1"EmergencyContact
+Person *--> "1"Address
+Person *--> "1"Note
+Person *--> "1   "Level
+Person *--> "*" Subject
+Person *--> "*" LessonTime
+Person *-right-> "1"TaskList
+
+TaskList "1     "-right-> "*" Task
+Task *-right-> "1"TaskDescription
+Task *-up-> "1"TaskDeadline
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> EmergencyContact
+EmergencyContact -[hidden]right-> Address
+Address -[hidden]right-> Note
+Note -[hidden]right-> Level
+Level -[hidden]right-> Subject
+Subject -[hidden]right-> LessonTime
+
+Person -[hidden]right-> J
+TaskList -[hidden]down-> J
 
 ModelManager --> "~* filtered" Person
 @enduml

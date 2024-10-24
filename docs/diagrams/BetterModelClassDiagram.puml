@@ -10,16 +10,16 @@ UniquePersonList -down-> Person
 
 Person *-right-> "1" TaskList
 TaskList "1     " -right-> "*" Task
-Task -right-> "1" TaskDescription
-Task -up-> "1" TaskDeadline
+Task *-right-> "1" TaskDescription
+Task *-up-> "1" TaskDeadline
 
 
 Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" EmergencyContact
 Person *--> "1" Address
-Person *--> "0..1  " Note
+Person *--> "1  " Note
 Person *--> "1" Level
-Person *--> "*" Subjects
+Person *--> "*" Subject
 Person *--> "*" LessonTime
 @enduml
