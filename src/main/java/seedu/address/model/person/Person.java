@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Gender gender;
+    private final Remark remark;
 
     // Data fields
     private final Set<Module> modules = new HashSet<>();
@@ -28,13 +29,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Gender gender, Set<Module> modules, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Gender gender, Set<Module> modules, Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, gender, modules, tags);
         this.name = name;
         this.phone = phone;
         this.modules.addAll(modules);
         this.tags.addAll(tags);
         this.gender = gender;
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -49,6 +51,9 @@ public class Person {
         return gender;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
     public Set<Module> getModules() {
         return Collections.unmodifiableSet(modules);
     }
@@ -110,6 +115,7 @@ public class Person {
                 .add("gender", gender)
                 .add("modules", modules)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 

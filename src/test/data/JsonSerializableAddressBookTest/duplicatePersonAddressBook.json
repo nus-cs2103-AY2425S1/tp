@@ -4,11 +4,13 @@
     "phone": "94351253",
     "gender": "female",
     "modules": [ "CS2103T" ],
+    "remark" : "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "female",
+    "remark" : "",
     "modules": [ "CS2103T" ]
   } ]
 }

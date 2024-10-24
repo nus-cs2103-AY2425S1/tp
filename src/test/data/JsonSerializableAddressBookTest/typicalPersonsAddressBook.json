@@ -5,42 +5,49 @@
     "phone" : "94351253",
     "gender": "female",
     "modules" : [ "MA1522" ],
+    "remark" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "gender": "male",
     "modules" : [ "MA1522" ],
+    "remark" : "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "gender": "male",
     "modules" : [ "EL1101" ],
+    "remark" : "",
     "tags" : [ "runner" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "gender": "male",
     "modules" : [ "CS1101" ],
+    "remark" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "gender": "female",
     "modules" : [ "MA1522" ],
+    "remark" : "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "gender": "female",
     "modules" : [ "MA1522" ],
+    "remark" : "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "gender": "male",
     "modules" : [ "EL1101" ],
+    "remark" : "",
     "tags" : [ ]
   } ]
 }

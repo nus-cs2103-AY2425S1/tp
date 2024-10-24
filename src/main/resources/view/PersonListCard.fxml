@@ -44,6 +44,7 @@
       <HBox spacing="0.5" alignment="CENTER" style="-fx-padding: 30;">
         <FlowPane fx:id="modules" />
       </HBox>
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </HBox>
   </GridPane>
 </HBox>
