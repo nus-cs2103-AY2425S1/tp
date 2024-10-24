@@ -80,7 +80,7 @@ Shows you a help window with useful resources which includes:
 
 Format: `help`
 
-![helpwindow.png](images%2Fhelpwindow.png)
+![helpWindow.png](images%2FhelpWindow.png)
 
 
 ### Adding a person: `add`
