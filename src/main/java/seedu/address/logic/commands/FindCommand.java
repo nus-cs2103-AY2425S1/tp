@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
@@ -13,12 +14,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.IncomePredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PriorityPredicate;
 
 /**
  * Filters and lists all persons in address book according to the given filter parameters.
- * Keyword matching for names and addresses is case insensitive.
+ * Keyword matching for names and addresses is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -29,26 +31,30 @@ public class FindCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_NAME + "START_OF_NAME] "
             + "[" + PREFIX_ADDRESS + "PART_OF_ADDRESS] "
-            + "[" + PREFIX_PRIORITY + "PRIORITY]\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_INCOME + "INCOME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jo "
-            + PREFIX_ADDRESS + "Clementi | Serangoon"
-            + PREFIX_PRIORITY + "HIGH\n"
+            + PREFIX_ADDRESS + "Clementi | Serangoon "
+            + PREFIX_PRIORITY + "HIGH "
+            + PREFIX_INCOME + "1000\n"
             + "Note that the corresponding prefix must be used everytime a new filter is given.";
 
     private final List<String> names;
     private final List<String> addresses;
     private final List<String> priorities;
+    private final List<String> incomes;
 
     /**
      * Creates a FindCommand to filter the address book by the given lists of
      * {@code names}, {@code addresses}, and {@code priorities}
      *
      */
-    public FindCommand(List<String> names, List<String> addresses, List<String> priorities) {
+    public FindCommand(List<String> names, List<String> addresses, List<String> priorities, List<String> incomes) {
         this.names = names;
         this.addresses = addresses;
         this.priorities = priorities;
+        this.incomes = incomes;
     }
 
     @Override
@@ -67,6 +73,10 @@ public class FindCommand extends Command {
 
         if (!this.priorities.isEmpty()) {
             finalPredicate = finalPredicate.and(new PriorityPredicate(priorities));
+        }
+
+        if (!this.incomes.isEmpty()) {
+            finalPredicate = finalPredicate.and(new IncomePredicate(incomes));
         }
 
         model.updateFilteredPersonList(finalPredicate);
@@ -88,7 +98,8 @@ public class FindCommand extends Command {
         FindCommand otherFindCommand = (FindCommand) other;
         return names.equals(otherFindCommand.names)
                 && addresses.equals(otherFindCommand.addresses)
-                && priorities.equals(otherFindCommand.priorities);
+                && priorities.equals(otherFindCommand.priorities)
+                && incomes.equals(otherFindCommand.incomes);
     }
 
     @Override
@@ -97,6 +108,7 @@ public class FindCommand extends Command {
                 .add("names", names)
                 .add("addresses", addresses)
                 .add("priorities", priorities)
+                .add("incomes", incomes)
                 .toString();
     }
 }
