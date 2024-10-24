@@ -30,6 +30,16 @@ public class TransactionListPanel extends UiPart<Region> {
     }
 
     /**
+     * Updates the current {@code TransactionListPanel} UI with the transaction list.
+     *
+     * @param transactionList The updated transaction list.
+     */
+    public void updateTransactionList(ObservableList<Transaction> transactionList) {
+        transactionListView.setItems(transactionList);
+        transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Transaction} using a {@code TransactionCard}.
      */
     class TransactionListViewCell extends ListCell<Transaction> {
