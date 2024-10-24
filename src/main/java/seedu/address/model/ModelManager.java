@@ -119,8 +119,27 @@ public class ModelManager implements Model {
         addressBook.addMeeting(meeting);
     }
 
+    @Override
+    public void deleteMeeting(Person target, Meeting meeting) {
+        // Delete meeting for anUdder
+        target.getMeetings().deleteMeeting(meeting);
+        // Delete meeting for user
+        addressBook.deleteMeeting(meeting);
+    }
+
+    @Override
+    public Meeting getMeeting(int index) {
+        return addressBook.getMeeting(index);
+    }
+
+    @Override
     public String listMeetings() {
         return addressBook.listMeetings();
+    }
+
+    @Override
+    public int getMeetingSize() {
+        return addressBook.getMeetingSize();
     }
 
     //=========== Filtered Person List Accessors =============================================================
