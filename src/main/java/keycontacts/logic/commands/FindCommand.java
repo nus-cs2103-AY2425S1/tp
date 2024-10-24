@@ -1,6 +1,10 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
@@ -19,8 +23,12 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: Name, Address, Phone Number, Grade Level...\n"
-            + "Example: " + COMMAND_WORD + " [prefix/keyword]";
+            + "Parameters: \n"
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
+            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Alice" + PREFIX_PHONE + "91234567";
 
     private final StudentDescriptorMatchesPredicate predicate;
 
