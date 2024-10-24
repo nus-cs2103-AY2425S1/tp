@@ -105,7 +105,7 @@ public class ContactDisplay extends UiPart<Region> {
         }
         if (person instanceof Student) {
             Student student = (Student) person;
-            industryStudentIdLabel.setText("Student ID: " + student.getStudentID());
+            industryStudentIdLabel.setText("Student ID: " + student.getStudentId());
         }
     }
 
@@ -135,7 +135,7 @@ public class ContactDisplay extends UiPart<Region> {
     public void updateContactDetails(Student student) {
         nameLabel.setText("Name: " + student.getName().fullName);
         categoryLabel.setText("Category: " + student.getCategoryDisplayName());
-        industryStudentIdLabel.setText("Student ID: " + student.getStudentID());
+        industryStudentIdLabel.setText("Student ID: " + student.getStudentId());
         phoneLabel.setText("Phone: " + student.getPhone().value);
         emailLabel.setText("Email: " + student.getEmail().value);
         addressLabel.setText("Address: " + student.getAddress().value);
