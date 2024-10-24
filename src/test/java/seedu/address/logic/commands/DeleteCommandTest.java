@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -27,8 +27,11 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Test for successfully deleting a person by identity number.
+     */
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIdentityNumberUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         IdentityNumber identityNumber = personToDelete.getIdentityNumber();
         DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
@@ -42,48 +45,16 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
-    // TODO: Add test for invalid identity number once message constraints are updated, change to invalid IdentityNumber
-    //    @Test
-    //    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-    //        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-    //        IdentityNumber invalidIdentityNumber = new IdentityNumber("INVALID_ID");
-    //        DeleteCommand deleteCommand = new DeleteCommand(invalidIdentityNumber);
-    //
-    //        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    //    }
-
+    /**
+     * Test for deleting a person not found in the address book.
+     */
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        IdentityNumber identityNumber = personToDelete.getIdentityNumber();
+    public void execute_personNotFound_throwsCommandException() {
+        IdentityNumber identityNumber = new IdentityNumber("S8860602G");
         DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
-
-    // TODO: Add test for invalid identity number once message constraints are updated
-    //    @Test
-    //    public void execute_invalidIndexFilteredList_throwsCommandException() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-    //
-    //        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-    //        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-    //
-    //        // Simulate an invalid IdentityNumber based on out-of-bound index
-    //        IdentityNumber invalidIdentityNumber = new IdentityNumber("INVALID_ID");
-    //        DeleteCommand deleteCommand = new DeleteCommand(invalidIdentityNumber);
-    //
-    //        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    //    }
 
     @Test
     public void equals() {
@@ -120,6 +91,7 @@ public class DeleteCommandTest {
         String expected = DeleteCommand.class.getCanonicalName() + "{identityNumber=" + identityNumber + "}";
         assertEquals(expected, deleteCommand.toString());
     }
+
 
     /**
      * Updates {@code model}'s filtered list to show no one.
