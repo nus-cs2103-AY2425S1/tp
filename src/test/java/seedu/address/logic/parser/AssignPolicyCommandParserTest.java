@@ -47,4 +47,5 @@ public class AssignPolicyCommandParserTest {
         AssignPolicyCommand assignPolicyCommand = new AssignPolicyCommand(targetIndex, policy);
         assertParseSuccess(parser, "1" + VALID_ASSIGN_POLICY, assignPolicyCommand);
     }
+
 }

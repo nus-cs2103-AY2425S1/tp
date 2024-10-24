@@ -95,7 +95,7 @@ public class AssignPolicyCommand extends Command {
         }
         // Cast and compare the policyName attribute
         AssignPolicyCommand otherCommand = (AssignPolicyCommand) other;
-        return this.policy.toString().equalsIgnoreCase(otherCommand.policy.toString());
+        return this.policy.equals(otherCommand.policy);
     }
 
 }
