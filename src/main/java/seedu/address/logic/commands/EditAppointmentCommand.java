@@ -209,8 +209,8 @@ public class EditAppointmentCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("nric", nric)
-                    .add("startDateTime", startTime)
-                    .add("endDateTime", endTime)
+                    .add("startTime", startTime)
+                    .add("endTime", endTime)
                     .toString();
         }
     }
