@@ -64,20 +64,17 @@ public class UnmarkCommandTest {
      * Unmark a person using tutorial that is already unmarked.
      */
     @Test
-    public void execute_tutorialAlreadyMarked_failure() {
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON,
-                new Tutorial("1"));
+    public void execute_tutorialAlreadyUnmarked_failure() {
+        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, new Tutorial("1"));
         try {
             unmarkCommand.execute(model);
             unmarkCommand.execute(model);
         } catch (CommandException e) {
             assertCommandFailure(unmarkCommand, model,
-                    String.format(Messages.MESSAGE_UNMARK_UNNECESSARY, 1,
-                            Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))));
+                    String.format(Messages.MESSAGE_UNMARK_UNNECESSARY,
+                            model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(),
+                            "1"));
         }
-        assertCommandFailure(unmarkCommand, model,
-                String.format(Messages.MESSAGE_UNMARK_UNNECESSARY, 1,
-                        Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))));
     }
 
     /**

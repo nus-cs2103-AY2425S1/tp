@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,10 @@ public class ParserUtilTest {
     private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TUTORIAL = "0";
+    private static final String INVALID_TUTORIAL_FORMAT = "1-2-4";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_LIST = "[1,13]";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE = "1-13";
+    private static final String INVALID_TUTORIAL_RANGE = "5-3";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -201,24 +206,48 @@ public class ParserUtilTest {
 
     @Test
     public void parseTutorial_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorial(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorials(null));
     }
 
     @Test
     public void parseTutorial_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorial(INVALID_TUTORIAL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL));
     }
 
     @Test
     public void parseTutorial_validValueWithoutWhitespace_returnsTutorial() throws Exception {
         Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
-        assertEquals(expectedTutorial, ParserUtil.parseTutorial(VALID_TUTORIAL_1));
+        assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(VALID_TUTORIAL_1));
     }
 
     @Test
     public void parseTutorial_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
         String tutWithWhitespace = WHITESPACE + VALID_TUTORIAL_1 + WHITESPACE;
         Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
-        assertEquals(expectedTutorial, ParserUtil.parseTutorial(tutWithWhitespace));
+        assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(tutWithWhitespace));
+    }
+
+    // 1. Test for invalid range (start > end)
+    @Test
+    public void parseTutorial_invalidRangeStartGreaterThanEnd_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_RANGE));
+    }
+
+    // 2. Test for invalid format (e.g., mark 1 tut/1-2-4)
+    @Test
+    public void parseTutorial_invalidFormatMultipleDashes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_FORMAT));
+    }
+
+    // 3. Test for invalid tutorial number in list (e.g., [1, 13])
+    @Test
+    public void parseTutorial_invalidTutorialNumberInList_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_LIST));
+    }
+
+    // 4. Test for invalid tutorial number in range (e.g., 1-13)
+    @Test
+    public void parseTutorial_invalidTutorialNumberInRange_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE));
     }
 }

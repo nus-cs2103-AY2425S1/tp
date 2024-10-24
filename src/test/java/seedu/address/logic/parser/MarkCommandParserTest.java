@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
@@ -46,7 +47,8 @@ public class MarkCommandParserTest {
         assertParseFailure(parser, TUTORIAL_DESC_ONE, expectedMessage);
 
         // missing tutorial number with prefix
-        expectedMessage = Tutorial.MESSAGE_CONSTRAINTS;
+        expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                Tutorial.MESSAGE_INVALID_FORMAT);
 
         assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TUTORIAL,
                 expectedMessage);

@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -135,13 +138,61 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tutorial} is invalid.
      */
-    public static Tutorial parseTutorial(String tutorial) throws ParseException {
+    private static Tutorial parseTutorial(String tutorial) throws ParseException {
         requireNonNull(tutorial);
         String trimmedTutorial = tutorial.trim();
+        try {
+            Integer.parseInt(trimmedTutorial);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    Tutorial.MESSAGE_INVALID_FORMAT));
+        }
         if (!Tutorial.isValidTutorial(trimmedTutorial)) {
             throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
         }
         return new Tutorial(trimmedTutorial);
+    }
+
+    /**
+     * Parses a {@code String tutorialInput} into a list of {@code Tutorial} objects.
+     * This method supports both single tutorials (e.g., "3") and multiple tutorials, either comma-separated
+     * (e.g., "[3,4,5]") or ranges (e.g., "3-5").
+     *
+     * @param tutorialInput the string representing multiple tutorials or a range
+     * @return a list of parsed {@code Tutorial} objects
+     * @throws ParseException if the input format is invalid
+     */
+    public static List<Tutorial> parseTutorials(String tutorialInput) throws ParseException {
+        requireNonNull(tutorialInput);
+        List<Tutorial> tutorials = new ArrayList<>();
+
+        // Check if it's a list of tutorials within brackets [3,4,5]
+        if (tutorialInput.startsWith("[") && tutorialInput.endsWith("]")) {
+            String content = tutorialInput.substring(1, tutorialInput.length() - 1).trim();
+            String[] parts = content.split(",");
+            for (String part : parts) {
+                tutorials.add(parseTutorial(part.trim()));
+            }
+        } else if (tutorialInput.contains("-")) {
+            String[] range = tutorialInput.split("-");
+            if (range.length != 2) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        Tutorial.MESSAGE_INVALID_FORMAT));
+            }
+            int start = Integer.parseInt(range[0].trim());
+            int end = Integer.parseInt(range[1].trim());
+            if (start > end) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        Tutorial.MESSAGE_INVALID_FORMAT));
+            }
+            for (int i = start; i <= end; i++) {
+                tutorials.add(parseTutorial(Integer.toString(i)));
+            }
+        } else {
+            tutorials.add(parseTutorial(tutorialInput.trim()));
+        }
+
+        return tutorials;
     }
 
     /**

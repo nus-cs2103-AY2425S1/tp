@@ -73,8 +73,8 @@ public class MarkCommandTest {
         } catch (CommandException e) {
             assertCommandFailure(markCommand, model,
                     String.format(Messages.MESSAGE_MARK_UNNECESSARY,
-                            Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
-                            new Tutorial("1").tutorial));
+                            model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(),
+                            "1"));
         }
     }
 

@@ -10,6 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tutorial {
     public static final String MESSAGE_CONSTRAINTS =
             "Tutorial number should be between 1 to 12 only.";
+    public static final String MESSAGE_INVALID_FORMAT = "Tutorial format should be: \n"
+            + "1) A positive number between 1-12 \n"
+            + "2) A list of numbers eg. [1,3,5] \n"
+            + "3) A range of two numbers eg. 3-6";
     public static final String VALIDATION_REGEX = "([1-9]|1[0-2])";
 
     public final String tutorial;
