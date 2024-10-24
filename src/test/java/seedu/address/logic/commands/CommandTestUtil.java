@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,6 +21,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
 
 /**
@@ -50,17 +52,25 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String NAME_DESC_WEDDING = " " + PREFIX_NAME + VALID_NAME_WEDDING;
+    public static final String DATE_DESC_WEDDING = " " + PREFIX_DATE + VALID_DATE_WEDDING;
+    public static final String NAME_DESC_BIRTHDAY = " " + PREFIX_NAME + VALID_NAME_BIRTHDAY;
+    public static final String DATE_DESC_BIRTHDAY = " " + PREFIX_DATE + VALID_DATE_BIRTHDAY;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     // empty string not allowed for description
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION;
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12-12-12"; // wrong date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditVendorDescriptor DESC_AMY;
-    public static final EditCommand.EditVendorDescriptor DESC_BOB;
+    public static final EditVendorCommand.EditVendorDescriptor DESC_AMY;
+    public static final EditVendorCommand.EditVendorDescriptor DESC_BOB;
+    public static final EditEventCommand.EditEventDescriptor DESC_BIRTHDAY;
+    public static final EditEventCommand.EditEventDescriptor DESC_WEDDING;
 
     static {
         DESC_AMY = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -69,6 +79,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDescription(VALID_DESCRIPTION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BIRTHDAY = new EditEventDescriptorBuilder().withName(VALID_NAME_BIRTHDAY)
+                .withDate(VALID_DATE_BIRTHDAY).build();
+        DESC_WEDDING = new EditEventDescriptorBuilder().withName(VALID_NAME_WEDDING)
+                .withDate(VALID_DATE_WEDDING).build();
     }
 
     /**
