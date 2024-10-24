@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
@@ -21,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL);
+                        PREFIX_EDUCATION, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -58,6 +60,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Grade grade = new Grade("0"); // add command does not allow adding grade straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+
+        Education education;
+        if (arePrefixesPresent(argMultimap, PREFIX_EDUCATION)) {
+            education = ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION).get());
+        } else {
+            education = null;
+        }
 
         Name parentName;
         if (arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME)) {
@@ -80,7 +90,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             parentEmail = null;
         }
 
-        Person person = new Student(name, phone, email, address, parentName, parentPhone, parentEmail, grade, tagList);
+        Person person = new Student(name, phone, email, address, education, grade, parentName, parentPhone, parentEmail,
+                tagList);
 
         return new AddCommand(person);
     }

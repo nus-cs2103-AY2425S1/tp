@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
@@ -12,45 +13,59 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private final Education education;
+    private final Grade grade;
     private final Name parentName;
     private final Phone parentPhone;
     private final Email parentEmail;
-    private final Grade grade;
+
 
     /**
      * Constructs a {@code Student} with the given details.
      * Students constructed with this constructor will have isPinned set to false by default.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
-            Email parentEmail, Grade grade, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
+                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        this.education = education;
+        this.grade = grade;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
-        this.grade = grade;
     }
 
     /**
      * Constructs a {@code Student} with the given details.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
-                   Email parentEmail, Grade grade, Set<Tag> tags, boolean isPinned) {
+    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
+                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags, boolean isPinned) {
         super(name, phone, email, address, tags, isPinned);
+        this.education = education;
+        this.grade = grade;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
-        this.grade = grade;
     }
 
     /**
      * Constructs a {@code Student} with the given {@code Person} as a base.
      */
-    public Student(Person person, Name parentName, Phone parentPhone, Email parentEmail, Grade grade) {
+    public Student(Person person, Education education, Grade grade, Name parentName, Phone parentPhone,
+                   Email parentEmail) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
+        this.education = education;
+        this.grade = grade;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
-        this.grade = grade;
+    }
+
+    public Education getEducation() {
+        return education;
+    }
+
+    public Grade getGrade() {
+        return grade;
     }
 
     public Name getParentName() {
@@ -65,10 +80,6 @@ public class Student extends Person {
         return parentEmail;
     }
 
-    public Grade getGrade() {
-        return grade;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -81,16 +92,16 @@ public class Student extends Person {
         }
 
         Student otherStudent = (Student) other;
-        return super.equals(otherStudent) && parentName.equals(otherStudent.parentName)
-                && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail)
-                && grade.equals(otherStudent.grade);
+        return super.equals(otherStudent) && education.equals(otherStudent.education)
+                && grade.equals(otherStudent.grade) && parentName.equals(otherStudent.parentName)
+                && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
-                this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getGrade(),
-                this.getTags(), this.getPinned());
+        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getEducation(),
+                this.getGrade(), this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getTags(),
+                this.getPinned());
     }
 
     @Override
@@ -100,10 +111,11 @@ public class Student extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
+                .add("education", this.getEducation())
+                .add("grade", this.getGrade())
                 .add("parent name", this.getParentName())
                 .add("parent phone", this.getParentPhone())
                 .add("parent email", this.getParentEmail())
-                .add("grade", this.getGrade())
                 .add("tags", this.getTags())
                 .toString();
     }
@@ -118,14 +130,16 @@ public class Student extends Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Education: ")
+                .append(getEducation())
+                .append("; Grade: ")
+                .append(getGrade())
                 .append("; Parent Name: ")
                 .append(getParentName())
                 .append("; Parent Phone: ")
                 .append(getParentPhone())
                 .append("; Parent Email: ")
                 .append(getParentEmail())
-                .append("; Grade: ")
-                .append(getGrade())
                 .append("; Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
