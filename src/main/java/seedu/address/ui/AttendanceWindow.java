@@ -42,14 +42,11 @@ public class AttendanceWindow {
         Platform.runLater(() -> { });
         Stage stage = new Stage();
         stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
-
         TableView<AttendanceRow> table = new TableView<>();
-
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
         studentNameColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
-
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
         for (LocalDate date : attendanceDates) {
             TableColumn<AttendanceRow, String> dateColumn =
@@ -59,21 +56,16 @@ public class AttendanceWindow {
                 AttendanceRow row = cellData.getValue();
                 return new SimpleStringProperty(row.getAttendanceForDate(date));
             });
-
             table.getColumns().add(dateColumn);
         }
-
         ObservableList<AttendanceRow> data = getStudentAttendanceRows(model);
         table.setItems(data);
-
         VBox vbox = new VBox(table);
         vbox.setAlignment(Pos.CENTER);
         vbox.setFillWidth(true);
         VBox.setVgrow(table, Priority.ALWAYS);
-
         table.setMinHeight(Region.USE_COMPUTED_SIZE);
         table.setMinWidth(Region.USE_COMPUTED_SIZE);
-
         Scene scene = new Scene(vbox);
         stage.setScene(scene);
         stage.show();
