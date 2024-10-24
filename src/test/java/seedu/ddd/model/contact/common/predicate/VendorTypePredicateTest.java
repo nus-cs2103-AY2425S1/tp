@@ -42,9 +42,9 @@ public class VendorTypePredicateTest {
 
     @Test
     public void toStringMethod() {
-        ClientTypePredicate predicate = new ClientTypePredicate();
+        VendorTypePredicate predicate = new VendorTypePredicate();
 
-        String expected = ClientTypePredicate.class.getCanonicalName() + "{}";
+        String expected = VendorTypePredicate.class.getCanonicalName() + "{}";
         assertEquals(expected, predicate.toString());
     }
 }

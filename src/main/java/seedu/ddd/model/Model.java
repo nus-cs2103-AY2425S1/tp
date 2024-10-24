@@ -124,4 +124,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns the size of the filtered event list.
+     * @return an integer denoting the size of the filtered event list.
+     */
+    int getFilteredEventListSize();
 }

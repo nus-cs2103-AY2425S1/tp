@@ -7,6 +7,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
@@ -78,5 +79,10 @@ public class EventPredicateBuilder {
 
         EventPredicateBuilder otherEventPredicateBuilder = (EventPredicateBuilder) other;
         return argMultimap.equals(otherEventPredicateBuilder.argMultimap);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).toString();
     }
 }
