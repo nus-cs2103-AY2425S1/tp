@@ -18,6 +18,12 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
+     * Updates the path to the data file.
+     * @param filePath the new file path.
+     */
+    void updateAddressBookFilePath(Path filePath);
+
+    /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *

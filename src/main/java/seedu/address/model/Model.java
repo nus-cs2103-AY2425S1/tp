@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.profile.Profile;
 
 /**
  * The API of the Model component.
@@ -43,6 +45,17 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Returns the set of profiles in the user preference file.
+     */
+    HashSet<Profile> getProfiles();
+
+    /**
+     * Adds a new profile to the user preference file.
+     * @param profileName the new profile to be added.
+     */
+    void addToProfiles(Profile profileName);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

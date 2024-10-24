@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -37,7 +38,8 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TELEGRAM + "alexYeoh "
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Mark %1$d people's attendance on %2$s.";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS =
+            "Successfully mark the attendance on %1$s for these people: %2$s";
 
     private final List<Telegram> telegrams;
     private final Attendance attendance;
@@ -62,13 +64,14 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> peopleToMarkAttendance = findByTelegram(telegrams, lastShownList);
+        List<String> peopleNames = peopleToMarkAttendance.stream().map(p -> p.getName().toString()).toList();
         if (peopleToMarkAttendance.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, telegrams));
         }
 
         markAttendance(model, peopleToMarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, peopleToMarkAttendance.size(), attendance));
+        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, attendance, peopleNames));
     }
 
     @Override
@@ -125,8 +128,9 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         Telegram telegram = person.getTelegram();
         Set<Role> roles = person.getRoles();
         Set<Attendance> updatedAttendances = newAttendanceList;
+        FavouriteStatus favouriteStatus = person.getFavouriteStatus();
 
-        return new Person(name, phone, email, telegram, roles, updatedAttendances);
+        return new Person(name, phone, email, telegram, roles, updatedAttendances, favouriteStatus);
     }
 
     private void markAttendance(Model model, List<Person> peopleToMark, Attendance attendance) {
