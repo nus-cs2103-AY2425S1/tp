@@ -20,4 +20,5 @@ Person *--> Email
 Person *--> Address
 Person *--> ContactType
 Person *--> ModuleName
+Person *--> TelegramHandle
 @enduml
