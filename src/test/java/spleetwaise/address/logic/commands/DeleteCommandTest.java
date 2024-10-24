@@ -1,8 +1,10 @@
 package spleetwaise.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +30,9 @@ import spleetwaise.transaction.model.transaction.Transaction;
  */
 public class DeleteCommandTest {
 
-    private AddressBookModel addressBookModel = new AddressBookModelManager(
+    private final AddressBookModel addressBookModel = new AddressBookModelManager(
             TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-    private TransactionBookModel transactionBookModel = new TransactionBookModelManager();
+    private final TransactionBookModel transactionBookModel = new TransactionBookModelManager();
 
     @BeforeEach
     void setup() {
@@ -73,8 +75,7 @@ public class DeleteCommandTest {
 
         // Add some txn for this person
         transactionBookModel.addTransaction(new Transaction(personToDelete, new Amount("10.00"),
-                new Description("foo"), new Date(
-                "01012024")
+                new Description("foo"), new Date("01012024"), new HashSet<>()
         ));
 
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
@@ -120,20 +121,20 @@ public class DeleteCommandTest {
         DeleteCommand deleteSecondCommand = new DeleteCommand(TypicalIndexes.INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(1, deleteFirstCommand);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(null, deleteFirstCommand);
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 
     @Test

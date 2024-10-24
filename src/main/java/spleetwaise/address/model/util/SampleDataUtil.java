@@ -1,6 +1,7 @@
 package spleetwaise.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import spleetwaise.address.model.tag.Tag;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -58,16 +60,23 @@ public class SampleDataUtil {
     }
 
     public static Transaction[] getSampleTransactions() {
-        return new Transaction[]{
-            new Transaction(alexYeoh, new Amount("10.00"), new Description("Mc Donald's"), new Date("01012024")),
-            new Transaction(berniceYu, new Amount("5.50"), new Description("Starbucks"), new Date("02022024")),
-            new Transaction(
-                    charlotteOliveiro, new Amount("8.25"), new Description("Pizza Hut"), new Date("03032024")),
-            new Transaction(davidLi, new Amount("12.00"), new Description("NTUC FairPrice"), new Date("04042024")),
-            new Transaction(
-                    irfanIbrahim, new Amount("-9.50"), new Description("Cold Storage"), new Date("05052024")),
-            new Transaction(
-                    royBalakrishnan, new Amount("11.25"), new Description("Old Chang Kee"), new Date("06062024"))
+        Set<Category> emptyCategories = new HashSet<>();
+        return new Transaction[]{ new Transaction(alexYeoh, new Amount("10.00"), new Description("Mc Donald's"),
+                new Date("01012024"), emptyCategories
+        ), new Transaction(
+                berniceYu, new Amount("5.50"), new Description("Starbucks"), new Date("02022024"), emptyCategories
+        ), new Transaction(
+                charlotteOliveiro, new Amount("8.25"), new Description("Pizza Hut"), new Date("03032024"),
+                emptyCategories
+        ), new Transaction(
+                davidLi, new Amount("12.00"), new Description("NTUC FairPrice"), new Date("04042024"), emptyCategories
+        ), new Transaction(
+                irfanIbrahim, new Amount("-9.50"), new Description("Cold Storage"), new Date("05052024"),
+                emptyCategories
+        ), new Transaction(
+                royBalakrishnan, new Amount("11.25"), new Description("Old Chang Kee"), new Date("06062024"),
+                emptyCategories
+        )
         };
     }
 

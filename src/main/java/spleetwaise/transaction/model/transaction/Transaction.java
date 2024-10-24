@@ -2,7 +2,9 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
@@ -19,7 +21,7 @@ public class Transaction {
     private final Amount amount;
     private final Description description;
     private final Date date;
-    private final HashSet<Category> categories;
+    private final Set<Category> categories = new HashSet<>();
 
     /**
      * Represents a Transaction in the transaction book.
@@ -29,17 +31,19 @@ public class Transaction {
      * @param amount      The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date        The date the transaction has taken place.
-     * @param categories        The categories the transaction has.
+     * @param categories  The categories the transaction has.
      */
-    public Transaction(String id, Person person, Amount amount, Description description, Date date,
-                       HashSet<Category> categories) {
+    public Transaction(
+            String id, Person person, Amount amount, Description description, Date date,
+            Set<Category> categories
+    ) {
         CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.categories = categories;
+        this.categories.addAll(categories);
     }
 
     /**
@@ -49,21 +53,10 @@ public class Transaction {
      * @param amount      The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date        The date the transaction has taken place.
+     * @param categories  The categories the transaction has.
      */
-    public Transaction(Person person, Amount amount, Description description, Date date, HashSet<Category> categories) {
+    public Transaction(Person person, Amount amount, Description description, Date date, Set<Category> categories) {
         this(IdUtil.getId(), person, amount, description, date, categories);
-    }
-
-    public Transaction(Person person, Amount amount, Description description, Date date) {
-        this(IdUtil.getId(), person, amount, description, date, new HashSet<>());
-    }
-
-    public Transaction(Person person, Amount amount, Description description, HashSet<Category> categories) {
-        this(IdUtil.getId(), person, amount, description, Date.getNowDate(), categories);
-    }
-
-    public Transaction(Person person, Amount amount, Description description) {
-        this(IdUtil.getId(), person, amount, description, Date.getNowDate(), new HashSet<>());
     }
 
     public String getId() {
@@ -86,12 +79,12 @@ public class Transaction {
         return date;
     }
 
-    public HashSet<Category> getCategories() {
-        return categories;
-    }
-
-    public boolean containsCategory(Category cat) {
-        return categories.contains(cat);
+    /**
+     * Returns an immutable category set, which throws {@code UnsupportedOperationException} if modification is
+     * attempted.
+     */
+    public Set<Category> getCategories() {
+        return Collections.unmodifiableSet(categories);
     }
 
     /**
@@ -106,10 +99,9 @@ public class Transaction {
             return true;
         }
 
-        if (!(other instanceof Transaction)) {
+        if (!(other instanceof Transaction otherTransaction)) {
             return false;
         }
-        Transaction otherTransaction = (Transaction) other;
         return this.person.equals(otherTransaction.getPerson())
                 && this.amount.equals(otherTransaction.getAmount())
                 && this.description.equals(otherTransaction.getDescription())

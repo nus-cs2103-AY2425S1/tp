@@ -2,6 +2,7 @@ package spleetwaise.transaction.testutil;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -24,14 +25,14 @@ public class TransactionBuilder {
     private static final String DEFAULT_POSITIVE_AMOUNT = "1.23";
     private static final String DEFAULT_NEGATIVE_AMOUNT = "-1.23";
     private static final Category DEFAULT_CATEGORY = new Category("FOOD");
-    public static final HashSet<Category> DEFAULT_CATEGORY_SET = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
+    public static final Set<Category> DEFAULT_CATEGORY_SET = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
 
     private String id;
     private Person person;
     private Amount amount;
     private Description description;
     private Date date;
-    private HashSet<Category> categories;
+    private Set<Category> categories;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
@@ -101,7 +102,7 @@ public class TransactionBuilder {
     /**
      * Sets the {@code Category} hashset of the {@code Transaction} that we are building.
      */
-    public TransactionBuilder withCategories(HashSet<Category> categories) {
+    public TransactionBuilder withCategories(Set<Category> categories) {
         this.categories = categories;
         return this;
     }

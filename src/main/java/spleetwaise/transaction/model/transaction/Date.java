@@ -44,8 +44,8 @@ public class Date {
         }
     }
 
-    public static Date getNowDate() {
-        return new Date(LocalDate.now().format(VALIDATION_FORMATTER));
+    public static String getNowDate() {
+        return LocalDate.now().format(VALIDATION_FORMATTER);
     }
 
     public LocalDate getDate() {
