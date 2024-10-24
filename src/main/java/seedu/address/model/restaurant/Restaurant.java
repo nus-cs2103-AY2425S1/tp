@@ -27,7 +27,7 @@ public class Restaurant {
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavourite;
-    private final Tag price;
+    private final Price price;
 
     /**
      * Every field must be present and not null.
@@ -42,7 +42,7 @@ public class Restaurant {
 
         // Extract the price tag and other tags
         Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
-        this.price = priceTagAndOtherTags.getFirst();
+        this.price = new Price(priceTagAndOtherTags.getFirst());
         this.tags.addAll(priceTagAndOtherTags.getSecond());
 
         // Default to not favourite
