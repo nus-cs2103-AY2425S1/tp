@@ -54,8 +54,10 @@ activate TagCommand
 TagCommand -> Model : setPerson(personToTag, personWithTags)
 activate Model
 Model --> TagCommand
+deactivate Model
 
 TagCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
 Model --> TagCommand
 deactivate Model
 

@@ -14,14 +14,16 @@ Model -> AddressBook : setPerson(personToTag, personWithTags)
 activate AddressBook
 AddressBook --> Model
 deactivate AddressBook
+deactivate Model
 
 [-> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
 Model -> FilteredPersons : setPredicate(PREDICATE_SHOW_ALL_PERSONS)
 activate FilteredPersons
 FilteredPersons --> Model
 deactivate FilteredPersons
+deactivate Model
 
 [<-- Model
-deactivate Model
 
 @enduml
