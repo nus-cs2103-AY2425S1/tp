@@ -12,16 +12,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductName;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new UpdateStockLevelCommand object
  */
 public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCommand> {
 
-    public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
-    public static final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces,"
-            + " and it should not be blank";
+    public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a non-negative integer.";
+    public static final String MESSAGE_INVALID_STOCK_FORMAT = "Stock Level should be a valid non-negative integer.";
+
     /**
-     * Parses the given {@code String} of arguments in the context of the SetThresholdCommand
-     * and returns an SetThresholdCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UpdateStockLevelCommand
+     * and returns an UpdateStockLevelCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -56,18 +56,17 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
     private UpdateStockLevelCommand parseCurrentStockLevelCommand(ArgumentMultimap argMap, ProductName productName)
             throws ParseException {
         try {
-            int currentStockLevel = Integer.parseInt(argMap.getValue(PREFIX_STOCK_LEVEL).get());
+            String stockLevelString = argMap.getValue(PREFIX_STOCK_LEVEL).get().trim();
+            int currentStockLevel = Integer.parseInt(stockLevelString);
 
             if (currentStockLevel < 0) {
                 throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
             }
 
             return new UpdateStockLevelCommand(productName, currentStockLevel);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(MESSAGE_INVALID_STOCK);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
         }
-
     }
 
 }
-
