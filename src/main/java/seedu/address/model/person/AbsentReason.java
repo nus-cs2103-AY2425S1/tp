@@ -6,8 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents the date where the student is absent.
- * The date should only be in the form of DD-MM-YYYY.
+ * Represents the reason that the student is absent.
+ * The reason should only contain alphanumeric characters and spaces.
+ * The reason can be blank to delete attendance
  */
 public class AbsentReason {
 
