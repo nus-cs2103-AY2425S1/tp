@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.GradYear;
 import seedu.address.model.person.GradYearPredicate;
@@ -19,7 +20,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes all people whose graduation date has passed.
  */
-public class CleanCommand extends Command {
+public class CleanCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "clean";
 
@@ -29,8 +30,10 @@ public class CleanCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_CLEAN_SUCCESS = "Deleted graduated people";
+    public static final String MESSAGE_UNDO_SUCCESS = "Restored deleted graduated people";
 
     private final Predicate<Person> predicate;
+    private AddressBook initialAddressBook;
 
     /**
      * Creates a CleanCommand to delete the people whose graduation dates have past
@@ -42,16 +45,29 @@ public class CleanCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNotExecuted();
         requireNonNull(model);
+        initialAddressBook = new AddressBook(model.getAddressBook());
+
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (int i = lastShownList.size() - 1; i >= 0; i--) {
             model.deletePerson(lastShownList.get(i));
         }
-
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
+        isExecuted = true;
         return new CommandResult(MESSAGE_CLEAN_SUCCESS);
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireExecuted();
+        requireNonNull(model);
+        requireNonNull(initialAddressBook);
+        model.setAddressBook(initialAddressBook);
+        isExecuted = false;
+        return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 
     @Override

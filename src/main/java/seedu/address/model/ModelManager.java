@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final Stack<ConcreteCommand> undoStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        undoStack = new Stack<>();
     }
 
     public ModelManager() {
@@ -111,6 +117,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void insertPerson(Person person, Index index) {
+        addressBook.insertPerson(person, index);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -149,5 +161,22 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Undo/Redo ================================================================================
+
+    @Override
+    public void pushToUndoStack(ConcreteCommand command) {
+        assert command != null;
+        undoStack.push(command);
+    }
+
+    @Override
+    public CommandResult undoAddressBook() {
+        if (undoStack.isEmpty()) {
+            return null;
+        }
+        ConcreteCommand command = undoStack.pop();
+        return command.undo(this);
     }
 }

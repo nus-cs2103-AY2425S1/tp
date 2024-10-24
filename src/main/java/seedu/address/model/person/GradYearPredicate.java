@@ -24,7 +24,7 @@ public class GradYearPredicate implements Predicate<Person> {
 
     /**
      * Evaluates this predicate on the given Person instance.
-     * Tests if the Person's phone number matches the phone number provided during instantiation.
+     * Tests that the Person's graduation year is before the predicate's graduation year.
      *
      * @param person The Person to be tested against this predicate.
      * @return true if the Person's graduation year is before the predicate's graduation year, otherwise false.

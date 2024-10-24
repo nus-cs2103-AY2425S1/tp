@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -41,6 +41,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
     public static final String MESSAGE_DUPLICATE_NAME = "A person with this name already exists in the address book";
+    public static final String MESSAGE_UNDO_SUCCESS = "Reverted addition of person: %1$s";
 
     private final Person toAdd;
 
@@ -54,6 +55,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNotExecuted();
         requireNonNull(model);
 
         // Duplication checking for contact number, name and person as a whole.
@@ -64,7 +66,17 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        isExecuted = true;
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireExecuted();
+        requireNonNull(model);
+        model.deletePerson(toAdd);
+        isExecuted = false;
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

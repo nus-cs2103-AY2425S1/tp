@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CleanCommand.MESSAGE_CLEAN_SUCCESS;
+import static seedu.address.logic.commands.CleanCommand.MESSAGE_UNDO_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.Year;
@@ -49,6 +51,23 @@ public class CleanCommandTest {
         }
 
         assertCommandSuccess(new CleanCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void undo_commandExecuted_success() throws Exception {
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        CleanCommand cleanCommand = new CleanCommand();
+        cleanCommand.execute(model);
+        CommandResult undoResult = cleanCommand.undo(model);
+        assertEquals(expectedCommandResult, undoResult);
+        assertEquals(expectedModel, model);
+    }
+
+    @Test
+    public void undo_commandNotExecuted_throwsAssertionError() {
+        CleanCommand cleanCommand = new CleanCommand();
+        assertThrows(AssertionError.class, Command.MESSAGE_NOT_EXECUTED_ERROR, () -> cleanCommand.undo(model));
     }
 
     @Test

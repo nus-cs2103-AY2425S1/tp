@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using its displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -23,16 +24,23 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person: %1$s";
+    public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
 
     private final Index targetIndex;
+    private Person deletedPerson;
 
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code Index}.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNotExecuted();
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -57,7 +65,18 @@ public class DeleteCommand extends Command {
          */
 
         model.deletePerson(personToDelete);
+        deletedPerson = personToDelete;
+        isExecuted = true;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireExecuted();
+        requireAllNonNull(model, deletedPerson);
+        model.insertPerson(deletedPerson, targetIndex);
+        isExecuted = false;
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(deletedPerson)));
     }
 
     @Override

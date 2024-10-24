@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -78,6 +79,11 @@ public class ViewCommandTest {
         }
 
         @Override
+        public void insertPerson(Person person, Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -114,6 +120,16 @@ public class ViewCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void pushToUndoStack(ConcreteCommand command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }

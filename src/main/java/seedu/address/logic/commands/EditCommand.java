@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_NAME;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
@@ -39,7 +39,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -64,10 +64,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_NAME = "A person with this name already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
+    public static final String MESSAGE_UNDO_SUCCESS = "Reverted edit of person: %1$s";
 
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private Person originalPerson;
+    private Person editedPerson;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -83,6 +86,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNotExecuted();
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -91,7 +95,8 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        originalPerson = personToEdit;
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
 
         if (!personToEdit.isSameName(editedPerson) && model.hasName(editedPerson)) {
@@ -102,7 +107,19 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        isExecuted = true;
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireExecuted();
+        requireAllNonNull(model, originalPerson, editedPerson);
+
+        model.setPerson(editedPerson, originalPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        isExecuted = false;
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(originalPerson)));
     }
 
     /**

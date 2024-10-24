@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -64,6 +65,26 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PHONE, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void undo_commandExecuted_success() throws Exception {
+        ModelStubAddDelete modelStub = new ModelStubAddDelete();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        CommandResult commandResult = addCommand.execute(modelStub);
+        CommandResult undoCommandResult = addCommand.undo(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_UNDO_SUCCESS, Messages.format(validPerson)),
+                undoCommandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(), modelStub.personsAdded);
+    }
+
+    @Test
+    public void undo_commandNotExecuted_throwsAssertionError() {
+        ModelStubAddDelete modelStub = new ModelStubAddDelete();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        assertThrows(AssertionError.class, Command.MESSAGE_NOT_EXECUTED_ERROR, () -> addCommand.undo(modelStub));
     }
 
     @Test
@@ -137,6 +158,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void insertPerson(Person person, Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,6 +199,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void pushToUndoStack(ConcreteCommand command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -231,4 +267,39 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * A Model stub that allow addition and deletion of a person.
+     */
+    private class ModelStubAddDelete extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasName(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameName);
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameNumber);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public void deletePerson(Person person) {
+            requireNonNull(person);
+            personsAdded.remove(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
 }
