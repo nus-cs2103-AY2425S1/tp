@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_DESC_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_DESC_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_DESC_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,18 +40,20 @@ public class EditAppointmentDescriptorTest {
                 .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_APPOINTMENT_AMY.equals(editedAmy));
 
-        // different phone -> returns false
+        // different nric -> returns false
         editedAmy = new EditAppointmentDescriptorBuilder(DESC_APPOINTMENT_AMY).withNric(VALID_NRIC_BOB).build();
         assertFalse(DESC_APPOINTMENT_AMY.equals(editedAmy));
 
-        // different email -> returns false
+        // different start time -> returns false
         editedAmy = new EditAppointmentDescriptorBuilder(DESC_APPOINTMENT_AMY)
-                .withStartTime(VALID_DATE_DESC_APPOINTMENT_BOB + VALID_START_TIME_DESC_APPOINTMENT_BOB).build();
+                .withDate(VALID_DATE_APPOINTMENT_BOB)
+                .withStartTime(VALID_START_TIME_APPOINTMENT_BOB).build();
         assertFalse(DESC_APPOINTMENT_AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different end time -> returns false
         editedAmy = new EditAppointmentDescriptorBuilder(DESC_APPOINTMENT_AMY)
-                .withEndTime(VALID_DATE_DESC_APPOINTMENT_BOB + VALID_END_TIME_DESC_APPOINTMENT_BOB).build();
+                .withDate(VALID_DATE_APPOINTMENT_BOB)
+                .withEndTime(VALID_END_TIME_APPOINTMENT_BOB).build();
         assertFalse(DESC_APPOINTMENT_AMY.equals(editedAmy));
     }
 

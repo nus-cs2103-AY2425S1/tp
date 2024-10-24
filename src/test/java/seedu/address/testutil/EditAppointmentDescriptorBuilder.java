@@ -1,17 +1,11 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 
@@ -20,6 +14,9 @@ import seedu.address.model.person.Nric;
  */
 public class EditAppointmentDescriptorBuilder {
     private EditAppointmentDescriptor descriptor;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private LocalDate date;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -59,33 +56,40 @@ public class EditAppointmentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditAppointmentDescriptor} that we are building.
+     * Sets the {@code date} of the {@code EditAppointmentDescriptor} that we are building.
      */
-    public EditAppointmentDescriptorBuilder withStartTime(String args) {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_DATE, PREFIX_START_TIME);
-
-        LocalDate date = LocalDate.parse(argumentMultimap.getValue(PREFIX_DATE).get(), dateFormatter);
-        LocalTime startTime = LocalTime.parse(argumentMultimap.getValue(PREFIX_START_TIME).get(), timeFormatter);
-
-        descriptor.setStartTime(LocalDateTime.of(date, startTime));
+    public EditAppointmentDescriptorBuilder withDate(String date) {
+        this.date = LocalDate.parse(date, dateFormatter);
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditAppointmentDescriptor} that we are building.
+     * Sets the {@code startTime} of the {@code EditAppointmentDescriptor} that we are building.
      */
-    public EditAppointmentDescriptorBuilder withEndTime(String args) {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_DATE, PREFIX_END_TIME);
-
-        LocalDate date = LocalDate.parse(argumentMultimap.getValue(PREFIX_DATE).get(), dateFormatter);
-        LocalTime endTime = LocalTime.parse(argumentMultimap.getValue(PREFIX_END_TIME).get(), timeFormatter);
-
-        descriptor.setEndTime(LocalDateTime.of(date, endTime));
+    public EditAppointmentDescriptorBuilder withStartTime(String startTime) {
+        this.startTime = LocalTime.parse(startTime, timeFormatter);
+        System.out.println("here" + this.date + this.startTime);
+        if (this.date != null && this.startTime != null) {
+            descriptor.setStartTime(LocalDateTime.of(date, this.startTime));
+        }
         return this;
     }
 
+    /**
+     * Sets the {@code endTime} of the {@code EditAppointmentDescriptor} that we are building.
+     */
+    public EditAppointmentDescriptorBuilder withEndTime(String endTime) {
+        this.endTime = LocalTime.parse(endTime, timeFormatter);
+        if (this.date != null && this.endTime != null) {
+            descriptor.setEndTime(LocalDateTime.of(date, this.endTime));
+        }
+        return this;
+    }
+
+    /**
+     * Builds the EditAppointmentDescriptor object.
+     * @return
+     */
     public EditAppointmentDescriptor build() {
         return descriptor;
     }
