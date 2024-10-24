@@ -53,8 +53,14 @@ public class PersonDetails {
         remarkLabel.setText(person.getRemark().value);
 
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-            Label historyLabel = new Label(date.toString() + ": \n" + String.join(", \n", activities));
+            Label historyLabel = new Label(date.toString());
+            historyLabel.setStyle("-fx-background-color: #293f3f; -fx-text-fill: #D9B08C; -fx-padding: 5");
             history.getChildren().add(historyLabel);
+            activities.forEach(entry -> {
+                Label activityLabel = new Label("\t - " + entry);
+                activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 2");
+                history.getChildren().add(activityLabel);
+            });
         });
 
         person.getTags().stream()
