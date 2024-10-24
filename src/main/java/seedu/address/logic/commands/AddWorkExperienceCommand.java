@@ -58,7 +58,7 @@ public class AddWorkExperienceCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), workExp,
                 personToEdit.getTags(), personToEdit.getUniversity(), personToEdit.getMajor(),
-                personToEdit.getInterest());
+                personToEdit.getInterests());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

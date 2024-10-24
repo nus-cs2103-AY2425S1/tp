@@ -32,27 +32,27 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String interest;
+    private final List<String> interests;
     private final String workExp;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String university;
     private final String major;
-
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("workExp") String workExp,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("university") String university,
-                             @JsonProperty("major") String major, @JsonProperty("interest") String interest) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("university") String university,
+                             @JsonProperty("major") String major,
+                             @JsonProperty("interests") List<String> interests) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.interest = interest;
         this.workExp = workExp;
         this.university = university;
         this.major = major;
@@ -60,23 +60,28 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.interests = (interests != null) ? new ArrayList<>(interests) : new ArrayList<>();
     }
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        interest = source.getInterest().value;
-        address = source.getAddress().value;
-        workExp = source.getWorkExp().value;
-        university = source.getUniversity().value;
-        major = source.getMajor().value;
-        tags.addAll(source.getTags().stream()
+        this.name = source.getName().fullName;
+        this.phone = source.getPhone().value;
+        this.email = source.getEmail().value;
+        this.address = source.getAddress().value;
+        this.workExp = source.getWorkExp().value;
+        this.university = source.getUniversity().value;
+        this.major = source.getMajor().value;
+
+        this.tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        this.interests = source.getInterests().stream()
+                .map(Interest::toString)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -90,6 +95,7 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        // Validation for name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -98,6 +104,7 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        // Validation for phone
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -106,6 +113,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        // Validation for email
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -114,6 +122,7 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        // Validation for address
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -122,6 +131,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        // Validation for work experience
         if (workExp == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, WorkExp.class.getSimpleName()));
         }
@@ -130,28 +140,48 @@ class JsonAdaptedPerson {
         }
         final WorkExp modelWorkExp = new WorkExp(workExp);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        // Validation for new fields
+        // Validation for university
         if (university == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     University.class.getSimpleName()));
         }
-        if (university.trim().isEmpty() || !University.isValidUniversity(university)) {
+        if (!University.isValidUniversity(university)) {
             throw new IllegalValueException(University.MESSAGE_CONSTRAINTS);
         }
         final University modelUniversity = new University(university);
 
+        // Validation for major
         if (major == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
-        if (major.trim().isEmpty() || !Major.isValidMajor(major)) {
+        if (!Major.isValidMajor(major)) {
             throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
         }
         final Major modelMajor = new Major(major);
 
+        // Correctly handle interests validation
+        if (interests == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Interest.class
+                    .getSimpleName()));
+        }
+
+        final List<Interest> personInterests = new ArrayList<>();
+        for (String interestStr : interests) {
+            if (interestStr == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Interest.class
+                        .getSimpleName()));
+            }
+            try {
+                personInterests.add(new Interest(interestStr));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(Interest.MESSAGE_CONSTRAINTS);
+            }
+        }
+        final Set<Interest> modelInterests = new HashSet<>(personInterests);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags, modelUniversity,
-                          modelMajor, new Interest(""));
+                modelMajor, modelInterests);
     }
 
 }
