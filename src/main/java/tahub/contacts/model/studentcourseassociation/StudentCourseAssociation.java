@@ -177,7 +177,7 @@ public class StudentCourseAssociation {
 
         StudentCourseAssociation otherStudentCourseAssociation = (StudentCourseAssociation) other;
         boolean checkStudentAndCourse = this.student.equals(otherStudentCourseAssociation.student)
-                && this.course.equals(otherStudentCourseAssociation.course);
+                && this.course.isConflictCourse(otherStudentCourseAssociation.course);
 
         if (!checkStudentAndCourse) {
             return false;
