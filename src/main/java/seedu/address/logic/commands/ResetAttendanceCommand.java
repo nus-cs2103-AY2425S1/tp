@@ -18,7 +18,7 @@ public class ResetAttendanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Attendance reset successfully.";
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         model.resetAttendance();
         return new CommandResult(MESSAGE_SUCCESS);
