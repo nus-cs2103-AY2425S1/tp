@@ -66,6 +66,20 @@ public class ModuleTest {
     @Test
     public void toString_returnsCorrectString() {
         Module module = new Module("CS2103T");
-        assertEquals("[CS2103T]", module.toString());
+        assertEquals("[CS2103T | Grade: Ungraded]", module.toString());
+    }
+
+    @Test
+    public void assignGrade_invalidGrade_throwsIllegalArgumentException() {
+        Module module = new Module("CS2103T");
+        assertThrows(IllegalArgumentException.class, () -> module.assignGrade(-2)); // Negative grade
+        assertThrows(IllegalArgumentException.class, () -> module.assignGrade(101)); // Grade above 100
+    }
+
+    @Test
+    public void assignGrade_validGrade_success() {
+        Module module = new Module("CS2103T");
+        module.assignGrade(85);
+        assertEquals("85", module.getGrade());
     }
 }

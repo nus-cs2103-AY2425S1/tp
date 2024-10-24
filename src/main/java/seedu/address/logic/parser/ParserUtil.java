@@ -136,6 +136,25 @@ public class ParserUtil {
         }
         return tagSet;
     }
+    /**
+     * Parses a {@code String grade} into a {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static int parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        try {
+            int numericGrade = Integer.parseInt(trimmedGrade);
+            if (!Module.isValidGrade(numericGrade)) {
+                throw new ParseException(Module.GRADE_CONSTRAINTS);
+            }
+            return numericGrade;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Module.GRADE_CONSTRAINTS);
+        }
+    }
 
     /**
      * Parses a {@code String path} into a {@code Path}.

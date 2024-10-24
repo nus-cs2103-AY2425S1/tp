@@ -197,6 +197,15 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
     @Test
+    public void parseGrade_validInput_success() throws Exception {
+        assertEquals(100, ParserUtil.parseGrade("100"));
+    }
+
+    @Test
+    public void parseGrade_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, Module.GRADE_CONSTRAINTS, () -> ParserUtil.parseGrade("101"));
+    }
+    @Test
     public void parsePathWithCheck_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePathWithCheck((String) null));
     }
