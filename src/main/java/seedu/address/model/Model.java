@@ -88,5 +88,11 @@ public interface Model {
     public void sortPersonsAsc();
 
     public void sortPersonsDesc();
+
+    /**
+     * Returns a list of persons whose birthdays are within the next week.
+     */
+    String getPersonsWithUpcomingBirthdays();
+
     public void sortPersonsFavourite();
 }

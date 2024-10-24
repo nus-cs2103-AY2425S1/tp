@@ -1,20 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="seedu.address.ui.PersonDetails">
+<VBox prefHeight="589.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
-    <Label text="Name:" />
-    <Label fx:id="nameLabel" />
+    <Label alignment="TOP_LEFT" text="Name:" />
+    <Label fx:id="nameLabel" prefHeight="37.0" prefWidth="499.0" />
+      <HBox prefHeight="23.0" prefWidth="419.0">
+         <children>
+            <FlowPane fx:id="tags" prefHeight="6.0" prefWidth="419.0" />
+         </children>
+      </HBox>
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
-    <Label text="Phone:" />
-    <Label fx:id="phoneLabel" />
+      <HBox prefHeight="23.0" prefWidth="419.0"  spacing="10.0">
+         <children>
+            <Label text="Birthday:" />
+            <Label fx:id="birthdayLabel" />
+         </children>
+      </HBox>
+      <Separator prefHeight="1.0" prefWidth="336.0" />
+      <HBox prefHeight="23.0" prefWidth="419.0"  spacing="10.0">
+         <children>
+
+                <Label text="Phone:" />
+          <Label fx:id="phoneLabel" />
+         </children>
+      </HBox>
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
     <Label text="Email:" />
     <Label fx:id="emailLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
     <Label text="Address:" />
     <Label fx:id="addressLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
+
+    <Label text="Remarks:" />
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="remarkLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
+
+    <Label text="History:" />
+    <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="437.0">
+        <content>
+            <Label fx:id="historyLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
 </children>
 </VBox>

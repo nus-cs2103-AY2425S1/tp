@@ -8,12 +8,19 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_EMPTY;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_HEADER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +31,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -32,6 +40,7 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
@@ -172,5 +181,38 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void testGetPersonsWithUpcomingBirthdays() {
+        Person editedAlice = new PersonBuilder(ALICE).withBirthday(LocalDate.now()
+                .plusDays(7).minusYears(20).toString()).build();
+        Person editedBob = new PersonBuilder(BOB).withBirthday(LocalDate.now()
+                .minusDays(1).minusYears(20).toString()).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(editedAlice).withPerson(editedBob).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        model = new ModelManager(addressBook, userPrefs);
+        logic = new LogicManager(model, storage);
+        assertEquals(logic.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_EMPTY);
+
+        LocalDate sixDaysAfterTodaySomeYearsBack = LocalDate.now().plusDays(6).minusYears(20);
+        LocalDate todaySomeYearsBack = LocalDate.now().minusDays(0).minusYears(20);
+        Person editedBenson = new PersonBuilder(BENSON).withBirthday(sixDaysAfterTodaySomeYearsBack.toString())
+                .build();
+        Person editedCarl = new PersonBuilder(CARL).withBirthday(todaySomeYearsBack.toString()).build();
+        addressBook = new AddressBookBuilder().withPerson(editedBenson).withPerson(editedCarl).build();
+
+        model = new ModelManager(addressBook, userPrefs);
+        logic = new LogicManager(model, storage);
+
+        assertEquals(logic.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_HEADER
+                + "Benson Meier's birthday is on " + sixDaysAfterTodaySomeYearsBack.plusYears(20) + "\n"
+                + "Carl Kurz's birthday is on " + todaySomeYearsBack.plusYears(20));
     }
 }
