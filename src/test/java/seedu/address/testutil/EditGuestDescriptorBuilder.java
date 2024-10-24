@@ -40,6 +40,7 @@ public class EditGuestDescriptorBuilder {
         descriptor.setAddress(guest.getAddress());
         descriptor.setTags(guest.getTags());
         descriptor.setRsvp(guest.getRsvp());
+        descriptor.setRelation(guest.getRelation());
     }
 
     /**

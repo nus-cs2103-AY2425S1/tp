@@ -27,6 +27,7 @@ public class EditGuestDescriptor extends EditPersonDescriptor {
     public EditGuestDescriptor(EditGuestDescriptor toCopy) {
         super(toCopy);
         setRsvp(toCopy.rsvp);
+        setRelation(toCopy.relation);
     }
 
     /**
@@ -78,6 +79,7 @@ public class EditGuestDescriptor extends EditPersonDescriptor {
                 .add("address", getAddress().orElse(null))
                 .add("tags", getTags().orElse(null))
                 .add("RSVP", rsvp)
+                .add("Relation", relation)
                 .toString();
     }
 }
