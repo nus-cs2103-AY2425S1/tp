@@ -305,7 +305,9 @@ Views a specific student on the right side window.
 **Format:** `view n/NAME`
 
 **Examples:**
-* `view n/John Doe`
+* `view n/Alex Yeoh`
+
+![view student](images/view_student.png)
 
 ***
 
