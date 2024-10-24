@@ -39,6 +39,7 @@ public class FindCommand extends Command {
             + PREFIX_ATTENDANCE + "true";
 
     private final Predicate<Person> combinedPredicate;
+    private final List<Predicate<Person>> predicates;
 
     /**
      * Constructs a {@code FindCommand} with a list of predicates that will be combined using logical AND,
@@ -49,6 +50,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(List<Predicate<Person>> predicates) {
         requireNonNull(predicates);
+        this.predicates = predicates;
         this.combinedPredicate = predicates.stream()
                 .reduce(x -> true, Predicate::and); // Combine predicates with logical AND
     }
@@ -73,13 +75,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return this.combinedPredicate.equals(otherFindCommand.combinedPredicate);
+        return this.predicates.equals(otherFindCommand.predicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", combinedPredicate)
+                .add("predicate", predicates)
                 .toString();
     }
 }
