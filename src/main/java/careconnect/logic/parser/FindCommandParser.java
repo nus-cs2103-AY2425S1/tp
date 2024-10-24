@@ -72,7 +72,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
 
         return new FindCommand(
-                new NameAndAddressAndTagsContainsKeywordsPredicate(Arrays.asList(nameKeywords), Arrays.asList(addressKeywords), Arrays.asList(tagKeywords))
+                new NameAndAddressAndTagsContainsKeywordsPredicate(
+                        Arrays.asList(nameKeywords), Arrays.asList(addressKeywords), Arrays.asList(tagKeywords))
                 );
     }
 

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import careconnect.commons.core.LogsCenter;
 import careconnect.commons.util.StringUtil;
 import careconnect.commons.util.ToStringBuilder;
-import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.ModelManager;
 import careconnect.model.tag.Tag;
 
