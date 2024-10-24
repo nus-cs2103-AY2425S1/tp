@@ -40,5 +40,6 @@ public class CategoryTest {
     @Test
     public void invalidCat() {
         assertNotEquals(testCat, new Category("EXTRA"));
+        assertNotEquals(testCat, null);
     }
 }
