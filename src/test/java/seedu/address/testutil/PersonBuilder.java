@@ -91,7 +91,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAppointment(String appointment) {
+    public PersonBuilder addAppointment(String appointment) {
         this.appointments.add(new Appointment(appointment));
         return this;
     }

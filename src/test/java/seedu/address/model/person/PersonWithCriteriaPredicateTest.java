@@ -86,7 +86,7 @@ public class PersonWithCriteriaPredicateTest {
                 LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)
         ));
         predicate = new PersonWithCriteriaPredicate(criteria);
-        assertTrue(predicate.test(new PersonBuilder().withAge("21").withAppointment("01/01/2024 1200").build()));
+        assertTrue(predicate.test(new PersonBuilder().withAge("21").addAppointment("01/01/2024 1200").build()));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class PersonWithCriteriaPredicateTest {
         criteria.add(new Range<LocalDate>(
                 LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)
         ));
-        assertFalse(predicate.test(new PersonBuilder().withAge("19").withAppointment("01/01/2024 1200").build()));
+        assertFalse(predicate.test(new PersonBuilder().withAge("19").addAppointment("01/01/2024 1200").build()));
     }
 
     @Test
