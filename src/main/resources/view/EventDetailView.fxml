@@ -45,6 +45,21 @@
                     <Label fx:id="date" styleClass="detail-contents" text="\$date"/>
                 </HBox>
 
+
+                <!-- Location Section -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <HBox spacing="15" prefWidth="150" alignment="CENTER_LEFT">
+                        <ImageView>
+                            <image>
+                                <Image url="@/images/location_dark.png" />
+                            </image>
+                        </ImageView>
+                        <Text styleClass="detail-contents"> Location </Text>
+                    </HBox>
+                    <Label fx:id="locationLabel" styleClass="detail-contents" text="\$location"/>
+                </HBox>
+
+
                 <!-- Attendees Section -->
                 <VBox spacing="20">
                     <Label text="Attendees" styleClass="detail-subheader" />
