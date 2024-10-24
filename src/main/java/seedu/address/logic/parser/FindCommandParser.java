@@ -76,6 +76,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses and validates the name extracted from the input arguments.
      * Returns an Optional containing the name if it is valid, otherwise throws ParseException.
+     *
      * @param name The name to validate.
      * @return Optional Containing the validated name, or empty if no name is provided.
      * @throws ParseException If the name does not meet the validation criteria.
@@ -94,6 +95,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses and validates the contact number from the input arguments.
      * Returns an Optional containing the contact number if it is valid, otherwise throws ParseException.
+     *
      * @param contactNumber The contact number to validate.
      * @return Optional Containing the validated contact number, or empty if no contact number is provided.
      * @throws ParseException If the contact number does not meet the validation criteria.
@@ -112,6 +114,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses and validates the room number from the input arguments.
      * Returns an Optional containing the room number if it is valid, otherwise throws ParseException.
+     *
      * @param roomNumber The room number to validate.
      * @return Optional Containing the validated room number, or empty if no room number is provided.
      * @throws ParseException If the room number does not meet the validation criteria.
@@ -131,6 +134,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses and validates the list of tags from the input arguments.
      * Returns an Optional containing the list of tags if it is valid, otherwise throws ParseException.
+     *
      * @param tags The list of tags to validate.
      * @return Optional Containing the validated list of tags, or empty if no list of tags is provided.
      * @throws ParseException If the list of tags does not meet the validation criteria.
