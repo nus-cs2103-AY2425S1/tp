@@ -176,6 +176,12 @@ public class AddGuestCommandParserTest {
         Guest expectedGuest = new GuestBuilder(BOB).withTags().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 new AddGuestCommand(expectedGuest));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + RSVP_DESC_BOB,
+                new AddGuestCommand(expectedGuest));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + RELATION_DESC_BOB,
+                new AddGuestCommand(expectedGuest));
     }
 
     @Test

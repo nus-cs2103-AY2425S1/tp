@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -55,5 +57,18 @@ public class RelationTest {
 
         // different values -> returns false
         assertFalse(relation.equals(new Relation("W")));
+    }
+
+    @Test
+    public void hashcode() {
+        Relation relationH = new Relation("H");
+        Relation relationW = new Relation("W");
+        Relation relationHCopy = new Relation("H");
+
+        // Same values should have same hash code
+        assertEquals(relationH.hashCode(), relationHCopy.hashCode());
+
+        // Different values should have different hash codes
+        assertNotEquals(relationH.hashCode(), relationW.hashCode());
     }
 }
