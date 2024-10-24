@@ -96,21 +96,18 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
-        commitAddressBook(); // Commit after deleting a person
     }
 
     @Override
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        commitAddressBook(); // Commit after adding a person
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         versionedAddressBook.setPerson(target, editedPerson);
-        commitAddressBook(); // Commit after setting a person
     }
 
     //=========== Filtered Person List Accessors =============================================================
