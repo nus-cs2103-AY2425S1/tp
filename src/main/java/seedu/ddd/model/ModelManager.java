@@ -46,24 +46,12 @@ public class ModelManager implements Model {
 
         // listen for changes in the original lists and update the combined list
         filteredContacts.addListener((ListChangeListener<Contact>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    displayedList.removeAll(change.getRemoved());
-                }
-                if (change.wasAdded()) {
-                    displayedList.addAll(change.getAddedSubList());
-                }
-            }
+            displayedList.clear();
+            displayedList.addAll(filteredContacts);
         });
         filteredEvents.addListener((ListChangeListener<Event>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    displayedList.removeAll(change.getRemoved());
-                }
-                if (change.wasAdded()) {
-                    displayedList.addAll(change.getAddedSubList());
-                }
-            }
+            displayedList.clear();
+            displayedList.addAll(filteredEvents);
         });
 
         // populate the initial displayed list with contacts only
