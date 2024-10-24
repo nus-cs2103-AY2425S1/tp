@@ -1,22 +1,30 @@
-
 #titleLabel {
     -fx-font-family: "Arial";
     -fx-font-size: 40px;
-    -fx-text-fill: #fefcfc;
+    -fx-text-fill: #FEFAF9;
     -fx-stroke-width: 1px;
+    -fx-padding: 5 0 0 0;
 }
 
 #personListView {
-    -fx-padding: 10 0 0 0;
     -fx-background-color: #F0A89F;
 }
 
 .separator {
-    -fx-padding: 0 8 0 0;
+    -fx-padding: 0 10 10 12;
+}
+
+.separator *.line {
+    -fx-border-color: #FEF7F7;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
 }
 
 .list-view {
     -fx-background-color: #F0A89F;
+    -fx-padding: 0 10 5 8;
+    -fx-background-insets: 0 10 5 8;
+    -fx-border-insets: 0 10 5 8;
 }
 
 .list-view .scroll-bar:vertical {
@@ -29,10 +37,10 @@
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 8 15 0;
-    -fx-background-insets: 0 8 15 0;
-    -fx-border-insets: 0 8 15 0;
-    -fx-border: 1;
+    -fx-padding: 0 0 15 0;
+    -fx-background-insets: 0 0 15 0;
+    -fx-border-insets: 0 0 15 0;
+    -fx-border-width: 2;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
     -fx-border-color: transparent;
@@ -40,11 +48,11 @@
 }
 
 .list-cell:filled {
-    -fx-background-color: #F5C6C0;
+    -fx-background-color: #f8d3ca;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #F7D5D1;
+    -fx-background-color: #f8d3ca;
     -fx-border-color: #913E3E;
 }
 
