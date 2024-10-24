@@ -18,7 +18,7 @@ public class StatusPredicate implements Predicate<InternshipApplication> {
      * @param statusToFilterBy A string that specifies the status to filter internship applications.
      */
     public StatusPredicate(String statusToFilterBy) {
-        this.statusToFilterBy = statusToFilterBy;
+        this.statusToFilterBy = statusToFilterBy.toUpperCase();
     }
 
     /**

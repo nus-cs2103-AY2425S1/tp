@@ -16,6 +16,7 @@ import seedu.hireme.logic.commands.AddCommand;
 import seedu.hireme.logic.commands.ClearCommand;
 import seedu.hireme.logic.commands.DeleteCommand;
 import seedu.hireme.logic.commands.ExitCommand;
+import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
@@ -24,6 +25,7 @@ import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.hireme.model.internshipapplication.Status;
+import seedu.hireme.model.internshipapplication.StatusPredicate;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 import seedu.hireme.testutil.InternshipApplicationUtil;
 
@@ -107,5 +109,13 @@ public class AddressBookParserTest {
     public void parseCommand_statusReject_success() throws Exception {
         StatusCommand command = (StatusCommand) parser.parseCommand("/reject 1");
         assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.REJECTED), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String status = "pending";
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + String.join(" ", status));
+        assertEquals(new FilterCommand(new StatusPredicate(status)), command);
     }
 }
