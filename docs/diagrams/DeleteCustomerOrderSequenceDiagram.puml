@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+user -[USER_COLOR]> ui : "deleteCustomerOrder 1"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("deleteCustomerOrder 1")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : getCustomerOrderList()
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> logic : return customerOrderList
+deactivate model
+
+logic -[LOGIC_COLOR]> model : removeOrderByIndex(1)
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> logic : order removed
+deactivate model
+
+logic -[LOGIC_COLOR]> storage : saveCustomerOrderList()
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+deactivate storage
+
+storage --[STORAGE_COLOR]> logic
+deactivate storage
+
+logic --[LOGIC_COLOR]> ui : command success
+deactivate logic
+
+ui--[UI_COLOR]> user : success message
+deactivate ui
+@enduml
