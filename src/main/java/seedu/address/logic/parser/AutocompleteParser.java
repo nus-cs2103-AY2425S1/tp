@@ -40,7 +40,7 @@ public class AutocompleteParser {
         ListCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
-        GradeCommand.COMMAND_WORD
+        GradeCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
         UndoCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
