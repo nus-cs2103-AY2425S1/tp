@@ -77,3 +77,5 @@ skinparam packageStyle Rectangle
 hide footbox
 hide members
 hide circle
+show enum members
+hide enum methods

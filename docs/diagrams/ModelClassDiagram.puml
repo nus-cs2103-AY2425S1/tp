@@ -19,6 +19,19 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class OrderList
+Class Order {
+    status: Status
+}
+Class Item
+Class Date
+Class Count
+
+
+enum Status <<enumeration>> {
+    PENDING
+    COMPLETED
+}
 
 Class I #FFFFFF
 }
@@ -42,6 +55,11 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> OrderList
+OrderList *--> "*" Order
+Order *--> Item
+Order *--> Date
+Order *--> Count
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -50,5 +68,11 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
+Count -[hidden]right--> Status
+
+show Order members
+hide Order methods
+
 ModelManager --> "~* filtered" Person
+ModelManager --> "1 selected" Person
 @enduml
