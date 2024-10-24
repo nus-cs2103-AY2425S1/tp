@@ -613,9 +613,11 @@ testers are expected to do more *exploratory* testing.
 ### Edit schedule
 
 1. Test case:
+
     1. Expected:
 
 ### Delete schedule
 
 1. Test case:
+
     1. Expected:
