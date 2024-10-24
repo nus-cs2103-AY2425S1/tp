@@ -16,6 +16,7 @@ Class PersonCard
 Class ContactDetails
 Class StatusBarFooter
 Class CommandBox
+Class SearchBox
 }
 
 package Model <<Rectangle>> {
@@ -33,6 +34,7 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 
 MainWindow *-down->  "1" CommandBox
+MainWindow *-down->  "1" SearchBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
@@ -46,6 +48,7 @@ ContactDetails -down-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
+SearchBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
@@ -58,7 +61,8 @@ UiManager -right-> Logic
 MainWindow -left-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+HelpWindow -[hidden]left- SearchBox
+SearchBox -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 

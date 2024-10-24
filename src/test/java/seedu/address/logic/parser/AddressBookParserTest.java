@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -114,11 +115,21 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_export() throws Exception {
         ExportCommand command = (ExportCommand) parser.parseCommand(
-            ExportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
+                ExportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
         ExportCommand commandUpperCase = (ExportCommand) parser.parseCommand(
-            ExportCommand.COMMAND_WORD.toUpperCase() + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
+                ExportCommand.COMMAND_WORD.toUpperCase() + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
         assertEquals(new ExportCommand(FILE_TYPE_CSV), command);
         assertEquals(new ExportCommand(FILE_TYPE_CSV), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_pin() throws Exception {
+        PinCommand command = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        PinCommand commandUpperCase = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD.toUpperCase() + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new PinCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new PinCommand(INDEX_FIRST_PERSON), commandUpperCase);
     }
 
     @Test

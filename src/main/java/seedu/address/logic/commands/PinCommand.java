@@ -12,27 +12,27 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Pins a person in address book to a pinned list.
  */
-public class DeleteCommand extends Command {
+public class PinCommand extends Command {
+    public static final String COMMAND_WORD = "pin";
 
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the person identified by the index number.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
+    public static final String MESSAGE_ALREADY_PINNED = "This person already pinned";
 
     private final Index targetIndex;
 
     /**
-     * Creates a DeleteCommand to delete the specified person.
+     * Creates a PinCommand to pin the specified person.
      *
-     * @param targetIndex of the person in the filtered person list to be deleted
+     * @param targetIndex of the person in the filtered person list to be pinned
      */
-    public DeleteCommand(Index targetIndex) {
+    public PinCommand(Index targetIndex) {
+        assert targetIndex != null;
         this.targetIndex = targetIndex;
     }
 
@@ -45,12 +45,15 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.getFocusedPerson().set(null);
-        CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.formatShort(personToDelete)), false, false);
-        System.out.println(commandResult.getFeedbackToUser());
+        Person personToPin = lastShownList.get(targetIndex.getZeroBased());
+
+        if (model.isPinned(personToPin)) {
+            throw new CommandException(MESSAGE_ALREADY_PINNED);
+        }
+
+        model.addPinnedPersonList(personToPin);
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS,
+                Messages.formatShort(personToPin)), false, false);
         return commandResult;
     }
 
@@ -61,12 +64,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof PinCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        PinCommand otherPinCommand = (PinCommand) other;
+        return targetIndex.equals(otherPinCommand.targetIndex);
     }
 
     @Override
