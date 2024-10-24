@@ -36,17 +36,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label dateOfLastVisit;
-    @FXML
-    private Label emergencyContact;
-    @FXML
-    private Label remark;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,37 +50,12 @@ public class PersonCard extends UiPart<Region> {
         setIdLabel(displayedIndex);
         setNameLabel(person);
         setPhoneLabel(person);
-        setAddressLabel(person);
-        setEmailLabel(person);
         setTagsFlowpane(person);
         setDateOfLastVisitLabel(person);
-        setEmergencyContactLabel(person);
-        setRemarkLabel(person);
     }
 
     private void setIdLabel(int displayedIndex) {
         id.setText(displayedIndex + ". ");
-    }
-
-    private void setRemarkLabel(Person personToView) {
-        if (personToView.getRemark().isPresent()) {
-            // the lack of a remark is denoted by an empty string
-            remark.setText("Remarks: " + personToView.getRemark().value);
-            remark.setManaged(true);
-        } else {
-            remark.setText("");
-            remark.setManaged(false);
-        }
-    }
-
-    private void setEmergencyContactLabel(Person personToView) {
-        if (personToView.hasEmergencyContact()) {
-            emergencyContact.setText("Emergency Contact: " + personToView.getEmergencyContact().get().value);
-            emergencyContact.setManaged(true);
-        } else {
-            emergencyContact.setText("");
-            emergencyContact.setManaged(false);
-        }
     }
 
     private void setDateOfLastVisitLabel(Person personToView) {
@@ -107,28 +74,8 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private void setEmailLabel(Person personToView) {
-        if (personToView.hasEmail()) {
-            email.setText(personToView.getEmail().get().value);
-            email.setManaged(true);
-        } else {
-            email.setText("");
-            email.setManaged(false);
-        }
-    }
-
-    private void setAddressLabel(Person personToView) {
-        if (personToView.hasAddress()) {
-            address.setText(personToView.getAddress().get().value);
-            address.setManaged(true);
-        } else {
-            address.setText("");
-            address.setManaged(false);
-        }
-    }
-
     private void setPhoneLabel(Person personToView) {
-        phone.setText(personToView.getPhone().value);
+        phone.setText("Phone number: " + personToView.getPhone().value);
     }
 
     private void setNameLabel(Person personToView) {
