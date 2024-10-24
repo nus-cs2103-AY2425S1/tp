@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -198,8 +199,13 @@ public class ModelManager implements Model {
 
     @Override
     public Event getEventById(int eventId) {
-        return addressBook.getEventById(eventId);
+        try {
+            return addressBook.getEventById(eventId);
+        } catch (NoSuchElementException e) {
+            return null; // Return null if no event is found
+        }
     }
+
 
     @Override
     public void setEvent(Event target, Event editedEvent) {
