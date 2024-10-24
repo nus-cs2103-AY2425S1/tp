@@ -6,7 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -37,13 +36,12 @@ public class MarkAttendanceCommandTest {
 
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        String expectedDate = DateTimeFormatter.ofPattern("MMM d yyyy").format(date);
         MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 
         CommandResult result = command.execute(modelStub);
 
         assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
-                        validStudent.getTutorialGroup(), attendance, expectedDate), result.getFeedbackToUser());
+                        validStudent.getTutorialGroup(), attendance, date), result.getFeedbackToUser());
     }
 
     @Test
@@ -184,6 +182,11 @@ public class MarkAttendanceCommandTest {
 
         @Override
         public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 

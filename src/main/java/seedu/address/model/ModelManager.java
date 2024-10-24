@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -197,6 +199,15 @@ public class ModelManager implements Model {
         }
         return null; // Return null if no matching student is found
 
+    }
+
+    @Override
+    public ObservableList<Student> getAllStudentsByName(Name name) {
+        return getAddressBook()
+                .getStudentList()
+                .stream()
+                .filter(s -> s.getName().equals(name))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
