@@ -112,5 +112,10 @@ public class UniqueAssociationList implements Iterable<Association> {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
 }
 

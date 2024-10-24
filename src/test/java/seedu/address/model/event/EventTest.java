@@ -104,7 +104,6 @@ public class EventTest {
         Name name = new Name("Workshop");
         Date date = new Date("2024-10-10");
 
-        // Generate a valid UUID
         UniqueId id = new UniqueId(UUID.randomUUID().toString());
         Event event1 = new Event(id, name, date);
         Event event2 = new Event(id, name, date);
@@ -118,10 +117,12 @@ public class EventTest {
     public void toString_checkFormat() {
         Name name = new Name("Conference");
         Date date = new Date("2024-10-10");
+        UniqueId id = new UniqueId(UUID.randomUUID().toString());
 
-        Event event = new Event(name, date);
+        Event event = new Event(id, name, date);
 
-        String expected = Event.class.getCanonicalName() + "{name=Conference, date=2024-10-10}";
+        String expected = Event.class.getCanonicalName() + "{id=" + id.toString()
+                + ", name=Conference, date=2024-10-10}";
         assertEquals(expected, event.toString());
     }
 }

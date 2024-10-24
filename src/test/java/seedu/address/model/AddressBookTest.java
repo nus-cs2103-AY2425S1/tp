@@ -34,7 +34,6 @@ public class AddressBookTest {
     private final AddressBook addressBook = new AddressBook();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
     private final Event anotherEvent = new Event(new Name("Another Event"), new Date("2024-10-11"));
-    private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
 
     @Test
     public void constructor() {
@@ -104,12 +103,6 @@ public class AddressBookTest {
         assertTrue(addressBook.hasEvent(testEvent));
     }
 
-    @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addEvent(testEvent);
-        assertTrue(addressBook.hasEvent(similarTestEvent));
-    }
-
     // might be redundant has this is already tested in UniqueEventListTest.java
     @Test
     public void addEvent_nullEvent_throwsNullPointerException() {
@@ -144,7 +137,8 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
                 + "{vendors=" + addressBook.getVendorList() + ", "
-                + "events=" + addressBook.getEventList()
+                + "events=" + addressBook.getEventList() + ", "
+                + "associations=" + addressBook.getAssociationList()
                 + "}";
         assertEquals(expected, addressBook.toString());
     }
