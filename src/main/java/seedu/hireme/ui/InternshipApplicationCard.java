@@ -35,6 +35,8 @@ public class InternshipApplicationCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label email;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code InternshipApplicationCard} with the given {@code InternshipApplication} and index to display.
@@ -47,5 +49,22 @@ public class InternshipApplicationCard extends UiPart<Region> {
         email.setText(internshipApplication.getCompany().getEmail().getValue());
         role.setText(internshipApplication.getRole().getValue());
         date.setText(internshipApplication.getDateOfApplication().getValue().toString());
+
+        String statusValue = internshipApplication.getStatus().getValue().toUpperCase();
+        status.setText(statusValue);
+
+        switch (statusValue) {
+        case "PENDING":
+            status.getStyleClass().add("status-pending");
+            break;
+        case "ACCEPTED":
+            status.getStyleClass().add("status-accepted");
+            break;
+        case "REJECTED":
+            status.getStyleClass().add("status-rejected");
+            break;
+        default:
+            break;
+        }
     }
 }

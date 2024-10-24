@@ -26,9 +26,10 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="email" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="role" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="date" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
+      <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+      <Label fx:id="status" styleClass="status-label" text="\$status"/>
     </VBox>
   </GridPane>
 </HBox>
