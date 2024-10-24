@@ -40,10 +40,9 @@ public class CleanCommandTest {
             Person p = lastShownList.get(i);
             Optional<GradYear> graduationYear = p.getGradYear();
             if (graduationYear.isPresent()) {
-                String theYear = graduationYear.get().toString();
-                System.out.println(theYear);
-                Integer year = Integer.parseInt(theYear);
-                if (year < Year.now().getValue()) {
+                String year = graduationYear.get().toString();
+                Integer yearValue = Integer.parseInt(year);
+                if (yearValue < Year.now().getValue()) {
                     expectedModel.deletePerson(p);
                 }
             }
