@@ -1,0 +1,25 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+
+Class HireCommand {
+  +COMMAND_WORD: String
+  -name: Name
+  -job: Job
+  +HireCommand(Name, Job)
+  +execute(Model): CommandResult
+  +getName(): Name
+  +getJob(): Job
+}
+
+Class CommandException
+
+HireCommand -up-|> Command
+Command ..> CommandException: throws >
+HireCommand .right.> CommandException: throws >
+
+@enduml
