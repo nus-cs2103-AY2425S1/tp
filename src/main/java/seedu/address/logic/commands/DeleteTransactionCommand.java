@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -41,7 +42,7 @@ public class DeleteTransactionCommand extends Command {
         }
 
         Person selected = lastShownList.get(CURRENT_PERSON.getZeroBased());
-        List<Transaction> transactions = selected.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(model.getFilteredTransactionList());
 
         if (index.getZeroBased() >= transactions.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
@@ -50,6 +51,7 @@ public class DeleteTransactionCommand extends Command {
         Transaction transactionToRemove = transactions.get(index.getZeroBased());
         transactions.remove(index.getZeroBased());
         selected.updateBalance(transactionToRemove.getAmount() * -1);
+        selected.updateTransactions(transactions);
         model.updateTransactionList(transactions);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToRemove),
