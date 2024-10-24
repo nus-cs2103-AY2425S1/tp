@@ -70,17 +70,17 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 [Back to Table of Contents](#table-of-contents)
 
-# Quick Start
+## Quick Start
 
 In this section, lets learn how to set up MediBase3 on your computer.
 
-## Installing MediBase3
+### Installing MediBase3
 
-### Step 1: Install JDK 17
+#### Step 1: Install JDK 17
 
 Before running MediBase3, ensure that **Java 17** is installed on your system.
 
-### For Windows:
+#### For Windows:
 
 1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
@@ -95,7 +95,7 @@ You should see something like:
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
-### For macOS:
+#### For macOS:
 
 1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
 ```
@@ -120,7 +120,7 @@ You should see something like this:
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
-### For Ubuntu/Debian:
+#### For Ubuntu/Debian:
 
 1. Open **Terminal**.
 2. Install Java 17 by typing:
@@ -154,14 +154,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 ---
 
-### Step 2: Download the MediBase3 JAR File
+#### Step 2: Download the MediBase3 JAR File
 
 1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this
 ![githubAssets.png](images%2FgithubAssets.png)
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
 
-## Launching MediBase3
+### Launching MediBase3
 
 1. Open **Command Prompt** (Windows) or **Terminal** (macOS).
 2. Navigate to the directory where the `.jar` file is located. For example:
@@ -175,7 +175,7 @@ cd Downloads
 
 You should be greeted by the UI, which you will see in the next section.
 
-## Overview of the GUI
+### Overview of the GUI
 
 Once MediBase3 is running, you will see the main interface. Here’s an overview of the key parts:
 
@@ -188,11 +188,11 @@ Once MediBase3 is running, you will see the main interface. Here’s an overview
 
 ![GUIOverview.jpg](images%2FGUIOverview.jpg)
 
-## Overview of CLI
+### Overview of CLI
 
 MediBase3 can be controlled using commands in the **Command Line Interface (CLI)**.
 
-### CLI Command Structure
+#### CLI Command Structure
 
 Each command follows this structure:
 
@@ -206,14 +206,14 @@ Here’s a breakdown of the parts:
 | **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
 
-### Example:
+#### Example:
 
 add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
 - **Command:** `add`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
-## A First Look at MediBase3
+### A First Look at MediBase3
 
 Here’s a basic tutorial on how to start using the application:
 
@@ -263,7 +263,7 @@ Here’s a basic tutorial on how to start using the application:
 Now you’re ready to use MediBase3!
 For a comprehensive list of features and how to use them, [click here!](#features).
 
-If you have eny more common questions, [click here!](#faq).
+If you have any more common questions, [click here!](#faq).
 
 [Back to Table of Contents](#table-of-contents)
 ## Features
