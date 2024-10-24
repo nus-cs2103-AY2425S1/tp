@@ -10,7 +10,10 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.tutorial.Tutorial;
 
@@ -110,19 +113,21 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
         return courseTutorialScas;
     }
 
+
+
     /**
      * Returns the SCA list of a student by matric number.
      */
     public ObservableList<StudentCourseAssociation> getByMatric(String matricNumber) {
         ObservableList<StudentCourseAssociation> studentScas = FXCollections.observableArrayList();
         for (StudentCourseAssociation sca : internalList) {
-            if (sca.getStudent().getMatricNumber().equals(matricNumber)) {
+            if (sca.getStudent().getMatricNumber().equals(new MatriculationNumber(matricNumber))) {
                 studentScas.add(sca);
             }
         }
         return studentScas;
     }
-
+    
     /**
      * Replaces the SCA {@code target} in the list with {@code editedSca}.
      * {@code target} must exist in the list.
