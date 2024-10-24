@@ -192,13 +192,13 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### View an existing contact's details : `view`
+### Viewing an existing contact's details : `view`
 
 Views the details of a person in the address book.
 
 Format: `view INDEX`
 
-- Views a the details of the person at the specified `INDEX`.
+- Views the details of the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, ...
 - The index **must be within the range** shown on the displayed person list.
@@ -206,6 +206,21 @@ Format: `view INDEX`
 Examples:
 
 - `view 1` shows the contact details of the first person shown on the displayed person list.
+
+### Pinning a contact: `pin`
+
+Pins the contact of a person into a dedicated panel.
+
+Format: `pin INDEX`
+
+- Pin the contact of the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list, not the pinned list.
+- The index **must be a positive integer** 1, 2, 3, ...
+- The index **must be within the range** shown on the displayed person list.
+
+Examples:
+
+- `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
 ### Exiting the program : `exit`
 
@@ -250,13 +265,14 @@ _Details coming soon ..._
 
 | Action          | Format, Examples                                                                                                                                                      |
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`|
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**        | `list`                                                                                                                                                                |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes**    | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
 | **Deletenotes** | `deletenotes INDEX i/[NOTE_INDEX]` <br> e.g. `deletenotes 1 i/1`                                                                                                      |
 | **View**        | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Pin**         | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
 | **Clear**       | `clear`                                                                                                                                                               |
 | **Help**        | `help`                                                                                                                                                                |
