@@ -14,12 +14,10 @@ import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
-import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
