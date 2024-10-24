@@ -22,6 +22,9 @@ import seedu.address.model.supplier.Supplier;
  */
 public class AutoCompleteCommand extends Command {
 
+    public static final String SUGGESTIONS_DELIMITER = "\t\t\t";
+    public static final int MAX_SUGGESTIONS = 8;
+
     private final String currentInput;
     private final Prefix inputType;
 
@@ -52,7 +55,7 @@ public class AutoCompleteCommand extends Command {
                 EditCommand.COMMAND_WORD,
                 ExitCommand.COMMAND_WORD,
                 HelpCommand.COMMAND_WORD,
-                ListCommand.COMMAND_WORD,
+                ViewAllSupplierCommand.COMMAND_WORD,
                 SetThresholdCommand.COMMAND_WORD,
                 UnassignProductCommand.COMMAND_WORD,
                 ViewProductCommand.COMMAND_WORD,
@@ -90,8 +93,8 @@ public class AutoCompleteCommand extends Command {
 
         java.util.Collections.sort(filteredCompletions);
 
-        if (filteredCompletions.size() > 8) {
-            filteredCompletions = filteredCompletions.subList(0, 8);
+        if (filteredCompletions.size() > MAX_SUGGESTIONS) {
+            filteredCompletions = filteredCompletions.subList(0, MAX_SUGGESTIONS);
         }
 
         if (filteredCompletions.size() == 0) {
@@ -103,7 +106,7 @@ public class AutoCompleteCommand extends Command {
 
         // TODO: Only a single tab character doesn't work ... why?
         // TODO: Handle text not fitting
-        return new CommandResult(String.join("\t\t\t", filteredCompletions));
+        return new CommandResult(String.join(SUGGESTIONS_DELIMITER, filteredCompletions));
     }
     @Override
     public boolean equals(Object other) {

@@ -196,7 +196,8 @@ public class MainWindow extends UiPart<Stage> {
                 lastResultDisplayAutoComplete = autoComplete;
             }
 
-            if (commandResult.getUpdateCommandBox() && lastResultDisplayAutoComplete) {
+            if ((commandResult.getUpdateCommandBox() || !(commandResult.getResultDisplay()
+                || commandResult.getUpdateCommandBox())) && lastResultDisplayAutoComplete) {
                 resultDisplay.setFeedbackToUser("");
             }
 

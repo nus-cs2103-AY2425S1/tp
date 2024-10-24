@@ -48,7 +48,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleCommand(Boolean autoComplete) {
         String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+        if (commandText.equals("") && !autoComplete) {
             return;
         }
 
