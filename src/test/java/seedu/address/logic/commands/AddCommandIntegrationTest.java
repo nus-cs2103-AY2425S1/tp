@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,14 +27,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
     }
 
     @Test
     public void execute_newBuyer_success() {
         Buyer validBuyer = (Buyer) new PersonBuilder().buildBuyer();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validBuyer);
 
         assertCommandSuccess(new AddBuyerProfile(validBuyer), model,
@@ -45,7 +46,7 @@ public class AddCommandIntegrationTest {
     public void execute_newSeller_success() {
         Seller validSeller = (Seller) new PersonBuilder().buildSeller();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validSeller);
 
         assertCommandSuccess(new AddSellerProfile(validSeller), model,

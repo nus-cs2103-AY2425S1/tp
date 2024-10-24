@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -14,6 +15,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Listing> PREDICATE_SHOW_ALL_LISTINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,6 +58,26 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' listings file path.
+     */
+    Path getListingsFilePath();
+
+    /**
+     * Sets the user prefs' listings file path.
+     */
+    void setListingsFilePath(Path listingsFilePath);
+
+    /**
+     * Replaces listingds data with the data in {@code addressBook}.
+     */
+    void setListings(ReadOnlyListings listings);
+
+    /** Returns the Listings */
+    ReadOnlyListings getListings();
+
+    // Methods for clients
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -85,9 +109,48 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    //Methods for listings
+
+    /**
+     * Returns true if a listing with the same identity as {@code listing} exists in the address book.
+     */
+    boolean hasListing(Listing listing);
+
+    /**
+     * Deletes the given listing.
+     * The listing must exist in the address book.
+     */
+    void deleteListing(Listing listing);
+
+    /**
+     * Adds the given listing.
+     * {@code listing} must not already exist in the address book.
+     */
+    void addListing(Listing listing);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedListing}.
+     * {@code listing} must exist in the address book.
+     * The person identity of {@code editedListing} must not be the same as another existing person in the address book.
+     */
+    void setListing(Listing target, Listing editedListing);
+
+
+    // Returns the listing with the same name as {@code listing} exists in the address book.
+    //Person getPersonByName(Name name);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Listing> getFilteredListingList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered listing list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredListingList(Predicate<Listing> predicate);
 }
