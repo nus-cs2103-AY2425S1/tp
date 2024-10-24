@@ -43,6 +43,8 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label appointmentDescription;
     @FXML
+    private Label appointmentDuration;
+    @FXML
     private Label appointmentStart;
     @FXML
     private Label appointmentEnd;
@@ -79,14 +81,13 @@ public class AppointmentCard extends UiPart<Region> {
     private void setAppointmentFields(Person person) {
         if (person.getAppointment() != null) {
             appointmentDescription.setText(person.getAppointmentDescription());
-            appointmentStart.setText(person.getAppointmentStart().toString());
-            appointmentEnd.setText(person.getAppointmentEnd().toString());
+            String duration = person.getAppointmentStart().toString() + " ~ " + person.getAppointmentEnd().toString();
+            appointmentDuration.setText(duration);
         } else {
             // Use of ChatGPT to see how to hide unwanted label
             // Prompt: How to remove label if appointment is null
             appointmentDescription.setVisible(false); // Hide the label
-            appointmentStart.setVisible(false);
-            appointmentEnd.setVisible(false);
+            appointmentDuration.setVisible(false);
         }
     }
 }

@@ -4,13 +4,13 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -41,6 +41,12 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
+    private VBox leftPartition;
+    @FXML
+    private VBox rightPartition;
+    @FXML
+    private HBox horizontalContainer;
+    @FXML
     private StackPane commandBoxPlaceholder;
     @FXML
     private MenuItem helpMenuItem;
@@ -60,10 +66,6 @@ public class MainWindow extends UiPart<Stage> {
     private ImageView imageView;
     @FXML
     private Image image;
-    @FXML
-    private Label appointmentsTitle;
-    @FXML
-    private Label personsTitle;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,7 +80,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
+        // setAccelerators();
 
         helpWindow = new HelpWindow();
     }
@@ -87,9 +89,11 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
-    private void setAccelerators() {
+    /*
+     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
+     }
+     */
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -125,6 +129,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // Use of chatGPT to learn how to set the widths of the panels to be fixed by proportion.
+        // Prompt: Given a HBox of 2 stackpanes how to make both widths resize accordingly.
+        horizontalContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double totalWidth = newVal.doubleValue(); // Get the new width
+            leftPartition.setPrefWidth(totalWidth * 0.8); // Set to 80%
+            rightPartition.setPrefWidth(totalWidth * 0.2); // Set to 20%
+        });
+
         fillPersonsAndAppointments();
 
         resultDisplay = new ResultDisplay();
@@ -138,17 +150,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void fillPersonsAndAppointments() {
-        appointmentsTitle.setText("Appointments");
-        personsTitle.setText("Persons");
-
-        // Use of chatGPT to learn how to set the widths of the panels to be fixed by proportion.
-        // Prompt: Given a HBox of 2 stackpanes how to make both widths resize accordingly.
-        personList.widthProperty().addListener((obs, oldVal, newVal) -> {
-            double totalWidth = newVal.doubleValue(); // Get the new width
-            appointmentListPanelPlaceholder.setPrefWidth(totalWidth * 0.3); // Set to 30%
-            personListPanelPlaceholder.setPrefWidth(totalWidth * 0.7); // Set to 70%
-        });
-
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -181,6 +182,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void show() {
+        primaryStage.setMinHeight(800);
+        primaryStage.setMinWidth(1200);
         primaryStage.show();
     }
 

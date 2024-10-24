@@ -142,6 +142,10 @@
      -fx-border-top-width: 1px;
 }
 
+.pane-without-border {
+     -fx-background-color: derive(#585858, 20%);
+}
+
 .status-bar {
     -fx-background-color: derive(#585858, 30%);
 }
@@ -351,27 +355,27 @@
     -fx-font-size: 11;
 }
 
-#appointmentDescription {
+.blueLabel {
     -fx-text-fill: white;
-        -fx-background-color: #f01e2c;
+        -fx-background-color: #4B7BEC;
         -fx-padding: 1 3 1 3;
         -fx-border-radius: 2;
         -fx-background-radius: 2;
         -fx-font-size: 14;
 }
 
-#appointmentStart {
+.greenLabel {
     -fx-text-fill: white;
-        -fx-background-color: #52a447;
+        -fx-background-color: #45B7AF;
         -fx-padding: 1 3 1 3;
         -fx-border-radius: 2;
         -fx-background-radius: 2;
         -fx-font-size: 14;
 }
 
-#appointmentEnd {
+.purpleLabel {
     -fx-text-fill: white;
-        -fx-background-color: #3e7b91;
+        -fx-background-color: #826AF9;
         -fx-padding: 1 3 1 3;
         -fx-border-radius: 2;
         -fx-background-radius: 2;

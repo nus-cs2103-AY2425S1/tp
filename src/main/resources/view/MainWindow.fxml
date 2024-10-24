@@ -3,85 +3,102 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Ward Watch App" minWidth="600" minHeight="600" onCloseRequest="#handleExit">
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<fx:root minHeight="800" minWidth="1200" onCloseRequest="#handleExit" title="Ward Watch App" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/address_book_32.png"/>
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@DarkTheme.css"/>
+        <URL value="@Extensions.css"/>
       </stylesheets>
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="bannerPlaceholder" styleClass="pane-with-border">
-          <ImageView fx:id="imageView" fitWidth="300" fitHeight="100" preserveRatio="true">
-            <Image url="@/images/wardwatch_banner.png"/>
-          </ImageView>
-        </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5"/>
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="200">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <HBox fx:id="horizontalContainer" VBox.vgrow="ALWAYS">
+          <VBox fx:id="leftPartition">
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200" minHeight="100" prefHeight="800"
+                       styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5"/>
+              </padding>
+            </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <HBox spacing="10">
-            <VBox>
-              <Label fx:id="appointmentsTitle" styleClass="cell_big_label">
-                <minWidth>
-                  <!-- Ensures that the label text is never truncated -->
-                  <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-              </Label>
-              <StackPane fx:id="appointmentListPanelPlaceholder" minWidth="0" prefWidth="0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
-            </VBox>
-            <VBox>
-              <Label fx:id="personsTitle" styleClass="cell_big_label">
-                <minWidth>
-                  <!-- Ensures that the label text is never truncated -->
-                  <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-              </Label>
-              <StackPane fx:id="personListPanelPlaceholder" minWidth="0" prefWidth="0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
-            </VBox>
-          </HBox>
-        </VBox>
+            <StackPane styleClass="pane-without-border" VBox.vgrow="NEVER">
+              <Label text="PATIENTS:" styleClass="cell_big_label"/>
+              <padding>
+                <Insets top="10"/>
+              </padding>
+            </StackPane>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <StackPane minWidth="340" prefWidth="340" styleClass="pane-without-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="personList">
+                <padding>
+                  <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <StackPane fx:id="personListPanelPlaceholder" minWidth="0" prefWidth="0" HBox.hgrow="ALWAYS"
+                           VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </StackPane>
+
+          </VBox>
+
+          <VBox fx:id="rightPartition" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="bannerPlaceholder" styleClass="pane-without-border" HBox.hgrow="ALWAYS">
+              <ImageView fx:id="imageView" fitHeight="100" fitWidth="300.0" preserveRatio="true">
+                <Image url="@/images/wardwatch_banner.png"/>
+              </ImageView>
+            </StackPane>
+
+            <StackPane styleClass="pane-without-border" VBox.vgrow="NEVER">
+              <Label text="APPOINTMENTS:" styleClass="cell_big_label"/>
+              <padding>
+                <Insets top="10"/>
+              </padding>
+            </StackPane>
+
+            <StackPane minWidth="340" prefWidth="340" styleClass="pane-without-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="appointmentList">
+                <padding>
+                  <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <StackPane fx:id="appointmentListPanelPlaceholder" minWidth="0" prefWidth="0" HBox.hgrow="ALWAYS"
+                           VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </StackPane>
+          </VBox>
+
+        </HBox>
+
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
       </VBox>
     </Scene>
   </scene>

@@ -36,9 +36,9 @@
 <!--      Prompt used: was wondering if i can make the appointment row made of 3 different labels, in 1 row-->
       <!-- New HBox for appointment -->
       <HBox fx:id="appointmentBox" spacing="5" translateY="5.0">
-        <Label fx:id="appointmentDescription" />
-        <Label fx:id="appointmentStart" />
-        <Label fx:id="appointmentEnd" />
+        <Label fx:id="appointmentDescription" styleClass="blueLabel"/>
+        <Label fx:id="appointmentStart" styleClass="greenLabel"/>
+        <Label fx:id="appointmentEnd" styleClass="purpleLabel"/>
       </HBox>
     </VBox>
       <rowConstraints>
