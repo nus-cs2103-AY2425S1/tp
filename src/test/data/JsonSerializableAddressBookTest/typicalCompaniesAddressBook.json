@@ -6,7 +6,7 @@
     "email" : "google@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "google" ],
+    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
     }
@@ -16,7 +16,7 @@
     "email" : "meta@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "bigTech", "facebook" ],
+    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
     }
@@ -25,7 +25,7 @@
     "phone" : "00000003",
     "email" : "grab@example.com",
     "address" : "wall street",
-    "tags" : [ ],
+    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "careerPageUrl" : "careers.com",
     "isBookmark" : {
       "isBookmark" : false
@@ -36,7 +36,7 @@
     "email" : "shopee@example.com",
     "address" : "10th street",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "bigTech" ],
+    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
     }
