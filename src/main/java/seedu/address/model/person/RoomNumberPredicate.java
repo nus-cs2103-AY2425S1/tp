@@ -33,7 +33,10 @@ public class RoomNumberPredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        return person.getRoomNumber().equals(roomNumber);
+        // This checks if the person's room number is present and matches the one in the predicate.
+        return person.getRoomNumber()
+                .map(roomNum -> roomNum.equals(this.roomNumber))
+                .orElse(false);
     }
 
 
