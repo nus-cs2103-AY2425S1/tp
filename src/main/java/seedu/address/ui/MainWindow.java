@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getModifiedSupplierList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
@@ -185,7 +185,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            personListPanel = new PersonListPanel(logic.getSortedSupplierList());
+            personListPanel = new PersonListPanel(logic.getModifiedSupplierList());
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
             deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());

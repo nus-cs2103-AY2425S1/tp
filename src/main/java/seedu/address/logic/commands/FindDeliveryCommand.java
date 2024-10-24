@@ -29,9 +29,9 @@ public class FindDeliveryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
             + " : Finds all deliveries based on the provided filters.\n"
             + "Parameters: "
-            + PREFIX_DATETIME + "DELIVERY_DATE] "
-            + PREFIX_STATUS + "STATUS] "
-            + PREFIX_PRODUCT + "PRODUCT]\n"
+            + PREFIX_DATETIME + "DELIVERY_DATE "
+            + PREFIX_STATUS + "STATUS "
+            + PREFIX_PRODUCT + "PRODUCT \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATETIME + "23-08-2024 20:21 "
             + PREFIX_STATUS + "DELIVERED "

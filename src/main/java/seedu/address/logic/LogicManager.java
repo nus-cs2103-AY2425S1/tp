@@ -81,6 +81,11 @@ public class LogicManager implements Logic {
     public ObservableList<Delivery> getModifiedDeliveryList() {
         return model.getModifiedDeliveryList();
     }
+
+    @Override
+    public ObservableList<Person> getModifiedSupplierList() {
+        return model.getModifiedSupplierList();
+    }
     @Override
     public ObservableList<Person> getSortedSupplierList() {
         return model.getSortedSupplierList();

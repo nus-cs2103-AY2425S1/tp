@@ -139,6 +139,11 @@ public interface Model {
      * Returns an unmodifiable view of the modified delivery list.
      */
     ObservableList<Delivery> getModifiedDeliveryList();
+
+    /**
+     * Returns an unmodifiable view of the modified supplier list.
+     */
+    ObservableList<Person> getModifiedSupplierList();
     /**
      * Returns an unmodifiable view of the sorted supplier list.
      */

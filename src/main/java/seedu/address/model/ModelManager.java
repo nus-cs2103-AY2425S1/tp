@@ -28,7 +28,9 @@ public class ModelManager implements Model {
     private final FilteredList<Delivery> filteredDeliveries;
     private final SortedList<Delivery> sortedDeliveries;
     private final SortedList<Person> sortedSuppliers;
-    private boolean isViewingFilteredList = true;
+    private boolean isViewingSupplierFilteredList = true;
+
+    private boolean isViewingDeliveryFilteredList = true;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -121,6 +123,12 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public ObservableList<Person> getModifiedSupplierList() {
+        return isViewingSupplierFilteredList ? getFilteredPersonList() : getSortedSupplierList();
+    }
+
     //===========Sorted Supplier List Accessors  ====================================================================
     @Override
     public ObservableList<Person> getSortedSupplierList() {
@@ -129,6 +137,7 @@ public class ModelManager implements Model {
     @Override
     public void updateSortedSupplierList(Comparator<Person> comparator) {
         requireNonNull(comparator);
+        isViewingSupplierFilteredList = false;
         sortedSuppliers.setComparator(comparator);
     }
 
@@ -160,7 +169,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Delivery> getModifiedDeliveryList() {
-        return isViewingFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
+        return isViewingDeliveryFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
     }
 
     //=========== Filtered Delivery List Accessors =============================================================
@@ -172,7 +181,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
-        isViewingFilteredList = true;
+        isViewingDeliveryFilteredList = true;
         filteredDeliveries.setPredicate(predicate);
     }
 
@@ -185,7 +194,7 @@ public class ModelManager implements Model {
     @Override
     public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
         requireNonNull(comparator);
-        isViewingFilteredList = false;
+        isViewingDeliveryFilteredList = false;
         sortedDeliveries.setComparator(comparator);
     }
 
@@ -203,6 +212,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        isViewingSupplierFilteredList = true;
         filteredPersons.setPredicate(predicate);
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import seedu.address.logic.parser.SortOrder;
+
 /**
  * Represents a comparator for suppliers that sort based on name.
  */
@@ -11,8 +12,8 @@ public class SupplierSortNameComparator extends SupplierSortComparator {
 
     @Override
     public int compare(Person supplier1, Person supplier2) {
-        String supplier1Name = supplier1.getName().fullName;
-        String supplier2Name = supplier2.getName().fullName;
+        String supplier1Name = supplier1.getName().fullName.toLowerCase();
+        String supplier2Name = supplier2.getName().fullName.toLowerCase();
         if (super.getIsSortByAscending()) {
             return supplier1Name.compareTo(supplier2Name);
         } else {
