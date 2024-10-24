@@ -115,4 +115,17 @@ public class PersonTest {
                 + ", interests=" + ALICE.getInterests() + "}";
         assertEquals(expected, ALICE.toString());
     }
+    @Test
+    public void testHashCodeConsistency() {
+        // Test that two identical persons return the same hashCode
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
+    @Test
+    public void testHashCodeDifferent() {
+        // Test that two different persons return different hash codes
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+    }
 }

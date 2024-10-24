@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.University;
 import seedu.address.model.person.WorkExp;
@@ -206,5 +208,57 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Interest.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+    @Test
+    public void toModelType_multipleValidInterests_returnsPerson() throws Exception {
+        List<String> validInterests = List.of("Reading", "Cycling", "Hiking");
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_WORKEXP, VALID_TAGS, VALID_UNIVERSITY, VALID_MAJOR, validInterests);
+
+        Person expectedPerson = new Person(new Name(VALID_NAME), new Phone(VALID_PHONE), new Email(VALID_EMAIL),
+                new Address(VALID_ADDRESS), new WorkExp(VALID_WORKEXP),
+                BENSON.getTags(), new University(VALID_UNIVERSITY), new Major(VALID_MAJOR),
+                validInterests.stream().map(Interest::new).collect(Collectors.toSet()));
+
+        assertEquals(expectedPerson, person.toModelType());
+    }
+    @Test
+    public void toModelType_emptyInterests_returnsPerson() throws Exception {
+        List<String> emptyInterests = Collections.emptyList();
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_WORKEXP, VALID_TAGS, VALID_UNIVERSITY, VALID_MAJOR, emptyInterests);
+
+        Person expectedPerson = new Person(new Name(VALID_NAME), new Phone(VALID_PHONE), new Email(VALID_EMAIL),
+                new Address(VALID_ADDRESS), new WorkExp(VALID_WORKEXP),
+                BENSON.getTags(), new University(VALID_UNIVERSITY), new Major(VALID_MAJOR),
+                Collections.emptySet());
+
+        assertEquals(expectedPerson, person.toModelType());
+    }
+    @Test
+    public void toModelType_duplicateInterests_returnsPersonWithUniqueInterests() throws Exception {
+        List<String> duplicateInterests = List.of("Reading", "Reading");
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_WORKEXP, VALID_TAGS, VALID_UNIVERSITY, VALID_MAJOR, duplicateInterests);
+
+        Person expectedPerson = new Person(new Name(VALID_NAME), new Phone(VALID_PHONE), new Email(VALID_EMAIL),
+                new Address(VALID_ADDRESS), new WorkExp(VALID_WORKEXP),
+                BENSON.getTags(), new University(VALID_UNIVERSITY), new Major(VALID_MAJOR),
+                Set.of(new Interest("Reading")));
+
+        assertEquals(expectedPerson, person.toModelType());
+    }
+    @Test
+    public void toModelType_mixedValidAndInvalidInterests_throwsIllegalValueException() {
+        List<String> mixedInterests = List.of("Reading", INVALID_INTEREST);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_WORKEXP, VALID_TAGS, VALID_UNIVERSITY, VALID_MAJOR, mixedInterests);
+
+        String expectedMessage = Interest.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+
+
+
 
 }
