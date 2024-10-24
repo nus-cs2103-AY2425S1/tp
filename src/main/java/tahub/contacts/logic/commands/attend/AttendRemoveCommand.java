@@ -38,8 +38,8 @@ public class AttendRemoveCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";
     public static final String MESSAGE_NO_SCA_FOUND = "Student %1$s could not be found.";
-    public static final String MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE
-            = "There are no available attendance sessions to remove.";
+    public static final String MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE =
+            "There are no available attendance sessions to remove.";
 
     private final StudentCourseAssociation toFind;
 
