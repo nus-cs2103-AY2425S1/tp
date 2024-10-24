@@ -127,7 +127,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailureWithoutModel(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_PERSON);
 
     }
 
@@ -139,6 +139,7 @@ public class EditCommandTest {
         Person personInList = model.getCampusConnect().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
+
         assertCommandFailureWithoutModel(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
     }

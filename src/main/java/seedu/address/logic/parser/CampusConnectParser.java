@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -61,6 +62,9 @@ public class CampusConnectParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case AddTagCommand.COMMAND_WORD:
+            return new AddTagCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
