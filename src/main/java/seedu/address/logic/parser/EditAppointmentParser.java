@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,7 +20,7 @@ import seedu.address.model.person.Nric;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditAppointmentParser {
+public class EditAppointmentParser implements Parser<EditAppointmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -48,7 +47,7 @@ public class EditAppointmentParser {
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME)) {
             System.out.println("Prefixes not found");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_USAGE));
+                    EditAppointmentCommand.MESSAGE_USAGE));
         }
 
         argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME);
