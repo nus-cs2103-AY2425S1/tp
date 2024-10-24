@@ -16,8 +16,7 @@ public class CategoryPredicate implements Predicate<GoodsReceipt> {
 
     @Override
     public boolean test(GoodsReceipt goodsData) {
-        // TODO: Uncomment when goods storage is implemented
-        return false;
+        return goodsData.getGoods().getCategory().equals(this.category);
     }
 
     @Override
