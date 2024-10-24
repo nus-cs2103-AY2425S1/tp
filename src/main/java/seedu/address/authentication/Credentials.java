@@ -59,8 +59,8 @@ public class Credentials {
      * @return True if such user is found
      */
     public boolean findUser(String username, String password) {
-        assert username != null: "username should not be null";
-        assert password != null: "password should not be null";
+        assert username != null : "username should not be null";
+        assert password != null : "password should not be null";
         logger.info("find user");
         HashMap<String, String> credentials = readCredentials();
         if (!credentials.containsKey(username)) {

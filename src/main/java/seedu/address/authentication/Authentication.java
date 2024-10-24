@@ -14,8 +14,8 @@ public class Authentication {
      * @return boolean
      */
     public static boolean authenticate(String username, String password) {
-        assert username != null: "username should not be null";
-        assert password != null: "password should not be null";
+        assert username != null : "username should not be null";
+        assert password != null : "password should not be null";
         if (credentials.findUser(username, password)) {
             return true;
         } else {
