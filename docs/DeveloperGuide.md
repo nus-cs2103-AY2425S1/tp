@@ -158,6 +158,34 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add/delete remark feature
+
+The `addRemarkCommand` allows users to add a remark to a specified person in the addressbook.
+The `deleteRemarkCommand` allows users to delete a remark from a specified person in the addressbook.
+They both use `RemarkCommandParser` to parse the user input and create an `addRemarkCommand` and `deleteRemarkCommand` object respectively, which modifies the `Person` object in the `Model`.
+
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+
+<puml src="diagrams/AddRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -a Good progress` Command" />
+
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `deleteRemarkCommand`, taking `execute("remark 1 -d 2")` API call as an example.
+
+<puml src="diagrams/DeleteRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -d 2` Command" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+How the this feature works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `remark` (i.e., `RemarkCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddRemarkCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed.<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
