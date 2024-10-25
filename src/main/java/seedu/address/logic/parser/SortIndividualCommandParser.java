@@ -46,6 +46,7 @@ public class SortIndividualCommandParser implements Parser<SortIndividualCommand
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORDER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
 
         return new SortIndividualCommand(index, argMultimap.getValue(PREFIX_FIELD).get(),
                 argMultimap.getValue(PREFIX_ORDER).get());

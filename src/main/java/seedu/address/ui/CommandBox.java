@@ -29,6 +29,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDE
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_NO_PROPERTIES_TO_DELETE;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -80,7 +81,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Highlights the error location in the command box.
      */
-    private void highlightErrorLocation(Exception e, String input) {
+    public void highlightErrorLocation(Exception e, String input) {
         String commandText = input + " ";
         String errorMessage = e.getMessage();
         int errorIndexStart = 0;
@@ -133,6 +134,9 @@ public class CommandBox extends UiPart<Region> {
             break;
         case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
             errorIndexStart = commandText.indexOf("findp") + 6;
+            break;
+        case MESSAGE_UNKNOWN_COMMAND:
+            errorIndexStart = 0;
             break;
         default:
             errorIndexStart = commandText.length();
