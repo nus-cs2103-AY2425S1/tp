@@ -23,9 +23,9 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
      */
     public AddCustomerCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PREFERENCE, PREFIX_INFORMATION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INFORMATION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PREFERENCE, PREFIX_INFORMATION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_INFORMATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
         }
@@ -35,7 +35,6 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        DietaryPreference preference = ParserUtil.parsePreference(argMultimap.getValue(PREFIX_PREFERENCE).get());
         Information information = ParserUtil.parseInformation(argMultimap.getValue(PREFIX_INFORMATION).get());
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -44,7 +43,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         // Add the "customer" tag explicitly
         tagList.add(new Tag("customer"));
 
-        Customer customer = new Customer(name, phone, email, address, preference, information, remark, tagList);
+        Customer customer = new Customer(name, phone, email, address, information, remark, tagList);
 
         return new AddCustomerCommand(customer);
     }
