@@ -120,6 +120,8 @@ public class Student extends Person {
                 .add("contactNumber", getPhone())
                 .add("tutorialGroup", tutorialGroup)
                 .add("studentNumber", studentNumber)
+                .add("assignments", assignments)
+                .add("attendanceRecords", attendanceRecords)
                 .toString();
     }
     /**

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,8 @@ public class MarkPresentAllCommand extends Command {
                     .orElse(null));
             student.markAttendance(date, "p");
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup, date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
     }
 
     @Override

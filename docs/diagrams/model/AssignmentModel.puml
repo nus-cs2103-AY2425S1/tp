@@ -1,0 +1,18 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Assignment as AssignmentPackage<<Rectangle>>{
+Assignment---"1"Name
+Assignment---"1"Deadline
+Assignment---"0..1"Submission
+Assignment---"0..1"Grade
+}
+
+Class HiddenStudent #FFFFFF
+HiddenStudent..right>Assignment
+
+
+@enduml
