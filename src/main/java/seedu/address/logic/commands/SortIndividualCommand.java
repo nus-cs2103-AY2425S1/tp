@@ -19,8 +19,6 @@ import seedu.address.model.person.Property;
  */
 public class SortIndividualCommand extends Command {
     public static final String COMMAND_WORD = "sorti";
-    private static String order;
-    private static String field;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of properties for each Person "
             + "in the AddressBook based on input field.\n"
             + "Parameters: "
@@ -35,6 +33,8 @@ public class SortIndividualCommand extends Command {
     public static final String MESSAGE_INVALID_ORDER =
             "Sort contacts using L for low to high order and H for high to low order";
 
+    private static String order;
+    private static String field;
     private static int isInSortedState = 0;
     private static int isFromLowToHighOrder = 0;
     private final Index personIndexToSort;

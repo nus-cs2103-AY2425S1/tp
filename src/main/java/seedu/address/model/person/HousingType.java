@@ -6,8 +6,8 @@ package seedu.address.model.person;
 public enum HousingType {
     CONDO, HDB, APARTMENT, BTO, OTHERS, INVALID_HOUSING_TYPE;
 
-    public static final String MESSAGE_CONSTRAINTS = "Housing type should be one of the following: \n" +
-            "'h' (HDB), 'c' (Condo), 'a' (Apartment), 'b' (BTO) or 'o' (Others).";
+    public static final String MESSAGE_CONSTRAINTS = "Housing type should be one of the following: \n"
+            + "'h' (HDB), 'c' (Condo), 'a' (Apartment), 'b' (BTO) or 'o' (Others).";
 
     /**
      * Checks if the given housing type is valid.
