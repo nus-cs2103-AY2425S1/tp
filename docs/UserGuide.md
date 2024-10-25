@@ -79,7 +79,7 @@ Adds an elderly to ContactMate.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
 
-* The call frequency is measured in days and must be within 1 to 7 (i.e., within one week).
+* The call frequency is measured in days and must be a positive integer less than or equal to 7 (e.g. 1, 2, ..., 7)
 * `NRIC` must be a valid, government issued NRIC.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -114,7 +114,7 @@ Examples:
 *  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the NRIC, phone number and email address of the 1st elderly shown in the list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC `S6878830G` to be `Betsy Crower` and clears all existing tags.
 
-### Locating elderly by name or nric: `find`
+### Locating elderly by name and/or nric: `find`
 
 Finds all elderly whose names or nric contain any of the given keywords.
 
@@ -122,7 +122,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name or nric is searched.
+* Only the name and nric are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
 * All elderly matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
