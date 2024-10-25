@@ -14,10 +14,15 @@ UniquePersonList -right-> Person
 
 Person -up-> "0...1" Group
 
-Person *--> Name
-Person *--> StudentID
-Person *--> NUSNetID
-Person *--> Major
-Person *--> Year
-Person *--> Comment
+Person *--> "1" Name
+Person *--> "1" StudentID
+Person *--> "0...1" Major
+Person *--> "0...1" Email
+Person *--> "0...1" Year
+Person *--> "0...1" Comment
+
+Name -[hidden]right-> StudentID
+StudentID -[hidden]right-> Email
+Email -[hidden]right-> Major
+Major -[hidden]right-> Year
 @enduml
