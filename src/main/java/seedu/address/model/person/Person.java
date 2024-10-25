@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -133,5 +137,32 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
+
+    /**
+     * Looks inside the person class, and returns a {@Code String[]} containing the simple names of all the fields.
+     * Extracts out the field names from class wrapped within a {@Code Optional} as well.
+     * @return A {@Code String[]} containing the simple names of the fields that comprise a Person
+     */
+    public static String[] getFieldSimpleNames() {
+        Class<Person> clazz = Person.class;
+        return Arrays.stream(clazz.getDeclaredFields())
+                .map(Person::getFieldSimpleName)
+                .toArray(String[]::new);
+    }
+
+    private static String getFieldSimpleName(Field field) {
+        Class<?> fieldType = field.getType();
+
+        if (fieldType.equals(Optional.class)) {
+            Type genericType = field.getGenericType();
+            if (genericType instanceof ParameterizedType) {
+                Type actualType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
+                return ((Class<?>) actualType).getSimpleName();
+            }
+        }
+
+        return fieldType.getSimpleName();
+    }
+
 
 }
