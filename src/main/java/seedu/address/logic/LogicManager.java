@@ -60,15 +60,12 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         try {
             commandResult = command.execute(model);
+            storage.saveCampusConnect(model.getCampusConnect());
         } catch (CommandException e) {
             if (!(command instanceof RedoCommand)) {
                 model.undoCampusConnect();
             }
             throw e;
-        }
-        
-        try {
-            storage.saveCampusConnect(model.getCampusConnect());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

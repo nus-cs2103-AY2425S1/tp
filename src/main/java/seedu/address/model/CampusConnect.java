@@ -69,7 +69,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     /**
      * Recovers previously undone states
      */
-    public ReadOnlyCampusConnect recoverUndoneState() throws RedoException  {
+    public ReadOnlyCampusConnect recoverUndoneState() throws RedoException {
         ReadOnlyCampusConnect out = versionedCampusConnect.extractUndoneData();
         versionedCampusConnect.saveOldData(new CampusConnect(this));
         return out;
