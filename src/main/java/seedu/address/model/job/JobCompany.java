@@ -1,16 +1,12 @@
 package seedu.address.model.job;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.model.common.Name;
 
 /**
  * Represents a Job's company in the address book.
+ * This extends from the Name class to avoid code duplication.
  */
-public class JobCompany {
-    public static final String MESSAGE_CONSTRAINTS = "The company provided does not exist";
-
-    // TODO: Change type to Company during integration
-    public final String value;
+public class JobCompany extends Name {
 
     /**
      * Constructs a {@code JobCompany}.
@@ -18,22 +14,30 @@ public class JobCompany {
      * @param companyName An existing company's name.
      */
     public JobCompany(String companyName) {
-        requireNonNull(companyName);
-        checkArgument(isValidCompany(companyName), MESSAGE_CONSTRAINTS);
-        value = companyName;
+        super(companyName);
     }
 
     /**
      * Returns true if a given company exists.
+     * Not used in constructor but used in ParserUtil to construct a JobCompany.
      */
     public static boolean isValidCompany(String test) {
-        // TODO: check if the company exists
-        return true;
+        return Name.isValidName(test);
+    }
+
+    /**
+     * Checks if this name is equal to the specified company's name.
+     *
+     * @param name Name of the company specified.
+     * @return true if equal.
+     */
+    public boolean matchesCompanyName(Name name) {
+        return this.fullName.equals(name.fullName);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return fullName.hashCode();
     }
 
     @Override
@@ -48,11 +52,11 @@ public class JobCompany {
         }
 
         JobCompany otherCompany = (JobCompany) other;
-        return value.equals(otherCompany.value);
+        return fullName.equals(otherCompany.fullName);
     }
 
     @Override
     public String toString() {
-        return value;
+        return fullName;
     }
 }

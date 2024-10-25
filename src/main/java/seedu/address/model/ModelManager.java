@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
 import seedu.address.model.person.Person;
 
 /**
@@ -252,6 +253,37 @@ public class ModelManager implements Model {
                && filteredPersons.equals(otherModelManager.filteredPersons)
                && filteredJobs.equals(otherModelManager.filteredJobs)
                && filteredCompanies.equals(otherModelManager.filteredCompanies);
+    }
+
+    /**
+     * Returns a predicate that tests whether a {@code Person} is linked to the specified company.
+     * @param targetCompany The company to match against.
+     * @return A predicate that returns {@code true} if the person is linked to the specified company.
+     */
+    public Predicate<Person> getPersonLinkedToCompanyPredicate(Company targetCompany) {
+        return person -> person.isMatchPresent()
+                && person.getMatch().startsWith(targetCompany.getName().toString() + "::");
+    }
+
+    /**
+     * Returns a predicate that tests whether a {@code Job} is linked to the specified company.
+     * @param targetCompany The company to match against.
+     * @return A predicate that returns {@code true} if the job is linked to the specified company.
+     */
+    public Predicate<Job> getJobLinkedToCompanyPredicate(Company targetCompany) {
+        return job -> job.getCompany().equals(new JobCompany(targetCompany.getName().toString()));
+    }
+
+    /**
+     * Filters the lists of jobs, persons, and companies to show only those
+     * linked to the specified company.
+     * @param targetCompany The company whose linked jobs and persons will be shown.
+     */
+    @Override
+    public void showLinkedJobsAndPersonsByCompany(Company targetCompany) {
+        updateFilteredJobList(getJobLinkedToCompanyPredicate(targetCompany));
+        updateFilteredPersonList(getPersonLinkedToCompanyPredicate(targetCompany));
+        updateFilteredCompanyList(company -> company.equals(targetCompany));
     }
 
 }
