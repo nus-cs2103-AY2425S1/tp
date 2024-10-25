@@ -10,7 +10,6 @@ import static tutorease.address.testutil.TypicalLessons.MATH_LESSON;
 import static tutorease.address.testutil.TypicalLessons.SCIENCE_LESSON;
 import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class DeleteLessonCommandIntegrationTest {
     }
 
     @Test
-    public void execute_AfterFind_success() {
+    public void execute_afterFind_success() {
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(),
                 model.getLessonSchedule());
 
