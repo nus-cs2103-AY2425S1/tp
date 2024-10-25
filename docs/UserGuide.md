@@ -1,8 +1,3 @@
----
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
----
 
 # Vendor Vault User Guide
 
@@ -30,9 +25,9 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add -s n/John Doe p/98765432 e/johnd@example.com com/John street, block 123, #01-01 pro/ iPhone` : Adds a supplier named `John Doe` to the VendorVault.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete -d 3` : Deletes the 3rd contact shown in the current delivery list.
 
    * `exit` : Exits the app.
 
@@ -63,7 +58,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
-
+---
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -72,10 +67,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+---
+
 ## <ins> Supplier Commands </ins>
 
-
-### Adding a supplier: `add`
+### Adding a supplier: `add -s`
 
 Adds a supplier to the address book.
 
@@ -101,38 +97,41 @@ Expected output:
 * `New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products breadrice`
 * `New person added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products soap`
 
+#### Here's how it would look like in the app:
+![add Command](images/addSupplierCommand.png)
+
 ### Listing all suppliers : `list`
 
 Shows a list of all suppliers in the address book.
 
 Format: `list`
 
-### Deleting a supplier : `delete`
+### Deleting a supplier : `delete -s`
 
-The `delete` command is used to delete a supplier from the list of suppliers in VendorVault.
+The `delete -s` command is used to delete a supplier from the list of suppliers in VendorVault.
 
 #### Command Format:
-`delete INDEX`
+`delete -s INDEX`
 
 - `INDEX`: The index of the supplier in the list.
 
 #### Example
 To delete the supplier at index 3:
 
-    delete 3
+    delete -s 3
 
 A success message will be displayed if the supplier is successfully deleted.
 
-### Here's how it would look like in the app:
-![delete command](images/deleteCommand.png)
+#### Here's how it would look like in the app:
+![delete command](images/deleteSupplierCommand.png)
 
-### Mark a supplier status : `mark`
+### Mark a supplier status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
 #### Command Format:
-`mark <supplier_index> <status>`
+`mark -s <supplier_index> <status>`
 - `<supplier_index>`: The index of the supplier in the list.
 
 
@@ -141,16 +140,18 @@ in VendorVault. This helps you keep track of which suppliers are currently activ
 #### Example
 To mark the supplier at index 3 as active:
 
-    mark 3 active
+    mark -s 3 active
 
 A success message will be displayed if the supplier is successfully marked as active.
 
-### Here's how it would look like in the app:
-![mark command](images/markCommand.png)
+#### Here's how it would look like in the app:
+![mark command](images/markSupplierCommand.png)
+
+---
 
 ## <ins> Delivery Commands </ins>
 
-### Adding a delivery: `add`
+### Adding a delivery: `add -d`
 
 Adds a delivery to the address book.
 
@@ -176,6 +177,8 @@ Expected output:
 * `New delivery added: John Doe; Date & time: 18-06-2024 17:00; Product: bread; Quantity: 500 g; Cost: 5.50; Status: PENDING`
 * `New delivery added: Betsy Crowe; Date & time: 19-12-2024 08:00; Product: soap; Quantity: 10 units; Cost: 39.50; Status: PENDING`
 
+#### Here's how it would look like in the app:
+![add delivery command](images/addDeliveryCommand.png)
 
 ### Marking a delivery : `mark -d`
 
@@ -194,6 +197,8 @@ Examples:
 * `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
 * `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
 
+#### Here's how it would look like in the app:
+![mark delivery command](images/markDeliveryCommand.png)
 
 ### Deleting a delivery : `delete -d`
 
@@ -209,6 +214,10 @@ Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
 * `find -d /pro bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
 
+#### Here's how it would look like in the app:
+![delete delivery command](images/deleteDeliveryCommand.png)
+
+---
 
 ### Exiting the program : `exit`
 
@@ -230,6 +239,8 @@ AddressBook automatically saves your data as a JSON file `[JAR file location]/da
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+---
 
 ### Archiving data files `[coming in v2.0]`
 
