@@ -7,8 +7,12 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyBuyerList" as ReadOnlyBuyerList
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyMeetUpList" as ReadOnlyMeetUpList
+Class "<<interface>>\nReadOnlyPropertyList" as ReadOnlyPropertyList
 Class "<<interface>>\nModel" as Model
 Class BuyerList
+Class MeetUpList
+Class PropertyList
 Class ModelManager
 Class UserPrefs
 
@@ -18,7 +22,22 @@ Class Budget
 Class Email
 Class Name
 Class Phone
-Class Tag
+
+Class UniqueMeetUpList
+Class MeetUp
+Class "Name" as t1
+Class Info
+Class From
+Class To
+Class AddedBuyer
+
+Class UniquePropertyList
+Class Property
+Class LandlordName
+Class LandlordPhone
+Class Location
+Class AskingPrice
+Class PropertyType
 
 Class I #FFFFFF
 }
@@ -27,11 +46,17 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 BuyerList .up.|> ReadOnlyBuyerList
+PropertyList .up.|> ReadOnlyPropertyList
+MeetUpList .up.|> ReadOnlyMeetUpList
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
+Model .right.> ReadOnlyMeetUpList
+Model .left.> ReadOnlyPropertyList
 Model .left.> ReadOnlyBuyerList
 ModelManager -left-> "1" BuyerList
+ModelManager -left-> "1" PropertyList
+ModelManager -right-> "1" MeetUpList
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
@@ -41,14 +66,47 @@ Buyer *--> Name
 Buyer *--> Phone
 Buyer *--> Email
 Buyer *--> Budget
-Buyer *--> "*" Tag
+
+PropertyList *--> "1" UniquePropertyList
+UniquePropertyList --> "~* all" Property
+Property *--> LandlordName
+Property *--> LandlordPhone
+Property *--> AskingPrice
+Property *--> Location
+Property *--> PropertyType
+
+MeetUpList *--> "1" UniqueMeetUpList
+UniqueMeetUpList --> "~* all" MeetUp
+MeetUp *--> t1
+MeetUp *--> Info
+MeetUp *--> From
+MeetUp *--> To
+MeetUp *--> "*" AddedBuyer
 
 Buyer -[hidden]up--> I
 UniqueBuyerList -[hidden]right-> I
+
+Property -[hidden]up--> I
+UniquePropertyList -[hidden]right-> I
+
+MeetUp -[hidden]up--> I
+UniqueMeetUpList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Budget
 Budget -[hidden]right-> Email
 
+LandlordName -[hidden]right-> LandlordPhone
+LandlordPhone -[hidden]right-> Location
+Location -[hidden]right-> AskingPrice
+AskingPrice -[hidden]right-> PropertyType
+
+t1 -[hidden]right-> Info
+Info -[hidden]right-> From
+From -[hidden]right-> To
+To -[hidden]right-> AddedBuyer
+
 ModelManager --> "~* filtered" Buyer
+ModelManager --> "~* filtered" Property
+ModelManager --> "~* filtered" MeetUp
 @enduml
