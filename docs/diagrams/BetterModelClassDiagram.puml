@@ -14,4 +14,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+
+class Student extends Person
+Student *--> "1" Grade
+Student *--> "1" Education
 @enduml
