@@ -16,8 +16,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code EditPersonDescriptor}.
+ */
 public class EditPersonDescriptorTest {
 
+    /**
+     * Tests the {@code equals} method of {@code EditPersonDescriptor} for various scenarios.
+     */
     @Test
     public void equals() {
         // same values -> returns true
@@ -62,6 +68,9 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
+    /**
+     * Tests the {@code toString} method of {@code EditPersonDescriptor}.
+     */
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
