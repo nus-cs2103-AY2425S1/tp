@@ -14,11 +14,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -87,7 +87,7 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand("", "friends", "", "", "");
 
         // Set up expected model to filter by tag only
-        expectedModel.updateFilteredPersonList(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
+        expectedModel.updateFilteredPersonList(new RoleContainsKeywordsPredicate(Arrays.asList("friends")));
 
         // Execute the command
         CommandResult result = filterCommand.execute(model);

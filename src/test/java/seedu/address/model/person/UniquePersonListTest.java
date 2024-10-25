@@ -47,7 +47,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsFalse() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withRoles(VALID_TAG_HUSBAND)
                 .build();
         assertFalse(uniquePersonList.contains(editedAlice));
     }
@@ -63,7 +63,7 @@ public class UniquePersonListTest {
     @Test
     public void containsPhone_personWithDifferentPhoneInList_returnsFalse() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withRoles(VALID_TAG_HUSBAND)
                 .build();
         assertFalse(uniquePersonList.contains(editedAlice));
     }
@@ -79,7 +79,7 @@ public class UniquePersonListTest {
     @Test
     public void containsEmail_personWithDifferentEmailInList_returnsFalse() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withRoles(VALID_TAG_HUSBAND)
                 .build();
         assertFalse(uniquePersonList.contains(editedAlice));
     }
@@ -122,7 +122,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withRoles(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();

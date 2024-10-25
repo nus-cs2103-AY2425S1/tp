@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.stream.Stream;
 
@@ -17,6 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
+    private static final Prefix ROLE_PREFIX = CliSyntax.PREFIX_ROLE;
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
@@ -24,11 +26,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args.trim(), PREFIX_NAME, PREFIX_TAG,
+                ArgumentTokenizer.tokenize(args.trim(), PREFIX_NAME, PREFIX_ROLE,
                         PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS);
 
         // Check if any valid prefixes are present
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG,
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE,
                 PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -39,9 +41,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String email = argMultimap.getValue(PREFIX_EMAIL).orElse("").trim();
         String phone = argMultimap.getValue(PREFIX_PHONE).orElse("").trim();
         String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("").trim();
-        String tag = argMultimap.getValue(PREFIX_TAG).orElse("").trim();
+        String role = argMultimap.getValue(PREFIX_ROLE).orElse("").trim();
 
-        return new FilterCommand(name, tag, email, phone, address);
+        return new FilterCommand(name, role, email, phone, address);
     }
 
     /**

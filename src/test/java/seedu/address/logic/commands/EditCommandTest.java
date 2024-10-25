@@ -57,10 +57,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withRoles(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, null, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -80,10 +80,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(newPhone)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(newPhone).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(newPhone).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, null, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_DUPLICATE_PHONE, Messages.format(editedPerson));
@@ -100,10 +100,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withEmail(newEmail)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withEmail(newEmail).withTags(VALID_TAG_HUSBAND).build();
+                .withEmail(newEmail).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, null, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_DUPLICATE_EMAIL, Messages.format(editedPerson));

@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane role;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,8 +50,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        if (person.getRole() != null) {
-            tags.getChildren().add(new Label(this.person.getRole().tagName));
-        }
+        role.getChildren().add(new Label(person.getRole().roleName));
     }
 }

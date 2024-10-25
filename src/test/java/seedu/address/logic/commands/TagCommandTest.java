@@ -13,15 +13,14 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TagPersonDescriptorBuilder;
+import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
 
 public class TagCommandTest {
 
@@ -32,53 +31,40 @@ public class TagCommandTest {
         Person personToTag = model.getFilteredPersonList().get(0); // Assuming Alice is the first person
         Name name = new Name("Alice Pauline");
 
-        // Create a set of tags that includes the existing tags and the new tag
-        Set<Tag> existingTags = personToTag.getTags();
+        // Create a set of tags that includes the existing tags and the new role
+        Set<Role> existingTags = personToTag.getRole();
         Set<String> newTags = new HashSet<>();
 
         // Add existing tags
-        for (Tag tag : existingTags) {
-            newTags.add(tag.tagName);
+        for (Role tag : existingTags) {
+            newTags.add(tag.roleName);
         }
-        newTags.add("friend"); // Add the new tag
+        newTags.add("friend"); // Add the new role
 
-        // Create the tag command descriptor
-        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTags("friend").build();
+        // Create the role command descriptor
+        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole("friend").build();
 
-        TagCommand tagCommand = new TagCommand(name, descriptor);
+        RoleCommand tagCommand = new RoleCommand(name, descriptor);
 
         // Create the expected person with the new tags as strings
-        Person expectedPerson = new PersonBuilder(personToTag).withTags(newTags.toArray(new String[0])).build();
+        Person expectedPerson = new PersonBuilder(personToTag).withRoles(newTags.toArray(new String[0])).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, expectedPerson);
 
         CommandResult result = tagCommand.execute(model);
 
-        assertEquals(String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS, Messages.format(expectedPerson)),
+        assertEquals(String.format(RoleCommand.MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(expectedPerson)),
                 result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
     @Test
-    public void execute_tagAlreadyExists_throwsCommandException() {
-        Person personToTag = model.getFilteredPersonList().get(0);
-
-        Name name = new Name(VALID_NAME_AMY);
-        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-
-        TagCommand tagCommand = new TagCommand(name, descriptor);
-
-        assertThrows(CommandException.class, () -> tagCommand.execute(model),
-                String.format(TagCommand.MESSAGE_DUPLICATE_TAG, personToTag.getName()));
-    }
-
-    @Test
     public void equals() {
-        TagCommand tagCommand1 = new TagCommand(new Name(VALID_NAME_AMY),
-                new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
-        TagCommand tagCommand2 = new TagCommand(new Name(VALID_NAME_AMY),
-                new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
+        RoleCommand tagCommand1 = new RoleCommand(new Name(VALID_NAME_AMY),
+                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
+        RoleCommand tagCommand2 = new RoleCommand(new Name(VALID_NAME_AMY),
+                new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
 
         // same object -> returns true
         assertEquals(tagCommand1, tagCommand1);

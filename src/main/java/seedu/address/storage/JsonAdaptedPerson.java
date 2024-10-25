@@ -16,7 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -68,7 +68,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        role = source.getRole() != null ? source.getRole().tagName : null;
+        role = source.getRole().roleName;
         ownWedding = source.getOwnWedding() != null ? source.getOwnWedding().hashCode() : 0;
         weddingJobs.addAll(source.getWeddingJobs().stream()
                 .map(Wedding::hashCode)
@@ -113,12 +113,12 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        Tag modelRole = null;
+        Role modelRole = null;
         if (role != null) {
-            if (!Tag.isValidTagName(role)) {
-                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            if (!Role.isValidRoleName(role)) {
+                throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
             }
-            modelRole = new Tag(role);
+            modelRole = new Role(role);
         }
 
         Wedding modelOwnWedding = ownWedding != 0 ? lookupWeddingByHashCode(ownWedding, weddingList) : null;
