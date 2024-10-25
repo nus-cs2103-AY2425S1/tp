@@ -15,4 +15,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_LOG = new Prefix("l/");
+    public static final Prefix PREFIX_PROPERTY_ADDRESS = new Prefix("address/");
+    public static final Prefix PREFIX_TOWN = new Prefix("town/");
+    public static final Prefix PREFIX_TYPE = new Prefix("type/");
+    public static final Prefix PREFIX_SIZE = new Prefix("size/");
+    public static final Prefix PREFIX_BEDROOMS = new Prefix("bed/");
+    public static final Prefix PREFIX_BATHROOMS = new Prefix("bath/");
+    public static final Prefix PREFIX_PRICE = new Prefix("price/");
+
 }

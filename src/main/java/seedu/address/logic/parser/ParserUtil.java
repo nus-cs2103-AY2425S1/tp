@@ -165,4 +165,38 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
     }
+
+    /**
+     * Parses a {@code String} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid double.
+     */
+    public static double parseDouble(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Double.parseDouble(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid double value: " + input);
+        }
+    }
+
+
+    /**
+     * Parses a {@code String} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid integer.
+     */
+    public static int parseInteger(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Integer.parseInt(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid integer value: " + input);
+        }
+    }
+
 }

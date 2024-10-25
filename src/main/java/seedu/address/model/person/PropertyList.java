@@ -22,6 +22,16 @@ public class PropertyList {
     }
 
     /**
+     * Constructs a {@code PropertyList} with the specified properties.
+     *
+     * @param properties The initial list of properties.
+     */
+    public PropertyList(List<Property> properties) {
+        requireNonNull(properties);
+        this.properties = new ArrayList<>(properties);
+    }
+
+    /**
      * Adds a new property to the list.
      *
      * @param property The {@code Property} object to be added.
@@ -30,16 +40,6 @@ public class PropertyList {
     public void addProperty(Property property) {
         requireNonNull(property, "Property cannot be null.");
         this.properties.add(property);
-    }
-
-    /**
-     * Constructs a {@code PropertyList} with the specified properties.
-     *
-     * @param properties The initial list of properties.
-     */
-    public PropertyList(List<Property> properties) {
-        requireNonNull(properties);
-        this.properties = new ArrayList<>(properties);
     }
 
     /**

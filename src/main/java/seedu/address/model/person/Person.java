@@ -30,6 +30,7 @@ public class Person {
     private final DateOfCreation dateOfCreation;
     private final History history;
     private final Birthday birthday;
+    private final PropertyList propertyList;
     /**
      * array of preset tags, index 0: favourite == 1; archived == -1; default == 0;
      *                       index 1: buyer == 1; seller == 0;
@@ -51,6 +52,7 @@ public class Person {
         this.tags.addAll(tags);
         this.dateOfCreation = new DateOfCreation(LocalDate.now());
         this.history = new History(dateOfCreation.getDateOfCreation());
+        this.propertyList = new PropertyList();
     }
     /**
      * Every field must be present and not null. with non-empty remark and non-empty birthday
@@ -67,6 +69,7 @@ public class Person {
         this.tags.addAll(tags);
         this.dateOfCreation = new DateOfCreation(LocalDate.now());
         this.history = new History(dateOfCreation.getDateOfCreation());
+        this.propertyList = new PropertyList();
     }
 
     /**
@@ -84,6 +87,7 @@ public class Person {
         this.dateOfCreation = dateOfCreation;
         this.history = history;
         this.tags.addAll(tags);
+        this.propertyList = new PropertyList();
     }
 
     /**
@@ -101,6 +105,26 @@ public class Person {
         this.dateOfCreation = dateOfCreation;
         this.history = history;
         this.tags.addAll(tags);
+        this.propertyList = new PropertyList();
+    }
+
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Remark remark, Birthday birthday, Set<Tag> tags, DateOfCreation dateOfCreation, History history,
+                  PropertyList propertyList) {
+        requireAllNonNull(name, phone, email, address, tags, remark, dateOfCreation, history);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = birthday;
+        this.dateOfCreation = dateOfCreation;
+        this.history = history;
+        this.tags.addAll(tags);
+        this.propertyList = propertyList;
     }
 
     /**
@@ -118,6 +142,7 @@ public class Person {
         this.tags.addAll(tags);
         this.dateOfCreation = new DateOfCreation(LocalDate.now());
         this.history = new History(dateOfCreation.getDateOfCreation());
+        this.propertyList = new PropertyList();
     }
 
     public Name getName() {
@@ -151,9 +176,11 @@ public class Person {
     public Remark getRemark() {
         return this.remark;
     }
+
     public DateOfCreation getDateOfCreation() {
         return this.dateOfCreation;
     }
+
     public History getHistory() {
         return this.history;
     }
@@ -161,6 +188,11 @@ public class Person {
     public Birthday getBirthday() {
         return birthday;
     }
+    
+    public PropertyList getPropertyList() {
+        return propertyList;
+    }
+    
     public int getWeight(int... tagIndex) {
         int totalWeight = 0;
         for (int index : tagIndex) {
@@ -168,6 +200,7 @@ public class Person {
         }
         return totalWeight;
     }
+
     /**
      * Returns if the person's birthday is within a week from today.
      */
@@ -217,7 +250,8 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && remark.equals(otherPerson.remark)
                 && dateOfCreation.equals(otherPerson.dateOfCreation)
-                && birthday.equals(otherPerson.birthday);
+                && birthday.equals(otherPerson.birthday)
+                && propertyList.equals(otherPerson.propertyList);
     }
 
     @Override
@@ -238,6 +272,7 @@ public class Person {
                 .add("birthday", birthday)
                 .add("dateOfCreation", dateOfCreation)
                 .add("history", history)
+                .add("propertyList", propertyList)
                 .toString();
     }
 
