@@ -1,7 +1,8 @@
 package tahub.contacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.*;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Objects;

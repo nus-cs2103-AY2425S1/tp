@@ -157,7 +157,7 @@ public class LogicManagerTest {
         model.addSca(sca);
 
         StudentCourseAssociationList scaList = logic.getStudentScas(student);
-        assertTrue(scaList.has(sca));
+        assertTrue(scaList.contains(sca));
     }
 
     @Test

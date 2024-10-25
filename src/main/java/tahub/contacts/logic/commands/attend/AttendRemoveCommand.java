@@ -1,7 +1,9 @@
 package tahub.contacts.logic.commands.attend;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.*;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
