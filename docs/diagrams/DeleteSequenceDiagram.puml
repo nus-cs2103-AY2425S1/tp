@@ -12,6 +12,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
+participant "member:Member" as Member MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
@@ -49,7 +50,13 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteMember(1)
+DeleteCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> DeleteCommand : List<Member>
+deactivate Model
+
+DeleteCommand -> Model : deleteMember(member)
 activate Model
 
 Model --> DeleteCommand

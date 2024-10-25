@@ -1,7 +1,9 @@
+<!--
 ---
-  layout: default.md
-  title: "HallPointer"
+layout: default.md
+title: "HallPointer"
 ---
+-->
 
 # HallPointer
 

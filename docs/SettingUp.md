@@ -1,8 +1,10 @@
+<!--
 ---
-  layout: default.md
-  title: "Setting up and getting started"
-  pageNav: 3
+layout: default.md
+title: "Setting up and getting started"
+pageNav: 3
 ---
+-->
 
 # Setting up and getting started
 
