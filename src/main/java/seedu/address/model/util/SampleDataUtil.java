@@ -35,13 +35,13 @@ public class SampleDataUtil {
             new Person(new Name("David Li"), new IdentityNumber("S5141265F"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getLogSet("15 March 2024|Checkin with patient")),
+                getTagSet("family"), getLogSet("15 Mar 2024|Checkin with patient")),
             new Person(new Name("Irfan Ibrahim"), new IdentityNumber("S6532483J"),
                 new Phone("92492021"), new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getLogSet("22 April 2024|Second follow-up")),
+                getTagSet("classmates"), getLogSet("22 Apr 2024|Second follow-up")),
             new Person(new Name("Roy Balakrishnan"), new IdentityNumber("T1355313G"),
                 new Phone("92624417"), new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getLogSet("22 April 2024|Meditation Techniques"))
+                getTagSet("colleagues"), getLogSet("22 Apr 2024|Meditation Techniques"))
         };
     }
 
