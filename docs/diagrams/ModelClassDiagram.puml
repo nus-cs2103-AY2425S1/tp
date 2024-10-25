@@ -40,20 +40,20 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-Client *-right-> InsurancePlanManager
-InsurancePlanManager *--> "*" InsurancePlan
-InsurancePlanManager *--> "*" Claim
+Client -right-> InsurancePlanManager
+InsurancePlanManager --> "*" InsurancePlan
+InsurancePlanManager --> "*" Claim
 BasicPlan --.up.|> InsurancePlan
 TravelPlan --.up.|> InsurancePlan
 
-AddressBook *--> "1" UniqueClientList
+AddressBook --> "1" UniqueClientList
 UniqueClientList -left-> "~* all" Client
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
+Client --> Name
+Client --> Phone
+Client --> Email
+Client --> Address
 
-Client *--> "*" Tag
+Client --> "*" Tag
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
