@@ -19,7 +19,8 @@ Class "<<interface>>\nAgentAssistStorage" as AgentAssistStorage
 Class JsonAgentAssistStorage
 Class JsonSerializableAgentAssist
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Class JsonAdaptedTier
+Class JsonAdaptedStatus
 }
 
 }
@@ -38,6 +39,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAgentAssistStorage .up.|> AgentAssistStorage
 JsonAgentAssistStorage ..> JsonSerializableAgentAssist
 JsonSerializableAgentAssist --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "1" JsonAdaptedTier
+JsonAdaptedPerson --> "1" JsonAdaptedStatus
 
 @enduml

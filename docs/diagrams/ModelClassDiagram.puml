@@ -20,6 +20,8 @@ Class Phone
 Class Tier
 Class Remark
 Class Status
+Class Job
+Class Income
 
 Class I #FFFFFF
 Class HiddenOutside #FFFFFF
@@ -43,6 +45,8 @@ Person *--> "1" Address
 Person *--> "1" Remark
 Person *--> "1" Tier
 Person *--> "1" Status
+Person *--> "1" Job
+Person *--> "1" Income
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
