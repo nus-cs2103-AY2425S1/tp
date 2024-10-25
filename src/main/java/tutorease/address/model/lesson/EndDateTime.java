@@ -3,6 +3,7 @@ package tutorease.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
+import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;
 import static tutorease.address.model.lesson.StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
 
@@ -18,7 +19,7 @@ public class EndDateTime extends DateTime {
     public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be between 0 and 24.";
     public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT, "End");
 
-    private EndDateTime(LocalDateTime dateTime) {
+    private EndDateTime(LocalDateTime dateTime) throws ParseException {
         super(dateTime);
     }
 
@@ -49,7 +50,7 @@ public class EndDateTime extends DateTime {
     public static EndDateTime createEndDateTime(String dateTime) throws ParseException {
         dateTime = dateTime.trim();
         requireNonNull(dateTime);
-        checkArgument(isValidDateTime(dateTime), START_DATE_MESSAGE_CONSTRAINTS);
+        checkValidDateTime(dateTime);
         return new EndDateTime(parseDateTime(dateTime));
     }
 
