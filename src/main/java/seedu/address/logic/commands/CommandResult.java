@@ -19,13 +19,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show the history. */
+    private final boolean showHistory;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showHistory) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showHistory = showHistory;
     }
 
     /**
@@ -33,11 +37,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public boolean isShowHistory() {
+        return showHistory;
     }
 
     public boolean isShowHelp() {
@@ -62,12 +70,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showHistory == otherCommandResult.showHistory;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showHistory);
     }
 
     @Override
@@ -76,11 +85,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showHistory", showHistory)
                 .toString();
-    }
-
-    public String getPersonName() {
-        String[] parts = feedbackToUser.split(": ");
-        return parts.length > 1 ? parts[1].strip() : "";
     }
 }

@@ -98,7 +98,8 @@ public class HistoryCommand extends Command {
         }
         model.updateDisplayedList(callHistory);
 
-        return new CommandResult(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personFound.getName()));
+        return new CommandResult(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personFound.getName()),
+                false, false, true);
     }
 
     @Override
