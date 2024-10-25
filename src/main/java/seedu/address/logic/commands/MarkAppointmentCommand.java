@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 public class MarkAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "markAppointment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks an appointment as complete"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks an appointment as complete "
             + "between the relevant doctor and patient. "
             + COMMAND_WORD + " "
             + PREFIX_DATE + "[APPOINTMENT_TIME] "
