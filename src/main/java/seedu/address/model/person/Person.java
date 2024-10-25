@@ -2,13 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -24,30 +23,27 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Tag role;
-
-    private final Set<Tag> tags = new HashSet<>(); // to remove
+    private final Role role;
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) { // to remove
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.role = null;
-        this.ownWedding = null;
-    }
+    //    /**
+    //     * Every field must be present and not null.
+    //     */
+    //    public Person(Name name, Phone phone, Email email, Address address, Role role) {
+    //        requireAllNonNull(name, phone, email, address, role);
+    //        this.name = name;
+    //        this.phone = phone;
+    //        this.email = email;
+    //        this.address = address;
+    //        this.role = role;
+    //        this.ownWedding = null;
+    //    }
 
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Wedding ownWedding) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -77,17 +73,13 @@ public class Person {
         return address;
     }
 
-    public Tag getRole() {
-        return role;
-    }
-
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() { // to remove
-        return Collections.unmodifiableSet(tags);
-    } // to remove
+    public Role getRole() {
+        return role;
+    }
 
     public Wedding getOwnWedding() {
         return ownWedding;
@@ -171,7 +163,8 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address);
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, role);
     }
 
     @Override
@@ -183,7 +176,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tag", role == null ? nullString : role)
+                .add("roles", role)
                 .add("wedding", ownWedding == null ? nullString : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();

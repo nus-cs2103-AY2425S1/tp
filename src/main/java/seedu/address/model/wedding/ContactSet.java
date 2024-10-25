@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 
 /**
  * Represents a Contact Set of a Wedding.
@@ -32,7 +32,7 @@ public class ContactSet {
      * @param role role to check.
      * @return whether the role is assigned.
      */
-    public boolean hasRole(Tag role) {
+    public boolean hasRole(Role role) {
         return set.stream().anyMatch(x -> x.getRole().equals(role));
     }
 
@@ -42,7 +42,7 @@ public class ContactSet {
      * @param person person with the role.
      * @throws IllegalArgumentException if the role is already assigned.
      */
-    public void addToMap(Tag role, Person person) {
+    public void addToMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (this.hasRole(role)) {
             throw new IllegalArgumentException("This role is already assigned.");
@@ -55,7 +55,7 @@ public class ContactSet {
      *
      * @param person person with the role.
      */
-    public void removeFromMap(Tag role, Person person) {
+    public void removeFromMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (!this.hasRole(role)) {
             throw new IllegalArgumentException("This role is not assigned.");
@@ -69,7 +69,7 @@ public class ContactSet {
      * @param role person of this role.
      * @return Optional person of role.
      */
-    public Optional<Person> getPersonOfRole(Tag role) {
+    public Optional<Person> getPersonOfRole(Role role) {
         requireNonNull(role);
         return set.stream().filter(x -> x.getRole().equals(role)).findFirst();
     }
@@ -78,7 +78,7 @@ public class ContactSet {
     public String toString() {
         ToStringBuilder str = new ToStringBuilder(this);
         for (Person person : set) {
-            Tag role = person.getRole();
+            Role role = person.getRole();
             str.add("person", person.toString());
         }
         return str.toString();
