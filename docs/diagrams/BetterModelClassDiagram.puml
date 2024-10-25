@@ -5,18 +5,19 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+AddressBook *-right-> "1" UniqueGroupList
+UniqueGroupList -[hidden]down- UniquePersonList
+UniqueGroupList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Tag
+UniqueGroupList -right-> "0...1" Group
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "0...1" Group
 
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> StudentID
+Person *--> NUSNetID
+Person *--> Major
+Person *--> Year
 Person *--> Comment
 @enduml
