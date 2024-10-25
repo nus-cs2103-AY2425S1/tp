@@ -15,6 +15,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.Phone;
 
 
@@ -24,12 +25,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_OWED_AMOUNT = "+123.12";
     private static final String INVALID_HOUR = "+0.75";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_OWED_AMOUNT = "300.25";
     private static final String VALID_HOUR = "12.5";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -145,6 +148,28 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseOwedAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOwedAmount((String) null));
+    }
+
+    @Test
+    public void parseOwedAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOwedAmount(INVALID_OWED_AMOUNT));
+    }
+
+    @Test
+    public void parseOwedAmount_validValueWithWhitespace_returnsTrimmedOwedAmount() throws Exception {
+        OwedAmount expectedOwedAmount = new OwedAmount(VALID_OWED_AMOUNT);
+        assertEquals(expectedOwedAmount, ParserUtil.parseOwedAmount(VALID_OWED_AMOUNT + WHITESPACE));
+    }
+
+    @Test
+    public void parseOwedAmount_validValueWithoutWhitespace_returnsOwedAmount() throws Exception {
+        OwedAmount expectedOwedAmount = new OwedAmount(VALID_OWED_AMOUNT);
+        assertEquals(expectedOwedAmount, ParserUtil.parseOwedAmount(VALID_OWED_AMOUNT));
     }
 
     @Test
