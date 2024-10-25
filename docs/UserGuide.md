@@ -26,7 +26,7 @@ administrators.
    - [2.8 Exiting the Program](#28-exiting-the-program-exit)
    - [2.9 Saving the Data](#29-saving-the-data)
    - [2.10 Editing the Data File](#210-editing-the-data-file)
-   - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed)
+   - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed-markpaid)
    - [2.12 Displaying Pie Chart of Class Distribution](#212-displaying-pie-chart-of-class-distribution-pie)
    - [2.13 Displaying Bar Chart](#213-displaying-bar-chart-bar)
    - [2.14 Viewing Command History](#214-viewing-command-history-arrow-keys)
