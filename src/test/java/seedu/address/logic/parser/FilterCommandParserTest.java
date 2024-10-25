@@ -51,7 +51,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_RsvpStatus_success() {
+    public void parse_rsvpStatus_success() {
         statuses.add(RsvpStatus.COMING);
         assertParseSuccess(parser, " s/1", new FilterCommand(tags, statuses));
     }

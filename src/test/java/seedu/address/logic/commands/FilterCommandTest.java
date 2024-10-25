@@ -58,7 +58,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_TagNotCreated_failure() {
+    public void execute_tagNotCreated_failure() {
         String expectedMessage = "Tag [friends] must be created before being used to filter.";
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(FRIENDS);
