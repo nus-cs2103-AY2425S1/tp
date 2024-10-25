@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -69,13 +70,73 @@ public class ChatWindow {
 
                         String response = getResponse(message);
                         chatArea.appendText("Assistant: " + response + "\n");
+                        if (isGoodbyeMessage(message)) {
+                            Timeline closeTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e2 -> {
+                                closeChatWindow();
+                            }));
+                            closeTimeline.setCycleCount(1);
+                            closeTimeline.play();
+                        }
                         userInput.setDisable(false);
+                        userInput.requestFocus();
                     })
             );
 
             timeline.setCycleCount(1);
             timeline.play();
         }
+    }
+
+    /**
+     * Checks if the user's message is a goodbye message.
+     *
+     * @param message The user's input message.
+     * @return True if the message indicates a goodbye; otherwise, false.
+     */
+    private boolean isGoodbyeMessage(String message) {
+        String lowerMessage = message.toLowerCase().trim();
+        return Pattern.compile("\\b(g+o+o+d+b+y+e+|b+y+e+|bai|bubye|see ya|see you"
+                        + "|take care|later|cya|catch you later|peace|adieu|ta"
+                        + "|farewell|good night|so long|cheerio|toodle-oo"
+                        + "|until next time|ttyl|g2g|gotta go|im off|exit"
+                        + "|im leaving|im out|im off now|im outta here|i'm out)\\b")
+                .matcher(lowerMessage).find();
+    }
+
+    /**
+     * Checks if the user's message is a hello message.
+     *
+     * @param message The user's input message.
+     * @return True if the message indicates a hello; otherwise, false.
+     */
+    private boolean isHelloMessage(String message) {
+        String lowerMessage = message.toLowerCase().trim();
+        return Pattern.compile("\\b(h+e+l+o+|h+i+|h+e+y+|howdy|greetings|salutations"
+                        + "|what's up|what's good|yo|sup|how's it going|how are you|howdy doo"
+                        + "aloha|bonjour|hola|holla|howdy+|hiya|wazzup|welcome)\\b")
+                .matcher(lowerMessage).find();
+    }
+
+    /**
+     * Requests focus for the user input field in the chat window.
+     * <p>
+     * This method checks if the user input field is initialized and, if so,
+     * requests the focus to ensure that the user can start typing immediately
+     * when the chat window is opened.
+     * </p>
+     */
+    public void focusInputField() {
+        if (userInput != null) {
+            userInput.requestFocus();
+        }
+    }
+
+    /**
+     * Closes the chat window.
+     */
+    private void closeChatWindow() {
+        Stage stage = (Stage) userInput.getScene().getWindow();
+        stage.close();
     }
 
     /**
@@ -87,12 +148,9 @@ public class ChatWindow {
     public String getResponse(String message) {
         message = message.toLowerCase().trim();
 
-        if (Pattern.compile("\\bh+e+l+o+\\b").matcher(message).find()
-                || Pattern.compile("\\bh+i+\\b").matcher(message).find()
-                || Pattern.compile("\\bh+e+y+\\b").matcher(message).find()) {
+        if (isHelloMessage(message)) {
             return "Hi there! How can I assist you today?";
-        } else if (Pattern.compile("\\b(g+o+o+d+b+y+|b+y+e+|b+y+|bye|goodbye)\\b")
-                .matcher(message).find()) {
+        } else if (isGoodbyeMessage(message)) {
             return "Goodbye! Have a great day!";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
