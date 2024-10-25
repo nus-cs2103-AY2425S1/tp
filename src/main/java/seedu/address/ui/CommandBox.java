@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -120,6 +122,12 @@ public class CommandBox extends UiPart<Region> {
             break;
         case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
             errorIndexStart = commandText.trim().lastIndexOf(" ") + 1;
+            break;
+        case SortCommand.MESSAGE_AVAILABLE_FIELDS, SortIndividualCommand.MESSAGE_AVAILABLE_FIELDS:
+            errorIndexStart = commandText.indexOf("f/");
+            break;
+        case SortCommand.MESSAGE_INVALID_ORDER:
+            errorIndexStart = commandText.indexOf("o/");
             break;
         case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
             errorIndexStart = commandText.indexOf("findp") + 6;

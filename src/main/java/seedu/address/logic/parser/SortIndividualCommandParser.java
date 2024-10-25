@@ -37,11 +37,14 @@ public class SortIndividualCommandParser implements Parser<SortIndividualCommand
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SortIndividualCommand.MESSAGE_USAGE));
         }
-        if (!areValidOrderArguments(argMultimap.getValue(PREFIX_FIELD).get(),
-                argMultimap.getValue(PREFIX_ORDER).get())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SortIndividualCommand.MESSAGE_USAGE));
+        if (!isValidFieldArgument(argMultimap.getValue(PREFIX_FIELD).get())) {
+            throw new ParseException(SortIndividualCommand.MESSAGE_AVAILABLE_FIELDS);
         }
+
+        if (!isValidOrderArgument(argMultimap.getValue(PREFIX_ORDER).get())) {
+            throw new ParseException(SortIndividualCommand.MESSAGE_INVALID_ORDER);
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORDER);
 
         return new SortIndividualCommand(index, argMultimap.getValue(PREFIX_FIELD).get(),
@@ -56,7 +59,14 @@ public class SortIndividualCommandParser implements Parser<SortIndividualCommand
     /**
      * Returns true if the order argument is valid.
      */
-    private static boolean areValidOrderArguments(String field, String order) {
-        return (order.equals("H") || order.equals("L")) && field.equals("Price");
+    private static boolean isValidOrderArgument(String order) {
+        return (order.equals("H") || order.equals("L"));
+    }
+
+    /**
+     * Returns true if the field argument is valid.
+     */
+    private static boolean isValidFieldArgument(String field) {
+        return field.equals("Price");
     }
 }

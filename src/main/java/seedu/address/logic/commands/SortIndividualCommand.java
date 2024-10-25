@@ -29,6 +29,12 @@ public class SortIndividualCommand extends Command {
             + PREFIX_ORDER + "[ORDER]"
             + " (either \"o/H for High to Low\" or \"o/L for Low to High\")\n"
             + "Example: " + COMMAND_WORD + " " + "1 " + PREFIX_FIELD + "Price " + PREFIX_ORDER + "L";
+
+    public static final String MESSAGE_AVAILABLE_FIELDS = "Available fields to sort by: Price";
+
+    public static final String MESSAGE_INVALID_ORDER =
+            "Sort contacts using L for low to high order and H for high to low order";
+
     private static int isInSortedState = 0;
     private static int isFromLowToHighOrder = 0;
     private final Index personIndexToSort;
