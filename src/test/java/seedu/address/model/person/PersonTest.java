@@ -97,6 +97,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail().map(Email::toString).orElse(" ")
                 + ", telegramHandle=" + ALICE.getTelegramHandle()
                 + ", moduleName=" + ALICE.getModuleName()
+                + ", remark=" + ALICE.getRemark()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

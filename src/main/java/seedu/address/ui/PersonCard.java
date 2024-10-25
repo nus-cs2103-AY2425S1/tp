@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label moduleName;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -60,6 +62,7 @@ public class PersonCard extends UiPart<Region> {
         telegramHandle.setText(person.getTelegramHandle().value);
         moduleName.setText(person.getModuleName().toString());
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
+        remark.setText(person.getRemark().value);
         contactType.setText(contactTypeStr);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

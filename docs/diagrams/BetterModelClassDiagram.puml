@@ -17,7 +17,8 @@ Person -up-> "*" Tag
 Person *--> "1" Name
 Person *--> "0..1" Phone
 Person *--> "0..1" Email
-Person *--> TelegramHandle
+Person *--> "0..1" TelegramHandle
 Person *--> ContactType
 Person *--> ModuleName
+Person *--> Remark
 @enduml

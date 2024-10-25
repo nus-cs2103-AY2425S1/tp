@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "telegramHandle" : "@alicepauline",
     "moduleName" : "CFG1002",
+    "remark" : "likes cake",
     "tags" : [ "friends" ],
     "contactType" : "WORK"
   }, {
@@ -14,6 +15,7 @@
     "email" : "johnd@example.com",
     "telegramHandle" : "@bensonmeier",
     "moduleName" : "SC1101E",
+    "remark" : "loves fishing",
     "tags" : [ "owesMoney", "friends" ],
     "contactType" : "WORK"
   }, {
@@ -22,6 +24,7 @@
     "email" : "heinz@example.com",
     "telegramHandle" : "@carlkurz",
     "moduleName" : "GEA1000",
+    "remark" : "good at stats",
     "tags" : [ ],
     "contactType" : "WORK"
   }, {
@@ -30,6 +33,7 @@
     "email" : "cornelia@example.com",
     "telegramHandle" : "@danielmeier",
     "moduleName" : "HSI1000",
+    "remark" : "likes to volunteer",
     "tags" : [ "friends" ],
     "contactType" : "PERSONAL"
   }, {
@@ -38,6 +42,7 @@
     "email" : "werner@example.com",
     "telegramHandle" : "@ellemeyer",
     "moduleName" : "CS2103T",
+    "remark" : "Head TA",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   }, {
@@ -46,6 +51,7 @@
     "email" : "lydia@example.com",
     "telegramHandle" : "@fionakunz",
     "moduleName" : "CS2101",
+    "remark" : "research assistant for a language model project",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   }, {
@@ -54,6 +60,7 @@
     "email" : "anna@example.com",
     "telegramHandle" : "@georgebest",
     "moduleName" : "CS2109",
+    "remark" : "hates lizards",
     "tags" : [ ],
     "contactType" : "PERSONAL"
   } ]

@@ -10,6 +10,7 @@ import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,6 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEHANDLE = "@amybee";
     public static final String DEFAULT_MODULENAME = "CS1101S";
+    public static final String DEFAULT_REMARK = "likes chocolate";
 
     private ContactType contactType;
     private Name name;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Optional<Email> email;
     private TelegramHandle telegramHandle;
     private ModuleName moduleName;
+    private Remark remark;
     private Set<Tag> tags;
 
     /**
@@ -44,6 +47,7 @@ public class PersonBuilder {
         email = Optional.of(new Email(DEFAULT_EMAIL));
         telegramHandle = new TelegramHandle(DEFAULT_TELEHANDLE);
         moduleName = new ModuleName(DEFAULT_MODULENAME);
+        remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
 
@@ -57,6 +61,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         telegramHandle = personToCopy.getTelegramHandle();
         moduleName = personToCopy.getModuleName();
+        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -115,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
     public Person build() {
-        return new Person(contactType, name, phone, email, telegramHandle, moduleName, tags);
+        return new Person(contactType, name, phone, email, telegramHandle, moduleName, remark, tags);
     }
 
 }
