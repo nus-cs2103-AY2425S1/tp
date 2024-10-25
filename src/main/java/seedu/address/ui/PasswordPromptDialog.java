@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.KeyBindController.handleKeyEvent;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,8 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.security.PasswordManager;
-
-import static seedu.address.ui.KeyBindController.handleKeyEvent;
 
 
 /**
@@ -75,9 +75,10 @@ public class PasswordPromptDialog {
                 } else {
                     showAlert("Incorrect Password", "Please try again.");
                 }
-            }};
-        KeyBind confirmPasswordKeyBind = new KeyBind(KeyCode.ENTER,
-                () -> confirmPasswordAction.handle(new ActionEvent()));
+            }
+        };
+        KeyBind confirmPasswordKeyBind = new KeyBind(KeyCode.ENTER, ()
+                 -> confirmPasswordAction.handle(new ActionEvent()));
         confirmButton.setOnAction(confirmPasswordAction);
         grid.setOnKeyPressed(event ->
                 handleKeyEvent(event, confirmPasswordKeyBind));
