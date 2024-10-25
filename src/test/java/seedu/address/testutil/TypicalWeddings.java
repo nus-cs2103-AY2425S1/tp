@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Wedding;
 
 import java.util.ArrayList;
@@ -19,20 +18,19 @@ import static seedu.address.testutil.TypicalPersons.JOHN;
  */
 public class TypicalWeddings {
 
+    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Bob Wedding")
+            .withVenue("Marina Bay Sands").withDate("2024-12-12").withClient(ALICE).build();
 
-    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Bob")
-            .withVenue("Marina Bay Sands").withDate(new Date("2024-12-12")).withClient(ALICE).build();
-
-    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy Jack")
+    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy Jack Wedding")
             .withDate("2025-12-25").withClient(AMY).build();
 
-    public static final Wedding ELLE_WEDDING = new WeddingBuilder().withName("ELLE George")
+    public static final Wedding ELLE_WEDDING = new WeddingBuilder().withName("Elle George Wedding")
             .withClient(ELLE).build();
 
-    public static final Wedding GEORGE_WEDDING = new WeddingBuilder().withName("George Jane")
+    public static final Wedding GEORGE_WEDDING = new WeddingBuilder().withName("George Jane Wedding")
             .withVenue("Sentosa").withDate("2025-01-01").withClient(GEORGE).build();
 
-    public static final Wedding JOHN_WEDDING = new WeddingBuilder().withName("John Jane")
+    public static final Wedding JOHN_WEDDING = new WeddingBuilder().withName("John Jane Wedding")
             .withVenue("Fullerton").withClient(JOHN).build();
 
     private TypicalWeddings() {} // prevents instantiation
