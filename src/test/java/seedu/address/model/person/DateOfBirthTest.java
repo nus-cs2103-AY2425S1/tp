@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -48,5 +50,26 @@ public class DateOfBirthTest {
     public void isValidDate_futureDate_returnsFalse() {
         LocalDate futureDate = LocalDate.of(3000, 1, 1);
         assertFalse(DateOfBirth.isValidDate(futureDate));
+    }
+
+    @Test
+    public void equals() {
+        DateOfBirth dateOfBirth1 = new DateOfBirth(LocalDate.of(2000, 1, 1));
+        DateOfBirth dateOfBirth2 = new DateOfBirth(LocalDate.of(2024, 1, 1));
+
+        // same object
+        assertEquals(dateOfBirth1, dateOfBirth1);
+
+        // same date
+        assertEquals(dateOfBirth1, new DateOfBirth(LocalDate.of(2000, 1, 1)));
+
+        // different dates
+        assertNotEquals(dateOfBirth1, dateOfBirth2);
+
+        // different types
+        assertNotEquals(dateOfBirth2, dateOfBirth2.getValue());
+
+        // null
+        assertNotEquals(dateOfBirth2, null);
     }
 }
