@@ -46,6 +46,8 @@ public class MainWindowNew extends UiPart<Stage> {
 
     @FXML
     private MenuItem reportBugItem;
+    @FXML
+    private MenuItem summaryMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -165,6 +167,18 @@ public class MainWindowNew extends UiPart<Stage> {
             reportBugWindow.show();
         } else {
             reportBugWindow.focus();
+        }
+    }
+
+    /**
+     * Displays the summary in the command result panel.
+     */
+    @FXML
+    public void handleSummary() {
+        try {
+            executeCommand("summary");
+        } catch (CommandException | ParseException e) {
+            logger.warning("Failed to execute summary command: " + e.getMessage());
         }
     }
 
