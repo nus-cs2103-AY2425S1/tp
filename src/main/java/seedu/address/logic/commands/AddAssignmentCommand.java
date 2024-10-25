@@ -41,6 +41,8 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s to student %2$s";
     public static final String MESSAGE_NO_STUDENT_FOUND = "No such student found!";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT_FOUND = "There is already an existing assignment named "
+            + "%1$s for student %2$s";
 
     public final Assignment assignment;
     public final Name name;
@@ -63,7 +65,10 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
         }
 
-        student.addAssignment(assignment);
+        if (!student.addAssignment(assignment)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_FOUND,
+                    assignment.getAssignmentName(), student.getName()));
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }

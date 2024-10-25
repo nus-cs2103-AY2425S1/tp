@@ -11,7 +11,6 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
@@ -143,9 +142,17 @@ public class Student extends Person {
      *
      * @param assignment A valid assignment
      */
-    public void addAssignment(Assignment assignment) {
+    public boolean addAssignment(Assignment assignment) {
         requireAllNonNull(assignment);
+
+        for (Assignment assignment1 : assignments) {
+            if (assignment1.isSameAssignment(assignment)) {
+                return false;
+            }
+        }
+
         assignments.add(assignment);
+        return true;
     }
 
     /**
@@ -154,7 +161,7 @@ public class Student extends Person {
      * @param assignmentQuery A valid assignment query.
      * @return the deleted assignment
      */
-    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) throws CommandException {
+    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) {
         requireAllNonNull(assignmentQuery);
         for (Assignment assignment : assignments) {
             if (assignmentQuery.match(assignment)) {
