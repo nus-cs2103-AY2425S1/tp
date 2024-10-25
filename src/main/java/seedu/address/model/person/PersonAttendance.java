@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}.
  */
 public class PersonAttendance {
-    public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'present' or 'absent'";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'p' or 'a'";
 
     // Valid attendance statuses
-    public static final String VALIDATION_REGEX = "^(present|absent)$";
+    public static final String VALIDATION_REGEX = "^(p|a)$";
 
     public final String value;
 
@@ -32,7 +32,8 @@ public class PersonAttendance {
 
     @Override
     public String toString() {
-        return value;
+
+        return value.equals("p") ? "Present" : "Absent";
     }
 
     @Override

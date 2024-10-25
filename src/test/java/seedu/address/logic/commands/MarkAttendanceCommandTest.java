@@ -6,7 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,7 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class MarkAttendanceCommandTest {
@@ -38,8 +41,11 @@ public class MarkAttendanceCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
-                        validStudent.getTutorialGroup(), attendance, date), result.getFeedbackToUser());
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS,
+                validStudent.getName(), attendance,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(), attendance,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
     }
 
     @Test
@@ -60,10 +66,6 @@ public class MarkAttendanceCommandTest {
 
         assertThrows(IllegalArgumentException.class, () -> new Attendance("unknown"));
     }
-
-
-
-
 
 
     private class ModelStub implements Model {
@@ -159,7 +161,12 @@ public class MarkAttendanceCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -177,6 +184,12 @@ public class MarkAttendanceCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
 
     }

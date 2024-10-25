@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class AttendanceRecord {
     private final LocalDate date;
-    private final Attendance attendance;
+    private Attendance attendance;
 
     /**
      *  Constructs an {@code AttendanceRecord} object.
@@ -27,8 +27,29 @@ public class AttendanceRecord {
         return attendance;
     }
 
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
     @Override
     public String toString() {
         return date + " [" + (attendance.value.equals("p") ? "x" : " ") + "]";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof AttendanceRecord)) {
+            return false;
+        }
+        AttendanceRecord otherRecord = (AttendanceRecord) other;
+        return date.equals(otherRecord.date) && attendance.equals(otherRecord.attendance);
+    }
+
+    @Override
+    public int hashCode() {
+        return date.hashCode() + attendance.hashCode();
     }
 }

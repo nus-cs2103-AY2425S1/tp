@@ -48,6 +48,8 @@ public class EditStudentCommand extends Command {
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
+    private Student studentToEdit;
+    private Student editedStudent;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -74,14 +76,14 @@ public class EditStudentCommand extends Command {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
-        Student personToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedStudent(personToEdit, editStudentDescriptor);
+        studentToEdit = lastShownList.get(index.getZeroBased());
+        editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!personToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setStudent(personToEdit, editedStudent);
+        model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
@@ -101,7 +103,7 @@ public class EditStudentCommand extends Command {
                 .orElse(personToEdit.getStudentNumber());
 
         return new Student(updatedName, updatedPhone, updatedTutorialGroup,
-                updatedStudentNumber, personToEdit.getAssignments());
+                updatedStudentNumber, personToEdit.getAssignments(), personToEdit.getAttendanceRecord());
     }
 
     @Override
@@ -126,6 +128,16 @@ public class EditStudentCommand extends Command {
                 .add("index", index)
                 .add("editStudentDescriptor", editStudentDescriptor.toString())
                 .toString();
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        if (studentToEdit == null) {
+            return false;
+        }
+        model.setStudent(editedStudent, studentToEdit);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return true;
     }
 
     /**

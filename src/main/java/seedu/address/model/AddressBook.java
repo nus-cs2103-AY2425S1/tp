@@ -109,7 +109,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //student methods
 
-
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
@@ -127,6 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a student to the address book at the specified index.
+     * The student must not already exist in the address book.
+     */
+    public void addStudent(int index, Student s) {
+        students.add(index, s);
+    }
+
+    /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
      * The student identity of {@code editedStudent} must not be the same as
@@ -141,9 +148,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     * @return the integer index of the student removed
      */
-    public void removeStudent(Student key) {
-        students.remove(key);
+    public int removeStudent(Student key) {
+        return students.remove(key);
     }
 
     //// util methods
@@ -185,7 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && students.equals(otherAddressBook.students);
     }
 
     @Override

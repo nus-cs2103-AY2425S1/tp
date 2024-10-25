@@ -4,7 +4,7 @@
 
 * This is **a  project by NUS Software Engineering (SE) students**.<br>
   Usages:
-  * as an application for tutors to manage their classes, including student details, assignments, and attendance.
+  * as an application for tutors to manage their classes, including student details, assignments, and attendance. 
 * The project is an ongoing software project for a desktop application (called _Teletutors_) used by tutors for managing their classes.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.

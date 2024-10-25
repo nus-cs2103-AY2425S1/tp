@@ -56,7 +56,8 @@ public class EditStudentCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastPerson.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_DIDDY).withPhone(VALID_PHONE_DIDDY).build();
+        Student editedStudent = studentInList.withName(VALID_NAME_DIDDY).withPhone(VALID_PHONE_DIDDY)
+                .build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_DIDDY)
                 .withPhone(VALID_PHONE_DIDDY).build();
@@ -178,5 +179,16 @@ public class EditStudentCommandTest {
         String expected = EditStudentCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_PERSON
                 + ", editStudentDescriptor=" + DESC_HUGH + "}";
         assertEquals(expected, editStudentCommand.toString());
+    }
+
+    @Test
+    public void undo_editedStudent() throws Exception {
+        Student editedStudent = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
+        EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_PERSON, descriptor);
+        editStudentCommand.execute(model);
+        editStudentCommand.undo(model);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
     }
 }

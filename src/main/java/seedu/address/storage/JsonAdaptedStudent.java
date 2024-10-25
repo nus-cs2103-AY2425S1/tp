@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -18,6 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.storage.attendance.JsonAdaptedAttendanceRecord;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -33,6 +35,7 @@ public class JsonAdaptedStudent {
     private final String tutorialGroup;
 
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
+    private final List<JsonAdaptedAttendanceRecord> attendanceRecord = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -42,7 +45,8 @@ public class JsonAdaptedStudent {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("tutorialGroup") String tutorialGroup,
                               @JsonProperty("studentNumber") String studentNumber,
-                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
+                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
+                              @JsonProperty("attendanceRecord") List<JsonAdaptedAttendanceRecord> attendanceRecord) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,6 +55,9 @@ public class JsonAdaptedStudent {
         this.studentNumber = studentNumber;
         if (assignments != null) {
             this.assignments.addAll(assignments);
+        }
+        if (attendanceRecord != null) {
+            this.attendanceRecord.addAll(attendanceRecord);
         }
     }
 
@@ -66,6 +73,9 @@ public class JsonAdaptedStudent {
         tutorialGroup = source.getTutorialGroup().value;
         assignments.addAll(source.getAssignments().stream()
                 .map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
+        attendanceRecord.addAll(source.getAttendanceRecord().stream()
+                .map(JsonAdaptedAttendanceRecord::new)
                 .collect(Collectors.toList()));
     }
 
@@ -140,6 +150,11 @@ public class JsonAdaptedStudent {
                 throw new IllegalValueException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_FOUND,
                         modelAssignment.getAssignmentName(), student.getName()));
             };
+        }
+
+        for (JsonAdaptedAttendanceRecord record : attendanceRecord) {
+            AttendanceRecord modelAttendanceRecord = record.toModelType();
+            student.addAttendanceRecord(modelAttendanceRecord);
         }
 
 
