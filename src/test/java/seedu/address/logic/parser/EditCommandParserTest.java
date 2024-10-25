@@ -168,7 +168,6 @@ public class EditCommandParserTest {
         // Multiple tags provided
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = "edit " + targetIndex.getOneBased() + TAG_DESC_HIGH_RISK + TAG_DESC_LOW_RISK;
-        System.out.println(userInput);
 
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
     }
@@ -178,7 +177,6 @@ public class EditCommandParserTest {
         // Attempt to edit a person without providing a tag
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = "edit " + targetIndex.getOneBased() + PREFIX_TAG; // Only name is edited
-        System.out.println(userInput);
 
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
     }

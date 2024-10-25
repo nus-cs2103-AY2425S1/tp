@@ -4,7 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -100,10 +106,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_date() throws Exception {
-        final Date date = new Date("Some date.");
+        final Date date = new Date("01/01/2024");
         DateCommand command = (DateCommand) parser.parseCommand(DateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date.value);
-        assertEquals(new DateCommand(INDEX_FIRST_PERSON, date), command);
+                + PREFIX_NAME + VALID_NAME_AMY + " "
+                + PREFIX_PHONE + VALID_PHONE_AMY + " "
+                + PREFIX_EMAIL + VALID_EMAIL_AMY + " "
+                + PREFIX_DATE + date.value);
+        assertEquals(new DateCommand(Optional.of(VALID_NAME_AMY), Optional.of(VALID_PHONE_AMY),
+                Optional.of(VALID_EMAIL_AMY), date), command);
     }
 
     @Test
