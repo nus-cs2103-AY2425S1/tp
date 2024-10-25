@@ -237,27 +237,24 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 <div>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
-![ArchiveSequenceDiagram](./images/ArchiveSequenceDiagramLogic.png)
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
 </div>
 
 <div>
 
 `Storage` Class Diagram with support for archive:
-![StorageClassDiagramWithArchive](./images/StorageClassDiagramWithArchive.png)
+![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
 </div>
 
 <div>
 
 The following sequence diagram shows how a sort command goes through the `Model` component:
-![ArchiveSortSequenceDiagram](./images/ArchiveSortSequenceDiagram.png)
+![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -278,13 +275,13 @@ The following sequence diagram shows how a sort command goes through the `Model`
 
 **Target user profile**:
 
-* Needs to manage a variety of sections, such as client names, email, payment status and more
-* Desire to track all client statuses in one place
-* Wants to avoid tracking clients using multiple applications
-* Wants to easily change statuses of a client upon completion of project
-* Can type fast
-* Prefers typing to mouse interactions
-* Familiar with the workings of CLI and commands
+* Needs to manage a variety of sections, such as client names, email, payment status and more.
+* Desire to track all client statuses in one place.
+* Wants to avoid tracking clients using multiple applications.
+* Wants to easily change statuses of a client upon completion of project.
+* Can type fast (≥80 wpm).
+* Prefers typing over mouse interactions.
+* Familiar with the workings of CLI and commands.
 
 **Value proposition**: Our address book seamlessly combines client contacts,
 payment tracking and more in one efficient package, tailored specifically for freelance software developers.
