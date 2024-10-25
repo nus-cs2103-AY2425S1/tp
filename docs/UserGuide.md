@@ -245,7 +245,7 @@ Format: `addSubmission sm/SUBMISSION_NAME`
 
 <box type="tip" seamless>
 
-**Tip:** If a new student is added after a submission is added, the submission has to be added again for it to be reflected for the new student.
+**Tip:** If a new student is added after a submission is added, the same submission has to be added again for it to be reflected for the new student.
 </box>
 
 * The submission name can only contain alphanumeric characters and spaces.
@@ -259,13 +259,13 @@ Adds a submission status for the specified submission for the person at the spec
 
 Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 
-* The submission status must be a boolean value "T" or "F", or `NIL`.
+* The submission status must be "Y" or "N", or `NIL`.
 * The submission status can be edited using the same command with a different submission status.
 * The submission status can be deleted by entering the submission status as `NIL`.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addSubmissionStatus 1 sm/Assignment 1 ss/T`
+* `addSubmissionStatus 1 sm/Assignment 1 ss/Y`
 * `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
 
 ### Sorting the list : `sort`
