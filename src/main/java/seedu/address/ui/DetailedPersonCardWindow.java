@@ -69,7 +69,6 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        getRoot().requestFocus();
         getRoot().centerOnScreen();
 
     }
