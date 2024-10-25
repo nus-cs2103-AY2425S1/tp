@@ -47,7 +47,8 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide for more info: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Press Esc to close this window!"
+            + "\nRefer to the user guide for more info: " + USERGUIDE_URL;
 
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -72,6 +73,13 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
+        // Add key event filter for ESC key to close the window
+        getRoot().addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == javafx.scene.input.KeyCode.ESCAPE) {
+                hide();
+                event.consume();
+            }
+        });
     }
 
     /**
