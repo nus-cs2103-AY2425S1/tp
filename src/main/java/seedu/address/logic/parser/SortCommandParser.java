@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 
@@ -24,6 +25,10 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         if (argMultimap.getValue(PREFIX_FIELD).isEmpty() || argMultimap.getValue(PREFIX_ORDER).isEmpty()) {
             throw new ParseException(SortCommand.MESSAGE_USAGE);
+        }
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         if (!argMultimap.getValue(PREFIX_FIELD).get().equals("Name")
