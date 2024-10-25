@@ -100,7 +100,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 Another (more concise) sequence diagram below illustrates some interactions within the `Logic` component when **arguments** are involved, taking `execute("mark 1 d/2020-01-01")` API call as an example.
 
-![Interactions Inside the Logic Component for the `mark 1 d/2020-01-01` Command](images/MarkSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `mark 1 d/2024-10-25` Command](images/MarkSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommandParser` and `ArgumentMultimap` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
