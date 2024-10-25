@@ -16,7 +16,9 @@ Person -up-> "*" Tag
 Person -up-> "1" Tag : Job Status
 
 Person *--> Name
+Person *--> Job
 Person *--> Phone
 Person *--> Email
-Person *--> Job
+Person *--> InterviewScore
+Person *--> Skills
 @enduml
