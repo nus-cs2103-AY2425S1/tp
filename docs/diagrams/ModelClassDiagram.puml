@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Tag
 Class Priority
+Class LastSeen
 
 Class I #FFFFFF
 }
@@ -44,6 +45,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "1" Priority
+Person *--> "1" LastSeen
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
