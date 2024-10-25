@@ -37,6 +37,7 @@ public class MarkAttendanceCommand extends Command {
     private final Name name;
     private final LocalDate date;
     private final Attendance attendance;
+    private Attendance previousAttendance;
 
 
 
@@ -62,9 +63,33 @@ public class MarkAttendanceCommand extends Command {
         }
 
 
+        // Save the previous attendance state
+        previousAttendance = student.getAttendanceRecord().stream()
+                .filter(record -> record.getDate().equals(date))
+                .findFirst()
+                .map(record -> record.getAttendance())
+                .orElse(null);
+
         // Mark attendance
         student.markAttendance(date, attendance.value);
         return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        // Find the student by name
+        Student student = model.getStudentByName(name);
+        if (student == null) {
+            return false;
+        }
+
+        // Revert to the previous attendance state
+        if (previousAttendance != null) {
+            student.markAttendance(date, previousAttendance.value);
+        } else {
+            student.undoAttendance(date);
+        }
+        return true;
     }
 }
