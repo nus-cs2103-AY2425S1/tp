@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOWN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -17,8 +17,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Property;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
 import seedu.address.model.person.PropertyList;
 
 /**
@@ -27,7 +27,8 @@ import seedu.address.model.person.PropertyList;
 public class AddPropertyCommand extends Command {
     public static final String COMMAND_WORD = "addProperty";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property for sale with the specified details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a property for sale with the specified details of the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PROPERTY_ADDRESS + "ADDRESS "
@@ -47,7 +48,8 @@ public class AddPropertyCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "AddProperty command not implemented yet";
     public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Added property to Person: %1$s";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Address: %2$s, Town: %3$s, Type: %4$s, Size: %.2f, Bedrooms: %5$d, Bathrooms: %6$d, Price: $%.2f";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d,"
+            + " Address: %2$s, Town: %3$s, Type: %4$s, Size: %.2f, Bedrooms: %5$d, Bathrooms: %6$d, Price: $%.2f";
     private final Index index;
     private final String address;
     private final String town;

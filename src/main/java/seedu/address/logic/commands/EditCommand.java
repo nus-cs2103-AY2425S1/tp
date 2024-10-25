@@ -31,11 +31,9 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.PropertyList;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-
-
 
 /**
  * Edits the details of an existing person in the address book.
@@ -96,14 +94,16 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -116,7 +116,8 @@ public class EditCommand extends Command {
         DateOfCreation updatedDateOfCreation = editPersonDescriptor.getDateofCreation()
                 .orElse(personToEdit.getDateOfCreation());
         History updatedHistory = editPersonDescriptor.getHistory().orElse(personToEdit.getHistory());
-        PropertyList updatedPropertyList = editPersonDescriptor.getPropertyList().orElse(personToEdit.getPropertyList());
+        PropertyList updatedPropertyList = editPersonDescriptor.getPropertyList()
+                .orElse(personToEdit.getPropertyList());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRemark, updatedBirthday, updatedTags, updatedDateOfCreation, updatedHistory);
     }

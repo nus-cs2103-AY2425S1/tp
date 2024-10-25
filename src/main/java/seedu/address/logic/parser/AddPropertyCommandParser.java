@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOWN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyCommand;

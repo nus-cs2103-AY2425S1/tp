@@ -188,11 +188,9 @@ public class Person {
     public Birthday getBirthday() {
         return birthday;
     }
-    
     public PropertyList getPropertyList() {
         return propertyList;
     }
-    
     public int getWeight(int... tagIndex) {
         int totalWeight = 0;
         for (int index : tagIndex) {
