@@ -23,4 +23,5 @@ Person *--> University
 Person *--> WorkExp
 Person *--> Major
 Person *--> Interest
+Person *--> Birthday
 @enduml
