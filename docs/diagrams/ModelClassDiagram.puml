@@ -43,7 +43,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> Comment
-Person *--> "*" Tag
+Person *--> "0...1" Group
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
