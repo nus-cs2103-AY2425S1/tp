@@ -149,7 +149,7 @@ public class JsonAdaptedStudent {
             if (!student.addAssignment(modelAssignment)) {
                 throw new IllegalValueException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_FOUND,
                         modelAssignment.getAssignmentName(), student.getName()));
-            };
+            }
         }
 
         for (JsonAdaptedAttendanceRecord record : attendanceRecord) {

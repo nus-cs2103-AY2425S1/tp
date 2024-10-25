@@ -25,6 +25,17 @@ public class AssignmentQuery {
         this.queryGrade = Optional.ofNullable(grade);
     }
 
+    /**
+     * Constructs an {@code AssignmentQuery}
+     */
+    public AssignmentQuery(Assignment assignment) {
+        this.queryName = Optional.ofNullable(assignment.getAssignmentName());
+        this.queryDeadline = Optional.ofNullable(assignment.getDeadline());
+        this.querySubmissionStatus = Optional.ofNullable(assignment.getSubmissionStatus());
+        this.queryGradingStatus = Optional.ofNullable(assignment.getGradingStatus());
+        this.queryGrade = Optional.ofNullable(assignment.getGrade());
+    }
+
 
     /**
      * Generic function that matches a query to a variable.
