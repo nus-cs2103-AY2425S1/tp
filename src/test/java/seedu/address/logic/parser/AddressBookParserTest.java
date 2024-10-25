@@ -17,6 +17,7 @@ import seedu.address.logic.commands.AddCarCommand;
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.CheckClientCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCarCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditCarDescriptor;
@@ -56,6 +57,14 @@ public class AddressBookParserTest {
                 DeleteClientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteClientCommand(INDEX_FIRST_PERSON), command);
     }
+
+    @Test
+    public void parseCommand_deleteCar() throws Exception {
+        DeleteCarCommand command = (DeleteCarCommand) parser.parseCommand(
+                DeleteCarCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCarCommand(INDEX_FIRST_PERSON), command);
+    }
+
 
     @Test
     public void parseCommand_checkClient() throws Exception {
