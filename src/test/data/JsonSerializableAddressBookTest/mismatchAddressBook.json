@@ -73,7 +73,7 @@
     "eventId": 0,
     "clientIds": [ 1, 3 ],
     "vendorIds": [ 2, 4 ]
-  }, {    
+  }, {
     "name" : "Sample Wedding",
     "description": "This is wedding B",
     "date" : "2000-01-01",

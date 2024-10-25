@@ -38,7 +38,7 @@
     "id": 4,
     "eventIds": [ 0, 1 ]
   } ],
-  "events" : [ {    
+  "events" : [ {
     "name" : "Sample Wedding",
     "description": "This is wedding A",
     "date" : "2000-01-01",
