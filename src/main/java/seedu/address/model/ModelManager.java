@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.person.Person;
@@ -209,8 +210,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGoods(String goodsName) {
-        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getReadableGoodsName(), goodsName));
+    public void deleteGoods(GoodsName goodsName) {
+        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getGoodsName(), goodsName));
     }
 
     @Override

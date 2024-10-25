@@ -99,11 +99,11 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01T00:00\","
+        String content = "\"2021-01-01 00:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
-                + "\"2021-01-01T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());
@@ -129,11 +129,11 @@ public class CsvGoodsStorageTest {
             + "\"procurement date\","
             + "\"quantity\","
             + "\"supplier name\"\n";
-        String content = "\"2021-01-01T00:00\","
+        String content = "\"2021-01-01 00:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
-                + "\"2021-01-01T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"\n";
         String missingContent = "\"2022-02-02T00:00\","
@@ -166,11 +166,11 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01T00:00\","
+        String content = "\"2021-01-01 00:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
-                + "\"2021-01-01T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());

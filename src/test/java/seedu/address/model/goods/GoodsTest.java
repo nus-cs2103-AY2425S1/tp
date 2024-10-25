@@ -27,10 +27,10 @@ public class GoodsTest {
     }
 
     @Test
-    public void getReadableGoodsName_success() {
+    public void getGoodsName_success() {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         String expected = "Gardenia Bread";
-        assertEquals(expected, testGoods.getReadableGoodsName());
+        assertEquals(new GoodsName(expected), testGoods.getGoodsName());
     }
 
     @Test
