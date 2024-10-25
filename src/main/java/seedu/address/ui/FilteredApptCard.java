@@ -5,8 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.filteredappointment.FilteredAppointment;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Patient;
 
 
 /**
@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 public class FilteredApptCard extends UiPart<Region> {
     private static final String FXML = "FilteredApptListCard.fxml";
 
-    public final Person person;
+    public final Patient patient;
     public final Appt appt;
 
     @FXML
@@ -36,11 +36,11 @@ public class FilteredApptCard extends UiPart<Region> {
     public FilteredApptCard(FilteredAppointment filteredAppointment, int displayedIndex) {
         super(FXML);
         this.appt = filteredAppointment.getAppt();
-        this.person = filteredAppointment.getPerson();
+        this.patient = filteredAppointment.getPatient();
         id.setText(displayedIndex + ". ");
         appointmentDateTime.setText(appt.toString());
-        name.setText(person.getName().fullName);
-        nric.setText(person.getNric().value);
+        name.setText(patient.getName().fullName);
+        nric.setText(patient.getNric().value);
     }
 
 }

@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
  * Controller for a help page
@@ -85,7 +85,7 @@ public class PatientInfoPanel extends UiPart<Region> {
      *
      * @param patient
      */
-    public PatientInfoPanel(Person patient) {
+    public PatientInfoPanel(Patient patient) {
         super(FXML);
         header.setText("Patient Information");
         basicInfoHeader.setText("Basic Information");
@@ -95,7 +95,7 @@ public class PatientInfoPanel extends UiPart<Region> {
         setPatientInfoContent(patient);
     }
 
-    private void setPatientInfoContent(Person patient) {
+    private void setPatientInfoContent(Patient patient) {
         name.setText("Name: " + (patient.getName() == null ? "" : patient.getName().toString()));
         nric.setText("NRIC: " + patient.getNric().toString());
         birthdate.setText("Birth Date: " + patient.getBirthdate().toString());

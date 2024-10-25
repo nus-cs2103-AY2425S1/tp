@@ -25,100 +25,100 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Sex;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Sex;
+import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Patient expectedPatient = new PatientBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                + BIRTHDATE_DESC_BOB, new AddCommand(expectedPerson));
+                + BIRTHDATE_DESC_BOB, new AddCommand(expectedPatient));
 
 
         // multiple health services - all accepted
-        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB).build();
+        Patient expectedPatientMultipleHealthServices = new PatientBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
                         + BIRTHDATE_DESC_BOB,
-                new AddCommand(expectedPersonMultipleHealthServices));
+                new AddCommand(expectedPatientMultipleHealthServices));
     }
 
     @Test
     public void parse_repeatedNonHealthServiceValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
+        String validExpectedPatientString = NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
                 + BIRTHDATE_DESC_BOB;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple NRICs
-        assertParseFailure(parser, NRIC_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NRIC_DESC_AMY + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // multiple sexes
-        assertParseFailure(parser, SEX_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, SEX_DESC_AMY + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
 
         // multiple birthdates
-        assertParseFailure(parser, BIRTHDATE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, BIRTHDATE_DESC_AMY + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY
-                        + validExpectedPersonString,
+                validExpectedPatientString + NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY
+                        + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid NRIC
-        assertParseFailure(parser, INVALID_NRIC_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NRIC_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // invalid Sex
-        assertParseFailure(parser, INVALID_SEX_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_SEX_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
 
         // invalid Birthdate
-        assertParseFailure(parser, INVALID_BIRTHDATE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_BIRTHDATE_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedPatientString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid NRIC
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NRIC_DESC,
+        assertParseFailure(parser, validExpectedPatientString + INVALID_NRIC_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // invalid Sex
-        assertParseFailure(parser, validExpectedPersonString + INVALID_SEX_DESC,
+        assertParseFailure(parser, validExpectedPatientString + INVALID_SEX_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
 
         // invalid Birthdate
-        assertParseFailure(parser, validExpectedPersonString + INVALID_BIRTHDATE_DESC,
+        assertParseFailure(parser, validExpectedPatientString + INVALID_BIRTHDATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
     }
 

@@ -20,16 +20,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
- * Adds a person to the address book with optional fields.
+ * Adds a patient to the address book with optional fields.
  */
 public class AddFCommand extends Command {
 
     public static final String COMMAND_WORD = "addf";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
@@ -61,28 +61,28 @@ public class AddFCommand extends Command {
             + PREFIX_HEALTHRECORD + "Diabetes "
             + PREFIX_NOTE + "Patient needs extra care";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
 
-    private final Person toAdd;
+    private final Patient toAdd;
 
     /**
-     * Creates an AddFCommand to add the specified {@code Person}
+     * Creates an AddFCommand to add the specified {@code Patient}
      */
-    public AddFCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddFCommand(Patient patient) {
+        requireNonNull(patient);
+        toAdd = patient;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPatient(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.addPerson(toAdd);
+        model.addPatient(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

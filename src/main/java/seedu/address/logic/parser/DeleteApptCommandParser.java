@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 /**
  * Parses input arguments and creates a new DeleteApptCommand object

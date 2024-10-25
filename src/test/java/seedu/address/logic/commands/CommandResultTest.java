@@ -11,13 +11,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.healthservice.HealthService;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 public class CommandResultTest {
     @Test
@@ -52,11 +52,11 @@ public class CommandResultTest {
         // different patient value -> returns false
         Set<HealthService> healthServices = new HashSet<>();
         healthServices.add(new HealthService("Blood Test"));
-        Person newPerson = new Person(new Name("Alice"), new Nric("S1111111A"),
+        Patient newPatient = new Patient(new Name("Alice"), new Nric("S1111111A"),
                 new Birthdate("2022-11-11"), new Sex("F"),
                 new Phone("1111111"), new Email("123@gmail.com"));
         assertFalse(commandResult.equals(new CommandResult("feedback", null,
-                false, newPerson, false, false)));
+                false, newPatient, false, false)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", null,

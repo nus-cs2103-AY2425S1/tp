@@ -9,13 +9,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
 
 /**
- * Deletes an appointment from a person in the address book.
- * The appointment is identified by the NRIC of the person and the date and time of the appointment.
+ * Deletes an appointment from a patient in the address book.
+ * The appointment is identified by the NRIC of the patient and the date and time of the appointment.
  *
  */
 public class DeleteApptCommand extends Command {
@@ -49,17 +49,17 @@ public class DeleteApptCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
-        Person personToDeleteAppt = lastShownList.stream()
-                .filter(person -> person.getNric().equals(nric))
+        Patient patientToDeleteAppt = lastShownList.stream()
+                .filter(patient -> patient.getNric().equals(nric))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_NRIC));
-        if (personToDeleteAppt == null) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PATIENT_NRIC));
+        if (patientToDeleteAppt == null) {
+            throw new CommandException(Messages.MESSAGE_PATIENT_NOT_FOUND);
         }
 
-        Appt apptToDelete = personToDeleteAppt.getAppts().stream()
+        Appt apptToDelete = patientToDeleteAppt.getAppts().stream()
                 .filter(appt -> appt.getDateTime().equals(apptDateTime))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_APPT_DATETIME));
@@ -67,7 +67,7 @@ public class DeleteApptCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_APPT_DATETIME);
         }
 
-        personToDeleteAppt.deleteAppt(apptToDelete);
+        patientToDeleteAppt.deleteAppt(apptToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_APPT_SUCCESS, apptToDelete));
     }
