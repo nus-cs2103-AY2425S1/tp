@@ -16,6 +16,7 @@ import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Subject;
 
 
 
@@ -275,4 +276,28 @@ public class ParserUtilTest {
                 List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")));
     }
 
+    @Test
+    public void parseSubject_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSubject(null));
+    }
+
+    @Test
+    public void parseSubject_invalidValue_throwsParseException() {
+        // Invalid subject example: contains special characters or is empty
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("Math!")); // contains invalid characters
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("")); // empty string
+    }
+
+    @Test
+    public void parseSubject_validValueWithoutWhitespace_returnsSubject() throws Exception {
+        Subject expectedSubject = new Subject("Mathematics");
+        assertEquals(expectedSubject, ParserUtil.parseSubject("Mathematics"));
+    }
+
+    @Test
+    public void parseSubject_validValueWithWhitespace_returnsTrimmedSubject() throws Exception {
+        String subjectWithWhitespace = WHITESPACE + "Science" + WHITESPACE;
+        Subject expectedSubject = new Subject("Science");
+        assertEquals(expectedSubject, ParserUtil.parseSubject(subjectWithWhitespace));
+    }
 }
