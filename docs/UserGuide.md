@@ -47,9 +47,9 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
 
     - **Check if Java is installed:**
         1. Open your command terminal:
-            - **Windows**: Press `Windows + R`, type `cmd`, and hit Enter.
-            - **Mac**: Press `Command + Space`, type `Terminal`, and hit Enter.
-            - **Linux**: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
+            - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
+            - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
+            - Linux: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
         2. Once the terminal is open, type the following command and press Enter:
            ```bash
            java -version
@@ -77,30 +77,29 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
     
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-    1. **Windows**:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
         - Locate the downloaded `.jar` file in your `Downloads` folder.
-        - Right-click on the `.jar` file, select **Copy**.
-        - Navigate to the folder where you want to store the TAHub, right-click and select **Paste**.
+        - Right-click on the `.jar` file, select Copy.
+        - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
 
-    2. **Mac**:
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
         - Open the **Finder** and go to your `Downloads` folder.
-        - Right-click (or `Control + Click`) on the `.jar` file and choose **Copy**.
-        - Go to the folder where you want to keep the file, then right-click and select **Paste**.
+        - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
+        - Go to the folder where you want to keep the file, then right-click and select Paste.
 
-    3. **Linux**:
+    3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
-        - Right-click on the `.jar` file, choose **Copy**.
-        - Go to the destination folder, right-click and select **Paste**.
+        - Right-click on the `.jar` file, choose Copy.
+        - Go to the destination folder, right-click and select Paste.
 
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
-    1. **Windows**:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
         - Open the folder where you saved the `.jar` file.
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
-            2. In the **General** tab, you will see the **Location** field. Copy the location path.
-            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`).
+            2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`))
         - Open the **Command Prompt**:
             - Press `Windows + R`, type `cmd`, and press Enter.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
@@ -112,7 +111,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
           java -jar TAHub.jar
           ```
 
-    2. **Mac/Linux**:
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
         - To get the full path of the folder where the `.jar` file is located:
             - Open **Finder** or **File Explorer**.
@@ -128,7 +127,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
-   ![Ui](images/Ui.png)
+   ![Screenshot 2024-10-26 at 12.01.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5510gx%2FScreenshot%202024-10-26%20at%2012.01.46%E2%80%AFAM.png)
 
    
 5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
