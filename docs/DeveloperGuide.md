@@ -155,6 +155,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort feature
+The following sequence diagram shows how a sort command goes through the `Model` component:
+![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -239,23 +243,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 
 ### \[Proposed\] Data archiving
-<div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+The following sequence diagram shows how an archive operation goes through the `Logic` component:
 ![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
-</div>
 
-<div>
 
 `Storage` Class Diagram with support for archive:
 ![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
-</div>
 
-<div>
-
-The following sequence diagram shows how a sort command goes through the `Model` component:
-![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
