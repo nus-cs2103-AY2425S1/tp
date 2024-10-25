@@ -10,7 +10,7 @@ import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name matches the specified keywords
+ * Finds and lists all persons EduContacts whose name matches the specified keywords
  * or whose course matches the specified course.
  * Keyword matching is case insensitive.
  */

@@ -1,8 +1,8 @@
 
 package seedu.address.model.util;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.EduContacts;
+import seedu.address.model.ReadOnlyEduContacts;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -13,7 +13,7 @@ import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code EduContacts} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -62,8 +62,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyEduContacts getSampleEduContacts() {
+        EduContacts sampleAb = new EduContacts();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
