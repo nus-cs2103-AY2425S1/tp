@@ -18,7 +18,7 @@ import static seedu.address.testutil.TypicalPersons.JOHN;
  */
 public class TypicalWeddings {
 
-    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Bob Wedding")
+    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Adam Wedding")
             .withVenue("Marina Bay Sands").withDate("2024-12-12").withClient(ALICE).build();
 
     public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy Jack Wedding")
