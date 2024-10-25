@@ -153,9 +153,9 @@ public class MainWindow extends UiPart<Stage> {
         double defaultHeight = guiSettings.getWindowHeight();
 
         primaryStage.setWidth(defaultWidth);
-        primaryStage.setMinWidth(defaultWidth);
+        primaryStage.setMinWidth(889.0);
         primaryStage.setHeight(defaultHeight);
-        primaryStage.setMinHeight(defaultHeight);
+        primaryStage.setMinHeight(783.0);
 
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
@@ -193,9 +193,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-//        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-//                (int) primaryStage.getX(), (int) primaryStage.getY());
-//        logic.setGuiSettings(guiSettings);
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
