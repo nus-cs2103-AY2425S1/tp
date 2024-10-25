@@ -120,5 +120,18 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void updateSortedPersonList(Comparator<Person> comparator);
+
+    /**
+     * Sets the user's sort preference to the given value
+     * @param sortPreference The sort preference to set.
+     */
+    void setSortPreference(String sortPreference);
+
+    /**
+     * Applies the saved sort preference (e.g., by priority or last seen date) from the user preferences
+     * This method will sort the List of persons based on the saved preferences
+     */
+    void applySavedSortPreference();
+
     void addReminder(Reminder reminder, Person person);
 }

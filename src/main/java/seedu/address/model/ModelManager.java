@@ -13,7 +13,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.DateDistantToRecentComparator;
+import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
+import seedu.address.model.person.PriorityLowToHighComparator;
 import seedu.address.model.person.Reminder;
 
 /**
@@ -44,6 +48,7 @@ public class ModelManager implements Model {
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
         filteredReminders = new FilteredList<>(this.reminderAddressBook.getReminderList());
+        applySavedSortPreference();
     }
 
     public ModelManager() {
@@ -61,6 +66,34 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
+    }
+
+    @Override
+    public void setSortPreference(String sortPreference) {
+        requireNonNull(userPrefs);
+        userPrefs.setSortPreference(sortPreference);
+    }
+
+    @Override
+    public void applySavedSortPreference() {
+        String sortPreference = userPrefs.getSortPreference();
+
+        switch(sortPreference) {
+        case "high":
+            updateSortedPersonList(new PriorityHighToLowComparator());
+            break;
+        case "low":
+            updateSortedPersonList(new PriorityLowToHighComparator());
+            break;
+        case "distant":
+            updateSortedPersonList(new DateDistantToRecentComparator());
+            break;
+        case "recent":
+            updateSortedPersonList(new DateRecentToDistantComparator());
+            break;
+        default:
+            break;
+        }
     }
 
     @Override

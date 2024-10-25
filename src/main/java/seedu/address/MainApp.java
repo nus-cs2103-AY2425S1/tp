@@ -86,21 +86,21 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         Optional<ReadOnlyReminderAddressBook> reminderAddressBookOptional;
-        ReadOnlyReminderAddressBook initialReminders = new ReminderAddressBook();
+        ReadOnlyReminderAddressBook initialReminders;
         try {
             addressBookOptional = storage.readAddressBook();
-            //reminderAddressBookOptional = storage.readReminderAddressBook();
+            reminderAddressBookOptional = storage.readReminderAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            //initialReminders = reminderAddressBookOptional.orElseGet(() -> new ReminderAddressBook());
+            initialReminders = reminderAddressBookOptional.orElseGet(() -> new ReminderAddressBook());
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
-            //initialReminders = new ReminderAddressBook();
+            initialReminders = new ReminderAddressBook();
         }
 
         return new ModelManager(initialData, userPrefs, initialReminders);
