@@ -40,6 +40,12 @@ public class InspectWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private double windowWidth;
+    private double windowHeight;
+    private double windowX;
+    private double windowY;
+    private boolean isMaximized;
+    private boolean isFullScreen;
 
     @javafx.fxml.FXML
     private StackPane commandBoxPlaceholder;
@@ -200,11 +206,38 @@ public class InspectWindow extends UiPart<Stage> {
     private void handleList(CommandResult commandResult) {
         logger.info("Changing UI back to main window...");
 
+        storeWindowSize();
         MainWindow mainWindow = new MainWindow(primaryStage, logic);
+        keepWindowSize(mainWindow.getPrimaryStage());
         mainWindow.show();
         mainWindow.fillInnerParts();
         mainWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
         AddressBookParser.setInspect(false);
+    }
+
+    /**
+     * Stores the current window size before changing windows.
+     */
+    private void storeWindowSize() {
+        windowWidth = primaryStage.getWidth();
+        windowHeight = primaryStage.getHeight();
+        windowX = primaryStage.getX();
+        windowY = primaryStage.getY();
+        isMaximized = primaryStage.isMaximized();
+        isFullScreen = primaryStage.isFullScreen();
+    }
+
+    /**
+     * Sets the window size of the next window to match the size of the current window
+     * @param stage (window to be switched to)
+     */
+    private void keepWindowSize(Stage stage) {
+        stage.setFullScreen(isFullScreen);
+        stage.setWidth(windowWidth);
+        stage.setHeight(windowHeight);
+        stage.setX(windowX);
+        stage.setY(windowY);
+        stage.setMaximized(isMaximized);
     }
 
     public ResultDisplay getResultDisplay() {
