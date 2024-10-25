@@ -362,7 +362,7 @@
 }
 
 /* Hover effect to highlight the payment status */
-#paymentStatus: hover {
+#paymentStatus:hover {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
