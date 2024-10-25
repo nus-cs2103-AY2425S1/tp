@@ -28,8 +28,6 @@ import tuteez.model.person.Person;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 import tuteez.testutil.PersonBuilder;
 
-import java.util.Optional;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
