@@ -116,8 +116,6 @@ public class UnmarkPresentAllCommandTest {
     @Test
     public void execute_undoMarkPresentAllCommand_success() throws Exception {
         Model model = new ModelManager();
-        student1.undoAttendance(LocalDate.of(2020, 1, 1));
-        student2.undoAttendance(LocalDate.of(2020, 1, 1));
         model.addStudent(student1);
         model.addStudent(student2);
         MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
@@ -146,9 +144,9 @@ public class UnmarkPresentAllCommandTest {
         markCommand.execute(model);
         markCommand.undo(model);
 
-        AttendanceRecord ar = student1.getAttendanceRecord().get(1);
+        AttendanceRecord ar = student1.getAttendanceRecord().get(0);
         assertTrue(ar.getAttendance().equals(attendance));
-        AttendanceRecord ar2 = student2.getAttendanceRecord().get(1);
+        AttendanceRecord ar2 = student2.getAttendanceRecord().get(0);
         assertTrue(ar2.getAttendance().equals(attendance));
     }
 

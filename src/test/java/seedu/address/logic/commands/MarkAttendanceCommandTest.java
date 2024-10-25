@@ -111,7 +111,7 @@ public class MarkAttendanceCommandTest {
     }
 
     @Test
-    public void execute_noCommandToUndo_throwsCommandException() {
+    public void execute_emptyStack() {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         UndoCommand undoCommand = new UndoCommand();
         CommandResult result = undoCommand.execute(modelStub);
