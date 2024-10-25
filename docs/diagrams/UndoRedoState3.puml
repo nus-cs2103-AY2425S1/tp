@@ -7,9 +7,9 @@ skinparam ClassBackgroundColor #FFFFAA
 title After command "undo"
 
 package States <<rectangle>> {
-    class State1 as "<u>ab0:AgentAssist</u>"
-    class State2 as "<u>ab1:AgentAssist</u>"
-    class State3 as "<u>ab2:AgentAssist</u>"
+    class State1 as "<u>aa0:AgentAssist</u>"
+    class State2 as "<u>aa1:AgentAssist</u>"
+    class State3 as "<u>aa2:AgentAssist</u>"
 }
 
 State1 -[hidden]right-> State2
