@@ -4,7 +4,7 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Session's name in the application.
+ * Represents a Session's name in the application (not case-sensitive).
  * Guarantees: immutable; is valid as declared in {@link #isValidSessionName(String)}
  */
 public class SessionName {
@@ -55,7 +55,7 @@ public class SessionName {
         }
 
         SessionName otherSessionName = (SessionName) other;
-        return sessionName.equals(otherSessionName.sessionName);
+        return sessionName.toLowerCase().equals(otherSessionName.sessionName.toLowerCase());
     }
 
     @Override
