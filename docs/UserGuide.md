@@ -188,7 +188,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 4. **Retrieves the public address of a contact**
 
    ```
-   retrievepa 1 pa/BTC l/wallet1
+   retrievepa 1 c/BTC l/wallet1
    ```
 
 
