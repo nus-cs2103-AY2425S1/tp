@@ -18,4 +18,13 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+
+EventBook *-right-> "1" ObservableList
+EventBook *-right-> "1" ObservableList
+
+
+
+Event  --> "1" LocalDate
+Event  --> "*" Person
+Event  --> "1" Address
 @enduml
