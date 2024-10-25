@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -79,6 +80,10 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void updateSortedPersonList(Comparator<Person> comparator);
+
+    ObservableList<Person> getSortedPersonList();
 
     void markAsHired(Person person);
 

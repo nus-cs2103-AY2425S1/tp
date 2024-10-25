@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -40,13 +39,13 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> sortedList = model.getFilteredPersonList().stream()
-                .sorted((p1, p2) -> {
-                    int comparison = Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat());
-                    return isAscending ? comparison : -comparison;
-                })
-                .collect(Collectors.toList());
-        model.setPersons(sortedList);
+        Comparator<Person> comparator = (p1, p2) -> {
+            int comparison = Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat());
+            return isAscending ? comparison : -comparison;
+        };
+
+        model.updateSortedPersonList(comparator);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, isAscending ? "ascending" : "descending"));
     }
 }
