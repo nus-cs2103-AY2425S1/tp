@@ -113,12 +113,16 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        if (personToEdit.equals(model.getLastViewedPerson().get().get())) {
-            model.updateLastViewedPerson(editedPerson);
-            String logMessageForPerson =
-                    String.format("Student on display is edited, After Edit - Student: %s", editedPerson);
-            logger.info(logMessageForPerson);
+
+        if (model.getLastViewedPerson().get().isPresent()) {
+            if (personToEdit.equals(model.getLastViewedPerson().get().get())) {
+                model.updateLastViewedPerson(editedPerson);
+                String logMessageForPerson =
+                        String.format("Student on display is edited, After Edit - Student: %s", editedPerson);
+                logger.info(logMessageForPerson);
+            }
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String logMessage = String.format("Before Edit - Student: %s%nAfter Edit - Student: %s",
                 personToEdit, editedPerson);
