@@ -11,7 +11,7 @@ Class CombinedPredicate
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
+Class AgentAssistParser
 Class XYZCommandParser
 Class FilterCommandParser
 Class CliSyntax
@@ -22,15 +22,15 @@ Class Prefix
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside ..> AgentAssistParser
 
-AddressBookParser .down.> XYZCommandParser: <<create>>
-AddressBookParser .down.> FilterCommandParser: <<create>>
+AgentAssistParser .down.> XYZCommandParser: <<create>>
+AgentAssistParser .down.> FilterCommandParser: <<create>>
 
 XYZCommandParser ..> XYZCommand : <<create>>
 FilterCommandParser ..> FilterCommand : <<create>>
 FilterCommandParser ..> CombinedPredicate : <<create>>
-AddressBookParser ..> Command : <<use>>
+AgentAssistParser ..> Command : <<use>>
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer

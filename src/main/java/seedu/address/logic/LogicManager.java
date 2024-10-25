@@ -13,10 +13,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AgentAssistParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyAgentAssist;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -33,7 +33,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AgentAssistParser agentAssistParser;
 
     // Boolean to determine if user has confirmed they want to delete command
     private boolean awaitingConfirmation = false;
@@ -45,7 +45,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        agentAssistParser = new AgentAssistParser();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
         if (this.awaitingConfirmation) {
             commandResult = handleConfirmation(commandText);
         } else {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = agentAssistParser.parseCommand(commandText);
             commandResult = command.execute(model, this.awaitingConfirmation);
 
             if (commandResult.isShowConfirmation() && !this.awaitingConfirmation) {
@@ -66,7 +66,7 @@ public class LogicManager implements Logic {
         }
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAgentAssist(model.getAgentAssist());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -86,7 +86,7 @@ public class LogicManager implements Logic {
      */
     private CommandResult handleConfirmation(String commandText) throws CommandException {
         CommandResult commandResult;
-        if (addressBookParser.parseConfirmation(commandText)) {
+        if (agentAssistParser.parseConfirmation(commandText)) {
             commandResult = this.delayedCommand.execute(model, this.awaitingConfirmation);
         } else {
             commandResult = new CommandResult(MESSAGE_COMMAND_CANCELLED);
@@ -96,8 +96,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyAgentAssist getAgentAssist() {
+        return model.getAgentAssist();
     }
 
     @Override
@@ -106,8 +106,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getAgentAssistFilePath() {
+        return model.getAgentAssistFilePath();
     }
 
     @Override

@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "AgentAssist save file which contains the same Person values as in TypicalPersons#getTypicalAgentAssist()",
   "persons": [
     {
       "name": "Alice Pauline",

@@ -684,7 +684,7 @@ AgentAssist **automatically saves** all client data to your computer after each 
 
 
 ## 5.6 Modifying the Data File
-The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 > ⚠️ **Danger:**  
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
@@ -697,7 +697,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 ## 6. FAQ
 
 ### How do I transfer my data to another Computer?
-Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing customer?
 Use the [`edit` command](#feature-4-edit-the-existing-customer), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
