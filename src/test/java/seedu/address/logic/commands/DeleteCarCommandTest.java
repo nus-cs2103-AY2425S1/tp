@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -42,12 +43,13 @@ public class DeleteCarCommandTest {
         // Step 4: Build the expected message for a successful car deletion
         // The value 1 is passed to the string here as we know that the test only has 1 person inside the test stub.
         Car carToDelete = personWithCar.getCar();
-        String expectedMessage = String.format(DeleteCarCommand.MESSAGE_DELETE_CAR_SUCCESS,
-                "1", carToDelete.getVrn(), carToDelete.getVin(),
-                carToDelete.getCarMake(), carToDelete.getCarModel());
 
         // Step 5: Execute the command and check for successful deletion
         CommandResult commandResult = deleteCarCommand.execute(modelStub);
+
+        Person personWithoutCar = new PersonBuilder().build();
+        String expectedMessage = Messages.formatSuccessMessage(personWithoutCar,
+                DeleteCarCommand.MESSAGE_DELETE_CAR_SUCCESS);
 
         // Step 6: Check the expected result and ensure no car remains
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());

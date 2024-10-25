@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -49,15 +50,15 @@ public class AddCarCommandTest {
 
         // Build the expected message after adding the car
         // The value 1 is passed to the string here as we know that the test only has 1 person inside the test stub.
-        String expectedMessage = String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS,
-                "1", validCar.getVrn(), validCar.getVin(),
-                validCar.getCarMake(), validCar.getCarModel());
+        Person validPersonWithCar = new PersonBuilder()
+                .withCar("SJH9514P", "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
+        String expectedMessage = Messages.formatSuccessMessage(validPersonWithCar,
+                AddCarCommand.MESSAGE_ADD_CAR_SUCCESS);
 
         // Execute the command and capture the result
         CommandResult commandResult = addCarCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS, validPerson.getName(), validCar.getVrn()),
-                commandResult.getFeedbackToUser());
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
     @Test

@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,15 +18,13 @@ public class DeleteCarCommand extends Command {
     public static final String COMMAND_WORD = "delete-car";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the car currently belonging to the client of the index provided.\n"
-            + "Client must already have a car. The index must be a positive integer.\n"
-            + "Client's car cannot be currently checked-in in order to be deleted.\n"
+            + ": Deletes the Car of the indexed Client, who must be associated to a Car.\n"
+            + "Car must not be Checked In.\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_USER_IS_CHECKED_IN = "This person's car is currently checked in.";
-    public static final String MESSAGE_DELETE_CAR_SUCCESS =
-            "Car deleted successfully from index %s: VRN: %s, VIN: %s, Make: %s, Model: %s";
-    public static final String MESSAGE_USER_HAS_NO_CAR = "This person has no car to delete.";
+    public static final String MESSAGE_USER_IS_CHECKED_IN = "Car is currently Checked In.";
+    public static final String MESSAGE_DELETE_CAR_SUCCESS = "Car successfully deleted from Client";
+    public static final String MESSAGE_USER_HAS_NO_CAR = "Client is not associated to a Car.";
 
     private final Index index;
 
@@ -71,13 +68,10 @@ public class DeleteCarCommand extends Command {
                 personToDeleteCarFrom.getIssues()
         );
 
-        // This is to pass the details of the deleted car to the UI for visual confirmation.
-        Car carToDelete = personToDeleteCarFrom.getCar();
         // This method call effectively replaces the old user with the new user with a car.
         model.setPerson(personToDeleteCarFrom, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_CAR_SUCCESS, index.getOneBased(), carToDelete.getVrn(),
-                carToDelete.getVin(), carToDelete.getCarMake(), carToDelete.getCarModel()));
+        return new CommandResult(Messages.formatSuccessMessage(updatedPerson, MESSAGE_DELETE_CAR_SUCCESS));
     }
 
     @Override

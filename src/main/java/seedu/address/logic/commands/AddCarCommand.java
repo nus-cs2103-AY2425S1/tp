@@ -36,7 +36,7 @@ public class AddCarCommand extends Command {
             + PREFIX_MODEL + "Corolla ";
 
     public static final String MESSAGE_USER_ALREADY_HAS_CAR = "Client is already associated to a Car.";
-    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added to Client: %s (VRN: %s).";
+    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added to Client";
     public static final String MESSAGE_SAME_CAR_ALREADY_EXISTS = "Car already exists in MATER.";
 
     private final Index index;
@@ -86,7 +86,7 @@ public class AddCarCommand extends Command {
         // This method call effectively replaces the old user with the new user with a car.
         model.setPerson(personToAddCarTo, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, updatedPerson.getName(), carToAdd.getVrn()));
+        return new CommandResult(Messages.formatSuccessMessage(updatedPerson, MESSAGE_ADD_CAR_SUCCESS));
     }
 
     @Override
