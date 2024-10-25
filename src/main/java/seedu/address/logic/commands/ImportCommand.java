@@ -96,7 +96,7 @@ public class ImportCommand extends Command {
                 Phone phone = ParserUtil.parsePhone((nextLine[2].trim() == "") ? "00000000" : nextLine[2]);
                 List<String> tagList = Arrays.asList(nextLine[3].split(" "));
 
-                if(!"".equals(tagList.get(0))) {
+                if (!"".equals(tagList.get(0))) {
                     Set<Tag> tags = ParserUtil.parseTags(tagList);
                     isDuplicatePerson(model, new Person(name, studentClass, phone, tags));
                 } else {

@@ -36,7 +36,7 @@ public class Person {
         this.name = name;
         this.studentClass = studentClass;
         this.phone = phone;
-        if(tags != null) {
+        if (tags != null) {
             this.tags.addAll(tags);
         }
     }
