@@ -1,61 +1,76 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.FilterListPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-
+import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified either by their index number in the displayed person list,
  * their phone number, or a name matching the given predicate.
- * This command supports deletion by index, phone number, or name (partial match).
+ * This command supports deletion by index, phone number, email, address, or name (partial match).
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number "
-            + "used in the displayed person list or by phone number.\n"
-            + "Parameters: INDEX (must be a positive integer) or PHONE_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 98765432";
+            + ": Deletes the person identified by the specified attributes.\n"
+            + "Parameters: [" + "INDEX" + "] "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-
-    private final Index targetIndex;
-    private final Phone phoneNumber;
-    private final NameContainsKeywordsPredicate predicate;
-
+    private Index targetIndex = null;
+    private Phone phoneNumber = null;
+    private NameContainsKeywordsPredicate predicate = null;
+    private Address address = null;
+    private Email email = null;
+    private Set<Tag> tags = null;
 
     /**
      * Constructs a {@code DeleteCommand} that deletes a person identified by a name predicate (partial match).
      *
      * @param predicate The predicate used to find the person by name.
      */
-
     public DeleteCommand(NameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
-        this.phoneNumber = null;
-        this.targetIndex = null;
     }
 
     /**
-     * Initializes command to delete a person identified using it's displayed index
+     * Constructs a {@code DeleteCommand} that deletes a person identified by their displayed index.
+     *
+     * @param targetIndex The index of the person to be deleted.
      */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
-        this.phoneNumber = null;
-        this.predicate = null;
     }
 
     /**
@@ -64,88 +79,223 @@ public class DeleteCommand extends Command {
      * @param phoneNumber The phone number of the person to be deleted.
      */
     public DeleteCommand(Phone phoneNumber) {
+        requireNonNull(phoneNumber);
         this.phoneNumber = phoneNumber;
-        this.targetIndex = null;
-        this.predicate = null;
+    }
+
+    /**
+     * Constructs a {@code DeleteCommand} that deletes a person identified by their address.
+     *
+     * @param address The address of the person to be deleted.
+     */
+    public DeleteCommand(Address address) {
+        requireNonNull(address);
+        this.address = address;
+    }
+
+    /**
+     * Constructs a {@code DeleteCommand} that deletes a person identified by a set of tags.
+     *
+     * @param tags The set of tags used to find the person to be deleted.
+     */
+    public DeleteCommand(Set<Tag> tags) {
+        requireNonNull(tags);
+        this.tags = tags;
+    }
+
+    /**
+     * Constructs a {@code DeleteCommand} that deletes a person identified by their email.
+     *
+     * @param email The email of the person to be deleted.
+     */
+    public DeleteCommand(Email email) {
+        requireNonNull(email);
+        this.email = email;
     }
 
     /**
      * Executes the delete command.
-     * Deletes the person from the model either by index, phone number, or name (using predicate).
+     * Deletes the person from the model based on the provided criteria.
      *
      * @param model The model that holds the list of persons.
      * @return The result of the delete command execution.
-     * @throws CommandException If no valid person is found by index, phone number, or name.
+     * @throws CommandException If no valid person is found.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         Person personToDelete;
-        // deleting by index
+
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
-
         } else if (phoneNumber != null) {
-            personToDelete = findPersonToDeleteByPhoneNumber(lastShownList, phoneNumber);
-            if (personToDelete == null) {
+            List<Person> personsToDelete = findPersonToDeleteByAttribute(lastShownList, phoneNumber);
+            if (personsToDelete.isEmpty()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PHONE_NUMBER);
+            } else {
+                personToDelete = personsToDelete.get(0);
             }
-        } else {
+        } else if (predicate != null) {
             model.updateFilteredPersonList(predicate);
             if (model.getFilteredPersonList().size() == 1) {
                 personToDelete = model.getFilteredPersonList().get(0);
             } else {
                 return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                            model.getFilteredPersonList().size()));
+                        String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                                model.getFilteredPersonList().size()));
             }
+        } else if (address != null) {
+            return deletePersonByAttribute(model, address, Messages.MESSAGE_INVALID_ADDRESS);
+        } else if (email != null) {
+            return deletePersonByAttribute(model, email, Messages.MESSAGE_INVALID_EMAIL);
+        } else {
+            return deletePersonByAttribute(model, tags, Messages.MESSAGE_INVALID_TAGS);
         }
+
         model.deletePerson(personToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-             Messages.format(personToDelete)));
+                Messages.format(personToDelete)));
     }
-
 
     /**
-     * Finds a person in the list by their phone number.
-     * @param lastShownList The list of persons currently shown.
-     * @param phoneNumber The phone number of the person to delete.
-     * @return The person to delete, or null if no matching person is found.
+     * Deletes a person based on a specific attribute (address, email, or tags).
+     *
+     * @param model The model containing the list of persons.
+     * @param attribute The attribute to be matched for deletion.
+     * @param errorMessage The error message if no persons match the attribute.
+     * @return The result of the delete operation.
+     * @throws CommandException If no persons match the attribute.
      */
-
-    private Person findPersonToDeleteByPhoneNumber(List<Person> lastShownList, Phone phoneNumber) {
-        for (Person person : lastShownList) {
-            Phone phoneNumberOfPerson = person.getPhone();
-            if (phoneNumberOfPerson.equals(phoneNumber)) {
-                return person;
-            }
+    private CommandResult deletePersonByAttribute(Model model, Object attribute,
+                                                  String errorMessage) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> personsToDelete = findPersonToDeleteByAttribute(lastShownList, attribute);
+        if (personsToDelete.isEmpty()) {
+            throw new CommandException(errorMessage);
+        } else if (personsToDelete.size() == 1) {
+            Person personToDelete = personsToDelete.get(0);
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                    Messages.format(personToDelete)));
+        } else {
+            FilterListPredicate filter = new FilterListPredicate(personsToDelete);
+            model.updateFilteredPersonList(filter);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                            model.getFilteredPersonList().size()));
         }
-        return null; //no person found with given phone number
     }
 
+    /**
+     * Finds persons that match a specified attribute.
+     *
+     * @param lastShownList The list of all persons.
+     * @param attribute The attribute to match against.
+     * @return A list of persons that match the attribute.
+     */
+    private List<Person> findPersonToDeleteByAttribute(List<Person> lastShownList, Object attribute) {
+        String type = getTypeOfAttribute(attribute);
+        List<Person> matchingPersons = new ArrayList<>();
+        for (Person person : lastShownList) {
+            switch(type) {
+            case "PHONE":
+                Phone phoneOfPerson = person.getPhone();
+                Phone phoneNumber = (Phone) attribute;
+                if (phoneOfPerson.equals(phoneNumber)) {
+                    matchingPersons.add(person);
+                }
+                break;
 
+            case "EMAIL":
+                Email emailOfPerson = person.getEmail();
+                Email email = (Email) attribute;
+                if (emailOfPerson.equals(email)) {
+                    matchingPersons.add(person);
+                }
+                break;
+
+            case "ADDRESS":
+                Address addressOfPerson = person.getAddress();
+                Address address = (Address) attribute;
+                if (addressOfPerson.equals(address)) {
+                    matchingPersons.add(person);
+                }
+                break;
+
+            case "TAG":
+                Set<Tag> tagsOfPerson = person.getTags();
+                @SuppressWarnings("unchecked")
+                Set<Tag> tagsSet = (Set<Tag>) attribute;
+                if (tagsOfPerson.containsAll(tagsSet)) {
+                    matchingPersons.add(person);
+                }
+                break;
+
+            default:
+                break;
+            }
+        }
+        return matchingPersons;
+    }
+
+    /**
+     * Determines the type of the attribute.
+     *
+     * @param attribute The attribute object.
+     * @return The type of the attribute as a string.
+     */
+    private String getTypeOfAttribute(Object attribute) {
+        if (attribute instanceof Phone) {
+            return "PHONE";
+        } else if (attribute instanceof Email) {
+            return "EMAIL";
+        } else if (attribute instanceof Address) {
+            return "ADDRESS";
+        } else {
+            return "TAG";
+        }
+    }
+
+    /**
+     * Checks if this {@code DeleteCommand} is equal to another object.
+     *
+     * @param other The object to compare against.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         if (targetIndex != null) {
             return targetIndex.equals(otherDeleteCommand.targetIndex);
-        } else {
+        } else if (phoneNumber != null) {
             return phoneNumber.equals(otherDeleteCommand.phoneNumber);
+        } else if (address != null) {
+            return address.equals(otherDeleteCommand.address);
+        } else if (email != null) {
+            return email.equals(otherDeleteCommand.email);
+        } else if (tags != null) {
+            return tags.equals(otherDeleteCommand.tags);
+        } else {
+            return predicate.equals(otherDeleteCommand.predicate);
         }
     }
 
+    /**
+     * Returns a string representation of the command.
+     *
+     * @return The string representation.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

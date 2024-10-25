@@ -1,12 +1,17 @@
 package seedu.address.ui;
 
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -27,6 +32,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private WebView webView;
     /**
      * Creates a new HelpWindow.
      *
@@ -34,14 +41,26 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        assert webView != null : "WebView must be initialized";
+        assert helpMessage != null : "Help message label must be initialized";
         helpMessage.setText(HELP_MESSAGE);
+        loadUserGuide();
     }
+
 
     /**
      * Creates a new HelpWindow.
      */
     public HelpWindow() {
         this(new Stage());
+    }
+    /**
+     * Copies the URL to the user guide to the clipboard.
+     * Loads the user guide URL in the WebView.
+     */
+    public void loadUserGuide() {
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load(USERGUIDE_URL);
     }
 
     /**
@@ -90,13 +109,15 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Loads the user guide URL in the WebView.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private void openUrlInBrowser() {
+        try {
+            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+            logger.fine("Opened URL: " + USERGUIDE_URL);
+        } catch (IOException | URISyntaxException e) {
+            logger.warning("Failed to open URL: " + USERGUIDE_URL);
+        }
     }
 }
