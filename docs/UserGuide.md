@@ -139,7 +139,7 @@ Edits an existing student in the address book.
 3. Existing values will be updated to the input values.
 </box>
 
-<box type="tip" header="#### Tips">
+<box type="tip" header="##### Tips">
 <markdown>
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 </markdown>
