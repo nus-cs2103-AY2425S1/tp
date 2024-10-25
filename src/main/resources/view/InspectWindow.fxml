@@ -46,16 +46,20 @@
                     </padding>
                 </StackPane>
 
-                <SplitPane fx:id="mainSplitPane" VBox.vgrow="ALWAYS" dividerPositions="0.5">
+                <SplitPane fx:id="mainSplitPane" VBox.vgrow="ALWAYS" dividerPositions="0.3">
                     <items>
                         <VBox fx:id="personInfoSection">
                             <StackPane fx:id="personInfoPlaceholder" />
                         </VBox>
-                        <VBox fx:id="deliveryListSection">
-                            <StackPane fx:id="deliveryListPlaceholder" />
+                        <VBox fx:id="deliveryListSection" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                            <StackPane fx:id="deliveryListPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
                     </items>
                 </SplitPane>
+
                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
         </Scene>

@@ -55,14 +55,17 @@ public class AddCommand extends Command {
             + PREFIX_ETA + "ETA "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COST + "COST "
-            + PREFIX_STATUS + "STATUS\n"
+            + PREFIX_STATUS + "STATUS "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEMS + "Monitor "
             + PREFIX_ITEMS + "Mouse "
             + PREFIX_ETA + "2020-02-02 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
             + PREFIX_COST + "$100 "
-            + PREFIX_STATUS + "not delivered ";
+            + PREFIX_STATUS + "not delivered "
+            + PREFIX_TAG + "Difficult address to deliver "
+            + PREFIX_TAG + "Best before Wednesday";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";

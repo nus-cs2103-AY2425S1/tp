@@ -20,6 +20,7 @@ import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
+import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Delivery}.
@@ -36,6 +37,7 @@ public class JsonAdaptedDelivery {
     private final String time;
     private final String eta;
     private final String status;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String archive;
 
     /**
@@ -50,10 +52,14 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("time") String time,
                                @JsonProperty("eta") String eta,
                                @JsonProperty("status") String status,
+                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                @JsonProperty("archive") String archive) {
         this.deliveryId = deliveryId;
         if (items != null) {
             this.items.addAll(items);
+        }
+        if (tags != null) {
+            this.tags.addAll(tags);
         }
         this.address = address;
         this.cost = cost;
@@ -72,6 +78,7 @@ public class JsonAdaptedDelivery {
         items.addAll(source.getItems().stream()
                 .map(JsonAdaptedItem::new)
                 .collect(Collectors.toList()));
+        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).toList());
         address = source.getAddress().value;
         cost = source.getCost().value;
         date = source.getDate().value.toString();
@@ -150,6 +157,12 @@ public class JsonAdaptedDelivery {
         }
         final Status modelStatus = new Status(status);
 
+        final List<Tag> deliveryTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            deliveryTags.add(tag.toModelType());
+        }
+        final Set<Tag> modelTags = new HashSet<>(deliveryTags);
+
         if (archive == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Archive.class.getSimpleName()));
         }
@@ -159,6 +172,6 @@ public class JsonAdaptedDelivery {
         final Archive modelArchive = new Archive(archive);
 
         return new Delivery(modelDeliveryId, modelItems, modelAddress, modelCost, modelDate, modelTime, modelEta,
-                modelStatus, modelArchive);
+                modelStatus, modelTags, modelArchive);
     }
 }

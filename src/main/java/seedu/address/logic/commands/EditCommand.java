@@ -73,12 +73,14 @@ public class EditCommand extends Command {
            + "[" + PREFIX_ADDRESS + "ADDRESS] "
            + "[" + PREFIX_COST + "COST] "
            + "[" + PREFIX_ETA + "ETA] "
-           + "[" + PREFIX_STATUS + "STATUS]\n"
+           + "[" + PREFIX_STATUS + "STATUS]"
+           + "[" + PREFIX_TAG + "TAG]...\n"
            + "Example: " + COMMAND_WORD + " 1 "
            + PREFIX_ITEMS + "TV "
            + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
-           + PREFIX_COST + "$300"
-           + PREFIX_STATUS + "not delivered ";
+           + PREFIX_COST + "$300 "
+           + PREFIX_STATUS + "not delivered "
+           + PREFIX_TAG + "delivery was fast";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -208,8 +210,9 @@ public class EditCommand extends Command {
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
         Status updatedStatus = descriptor.getStatus().orElse(toEdit.getStatus());
+        Set<Tag> updatedTags = descriptor.getTags().orElse(toEdit.getTags());
 
-        return new Delivery(updatedItems, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
+        return new Delivery(updatedItems, updatedAddress, updatedCost, updatedEta, updatedStatus, updatedTags, archive);
     }
 
     @Override
@@ -371,6 +374,7 @@ public class EditCommand extends Command {
         private Time time;
         private Eta eta;
         private Status status;
+        private Set<Tag> tags;
 
         public EditDeliveryDescriptor() {}
 
@@ -385,13 +389,14 @@ public class EditCommand extends Command {
             setTime(toCopy.time);
             setEta(toCopy.eta);
             setStatus(toCopy.status);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(items, address, cost, date, time, eta);
+            return CollectionUtil.isAnyNonNull(items, address, cost, date, time, eta, tags);
         }
 
         public void setItems(Set<ItemName> items) {
@@ -448,6 +453,14 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : new HashSet<>();
+        }
+
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override
