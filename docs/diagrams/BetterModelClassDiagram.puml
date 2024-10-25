@@ -11,9 +11,12 @@ UniquePersonList -right-> "*" Person
 UniqueDeliveryList -down-> "*" Delivery
 
 Person -up-> "*" Tag
-Person *--> Name
-Person *--> Phone
-Person *--> Email
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Company
+Person *--> "*" Product
+Person -up-> "1" SupplierStatus
 
 Delivery *--> "*" Product
 Delivery *--> "1" DateTime
@@ -21,5 +24,5 @@ Delivery *--> "1" Person
 Delivery *--> "1" SupplierIndex
 Delivery *--> "1" Quantity
 Delivery *--> "1" Cost
-Delivery *--> "1" Status
+Delivery *--> "1" DeliveryStatus
 @enduml
