@@ -13,7 +13,8 @@ import seedu.address.model.person.Person;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Filtered participants have been deleted";
+    public static final String MESSAGE_SUCCESS_FULL_CLEAR = "Address book has been cleared";
+    public static final String MESSAGE_SUCCESS_FILTERED_CLEAR = "Filtered participants have been deleted";
 
 
     @Override
@@ -22,12 +23,13 @@ public class ClearCommand extends Command {
         ObservableList<Person> participantList = model.getFilteredPersonList();
         if (participantList.equals(model.getAddressBook().getPersonList())) {
             model.setAddressBook(new AddressBook());
+            return new CommandResult(MESSAGE_SUCCESS_FULL_CLEAR);
         } else {
             while (!participantList.isEmpty()) {
                 Person personToDelete = participantList.get(0);
                 model.deletePerson(personToDelete);
             }
+            return new CommandResult(MESSAGE_SUCCESS_FILTERED_CLEAR);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
