@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label moduleName;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**

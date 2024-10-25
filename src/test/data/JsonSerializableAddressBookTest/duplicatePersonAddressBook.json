@@ -5,14 +5,15 @@
     "email": "alice@example.com",
     "telegramHandle": "@alicepauline",
     "moduleName" : "CS2100",
+    "remark": "",
     "tags": [ "friends" ],
-    "contactType" : "PERSONAL"
+    "contactType": "PERSONAL"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "telegramHandle": "@alicepauline",
-    "moduleName" : "CS2100",
-    "contactType" : "PERSONAL"
+    "moduleName": "CS2100",
+    "contactType": "PERSONAL"
   } ]
 }

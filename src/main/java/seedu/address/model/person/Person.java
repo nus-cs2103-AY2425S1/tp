@@ -26,13 +26,14 @@ public class Person {
     // Data fields
     private final TelegramHandle telegramHandle;
     private final ModuleName moduleName;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(ContactType contactType, Name name, Optional<Phone> phone, Optional<Email> email,
-                  TelegramHandle telegramHandle, ModuleName moduleName, Set<Tag> tags) {
+                  TelegramHandle telegramHandle, ModuleName moduleName, Remark remark, Set<Tag> tags) {
         requireAllNonNull(contactType, name, phone, email, telegramHandle, moduleName, tags);
         this.contactType = contactType;
         this.name = name;
@@ -40,6 +41,7 @@ public class Person {
         this.email = email;
         this.telegramHandle = telegramHandle;
         this.moduleName = moduleName;
+        this.remark = remark;
 
         this.tags.addAll(tags);
     }
@@ -66,6 +68,10 @@ public class Person {
 
     public ModuleName getModuleName() {
         return moduleName;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -111,13 +117,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && telegramHandle.equals(otherPerson.telegramHandle)
                 && moduleName.equals(otherPerson.moduleName)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName);
+        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName, remark);
 
     }
 
@@ -130,6 +137,7 @@ public class Person {
                 .add("email", email.map(Email::toString).orElse(" "))
                 .add("telegramHandle", telegramHandle)
                 .add("moduleName", moduleName)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }

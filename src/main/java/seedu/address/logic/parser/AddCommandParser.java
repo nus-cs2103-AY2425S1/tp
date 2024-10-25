@@ -21,6 +21,7 @@ import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
@@ -51,6 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get());
+        Remark remark = new Remark("");
 
         //parse optional fields
         Optional<Phone> phone = argMultimap.getValue(PREFIX_PHONE).isPresent()
@@ -63,7 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(contactType, name, phone, email, telegramHandle, moduleName, tagList);
+        Person person = new Person(contactType, name, phone, email, telegramHandle, moduleName, remark, tagList);
         return new AddCommand(person);
     }
 
