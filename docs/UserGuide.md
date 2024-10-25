@@ -203,9 +203,9 @@ Edits an existing person in the address book.
 Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 **Command Format:**
-- Format 1: `find n/KEYWORD`
-- Format 2: `find c/KEYWORD`
-- Format 3: `find n/KEYWORD c/KEYWORD [MORE_KEYWORDS]`
+- Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
+- Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
+- Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD2 [MORE_KEYWORDS2]`
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
