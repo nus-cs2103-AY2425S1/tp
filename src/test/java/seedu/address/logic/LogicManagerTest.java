@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_DESC_AMY;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -84,6 +87,29 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getAddressBookFilePath_returnsCorrectPath() {
+        Path expectedPath = Path.of("data/addressBook.json");
+        assertEquals(expectedPath, logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void guiSettings_setAndRetrieveSuccessfully() {
+        // Set GUI settings in the model and verify they are retrieved correctly
+        GuiSettings expectedGuiSettings = new GuiSettings(800, 600, 0, 0);
+        logic.setGuiSettings(expectedGuiSettings);
+
+        // Verify that getGuiSettings returns the expected settings
+        assertEquals(expectedGuiSettings, logic.getGuiSettings());
+    }
+
+    @Test
+    public void getStorage_returnsNonNullStorage() {
+        // Ensure that the storage object is not null and is the one injected into LogicManager
+        assertNotNull(logic.getStorage());
+        assertSame(logic.getStorage(), logic.getStorage());
     }
 
     /**

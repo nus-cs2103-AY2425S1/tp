@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
 
 /**
  * API of the Logic component
@@ -51,4 +52,8 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+    /**
+     * Returns the Storage object.
+     */
+    Storage getStorage();
 }
