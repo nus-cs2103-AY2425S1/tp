@@ -3,7 +3,7 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CLIENT_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -49,7 +49,7 @@ public class EditVendorDescriptorTest {
         assertFalse(DESC_VENDOR_BOB.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_VENDOR_BOB.equals(DESC_CLIENT_AMY));
+        assertFalse(DESC_VENDOR_BOB.equals(DESC_CONTACT_AMY));
 
         // different name -> returns false
         EditVendorDescriptor editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB)

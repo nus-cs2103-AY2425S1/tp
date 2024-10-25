@@ -1,9 +1,9 @@
-package seedu.ddd.model.contact.client;
+package seedu.ddd.model.event.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.ddd.model.contact.client.Date.VALID_DATE_FORMAT1;
-import static seedu.ddd.model.contact.client.Date.VALID_DATE_FORMAT2;
-import static seedu.ddd.model.contact.client.Date.VALID_DATE_FORMAT3;
+import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT1;
+import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT2;
+import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT3;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;

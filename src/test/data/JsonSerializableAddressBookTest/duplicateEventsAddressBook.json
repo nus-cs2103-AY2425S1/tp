@@ -5,7 +5,6 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "date" : "2000-01-01",
     "tags" : [ "friends" ],
     "id" : 1,
     "eventIds": [0, 1]
@@ -25,7 +24,6 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "date" : "2000-01-01",
     "tags" : [ ],
     "id" : 3,
     "eventIds": [0, 1]

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -29,7 +28,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds a contact.";
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " {"
-            + FLAG_CLIENT + " " + PREFIX_DATE + "DATE | "
+            + FLAG_CLIENT + "| "
             + FLAG_VENDOR + " " + PREFIX_SERVICE + "SERVICE} "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -42,7 +41,6 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "jd@gmail.com "
             + PREFIX_ADDRESS + "Blk 123 St 4 "
-            + PREFIX_DATE + "2024-12-15 "
             + PREFIX_TAG + "budget ";
     public static final String VENDOR_EXAMPLE_USAGE = "example: " + COMMAND_WORD + " "
             + FLAG_VENDOR + " "

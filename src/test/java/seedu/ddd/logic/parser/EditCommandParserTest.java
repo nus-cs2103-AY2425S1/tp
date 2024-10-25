@@ -3,7 +3,6 @@ package seedu.ddd.logic.parser;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -18,7 +17,6 @@ import static seedu.ddd.logic.commands.CommandTestUtil.SERVICE_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -47,7 +45,6 @@ import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
-import seedu.ddd.testutil.EditClientDescriptorBuilder;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 import seedu.ddd.testutil.EditVendorDescriptorBuilder;
 
@@ -122,10 +119,10 @@ public class EditCommandParserTest {
 
         targetIndex = INDEX_FIRST_CONTACT;
         userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
-        descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
+            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

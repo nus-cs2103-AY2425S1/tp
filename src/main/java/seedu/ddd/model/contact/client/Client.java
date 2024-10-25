@@ -1,7 +1,5 @@
 package seedu.ddd.model.contact.client;
 
-import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +19,6 @@ import seedu.ddd.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Client extends Contact {
-    private Date date;
 
     /**
      * Constructs a {@code Client}.
@@ -30,23 +27,11 @@ public class Client extends Contact {
      * @param phone   A valid phone number.
      * @param email   A valid email address.
      * @param address A valid address.
-     * @param date    A valid date.
      * @param tags    A set of tags associated with the client.
      * @param contactId      A valid id.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, ContactId contactId) {
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ContactId contactId) {
         super(name, phone, email, address, tags, contactId);
-        requireAllNonNull(date);
-        this.date = date;
-    }
-
-    /**
-     * Returns the client's date.
-     *
-     * @return the date associated with the client.
-     */
-    public Date getDate() {
-        return date;
     }
 
     /**
@@ -78,14 +63,14 @@ public class Client extends Contact {
         }
 
         Client otherClient = (Client) other;
-        return super.equals(otherClient) && date.equals(otherClient.date);
+        return super.equals(otherClient);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(),
-                this.getAddress(), this.date, this.getTags());
+                this.getAddress(), this.getTags());
     }
 
     @Override
@@ -95,7 +80,6 @@ public class Client extends Contact {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("date", this.date)
                 .add("tags", this.getTags())
                 .add("id", this.getId())
                 .toString();

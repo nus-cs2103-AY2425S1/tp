@@ -1,7 +1,6 @@
 package seedu.ddd.testutil;
 
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -11,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
@@ -30,14 +28,12 @@ public class ClientBuilder {
     public static final String DEFAULT_PHONE = VALID_PHONE_AMY;
     public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
     public static final String DEFAULT_ADDRESS = VALID_ADDRESS_AMY;
-    public static final String DEFAULT_DATE = VALID_DATE_AMY;
     public static final String DEFAULT_ID = VALID_ID_AMY;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Date date;
     private Set<Tag> tags;
     private ContactId contactId;
     private Set<EventId> eventIds;
@@ -50,7 +46,6 @@ public class ClientBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
         contactId = new ContactId(DEFAULT_ID);
         eventIds = new HashSet<>();
@@ -64,7 +59,6 @@ public class ClientBuilder {
         phone = clientToCopy.getPhone();
         email = clientToCopy.getEmail();
         address = clientToCopy.getAddress();
-        date = clientToCopy.getDate();
         tags = new HashSet<>(clientToCopy.getTags());
         contactId = clientToCopy.getId();
         eventIds = new HashSet<>(clientToCopy.getEventIds());
@@ -111,14 +105,6 @@ public class ClientBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Client} that we are building.
-     */
-    public ClientBuilder withDate(String date) {
-        this.date = new Date(date);
-        return this;
-    }
-
-    /**
      * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
     public ClientBuilder withId(int id) {
@@ -135,7 +121,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        return new Client(name, phone, email, address, date, tags, contactId);
+        return new Client(name, phone, email, address, tags, contactId);
     }
 
 }

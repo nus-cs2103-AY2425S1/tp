@@ -3,10 +3,8 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CLIENT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -17,7 +15,6 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.logic.commands.CommandTestUtil.showContactAtIndex;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
@@ -28,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.model.AddressBook;
@@ -39,7 +35,6 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.EditClientDescriptorBuilder;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 import seedu.ddd.testutil.EditVendorDescriptorBuilder;
 import seedu.ddd.testutil.VendorBuilder;
@@ -73,8 +68,8 @@ public class EditCommandTest {
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
         Client editedContact = (Client) new ClientBuilder().withId(targeContact.getId().contactId).build();
-        EditClientDescriptor editClientDescriptor = new EditClientDescriptorBuilder(editedContact).build();
-        EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
+        EditCommand editCommand = new EditCommand(targetIndex, editContactDescriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
@@ -89,8 +84,8 @@ public class EditCommandTest {
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
         Vendor editedContact = (Vendor) new VendorBuilder().withId(targeContact.getId().contactId).build();
-        EditVendorDescriptor editClientDescriptor = new EditVendorDescriptorBuilder(editedContact).build();
-        EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
+        EditVendorDescriptor editContactDescriptor = new EditVendorDescriptorBuilder(editedContact).build();
+        EditCommand editCommand = new EditCommand(targetIndex, editContactDescriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
@@ -106,8 +101,8 @@ public class EditCommandTest {
 
         ClientBuilder clientBuilder = new ClientBuilder((Client) targetContact);
         Contact editedContact = clientBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND).build();
-        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(targetIndex, descriptor);
 
@@ -155,7 +150,7 @@ public class EditCommandTest {
         Contact contactInFilteredList = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         Contact editedContact = new ClientBuilder((Client) contactInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT,
-                new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
@@ -173,7 +168,7 @@ public class EditCommandTest {
 
         ClientBuilder clientBuilder = new ClientBuilder((Client) targetContact);
         Contact editedContact = clientBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).withId(targetContact.getId().contactId).build();
         EditCommand editCommand = new EditCommand(null, descriptor);
@@ -188,7 +183,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateContactList_failure() {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
-        EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) firstContact)
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact)
                 .withId(VALID_ID_AMY).build();
         EditCommand editCommand = new EditCommand(INDEX_THIRD_CONTACT, descriptor);
 
@@ -198,7 +193,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateId_failure() {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
-        EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) firstContact).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(INDEX_THIRD_CONTACT, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
@@ -209,16 +204,12 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT, new EditVendorDescriptorBuilder().build());
         assertCommandFailure(editCommand, model, String.format(
                 EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_SERVICE));
-
-        editCommand = new EditCommand(INDEX_SECOND_CONTACT, new EditClientDescriptorBuilder().build());
-        assertCommandFailure(editCommand, model, String.format(
-                EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_DATE));
     }
 
     @Test
     public void execute_invalidContactIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
-        EditContactDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
@@ -236,7 +227,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getContactList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
@@ -265,10 +256,10 @@ public class EditCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_CONTACT, DESC_VENDOR_BOB)));
 
-        EditCommand clientCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_CLIENT_AMY);
-        copyDescriptor = DESC_CLIENT_AMY.copy();
+        EditCommand contactCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_CONTACT_AMY);
+        copyDescriptor = DESC_CONTACT_AMY.copy();
         commandWithSameValues = new EditCommand(INDEX_FIRST_CONTACT, copyDescriptor);
-        assertTrue(clientCommand.equals(commandWithSameValues));
+        assertTrue(contactCommand.equals(commandWithSameValues));
 
         EditCommand vendorCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_VENDOR_BOB);
         copyDescriptor = DESC_VENDOR_BOB.copy();
@@ -279,16 +270,10 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditClientDescriptor editContactDescriptor = new EditClientDescriptor();
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
         EditCommand editCommand = new EditCommand(index, editContactDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editContactDescriptor="
                 + editContactDescriptor + "}";
-        assertEquals(expected, editCommand.toString());
-
-        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
-        editCommand = new EditCommand(index, editClientDescriptor);
-        expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editContactDescriptor="
-                + editClientDescriptor + "}";
         assertEquals(expected, editCommand.toString());
 
         EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor();

@@ -2,7 +2,6 @@ package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -24,7 +23,6 @@ import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
@@ -50,8 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "{[" + PREFIX_DATE + "DATE] | "
-            + "[" + PREFIX_SERVICE + "SERVICE]} "
+            + "[" + PREFIX_SERVICE + "SERVICE] "
             + "[" + PREFIX_TAG + "TAG ...]";
     public static final String INDEX_EXAMPLE_USAGE = "example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567";
@@ -110,9 +107,6 @@ public class EditCommand extends Command {
         if (contactToEdit instanceof Client && editContactDescriptor instanceof EditVendorDescriptor) {
             throw new CommandException(String.format(MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_SERVICE));
         }
-        if (contactToEdit instanceof Vendor && editContactDescriptor instanceof EditClientDescriptor) {
-            throw new CommandException(String.format(MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_DATE));
-        }
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(contactToEdit) && model.hasContact(editedContact)) {
@@ -147,18 +141,15 @@ public class EditCommand extends Command {
      */
     private static Client createEditedClient(Client contactToEdit, EditContactDescriptor editContactDescriptor) {
         assert contactToEdit != null;
+        assert contactToEdit instanceof Client;
 
         Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
         Phone updatedPhone = editContactDescriptor.getPhone().orElse(contactToEdit.getPhone());
         Email updatedEmail = editContactDescriptor.getEmail().orElse(contactToEdit.getEmail());
         Address updatedAddress = editContactDescriptor.getAddress().orElse(contactToEdit.getAddress());
-        Date updatedDate = editContactDescriptor instanceof EditClientDescriptor
-            ? ((EditClientDescriptor) editContactDescriptor).getDate().orElse(contactToEdit.getDate())
-            : contactToEdit.getDate();
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDate, updatedTags,
-                contactToEdit.getId());
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, contactToEdit.getId());
     }
 
     /**
@@ -167,6 +158,7 @@ public class EditCommand extends Command {
      */
     private static Vendor createEditedVendor(Vendor contactToEdit, EditContactDescriptor editContactDescriptor) {
         assert contactToEdit != null;
+        assert contactToEdit instanceof Vendor;
 
         Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
         Phone updatedPhone = editContactDescriptor.getPhone().orElse(contactToEdit.getPhone());
@@ -240,35 +232,35 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
+        public final void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public final Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
+        public final void setPhone(Phone phone) {
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public final Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
+        public final void setEmail(Email email) {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public final Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
+        public final void setAddress(Address address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public final Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
 
@@ -276,7 +268,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
+        public final void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
@@ -285,15 +277,15 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
+        public final Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setId(ContactId contactId) {
+        public final void setId(ContactId contactId) {
             this.contactId = contactId;
         }
 
-        public Optional<ContactId> getId() {
+        public final Optional<ContactId> getId() {
             return Optional.ofNullable(contactId);
         }
 
@@ -331,79 +323,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
-                    .add("id", contactId)
-                    .toString();
-        }
-    }
-
-    /**
-     * Stores the details of the client to edit. This class extends {@code EditContactDescriptor}
-     * and also contains fields exclusive to {@code Client} (i.e. {@code Client.date}).
-     */
-    public static class EditClientDescriptor extends EditContactDescriptor {
-        private Date date;
-
-        public EditClientDescriptor() {
-            super();
-        }
-
-        public EditClientDescriptor(EditContactDescriptor toCopy) {
-            super(toCopy);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        @Override
-        public boolean isAnyFieldEdited() {
-            return super.isAnyFieldEdited() || date != null;
-        }
-
-        public void setDate(Date date) {
-            this.date = date;
-        }
-
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
-        }
-
-        @Override
-        public EditClientDescriptor copy() {
-            EditClientDescriptor copied = new EditClientDescriptor(this);
-            copied.setDate(date);
-            return copied;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditClientDescriptor)) {
-                return false;
-            }
-
-            EditClientDescriptor otherEditClientDescriptor = (EditClientDescriptor) other;
-            return Objects.equals(name, otherEditClientDescriptor.name)
-                    && Objects.equals(phone, otherEditClientDescriptor.phone)
-                    && Objects.equals(email, otherEditClientDescriptor.email)
-                    && Objects.equals(address, otherEditClientDescriptor.address)
-                    && Objects.equals(date, otherEditClientDescriptor.date)
-                    && Objects.equals(tags, otherEditClientDescriptor.tags)
-                    && Objects.equals(contactId, otherEditClientDescriptor.contactId);
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("date", date)
                     .add("tags", tags)
                     .add("id", contactId)
                     .toString();

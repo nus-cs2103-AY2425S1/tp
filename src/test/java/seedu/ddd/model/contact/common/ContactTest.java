@@ -109,8 +109,8 @@ public class ContactTest {
     public void toStringMethod() {
         String expectedClientString = Client.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
-                + ", address=" + ALICE.getAddress() + ", date=" + ALICE.getDate()
-                + ", tags=" + ALICE.getTags() + ", id=" + ALICE.getId() + "}";
+                + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", id=" + ALICE.getId() + "}";
         assertEquals(expectedClientString, ALICE.toString());
 
         String expectedVendorString = Vendor.class.getCanonicalName() + "{name=" + BOB.getName()

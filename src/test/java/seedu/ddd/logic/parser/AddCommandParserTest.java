@@ -4,11 +4,9 @@ import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
-import static seedu.ddd.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ddd.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -47,7 +45,6 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
@@ -68,14 +65,14 @@ public class AddCommandParserTest {
 
         Client expectedClient = new ClientBuilder(AMY).build();
         assertParseSuccess(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedClient));
+                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
 
         // multiple tags - all accepted
         Client expectedPersonMultipleTags = new ClientBuilder(AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         assertParseSuccess(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                        + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -98,7 +95,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_clientValidRepeatedNonTagValue_failure() {
         String validExpectedContactString = CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, validExpectedContactString + NAME_DESC_AMY,
@@ -153,7 +150,7 @@ public class AddCommandParserTest {
     public void parse_clientInvalidRepeatedNonTagValue_failure() {
 
         String validExpectedContactString = CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
 
         // invalid value followed by valid value
 
@@ -242,7 +239,7 @@ public class AddCommandParserTest {
         // zero tags
         Contact expectedClient = new ClientBuilder(AMY).withTags().build();
         assertParseSuccess(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY, new AddCommand(expectedClient));
+                + ADDRESS_DESC_AMY, new AddCommand(expectedClient));
     }
 
     @Test
@@ -259,23 +256,18 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, CLIENT_FLAG + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + DATE_DESC_AMY, expectedMessage);
+                        + ADDRESS_DESC_AMY, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + DATE_DESC_AMY, expectedMessage);
+                        + ADDRESS_DESC_AMY, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY
-                        + ADDRESS_DESC_AMY + DATE_DESC_AMY, expectedMessage);
+                        + ADDRESS_DESC_AMY, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + DATE_DESC_AMY, expectedMessage);
-
-        // missing date prefix
-        assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY, expectedMessage);
+        assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, CLIENT_FLAG + VALID_NAME_AMY + VALID_PHONE_AMY + VALID_EMAIL_AMY + VALID_ADDRESS_AMY,
@@ -353,36 +345,32 @@ public class AddCommandParserTest {
     public void parse_clientInvalidValue_failure() {
         // invalid name
         assertParseFailure(parser, CLIENT_FLAG + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC + DATE_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + INVALID_ADDRESS_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_CONSTRAINTS);
-
-        // invalid date
-        assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + INVALID_DATE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Date.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + DATE_DESC_AMY + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_AMY + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, CLIENT_FLAG + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC + DATE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
+                + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CLIENT_FLAG + NAME_DESC_AMY + PHONE_DESC_AMY
-                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DATE_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.CLIENT_MESSAGE_USAGE));
     }
 

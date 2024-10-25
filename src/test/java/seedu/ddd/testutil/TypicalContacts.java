@@ -2,7 +2,6 @@ package seedu.ddd.testutil;
 
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -30,7 +29,6 @@ public class TypicalContacts {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withDate("2000-01-01")
             .withId(1)
             .build();
     public static final Vendor BENSON = new VendorBuilder()
@@ -47,7 +45,6 @@ public class TypicalContacts {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withDate("01/01/2000")
             .withId(3)
             .build();
     public static final Vendor DANIEL = new VendorBuilder()
@@ -64,7 +61,6 @@ public class TypicalContacts {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
-            .withDate("01 Jan 2000")
             .withId(5)
             .build();
     public static final Client FIONA = new ClientBuilder()
@@ -72,7 +68,6 @@ public class TypicalContacts {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
-            .withDate("31 Dec 2000")
             .withId(6)
             .build();
     public static final Vendor GEORGE = new VendorBuilder()
@@ -101,8 +96,7 @@ public class TypicalContacts {
 
     // Manually added - Contacts' details found in {@code CommandTestUtil}
     public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDate(VALID_DATE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Vendor BOB = new VendorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withService(VALID_SERVICE_BOB)
             .withTags(VALID_TAG_FRIEND).build();

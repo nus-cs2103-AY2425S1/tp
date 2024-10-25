@@ -3,7 +3,6 @@ package seedu.ddd.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,7 +17,6 @@ import java.util.Set;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.logic.parser.exceptions.ParseException;
@@ -34,10 +32,11 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_DATE, PREFIX_SERVICE, PREFIX_TAG, PREFIX_ID);
+                PREFIX_ADDRESS, PREFIX_SERVICE, PREFIX_TAG, PREFIX_ID);
 
         Index index = null;
         // Either index or id/ parameter must be specified
@@ -55,9 +54,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Should not contain duplicates prefixes.
         // Should either specify date for client or service for vendor.
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE,
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SERVICE, PREFIX_ID);
-        argMultimap.verifyNoExclusivePrefixesFor(PREFIX_DATE, PREFIX_SERVICE);
 
         EditContactDescriptor editContactDescriptor = parseArgumentMultimap(argMultimap);
         return new EditCommand(index, editContactDescriptor);
@@ -97,11 +95,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editContactDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            EditClientDescriptor editClientDescriptor = new EditClientDescriptor(editContactDescriptor);
-            editClientDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
-            editContactDescriptor = editClientDescriptor;
-        }
         if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
             EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor(editContactDescriptor);
             editVendorDescriptor.setService(ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get()));

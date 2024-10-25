@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
@@ -25,10 +24,21 @@ import seedu.ddd.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    private static final Client sampleCLient = new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"),
-            new Address("A"), new Date("01 Jan 2000"), getTagSet("another"), new ContactId(0));
-    private static final Vendor sampleVendor = new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"),
-            new Address("B"), new Service("Catering"), getTagSet("test"), new ContactId(1));
+    private static final Client sampleCLient = new Client(
+            new Name("A"),
+            new Phone("12345678"),
+            new Email("a@a.com"),
+            new Address("A"),
+            getTagSet("another"),
+            new ContactId(0));
+    private static final Vendor sampleVendor = new Vendor(
+            new Name("B"),
+            new Phone("12345678"),
+            new Email("b@b.com"),
+            new Address("B"),
+            new Service("Catering"),
+            getTagSet("test"),
+            new ContactId(1));
     private static final Event sampleEvent = new Event(new Description("Sample Event"), new EventId(0));
     private static final Contact[] sampleContacts = new Contact[] {
         sampleCLient, sampleVendor

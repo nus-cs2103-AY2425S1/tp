@@ -6,7 +6,6 @@ import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_CONTACT_TYPES;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,7 +21,6 @@ import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
@@ -44,11 +42,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public AddCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE, FLAG_CLIENT, FLAG_VENDOR);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, FLAG_CLIENT, FLAG_VENDOR);
 
         ContactType contactType;
 
@@ -68,8 +67,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 && contactType == VENDOR) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.VENDOR_MESSAGE_USAGE));
-        } else if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE)
+        } else if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty())
                 && contactType == CLIENT) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -77,7 +75,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_SERVICE, PREFIX_DATE);
+                PREFIX_ADDRESS, PREFIX_SERVICE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -91,8 +89,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Service service = ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get());
             contact = new Vendor(name, phone, email, address, service, tagList, contactId);
         } else {
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            contact = new Client(name, phone, email, address, date, tagList, contactId);
+            contact = new Client(name, phone, email, address, tagList, contactId);
         }
 
         return new AddCommand(contact);

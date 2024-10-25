@@ -29,9 +29,6 @@ public class ClientCard extends DisplayedCard {
     private Label address;
 
     @FXML
-    private Label date;
-
-    @FXML
     private FlowPane tags;
 
     @FXML
@@ -50,7 +47,6 @@ public class ClientCard extends DisplayedCard {
         phone.setText(String.format("📞  Phone Number: %s", client.getPhone()));
         email.setText(String.format("📫  Email: %s", client.getEmail()));
         address.setText(String.format("🏠  Address: %s", client.getAddress()));
-        date.setText(String.format("📅  Date: %s", client.getDate()));
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

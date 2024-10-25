@@ -6,7 +6,6 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "date" : "2000-01-01",
     "tags" : [ "friends" ],
     "id" : 1,
     "eventIds": [0]
@@ -26,7 +25,6 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "date" : "2000-01-01",
     "tags" : [ ],
     "id" : 3,
     "eventIds": [0]
@@ -46,7 +44,6 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "date" : "2000-01-01",
     "tags" : [ ],
     "id" : 5,
     "eventIds": [1]
@@ -56,7 +53,6 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "date" : "2000-12-31",
     "tags" : [ ],
     "id" : 6,
     "eventIds": [1]
