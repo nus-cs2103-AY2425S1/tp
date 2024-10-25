@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a reminder in NetBook
  */
@@ -26,7 +29,9 @@ public class Reminder {
      * @param description A valid description
      * @param personToMeet A valid name of the person that the reminder is linked to
      */
-    public Reminder(String date, String description, Name personToMeet) {
+    @JsonCreator
+    public Reminder(@JsonProperty("date") String date, @JsonProperty("description") String description,
+                    @JsonProperty("person") Name personToMeet) {
         requireNonNull(date, description);
         requireNonNull(personToMeet);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
@@ -89,7 +94,8 @@ public class Reminder {
     }
     @Override
     public String toString() {
-        return "Date: " + reminderDate.toString() + "\n" + "Description: " + reminderDescription;
+        return "Date: " + reminderDate.toString() + "\n" + "Description: " + reminderDescription
+                + "\n" + "Name: " + personToMeet.toString();
     }
 
     /**
