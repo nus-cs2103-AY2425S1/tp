@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class CheckClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "check-client";
+    public static final String COMMAND_WORD = "check";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Checks In/ Out a Client identified by the index number used in the displayed Clients list.\n"
