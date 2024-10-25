@@ -24,6 +24,10 @@ public class FindNameCommandParser implements Parser<FindNameCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
         }
+        if (!trimmedArgs.matches("^[a-zA-Z()\\s]+$")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
+        }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 

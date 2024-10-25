@@ -28,7 +28,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
 
         // Check for special characters - only allow letters and whitespace
-        if (!trimmedArgs.matches("^[a-zA-Z\\s]+$")) {
+        if (!trimmedArgs.matches("^[a-zA-Z()\\s]+$")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }

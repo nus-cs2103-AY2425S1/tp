@@ -41,7 +41,9 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + "Likes to eat a lot ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in the address book. If the "
+            + "newly added person has the same name, Please add use () to add more information after the name "
+            + "to differentiate the names.";
 
     private final Person toAdd;
 
