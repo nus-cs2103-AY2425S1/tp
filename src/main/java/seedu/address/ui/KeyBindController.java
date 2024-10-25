@@ -59,7 +59,7 @@ public class KeyBindController {
 
         KeyBind focusCommandBox = new KeyBind(KeyCode.SEMICOLON, commandTextField::requestFocus);
 
-        KeyBind focusResult = new KeyBind(KeyCode.ESCAPE, resultTextArea::requestFocus);
+        KeyBind focusPersonListView = new KeyBind(KeyCode.ESCAPE, personListView::requestFocus);
 
         KeyBind undoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(UndoCommand.COMMAND_WORD),
                 event -> event.isControlDown() && !event.isShiftDown());
@@ -71,7 +71,7 @@ public class KeyBindController {
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
 
         commandTextField.setOnKeyPressed(event ->
-                handleKeyEvent(event, focusResult, undoCommand, redoCommand));
+                handleKeyEvent(event, focusPersonListView, undoCommand, redoCommand));
 
         personListView.setOnKeyPressed(event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
