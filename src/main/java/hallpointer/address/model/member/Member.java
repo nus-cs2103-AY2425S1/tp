@@ -47,15 +47,19 @@ public class Member {
     /**
      * Every field must be present and not null. Overloaded constructor to include totalPoints and sessions.
      */
-    public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Point totalPoints, Set<Session> sessions) {
-        requireAllNonNull(name, telegram, room, tags, totalPoints, sessions);
+    public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Set<Session> sessions) {
+        requireAllNonNull(name, telegram, room, tags, sessions);
 
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
-        this.totalPoints = totalPoints;
         this.sessions.addAll(sessions);
+
+        this.totalPoints = new Point("0");
+        for (Session session : this.sessions) {
+            addPoints(session.getPoints());
+        }
     }
 
     public Name getName() {
