@@ -79,7 +79,7 @@ Adds an elderly to ContactMate.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
 
-* The call frequency is measured in days and must be within 1 to 7 (i.e., within one week).
+* The call frequency is measured in days and must be a positive integer less than or equal to 7 (e.g. 1, 2, ..., 7)
 * `NRIC` must be a valid, government issued NRIC.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
