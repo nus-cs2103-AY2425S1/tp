@@ -144,8 +144,8 @@ public class SortCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(unSortedmodel.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedPersonList(comparatorForAddress);
 
-        assertCommandSuccess(sortCommand, unSortedmodel, String.format(SortCommand.MESSAGE_SORT_LIST_SUCCESS, "address"),
-                expectedModel);
+        assertCommandSuccess(sortCommand, unSortedmodel, String.format(SortCommand.MESSAGE_SORT_LIST_SUCCESS,
+                        "address"), expectedModel);
 
         // Checks that model remains unchanged
         assertEquals(unSortedmodel, expectedModel);
@@ -208,8 +208,8 @@ public class SortCommandTest {
                 .toList();
 
         // Apply sorting to reverseSortedModel via SortCommand
-        assertCommandSuccess(sortCommand, reverseSortedModel, String.format(SortCommand.MESSAGE_SORT_LIST_SUCCESS, "name"),
-                expectedModel);
+        assertCommandSuccess(sortCommand, reverseSortedModel, String.format(SortCommand.MESSAGE_SORT_LIST_SUCCESS,
+                        "name"), expectedModel);
         assertEquals(reverseSortedModel.getFilteredPersonList(), sortedList);
     }
 }
