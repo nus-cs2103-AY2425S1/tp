@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedWedding.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWeddings.ALICE_WEDDING;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,6 @@ public class JsonAdaptedWeddingTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_DATE = "32-13-2020";
     private static final String INVALID_VENUE = " ";
-
-    private static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").withEmail("alicePushingP@gmail.com").withAddress("123, Jurong West Ave 6, #08-111")
-            .withTag("friends").build();
-    private static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Wedding")
-            .withClient(ALICE).withDate("2020-10-10").withVenue("Alice's Wedding Venue").build();
 
     private static final String VALID_NAME = ALICE_WEDDING.getName().toString();
     private static final JsonAdaptedPerson VALID_CLIENT =
