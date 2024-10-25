@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DAY;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_CHAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_TWENTY_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_ZERO;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_HOUR;
@@ -77,6 +78,8 @@ public class EndDateTimeTest {
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_CHAR));
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_ZERO));
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_TWENTY_FIVE));
+        assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE));
+
         // valid hours
         assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION));
     }

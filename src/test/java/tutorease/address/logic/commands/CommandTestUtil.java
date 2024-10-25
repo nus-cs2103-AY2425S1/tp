@@ -110,6 +110,7 @@ public class CommandTestUtil {
     public static final String INVALID_DURATION_CHAR = " " + PREFIX_DURATION + "a";
     public static final String INVALID_DURATION_ZERO = " " + PREFIX_DURATION + "0";
     public static final String INVALID_DURATION_TWENTY_FIVE = " " + PREFIX_DURATION + "25";
+    public static final String INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE = " " + PREFIX_DURATION + "1.33";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
