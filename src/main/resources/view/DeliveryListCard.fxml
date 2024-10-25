@@ -30,7 +30,7 @@
             <Label fx:id="deliveryId" styleClass="cell_small_label" text="deliveryId" />
             <Label fx:id="address" styleClass="cell_small_label" text="address" />
             <HBox fx:id="itemsContainer" styleClass="cell_small_label">
-                <Label fx:id="itemsLabel" minWidth="40" text="Items: " />
+                <Label fx:id="itemsLabel" styleClass="cell_small_label" text="Items: " />
                 <FlowPane fx:id="items" />
             </HBox>
             <!--<FlowPane fx:id="items" />-->
@@ -40,12 +40,9 @@
             <Label fx:id="eta" styleClass="cell_small_label" text="eta" />
             <Label fx:id="status" styleClass="cell_small_label" text="status" />
             <HBox fx:id="tagsContainer" styleClass="cell_small_label">
-                <Label fx:id="tagsLabel" minWidth="40" text="Tags: "/>
-                <FlowPane fx:id="tags" />
+                <Label fx:id="tagsLabel" styleClass="cell_small_label" text="Tags: "/>
+                <FlowPane fx:id="tags" styleClass="cell_small_label" />
             </HBox>
-
-            <!--Can be removed-->
-            <Label fx:id="archive" styleClass="cell_small_label" text="status" />
         </VBox>
     </GridPane>
 </HBox>
