@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddListingCommand;
 import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.AppointmentCommand;
+import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
@@ -101,6 +102,9 @@ public class AddressBookParser {
 
         case ShowListingsCommand.COMMAND_WORD:
             return new ShowListingsCommand();
+
+        case ChatWindowCommand.COMMAND_WORD:
+            return new ChatWindowCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
