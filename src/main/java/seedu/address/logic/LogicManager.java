@@ -66,6 +66,7 @@ public class LogicManager implements Logic {
             }
             throw e;
         }
+        
         try {
             storage.saveCampusConnect(model.getCampusConnect());
         } catch (AccessDeniedException e) {

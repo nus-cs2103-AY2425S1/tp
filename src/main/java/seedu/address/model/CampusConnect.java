@@ -58,7 +58,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Recover from previous states
+     * Recovers from previous states
      */
     public ReadOnlyCampusConnect recoverPreviousState() throws UndoException {
         ReadOnlyCampusConnect out = versionedCampusConnect.extractOldData();
@@ -67,7 +67,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Recover previously undone states
+     * Recovers previously undone states
      */
     public ReadOnlyCampusConnect recoverUndoneState() throws RedoException  {
         ReadOnlyCampusConnect out = versionedCampusConnect.extractUndoneData();
