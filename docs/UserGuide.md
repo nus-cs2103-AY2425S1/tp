@@ -29,21 +29,21 @@ tasks done faster than traditional GUI apps.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
    open the help window.<br>
-    ### Command Summary
-    
-    | Action     | Format                                                                                           | Examples                                                                                                                                        |
-    |------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-    | **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`     | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
-    | **Clear**  | `:clear`                                                                                         | `:clear`                                                                                                                                        |
-    | **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX1, INDEX2, ...`                                              | `:remove -i 3,4,5`<br/>`:rm -i 3,4,5`                                                                                                           |
-    | **Edit**   | `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br/>`:ed INDEX -n NAME...` | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
-    | **Exit**   | `:exit`                                                                                          | `:exit`                                                                                                                                         |
-    | **Export** | `:export`                                                                                        | `:export`                                                                                                                                       |
-    | **Find**   | `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`                                  | `:find -n david -l serangoon`                                                                                                                   |
-    | **Help**   | `:help`                                                                                          | `:help`                                                                                                                                         |
-    | **List**   | `:list`<br/>`:ls`                                                                                | `:list`<br/>`:ls`                                                                                                                               |
-    | **Redo**   | `:redo`                                                                                          | `:redo`                                                                                                                                         |
-    | **Undo**   | `:undo`                                                                                          | `:undo`                                                                                                                                         |
+   ### Command Summary
+
+   | Action     | Format                                                                                           | Examples                                                                                                                                        |
+          |------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+   | **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`     | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
+   | **Clear**  | `:clear`                                                                                         | `:clear`                                                                                                                                        |
+   | **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX1, INDEX2, ...`                                              | `:remove -i 3,4,5`<br/>`:rm -i 3,4,5`                                                                                                           |
+   | **Edit**   | `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br/>`:ed INDEX -n NAME...` | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
+   | **Exit**   | `:exit`                                                                                          | `:exit`                                                                                                                                         |
+   | **Export** | `:export`                                                                                        | `:export`                                                                                                                                       |
+   | **Find**   | `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`                                  | `:find -n david -l serangoon`                                                                                                                   |
+   | **Help**   | `:help`                                                                                          | `:help`                                                                                                                                         |
+   | **List**   | `:list`<br/>`:ls`                                                                                | `:list`<br/>`:ls`                                                                                                                               |
+   | **Redo**   | `:redo`                                                                                          | `:redo`                                                                                                                                         |
+   | **Undo**   | `:undo`                                                                                          | `:undo`                                                                                                                                         |
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -78,13 +78,13 @@ Refer to the [Features](#features) below for details of each command.
 
 ### View Help
 
->Shows a command cheatsheet, as well as a link to access the user guide.
+> Shows a command cheatsheet, as well as a link to access the user guide.
 
 **Command:** `:help`
 
 ### Add Person
 
->Adds a person to the address book.
+> Adds a person to the address book.
 
 **Short command:** `:a -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`\
 **Long command:** `:add -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`
@@ -95,7 +95,6 @@ Refer to the [Features](#features) below for details of each command.
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
-
 **Examples:**
 
 * `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`
@@ -103,14 +102,14 @@ Refer to the [Features](#features) below for details of each command.
 
 ### List All
 
->Shows a list of all persons in the address book.
+> Shows a list of all persons in the address book.
 
 **Short command:** `:ls`\
 **Long command:** `:list`
 
 ### Edit Person
 
->Edits an existing person in the address book.
+> Edits an existing person in the address book.
 
 **Short command:** `:ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`\
 **Long command:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
@@ -131,7 +130,7 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Find Person
 
->Finds persons whose names contain any of the given keywords.
+> Finds persons whose names contain any of the given keywords.
 
 **Command:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
@@ -153,7 +152,7 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Delete Person
 
->Deletes the specified person from the address book.
+> Deletes the specified person from the address book.
 
 **Short command:** `:rm -i INDEX1, INDEX2, ...`\
 **Long command:** `:remove -i INDEX1, INDEX2, ...`
@@ -169,9 +168,9 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Undo
 
->Reverts the address book to the state before the last change.\
->User can undo up to **10 changes**.\
->Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
+> Reverts the address book to the state before the last change.\
+> User can undo up to **10 changes**.\
+> Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
 
 **Command:** `:undo`
 
@@ -183,8 +182,8 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Redo
 
->Reapplies the last undone change to the address book.\
-User can redo up to 10 undo changes.
+> Reapplies the last undone change to the address book.\
+> User can redo up to 10 undo changes.
 
 **Command:** `:redo`
 
@@ -195,32 +194,33 @@ User can redo up to 10 undo changes.
 
 ### Export Data
 
->Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
-select a directory to save the file.
+> Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
+> select a directory to save the file.
 
 **Command:** `:export`
 
 ### Clear Data
 
->Clears all entries from the address book.
+> Clears all entries from the address book.
 
 **Command:** `:clear`
 
 ### Exit Program
 
->Exits the program.
+> Exits the program.
 
 **Command:** `:exit`
 
 ### Save Data
 
->AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
-save manually.
+> AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+> save manually.
 
 ### Edit Data File
 
->AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
-welcome to update data directly by editing that data file.
+> AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users
+> are
+> welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
