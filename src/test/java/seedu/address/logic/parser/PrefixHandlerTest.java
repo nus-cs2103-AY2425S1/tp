@@ -305,7 +305,6 @@ public class PrefixHandlerTest {
         expectedResult.add(ALICE);
         expectedResult.add(BENSON);
         expectedResult.add(CARL);
-        expectedResult.add(DANIEL);
         expectedResult.add(ELLE);
         expectedResult.add(FIONA);
         assertEquals(expectedResult, actualResult);
