@@ -166,8 +166,8 @@ Format: `delete KEYWORD`
 
 * This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
 * The keyword can be either the full name or partial name.
-* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts 
-  will be given. From that list, you can obtain the index of the specific contact you want to delete. With that index, 
+* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts
+  will be given. From that list, you can obtain the index of the specific contact you want to delete. With that index,
   you can do a `delete INDEX` to delete that specific contact.
 
 Example:
