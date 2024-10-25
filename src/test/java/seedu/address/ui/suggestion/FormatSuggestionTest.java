@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.suggestion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
