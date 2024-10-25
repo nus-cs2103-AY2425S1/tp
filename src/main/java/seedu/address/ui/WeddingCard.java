@@ -32,7 +32,7 @@ public class WeddingCard extends UiPart<Region> {
     @FXML
     private Label venue;
     @FXML
-    private Label dateTime;
+    private Label date;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -43,6 +43,6 @@ public class WeddingCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         names.setText(wedding.getWeddingName().toString());
         venue.setText(wedding.getVenue().value);
-        dateTime.setText(wedding.getDatetime().value);
+        date.setText(wedding.getDate().value);
     }
 }
