@@ -76,14 +76,12 @@ public class LogicManagerTest {
         assertHistoryCorrect(listCommand);
     }
 
-    @Disabled
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
-    @Disabled
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
@@ -193,6 +191,7 @@ public class LogicManagerTest {
         Tutor expectedTutor = new TutorBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedTutor);
+        expectedModel.commitAddressBook();
         assertCommandFailure(addTutorCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
