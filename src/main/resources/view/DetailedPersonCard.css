@@ -26,7 +26,7 @@
 
 .label {
     -fx-font-family: "Arial";
-    -fx-font-size: 14px;
+    -fx-font-size: 20px;
     -fx-text-fill: -ab3-label;
     -fx-background-color: -ab3-background;
     -fx-alignment: center;
@@ -35,4 +35,5 @@
 .vbox {
     -fx-padding: 10;
     -fx-spacing: 10;
+    -fx-alignment: center;
 }
