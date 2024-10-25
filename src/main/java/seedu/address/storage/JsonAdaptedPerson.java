@@ -22,6 +22,7 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PropertyList; // Import for PropertyList
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
@@ -41,6 +42,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedHistoryEntry> historyEntries = new ArrayList<>();
     private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>(); // New properties list
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -51,7 +53,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("remark") String remark, @JsonProperty("birthday") String birthday,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("dateOfCreation") String dateOfCreation,
-                             @JsonProperty("history") List<JsonAdaptedHistoryEntry> historyEntries) {
+                             @JsonProperty("history") List<JsonAdaptedHistoryEntry> historyEntries,
+                             @JsonProperty("properties") List<JsonAdaptedProperty> properties) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -64,6 +67,9 @@ class JsonAdaptedPerson {
         }
         if (historyEntries != null) {
             this.historyEntries.addAll(historyEntries);
+        }
+        if (properties != null) { // Check if properties are provided
+            this.properties.addAll(properties);
         }
     }
 
@@ -83,6 +89,10 @@ class JsonAdaptedPerson {
         dateOfCreation = source.getDateOfCreation().toString();
         historyEntries.addAll(source.getHistory().getHistoryEntries().entrySet().stream()
                 .map(entry -> new JsonAdaptedHistoryEntry(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList()));
+
+        properties.addAll(source.getPropertyList().getProperties().stream()
+                .map(JsonAdaptedProperty::new) // Convert each property to JsonAdaptedProperty
                 .collect(Collectors.toList()));
     }
 
@@ -156,9 +166,14 @@ class JsonAdaptedPerson {
         }
         final Birthday modelBirthday = birthday.isEmpty() ? EMPTY_BIRTHDAY : new Birthday(birthday);
 
+        // Convert properties from JsonAdaptedProperty to PropertyList
+        final PropertyList modelProperties = new PropertyList();
+        for (JsonAdaptedProperty jsonAdaptedProperty : properties) {
+            modelProperties.addProperty(jsonAdaptedProperty.toModelType());
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelRemark, modelBirthday, modelTags, modalDateOfCreation, modelHistory);
+                modelRemark, modelBirthday, modelTags, modalDateOfCreation, modelHistory, modelProperties);
     }
-
 }

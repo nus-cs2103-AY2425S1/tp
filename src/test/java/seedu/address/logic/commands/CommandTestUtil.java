@@ -10,6 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOWN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -44,6 +51,20 @@ public class CommandTestUtil {
     public static final String VALID_BIRTHDAY_BOB = "1999-01-27";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PROPERTY_ADDRESS_AMY = "123 Main St, Springfield";
+    public static final String VALID_PROPERTY_ADDRESS_BOB = "456 Elm St, Metropolis";
+    public static final String VALID_TOWN_AMY = "Springfield";
+    public static final String VALID_TOWN_BOB = "Metropolis";
+    public static final String VALID_TYPE_AMY = "Apartment";
+    public static final String VALID_TYPE_BOB = "House";
+    public static final String VALID_SIZE_AMY = "1200 sqft";
+    public static final String VALID_SIZE_BOB = "2500 sqft";
+    public static final String VALID_BEDROOMS_AMY = "3";
+    public static final String VALID_BEDROOMS_BOB = "4";
+    public static final String VALID_BATHROOMS_AMY = "2";
+    public static final String VALID_BATHROOMS_BOB = "3";
+    public static final String VALID_PRICE_AMY = "300000";
+    public static final String VALID_PRICE_BOB = "500000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,7 +78,20 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String BIRTHDAY_DESC_AMY = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
     public static final String BIRTHDAY_DESC_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
-
+    public static final String PROPERTY_ADDRESS_DESC_AMY = " " + PREFIX_PROPERTY_ADDRESS + VALID_PROPERTY_ADDRESS_AMY;
+    public static final String PROPERTY_ADDRESS_DESC_BOB = " " + PREFIX_PROPERTY_ADDRESS + VALID_PROPERTY_ADDRESS_BOB;
+    public static final String TOWN_DESC_AMY = " " + PREFIX_TOWN + VALID_TOWN_AMY;
+    public static final String TOWN_DESC_BOB = " " + PREFIX_TOWN + VALID_TOWN_BOB;
+    public static final String TYPE_DESC_AMY = " " + PREFIX_TYPE + VALID_TYPE_AMY;
+    public static final String TYPE_DESC_BOB = " " + PREFIX_TYPE + VALID_TYPE_BOB;
+    public static final String SIZE_DESC_AMY = " " + PREFIX_SIZE + VALID_SIZE_AMY;
+    public static final String SIZE_DESC_BOB = " " + PREFIX_SIZE + VALID_SIZE_BOB;
+    public static final String BEDROOMS_DESC_AMY = " " + PREFIX_BEDROOMS + VALID_BEDROOMS_AMY;
+    public static final String BEDROOMS_DESC_BOB = " " + PREFIX_BEDROOMS + VALID_BEDROOMS_BOB;
+    public static final String BATHROOMS_DESC_AMY = " " + PREFIX_BATHROOMS + VALID_BATHROOMS_AMY;
+    public static final String BATHROOMS_DESC_BOB = " " + PREFIX_BATHROOMS + VALID_BATHROOMS_BOB;
+    public static final String PRICE_DESC_AMY = " " + PREFIX_PRICE + VALID_PRICE_AMY;
+    public static final String PRICE_DESC_BOB = " " + PREFIX_PRICE + VALID_PRICE_BOB;
 
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
@@ -82,6 +116,15 @@ public class CommandTestUtil {
     public static final String INVALID_BIRTHDAY_LATE_DESC = " " + PREFIX_BIRTHDAY + LocalDate.now()
             .plusDays(1).toString();
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    // PROPERTY STUFF
+    public static final String INVALID_PROPERTY_ADDRESS_DESC = " " + PREFIX_PROPERTY_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_TOWN_DESC = " " + PREFIX_TOWN; // empty string not allowed for town
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE; // empty string not allowed for type
+    public static final String INVALID_SIZE_DESC = " " + PREFIX_SIZE; // empty string not allowed for size
+    public static final String INVALID_BEDROOMS_DESC = " " + PREFIX_BEDROOMS + "two"; // not a number
+    public static final String INVALID_BATHROOMS_DESC = " " + PREFIX_BATHROOMS + "three"; // not a number
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "thousand"; // not a number
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

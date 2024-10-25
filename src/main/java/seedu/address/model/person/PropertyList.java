@@ -31,6 +31,12 @@ public class PropertyList {
         this.properties = new ArrayList<>(properties);
     }
 
+    public PropertyList(Property property) {
+        requireNonNull(property);
+        this.properties = new ArrayList<>();
+        this.properties.add(property);
+    }
+
     /**
      * Adds a new property to the list.
      *

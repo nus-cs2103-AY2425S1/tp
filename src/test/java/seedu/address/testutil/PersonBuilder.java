@@ -12,6 +12,7 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PropertyList; // Import PropertyList
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -37,6 +38,7 @@ public class PersonBuilder {
     private History history;
     private Birthday birthday;
     private Set<Tag> tags;
+    private PropertyList propertyList; // New PropertyList attribute
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -51,6 +53,7 @@ public class PersonBuilder {
         history = new History(dateOfCreation.getDateOfCreation());
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         tags = new HashSet<>();
+        propertyList = new PropertyList(); // Initialize PropertyList with default
     }
 
     /**
@@ -66,6 +69,7 @@ public class PersonBuilder {
         history = personToCopy.getHistory();
         birthday = personToCopy.getBirthday();
         tags = new HashSet<>(personToCopy.getTags());
+        propertyList = personToCopy.getPropertyList(); // Copy PropertyList
     }
 
     /**
@@ -79,7 +83,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -107,6 +111,7 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+
     /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
@@ -114,6 +119,7 @@ public class PersonBuilder {
         this.remark = new Remark(remark);
         return this;
     }
+
     /**
      * Sets the {@code DateOfCreation} of the {@code Person} that we are building.
      */
@@ -142,8 +148,15 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, remark, birthday, tags, dateOfCreation, history);
+    /**
+     * Sets the {@code PropertyList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPropertyList(PropertyList propertyList) {
+        this.propertyList = propertyList;
+        return this;
     }
 
+    public Person build() {
+        return new Person(name, phone, email, address, remark, birthday, tags, dateOfCreation, history, propertyList);
+    }
 }
