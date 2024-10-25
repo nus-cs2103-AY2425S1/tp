@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.exceptions.RedoException;
+import seedu.address.model.exceptions.UndoException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -183,13 +186,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undoCampusConnect() {
+    public void undoCampusConnect() throws CommandException {
         ReadOnlyCampusConnect newCampusConnect = campusConnect.recoverPreviousState();
         this.setCampusConnect(newCampusConnect);
     }
 
     @Override
-    public void redoCampusConnect() {
+    public void redoCampusConnect() throws CommandException {
         ReadOnlyCampusConnect newCampusConnect = campusConnect.recoverUndoneState();
         this.setCampusConnect(newCampusConnect);
     }

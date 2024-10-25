@@ -56,8 +56,16 @@ public class LogicManager implements Logic {
         if (shouldSaveCampusConnect(command)) {
             model.saveCurrentCampusConnect();
         }
-        CommandResult commandResult = command.execute(model);
 
+        CommandResult commandResult;
+        try {
+            commandResult = command.execute(model);
+        } catch (CommandException e) {
+            if (!(command instanceof RedoCommand)) {
+                model.undoCampusConnect();
+            }
+            throw e;
+        }
         try {
             storage.saveCampusConnect(model.getCampusConnect());
         } catch (AccessDeniedException e) {

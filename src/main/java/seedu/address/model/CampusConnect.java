@@ -7,6 +7,8 @@ import java.util.Stack;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.exceptions.RedoException;
+import seedu.address.model.exceptions.UndoException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -20,6 +22,8 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     private final UniquePersonList persons;
     private final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
     private final Stack<ReadOnlyCampusConnect> future = new Stack<>();
+
+    private final VersionedCampusConnect versionedCampusConnect = new VersionedCampusConnect();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -49,36 +53,26 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void saveCurrentState() {
         ReadOnlyCampusConnect newCampusConnect = new CampusConnect(this);
-        prev.add(newCampusConnect);
-        future.clear();
+        versionedCampusConnect.saveOldData(newCampusConnect);
+        versionedCampusConnect.clearUndoneData();
     }
 
     /**
      * Recover from previous states
      */
-    public ReadOnlyCampusConnect recoverPreviousState() {
-        if (!prev.isEmpty()) {
-            ReadOnlyCampusConnect out = prev.pop();
-            future.push(new CampusConnect(this));
-            assert out != null;
-            return out;
-        } else {
-            return new CampusConnect(this);
-        }
+    public ReadOnlyCampusConnect recoverPreviousState() throws UndoException {
+        ReadOnlyCampusConnect out = versionedCampusConnect.extractOldData();
+        versionedCampusConnect.saveCurrentData(new CampusConnect(this));
+        return out;
     }
 
     /**
      * Recover previously undone states
      */
-    public ReadOnlyCampusConnect recoverUndoneState() {
-        if (!future.isEmpty()) {
-            ReadOnlyCampusConnect out = future.pop();
-            prev.push(new CampusConnect(this));
-            assert out != null;
-            return out;
-        } else {
-            return new CampusConnect(this);
-        }
+    public ReadOnlyCampusConnect recoverUndoneState() throws RedoException  {
+        ReadOnlyCampusConnect out = versionedCampusConnect.extractUndoneData();
+        versionedCampusConnect.saveOldData(new CampusConnect(this));
+        return out;
     }
 
     /**
