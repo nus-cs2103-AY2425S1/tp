@@ -54,7 +54,7 @@ administrators.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250, c/1 ` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -62,7 +62,7 @@ administrators.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the features below for details of each command.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -97,7 +97,7 @@ administrators.
 
 ### 2.1 Viewing Help : `help`
 
-Command: `help`
+Command Format: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -203,16 +203,16 @@ Edits an existing person in the address book.
 Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 **Command Format:**
-- Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
-- Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
-- Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
+- Format 1: `find n/KEYWORD`
+- Format 2: `find c/KEYWORD`
+- Format 3: `find n/KEYWORD c/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
 * Only the name is searched when using `n/` format.
 * Partially matched words will be matched, e.g., `Han` will match `Hans`.
-* Persons matching at least one keyword will be returned (i.e., `OR` search), e.g., `Esther Kim` will return `Esther Gruber`, `Kim Yang`.
-* The priority of the search will be class ID, followed by name.
+* find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and class IDs containing `KEYWORD2`.
+
 
 **Example Usage:**
 
@@ -247,7 +247,7 @@ Deletes the specified person from the address book.
 
 **Example Usage:**
 
-`list` followed by `delete 3`  
+`delete 3`  
 
 *Input: User enters the `delete 3` command to remove the 3rd person in the displayed list.*  
 ![Ui](images/deletecommandinput.png)
@@ -281,6 +281,7 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 `clear`  
 
 *Input: User enters the `clear` command to remove all entries.*  
+![Ui](images/clearinput.png)
 
 *Output: The UI updates to show that all entries have been cleared.*
 ![Ui](images/clearcommand.png)
@@ -313,6 +314,9 @@ Exiting the program can be done in two ways:
 
 **Method 2:**
 1. Type the command `exit` in the command box and press Enter.
+   ![Ui](images/exitcommandinput.png)
+
+
 2. The program will close.
 
 **Tips:**
@@ -347,21 +351,26 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.11 Marking a Payment as Completed
+### 2.11 Marking a Payment as Completed: `markpaid`
 
 Updates the payment status of a student to completed.
 
-**Format:** `markpaid INDEX YEAR_MONTH`
+**Format:** `markpaid INDEX m/YEAR_MONTH`
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The index **must be within the range** of the number of people in the list.
-* You can only mark the payment as completed for the current or a past month, not for future months.
 
-**Examples:**
-* `markpaid 1 2024-10` – Marks the payment of the 1st student as completed for October 2024.
-* `markpaid 3 2023-12` – Marks the payment of the 3rd student as completed for December 2023.
+
+**Example Usage:**
+*Input: User enters the `markpaid 1 /m 2024-10` mark the first student as paid for October 2024.*
+  ![Ui](images/markpaidcommandinput.png)
+
+*Output: The UI updates to show the payment status of the student.*
+  ![Ui](images/markpaidafter.png)
+
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -406,6 +415,9 @@ Displays a bar chart showing the number of students who made payments for each m
 * If no payments were made in a given month, the value for that month will be zero.
 
 *Input: User enters the `bar` command.*  
+![Ui](images/barinput.png)
+
+*Output: A bar chart is displayed, showing the number of students who made payments for each month.*
 ![Ui](images/bar.png)
 
 **Tips:**
