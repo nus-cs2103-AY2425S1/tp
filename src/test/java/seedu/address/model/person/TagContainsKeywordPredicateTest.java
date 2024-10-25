@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class RoleContainsKeywordPredicateTest {
+public class TagContainsKeywordPredicateTest {
 
     @Test
     public void equals() {
@@ -42,7 +42,7 @@ public class RoleContainsKeywordPredicateTest {
     }
 
     @Test
-    public void test_RoleContainsKeywords_returnsTrue() {
+    public void test_tagContainsKeywords_returnsTrue() {
         // One keyword
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends"));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
@@ -51,12 +51,12 @@ public class RoleContainsKeywordPredicateTest {
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends", "family"));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
         assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withRole("friends", "family").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
 
         // Only one matching keyword
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("family", "friends"));
         assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withRole("family", "friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
 
         // Mixed-case keywords
@@ -75,7 +75,7 @@ public class RoleContainsKeywordPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withRole("friends").build()));
 
         // Keywords match name
-        // TODO keywords to match whole contact (phone, email and address), but not role
+        // TODO keywords to match whole contact (phone, email and address), but not tag
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Alice", "12345"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withRole("bruh").build()));
     }
@@ -83,7 +83,7 @@ public class RoleContainsKeywordPredicateTest {
     @Test
     public void test_personHasNoTags_returnsFalse() {
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends"));
-        assertFalse(predicate.test(new PersonBuilder().withRole().build()));
+        assertFalse(predicate.test(new PersonBuilder().withRole("friends").build()));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class RoleContainsKeywordPredicateTest {
     @Test
     public void personHasMixedTags_someMatching_returnsTrue() {
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
-        assertTrue(predicate.test(new PersonBuilder().withRole("family", "gym").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
     }
 
     @Test

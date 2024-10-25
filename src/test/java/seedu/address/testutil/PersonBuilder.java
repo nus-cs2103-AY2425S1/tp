@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -10,9 +7,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.wedding.Wedding;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building {@code Person} objects.
  */
 public class PersonBuilder {
 
@@ -20,12 +18,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ROLE = "Client"; // Default role example
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Role> tags;
+    private Role role; // Single role representing role
+    private Wedding wedding;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,22 +35,29 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        role = new Role(DEFAULT_ROLE); // Default role
+        wedding = null; // Default wedding is null
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the {@code PersonBuilder} with the data of {@code personToCopy}.
+     *
+     * @param personToCopy The person to copy.
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getRole());
+        role = personToCopy.getRole();
+        wedding = personToCopy.getOwnWedding();
     }
 
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
+     *
+     * @param name The name to set.
+     * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,15 +65,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withRoles(String ... roles) {
-        this.tags = SampleDataUtil.getTagSet(roles);
-        return this;
-    }
-
-    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
+     *
+     * @param address The address to set.
+     * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -75,6 +77,9 @@ public class PersonBuilder {
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
+     *
+     * @param phone The phone number to set.
+     * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -83,14 +88,43 @@ public class PersonBuilder {
 
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
+     *
+     * @param email The email to set.
+     * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Role} (as a {@code Tag}) of the {@code Person} that we are building.
+     *
+     * @param role The role to set.
+     * @return The updated {@code PersonBuilder} instance.
+     */
+    public PersonBuilder withRole(String role) {
+        this.role = new Role(role);
+        return this;
     }
 
+    /**
+     * Sets the {@code Wedding} of the {@code Person} that we are building.
+     *
+     * @param wedding The wedding to set.
+     * @return The updated {@code PersonBuilder} instance.
+     */
+    public PersonBuilder withWedding(Wedding wedding) {
+        this.wedding = wedding;
+        return this;
+    }
+
+    /**
+     * Builds and returns the {@code Person} with the specified attributes.
+     *
+     * @return The built {@code Person}.
+     */
+    public Person build() {
+        return new Person(name, phone, email, address, role, wedding);
+    }
 }

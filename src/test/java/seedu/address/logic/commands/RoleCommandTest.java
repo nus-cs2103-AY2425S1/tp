@@ -4,25 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.role.Role;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
 
-public class TagCommandTest {
+public class RoleCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -31,32 +27,40 @@ public class TagCommandTest {
         Person personToTag = model.getFilteredPersonList().get(0); // Assuming Alice is the first person
         Name name = new Name("Alice Pauline");
 
-        // Create a set of tags that includes the existing tags and the new role
-        Set<Role> existingTags = personToTag.getRole();
-        Set<String> newTags = new HashSet<>();
+        // Define the new tag to add
+        String newTag = "friend";
 
-        // Add existing tags
-        for (Role tag : existingTags) {
-            newTags.add(tag.roleName);
-        }
-        newTags.add("friend"); // Add the new role
-
-        // Create the role command descriptor
-        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole("friend").build();
+        // Create the tag command descriptor with one tag
+        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(newTag).build();
 
         RoleCommand tagCommand = new RoleCommand(name, descriptor);
 
         // Create the expected person with the new tags as strings
-        Person expectedPerson = new PersonBuilder(personToTag).withRoles(newTags.toArray(new String[0])).build();
+        Person expectedPerson = new PersonBuilder(personToTag).withRole(newTag).build();
 
+        // Setup the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, expectedPerson);
 
+        // Execute the command and assert success
         CommandResult result = tagCommand.execute(model);
 
         assertEquals(String.format(RoleCommand.MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(expectedPerson)),
                 result.getFeedbackToUser());
         assertEquals(expectedModel, model);
+    }
+
+    @Test
+    public void execute_tagAlreadyExists_throwsCommandException() {
+        Person personToTag = model.getFilteredPersonList().get(0);
+
+        Name name = new Name(VALID_NAME_AMY);
+        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build();
+
+        RoleCommand tagCommand = new RoleCommand(name, descriptor);
+
+        assertThrows(CommandException.class, () -> tagCommand.execute(model),
+                String.format(RoleCommand.MESSAGE_DUPLICATE_ROLE, personToTag.getName()));
     }
 
     @Test

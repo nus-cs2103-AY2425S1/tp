@@ -29,6 +29,7 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -301,6 +302,9 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("role", role)
                     .toString();
+        }
+
+        public void setWedding(Wedding wedding) {
         }
     }
 }

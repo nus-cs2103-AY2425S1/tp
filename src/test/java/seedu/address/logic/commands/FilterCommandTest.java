@@ -43,7 +43,7 @@ public class FilterCommandTest {
         // Set up expected model to filter based on criteria
         expectedModel.updateFilteredPersonList(person -> new NameContainsKeywordsPredicate(Arrays.asList("John"))
                     .test(person)
-                && new TagContainsKeywordsPredicate(Arrays.asList("friends")).test(person)
+                && new RoleContainsKeywordsPredicate(Arrays.asList("friends")).test(person)
                 && new EmailContainsKeywordsPredicate(Arrays.asList("example@test.com")).test(person)
                 && new PhoneContainsKeywordsPredicate(Arrays.asList("94351253")).test(person)
                 && new AddressContainsKeywordsPredicate(Arrays.asList("Main St")).test(person));
