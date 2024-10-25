@@ -122,7 +122,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and/or nric is searched.
+* Only the name and nric are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
 * All elderly matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
