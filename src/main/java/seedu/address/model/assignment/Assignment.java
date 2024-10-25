@@ -91,6 +91,10 @@ public class Assignment {
                  .toString();
     }
 
+    public boolean isSameAssignment(Assignment other) {
+        return assignmentName.equals(other.assignmentName);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

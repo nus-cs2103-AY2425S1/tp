@@ -143,4 +143,6 @@ public interface Model {
      * Returns a list of students in the given tutorial group.
      */
     List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
+
+    ObservableList<Student> getAllStudentsByName(Name name);
 }
