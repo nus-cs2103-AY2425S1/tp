@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -44,6 +45,17 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new DuplicateLessonException();
         }
         internalList.add(toAdd);
+    }
+
+    public Subject getSubject(Person tutor, Person tutee) {
+        requireAllNonNull(tutor, tutee);
+        if (tutor instanceof Tutor) {
+            return internalList.stream().filter(item -> item.getTutor().equals(tutor) && item.getTutee().equals(tutee))
+                    .map(Lesson::getSubject).findFirst().orElse(null);
+        } else {
+            return internalList.stream().filter(item -> item.getTutor().equals(tutee) && item.getTutee().equals(tutor))
+                    .map(Lesson::getSubject).findFirst().orElse(null);
+        }
     }
 
     /**

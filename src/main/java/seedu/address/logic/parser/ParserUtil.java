@@ -25,6 +25,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_INDEXES = "Number of Indexes given is not two.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -36,6 +38,15 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static Index[] parseIndexes(String args) throws ParseException {
+        String trimmedIndices = args.trim();
+        String[] parts = trimmedIndices.split(" ");
+        if (parts.length != 2) {
+            throw new ParseException(MESSAGE_INVALID_INDEXES);
+        }
+        return new Index[]{parseIndex(parts[0]), parseIndex(parts[1])};
     }
 
     /**

@@ -176,9 +176,13 @@ public abstract class Person {
      * @param subject
      * @return {@code true} if the person has a subject with the given name, {@code false} otherwise.
      */
-    public boolean hasSubject(String subject) {
+    public boolean hasSubject(Subject subject) {
         return subjects.stream()
-                .anyMatch(s -> s.subject.equalsIgnoreCase(subject));
+                .anyMatch(s -> s.subject.equalsIgnoreCase(subject.getSubject()));
+    }
+
+    public void setSubject(Subject subject) {
+        subjects.add(subject);
     }
 
 }

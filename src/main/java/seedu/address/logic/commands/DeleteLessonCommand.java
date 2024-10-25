@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.ToDoubleBiFunction;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -30,9 +32,15 @@ public class DeleteLessonCommand extends Command {
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 
+    public static final String MESSAGE_INVALID_TUTOR_INDEX = "The person index provided is not a Tutor";
+
+    public static final String MESSAGE_INVALID_TUTEE_INDEX = "The person index provided is not a Tutee";
+
     private final Index tutorIndex;
 
     private final Index tuteeIndex;
+
+    private final Subject subject;
 
     /**
      * Creates a DeleteLesson Command to delete the Lesson asssociated with
@@ -40,9 +48,10 @@ public class DeleteLessonCommand extends Command {
      * @param tutorIndex
      * @param tuteeIndex
      */
-    public DeleteLessonCommand(Index tutorIndex, Index tuteeIndex) {
+    public DeleteLessonCommand(Index tutorIndex, Index tuteeIndex, Subject subject) {
         this.tutorIndex = tutorIndex;
         this.tuteeIndex = tuteeIndex;
+        this.subject = subject;
     }
 
     @Override
@@ -54,9 +63,20 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Tutor tutorLessonToDelete = (Tutor) lastShownList.get(tutorIndex.getZeroBased());
-        Tutee tuteeLessonToDelete = (Tutee) lastShownList.get(tuteeIndex.getZeroBased());
-        Lesson lessonToDelete = new Lesson(tutorLessonToDelete, tuteeLessonToDelete);
+        //ToDo
+        // check if the lesson to be deleted is valid by checking if the tutor and tutee are
+        // associated with a Lesson with the correct subject
+
+
+        Person tutorToDelete = lastShownList.get(tutorIndex.getZeroBased());
+        Person tuteeToDelete = lastShownList.get(tuteeIndex.getZeroBased());
+
+        if (!(tutorToDelete instanceof Tutor)) {
+            throw new CommandException(MESSAGE_INVALID_TUTOR_INDEX);
+        } else if (!(tuteeToDelete instanceof Tutee)) {
+            throw new CommandException(MESSAGE_INVALID_TUTEE_INDEX);
+        }
+        Lesson lessonToDelete = new Lesson((Tutor) tutorToDelete, (Tutee) tuteeToDelete, subject);
 
         model.deleteLesson(lessonToDelete);
         model.commitAddressBook();

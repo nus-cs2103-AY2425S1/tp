@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -37,19 +38,27 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
 
+    public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be added " +
+            "must have the same subject";
+
     private final Index tutorIndex;
 
     private final Index tuteeIndex;
+
+    private final Subject subject;
 
     /**
      * Creates an AddLessonCommand to add the specified {@code Tutor} and {@code Tutee}.
      *
      * @param tutorIndex Index of the tutor
      * @param tuteeIndex Index of the tutee
+     * @param subject Subject of the lesson
      */
-    public AddLessonCommand(Index tutorIndex, Index tuteeIndex) {
+    public AddLessonCommand(Index tutorIndex, Index tuteeIndex, Subject subject) {
         this.tutorIndex = tutorIndex;
         this.tuteeIndex = tuteeIndex;
+        this.subject = subject;
+
     }
 
     @Override
@@ -64,13 +73,22 @@ public class AddLessonCommand extends Command {
         Person tutorToAdd = lastShownList.get(tutorIndex.getZeroBased());
         Person tuteeToAdd = lastShownList.get(tuteeIndex.getZeroBased());
 
+        if (!tutorToAdd.hasSubject(this.subject) || !tuteeToAdd.hasSubject(this.subject)) {
+            throw new CommandException(MESSAGE_INVALID_SUBJECT);
+        }
+
         if (!(tutorToAdd instanceof Tutor)) {
             throw new CommandException(MESSAGE_INVALID_TUTOR_INDEX);
         } else if (!(tuteeToAdd instanceof Tutee)) {
             throw new CommandException(MESSAGE_INVALID_TUTEE_INDEX);
         }
 
-        Lesson lesson = new Lesson((Tutor) tutorToAdd, (Tutee) tuteeToAdd);
+        // check if the tutor, tutee and the lesson to be added have the same subject
+        if (!tutorToAdd.hasSubject(this.subject) || !tuteeToAdd.hasSubject(this.subject)) {
+            throw new CommandException(MESSAGE_INVALID_SUBJECT);
+        }
+
+        Lesson lesson = new Lesson((Tutor) tutorToAdd, (Tutee) tuteeToAdd, this.subject);
 
         if (model.hasLesson(lesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);

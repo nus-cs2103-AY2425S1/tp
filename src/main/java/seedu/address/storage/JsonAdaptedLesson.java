@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -18,6 +19,7 @@ public class JsonAdaptedLesson {
 
     private int tutorId;
     private int tuteeId;
+    private Subject subject;
     public JsonAdaptedLesson() {}
 
 
@@ -26,9 +28,11 @@ public class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("tutorId") int tutorId, @JsonProperty("tuteeId") int tuteeId) {
+    public JsonAdaptedLesson(@JsonProperty("tutorId") int tutorId, @JsonProperty("tuteeId") int tuteeId,
+                             @JsonProperty("subject") Subject subject) {
         this.tutorId = tutorId;
         this.tuteeId = tuteeId;
+        this.subject = subject;
     }
 
     /**
@@ -37,6 +41,7 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         tutorId = source.getTutor().getId();
         tuteeId = source.getTutee().getId();
+        subject = source.getSubject();
     }
 
     public int getTutorId() {
@@ -67,7 +72,7 @@ public class JsonAdaptedLesson {
         Tutor tutor = (Tutor) addressBook.getPersonById(tutorId);
         Tutee tutee = (Tutee) addressBook.getPersonById(tuteeId);
 
-        return new Lesson(tutor, tutee);
+        return new Lesson(tutor, tutee, subject);
     }
 
 }
