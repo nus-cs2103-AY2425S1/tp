@@ -5,7 +5,7 @@
     "email": "alice@example.com",
     "telegramHandle": "@alicepauline",
     "moduleName" : "CS2100",
-    "remark": "",
+    "remark": "hello",
     "tags": [ "friends" ],
     "contactType": "PERSONAL"
   }, {
@@ -14,7 +14,7 @@
     "email": "pauline@example.com",
     "telegramHandle": "@alicepauline",
     "moduleName": "CS2100",
-    "remark": "",
+    "remark": "hello",
     "contactType": "PERSONAL"
   } ]
 }

@@ -10,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_AMY;
@@ -86,6 +88,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withTelegramHandle("@hoonmeier")
             .withModuleName("CS2106")
+            .withRemark("good at coding")
             .withContactType("Work").build();
     public static final Person IDA = new PersonBuilder()
             .withName("Ida Mueller")
@@ -93,6 +96,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withTelegramHandle("@idamueller")
             .withModuleName("ST1131")
+            .withRemark("hates stats")
             .withContactType("Work").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -102,7 +106,8 @@ public class TypicalPersons {
             .withTelegramHandle(VALID_TELEHANDLE_AMY)
             .withTags(VALID_TAG_FRIEND)
             .withContactType(VALID_CONTACTTYPE_AMY)
-            .withModuleName(VALID_MODNAME_AMY).build();
+            .withModuleName(VALID_MODNAME_AMY)
+            .withRemark(VALID_REMARK_AMY).build();
     public static final Person BOB = new PersonBuilder()
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -110,7 +115,8 @@ public class TypicalPersons {
             .withTelegramHandle(VALID_TELEHANDLE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withModuleName(VALID_MODNAME_BOB)
-            .withContactType(VALID_CONTACTTYPE_BOB).build();
+            .withContactType(VALID_CONTACTTYPE_BOB)
+            .withRemark(VALID_REMARK_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
