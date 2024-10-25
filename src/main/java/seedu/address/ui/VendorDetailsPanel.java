@@ -74,7 +74,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
         phone.setText(vendor.getPhone().value);
         description.setText(vendor.getDescription().value);
 
-        // Reset tags when updating vendor
+        // Empty tags will leave behind the last set of tags,
+        // so we clear the tags before adding new tags
         tags.getChildren().clear();
         vendor.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
