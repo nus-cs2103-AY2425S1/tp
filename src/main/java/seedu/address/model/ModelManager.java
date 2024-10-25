@@ -181,12 +181,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group groupToDelete) {
         requireNonNull(groupToDelete);
-
-        boolean isRemoved = groups.remove(groupToDelete);
-
-        if (!isRemoved) {
-            throw new IllegalArgumentException("Group not found: " + groupToDelete.getGroupName());
-        }
+        addressBook.removeGroup(groupToDelete);
     }
 
     /**

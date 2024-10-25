@@ -166,21 +166,36 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateFilteredGroupList_validPredicate_returnsMatchingGroups() {
-        Group groupA = new Group("group A", List.of(new PersonBuilder().build()));
-        Group groupB = new Group("group B", List.of(new PersonBuilder().build()));
-        Group groupC = new Group("group C", List.of(new PersonBuilder().build()));
+    public void addToGroupList_returnsMatchingGroups() {
+        Group groupA = new Group("groupA", List.of(new PersonBuilder().build()));
+        Group groupB = new Group("groupB", List.of(new PersonBuilder().build()));
+        Group groupC = new Group("groupC", List.of(new PersonBuilder().build()));
         modelManager.addGroup(groupA);
         modelManager.addGroup(groupB);
         modelManager.addGroup(groupC);
 
-        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(List.of("Group A", "Group B"));
-        modelManager.updateFilteredGroupList(predicate);
-
         assertTrue(modelManager.hasGroupName(groupA));
         assertTrue(modelManager.hasGroupName(groupB));
-        assertFalse(modelManager.hasGroupName(groupC));
+        assertTrue(modelManager.hasGroupName(groupC));
     }
+    @Test
+    public void updateFilteredGroupList_validPredicate_returnsMatchingGroups() {
+        Group groupA = new Group("groupA", List.of(new PersonBuilder().build()));
+        Group groupB = new Group("groupB", List.of(new PersonBuilder().build()));
+        Group groupC = new Group("groupC", List.of(new PersonBuilder().build()));
+        modelManager.addGroup(groupA);
+        modelManager.addGroup(groupB);
+        modelManager.addGroup(groupC);
+
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(List.of("GroupA"));
+        modelManager.updateFilteredGroupList(predicate);
+
+        assertTrue(modelManager.getFilteredGroupList().contains(groupA));
+        assertFalse(modelManager.getFilteredGroupList().contains(groupB));
+        assertFalse(modelManager.getFilteredGroupList().contains(groupC));
+    }
+
+
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {

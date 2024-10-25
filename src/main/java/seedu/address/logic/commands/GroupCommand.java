@@ -48,12 +48,11 @@ public class GroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // check if group already exists
+
         if (model.hasGroupName(new Group(groupName, List.of()))) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
-
-        // Get the persons that have those names
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Person> allPersons = model.getFilteredPersonList();
         List<Person> groupMembers = allPersons.stream()
                 .filter(person -> students.contains(person
@@ -63,10 +62,8 @@ public class GroupCommand extends Command {
         if (groupMembers.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS_FOUND);
         }
-        // Append to a group object
         Group group = new Group(groupName, groupMembers);
 
-        // Add the group object to the model
         model.addGroup(group);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, groupMembers.size()));

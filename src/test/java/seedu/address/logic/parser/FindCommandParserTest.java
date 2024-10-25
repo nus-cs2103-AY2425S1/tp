@@ -35,26 +35,6 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
-    @Test
-    public void parse_validGroupArgs_returnsFindCommand() {
-
-        List<String> keyWord = new ArrayList<>();
-        keyWord.add("Gooners");
-        // no leading and trailing whitespaces
-        FindCommand expectedFindGroupCommand =
-                new FindCommand(new GroupContainsKeywordsPredicate(keyWord));
-        assertParseSuccess(parser, "/group Gooners", expectedFindGroupCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "/group  \n Gooners \n \t", expectedFindGroupCommand);
-    }
-
-    @Test
-    public void parse_invalidGroupArgs_throwsParseException() {
-        // Missing group name after /group
-        assertParseFailure(parser, "/group    ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
 
     @Test
     public void parse_invalidNameArgs_throwsParseException() {

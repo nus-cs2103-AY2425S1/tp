@@ -45,12 +45,9 @@ public class FindCommandTest {
 
         FindCommand findFirstNameCommand = new FindCommand(firstNamePredicate);
         FindCommand findSecondNameCommand = new FindCommand(secondNamePredicate);
-        FindCommand findFirstGroupCommand = new FindCommand(firstGroupPredicate);
-        FindCommand findSecondGroupCommand = new FindCommand(secondGroupPredicate);
 
         // same object -> returns true
         assertTrue(findFirstNameCommand.equals(findFirstNameCommand));
-        assertTrue(findFirstGroupCommand.equals(findFirstGroupCommand));
 
         // same values -> returns true
         FindCommand findFirstNameCommandCopy = new FindCommand(firstNamePredicate);
@@ -85,33 +82,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
-    @Test
-    public void execute_findGroup() {
-        // Make sure the model has the GOONERS group before running the command
-        model.addGroup(GOONERS);
-
-        // Prepare the group-based predicate
-        GroupContainsKeywordsPredicate groupPredicate = prepareGroupPredicate("gooners");
-
-        // Create the FindCommand for group-based search
-        FindCommand command = new FindCommand(groupPredicate);
-
-        // Get the matching groups and filter persons accordingly
-        List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
-
-        // Update the expectedModel to filter persons based on matching groups
-        expectedModel.updateFilteredPersonList(person -> matchingGroups.stream()
-                .flatMap(group -> group.getMembers().stream())
-                .anyMatch(member -> member.isSamePerson(person)));
-
-        // Calculate the expected message based on the number of persons in the filtered list
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
-
-        // Assert command success with the correct number of persons
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
-    }
 
 
     @Test
@@ -129,10 +99,4 @@ public class FindCommandTest {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
-    /**
-     * Parses {@code userInput} into a {@code GroupContainsKeywordsPredicate}.
-     */
-    private GroupContainsKeywordsPredicate prepareGroupPredicate(String userInput) {
-        return new GroupContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
 }

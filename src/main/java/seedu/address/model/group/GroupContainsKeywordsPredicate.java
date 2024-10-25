@@ -20,7 +20,7 @@ public class GroupContainsKeywordsPredicate implements Predicate<Group> {
     @Override
     public boolean test(Group group) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.getGroupName().groupName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.getGroupName().toString(), keyword));
     }
     @Override
     public boolean equals(Object other) {
