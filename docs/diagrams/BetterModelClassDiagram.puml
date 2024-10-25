@@ -15,8 +15,10 @@ UniquePersonList -right-> Person
 Person -up-> "*" Tag
 
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> StudentID
+Person *--> NUSNetID
+Person *--> Major
+Person *--> Year
+Person *--> Group
 Person *--> Comment
 @enduml
