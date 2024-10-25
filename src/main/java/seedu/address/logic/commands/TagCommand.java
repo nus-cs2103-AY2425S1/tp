@@ -75,15 +75,14 @@ public class TagCommand extends Command {
             throw new CommandException(Name.MESSAGE_CONSTRAINTS);
         }
 
-        // check for duplicate tags
-        Set<Tag> currentTags = personToTag.getTags();
-        for (Tag newTag : tagPersonDescriptor.getTags().orElse(Set.of())) {
-            if (currentTags.contains(newTag)) {
-                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        String.format(MESSAGE_DUPLICATE_TAG, personToTag.getName())));
-            }
+        // Check for duplicate tag
+        Tag currentTag = personToTag.getRole(); // Use `getRole()` instead of `getTags()`
+        Tag newTag = tagPersonDescriptor.getTag().orElse(null);
+        if (newTag != null && newTag.equals(currentTag)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TAG, personToTag.getName()));
         }
 
+        // When creating an edited person
         Person taggedPerson = createEditedPerson(personToTag, tagPersonDescriptor);
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -101,10 +100,9 @@ public class TagCommand extends Command {
         Phone updatedPhone = tagPersonDescriptor.getPhone().orElse(personToTag.getPhone());
         Email updatedEmail = tagPersonDescriptor.getEmail().orElse(personToTag.getEmail());
         Address updatedAddress = tagPersonDescriptor.getAddress().orElse(personToTag.getAddress());
-        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
-        tagPersonDescriptor.getTags().ifPresent(updatedTags::addAll); // Add tags if present
+        Tag updatedTag = tagPersonDescriptor.getTag().orElse(personToTag.getRole());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTag, null);
     }
 
     @Override
@@ -140,23 +138,17 @@ public class TagCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Tag tag;
 
-        public TagPersonDescriptor() {
-        }
+        public TagPersonDescriptor() {}
 
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
         public TagPersonDescriptor(TagPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
         }
-
 
         public void setName(Name name) {
             this.name = name;
@@ -190,36 +182,29 @@ public class TagCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        // Set and get methods for a single tag instead of a set of tags
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
         public boolean equals(Object other) {
             if (this == other) {
-                return true; // same object
+                return true;
             }
             if (!(other instanceof TagPersonDescriptor)) {
-                return false; // different type
+                return false;
             }
             TagPersonDescriptor otherDescriptor = (TagPersonDescriptor) other;
-
-            // Ensure all fields (including tags) are compared correctly
             return Objects.equals(name, otherDescriptor.name)
-                    && Objects.equals(tags, otherDescriptor.tags); // add other fields as necessary
+                    && Objects.equals(phone, otherDescriptor.phone)
+                    && Objects.equals(email, otherDescriptor.email)
+                    && Objects.equals(address, otherDescriptor.address)
+                    && Objects.equals(tag, otherDescriptor.tag);
         }
 
         @Override
@@ -229,7 +214,7 @@ public class TagCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("tag", tag)
                     .toString();
         }
     }

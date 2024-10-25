@@ -43,8 +43,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         if (argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_NO_NEW_TAG));
         } else {
-            Set<Tag> tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG));
-            editPersonDescriptor.setTags(tags);
+            Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElseThrow());
+            editPersonDescriptor.setTag(tag);
         }
 
         return new TagCommand(name, editPersonDescriptor);
