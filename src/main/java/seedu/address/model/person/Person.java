@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.addresses.Network;
@@ -27,8 +29,8 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private Map<Network, Set<PublicAddress>> publicAddresses;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<Network, Set<PublicAddress>> publicAddresses;
 
     /**
      * Every field must be present and not null.
@@ -65,21 +67,100 @@ public class Person {
         return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
     }
 
-    public void setPublicAddressesByNetwork(Network network, Set<PublicAddress> addresses) {
-        if (publicAddresses.containsKey(network)) {
-            this.publicAddresses.put(network, new HashSet<>(addresses));
-        }
+
+    /**
+     * Returns true if the person has a public address in the network
+     *
+     * @param publicAddressString
+     * @return
+     */
+    public Boolean hasPublicAddressStringAmongAllNetworks(String publicAddressString) {
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
+    }
+
+    public Set<PublicAddress> getPublicAddressObjectByPublicAddressStringMap(String publicAddressString) {
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .filter(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString))
+                .collect(Collectors.toSet());
+    }
+
+    public Map<Network, Set<PublicAddress>> getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
+        return publicAddresses.entrySet().stream()
+                .map(entry -> {
+                    Set<PublicAddress> filteredAddresses = entry.getValue().stream()
+                            .filter(pa -> pa.isPublicAddressStringEquals(publicAddressString))
+                            .collect(Collectors.toSet());
+                    return new AbstractMap.SimpleEntry<>(entry.getKey(), filteredAddresses);
+                })
+                .filter(entry -> !entry.getValue().isEmpty())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
 
+    public void setPublicAddressesByNetwork(Network network, Set<PublicAddress> addresses) {
+        requireAllNonNull(network, addresses);
+        if (addresses.isEmpty()) {
+            this.publicAddresses.remove(network);
+            return;
+
+        }
+        this.publicAddresses.put(network, new HashSet<>(addresses));
+    }
+
     /**
      * Gets the current Public address map
-     * Should be replaced with a better method in the future
      *
      * @return publicAddresses
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return Collections.unmodifiableMap(publicAddresses);
+    }
+
+    /**
+     * Checks if there is a public address associated with the specified network and label.
+     *
+     * @param network The network to search for
+     * @param label   The label to match against the public addresses
+     * @return true if a public address with the specified label exists for the given network, false otherwise
+     */
+    public boolean hasPublicAddressWithLabel(Network network, String label) {
+        return publicAddresses
+                .getOrDefault(network, Collections.emptySet())
+                .stream()
+                .anyMatch(addr -> addr.label.equals(label));
+    }
+
+    /**
+     * Returns a new {@code Person} object with the updated public address.
+     * If the public address already exists for the network, it is replaced with the new one.
+     *
+     * @param newPublicAddress The new or updated public address to be added or replaced
+     * @return A new {@code Person} object with the updated public address
+     */
+    public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses
+                .entrySet()
+                .stream()
+                .map(entry -> Map.entry(
+                        entry.getKey(),
+                        entry.getKey().equals(newPublicAddress.getNetwork())
+                        ? updateAddressSet(entry.getValue(), newPublicAddress)
+                        : entry.getValue()
+                ))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
+        return addresses.stream()
+                .map(addr -> addr.label.equals(newAddress.label)
+                             ? newAddress
+                             : addr)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -114,11 +195,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)

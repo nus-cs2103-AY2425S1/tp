@@ -26,9 +26,9 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final PublicAddress BTC_DAILY_ADDRESS =
-            new BtcAddress("14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Daily wallet");
+            new BtcAddress("123", "Daily wallet");
     public static final PublicAddress BTC_SPECIAL_ADDRESS =
-            new BtcAddress("24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Special wallet");
+            new BtcAddress("12", "Special wallet");
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")

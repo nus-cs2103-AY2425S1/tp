@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
 import java.util.List;
 
@@ -20,14 +20,14 @@ import seedu.address.model.person.Person;
  */
 public class RetrievePublicAddressCommand extends Command {
 
-    public static final String COMMAND_WORD = "retrievePublicAddress";
+    public static final String COMMAND_WORD = "retrievepa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_PUBLIC_ADDRESS + "NETWORK "
+            + PREFIX_PUBLIC_ADDRESS_NETWORK + "NETWORK "
             + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PUBLIC_ADDRESS + "BTC "
+            + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
             + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet";
 
     public static final String MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS =

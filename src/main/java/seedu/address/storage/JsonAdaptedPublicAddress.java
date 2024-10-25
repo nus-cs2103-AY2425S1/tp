@@ -13,6 +13,8 @@ import seedu.address.model.addresses.PublicAddressFactory;
  */
 class JsonAdaptedPublicAddress {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "PublicAddress's %s field is missing!";
+
     private final String publicAddress;
 
     private final String label;
@@ -41,10 +43,23 @@ class JsonAdaptedPublicAddress {
      * @throws IllegalValueException if there were any data constraints violated in the adapted label.
      */
     public PublicAddress toModelType(Network network) throws IllegalValueException {
-        if (!PublicAddress.isValidPublicAddress(publicAddress) || !PublicAddress.isValidPublicAddressLabel(label)) {
-            throw new IllegalValueException(PublicAddress.MESSAGE_CONSTRAINTS);
+        if (publicAddress == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "publicAddress"));
         }
-        return PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+
+        if (label == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "label"));
+        }
+
+        if (network == null) {
+            throw new IllegalValueException("Network cannot be null!");
+        }
+
+        try {
+            return PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
     }
 
 }

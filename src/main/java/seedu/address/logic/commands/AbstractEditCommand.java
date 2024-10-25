@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -70,8 +71,7 @@ public class AbstractEditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPublicAddresses, updatedTags);
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
+    private Person getPersonToEdit(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -79,16 +79,53 @@ public class AbstractEditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        return lastShownList.get(index.getZeroBased());
+    }
 
+    private CommandResult saveEditedPerson(
+            Model model,
+            Person personToEdit,
+            Person editedPerson,
+            String successMessage
+    ) throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(successMessage, Messages.format(editedPerson)));
+    }
+
+    /**
+     * Executes the edit command with the given model.
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult with the success message.
+     * @throws CommandException
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        Person personToEdit = getPersonToEdit(model);
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        return saveEditedPerson(model, personToEdit, editedPerson, MESSAGE_EDIT_PERSON_SUCCESS);
+    }
+
+    /**
+     * Executes the edit command with the given function to create the edited person.
+     *
+     * @param model               {@code Model} which the command should operate on.
+     * @param makeEditedPerson    Function to create the edited person.
+     * @return CommandResult with the success message.
+     * @throws CommandException If the index is invalid or the person to edit does not exist.
+     */
+    CommandResult execute(
+            Model model,
+            BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson,
+            String successMessage
+    ) throws CommandException {
+        Person personToEdit = getPersonToEdit(model);
+        Person editedPerson = makeEditedPerson.apply(personToEdit, editPersonDescriptor);
+        return saveEditedPerson(model, personToEdit, editedPerson, successMessage);
     }
 
     @Override
@@ -244,6 +281,7 @@ public class AbstractEditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(publicAddresses, otherEditPersonDescriptor.publicAddresses)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 

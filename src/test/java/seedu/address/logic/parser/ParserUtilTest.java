@@ -291,4 +291,30 @@ public class ParserUtilTest {
         assertEquals(expectedMap, ParserUtil.parsePublicAddresses(inputs));
     }
 
+    @Test
+    public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
+        Collection<String> inputs = Arrays.asList(
+                " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_1 + " ",
+                " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_2 + " "
+        );
+
+        Map<Network, Set<PublicAddress>> expectedMap = new HashMap<>();
+        Set<PublicAddress> btcAddresses = new HashSet<>();
+        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL));
+        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL));
+        expectedMap.put(Network.BTC, btcAddresses);
+
+        assertEquals(expectedMap, ParserUtil.parsePublicAddresses(inputs));
+    }
+
+    @Test
+    public void parsePublicAddressLabel_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddressLabel(null));
+    }
+
+    @Test
+    public void parsePublicAddressLabel_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePublicAddressLabel(INVALID_LABEL));
+    }
+
 }
