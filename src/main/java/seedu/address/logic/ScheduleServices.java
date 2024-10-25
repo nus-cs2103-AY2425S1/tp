@@ -5,13 +5,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
+/**
+ * A class that provides services for handling and retrieving schedules.
+ */
 public class ScheduleServices {
-    public ScheduleServices() {
-
-    }
+    /**
+     * Retrieves the top three upcoming schedules from a list of persons, sorted by date and time.\
+     *
+     * @param personList The list of persons from which to retrieve schedules.
+     * @return A list of strings representing the top three schedules
+     *         If there are fewer than three schedules, it returns all of them
+     */
     public static List<String> getTopThreeSchedules(List<Person> personList) {
         List<Map.Entry<Person, LocalDateTime>> allAppointments = new ArrayList<>();
 
