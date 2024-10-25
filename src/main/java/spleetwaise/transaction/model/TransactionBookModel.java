@@ -52,4 +52,9 @@ public interface TransactionBookModel {
      * Deletes the given transaction. Transaction must be present in the transactionBook.
      */
     void deleteTransaction(Transaction target);
+
+    /**
+     * Replaces the given transaction. Transaction must be present in the transactionBook.
+     */
+    void setTransaction(Transaction target, Transaction editedTransaction);
 }

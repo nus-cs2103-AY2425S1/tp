@@ -4,13 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.commons.util.StringUtil;
-import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -26,6 +24,7 @@ import spleetwaise.transaction.model.transaction.Description;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_UNKOWN_PHONE_NUMBER = "Phone number is unknown.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -118,12 +117,10 @@ public class ParserUtil {
      */
     public static Person getPersonFromPhone(Phone phone) throws ParseException {
         requireNonNull(phone);
-        ReadOnlyAddressBook ab = CommonModel.getInstance().getAddressBook();
-        ObservableList<Person> personList = ab.getPersonList();
-        FilteredList<Person> filteredPersonList = personList.filtered((p) -> p.getPhone().equals(phone));
-        if (filteredPersonList.isEmpty()) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        Optional<Person> p = CommonModel.getInstance().getPersonByPhone(phone);
+        if (p.isEmpty()) {
+            throw new ParseException(MESSAGE_UNKOWN_PHONE_NUMBER);
         }
-        return filteredPersonList.get(0);
+        return p.get();
     }
 }

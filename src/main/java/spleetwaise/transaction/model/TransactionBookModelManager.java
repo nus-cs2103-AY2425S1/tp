@@ -1,6 +1,7 @@
 package spleetwaise.transaction.model;
 
 import static java.util.Objects.requireNonNull;
+import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -92,6 +93,13 @@ public class TransactionBookModelManager implements TransactionBookModel {
         requireNonNull(transaction);
         transactionBook.removeTransaction(transaction);
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
+    }
+
+    @Override
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
+        requireAllNonNull(target, editedTransaction);
+
+        transactionBook.setTransaction(target, editedTransaction);
     }
 
     @Override

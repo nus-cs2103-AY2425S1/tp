@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.model.transaction.exceptions.DuplicateTransactionException;
+import spleetwaise.transaction.model.transaction.exceptions.TransactionNotFoundException;
 
 /**
  * Wraps all data at the transaction book level.
@@ -79,6 +80,24 @@ public class TransactionBook implements ReadOnlyTransactionBook {
     }
 
     /**
+     * Replaces the transaction {@code target} in the list with {@code replacement}. {@code target} must exist in the
+     * list. The txn identity of {@code replacement} must not be the same as another existing txn in the list.
+     */
+    public void setTransaction(Transaction target, Transaction replacement) {
+        CollectionUtil.requireAllNonNull(target, replacement);
+        int i = transactionList.indexOf(target);
+        if (i == -1) {
+            throw new TransactionNotFoundException();
+        }
+
+        if (!target.equals(replacement) && containsTransaction(replacement)) {
+            throw new DuplicateTransactionException();
+        }
+
+        transactionList.set(i, replacement);
+    }
+
+    /**
      * Adds a transaction entry to the transaction list.
      *
      * @param transaction The transaction to be added.
@@ -98,6 +117,7 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      * @return whether the removal was successful
      */
     public boolean removeTransaction(Transaction key) {
+        requireNonNull(key);
         return transactionList.remove(key);
     }
 
