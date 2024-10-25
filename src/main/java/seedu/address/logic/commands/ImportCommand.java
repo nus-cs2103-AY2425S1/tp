@@ -90,13 +90,20 @@ public class ImportCommand extends Command {
             String[] nextLine;
             reader.readNext(); // skip header
             while ((nextLine = reader.readNext()) != null) {
+
                 Name name = ParserUtil.parseName(cleanDataString(nextLine[0]));
                 StudentClass studentClass = ParserUtil.parseClass(cleanDataString(nextLine[1]));
                 Phone phone = ParserUtil.parsePhone((nextLine[2].trim() == "") ? "00000000" : nextLine[2]);
-
                 List<String> tagList = Arrays.asList(nextLine[3].split(" "));
-                Set<Tag> tags = ParserUtil.parseTags(tagList);
-                isDuplicatePerson(model, new Person(name, studentClass, phone, tags));
+
+                if(!"".equals(tagList.get(0))) {
+                    Set<Tag> tags = ParserUtil.parseTags(tagList);
+                    isDuplicatePerson(model, new Person(name, studentClass, phone, tags));
+                } else {
+                    isDuplicatePerson(model, new Person(name, studentClass, phone, null));
+                }
+
+
             }
             if (haveDuplicatePersons) {
                 throw new CommandException(

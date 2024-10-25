@@ -32,11 +32,13 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, StudentClass studentClass, Phone phone, Set<Tag> tags) {
-        requireAllNonNull(name, phone, studentClass, tags);
+        requireAllNonNull(name, phone, studentClass);
         this.name = name;
         this.studentClass = studentClass;
         this.phone = phone;
-        this.tags.addAll(tags);
+        if(tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     public Name getName() {
