@@ -6,12 +6,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
@@ -35,15 +39,16 @@ public class DeleteSessionCommand extends Command {
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
     public static final String MESSAGE_DELETE_SESSION_FAIL = "Error: Session %1$s does not exist in member %2$s.";
 
-    private final List<Index> memberIndexes;
+    private final Set<Index> memberIndexes;
     private final SessionName sessionName;
 
     /**
      * Creates a DeleteSessionCommand to delete the specified session from the specified list of users.
      *
      * @param sessionName The name of the session to delete.
+     * @param memberIndexes The indexes of the members in the list the session can be found in.
      */
-    public DeleteSessionCommand(SessionName sessionName, List<Index> memberIndexes) {
+    public DeleteSessionCommand(SessionName sessionName, Set<Index> memberIndexes) {
         requireNonNull(sessionName);
         requireNonNull(memberIndexes);
         this.memberIndexes = memberIndexes;
@@ -62,7 +67,10 @@ public class DeleteSessionCommand extends Command {
             }
             Member member = lastShownList.get(index.getZeroBased());
             if (member.getSessions().stream().noneMatch(
-                    element -> element.getSessionName().toString().equals(sessionName.toString()))) {
+                    // dummy values to avoid duplicating isSameSession or add circular dependencies via SessionBuilder
+                    element -> element.isSameSession(
+                            new Session(sessionName, new SessionDate("01 Dec 2010"), new Point("3"))
+                    ))) {
                 throw new CommandException(String.format(MESSAGE_DELETE_SESSION_FAIL, sessionName.toString(),
                         member.getName().toString()));
             }
@@ -94,7 +102,7 @@ public class DeleteSessionCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("delete", sessionName.toString())
+                .add("delete", sessionName)
                 .toString();
     }
 

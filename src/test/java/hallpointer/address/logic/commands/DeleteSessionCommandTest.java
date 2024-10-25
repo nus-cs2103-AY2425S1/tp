@@ -1,23 +1,19 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.model.Model;
-import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.point.Point;
@@ -25,6 +21,8 @@ import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.ModelStub;
+import hallpointer.address.testutil.SessionBuilder;
 import hallpointer.address.testutil.TypicalIndexes;
 import javafx.collections.ObservableList;
 
@@ -40,7 +38,7 @@ public class DeleteSessionCommandTest {
 
     @Test
     public void constructor_nullSessionName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(null, List.of()));
+        assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(null, new HashSet<>()));
     }
 
     @Test
@@ -55,7 +53,8 @@ public class DeleteSessionCommandTest {
         validMember.addSession(defaultSession);
         modelStub.addMember(validMember);
 
-        List<Index> memberIndexes = Arrays.asList(TypicalIndexes.INDEX_FIRST_MEMBER);
+        Set<Index> memberIndexes = new HashSet<>();
+        memberIndexes.add(TypicalIndexes.INDEX_FIRST_MEMBER);
         SessionName sessionName = new SessionName("Rehearsal");
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(sessionName, memberIndexes);
@@ -70,7 +69,8 @@ public class DeleteSessionCommandTest {
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithoutMembers();
-        List<Index> memberIndexes = Arrays.asList(Index.fromZeroBased(5)); // Invalid index
+        Set<Index> memberIndexes = new HashSet<>();
+        memberIndexes.add(Index.fromZeroBased(5)); // Invalid index
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
                 new SessionName("Rehearsal"), memberIndexes);
@@ -82,7 +82,8 @@ public class DeleteSessionCommandTest {
     @Test
     public void execute_sessionNotInMember_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithMemberButNoSession();
-        List<Index> memberIndexes = Arrays.asList(TypicalIndexes.INDEX_FIRST_MEMBER);
+        Set<Index> memberIndexes = new HashSet<>();
+        memberIndexes.add(TypicalIndexes.INDEX_FIRST_MEMBER);
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
                 new SessionName("NonExistentSession"), memberIndexes);
@@ -91,8 +92,10 @@ public class DeleteSessionCommandTest {
 
     @Test
     public void equals() {
-        List<Index> indexesAlice = Arrays.asList(TypicalIndexes.INDEX_FIRST_MEMBER);
-        List<Index> indexesBob = Arrays.asList(TypicalIndexes.INDEX_SECOND_MEMBER);
+        Set<Index> indexesAlice = new HashSet<>();
+        Set<Index> indexesBob = new HashSet<>();
+        indexesAlice.add(TypicalIndexes.INDEX_FIRST_MEMBER);
+        indexesBob.add(TypicalIndexes.INDEX_SECOND_MEMBER);
         SessionName rehearsal = new SessionName("Rehearsal");
         SessionName exam = new SessionName("Exam");
 
@@ -119,76 +122,17 @@ public class DeleteSessionCommandTest {
         // different session -> returns false
         assertFalse(deleteRehearsalFromAliceCommand.equals(deleteExamFromAliceCommand));
     }
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
 
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
+    @Test
+    public void toStringMethod() {
+        Session session = new SessionBuilder(ATTENDANCE).build();
+        Set<Index> indices = new HashSet<Index>();
+        indices.add(INDEX_FIRST_MEMBER);
 
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteMember(Member target) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
-        public void setMember(Member target, Member updatedMember) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
-        public ObservableList<Member> getFilteredMemberList() {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
-        public void updateFilteredMemberList(Predicate<Member> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(session.getSessionName(), indices);
+        String expected = DeleteSessionCommand.class.getCanonicalName()
+                + "{delete=" + ATTENDANCE.getSessionName() + "}";
+        assertEquals(expected, deleteSessionCommand.toString());
     }
 
     /**

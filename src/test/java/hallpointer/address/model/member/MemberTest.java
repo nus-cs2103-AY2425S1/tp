@@ -1,12 +1,15 @@
 package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
+import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,6 +21,7 @@ import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.SessionBuilder;
 
 public class MemberTest {
 
@@ -29,11 +33,11 @@ public class MemberTest {
 
     @Test
     public void isSameMember() {
-        // same object -> returns true
-        assertTrue(ALICE.isSameMember(ALICE));
-
         // null -> returns false
         assertFalse(ALICE.isSameMember(null));
+
+        // same object -> returns true
+        assertTrue(ALICE.isSameMember(ALICE));
 
         // same name, all other attributes different -> returns true
         Member updatedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
@@ -44,9 +48,11 @@ public class MemberTest {
         updatedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameMember(updatedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameMember(updatedBob));
+        // name differs in case, all other attributes different -> returns true
+        Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase())
+                .withTelegram(VALID_TELEGRAM_AMY).withRoom(VALID_ROOM_AMY).withTags(VALID_TAG_HUSBAND)
+                .withSessions(new SessionBuilder(REHEARSAL).build()).build();
+        assertTrue(BOB.isSameMember(updatedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -128,6 +134,10 @@ public class MemberTest {
         // different tags -> returns false
         updatedAlice = new MemberBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(updatedAlice));
+
+        // different sessions -> returns false
+        updatedAlice = new MemberBuilder(ALICE)
+                .withSessions(new SessionBuilder(REHEARSAL).build()).build();
     }
 
     @Test

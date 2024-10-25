@@ -76,8 +76,6 @@ public class AddSessionCommand extends Command {
             model.setMember(member, member);
         }
 
-        // Hack to force refresh without focus being needed, since model.setMember doesn't quite work here
-        // model.updateFilteredMemberList(PREDICATE_SHOW_NO_MEMBERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 toAdd.getSessionName().sessionName,
                 toAdd.getDate().fullDate,
