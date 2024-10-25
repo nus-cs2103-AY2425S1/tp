@@ -35,10 +35,10 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
@@ -53,6 +53,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -93,6 +94,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validPhoneNumber_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person personToDelete = ALICE;
         Phone phone = personToDelete.getPhone();
         DeleteCommand deleteCommand = new DeleteCommand(phone);
@@ -107,6 +109,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidPhoneNumber_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Phone invalidPhone = new Phone("99999999");
         DeleteCommand deleteCommand = new DeleteCommand(invalidPhone);
 
@@ -115,6 +118,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validAddress_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person personToDelete = ALICE;
         Address address = personToDelete.getAddress();
         DeleteCommand deleteCommand = new DeleteCommand(address);
@@ -129,6 +133,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidAddress_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Address address = new Address("Invalid addresss");
         DeleteCommand deleteCommand = new DeleteCommand(address);
 
@@ -137,6 +142,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validEmail_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person personToDelete = ALICE;
         Email email = personToDelete.getEmail();
         DeleteCommand deleteCommand = new DeleteCommand(email);
@@ -151,6 +157,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidEmail_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Email email = new Email("invalidemail@example.com");
         DeleteCommand deleteCommand = new DeleteCommand(email);
 
@@ -159,6 +166,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidTags_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Set<Tag> invalidTags = new HashSet<>();
         Tag invalidTag = new Tag("InvalidTag");
         invalidTags.add(invalidTag);

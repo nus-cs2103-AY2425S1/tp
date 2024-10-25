@@ -43,7 +43,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + PREFIX_PHONE + "91234567 ";
+            + PREFIX_PHONE + " 91234567 ";
 
     private Index targetIndex = null;
     private Phone phoneNumber = null;

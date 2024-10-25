@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -134,7 +134,7 @@ public class DeleteCommand extends Command {
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
         } else if (phoneNumber != null) {
-            return deletePersonByAttribute(model, address, Messages.MESSAGE_INVALID_PHONE_NUMBER);
+            return deletePersonByAttribute(model, phoneNumber, Messages.MESSAGE_INVALID_PHONE_NUMBER);
         } else if (predicate != null) {
             model.updateFilteredPersonList(predicate);
             if (model.getFilteredPersonList().size() == 1) {

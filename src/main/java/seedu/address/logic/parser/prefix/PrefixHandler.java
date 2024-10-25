@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -64,8 +65,10 @@ public class PrefixHandler {
      * @param attribute The attribute object.
      * @return The type of the attribute as a string (e.g., "PHONE", "EMAIL", "ADDRESS").
      */
-    private String getTypeOfAttribute(Object attribute) {
-        if (attribute instanceof Phone) {
+    public String getTypeOfAttribute(Object attribute) {
+        if (attribute instanceof Name) {
+            return "NAME";
+        } else if (attribute instanceof Phone) {
             return "PHONE";
         } else if (attribute instanceof Email) {
             return "EMAIL";
@@ -73,8 +76,10 @@ public class PrefixHandler {
             return "ADDRESS";
         } else if (attribute instanceof Role) {
             return "ROLE";
-        } else {
+        } else if (attribute instanceof Set<?>) {
             return "TAG";
+        } else {
+            return "ERROR";
         }
     }
 
@@ -91,6 +96,13 @@ public class PrefixHandler {
         List<Person> matchingPersons = new ArrayList<>();
         for (Person person : lastShownList) {
             switch (type) {
+            case "NAME":
+                Name nameOfPerson = person.getName();
+                Name name = (Name) attribute;
+                if (nameOfPerson.equals(name)) {
+                    matchingPersons.add(person);
+                }
+                break;
             case "PHONE":
                 Phone phoneOfPerson = person.getPhone();
                 Phone phoneNumber = (Phone) attribute;

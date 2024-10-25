@@ -43,6 +43,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
 
         String argumentType = prefixHandler.getArgumentType(argMultimap);
+        System.out.println(argumentType);
 
         switch (argumentType) {
 
