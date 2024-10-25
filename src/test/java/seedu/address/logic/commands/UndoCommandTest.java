@@ -26,32 +26,70 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoAddPerson_success() throws CommandException {
-        Person validPerson = new PersonBuilder().build();
-        model.addPerson(validPerson);
+        Person firstPerson = new PersonBuilder().withName("firstPerson").build();
+        Person secondPerson = new PersonBuilder().withName("secondPerson").build();
+
+        // Add the first person and commit the change
+        model.addPerson(firstPerson);
+        model.commitAddressBook();
+
+        // Add the second person and commit the change
+        model.addPerson(secondPerson);
+        model.commitAddressBook();
+
+        // Set up the expected model to match the state after undo
+        expectedModel.addPerson(firstPerson);
+
+        // Execute the undo command
         CommandResult result = new UndoCommand().execute(model);
+
+        // Verify the results
         assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
-
     }
+
     @Test
     public void execute_undoEditPerson_success() throws CommandException {
         Person originalPerson = new PersonBuilder().build();
         Person editedPerson = new PersonBuilder().withName("Edited Name").build();
+
+        // Add the original person and commit the change
         model.addPerson(originalPerson);
+        model.commitAddressBook();
+
+        // Edit the person and commit the change
         model.setPerson(originalPerson, editedPerson);
+        model.commitAddressBook();
+
+        // Set up the expected model to match the state after undo
         expectedModel.addPerson(originalPerson);
+
+        // Execute the undo command
         CommandResult result = new UndoCommand().execute(model);
+
+        // Verify the results
         assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
-
     @Test
     public void execute_undoDeletePerson_success() throws CommandException {
         Person validPerson = new PersonBuilder().build();
+
+        // Add the person and commit the change
         model.addPerson(validPerson);
+        model.commitAddressBook();
+
+        // Delete the person and commit the change
         model.deletePerson(validPerson);
+        model.commitAddressBook();
+
+        // Set up the expected model to match the state after undo
         expectedModel.addPerson(validPerson);
+
+        // Execute the undo command
         CommandResult result = new UndoCommand().execute(model);
+
+        // Verify the results
         assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
