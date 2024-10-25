@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Sex;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,9 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Birthdate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get());
-        Person person = new Person(name, nric, birthDate, sex);
+        Patient patient = new Patient(name, nric, birthDate, sex);
 
-        return new AddCommand(person);
+        return new AddCommand(patient);
     }
 
     /**

@@ -7,29 +7,29 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
- * A utility class for Person.
+ * A utility class for Patient.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code patient}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Patient patient) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(patient);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code patient}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Patient patient) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_NRIC + person.getNric().value + " ");
-        sb.append(PREFIX_SEX + person.getSex().value + " ");
-        sb.append(PREFIX_BIRTHDATE + person.getBirthdate().value + " ");
+        sb.append(PREFIX_NAME + patient.getName().fullName + " ");
+        sb.append(PREFIX_NRIC + patient.getNric().value + " ");
+        sb.append(PREFIX_SEX + patient.getSex().value + " ");
+        sb.append(PREFIX_BIRTHDATE + patient.getBirthdate().value + " ");
         return sb.toString();
     }
 

@@ -3,23 +3,23 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Allergy;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthRecord;
-import seedu.address.model.person.HealthRisk;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Patient objects.
  */
 public class PersonBuilder {
 
@@ -79,30 +79,30 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code patientToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        nric = personToCopy.getNric();
-        birthdate = personToCopy.getBirthdate();
-        sex = personToCopy.getSex();
-        allergy = personToCopy.getAllergy();
-        bloodType = personToCopy.getBloodType();
-        healthRisk = personToCopy.getHealthRisk();
-        healthRecord = personToCopy.getHealthRecord();
-        note = personToCopy.getNote();
-        nokName = personToCopy.getNokName();
-        nokPhone = personToCopy.getNokPhone();
-        for (Appt appt: personToCopy.getAppts()) {
+    public PersonBuilder(Patient patientToCopy) {
+        name = patientToCopy.getName();
+        phone = patientToCopy.getPhone();
+        email = patientToCopy.getEmail();
+        address = patientToCopy.getAddress();
+        nric = patientToCopy.getNric();
+        birthdate = patientToCopy.getBirthdate();
+        sex = patientToCopy.getSex();
+        allergy = patientToCopy.getAllergy();
+        bloodType = patientToCopy.getBloodType();
+        healthRisk = patientToCopy.getHealthRisk();
+        healthRecord = patientToCopy.getHealthRecord();
+        note = patientToCopy.getNote();
+        nokName = patientToCopy.getNokName();
+        nokPhone = patientToCopy.getNokPhone();
+        for (Appt appt: patientToCopy.getAppts()) {
             appts.add(new Appt(appt.getDateTime()));
         }
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Patient} that we are building.
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
@@ -110,7 +110,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Patient} that we are building.
      */
     public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -118,7 +118,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Patient} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -126,7 +126,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Patient} that we are building.
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
@@ -134,7 +134,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Nric} of the {@code Person} that we are building.
+     * Sets the {@code Nric} of the {@code Patient} that we are building.
      */
     public PersonBuilder withNric(String nric) {
         this.nric = new Nric(nric);
@@ -142,7 +142,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Birthdate} of the {@code Person} that we are building.
+     * Sets the {@code Birthdate} of the {@code Patient} that we are building.
      */
     public PersonBuilder withBirthdate(String birthdate) {
         this.birthdate = new Birthdate(birthdate);
@@ -150,7 +150,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Sex} of the {@code Person} that we are building.
+     * Sets the {@code Sex} of the {@code Patient} that we are building.
      */
     public PersonBuilder withSex(String sex) {
         this.sex = new Sex(sex);
@@ -158,7 +158,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Allergy} of the {@code Person} that we are building.
+     * Sets the {@code Allergy} of the {@code Patient} that we are building.
      */
     public PersonBuilder withAllergy(String allergy) {
         this.allergy = new Allergy(allergy);
@@ -166,7 +166,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Blood Type} of the {@code Person} that we are building.
+     * Sets the {@code Blood Type} of the {@code Patient} that we are building.
      */
     public PersonBuilder withBloodType(String bloodType) {
         this.bloodType = new BloodType(bloodType);
@@ -174,7 +174,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Health Risk} of the {@code Person} that we are building.
+     * Sets the {@code Health Risk} of the {@code Patient} that we are building.
      */
     public PersonBuilder withHealthRisk(String healthRisk) {
         this.healthRisk = new HealthRisk(healthRisk);
@@ -182,7 +182,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Health Record} of the {@code Person} that we are building.
+     * Sets the {@code Health Record} of the {@code Patient} that we are building.
      */
     public PersonBuilder withHealthRecord(String healthRecord) {
         this.healthRecord = new HealthRecord(healthRecord);
@@ -190,7 +190,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Note} of the {@code Person} that we are building.
+     * Sets the {@code Note} of the {@code Patient} that we are building.
      */
     public PersonBuilder withNote(String note) {
         this.note = new Note(note);
@@ -198,7 +198,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code NokName} of the {@code Person} that we are building.
+     * Sets the {@code NokName} of the {@code Patient} that we are building.
      */
     public PersonBuilder withNokName(String nokName) {
         this.nokName = new Name(nokName);
@@ -206,7 +206,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code NokPhone} of the {@code Person} that we are building.
+     * Sets the {@code NokPhone} of the {@code Patient} that we are building.
      */
     public PersonBuilder withNokPhone(String nokPhone) {
         this.nokPhone = new Phone(nokPhone);
@@ -214,10 +214,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Builds a person based on the fields that were set.
+     * Builds a patient based on the fields that were set.
      */
-    public Person build() {
-        return new Person(name, nric, birthdate, sex, phone, email, address, allergy, bloodType,
+    public Patient build() {
+        return new Patient(name, nric, birthdate, sex, phone, email, address, allergy, bloodType,
                 healthRisk, healthRecord, note, nokName, nokPhone, appts);
     }
 

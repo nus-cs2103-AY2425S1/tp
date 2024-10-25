@@ -18,7 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.filteredappointment.FilteredAppointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -176,7 +176,7 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the Patient Info Panel.
      */
     @FXML
-    public void showPatientInfo(Person patient) {
+    public void showPatientInfo(Patient patient) {
         PatientInfoPanel patientInfoPanel = new PatientInfoPanel(patient);
         guiPanelPlaceholder.getChildren().remove(0);
         guiPanelPlaceholder.getChildren().add(patientInfoPanel.getRoot());

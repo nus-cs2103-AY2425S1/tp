@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
 
 /**
  * Views the full profile of a patient in the database.
@@ -33,10 +33,10 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPersonList();
 
-        // Find the person with the given nric
-        Optional<Person> optionalPerson = lastShownList.stream()
+        // Find the patient with the given nric
+        Optional<Patient> optionalPerson = lastShownList.stream()
                 .filter(person -> person.getNric().equals(nric))
                 .findFirst();
 
@@ -44,9 +44,9 @@ public class ViewCommand extends Command {
             throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
-        Person person = optionalPerson.get();
+        Patient patient = optionalPerson.get();
 
-        return new CommandResult(generateSuccessMessage(person), null, false, person,
+        return new CommandResult(generateSuccessMessage(patient), null, false, patient,
                 true, false);
     }
 
@@ -65,8 +65,8 @@ public class ViewCommand extends Command {
         return nric.equals(e.nric);
     }
 
-    private String generateSuccessMessage(Person person) {
-        return String.format(MESSAGE_VIEW_SUCCESS, person.getName());
+    private String generateSuccessMessage(Patient patient) {
+        return String.format(MESSAGE_VIEW_SUCCESS, patient.getName());
     }
 
 }

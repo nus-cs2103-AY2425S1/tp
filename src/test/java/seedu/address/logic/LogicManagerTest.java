@@ -26,7 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -162,9 +162,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + NRIC_DESC_AMY
                 + SEX_DESC_AMY + BIRTHDATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Patient expectedPatient = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPerson(expectedPatient);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

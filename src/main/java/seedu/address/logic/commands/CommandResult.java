@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
  * Represents the result of a command execution.
@@ -23,7 +23,7 @@ public class CommandResult {
     private final boolean showPatientInfo;
 
     /** Target patient whose info is to be displayed */
-    private final Person patient;
+    private final Patient patient;
 
     /** The application should exit. */
     private final boolean exit;
@@ -31,7 +31,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, String keyword, boolean showHelp, Person patient,
+    public CommandResult(String feedbackToUser, String keyword, boolean showHelp, Patient patient,
             boolean showPatientInfo, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.keyword = keyword;
@@ -61,7 +61,7 @@ public class CommandResult {
         return this.keyword;
     }
 
-    public Person getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 

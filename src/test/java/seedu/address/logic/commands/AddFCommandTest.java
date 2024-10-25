@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.filteredappointment.FilteredAppointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddFCommandTest {
@@ -32,10 +32,10 @@ public class AddFCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        Person validPerson = new PersonBuilder().build();
+        Patient validPatient = new PersonBuilder().build();
         AddFCommandTest.ModelStubWithOnlyOnePerson modelStub =
-                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPerson);
-        Person alice = new PersonBuilder().withNric("T0123456A").build();
+                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPatient);
+        Patient alice = new PersonBuilder().withNric("T0123456A").build();
         CommandResult commandResult = new AddFCommand(alice).execute(modelStub);
 
         assertEquals(String.format(AddFCommand.MESSAGE_SUCCESS, Messages.format(alice)),
@@ -44,10 +44,10 @@ public class AddFCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddFCommand addFCommand = new AddFCommand(validPerson);
+        Patient validPatient = new PersonBuilder().build();
+        AddFCommand addFCommand = new AddFCommand(validPatient);
         AddFCommandTest.ModelStubWithOnlyOnePerson modelStub =
-                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPerson);
+                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPatient);
 
         assertThrows(CommandException.class, AddFCommand.MESSAGE_DUPLICATE_PERSON, () ->
                 addFCommand.execute(modelStub));
@@ -55,8 +55,8 @@ public class AddFCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withNric("T0123456A").build();
-        Person bob = new PersonBuilder().withNric("S0123456A").build();
+        Patient alice = new PersonBuilder().withNric("T0123456A").build();
+        Patient bob = new PersonBuilder().withNric("S0123456A").build();
         AddFCommand addFAliceCommand = new AddFCommand(alice);
         AddFCommand addFBobCommand = new AddFCommand(bob);
 
@@ -119,32 +119,32 @@ public class AddFCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPerson(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePerson(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addPerson(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPerson(Patient target, Patient editedPatient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Patient> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,25 +160,25 @@ public class AddFCommandTest {
     }
 
     /**
-     * A Model stub that will only store 1 person and always accept the person being added
-     * unless the person is already stored in the model.
+     * A Model stub that will only store 1 patient and always accept the patient being added
+     * unless the patient is already stored in the model.
      */
     private class ModelStubWithOnlyOnePerson extends ModelStub {
 
-        private final Person person;
+        private final Patient patient;
 
-        ModelStubWithOnlyOnePerson(Person person) {
-            this.person = person;
+        ModelStubWithOnlyOnePerson(Patient patient) {
+            this.patient = patient;
         }
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasPerson(Patient patient) {
+            requireNonNull(patient);
+            return this.patient.isSamePerson(patient);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
+        public void addPerson(Patient patient) {
+            requireNonNull(patient);
         }
     }
 }

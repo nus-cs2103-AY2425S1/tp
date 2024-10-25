@@ -22,20 +22,20 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddFCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Allergy;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthRecord;
-import seedu.address.model.person.HealthRisk;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 
 /**
@@ -82,10 +82,10 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
         List<Appt> appts = new ArrayList<>();
 
-        Person person = new Person(name, nric, birthDate, sex, phone, email, address, allergy,
+        Patient patient = new Patient(name, nric, birthDate, sex, phone, email, address, allergy,
                 bloodType, healthRIsk, healthRecord, note, nokName, nokPhone, appts);
 
-        return new AddFCommand(person);
+        return new AddFCommand(patient);
     }
 
     /**

@@ -13,8 +13,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Patient;
 
 /**
  * Filters the patients based on their appointment dates and health services.
@@ -47,11 +47,11 @@ public class FilterCommand extends Command {
 
         TreeSet<FilteredAppointment> filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
 
-        List<Person> personList = model.getFilteredPersonList();
-        for (Person person : personList) {
-            for (Appt appt : person.getAppts()) {
+        List<Patient> patientList = model.getFilteredPersonList();
+        for (Patient patient : patientList) {
+            for (Appt appt : patient.getAppts()) {
                 if (appt.isBetweenDatesAndMatchService(dateFilter)) {
-                    FilteredAppointment filteredAppt = new FilteredAppointment(appt, person);
+                    FilteredAppointment filteredAppt = new FilteredAppointment(appt, patient);
                     filteredAppts.add(filteredAppt);
                 }
             }

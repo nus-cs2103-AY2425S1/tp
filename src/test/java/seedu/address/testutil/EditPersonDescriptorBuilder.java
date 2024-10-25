@@ -8,20 +8,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Allergy;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthRecord;
-import seedu.address.model.person.HealthRisk;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -39,25 +39,25 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code patient}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Patient patient) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setNric(person.getNric());
-        descriptor.setBirthDate(person.getBirthdate());
-        descriptor.setSex(person.getSex());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setBloodType(person.getBloodType());
-        descriptor.setNokName(person.getNokName());
-        descriptor.setNokPhone(person.getNokPhone());
-        descriptor.setAllergy(person.getAllergy());
-        descriptor.setHealthRisk(person.getHealthRisk());
-        descriptor.setHealthRecord(person.getHealthRecord());
-        descriptor.setAppts(person.getAppts());
-        descriptor.setNote(person.getNote());
+        descriptor.setName(patient.getName());
+        descriptor.setNric(patient.getNric());
+        descriptor.setBirthDate(patient.getBirthdate());
+        descriptor.setSex(patient.getSex());
+        descriptor.setPhone(patient.getPhone());
+        descriptor.setEmail(patient.getEmail());
+        descriptor.setAddress(patient.getAddress());
+        descriptor.setBloodType(patient.getBloodType());
+        descriptor.setNokName(patient.getNokName());
+        descriptor.setNokPhone(patient.getNokPhone());
+        descriptor.setAllergy(patient.getAllergy());
+        descriptor.setHealthRisk(patient.getHealthRisk());
+        descriptor.setHealthRecord(patient.getHealthRecord());
+        descriptor.setAppts(patient.getAppts());
+        descriptor.setNote(patient.getNote());
     }
 
     /**

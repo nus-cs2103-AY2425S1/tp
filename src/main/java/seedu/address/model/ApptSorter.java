@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.address.model.person.Appt;
+import seedu.address.model.patient.Appt;
 
 /**
  * Contains utility methods for sorting appointments.

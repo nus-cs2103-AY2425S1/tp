@@ -26,8 +26,8 @@ import java.util.Optional;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Nric;
 
 /**
  * Parses input arguments and creates a new EditCommand object

@@ -31,11 +31,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Sex;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -43,19 +43,19 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Patient expectedPatient = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                + BIRTHDATE_DESC_BOB, new AddCommand(expectedPerson));
+                + BIRTHDATE_DESC_BOB, new AddCommand(expectedPatient));
 
 
         // multiple health services - all accepted
-        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB).build();
+        Patient expectedPatientMultipleHealthServices = new PersonBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
                         + BIRTHDATE_DESC_BOB,
-                new AddCommand(expectedPersonMultipleHealthServices));
+                new AddCommand(expectedPatientMultipleHealthServices));
     }
 
     @Test

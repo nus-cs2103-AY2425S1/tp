@@ -10,16 +10,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds a patient to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
@@ -31,17 +31,17 @@ public class AddCommand extends Command {
             + PREFIX_BIRTHDATE + "2001-06-24 "
             + PREFIX_SEX + "M ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
 
-    private final Person toAdd;
+    private final Patient toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Patient}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Patient patient) {
+        requireNonNull(patient);
+        toAdd = patient;
     }
 
     @Override

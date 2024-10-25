@@ -8,27 +8,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Allergy;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthRecord;
-import seedu.address.model.person.HealthRisk;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Patient}.
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
     private final String name;
     private final String nric;
@@ -48,7 +48,7 @@ class JsonAdaptedPerson {
 
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given patient details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
@@ -79,9 +79,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Patient} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Patient source) {
         name = source.getName().fullName;
         nric = source.getNric().value;
         sex = source.getSex().value;
@@ -102,11 +102,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Patient toModelType() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -211,7 +211,7 @@ class JsonAdaptedPerson {
             }
         }
 
-        return new Person(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
+        return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
                 modelAddress, modelAllergy, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
                 modelNokName, modelNokPhone, modelAppts);
     }

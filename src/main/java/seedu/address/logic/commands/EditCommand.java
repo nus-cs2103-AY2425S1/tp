@@ -29,29 +29,29 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Allergy;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Birthdate;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthRecord;
-import seedu.address.model.person.HealthRisk;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Sex;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing patient in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified by the "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified by the "
             + "NRIC input. Existing values will be overwritten by the input values.\n"
             + "Parameters: NRIC (must be a valid NRIC in the system) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -86,17 +86,17 @@ public class EditCommand extends Command {
             + PREFIX_APPOINTMENT + "2022-12-31T14:00"
             + PREFIX_NOTE + "Patient needs extra care";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book.";
     public static final String WRONG_NRIC = "NRIC provided has to be a current valid NRIC in the system.";
 
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param nric of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param nric of the patient in the filtered patient list to edit
+     * @param editPersonDescriptor details to edit the patient with
      */
     public EditCommand(Nric nric, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(nric);
@@ -109,52 +109,52 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPersonList();
 
-        Person personToEdit = lastShownList.stream()
+        Patient patientToEdit = lastShownList.stream()
                 .filter(person -> person.getNric().equals(nric))
                 .findFirst()
                 .orElse(null);
 
-        if (personToEdit == null) {
+        if (patientToEdit == null) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_NRIC, nric));
         }
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Patient editedPatient = createEditedPerson(patientToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!patientToEdit.isSamePerson(editedPatient) && model.hasPerson(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(patientToEdit, editedPatient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Patient createEditedPerson(Patient patientToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert patientToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
-        Birthdate updatedBirthDate = editPersonDescriptor.getBirthDate().orElse(personToEdit.getBirthdate());
-        Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Allergy updatedAllergy = editPersonDescriptor.getAllergy().orElse(personToEdit.getAllergy());
-        BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
-        HealthRisk updatedHealthRisk = editPersonDescriptor.getHealthRisk().orElse(personToEdit.getHealthRisk());
+        Name updatedName = editPersonDescriptor.getName().orElse(patientToEdit.getName());
+        Nric updatedNric = editPersonDescriptor.getNric().orElse(patientToEdit.getNric());
+        Birthdate updatedBirthDate = editPersonDescriptor.getBirthDate().orElse(patientToEdit.getBirthdate());
+        Sex updatedSex = editPersonDescriptor.getSex().orElse(patientToEdit.getSex());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Allergy updatedAllergy = editPersonDescriptor.getAllergy().orElse(patientToEdit.getAllergy());
+        BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
+        HealthRisk updatedHealthRisk = editPersonDescriptor.getHealthRisk().orElse(patientToEdit.getHealthRisk());
         HealthRecord updatedHealthRecord = editPersonDescriptor.getHealthRecord()
-                .orElse(personToEdit.getHealthRecord());
-        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
-        Name updatedNokName = editPersonDescriptor.getNokName().orElse(personToEdit.getNokName());
-        Phone updatedNokPhone = editPersonDescriptor.getNokPhone().orElse(personToEdit.getNokPhone());
-        List<Appt> updatedAppts = editPersonDescriptor.getAppts().orElse(personToEdit.getAppts());
+                .orElse(patientToEdit.getHealthRecord());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(patientToEdit.getNote());
+        Name updatedNokName = editPersonDescriptor.getNokName().orElse(patientToEdit.getNokName());
+        Phone updatedNokPhone = editPersonDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
+        List<Appt> updatedAppts = editPersonDescriptor.getAppts().orElse(patientToEdit.getAppts());
 
-        return new Person(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
+        return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, updatedAllergy, updatedBloodType, updatedHealthRisk, updatedHealthRecord,
                 updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
     }
@@ -184,8 +184,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
     public static class EditPersonDescriptor {
         private Name name;

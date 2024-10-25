@@ -1,13 +1,11 @@
 package seedu.address.model.filteredappointment;
 
-import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
+import static seedu.address.model.patient.Appt.DATETIME_COMPARATOR;
 
 import java.util.Comparator;
 
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Person;
-
-
+import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.Patient;
 
 
 /**
@@ -26,24 +24,24 @@ public class FilteredAppointment {
     };
 
     private final Appt appt;
-    private final Person person;
+    private final Patient patient;
 
     /**
-     * Creates a {@code FilteredAppointment} with the given {@Code Appt} and {@Code Person}
+     * Creates a {@code FilteredAppointment} with the given {@Code Appt} and {@Code Patient}
      * @param appt
-     * @param person
+     * @param patient
      */
-    public FilteredAppointment(Appt appt, Person person) {
+    public FilteredAppointment(Appt appt, Patient patient) {
         this.appt = appt;
-        this.person = person;
+        this.patient = patient;
     }
 
     public Appt getAppt() {
         return appt;
     }
 
-    public Person getPerson() {
-        return person;
+    public Patient getPerson() {
+        return patient;
     }
 
     @Override
@@ -59,11 +57,11 @@ public class FilteredAppointment {
 
         FilteredAppointment otherFilteredAppointment = (FilteredAppointment) other;
         return this.appt.equals(otherFilteredAppointment.getAppt())
-                && this.person.equals(otherFilteredAppointment.getPerson());
+                && this.patient.equals(otherFilteredAppointment.getPerson());
     }
 
     @Override
     public String toString() {
-        return appt.toString() + "\n" + person.getName() + " " + person.getNric();
+        return appt.toString() + "\n" + patient.getName() + " " + patient.getNric();
     }
 }
