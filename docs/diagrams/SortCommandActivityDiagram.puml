@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters SortCommand;
+if () then ([has preamble])
+  :Check preamble value;
+  if () then ([is -1 or 1])
+    :Check for prefixes;
+    if () then ([no prefixes])
+      :Throw no prefix exception;
+      stop
+    elseif () then ([multiple prefixes])
+      :Throw incorrect prefix count exception;
+      stop
+    else ([else])
+      :Check which criteria input;
+      if () then ([name prefix])
+        :Create sort by name command;
+      elseif () then ([student ID prefix])
+        :Create sort by student ID command;
+      elseif () then ([tutorial prefix])
+        :Create sort by tutorial command;
+      else ([else])
+        :Throw format exception;
+        stop
+      endif
+      :LogicManager executes command;
+      :Update GUI to show sorted results;
+      stop
+    endif
+  else ([else])
+    :Throw invalid preamble exception;
+    stop
+  endif
+else ([else])
+    :Throw format exception;
+    stop
+
+@enduml

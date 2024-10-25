@@ -172,6 +172,24 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort feature
+
+#### Current Implementation
+
+The sort mechanism allows for sorting by one of three fields, the contact's name, contact's student ID and the contact's tutorial attendance. Sorting can also be done in ascending or descending order.
+
+- Name: Sorted by alphabetical order
+- Student ID: Sorted by numerical order
+- Tutorials: Sorted by attendance status. 
+  - Ascending order: `PRESENT`, `ABSENT`, `NOT_TAKEN_PLACE`
+  - Descending Order: `ABSENT`, `PRESENT`, `NOT_TAKEN_PLACE`
+
+After parsing a sort command from the UI, the SortCommandParser will then decide on which `Comparator<Person>` to use based on the given prefixes of the command.
+
+The activity diagram below shows how the correct Comparator is selected:
+
+<img src="images/SortCommandActivityDiagram.png" width="800" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
