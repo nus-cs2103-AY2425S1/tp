@@ -4,18 +4,24 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
+AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" ArchivedPersonList
 
-UniquePersonList -right-> Person
+UniquePersonList --> "*" Person
+ArchivedPersonList --> "*" Person
 
-Person -up-> "*" Tag
+Class Student extends Person
+Class Parent extends Person
+Parent -[hidden]right->Person
 
+Tag -left-> "*" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 
-class Student extends Person
+Parent -[hidden]up-> Tag
+Student "child" <-right-> "parent" Parent
 Student *--> "1" Grade
 Student *--> "1" Education
 @enduml
