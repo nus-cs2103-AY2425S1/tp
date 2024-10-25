@@ -66,7 +66,7 @@
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -74,7 +74,19 @@
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Help command supports two input formats which allows for more flexibility when
+you want to seek help:
+
+**Shows a message explain the usage of the specified command keyword**
+
+Format: `help COMMAND_KEYWORD`
+
+Example: 
+- `help add` shows the help message for `add` command in the following format
+![help_example](images/helpExample.png)
+
+**Shows a message and a pop-up window showing the full list of help messages,
+and an external link to the full user guide.**
 
 ![help message](images/helpMessage.png)
 
