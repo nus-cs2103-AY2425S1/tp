@@ -24,7 +24,7 @@ import spleetwaise.transaction.model.transaction.Description;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_UNKOWN_PHONE_NUMBER = "Phone number is unknown.";
+    public static final String MESSAGE_PHONE_NUMBER_IS_UNKNOWN = "Phone number is unknown.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -119,7 +119,7 @@ public class ParserUtil {
         requireNonNull(phone);
         Optional<Person> p = CommonModel.getInstance().getPersonByPhone(phone);
         if (p.isEmpty()) {
-            throw new ParseException(MESSAGE_UNKOWN_PHONE_NUMBER);
+            throw new ParseException(MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
         }
         return p.get();
     }

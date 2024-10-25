@@ -71,7 +71,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidPersonField_failure() {
         String userInput = " p/9435125";
-        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_UNKOWN_PHONE_NUMBER);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
     }
 
     @Test
