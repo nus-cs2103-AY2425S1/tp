@@ -26,11 +26,11 @@ public class TagPersonDescriptorTest {
         assertFalse(DESC_DOE.equals(DESC_BOB));
 
         // different tag -> returns false
-        TagPersonDescriptor editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTags("colleague").build();
+        TagPersonDescriptor editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTag("colleague").build();
         assertFalse(DESC_DOE.equals(editedDoe));
 
         // different tag (multiple tags) -> returns false
-        editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTags("friend", "husband").build();
+        editedDoe = new TagPersonDescriptorBuilder(DESC_DOE).withTag("friend").build();
         assertFalse(DESC_DOE.equals(editedDoe));
     }
 

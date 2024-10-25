@@ -78,8 +78,8 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         // Initialize TagPersonDescriptor using the TagPersonDescriptorBuilder
-        DESC_JON = new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        DESC_DOE = new TagPersonDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
+        DESC_JON = new TagPersonDescriptorBuilder().withTag(VALID_TAG_FRIEND).build();
+        DESC_DOE = new TagPersonDescriptorBuilder().withTag(VALID_TAG_HUSBAND).build();
     }
 
     /**
