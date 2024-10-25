@@ -137,9 +137,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedPersonList() {
-        sortedPersons.setComparator(Comparator.comparing(person
-                -> person.getName().fullName));
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
     }
 
     @Override

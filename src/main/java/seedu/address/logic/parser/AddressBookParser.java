@@ -84,7 +84,7 @@ public class AddressBookParser {
             return new BatchDeleteCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommand();
+            return new SortCommandParser().parse(arguments);
 
         case BatchEditCommand.COMMAND_WORD:
             return new BatchEditCommandParser().parse(arguments);
