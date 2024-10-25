@@ -48,11 +48,11 @@
         </StackPane>
 
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+          <VBox fx:id="employeeList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="employeeListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
           <VBox fx:id="projectList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">

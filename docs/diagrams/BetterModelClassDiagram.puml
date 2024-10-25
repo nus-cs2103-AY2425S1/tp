@@ -4,29 +4,29 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueEmployeeList
 AddressBook *-down-> "1" UniqueProjectList
 AddressBook *-down-> "1" UniqueAssignmentList
 AddressBook *-right-> "1" UniqueTagList
 AddressBook *-right-> "1" UniqueSkillList
 UniqueAssignmentList -[hidden]left- UniqueProjectList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniqueEmployeeList
+UniqueTagList -[hidden]down- UniqueEmployeeList
 UniqueSkillList -[hidden]down- UniqueTagList
 Tag -[hidden]right- Skill
 
 UniqueTagList -right-> "*" Tag
 UniqueSkillList -right-> "*" Skill
-UniquePersonList -right-> Person
+UniqueEmployeeList -right-> Employee
 
-Person -up-> "*" Tag
-Person -up-> "*" Skill
+Employee -up-> "*" Tag
+Employee -up-> "*" Skill
 
-Person *--> EmployeeId
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Employee *--> EmployeeId
+Employee *--> Name
+Employee *--> Phone
+Employee *--> Email
+Employee *--> Address
 
 UniqueProjectList --> Project
 
@@ -37,6 +37,6 @@ Project *--> "*" Skill
 UniqueAssignmentList --> Assignment
 
 Assignment *--> AssignmentId
-Assignment *--> Person
+Assignment *--> Employee
 Assignment *--> Project
 @enduml

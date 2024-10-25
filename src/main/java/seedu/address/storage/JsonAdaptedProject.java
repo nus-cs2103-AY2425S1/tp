@@ -51,9 +51,9 @@ class JsonAdaptedProject {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted employee object into the model's {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Project toModelType() throws IllegalValueException {
         if (name == null) {

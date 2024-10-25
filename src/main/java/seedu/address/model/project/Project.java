@@ -48,8 +48,8 @@ public class Project {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both projects have the same name.
+     * This defines a weaker notion of equality between two projects.
      */
     public boolean isSameProject(Project otherProject) {
         if (otherProject == this) {
@@ -61,8 +61,8 @@ public class Project {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both projects have the same identity and data fields.
+     * This defines a stronger notion of equality between two projects.
      */
     @Override
     public boolean equals(Object other) {

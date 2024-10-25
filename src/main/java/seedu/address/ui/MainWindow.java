@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EmployeeListPanel employeeListPanel;
     private ProjectListPanel projectListPanel;
     private AssignmentListPanel assignmentListPanel;
     private ResultDisplay resultDisplay;
@@ -46,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane employeeListPanelPlaceholder;
 
     @FXML
     private StackPane projectListPanelPlaceholder;
@@ -120,8 +120,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
+        employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
 
         projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
@@ -152,11 +152,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Highlights the list of persons.
+     * Highlights the list of employees.
      */
     @FXML
-    public void emphasizePersonListPanel() {
-        personListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
+    public void emphasizeEmployeeListPanel() {
+        employeeListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
         projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
         assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
     }
@@ -166,7 +166,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void emphasizeProjectListPanel() {
-        personListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        employeeListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
         projectListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
         assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
     }
@@ -176,7 +176,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void emphasizeAssignmentListPanel() {
-        personListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        employeeListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
         projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
         assignmentListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
     }
@@ -221,8 +221,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             // TODO: Consider using factory classes for this
-            if (commandResult.getDisplayType().equals(DisplayType.PERSON_LIST)) {
-                emphasizePersonListPanel();
+            if (commandResult.getDisplayType().equals(DisplayType.EMPLOYEE_LIST)) {
+                emphasizeEmployeeListPanel();
             }
 
             if (commandResult.getDisplayType().equals(DisplayType.PROJECT_LIST)) {

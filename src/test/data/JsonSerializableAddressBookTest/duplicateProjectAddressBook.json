@@ -1,6 +1,6 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [],
+  "_comment": "AddressBook save file which contains the same  values as in TypicalEmployees#getTypicalAddressBook()",
+  "employees" : [],
   "projects" : [ {
     "name" : "Project Alpha",
     "id" : "A0276123J"

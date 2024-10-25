@@ -13,8 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -26,7 +26,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Project> filteredProjects;
     private final FilteredList<Assignment> filteredAssignments;
 
@@ -40,7 +40,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredProjects = new FilteredList<>(this.addressBook.getProjectList());
         filteredAssignments = new FilteredList<>(this.addressBook.getAssignmentList());
     }
@@ -88,13 +88,13 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        setAddressBookPerson(addressBook);
+        setAddressBookEmployee(addressBook);
         setAddressBookProject(addressBook);
     }
 
     @Override
-    public void setAddressBookPerson(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetPersonData(addressBook);
+    public void setAddressBookEmployee(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetEmployeeData(addressBook);
     }
 
     @Override
@@ -108,9 +108,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return addressBook.hasEmployee(employee);
     }
 
     @Override
@@ -120,26 +120,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteEmployee(Employee target) {
+        addressBook.removeEmployee(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addEmployee(Employee employee) {
+        addressBook.addEmployee(employee);
+        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireAllNonNull(target, editedEmployee);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setEmployee(target, editedEmployee);
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return this.addressBook.getPersonList();
+    public ObservableList<Employee> getEmployeeList() {
+        return this.addressBook.getEmployeeList();
     }
 
     @Override
@@ -215,21 +215,21 @@ public class ModelManager implements Model {
     public void addAssignment(Assignment assignment) {
         addressBook.addAssignment(assignment);
     }
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Employee List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Employee> getFilteredEmployeeList() {
+        return filteredEmployees;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredEmployees.setPredicate(predicate);
     }
 
     //=========== Filtered Project List Accessors =============================================================
@@ -280,7 +280,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredEmployees.equals(otherModelManager.filteredEmployees)
                 && filteredProjects.equals(otherModelManager.filteredProjects);
     }
 

@@ -13,7 +13,7 @@ import seedu.address.model.project.Project;
 import seedu.address.ui.DisplayType;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an employee identified using it's displayed index from the address book.
  */
 public class DeleteProjectCommand extends Command {
 

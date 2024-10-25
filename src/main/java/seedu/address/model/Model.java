@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -17,7 +17,7 @@ import seedu.address.model.project.ProjectId;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
     Predicate<Project> PREDICATE_SHOW_ALL_PROJECTS = unused -> true;
     Predicate<Assignment> PREDICATE_SHOW_ALL_ASSIGNMENTS = unused -> true;
 
@@ -57,9 +57,9 @@ public interface Model {
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Replaces address book persons data with the data in {@code addressBook}.
+     * Replaces address book employees data with the data in {@code addressBook}.
      */
-    void setAddressBookPerson(ReadOnlyAddressBook addressBook);
+    void setAddressBookEmployee(ReadOnlyAddressBook addressBook);
 
     /**
      * Replaces address book projects data with the data in {@code addressBook}.
@@ -70,39 +70,41 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an employee with the same identity as {@code employee} exists
+     * in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasEmployee(Employee employee);
 
     /**
-     * Returns true if a person with the same {@code employeeId} exists in
+     * Returns true if an employee with the same {@code employeeId} exists in
      * the address book.
      */
     boolean hasEmployeeId(EmployeeId employeeId);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given employee.
+     * The employee must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteEmployee(Employee target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given employee.
+     * {@code employee} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addEmployee(Employee employee);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given employee {@code target} with {@code editedEmployee}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The employee identity of {@code editedEmployee} must not be the same as
+     * another existing employee in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setEmployee(Employee target, Employee editedEmployee);
 
     /**
-     * Gets list of persons in the address book.
+     * Gets list of employees in the address book.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Employee> getEmployeeList();
 
     /**
      * Returns true if a project with the same identity as {@code project} exists in
@@ -131,7 +133,8 @@ public interface Model {
     /**
      * Replaces the given project {@code target} with {@code project}.
      * {@code project} must exist in the address book.
-     * The person identity of {@code project} must not be the same as another existing project in the address book.
+     * The employee identity of {@code project} must not be the same as another
+     * existing project in the address book.
      */
     void setProject(Project target, Project editedProject);
 
@@ -147,7 +150,8 @@ public interface Model {
     boolean hasAssignment(Assignment assignment);
 
     /**
-     * Returns true if an assignment with the same assignment id as {@code assignmentId}
+     * Returns true if an assignment with the same assignment id as
+     * {@code assignmentId}
      * exists in the address book.
      */
     boolean hasAssignment(AssignmentId assignmentId);
@@ -183,20 +187,24 @@ public interface Model {
      */
     void addAssignment(Assignment assignment);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered employee list */
+    ObservableList<Employee> getFilteredEmployeeList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered employee list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredEmployeeList(Predicate<Employee> predicate);
 
     /** Returns an unmodifiable view of the filtered project list */
     ObservableList<Project> getFilteredProjectList();
 
     /**
-     * Updates the filter of the filtered project list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered project list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProjectList(Predicate<Project> predicate);
@@ -205,7 +213,9 @@ public interface Model {
     ObservableList<Assignment> getFilteredAssignmentList();
 
     /**
-     * Updates the filter of the filtered assignment list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered assignment list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAssignmentList(Predicate<Assignment> predicate);

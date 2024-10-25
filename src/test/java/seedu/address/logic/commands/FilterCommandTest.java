@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_EMPLOYEES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
+import static seedu.address.testutil.TypicalEmployees.CARL;
+import static seedu.address.testutil.TypicalEmployees.DANIEL;
+import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,81 +57,81 @@ public class FilterCommandTest {
         // null -> returns false
         assertFalse(filterFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noEmployeeFound() {
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                DisplayType.PERSON_LIST, false, false);
+                DisplayType.EMPLOYEE_LIST, false, false);
         SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate(" ");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
         FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
-        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        expectedModel.updateFilteredEmployeeList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+    public void execute_multipleKeywords_multipleEmployeesFound() {
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 4);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                DisplayType.PERSON_LIST, false, false);
+                DisplayType.EMPLOYEE_LIST, false, false);
 
         SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("thievery");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("friends");
 
         FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
-        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        expectedModel.updateFilteredEmployeeList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_multipleKeywordsMutuallyExclusive_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+    public void execute_multipleKeywordsMutuallyExclusive_multipleEmployeesFound() {
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                DisplayType.PERSON_LIST, false, false);
+                DisplayType.EMPLOYEE_LIST, false, false);
 
         SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("moneyManagement");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("owesMoney");
 
         FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
-        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        expectedModel.updateFilteredEmployeeList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_onlySkills_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+    public void execute_onlySkills_multipleEmployeesFound() {
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                DisplayType.PERSON_LIST, false, false);
+                DisplayType.EMPLOYEE_LIST, false, false);
 
         SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("thievery");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
 
         FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
-        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        expectedModel.updateFilteredEmployeeList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(Arrays.asList(BENSON, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, CARL), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_onlyTags_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_onlyTags_multipleEmployeesFound() {
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                DisplayType.PERSON_LIST, false, false);
+                DisplayType.EMPLOYEE_LIST, false, false);
 
         SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate(" ");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("friends");
 
         FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
-        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        expectedModel.updateFilteredEmployeeList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredEmployeeList());
     }
 
     @Test

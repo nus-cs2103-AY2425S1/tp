@@ -9,12 +9,12 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 
 /**
- * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
+ * Tests that a {@code Employee}'s {@code Tags} matches any of the keywords given.
  */
-public class TagsContainsKeywordsPredicate implements Predicate<Person> {
+public class TagsContainsKeywordsPredicate implements Predicate<Employee> {
     private final Set<String> keywords;
 
     /**
@@ -28,13 +28,13 @@ public class TagsContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Employee employee) {
         // Null objects should not have been added to addressbook
-        assert person != null;
+        assert employee != null;
 
         // Tag matches any of the keywords given
         return keywords.stream()
-                .anyMatch(keyword -> person.getTags().stream()
+                .anyMatch(keyword -> employee.getTags().stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 

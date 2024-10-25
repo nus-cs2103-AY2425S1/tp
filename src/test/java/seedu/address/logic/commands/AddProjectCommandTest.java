@@ -24,8 +24,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.ProjectBuilder;
@@ -79,7 +79,7 @@ public class AddProjectCommandTest {
         // null -> returns false
         assertFalse(addAlphaCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(addAlphaCommand.equals(addBetaCommand));
     }
 
@@ -125,7 +125,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -140,7 +140,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void setAddressBookPerson(ReadOnlyAddressBook newData) {
+        public void setAddressBookEmployee(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,7 +155,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,17 +165,17 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteEmployee(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setEmployee(Employee target, Employee editedEmployee) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Employee> getEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,7 +240,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -255,7 +255,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -271,7 +271,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single employee.
      */
     private class ModelStubWithProject extends ModelStub {
         private final Project project;
@@ -289,7 +289,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the employee being added.
      */
     private class ModelStubAcceptingProjectAdded extends ModelStub {
         final ArrayList<Project> projectsAdded = new ArrayList<>();
