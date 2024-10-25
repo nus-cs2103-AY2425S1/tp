@@ -284,7 +284,7 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 ![Ui](images/clearinput.png)
 
 *Output: The UI updates to show that all entries have been cleared.*
-![Ui](images/clearcommand.png)
+![Ui](images/ClearCommand.png)
 
 **Tips:**
 
@@ -361,6 +361,7 @@ Updates the payment status of a student to completed.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The index **must be within the range** of the number of people in the list.
+* The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
 
 
 **Example Usage:**
@@ -369,7 +370,6 @@ Updates the payment status of a student to completed.
 
 *Output: The UI updates to show the payment status of the student.*
   ![Ui](images/markpaidafter.png)
-
 
 
 [Back to Table of Contents](#table-of-contents)
