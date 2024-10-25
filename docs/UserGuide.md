@@ -216,7 +216,7 @@ Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 **Example Usage:**
 
-`find Kim`  
+`find n/Kim`  
 
 *Input: User enters the `find` command to search for persons whose names contain the keyword `Kim`.*  
 ![find image](images/findBefore.png)
@@ -228,7 +228,7 @@ Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 - Use the `find` command to quickly locate persons based on their names or class IDs.
 - The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
-- The `OR` search means more results, making it easier to find related entries.
+
 
 [Back to Table of Contents](#table-of-contents)
 
