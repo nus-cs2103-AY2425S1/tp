@@ -22,4 +22,5 @@ Person *--> Remark
 Person *--> Income
 Person *--> Priority
 Person *--> DateOfBirth
+Person *--> FamilySize
 @enduml

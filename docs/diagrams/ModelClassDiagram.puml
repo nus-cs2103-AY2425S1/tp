@@ -23,6 +23,7 @@ Class Remark
 Class Priority
 Class Income
 Class DateOfBirth
+Class FamilySize
 
 Class I #FFFFFF
 }
@@ -50,6 +51,7 @@ Person *--> Remark
 Person *--> Priority
 Person *--> Income
 Person *--> DateOfBirth
+Person *--> FamilySize
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
