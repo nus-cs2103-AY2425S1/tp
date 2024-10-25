@@ -139,6 +139,5 @@ public class DeleteAppointmentCommand extends Command {
                     .add("appointment", appointment)
                     .toString();
         }
-
     }
 }
