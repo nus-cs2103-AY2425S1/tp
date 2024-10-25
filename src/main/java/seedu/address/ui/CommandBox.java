@@ -121,7 +121,13 @@ public class CommandBox extends UiPart<Region> {
             errorIndexStart = commandText.indexOf(" ") + 1;
             break;
         case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
-            errorIndexStart = commandText.trim().lastIndexOf(" ") + 1;
+            if ((commandText.contains("sold") && commandText.contains("ap/"))
+                    || (commandText.contains("bought") && commandText.contains("ap/"))) {
+                errorIndexStart = commandText.substring(0, commandText.trim().lastIndexOf(" "))
+                        .trim().lastIndexOf(" ") + 1;
+            } else {
+                errorIndexStart = commandText.trim().lastIndexOf(" ") + 1;
+            }
             break;
         case SortCommand.MESSAGE_AVAILABLE_FIELDS, SortIndividualCommand.MESSAGE_AVAILABLE_FIELDS:
             errorIndexStart = commandText.indexOf("f/");
