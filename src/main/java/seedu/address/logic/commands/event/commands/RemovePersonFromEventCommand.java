@@ -1,0 +1,73 @@
+package seedu.address.logic.commands.event.commands;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Person;
+
+
+
+public class RemovePersonFromEventCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(RemovePersonFromEventCommand.class);
+
+    public static final String COMMAND_WORD = "remove";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "e/ [INDEX] [p/ [PERSON INDEX]] : Removes a person from " +
+            "an event";
+    public static final String MESSAGE_SUCCESS = "Person %1$s removed from event %2$s";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found in event";
+    public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found";
+
+    private final Index eventIndex;
+    private final Index personIndex;
+
+    public RemovePersonFromEventCommand(Index eventIndex, Index personIndex) {
+        requireAllNonNull(eventIndex, personIndex);
+        this.eventIndex = eventIndex;
+        this.personIndex = personIndex;
+    }
+
+    @Override
+    public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
+        requireAllNonNull(model, eventManager);
+
+        if (eventIndex.getZeroBased() >= eventManager.getEventList().size()) {
+            throw new CommandException(MESSAGE_EVENT_NOT_FOUND);
+        }
+
+        Event event = eventManager.getEventList().get(eventIndex.getZeroBased());
+
+        if (personIndex.getZeroBased() >= event.getAllPersons().size()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        // get the person from address book, then remove from event
+        List<Person> lastShownList = model.getFilteredPersonList();
+        Person person = lastShownList.get(eventIndex.getZeroBased());
+        String personRole = event.getRole(person);
+        if (personRole == null) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        // at this point, person should have a role in event
+        assert(event.hasPerson(person));
+        logger.info("Removing person " + person.getName() + " from event " + event.getName());
+
+        event.removePerson(person, personRole);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
+
+
+
+
+    }
+
+
+}

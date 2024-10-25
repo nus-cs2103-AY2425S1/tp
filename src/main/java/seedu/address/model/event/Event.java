@@ -101,8 +101,46 @@ public class Event {
         return new HashSet<>(volunteers);
     }
 
+    /**
+     * Returns true if the person is in the event.
+     * @param p Person to check.
+     * @return True if the person is in the event.
+     */
+    public boolean hasPerson(Person p) {
+        return attendees.contains(p) || vendors.contains(p) || sponsors.contains(p) || volunteers.contains(p);
+    }
 
+    /**
+     * Returns the role of a person in the event, if not present, return null
+     * @param p Person to check.
+     * @return Role of the person in the event.
+     */
+    public String getRole(Person p) {
+        if (attendees.contains(p)) {
+            return "attendee";
+        } else if (vendors.contains(p)) {
+            return "vendor";
+        } else if (sponsors.contains(p)) {
+            return "sponsor";
+        } else if (volunteers.contains(p)) {
+            return "volunteer";
+        } else {
+            return null;
+        }
+    }
 
+    /**
+     * Returns all persons in the event.
+     * @return Set of all persons in the event.
+     */
+    public Set<Person> getAllPersons() {
+        Set<Person> allPersons = new HashSet<>();
+        allPersons.addAll(attendees);
+        allPersons.addAll(vendors);
+        allPersons.addAll(sponsors);
+        allPersons.addAll(volunteers);
+        return allPersons;
+    }
     /**
      * Adds a person to the event with the specified role.
      * @param person Person to be added.
@@ -140,6 +178,8 @@ public class Event {
             throw new IllegalValueException(e.getMessage());
         }
     }
+
+
 
     /**
      * Returns true if a given string is a valid event.
