@@ -40,7 +40,6 @@ public class TagCommand extends Command {
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
     public static final String MESSAGE_NO_NEW_TAG = "At least one tag must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for %1$s.";
-    // public static final String MESSAGE_UNSPECIFIED_NAME = "Please specific the full name of person to tag.";
 
 
     private final Name name;
@@ -61,18 +60,6 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        // checks if multiple persons contain same keyword in name
-        // displays those persons
-        /*
-        String[] nameKeywords = new String[] {this.name.fullName}
-
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-        model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().size() > 1) {
-            return new CommandResult(MESSAGE_UNSPECIFIED_NAME);
-        }
-        */
 
         // finds person to tag
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

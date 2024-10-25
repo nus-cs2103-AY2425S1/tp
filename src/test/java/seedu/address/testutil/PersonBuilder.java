@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -27,8 +23,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
-    private Tag role;
+    private Tag tag; // Single tag representing role
     private Wedding wedding;
 
     /**
@@ -39,8 +34,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
-        role = new Tag(DEFAULT_ROLE); // Set default role
+        tag = new Tag(DEFAULT_ROLE); // Default role
         wedding = null; // Default wedding is null
     }
 
@@ -54,8 +48,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        role = personToCopy.getRole();
+        tag = personToCopy.getRole();
         wedding = personToCopy.getOwnWedding();
     }
 
@@ -71,13 +64,17 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Person} that we are building.
+     * Sets the single {@code Tag} of the {@code Person} that we are building.
      *
-     * @param tags The tags to set.
+     * @param tag The tag to set.
      * @return The updated {@code PersonBuilder} instance.
      */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTag(String tag) {
+        if (tag != null) {
+            this.tag = new Tag(tag);
+        } else {
+            this.tag = null;
+        }
         return this;
     }
 
@@ -121,7 +118,7 @@ public class PersonBuilder {
      * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withRole(String role) {
-        this.role = new Tag(role);
+        this.tag = new Tag(role);
         return this;
     }
 
@@ -142,6 +139,6 @@ public class PersonBuilder {
      * @return The built {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, role, wedding);
+        return new Person(name, phone, email, address, tag, wedding);
     }
 }
