@@ -96,4 +96,24 @@ public class ScheduleServicesTest {
         assertEquals("2. Benson: 2024-10-26 1200", result.get(1));
         assertEquals("3. Carl: 2024-10-27 1200", result.get(2));
     }
+
+    @Test
+    public void getTopThreeSchedules_emptyDateTime_continue() {
+        Person scheduledPerson1 = new PersonBuilder().withName("Alice")
+                .withSchedule(new String[]{"2024-10-26 1200"}, new String[]{""}).build();
+        Person scheduledPerson2 = new PersonBuilder().withName("Benson")
+                .withSchedule(new String[]{""}, new String[]{""}).build();
+        Person scheduledPerson3 = new PersonBuilder().withName("Carl")
+                .withSchedule(new String[]{"2024-10-27 1800"}, new String[]{""}).build();
+
+        model.addPerson(scheduledPerson1);
+        model.addPerson(scheduledPerson2);
+        model.addPerson(scheduledPerson3);
+
+        List<String> result = scheduleServices.getTopThreeSchedules(model.getFilteredPersonList());
+
+        assertEquals(2, result.size());
+        assertEquals("1. Alice: 2024-10-26 1200", result.get(0));
+        assertEquals("2. Carl: 2024-10-27 1800", result.get(1));
+    }
 }
