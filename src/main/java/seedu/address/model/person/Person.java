@@ -15,8 +15,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-
+    private static int index = 0;
     // Identity fields
+    protected final int id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -40,6 +41,24 @@ public abstract class Person {
         this.hours = hours;
         this.tags.addAll(tags);
         this.subjects.addAll(subjects);
+        this.id = ++index;
+    }
+
+    /**
+     * Alternate constructor for creating Person from addressbook.json
+     */
+    public Person(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                  Set<Subject> subjects) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.hours = hours;
+        this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
+        this.id = id;
+        index = id++;
     }
 
     public abstract boolean isTutor();
@@ -76,6 +95,14 @@ public abstract class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static void initialiseIndex(int index) {
+        Person.index = index;
     }
 
     /**

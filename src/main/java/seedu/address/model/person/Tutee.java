@@ -25,6 +25,11 @@ public class Tutee extends Person {
         super(name, phone, email, address, hours, tags, subjects);
     }
 
+    public Tutee(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                 Set<Subject> subjects) {
+        super(id, name, phone, email, address, hours, tags, subjects);
+    }
+
     /**
      * Returns {@code false} because this object represents a Tutee, not a Tutor.
      *

@@ -11,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -112,6 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeAssociatedLessons(key);
         indicateModified();
     }
 
@@ -155,6 +158,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         indicateModified();
     }
 
+    /**
+     * Removes all lessons associated with this {@code person} from this {@code AddressBook}.
+     * {@code person} must exist in the address book.
+     */
+    public void removeAssociatedLessons(Person person) {
+        List<Person> associations = getAssociatedPeople(person);
+        for (Person associate : associations) {
+            if (person.isTutor()) {
+                removeLesson(new Lesson((Tutor) person, (Tutee) associate));
+            } else {
+                removeLesson(new Lesson((Tutor) associate, (Tutee) person));
+            }
+        }
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);
@@ -195,6 +213,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.getAssociatedPeople(person);
     }
 
+    public Person getPersonById(int personId) {
+        return persons.get(personId);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -207,7 +229,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && lessons.equals(otherAddressBook.lessons);
     }
 
     @Override

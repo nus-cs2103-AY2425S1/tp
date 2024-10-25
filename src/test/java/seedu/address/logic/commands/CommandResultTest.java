@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -60,4 +62,20 @@ public class CommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void getChartData_success() {
+        Person[] persons = new Person[0];
+        CommandResult commandResult = new CommandResult("feedback", false,
+                false, true, persons);
+        assertEquals(persons, commandResult.getChartData());
+    }
+
+    @Test
+    public void isShowChart_success() {
+        CommandResult commandResult = new CommandResult("feedback", false,
+                false, true, new Person[0]);
+        assertTrue(commandResult.isShowChart());
+    }
 }
+

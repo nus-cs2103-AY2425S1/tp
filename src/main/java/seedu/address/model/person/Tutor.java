@@ -27,6 +27,12 @@ public class Tutor extends Person {
         super(name, phone, email, address, hours, tags, subjects);
     }
 
+    public Tutor(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                 Set<Subject> subjects) {
+        super(id, name, phone, email, address, hours, tags, subjects);
+    }
+
+
     /**
      * Returns {@code true} because this object represents a Tutor.
      *
