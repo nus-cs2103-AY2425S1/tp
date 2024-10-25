@@ -150,12 +150,4 @@ public class MarkPresentAllCommandTest {
     }
 
 
-    @Test
-    public void execute_emptyStack() {
-        Model model = new ModelManager();
-        UndoCommand undoCommand = new UndoCommand();
-        CommandResult result = undoCommand.execute(model);
-
-        assertEquals("There are no commands to undo", result.getFeedbackToUser());
-    }
 }

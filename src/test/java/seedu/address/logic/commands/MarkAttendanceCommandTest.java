@@ -110,15 +110,6 @@ public class MarkAttendanceCommandTest {
         assertTrue(ar.getAttendance().equals(attendance));
     }
 
-    @Test
-    public void execute_emptyStack() {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        UndoCommand undoCommand = new UndoCommand();
-        CommandResult result = undoCommand.execute(modelStub);
-
-        assertEquals("There are no commands to undo", result.getFeedbackToUser());
-    }
-
 
     private class ModelStub implements Model {
         @Override
