@@ -19,6 +19,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class InsurancePlanManager
+Class "{abstract}\nInsurancePlan" as InsurancePlan
+Class Claim
+Class BasicPlan
+Class TravelPlan
 
 Class I #FFFFFF
 }
@@ -35,13 +40,20 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueClientList
-UniqueClientList --> "~* all" Client
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
-Client *--> "*" Tag
+Client -right-> InsurancePlanManager
+InsurancePlanManager --> "*" InsurancePlan
+InsurancePlanManager --> "*" Claim
+BasicPlan --.up.|> InsurancePlan
+TravelPlan --.up.|> InsurancePlan
+
+AddressBook --> "1" UniqueClientList
+UniqueClientList -left-> "~* all" Client
+Client --> Name
+Client --> Phone
+Client --> Email
+Client --> Address
+
+Client --> "*" Tag
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
