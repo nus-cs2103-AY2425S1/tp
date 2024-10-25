@@ -257,7 +257,7 @@ public class StudentTest {
     }
 
     @Test
-    void constructor_withAssignments_success() {
+    void constructor_withAssignmentsAndAttendance_success() {
         Name name = new Name("John Doe");
         Phone phone = new Phone("12345678");
         TutorialGroup tutorialGroup = new TutorialGroup("G01");

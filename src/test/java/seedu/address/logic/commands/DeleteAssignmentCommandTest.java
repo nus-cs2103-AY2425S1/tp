@@ -45,11 +45,11 @@ public class DeleteAssignmentCommandTest {
     @Test
     public void undo_after_execute() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        HUGH.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
         Student hughCopy = new StudentBuilder(HUGH).build();
-        expectedModel.addStudent(hughCopy);
+        hughCopy.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
+        expectedModel.addStudent(HUGH);
 
-        model.addStudent(HUGH);
+        model.addStudent(hughCopy);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(HUGH.getName(),
                 new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
                         null, null));
@@ -59,8 +59,8 @@ public class DeleteAssignmentCommandTest {
                 expectedModel);
 
         assertTrue(deleteAssignmentCommand.undo(model));
-        assertTrue(HUGH.getAssignments().size() == 1);
-        assertTrue(HUGH.getAssignments().get(0).equals(MATH_ASSIGNMENT_SUBMITTED));
+        assertTrue(hughCopy.getAssignments().size() == 1);
+        assertTrue(hughCopy.getAssignments().get(0).equals(MATH_ASSIGNMENT_SUBMITTED));
     }
 
     @Test

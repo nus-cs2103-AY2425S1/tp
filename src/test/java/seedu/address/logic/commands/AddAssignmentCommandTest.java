@@ -35,7 +35,7 @@ public class AddAssignmentCommandTest {
                 String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
                         MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
                 expectedModel);
-        HUGH.deleteLastAssignment(); // This added assignment changed the state of HUGH, so we need to revert it
+        HUGH.deleteLastAssignment(); // This added assignment changes the state of HUGH, so we need to revert it
     }
 
     @Test

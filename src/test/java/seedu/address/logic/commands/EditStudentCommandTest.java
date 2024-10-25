@@ -57,7 +57,7 @@ public class EditStudentCommandTest {
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
         Student editedStudent = studentInList.withName(VALID_NAME_DIDDY).withPhone(VALID_PHONE_DIDDY)
-                .buildFull();
+                .build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_DIDDY)
                 .withPhone(VALID_PHONE_DIDDY).build();
