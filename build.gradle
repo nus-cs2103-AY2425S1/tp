@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'fart-in-a.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
