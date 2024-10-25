@@ -172,7 +172,7 @@ Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 * The `ASK` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
 * The `BID` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
 
-<box type="note" seamless>
+<box type="info" seamless>
 
 **Note:**
 No duplicate properties are allowed. Duplicate properties are checked based on:
