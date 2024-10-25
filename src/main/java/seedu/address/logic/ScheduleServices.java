@@ -9,6 +9,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
 public class ScheduleServices {
+    public ScheduleServices() {
+
+    }
     public static List<String> getTopThreeSchedules(List<Person> personList) {
         List<Map.Entry<Person, LocalDateTime>> allAppointments = new ArrayList<>();
 
