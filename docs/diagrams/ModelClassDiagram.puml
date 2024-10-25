@@ -18,6 +18,8 @@ Class Address
 Class Name
 Class Telegram
 Class Tag
+Class Session
+Class Point
 
 Class I #FFFFFF
 }
@@ -40,6 +42,9 @@ Member *--> Name
 Member *--> Telegram
 Member *--> Address
 Member *--> "*" Tag
+Member *--> "*" Session
+
+Session *--> Point
 
 Member -[hidden]up--> I
 UniqueMemberList -[hidden]right-> I
