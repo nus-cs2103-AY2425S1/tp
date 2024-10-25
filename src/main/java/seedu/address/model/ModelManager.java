@@ -122,6 +122,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean tagExists(Person target, Set<Tag> tags) {
+        return target.tagExists(tags);
+    }
+
+    @Override
     public void addTag(Person target, Set<Tag> newTags) {
         Person updatedPerson = target.addTags(newTags);
         setPerson(target, updatedPerson);

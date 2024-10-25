@@ -87,6 +87,12 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Check if any of the already exist for the person.
+     * {@code person} must already exist in the address book.
+     */
+    boolean tagExists(Person target, Set<Tag> tags);
+
+    /**
      * Adds the tags to the specified person.
      * {@code person} must already exist in the address book.
      */

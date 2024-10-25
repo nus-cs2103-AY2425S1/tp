@@ -43,7 +43,7 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {
         JsonAddressBookStorage jsonStorage =
-            new JsonAddressBookStorage(projectRootPath.resolve("data").resolve("addressbook.json"));
+            new JsonAddressBookStorage(projectRootPath.resolve("addressbook.json"));
         JsonUserPrefsStorage userPrefStorage =
             new JsonUserPrefsStorage(projectRootPath.resolve("config.json"));
         storage = new StorageManager(jsonStorage, userPrefStorage);
@@ -52,8 +52,8 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path importPath = projectRootPath.resolve("data").resolve("adressbook.json");
-        Path exportPath = projectRootPath.resolve("data").resolve("exported_data.csv");
+        Path importPath = projectRootPath.resolve("data").resolve("addressbook.json");
+        Path exportPath = projectRootPath.resolve("exported_data.csv");
         requireNonNull(model);
         saveJsonFile(model, importPath, exportPath);
 
@@ -89,7 +89,7 @@ public class ExportCommand extends Command {
      * Translate the Jsonfile into a csv file
      * @param jsonFilePath
      */
-    private void translateJsonToCsv(Path jsonFilePath, Path exportPath) {
+    private void translateJsonToCsv(Path jsonFilePath, Path exportPath) throws AccessDeniedException {
         try {
             // Read the JSON file
             String jsonContent = Files.readString(jsonFilePath);
@@ -99,7 +99,7 @@ public class ExportCommand extends Command {
             FileWriter csvWriter = new FileWriter(exportPath.toFile());
 
             // Write the CSV header
-            csvWriter.append("Name, Class, Phone number, Tags\n");
+            csvWriter.append("Name,Class,Phone number,Tags\n");
 
             // Iterate through the JSON array and write each object as a CSV row
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -109,22 +109,31 @@ public class ExportCommand extends Command {
                 String phone = person.getString("phone");
                 String tags = getPersonTags(person.getJSONArray("tags"));
                 csvWriter.append(name).append(",").append(studentClass)
-                            .append(",").append(phone).append(", ").append(tags).append("\n");
+                            .append(",").append(phone).append(",").append(tags).append("\n");
             }
-
             // Close the CSV writer
             csvWriter.flush();
             csvWriter.close();
 
+        } catch (AccessDeniedException e) {
+            throw e;
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Parses the json array of tags into a parsable string
+     * @param tags
+     * @return String
+     */
     private String getPersonTags(JSONArray tags) {
         StringBuilder tagsString = new StringBuilder();
         for (int i = 0; i < tags.length(); i++) {
-            tagsString.append(tags.getString(i)).append(" ");
+            tagsString.append(tags.getString(i));
+            if (i != tags.length() - 1) {
+                tagsString.append(" ");
+            }
         }
         return tagsString.toString();
     }
