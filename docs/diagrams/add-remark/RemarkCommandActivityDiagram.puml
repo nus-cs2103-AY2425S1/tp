@@ -38,6 +38,4 @@ else ([Remark prefix is missing])
     stop
 endif
 
-stop
-
 @enduml
