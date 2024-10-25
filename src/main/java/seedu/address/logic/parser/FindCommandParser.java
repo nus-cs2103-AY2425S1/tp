@@ -66,7 +66,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (roomNumber.isPresent()) {
             combinedPredicate = combinedPredicate.and(new RoomNumberPredicate(roomNumber.get()));
         }
-        if (tagList.isPresent()) {
+        if (tagList.isPresent() && !tagList.get().isEmpty()) {
             combinedPredicate = combinedPredicate.and(new TagContainsKeywordsPredicate(tagList.get()));
         }
 
@@ -141,12 +141,18 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private Optional<List<String>> parseTags(List<String> tags) throws ParseException {
         if (!tags.isEmpty()) {
-            // Split all entries by space and flatten into a single list
             List<String> tagList = tags.stream()
-                    .flatMap(tag -> Arrays.stream(tag.split("\\s+")))
+                    .map(String::trim) // Trim each tag
+                    .filter(tag -> !tag.isEmpty()) // Filter out empty strings after trim
                     .collect(Collectors.toList());
+
+            if (tagList.isEmpty()) {
+                return Optional.empty(); // Return empty if no valid tags are found
+            }
+
             return Optional.of(tagList);
         }
         return Optional.empty();
     }
+
 }
