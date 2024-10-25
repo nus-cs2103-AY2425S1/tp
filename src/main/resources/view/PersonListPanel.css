@@ -6,10 +6,6 @@
     -fx-padding: 5 0 0 0;
 }
 
-#personListView {
-    -fx-background-color: #F0A89F;
-}
-
 .separator {
     -fx-padding: 0 10 10 12;
 }
@@ -17,7 +13,23 @@
 .separator *.line {
     -fx-border-color: #FEF7F7;
     -fx-border-style: solid;
-    -fx-border-width: 1;
+    -fx-border-width: 1.3;
+}
+
+#placeholderContainer {
+    -fx-padding: 0 0 52 0;
+}
+
+#placeholderLabel {
+    -fx-font-family: "Arial";
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+    -fx-stroke-width: 1px;
+    -fx-padding: 0 0 8 5;
+}
+
+#personListView {
+    -fx-background-color: #F0A89F;
 }
 
 .list-view {

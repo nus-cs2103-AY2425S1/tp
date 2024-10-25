@@ -11,11 +11,11 @@
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="panel-container" stylesheets="PersonListPanel.css">
     <Label fx:id="titleLabel" styleClass="label-header" />
     <Separator prefWidth="248.0" styleClass="separator" />
-    <VBox fx:id="placeholderContainer" alignment="CENTER" spacing="10" visible="false" managed="false" VBox.vgrow="ALWAYS">
-        <ImageView fitHeight="200" pickOnBounds="true" preserveRatio="true">
-            <Image url="@/images/emptyListIcon.jpg"/>
+    <VBox fx:id="placeholderContainer" alignment="CENTER" visible="false" managed="false" VBox.vgrow="ALWAYS">
+        <ImageView fx:id="placeholderImageView" fitHeight="250" pickOnBounds="true" preserveRatio="true">
+            <Image url="@/images/emptyListIcon.png"/>
         </ImageView>
-        <Label fx:id="placeholderLabel" />
+        <Label fx:id="placeholderLabel" text="Nothing to see here."/>
     </VBox>
     <VBox fx:id="personListContainer" VBox.vgrow="ALWAYS" visible="false" managed="false">
         <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />

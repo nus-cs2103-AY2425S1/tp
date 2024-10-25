@@ -1,7 +1,7 @@
 #contactLists {
-    -fx-padding: 0 0 7 0;
-    -fx-border-insets: 0 0 7 0;
-    -fx-background-insets: 0 0 7 0;
+    -fx-padding: 0 10 7 10;
+    -fx-border-insets: 0 10 7 10;
+    -fx-background-insets: 0 10 7 10;
 }
 
 #guestList, #vendorList {

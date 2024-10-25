@@ -83,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -148,8 +149,14 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
+        double defaultWidth = guiSettings.getWindowWidth();
+        double defaultHeight = guiSettings.getWindowHeight();
+
+        primaryStage.setWidth(defaultWidth);
+        primaryStage.setMinWidth(defaultWidth);
+        primaryStage.setHeight(defaultHeight);
+        primaryStage.setMinHeight(defaultHeight);
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -170,6 +177,15 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+        logger.info("Application width: " + primaryStage.getWidth() + ", height: " + primaryStage.getHeight());
+
+        // Log whenever the window is resized
+        primaryStage.widthProperty().addListener((obs, oldWidth, newWidth) ->
+                logger.info("New width: " + newWidth)
+        );
+        primaryStage.heightProperty().addListener((obs, oldHeight, newHeight) ->
+                logger.info("New height: " + newHeight)
+        );
     }
 
     /**
@@ -177,9 +193,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
-        logic.setGuiSettings(guiSettings);
+//        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+//                (int) primaryStage.getX(), (int) primaryStage.getY());
+//        logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
