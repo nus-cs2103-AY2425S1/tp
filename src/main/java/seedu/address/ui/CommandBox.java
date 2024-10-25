@@ -92,8 +92,10 @@ public class CommandBox extends UiPart<Region> {
         case Price.MESSAGE_CONSTRAINTS:
             if (commandText.contains("sp/")) {
                 errorIndexStart = commandText.indexOf("sp/");
-            } else {
+            } else if (commandText.contains("bp/")) {
                 errorIndexStart = commandText.indexOf("bp/");
+            } else if (commandText.contains("ap/")) {
+                errorIndexStart = commandText.indexOf("ap/");
             }
             break;
         case PostalCode.MESSAGE_CONSTRAINTS:
