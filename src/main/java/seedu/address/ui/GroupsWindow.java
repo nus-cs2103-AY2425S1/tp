@@ -3,10 +3,6 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -18,8 +14,8 @@ import seedu.address.logic.Logic;
 public class GroupsWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(GroupsWindow.class);
-    private Logic logic;
     private static final String FXML = "GroupWindow.fxml";
+    private Logic logic;
     private GroupListPanel groupListPanel;
     @FXML
     private StackPane groupListPanelPlaceholder;

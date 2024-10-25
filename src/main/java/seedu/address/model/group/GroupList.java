@@ -8,10 +8,20 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
+/**
+ * A list of groups that enforces uniqueness between its elements and does not allow nulls.
+ * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of
+ * groups uses {@code Group#isSameGroup(Group)} for equality to ensure that the group being added or updated is
+ * unique in terms of identity within the `GroupList`. However, the removal of a group uses `Group#equals(Object)` to
+ * ensure that the group with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Group#isSameGroup(Group)
+ */
 public class GroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
@@ -78,13 +88,13 @@ public class GroupList implements Iterable<Group> {
      * Replaces the contents of this list with {@code Groups}.
      * {@code Groups} must not contain duplicate Groups.
      */
-    public void setGroups(List<Group> Groups) {
-        requireAllNonNull(Groups);
-        if (!GroupsAreUnique(Groups)) {
+    public void setGroups(List<Group> groups) {
+        requireAllNonNull(groups);
+        if (!groupsAreUnique(groups)) {
             throw new DuplicateGroupException();
         }
 
-        internalList.setAll(Groups);
+        internalList.setAll(groups);
     }
 
     /**
@@ -127,10 +137,10 @@ public class GroupList implements Iterable<Group> {
     /**
      * Returns true if {@code Groups} contains only unique Groups.
      */
-    private boolean GroupsAreUnique(List<Group> Groups) {
-        for (int i = 0; i < Groups.size() - 1; i++) {
-            for (int j = i + 1; j < Groups.size(); j++) {
-                if (Groups.get(i).isSameGroup(Groups.get(j))) {
+    private boolean groupsAreUnique(List<Group> groups) {
+        for (int i = 0; i < groups.size() - 1; i++) {
+            for (int j = i + 1; j < groups.size(); j++) {
+                if (groups.get(i).isSameGroup(groups.get(j))) {
                     return false;
                 }
             }

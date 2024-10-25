@@ -11,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.person.Person;
 
 /**
  * Deletes a group identified by its name from the address book.

@@ -42,7 +42,7 @@ public class FindGroupCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-       if (groupPredicate != null) {
+        if (groupPredicate != null) {
             model.updateFilteredGroupList(groupPredicate);
         }
         return new CommandResult(

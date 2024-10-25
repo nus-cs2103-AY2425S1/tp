@@ -71,7 +71,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
-
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
