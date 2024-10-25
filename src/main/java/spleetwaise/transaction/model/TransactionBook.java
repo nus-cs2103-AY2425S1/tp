@@ -72,7 +72,7 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      *
      * @param replacementTransactionBook The data used to replace the current transactions.
      */
-    public void setTransactions(ReadOnlyTransactionBook replacementTransactionBook) {
+    public void setTransactionBook(ReadOnlyTransactionBook replacementTransactionBook) {
         requireNonNull(replacementTransactionBook);
         transactionList.clear();
         transactionList.addAll(replacementTransactionBook.getTransactionList());

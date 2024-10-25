@@ -130,7 +130,7 @@ public class TransactionBookTest {
     public void setTransaction_null_exceptionThrown() {
         TransactionBook book = new TransactionBook();
 
-        assertThrows(NullPointerException.class, () -> book.setTransactions(null));
+        assertThrows(NullPointerException.class, () -> book.setTransactionBook(null));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class TransactionBookTest {
         replacementBook.addTransaction(testTxn2);
         replacementBook.addTransaction(testTxn3);
 
-        book.setTransactions(replacementBook);
+        book.setTransactionBook(replacementBook);
 
         assertFalse(book.containsTransaction(testTxn));
         assertTrue(book.containsTransaction(testTxn2));

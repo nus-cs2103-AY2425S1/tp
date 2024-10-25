@@ -56,7 +56,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     @Override
     public void setTransactionBook(ReadOnlyTransactionBook replacementBook) {
         requireNonNull(replacementBook);
-        transactionBook.setTransactions(replacementBook);
+        transactionBook.setTransactionBook(replacementBook);
     }
 
     @Override
