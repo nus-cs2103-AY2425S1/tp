@@ -199,6 +199,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void reSortEvents() {
+        addressBook.reSortEvents();
+    };
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

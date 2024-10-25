@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.types.common.DateTimeUtil;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -80,6 +82,14 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Resort Events at the exact minute mark
+        long currentTimeMillis = System.currentTimeMillis();
+        long delayMillis = 60000 - (currentTimeMillis % 60000);
+
+        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(logic::reSortEvents,
+                javafx.util.Duration.minutes(1), delayMillis);
+        eventReSortTimeline.play();
     }
 
     public Stage getPrimaryStage() {

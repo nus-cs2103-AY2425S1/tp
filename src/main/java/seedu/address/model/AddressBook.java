@@ -22,20 +22,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEventList events;
 
-    //TODO: Lets' Re-evaluate how we want to do this
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+    /**
+     * Creates an AddressBook
      */
-    {
+    public AddressBook() {
         persons = new UniquePersonList();
         events = new UniqueEventList();
     }
-
-    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -147,6 +140,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.remove(key);
     }
 
+    /** Resorts Events */
+    public void reSortEvents() {
+        events.sortEvents();
+    };
+
+
     //// util methods
 
     @Override
@@ -162,6 +161,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
     }
