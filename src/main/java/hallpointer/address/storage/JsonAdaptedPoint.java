@@ -29,7 +29,7 @@ public class JsonAdaptedPoint {
      * @param source The Point object to be converted into a {@code JsonAdaptedPoint}.
      */
     public JsonAdaptedPoint(Point source) {
-        this.points = source.toString();
+        this.points = Integer.toString(source.getValue());
     }
 
     /**
