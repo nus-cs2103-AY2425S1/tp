@@ -42,6 +42,34 @@ public class Property {
         this.price = price;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public String getPropertyType() {
+        return propertyType;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public int getNumberOfBedrooms() {
+        return numberOfBedrooms;
+    }
+
+    public int getNumberOfBathrooms() {
+        return numberOfBathrooms;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     /**
      * Static factory method to create a new {@code Property} instance.
      * This method is preferred over directly calling the constructor.
