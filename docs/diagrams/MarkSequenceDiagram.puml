@@ -3,24 +3,18 @@
 skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
 participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
 participant "argM:ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
 participant "mark:MarkCommand" as MarkCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":ContactRecord" as ContactRecord MODEL_COLOR
-participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("mark 1 d/2020-01-01")
-activate LogicManager
-
-LogicManager -> AddressBookParser : parseCommand("mark 1 d/2024-10-25")
+[-> AddressBookParser : parseCommand("mark 1 d/2024-10-25")
 activate AddressBookParser
 
 create MarkCommandParser
@@ -75,28 +69,7 @@ destroy MarkCommandParser
 
 
 
-AddressBookParser --> LogicManager : mark
+[<--AddressBookParser: mark
 deactivate AddressBookParser
 
-LogicManager -> MarkCommand : execute(m)
-activate MarkCommand
-
-MarkCommand -> Model : markAsContacted(person, contactRecord)
-activate Model
-
-Model --> MarkCommand
-deactivate Model
-
-create CommandResult
-MarkCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> MarkCommand
-deactivate CommandResult
-
-MarkCommand --> LogicManager : r
-deactivate MarkCommand
-
-[<--LogicManager
-deactivate LogicManager
 @enduml
