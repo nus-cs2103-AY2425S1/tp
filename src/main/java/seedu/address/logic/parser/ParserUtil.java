@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -100,29 +99,6 @@ public class ParserUtil {
             throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
         }
         return TutorialId.of(trimmedTutorialId);
-    }
-
-    /**
-     * Parses a tutorial id and converts it into an integer.
-     *
-     * @param id String id of the tutorial.
-     * @return an integer id of the tutorial.
-     * @throws ParseException if the id is invalid.
-     */
-    public static TutorialId parseTutIndex(String id) throws ParseException {
-        requireNonNull(id);
-        String trimmedId = id.trim();
-        checkArgument(checkUsingIsDigitMethod(trimmedId), Tutorial.MESSAGE_ID_CONSTRAINTS);
-        return TutorialId.of(trimmedId);
-    }
-
-    static boolean checkUsingIsDigitMethod(String input) {
-        for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

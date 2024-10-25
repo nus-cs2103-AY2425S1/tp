@@ -29,8 +29,8 @@ public class TutorialListTest {
 
     @Test
     public void constructor_constructTutorialListSuccess() {
-        TutorialId tutorialId1 = TutorialId.of("1000");
-        TutorialId tutorialId2 = TutorialId.of("2000");
+        TutorialId tutorialId1 = TutorialId.of("T1000");
+        TutorialId tutorialId2 = TutorialId.of("T2000");
         Tutorial tutorial1 = Tutorial.of(new TutName("Tut"), tutorialId1);
         Tutorial tutorial2 = Tutorial.of(new TutName("Tut1"), tutorialId2);
         ArrayList<Tutorial> tutorials = new ArrayList<>();

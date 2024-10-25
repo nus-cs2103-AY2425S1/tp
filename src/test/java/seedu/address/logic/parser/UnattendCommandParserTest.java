@@ -23,14 +23,14 @@ public class UnattendCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = " " + PREFIX_STUDENTID + "1001 "
-                + PREFIX_TUTORIALID + "1001 "
+        String userInput = " " + PREFIX_STUDENTID + "A1001000U "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         UnattendCommand command = parser.parse(userInput);
 
-        StudentId expectedStudentId = new StudentId("1001");
-        TutorialId expectedTutorialId = TutorialId.of("1001");
+        StudentId expectedStudentId = new StudentId("A1001000U");
+        TutorialId expectedTutorialId = TutorialId.of("T1001");
         Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
 
         UnattendCommand expectedCommand = new UnattendCommand(expectedStudentId, expectedTutorialId, expectedDate);
@@ -40,7 +40,7 @@ public class UnattendCommandParserTest {
 
     @Test
     public void parse_missingStudentId_failure() {
-        String userInput = " " + PREFIX_TUTORIALID + "1001 "
+        String userInput = " " + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -49,7 +49,7 @@ public class UnattendCommandParserTest {
 
     @Test
     public void parse_missingTutorialId_failure() {
-        String userInput = " " + PREFIX_STUDENTID + "1001 "
+        String userInput = " " + PREFIX_STUDENTID + "A1001000U "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -59,7 +59,7 @@ public class UnattendCommandParserTest {
     @Test
     public void parse_invalidStudentId_failure() {
         String userInput = " " + PREFIX_STUDENTID + "invalid_id "
-                + PREFIX_TUTORIALID + "1001 "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
@@ -67,8 +67,8 @@ public class UnattendCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        String userInput = " " + PREFIX_STUDENTID + "1001 "
-                + PREFIX_TUTORIALID + "1001 "
+        String userInput = " " + PREFIX_STUDENTID + "A1001000U "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "invalid_date";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
@@ -76,9 +76,9 @@ public class UnattendCommandParserTest {
 
     @Test
     public void parse_duplicatePrefixes_failure() {
-        String userInput = " " + PREFIX_STUDENTID + "1001 "
-                + PREFIX_STUDENTID + "1002 "
-                + PREFIX_TUTORIALID + "1001 "
+        String userInput = " " + PREFIX_STUDENTID + "A1001000U "
+                + PREFIX_STUDENTID + "A1002000U "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
@@ -87,8 +87,8 @@ public class UnattendCommandParserTest {
     @Test
     public void parse_extraArguments_failure() {
         String userInput = " extra_arg "
-                + PREFIX_STUDENTID + "1001 "
-                + PREFIX_TUTORIALID + "1001 "
+                + PREFIX_STUDENTID + "A1001000U "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

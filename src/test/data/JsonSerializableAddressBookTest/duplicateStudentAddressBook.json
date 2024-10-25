@@ -4,16 +4,16 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "studentId" : "1001",
-    "tutorialId" : "1001",
+    "studentId" : "A1111111U",
+    "tutorialId" : "T1001",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "studentId" : "1001",
-    "tutorialId" : "1001",
+    "studentId" : "A2222222U",
+    "tutorialId" : "T1001",
     "tags": [ "friends" ]
   } ]
 }

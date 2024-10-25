@@ -26,14 +26,14 @@ public class AttendCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = " " + PREFIX_STUDENTID + "1001 "
-                + PREFIX_TUTORIALID + "1001 "
+        String userInput = " " + PREFIX_STUDENTID + "A1001000U "
+                + PREFIX_TUTORIALID + "T1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         AttendCommand command = parser.parse(userInput);
 
-        StudentId expectedStudentId = new StudentId("1001");
-        TutorialId expectedTutorialId = TutorialId.of("1001");
+        StudentId expectedStudentId = new StudentId("A1001000U");
+        TutorialId expectedTutorialId = TutorialId.of("T1001");
         Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
 
         AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialId, expectedDate);

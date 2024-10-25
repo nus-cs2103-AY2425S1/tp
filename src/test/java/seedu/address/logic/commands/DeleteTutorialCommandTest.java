@@ -44,7 +44,7 @@ public class DeleteTutorialCommandTest {
 
     @Test
     public void execute_invalidTutId_success() {
-        Tutorial tutorial = Tutorial.of(new TutName("tut"), TutorialId.of("5000"));
+        Tutorial tutorial = Tutorial.of(new TutName("tut"), TutorialId.of("T5000"));
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_TUTORIAL_NOT_FOUND);
     }

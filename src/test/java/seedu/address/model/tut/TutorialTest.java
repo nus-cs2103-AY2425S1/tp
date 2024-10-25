@@ -214,7 +214,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_noneTest() {
         assertThrows(NoTutorialException.class, ()
-                -> NONE.setAttendance(new Date(), new StudentId("1000")));
+                -> NONE.setAttendance(new Date(), new StudentId("A1000000U")));
     }
 
     @Test

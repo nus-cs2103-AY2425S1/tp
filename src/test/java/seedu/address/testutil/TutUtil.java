@@ -12,7 +12,7 @@ import seedu.address.model.tut.Tutorial;
  */
 public class TutUtil {
     public static final String TUT_NAME = "CS2103T";
-    public static final String TUT_01 = "1001";
+    public static final String TUT_01 = "T1001";
     public static final TutorialId TUTORIAL_ID = TutorialId.of(TUT_01);
     public static final Tutorial TUTORIAL_SAMPLE = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_ID);
     public static final TutDate TUT_DATE;
