@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteOwnerCommand" as DeleteCommand LOGIC_COLOR
+participant "d:DeleteOwnerCommand" as DeleteOwnerCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -30,12 +30,12 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse("o1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteOwnerCommand
+DeleteCommandParser -> DeleteOwnerCommand
+activate DeleteOwnerCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+DeleteOwnerCommand --> DeleteCommandParser :
+deactivate DeleteOwnerCommand
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -46,24 +46,24 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
+LogicManager -> DeleteOwnerCommand : execute(m)
+activate DeleteOwnerCommand
 
-DeleteCommand -> Model : deleteOwner(1)
+DeleteOwnerCommand -> Model : deleteOwner(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteOwnerCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteOwnerCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteOwnerCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+DeleteOwnerCommand --> LogicManager : r
+deactivate DeleteOwnerCommand
 
 [<--LogicManager
 deactivate LogicManager
