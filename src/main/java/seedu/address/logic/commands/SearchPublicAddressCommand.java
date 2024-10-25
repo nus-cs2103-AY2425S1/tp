@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class SearchPublicAddressCommand extends Command {
 
-    public static final String COMMAND_WORD = "searchPublicAddress";
+    public static final String COMMAND_WORD = "searchpa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for a public address and returns the user, network and tag "
