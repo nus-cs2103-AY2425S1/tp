@@ -8,11 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RoleCommand;
 import seedu.address.logic.commands.RoleCommand.PersonWithRoleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.role.Role;
+
+import java.util.Arrays;
 
 /**
  * Parses input arguments and creates a new RoleCommand object
@@ -29,36 +32,36 @@ public class RoleCommandParser implements Parser<RoleCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
 
-        Name name;
+        Index index = null;
+        NameMatchesKeywordPredicate predicate = null;
+
         try {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
+            String target = argMultimap.getPreamble();
+
+            if (target.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoleCommand.MESSAGE_USAGE));
+            }
+
+            if (isNumeric(target)) {
+                index = ParserUtil.parseIndex(target);
+            } else {
+                String[] nameKeywords = target.split("\\s+");
+                predicate = new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords));
+            }
+
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoleCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
 
-        PersonWithRoleDescriptor personWithRoleDescriptor = new PersonWithRoleDescriptor();
+        RoleCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new RoleCommand.PersonWithRoleDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            personWithRoleDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            personWithRoleDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            personWithRoleDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            personWithRoleDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            personWithRoleDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
         }
 
-        Role role = parseRoleToAssign(argMultimap.getValue(PREFIX_ROLE).get());
-
-        personWithRoleDescriptor.setRole(role);
-        System.out.println(personWithRoleDescriptor.getRole());
-
-        return new RoleCommand(name, personWithRoleDescriptor);
+        return new RoleCommand(index, predicate, personWithRoleDescriptor);
     }
 
     /**
@@ -66,6 +69,11 @@ public class RoleCommandParser implements Parser<RoleCommand> {
      * If {@code roles} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Role>} containing zero roles.
      */
+
+    private boolean isNumeric(String str) {
+        return str != null && str.matches("-?\\d+");
+    }
+
     private Role parseRoleToAssign(String role) throws ParseException {
 
         return ParserUtil.parseRole(role);

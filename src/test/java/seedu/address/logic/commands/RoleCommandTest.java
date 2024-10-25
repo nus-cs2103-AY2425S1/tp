@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,8 +26,9 @@ public class RoleCommandTest {
 
     @Test
     public void execute_addValidTag_success() throws Exception {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+
         Person personToTag = model.getFilteredPersonList().get(0); // Assuming Alice is the first person
-        Name name = new Name("Alice Pauline");
 
         // Define the new tag to add
         String newTag = "friend";
@@ -33,7 +36,7 @@ public class RoleCommandTest {
         // Create the tag command descriptor with one tag
         RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(newTag).build();
 
-        RoleCommand tagCommand = new RoleCommand(name, descriptor);
+        RoleCommand tagCommand = new RoleCommand(indexLastPerson, null, descriptor);
 
         // Create the expected person with the new tags as strings
         Person expectedPerson = new PersonBuilder(personToTag).withRole(newTag).build();
@@ -52,12 +55,14 @@ public class RoleCommandTest {
 
     @Test
     public void execute_tagAlreadyExists_throwsCommandException() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+
         Person personToTag = model.getFilteredPersonList().get(0);
 
         Name name = new Name(VALID_NAME_AMY);
         RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build();
 
-        RoleCommand tagCommand = new RoleCommand(name, descriptor);
+        RoleCommand tagCommand = new RoleCommand(indexLastPerson, null, descriptor);
 
         assertThrows(CommandException.class, () -> tagCommand.execute(model),
                 String.format(RoleCommand.MESSAGE_DUPLICATE_ROLE, personToTag.getName()));
@@ -65,9 +70,9 @@ public class RoleCommandTest {
 
     @Test
     public void equals() {
-        RoleCommand tagCommand1 = new RoleCommand(new Name(VALID_NAME_AMY),
+        RoleCommand tagCommand1 = new RoleCommand(INDEX_FIRST_PERSON, null,
                 new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
-        RoleCommand tagCommand2 = new RoleCommand(new Name(VALID_NAME_AMY),
+        RoleCommand tagCommand2 = new RoleCommand(INDEX_FIRST_PERSON, null,
                 new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build());
 
         // same object -> returns true
