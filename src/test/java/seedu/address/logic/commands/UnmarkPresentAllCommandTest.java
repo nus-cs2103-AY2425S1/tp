@@ -114,11 +114,11 @@ public class UnmarkPresentAllCommandTest {
     }
 
     @Test
-    public void execute_undoMarkPresentAllCommand_success() throws Exception {
+    public void execute_undoUnmarkPresentAllCommand_success() throws Exception {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
-        MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
+        UnmarkPresentAllCommand markCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
         markCommand.execute(model);
 
         CommandStack commandStack = CommandStack.getInstance();
@@ -133,16 +133,16 @@ public class UnmarkPresentAllCommandTest {
     }
 
     @Test
-    public void execute_undoMarkPresentAllCommandTwoAttendance_success() throws Exception {
+    public void execute_undoUnmarkPresentAllCommandTwoAttendance_success() throws Exception {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
         MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
         UnmarkPresentAllCommand unmarkCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
-        Attendance attendance = new Attendance("a");
-        unmarkCommand.execute(model);
+        Attendance attendance = new Attendance("p");
         markCommand.execute(model);
-        markCommand.undo(model);
+        unmarkCommand.execute(model);
+        unmarkCommand.undo(model);
 
         AttendanceRecord ar = student1.getAttendanceRecord().get(0);
         assertTrue(ar.getAttendance().equals(attendance));
