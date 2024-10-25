@@ -26,7 +26,6 @@ public class CommandTextFlow extends TextFlow {
         super();
         this.commandText = command;
         this.detailText = getDetailForCommand(command);
-
         // Style the command text with highlighting
         buildCommandText(command, filter);
         // Add separator
@@ -34,7 +33,7 @@ public class CommandTextFlow extends TextFlow {
         // Add detail text
         Text details = new Text(detailText);
         details.setFont(Font.font("Comfortaa", FontWeight.NORMAL, 14));
-        details.setFill(Color.WHITE);
+        details.setFill(Color.grayRgb(210));
         getChildren().add(details);
 
         // Set padding for the entire flow
@@ -59,6 +58,7 @@ public class CommandTextFlow extends TextFlow {
         if (!text.toLowerCase().equals(filter.toLowerCase())) {
             Text textAfter = new Text(text.substring(filterIndex + filter.length()));
             textAfter.setFont(Font.font("Comfortaa", FontWeight.BOLD, size));
+            textAfter.setFill(Color.WHITE);
             getChildren().add(textAfter);
         }
 
