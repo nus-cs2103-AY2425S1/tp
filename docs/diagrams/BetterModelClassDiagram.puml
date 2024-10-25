@@ -16,13 +16,13 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Age
-Person *--> Nric
-Person *--> Gender
-Person *--> Appointment
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Age
+Person *--> "1" Nric
+Person *--> "1" Gender
+Person *--> "1" Appointment
+Person *--> "1" Address
 
 @enduml
