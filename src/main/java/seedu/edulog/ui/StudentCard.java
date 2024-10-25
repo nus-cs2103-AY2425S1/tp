@@ -64,6 +64,7 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        assert(student.getAddress() != null);
         paidStatusIcon.setImage(student.getHasPaid() ? paidIcon : unpaidIcon);
         fee.setText("$" + String.valueOf(student.getFee().value));
     }
