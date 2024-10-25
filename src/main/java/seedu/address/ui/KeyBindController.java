@@ -28,7 +28,7 @@ public class KeyBindController {
         this.resultDisplay = resultDisplay;
     }
 
-    private static void handleKeyEvent(KeyEvent event, KeyBind... bindings) {
+    static void handleKeyEvent(KeyEvent event, KeyBind... bindings) {
         for (KeyBind binding : bindings) {
             if (binding.matches(event)) {
                 event.consume();
