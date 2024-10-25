@@ -14,12 +14,19 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "SocialBook Storage" #F4F6F6{
+Class "<<interface>>\nSocialBookStorage" as SocialBookStorage
+Class JsonSocialBookStorage
+Class JsonSerializableSocialBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+}
+
+package "Appointment Storage" #F4F6F6{
+Class "<<interface>>\nAppointmentStorage" as AppointmentStorage
+Class JsonAppointmentStorage
+Class JsonSerializableAppointment
+Class JsonAdaptedAppointment
 }
 
 }
@@ -29,15 +36,21 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" SocialBookStorage
+StorageManager -up-> "1" AppointmentStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -left-|> AppointmentStorage
+Storage -right-|> SocialBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSocialBookStorage .up.|> SocialBookStorage
+JsonSocialBookStorage ..> JsonSerializableSocialBook
+JsonSerializableSocialBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonAppointmentStorage .up.|> AppointmentStorage
+JsonAppointmentStorage ..> JsonSerializableAppointment
+JsonSerializableAppointment --> "*" JsonAdaptedAppointment
 
 @enduml
