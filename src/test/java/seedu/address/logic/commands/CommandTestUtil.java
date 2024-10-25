@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,8 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_BOB = "MEDIUM";
     public static final String VALID_REMARK_AMY = "Loves Taylor Swift.";
     public static final String VALID_REMARK_BOB = "Supports Manchester United.";
-    public static final String VALID_DATE_OF_BIRTH_AMY = "1 Jan 2000";
-    public static final String VALID_DATE_OF_BIRTH_BOB = "3 Jan 1989";
+    public static final LocalDate VALID_DATE_OF_BIRTH_AMY = LocalDate.of(2000, 1, 1);
+    public static final LocalDate VALID_DATE_OF_BIRTH_BOB = LocalDate.of(1989, 1, 3);
     public static final double VALID_INCOME_AMY = 1500.32;
     public static final double VALID_INCOME_BOB = 1300;
     public static final int VALID_FAMILY_SIZE_AMY = 1;
@@ -79,7 +80,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "CRITICAL"; // no such priority
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "99 Dec 0001"; // invalid date
+    public static final String INVALID_FUTURE_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "9999-01-01";
+    public static final String INVALID_FORMAT_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "99 Dec 0001";
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + -323.32323;
     public static final String INVALID_FAMILY_SIZE_DESC = " " + PREFIX_FAMILY_SIZE + 0;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

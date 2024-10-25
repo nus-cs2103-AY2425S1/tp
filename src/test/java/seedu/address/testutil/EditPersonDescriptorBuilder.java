@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -81,7 +82,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code DateOfBirth} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withDateOfBirth(String dateOfBirth) {
+    public EditPersonDescriptorBuilder withDateOfBirth(LocalDate dateOfBirth) {
         descriptor.setDateOfBirth(new DateOfBirth(dateOfBirth));
         return this;
     }

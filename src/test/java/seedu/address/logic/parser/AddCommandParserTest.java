@@ -11,9 +11,10 @@ import static seedu.address.logic.commands.CommandTestUtil.FAMILY_SIZE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.FAMILY_SIZE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAMILY_SIZE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FORMAT_DATE_OF_BIRTH_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FUTURE_DATE_OF_BIRTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -154,7 +155,9 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
         // invalid date of birth
-        assertParseFailure(parser, INVALID_DATE_OF_BIRTH_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_FORMAT_DATE_OF_BIRTH_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
+        assertParseFailure(parser, INVALID_FUTURE_DATE_OF_BIRTH_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
 
         // invalid income
@@ -188,7 +191,9 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
         // invalid date of birth
-        assertParseFailure(parser, validExpectedPersonString + INVALID_DATE_OF_BIRTH_DESC,
+        assertParseFailure(parser, validExpectedPersonString + INVALID_FORMAT_DATE_OF_BIRTH_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
+        assertParseFailure(parser, validExpectedPersonString + INVALID_FUTURE_DATE_OF_BIRTH_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
 
         // invalid income
@@ -257,9 +262,14 @@ public class AddCommandParserTest {
                 + DATE_OF_BIRTH_DESC_BOB + INVALID_PRIORITY_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Priority.MESSAGE_CONSTRAINTS);
 
-        // invalid date of birth
+        // invalid date format for date of birth
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_DATE_OF_BIRTH_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + INVALID_FORMAT_DATE_OF_BIRTH_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Messages.MESSAGE_INVALID_DATE_FORMAT);
+
+        // invalid future date for date of birth
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_FUTURE_DATE_OF_BIRTH_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 DateOfBirth.MESSAGE_CONSTRAINTS);
 
         // invalid income

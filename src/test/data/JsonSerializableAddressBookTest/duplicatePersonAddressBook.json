@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "2000-01-01",
     "priority" : "LOW",
     "income": 0,
     "familySize": 3,
@@ -14,7 +14,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "2000-01-01",
     "priority" : "LOW",
     "income": 0,
     "familySize": 3

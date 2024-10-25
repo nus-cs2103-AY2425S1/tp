@@ -6,73 +6,47 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
 public class DateOfBirthTest {
 
     @Test
-    public void constructor_invalidDate_throwsIllegalArgumentException() {
-        String invalidDate = "99 Jal 0002";
-        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidDate));
-    }
-
-    @Test
-    public void constructor_dateWithMonthFullySpelled_throwsIllegalArgumentException() {
-        String invalidDate = "9 January 2000";
-        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidDate));
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DateOfBirth(null));
     }
 
     @Test
     public void constructor_futureDate_throwsIllegalArgumentException() {
-        String futureDate = "9 Dec 9999";
+        LocalDate futureDate = LocalDate.of(3000, 1, 1);
         assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(futureDate));
     }
 
     @Test
     public void constructor_validDate_shouldSucceed() {
-        assertDoesNotThrow(() -> new DateOfBirth("18 Feb 1978"));
-    }
-
-    @Test
-    public void constructor_currentDate_shouldSucceed() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMAT_STRING);
-        String currentDate = LocalDate.now().format(formatter);
-        assertDoesNotThrow(() -> new DateOfBirth(currentDate));
+        assertDoesNotThrow(() -> new DateOfBirth(LocalDate.of(2000, 1, 1)));
+        assertDoesNotThrow(() -> new DateOfBirth(LocalDate.now()));
     }
 
     @Test
     public void isValidDate_null_throwsNullPointerException() {
-        String nullString = null;
-        assertThrows(NullPointerException.class, () -> DateOfBirth.isValidDate(nullString));
+        assertThrows(NullPointerException.class, () -> DateOfBirth.isValidDate(null));
     }
 
     @Test
     public void isValidDate_validDate_returnsTrue() {
-        String validDate1 = "1 Jan 2000";
-        String validDate2 = "31 Dec 1998";
+        LocalDate validDate1 = LocalDate.of(2000, 1, 1);
+        LocalDate validDate2 = LocalDate.of(1998, 12, 31);
+        LocalDate now = LocalDate.now();
 
         assertTrue(DateOfBirth.isValidDate(validDate1));
         assertTrue(DateOfBirth.isValidDate(validDate2));
-    }
-
-    @Test
-    public void isValidDate_invalidDate_returnsFalse() {
-        String invalidDate = "srjhehr";
-        assertFalse(DateOfBirth.isValidDate(invalidDate));
+        assertTrue(DateOfBirth.isValidDate(now));
     }
 
     @Test
     public void isValidDate_futureDate_returnsFalse() {
-        String futureDate = "9 Jan 9999";
+        LocalDate futureDate = LocalDate.of(3000, 1, 1);
         assertFalse(DateOfBirth.isValidDate(futureDate));
-    }
-
-    @Test
-    public void isValidDate_currentDate_returnsTrue() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMAT_STRING);
-        String currentDate = LocalDate.now().format(formatter);
-        assertTrue(DateOfBirth.isValidDate(currentDate));
     }
 }

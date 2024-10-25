@@ -92,7 +92,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private static int getPersonAge(Person person) {
-        LocalDate date = person.getDateOfBirth().toLocalDate();
+        LocalDate date = person.getDateOfBirth().getValue();
         LocalDate now = LocalDate.now();
         return Period.between(date, now).getYears();
     }
