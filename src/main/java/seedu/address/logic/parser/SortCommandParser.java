@@ -16,7 +16,10 @@ public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.equals("a")) {
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException("Invalid sort order: Use 'a' for ascending or 'd' for descending."
+                    + " Example: sort a");
+        } else if (trimmedArgs.equals("a")) {
             return new SortCommand(true);
         } else if (trimmedArgs.equals("d")) {
             return new SortCommand(false);

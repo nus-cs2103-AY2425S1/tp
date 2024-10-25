@@ -41,16 +41,11 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> sortedList = model.getFilteredPersonList().stream()
-                .sorted((p1, p2) -> Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat()))
+                .sorted((p1, p2) -> {
+                    int comparison = Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat());
+                    return isAscending ? comparison : -comparison;
+                })
                 .collect(Collectors.toList());
-
-        if (!isAscending) {
-            sortedList = sortedList.stream()
-                    .sorted((p1, p2) -> Float.compare(
-                            p2.getInterviewScore().toFloat(), p1.getInterviewScore().toFloat()))
-                    .collect(Collectors.toList());
-        }
-
         model.setPersons(sortedList);
         return new CommandResult(String.format(MESSAGE_SUCCESS, isAscending ? "ascending" : "descending"));
     }
