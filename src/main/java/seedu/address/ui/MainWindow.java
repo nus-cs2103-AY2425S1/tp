@@ -8,9 +8,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -38,7 +37,6 @@ public class MainWindow extends UiPart<Stage> {
     private WeddingListPanel weddingListPanel;
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
-    private PanelsWindow panelsWindow;
     private HelpWindow helpWindow;
 
     @FXML
@@ -48,7 +46,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private HBox panelsPlaceholder;
+    private VBox personList;
+
+    @FXML
+    private VBox entityList;
 
     @FXML
     private StackPane personPanelPlaceholder;
@@ -126,9 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
 
-        panelsWindow = new PanelsWindow(personListPanel, weddingListPanel);
-//        panelsWindow.setWidths();
-        panelsPlaceholder.getChildren().add(panelsWindow.getRoot());
+        personPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -237,7 +237,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void changeToWeddingView() {
         weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
-        panelsWindow.switchView(weddingListPanel);
+        entityList.getChildren().clear();
+        entityList.getChildren().add(weddingListPanel.getRoot());
     }
 
     /**
@@ -245,6 +246,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void changeToTaskView() {
         taskListPanel.updatePersonList(logic.getFilteredTaskList());
-        panelsWindow.switchView(taskListPanel);
+        entityList.getChildren().clear();
+        entityList.getChildren().add(taskListPanel.getRoot());
     }
 }

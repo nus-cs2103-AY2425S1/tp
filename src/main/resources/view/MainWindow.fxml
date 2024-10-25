@@ -45,10 +45,20 @@
           </padding>
         </StackPane>
 
-        <HBox fx:id="panelsPlaceholder" styleClass="pane-holder-with-border" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
+        <HBox fx:id="panelsHolder" prefWidth="600" styleClass="pane-holder-with-border" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="personPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+          </VBox>
+
+          <VBox fx:id="entityList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="listPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+          </VBox>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
