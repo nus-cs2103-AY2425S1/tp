@@ -25,7 +25,7 @@ Class Phone
 
 Class UniqueMeetUpList
 Class MeetUp
-Class "Name" as t1
+Class Subject
 Class Info
 Class From
 Class To
@@ -35,7 +35,7 @@ Class UniquePropertyList
 Class Property
 Class LandlordName
 Class LandlordPhone
-Class Location
+Class Address
 Class AskingPrice
 Class PropertyType
 
@@ -72,12 +72,12 @@ UniquePropertyList --> "~* all" Property
 Property *--> LandlordName
 Property *--> LandlordPhone
 Property *--> AskingPrice
-Property *--> Location
+Property *--> Address
 Property *--> PropertyType
 
 MeetUpList *--> "1" UniqueMeetUpList
 UniqueMeetUpList --> "~* all" MeetUp
-MeetUp *--> t1
+MeetUp *--> Subject
 MeetUp *--> Info
 MeetUp *--> From
 MeetUp *--> To
@@ -97,11 +97,11 @@ Phone -[hidden]right-> Budget
 Budget -[hidden]right-> Email
 
 LandlordName -[hidden]right-> LandlordPhone
-LandlordPhone -[hidden]right-> Location
-Location -[hidden]right-> AskingPrice
+LandlordPhone -[hidden]right-> Address
+Address -[hidden]right-> AskingPrice
 AskingPrice -[hidden]right-> PropertyType
 
-t1 -[hidden]right-> Info
+Subject -[hidden]right-> Info
 Info -[hidden]right-> From
 From -[hidden]right-> To
 To -[hidden]right-> AddedBuyer
