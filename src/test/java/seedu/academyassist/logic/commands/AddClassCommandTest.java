@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.academyassist.commons.core.GuiSettings;
-import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
@@ -194,6 +193,11 @@ public class AddClassCommandTest {
 
         @Override
         public void sortAcademyAssistByClass() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortAcademyAssistById() {
             throw new AssertionError("This method should not be called.");
         }
 

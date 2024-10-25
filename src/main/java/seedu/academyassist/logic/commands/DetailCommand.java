@@ -42,7 +42,7 @@ public class DetailCommand extends Command {
         Person personToView = model.getPersonWithStudentId(targetStudentId);
 
         return new CommandResult(String.format(MESSAGE_DETAIL_SUCCESS, personToView.getName(),
-                personToView.getStudentId()), false, false, true, personToView);
+                personToView.getStudentId()), false, false, false, true, personToView);
 
     }
 

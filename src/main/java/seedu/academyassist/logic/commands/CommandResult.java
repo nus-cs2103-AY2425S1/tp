@@ -20,17 +20,23 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Number of students taking each subject should be shown to the user. */
+    private final boolean showSubjectTracker;
+
     /** The specific student detail should be shown to the user. */
     private final boolean showDetailWindow;
 
     /** The specific student to display his or her detail */
     private final Person personToShow;
 
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showDetailWindow,
-                         Person personToShow) {
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSubjectTracker,
+                         boolean showDetailWindow, Person personToShow) {
+
         this.feedbackToUser = requireNonNull(feedbackToUser);
 
         if (showDetailWindow) {
@@ -39,6 +45,7 @@ public class CommandResult {
 
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showSubjectTracker = showSubjectTracker;
         this.showDetailWindow = showDetailWindow;
         this.personToShow = personToShow;
     }
@@ -48,7 +55,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false,
+        this(feedbackToUser, false, false, false,
                 false, null);
     }
 
@@ -64,6 +71,9 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isShowSubjectTracker() {
+        return showSubjectTracker;
+    }
     public boolean isShowDetailWindow() {
         return showDetailWindow;
     }
@@ -87,12 +97,14 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
+                && showSubjectTracker == otherCommandResult.showSubjectTracker
                 && showDetailWindow == otherCommandResult.showDetailWindow;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showDetailWindow);
+        return Objects.hash(feedbackToUser, showHelp, exit, showSubjectTracker,
+                            showDetailWindow, personToShow);
     }
 
     @Override
@@ -101,6 +113,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showSubjectTracker", showSubjectTracker)
                 .add("showDetailWindow", showDetailWindow)
                 .add("personToShow", personToShow)
                 .toString();
