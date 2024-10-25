@@ -18,7 +18,6 @@ import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.util.SampleDataUtil;
 
@@ -124,6 +123,9 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Creates a {@code Client} from the current fields;
+     */
     public Client build() {
         requireAllNonNull(name, phone, email, address, tags, contactId);
         return new Client(name, phone, email, address, tags, contactId);

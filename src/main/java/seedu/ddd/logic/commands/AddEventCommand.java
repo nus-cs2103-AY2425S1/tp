@@ -7,11 +7,11 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_VENDORS;
-import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_NAME;
-import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_DATE;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_DESCRIPTION;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_EVENT_NAME;
+import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_ID;
 
 import java.util.List;
 import java.util.Objects;

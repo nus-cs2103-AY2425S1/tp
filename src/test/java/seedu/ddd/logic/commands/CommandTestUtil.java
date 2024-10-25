@@ -3,7 +3,17 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,15 +35,6 @@ import seedu.ddd.testutil.EditVendorDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    // Event fields
-    // public static final String VALID_EVENT_NAME = SAMPLE_EVENT_NAME;
-    // public static final String VALID_EVENT_DESCRIPTION_1 = SAMPLE_EVENT_DESCRIPTION;
-    // public static final String VALID_EVENT_DESCRIPTION_2 = "Afterparty";
-    // public static final String VALID_EVENT_DATE = SAMPLE_EVENT_DATE;
-    // public static final String VALID_EVENT_ID = SAMPLE_EVENT_ID;
-    // public static final String INVALID_EVENT_DESCRIPTION = "";
-    // public static final String INVALID_EVENT_ID = "-1";
 
     // Command flags
     public static final String CLIENT_FLAG = CliFlags.FLAG_CLIENT.getPrefix();

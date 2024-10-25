@@ -1,23 +1,54 @@
 package seedu.ddd.logic.parser;
 
-
-import org.junit.jupiter.api.Test;
-
-import seedu.ddd.logic.Messages;
-
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.ddd.logic.commands.AddCommand;
 import static seedu.ddd.logic.commands.CommandTestUtil.CLIENT_FLAG;
 import static seedu.ddd.logic.commands.CommandTestUtil.VENDOR_FLAG;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.*;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_NON_EMPTY_PREAMBLE;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_TAG_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_VENDOR_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_VENDOR_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_VENDOR_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_VENDOR_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_VENDOR_SERVICE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_1;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_2;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
@@ -359,8 +390,7 @@ public class AddCommandParserTest {
             VALID_CLIENT_ADDRESS_ARGUMENT
         );
         assertParseFailure(parser, arguments, expectedMessage);
-        
-        
+
         // missing email prefix
         arguments = CommandParserTestUtil.joinArguments(
             CLIENT_FLAG,
@@ -413,8 +443,7 @@ public class AddCommandParserTest {
             VALID_VENDOR_SERVICE_ARGUMENT
         );
         assertParseFailure(parser, arguments, expectedMessage);
-        
-        
+
         // missing email prefix
         arguments = CommandParserTestUtil.joinArguments(
             VENDOR_FLAG,
@@ -521,7 +550,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         arguments = CommandParserTestUtil.joinArguments(
-            INVALID_NON_EMPTY_PREAMBLE,    
+            INVALID_NON_EMPTY_PREAMBLE,
             CLIENT_FLAG,
             VALID_CLIENT_NAME_ARGUMENT,
             VALID_CLIENT_PHONE_ARGUMENT,
@@ -616,7 +645,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         arguments = CommandParserTestUtil.joinArguments(
-            INVALID_NON_EMPTY_PREAMBLE,    
+            INVALID_NON_EMPTY_PREAMBLE,
             VENDOR_FLAG,
             VALID_VENDOR_NAME_ARGUMENT,
             VALID_VENDOR_PHONE_ARGUMENT,

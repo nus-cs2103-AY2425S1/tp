@@ -1,14 +1,15 @@
 package seedu.ddd.testutil.contact;
 
-import java.util.Set;
-
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.model.common.Tag;
 
 /**

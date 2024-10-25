@@ -5,7 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EDIT_CONTACT_DESCRIPTOR;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EDIT_VENDOR_DESCRIPTOR;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_3;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_2;
 
 import org.junit.jupiter.api.Test;
 

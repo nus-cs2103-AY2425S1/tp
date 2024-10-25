@@ -14,7 +14,6 @@ import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.common.Name;
-import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
@@ -67,7 +66,7 @@ public class Event implements Displayable {
 
     /**
      * Constructs a {@code Event}.
-     * 
+     *
      * Alternative constructor that defers the loading of clients and vendors.
      */
     public Event(Name name, Description description, Date date, EventId eventId) {
@@ -192,7 +191,7 @@ public class Event implements Displayable {
 
     /**
      * Return if the two events are the same.
-     * 
+     *
      * Two events are considered the same if they have the same client and date.
      * @param otherEvent Another event.
      * @return A boolean value which represents the result.

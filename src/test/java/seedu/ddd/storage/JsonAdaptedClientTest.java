@@ -1,10 +1,27 @@
 package seedu.ddd.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ddd.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.INVALID_TAG;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
@@ -13,10 +30,6 @@ import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import static seedu.ddd.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
-import static seedu.ddd.testutil.contact.TypicalContacts.*;
 
 public class JsonAdaptedClientTest {
 

@@ -6,8 +6,6 @@ import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.common.Tag;
-
 public class TagTest {
 
     @Test

@@ -1,9 +1,5 @@
 package seedu.ddd.testutil.contact;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ADDRESS;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_EMAIL;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_CLIENT_ID;
@@ -18,14 +14,21 @@ import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_NAME;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_PHONE;
 import static seedu.ddd.model.util.SampleDataUtil.SAMPLE_VENDOR_SERVICE;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Service;
 
+/**
+ * A utility class containing a list of {@code Contact} field strings and objects to be used in tests.
+ */
 public class TypicalContactFields {
 
     // Strings
@@ -79,7 +82,7 @@ public class TypicalContactFields {
     public static final Set<Tag> DEFAULT_CLIENT_TAGS = Stream.of(VALID_TAG_1)
             .map(Tag::new)
             .collect(Collectors.toSet());
-        
+
     // Vendor field objects
     public static final Name DEFAULT_VENDOR_NAME = new Name(VALID_VENDOR_NAME);
     public static final Phone DEFAULT_VENDOR_PHONE = new Phone(VALID_VENDOR_PHONE);

@@ -52,7 +52,7 @@ public class SampleDataUtil {
 
     private static final int SAMPLE_NEXT_CONTACT_ID = 2;
     private static final int SAMPLE_NEXT_EVENT_ID = 1;
-    
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         Client sampleClient = new Client(
             new Name(SAMPLE_CLIENT_NAME),
@@ -87,7 +87,7 @@ public class SampleDataUtil {
         sampleAb.addContact(sampleClient);
         sampleAb.addContact(sampleVendor);
         sampleAb.addEvent(sampleEvent);
-        
+
         AddressBook.setNextContactId(SAMPLE_NEXT_CONTACT_ID);
         AddressBook.setNextEventId(SAMPLE_NEXT_EVENT_ID);
         return sampleAb;

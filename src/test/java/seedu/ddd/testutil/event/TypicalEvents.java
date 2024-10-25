@@ -1,7 +1,17 @@
 package seedu.ddd.testutil.event;
 
-import static seedu.ddd.testutil.contact.TypicalContacts.*;
-import static seedu.ddd.testutil.event.TypicalEventFields.*;
+import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
+import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
+import static seedu.ddd.testutil.contact.TypicalContacts.DANIEL;
+import static seedu.ddd.testutil.contact.TypicalContacts.ELLE;
+import static seedu.ddd.testutil.contact.TypicalContacts.FIONA;
+import static seedu.ddd.testutil.contact.TypicalContacts.GEORGE;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_LIST;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_LIST;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +31,7 @@ public class TypicalEvents {
             .withVendors(BENSON, DANIEL)
             .withEventId(0)
             .build();
-    public static final Event WEDDING_B = new EventBuilder()    
+    public static final Event WEDDING_B = new EventBuilder()
             .withName(VALID_EVENT_NAME)
             .withDescription("This is wedding B")
             .withDate(VALID_EVENT_DATE)
@@ -33,8 +43,8 @@ public class TypicalEvents {
             .withName(VALID_EVENT_NAME)
             .withDescription(VALID_EVENT_DESCRIPTION_1)
             .withDate(VALID_EVENT_DATE)
-            .withClients(DEFAULT_CLIENT_LIST)
-            .withVendors(DEFAULT_VENDOR_LIST)
+            .withClients(DEFAULT_EVENT_CLIENT_LIST)
+            .withVendors(DEFAULT_EVENT_VENDOR_LIST)
             .build();
 
     private TypicalEvents() {} // prevents instantiation

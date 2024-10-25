@@ -1,6 +1,5 @@
 package seedu.ddd.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -10,9 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.commons.util.JsonUtil;
-import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
-import seedu.ddd.testutil.TypicalAddressBook;
 
 public class JsonSerializableAddressBookTest {
 

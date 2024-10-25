@@ -1,7 +1,13 @@
 package seedu.ddd.testutil.contact;
 
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_SERVICE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_TAGS;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -119,6 +125,9 @@ public class VendorBuilder {
         return this;
     }
 
+    /**
+     * Creates a {@code Vendor} from the current fields;
+     */
     public Vendor build() {
         requireAllNonNull(name, phone, email, address, service, tags, contactId);
         return new Vendor(name, phone, email, address, service, tags, contactId);

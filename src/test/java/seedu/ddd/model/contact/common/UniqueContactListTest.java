@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
 import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 

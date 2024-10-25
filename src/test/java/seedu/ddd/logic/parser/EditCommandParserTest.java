@@ -1,12 +1,46 @@
 package seedu.ddd.logic.parser;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ddd.logic.parser.CliSyntax.*;
-import static seedu.ddd.logic.parser.CommandParserTestUtil.*;
-import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_CLIENT_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.INVALID_TAG_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_CLIENT_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_EDITED_CONTACT_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_EDITED_CONTACT_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_EMPTY_TAG_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_1;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_TAG_ARGUMENT_2;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_ADDRESS_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_EMAIL_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_NAME_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_EDITED_CONTACT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_EDITED_CONTACT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
 
 import org.junit.jupiter.api.Test;
 
@@ -65,7 +99,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 " + INVALID_TAG_ARGUMENT, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_PHONE_ARGUMENT + " " + VALID_CLIENT_EMAIL_ARGUMENT, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + INVALID_CLIENT_PHONE_ARGUMENT + " "
+                + VALID_CLIENT_EMAIL_ARGUMENT, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
         // parsing it together with a valid tag results in error
@@ -165,7 +200,7 @@ public class EditCommandParserTest {
                 .withTags(VALID_TAG_1, VALID_TAG_2)
                 .build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, arguments, expectedCommand);    
+        assertParseSuccess(parser, arguments, expectedCommand);
     }
 
     @Test

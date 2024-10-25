@@ -46,7 +46,7 @@ public class DateTest {
         final String validDateString1 = "2024-12-24";
         final String validDateString2 = "12/24/2024";
         final String validDateString3 = "24 Dec 2024";
-        
+
         final LocalDate actualDate = LocalDate.parse(validDateString1);
         assertEquals(actualDate, Date.parseDate(validDateString1));
         assertEquals(actualDate, Date.parseDate(validDateString2));

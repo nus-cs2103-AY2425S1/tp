@@ -1,11 +1,7 @@
 package seedu.ddd.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.ddd.testutil.contact.TypicalContacts.HOON;
-import static seedu.ddd.testutil.contact.TypicalContacts.IDA;
 
 import java.io.IOException;
 import java.nio.file.Path;

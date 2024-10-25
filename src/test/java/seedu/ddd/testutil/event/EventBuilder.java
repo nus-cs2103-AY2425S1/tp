@@ -1,8 +1,12 @@
 package seedu.ddd.testutil.event;
 
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.ddd.testutil.event.TypicalEventFields.*;
-import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_LIST;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DESCRIPTION;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_ID;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_LIST;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +50,8 @@ public class EventBuilder {
         name = DEFAULT_EVENT_NAME;
         description = DEFAULT_EVENT_DESCRIPTION;
         date = DEFAULT_EVENT_DATE;
-        clients = new ArrayList<>(DEFAULT_CLIENT_LIST);
-        vendors = new ArrayList<>(DEFAULT_VENDOR_LIST);
+        clients = new ArrayList<>(DEFAULT_EVENT_CLIENT_LIST);
+        vendors = new ArrayList<>(DEFAULT_EVENT_VENDOR_LIST);
         eventId = DEFAULT_EVENT_ID;
     }
 
@@ -117,6 +121,9 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Creates an {@code Event} from the current fields;
+     */
     public Event build() {
         requireAllNonNull(name, description, date, clients, vendors, eventId);
         return new Event(name, description, date, clients, vendors, eventId);
