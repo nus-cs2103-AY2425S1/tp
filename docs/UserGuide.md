@@ -78,39 +78,42 @@ Refer to the [Features](#features) below for details of each command.
 
 ### View Help
 
-Shows a command cheatsheet, as well as a link to access the user guide.
+>Shows a command cheatsheet, as well as a link to access the user guide.
 
-Format: `:help`
+**Command:** `:help`
 
 ### Add Person
 
-Adds a person to the address book.
+>Adds a person to the address book.
 
-Long command format: `:add -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`\
-Short command format: `:a -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`
+**Short command:** `:a -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`\
+**Long command:** `:add -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`
+
 
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
-<box >
+
 
 **Examples:**
 
 * `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`
 * `:a -n Betsy Crowe -t friend -e betsycrowe@example.com -l Newgate Prison -p 1234567 -t criminal`
-</box>
+
 ### List All
 
-Shows a list of all persons in the address book.
+>Shows a list of all persons in the address book.
 
-Format: `:ls` or `:list`
+**Short command:** `:ls`\
+**Long command:** `:list`
 
 ### Edit Person
 
-Edits an existing person in the address book.
+>Edits an existing person in the address book.
 
-Format: `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
+**Short command:** `:ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`\
+**Long command:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -120,7 +123,7 @@ Format: `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​
 * You can remove all the person’s tags by typing `-t ` without
   specifying any tags after it.
 
-Examples:
+**Examples:**
 
 * `:edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be
   `91234567` and `johndoe@example.com` respectively.
@@ -128,9 +131,9 @@ Examples:
 
 ### Find Person
 
-Finds persons whose names contain any of the given keywords.
+>Finds persons whose names contain any of the given keywords.
 
-Format: `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
+**Command:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
 * The search is case-insensitive. \
   e.g. `hans` will match `Hans`
@@ -141,7 +144,7 @@ Format: `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 * Only persons matching all keywords will be returned (i.e. `AND` search).\
   e.g. `-n Hans -p 98765432` will not return `Hans` if his phone number is not `98765432`.
 
-Examples:
+**Examples:**
 
 * `:find -l Serangoon` returns `Bernice Yu` with location `Serangoon Gardens` and `David Li` with
   location `Serangoon Gardens`
@@ -150,28 +153,29 @@ Examples:
 
 ### Delete Person
 
-Deletes the specified person from the address book.
+>Deletes the specified person from the address book.
 
-Format: `:rm -i INDEX1, INDEX2, ...` or `:remove -i INDEX`
+**Short command:** `:rm -i INDEX1, INDEX2, ...`\
+**Long command:** `:remove -i INDEX1, INDEX2, ...`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, ...
 
-Examples:
+**Examples:**
 
 * `:list` followed by `:rm -i 2, 3` deletes the 2nd and 3rd person in the address book.
 * `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `:find` command.
 
 ### Undo
 
-Reverts the address book to the state before the last change.\
-User can undo up to 10 changes.\
-Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
+>Reverts the address book to the state before the last change.\
+>User can undo up to **10 changes**.\
+>Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
 
-Format: `:undo`
+**Command:** `:undo`
 
-Examples:
+**Examples:**
 
 * If we add a new contact with `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`,
   using `:undo` will remove John Doe from the address book.
@@ -179,43 +183,43 @@ Examples:
 
 ### Redo
 
-Reapplies the last undone change to the address book.\
+>Reapplies the last undone change to the address book.\
 User can redo up to 10 undo changes.
 
-Format: `:redo`
+**Command:** `:redo`
 
-Examples:
+**Examples:**
 
 * After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
 * After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
 
 ### Export Data
 
-Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
+>Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
 select a directory to save the file.
 
-Format: `:export`
+**Command:** `:export`
 
 ### Clear Data
 
-Clears all entries from the address book.
+>Clears all entries from the address book.
 
-Format: `:clear`
+**Command:** `:clear`
 
 ### Exit Program
 
-Exits the program.
+>Exits the program.
 
-Format: `:exit`
+**Command:** `:exit`
 
 ### Save Data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+>AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
 
 ### Edit Data File
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+>AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
