@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -21,22 +21,42 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            List<Index> indices = Arrays.stream(args.trim().split("\\s+"))
-                    .map(arg -> {
-                        try {
-                            return ParserUtil.parseIndex(arg);
-                        } catch (ParseException e) {
-                            throw new RuntimeException(e);
-                        }
-                    })
-                    // remove duplicates
-                    .distinct()
-                    .collect(Collectors.toList());
-            return new DeleteCommand(indices);
-        } catch (RuntimeException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
+        Set<Index> indices = new HashSet<>();
+
+        String[] parts = args.trim().split("\\s+");
+        for (String part : parts) {
+            if (part.contains("-")) {
+                // Handle range
+                String[] range = part.split("-");
+                if (range.length != 2) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                }
+
+                try {
+                    int start = Integer.parseInt(range[0].trim());
+                    int end = Integer.parseInt(range[1].trim());
+                    // Check for valid range
+                    if (start > end) {
+                        throw new ParseException("Invalid range: " + part);
+                    }
+                    for (int i = start; i <= end; i++) {
+                        indices.add(ParserUtil.parseIndex(String.valueOf(i)));
+                    }
+                } catch (NumberFormatException | ParseException e) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.INVALID_RANGE), e);
+                }
+            } else {
+                // Handle individual index
+                try {
+                    indices.add(ParserUtil.parseIndex(part));
+                } catch (ParseException e) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
+                }
+            }
         }
+        return new DeleteCommand(indices.stream().collect(Collectors.toList()));
     }
 }

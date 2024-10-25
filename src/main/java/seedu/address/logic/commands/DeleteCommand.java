@@ -27,6 +27,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted successfully!\n"
             + "Deleted participant(s): %1$s";
 
+    public static final String INVALID_RANGE = "Invalid range: The start index must be less than "
+            + "or equal to the end index.\n";
+
     private final List<Index> targetIndices;
 
     public DeleteCommand(List<Index> targetIndices) {
