@@ -16,6 +16,7 @@ import seedu.address.logic.commands.AddListingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;

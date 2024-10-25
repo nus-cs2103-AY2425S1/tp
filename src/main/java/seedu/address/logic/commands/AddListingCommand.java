@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
@@ -67,6 +68,7 @@ public class AddListingCommand extends Command {
      */
     public AddListingCommand(Name listingName, Price price, Area area, Address address, Region region,
                                 Name seller, Set<Name> buyers) {
+        requireAllNonNull(listingName, price, area, address, region, seller);
         this.listingName = listingName;
         this.price = price;
         this.area = area;
