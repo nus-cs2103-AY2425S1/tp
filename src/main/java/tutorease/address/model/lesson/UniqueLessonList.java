@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
+import tutorease.address.model.lesson.exceptions.LessonNotInList;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
 
 // adapted from UniquePersonList
@@ -60,15 +61,15 @@ public class UniqueLessonList implements Iterable<Lesson> {
     /**
      * Removes the lesson at the specified index from the list.
      *
-     * @param index The index of the lesson to be removed.
-     * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than the size of the
+     * @param lesson The lesson to be removed.
+     * @throws LessonNotInList If the index is invalid (less than 0 or greater than the size of the
      *     list).
      */
-    public void remove(int index) {
-        if (!isValidIndex(index)) {
-            throw new LessonIndexOutOfRange();
+    public void remove(Lesson lesson) {
+        if (!contains(lesson)) {
+            throw new LessonNotInList();
         } else {
-            internalList.remove(index);
+            internalList.remove(lesson);
         }
     }
 

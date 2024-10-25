@@ -23,7 +23,8 @@ public class DeleteLessonCommand extends LessonCommand {
             + "Parameters: INDEX (must be a positive integer)";
 
     public static final String MESSAGE_SUCCESS = "Lesson removed successfully: %1$s";
-    public static final String MESSAGE_INVALID_INDEX = "The lesson index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The lesson index provided is invalid. "
+            + "Please key in an index that is on the lesson panel";
 
     private final Index targetIndex;
 
@@ -45,12 +46,12 @@ public class DeleteLessonCommand extends LessonCommand {
 
         int listIndex = targetIndex.getZeroBased();
 
-        if (listIndex >= model.getLessonScheduleSize()) {
+        if (listIndex >= model.getFilteredLessonList().size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        Lesson lesson = model.getLesson(listIndex);
-        model.deleteLesson(listIndex);
+        Lesson lesson = model.getFilteredLessonList().get(listIndex);
+        model.deleteLesson(lesson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
     }
 

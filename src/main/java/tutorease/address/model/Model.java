@@ -115,9 +115,9 @@ public interface Model {
     /**
      * Deletes the lesson at the given index.
      *
-     * @param index The index of the lesson to delete.
+     * @param lesson The lesson to delete.
      */
-    void deleteLesson(int index);
+    void deleteLesson(Lesson lesson);
 
     /**
      * Returns lesson at the specified index.
