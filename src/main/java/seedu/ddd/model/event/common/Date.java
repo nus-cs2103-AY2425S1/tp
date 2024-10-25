@@ -5,29 +5,27 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.ddd.commons.util.AppUtil;
 
 /**
- * Represents a Client's Date in the address book.
+ * Represents an event's Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format of either of the following:\n"
-                    + "1. yyyy-MM-dd\n"
-                    + "2. MM/dd/yyyy\n"
-                    + "3. d MMM yyyy";
-    public static final DateTimeFormatter VALID_DATE_FORMAT1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final DateTimeFormatter VALID_DATE_FORMAT2 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static final DateTimeFormatter VALID_DATE_FORMAT3 = DateTimeFormatter.ofPattern("d MMM yyyy");
-    private static final DateTimeFormatter[] formatters = new DateTimeFormatter[] {
-        VALID_DATE_FORMAT1,
-        VALID_DATE_FORMAT2,
-        VALID_DATE_FORMAT3
-    };
+
+    public static final String[] VALID_DATE_PATTERNS = new String[] {"yyyy-MM-dd", "MM/dd/yyyy", "d MMM yyyy"};
+    private static final List<DateTimeFormatter> FORMATTERS = Stream.of(VALID_DATE_PATTERNS)
+            .map(DateTimeFormatter::ofPattern)
+            .toList();
+    public static final String MESSAGE_CONSTRAINTS = "Supported ate formats: " + Stream.of(VALID_DATE_PATTERNS)
+            .collect(Collectors.joining(", "));
 
     public final LocalDate date;
+
     /**
      * Constructs a {@code Date}.
      *
@@ -44,7 +42,7 @@ public class Date {
      */
     // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
-        for (DateTimeFormatter formatter : formatters) {
+        for (DateTimeFormatter formatter : FORMATTERS) {
             try {
                 LocalDate.parse(test, formatter);
                 return true;
@@ -62,7 +60,7 @@ public class Date {
      * @return The parsed LocalDate.
      */
     public static LocalDate parseDate(String date) {
-        for (DateTimeFormatter formatter : formatters) {
+        for (DateTimeFormatter formatter : FORMATTERS) {
             try {
                 return LocalDate.parse(date, formatter);
             } catch (DateTimeParseException e) {
@@ -71,7 +69,6 @@ public class Date {
         }
         throw new DateTimeParseException("Date could not be parsed", date, 0);
     }
-
 
     @Override
     public String toString() {

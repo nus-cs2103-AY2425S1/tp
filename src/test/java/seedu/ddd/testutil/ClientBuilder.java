@@ -9,14 +9,14 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.event.common.EventId;
-import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;
 
 /**

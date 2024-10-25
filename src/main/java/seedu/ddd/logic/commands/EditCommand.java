@@ -22,17 +22,17 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.tag.Tag;
 
 /**
  * Edits the details of an existing contact in the address book.

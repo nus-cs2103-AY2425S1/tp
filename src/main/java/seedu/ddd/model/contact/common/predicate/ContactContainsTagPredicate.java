@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.tag.Tag;
 
 /**
  * Tests that any of a {@code Contact}'s {@code Tags} matches the given tag .

@@ -5,14 +5,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.tag.Tag;
 
 /**
  * Represents a Client in the address book.

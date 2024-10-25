@@ -1,9 +1,6 @@
 package seedu.ddd.model.event.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT1;
-import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT2;
-import static seedu.ddd.model.event.common.Date.VALID_DATE_FORMAT3;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -49,11 +46,10 @@ public class DateTest {
         final String validDateString1 = "2024-12-24";
         final String validDateString2 = "12/24/2024";
         final String validDateString3 = "24 Dec 2024";
-        final LocalDate validDate1 = LocalDate.parse(validDateString1, VALID_DATE_FORMAT1);
-        final LocalDate validDate2 = LocalDate.parse(validDateString2, VALID_DATE_FORMAT2);
-        final LocalDate validDate3 = LocalDate.parse(validDateString3, VALID_DATE_FORMAT3);
-        assertEquals(validDate1, Date.parseDate(validDateString1));
-        assertEquals(validDate2, Date.parseDate(validDateString2));
-        assertEquals(validDate3, Date.parseDate(validDateString3));
+        
+        final LocalDate actualDate = LocalDate.parse(validDateString1);
+        assertEquals(actualDate, Date.parseDate(validDateString1));
+        assertEquals(actualDate, Date.parseDate(validDateString2));
+        assertEquals(actualDate, Date.parseDate(validDateString3));
     }
 }

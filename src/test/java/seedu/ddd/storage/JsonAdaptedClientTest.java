@@ -1,22 +1,21 @@
 package seedu.ddd.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.ddd.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import static seedu.ddd.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.TypicalContacts.ALICE;
 
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";

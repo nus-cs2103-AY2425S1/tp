@@ -32,7 +32,6 @@ public class EventId {
         this.eventId = Integer.parseInt(eventId);
     }
 
-
     /**
      * Returns true if a given integer is a valid event id.
      */

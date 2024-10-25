@@ -10,14 +10,14 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;
 
 /**

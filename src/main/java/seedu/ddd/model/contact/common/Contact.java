@@ -9,9 +9,10 @@ import java.util.stream.Collectors;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.EventId;
-import seedu.ddd.model.tag.Tag;
 
 /**
  * Represents a Contact in the address book.
@@ -24,22 +25,27 @@ public abstract class Contact implements Displayable {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
-    private final Set<Event> events = new HashSet<>();
+    private final Set<Tag> tags;
+
+    // References
+    private final Set<Event> events;
 
     /**
      * Every field must be present and not null.
      */
     public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ContactId contactId) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+
+        this.tags = new HashSet<>();
         this.tags.addAll(tags);
+        this.events = new HashSet<>();
+
         this.contactId = contactId;
     }
 
@@ -66,9 +72,11 @@ public abstract class Contact implements Displayable {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
     public ContactId getId() {
         return contactId;
     }
+
     /**
      * Returns an immutable {@code EventId} set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -76,6 +84,7 @@ public abstract class Contact implements Displayable {
     public Set<EventId> getEventIds() {
         return Collections.unmodifiableSet(events.stream().map(Event::getEventId).collect(Collectors.toSet()));
     }
+
     /**
     * Returns an immutable {@code Event} set, which throws {@code UnsupportedOperationException}
     * if modification is attempted.

@@ -20,7 +20,7 @@ import seedu.ddd.logic.commands.EditCommand;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.tag.Tag;
+import seedu.ddd.model.common.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

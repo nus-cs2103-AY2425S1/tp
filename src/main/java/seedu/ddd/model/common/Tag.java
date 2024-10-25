@@ -1,4 +1,4 @@
-package seedu.ddd.model.tag;
+package seedu.ddd.model.common;
 
 import static java.util.Objects.requireNonNull;
 

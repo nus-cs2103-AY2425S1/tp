@@ -3,6 +3,7 @@ package seedu.ddd.model.event.common;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.Set;
 import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
@@ -25,10 +28,16 @@ public class Event implements Displayable {
 
     public static final String MESSAGE_CONSTRAINTS =
             "There must be at least one client in a specific event.";
+
+    // Identity fields
+    private final Name name;
+    private final Description description;
+    private final Date date;
+    private final EventId eventId;
+
+    // References
     private final List<Client> clients;
     private final List<Vendor> vendors;
-    private final Description description;
-    private final EventId eventId;
 
     /**
      * Constructs a {@code Event}.
@@ -36,24 +45,41 @@ public class Event implements Displayable {
      * @param clients A list of client.
      * @param vendors A list of vendors.
      */
-    public Event(List<Client> clients, List<Vendor> vendors, Description description, EventId eventId) {
-        requireAllNonNull(clients, vendors, description);
+    public Event(
+        Name name,
+        Description description,
+        Date date,
+        Collection<Client> clients,
+        Collection<Vendor> vendors,
+        EventId eventId
+    ) {
+        requireAllNonNull(name, description, date, clients, vendors, eventId);
         AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
         assert !clients.isEmpty();
+
+        this.name = name;
+        this.description = description;
+        this.date = date;
+
         this.clients = new ArrayList<>();
         this.clients.addAll(clients);
         this.vendors = new ArrayList<>();
         this.vendors.addAll(vendors);
-        this.description = description;
+
         this.eventId = eventId;
     }
 
     /**
-     * Alternative constructor that defers the loading of clients and vendors
+     * Constructs a {@code Event}.
+     * 
+     * Alternative constructor that defers the loading of clients and vendors.
      */
-    public Event(Description description, EventId eventId) {
+    public Event(Name name, Description description, Date date, EventId eventId) {
+        this.name = name;
+        this.date = date;
         this.description = description;
         this.eventId = eventId;
+
         this.clients = new ArrayList<>();
         this.vendors = new ArrayList<>();
     }
@@ -63,7 +89,7 @@ public class Event implements Displayable {
      * be at least one {@code Client} in clients list.
      * @param testList The {@code ArrayList} of {@code Client} at the constructor.
      */
-    public static boolean isValidEvent(List<Client> testList) {
+    public static boolean isValidEvent(Collection<Client> testList) {
         return !testList.isEmpty();
     }
 
@@ -79,7 +105,7 @@ public class Event implements Displayable {
     }
 
     /**
-     * Adds a{@code Client} to an {@code Event}
+     * Adds a {@code Client} to an {@code Event}
      * If the current event is not stored in the client's set of events,
      * it will add the association
      */
@@ -92,7 +118,7 @@ public class Event implements Displayable {
     }
 
     /**
-     * Adds a{@code Vendor} to an {@code Event}
+     * Adds a {@code Vendor} to an {@code Event}
      * If the current event is not stored in the vendor's set of events,
      * it will add the association
      */
@@ -102,6 +128,30 @@ public class Event implements Displayable {
         if (!events.contains(this)) {
             vendor.addEvent(this);
         }
+    }
+
+    /**
+     * Returns the event name.
+     * @return A {@code Name} which represents the name of the event.
+     */
+    public Name getName() {
+        return this.name;
+    }
+
+    /**
+     * Returns the event description.
+     * @return A {@code Description} which represents the description of the event.
+     */
+    public Description getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Returns the event date.
+     * @return A {@code Date} which represents the date of the event.
+     */
+    public Date getDate() {
+        return this.date;
     }
 
     /**
@@ -135,13 +185,6 @@ public class Event implements Displayable {
     public List<ContactId> getVendorIds() {
         return vendors.stream().map(Contact::getId).toList();
     }
-    /**
-     * Returns the event description.
-     * @return A {@code String} which represents the description of the event.
-     */
-    public Description getDescription() {
-        return this.description;
-    }
 
     /**
      * Returns the unique event ID.
@@ -152,6 +195,8 @@ public class Event implements Displayable {
 
     /**
      * Return if the two events are the same.
+     * 
+     * Two events are considered the same if they have the same client and date.
      * @param otherEvent Another event.
      * @return A boolean value which represents the result.
      */
@@ -177,8 +222,6 @@ public class Event implements Displayable {
 
         Event otherEvent = (Event) other;
 
-        //two event is equal if have same clients,
-        //same vendors and have same description.
         Set<Client> thisClients = new HashSet<>(this.getClients());
         Set<Vendor> thisVendors = new HashSet<>(this.getVendors());
         Description thisDescription = this.getDescription();

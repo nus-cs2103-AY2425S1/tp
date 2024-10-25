@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.tag.Tag;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.testutil.ClientBuilder;
 
 

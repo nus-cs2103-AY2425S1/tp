@@ -44,15 +44,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.AddCommand;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.VendorBuilder;
 
