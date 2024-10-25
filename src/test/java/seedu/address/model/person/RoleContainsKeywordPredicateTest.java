@@ -51,12 +51,12 @@ public class RoleContainsKeywordPredicateTest {
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends", "family"));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
         assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withRole("friends", "family").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
 
         // Only one matching keyword
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("family", "friends"));
         assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withRole("family", "friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
 
         // Mixed-case keywords
@@ -83,7 +83,7 @@ public class RoleContainsKeywordPredicateTest {
     @Test
     public void test_personHasNoTags_returnsFalse() {
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends"));
-        assertFalse(predicate.test(new PersonBuilder().withRole().build()));
+        assertFalse(predicate.test(new PersonBuilder().build()));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class RoleContainsKeywordPredicateTest {
     @Test
     public void personHasMixedTags_someMatching_returnsTrue() {
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
-        assertTrue(predicate.test(new PersonBuilder().withRole("family", "gym").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
     }
 
     @Test

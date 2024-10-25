@@ -179,35 +179,35 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRole(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_TAG));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseRole(Collections.emptyList()).isEmpty());
+    public void parseTags_EmptyRole_throwsParseException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(""));
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Role> actualTagSet = ParserUtil.parseRole(Arrays.asList(VALID_TAG_1, VALID_TAG_2A));
-        Set<Role> expectedTagSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1), new Role(VALID_TAG_2A)));
+        Role actualTagSet = ParserUtil.parseRole(VALID_TAG_1);
+        Role expectedTagSet = new Role(VALID_TAG_1);
 
         assertEquals(expectedTagSet, actualTagSet);
     }
 
-    @Test
-    public void parseTags_collectionWithRepeatedTags_returnsTagSet() throws Exception {
-        Set<Role> actualTagSet = ParserUtil.parseRole(Arrays.asList(VALID_TAG_1, VALID_TAG_1));
-        Set<Role> expectedTagSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1)));
-
-        assertEquals(expectedTagSet, actualTagSet);
-    }
-
-    @Test
-    public void parseTags_collectionWithEqualTags_returnsTagSet() throws Exception {
-        Set<Role> actualTagSet = ParserUtil.parseRole(VALID_TAG_1, VALID_TAG_2A, VALID_TAG_2B));
-        Set<Role> expectedTagSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1), new Role(VALID_TAG_2A)));
-
-        assertEquals(expectedTagSet, actualTagSet);
-    }
+//    @Test
+//    public void parseTags_collectionWithRepeatedTags_returnsTagSet() throws Exception {
+//        Set<Role> actualTagSet = ParserUtil.parseRole(Arrays.asList(VALID_TAG_1, VALID_TAG_1));
+//        Set<Role> expectedTagSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1)));
+//
+//        assertEquals(expectedTagSet, actualTagSet);
+//    }
+//
+//    @Test
+//    public void parseTags_collectionWithEqualTags_returnsTagSet() throws Exception {
+//        Set<Role> actualTagSet = ParserUtil.parseRole(VALID_TAG_1, VALID_TAG_2A, VALID_TAG_2B));
+//        Set<Role> expectedTagSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1), new Role(VALID_TAG_2A)));
+//
+//        assertEquals(expectedTagSet, actualTagSet);
+//    }
 }
