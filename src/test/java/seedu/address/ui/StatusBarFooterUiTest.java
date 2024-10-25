@@ -17,7 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import seedu.address.MainApp;
 
-public class StatusBarFooterTest extends ApplicationTest {
+public class StatusBarFooterUiTest extends ApplicationTest {
     private MainApp app;
 
     @BeforeEach
