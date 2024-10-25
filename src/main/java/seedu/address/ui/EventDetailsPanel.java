@@ -71,6 +71,9 @@ public class EventDetailsPanel extends UiPart<Region> {
         this.event = event;
         name.setText(event.getName().fullName);
         date.setText(event.getDate().toString());
+
+        // Reset tags when updating event
+        tags.getChildren().clear();
         event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

@@ -73,6 +73,9 @@ public class VendorDetailsPanel extends UiPart<Region> {
         name.setText(vendor.getName().fullName);
         phone.setText(vendor.getPhone().value);
         description.setText(vendor.getDescription().value);
+
+        // Reset tags when updating vendor
+        tags.getChildren().clear();
         vendor.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
