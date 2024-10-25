@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String VALID_END_DATE = "01-01-2024 13:00";
 
     public static final String VALID_DURATION = "1";
+    public static final String VALID_DURATION_WITH_POINT_FIVE = "1.5";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

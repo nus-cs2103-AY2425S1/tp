@@ -12,6 +12,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_MINUTE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_MONTH;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION_WITH_POINT_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.testutil.Assert.assertThrows;
 
@@ -82,5 +83,6 @@ public class EndDateTimeTest {
 
         // valid hours
         assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION));
+        assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION_WITH_POINT_FIVE));
     }
 }
