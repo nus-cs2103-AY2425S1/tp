@@ -1,6 +1,7 @@
 package seedu.address.model.group;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -40,6 +41,8 @@ public class GroupContainsKeywordsPredicateTest {
 
         // different group -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
+
+        assertFalse(firstPredicate.equals(null));
     }
 
     @Test
@@ -60,6 +63,8 @@ public class GroupContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("stuDy", "grOup"));
         assertTrue(predicate.test(new GroupBuilder().withGroupName("Study Group").build()));
+
+        assertEquals(predicate.getKeywords(), Arrays.asList("stuDy", "grOup"));
     }
 }
 
