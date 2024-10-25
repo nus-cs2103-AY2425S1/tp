@@ -20,7 +20,7 @@ end box
 [-> LogicManager : execute("mark 1 d/2020-01-01")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("mark 1 d/2020-01-01")
+LogicManager -> AddressBookParser : parseCommand("mark 1 d/2024-10-25")
 activate AddressBookParser
 
 create MarkCommandParser
@@ -32,9 +32,9 @@ activate MarkCommandParser
 MarkCommandParser --> AddressBookParser
 deactivate MarkCommandParser
 
-AddressBookParser -> MarkCommandParser : parse("1 d/2020-01-01")
+AddressBookParser -> MarkCommandParser : parse("1 d/2024-10-25")
 activate MarkCommandParser
-MarkCommandParser -> ArgumentTokenizer : tokenize("1 d/2020-01-01")
+MarkCommandParser -> ArgumentTokenizer : tokenize("1 d/2024-10-25")
 activate ArgumentTokenizer
 ArgumentTokenizer -> ArgumentTokenizer : extractArguments
 activate ArgumentTokenizer
