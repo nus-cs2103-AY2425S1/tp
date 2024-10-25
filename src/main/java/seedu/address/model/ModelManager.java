@@ -116,6 +116,11 @@ public class ModelManager implements Model {
         addressBook.favouriteRestaurant(target);
     }
 
+    @Override
+    public void unfavouriteRestaurant(Restaurant target) {
+        addressBook.unfavouriteRestaurant(target);
+    }
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**

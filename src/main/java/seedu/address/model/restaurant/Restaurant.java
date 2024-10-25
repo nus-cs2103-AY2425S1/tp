@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Pair;
 
 /**
  * Represents a Restaurant in the address book.
@@ -23,23 +24,26 @@ public class Restaurant {
 
     // Data fields
     private final Address address;
+    private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
-    private final Price price;
     private boolean isFavourite;
+    private final Price price;
 
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, rating, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.rating = rating;
 
-        // Price is set to 0.0 for now, will have functionality added in the next milestone
-        this.price = new Price(0.0);
+        // Extract the price tag and other tags
+        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
+        this.price = priceTagAndOtherTags.getFirst();
+        this.tags.addAll(priceTagAndOtherTags.getSecond());
 
         // Default to not favourite
         this.isFavourite = false;
@@ -61,8 +65,8 @@ public class Restaurant {
         return address;
     }
 
-    public Price getPrice() {
-        return price;
+    public Rating getRating() {
+        return rating;
     }
 
     /**
@@ -70,41 +74,27 @@ public class Restaurant {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        Set<Tag> allTags = new HashSet<>(this.tags);
+        allTags.addAll(getPriceTags());
+        return Collections.unmodifiableSet(allTags);
     }
 
     /**
-     * Returns an immutable tag set without $, $$, $$$ or $$$$, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable tag set without symbols in PriceCategory
      */
     public Set<Tag> getTagsWithoutPrice() {
-        Set<Tag> tagsWithoutPrice = new HashSet<>();
-        for (Tag tag : tags) {
-            if (!tag.tagName.equals("$")
-                    && !tag.tagName.equals("$$")
-                    && !tag.tagName.equals("$$$")
-                    && !tag.tagName.equals("$$$$")) {
-                tagsWithoutPrice.add(tag);
-            }
-        }
-        return Collections.unmodifiableSet(tagsWithoutPrice);
+        return tags;
     }
 
     /**
-     * Returns an immutable tag set with only $, $$, $$$ or $$$$, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable tag set containing only the single price tag.
      */
     public Set<Tag> getPriceTags() {
-        Set<Tag> priceTags = new HashSet<>();
-        for (Tag tag : tags) {
-            if (tag.tagName.equals("$")
-                    || tag.tagName.equals("$$")
-                    || tag.tagName.equals("$$$")
-                    || tag.tagName.equals("$$$$")) {
-                priceTags.add(tag);
-            }
+        if (price == null) {
+            return Collections.emptySet();
         }
-        return Collections.unmodifiableSet(priceTags);
+        assert price != null : "Price should not be null";
+        return Collections.singleton(price);
     }
 
     /**
@@ -120,10 +110,16 @@ public class Restaurant {
                 && otherRestaurant.getName().equals(getName());
     }
 
+    /**
+     * Returns the boolean attribute isFavourite.
+     */
     public boolean isFavourite() {
         return isFavourite;
     }
 
+    /**
+     * Sets the boolean attribute isFavourite based on the favourite parameter.
+     */
     public void setFavourite(boolean favourite) {
         this.isFavourite = favourite;
     }

@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Restaurant` object residing in the `Model`.
 
 ### Logic component
 
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Restaurant` objects (which are contained in a `UniqueRestaurantList` object).
+* stores the currently 'selected' `Restaurant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Restaurant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Restaurant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Restaurant` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -280,19 +280,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
 | `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
-| `* * *`  | Foodie                      | review restaurant ratings and reviews                               | make an informed decision based on other diners' experiences |
+| `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
 | `* *`    | thrifty individual          | find the cheapest food                                              | survive the day                                              |
 | `* *`    | Deal Seeker                 | find discounts and special offers at nearby restaurants             | enjoy eating out without overspending                        |
 | `* *`    | Health-Conscious Diner      | find restaurants that serve nutritious and diet-specific meals      | maintain my healthy lifestyle while dining out               |
 | `* *`    | Pet lover                   | find restaurants that allow and accommodate for pets                | enjoy my meal with my furry companion                        |
 | `*`      | Person with Disabilities    | find accessible restaurants with features like ramps                | dine out comfortably and independently                       |
-| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                     |
+| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                 |
 | `*`      | Office Worker               | plan what to eat given my 1hr lunch                                 | fit lunch into my busy schedule                              |
 | `*`      | Food Connoisseur            | save my favorite restaurants                                        | quickly access them later                                    |
 | `*`      | Influencer                  | find an atas restaurant                                             | post them on Instagram                                       |
 | `*`      | introvert                   | filter eateries based on delivery options                           | find places that offer food delivery and enjoy meals at home |
-| `*`      | Food Journalist             | discover restaurants to try and write opinion pieces                | write engaging blogs to recommend to others                  |
+| `*`      | Food Journalist             | discover restaurants to try and write review                        | write engaging review to recommend to others                 |
 | `*`      | Carouser                    | find the bars that offer happy hours                                | drink riotously                                              |
 | `*`      | Chef                        | eat at my competitors' restaurants                                  | compare the quality of my food against theirs                |
 | `*`      | Student                     | find student deals for food                                         | know places to eat that are affordable for me                |
