@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Vendor Vault User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,13 +15,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. If you are unsure, you can check by opening the command terminal and typing `java -version`. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, type `cd [path-to-your-folder]` (path to the folder you put the jar file in) and use the `java -jar vendorvault.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -34,15 +34,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
-
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -60,7 +58,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -74,29 +72,8 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-## Features
+## <ins> Supplier Commands </ins>
 
-### Mark a supplier status : `mark`
-
-The `mark` command is used to mark a supplier as either **active** or **inactive**
-in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
-
-#### Command Format:
-`mark <supplier_index> <status>`
-- `<supplier_index>`: The index of the supplier in the list.
-
-
-- `<status>`: Either `active` or `inactive` to indicate the supplier's status.
-
-#### Example
-To mark the supplier at index 3 as active:
-    
-    mark 3 active
-
-   A success message will be displayed if the supplier is successfully marked as active.
-   
-### Here's how it would look like in the app:
-![mark command](images/markCommand.png)
 
 ### Adding a supplier: `add`
 
@@ -124,46 +101,11 @@ Expected output:
 * `New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products breadrice`
 * `New person added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products soap`
 
-### Listing all persons : `list`
+### Listing all suppliers : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all suppliers in the address book.
 
 Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a supplier : `delete`
 
@@ -183,6 +125,30 @@ A success message will be displayed if the supplier is successfully deleted.
 
 ### Here's how it would look like in the app:
 ![delete command](images/deleteCommand.png)
+
+### Mark a supplier status : `mark`
+
+The `mark` command is used to mark a supplier as either **active** or **inactive**
+in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
+
+#### Command Format:
+`mark <supplier_index> <status>`
+- `<supplier_index>`: The index of the supplier in the list.
+
+
+- `<status>`: Either `active` or `inactive` to indicate the supplier's status.
+
+#### Example
+To mark the supplier at index 3 as active:
+
+    mark 3 active
+
+A success message will be displayed if the supplier is successfully marked as active.
+
+### Here's how it would look like in the app:
+![mark command](images/markCommand.png)
+
+## <ins> Delivery Commands </ins>
 
 ### Adding a delivery: `add`
 
@@ -243,11 +209,6 @@ Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
 * `find -d /pro bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -261,13 +222,13 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook automatically saves your data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
+- Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -314,6 +275,7 @@ Action     | Format, Examples
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Clear**  | `clear`
 **List**   | `list`
 **Help**   | `help`
+
+[Back to Top](#vendor-vault-user-guide)
