@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
@@ -20,7 +20,7 @@ import seedu.address.model.wedding.WeddingName;
 public class WeddingCardTest {
 
     private static final Wedding SAMPLE_WEDDING = new Wedding(new WeddingName("Alice & Bob"),
-            new Venue("Marina Bay Sands"), new Datetime("22/12/2025"));
+            new Venue("Marina Bay Sands"), new Date("22/12/2025"));
 
     @BeforeAll
     public static void setUpClass() throws InterruptedException {
@@ -59,7 +59,7 @@ public class WeddingCardTest {
         Label venueLabel = (Label) venueField.get(weddingCard);
         assertEquals("Marina Bay Sands", venueLabel.getText());
 
-        Field dateTimeField = WeddingCard.class.getDeclaredField("dateTime");
+        Field dateTimeField = WeddingCard.class.getDeclaredField("date");
         dateTimeField.setAccessible(true);
         Label dateTimeLabel = (Label) dateTimeField.get(weddingCard);
         assertEquals("22/12/2025", dateTimeLabel.getText());
