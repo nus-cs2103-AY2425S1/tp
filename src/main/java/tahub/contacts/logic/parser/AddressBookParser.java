@@ -16,6 +16,7 @@ import tahub.contacts.logic.commands.DeleteCommand;
 import tahub.contacts.logic.commands.DeleteCourseCommand;
 import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.EditCourseCommand;
+import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EnrollCommand.COMMAND_WORD:
+            return new EnrollCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
