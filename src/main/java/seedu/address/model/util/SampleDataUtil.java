@@ -16,6 +16,8 @@ import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 
+import javax.xml.xpath.XPathEvaluationResult;
+
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
@@ -76,8 +78,14 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
+        Person[] persons = getSamplePersons();
+        Wedding[] weddings = getSampleWeddings();
+        setUpWeddings(persons, weddings);
+        for (Person samplePerson : persons) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Wedding wedding : weddings) {
+            sampleAb.addWedding(wedding);
         }
         return sampleAb;
     }
