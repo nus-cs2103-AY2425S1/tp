@@ -137,7 +137,7 @@ public class AddClaimCommandTest {
         HealthPolicy policy = new HealthPolicy();
         Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
 
-        policy.getClaimSet().add(claim);
+        policy.getClaimList().add(claim);
 
         return new PersonBuilder().withPolicy(policy).build();
     }

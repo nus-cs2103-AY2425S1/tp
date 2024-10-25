@@ -114,7 +114,7 @@ public class PolicyTest {
         final String expected = String.format("Premium amount: $%s | Coverage amount: $%s "
                 + "| Expiry date: %s | Claims: %s",
                 policy.getPremiumAmount().toString(), policy.getCoverageAmount().toString(),
-                policy.getExpiryDate().toString(), policy.getClaimSet().toString());
+                policy.getExpiryDate().toString(), policy.getClaimList().toString());
         assertEquals(expected, policy.toString());
     }
 

@@ -15,7 +15,9 @@ public class ClaimList implements List<Claim> {
     public ClaimList() {
         this.claims = new ArrayList<>();
     }
-
+    public List<Claim> getList() {
+        return Collections.unmodifiableList(claims);
+    }
     @Override
     public boolean add(Claim claim) {
         requireNonNull(claim);
@@ -73,7 +75,7 @@ public class ClaimList implements List<Claim> {
 
     @Override
     public Iterator<Claim> iterator() {
-        return null;
+        return claims.iterator();
     }
 
     @Override
