@@ -16,9 +16,11 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
     - [Adding a person](#adding-a-person--add)
     - [Listing all patients](#listing-all-patients--list)
     - [Editing a patient](#editing-a-patient--edit)
+    - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
     - [Searching patients by field](#searching-patients-by-field--find)
     - [Deleting a person](#deleting-a-person--delete)
     - [Adding an appointment to a person](#adding-an-appointment-to-a-person--make_appt)
+    - [Deleting an appointment from a person](#deleting-an-appointment-from-a-person-del_appt)
     - [List all person appointment](#list-all-person-appointment--schedule_all)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
@@ -153,6 +155,20 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+### Adding notes to a patient : `addNotes`
+
+Adds notes to an existing person in the address book.
+
+Format: `addNotes INDEX pn/NOTES`
+
+* Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `addNotes 1 pn/Patient is prone to falling`
+*  `addNotes 2 pn/Patient requires frequent checkups`
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Viewing a patient's details: `view`
 
 Displays more details about a specific patient listed.
@@ -232,6 +248,19 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+### Deleting an Appointment from a person: `del_appt`
+
+Deletes an appointment from a person
+
+Format: `del_appt INDEX`
+
+* Deletes the appointment for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+[Back to Table of Contents](#table-of-contents)
+
+
 ### Show appointments on a specific date: `schedule_date`
 
 Lists all the appointments on a specific date.
@@ -243,6 +272,8 @@ Format: `schedule_date DATE`
 
 Examples:
 * `schedule_date 01-01-2020` returns all the appointments that takes place on 1 January 2020.
+
+[Back to Table of Contents](#table-of-contents)
 
 ### List all patient appointment: `schedule_all`
 
