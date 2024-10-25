@@ -168,8 +168,6 @@ All successful commands done by the user is stored in a `CommandLog`.
 
 When `undo` is executed, the latest command in `CommandLog` is retrieved and that command's `undo()` method is called.
 
-</box>
-
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
 <puml src="diagrams/UndoSequenceDiagramNew-Logic.puml" alt="UndoSequenceDiagramNew-Logic" />
@@ -178,7 +176,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 **Note:** The lifeline for `UndoCommand` and `Command` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-
+</box>
 
 ### \[Proposed\] Undo/redo feature
 
