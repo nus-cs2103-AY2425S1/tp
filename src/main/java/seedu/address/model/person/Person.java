@@ -20,7 +20,6 @@ public class Person {
     private final Phone phone;
     private final Email email;
     // Add the new dietary preference field
-    private final DietaryPreference preference;
 
     // Data fields
     private final Address address;
@@ -31,13 +30,12 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  DietaryPreference preference, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, preference, tags);
+                  Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.preference = preference;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -46,7 +44,6 @@ public class Person {
             new Phone(),
             new Email(),
             new Address(),
-            new DietaryPreference(),
             new Remark(),
             Collections.emptySet());
 
@@ -59,7 +56,6 @@ public class Person {
             new Phone(),
             new Email(),
             new Address(),
-            new DietaryPreference(),
             new Remark(),
             Collections.emptySet());
 
@@ -82,10 +78,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public DietaryPreference getPreference() {
-        return preference;
     }
 
     public Remark getRemark() {
@@ -111,8 +103,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()))
-                && otherPerson.getPreference().equals(getPreference());
+                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
     }
 
     /**
@@ -134,14 +125,13 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getPreference().equals(getPreference())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, preference, tags);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
     @Override
@@ -154,8 +144,6 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Preference: ")
-                .append(getPreference())
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Tags: ");
