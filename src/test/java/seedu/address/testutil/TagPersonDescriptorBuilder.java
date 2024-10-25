@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.TagCommand.TagPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -24,20 +20,20 @@ public class TagPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code TagPersonDescriptor} with fields containing {@code person}'s details.
+     * Returns an {@code TagPersonDescriptor} with fields containing {@code person}'s tag details.
      */
     public TagPersonDescriptorBuilder(Person person) {
         descriptor = new TagPersonDescriptor();
-        descriptor.setTags(person.getTags());
+        if (!person.getTags().isEmpty()) {
+            descriptor.setTag(person.getTags().iterator().next());
+        }
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code TagPersonDescriptor}
-     * that we are building.
+     * Sets a single tag to the {@code TagPersonDescriptor} that we are building.
      */
-    public TagPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public TagPersonDescriptorBuilder withTag(String tag) {
+        descriptor.setTag(tag != null ? new Tag(tag) : null);
         return this;
     }
 

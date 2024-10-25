@@ -29,6 +29,10 @@ public class Client {
         return this.person;
     }
 
+    public Name getName() {
+        return this.person.getName();
+    }
+
     public static boolean isValidClientName(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
     }
