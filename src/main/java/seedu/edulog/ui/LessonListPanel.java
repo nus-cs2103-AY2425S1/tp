@@ -25,6 +25,7 @@ public class LessonListPanel extends UiPart<Region> {
      */
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
+        logger.info("Initializing LessonListPanel with " + lessonList.size() + " lessons.");
         lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
@@ -41,6 +42,7 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
+                logger.fine("Updating LessonListViewCell with lesson: " + lesson);
                 setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
             }
         }
