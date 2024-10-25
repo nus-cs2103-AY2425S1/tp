@@ -27,7 +27,7 @@ public class JsonAdaptedWeddingTest {
 
     private static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253").withEmail("alicePushingP@gmail.com").withAddress("123, Jurong West Ave 6, #08-111")
-            .withTags("friends").build();
+            .withTag("friends").build();
     private static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Wedding")
             .withClient(ALICE).withDate("2020-10-10").withVenue("Alice's Wedding Venue").build();
 
