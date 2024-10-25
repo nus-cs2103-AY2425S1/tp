@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.person.Person;
 
@@ -16,23 +16,23 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
     private static final String FXML = "DetailedPersonCardWindow.fxml";
 
     @FXML
-    private HBox cardPane;
+    private VBox cardPane;
     @FXML
-    private Label name;
+    private TextField name;
     @FXML
-    private Label id;
+    private TextField id;
     @FXML
-    private Label phone;
+    private TextField phone;
     @FXML
-    private Label address;
+    private TextField address;
     @FXML
-    private Label email;
+    private TextField email;
     @FXML
-    private Label fees;
+    private TextField fees;
     @FXML
-    private Label classId;
+    private TextField classId;
     @FXML
-    private Label monthsPaid;
+    private TextField monthsPaid;
 
     @FXML
     private FlowPane tags;
@@ -69,7 +69,9 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
+        getRoot().requestFocus();
         getRoot().centerOnScreen();
+
     }
 
     public boolean isShowing() {

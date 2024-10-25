@@ -20,13 +20,16 @@
 
 
 .root {
-    -fx-background-color: -ab3-background; /* Light gray background */
+    -fx-background-color: -ab3-background;
+
 }
 
 .label {
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
-    -fx-text-fill: -ab3-label; /* Dark gray text */
+    -fx-text-fill: -ab3-label;
+    -fx-background-color: -ab3-background;
+    -fx-alignment: center;
 }
 
 .vbox {

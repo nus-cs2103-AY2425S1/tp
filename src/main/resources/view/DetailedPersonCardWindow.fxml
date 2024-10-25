@@ -5,18 +5,19 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.TextField?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene stylesheets="@DetailedPersonCard.css">
-            <VBox spacing = "10" VBox.vgrow = "ALWAYS" styleClass="vbox">
+            <VBox spacing = "10" VBox.vgrow = "ALWAYS" styleClass="vbox" prefHeight="600" prefWidth="600">
                 <children>
-                    <Label fx:id="name" text="Name" styleClass="label"/>
-                    <Label fx:id="phone" text="Phone" styleClass="label"/>
-                    <Label fx:id="address" text="Address" styleClass="label"/>
-                    <Label fx:id="email" text="Email" styleClass="label"/>
-                    <Label fx:id="fees" text="Fees" styleClass="label"/>
-                    <Label fx:id="classId" text="Class ID" styleClass="label"/>
-                    <Label fx:id="monthsPaid" text="Months Paid" styleClass="label"/>
+                    <TextField fx:id="name" text="Name" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="phone" text="Phone" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="address" text="Address" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="email" text="Email" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="fees" text="Fees" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="classId" text="Class ID" styleClass="label" editable="false" focusTraversable="false"/>
+                    <TextField fx:id="monthsPaid" text="Months Paid" styleClass="label" editable="false" focusTraversable="false"/>
                 </children>
             </VBox>
         </Scene>
