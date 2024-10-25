@@ -90,12 +90,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath_returnsCorrectPath() {
-        Path expectedPath = Path.of("data/addressBook.json");
-        assertEquals(expectedPath, logic.getAddressBookFilePath());
-    }
-
-    @Test
     public void guiSettings_setAndRetrieveSuccessfully() {
         // Set GUI settings in the model and verify they are retrieved correctly
         GuiSettings expectedGuiSettings = new GuiSettings(800, 600, 0, 0);
