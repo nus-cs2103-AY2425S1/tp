@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ScheduleServices;
 import seedu.address.logic.commands.ClientUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -227,38 +228,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see Schedule
      */
     private void showTopThreeSchedules() {
-        List<Map.Entry<Person, LocalDateTime>> allAppointments = new ArrayList<>();
-
-        for (Person person : personList) {
-            for (Schedule schedule : person.getSchedules()) {
-                if (schedule.getDateTime().isEmpty()) {
-                    continue;
-                }
-
-                LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.getDateTime(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-
-                allAppointments.add(Map.entry(person, appointmentDateTime));
-            }
-        }
-
-        allAppointments.sort(Map.Entry.comparingByValue());
-
-        List<String> result = new ArrayList<>();
-        int count = 1;
-        for (Map.Entry<Person, LocalDateTime> entry : allAppointments) {
-            if (count > 3) {
-                break;
-            }
-
-            String formattedAppointment = String.format("%d. %s: %s",
-                    count,
-                    entry.getKey().getName(),
-                    entry.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-            );
-            result.add(formattedAppointment);
-            count++;
-        }
+        List<String> result = ScheduleServices.getTopThreeSchedules(personList);
 
         StringBuilder feedbackMessage = new StringBuilder("Upcoming Appointments:\n");
 
