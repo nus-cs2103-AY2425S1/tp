@@ -25,6 +25,7 @@ public class AddGradeCommand extends Command {
             + "Existing grades will be updated by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) n/EXAM_NAME s/EXAM_SCORE w/EXAM_WEIGHTAGE\n"
             + "Example: " + COMMAND_WORD + " 1 n/Midterm s/85 w/30";
+    public static final String MESSAGE_EXCEED_WEIGHTAGE = "The total weightage of grades cannot exceed 100%";
 
     private final Grade toAdd;
     private final Index index;
@@ -59,12 +60,18 @@ public class AddGradeCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person updatedPerson = personToEdit.addGrade(this.toAdd);
 
+        float totalWeightage = personToEdit.getTotalWeightage();
+        totalWeightage += this.toAdd.getWeightage();
+
+        if (totalWeightage > 100) {
+            throw new CommandException("The total weightage of grades cannot exceed 100%");
+        }
+
+        Person updatedPerson = personToEdit.addGrade(this.toAdd);
         model.setPerson(personToEdit, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(updatedPerson)));
-
     }
 
     /**

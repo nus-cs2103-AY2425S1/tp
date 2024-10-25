@@ -24,7 +24,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Course course;
     private final Set<Tag> tags = new HashSet<>();
     private final GradeList gradeList;
     private final AttendanceList attendanceList;
@@ -32,13 +32,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeList gradeList,
+    public Person(Name name, Phone phone, Email email, Course course, Set<Tag> tags, GradeList gradeList,
             AttendanceList attendanceList) {
-        requireAllNonNull(name, phone, email, address, tags, gradeList, attendanceList);
+        requireAllNonNull(name, phone, email, course, tags, gradeList, attendanceList);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.course = course;
         this.tags.addAll(tags);
         this.gradeList = gradeList;
         this.attendanceList = attendanceList;
@@ -56,8 +56,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Course getCourse() {
+        return course;
     }
 
     public GradeList getGradeList() {
@@ -68,6 +68,9 @@ public class Person {
         return attendanceList;
     }
 
+    public boolean isAbsentOn(LocalDateTime date) {
+        return new Attendance(false).equals(attendanceList.getAttendance(date));
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -88,7 +91,7 @@ public class Person {
 
         GradeList newGradeList = this.gradeList.addGrade(grade);
 
-        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradeList,
+        return new Person(this.name, this.phone, this.email, this.course, this.tags, newGradeList,
                           this.attendanceList);
     }
 
@@ -103,7 +106,7 @@ public class Person {
 
         GradeList newGradelist = this.gradeList.removeGrade(testName);
 
-        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
+        return new Person(this.name, this.phone, this.email, this.course, this.tags, newGradelist,
                           this.attendanceList);
     }
 
@@ -142,7 +145,7 @@ public class Person {
      */
     public Person setAttendance(LocalDateTime date, Attendance attendance) {
         AttendanceList newAttendanceList = attendanceList.setAttendance(date, attendance);
-        return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
+        return new Person(name, phone, email, course, tags, gradeList, newAttendanceList);
     }
 
     /**
@@ -153,7 +156,20 @@ public class Person {
      */
     public Person removeAttendance(LocalDateTime date) {
         AttendanceList newAttendanceList = attendanceList.removeAttendance(date);
-        return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
+        return new Person(name, phone, email, course, tags, gradeList, newAttendanceList);
+    }
+
+    /**
+     * Returns the total weightage of all grades associated with this person.
+     *
+     * @return the total weightage of grades as a double.
+     */
+    public float getTotalWeightage() {
+        float totalWeightage = 0;
+        for (Grade g : gradeList.getMap().values()) {
+            totalWeightage += g.getWeightage();
+        }
+        return totalWeightage;
     }
 
     /**
@@ -175,7 +191,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && course.equals(otherPerson.course)
                 && tags.equals(otherPerson.tags)
                 && gradeList.equals(otherPerson.gradeList)
                 && attendanceList.equals(otherPerson.attendanceList);
@@ -184,7 +200,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeList, attendanceList);
+        return Objects.hash(name, phone, email, course, tags, gradeList, attendanceList);
     }
 
     @Override
@@ -193,7 +209,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("course", course)
                 .add("tags", tags)
                 .add("gradeList", gradeList)
                 .add("attendanceList", attendanceList)

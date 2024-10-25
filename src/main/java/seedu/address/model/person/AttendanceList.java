@@ -68,6 +68,10 @@ public class AttendanceList {
         return new AttendanceList(newAttendanceList);
     }
 
+    public Attendance getAttendance(LocalDateTime date) {
+        return attendanceList.get(date);
+    }
+
     /**
      * Returns a copy of the map from {@code LocalDateTime} to {@code Attendance} in this {@code AttendanceList}
      *

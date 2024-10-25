@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AggGradeCommand.MESSAGE_OPERATION_CONSTRAINTS;
+import static seedu.address.logic.commands.AggGradeCommand.OPERATION_TRANSLATE;
 import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
 import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
@@ -13,10 +15,11 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AggGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.AttendanceList;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
@@ -76,18 +79,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String course} into an {@code Course}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedAddress = course.trim();
+        if (!Course.isValidCourse(trimmedAddress)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Course(trimmedAddress);
     }
 
     /**
@@ -236,5 +239,22 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parsers {@code String value} into a valid AggGrade operation.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if operation is invalid
+     */
+    public static AggGradeCommand.Operation parseAggGradeOperation(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        if (!OPERATION_TRANSLATE.containsKey(trimmedValue)) {
+            throw new ParseException(MESSAGE_OPERATION_CONSTRAINTS);
+        }
+
+        return OPERATION_TRANSLATE.get(trimmedValue);
     }
 }
