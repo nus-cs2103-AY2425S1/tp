@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.suggestion;
 
 /**
  * Enum representing the various commands available in the application.

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.ui.suggestion.Suggestions;
+
 /**
  * Unit tests for the Suggestions class.
  */

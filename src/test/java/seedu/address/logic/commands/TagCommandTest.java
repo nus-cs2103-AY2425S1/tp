@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -32,27 +30,23 @@ public class TagCommandTest {
         Person personToTag = model.getFilteredPersonList().get(0); // Assuming Alice is the first person
         Name name = new Name("Alice Pauline");
 
-        // Create a set of tags that includes the existing tags and the new tag
-        Set<Tag> existingTags = personToTag.getTags();
-        Set<String> newTags = new HashSet<>();
+        // Define the new tag to add
+        String newTag = "friend";
 
-        // Add existing tags
-        for (Tag tag : existingTags) {
-            newTags.add(tag.tagName);
-        }
-        newTags.add("friend"); // Add the new tag
+        // Create the tag command descriptor with one tag
+        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTag(newTag).build();
 
-        // Create the tag command descriptor
-        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTags("friend").build();
-
+        // Create the tag command
         TagCommand tagCommand = new TagCommand(name, descriptor);
 
-        // Create the expected person with the new tags as strings
-        Person expectedPerson = new PersonBuilder(personToTag).withTags(newTags.toArray(new String[0])).build();
+        // Create the expected person with the new tag
+        Person expectedPerson = new PersonBuilder(personToTag).withTag(newTag).build();
 
+        // Setup the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, expectedPerson);
 
+        // Execute the command and assert success
         CommandResult result = tagCommand.execute(model);
 
         assertEquals(String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS, Messages.format(expectedPerson)),
@@ -65,7 +59,7 @@ public class TagCommandTest {
         Person personToTag = model.getFilteredPersonList().get(0);
 
         Name name = new Name(VALID_NAME_AMY);
-        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        TagCommand.TagPersonDescriptor descriptor = new TagPersonDescriptorBuilder().withTag(VALID_TAG_FRIEND).build();
 
         TagCommand tagCommand = new TagCommand(name, descriptor);
 
@@ -76,9 +70,9 @@ public class TagCommandTest {
     @Test
     public void equals() {
         TagCommand tagCommand1 = new TagCommand(new Name(VALID_NAME_AMY),
-                new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
+                new TagPersonDescriptorBuilder().withTag(VALID_TAG_FRIEND).build());
         TagCommand tagCommand2 = new TagCommand(new Name(VALID_NAME_AMY),
-                new TagPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
+                new TagPersonDescriptorBuilder().withTag(VALID_TAG_FRIEND).build());
 
         // same object -> returns true
         assertEquals(tagCommand1, tagCommand1);

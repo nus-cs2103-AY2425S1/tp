@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.ui.suggestion.FormatSuggestion;
+
 public class FormatSuggestionTest {
 
     @Test
