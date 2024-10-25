@@ -28,6 +28,7 @@ test {
 
 run {
     jvmArgs '-ea'  // Enable assertions during application runtime
+    enableAssertions = true
 }
 
 task coverage(type: JacocoReport) {
