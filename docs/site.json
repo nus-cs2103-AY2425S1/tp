@@ -1,7 +1,6 @@
 {
   "baseUrl": "",
   "titlePrefix": "VBook",
-  "titleSuffix": "VBook",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"

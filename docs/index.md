@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: ""
+layout: default.md
+title: ""
 ---
 
 # AddressBook Level-3
