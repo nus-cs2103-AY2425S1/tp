@@ -45,57 +45,57 @@ public class TagContainsKeywordPredicateTest {
     public void test_tagContainsKeywords_returnsTrue() {
         // One keyword
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("friends"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("friends").build()));
 
         // Multiple keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("friends", "family"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
-        assertTrue(predicate.test(new PersonBuilder().withTags("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friends", "family").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("family").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("friends", "family").build()));
 
         // Only one matching keyword
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("family", "friends"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("family").build()));
-        assertTrue(predicate.test(new PersonBuilder().withTags("family", "friends").build()));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("family").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("family", "friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("friends").build()));
 
         // Mixed-case keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("fRiEnDs"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("friends").build()));
     }
 
     @Test
     public void test_tagDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList());
-        assertFalse(predicate.test(new PersonBuilder().withTags("friends").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag("friends").build()));
 
         // Non-matching keyword
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("family"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("friends").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag("friends").build()));
 
         // Keywords match name
         // TODO keywords to match whole contact (phone, email and address), but not tag
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Alice", "12345"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTags("bruh").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTag("bruh").build()));
     }
 
     @Test
     public void test_personHasNoTags_returnsFalse() {
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("friends"));
-        assertFalse(predicate.test(new PersonBuilder().withTags().build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag().build()));
     }
 
     @Test
     public void test_tagContainsSubstringOfKeyword_returnsFalse() {
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("family"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("familiar").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag("familiar").build()));
     }
 
     @Test
     public void personHasMixedTags_someMatching_returnsTrue() {
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("family", "gym").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("family", "gym").build()));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class TagContainsKeywordPredicateTest {
             keywords.add("keyword" + i);
         }
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(keywords);
-        assertFalse(predicate.test(new PersonBuilder().withTags("unrelated").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag("unrelated").build()));
     }
 
 }

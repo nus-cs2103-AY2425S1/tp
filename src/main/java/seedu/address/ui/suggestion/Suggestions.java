@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.suggestion;
 
 /**
  * Provides functionality for generating command suggestions based on user input.

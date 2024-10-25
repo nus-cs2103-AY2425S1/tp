@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.suggestion;
 
 /**
  * Represents a format suggestion for a command in the application.
