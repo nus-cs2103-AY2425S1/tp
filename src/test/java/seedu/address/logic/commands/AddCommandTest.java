@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAgentAssistFilePath(Path addressBookFilePath) {
+        public void setAgentAssistFilePath(Path agentAssistFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

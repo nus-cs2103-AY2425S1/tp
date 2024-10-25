@@ -112,7 +112,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different agentAssist -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAgentAssist, userPrefs)));
 
         // different filteredList -> returns false

@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAgentAssistFilePath());
 
-        Optional<ReadOnlyAgentAssist> addressBookOptional;
+        Optional<ReadOnlyAgentAssist> agentAssistOptional;
         ReadOnlyAgentAssist initialData;
         try {
-            addressBookOptional = storage.readAgentAssist();
-            if (!addressBookOptional.isPresent()) {
+            agentAssistOptional = storage.readAgentAssist();
+            if (!agentAssistOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAgentAssistFilePath()
                         + " populated with a sample AgentAssist.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAgentAssist);
+            initialData = agentAssistOptional.orElseGet(SampleDataUtil::getSampleAgentAssist);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAgentAssistFilePath() + " could not be loaded."
                     + " Will be starting with an empty AgentAssist.");

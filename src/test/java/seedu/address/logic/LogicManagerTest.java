@@ -47,10 +47,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAgentAssistStorage addressBookStorage =
-                new JsonAgentAssistStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAgentAssistStorage agentAssistStorage =
+                new JsonAgentAssistStorage(temporaryFolder.resolve("agentAssist.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(agentAssistStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -188,9 +188,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AgentAssistStorage that throws the IOException e when saving
-        JsonAgentAssistStorage addressBookStorage = new JsonAgentAssistStorage(prefPath) {
+        JsonAgentAssistStorage agentAssistStorage = new JsonAgentAssistStorage(prefPath) {
             @Override
-            public void saveAgentAssist(ReadOnlyAgentAssist addressBook, Path filePath)
+            public void saveAgentAssist(ReadOnlyAgentAssist agentAssist, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -198,7 +198,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(agentAssistStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

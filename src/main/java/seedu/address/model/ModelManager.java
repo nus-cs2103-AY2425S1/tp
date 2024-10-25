@@ -29,15 +29,15 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given agentAssist and userPrefs.
      */
-    public ModelManager(ReadOnlyAgentAssist addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAgentAssist agentAssist, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(agentAssist, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + agentAssist + " and user prefs " + userPrefs);
 
-        this.agentAssist = new AgentAssist(addressBook);
+        this.agentAssist = new AgentAssist(agentAssist);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.agentAssist.getPersonList());
     }
@@ -77,16 +77,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAgentAssistFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAgentAssistFilePath(addressBookFilePath);
+    public void setAgentAssistFilePath(Path agentAssistFilePath) {
+        requireNonNull(agentAssistFilePath);
+        userPrefs.setAgentAssistFilePath(agentAssistFilePath);
     }
 
     //=========== AgentAssist ================================================================================
 
     @Override
-    public void setAgentAssist(ReadOnlyAgentAssist addressBook) {
-        this.agentAssist.resetData(addressBook);
+    public void setAgentAssist(ReadOnlyAgentAssist agentAssist) {
+        this.agentAssist.resetData(agentAssist);
     }
 
     @Override

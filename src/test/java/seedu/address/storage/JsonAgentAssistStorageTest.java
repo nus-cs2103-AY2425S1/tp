@@ -92,12 +92,12 @@ public class JsonAgentAssistStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code agentAssist} at the specified {@code filePath}.
      */
-    private void saveAgentAssist(ReadOnlyAgentAssist addressBook, String filePath) {
+    private void saveAgentAssist(ReadOnlyAgentAssist agentAssist, String filePath) {
         try {
             new JsonAgentAssistStorage(Paths.get(filePath))
-                    .saveAgentAssist(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveAgentAssist(agentAssist, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

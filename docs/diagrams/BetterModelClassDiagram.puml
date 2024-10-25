@@ -5,17 +5,17 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AgentAssist *-right-> "1" UniquePersonList
-AgentAssist *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
-
-Person -up-> "*" Tag
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Tier
+Person *--> Job
+Person *--> Income
+Person *--> Status
+Person *--> Remark
+
 @enduml

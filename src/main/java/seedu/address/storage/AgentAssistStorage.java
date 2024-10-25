@@ -33,14 +33,14 @@ public interface AgentAssistStorage {
 
     /**
      * Saves the given {@link ReadOnlyAgentAssist} to the storage.
-     * @param addressBook cannot be null.
+     * @param agentAssist cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAgentAssist(ReadOnlyAgentAssist addressBook) throws IOException;
+    void saveAgentAssist(ReadOnlyAgentAssist agentAssist) throws IOException;
 
     /**
      * @see #saveAgentAssist(ReadOnlyAgentAssist)
      */
-    void saveAgentAssist(ReadOnlyAgentAssist addressBook, Path filePath) throws IOException;
+    void saveAgentAssist(ReadOnlyAgentAssist agentAssist, Path filePath) throws IOException;
 
 }

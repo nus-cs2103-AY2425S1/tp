@@ -43,12 +43,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAgentAssistFilePath(Path addressBookFilePath);
+    void setAgentAssistFilePath(Path agentAssistFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code agentAssist}.
      */
-    void setAgentAssist(ReadOnlyAgentAssist addressBook);
+    void setAgentAssist(ReadOnlyAgentAssist agentAssist);
 
     /** Returns the AgentAssist */
     ReadOnlyAgentAssist getAgentAssist();

@@ -27,6 +27,6 @@ public interface Storage extends AgentAssistStorage, UserPrefsStorage {
     Optional<ReadOnlyAgentAssist> readAgentAssist() throws DataLoadingException;
 
     @Override
-    void saveAgentAssist(ReadOnlyAgentAssist addressBook) throws IOException;
+    void saveAgentAssist(ReadOnlyAgentAssist agentAssist) throws IOException;
 
 }

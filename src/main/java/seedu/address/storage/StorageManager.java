@@ -65,14 +65,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveAgentAssist(ReadOnlyAgentAssist addressBook) throws IOException {
-        saveAgentAssist(addressBook, agentAssistStorage.getAgentAssistFilePath());
+    public void saveAgentAssist(ReadOnlyAgentAssist agentAssist) throws IOException {
+        saveAgentAssist(agentAssist, agentAssistStorage.getAgentAssistFilePath());
     }
 
     @Override
-    public void saveAgentAssist(ReadOnlyAgentAssist addressBook, Path filePath) throws IOException {
+    public void saveAgentAssist(ReadOnlyAgentAssist agentAssist, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        agentAssistStorage.saveAgentAssist(addressBook, filePath);
+        agentAssistStorage.saveAgentAssist(agentAssist, filePath);
     }
 
 }

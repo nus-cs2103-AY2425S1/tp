@@ -11,7 +11,7 @@ start
 if () then ([command commits AgentAssist])
     :Purge redundant states;
     :Save AgentAssist to
-    addressBookStateList;
+    agentAssistStateList;
 else ([else])
 endif
 stop

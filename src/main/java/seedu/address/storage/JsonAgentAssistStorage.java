@@ -60,8 +60,8 @@ public class JsonAgentAssistStorage implements AgentAssistStorage {
     }
 
     @Override
-    public void saveAgentAssist(ReadOnlyAgentAssist addressBook) throws IOException {
-        saveAgentAssist(addressBook, filePath);
+    public void saveAgentAssist(ReadOnlyAgentAssist agentAssist) throws IOException {
+        saveAgentAssist(agentAssist, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonAgentAssistStorage implements AgentAssistStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAgentAssist(ReadOnlyAgentAssist addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveAgentAssist(ReadOnlyAgentAssist agentAssist, Path filePath) throws IOException {
+        requireNonNull(agentAssist);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAgentAssist(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAgentAssist(agentAssist), filePath);
     }
 
 }
