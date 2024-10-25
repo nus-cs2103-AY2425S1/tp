@@ -5,8 +5,15 @@
 ---
 
 # PlanPerfect User Guide
+PlanPerfect is designed to streamline the way wedding planners manage their contacts and organize wedding events. 
+With PlanPerfect, you can store essential contacts—from photographers and florists to caterers and entertainers—in one convenient place. 
+Easily assign these contacts to specific weddings, helping you stay organized and focused on delivering seamless, unforgettable events. 
 
-PlanPerfect is a **desktop app for wedding planers to manage contacts, optimized for use via a  Line Interface** 
+
+Whether you’re coordinating one wedding or multiple, PlanPerfect provides the structure you need to keep everything running smoothly.
+
+
+PlanPerfect is **optimized for use via a Command Line Interface** 
 (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PlanPerfect can get 
 your wedding contact management tasks done faster than traditional GUI apps.
 
@@ -156,6 +163,17 @@ Examples:
 
 <br><br/>
 
+### Listing all tags: `taglist`
+
+Lists all the current active tags in the address book.
+
+Format: `taglist`
+
+* Lists the tags in alphabetical order
+* Useful to keep track of which tags you have used in order to maintain consistency
+
+<br></br>
+
 ### Locating contacts by name: `find`
 
 Finds contacts whose names contain any of the given keywords.
@@ -295,14 +313,6 @@ Examples:
 
 <br><br/>
 ## Other Features
-
-### Listing all active tags : `taglist`
-
-Format: `taglist`
-
-* Lists all the tags in active use within PlanPerfect.
-
-<br><br/>
 
 ### Exiting the program : `exit`
 
