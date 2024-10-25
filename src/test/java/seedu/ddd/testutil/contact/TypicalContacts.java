@@ -20,7 +20,7 @@ public class TypicalContacts {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withId(11)
+            .withId(1)
             .build();
     public static final Vendor BENSON = new VendorBuilder()
             .withName("Benson Meier")
@@ -29,7 +29,7 @@ public class TypicalContacts {
             .withPhone("98765432")
             .withService("flower provider")
             .withTags("owesMoney", "friends")
-            .withId(21)
+            .withId(2)
             .build();
     public static final Client CARL = new ClientBuilder()
             .withName("Carl Kurz")

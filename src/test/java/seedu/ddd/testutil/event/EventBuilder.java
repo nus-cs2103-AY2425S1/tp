@@ -87,8 +87,16 @@ public class EventBuilder {
      * Sets the {@code Clients} of the {@code Event} that we are building.
      */
     public EventBuilder withClients(List<Client> clients) {
-        this.clients = new ArrayList<>();
-        this.clients.addAll(clients);
+        this.clients = new ArrayList<>(clients);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Clients} of the {@code Event} that we are building.
+     */
+    public EventBuilder withClients(Client ... clients) {
+        assert clients.length > 0;
+        this.clients = List.of(clients);
         return this;
     }
 
@@ -96,10 +104,19 @@ public class EventBuilder {
      * Sets the {@code Vendors} of the {@code Event} that we are building.
      */
     public EventBuilder withVendors(List<Vendor> vendors) {
-        this.vendors = new ArrayList<>();
-        this.vendors.addAll(vendors);
+        this.vendors = new ArrayList<>(vendors);
         return this;
     }
+
+    /**
+     * Sets the {@code Vendors} of the {@code Event} that we are building.
+     */
+    public EventBuilder withVendors(Vendor ... vendors) {
+        assert vendors.length > 0;
+        this.vendors = List.of(vendors);
+        return this;
+    }
+
     public Event build() {
         requireAllNonNull(name, description, date, clients, vendors, eventId);
         return new Event(name, description, date, clients, vendors, eventId);

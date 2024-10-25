@@ -7,7 +7,8 @@ import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.EventId;
 
-class JsonAdaptedContactId {
+public class JsonAdaptedContactId {
+
     private final int contactId;
 
     /**
@@ -41,4 +42,5 @@ class JsonAdaptedContactId {
         }
         return new ContactId(contactId);
     }
+
 }

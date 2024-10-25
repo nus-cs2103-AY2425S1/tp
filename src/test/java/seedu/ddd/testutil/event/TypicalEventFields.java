@@ -17,6 +17,7 @@ import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.EventId;
+import seedu.ddd.storage.JsonAdaptedContactId;
 
 /**
  *  A utility class containing a list of {@code Event} fields to be used in tests.
@@ -50,5 +51,11 @@ public class TypicalEventFields {
     public static final Set<ContactId> DEFAULT_VENDOR_CONTACT_ID_SET = Stream.of(VALID_VENDOR_ID)
             .map(ContactId::new)
             .collect(Collectors.toSet());
+
+    // Storage objects
+    public static final List<JsonAdaptedContactId> DEFAULT_JSON_CLIENT_CONTACT_ID_LIST =
+            List.of(new JsonAdaptedContactId(DEFAULT_CLIENT_ID));
+    public static final List<JsonAdaptedContactId> DEFAULT_JSON_VENDOR_CONTACT_ID_LIST  =
+            List.of(new JsonAdaptedContactId(DEFAULT_VENDOR_ID));
 
 }
