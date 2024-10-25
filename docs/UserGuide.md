@@ -28,7 +28,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
    * `list` : Lists all contacts.
 
-   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/friends t/owesMoney` : Adds a contact named `John Doe` to ContactMate.
+   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/wheelchairUser t/livingAlone` : Adds a contact named `John Doe` to ContactMate.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -50,10 +50,10 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets `[]` are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/fallrisk` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/wheelchairUser`, `t/wheelchairUser` `t/livingAlone` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -79,7 +79,7 @@ Adds an elderly to ContactMate.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
 
-* The call frequency is in days and has to be a positive number less than or equal to 7.
+* The call frequency is measured in days and must be a positive integer less than or equal to 7 (e.g. 1, 2, ..., 7)
 * `NRIC` must be a valid, government issued NRIC.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -88,7 +88,7 @@ An elderly can have any number of tags (including 0)
 
 Examples:
 * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/7`
-* `add i/S6878830G n/Betsy Crowe t/wheelchair e/betsycrowe@example.com a/Newgate Prison p/1234567 c/2`
+* `add i/S6878830G n/Betsy Crowe t/wheelchairUser e/betsycrowe@example.com a/Blk 30 Geylang Street 28, #06-48 p/1234567 c/2`
 
 ### Listing all elderly : `list`
 
@@ -102,19 +102,19 @@ Edits an existing elderly in ContactMate.
 
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
-* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list.The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* The existing values will be replaced with the new input values.
 * When editing tags, the existing tags of the elderly will be removed i.e adding of tags is not cumulative.
 * You can remove all the elderly’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st elderly to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the NRIC, phone number and email address of the 1st elderly shown in the list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC `S6878830G` to be `Betsy Crower` and clears all existing tags.
 
-### Locating elderly by name or nric: `find`
+### Locating elderly by name and/or nric: `find`
 
 Finds all elderly whose names or nric contain any of the given keywords.
 
@@ -122,7 +122,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and nric is searched.
+* Only the name and nric are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
 * All elderly matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
