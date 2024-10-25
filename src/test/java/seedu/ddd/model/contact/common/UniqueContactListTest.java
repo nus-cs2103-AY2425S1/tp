@@ -3,11 +3,10 @@ package seedu.ddd.model.contact.common;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
-import static seedu.ddd.testutil.TypicalContacts.BOB;
+import static seedu.ddd.testutil.contact.TypicalContactFields.*;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_CLIENT;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
-import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class UniqueContactListTest {
 
@@ -30,19 +29,21 @@ public class UniqueContactListTest {
 
     @Test
     public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniqueContactList.contains(ALICE));
+        assertFalse(uniqueContactList.contains(VALID_CLIENT));
     }
 
     @Test
     public void contains_personInList_returnsTrue() {
-        uniqueContactList.add(ALICE);
-        assertTrue(uniqueContactList.contains(ALICE));
+        uniqueContactList.add(VALID_CLIENT);
+        assertTrue(uniqueContactList.contains(VALID_CLIENT));
     }
 
     @Test
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueContactList.add(ALICE);
-        Contact editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        uniqueContactList.add(VALID_CLIENT);
+        Contact editedAlice = new ClientBuilder(VALID_CLIENT)
+                .withAddress(VALID_VENDOR_ADDRESS)
+                .withTags(VALID_TAG_1)
                 .build();
         assertTrue(uniqueContactList.contains(editedAlice));
     }
@@ -54,40 +55,42 @@ public class UniqueContactListTest {
 
     @Test
     public void add_duplicateContact_throwsDuplicateContactException() {
-        uniqueContactList.add(ALICE);
-        assertThrows(DuplicateContactException.class, () -> uniqueContactList.add(ALICE));
+        uniqueContactList.add(VALID_CLIENT);
+        assertThrows(DuplicateContactException.class, () -> uniqueContactList.add(VALID_CLIENT));
     }
 
     @Test
     public void setContact_nullTargetContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(null, VALID_CLIENT));
     }
 
     @Test
     public void setContact_nullEditedContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(VALID_CLIENT, null));
     }
 
     @Test
     public void setContact_targetContactNotInList_throwsContactNotFoundException() {
-        assertThrows(ContactNotFoundException.class, () -> uniqueContactList.setContact(ALICE, ALICE));
+        assertThrows(ContactNotFoundException.class, () -> uniqueContactList.setContact(VALID_CLIENT, VALID_CLIENT));
     }
 
     @Test
     public void setContact_editedContactIsSameContact_success() {
-        uniqueContactList.add(ALICE);
-        uniqueContactList.setContact(ALICE, ALICE);
+        uniqueContactList.add(VALID_CLIENT);
+        uniqueContactList.setContact(VALID_CLIENT, VALID_CLIENT);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(ALICE);
+        expectedUniqueContactList.add(VALID_CLIENT);
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
 
     @Test
     public void setContact_editedContactHasSameIdentity_success() {
-        uniqueContactList.add(ALICE);
-        Contact editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        uniqueContactList.add(VALID_CLIENT);
+        Contact editedAlice = new ClientBuilder(VALID_CLIENT)
+                .withAddress(VALID_VENDOR_ADDRESS)
+                .withTags(VALID_TAG_1)
                 .build();
-        uniqueContactList.setContact(ALICE, editedAlice);
+        uniqueContactList.setContact(VALID_CLIENT, editedAlice);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
         expectedUniqueContactList.add(editedAlice);
         assertEquals(expectedUniqueContactList, uniqueContactList);
@@ -95,18 +98,18 @@ public class UniqueContactListTest {
 
     @Test
     public void setContact_editedContactHasDifferentIdentity_success() {
-        uniqueContactList.add(ALICE);
-        uniqueContactList.setContact(ALICE, BOB);
+        uniqueContactList.add(VALID_CLIENT);
+        uniqueContactList.setContact(VALID_CLIENT, VALID_VENDOR);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(BOB);
+        expectedUniqueContactList.add(VALID_VENDOR);
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
 
     @Test
     public void setContact_editedContactHasNonUniqueIdentity_throwsDuplicateContactException() {
-        uniqueContactList.add(ALICE);
-        uniqueContactList.add(BOB);
-        assertThrows(DuplicateContactException.class, () -> uniqueContactList.setContact(ALICE, BOB));
+        uniqueContactList.add(VALID_CLIENT);
+        uniqueContactList.add(VALID_VENDOR);
+        assertThrows(DuplicateContactException.class, () -> uniqueContactList.setContact(VALID_CLIENT, VALID_VENDOR));
     }
 
     @Test
@@ -116,13 +119,13 @@ public class UniqueContactListTest {
 
     @Test
     public void remove_contactDoesNotExist_throwsContactNotFoundException() {
-        assertThrows(ContactNotFoundException.class, () -> uniqueContactList.remove(ALICE));
+        assertThrows(ContactNotFoundException.class, () -> uniqueContactList.remove(VALID_CLIENT));
     }
 
     @Test
     public void remove_existingContact_removesContact() {
-        uniqueContactList.add(ALICE);
-        uniqueContactList.remove(ALICE);
+        uniqueContactList.add(VALID_CLIENT);
+        uniqueContactList.remove(VALID_CLIENT);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
@@ -134,9 +137,9 @@ public class UniqueContactListTest {
 
     @Test
     public void setContacts_uniqueContactList_replacesOwnListWithProvidedUniqueContactList() {
-        uniqueContactList.add(ALICE);
+        uniqueContactList.add(VALID_CLIENT);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(BOB);
+        expectedUniqueContactList.add(VALID_VENDOR);
         uniqueContactList.setContacts(expectedUniqueContactList);
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
@@ -148,17 +151,17 @@ public class UniqueContactListTest {
 
     @Test
     public void setContacts_list_replacesOwnListWithProvidedList() {
-        uniqueContactList.add(ALICE);
-        List<Contact> contactList = Collections.singletonList(BOB);
+        uniqueContactList.add(VALID_CLIENT);
+        List<Contact> contactList = Collections.singletonList(VALID_VENDOR);
         uniqueContactList.setContacts(contactList);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(BOB);
+        expectedUniqueContactList.add(VALID_VENDOR);
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
 
     @Test
     public void setContacts_listWithDuplicateContacts_throwsDuplicateContactException() {
-        List<Contact> listWithDuplicateContacts = Arrays.asList(ALICE, ALICE);
+        List<Contact> listWithDuplicateContacts = Arrays.asList(VALID_CLIENT, VALID_CLIENT);
         assertThrows(DuplicateContactException.class, () -> uniqueContactList.setContacts(listWithDuplicateContacts));
     }
 

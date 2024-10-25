@@ -25,12 +25,14 @@ import seedu.ddd.model.event.common.EventId;
  */
 public class SampleDataUtil {
 
+    // Client fields
     public static final String SAMPLE_CLIENT_NAME = "Amy Bee";
     public static final String SAMPLE_CLIENT_PHONE = "12345678";
     public static final String SAMPLE_CLIENT_EMAIL = "amy@example.com";
     public static final String SAMPLE_CLIENT_ADDRESS = "Block 312, Amy Street 1";
     public static final String SAMPLE_CLIENT_ID = "0";
 
+    // Vendor fields
     public static final String SAMPLE_VENDOR_NAME = "Bob Choo";
     public static final String SAMPLE_VENDOR_PHONE = "87654321";
     public static final String SAMPLE_VENDOR_EMAIL = "bob@example.com";
@@ -38,9 +40,11 @@ public class SampleDataUtil {
     public static final String SAMPLE_VENDOR_SERVICE = "Catering";
     public static final String SAMPLE_VENDOR_ID = "1";
 
-    public static final String SAMPLE_TAG_BUDGET = "budget";
-    public static final String SAMPLE_TAG_VEGETARIAN = "vegetarian";
+    // Common contact fields
+    public static final String SAMPLE_TAG_1 = "budget";
+    public static final String SAMPLE_TAG_2 = "vegetarian";
 
+    // Event fields
     public static final String SAMPLE_EVENT_NAME = "Sample Wedding";
     public static final String SAMPLE_EVENT_DESCRIPTION = "Wedding reception";
     public static final String SAMPLE_EVENT_DATE = "2000-01-01";
@@ -55,7 +59,7 @@ public class SampleDataUtil {
             new Phone(SAMPLE_CLIENT_PHONE),
             new Email(SAMPLE_CLIENT_EMAIL),
             new Address(SAMPLE_CLIENT_ADDRESS),
-            getTagSet(SAMPLE_TAG_BUDGET, SAMPLE_TAG_VEGETARIAN),
+            getTagSet(SAMPLE_TAG_1, SAMPLE_TAG_2),
             new ContactId(SAMPLE_CLIENT_ID)
         );
         Vendor sampleVendor = new Vendor(
@@ -64,7 +68,7 @@ public class SampleDataUtil {
             new Email(SAMPLE_VENDOR_EMAIL),
             new Address(SAMPLE_VENDOR_ADDRESS),
             new Service(SAMPLE_VENDOR_SERVICE),
-            getTagSet(SAMPLE_TAG_BUDGET),
+            getTagSet(SAMPLE_TAG_1),
             new ContactId(SAMPLE_VENDOR_ID)
         );
         Event sampleEvent = new Event(

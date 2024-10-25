@@ -49,8 +49,8 @@ public class Event implements Displayable {
         Name name,
         Description description,
         Date date,
-        Collection<Client> clients,
-        Collection<Vendor> vendors,
+        List<Client> clients,
+        List<Vendor> vendors,
         EventId eventId
     ) {
         requireAllNonNull(name, description, date, clients, vendors, eventId);
@@ -60,12 +60,8 @@ public class Event implements Displayable {
         this.name = name;
         this.description = description;
         this.date = date;
-
-        this.clients = new ArrayList<>();
-        this.clients.addAll(clients);
-        this.vendors = new ArrayList<>();
-        this.vendors.addAll(vendors);
-
+        this.clients = new ArrayList<>(clients);
+        this.vendors = new ArrayList<>(vendors);
         this.eventId = eventId;
     }
 
@@ -75,13 +71,14 @@ public class Event implements Displayable {
      * Alternative constructor that defers the loading of clients and vendors.
      */
     public Event(Name name, Description description, Date date, EventId eventId) {
+        requireAllNonNull(name, description, date, eventId);
+
         this.name = name;
         this.date = date;
         this.description = description;
-        this.eventId = eventId;
-
         this.clients = new ArrayList<>();
         this.vendors = new ArrayList<>();
+        this.eventId = eventId;
     }
 
     /**

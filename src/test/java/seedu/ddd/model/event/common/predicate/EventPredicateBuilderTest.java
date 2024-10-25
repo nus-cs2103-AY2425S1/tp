@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.testutil.EventBuilder;
+import seedu.ddd.testutil.event.EventBuilder;
 
 public class EventPredicateBuilderTest {
 

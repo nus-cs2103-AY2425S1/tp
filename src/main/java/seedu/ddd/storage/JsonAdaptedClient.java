@@ -51,4 +51,5 @@ class JsonAdaptedClient extends JsonAdaptedContact {
     ) throws IllegalValueException {
         return new Client(name, phone, email, address, tags, contactId);
     }
+
 }

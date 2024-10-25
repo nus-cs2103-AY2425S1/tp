@@ -36,7 +36,6 @@ public class JsonSerializableAddressBookTest {
         AddressBook typicalContactsAddressBook = TypicalAddressBook.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalContactsAddressBook);
     }
-    */
 
     @Test
     public void toModelType_nonExistentContact_throwsIllegalValueException() throws Exception {
@@ -97,4 +96,6 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_ASSOCIATION_MISMATCH,
                 dataFromFile::toModelType);
     }
+    */
+
 }

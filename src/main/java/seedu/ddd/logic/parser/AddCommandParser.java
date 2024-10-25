@@ -49,8 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, FLAG_CLIENT, FLAG_VENDOR);
 
-        ContactType contactType;
-
+        ContactType contactType = null;
         if (argMultimap.getValue(FLAG_CLIENT).isPresent() && argMultimap.getValue(FLAG_VENDOR).isPresent()) {
             throw new ParseException(MESSAGE_MULTIPLE_CONTACT_TYPES);
         } else if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
@@ -61,6 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE));
         }
+        assert contactType != null;
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)
                 || !argMultimap.getPreamble().isEmpty())
@@ -74,8 +74,13 @@ public class AddCommandParser implements Parser<AddCommand> {
                     AddCommand.CLIENT_MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_SERVICE);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+            PREFIX_NAME,
+            PREFIX_PHONE,
+            PREFIX_EMAIL,
+            PREFIX_ADDRESS,
+            PREFIX_SERVICE
+        );
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -83,15 +88,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         ContactId contactId = new ContactId(AddressBook.getNextContactId());
 
-        Contact contact;
-
+        Contact contact = null;
         if (contactType == VENDOR) {
             Service service = ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get());
             contact = new Vendor(name, phone, email, address, service, tagList, contactId);
         } else {
             contact = new Client(name, phone, email, address, tagList, contactId);
         }
-
+        assert contact != null;
         return new AddCommand(contact);
     }
 

@@ -42,10 +42,8 @@ class JsonAdaptedEvent {
         this.description = description;
         this.date = date;
     
-        this.clientIds = new ArrayList<>();
-        this.clientIds.addAll(clientIds);
-        this.vendorIds = new ArrayList<>();
-        this.vendorIds.addAll(vendorIds);
+        this.clientIds = new ArrayList<>(clientIds);
+        this.vendorIds = new ArrayList<>(vendorIds);
 
         this.eventId = eventId;
     }

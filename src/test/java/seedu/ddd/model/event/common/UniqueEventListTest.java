@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-//import static seedu.ddd.testutil.TypicalContacts.BOB;
-import static seedu.ddd.testutil.TypicalEvents.WEDDING_A;
-import static seedu.ddd.testutil.TypicalEvents.WEDDING_B;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_B;
 
 import java.util.Arrays;
 import java.util.Collections;

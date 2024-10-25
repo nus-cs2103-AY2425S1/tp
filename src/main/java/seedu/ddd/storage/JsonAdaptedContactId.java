@@ -19,7 +19,7 @@ class JsonAdaptedContactId {
     }
 
     /**
-     * Converts a given {@code EventId} into this class for Jackson use.
+     * Converts a given {@code ContactId} into this class for Jackson use.
      */
     public JsonAdaptedContactId(ContactId source) {
         contactId = source.contactId;

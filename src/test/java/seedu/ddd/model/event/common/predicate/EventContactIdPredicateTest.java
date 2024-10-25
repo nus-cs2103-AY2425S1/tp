@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.event.common.EventId;
-import seedu.ddd.testutil.EventBuilder;
+import seedu.ddd.testutil.event.EventBuilder;
 
 public class EventContactIdPredicateTest {
     @Test

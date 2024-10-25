@@ -12,7 +12,7 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

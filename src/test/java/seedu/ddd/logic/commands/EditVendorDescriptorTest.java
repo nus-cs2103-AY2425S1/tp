@@ -3,15 +3,9 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_OTHER;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EDIT_CONTACT_DESCRIPTOR;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EDIT_VENDOR_DESCRIPTOR;
+import static seedu.ddd.testutil.contact.TypicalContactFields.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,59 +16,71 @@ public class EditVendorDescriptorTest {
 
     @Test
     public void isAnyFieldEdited() {
-        EditVendorDescriptor editedDescriptor = new EditVendorDescriptor(DESC_VENDOR_BOB);
+        EditVendorDescriptor editedDescriptor = new EditVendorDescriptor(VALID_EDIT_VENDOR_DESCRIPTOR);
         assertTrue(editedDescriptor.isAnyFieldEdited());
 
         EditVendorDescriptor uneditedDescriptor = new EditVendorDescriptor();
         assertFalse(uneditedDescriptor.isAnyFieldEdited());
 
         EditVendorDescriptor onlyIdSpecifiedDescriptor = new EditVendorDescriptorBuilder()
-                .withId(VALID_ID_BOB).build();
+                .withId(VALID_VENDOR_ID)
+                .build();
         assertFalse(onlyIdSpecifiedDescriptor.isAnyFieldEdited());
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditVendorDescriptor descriptorWithSameValues = DESC_VENDOR_BOB.copy();
-        assertTrue(DESC_VENDOR_BOB.equals(descriptorWithSameValues));
+        EditVendorDescriptor descriptorWithSameValues = VALID_EDIT_VENDOR_DESCRIPTOR.copy();
+        assertTrue(VALID_EDIT_VENDOR_DESCRIPTOR.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_VENDOR_BOB.equals(DESC_VENDOR_BOB));
+        assertTrue(VALID_EDIT_VENDOR_DESCRIPTOR.equals(VALID_EDIT_VENDOR_DESCRIPTOR));
 
         // null -> returns false
-        assertFalse(DESC_VENDOR_BOB.equals(null));
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_VENDOR_BOB.equals(5));
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_VENDOR_BOB.equals(DESC_CONTACT_AMY));
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(VALID_EDIT_CONTACT_DESCRIPTOR));
 
         // different name -> returns false
-        EditVendorDescriptor editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB)
-                .withName(VALID_NAME_AMY).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        EditVendorDescriptor editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withName(VALID_CLIENT_NAME)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
 
         // different phone -> returns false
-        editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB).withPhone(VALID_PHONE_AMY).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withPhone(VALID_CLIENT_PHONE)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
 
         // different email -> returns false
-        editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withEmail(VALID_CLIENT_EMAIL)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
 
         // different address -> returns false
-        editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB).withAddress(VALID_ADDRESS_AMY).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withAddress(VALID_CLIENT_ADDRESS)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
 
         // different service -> returns false
-        editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB).withService(VALID_SERVICE_OTHER).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withService(VALID_VENDOR_SERVICE_2)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
 
         // different tags -> returns false
-        editedBob = new EditVendorDescriptorBuilder(DESC_VENDOR_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_VENDOR_BOB.equals(editedBob));
+        editedBob = new EditVendorDescriptorBuilder(VALID_EDIT_VENDOR_DESCRIPTOR)
+                .withTags(VALID_TAG_3)
+                .build();
+        assertFalse(VALID_EDIT_VENDOR_DESCRIPTOR.equals(editedBob));
     }
 
     @Test
