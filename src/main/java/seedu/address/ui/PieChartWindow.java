@@ -47,9 +47,13 @@ public class PieChartWindow extends UiPart<Stage> {
         piChart.setTitle("Number of students in each class");
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (Map.Entry<String, Integer> entry : numOfStudentsInEachClass.entrySet()) {
-            pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+            pieChartData.add(new PieChart.Data(entry.getKey() + ": " + entry.getValue() +
+                    (entry.getValue() == 1 ? " Student" : " Students"), entry.getValue()));
         }
         piChart.setData(pieChartData);
+
+
+
     }
 
     /**
