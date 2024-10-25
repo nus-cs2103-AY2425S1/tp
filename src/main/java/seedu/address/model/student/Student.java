@@ -3,7 +3,12 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -235,6 +240,10 @@ public class Student extends Person {
         assignments.remove(assignments.size() - 1);
     }
 
+    /**
+     * Deletes the last attendance record in the list.
+     * @param date The date of the attendance record to be deleted.
+     */
     public void undoAttendance(LocalDate date) {
         Iterator<AttendanceRecord> iterator = attendanceRecords.iterator();
         while (iterator.hasNext()) {

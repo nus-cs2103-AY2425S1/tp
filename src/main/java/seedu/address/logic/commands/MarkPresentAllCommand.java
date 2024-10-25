@@ -34,7 +34,7 @@ public class MarkPresentAllCommand extends Command {
     private final TutorialGroup tutorialGroup;
     private final LocalDate date;
 
-    Map<Student, Attendance> previousAttendances;
+    private final Map<Student, Attendance> previousAttendances;
     /**
      * Creates a MarkPresentAllCommand to mark the attendance of all students in the specified {@code TutorialGroup} as
      * present on the specified date.
