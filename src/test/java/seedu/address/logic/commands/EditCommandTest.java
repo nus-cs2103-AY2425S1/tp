@@ -8,21 +8,21 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.EditPatientDescriptorBuilder;
+import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.TypicalPatients;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -31,66 +31,68 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private Patient targetPatient = TypicalPersons.KEANU;
+    private Patient targetPatient = TypicalPatients.KEANU;
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        Patient editedPatient = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPatient).build();
+        Patient editedPatient = new PatientBuilder().build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditCommand editCommand = new EditCommand(targetPatient.getNric(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
+                Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(targetPatient, editedPatient);
+        expectedModel.setPatient(targetPatient, editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecified_success() {
-        Patient editedPatient = new PersonBuilder().withName("Keanu Reeves Tan").withNric("S9712385J").withSex("M")
+        Patient editedPatient = new PatientBuilder().withName("Keanu Reeves Tan").withNric("S9712385J").withSex("M")
                 .withBirthdate("1997-11-30").withPhone("86526969")
                 .withEmail("keanureeves@example.com").withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+")
                 .withNokName("Mila Kunis").withNokPhone("84126990").withAllergy("peanuts, cake").withHealthRisk("LOW")
                 .withHealthRecord("diabetes").withNote("Patient has previous gunshot wound to chest").build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Keanu Reeves Tan")
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName("Keanu Reeves Tan")
                 .withNric("S9712385J").withAllergy("peanuts, cake")
                 .build();
         EditCommand editCommand = new EditCommand(targetPatient.getNric(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
+                Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(targetPatient, editedPatient);
+        expectedModel.setPatient(targetPatient, editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_failure() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(targetPatient).build();
-        EditCommand editCommand = new EditCommand(TypicalPersons.ALICE.getNric(), descriptor);
+    public void execute_duplicatePatient_failure() {
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(targetPatient).build();
+        EditCommand editCommand = new EditCommand(TypicalPatients.ALICE.getNric(), descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
 
     @Test
-    public void execute_invalidPerson_failure() {
+    public void execute_invalidPatient_failure() {
         Nric invalidNric = new Nric("T0895432A");
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(invalidNric, descriptor);
 
-        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_NRIC, invalidNric));
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, invalidNric));
     }
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(DESC_AMY.getNric().get(), DESC_AMY);
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
+        EditPatientDescriptor copyDescriptor = new EditPatientDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(DESC_AMY.getNric().get(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -112,10 +114,10 @@ public class EditCommandTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(targetPatient.getNric(), editPersonDescriptor);
+        EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
+        EditCommand editCommand = new EditCommand(targetPatient.getNric(), editPatientDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{NRIC=" + targetPatient.getNric()
-                + ", editPersonDescriptor=" + editPersonDescriptor + "}";
+                + ", editPatientDescriptor=" + editPatientDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

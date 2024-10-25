@@ -1,5 +1,5 @@
 {
-  "persons": [ {
+  "patients": [ {
     "name" : "Alice Pauline",
     "healthServices" : [ "blood test", "vaccination" ],
     "allergy" : "",

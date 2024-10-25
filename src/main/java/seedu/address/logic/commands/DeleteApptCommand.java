@@ -49,14 +49,14 @@ public class DeleteApptCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         Patient patientToDeleteAppt = lastShownList.stream()
-                .filter(person -> person.getNric().equals(nric))
+                .filter(patient -> patient.getNric().equals(nric))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_NRIC));
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PATIENT_NRIC));
         if (patientToDeleteAppt == null) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_PATIENT_NOT_FOUND);
         }
 
         Appt apptToDelete = patientToDeleteAppt.getAppts().stream()

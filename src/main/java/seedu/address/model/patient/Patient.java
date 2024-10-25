@@ -193,10 +193,10 @@ public class Patient {
     }
 
     /**
-     * Returns true if both persons have the same NRIC.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both patients have the same NRIC.
+     * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSamePerson(Patient otherPatient) {
+    public boolean isSamePatient(Patient otherPatient) {
         if (otherPatient == this) {
             return true;
         }
@@ -214,8 +214,8 @@ public class Patient {
     // }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both patients have the same identity and data fields.
+     * This defines a stronger notion of equality between two patients.
      */
     @Override
     public boolean equals(Object other) {
@@ -229,7 +229,7 @@ public class Patient {
         }
 
         Patient otherPatient = (Patient) other;
-        return this.isSamePerson(otherPatient);
+        return this.isSamePatient(otherPatient);
     }
 
     @Override

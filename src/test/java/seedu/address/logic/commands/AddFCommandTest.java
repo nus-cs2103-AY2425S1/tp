@@ -21,21 +21,21 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.patient.Patient;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class AddFCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddFCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        Patient validPatient = new PersonBuilder().build();
-        AddFCommandTest.ModelStubWithOnlyOnePerson modelStub =
-                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPatient);
-        Patient alice = new PersonBuilder().withNric("T0123456A").build();
+    public void execute_patientAcceptedByModel_addSuccessful() throws Exception {
+        Patient validPatient = new PatientBuilder().build();
+        AddFCommandTest.ModelStubWithOnlyOnePatient modelStub =
+                new AddFCommandTest.ModelStubWithOnlyOnePatient(validPatient);
+        Patient alice = new PatientBuilder().withNric("T0123456A").build();
         CommandResult commandResult = new AddFCommand(alice).execute(modelStub);
 
         assertEquals(String.format(AddFCommand.MESSAGE_SUCCESS, Messages.format(alice)),
@@ -43,20 +43,20 @@ public class AddFCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Patient validPatient = new PersonBuilder().build();
+    public void execute_duplicatePatient_throwsCommandException() {
+        Patient validPatient = new PatientBuilder().build();
         AddFCommand addFCommand = new AddFCommand(validPatient);
-        AddFCommandTest.ModelStubWithOnlyOnePerson modelStub =
-                new AddFCommandTest.ModelStubWithOnlyOnePerson(validPatient);
+        AddFCommandTest.ModelStubWithOnlyOnePatient modelStub =
+                new AddFCommandTest.ModelStubWithOnlyOnePatient(validPatient);
 
-        assertThrows(CommandException.class, AddFCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddFCommand.MESSAGE_DUPLICATE_PATIENT, () ->
                 addFCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Patient alice = new PersonBuilder().withNric("T0123456A").build();
-        Patient bob = new PersonBuilder().withNric("S0123456A").build();
+        Patient alice = new PatientBuilder().withNric("T0123456A").build();
+        Patient bob = new PatientBuilder().withNric("S0123456A").build();
         AddFCommand addFAliceCommand = new AddFCommand(alice);
         AddFCommand addFBobCommand = new AddFCommand(bob);
 
@@ -119,32 +119,32 @@ public class AddFCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patient patient) {
+        public boolean hasPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Patient target) {
+        public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Patient patient) {
+        public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Patient target, Patient editedPatient) {
+        public void setPatient(Patient target, Patient editedPatient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Patient> getFilteredPersonList() {
+        public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Patient> predicate) {
+        public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -163,21 +163,21 @@ public class AddFCommandTest {
      * A Model stub that will only store 1 patient and always accept the patient being added
      * unless the patient is already stored in the model.
      */
-    private class ModelStubWithOnlyOnePerson extends ModelStub {
+    private class ModelStubWithOnlyOnePatient extends ModelStub {
 
         private final Patient patient;
 
-        ModelStubWithOnlyOnePerson(Patient patient) {
+        ModelStubWithOnlyOnePatient(Patient patient) {
             this.patient = patient;
         }
         @Override
-        public boolean hasPerson(Patient patient) {
+        public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return this.patient.isSamePerson(patient);
+            return this.patient.isSamePatient(patient);
         }
 
         @Override
-        public void addPerson(Patient patient) {
+        public void addPatient(Patient patient) {
             requireNonNull(patient);
         }
     }

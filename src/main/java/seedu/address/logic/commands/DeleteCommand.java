@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Parameters: NRIC (must be a valid NRIC)\n"
             + "Example: " + COMMAND_WORD + " S1234567A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
     private final Nric targetNric;
 
@@ -34,17 +34,17 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = lastShownList.stream()
-            .filter(person -> person.getNric().equals(targetNric))
+            .filter(patient -> patient.getNric().equals(targetNric))
             .findFirst()
             .orElse(null);
         if (patientToDelete == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, targetNric));
+            throw new CommandException(String.format(Messages.MESSAGE_PATIENT_NOT_FOUND, targetNric));
         }
 
-        model.deletePerson(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(patientToDelete)));
+        model.deletePatient(patientToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
 
     @Override

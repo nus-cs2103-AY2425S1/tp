@@ -21,7 +21,7 @@ public class ApptCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "appt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Patient not found";
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds an appointment to the patient with the given NRIC. "
@@ -50,18 +50,18 @@ public class ApptCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         // Find the patient with the given name
-        Optional<Patient> optionalPerson = lastShownList.stream()
-            .filter(person -> person.getNric().equals(nric))
+        Optional<Patient> optionalPatient = lastShownList.stream()
+            .filter(patient -> patient.getNric().equals(nric))
             .findFirst();
 
-        if (!optionalPerson.isPresent()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        if (!optionalPatient.isPresent()) {
+            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
-        Patient patient = optionalPerson.get();
+        Patient patient = optionalPatient.get();
 
         // Check for duplicate appointments
         boolean hasDuplicate = patient.getAppts().stream()

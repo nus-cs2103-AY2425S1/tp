@@ -33,18 +33,18 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         // Find the patient with the given nric
-        Optional<Patient> optionalPerson = lastShownList.stream()
-                .filter(person -> person.getNric().equals(nric))
+        Optional<Patient> optionalPatient = lastShownList.stream()
+                .filter(patient -> patient.getNric().equals(nric))
                 .findFirst();
 
-        if (!optionalPerson.isPresent()) {
+        if (!optionalPatient.isPresent()) {
             throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
-        Patient patient = optionalPerson.get();
+        Patient patient = optionalPatient.get();
 
         return new CommandResult(generateSuccessMessage(patient), null, false, patient,
                 true, false);

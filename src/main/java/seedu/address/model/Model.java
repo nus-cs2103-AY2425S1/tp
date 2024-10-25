@@ -14,7 +14,7 @@ import seedu.address.model.patient.Patient;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -57,35 +57,36 @@ public interface Model {
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the address book.
      */
-    boolean hasPerson(Patient patient);
+    boolean hasPatient(Patient patient);
 
     /**
      * Deletes the given patient.
      * The patient must exist in the address book.
      */
-    void deletePerson(Patient target);
+    void deletePatient(Patient target);
 
     /**
      * Adds the given patient.
      * {@code patient} must not already exist in the address book.
      */
-    void addPerson(Patient patient);
+    void addPatient(Patient patient);
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address book.
+     * The patient identity of {@code editedPatient} must not be the
+     * same as another existing patient in the address book.
      */
-    void setPerson(Patient target, Patient editedPatient);
+    void setPatient(Patient target, Patient editedPatient);
 
     /** Returns an unmodifiable view of the filtered patient list */
-    ObservableList<Patient> getFilteredPersonList();
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Patient> predicate);
+    void updateFilteredPatientList(Predicate<Patient> predicate);
 
     void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments);
 

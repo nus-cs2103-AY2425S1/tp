@@ -8,51 +8,51 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class PatientTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Patient patient = new PersonBuilder().build();
+        Patient patient = new PatientBuilder().build();
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSamePatient() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSamePatient(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSamePatient(null));
 
         // same nric, all other attributes different -> returns True
-        Patient editedAlice = new PersonBuilder(BOB).withNric(VALID_NRIC_ALICE).withSex(VALID_SEX_BOB)
+        Patient editedAlice = new PatientBuilder(BOB).withNric(VALID_NRIC_ALICE).withSex(VALID_SEX_BOB)
                 .withBirthdate(VALID_BIRTHDATE_BOB).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSamePatient(editedAlice));
 
         // different nric, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.isSamePatient(editedAlice));
 
         // name differs in case and nric same -> returns true
-        Patient editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertTrue(BOB.isSamePerson(editedBob));
+        Patient editedBob = new PatientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePatient(editedBob));
 
         // name has trailing spaces, nric same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertTrue(BOB.isSamePerson(editedBob));
+        editedBob = new PatientBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        assertTrue(BOB.isSamePatient(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Patient aliceCopy = new PersonBuilder(ALICE).build();
+        Patient aliceCopy = new PatientBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -68,7 +68,7 @@ public class PatientTest {
         assertFalse(ALICE.equals(BOB));
 
         // different NRIC -> returns false
-        Patient editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        Patient editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
     }

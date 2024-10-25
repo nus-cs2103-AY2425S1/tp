@@ -36,7 +36,7 @@ public class FilteredApptCard extends UiPart<Region> {
     public FilteredApptCard(FilteredAppointment filteredAppointment, int displayedIndex) {
         super(FXML);
         this.appt = filteredAppointment.getAppt();
-        this.patient = filteredAppointment.getPerson();
+        this.patient = filteredAppointment.getPatient();
         id.setText(displayedIndex + ". ");
         appointmentDateTime.setText(appt.toString());
         name.setText(patient.getName().fullName);

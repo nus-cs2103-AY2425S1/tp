@@ -6,25 +6,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.patient.Patient;
 
 /**
  * A utility class for Patient.
  */
-public class PersonUtil {
+public class PatientUtil {
 
     /**
      * Returns an add command string for adding the {@code patient}.
      */
     public static String getAddCommand(Patient patient) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(patient);
+        return AddCommand.COMMAND_WORD + " " + getPatientDetails(patient);
     }
 
     /**
      * Returns the part of command string for the given {@code patient}'s details.
      */
-    public static String getPersonDetails(Patient patient) {
+    public static String getPatientDetails(Patient patient) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_NRIC + patient.getNric().value + " ");
@@ -34,9 +34,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditPatientDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPatientDescriptorDetails(EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getNric().ifPresent(nric -> sb.append(PREFIX_NRIC).append(nric.value).append(" "));

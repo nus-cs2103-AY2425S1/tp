@@ -47,7 +47,7 @@ public class FilterCommand extends Command {
 
         TreeSet<FilteredAppointment> filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
 
-        List<Patient> patientList = model.getFilteredPersonList();
+        List<Patient> patientList = model.getFilteredPatientList();
         for (Patient patient : patientList) {
             for (Appt appt : patient.getAppts()) {
                 if (appt.isBetweenDatesAndMatchService(dateFilter)) {

@@ -21,7 +21,7 @@ import seedu.address.model.patient.Sex;
 /**
  * A utility class to help with building Patient objects.
  */
-public class PersonBuilder {
+public class PatientBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -58,9 +58,9 @@ public class PersonBuilder {
     //TODO to add default values for the rest of the fields, and add with___ methods for all fields
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code PatientBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -79,9 +79,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code patientToCopy}.
+     * Initializes the PatientBuilder with the data of {@code patientToCopy}.
      */
-    public PersonBuilder(Patient patientToCopy) {
+    public PatientBuilder(Patient patientToCopy) {
         name = patientToCopy.getName();
         phone = patientToCopy.getPhone();
         email = patientToCopy.getEmail();
@@ -104,7 +104,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public PatientBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -112,7 +112,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Address} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public PatientBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -120,7 +120,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Phone} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public PatientBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -128,7 +128,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public PatientBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -136,7 +136,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Nric} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withNric(String nric) {
+    public PatientBuilder withNric(String nric) {
         this.nric = new Nric(nric);
         return this;
     }
@@ -144,7 +144,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Birthdate} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withBirthdate(String birthdate) {
+    public PatientBuilder withBirthdate(String birthdate) {
         this.birthdate = new Birthdate(birthdate);
         return this;
     }
@@ -152,7 +152,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Sex} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withSex(String sex) {
+    public PatientBuilder withSex(String sex) {
         this.sex = new Sex(sex);
         return this;
     }
@@ -160,7 +160,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Allergy} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withAllergy(String allergy) {
+    public PatientBuilder withAllergy(String allergy) {
         this.allergy = new Allergy(allergy);
         return this;
     }
@@ -168,7 +168,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Blood Type} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withBloodType(String bloodType) {
+    public PatientBuilder withBloodType(String bloodType) {
         this.bloodType = new BloodType(bloodType);
         return this;
     }
@@ -176,7 +176,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Health Risk} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withHealthRisk(String healthRisk) {
+    public PatientBuilder withHealthRisk(String healthRisk) {
         this.healthRisk = new HealthRisk(healthRisk);
         return this;
     }
@@ -184,7 +184,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Health Record} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withHealthRecord(String healthRecord) {
+    public PatientBuilder withHealthRecord(String healthRecord) {
         this.healthRecord = new HealthRecord(healthRecord);
         return this;
     }
@@ -192,7 +192,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Note} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withNote(String note) {
+    public PatientBuilder withNote(String note) {
         this.note = new Note(note);
         return this;
     }
@@ -200,7 +200,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code NokName} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withNokName(String nokName) {
+    public PatientBuilder withNokName(String nokName) {
         this.nokName = new Name(nokName);
         return this;
     }
@@ -208,7 +208,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code NokPhone} of the {@code Patient} that we are building.
      */
-    public PersonBuilder withNokPhone(String nokPhone) {
+    public PatientBuilder withNokPhone(String nokPhone) {
         this.nokPhone = new Phone(nokPhone);
         return this;
     }

@@ -9,15 +9,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.testutil.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditPatientDescriptor descriptorWithSameValues = new EditPatientDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -33,7 +33,7 @@ public class EditPatientDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different nric -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNric(VALID_NRIC_BOB).build();
+        EditPatientDescriptor editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withNric(VALID_NRIC_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
 
@@ -41,12 +41,12 @@ public class EditPatientDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", nric="
-                + editPersonDescriptor.getNric().orElse(null) + ", sex="
-                + editPersonDescriptor.getSex().orElse(null) + ", birthdate="
-                + editPersonDescriptor.getBirthDate().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
+        String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
+                + editPatientDescriptor.getName().orElse(null) + ", nric="
+                + editPatientDescriptor.getNric().orElse(null) + ", sex="
+                + editPatientDescriptor.getSex().orElse(null) + ", birthdate="
+                + editPatientDescriptor.getBirthDate().orElse(null) + "}";
+        assertEquals(expected, editPatientDescriptor.toString());
     }
 }

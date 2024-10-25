@@ -358,8 +358,8 @@
 }
 
 #filterField,
-#personListPanel,
-#personWebpage {
+#patientListPanel,
+#patientWebpage {
   -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

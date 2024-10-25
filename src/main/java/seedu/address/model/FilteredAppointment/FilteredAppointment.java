@@ -17,7 +17,7 @@ public class FilteredAppointment {
         @Override
         public int compare(FilteredAppointment appt1, FilteredAppointment appt2) {
             if (DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt()) == 0) {
-                return appt1.getPerson().compareTo(appt2.getPerson());
+                return appt1.getPatient().compareTo(appt2.getPatient());
             }
             return DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt());
         }
@@ -40,7 +40,7 @@ public class FilteredAppointment {
         return appt;
     }
 
-    public Patient getPerson() {
+    public Patient getPatient() {
         return patient;
     }
 
@@ -57,7 +57,7 @@ public class FilteredAppointment {
 
         FilteredAppointment otherFilteredAppointment = (FilteredAppointment) other;
         return this.appt.equals(otherFilteredAppointment.getAppt())
-                && this.patient.equals(otherFilteredAppointment.getPerson());
+                && this.patient.equals(otherFilteredAppointment.getPatient());
     }
 
     @Override
