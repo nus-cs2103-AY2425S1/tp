@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -29,8 +29,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
@@ -131,7 +131,7 @@ public class AssignCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addPerson(Employee person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -161,7 +161,7 @@ public class AssignCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPerson(Employee person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -171,17 +171,17 @@ public class AssignCommandTest {
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePerson(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPerson(Employee target, Employee editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Employee> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,7 +246,7 @@ public class AssignCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -261,7 +261,7 @@ public class AssignCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -281,7 +281,7 @@ public class AssignCommandTest {
      */
     private class ModelStubWithAssignment extends ModelStub {
         private final Assignment assignment;
-        private final ArrayList<Person> persons = new ArrayList<>();
+        private final ArrayList<Employee> persons = new ArrayList<>();
         private final ArrayList<Project> projects = new ArrayList<>();
 
         ModelStubWithAssignment(Assignment assignment) {
@@ -290,7 +290,7 @@ public class AssignCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Employee> getPersonList() {
             persons.add(ALICE);
             persons.add(BENSON);
             return FXCollections.observableArrayList(persons);
@@ -315,11 +315,11 @@ public class AssignCommandTest {
      */
     private class ModelStubAcceptingAssignmentAdded extends ModelStub {
         final ArrayList<Assignment> assignmentsAdded = new ArrayList<>();
-        final ArrayList<Person> persons = new ArrayList<>();
+        final ArrayList<Employee> persons = new ArrayList<>();
         final ArrayList<Project> projects = new ArrayList<>();
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Employee> getPersonList() {
             persons.add(ALICE);
             persons.add(BENSON);
             return FXCollections.observableArrayList(persons);

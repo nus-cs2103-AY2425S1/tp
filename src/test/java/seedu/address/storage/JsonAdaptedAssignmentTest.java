@@ -8,7 +8,7 @@ import static seedu.address.storage.JsonAdaptedAssignment.PERSON_NOT_FOUND_MESSA
 import static seedu.address.storage.JsonAdaptedAssignment.PROJECT_NOT_FOUND_MESSAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
 
 

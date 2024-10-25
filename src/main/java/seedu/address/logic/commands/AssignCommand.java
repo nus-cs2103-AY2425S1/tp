@@ -15,8 +15,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.ui.DisplayType;
@@ -77,8 +77,8 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        List<Person> personList = model.getPersonList();
-        Person person = personList.stream().filter(p -> p.getEmployeeId().equals(employeeId)).findFirst().get();
+        List<Employee> personList = model.getPersonList();
+        Employee person = personList.stream().filter(p -> p.getEmployeeId().equals(employeeId)).findFirst().get();
 
         List<Project> projectList = model.getProjectList();
         Project project = projectList.stream().filter(p -> p.getId().equals(projectId)).findFirst().get();

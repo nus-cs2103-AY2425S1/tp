@@ -7,7 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_PROJECT_MEMBERS_LISTED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentProjectPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -66,7 +66,7 @@ public class ListProjectMembersCommandTest {
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> projectMembers = filteredAssignments.stream()
+        List<Employee> projectMembers = filteredAssignments.stream()
                 .map(Assignment::getPerson)
                 .distinct()
                 .toList();
@@ -85,7 +85,7 @@ public class ListProjectMembersCommandTest {
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> projectMembers = filteredAssignments.stream()
+        List<Employee> projectMembers = filteredAssignments.stream()
                 .map(Assignment::getPerson)
                 .distinct()
                 .toList();
@@ -104,7 +104,7 @@ public class ListProjectMembersCommandTest {
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> projectMembers = filteredAssignments.stream()
+        List<Employee> projectMembers = filteredAssignments.stream()
                 .map(Assignment::getPerson)
                 .distinct()
                 .toList();

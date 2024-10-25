@@ -2,8 +2,8 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -15,12 +15,12 @@ import seedu.address.model.project.ProjectId;
 public class Assignment {
     private final AssignmentId assignmentId;
     private final Project project;
-    private final Person person;
+    private final Employee person;
 
     /**
      * Every field must be present and not null.
      */
-    public Assignment(AssignmentId assignmentId, Project project, Person person) {
+    public Assignment(AssignmentId assignmentId, Project project, Employee person) {
         requireAllNonNull(project, person);
         this.assignmentId = assignmentId;
         this.project = project;
@@ -35,7 +35,7 @@ public class Assignment {
         return project;
     }
 
-    public Person getPerson() {
+    public Employee getPerson() {
         return person;
     }
 

@@ -13,8 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -26,7 +26,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Employee> filteredPersons;
     private final FilteredList<Project> filteredProjects;
     private final FilteredList<Assignment> filteredAssignments;
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(Employee person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
@@ -120,25 +120,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Employee target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Employee person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Employee target, Employee editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Employee> getPersonList() {
         return this.addressBook.getPersonList();
     }
 
@@ -222,12 +222,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Employee> getFilteredPersonList() {
         return filteredPersons;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }

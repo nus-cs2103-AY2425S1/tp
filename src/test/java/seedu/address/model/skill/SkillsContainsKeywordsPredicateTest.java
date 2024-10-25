@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EmployeeBuilder;
 
 public class SkillsContainsKeywordsPredicateTest {
 
@@ -48,34 +48,34 @@ public class SkillsContainsKeywordsPredicateTest {
         // One keyword
         SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(
                 Collections.singletonList("database"));
-        assertTrue(predicate.test(new PersonBuilder().withSkills("database").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withSkills("database").build()));
 
         // Multiple keywords
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertTrue(predicate.test(new PersonBuilder().withSkills("frontend", "backend").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withSkills("frontend", "backend").build()));
 
         // Only one matching keyword
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertTrue(predicate.test(new PersonBuilder().withSkills("frontend", "database").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withSkills("frontend", "database").build()));
 
         // Mixed-case keywords
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("fRonTenD", "BacKEnD"));
-        assertTrue(predicate.test(new PersonBuilder().withSkills("frontend", "backend").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withSkills("frontend", "backend").build()));
     }
 
     @Test
     public void test_skillsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withSkills("frontend").build()));
+        assertFalse(predicate.test(new EmployeeBuilder().withSkills("frontend").build()));
 
         // Non-matching keyword
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("database"));
-        assertFalse(predicate.test(new PersonBuilder().withSkills("frontend", "backend").build()));
+        assertFalse(predicate.test(new EmployeeBuilder().withSkills("frontend", "backend").build()));
 
         // Person does not have any skills
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EmployeeBuilder;
 
 public class TagsContainsKeywordsPredicateTest {
 
@@ -48,34 +48,34 @@ public class TagsContainsKeywordsPredicateTest {
         // One keyword
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(
                 Collections.singletonList("database"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("database").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withTags("database").build()));
 
         // Multiple keywords
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("frontend", "backend").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withTags("frontend", "backend").build()));
 
         // Only one matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("frontend", "database").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withTags("frontend", "database").build()));
 
         // Mixed-case keywords
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("fRonTenD", "BacKEnD"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("frontend", "backend").build()));
+        assertTrue(predicate.test(new EmployeeBuilder().withTags("frontend", "backend").build()));
     }
 
     @Test
     public void test_tagsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags("frontend").build()));
+        assertFalse(predicate.test(new EmployeeBuilder().withTags("frontend").build()));
 
         // Non-matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("database"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("frontend", "backend").build()));
+        assertFalse(predicate.test(new EmployeeBuilder().withTags("frontend", "backend").build()));
 
         // Person does not have any tags
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 

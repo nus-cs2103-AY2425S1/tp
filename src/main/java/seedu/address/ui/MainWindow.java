@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EmployeeListPanel personListPanel;
     private ProjectListPanel projectListPanel;
     private AssignmentListPanel assignmentListPanel;
     private ResultDisplay resultDisplay;
@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new EmployeeListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());

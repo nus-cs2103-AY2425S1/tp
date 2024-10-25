@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.project.Project;
 
 /**
@@ -33,7 +33,7 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Employee> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of projects */
     ObservableList<Project> getFilteredProjectList();

@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.project.Project;
 
 /**
@@ -25,7 +25,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PROJECT = "Projects list contains duplicate project(s).";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Projects list contains duplicate assignment(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedEmployee> persons = new ArrayList<>();
     private final List<JsonAdaptedProject> projects = new ArrayList<>();
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
@@ -34,7 +34,7 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(
-            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("persons") List<JsonAdaptedEmployee> persons,
             @JsonProperty("projects") List<JsonAdaptedProject> projects,
             @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments
     ) {
@@ -55,7 +55,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
         projects.addAll(source.getProjectList().stream().map(JsonAdaptedProject::new).collect(Collectors.toList()));
         assignments.addAll(source.getAssignmentList()
                 .stream().map(JsonAdaptedAssignment::new)
@@ -69,8 +69,8 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedEmployee jsonAdaptedPerson : persons) {
+            Employee person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

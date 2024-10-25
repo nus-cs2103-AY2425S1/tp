@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -17,7 +17,7 @@ import seedu.address.model.project.ProjectId;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Employee> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Project> PREDICATE_SHOW_ALL_PROJECTS = unused -> true;
     Predicate<Assignment> PREDICATE_SHOW_ALL_ASSIGNMENTS = unused -> true;
 
@@ -72,7 +72,7 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(Employee person);
 
     /**
      * Returns true if a person with the same {@code employeeId} exists in
@@ -84,25 +84,25 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deletePerson(Employee target);
 
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addPerson(Employee person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Employee target, Employee editedPerson);
 
     /**
      * Gets list of persons in the address book.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Employee> getPersonList();
 
     /**
      * Returns true if a project with the same identity as {@code project} exists in
@@ -184,13 +184,13 @@ public interface Model {
     void addAssignment(Assignment assignment);
 
     /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Employee> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Employee> predicate);
 
     /** Returns an unmodifiable view of the filtered project list */
     ObservableList<Project> getFilteredProjectList();

@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.address.model.person.EmployeeId;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
 
 /**

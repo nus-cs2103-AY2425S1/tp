@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.employee.NameContainsKeywordsPredicate;
 import seedu.address.ui.DisplayType;
 
 /**

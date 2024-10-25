@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
 import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 import seedu.address.ui.DisplayType;
@@ -49,7 +49,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
 
         // Logical OR of the two predicates
-        Predicate<Person> predicate = skillsPredicate.or(tagsPredicate);
+        Predicate<Employee> predicate = skillsPredicate.or(tagsPredicate);
         model.updateFilteredPersonList(predicate);
 
         // Filtered successsfully

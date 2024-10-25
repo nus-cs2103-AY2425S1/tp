@@ -16,7 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalEmployees.BOB;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
 import org.junit.jupiter.api.Test;

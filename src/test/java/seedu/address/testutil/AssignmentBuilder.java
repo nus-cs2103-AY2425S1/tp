@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.project.Project;
 
 /**
@@ -11,11 +11,11 @@ import seedu.address.model.project.Project;
 public class AssignmentBuilder {
     public static final AssignmentId DEFAULT_ASSIGNMENT_ID = new AssignmentId("1");
     public static final Project DEFAULT_PROJECT = TypicalProjects.ALPHA;
-    public static final Person DEFAULT_EMPLOYEE = TypicalPersons.ALICE;
+    public static final Employee DEFAULT_EMPLOYEE = TypicalEmployees.ALICE;
 
     private AssignmentId assignmentId;
     private Project project;
-    private Person person;
+    private Employee person;
 
     /**
      * Creates a {@code AssignmentBuilder} with the default details.
@@ -54,8 +54,8 @@ public class AssignmentBuilder {
     /**
      * Sets the {@code person} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withPerson(Person person) {
-        this.person = new Person(person.getEmployeeId(), person.getName(), person.getPhone(), person.getEmail(),
+    public AssignmentBuilder withPerson(Employee person) {
+        this.person = new Employee(person.getEmployeeId(), person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), person.getSkills());
         return this;
     }

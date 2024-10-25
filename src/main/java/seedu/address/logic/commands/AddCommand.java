@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
 import seedu.address.ui.DisplayType;
 
 /**
@@ -52,12 +52,12 @@ public class AddCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
-    private final Person toAdd;
+    private final Employee toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddCommand(Employee person) {
         requireNonNull(person);
         toAdd = person;
     }

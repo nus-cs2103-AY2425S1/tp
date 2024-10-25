@@ -7,8 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -22,7 +22,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.employee.NameContainsKeywordsPredicate;
 import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 

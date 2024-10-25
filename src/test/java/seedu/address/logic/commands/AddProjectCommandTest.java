@@ -24,8 +24,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.ProjectBuilder;
@@ -125,7 +125,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addPerson(Employee person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,7 +155,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPerson(Employee person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,17 +165,17 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePerson(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPerson(Employee target, Employee editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Employee> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,7 +240,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -255,7 +255,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

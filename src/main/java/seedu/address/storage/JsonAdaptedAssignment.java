@@ -7,8 +7,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
@@ -89,7 +89,7 @@ public class JsonAdaptedAssignment {
             throw new IllegalValueException(PROJECT_NOT_FOUND_MESSAGE);
         }
 
-        final Person modelPerson = addressBook
+        final Employee modelPerson = addressBook
                                     .getPersonList()
                                     .stream()
                                     .filter(person -> person.getEmployeeId().equals(new EmployeeId(personId)))

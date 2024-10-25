@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.employee;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class NameContainsKeywordsPredicate implements Predicate<Employee> {
     private final List<String> keywords;
 
     /**
@@ -25,7 +25,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Employee person) {
         // Null objects should not have been added to addressbook
         assert person != null;
 

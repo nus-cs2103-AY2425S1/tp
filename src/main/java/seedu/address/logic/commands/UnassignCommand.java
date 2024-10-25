@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
 import seedu.address.ui.DisplayType;
 
