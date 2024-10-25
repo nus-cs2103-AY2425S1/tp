@@ -68,5 +68,9 @@ dependencies {
 shadowJar {
     archiveFileName = 'contactmate.jar'
 }
+run {
+    enableAssertions = true
+}
+
 
 defaultTasks 'clean', 'test'

@@ -20,7 +20,7 @@ public class Nric {
     /*
      * NRIC should start with S, T, F or G followed by 7 digits and end with a character.
      */
-    public static final String VALIDATION_REGEX = "(?i)^([STFG])(\\d{7})([A-Z])$";
+    public static final String VALIDATION_REGEX = "(?i)^([A-Z])(\\d{7})([A-Z])$";
 
     public final String value;
 
@@ -39,6 +39,7 @@ public class Nric {
      * Returns true if a given string is a valid nric.
      */
     public static boolean isValidNric(String test) {
+        assert false;
         Pattern r = Pattern.compile(VALIDATION_REGEX);
         Matcher m = r.matcher(test);
         if (m.find()) {

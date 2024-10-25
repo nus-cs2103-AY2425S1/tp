@@ -7,8 +7,8 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
 participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
-participant ":ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
-participant "d:MarkCommand" as MarkCommand LOGIC_COLOR
+participant "argM:ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
+participant "mark:MarkCommand" as MarkCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -46,7 +46,7 @@ deactivate ArgumentMultimap
 
 ArgumentTokenizer --> ArgumentTokenizer
 deactivate ArgumentTokenizer
-ArgumentTokenizer --> MarkCommandParser : ArgumentMultimap
+ArgumentTokenizer --> MarkCommandParser : argM
 
 deactivate ArgumentTokenizer
 create ContactRecord
@@ -66,7 +66,7 @@ deactivate MarkCommand
 ArgumentMultimap -[hidden]-> MarkCommandParser
 destroy ArgumentMultimap
 
-MarkCommandParser --> AddressBookParser : d
+MarkCommandParser --> AddressBookParser : mark
 deactivate MarkCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
@@ -75,7 +75,7 @@ destroy MarkCommandParser
 
 
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : mark
 deactivate AddressBookParser
 
 LogicManager -> MarkCommand : execute(m)
