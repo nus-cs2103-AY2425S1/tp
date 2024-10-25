@@ -108,6 +108,25 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void constructor_withAddressBookAndUserPrefs_initializesCorrectly() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+
+        assertEquals(addressBook, modelManager.getAddressBook());
+        assertEquals(userPrefs, modelManager.getUserPrefs());
+    }
+
+    @Test
+    public void markAsHired_personMarkedAsHired() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+
+        modelManager.markAsHired(ALICE);
+        assertTrue(ALICE.isHired());
+    }
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
