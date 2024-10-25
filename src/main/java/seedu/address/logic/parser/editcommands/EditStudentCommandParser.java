@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -57,7 +56,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditTaskCommand.MESSAGE_USAGE));
+                EditStudentCommand.MESSAGE_USAGE));
         }
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NAME, PREFIX_EMAIL,
