@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BENSON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWESMONEY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING4;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -49,10 +48,10 @@ public class TagDeleteCommandTest {
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_WEDDING1).build();
         Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING1));
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
@@ -72,17 +71,17 @@ public class TagDeleteCommandTest {
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_WEDDING1).build();
         Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
-        stubTagList.add(new Tag(VALID_TAG_HUSBAND));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING1));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING2));
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage1 = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST + "\n",
-                VALID_TAG_HUSBAND, Messages.format(originalPerson));
+                VALID_TAG_WEDDING2, Messages.format(originalPerson));
         String expectedMessage2 = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                VALID_TAG_FRIENDS, Messages.format(editedPerson));
+                VALID_TAG_WEDDING1, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
@@ -99,9 +98,9 @@ public class TagDeleteCommandTest {
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_WEDDING1).build();
 
-        stubTagList.add(new Tag(VALID_TAG_HUSBAND));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING2));
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST,
@@ -121,11 +120,11 @@ public class TagDeleteCommandTest {
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS, VALID_TAG_OWESMONEY).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_WEDDING2, VALID_TAG_WEDDING1).build();
         Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
-        stubTagList.add(new Tag(VALID_TAG_OWESMONEY));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING1));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING2));
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
@@ -147,7 +146,7 @@ public class TagDeleteCommandTest {
 
         Person firstPerson = matchingPersons.get(0);
         Person wrongPerson = new PersonBuilder(firstPerson).withName(VALID_NAME_AMY).build();
-        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+        stubTagList.add(new Tag(VALID_TAG_WEDDING1));
 
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(wrongPerson.getName(), stubTagList);
 
@@ -158,7 +157,7 @@ public class TagDeleteCommandTest {
     @Test
     public void equals() {
 
-        Tag tag2 = new Tag(VALID_TAG_FRIENDS);
+        Tag tag2 = new Tag(VALID_TAG_WEDDING1);
         Name name = new Name(VALID_NAME_AMY);
         Set<Tag> deleteTagList = new HashSet<>();
         deleteTagList.add(tag2);
@@ -181,7 +180,7 @@ public class TagDeleteCommandTest {
         assertFalse(standardDeleteCommand.equals(new ClearCommand()));
 
         // different tag -> returns false
-        Tag newStubTag1 = new Tag(VALID_TAG_BOB);
+        Tag newStubTag1 = new Tag(VALID_TAG_WEDDING4);
         Set<Tag> newDeleteStubTagList = new HashSet<>();
         deleteStubTagList.add(newStubTag1);
         TagDeleteCommand deleteCommandWithDifferentValues = new TagDeleteCommand(stubName, newDeleteStubTagList);

@@ -15,6 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_JOB = new Prefix("j/");
     public static final Prefix PREFIX_WEDDING_NAME = new Prefix("w/");
     public static final Prefix PREFIX_VENUE = new Prefix("v/");
-    public static final Prefix PREFIX_DATETIME = new Prefix("d/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
 
 }

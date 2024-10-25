@@ -3,17 +3,17 @@
   "weddings" : [ {
     "weddingName" : "John Loh & Jean Tan",
     "venue" : "Orchard Hotel",
-    "dateTime" : "12/11/2024",
+    "date" : "12/11/2024",
     "participants" : [ ]
   }, {
     "weddingName" : "David Lee & Clara Wong",
     "venue" : "Shangri-La Hotel",
-    "dateTime" : "24/12/2023",
+    "date" : "24/12/2023",
     "participants" : [ ]
   }, {
     "weddingName" : "Alex Ng & Michelle Lim",
     "venue" : "Marina Bay Sands",
-    "dateTime" : "01/01/2024",
+    "date" : "01/01/2024",
     "participants" : [ ]
     } ]
   }

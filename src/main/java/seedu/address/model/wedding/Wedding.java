@@ -8,12 +8,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a wedding that has a name, venue, datetime and a list of participants
+ * Represents a wedding that has a name, venue, date and a list of participants
  */
 public class Wedding {
     private final WeddingName weddingName;
     private final Venue venue;
-    private final Datetime datetime;
+    private final Date date;
     private final Set<Person> participants = new HashSet<>();
 
     /**
@@ -21,13 +21,13 @@ public class Wedding {
      *
      * @param weddingName A valid wedding name.
      * @param venue A venue as inputted by the user.
-     * @param datetime A valid date format.
+     * @param date A valid date format.
      * @param participants A list of particpants.
      */
-    public Wedding(WeddingName weddingName, Venue venue, Datetime datetime, Set<Person> participants) {
+    public Wedding(WeddingName weddingName, Venue venue, Date date, Set<Person> participants) {
         this.weddingName = weddingName;
         this.venue = venue;
-        this.datetime = datetime;
+        this.date = date;
         this.participants.addAll(participants);
     }
 
@@ -36,12 +36,12 @@ public class Wedding {
      *
      * @param weddingName A valid wedding name.
      * @param venue A venue as inputted by the user.
-     * @param datetime A valid date format.
+     * @param date A valid date format.
      */
-    public Wedding(WeddingName weddingName, Venue venue, Datetime datetime) {
+    public Wedding(WeddingName weddingName, Venue venue, Date date) {
         this.weddingName = weddingName;
         this.venue = venue;
-        this.datetime = datetime;
+        this.date = date;
     }
 
     public WeddingName getWeddingName() {
@@ -52,8 +52,8 @@ public class Wedding {
         return this.venue;
     }
 
-    public Datetime getDatetime() {
-        return this.datetime;
+    public Date getDate() {
+        return this.date;
     }
 
     public Set<Person> getParticipants() {
@@ -91,13 +91,13 @@ public class Wedding {
         Wedding otherWedding = (Wedding) other;
         return weddingName.equals(otherWedding.weddingName)
                 && venue.equals(otherWedding.venue)
-                && datetime.equals(otherWedding.datetime);
+                && date.equals(otherWedding.date);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(weddingName, venue, datetime);
+        return Objects.hash(weddingName, venue, date);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Wedding {
         return new ToStringBuilder(this)
                 .add("weddingName", weddingName)
                 .add("venue", venue)
-                .add("datetime", datetime)
+                .add("date", date)
                 .toString();
     }
 }

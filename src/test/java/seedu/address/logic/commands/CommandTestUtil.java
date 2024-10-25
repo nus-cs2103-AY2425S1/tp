@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,12 +47,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOB_AMY = "Caterer";
     public static final String VALID_JOB_BOB = "Photographer";
-    public static final String VALID_TAG_FRIEND = "friend 25";
-    public static final String VALID_TAG_FRIENDS = "friends";
-    public static final String VALID_TAG_AMY = "Jane and Tom 230412";
-    public static final String VALID_TAG_BOB = "Jim and Joe 240101";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_OWESMONEY = "owesMoney";
+    public static final String VALID_TAG_WEDDING1 = "John Loh & Jean Tan";
+    public static final String VALID_TAG_WEDDING2 = "James Tan & Emily Koh";
+    public static final String VALID_TAG_WEDDING3 = "Jane Tan & Tom Cruise";
+    public static final String VALID_TAG_WEDDING4 = "Jim Lee & Joe Goldberg";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -64,8 +63,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String JOB_DESC_AMY = " " + PREFIX_JOB + VALID_JOB_AMY;
     public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_WEDDING1 = " " + PREFIX_TAG + VALID_TAG_WEDDING1;
+    public static final String TAG_DESC_WEDDING2 = " " + PREFIX_TAG + VALID_TAG_WEDDING2;
 
     public static final String INVALID_NAME = "Android";
 
@@ -85,30 +84,30 @@ public class CommandTestUtil {
     public static final String VALID_WEDDING_NAME_TWO = "Alice Tan & Bob Lee";
     public static final String VALID_VENUE_ONE = "Orchard Hotel";
     public static final String VALID_VENUE_TWO = "Botanic Gardens";
-    public static final String VALID_DATETIME_ONE = "12/11/2024";
-    public static final String VALID_DATETIME_TWO = "25/12/2024";
+    public static final String VALID_DATE_ONE = "12/11/2024";
+    public static final String VALID_DATE_TWO = "25/12/2024";
 
     public static final String WEDDING_NAME_DESC_ONE = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_ONE;
     public static final String WEDDING_NAME_DESC_TWO = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_TWO;
     public static final String VENUE_DESC_ONE = " " + PREFIX_VENUE + VALID_VENUE_ONE;
     public static final String VENUE_DESC_TWO = " " + PREFIX_VENUE + VALID_VENUE_TWO;
-    public static final String DATETIME_DESC_ONE = " " + PREFIX_DATETIME + VALID_DATETIME_ONE;
-    public static final String DATETIME_DESC_TWO = " " + PREFIX_DATETIME + VALID_DATETIME_TWO;
+    public static final String DATE_DESC_ONE = " " + PREFIX_DATE + VALID_DATE_ONE;
+    public static final String DATE_DESC_TWO = " " + PREFIX_DATE + VALID_DATE_TWO;
 
     public static final String INVALID_WEDDING_NAME_DESC = " " + PREFIX_WEDDING_NAME
             + "John Loh and Jean Tan"; // 'and' not allowed
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + " "; // empty venue description not allowed
-    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "42/02/2023"; // invalid date
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "42/02/2023"; // invalid date
 
 
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJob(VALID_JOB_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_AMY).withTags(VALID_TAG_WEDDING1).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJob(VALID_JOB_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_BOB).withTags(VALID_TAG_WEDDING1, VALID_TAG_WEDDING2).build();
     }
 
     /**

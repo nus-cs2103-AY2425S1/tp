@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Person in the address book.
@@ -109,14 +108,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("job", job)
-                .add("tags", tags)
-                .toString();
+        return String.format("name=%s, phone=%s, email=%s, address=%s, job=%s, tags=%s",
+            name, phone, email, address, job, tags);
     }
-
 }

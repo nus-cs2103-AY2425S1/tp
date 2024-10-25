@@ -2,12 +2,12 @@
   "weddings" : [ {
     "weddingName" : "John Loh & Jean Tan",
     "venue" : "Orchard Hotel",
-    "dateTime" : "12/11/2024",
+    "date" : "12/11/2024",
     "participants" : [ ]
   }, {
       "weddingName" : "John Loh & Jean Tan",
       "venue" : "Orchard Hotel",
-      "dateTime" : "12/11/2024",
+      "date" : "12/11/2024",
       "participants" : [ ]
     } ]
 }
