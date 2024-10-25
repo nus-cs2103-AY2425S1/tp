@@ -22,7 +22,6 @@ public class AddCustomerCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_PREFERENCE + "PREFERENCE "   // Add this line
             + PREFIX_INFORMATION + "INFORMATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -30,7 +29,6 @@ public class AddCustomerCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_PREFERENCE + "Vegan "    // Add this to the example
             + PREFIX_INFORMATION + "Allergic to Milk "
             + PREFIX_TAG + "loyal";
 
