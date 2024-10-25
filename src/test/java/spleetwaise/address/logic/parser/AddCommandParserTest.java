@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.CommandTestUtil;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -18,6 +17,7 @@ import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 public class AddCommandParserTest {
 
@@ -222,7 +222,8 @@ public class AddCommandParserTest {
         );
 
         // invalid address
-        assertParseFailure(parser,
+        assertParseFailure(
+                parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                         + CommandTestUtil.INVALID_ADDRESS_DESC
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,

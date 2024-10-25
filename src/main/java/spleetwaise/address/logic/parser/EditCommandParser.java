@@ -17,8 +17,9 @@ import java.util.Set;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.EditCommand;
 import spleetwaise.address.logic.commands.EditCommand.EditPersonDescriptor;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditCommand object

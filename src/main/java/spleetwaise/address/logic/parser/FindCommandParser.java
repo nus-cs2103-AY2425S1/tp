@@ -5,8 +5,9 @@ import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Arrays;
 
 import spleetwaise.address.logic.commands.FindCommand;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new FindCommand object

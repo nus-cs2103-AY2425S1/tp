@@ -14,8 +14,8 @@ import spleetwaise.address.logic.commands.FindCommand;
 import spleetwaise.address.logic.commands.HelpCommand;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.commands.RemarkCommand;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.

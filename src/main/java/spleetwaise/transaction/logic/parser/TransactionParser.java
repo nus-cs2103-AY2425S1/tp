@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
 import spleetwaise.transaction.logic.commands.DeleteCommand;
