@@ -33,7 +33,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
 
-        if (!person.getTags().isEmpty()) {
+        if (person.getRole() != null) {
             sb.append(PREFIX_TAG + person.getRole().tagName + " ");
         }
 
