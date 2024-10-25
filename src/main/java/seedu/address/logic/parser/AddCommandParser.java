@@ -53,9 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Tag role = ParserUtil.parseOptionalTag(argMultimap.getValue(PREFIX_TAG).orElse(null));
         Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
 
-        // Parse tags (roles and other tags)
-        // Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
         Person person = new Person(name, phone, email, address, role, null);
 
         return new AddCommand(person, weddingIndices);

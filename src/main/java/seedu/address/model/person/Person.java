@@ -27,23 +27,23 @@ public class Person {
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Role role) {
-        requireAllNonNull(name, phone, email, address, role);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.role = null;
-        this.ownWedding = null;
-    }
+//    /**
+//     * Every field must be present and not null.
+//     */
+//    public Person(Name name, Phone phone, Email email, Address address, Role role) {
+//        requireAllNonNull(name, phone, email, address, role);
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = address;
+//        this.role = role;
+//        this.ownWedding = null;
+//    }
 
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Wedding ownWedding) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -154,7 +154,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && role.equals(otherPerson.role);
                 // && role.equals(otherPerson.role)
                 // && ownWedding.equals(otherPerson.ownWedding)
                 && weddingJobs.equals(otherPerson.weddingJobs);

@@ -28,8 +28,6 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_NO_CRITERIA = "At least one filter criteria must be provided";
 
-    private final RoleContainsKeywordsPredicate predicate;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons by multiple criteria. "
             + "At least one field must be specified.\n"
             + "Parameters: [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...\n"

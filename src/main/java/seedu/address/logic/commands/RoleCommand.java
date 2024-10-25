@@ -105,7 +105,7 @@ public class RoleCommand extends Command {
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
         Role updatedRole = personWithRoleDescriptor.getRole().orElse(personToAddRole.getRole());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, null);
     }
 
     @Override

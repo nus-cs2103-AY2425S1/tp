@@ -104,7 +104,7 @@ public class EditCommandParserTest {
         // change to weddings
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetIndex, null, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -151,7 +151,7 @@ public class EditCommandParserTest {
         // tags -- change for weddings
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(targetIndex, null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
