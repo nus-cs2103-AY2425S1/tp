@@ -17,7 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final SupplierOrderList supplyOrders;
+    private final SupplyOrderList supplyOrders;
     private final CustomerOrderList customerOrders;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        supplyOrders = new SupplierOrderList();
+        supplyOrders = new SupplyOrderList();
         customerOrders = new CustomerOrderList();
     }
 
@@ -119,7 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return customerOrders;
     }
 
-    public SupplierOrderList getSupplierOrderList() {
+    public SupplyOrderList getSupplierOrderList() {
         return supplyOrders;
     }
 

@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.*;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
@@ -31,7 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
-    private final SupplierOrderList supplierOrderList;
+    private final SupplyOrderList supplyOrderList;
     private final CustomerOrderList customerOrderList;
     private final ObservableList<SupplyOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
@@ -49,9 +48,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.supplierOrderList = this.addressBook.getSupplierOrderList();
+        this.supplyOrderList = this.addressBook.getSupplierOrderList();
         this.customerOrderList = this.addressBook.getCustomerOrderList();
-        this.supplyOrderObservableList = this.supplierOrderList.getOrders();
+        this.supplyOrderObservableList = this.supplyOrderList.getOrders();
         this.customerOrderObservableList = this.customerOrderList.getOrders();
     }
 
@@ -150,7 +149,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addSupplyOrder(SupplyOrder supplyOrder) {
-        supplierOrderList.addOrder(supplyOrder);
+        supplyOrderList.addOrder(supplyOrder);
     }
 
     @Override
@@ -159,8 +158,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SupplierOrderList getSupplierOrderList() {
-        return supplierOrderList;
+    public SupplyOrderList getSupplyOrderList() {
+        return supplyOrderList;
     }
 
     public ObservableList<SupplyOrder> getSupplyOrderObservableList() {

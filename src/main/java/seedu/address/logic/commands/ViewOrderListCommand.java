@@ -18,7 +18,7 @@ public class ViewOrderListCommand extends Command {
         String result = "Customer Orders: \n"
                         + model.getCustomerOrderList().viewOrders()
                         + "Supply Orders: \n"
-                        + model.getSupplierOrderList().viewOrders();
+                        + model.getSupplyOrderList().viewOrders();
         return new CommandResult(result);
     }
 }
