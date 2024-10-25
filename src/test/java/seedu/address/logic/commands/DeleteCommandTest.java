@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -85,8 +86,8 @@ public class DeleteCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Carl");
         model.updateFilteredPersonList(predicate);
-        Index outOfBoundIndex = INDEX_THIRD_PERSON;
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index outOfBoundIndex = INDEX_OUT_OF_BOUNDS;
+        assertTrue(outOfBoundIndex.getZeroBased() > model.getAddressBook().getPersonList().size());
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }

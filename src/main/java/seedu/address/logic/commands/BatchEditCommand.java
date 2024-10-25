@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsTagsPredicate;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,8 +67,15 @@ public class BatchEditCommand extends Command {
         feedbackToUser.append(String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, oldTag, newTag));
 
         for (Person person : nonObservableList) {
-            Person updatedPerson = changeTag(person, oldTag, newTag);
-            model.setPerson(person, updatedPerson);
+            if (person instanceof Student) {
+                Student student = (Student) person;
+                Student updatedStudent = changeTagStudent(student, oldTag, newTag);
+                model.setPerson(person, updatedStudent);
+            } else {
+                Person updatedPerson = changeTagPerson(person, oldTag, newTag);
+                model.setPerson(person, updatedPerson);
+            }
+
         }
 
         PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));
@@ -75,7 +83,7 @@ public class BatchEditCommand extends Command {
         return new CommandResult(feedbackToUser.toString());
     }
 
-    private Person changeTag(Person person, Tag oldTag, Tag newTag) {
+    private Person changeTagPerson(Person person, Tag oldTag, Tag newTag) {
         Set<Tag> withoutOldTag = person
                 .getTags()
                 .stream()
@@ -88,6 +96,23 @@ public class BatchEditCommand extends Command {
                 person.getEmail(),
                 person.getAddress(),
                 withoutOldTag
+        );
+    }
+
+    private Student changeTagStudent(Student student, Tag oldTag, Tag newTag) {
+        Set<Tag> withoutOldTag = student
+                .getTags()
+                .stream()
+                .filter(tag -> !tag.equals(oldTag)).collect(Collectors.toSet());
+        withoutOldTag.add(newTag);
+        return new Student(
+                student.getName(),
+                student.getRole(),
+                student.getPhone(),
+                student.getEmail(),
+                student.getAddress(),
+                withoutOldTag,
+                student.getAttendanceCount()
         );
     }
 

@@ -43,6 +43,21 @@ public class Student extends Person {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Student)) {
+            return false;
+        }
+
+        Student otherStudent = (Student) other;
+        return super.equals(otherStudent) && attendanceCount.equals(otherStudent.attendanceCount);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", getName())

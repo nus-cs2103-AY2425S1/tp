@@ -32,16 +32,17 @@ public class TypicalPersons {
             .withRole("Student").withAttendanceCount("3")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withAttendanceCount("4").build();
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withRole("Student").withAttendanceCount("3")
             .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Student DANIEL = new StudentBuilder().withName("Carl Meier").withPhone("87652533")
-            .withRole("student").withAttendanceCount("3")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+                            .withRole("Parent")
+                            .withEmail("cornelia@example.com").withAddress("10th street")
+                            .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
             .withRole("student").withAttendanceCount("3")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withAddress("michegan ave").build();
     public static final Person CARLMEIER = new PersonBuilder().withName("Carl Meier").withPhone("876452533")
             .withRole("Parent")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("omg").build();
