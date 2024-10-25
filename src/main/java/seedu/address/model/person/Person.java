@@ -139,7 +139,8 @@ public abstract class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && hours.equals(otherPerson.hours)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && subjects.equals(otherPerson.subjects);
     }
 
     @Override

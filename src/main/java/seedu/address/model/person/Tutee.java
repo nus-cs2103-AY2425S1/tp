@@ -83,7 +83,8 @@ public class Tutee extends Person {
                 && this.getEmail().equals(otherTutee.getEmail())
                 && this.getAddress().equals(otherTutee.getAddress())
                 && this.getHours().equals(otherTutee.getHours())
-                && this.getTags().equals(otherTutee.getTags());
+                && this.getTags().equals(otherTutee.getTags())
+                && this.getSubjects().equals(otherTutee.getSubjects());
     }
 
     /**

@@ -52,8 +52,8 @@ public class CommandTestUtil {
     public static final String VALID_HOURS_DEACON = "25";
     public static final String VALID_TAG_COLLEAGUE = "colleague";
     public static final String VALID_TAG_MENTOR = "mentor";
-    public static final String VALID_SUBJECT_MATH = "math";
-    public static final String VALID_SUBJECT_SCIENCE = "science";
+    public static final String VALID_SUBJECT_MATH = "Math";
+    public static final String VALID_SUBJECT_SCIENCE = "Science";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

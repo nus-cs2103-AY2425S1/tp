@@ -16,7 +16,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Disabled;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,6 +30,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -54,19 +59,19 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Disabled
+
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexFirstPerson = INDEX_FIRST_PERSON;
+        Person lastPerson = model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build(); //is tutor
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -257,5 +262,67 @@ public class EditCommandTest {
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
+
+
+    @Test
+    public void execute_editSubjectsTutor_success() {
+        // Arrange
+        Index indexFirstPerson = INDEX_FIRST_PERSON;
+        Person personToEdit = model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        // Assuming personToEdit is a Tutor
+        Set<Subject> newSubjects = Set.of(new Subject("Math"), new Subject("Science"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withSubjects("Math", "Science").build();
+
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        // Creating expected person with updated subjects
+        Person editedPerson = new Tutor(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getHours(),
+                personToEdit.getTags(), newSubjects);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        // Act
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addSubjectsTutee_success() {
+        // Arrange
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person personToEdit = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        // Assuming personToEdit is a Tutee
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withSubjects("English").build();
+
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        // Create expected person with updated subjects
+        Set<Subject> updatedSubjects = new HashSet<>(personToEdit.getSubjects());
+        updatedSubjects.add(new Subject("English"));
+        Person editedPerson = new Tutee(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getHours(),
+                personToEdit.getTags(), updatedSubjects);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        // Act
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+
+
+
 
 }

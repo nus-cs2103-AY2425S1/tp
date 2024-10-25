@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.capitalizeFirstLetter;
 
 import java.io.File;
 import java.util.Collection;
@@ -169,8 +170,10 @@ public class ParserUtil {
         if (!Subject.isValidSubject(subject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(subject.toLowerCase());
+        return new Subject(capitalizeFirstLetter(trimmedSubject.toLowerCase()));
     }
+
+
 
     /**
      * Parses a collection of subject names into a {@code Set<Subject>}.
