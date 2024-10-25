@@ -434,7 +434,6 @@ Allows users to quickly access previously entered commands using the up and down
 
 - Use the arrow keys to quickly correct or modify a recent command.
 - This feature can save time when you need to execute similar commands repeatedly.
-- The command history resets when you restart the program, so it only keeps track of commands entered during the current session.
 
 [Back to Table of Contents](#table-of-contents)
 
