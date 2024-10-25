@@ -1,17 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -96,7 +92,8 @@ public class RoleCommand extends Command {
      * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
      *  with {@code personWithRoleDescriptor}.
      */
-    private static Person createPersonWithRole(Person personToAddRole, PersonWithRoleDescriptor personWithRoleDescriptor) {
+    private static Person createPersonWithRole(Person personToAddRole,
+                                               PersonWithRoleDescriptor personWithRoleDescriptor) {
         assert personToAddRole != null;
 
         Name updatedName = personWithRoleDescriptor.getName().orElse(personToAddRole.getName());

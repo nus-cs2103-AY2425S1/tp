@@ -1,9 +1,5 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
@@ -16,7 +12,6 @@ import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 
-import javax.xml.xpath.XPathEvaluationResult;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -44,7 +39,8 @@ public class SampleDataUtil {
                 new Role("colleagues"), null),
             new Person(new Name("Gourmet Bites Catering"), new Phone("84362714"), new Email("gourmetbites@example.com"),
                     new Address("123 Orchard Road, #05-67"), new Role("FoodCaterer"), null),
-            new Person(new Name("Timeless Moments Photograph"), new Phone("82336242"), new Email("timelessmoments@example.com"),
+            new Person(new Name("Timeless Moments Photograph"), new Phone("82336242"),
+                    new Email("timelessmoments@example.com"),
                     new Address("456 Marine Parade, #08-34"), new Role("Photographer"), null),
             new Person(new Name("Petal Pusher Florals"), new Phone("91234852"), new Email("petalpusher@example.com"),
                     new Address("321 Holland Road, #01-12"), new Role("Florist"), null),
@@ -57,10 +53,10 @@ public class SampleDataUtil {
 
     public static Wedding[] getSampleWeddings() {
         return new Wedding[] {
-                new Wedding(new Name("Alex's Wedding"), null, null),
-                new Wedding(new Name("Bernice's Wedding"), new Date("2024-12-12"), null),
-                new Wedding(new Name("Charlotte's Wedding"), null, new Venue("Grand Hyatt")),
-                new Wedding(new Name("David's Wedding"), new Date("2025-06-01"), new Venue("Marina Bay Sands"))
+            new Wedding(new Name("Alex's Wedding"), null, null),
+            new Wedding(new Name("Bernice's Wedding"), new Date("2024-12-12"), null),
+            new Wedding(new Name("Charlotte's Wedding"), null, new Venue("Grand Hyatt")),
+            new Wedding(new Name("David's Wedding"), new Date("2025-06-01"), new Venue("Marina Bay Sands"))
         };
     }
 

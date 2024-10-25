@@ -1,6 +1,5 @@
 package seedu.address.model.role;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**

@@ -9,13 +9,12 @@ import java.util.function.Predicate;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.RoleContainsKeywordsPredicate;
-
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 /**
  * Filters and lists all persons in address book whose fields (name, role, email, phone, address)
  * match any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
