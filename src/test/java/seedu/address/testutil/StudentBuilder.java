@@ -66,11 +66,12 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_CONTACT_NUMBER);
         tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
-        assignments.add(DEFAULT_ASSIGNMENT);
+        // assignments.add(DEFAULT_ASSIGNMENT);
         attendanceRecords = new ArrayList<>();
-        Attendance attendance = new Attendance(DEFAULT_ATTENDANCE_STATUS);
-        AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDate.parse(DEFAULT_ATTENDANCE_DATE), attendance);
-        attendanceRecords.add(attendanceRecord);
+        // Attendance attendance = new Attendance(DEFAULT_ATTENDANCE_STATUS);
+        // AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDate.parse(DEFAULT_ATTENDANCE_DATE),
+        // attendance);
+        // attendanceRecords.add(attendanceRecord);
     }
 
     /**
@@ -145,14 +146,6 @@ public class StudentBuilder {
 
     /**
      * Builds the student object with empty assignments and attendance records.
-     * @return Student object
-     */
-    public Student build_default() {
-        return new Student(name, phone, tutorialGroup, studentNumber);
-    }
-
-    /**
-     * Builds the student object with the given assignments and attendance records.
      * @return Student object
      */
     public Student build() {

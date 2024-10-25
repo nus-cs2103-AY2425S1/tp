@@ -63,7 +63,7 @@ public class ViewStudentCommandTest {
         ViewStudentCommand command = new ViewStudentCommand(nameWithMatch);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DIDDY), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(HUGH), model.getFilteredStudentList());
     }
 
     @Test
