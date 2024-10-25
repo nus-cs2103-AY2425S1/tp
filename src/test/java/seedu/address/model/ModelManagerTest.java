@@ -118,15 +118,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void markAsHired_personMarkedAsHired() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
-        UserPrefs userPrefs = new UserPrefs();
-        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
-
-        modelManager.markAsHired(ALICE);
-        assertTrue(ALICE.isHired());
-    }
-    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }

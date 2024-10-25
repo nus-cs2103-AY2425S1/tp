@@ -27,10 +27,10 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withJob("Software Engineer L1")
-            .withEmail("alice@example.com")
-            .withPhone("94351253").withSkills("python", "java").withInterviewScore("5.0")
-            .withTags("friends", "pending").build();
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withJob("Software Engineer L1").withPhone("94351253")
+            .withEmail("alice@example.com").withSkills("python", "java")
+            .withInterviewScore("5.0").withTags("pending", "friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withJob("Software Engineer L2")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withSkills("python").withInterviewScore("6.0")
