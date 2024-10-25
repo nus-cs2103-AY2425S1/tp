@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCarCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-car";
+    public static final String COMMAND_WORD = "del-car";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the car currently belonging to the client of the index provided.\n"

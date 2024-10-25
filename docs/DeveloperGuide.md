@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-client 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `del-client 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-client 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("del-client 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete-client 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `del-client 1` Command" />
 
 <box type="info" seamless>
 
@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
-* `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
+* `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view` command, parse the appropriate index to ViewClientCommand.
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
 Given below is an example usage scenario and how the View Client mechanism behaves at each step.
@@ -169,19 +169,19 @@ Given below is an example usage scenario and how the View Client mechanism behav
 Step 1. The user launches the application, all clients will be listed by default.
         OR The user calls a List/ Find command.
 
-Step 2. The user executes `view-client 1` command to view the first person in the Client list.
+Step 2. The user executes `view 1` command to view the first person in the Client list.
 
-Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view-client 2` command to view the second person in the Client list.
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view 2` command to view the second person in the Client list.
 
 <box type="info" seamless>
 
-**Note:** Only one `MATER - View Client` Window to be displayed at all times. Calling `view-client` will display the latest request. Concurrent edits to Client details will not be updated on the `MATER - View Client` Window, `view-client` must be called again to reflect the changes.
+**Note:** Only one `MATER - View Client` Window to be displayed at all times. Calling `view` will display the latest request. Concurrent edits to Client details will not be updated on the `MATER - View Client` Window, `view` must be called again to reflect the changes.
 
 </box>
 
 Step 4. The user closes the `MATER - View Client` Window by either pressing the Close button (bottom) or Terminate button (top).
 
-The following sequence diagram shows how a `view-client` operation goes through the `UI` and `Logic` component:
+The following sequence diagram shows how a `view` operation goes through the `UI` and `Logic` component:
 
 <puml src="diagrams/ViewClientSequenceDiagram.puml" alt="ViewClientSequenceDiagram" />
 
@@ -191,7 +191,7 @@ The following sequence diagram shows how a `view-client` operation goes through 
 
 </box>
 
-The following activity diagram summarizes what happens when a user executes a `view-client` command:
+The following activity diagram summarizes what happens when a user executes a `view` command:
 
 <puml src="diagrams/ViewClientActivityDiagram.puml" width="250" />
 

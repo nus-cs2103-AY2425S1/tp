@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
  * Views the details of an existing person in the address book.
  */
 public class ViewClientCommand extends Command {
-    public static final String COMMAND_WORD = "view-client";
+    public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the details of the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

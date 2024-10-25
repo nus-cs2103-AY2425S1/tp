@@ -13,13 +13,13 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "v:ViewClientCommand" as ViewClientCommand LOGIC_COLOR
 end box
 
-[-> MainWindow : "view-client 1"
+[-> MainWindow : "view 1"
 activate MainWindow
 
-MainWindow-> LogicManager : execute("view-client 1")
+MainWindow-> LogicManager : execute("view 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("view-client 1")
+LogicManager -> AddressBookParser : parseCommand("view 1")
 activate AddressBookParser
 
 create ViewClientCommand

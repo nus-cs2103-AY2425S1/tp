@@ -84,11 +84,11 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
    Type the command in the command box and press Enter to execute it. For example, typing **help** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - `list-client` : Lists all contacts.
+   - `list` : Lists all contacts.
 
    - `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named John Doe to MATER.
 
-   - `delete-client 3` : Deletes the 3rd client shown in the current list.
+   - `del-client 3` : Deletes the 3rd client shown in the current list.
 
    - `clear` : Deletes all contacts.
 
@@ -120,7 +120,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
   - `make/` for car make
   - `model/` for car model
   - `i/` for issue
-- **Index:** The numerical position of an item in a list, starting from 1. Used in commands like `edit-client` and `delete-client` to specify which client to modify.
+- **Index:** The numerical position of an item in a list, starting from 1. Used in commands like `edit` and `del-client` to specify which client to modify.
 - **Field:** An individual piece of data associated with a client or car (e.g., name, phone number, VIN).
 - **Optional Field:** A parameter in a command that is not required but can be provided to include additional information. Denoted by square brackets `[]` in command formats.
 
@@ -238,14 +238,14 @@ Parameter | Requirements | Explanation
 
 ---
 
-<h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">delete-car</span></h3>
+<h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
 Deletes a car from a client.
 
 **Format:**
 
 ```shell
-delete-car INDEX​
+del-car INDEX​
 ```
 
 **Parameters:**
@@ -261,36 +261,36 @@ Parameter | Requirements | Explanation
 
 **Examples:**
 
-- `delete-car 1`
+- `del-car 1`
 
 ---
 
-<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">list-client</span></h3>
+<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">list</span></h3>
 
 Shows a list of all clients in MATER.
 
 **Format:**
 
 ```shell
-list-client
+list
 ```
 
 **Parameters:**
 
 Parameter | Requirements | Explanation
 --- | --- | ---
-*(None)* | *(None)* | The `list-client` command takes no parameters.
+*(None)* | *(None)* | The `list` command takes no parameters.
 
 ---
 
-<h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">edit-client</span></h3>
+<h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">edit</span></h3>
 
 Edits an existing client in MATER.
 
 **Format:**
 
 ```shell
-edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...​
 ```
 
 **Parameters:**
@@ -317,9 +317,9 @@ Parameter | Requirements | Explanation
 
 **Examples:**
 
-- `edit-client 1 p/91234567 e/johndoe@example.com`
+- `edit 1 p/91234567 e/johndoe@example.com`
   Edits the phone number and email address of the 1st client to `91234567` and `johndoe@example.com` respectively.
-- `edit-client 2 n/Betsy Crower i/`
+- `edit 2 n/Betsy Crower i/`
   Edits the name of the 2nd client to `Betsy Crower` and clears all existing issues.
 
 ---
@@ -362,14 +362,14 @@ Parameter | Requirements | Explanation
 
 ---
 
-<h3 style="color: #1877F2;">Getting Client's Details: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">view-client</span></h3>
+<h3 style="color: #1877F2;">Getting Client's Details: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">view</span></h3>
 
 Views a client's details in MATER.
 
 **Format:**
 
 ```shell
-view-client INDEX
+view INDEX
 ```
 
 **Parameters:**
@@ -380,21 +380,21 @@ Parameter | Requirements | Explanation
 
 **Examples:**
 
-- `view-client 1`
+- `view 1`
   Returns client details of the 1st client in MATER.
 
-![Result for 'view-client 1'](images/viewClientResult.png)
+![Result for 'view 1'](images/viewClientResult.png)
 
 ---
 
-<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">delete-client</span></h3>
+<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
 
 Deletes the specified client from MATER.
 
 **Format:**
 
 ```shell
-delete-client INDEX
+del-client INDEX
 ```
 
 **Parameters:**
@@ -405,11 +405,11 @@ Parameter | Requirements | Explanation
 
 **Examples:**
 
-- `list-client`<br>
-  `delete-client 2`<br>
+- `list`<br>
+  `del-client 2`<br>
   Deletes the 2nd client in MATER.
 - `find Betsy`<br>
-  `delete-client 1`<br>
+  `del-client 1`<br>
   Deletes the 1st client in the results of the `find` command.
 
 ---
@@ -503,12 +503,12 @@ Action             | Format & Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br> e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br> e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
 **Add Car**   | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ` <br>e.g., `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
-**Delete Car**   | `delete-car INDEX`<br>e.g., `delete-car 1`
-**List Clients**   | `list-client`
-**Edit Client**    | `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit-client 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit-client 2 n/Betsy Crower i/`
+**Delete Car**   | `del-car INDEX`<br>e.g., `del-car 1`
+**List Clients**   | `list`
+**Edit Client**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit 2 n/Betsy Crower i/`
 **Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH9514P`
-**View Client**   | `view-client INDEX`<br>e.g., `view-client 1`
-**Delete Client**  | `delete-client INDEX`<br>e.g., `delete-client 3`
+**View Client**   | `view INDEX`<br>e.g., `view 1`
+**Delete Client**  | `del-client INDEX`<br>e.g., `del-client 3`
 **Clear**          | `clear`
 **Exit**           | `exit`
 **Help**           | `help`
