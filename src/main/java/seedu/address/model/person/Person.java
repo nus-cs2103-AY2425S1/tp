@@ -8,13 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null (except the appointment),
- * field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -29,7 +27,6 @@ public class Person {
     private final Remark remark;
     private final DateOfBirth dateOfBirth;
     private final Income income;
-    private final Appointment appointment;
     private final FamilySize familySize;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -39,18 +36,9 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags,
-                  UpdatedAt updatedAt) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, familySize, tags, updatedAt);
-    }
-
-    /**
-     * Every field must be present and not null, except the appointment.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Appointment appointment, FamilySize familySize,
-                  Set<Tag> tags, UpdatedAt updatedAt) {
-        requireAllNonNull(name, phone, email, address, dateOfBirth, familySize, tags);
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
+        requireAllNonNull(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,21 +47,9 @@ public class Person {
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
         this.income = income;
-        this.appointment = appointment;
         this.familySize = familySize;
         this.tags.addAll(tags);
         this.updatedAt = updatedAt;
-    }
-
-    /**
-     * Constructs a {@code Person} with the specified appointment.
-     *
-     * @param appointment An {@code Appointment}
-     * @return a new {@code Person} with the appointment
-     */
-    public Person withAppointment(Appointment appointment) {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment,
-                familySize, tags, updatedAt);
     }
 
     public Name getName() {
@@ -108,10 +84,6 @@ public class Person {
         return income;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
     public FamilySize getFamilySize() {
         return familySize;
     }
@@ -137,8 +109,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -152,11 +123,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
@@ -165,7 +135,6 @@ public class Person {
                 && remark.equals(otherPerson.remark)
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
-                && Objects.equals(appointment, otherPerson.appointment)
                 && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags);
     }
@@ -173,7 +142,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
+        return Objects.hash(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
     }
 
     @Override
@@ -187,9 +157,9 @@ public class Person {
                 .add("remark", remark)
                 .add("dateOfBirth", dateOfBirth)
                 .add("income", income)
-                .add("appointment", appointment)
                 .add("familySize", familySize)
                 .add("tags", tags)
+                .add("updatedAt", updatedAt)
                 .toString();
     }
 }

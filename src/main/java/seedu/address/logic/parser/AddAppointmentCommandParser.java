@@ -9,27 +9,28 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.appointment.Appointment;
 
 /**
- * Parses input arguments and creates a new ScheduleCommand object
+ * Parses input arguments and creates a new AddAppointmentCommand object
  */
-public class ScheduleCommandParser implements Parser<ScheduleCommand> {
+public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
+
     /**
-     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
-     * and returns a ScheduleCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand
+     * and returns an AddAppointmentCommand object for execution.
      *
      * @throws ParseException if the user input does not conform to the expected format
      */
     @Override
-    public ScheduleCommand parse(String args) throws ParseException {
+    public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_FROM, PREFIX_TO);
 
         if (argMultimap.arePrefixesMissing(PREFIX_DATE, PREFIX_FROM, PREFIX_TO)
                 || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_FROM, PREFIX_TO);
@@ -38,7 +39,6 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get());
         LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get());
 
-        Appointment appointment = new Appointment(date, startTime, endTime);
-        return new ScheduleCommand(index, appointment);
+        return new AddAppointmentCommand(index, date, startTime, endTime);
     }
 }

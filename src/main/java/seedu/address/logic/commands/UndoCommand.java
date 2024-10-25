@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,6 @@ import seedu.address.model.person.Person;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undoes the latest command and reverts person list to the state before it.\n"
@@ -46,7 +46,7 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (pastCommands.size() == 0) {
+        if (pastCommands.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
         Command latestCommand = pastCommands.get(pastCommands.size() - 1);
@@ -74,7 +74,7 @@ public class UndoCommand extends Command {
 
         case "delete":
             DeleteCommand dltCommand = (DeleteCommand) latestCommand;
-            ArrayList<Person> personsToAddBack = dltCommand.getPersonsToDelete();
+            List<Person> personsToAddBack = dltCommand.getPersonsToDelete();
 
             for (int i = 0; i < personsToAddBack.size(); i++) {
                 model.addPerson(personsToAddBack.get(i), dltCommand.getTargetIndexes()[i].getZeroBased());

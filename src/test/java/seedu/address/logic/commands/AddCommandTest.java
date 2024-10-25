@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,7 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -131,6 +129,7 @@ public class AddCommandTest {
         public void addPerson(Person person, int index) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
@@ -157,11 +156,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Pair<Name, Appointment>> getConflictingAppointments(Person person, Appointment appointment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,6 +167,41 @@ public class AddCommandTest {
 
         @Override
         public void updateSortingOrder(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAppointments(Name oldName, Name newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Appointment deleteAppointment(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAppointments(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Appointment> getFilteredAppointmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getConflictingAppointments(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
     }

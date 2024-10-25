@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_FIRST;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook2;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,13 +32,14 @@ import seedu.address.model.person.Person;
  * {@code GetCommand}.
  */
 public class GetCommandTest {
+
     private Model model;
     private Model expectedModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook2(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook2(), new ArrayList<>(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new ArrayList<>(), new UserPrefs());
     }
 
     @Test
@@ -57,7 +60,7 @@ public class GetCommandTest {
         String[] invalidParam = {"p/", "b/"};
         GetCommand getCommand = new GetCommand(invalidParam);
 
-        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_PARAMETER);
+        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_PARAMETERS);
     }
 
     @Test
@@ -82,7 +85,7 @@ public class GetCommandTest {
 
         GetCommand getCommand = new GetCommand(invalidParams);
 
-        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_PARAMETER);
+        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_PARAMETERS);
     }
 
     @Test

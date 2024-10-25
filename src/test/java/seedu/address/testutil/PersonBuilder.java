@@ -1,12 +1,9 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -32,8 +29,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
-    public static final double DEFAULT_INCOME = 0;
     public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
+    public static final double DEFAULT_INCOME = 0;
     public static final int DEFAULT_FAMILY_SIZE = 1;
     public static final LocalDateTime DEFAULT_UPDATED_AT =
             LocalDateTime.of(2024, 1, 1, 0, 0);
@@ -46,7 +43,6 @@ public class PersonBuilder {
     private Remark remark;
     private DateOfBirth dateOfBirth;
     private Income income;
-    private Appointment appointment;
     private FamilySize familySize;
     private Set<Tag> tags;
     private UpdatedAt updatedAt;
@@ -63,7 +59,6 @@ public class PersonBuilder {
         remark = new Remark(DEFAULT_REMARK);
         dateOfBirth = new DateOfBirth(DEFAULT_DATE_OF_BIRTH);
         income = new Income(DEFAULT_INCOME);
-        appointment = null;
         familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
         tags = new HashSet<>();
         updatedAt = new UpdatedAt(DEFAULT_UPDATED_AT);
@@ -81,7 +76,6 @@ public class PersonBuilder {
         remark = personToCopy.getRemark();
         dateOfBirth = personToCopy.getDateOfBirth();
         income = personToCopy.getIncome();
-        appointment = personToCopy.getAppointment();
         familySize = personToCopy.getFamilySize();
         tags = new HashSet<>(personToCopy.getTags());
         updatedAt = personToCopy.getUpdatedAt();
@@ -152,23 +146,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Appointment} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAppointment(String date, String startTime, String endTime) {
-        this.appointment =
-                new Appointment(LocalDate.parse(date), LocalTime.parse(startTime), LocalTime.parse(endTime));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Appointment} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAppointment(Appointment appointment) {
-        this.appointment = appointment;
-        return this;
-    }
-
-    /**
      * Sets the {@code familySize} of the {@code Person} that we are building.
      */
     public PersonBuilder withFamilySize(int familySize) {
@@ -187,7 +164,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code UpdatedAt} of the {@code Person} that we are building.
      */
-    public PersonBuilder withUpdateAt(LocalDateTime updatedAt) {
+    public PersonBuilder withUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = new UpdatedAt(updatedAt);
         return this;
     }
@@ -196,7 +173,7 @@ public class PersonBuilder {
      * Builds the {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, familySize,
-                tags, updatedAt);
+        return new Person(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
     }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Name;
@@ -18,6 +17,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -78,7 +78,6 @@ public interface Model {
      * Adds the given person at specified index.
      * {@code person} must not already exist in the address book.
      */
-
     void addPerson(Person person, int index);
 
     /**
@@ -88,14 +87,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /**
-     * Returns a list of appointments that conflict with the given appointment.
-     */
-    List<Pair<Name, Appointment>> getConflictingAppointments(Person person, Appointment appointment);
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
-
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -109,4 +102,39 @@ public interface Model {
      * @param comparator Specifies new comparison criteria to order person list by.
      */
     void updateSortingOrder(Comparator<Person> comparator);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not conflict with any existing appointments.
+     */
+    void addAppointment(Appointment appointment);
+
+    /**
+     * Updates all appointments with {@code oldName} to {@code newName}.
+     */
+    void updateAppointments(Name oldName, Name newName);
+
+    /**
+     * Deletes and returns the appointment at the specified index.
+     */
+    Appointment deleteAppointment(int index);
+
+    /**
+     * Deletes all appointments with the given name.
+     */
+    void deleteAppointments(Name name);
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    /**
+     * Returns a list of appointments that conflict with the given appointment.
+     */
+    List<Appointment> getConflictingAppointments(Appointment appointment);
 }

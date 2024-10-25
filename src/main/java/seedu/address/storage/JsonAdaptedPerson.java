@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -41,7 +40,6 @@ class JsonAdaptedPerson {
     private final String remark;
     private final String dateOfBirth;
     private final Double income;
-    private final JsonAdaptedAppointment appointment;
     private final Integer familySize;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String updatedAt;
@@ -59,7 +57,6 @@ class JsonAdaptedPerson {
             @JsonProperty("remark") String remark,
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("income") Double income,
-            @JsonProperty("appointment") JsonAdaptedAppointment appointment,
             @JsonProperty("familySize") Integer familySize,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("updatedAt") String updatedAt) {
@@ -71,7 +68,6 @@ class JsonAdaptedPerson {
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
         this.income = income;
-        this.appointment = appointment;
         this.familySize = familySize;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -91,9 +87,6 @@ class JsonAdaptedPerson {
         remark = source.getRemark().value;
         dateOfBirth = source.getDateOfBirth().getValue();
         income = source.getIncome().getValue();
-        appointment = Optional.ofNullable(source.getAppointment())
-                .map(JsonAdaptedAppointment::new)
-                .orElse(null);
         familySize = source.getFamilySize().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -159,8 +152,8 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark == null ? "" : remark);
 
         if (dateOfBirth == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    DateOfBirth.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName()));
         }
         if (!DateOfBirth.isValidDate(dateOfBirth)) {
             throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
@@ -175,10 +168,6 @@ class JsonAdaptedPerson {
         } else {
             throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
         }
-
-        final Appointment modelAppointment = Optional.ofNullable(appointment)
-                .map(JsonAdaptedAppointment::toModelType)
-                .orElse(null);
 
         final FamilySize modelFamilySize;
         if (familySize == null) {
@@ -197,7 +186,7 @@ class JsonAdaptedPerson {
                 .orElseGet(UpdatedAt::now);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
-                modelDateOfBirth, modelIncome, modelAppointment, modelFamilySize, modelTags, modelUpdatedAt);
+                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelUpdatedAt);
     }
 
     private static Optional<LocalDateTime> parseDateTime(String datetime) {

@@ -25,7 +25,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -69,6 +68,7 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+
     private Person personToEdit;
     private Person editedPerson;
 
@@ -96,8 +96,12 @@ public class EditCommand extends Command {
         personToEdit = lastShownList.get(index.getZeroBased());
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!personToEdit.isSamePerson(editedPerson)) {
+            if (model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.updateAppointments(personToEdit.getName(), editedPerson.getName());
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -120,19 +124,12 @@ public class EditCommand extends Command {
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
-        // edit command does not allow editing appointments
-        Appointment updatedAppointment = personToEdit.getAppointment();
         // todo - allow edit of person's family size
         FamilySize updatedFamilySize = personToEdit.getFamilySize();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority,
-                updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedFamilySize, updatedTags,
-                UpdatedAt.now());
-    }
-
-    public Index getIndex() {
-        return index;
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now());
     }
 
     public Person getUneditedPerson() {
@@ -155,11 +152,10 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
@@ -209,8 +205,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, income,
-                    remark, priority, tags);
+            return CollectionUtil.isAnyNonNull(
+                    name, phone, email, address, priority, remark, dateOfBirth, income, tags);
         }
 
         public void setName(Name name) {
@@ -301,19 +297,18 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPersonDescriptor otherEditPersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
-                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 

@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -21,11 +22,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new ArrayList<>(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new ArrayList<>(), new UserPrefs());
+
     @Test
     public void execute_name_sortInAlphabeticalOrder() {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name");
@@ -53,7 +56,7 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "priority");
 
         SortCommand command = new SortCommand("priority");
-        expectedModel.updateSortingOrder(Comparator.comparing(person -> person.getPriority()));
+        expectedModel.updateSortingOrder(Comparator.comparing(Person::getPriority));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());

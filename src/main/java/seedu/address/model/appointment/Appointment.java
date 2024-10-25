@@ -5,19 +5,21 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 
+import seedu.address.model.person.Name;
+
 /**
- * Represents an appointment with a Person in the address book.
+ * Represents an appointment with a person in SocialBook.
  * Guarantees: immutable; field values are validated
  */
-public record Appointment(LocalDate date, LocalTime startTime, LocalTime endTime) {
+public record Appointment(Name name, LocalDate date, LocalTime startTime, LocalTime endTime) {
+
+    public Appointment withName(Name name) {
+        return new Appointment(name, date, startTime, endTime);
+    }
 
     public String getFormattedDate() {
         return date.format(DateTimeFormatter.ofPattern(
                 date.getYear() == LocalDate.now().getYear() ? "EEEE, MMMM d" : "EEEE, MMMM d, yyyy"));
-    }
-
-    public LocalDate getUnformattedDate() {
-        return date;
     }
 
     public String getFormattedStartTime() {
@@ -43,24 +45,25 @@ public record Appointment(LocalDate date, LocalTime startTime, LocalTime endTime
     }
 
     @Override
-    public String toString() {
-        return "%s %s – %s".formatted(getFormattedDate(), getFormattedStartTime(), getFormattedEndTime());
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Appointment)) {
+        if (!(other instanceof Appointment otherAppointment)) {
             return false;
         }
 
-        Appointment otherAppointment = (Appointment) other;
-        return date.equals(otherAppointment.date)
+        return name.equals(otherAppointment.name)
+                && date.equals(otherAppointment.date)
                 && startTime.equals(otherAppointment.startTime)
                 && endTime.equals(otherAppointment.endTime);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s %s – %s",
+                name, getFormattedDate(), getFormattedStartTime(), getFormattedEndTime());
     }
 }

@@ -6,10 +6,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 
@@ -34,23 +33,22 @@ public class StatisticsCommand extends Command {
 
     /**
      * Displays all the overall statistics to be shown.
-     *
-     * @throws CommandException
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        ArrayList<String> allStats = new ArrayList<>();
-        allStats.add(nbOfPeople(lastShownList));
-        allStats.add(highPriorityPeople(lastShownList));
-        allStats.add(mediumPriorityPeople(lastShownList));
-        allStats.add(lowPriorityPeople(lastShownList));
-        allStats.add(incomeEightHundredOrLess(lastShownList));
-        allStats.add(appointmentsSoon(lastShownList));
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Appointment> lastShownAppointmentList = model.getFilteredAppointmentList();
+        List<String> allStats = new ArrayList<>();
 
-        resultMessage = allStats.stream()
-                .collect(Collectors.joining("\n"));
+        allStats.add(nbOfPeople(lastShownPersonList));
+        allStats.add(highPriorityPeople(lastShownPersonList));
+        allStats.add(mediumPriorityPeople(lastShownPersonList));
+        allStats.add(lowPriorityPeople(lastShownPersonList));
+        allStats.add(incomeEightHundredOrLess(lastShownPersonList));
+        allStats.add(appointmentsSoon(lastShownAppointmentList));
+
+        resultMessage = String.join("\n", allStats);
 
         return new CommandResult(String.format(MESSAGE_DISPLAY_STATISTICS_SUCCESS, resultMessage));
     }
@@ -121,15 +119,12 @@ public class StatisticsCommand extends Command {
     /**
      * Returns a message with number of people with appointments within a week or less from the current time.
      *
-     * @param currList current list.
+     * @param currList current list of appointments.
      * @return string message of number of people with appointments within a week or less from current time.
      */
-    public static String appointmentsSoon(List<Person> currList) {
+    public static String appointmentsSoon(List<Appointment> currList) {
         long appointmentsSoon = currList.stream()
-                .map(person -> person.getAppointment() != null
-                        ? person.getAppointment().getUnformattedDate()
-                        : null)
-                .filter(date -> date != null && isWithinAWeek(date))
+                .filter(appointment -> isWithinAWeek(appointment.date()))
                 .count();
         return String.format(MESSAGE_DISPLAY_APPOINTMENTS_SOON, appointmentsSoon);
     }
@@ -144,6 +139,7 @@ public class StatisticsCommand extends Command {
         LocalDate now = LocalDate.now();
         return !date.isBefore(now) && ChronoUnit.DAYS.between(now, date) <= 7;
     }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
