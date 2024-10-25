@@ -83,8 +83,12 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
+        // Resort Events at the exact minute mark
+        long currentTimeMillis = System.currentTimeMillis();
+        long delayMillis = 60000 - (currentTimeMillis % 60000);
+
         Timeline eventReSortTimeline = DateTimeUtil.createTimeline(logic::reSortEvents,
-                javafx.util.Duration.minutes(1));
+                javafx.util.Duration.minutes(1), delayMillis);
         eventReSortTimeline.play();
     }
 

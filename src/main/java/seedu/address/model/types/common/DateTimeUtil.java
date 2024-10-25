@@ -2,6 +2,7 @@ package seedu.address.model.types.common;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,6 +12,8 @@ import javafx.util.Duration;
  * Utility class for handling date and time operations.
  */
 public class DateTimeUtil {
+
+    private static final Logger logger = Logger.getLogger(DateTimeUtil.class.getName());
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -39,13 +42,22 @@ public class DateTimeUtil {
      * @param interval The duration interval to perform an update.
      * @return The configured Timeline.
      */
-    public static Timeline createTimeline(Runnable action, Duration interval) {
-        Timeline timeline = new Timeline(new KeyFrame(interval, e -> action.run()));
+    public static Timeline createTimeline(Runnable action, Duration interval, Long delayMillis) {
+        logger.fine("Creating timeline with delay: " + delayMillis //logger to track memory and timeline usage
+                + " ms, and interval: " + interval.toMillis() + " ms"); //do not remove
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(interval, e -> action.run()));
+
+        if (delayMillis != Integer.toUnsignedLong(0)) {
+            timeline.setDelay(Duration.millis(delayMillis));
+        }
+
         timeline.setCycleCount(Timeline.INDEFINITE);
         return timeline;
     }
 
     public static Timeline createTimeline(Runnable action) {
-        return createTimeline(action, Duration.seconds(1));
+        return createTimeline(action, Duration.seconds(1), Integer.toUnsignedLong(0));
     }
 }

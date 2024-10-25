@@ -32,14 +32,10 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
-    public UniqueEventList() {
-    }
-
     /**
      * Resorts Events
      */
     public void sortEvents() {
-        System.out.println("events sorted");
         internalList.sort((event1, event2) -> {
             long remainingTime1 = getEventTimeRemaining(event1);
             long remainingTime2 = getEventTimeRemaining(event2);
