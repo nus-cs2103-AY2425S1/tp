@@ -65,6 +65,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @throws LessonNotInList If the lesson is not in the list
      */
     public void remove(Lesson lesson) {
+        requireNonNull(lesson);
         if (!contains(lesson)) {
             throw new LessonNotInList();
         } else {

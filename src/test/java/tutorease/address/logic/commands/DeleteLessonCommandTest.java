@@ -53,6 +53,7 @@ public class DeleteLessonCommandTest {
 
         @Override
         public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
             lessonsAdded.remove(lesson);
         }
 

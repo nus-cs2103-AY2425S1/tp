@@ -175,12 +175,14 @@ public class ModelManager implements Model {
 
     @Override
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessonSchedule.addLesson(lesson);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessonSchedule.deleteLesson(lesson);
     }
 

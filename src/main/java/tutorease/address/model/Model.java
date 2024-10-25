@@ -113,7 +113,7 @@ public interface Model {
     boolean hasLessons(Lesson lesson);
 
     /**
-     * Deletes the lesson at the given index.
+     * Deletes the given lesson.
      *
      * @param lesson The lesson to delete.
      */
