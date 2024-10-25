@@ -24,4 +24,5 @@ Parent -[hidden]up-> Tag
 Student "child" <-right-> "parent" Parent
 Student *--> "1" Grade
 Student *--> "1" Education
+
 @enduml
