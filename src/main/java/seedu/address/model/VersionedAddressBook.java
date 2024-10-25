@@ -88,6 +88,8 @@ public class VersionedAddressBook extends AddressBook {
 
         VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
 
+        boolean check = addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList);
+        boolean check2 = super.equals(otherVersionedAddressBook);
         // state check
         return super.equals(otherVersionedAddressBook)
                 && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)

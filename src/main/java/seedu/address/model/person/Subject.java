@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a Person's subject teaching or learning in the address book.
  */
@@ -7,7 +9,7 @@ public class Subject {
     public static final String MESSAGE_CONSTRAINTS =
             "Subjects should be string format and of those valid ones(english, math, science).";
 
-    public static final String[] AVAILABLE_SUBJECTS = {"english", "math", "science"};
+    public static final String[] AVAILABLE_SUBJECTS = {"English", "Math", "Science"};
     public final String subject;
 
 
@@ -16,6 +18,7 @@ public class Subject {
      * @param subject
      */
     public Subject(String subject) {
+        requireNonNull(subject);
         if (!isValidSubject(subject)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
@@ -48,7 +51,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return subject;
+        return subject + " ";
     }
 
     /**

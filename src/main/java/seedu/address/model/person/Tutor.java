@@ -86,7 +86,8 @@ public class Tutor extends Person {
                 && this.getEmail().equals(otherTutor.getEmail())
                 && this.getAddress().equals(otherTutor.getAddress())
                 && this.getHours().equals(otherTutor.getHours())
-                && this.getTags().equals(otherTutor.getTags());
+                && this.getTags().equals(otherTutor.getTags())
+                && this.getSubjects().equals(otherTutor.getSubjects());
     }
 
     /**
