@@ -99,6 +99,7 @@ public class EditCommand extends Command {
 
         // Update tutorial assignments if tutorial ID has changed
         if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
+            model.unassignStudent(studentToEdit, studentToEdit.getTutorialId());
             model.assignStudent(editedStudent, editedStudent.getTutorialId());
         }
 

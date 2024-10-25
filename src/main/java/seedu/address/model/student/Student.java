@@ -105,8 +105,8 @@ public class Student {
         }
 
         return name.equals(otherStudent.name)
-                && studentId.equals(otherStudent.studentId)
-                && tutorialId.equals(otherStudent.tutorialId);
+                && studentId.equals(otherStudent.studentId);
+        // && tutorialId.equals(otherStudent.tutorialId);
     }
 
     @Override
