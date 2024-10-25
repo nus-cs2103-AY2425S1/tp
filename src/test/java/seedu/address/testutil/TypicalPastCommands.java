@@ -2,9 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -26,19 +24,34 @@ public class TypicalPastCommands {
     public static final EditCommand EXAMPLE_EDIT = new EditCommand(INDEX_FIRST_PERSON,
             settingName(NEW_NAME, EDIT_PERSON_DESCRIPTOR));
 
-    public static final ArrayList<Command> EMPTY_COMMAND_LAST =
-            new ArrayList<>();
-    public static final ArrayList<Command> CLEAR_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_ADD, EXAMPLE_EDIT, EXAMPLE_DELETE, EXAMPLE_CLEAR));
+    public static final CommandHistory EMPTY_COMMAND_LAST = createPastCommands();
 
-    public static final ArrayList<Command> ADD_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_CLEAR, EXAMPLE_ADD));
+    public static final CommandHistory CLEAR_COMMAND_LAST =
+            createPastCommands(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_CLEAR);
 
-    public static final ArrayList<Command> DELETE_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_CLEAR, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_DELETE));
+    public static final CommandHistory ADD_COMMAND_LAST =
+            createPastCommands(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_CLEAR, EXAMPLE_ADD);
 
-    public static final ArrayList<Command> EDIT_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_EDIT));
+    public static final CommandHistory DELETE_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_DELETE);
+
+    public static final CommandHistory EDIT_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_EDIT);
+    private static CommandHistory CURR_PAST_COMMANDS = new CommandHistory();
+    /**
+     * Helper function to create CommandHistory with specified past commands.
+     *
+     * @param pastCommands specified past commands to have.
+     * @return CommandHistory with past commands.
+     */
+    public static CommandHistory createPastCommands(Command... pastCommands) {
+        CURR_PAST_COMMANDS = new CommandHistory();
+        for (int i = 0; i < pastCommands.length; i++) {
+            CURR_PAST_COMMANDS.add(pastCommands[i]);
+        }
+        return CURR_PAST_COMMANDS;
+
+    }
 
     public static EditPersonDescriptor settingName(Name newName, EditPersonDescriptor editPersonDescriptor) {
         editPersonDescriptor.setName(newName);

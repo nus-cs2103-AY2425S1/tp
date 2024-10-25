@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.Command;
 
 /**
  * Stores the history of commands executed. (Solution inspired from addressbook-level-4)
@@ -12,9 +13,11 @@ public class CommandHistory {
     private final ObservableList<String> userInputHistory = FXCollections.observableArrayList();
     private final ObservableList<String> unmodifiableUserInputHistory =
             FXCollections.unmodifiableObservableList(userInputHistory);
-
     private int currentIndex = 0;
-
+    private final ObservableList<Command> commandInputHistory = FXCollections.observableArrayList();
+    private final ObservableList<Command> unmodifiableCommandInputHistory =
+            FXCollections.unmodifiableObservableList(commandInputHistory);
+    private int currentCommandIndex = 0;
     /**
      * Appends {@code userInput} to the list of user input entered.
      */
@@ -23,6 +26,16 @@ public class CommandHistory {
         userInputHistory.add(userInput);
         currentIndex = userInputHistory.size(); // reset index to the end
     }
+
+    /**
+     * Appends {@code commandInput} to the list of command input entered.
+     */
+    public void add(Command commandInput) {
+        requireNonNull(commandInput);
+        commandInputHistory.add(commandInput);
+        currentCommandIndex = commandInputHistory.size(); // reset index to the end
+    }
+
 
     /**
      * Returns an unmodifiable view of {@code userInputHistory}.
@@ -56,6 +69,24 @@ public class CommandHistory {
 
         assert currentIndex == userInputHistory.size() : "Index should be equal to size here";
         return ""; // return blank line when pressing down after most recent command is reached
+    }
+
+    /**
+     * Removes latest command from commandInputHistory.
+     */
+    public void remove() {
+        commandInputHistory.remove(commandInputHistory.size() - 1);
+    }
+
+    /**
+     * Returns an unmodifiable view of {@code commandInputHistory}.
+     */
+    public ObservableList<Command> getCommandHistory() {
+        return unmodifiableCommandInputHistory;
+    }
+
+    public int getSize() {
+        return unmodifiableCommandInputHistory.size();
     }
 
     @Override

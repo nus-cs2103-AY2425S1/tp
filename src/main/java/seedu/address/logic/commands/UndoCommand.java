@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,7 +30,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
     public static final String MESSAGE_UNDO_DELETE = "%s have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
-    private final ArrayList<Command> pastCommands;
+    private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
@@ -38,7 +38,7 @@ public class UndoCommand extends Command {
      *
      * @param pastCommands all the past commands during this code run.
      */
-    public UndoCommand(ArrayList<Command> pastCommands) {
+    public UndoCommand(CommandHistory pastCommands) {
         this.pastCommands = pastCommands;
 
     }
@@ -46,10 +46,10 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (pastCommands.isEmpty()) {
+        if (pastCommands.getCommandHistory().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
-        Command latestCommand = pastCommands.get(pastCommands.size() - 1);
+        Command latestCommand = pastCommands.getCommandHistory().get(pastCommands.getSize() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
         String resultMessage = String.format(
@@ -60,7 +60,7 @@ public class UndoCommand extends Command {
             AddCommand addCommand = (AddCommand) latestCommand;
             Person personToRemove = addCommand.getToAdd();
             model.deletePerson(personToRemove);
-            pastCommands.remove(pastCommands.size() - 1);
+            pastCommands.remove();
             resultMessage = String.format(MESSAGE_UNDO_ADD, personToRemove.getName());
             break;
         case "edit":
@@ -68,7 +68,7 @@ public class UndoCommand extends Command {
             Person bfrEdit = editCommand.getUneditedPerson();
             Person afterEdit = editCommand.getEditedPerson();
             model.setPerson(afterEdit, bfrEdit);
-            pastCommands.remove(pastCommands.size() - 1);
+            pastCommands.remove();
             resultMessage = String.format(MESSAGE_UNDO_EDIT, bfrEdit.getName());
             break;
 
@@ -82,7 +82,7 @@ public class UndoCommand extends Command {
             String namesAddedBack = personsToAddBack.stream()
                     .map(person -> person.getName().toString())
                     .collect(Collectors.joining(", "));
-            pastCommands.remove(pastCommands.size() - 1);
+            pastCommands.remove();
             resultMessage = String.format(MESSAGE_UNDO_DELETE, namesAddedBack);
             break;
 
@@ -90,18 +90,18 @@ public class UndoCommand extends Command {
             ClearCommand clearCommand = (ClearCommand) latestCommand;
             model.setAddressBook(clearCommand.getModel().getAddressBook());
             model.setUserPrefs(clearCommand.getModel().getUserPrefs());
-            pastCommands.remove(pastCommands.size() - 1);
+            pastCommands.remove();
             resultMessage = MESSAGE_UNDO_CLEAR;
             break;
         default:
-            pastCommands.remove(pastCommands.size() - 1);
+            pastCommands.remove();
             break;
 
         }
         return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
     }
 
-    public ArrayList<Command> getPastCommands() {
+    public CommandHistory getPastCommands() {
         return pastCommands;
     }
 
@@ -122,6 +122,7 @@ public class UndoCommand extends Command {
         }
 
         UndoCommand otherUndoCommand = (UndoCommand) other;
-        return pastCommands.equals(otherUndoCommand.getPastCommands());
+        return pastCommands.getCommandHistory()
+                .equals(otherUndoCommand.getPastCommands().getCommandHistory());
     }
 }
