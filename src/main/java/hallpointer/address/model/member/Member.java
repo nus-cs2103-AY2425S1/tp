@@ -95,7 +95,7 @@ public class Member {
      *
      *  @param points Points to be added to the member.
      */
-    public void addPoints(Point points) {
+    private void addPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = totalPoints.add(points);
     }
@@ -105,22 +105,10 @@ public class Member {
      *
      *  @param points Points to be subtracted from the member.
      */
-    public void subtractPoints(Point points) {
+    private void subtractPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = totalPoints.subtract(points);
     }
-
-    /**
-     *  Adds the given session to the member's list of sessions.
-     *
-     *  @param session Session to be added to the member.
-     */
-    public void addSession(Session session) {
-        requireNonNull(session);
-        this.sessions.add(session);
-        addPoints(session.getPoints());
-    }
-
 
     /**
      *  Returns true if the member has the given session.
@@ -136,6 +124,17 @@ public class Member {
             }
         }
         return false;
+    }
+
+    /**
+     *  Adds the given session to the member's list of sessions.
+     *
+     *  @param session Session to be added to the member.
+     */
+    public void addSession(Session session) {
+        requireNonNull(session);
+        this.sessions.add(session);
+        addPoints(session.getPoints());
     }
 
     /**
