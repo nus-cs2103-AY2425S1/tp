@@ -141,7 +141,7 @@ public class ParserUtil {
         if (!Game.isValidGameName(trimmedGame)) {
             throw new ParseException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Game(trimmedGame, new Username("tbc"), new SkillLevel("tbc"), new Role("tbc"), false);
+        return new Game(trimmedGame, new Username(""), new SkillLevel(""), new Role(""), false);
     }
 
     /**
@@ -169,7 +169,7 @@ public class ParserUtil {
         requireNonNull(skillLevel);
         String trimmedSkillLevel = skillLevel.trim();
         if (!SkillLevel.isValidSkillLevel(skillLevel)) {
-            throw new ParseException(Username.MESSAGE_CONSTRAINTS);
+            throw new ParseException(SkillLevel.MESSAGE_CONSTRAINTS);
         }
         return new SkillLevel(trimmedSkillLevel);
     }
@@ -184,7 +184,7 @@ public class ParserUtil {
         requireNonNull(role);
         String trimmedRole = role.trim();
         if (!Role.isValidRole(role)) {
-            throw new ParseException(Username.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
         return new Role(trimmedRole);
     }

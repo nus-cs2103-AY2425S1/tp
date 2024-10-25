@@ -72,6 +72,7 @@ public class EditGameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -109,7 +110,6 @@ public class EditGameCommand extends Command {
      */
     private static Game createEditedGame(Game gameToEdit, EditGameDescriptor editGameDescriptor) {
         assert gameToEdit != null;
-
         Username updatedUsername = editGameDescriptor.getUsername().orElse(gameToEdit.getUsername());
         SkillLevel updatedSkillLevel = editGameDescriptor.getSkillLevel().orElse(gameToEdit.getSkillLevel());
         Role updatedRole = editGameDescriptor.getRole().orElse(gameToEdit.getRole());
