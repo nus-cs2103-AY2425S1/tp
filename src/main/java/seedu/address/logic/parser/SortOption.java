@@ -69,7 +69,7 @@ public enum SortOption {
      * Returns the Role associated to the sort option as a string
      */
     public String getRoleAsString() {
-        return role.toLowerCase();
+        return role.toLowerCaseString();
     }
 
     /*

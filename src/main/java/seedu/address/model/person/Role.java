@@ -62,8 +62,8 @@ public enum Role {
      *
      * @return The name of the role in lowercase.
      */
-    public String toLowerCase() {
-        return name().toLowerCase();
+    public String toLowerCaseString() {
+        return toString().toLowerCase();
     }
 
     /**
