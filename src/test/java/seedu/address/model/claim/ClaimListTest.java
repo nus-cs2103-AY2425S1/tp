@@ -1,10 +1,21 @@
 package seedu.address.model.claim;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Spliterator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +59,7 @@ public class ClaimListTest {
     @Test
     public void add_duplicateClaim_returnsFalse() {
         claimList.add(claim1);
-        assertFalse(claimList.add(claim1));
+        Assertions.assertFalse(claimList.add(claim1));
         assertEquals(1, claimList.size());
     }
     @Test
@@ -95,14 +106,14 @@ public class ClaimListTest {
         claimList.add(claim1);
         claimList.add(claim2);
         Set<Claim> duplicateClaims = new HashSet<>(Arrays.asList(claim1, claim2));
-        assertFalse(claimList.addAll(duplicateClaims));
+        Assertions.assertFalse(claimList.addAll(duplicateClaims));
         assertEquals(2, claimList.size()); // Size remains the same
     }
     @Test
-    public void addAllAtIndex_mixedClaims_someDuplicates_returnsFalse() {
+    public void addAllAtIndex_someDuplicates_returnsFalse() {
         claimList.add(claim1);
         List<Claim> mixedClaims = Arrays.asList(claim1, claim2);
-        assertFalse(claimList.addAll(1, mixedClaims));
+        Assertions.assertFalse(claimList.addAll(1, mixedClaims));
         assertEquals(2, claimList.size());
         assertEquals(claim1, claimList.get(0));
         assertEquals(claim2, claimList.get(1));
@@ -123,17 +134,17 @@ public class ClaimListTest {
     @Test
     public void contains_nonExistingClaim_returnsFalse() {
         claimList.add(claim1);
-        assertFalse(claimList.contains(claim2));
+        Assertions.assertFalse(claimList.contains(claim2));
     }
     @Test
     public void iterator_emptyList_noException() {
         Iterator<Claim> iterator = claimList.iterator();
 
         // Check that the iterator is not null
-        assertNotNull(iterator);
+        Assertions.assertNotNull(iterator);
 
         // Verify that hasNext() is false for an empty list
-        assertFalse(iterator.hasNext());
+        Assertions.assertFalse(iterator.hasNext());
     }
     @Test
     public void indexOf_existingObject_returnsCorrectIndex() {
@@ -166,7 +177,7 @@ public class ClaimListTest {
         assertEquals(claim2, removedClaim);
         assertEquals(2, claimList.size());
         assertTrue(claimList.contains(claim1));
-        assertFalse(claimList.contains(claim2));
+        Assertions.assertFalse(claimList.contains(claim2));
         assertTrue(claimList.contains(claim3));
     }
     @Test
@@ -179,7 +190,7 @@ public class ClaimListTest {
     @Test
     public void remove_nonExistingClaim_returnsFalse() {
         claimList.add(claim1);
-        assertFalse(claimList.remove(claim2));
+        Assertions.assertFalse(claimList.remove(claim2));
     }
     @Test
     public void retainAll_retainsSpecifiedClaims_success() {
@@ -196,7 +207,7 @@ public class ClaimListTest {
         // Verify that only claim1 and claim3 remain in claimList
         assertEquals(2, claimList.size());
         assertTrue(claimList.contains(claim1));
-        assertFalse(claimList.contains(claim2));
+        Assertions.assertFalse(claimList.contains(claim2));
         assertTrue(claimList.contains(claim3));
     }
 
@@ -230,7 +241,7 @@ public class ClaimListTest {
     }
 
     @Test
-    public void set_validIndex_replacesClaim_success() {
+    public void set_validIndex_success() {
         claimList.add(claim1);
         claimList.add(claim2);
 
@@ -262,7 +273,7 @@ public class ClaimListTest {
     @Test
     public void isEmpty_nonEmptySet_returnsFalse() {
         claimList.add(claim1);
-        assertFalse(claimList.isEmpty());
+        Assertions.assertFalse(claimList.isEmpty());
     }
 
     @Test
@@ -302,13 +313,13 @@ public class ClaimListTest {
         assertTrue(standardClaimList.equals(standardClaimList));
 
         // null -> returns false
-        assertFalse(standardClaimList.equals(null));
+        Assertions.assertFalse(standardClaimList.equals(null));
 
         // different type -> returns false
-        assertFalse(standardClaimList.equals("foo"));
+        Assertions.assertFalse(standardClaimList.equals("foo"));
 
         // different claims -> returns false
-        assertFalse(standardClaimList.equals(differentClaimsClaimList));
+        Assertions.assertFalse(standardClaimList.equals(differentClaimsClaimList));
     }
 
 
@@ -320,7 +331,7 @@ public class ClaimListTest {
 
         claimList.add(claim2);
         int newHashCode = claimList.hashCode();
-        assertNotEquals(initialHashCode, newHashCode);
+        Assertions.assertNotEquals(initialHashCode, newHashCode);
     }
 
     @Test
@@ -356,7 +367,7 @@ public class ClaimListTest {
 
     @Test
     public void contains_nullClaim_returnsFalse() {
-        assertFalse(claimList.contains(null));
+        Assertions.assertFalse(claimList.contains(null));
     }
 
     @Test
@@ -371,7 +382,7 @@ public class ClaimListTest {
     public void containsAll_nonExistingClaim_returnsFalse() {
         claimList.add(claim1);
         Set<Claim> claims = new HashSet<>(Arrays.asList(claim1, claim2));
-        assertFalse(claimList.containsAll(claims));
+        Assertions.assertFalse(claimList.containsAll(claims));
     }
 
     @Test
@@ -387,7 +398,7 @@ public class ClaimListTest {
     public void removeAll_nonExistingClaim_doesNotRemove() {
         claimList.add(claim1);
         Set<Claim> claimsToRemove = Collections.singleton(claim2);
-        assertFalse(claimList.removeAll(claimsToRemove));
+        Assertions.assertFalse(claimList.removeAll(claimsToRemove));
         assertEquals(1, claimList.size());
     }
 
@@ -431,7 +442,7 @@ public class ClaimListTest {
         assertEquals(2, Arrays.stream(array).filter(Objects::nonNull).count());
         assertTrue(Arrays.asList(array).contains(claim1));
         assertTrue(Arrays.asList(array).contains(claim2));
-        assertNull(array[2]);
+        Assertions.assertNull(array[2]);
     }
 
     @Test
