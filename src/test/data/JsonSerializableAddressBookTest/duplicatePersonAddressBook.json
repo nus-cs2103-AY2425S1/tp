@@ -4,12 +4,17 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "role": null,
+    "ownWedding": 0,
+    "weddingJobs": [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
-  } ]
+    "role": null,
+    "ownWedding": 0,
+    "weddingJobs": [ ]
+  } ],
+  "weddings": [ ]
 }
