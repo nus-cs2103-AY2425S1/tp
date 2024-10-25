@@ -29,10 +29,10 @@ tasks done faster than traditional GUI apps.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
    open the help window.<br>
-   ### Command Summary
 
+   ### Command Summary
    | Action     | Format                                                                                           | Examples                                                                                                                                        |
-          |------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+   |------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`     | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
    | **Clear**  | `:clear`                                                                                         | `:clear`                                                                                                                                        |
    | **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX1, INDEX2, ...`                                              | `:remove -i 3,4,5`<br/>`:rm -i 3,4,5`                                                                                                           |

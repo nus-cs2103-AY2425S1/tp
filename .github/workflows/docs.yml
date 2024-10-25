@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - update-documentation
 
 jobs:
   build_and_deploy:
