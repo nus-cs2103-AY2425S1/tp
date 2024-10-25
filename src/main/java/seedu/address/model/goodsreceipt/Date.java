@@ -38,9 +38,16 @@ public class Date {
         return this.dateTime;
     }
 
+    /**
+     * Returns the date time string, formatted for user display.
+     */
+    public String getReadableDateTimeString() {
+        return dateTime.format(PATTERN_WRITE);
+    }
+
     @Override
     public String toString() {
-        return dateTime.format(PATTERN_WRITE);
+        return dateTime.format(PATTERN_READ);
     }
 
     @Override

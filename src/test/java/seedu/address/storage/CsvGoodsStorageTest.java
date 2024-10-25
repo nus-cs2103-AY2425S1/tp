@@ -59,11 +59,11 @@ public class CsvGoodsStorageTest {
         csvGoodsStorage.saveGoods(receiptLog, filePath);
 
         List<String> lines = Files.readAllLines(filePath);
-        String expectedLine = "\"Friday : 01 January 2021, 12.00 am\","
+        String expectedLine = "\"2021-01-01 00:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
-                + "\"Friday : 01 January 2021, 12.00 am\","
+                + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"";
         assertTrue(lines.contains(expectedLine));
