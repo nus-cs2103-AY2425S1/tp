@@ -17,6 +17,8 @@ public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
             "Dates must not be in the future, should be in the format 'dd/MM/yy', and must be valid.";
 
+    public static final String MESSAGE_TOO_MANY_ARGUMENTS = "Date should only be DD/MM/YY with no other words";
+
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     private final LocalDate date;

@@ -72,6 +72,7 @@ public class StatusCommand extends Command<InternshipApplication> {
 
         InternshipApplication internshipApplicationToUpdate = lastShownList.get(targetIndex.getZeroBased());
         internshipApplicationToUpdate.setStatus(newStatus);
+        model.updateFilteredList(Model.PREDICATE_SHOW_ALL);
         return new CommandResult(String.format(MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), newStatus.getValue()));
     }

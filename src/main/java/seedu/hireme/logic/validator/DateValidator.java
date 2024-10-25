@@ -40,7 +40,7 @@ public class DateValidator extends Validator<String> {
     public boolean validate(String input) {
         try {
             LocalDate date = LocalDate.parse(input, FORMATTER);
-            return date.isBefore(LocalDate.now());
+            return !date.isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }

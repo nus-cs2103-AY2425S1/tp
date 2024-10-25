@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.commons.util.StringUtil;
+import seedu.hireme.logic.commands.AddCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.logic.validator.DateValidator;
@@ -81,10 +82,15 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!DateValidator.of().validate(trimmedDate)) {
+        String[] args = trimmedDate.split(" ");
+        if (args.length > 1) {
+            throw new ParseException(Date.MESSAGE_TOO_MANY_ARGUMENTS);
+        }
+
+        if (!DateValidator.of().validate(args[0])) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd/MM/yy")));
+        return new Date(LocalDate.parse(args[0], DateTimeFormatter.ofPattern("dd/MM/yy")));
     }
 
     /**

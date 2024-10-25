@@ -37,6 +37,8 @@ public class InternshipApplicationCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label status;
+    @FXML
+    private Label statusTest;
 
     /**
      * Creates a {@code InternshipApplicationCard} with the given {@code InternshipApplication} and index to display.
@@ -49,6 +51,7 @@ public class InternshipApplicationCard extends UiPart<Region> {
         email.setText(internshipApplication.getCompany().getEmail().getValue());
         role.setText(internshipApplication.getRole().getValue());
         date.setText(internshipApplication.getDateOfApplication().getValue().toString());
+        statusTest.setText(internshipApplication.getStatus().getValue().toString().toUpperCase());
 
         String statusValue = internshipApplication.getStatus().getValue().toUpperCase();
         status.setText(statusValue);
