@@ -2,7 +2,7 @@ package tahub.contacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 
 import java.util.stream.Stream;
 
@@ -24,17 +24,17 @@ public class DeleteCourseCommandParser implements Parser<DeleteCourseCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE);
+                ArgumentTokenizer.tokenize(args, PREFIX_COURSE_CODE);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_COURSE_CODE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCourseCommand.MESSAGE_USAGE));
         }
 
-        assert argMultimap.getValue(PREFIX_CODE).isPresent();
+        assert argMultimap.getValue(PREFIX_COURSE_CODE).isPresent();
 
-        CourseCode courseCodeToEdit = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        CourseCode courseCodeToEdit = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
         return new DeleteCourseCommand(courseCodeToEdit);
     }
 

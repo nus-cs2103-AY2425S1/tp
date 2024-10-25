@@ -229,7 +229,7 @@ class StudentCourseAssociationTest {
             StudentCourseAssociation sca1 = new StudentCourseAssociation(stuRef, courseRef, tutorialRef);
             StudentCourseAssociation sca2 = new StudentCourseAssociation(
                     stuDiffName, courseDiffName, tutorialDiffCourse);
-            assertTrue(sca1.isSameSca(sca2));
+            assertFalse(sca1.isSameSca(sca2));
         }
 
         @Test

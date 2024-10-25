@@ -24,6 +24,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No student with this "
+            + "matriculation number exists!";
+    public static final String MESSAGE_COURSE_NOT_FOUND = "No course with this course code exists!";
     public static final String MESSAGE_NO_EXISTING_COURSE = "The course with course code provided does not exist";
 
     /**
@@ -74,5 +77,4 @@ public class Messages {
                 + "; " + sca.getTutorial()
                 + "-" + sca.getCourse();
     }
-
 }

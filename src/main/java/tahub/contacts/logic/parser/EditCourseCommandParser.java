@@ -2,7 +2,7 @@ package tahub.contacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
@@ -25,18 +25,18 @@ public class EditCourseCommandParser implements Parser<EditCourseCommand> {
     public EditCourseCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_COURSE_CODE, PREFIX_NAME);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_NAME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE_CODE, PREFIX_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_COURSE_CODE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCourseCommand.MESSAGE_USAGE));
         }
 
-        assert argMultimap.getValue(PREFIX_CODE).isPresent();
+        assert argMultimap.getValue(PREFIX_COURSE_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_NAME).isPresent();
 
-        CourseCode courseCodeToEdit = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        CourseCode courseCodeToEdit = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
         EditCourseDescriptor editCourseDescriptor = new EditCourseDescriptor();
         editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
 

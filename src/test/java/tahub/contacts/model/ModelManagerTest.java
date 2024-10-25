@@ -278,7 +278,7 @@ public class ModelManagerTest {
         modelManager.addSca(sca);
 
         StudentCourseAssociationList scaList = modelManager.getStudentScas(student);
-        assertTrue(scaList.has(sca));
+        assertTrue(scaList.contains(sca));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package tahub.contacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
@@ -21,7 +21,7 @@ public class DeleteCourseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by its course code.\n"
             + "Parameters: COURSE_CODE (must be course code of an existing course)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CODE + "CS1101S ";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COURSE_CODE + "CS1101S ";
 
     public static final String MESSAGE_DELETE_COURSE_SUCCESS = "Deleted Course: %1$s";
 

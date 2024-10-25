@@ -1,7 +1,7 @@
 package tahub.contacts.logic.commands.attend;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
@@ -27,12 +27,12 @@ public class AttendAbsentCommand extends Command {
             + "group as not having attended a session (absent).\n"
             + "Parameters: "
             + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER "
-            + PREFIX_CODE + "COURSE CODE "
+            + PREFIX_COURSE_CODE + "COURSE CODE "
             + PREFIX_TUTORIAL + "TUTORIAL ID\n"
             + "(All parameters need to already be created.)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MATRICULATION_NUMBER + "A0123456X "
-            + PREFIX_CODE + "CS1010 "
+            + PREFIX_COURSE_CODE + "CS1010 "
             + PREFIX_TUTORIAL + "T01 ";
 
     public static final String MESSAGE_SUCCESS = "New absent session marked for student %1$s";
