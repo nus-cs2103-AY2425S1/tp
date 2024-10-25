@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.buyer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,7 +18,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.BuyerList;
 import seedu.address.model.ReadOnlyBuyerList;
-import seedu.address.storage.buyer.JsonBuyerListStorage;
 
 public class JsonBuyerListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonBuyerListStorageTest");
@@ -52,13 +51,13 @@ public class JsonBuyerListStorageTest {
     }
 
     @Test
-    public void readBuyerList_invalidBuyerBuyerList_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readBuyerList("invalidBuyerBuyerList.json"));
+    public void readBuyerList_invalidBuyerList_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readBuyerList("invalidBuyerList.json"));
     }
 
     @Test
-    public void readBuyerList_invalidAndValidBuyerBuyerList_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readBuyerList("invalidAndValidBuyerBuyerList.json"));
+    public void readBuyerList_invalidAndValidBuyerList_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readBuyerList("invalidAndValidBuyerList.json"));
     }
 
     @Test

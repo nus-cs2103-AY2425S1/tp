@@ -26,7 +26,6 @@ public class PropertyListPanel extends UiPart<Region> {
      */
     public PropertyListPanel(ObservableList<Property> propertyList) {
         super(FXML);
-        logger.info(propertyList.toString());
         propertyListView.setItems(propertyList);
         propertyListView.setCellFactory(listView -> new PropertyListViewCell());
     }
@@ -40,7 +39,6 @@ public class PropertyListPanel extends UiPart<Region> {
             super.updateItem(property, empty);
 
             if (empty || property == null) {
-                logger.info("graphic or text is null");
                 setGraphic(null);
                 setText(null);
             } else {

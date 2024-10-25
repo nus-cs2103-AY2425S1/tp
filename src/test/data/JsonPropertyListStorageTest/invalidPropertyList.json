@@ -1,0 +1,9 @@
+{
+  "properties": [ {
+    "name": "Property with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "location": "Clementi",
+    "askingPrice": "1,000,000",
+    "propertyType": "HDB"
+  } ]
+}

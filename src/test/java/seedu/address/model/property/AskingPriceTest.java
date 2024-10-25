@@ -21,40 +21,39 @@ public class AskingPriceTest {
 
     @Test
     public void isValidAskingPrice() {
-        // null phone number
+        // null asking price
         assertThrows(NullPointerException.class, () -> AskingPrice.isValidPrice(null));
 
-        // invalid prices
-        assertFalse(AskingPrice.isValidPrice("")); // empty string
-        assertFalse(AskingPrice.isValidPrice(" ")); // spaces only
-        assertFalse(AskingPrice.isValidPrice("91")); // less than 3 numbers
-        assertFalse(AskingPrice.isValidPrice("phone")); // non-numeric
-        assertFalse(AskingPrice.isValidPrice("9011p041")); // alphabets within digits
-        assertFalse(AskingPrice.isValidPrice("9312 1534")); // spaces within digits
+        // invalid asking price
+        assertFalse(AskingPrice.isValidPrice("-100,000")); // negative number
+        assertFalse(AskingPrice.isValidPrice("abc")); // not a number
+        assertFalse(AskingPrice.isValidPrice("ab100")); // contain number and alphabets
+        assertFalse(AskingPrice.isValidPrice("100.00")); // not an integer
+        assertFalse(AskingPrice.isValidPrice("1000,000")); // haphazard placement of commas
 
-        // valid prices
-        assertTrue(AskingPrice.isValidPrice("911")); // exactly 3 numbers
-        assertTrue(AskingPrice.isValidPrice("93121534"));
-        assertTrue(AskingPrice.isValidPrice("124293842033123")); // long phone numbers
+
+        // valid asking price
+        assertTrue(AskingPrice.isValidPrice("1000000")); // no commas
+        assertTrue(AskingPrice.isValidPrice("1,000,000")); // commas
     }
 
     @Test
     public void equals() {
-        AskingPrice phone = new AskingPrice("999");
+        AskingPrice askingPrice = new AskingPrice("999");
 
         // same values -> returns true
-        assertTrue(phone.equals(new AskingPrice("999")));
+        assertTrue(askingPrice.equals(new AskingPrice("999")));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertTrue(askingPrice.equals(askingPrice));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertFalse(askingPrice.equals(null));
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertFalse(askingPrice.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(phone.equals(new AskingPrice("995")));
+        assertFalse(askingPrice.equals(new AskingPrice("995")));
     }
 }

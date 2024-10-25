@@ -50,7 +50,7 @@ public class PropertyList implements ReadOnlyPropertyList {
      */
     public void setProperties(List<Property> properties) {
         this.properties.setProperties(properties);
-        logger.info("set meetups to " + this.properties);
+        logger.info("set properties to " + this.properties);
     }
 
     /**
@@ -87,8 +87,7 @@ public class PropertyList implements ReadOnlyPropertyList {
      */
     public void setProperty(Property target, Property editedProperty) {
         requireNonNull(editedProperty);
-
-        properties.setProperties(target, editedProperty);
+        properties.setProperty(target, editedProperty);
     }
 
     /**

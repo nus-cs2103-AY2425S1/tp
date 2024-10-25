@@ -2,10 +2,16 @@ package seedu.address.logic.parser.meetup;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.meetup.EditCommand;
@@ -14,6 +20,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meetup.AddedBuyer;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -28,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER);
 
         Index index;
 
@@ -44,22 +51,41 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditCommand.EditMeetUpDescriptor editMeetUpDescriptor = new EditCommand.EditMeetUpDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editMeetUpDescriptor.setMeetUpName(ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get()));
+            editMeetUpDescriptor.setName(ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
-            editMeetUpDescriptor.setMeetUpInfo(ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get()));
+            editMeetUpDescriptor.setInfo(ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get()));
         }
         if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
-            editMeetUpDescriptor.setMeetUpFrom(ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get()));
+            editMeetUpDescriptor.setFrom(ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get()));
         }
         if (argMultimap.getValue(PREFIX_TO).isPresent()) {
-            editMeetUpDescriptor.setMeetUpTo(ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get()));
+            editMeetUpDescriptor.setTo(ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get()));
         }
+        parseAddedBuyersForEdit(argMultimap.getAllValues(PREFIX_ADDED_BUYER))
+                .ifPresent(editMeetUpDescriptor::setAddedBuyers);
 
         if (!editMeetUpDescriptor.isAnyMeetUpFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_MEETUP_NOT_EDITED);
         }
 
         return new EditCommand(index, editMeetUpDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> addedBuyers} into a {@code Set<AddedBuyer>}
+     * if {@code addedBuyers} is non-empty.
+     * If {@code addedBuyers} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<AddedBuyer>} containing zero addedBuyer.
+     */
+    private Optional<Set<AddedBuyer>> parseAddedBuyersForEdit(Collection<String> addedBuyers) throws ParseException {
+        assert addedBuyers != null;
+
+        if (addedBuyers.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> addedBuyerSet = addedBuyers.size() == 1 && addedBuyers.contains("")
+                ? Collections.emptySet() : addedBuyers;
+        return Optional.of(ParserUtil.parseAddedBuyers(addedBuyerSet));
     }
 }

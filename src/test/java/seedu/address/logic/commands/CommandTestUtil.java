@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
@@ -51,6 +52,8 @@ public class CommandTestUtil {
     public static final String VALID_MEETUP_FROM_NETWORKING = "2024-10-12 17:30";
     public static final String VALID_MEETUP_TO_PITCH = "2024-09-11 12:59";
     public static final String VALID_MEETUP_TO_NETWORKING = "2024-10-12 19:45";
+    public static final String VALID_MEETUP_ADDED_PERSON_ALEX = "Alex Yeoh";
+    public static final String VALID_MEETUP_ADDED_PERSON_BETTY = "Betty Ho";
     public static final String VALID_ASKING_PRICE_AMY = "1200000";
     public static final String VALID_ASKING_PRICE_BOB = "600000";
     public static final String VALID_PROPERTY_TYPE_AMY = "Condominium";
@@ -77,6 +80,10 @@ public class CommandTestUtil {
     public static final String MEETUP_FROM_DESC_NETWORKING = " " + PREFIX_FROM + VALID_MEETUP_FROM_NETWORKING;
     public static final String MEETUP_TO_DESC_PITCH = " " + PREFIX_TO + VALID_MEETUP_TO_PITCH;
     public static final String MEETUP_TO_DESC_NETWORKING = " " + PREFIX_TO + VALID_MEETUP_TO_NETWORKING;
+    public static final String MEETUP_ADDED_BUYER_DESC_PITCH = " " + PREFIX_ADDED_BUYER
+            + VALID_MEETUP_ADDED_PERSON_ALEX;
+    public static final String MEETUP_ADDED_BUYER_DESC_NETWORKING = " " + " " + PREFIX_ADDED_BUYER
+            + VALID_MEETUP_ADDED_PERSON_BETTY;
     public static final String MEETUP_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_MEETUP_NAME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -92,6 +99,7 @@ public class CommandTestUtil {
     public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
     public static final String INVALID_MEETUP_TO_DESC_TWO = " " + PREFIX_TO + "03/02/2025 2988"; // Not valid date
     public static final String INVALID_MEETUP_INFO_DESC = " " + PREFIX_INFO; // Empty info not allowed
+    public static final String INVALID_MEETUP_ADDED_BUYER_DESC = " " + PREFIX_ADDED_BUYER + "S@m"; // @ not allowed
     public static final String INVALID_TAG_FOR_FIND_MEETUP = "vfnivsd/";
     public static final String INVALID_FIND_MEETUP_DESC = " " + INVALID_TAG_FOR_FIND_MEETUP + VALID_FIND_MEETUP_NAME;
 

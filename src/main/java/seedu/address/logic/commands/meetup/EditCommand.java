@@ -1,15 +1,19 @@
 package seedu.address.logic.commands.meetup;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -19,11 +23,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
+
 
 /**
  * Edits the details of an existing meet-up in the meet-up list.
@@ -40,10 +46,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_FROM + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm]\n"
+            + "[" + PREFIX_ADDED_BUYER + "BUYER NAME]...\n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_INFO + "Review work plans while having lunch with Eswen "
             + PREFIX_FROM + "2024-02-03 12:00 "
-            + PREFIX_TO + "2024-02-03 14:00 ";
+            + PREFIX_TO + "2024-02-03 14:00 "
+            + PREFIX_ADDED_BUYER + "Alex Yeoh "
+            + PREFIX_ADDED_BUYER + "David Li ";
 
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
@@ -81,7 +90,8 @@ public class EditCommand extends Command {
 
         model.setMeetUp(meetUpToEdit, editedMeetUp);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
-        return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)));
+        return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)),
+                false, false, true, false, false);
     }
 
     /**
@@ -89,15 +99,16 @@ public class EditCommand extends Command {
      * edited with {@code editBuyerDescriptor}.
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
-                                                 EditCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
+                                             EditCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
-        Name updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
-        Info updatedInfo = editMeetUpDescriptor.getMeetUpInfo().orElse(meetUpToEdit.getInfo());
-        From updatedFromTime = editMeetUpDescriptor.getMeetUpFrom().orElse(meetUpToEdit.getFrom());
-        To updatedToTime = editMeetUpDescriptor.getMeetUpTo().orElse(meetUpToEdit.getTo());
-
-        return new MeetUp(updatedName, updatedInfo, updatedFromTime, updatedToTime);
+        Name updatedName = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
+        Info updatedInfo = editMeetUpDescriptor.getInfo().orElse(meetUpToEdit.getInfo());
+        From updatedFrom = editMeetUpDescriptor.getFrom().orElse(meetUpToEdit.getFrom());
+        To updatedTo = editMeetUpDescriptor.getTo().orElse(meetUpToEdit.getTo());
+        Set<AddedBuyer> updatedAddedBuyers = editMeetUpDescriptor.getAddedBuyers()
+                .orElse(meetUpToEdit.getAddedBuyers());
+        return new MeetUp(updatedName, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
     }
 
     @Override
@@ -134,18 +145,21 @@ public class EditCommand extends Command {
         private Info info;
         private From from;
         private To to;
+        private Set<AddedBuyer> addedBuyers;
 
-        public EditMeetUpDescriptor() {}
+        public EditMeetUpDescriptor() {
+        }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code addedBuyers} is used internally.
          */
         public EditMeetUpDescriptor(EditCommand.EditMeetUpDescriptor toCopy) {
-            setMeetUpName(toCopy.name);
-            setMeetUpInfo(toCopy.info);
-            setMeetUpFrom(toCopy.from);
-            setMeetUpTo(toCopy.to);
+            setName(toCopy.name);
+            setInfo(toCopy.info);
+            setFrom(toCopy.from);
+            setTo(toCopy.to);
+            setAddedBuyers(toCopy.addedBuyers);
         }
 
         /**
@@ -155,37 +169,53 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, info, from, to);
         }
 
-        // This method should not be used yet.
-        public void setMeetUpName(Name name) {
+        public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<Name> getMeetUpName() {
+        public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setMeetUpInfo(Info info) {
+        public void setInfo(Info info) {
             this.info = info;
         }
 
-        public Optional<Info> getMeetUpInfo() {
+        public Optional<Info> getInfo() {
             return Optional.ofNullable(info);
         }
 
-        public void setMeetUpFrom(From from) {
+        public void setFrom(From from) {
             this.from = from;
         }
 
-        public Optional<From> getMeetUpFrom() {
+        public Optional<From> getFrom() {
             return Optional.ofNullable(from);
         }
 
-        public void setMeetUpTo(To to) {
+        public void setTo(To to) {
             this.to = to;
         }
 
-        public Optional<To> getMeetUpTo() {
+        public Optional<To> getTo() {
             return Optional.ofNullable(to);
+        }
+
+        /**
+         * Sets {@code addedBuyers} to this object's {@code addedBuyers}.
+         * A defensive copy of {@code addedBuyers} is used internally.
+         */
+        public void setAddedBuyers(Set<AddedBuyer> addedBuyers) {
+            this.addedBuyers = (addedBuyers != null) ? new HashSet<>(addedBuyers) : null;
+        }
+
+        /**
+         * Returns an unmodifiable addedBuyer set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code addedBuyers} is null.
+         */
+        public Optional<Set<AddedBuyer>> getAddedBuyers() {
+            return (addedBuyers != null) ? Optional.of(Collections.unmodifiableSet(addedBuyers)) : Optional.empty();
         }
 
         @Override
@@ -205,8 +235,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditMeetUpDescriptor.name)
                     && Objects.equals(info, otherEditMeetUpDescriptor.info)
                     && Objects.equals(from, otherEditMeetUpDescriptor.from)
-                    && Objects.equals(to, otherEditMeetUpDescriptor.to);
-
+                    && Objects.equals(to, otherEditMeetUpDescriptor.to)
+                    && Objects.equals(addedBuyers, otherEditMeetUpDescriptor.addedBuyers);
         }
     }
 }

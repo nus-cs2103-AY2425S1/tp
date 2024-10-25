@@ -44,7 +44,8 @@ public class DeleteCommand extends Command {
 
         MeetUp meetUpToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMeetUp(meetUpToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MEETUP_SUCCESS, Messages.format(meetUpToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_MEETUP_SUCCESS, Messages.format(meetUpToDelete)),
+                false, false, true, false, false);
     }
 
     @Override
