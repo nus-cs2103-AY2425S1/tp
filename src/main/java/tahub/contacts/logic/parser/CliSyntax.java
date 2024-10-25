@@ -15,5 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_COURSE_CODE = new Prefix("c/");
     // t/ prefix is used by tags...
     public static final Prefix PREFIX_TUTORIAL_ID = new Prefix("tut/");
-
+    public static final Prefix PREFIX_TUTORIAL = new Prefix("tut/");
 }

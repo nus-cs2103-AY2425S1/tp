@@ -14,6 +14,8 @@ import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
@@ -46,7 +48,7 @@ public class EnrollCommand extends Command {
 
 
     private final MatriculationNumber matriculationNumberToAdd;
-    private final String courseCodeToAdd;
+    private final CourseCode courseCodeToAdd;
     private final String tutorialIdToAdd;
 
     /**
@@ -56,13 +58,12 @@ public class EnrollCommand extends Command {
      * @param courseCode The code of the course to enroll in. Cannot be null.
      * @param tutorialId The ID of the tutorial to enroll in. Cannot be null.
      */
-    public EnrollCommand(MatriculationNumber matriculationNumber, String courseCode, String tutorialId) {
+    public EnrollCommand(MatriculationNumber matriculationNumber, CourseCode courseCode, String tutorialId) {
         requireAllNonNull(matriculationNumber, courseCode, tutorialId);
         this.matriculationNumberToAdd = matriculationNumber;
         this.courseCodeToAdd = courseCode;
         this.tutorialIdToAdd = tutorialId;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -83,7 +84,7 @@ public class EnrollCommand extends Command {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
-        Course dummyCourse = new Course(courseCodeToAdd, "dummy course name");
+        Course dummyCourse = new Course(courseCodeToAdd, new CourseName("dummy course name"));
         if (!model.hasCourse(dummyCourse)) {
             throw new CommandException(Messages.MESSAGE_COURSE_NOT_FOUND);
         }

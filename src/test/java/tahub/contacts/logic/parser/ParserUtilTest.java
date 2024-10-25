@@ -11,7 +11,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.person.Address;
@@ -44,7 +48,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -192,5 +196,33 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Nested
+    @DisplayName("parseTutorialId")
+    class ParseTutorial {
+        @Test
+        public void null_throwsNullPointerException() {
+            assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorialId((String) null));
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"a", "A", "ABC", "R11", "T100", "T00", "t01"})
+        public void invalidValue_throwsParseException(String invalidTutId) {
+            assertThrows(ParseException.class, () -> ParserUtil.parseTutorialId(invalidTutId));
+        }
+
+        @Test
+        public void validValueWithoutWhitespace_returnsEmail() throws Exception {
+            String expectedTutId = "T20";
+            assertEquals(expectedTutId, ParserUtil.parseTutorialId("T20"));
+        }
+
+        @Test
+        public void validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+            String tutIdWithWhitespace = WHITESPACE + "T20" + WHITESPACE;
+            String expectedTutId = "T20";
+            assertEquals(expectedTutId, ParserUtil.parseTutorialId(tutIdWithWhitespace));
+        }
     }
 }

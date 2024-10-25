@@ -5,11 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
-import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
@@ -23,6 +25,16 @@ import tahub.contacts.model.tutorial.Tutorial;
  */
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    // ===================================== SPECIFIC PARSERS ===============================================
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -50,38 +62,6 @@ public class ParserUtil {
             throw new ParseException(MatriculationNumber.MESSAGE_CONSTRAINTS);
         }
         return new MatriculationNumber(trimmedMatricNumber);
-    }
-
-    /**
-     * Parses the given course code and trims leading and trailing whitespaces.
-     *
-     * @param courseCode the course code to parse
-     * @return the trimmed course code
-     * @throws ParseException if the specified course code is invalid
-     */
-    public static String parseCourseCode(String courseCode) throws ParseException {
-        requireNonNull(courseCode);
-        String trimmedCourseCode = courseCode.trim();
-        if (!Course.isValidCourseCode(trimmedCourseCode)) {
-            throw new ParseException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
-        }
-        return trimmedCourseCode;
-    }
-
-    /**
-     * Parses the given tutorial ID and trims leading and trailing whitespaces.
-     *
-     * @param tutorialId the tutorial ID to parse
-     * @return the trimmed tutorial ID
-     * @throws ParseException if the specified tutorial ID is invalid
-     */
-    public static String parseTutorialId(String tutorialId) throws ParseException {
-        requireNonNull(tutorialId);
-        String trimmedTutorialId = tutorialId.trim();
-        if (!Tutorial.isValidTutorialId(trimmedTutorialId)) {
-            throw new ParseException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
-        }
-        return trimmedTutorialId;
     }
 
     /**
@@ -169,5 +149,51 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String courseCode} into a {@code CourseCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseCode} is invalid.
+     */
+    public static CourseCode parseCourseCode(String courseCode) throws ParseException {
+        requireNonNull(courseCode);
+        String trimmedCourseCode = courseCode.trim();
+        if (!CourseCode.isValidCourseCode(courseCode)) {
+            throw new ParseException(CourseCode.MESSAGE_CONSTRAINTS);
+        }
+        return new CourseCode(trimmedCourseCode);
+    }
+
+    /**
+     * Parses a {@code String courseName} into a {@code CourseName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseName} is invalid.
+     */
+    public static CourseName parseCourseName(String courseName) throws ParseException {
+        requireNonNull(courseName);
+        String trimmedCourseName = courseName.trim();
+        if (!CourseName.isValidCourseName(trimmedCourseName)) {
+            throw new ParseException(CourseName.MESSAGE_CONSTRAINTS);
+        }
+        return new CourseName(trimmedCourseName);
+    }
+
+    /**
+     * Parses a {@code String tutorialId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return trimmed tutorial ID as a {@code String}.
+     * @throws ParseException if the given {@code tutorialId} is invalid.
+     */
+    public static String parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!Tutorial.isValidTutorialId(trimmedTutorialId)) {
+            throw new ParseException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedTutorialId;
     }
 }

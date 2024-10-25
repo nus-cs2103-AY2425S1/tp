@@ -10,6 +10,7 @@ import static tahub.contacts.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -208,6 +210,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setCourse(Course target, Course editedCourse) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteCourse(Course course) {
             throw new AssertionError("This method should not be called.");
         }
@@ -224,6 +231,21 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudentCourseAssociationList getStudentScas(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueCourseList getStudentCourses(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Tutorial> getStudentTutorials(Person student) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -1,6 +1,7 @@
 package tahub.contacts.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tahub.contacts.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tahub.contacts.logic.commands.CommandTestUtil.MATRICULATION_NUMBER_DESC_AMY;
@@ -12,6 +13,7 @@ import static tahub.contacts.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,14 @@ import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.ReadOnlyAddressBook;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.storage.JsonAddressBookStorage;
 import tahub.contacts.storage.JsonStudentCourseAssociationListStorage;
 import tahub.contacts.storage.JsonUniqueCourseListStorage;
@@ -137,5 +146,50 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getStudentScas_validStudent_returnsCorrectScas() {
+        Person student = new PersonBuilder(AMY).withTags().build();
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Tutorial tutorial = new Tutorial("T01", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        model.addSca(sca);
+
+        StudentCourseAssociationList scaList = logic.getStudentScas(student);
+        assertTrue(scaList.has(sca));
+    }
+
+    @Test
+    public void getStudentCourses_validStudent_returnsCorrectCourses() {
+        Person student = new PersonBuilder(AMY).withTags().build();
+        Course course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Course course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
+        Tutorial tutorial1 = new Tutorial("T01", course1);
+        Tutorial tutorial2 = new Tutorial("T02", course2);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial2);
+        model.addSca(sca1);
+        model.addSca(sca2);
+
+        UniqueCourseList courseList = logic.getStudentCourses(student);
+        assertTrue(courseList.hasCourse(course1));
+        assertTrue(courseList.hasCourse(course2));
+    }
+
+    @Test
+    public void getStudentTutorials_validStudent_returnsCorrectTutorials() {
+        Person student = new PersonBuilder(AMY).withTags().build();
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Tutorial tutorial1 = new Tutorial("T01", course);
+        Tutorial tutorial2 = new Tutorial("T02", course);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial2);
+        model.addSca(sca1);
+        model.addSca(sca2);
+
+        List<Tutorial> tutorials = logic.getStudentTutorials(student);
+        assertTrue(tutorials.contains(tutorial1));
+        assertTrue(tutorials.contains(tutorial2));
     }
 }

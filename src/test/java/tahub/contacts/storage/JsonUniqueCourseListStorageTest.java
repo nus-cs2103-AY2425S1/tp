@@ -16,6 +16,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import tahub.contacts.commons.exceptions.DataLoadingException;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 
 public class JsonUniqueCourseListStorageTest {
@@ -43,7 +45,7 @@ public class JsonUniqueCourseListStorageTest {
     @Test
     public void saveCourseList_validData_success() throws IOException {
         UniqueCourseList courses = new UniqueCourseList();
-        courses.add(new Course("CS1010", "Introduction to CS"));
+        courses.add(new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS")));
         Path filePath = testFolder.resolve("courses.json");
 
         storage.saveCourseList(courses, filePath);
@@ -68,7 +70,7 @@ public class JsonUniqueCourseListStorageTest {
     @Test
     public void readCourseList_validData_success() throws IOException, DataLoadingException {
         UniqueCourseList courses = new UniqueCourseList();
-        courses.add(new Course("CS1010", "Introduction to CS"));
+        courses.add(new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS")));
         Path filePath = testFolder.resolve("courses.json");
         storage.saveCourseList(courses, filePath);
 
@@ -77,8 +79,8 @@ public class JsonUniqueCourseListStorageTest {
         UniqueCourseList readCourses = readCoursesOptional.get();
 
         assertEquals(1, readCourses.asUnmodifiableObservableList().size());
-        assertEquals("CS1010", readCourses.asUnmodifiableObservableList().get(0).courseCode);
-        assertEquals("Introduction to CS", readCourses.asUnmodifiableObservableList().get(0).courseName);
+        assertEquals("CS1010", readCourses.asUnmodifiableObservableList().get(0).courseCode.toString());
+        assertEquals("Introduction to CS", readCourses.asUnmodifiableObservableList().get(0).courseName.toString());
     }
 
 

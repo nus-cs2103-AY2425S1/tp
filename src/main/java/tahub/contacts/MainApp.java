@@ -116,7 +116,7 @@ public class MainApp extends Application {
         Optional<StudentCourseAssociationList> scaListOptional;
         StudentCourseAssociationList initialScaList;
         try {
-            scaListOptional = storage.readScaList(userPrefs.getScaListFilePath());
+            scaListOptional = storage.readScaList(userPrefs.getScaListFilePath(), initialData, initialCourseList);
             if (scaListOptional.isEmpty()) {
                 logger.info("Creating a new sca list in the " + storage.getScaListFilePath()
                         + " file, populated with a sample SCA list.");

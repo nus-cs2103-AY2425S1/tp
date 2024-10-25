@@ -13,8 +13,24 @@ import static tahub.contacts.testutil.Assert.assertThrows;
 import static tahub.contacts.testutil.TypicalPersons.ALICE;
 import static tahub.contacts.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import tahub.contacts.logic.Logic;
+import tahub.contacts.logic.LogicManager;
+import tahub.contacts.model.Model;
+import tahub.contacts.model.ModelManager;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
+import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tag.Tag;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -23,6 +39,16 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    @DisplayName("Generic MatricNumber-only factory method genericFromMatricNumber() returns "
+            + "Persons with correct matric Number")
+    public void genericFromMatricNumber_validMatricNumberInput_createdObjectHasCorrectMatricNumber() {
+        MatriculationNumber mn1 = new MatriculationNumber("A0000000X");
+        MatriculationNumber mn2 = new MatriculationNumber("A1234567X");
+        assertEquals(Person.genericFromMatricNumber(mn1).getMatricNumber(), mn1);
+        assertEquals(Person.genericFromMatricNumber(mn2).getMatricNumber(), mn2);
     }
 
     @Test
@@ -50,6 +76,66 @@ public class PersonTest {
         // matriculation number differs in case, all other attributes same -> returns false
         editedBob = new PersonBuilder(BOB).withMatriculationNumber(VALID_MATRICULATION_NUMBER_AMY).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void getStudentCourseAssociations_validStudent_returnsCorrectScas() {
+        Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
+                new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Tutorial tutorial = new Tutorial("T01", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+
+        Model model = new ModelManager();
+        model.addSca(sca);
+        Logic logic = new LogicManager(model, null);
+
+        StudentCourseAssociationList scaList = student.getStudentCourseAssociations(logic);
+        assertEquals(1, scaList.asUnmodifiableObservableList().size());
+        assertEquals(sca, scaList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void getCourses_validStudent_returnsCorrectCourses() {
+        Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
+                new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
+        Course course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Course course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
+        Tutorial tutorial1 = new Tutorial("T01", course1);
+        Tutorial tutorial2 = new Tutorial("T02", course2);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial2);
+
+        Model model = new ModelManager();
+        model.addSca(sca1);
+        model.addSca(sca2);
+        Logic logic = new LogicManager(model, null);
+
+        UniqueCourseList courseList = student.getCourses(logic);
+        assertEquals(2, courseList.asUnmodifiableObservableList().size());
+        assertTrue(courseList.hasCourse(course1));
+        assertTrue(courseList.hasCourse(course2));
+    }
+
+    @Test
+    public void getTutorials_validStudent_returnsCorrectTutorials() {
+        Person student = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"), new Phone("12345678"),
+                new Email("student1@example.com"), new Address("123 Street"), new HashSet<Tag>());
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        Tutorial tutorial1 = new Tutorial("T01", course);
+        Tutorial tutorial2 = new Tutorial("T02", course);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial2);
+
+        Model model = new ModelManager();
+        model.addSca(sca1);
+        model.addSca(sca2);
+        Logic logic = new LogicManager(model, null);
+
+        List<Tutorial> tutorials = student.getTutorials(logic);
+        assertEquals(2, tutorials.size());
+        assertTrue(tutorials.contains(tutorial1));
+        assertTrue(tutorials.contains(tutorial2));
     }
 
     @Test

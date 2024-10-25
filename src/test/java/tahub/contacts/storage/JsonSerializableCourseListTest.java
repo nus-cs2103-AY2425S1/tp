@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 
 public class JsonSerializableCourseListTest {
@@ -19,8 +21,8 @@ public class JsonSerializableCourseListTest {
     @Test
     public void toModelType_typicalCourseList_success() throws Exception {
         UniqueCourseList courses = new UniqueCourseList();
-        courses.add(new Course("CS1010", "Introduction to Computer Science"));
-        courses.add(new Course("MA1521", "Calculus I"));
+        courses.add(new Course(new CourseCode("CS1010"), new CourseName("Introduction to Computer Science")));
+        courses.add(new Course(new CourseCode("MA1521"), new CourseName("Calculus I")));
 
         JsonSerializableCourseList jsonSerialisedCourseList = new JsonSerializableCourseList(courses);
         UniqueCourseList courseList = jsonSerialisedCourseList.toModelType();

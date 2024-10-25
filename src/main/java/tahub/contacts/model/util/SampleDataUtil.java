@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -66,8 +68,8 @@ public class SampleDataUtil {
 
     public static UniqueCourseList getSampleCourseList() {
         UniqueCourseList sampleCourseList = new UniqueCourseList();
-        sampleCourseList.add(new Course("CS1010", "Introduction to Computer Science"));
-        sampleCourseList.add(new Course("MA1521", "Calculus I"));
+        sampleCourseList.add(new Course(new CourseCode("CS1010"), new CourseName("Introduction to Computer Science")));
+        sampleCourseList.add(new Course(new CourseCode("MA1521"), new CourseName("Calculus I")));
         return sampleCourseList;
     }
 

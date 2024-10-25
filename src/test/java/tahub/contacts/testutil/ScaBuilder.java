@@ -5,6 +5,8 @@ import static tahub.contacts.testutil.AttendanceExamples.ATTENDANCE_EXAMPLE_1;
 import java.util.HashSet;
 
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -32,7 +34,7 @@ public class ScaBuilder {
                 new Address("Computing 1, 13 Computing Dr, 117417"),
                 new HashSet<>()
         );
-        Course course = new Course("CS1000", "Computer Testing");
+        Course course = new Course(new CourseCode("CS1000"), new CourseName("Computer Testing"));
         Tutorial tutorial = new Tutorial("T1", course);
         return new StudentCourseAssociation(student, course, tutorial, new GradingSystem(), ATTENDANCE_EXAMPLE_1);
     }
@@ -49,7 +51,7 @@ public class ScaBuilder {
                 new Address("Computing 2, 13 Computing Dr, 117417"),
                 new HashSet<>()
         );
-        Course course = new Course("CS1001", "Computer Testing");
+        Course course = new Course(new CourseCode("CS1001"), new CourseName("Computer Testing"));
         Tutorial tutorial = new Tutorial("T1", course);
         return new StudentCourseAssociation(student, course, tutorial, new GradingSystem(), ATTENDANCE_EXAMPLE_1);
     }

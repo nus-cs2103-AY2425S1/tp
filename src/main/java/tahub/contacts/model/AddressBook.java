@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.util.ToStringBuilder;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.UniquePersonList;
 
@@ -106,6 +107,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public Person getPersonByMatricNumber(String matricNumber) {
+        return persons.getPersonByMatricNumber(matricNumber);
+    }
+
+    public Person getPersonByMatricNumber(MatriculationNumber matricNumber) {
+        return persons.getPersonByMatricNumber(matricNumber);
     }
 
     @Override

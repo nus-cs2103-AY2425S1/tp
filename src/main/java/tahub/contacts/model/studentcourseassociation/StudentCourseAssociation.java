@@ -190,7 +190,23 @@ public class StudentCourseAssociation {
     @Override
     public String toString() {
         return String.format("Matriculation Number: %s Course Code: %s "
-                             + "Tutorial Group: %s ", student.getMatricNumber(),
+                        + "Tutorial Group: %s ", student.getMatricNumber(),
                 course.courseCode, tutorial.getTutorialId());
+    }
+    /**
+     * Compares this {@code StudentCourseAssociation} with another {@code StudentCourseAssociation} for equality
+     * based on the primary identifiers: matriculation number, course code, and tutorial ID.
+     *
+     * @param other The other {@code StudentCourseAssociation} to compare this {@code StudentCourseAssociation} with
+     * @return true if the two SCAs are equal, false otherwise
+     */
+    public boolean isSameSca(StudentCourseAssociation other) {
+        if (other == this) {
+            return true;
+        }
+
+        return this.student.isSamePerson(other.student)
+                && this.course.isConflictCourse(other.course)
+                && this.tutorial.equals(other.tutorial);
     }
 }

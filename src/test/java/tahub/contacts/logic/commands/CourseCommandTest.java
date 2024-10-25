@@ -10,6 +10,7 @@ import static tahub.contacts.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,13 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.tutorial.Tutorial;
 
 public class CourseCommandTest {
 
@@ -37,7 +41,7 @@ public class CourseCommandTest {
     @Test
     public void execute_courseAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCourseAdded modelStub = new ModelStubAcceptingCourseAdded();
-        Course validCourse = new Course("CS2103T", "Software Engineering");
+        Course validCourse = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
 
         CommandResult commandResult = new CourseCommand(validCourse).execute(modelStub);
 
@@ -48,7 +52,7 @@ public class CourseCommandTest {
 
     @Test
     public void execute_duplicateCourse_throwsCommandException() {
-        Course validCourse = new Course("CS2103T", "Software Engineering");
+        Course validCourse = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
         CourseCommand courseCommand = new CourseCommand(validCourse);
         ModelStub modelStub = new ModelStubWithCourse(validCourse);
 
@@ -58,8 +62,8 @@ public class CourseCommandTest {
 
     @Test
     public void equals() {
-        Course course1 = new Course("CS2103T", "Software Engineering");
-        Course course2 = new Course("CS2101", "Effective Communication");
+        Course course1 = new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering"));
+        Course course2 = new Course(new CourseCode("CS2101"), new CourseName("Effective Communication"));
         CourseCommand addCourse1Command = new CourseCommand(course1);
         CourseCommand addCourse2Command = new CourseCommand(course2);
 
@@ -82,7 +86,8 @@ public class CourseCommandTest {
 
     @Test
     public void toStringMethod() {
-        CourseCommand command = new CourseCommand(new Course("CS2103T", "Software Engineering"));
+        CourseCommand command = new CourseCommand(new Course(new CourseCode("CS2103T"),
+                new CourseName("Software Engineering")));
         String expected = "tahub.contacts.logic.commands.CourseCommand{toAdd=[CS2103T: Software Engineering]}";
         assertEquals(expected, command.toString());
     }
@@ -201,6 +206,11 @@ public class CourseCommandTest {
         }
 
         @Override
+        public void setCourse(Course target, Course editedCourse) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasSca(StudentCourseAssociation sca) {
             return false;
         }
@@ -222,6 +232,21 @@ public class CourseCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudentCourseAssociationList getStudentScas(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueCourseList getStudentCourses(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Tutorial> getStudentTutorials(Person student) {
             throw new AssertionError("This method should not be called.");
         }
     }

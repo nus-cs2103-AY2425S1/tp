@@ -37,6 +37,14 @@ public class UniqueCourseList implements Iterable<Course> {
     }
 
     /**
+     * Returns true if the list contains a course with given course code.
+     */
+    public boolean containsCourseWithCourseCode(CourseCode courseCode) {
+        requireNonNull(courseCode);
+        return internalList.stream().noneMatch(course -> course.courseCode.equals(courseCode));
+    }
+
+    /**
      * Returns true if the list contains an equivalent course as the given argument.
      */
     public boolean hasCourse(Course toCheck) {
@@ -117,6 +125,12 @@ public class UniqueCourseList implements Iterable<Course> {
         }
 
         internalList.setAll(courses);
+    }
+
+    public Course getCourseWithCourseCode(CourseCode courseCode) {
+        requireNonNull(courseCode);
+        return internalList.stream().filter(course -> course.courseCode
+                .equals(courseCode)).findFirst().orElse(null);
     }
 
     /**

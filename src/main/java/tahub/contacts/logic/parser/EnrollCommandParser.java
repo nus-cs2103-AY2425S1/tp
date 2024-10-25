@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.MatriculationNumber;
 
 
@@ -40,7 +41,7 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
         // Extract key parameters from user input
         MatriculationNumber matricNumber = ParserUtil.parseMatriculationNumber(argMultimap
                 .getValue(PREFIX_MATRICULATION_NUMBER).get());
-        String courseCode = ParserUtil.parseCourseCode(argMultimap
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap
                 .getValue(PREFIX_COURSE_CODE).get());
         String tutorialId = ParserUtil.parseTutorialId(argMultimap
                 .getValue(PREFIX_TUTORIAL_ID).get());
