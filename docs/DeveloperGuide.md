@@ -83,6 +83,23 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+#### Navigating Previous Commands with Auto-Fill
+
+Users can seamlessly browse through their previously entered commands using the arrow keys, making it easier to reuse or modify past inputs. This feature helps streamline interactions by reducing repetitive typing and enhancing productivity.
+
+**How it works**:
+
+1. **Detecting Arrow Keys and Retrieving Commands:**
+    - Pressing **`UP`** or **`DOWN`** triggers `quickSwitchInputs()`, showing the previous or next command respectively, if available.
+
+2. **Updating the Command Box:**
+    - If a command is found, it is displayed in the **`TextField`** using `setText()`.
+    - If no command is available, the textField remains unchanged.
+
+The sequence diagram below illustrates how the system processes the arrow key presses:
+
+<img src="images/AutoFillSequenceDiagram.png" width="550" />
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
