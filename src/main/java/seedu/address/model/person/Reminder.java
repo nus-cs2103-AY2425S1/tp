@@ -94,7 +94,8 @@ public class Reminder {
     }
     @Override
     public String toString() {
-        return "Date: " + reminderDate.toString() + "\n" + "Description: " + reminderDescription + "\n" + "Name: " + personToMeet.toString();
+        return "Date: " + reminderDate.toString() + "\n" + "Description: " + reminderDescription
+                + "\n" + "Name: " + personToMeet.toString();
     }
 
     /**
