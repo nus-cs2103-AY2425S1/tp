@@ -48,6 +48,8 @@ public class Messages {
                 .append(person.getTelegramHandle())
                 .append("; Module Name: ")
                 .append(person.getModuleName())
+                .append(": Remark: ")
+                .append(person.getRemark())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
