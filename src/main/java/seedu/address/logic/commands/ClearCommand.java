@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Agent Assist's contacts have been cleared!";
     public static final String MESSAGE_CLEAR_CONFIRMATION = "This will permanently clear all contacts. "
             + "Are you sure you want to execute this command? (y/n)";
 
