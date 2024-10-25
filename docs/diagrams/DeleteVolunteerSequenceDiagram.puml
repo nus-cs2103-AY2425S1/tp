@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":VolunteerDeleteCommandParser" as VolunteerDeleteCommandParser LOGIC_COLOR
+participant "d:VolunteerDeleteCommand" as VolunteerDeleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("del 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("del 1")
+activate AddressBookParser
+
+create VolunteerDeleteCommandParser
+AddressBookParser -> VolunteerDeleteCommandParser
+activate VolunteerDeleteCommandParser
+
+VolunteerDeleteCommandParser --> AddressBookParser
+deactivate VolunteerDeleteCommandParser
+
+AddressBookParser -> VolunteerDeleteCommandParser : parse("1")
+activate VolunteerDeleteCommandParser
+
+create VolunteerDeleteCommand
+VolunteerDeleteCommandParser -> VolunteerDeleteCommand
+activate VolunteerDeleteCommand
+
+VolunteerDeleteCommand --> VolunteerDeleteCommandParser
+deactivate VolunteerDeleteCommand
+
+VolunteerDeleteCommandParser --> AddressBookParser : d
+deactivate VolunteerDeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> VolunteerDeleteCommand : execute(m)
+activate VolunteerDeleteCommand
+
+VolunteerDeleteCommand -> Model : getFilteredVolunteerList()
+activate Model
+
+Model --> VolunteerDeleteCommand : [List<Volunteer>]
+deactivate Model
+
+VolunteerDeleteCommand -> Model : deleteVolunteer(volunteer)
+activate Model
+
+Model --> VolunteerDeleteCommand
+deactivate Model
+
+create CommandResult
+VolunteerDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> VolunteerDeleteCommand
+deactivate CommandResult
+
+VolunteerDeleteCommand --> LogicManager : r
+deactivate VolunteerDeleteCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
