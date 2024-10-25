@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
@@ -106,5 +108,54 @@ public class MarkPresentAllCommandTest {
         String expectedString = MarkPresentAllCommand.class.getCanonicalName() + "{tutorialGroup=" + tutorialGroup
                 + ", date=" + date + "}";
         assertEquals(expectedString, markPresentAllCommand.toString());
+    }
+
+    @Test
+    public void execute_undoMarkPresentAllCommand_success() throws Exception {
+        Model model = new ModelManager();
+        student1.undoAttendance(LocalDate.of(2020, 1, 1));
+        student2.undoAttendance(LocalDate.of(2020, 1, 1));
+        model.addStudent(student1);
+        model.addStudent(student2);
+        MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
+        markCommand.execute(model);
+
+        CommandStack commandStack = CommandStack.getInstance();
+        commandStack.push(markCommand);
+
+        UndoCommand undoCommand = new UndoCommand();
+        CommandResult result = undoCommand.execute(model);
+
+        assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertTrue(model.getStudentByName(student1.getName()).getAttendanceRecord().isEmpty());
+        assertTrue(model.getStudentByName(student2.getName()).getAttendanceRecord().isEmpty());
+    }
+
+    @Test
+    public void execute_undoMarkPresentAllCommandTwoAttendance_success() throws Exception {
+        Model model = new ModelManager();
+        model.addStudent(student1);
+        model.addStudent(student2);
+        MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
+        UnmarkPresentAllCommand unmarkCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
+        Attendance attendance = new Attendance("a");
+        unmarkCommand.execute(model);
+        markCommand.execute(model);
+        markCommand.undo(model);
+
+        AttendanceRecord ar = student1.getAttendanceRecord().get(1);
+        assertTrue(ar.getAttendance().equals(attendance));
+        AttendanceRecord ar2 = student2.getAttendanceRecord().get(1);
+        assertTrue(ar2.getAttendance().equals(attendance));
+    }
+
+
+    @Test
+    public void execute_noCommandToUndo_throwsCommandException() {
+        Model model = new ModelManager();
+        UndoCommand undoCommand = new UndoCommand();
+        CommandResult result = undoCommand.execute(model);
+
+        assertEquals("There are no commands to undo", result.getFeedbackToUser());
     }
 }
