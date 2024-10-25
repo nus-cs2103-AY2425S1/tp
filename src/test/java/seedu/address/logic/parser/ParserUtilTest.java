@@ -15,6 +15,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 
 
@@ -24,12 +25,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_PAID_AMOUNT = "2.123";
     private static final String INVALID_HOUR = "+0.75";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_PAID_AMOUNT = "12.50";
     private static final String VALID_HOUR = "12.5";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -148,6 +151,28 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePaidAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaidAmount((String) null));
+    }
+
+    @Test
+    public void parsePaidAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePaidAmount(INVALID_PAID_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithoutWhitespace_returnsPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_PAID_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(VALID_PAID_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithWhitespace_returnsTrimmedPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_PAID_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(WHITESPACE + VALID_PAID_AMOUNT + WHITESPACE));
+    }
+
+    @Test
     public void parseHour_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseHour((String) null));
     }
@@ -158,7 +183,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHour_validValueWithourWhitespace_returnsHour() throws Exception {
+    public void parseHour_validValueWithoutWhitespace_returnsHour() throws Exception {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
