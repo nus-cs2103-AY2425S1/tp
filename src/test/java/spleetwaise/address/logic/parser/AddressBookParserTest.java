@@ -23,13 +23,13 @@ import spleetwaise.address.logic.commands.FindCommand;
 import spleetwaise.address.logic.commands.HelpCommand;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.commands.RemarkCommand;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 public class AddressBookParserTest {
 

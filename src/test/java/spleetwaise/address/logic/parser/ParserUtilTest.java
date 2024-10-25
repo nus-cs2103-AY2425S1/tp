@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -18,6 +17,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalIndexes;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

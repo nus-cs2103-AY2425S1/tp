@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import spleetwaise.address.logic.commands.AddCommand;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -20,6 +19,8 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new AddCommand object

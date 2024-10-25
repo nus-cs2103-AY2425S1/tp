@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import spleetwaise.address.logic.Messages;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Stores mapping of prefixes to their respective arguments. Each key may be associated with multiple argument values.

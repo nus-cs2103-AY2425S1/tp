@@ -3,7 +3,8 @@ package spleetwaise.transaction.logic.parser;
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.DeleteCommand;
 
 /**

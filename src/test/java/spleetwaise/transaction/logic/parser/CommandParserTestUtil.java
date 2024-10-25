@@ -2,8 +2,9 @@ package spleetwaise.transaction.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 
 /**

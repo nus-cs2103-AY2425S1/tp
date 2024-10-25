@@ -1,4 +1,4 @@
-package spleetwaise.address.logic.parser.exceptions;
+package spleetwaise.commons.logic.parser.exceptions;
 
 import spleetwaise.address.commons.exceptions.IllegalValueException;
 

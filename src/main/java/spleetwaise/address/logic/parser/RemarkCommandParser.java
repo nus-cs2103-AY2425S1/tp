@@ -7,8 +7,9 @@ import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.logic.commands.RemarkCommand;
-import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.Remark;
+import spleetwaise.commons.logic.parser.Parser;
+import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
