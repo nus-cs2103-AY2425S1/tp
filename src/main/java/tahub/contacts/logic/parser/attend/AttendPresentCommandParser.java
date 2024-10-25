@@ -2,9 +2,7 @@ package tahub.contacts.logic.parser.attend;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_MISSING_FIELDS;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static tahub.contacts.logic.parser.CliSyntax.*;
 import static tahub.contacts.logic.parser.ParserUtil.arePrefixesPresent;
 
 import tahub.contacts.logic.commands.attend.AttendPresentCommand;
@@ -33,22 +31,22 @@ public class AttendPresentCommandParser implements Parser<AttendPresentCommand> 
     public AttendPresentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MATRICULATION_NUMBER, PREFIX_CODE, PREFIX_TUTORIAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_MATRICULATION_NUMBER, PREFIX_COURSE_CODE, PREFIX_TUTORIAL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MATRICULATION_NUMBER, PREFIX_CODE, PREFIX_TUTORIAL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MATRICULATION_NUMBER, PREFIX_COURSE_CODE, PREFIX_TUTORIAL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_MISSING_FIELDS, AttendPresentCommand.MESSAGE_USAGE));
         }
 
         assert argMultimap.getValue(PREFIX_MATRICULATION_NUMBER).isPresent();
-        assert argMultimap.getValue(PREFIX_CODE).isPresent();
+        assert argMultimap.getValue(PREFIX_COURSE_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_TUTORIAL).isPresent();
 
         // parse each of the values: trim and check for correct format for each.
         MatriculationNumber matricNumber = ParserUtil
                 .parseMatriculationNumber(argMultimap.getValue(PREFIX_MATRICULATION_NUMBER).get());
-        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_COURSE_CODE).get());
         String tutorialId = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIAL).get());
 
         Course course = new Course(courseCode, new CourseName("COURSE QUERY"));

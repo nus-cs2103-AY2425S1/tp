@@ -1,9 +1,7 @@
 package tahub.contacts.logic.commands.attend;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static tahub.contacts.logic.parser.CliSyntax.*;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
@@ -27,12 +25,12 @@ public class AttendPresentCommand extends Command {
             + "group as having attended a session (present).\n"
             + "Parameters: "
             + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER "
-            + PREFIX_CODE + "COURSE CODE "
+            + PREFIX_COURSE_CODE + "COURSE CODE "
             + PREFIX_TUTORIAL + "TUTORIAL ID\n"
             + "(All parameters need to already be created.)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MATRICULATION_NUMBER + "A0123456X "
-            + PREFIX_CODE + "CS1010 "
+            + PREFIX_COURSE_CODE + "CS1010 "
             + PREFIX_TUTORIAL + "T01 ";
 
     public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";

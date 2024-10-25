@@ -1,8 +1,7 @@
 package tahub.contacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
+import static tahub.contacts.logic.parser.CliSyntax.*;
 import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Objects;
@@ -31,7 +30,7 @@ public class EditCourseCommand extends Command {
             + "Parameters: COURSE_CODE (must be course code of an existing course) "
             + "[" + PREFIX_NAME + "COURSE_NAME]\n"
             + "Example: " + COMMAND_WORD
-            + PREFIX_CODE + "CS1101S "
+            + PREFIX_COURSE_CODE + "CS1101S "
             + PREFIX_NAME + "Programming basics";
 
     public static final String MESSAGE_EDIT_COURSE_SUCCESS = "Edited Course: %1$s";
