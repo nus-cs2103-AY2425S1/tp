@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.suggestion.Suggestions;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
