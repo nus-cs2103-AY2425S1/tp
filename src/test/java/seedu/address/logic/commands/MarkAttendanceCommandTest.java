@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -21,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
@@ -65,6 +67,56 @@ public class MarkAttendanceCommandTest {
         modelStub.addStudent(validStudent);
 
         assertThrows(IllegalArgumentException.class, () -> new Attendance("unknown"));
+    }
+
+    @Test
+    public void execute_undoMarkAttendanceCommand_success() throws Exception {
+        Student validStudent = new StudentBuilder().withName("John Doe").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
+        validStudent.undoAttendance(LocalDate.of(2020, 1, 1));
+        modelStub.addStudent(validStudent);
+
+        Attendance attendance = new Attendance("p");
+        LocalDate date = LocalDate.of(2023, 10, 9);
+        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John Doe"), date, attendance);
+        markCommand.execute(modelStub);
+
+        CommandStack commandStack = CommandStack.getInstance();
+        commandStack.push(markCommand);
+
+        UndoCommand undoCommand = new UndoCommand();
+        CommandResult result = undoCommand.execute(modelStub);
+
+        assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertTrue(modelStub.getStudentByName(new Name("John Doe")).getAttendanceRecord().isEmpty());
+    }
+
+    @Test
+    public void execute_undoMarkAttendanceCommandTwoAttendance_success() throws Exception {
+        Student validStudent = new StudentBuilder().withName("John").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
+        modelStub.addStudent(validStudent);
+
+        Attendance attendance = new Attendance("p");
+        Attendance attendance2 = new Attendance("a");
+        LocalDate date = LocalDate.of(2023, 10, 9);
+        MarkAttendanceCommand markCommand = new MarkAttendanceCommand(new Name("John"), date, attendance);
+        MarkAttendanceCommand markCommand2 = new MarkAttendanceCommand(new Name("John"), date, attendance2);
+        markCommand.execute(modelStub);
+        markCommand2.execute(modelStub);
+        markCommand2.undo(modelStub);
+
+        AttendanceRecord ar = validStudent.getAttendanceRecord().get(0);
+        assertTrue(ar.getAttendance().equals(attendance));
+    }
+
+    @Test
+    public void execute_noCommandToUndo_throwsCommandException() {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        UndoCommand undoCommand = new UndoCommand();
+        CommandResult result = undoCommand.execute(modelStub);
+
+        assertEquals("There are no commands to undo", result.getFeedbackToUser());
     }
 
 
