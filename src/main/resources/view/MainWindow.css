@@ -1,9 +1,5 @@
 #mainContainer {
-   -fx-background-color: #FBFBFB;
-}
-
-#commandBoxPlaceholder .content {
-    -fx-background-color: white;
+   -fx-background-color: #FFFAFA;
 }
 
 #contactLists {

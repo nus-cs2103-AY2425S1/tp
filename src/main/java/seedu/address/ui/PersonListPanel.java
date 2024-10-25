@@ -57,9 +57,10 @@ public class PersonListPanel extends UiPart<Region> {
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
 
-        // Toggle visibility based on the list's content
+        // Initial visibility toggle
         togglePlaceholder(personList.isEmpty());
 
+        // Subsequent visibility toggle handler
         personList.addListener((ListChangeListener<Person>) change -> {
             togglePlaceholder(personList.isEmpty());
         });

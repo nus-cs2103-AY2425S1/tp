@@ -177,15 +177,6 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
-        logger.info("Application width: " + primaryStage.getWidth() + ", height: " + primaryStage.getHeight());
-
-        // Log whenever the window is resized
-        primaryStage.widthProperty().addListener((obs, oldWidth, newWidth) ->
-                logger.info("New width: " + newWidth)
-        );
-        primaryStage.heightProperty().addListener((obs, oldHeight, newHeight) ->
-                logger.info("New height: " + newHeight)
-        );
     }
 
     /**
