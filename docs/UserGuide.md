@@ -323,4 +323,5 @@ _Details coming soon ..._
 | **Add/Edit Remark**    | `remark <index> r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                             |
 | **View Contact**       | `view <ContactID>`<br> e.g., `view 123`                                                                                                                                  |
 | **Favorite Contact**   | `favorite <ContactID>`<br> e.g., `favorite 123`                                                                                                                          |
+| **Add/Edit Birthday**  | `birthday <index> b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                    |
 | **Birthday Reminder**  | `birthday <ContactID> d/DATE`<br> e.g., `birthday 123 d/1990-05-15`                                                                                                      |
