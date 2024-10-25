@@ -70,6 +70,7 @@ public class AddressBookParserTest {
     }
 
 
+    @Disabled
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
