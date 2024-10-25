@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEHANDLE = "@amybee";
     public static final String DEFAULT_MODULENAME = "CS1101S";
-    public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_REMARK = "likes chocolate";
 
     private ContactType contactType;
     private Name name;
@@ -120,6 +120,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;

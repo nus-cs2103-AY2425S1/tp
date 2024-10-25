@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -48,6 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEHANDLE + "TELEHANDLE] "
             + "[" + PREFIX_MOD + "MODULE NAME] "
+            + "[" + PREFIX_REMARK + "REMARK]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEHANDLE + "@johndoe"
@@ -107,7 +109,7 @@ public class EditCommand extends Command {
         TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .orElse(personToEdit.getTelegramHandle());
         ModuleName updateModuleName = editPersonDescriptor.getModuleName().orElse(personToEdit.getModuleName());
-        Remark updatedRemark = personToEdit.getRemark();
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedContactType, updatedName, updatedPhone, updatedEmail, updatedTelegramHandle,
                 updateModuleName, updatedRemark, updatedTags);
@@ -147,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private TelegramHandle telegramHandle;
         private ModuleName moduleName;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -161,6 +164,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegramHandle(toCopy.telegramHandle);
             setModuleName(toCopy.moduleName);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -168,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegramHandle, moduleName, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegramHandle, moduleName, remark, tags);
         }
 
         public void setName(Name name) {
@@ -211,6 +215,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(moduleName);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -245,6 +257,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
                     && Objects.equals(moduleName, otherEditPersonDescriptor.moduleName)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 

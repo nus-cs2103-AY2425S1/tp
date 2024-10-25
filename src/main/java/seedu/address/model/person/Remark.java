@@ -7,11 +7,17 @@ import static java.util.Objects.requireNonNull;
  */
 public class Remark {
 
-    private static final String MESSAGE_CONSTRAINTS = "Remarks should be between 0 and 200 characters long.";
-    public static final String VALIDATION_REGEX = "^.{0,200}$";
+    public static final String VALIDATION_REGEX = "^.{1,200}$";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should be between 1 and 200 characters long.\n "
+            + "It cannot be blank";
 
     public final String value;
 
+    /**
+     * Constructs a {@code remark}
+     *
+     * @param remark a remark between 0 and 200 characters
+     */
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
