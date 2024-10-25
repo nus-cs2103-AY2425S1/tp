@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
 public class EditEmployeeDescriptorTest {
@@ -21,7 +21,7 @@ public class EditEmployeeDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditEmployeeDescriptor descriptorWithSameValues = new EditEmployeeDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +37,7 @@ public class EditEmployeeDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditEmployeeDescriptor editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
@@ -59,15 +59,15 @@ public class EditEmployeeDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName()
+        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        String expected = EditEmployeeDescriptor.class.getCanonicalName()
                 + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", skills="
-                + editPersonDescriptor.getSkills().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+                + editEmployeeDescriptor.getName().orElse(null) + ", phone="
+                + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
+                + editEmployeeDescriptor.getEmail().orElse(null) + ", address="
+                + editEmployeeDescriptor.getAddress().orElse(null) + ", tags="
+                + editEmployeeDescriptor.getTags().orElse(null) + ", skills="
+                + editEmployeeDescriptor.getSkills().orElse(null) + "}";
+        assertEquals(expected, editEmployeeDescriptor.toString());
     }
 }

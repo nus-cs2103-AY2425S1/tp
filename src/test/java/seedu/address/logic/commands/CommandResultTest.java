@@ -31,7 +31,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different displayType value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", DisplayType.PERSON_LIST)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", DisplayType.EMPLOYEE_LIST)));
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", DisplayType.SAME_AS_PREVIOUS, true, false)));
@@ -51,7 +51,7 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different displayType value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", DisplayType.PERSON_LIST).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", DisplayType.EMPLOYEE_LIST).hashCode());
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),

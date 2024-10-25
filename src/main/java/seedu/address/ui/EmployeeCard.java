@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.employee.Employee;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Employee}.
  */
 public class EmployeeCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "EmployeeListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class EmployeeCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Employee person;
+    public final Employee employee;
 
     @FXML
     private HBox cardPane;
@@ -46,21 +46,21 @@ public class EmployeeCard extends UiPart<Region> {
     private FlowPane skills;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
      */
-    public EmployeeCard(Employee person, int displayedIndex) {
+    public EmployeeCard(Employee employee, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.employee = employee;
         id.setText(displayedIndex + ". ");
-        employeeId.setText("id: " + person.getEmployeeId().value);
-        name.setText(person.getName().fullName);
-        phone.setText("phone no: " + person.getPhone().value);
-        address.setText("address: " + person.getAddress().value);
-        email.setText("email: " + person.getEmail().value);
-        person.getTags().stream()
+        employeeId.setText("id: " + employee.getEmployeeId().value);
+        name.setText(employee.getName().fullName);
+        phone.setText("phone no: " + employee.getPhone().value);
+        address.setText("address: " + employee.getAddress().value);
+        email.setText("email: " + employee.getEmail().value);
+        employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getSkills().stream()
+        employee.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skill))
                 .forEach(skill -> skills.getChildren().add(new Label(skill.skill)));
     }

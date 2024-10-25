@@ -12,15 +12,18 @@ import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of employees that enforces uniqueness between its elements and does
+ * not allow nulls. an employee is considered unique by comparing using
+ * {@code Employee#isSameEmployee()}. As such, adding and updating of
+ * employees uses Employee#isSameEmployee(Employee) for equality so as to ensure
+ * that the employee being added or updated is unique in terms of identity in
+ * the UniqueEmployeeList. However, the removal of an employee uses
+ * Employee#equals(Object) so as to ensure that the employee with exactly the
+ * same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Employee#isSamePerson(Employee)
+ * @see Employee#isSameEmployee(Employee)
  */
 public class UniqueEmployeeList implements Iterable<Employee> {
 
@@ -29,15 +32,16 @@ public class UniqueEmployeeList implements Iterable<Employee> {
             .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent employee as the given
+     * argument.
      */
     public boolean contains(Employee toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameEmployee);
     }
 
     /**
-     * Returns true if the list contains a {@code Person} with the given
+     * Returns true if the list contains an {@code Employee} with the given
      * {@code EmployeeId}.
      */
     public boolean containsId(EmployeeId toCheck) {
@@ -46,8 +50,8 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an employee to the list.
+     * The employee must not already exist in the list.
      */
     public void add(Employee toAdd) {
         requireNonNull(toAdd);
@@ -58,28 +62,29 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The employee identity of {@code editedEmployee} must not be the same as
+     * another existing employee in the list.
      */
-    public void setPerson(Employee target, Employee editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireAllNonNull(target, editedEmployee);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new EmployeeNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSameEmployee(editedEmployee) && contains(editedEmployee)) {
             throw new DuplicateEmployeeException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedEmployee);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent employee from the list.
+     * The employee must exist in the list.
      */
     public void remove(Employee toRemove) {
         requireNonNull(toRemove);
@@ -88,22 +93,22 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         }
     }
 
-    public void setPersons(UniqueEmployeeList replacement) {
+    public void setEmployees(UniqueEmployeeList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code employees}.
+     * {@code employees} must not contain duplicate employees.
      */
-    public void setPersons(List<Employee> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setEmployees(List<Employee> employees) {
+        requireAllNonNull(employees);
+        if (!employeesAreUnique(employees)) {
             throw new DuplicateEmployeeException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(employees);
     }
 
     /**
@@ -129,8 +134,8 @@ public class UniqueEmployeeList implements Iterable<Employee> {
             return false;
         }
 
-        UniqueEmployeeList otherUniquePersonList = (UniqueEmployeeList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueEmployeeList otherUniqueEmployeeList = (UniqueEmployeeList) other;
+        return internalList.equals(otherUniqueEmployeeList.internalList);
     }
 
     @Override
@@ -144,12 +149,12 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code employees} contains only unique employees.
      */
-    private boolean personsAreUnique(List<Employee> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean employeesAreUnique(List<Employee> employees) {
+        for (int i = 0; i < employees.size() - 1; i++) {
+            for (int j = i + 1; j < employees.size(); j++) {
+                if (employees.get(i).isSameEmployee(employees.get(j))) {
                     return false;
                 }
             }

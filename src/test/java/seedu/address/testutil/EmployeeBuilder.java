@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Employee objects.
  */
 public class EmployeeBuilder {
 
@@ -33,7 +33,7 @@ public class EmployeeBuilder {
     private Set<Skill> skills;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code EmployeeBuilder} with the default details.
      */
     public EmployeeBuilder() {
         employeeId = new EmployeeId(DEFAULT_EMPLOYEE_ID);
@@ -46,20 +46,20 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the EmployeeBuilder with the data of {@code employeeToCopy}.
      */
-    public EmployeeBuilder(Employee personToCopy) {
-        employeeId = personToCopy.getEmployeeId();
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        skills = new HashSet<>(personToCopy.getSkills());
+    public EmployeeBuilder(Employee employeeToCopy) {
+        employeeId = employeeToCopy.getEmployeeId();
+        name = employeeToCopy.getName();
+        phone = employeeToCopy.getPhone();
+        email = employeeToCopy.getEmail();
+        address = employeeToCopy.getAddress();
+        tags = new HashSet<>(employeeToCopy.getTags());
+        skills = new HashSet<>(employeeToCopy.getSkills());
     }
 
     /**
-     * Sets the {@code EmployeeId} of the {@code Person} that we are building.
+     * Sets the {@code EmployeeId} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withEmployeeId(String employeeId) {
         this.employeeId = new EmployeeId(employeeId);
@@ -67,7 +67,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withName(String name) {
         this.name = new Name(name);
@@ -75,7 +75,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Employee} that we are building.
      */
     public EmployeeBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -83,7 +83,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Parses the {@code skills} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
+     * Parses the {@code skills} into a {@code Set<Skill>} and set it to the {@code Employee} that we are building.
      */
     public EmployeeBuilder withSkills(String ... skills) {
         this.skills = SampleDataUtil.getSkillSet(skills);
@@ -91,7 +91,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -99,7 +99,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -107,7 +107,7 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withEmail(String email) {
         this.email = new Email(email);

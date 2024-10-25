@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
@@ -22,13 +22,13 @@ import seedu.address.model.project.ProjectId;
 import seedu.address.ui.DisplayType;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a project to a person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a project to an employee. "
             + "Parameters: "
             + PREFIX_ASSIGNMENT_ID + "ASSIGNMENT ID "
             + PREFIX_PROJECT_ID + "PROJECT ID "
@@ -38,7 +38,7 @@ public class AssignCommand extends Command {
             + PREFIX_PROJECT_ID + "123 "
             + PREFIX_EMPLOYEE_ID + "456";
 
-    public static final String MESSAGE_SUCCESS = "Project %1$s assigned to person %1$s";
+    public static final String MESSAGE_SUCCESS = "Project %1$s assigned to employee %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";
 
     private final AssignmentId assignmentId;
@@ -64,7 +64,7 @@ public class AssignCommand extends Command {
         requireNonNull(assignment);
         this.assignmentId = assignment.getAssignmentId();
         this.projectId = assignment.getProject().getId();
-        this.employeeId = assignment.getPerson().getEmployeeId();
+        this.employeeId = assignment.getEmployee().getEmployeeId();
     }
 
     @Override
@@ -74,16 +74,16 @@ public class AssignCommand extends Command {
         if (!model.hasProjectId(projectId)) {
             throw new CommandException(MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX);
         } else if (!model.hasEmployeeId(employeeId)) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
         }
 
-        List<Employee> personList = model.getPersonList();
-        Employee person = personList.stream().filter(p -> p.getEmployeeId().equals(employeeId)).findFirst().get();
+        List<Employee> employeeList = model.getEmployeeList();
+        Employee employee = employeeList.stream().filter(p -> p.getEmployeeId().equals(employeeId)).findFirst().get();
 
         List<Project> projectList = model.getProjectList();
         Project project = projectList.stream().filter(p -> p.getId().equals(projectId)).findFirst().get();
 
-        Assignment toAssign = new Assignment(assignmentId, project, person);
+        Assignment toAssign = new Assignment(assignmentId, project, employee);
 
         if (model.hasAssignment(toAssign)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);

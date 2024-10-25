@@ -21,13 +21,13 @@ import seedu.address.model.employee.Employee;
 import seedu.address.ui.DisplayType;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
             + "Parameters: "
             + PREFIX_EMPLOYEE_ID + "EMPLOYEE ID "
             + PREFIX_NAME + "NAME "
@@ -47,38 +47,38 @@ public class AddCommand extends Command {
             + PREFIX_SKILL + "thievery "
             + PREFIX_SKILL + "moneyManagement";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book";
 
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private final Employee toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Employee}
      */
-    public AddCommand(Employee person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Employee employee) {
+        requireNonNull(employee);
+        toAdd = employee;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasEmployee(toAdd)) {
             logger.warning("Failed to " + COMMAND_WORD + "\n" + toAdd
-                    + "\nReason:" + MESSAGE_DUPLICATE_PERSON);
+                    + "\nReason:" + MESSAGE_DUPLICATE_EMPLOYEE);
 
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
-        model.addPerson(toAdd);
+        model.addEmployee(toAdd);
 
-        // Added person successfully
-        logger.fine(COMMAND_WORD + " person\n" + toAdd);
+        // Added employee successfully
+        logger.fine(COMMAND_WORD + " employee\n" + toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), DisplayType.PERSON_LIST);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), DisplayType.EMPLOYEE_LIST);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class AssignmentBuilder {
 
     private AssignmentId assignmentId;
     private Project project;
-    private Employee person;
+    private Employee employee;
 
     /**
      * Creates a {@code AssignmentBuilder} with the default details.
@@ -23,7 +23,7 @@ public class AssignmentBuilder {
     public AssignmentBuilder() {
         assignmentId = DEFAULT_ASSIGNMENT_ID;
         project = DEFAULT_PROJECT;
-        person = DEFAULT_EMPLOYEE;
+        employee = DEFAULT_EMPLOYEE;
     }
 
     /**
@@ -32,7 +32,7 @@ public class AssignmentBuilder {
     public AssignmentBuilder(Assignment assignmentToCopy) {
         assignmentId = assignmentToCopy.getAssignmentId();
         project = assignmentToCopy.getProject();
-        person = assignmentToCopy.getPerson();
+        employee = assignmentToCopy.getEmployee();
     }
 
     /**
@@ -52,15 +52,16 @@ public class AssignmentBuilder {
     }
 
     /**
-     * Sets the {@code person} of the {@code Assignment} that we are building.
+     * Sets the {@code employee} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withPerson(Employee person) {
-        this.person = new Employee(person.getEmployeeId(), person.getName(), person.getPhone(), person.getEmail(),
-                person.getAddress(), person.getTags(), person.getSkills());
+    public AssignmentBuilder withEmployee(Employee employee) {
+        this.employee = new Employee(employee.getEmployeeId(), employee.getName(), employee.getPhone(),
+                employee.getEmail(),
+                employee.getAddress(), employee.getTags(), employee.getSkills());
         return this;
     }
 
     public Assignment build() {
-        return new Assignment(assignmentId, project, person);
+        return new Assignment(assignmentId, project, employee);
     }
 }

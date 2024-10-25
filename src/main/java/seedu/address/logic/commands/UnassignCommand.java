@@ -14,12 +14,12 @@ import seedu.address.model.project.ProjectId;
 import seedu.address.ui.DisplayType;
 
 /**
- * Unassign person from a project
+ * Unassign employee from a project
  */
 public class UnassignCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a person from a project. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns an employee from a project. "
             + "\nParameters: "
             + PREFIX_ASSIGNMENT_ID + "ASSIGNMENT ID "
             + "or "
@@ -31,7 +31,7 @@ public class UnassignCommand extends Command {
             + PREFIX_PROJECT_ID + "123 "
             + PREFIX_EMPLOYEE_ID + "456";
 
-    public static final String MESSAGE_SUCCESS = "Person %1$s unassigned from project %2$s";
+    public static final String MESSAGE_SUCCESS = "Employee %1$s unassigned from project %2$s";
     public static final String MESSAGE_SUCCESS_ASSIGNMENT_ID = "Assignment %1$s is removed";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "This assignment doesn't exists in the address book";
 

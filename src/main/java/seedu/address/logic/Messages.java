@@ -16,9 +16,9 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX = "The employee index provided is invalid";
     public static final String MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX = "The project index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_EMPLOYEES_LISTED_OVERVIEW = "%1$d employees listed!";
     public static final String MESSAGE_PROJECTS_LISTED_OVERVIEW = "%1$d projects listed!";
     public static final String MESSAGE_PROJECT_MEMBERS_LISTED = "%1$d project members listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -37,23 +37,23 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code employee} for display to the user.
      */
-    public static String format(Employee person) {
+    public static String format(Employee employee) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(employee.getName())
                 .append("; Employee ID: ")
-                .append(person.getEmployeeId())
+                .append(employee.getEmployeeId())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(employee.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(employee.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(employee.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        employee.getTags().forEach(builder::append);
         builder.append("; Skills: ");
-        person.getSkills().forEach(builder::append);
+        employee.getSkills().forEach(builder::append);
 
         return builder.toString();
     }
@@ -80,7 +80,7 @@ public class Messages {
                 .append("\nProject Id:\n")
                 .append(assignment.getProject().getId())
                 .append("\nEmployee Id:\n")
-                .append(assignment.getPerson().getEmployeeId());
+                .append(assignment.getEmployee().getEmployeeId());
         return builder.toString();
     }
 }

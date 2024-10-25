@@ -90,10 +90,10 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void contains_assignmentWithDifferentPersonFieldInList_returnsFalse() {
+    public void contains_assignmentWithDifferentEmployeeFieldInList_returnsFalse() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA)
-                .withPerson(BENSON)
+                .withEmployee(BENSON)
                 .build();
         assertFalse(uniqueAssignmentList.contains(editedAssignment));
     }
@@ -104,7 +104,7 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void add_duplicateAssignment_throwsDuplicatePersonException() {
+    public void add_duplicateAssignment_throwsDuplicateEmployeeException() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         assertThrows(DuplicateAssignmentException.class, () -> uniqueAssignmentList.add(ALICE_ALPHA));
     }
@@ -233,10 +233,10 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void setAssignments_listWithDuplicateAssignments_throwsDuplicatePersonException() {
-        List<Assignment> listWithDuplicatePersons = Arrays.asList(ALICE_ALPHA, ALICE_ALPHA);
+    public void setAssignments_listWithDuplicateAssignments_throwsDuplicateEmployeeException() {
+        List<Assignment> listWithDuplicateEmployees = Arrays.asList(ALICE_ALPHA, ALICE_ALPHA);
         assertThrows(DuplicateAssignmentException.class, () -> uniqueAssignmentList.setAssignments(
-                listWithDuplicatePersons));
+                listWithDuplicateEmployees));
     }
 
     @Test

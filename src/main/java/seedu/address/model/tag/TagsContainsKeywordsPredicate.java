@@ -28,13 +28,13 @@ public class TagsContainsKeywordsPredicate implements Predicate<Employee> {
     }
 
     @Override
-    public boolean test(Employee person) {
+    public boolean test(Employee employee) {
         // Null objects should not have been added to addressbook
-        assert person != null;
+        assert employee != null;
 
         // Tag matches any of the keywords given
         return keywords.stream()
-                .anyMatch(keyword -> person.getTags().stream()
+                .anyMatch(keyword -> employee.getTags().stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 

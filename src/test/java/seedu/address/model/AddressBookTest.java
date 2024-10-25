@@ -34,7 +34,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getEmployeeList());
     }
 
     @Test
@@ -50,26 +50,26 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+    public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
+        // Two employees with the same identity fields
         Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Employee> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<Employee> newEmployees = Arrays.asList(ALICE, editedAlice);
         List<Project> newProjects = Arrays.asList(ALPHA);
         List<Assignment> newAssignments = Arrays.asList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newProjects, newAssignments);
+        AddressBookStub newData = new AddressBookStub(newEmployees, newProjects, newAssignments);
 
         assertThrows(DuplicateEmployeeException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasEmployee_nullEmployee_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEmployee(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEmployee(ALICE));
     }
 
     @Test
@@ -78,23 +78,23 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+        addressBook.addEmployee(ALICE);
+        assertTrue(addressBook.hasEmployee(ALICE));
     }
 
     @Test
     public void hasEmployeeId_employeeIdInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        addressBook.addEmployee(ALICE);
         assertTrue(addressBook.hasEmployeeId(ALICE.getEmployeeId()));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEmployee(ALICE);
         Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasEmployee(editedAlice));
     }
 
     @Test
@@ -122,8 +122,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEmployeeList().remove(0));
     }
 
     @Test
@@ -209,30 +209,30 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
-                + "{persons=" + addressBook.getPersonList()
+                + "{employees=" + addressBook.getEmployeeList()
                 + ", projects=" + addressBook.getProjectList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface
+     * A stub ReadOnlyAddressBook whose employees list can violate interface
      * constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Employee> persons = FXCollections.observableArrayList();
+        private final ObservableList<Employee> employees = FXCollections.observableArrayList();
         private final ObservableList<Project> projects = FXCollections.observableArrayList();
         private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Employee> persons, Collection<Project> projects,
+        AddressBookStub(Collection<Employee> employees, Collection<Project> projects,
                 Collection<Assignment> assignments) {
-            this.persons.setAll(persons);
+            this.employees.setAll(employees);
             this.projects.setAll(projects);
             this.assignments.setAll(assignments);
         }
 
         @Override
-        public ObservableList<Employee> getPersonList() {
-            return persons;
+        public ObservableList<Employee> getEmployeeList() {
+            return employees;
         }
 
         @Override

@@ -39,7 +39,7 @@ public class TagsContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -73,14 +73,14 @@ public class TagsContainsKeywordsPredicateTest {
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("database"));
         assertFalse(predicate.test(new EmployeeBuilder().withTags("frontend", "backend").build()));
 
-        // Person does not have any tags
+        // Employee does not have any tags
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
         assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
-    public void test_personIsNull_throwsAssertionError() {
+    public void test_employeeIsNull_throwsAssertionError() {
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Arrays.asList("database"));
         assertThrows(AssertionError.class, () -> predicate.test(null));
     }

@@ -36,7 +36,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -76,7 +76,7 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_personIsNull_throwsAssertionError() {
+    public void test_employeeIsNull_throwsAssertionError() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertThrows(AssertionError.class, () -> predicate.test(null));
     }

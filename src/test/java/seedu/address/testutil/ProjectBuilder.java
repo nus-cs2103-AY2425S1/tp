@@ -10,7 +10,7 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Project objects.
  */
 public class ProjectBuilder {
 
@@ -31,7 +31,7 @@ public class ProjectBuilder {
     }
 
     /**
-     * Initializes the ProjectBuilder with the data of {@code personToCopy}.
+     * Initializes the ProjectBuilder with the data of {@code employeeToCopy}.
      */
     public ProjectBuilder(Project projectToCopy) {
         projectName = projectToCopy.getName();

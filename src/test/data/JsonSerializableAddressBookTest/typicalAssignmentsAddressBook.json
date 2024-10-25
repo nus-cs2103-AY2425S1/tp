@@ -1,6 +1,6 @@
 {
-  "_comment": "AddressBook save file which contains the same Person, Project and Assignment values as in TypicalAssignments#getTypicalAddressBook()",
-  "persons" : [{
+  "_comment": "AddressBook save file which contains the same , Project and Assignment values as in TypicalAssignments#getTypicalAddressBook()",
+  "employees" : [{
     "employeeId": "1",
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -33,11 +33,11 @@
   }],
   "assignments": [ {
     "assignmentId": "1",
-    "personId": "1",
+    "employeeId": "1",
     "projectId": "A0276123J"
   }, {
     "assignmentId": "2",
-    "personId": "2",
+    "employeeId": "2",
     "projectId": "A0276123K"
   }]
 }

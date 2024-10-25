@@ -28,31 +28,31 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Employee validPerson = new EmployeeBuilder().build();
+    public void execute_newEmployee_success() {
+        Employee validEmployee = new EmployeeBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addEmployee(validEmployee);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(validEmployee), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validEmployee)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Employee personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateEmployee_throwsCommandException() {
+        Employee employeeInList = model.getAddressBook().getEmployeeList().get(0);
+        assertCommandFailure(new AddCommand(employeeInList), model,
+                AddCommand.MESSAGE_DUPLICATE_EMPLOYEE);
     }
 
     @Test
     public void execute_duplicateEmployeeId_throwsCommandException() {
-        Employee personInList = model.getAddressBook().getPersonList().get(0);
-        Employee personToAdd = new EmployeeBuilder(AMY)
-                .withEmployeeId(personInList.getEmployeeId().toString()).build();
-        assertCommandFailure(new AddCommand(personToAdd), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Employee employeeInList = model.getAddressBook().getEmployeeList().get(0);
+        Employee employeeToAdd = new EmployeeBuilder(AMY)
+                .withEmployeeId(employeeInList.getEmployeeId().toString()).build();
+        assertCommandFailure(new AddCommand(employeeToAdd), model,
+                AddCommand.MESSAGE_DUPLICATE_EMPLOYEE);
     }
 
 }

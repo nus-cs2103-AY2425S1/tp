@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PROJECT_MEMBERS_LISTED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 
@@ -53,65 +53,65 @@ public class ListProjectMembersCommandTest {
         // null -> returns false
         assertFalse(listFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(listFirstCommand.equals(listSecondCommand));
     }
 
     @Test
-    public void execute_wrongName_noPersonFound() {
+    public void execute_wrongName_noEmployeeFound() {
         String expectedMessage = String.format(MESSAGE_PROJECT_MEMBERS_LISTED, 0);
         AssignmentProjectPredicate predicate = preparePredicate("sda");
         ListProjectMembersCommand command = new ListProjectMembersCommand(predicate);
 
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> projectMembers = filteredAssignments.stream()
-                .map(Assignment::getPerson)
+                .map(Assignment::getEmployee)
                 .distinct()
                 .toList();
-        expectedModel.updateFilteredPersonList(projectMembers::contains);
+        expectedModel.updateFilteredEmployeeList(projectMembers::contains);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_partialName_noPersonFound() {
+    public void execute_partialName_noEmployeeFound() {
         String expectedMessage = String.format(MESSAGE_PROJECT_MEMBERS_LISTED, 0);
         AssignmentProjectPredicate predicate = preparePredicate("Alpha");
         ListProjectMembersCommand command = new ListProjectMembersCommand(predicate);
 
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> projectMembers = filteredAssignments.stream()
-                .map(Assignment::getPerson)
+                .map(Assignment::getEmployee)
                 .distinct()
                 .toList();
-        expectedModel.updateFilteredPersonList(projectMembers::contains);
+        expectedModel.updateFilteredEmployeeList(projectMembers::contains);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void execute_fullProjectName_personFound() {
+    public void execute_fullProjectName_employeeFound() {
         String expectedMessage = String.format(MESSAGE_PROJECT_MEMBERS_LISTED, 1);
         AssignmentProjectPredicate predicate = preparePredicate("Project Alpha");
         ListProjectMembersCommand command = new ListProjectMembersCommand(predicate);
 
         expectedModel.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = expectedModel.getFilteredAssignmentList();
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> projectMembers = filteredAssignments.stream()
-                .map(Assignment::getPerson)
+                .map(Assignment::getEmployee)
                 .distinct()
                 .toList();
-        expectedModel.updateFilteredPersonList(projectMembers::contains);
+        expectedModel.updateFilteredEmployeeList(projectMembers::contains);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredEmployeeList());
     }
 
     @Test

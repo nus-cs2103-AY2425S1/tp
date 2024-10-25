@@ -21,7 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.employee.Employee;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Employee} objects to be used in tests.
  */
 public class TypicalEmployees {
 
@@ -59,7 +59,7 @@ public class TypicalEmployees {
                 .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - employee's details found in {@code CommandTestUtil}
     public static final Employee AMY = new EmployeeBuilder().withEmployeeId(VALID_EMPLOYEE_ID_AMY)
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
@@ -73,17 +73,17 @@ public class TypicalEmployees {
     private TypicalEmployees() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical employees.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Employee person : getTypicalPersons()) {
-            ab.addPerson(person);
+        for (Employee employee : getTypicalEmployees()) {
+            ab.addEmployee(employee);
         }
         return ab;
     }
 
-    public static List<Employee> getTypicalPersons() {
+    public static List<Employee> getTypicalEmployees() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

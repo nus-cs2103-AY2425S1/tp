@@ -1,10 +1,10 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedAssignment.EMPLOYEE_NOT_FOUND_MESSAGE;
 import static seedu.address.storage.JsonAdaptedAssignment.MISSING_ASSIGNMENT_ID_MESSAGE;
-import static seedu.address.storage.JsonAdaptedAssignment.MISSING_PERSON_ID_MESSAGE;
+import static seedu.address.storage.JsonAdaptedAssignment.MISSING_EMPLOYEE_ID_MESSAGE;
 import static seedu.address.storage.JsonAdaptedAssignment.MISSING_PROJECT_ID_MESSAGE;
-import static seedu.address.storage.JsonAdaptedAssignment.PERSON_NOT_FOUND_MESSAGE;
 import static seedu.address.storage.JsonAdaptedAssignment.PROJECT_NOT_FOUND_MESSAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
@@ -18,7 +18,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
-
 
 public class JsonAdaptedAssignmentTest {
     private static final String INVALID_PROJECT_ID = "+651234";
@@ -35,7 +34,7 @@ public class JsonAdaptedAssignmentTest {
                 VALID_PROJECT_ID,
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
-        addressBook.addPerson(ALICE);
+        addressBook.addEmployee(ALICE);
         addressBook.addProject(ALPHA);
         assertEquals(ALICE_ALPHA, assignment.toModelType(addressBook));
     }
@@ -44,7 +43,7 @@ public class JsonAdaptedAssignmentTest {
     public void toModelType_validAssignment_returnsProject() throws Exception {
         JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(ALICE_ALPHA);
         AddressBook addressBook = new AddressBook();
-        addressBook.addPerson(ALICE);
+        addressBook.addEmployee(ALICE);
         addressBook.addProject(ALPHA);
         assertEquals(ALICE_ALPHA, assignment.toModelType(addressBook));
     }
@@ -95,7 +94,8 @@ public class JsonAdaptedAssignmentTest {
                 VALID_PROJECT_ID,
                 null);
         AddressBook addressBook = new AddressBook();
-        assertThrows(IllegalValueException.class, MISSING_PERSON_ID_MESSAGE, () -> assignment.toModelType(addressBook));
+        assertThrows(IllegalValueException.class,
+                MISSING_EMPLOYEE_ID_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
@@ -114,17 +114,18 @@ public class JsonAdaptedAssignmentTest {
                 VALID_PROJECT_ID,
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
-        addressBook.addPerson(ALICE);
+        addressBook.addEmployee(ALICE);
         assertThrows(IllegalValueException.class, PROJECT_NOT_FOUND_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
-    public void toModelType_personNotFound_throwsIllegalValueException() throws Exception {
+    public void toModelType_employeeNotFound_throwsIllegalValueException() throws Exception {
         JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
                 VALID_PROJECT_ID,
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         addressBook.addProject(ALPHA);
-        assertThrows(IllegalValueException.class, PERSON_NOT_FOUND_MESSAGE, () -> assignment.toModelType(addressBook));
+        assertThrows(IllegalValueException.class,
+                EMPLOYEE_NOT_FOUND_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 }

@@ -49,7 +49,7 @@ public class FindProjectCommandTest {
         // null -> returns false
         assertFalse(findProjectFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(findProjectFirstCommand.equals(findProjectSecondCommand));
     }
 

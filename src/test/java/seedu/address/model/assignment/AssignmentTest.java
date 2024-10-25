@@ -68,8 +68,8 @@ public class AssignmentTest {
         editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
-        // different person -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withPerson(BENSON).build();
+        // different employee -> returns false
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withEmployee(BENSON).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
     }
 }

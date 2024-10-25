@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedEmployee {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Employee's %s field is missing!";
 
     private final String employeeId;
     private final String name;
@@ -35,7 +35,7 @@ class JsonAdaptedEmployee {
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
      */
     @JsonCreator
     public JsonAdaptedEmployee(@JsonProperty("employeeId") String employeeId, @JsonProperty("name") String name,
@@ -56,7 +56,7 @@ class JsonAdaptedEmployee {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Employee} into this class for Jackson use.
      */
     public JsonAdaptedEmployee(Employee source) {
         employeeId = source.getEmployeeId().value;
@@ -73,19 +73,19 @@ class JsonAdaptedEmployee {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted employee object into the model's {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> employeeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            employeeTags.add(tag.toModelType());
         }
 
-        final List<Skill> personSkills = new ArrayList<>();
+        final List<Skill> employeeSkills = new ArrayList<>();
         for (JsonAdaptedSkill skill : skills) {
-            personSkills.add(skill.toModelType());
+            employeeSkills.add(skill.toModelType());
         }
 
         if (employeeId == null) {
@@ -129,8 +129,8 @@ class JsonAdaptedEmployee {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Skill> modelSkills = new HashSet<>(personSkills);
+        final Set<Tag> modelTags = new HashSet<>(employeeTags);
+        final Set<Skill> modelSkills = new HashSet<>(employeeSkills);
         return new Employee(modelEmployeeId, modelName, modelPhone,
                 modelEmail, modelAddress, modelTags, modelSkills);
     }

@@ -24,7 +24,7 @@ import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.commands.listcommands.ListAssignmentsCommand;
-import seedu.address.logic.commands.listcommands.ListMembersCommand;
+import seedu.address.logic.commands.listcommands.ListEmployeesCommand;
 import seedu.address.logic.commands.listcommands.ListProjectMembersCommand;
 import seedu.address.logic.commands.listcommands.ListProjectsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -81,8 +81,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListMembersCommand.COMMAND_WORD:
-            return new ListMembersCommand();
+        case ListEmployeesCommand.COMMAND_WORD:
+            return new ListEmployeesCommand();
 
         case AddProjectCommand.COMMAND_WORD:
             return new AddProjectCommandParser().parse(arguments);

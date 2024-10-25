@@ -60,12 +60,13 @@ public class UnassignCommandTest {
     public void execute_unassignAssignmentWithProjectIdAndEmployeeIdByModel_addSuccessful() throws Exception {
         UnassignCommandTest.ModelStubAlwaysUnassign modelStub = new UnassignCommandTest.ModelStubAlwaysUnassign();
         Project validProject = new ProjectBuilder().build();
-        Employee validPerson = new EmployeeBuilder().build();
+        Employee validEmployee = new EmployeeBuilder().build();
 
         CommandResult commandResult = new UnassignCommand(validProject.getId(),
-                validPerson.getEmployeeId()).execute(modelStub);
+                validEmployee.getEmployeeId()).execute(modelStub);
 
-        assertEquals(String.format(UnassignCommand.MESSAGE_SUCCESS, validPerson.getEmployeeId(), validProject.getId()),
+        assertEquals(
+                String.format(UnassignCommand.MESSAGE_SUCCESS, validEmployee.getEmployeeId(), validProject.getId()),
                 commandResult.getFeedbackToUser());
     }
 
@@ -85,7 +86,7 @@ public class UnassignCommandTest {
     public void execute_projectIdAndEmployeeIdNotFound_throwsCommandException() {
         Assignment validAssignment = new AssignmentBuilder().build();
         UnassignCommand unassignCommand = new UnassignCommand(validAssignment.getProject().getId(),
-                validAssignment.getPerson().getEmployeeId());
+                validAssignment.getEmployee().getEmployeeId());
         UnassignCommandTest.ModelStub modelStub = new UnassignCommandTest.ModelStubWithNoAssignment();
         assertThrows(CommandException.class,
                 UnassignCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {
@@ -96,9 +97,9 @@ public class UnassignCommandTest {
     @Test
     public void equals() {
         Assignment alphaAlice = new AssignmentBuilder().withAssignmentId("1").withProject(ALPHA)
-                .withPerson(ALICE).build();
+                .withEmployee(ALICE).build();
         Assignment betaBenson = new AssignmentBuilder().withAssignmentId("2").withProject(BETA)
-                .withPerson(BENSON).build();
+                .withEmployee(BENSON).build();
         UnassignCommand unassignAlphaAliceCommand = new UnassignCommand(alphaAlice.getAssignmentId());
         UnassignCommand unassignBetaBensonCommand = new UnassignCommand(betaBenson.getAssignmentId());
 
@@ -115,7 +116,7 @@ public class UnassignCommandTest {
         // null -> returns false
         assertFalse(unassignAlphaAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(unassignAlphaAliceCommand.equals(unassignBetaBensonCommand));
     }
 
@@ -164,7 +165,7 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public void addPerson(Employee person) {
+        public void addEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -179,7 +180,7 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public void setAddressBookPerson(ReadOnlyAddressBook newData) {
+        public void setAddressBookEmployee(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -194,7 +195,7 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Employee person) {
+        public boolean hasEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,12 +205,12 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public void deletePerson(Employee target) {
+        public void deleteEmployee(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Employee target, Employee editedPerson) {
+        public void setEmployee(Employee target, Employee editedEmployee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -269,12 +270,12 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public ObservableList<Employee> getPersonList() {
+        public ObservableList<Employee> getEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Employee> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -294,7 +295,7 @@ public class UnassignCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Employee> predicate) {
+        public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -308,6 +309,7 @@ public class UnassignCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+
     /**
      * A Model stub that contains a single assignment.
      */
@@ -352,7 +354,7 @@ public class UnassignCommandTest {
             requireNonNull(employeeId);
             return this.assignment != null
                     && assignment.getProject().getId().equals(projectId)
-                    && assignment.getPerson().getEmployeeId().equals(employeeId);
+                    && assignment.getEmployee().getEmployeeId().equals(employeeId);
         }
 
         @Override

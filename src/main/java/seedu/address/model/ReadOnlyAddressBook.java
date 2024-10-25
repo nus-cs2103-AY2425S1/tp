@@ -11,10 +11,10 @@ import seedu.address.model.project.Project;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the employees list.
+     * This list will not contain any duplicate employees.
      */
-    ObservableList<Employee> getPersonList();
+    ObservableList<Employee> getEmployeeList();
 
     /**
      * Returns an unmodifiable view of the projects list.

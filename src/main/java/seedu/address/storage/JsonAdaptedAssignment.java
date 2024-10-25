@@ -17,26 +17,26 @@ import seedu.address.model.project.ProjectId;
  */
 public class JsonAdaptedAssignment {
     public static final String MISSING_PROJECT_ID_MESSAGE = "Project id is missing!";
-    public static final String MISSING_PERSON_ID_MESSAGE = "Person id is missing!";
+    public static final String MISSING_EMPLOYEE_ID_MESSAGE = "Employee id is missing!";
     public static final String MISSING_ASSIGNMENT_ID_MESSAGE = "Assignment id is missing!";
     public static final String PROJECT_NOT_FOUND_MESSAGE = "Project not found!";
-    public static final String PERSON_NOT_FOUND_MESSAGE = "Person not found!";
+    public static final String EMPLOYEE_NOT_FOUND_MESSAGE = "Employee not found!";
 
     private final String assignmentId;
     private final String projectId;
-    private final String personId;
-
+    private final String employeeId;
 
     /**
-     * Constructs a {@code JsonAdaptedPersonProjectAssignment} with the given project and person details.
+     * Constructs a {@code JsonAdaptedEmployeeProjectAssignment} with the given
+     * project and employee details.
      */
     @JsonCreator
     public JsonAdaptedAssignment(@JsonProperty("assignmentId") String assignmentId,
-                                 @JsonProperty("projectId") String projectId,
-                                 @JsonProperty("personId") String personId) {
+            @JsonProperty("projectId") String projectId,
+            @JsonProperty("employeeId") String employeeId) {
         this.assignmentId = assignmentId;
         this.projectId = projectId;
-        this.personId = personId;
+        this.employeeId = employeeId;
     }
 
     /**
@@ -45,17 +45,19 @@ public class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(Assignment source) {
         this.assignmentId = source.getAssignmentId().value;
         this.projectId = source.getProject().getId().fullId;
-        this.personId = source.getPerson().getEmployeeId().value;
+        this.employeeId = source.getEmployee().getEmployeeId().value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted employee object into the model's
+     * {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted employee.
      */
     public Assignment toModelType(AddressBook addressBook) throws IllegalValueException {
-        if (personId == null) {
-            throw new IllegalValueException(MISSING_PERSON_ID_MESSAGE);
+        if (employeeId == null) {
+            throw new IllegalValueException(MISSING_EMPLOYEE_ID_MESSAGE);
         }
 
         if (projectId == null) {
@@ -74,35 +76,35 @@ public class JsonAdaptedAssignment {
             throw new IllegalValueException(AssignmentId.MESSAGE_CONSTRAINTS);
         }
 
-        if (!EmployeeId.isValidEmployeeId(personId)) {
+        if (!EmployeeId.isValidEmployeeId(employeeId)) {
             throw new IllegalValueException(EmployeeId.MESSAGE_CONSTRAINTS);
         }
 
         final Project modelProject = addressBook
-                                        .getProjectList()
-                                        .stream()
-                                        .filter(project -> project.getId().equals(new ProjectId(projectId)))
-                                        .findFirst()
-                                        .orElse(null);
+                .getProjectList()
+                .stream()
+                .filter(project -> project.getId().equals(new ProjectId(projectId)))
+                .findFirst()
+                .orElse(null);
 
         if (modelProject == null) {
             throw new IllegalValueException(PROJECT_NOT_FOUND_MESSAGE);
         }
 
-        final Employee modelPerson = addressBook
-                                    .getPersonList()
-                                    .stream()
-                                    .filter(person -> person.getEmployeeId().equals(new EmployeeId(personId)))
-                                    .findFirst()
-                                    .orElse(null);
+        final Employee modelEmployee = addressBook
+                .getEmployeeList()
+                .stream()
+                .filter(employee -> employee.getEmployeeId().equals(new EmployeeId(employeeId)))
+                .findFirst()
+                .orElse(null);
 
-        if (modelPerson == null) {
-            throw new IllegalValueException(PERSON_NOT_FOUND_MESSAGE);
+        if (modelEmployee == null) {
+            throw new IllegalValueException(EMPLOYEE_NOT_FOUND_MESSAGE);
         }
 
         final AssignmentId modelAssignmentId = new AssignmentId(assignmentId);
 
-        return new Assignment(modelAssignmentId, modelProject, modelPerson);
+        return new Assignment(modelAssignmentId, modelProject, modelEmployee);
     }
 
 }

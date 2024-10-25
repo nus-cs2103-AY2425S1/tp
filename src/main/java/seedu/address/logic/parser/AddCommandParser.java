@@ -54,9 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Skill> skillList = ParserUtil.parseSkills(argMultimap.getAllValues(PREFIX_SKILL));
 
-        Employee person = new Employee(employeeId, name, phone, email, address, tagList, skillList);
+        Employee employee = new Employee(employeeId, name, phone, email, address, tagList, skillList);
 
-        return new AddCommand(person);
+        return new AddCommand(employee);
     }
 
     /**

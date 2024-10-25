@@ -39,7 +39,7 @@ public class SkillsContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -73,14 +73,14 @@ public class SkillsContainsKeywordsPredicateTest {
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("database"));
         assertFalse(predicate.test(new EmployeeBuilder().withSkills("frontend", "backend").build()));
 
-        // Person does not have any skills
+        // Employee does not have any skills
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
         assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
-    public void test_personIsNull_throwsAssertionError() {
+    public void test_employeeIsNull_throwsAssertionError() {
         SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("database"));
         assertThrows(AssertionError.class, () -> predicate.test(null));
     }

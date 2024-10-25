@@ -79,7 +79,7 @@ public class AddProjectCommandTest {
         // null -> returns false
         assertFalse(addAlphaCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(addAlphaCommand.equals(addBetaCommand));
     }
 
@@ -125,7 +125,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void addPerson(Employee person) {
+        public void addEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -140,7 +140,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void setAddressBookPerson(ReadOnlyAddressBook newData) {
+        public void setAddressBookEmployee(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,7 +155,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Employee person) {
+        public boolean hasEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,17 +165,17 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void deletePerson(Employee target) {
+        public void deleteEmployee(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Employee target, Employee editedPerson) {
+        public void setEmployee(Employee target, Employee editedEmployee) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Employee> getPersonList() {
+        public ObservableList<Employee> getEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,7 +240,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public ObservableList<Employee> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -255,7 +255,7 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Employee> predicate) {
+        public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -271,7 +271,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single employee.
      */
     private class ModelStubWithProject extends ModelStub {
         private final Project project;
@@ -289,7 +289,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the employee being added.
      */
     private class ModelStubAcceptingProjectAdded extends ModelStub {
         final ArrayList<Project> projectsAdded = new ArrayList<>();

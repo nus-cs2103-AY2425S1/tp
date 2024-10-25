@@ -12,7 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.employee.Employee;
 
 /**
- * Tests that a {@code Person}'s {@code Skills} matches any of the keywords given.
+ * Tests that a {@code Employee}'s {@code Skills} matches any of the keywords given.
  */
 public class SkillsContainsKeywordsPredicate implements Predicate<Employee> {
     private final Set<String> keywords;
@@ -28,13 +28,13 @@ public class SkillsContainsKeywordsPredicate implements Predicate<Employee> {
     }
 
     @Override
-    public boolean test(Employee person) {
+    public boolean test(Employee employee) {
         // Null objects should not have been added to addressbook
-        assert person != null;
+        assert employee != null;
 
         // Skill matches any of the keywords given
         return keywords.stream()
-                .anyMatch(keyword -> person.getSkills().stream()
+                .anyMatch(keyword -> employee.getSkills().stream()
                 .anyMatch(skill -> StringUtil.containsWordIgnoreCase(skill.skill, keyword)));
     }
 

@@ -20,38 +20,38 @@ public class EmployeeTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Employee person = new EmployeeBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Employee employee = new EmployeeBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> employee.getTags().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameEmployee() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameEmployee(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameEmployee(null));
 
         // same name, all other attributes different -> returns true
         Employee editedAlice = new EmployeeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameEmployee(editedAlice));
 
         // different name, all other attributes same -> returns true (previously false)
         editedAlice = new EmployeeBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        // assertFalse(ALICE.isSamePerson(editedAlice));
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // assertFalse(ALICE.isSameEmployee(editedAlice));
+        assertTrue(ALICE.isSameEmployee(editedAlice));
 
         // name differs in case, all other attributes same -> returns true (previously false)
         Employee editedBob = new EmployeeBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        // assertFalse(BOB.isSamePerson(editedBob));
-        assertTrue(BOB.isSamePerson(editedBob));
+        // assertFalse(BOB.isSameEmployee(editedBob));
+        assertTrue(BOB.isSameEmployee(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns true (previously false)
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new EmployeeBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        // assertFalse(BOB.isSamePerson(editedBob));
-        assertTrue(BOB.isSamePerson(editedBob));
+        // assertFalse(BOB.isSameEmployee(editedBob));
+        assertTrue(BOB.isSameEmployee(editedBob));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class EmployeeTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
