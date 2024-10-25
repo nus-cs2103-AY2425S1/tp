@@ -70,7 +70,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = 'volunsync'
-    archiveVersion = 'v1.3'
+    archiveVersion = 'v1.4'
     archiveClassifier = ''
 }
 
