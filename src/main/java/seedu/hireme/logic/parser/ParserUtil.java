@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.commons.util.StringUtil;
-import seedu.hireme.logic.commands.AddCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.logic.validator.DateValidator;
