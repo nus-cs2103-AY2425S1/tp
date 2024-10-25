@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_EMPTY_LIST_ERROR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
@@ -34,20 +37,24 @@ public class RoleCommand extends Command {
 
     public static final String MESSAGE_ADD_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
-    // public static final String MESSAGE_UNSPECIFIED_NAME = "Please specific the full name of person to role.";
 
-    private final Name name;
+    public static final String MESSAGE_DUPLICATE_HANDLING =
+            "Please specify the index of the contact you want to assign.\n"
+                    + "Find the index from the list below and type edit INDEX ...\n"
+                    + "Example: " + COMMAND_WORD + " 1 ...";
+    private final Index index;
+    private final NameMatchesKeywordPredicate predicate;
     private final PersonWithRoleDescriptor personWithRoleDescriptor;
 
     /**
-     * @param name                of the person in the filtered person list to add role to
-     * @param personWithRoleDescriptor details to add role to person with
+     * @param index of the person in the filtered person list to assign role
+     * @param personWithRoleDescriptor details of the person to assign role
      */
-    public RoleCommand(Name name, PersonWithRoleDescriptor personWithRoleDescriptor) {
-        requireNonNull(name);
+    public RoleCommand(Index index, NameMatchesKeywordPredicate predicate, PersonWithRoleDescriptor personWithRoleDescriptor) {
         requireNonNull(personWithRoleDescriptor);
 
-        this.name = name;
+        this.index = index;
+        this.predicate = predicate;
         this.personWithRoleDescriptor = new PersonWithRoleDescriptor(personWithRoleDescriptor);
     }
 
@@ -55,37 +62,67 @@ public class RoleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // checks if multiple persons contain same keyword in name
-        // displays those persons
-        /*
-        String[] nameKeywords = new String[] {this.name.fullName}
+        requireNonNull(model);
+        Person personToAssign;
 
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-        model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().size() > 1) {
-            return new CommandResult(MESSAGE_UNSPECIFIED_NAME);
+        if (this.index != null) {
+            personToAssign = assignWithIndex(model);
+        } else {
+            personToAssign = assignWithKeyword(model);
         }
-        */
 
-        // finds person to add role to
+        Person assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
+
+        if (personToAssign.getRole().equals(assignedPerson.getRole())) {
+            throw new CommandException(MESSAGE_DUPLICATE_ROLE);
+        }
+
+        model.setPerson(personToAssign, assignedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(assignedPerson)));
+    }
+
+    /**
+     * Performs edit command logic when the input is an index.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person to be edited
+     * @throws CommandException if the list is empty or if the index is invalid
+     */
+    public Person assignWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToAddRole = null;
-        for (Person person : lastShownList) {
-            if (person.getName().equals(this.name)) {
-                personToAddRole = person;
-                break;
-            }
-        }
-        if (personToAddRole == null) {
-            throw new CommandException(Name.MESSAGE_CONSTRAINTS);
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
         }
 
-        Person personWithRole = createPersonWithRole(personToAddRole, personWithRoleDescriptor);
-        model.setPerson(personToAddRole, personWithRole);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        System.out.println(personToAddRole);
-        return new CommandResult(String.format(MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(personWithRole)));
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    lastShownList.size()));
+        }
+
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    /**
+     * Performs edit command logic when the input is a {@code String}.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person to be edited
+     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element
+     */
+    public Person assignWithKeyword(Model model) throws CommandException {
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredList = model.getFilteredPersonList();
+
+        if (filteredList.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
+        } else if (filteredList.size() == 1) {
+            return filteredList.get(0);
+        } else {
+            throw new CommandException(MESSAGE_DUPLICATE_HANDLING);
+        }
     }
 
     /**
@@ -118,14 +155,14 @@ public class RoleCommand extends Command {
         RoleCommand otherRoleCommand = (RoleCommand) other;
 
         // Check equality of the fields
-        return Objects.equals(name, otherRoleCommand.name)
+        return index.equals(otherRoleCommand.index)
                 && Objects.equals(personWithRoleDescriptor, otherRoleCommand.personWithRoleDescriptor);
     }
 
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("name", name)
+        return new ToStringBuilder(this).add("index", index)
                 .add("personWithRoleDescriptor", personWithRoleDescriptor).toString();
     }
 
