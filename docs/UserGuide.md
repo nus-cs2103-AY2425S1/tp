@@ -13,41 +13,49 @@ It is optimized for use via typing while still having the benefits of a [Graphic
 
 The user guide contains formatting to highlight important info. The standards used are as follows:
 
-* `code typeface`: Commands or command formats
-* **Bold:** Essential information
-* **Underline \+ Bold**: Keywords
-* <span style="color:red">RED COLOR</span>: Caution, take note
-* *Italics*: Technical terms available in glossary
-* Hyperlink: Links to another section of the user guide, or a relevant page.
+- `code typeface`: Commands or command formats
+- **Bold:** Essential information
+- **Underline \+ Bold**: Keywords
+- <span style="color:red">RED COLOR</span>: Caution, take note
+- _Italics_: Technical terms available in glossary
+- Hyperlink: Links to another section of the user guide, or a relevant page.
 
 ---
 
 ## Table of Contents
 
+- [Note: User Guide Formatting](#note-user-guide-formatting)
+- [Table of Contents](#table-of-contents)
 - [Quick Start](#quick-start)
+  - [Some commands to get started:](#some-commands-to-get-started)
 - [Features](#features)
-  - [Viewing help](#viewing-help--help)
-  - [Adding a person](#adding-a-person-add)
-  - [Listing all persons](#listing-all-persons--list)
-  - [Editing a person](#editing-a-person--edit)
-  - [Editing a person](#editing-a-person--edit)
-  - [Filtering persons by skills](#filtering-persons-by-skills-filter)
-  - [Locating persons by name](#locating-persons-by-name-find)
-  - [Deleting a person](#deleting-a-person--delete)
-  - [Clearing all entries](#clearing-all-entries--clear)
-  - [Adding a project](#adding-a-project--addproject)
-  - [Listing all projects](#listing-all-projects--listproject)
-  - [Finding projects by name](#finding-projects-by-name--findproject)
-  - [Deleting a project](#deleting-a-project--deleteproject)
-  - [Clear all project entries](#clear-all-project-entries--clearproject)
-  - [Create Assignment](#create-assignment--assign)
-  - [List Assignments](#list-assignments--listassignments)
-  - [Delete Assignment](#delete-assignment-unassign)
-  - [Exiting the program](#exiting-the-program--exit)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding an employee: `add`](#adding-an-employee-add)
+  - [Listing all employees : `list`](#listing-all-employees--list)
+  - [Editing an employee : `edit`](#editing-an-employee--edit)
+  - [Filtering employees by skills: `filter`](#filtering-employees-by-skills-filter)
+  - [Locating employees by name: `find`](#locating-employees-by-name-find)
+  - [Deleting an employee : `delete`](#deleting-an-employee--delete)
+  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Adding a project : `addproject`](#adding-a-project--addproject)
+  - [Listing all projects : `listproject`](#listing-all-projects--listproject)
+  - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
+  - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
+  - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - [Create Assignment : `assign`](#create-assignment--assign)
+  - [List Assignments : `listassignments`](#list-assignments--listassignments)
+  - [Delete Assignment: `unassign`](#delete-assignment-unassign)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 - [Glossary](#glossary)
+  - [Alphanumeric](#alphanumeric)
+  - [Graphical User Interface](#graphical-user-interface)
+  - [Java](#java)
+  - [Numeric](#numeric)
 
 ---
 
@@ -73,29 +81,29 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 ### Some commands to get started:
 
-   - `list` : Lists all contacts.
+- `list` : Lists all contacts.
 
-   - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+- `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   - `delete 3` : Deletes the 3rd contact in the displayed list.
+- `delete 3` : Deletes the 3rd contact in the displayed list.
 
-   - `clear` : Deletes all contacts.
+- `clear` : Deletes all contacts.
 
-   - `listproject`: Lists all projects.
+- `listproject`: Lists all projects.
 
-   - `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
+- `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
 
-   - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
+- `deleteproject 3`: Deletes the 3rd project in the displayed project list.
 
-   - `clearproject` : Deletes all projects.
+- `clearproject` : Deletes all projects.
 
-   - `assign aid/1 pid/A03 id/1` : Assigns `John Doe` to `Project Charlie`.
+- `assign aid/1 pid/A03 id/1` : Assigns `John Doe` to `Project Charlie`.
 
-   - `listassignments` : Lists all assignments.
+- `listassignments` : Lists all assignments.
 
-   - `unassign aid/1 ` : Undoes the assignment with Assignment ID 1.
+- `unassign aid/1 ` : Undoes the assignment with Assignment ID 1.
 
-   - `exit` : Exits the app.
+- `exit` : Exits the app.
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -137,11 +145,12 @@ Format: `help`
 
 [Return to Top](#table-of-contents)
 
-### Adding a person: `add`
+### Adding an employee: `add`
 
-Adds a person to the address book.
+Adds an employee to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
+
 - Employee Id must be: Numeric, no spaces, unique
 - Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 - Phone Number must be: [Numeric](#numeric), no spaces, at least 3 digits long
@@ -150,7 +159,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
 - Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0) and any number of skills (including 0)
+An employee can have any number of tags (including 0) and any number of skills (including 0)
 </div>
 
 Examples:
@@ -159,50 +168,53 @@ Examples:
 - `add id/2 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal s/lockpicking`
 
 Expected output:
-- System message noting success and details of person edited
+
+- System message noting success and details of employee edited
 
 [Return to Top](#table-of-contents)
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all employees in the address book.
 
 Format: `list`
 
 Expected output:
+
 - System message noting success
-- All persons shown in the displayed person list
+- All employees shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Editing a person : `edit`
+### Editing an employee : `edit`
 
-Edits an existing person in the address book.
+Edits an existing employee in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- When editing skills, the existing skills of the person will be removed i.e adding of skills is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
+- When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+- When editing skills, the existing skills of the employee will be removed i.e adding of skills is not cumulative.
+- You can remove all the employee’s tags by typing `t/` without
   specifying any tags after it.
-- You can remove all the person’s skills by typing `s/` without
+- You can remove all the employee’s skills by typing `s/` without
   specifying any skills after it.
-- You cannot edit a person's employee id. More specifically, you are not allowed to specify `id/EMPLOYEEID` in the `edit` command.
+- You cannot edit an employee's employee id. More specifically, you are not allowed to specify `id/EMPLOYEEID` in the `edit` command.
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the projectName of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/` Edits the projectName of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 Expected output:
-- System message noting success and details of person edited
+
+- System message noting success and details of employee edited
 
 [Return to Top](#table-of-contents)
 
-### Filtering persons by skills: `filter`
+### Filtering employees by skills: `filter`
 
 Finds employees who has at least one skill or tag matching at least one of the search items.
 
@@ -222,14 +234,15 @@ Examples:
   ![result for 'filter s/frontend t/swe'](images/filterAlexCharlotte.png)
 
 Expected output:
+
 - System message noting success
-- Persons with skills above shown in the displayed person list
+- Employees with skills above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Locating persons by name: `find`
+### Locating employees by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds employees whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -237,7 +250,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -247,29 +260,31 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 Expected output:
+
 - System message noting success
-- Persons matching criteria above shown in the displayed person list
+- Employees matching criteria above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Deleting a person : `delete`
+### Deleting an employee : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified employee from the address book.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Deletes the employee at the specified `INDEX`.
+- The index refers to the index number shown in the displayed employee list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2` deletes the 2nd employee in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Expected output:
+
 - System message noting success
-- Deleted person vanishes from displayed person list
+- Deleted employee vanishes from displayed employee list
 
 [Return to Top](#table-of-contents)
 
@@ -280,8 +295,9 @@ Clears all entries from the address book.
 Format: `clear`
 
 Expected output:
+
 - System message noting success
-- Displayed person list becomes empty
+- Displayed employee list becomes empty
 
 [Return to Top](#table-of-contents)
 
@@ -290,6 +306,7 @@ Expected output:
 **Adds a new project** to HRConnect.
 
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
+
 - Project Id must be: [Alphanumeric](#alphanumeric), spaces allowed
 - Project Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 
@@ -299,6 +316,7 @@ Examples:
 - `addproject pid/WW2036 pn/Website UI Overhaul`
 
 Expected output:
+
 - System message noting success and id \+ name of project added
 
 [Return to Top](#table-of-contents)
@@ -310,6 +328,7 @@ Shows a list of **all stored projects**.
 Format: `listproject`
 
 Expected output:
+
 - System message noting success
 - All projects shown in the displayed project list
 
@@ -333,8 +352,9 @@ Examples:
 - `findproject Alpha Beta`
 
 Expected output:
+
 - System message noting success
-- Projects matching criteria above  shown in the displayed project list
+- Projects matching criteria above shown in the displayed project list
 
 [Return to Top](#table-of-contents)
 
@@ -368,6 +388,7 @@ Expected output:
 Format: `clearproject`
 
 Expected output:
+
 - System message noting success
 - Displayed project list becomes empty
 
@@ -375,12 +396,12 @@ Expected output:
 
 ### Create Assignment : `assign`
 
-**Creates an assignment** between a Person and a Project.
+**Creates an assignment** between an Employee and a Project.
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
 - The `PROJECT_ID` must belong to an existing project.
-- The `EMPLOYEE_ID` must belong to an existing person.
+- The `EMPLOYEE_ID` must belong to an existing employee.
 
 Examples:
 
@@ -407,8 +428,8 @@ Expected output:
 
 ### Delete Assignment: `unassign`
 
-**Deletes an assignment** between a Person and a Project.<br>
-This does not delete the Person nor the Project.
+**Deletes an assignment** between an Employee and a Project.<br>
+This does not delete the Employee nor the Project.
 
 Format: `unassign aid/ASSIGNMENT_ID`
 
@@ -482,15 +503,15 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 ## Command Summary
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **- Person Commands -**     |                                                                                                                                                                                                                          |
-| **Add Person**              | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
-| **Clear Persons**           | `clear`                                                                                                                                                                                                                  |
-| **Delete Person**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
-| **Edit Person**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter Persons**          | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
-| **Find Persons**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Persons**            | `list`                                                                                                                                                                                                                   |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **- Employee Commands -**   |                                                                                                                                                                                                                          |
+| **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
+| **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
+| **Delete Employee**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
+| **Edit Employee**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
+| **Filter Employees**        | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
+| **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
+| **List Employees**          | `list`                                                                                                                                                                                                                   |
 | **- Project Commands -**    |                                                                                                                                                                                                                          |
 | **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/E0276 pn/Project Alpha`                                                                                                                            |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
@@ -499,7 +520,7 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 | **List Projects**           | `listproject`                                                                                                                                                                                                            |
 | **- Assignment Commands -** |                                                                                                                                                                                                                          |
 | **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/A02 id/1`                                                                                                                           |
-| **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                                  |
+| **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
 | **List Assignments**        | `listassignments`                                                                                                                                                                                                        |
 | **Other Commands**          |                                                                                                                                                                                                                          |
 | **Help**                    | `help`                                                                                                                                                                                                                   |
@@ -513,16 +534,20 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 List of certain technical terms / uncommon words used in this user guide.
 
 ### Alphanumeric
+
 - Consisting of the letters A to Z (upper/lowercase) and the digits 0 to 9.
 
 ### Graphical User Interface
+
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
 
 ### Java
+
 - The programming language HRConnect is based on.
 - It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.
 
 ### Numeric
+
 - Consisting of the digits 0 to 9.
 
 [Return to Top](#table-of-contents)
