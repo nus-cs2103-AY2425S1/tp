@@ -20,5 +20,5 @@ Person *--> "0..1" Email
 Person *--> "0..1" TelegramHandle
 Person *--> ContactType
 Person *--> ModuleName
-Person *--> "0..1" Remark
+Person *--> Remark
 @enduml
