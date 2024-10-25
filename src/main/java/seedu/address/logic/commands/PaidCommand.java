@@ -79,7 +79,7 @@ public class PaidCommand extends Command {
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(),
-                updatedHasPaid, updatedFrequency);
+                updatedHasPaid, updatedFrequency, personToPay.getProfilePicFilePath());
     }
 
     @Override
