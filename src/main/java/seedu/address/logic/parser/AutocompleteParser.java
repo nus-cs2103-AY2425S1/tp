@@ -77,6 +77,7 @@ public class AutocompleteParser {
         if (shouldReturnEmptyList(userInput, wordUnderCaret)) {
             return new HashMap<>();
         }
+        assert(!wordUnderCaret.isEmpty()) : "Oh no, word under caret is empty!";
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + wordUnderCaret.trim(), prefixes);
         int startIndex = getPreviousWhitespaceIndex(userInput, caretPosition);
