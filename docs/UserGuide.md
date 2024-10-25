@@ -377,7 +377,7 @@ Updates the payment status of a student to completed.
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.12 Displaying Pie Chart of Class Distribution: `piechart`
+### 2.12 Displaying Pie Chart of Class Distribution: `pie`
 
 Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
 
