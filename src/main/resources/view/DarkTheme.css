@@ -143,6 +143,13 @@
     -fx-text-fill: black;
 }
 
+.pane-holder-with-border {
+    -fx-background-color: derive(#fde68a, 20%);
+    -fx-border-color: derive(#fde68a, 10%);
+    -fx-border-top-width: 1px;
+    -fx-text-fill: black;
+}
+
 .status-bar {
     -fx-background-color: derive(#fde68a, 30%);
 }

@@ -34,30 +34,30 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertNotEquals(commandResult, new CommandResult("different"));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false,
-                SwitchView.NONE)));
+        assertNotEquals(commandResult, new CommandResult("feedback", true, false,
+                SwitchView.NONE));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true,
-                SwitchView.NONE)));
+        assertNotEquals(commandResult, new CommandResult("feedback", false, true,
+                SwitchView.NONE));
 
         // different switchView value -> returns false
+        assertNotEquals(commandResult, new CommandResult("feedback", false, false,
+                SwitchView.TASK));
+
+        // different switchView value -> returns false
+        assertNotEquals(commandResult, new CommandResult("feedback", false, false,
+                SwitchView.WEDDING));
+
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 SwitchView.TASK)));
 
         // different switchView value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
-                SwitchView.WEDDING)));
-
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
-                SwitchView.PERSON)));
-
-        // different switchView value -> returns false
         assertNotEquals(commandResult.isSwitchView(), new CommandResult("feedback", false, false,
-                SwitchView.PERSON).isSwitchView());
+                SwitchView.TASK).isSwitchView());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
-                SwitchView.PERSON).hashCode());
+                SwitchView.TASK).hashCode());
     }
 
     @Test

@@ -8,6 +8,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -36,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private WeddingListPanel weddingListPanel;
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
+    private PanelsWindow panelsWindow;
     private HelpWindow helpWindow;
 
     @FXML
@@ -43,6 +46,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private HBox panelsPlaceholder;
+
+    @FXML
+    private StackPane personPanelPlaceholder;
 
     @FXML
     private StackPane listPanelPlaceholder;
@@ -114,11 +123,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-
         weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+
+        panelsWindow = new PanelsWindow(personListPanel, weddingListPanel);
+//        panelsWindow.setWidths();
+        panelsPlaceholder.getChildren().add(panelsWindow.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -211,9 +221,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void switchView(SwitchView switchView) {
         switch (switchView) {
-        case PERSON:
-            changeToPersonView();
-            break;
         case TASK:
             changeToTaskView();
             break;
@@ -230,8 +237,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void changeToWeddingView() {
         weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+        panelsWindow.switchView(weddingListPanel);
     }
 
     /**
@@ -239,17 +245,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void changeToTaskView() {
         taskListPanel.updatePersonList(logic.getFilteredTaskList());
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        panelsWindow.switchView(taskListPanel);
     }
-
-    /**
-     * Changes the list panel to show the {@code Person} list.
-     */
-    public void changeToPersonView() {
-        personListPanel.updatePersonList(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-    }
-
 }
