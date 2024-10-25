@@ -128,6 +128,12 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Sorting persons by name: `sort`
+
+Sorts list of persons alphabetically by name.
+
+Format: `sort`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from Cher.
@@ -165,8 +171,6 @@ Examples:
 Delete all contacts from cher with contains **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
-
-
 
 Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
