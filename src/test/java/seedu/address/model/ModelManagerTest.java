@@ -2,8 +2,8 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -27,6 +28,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(null, modelManager.getPersonToDisplay());
     }
 
     @Test
@@ -94,6 +96,51 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setPersonToDisplay_validPerson_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.setPersonToDisplay(ALICE);
+
+        // same person -> returns true
+        assertEquals(new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE), modelManager);
+
+        // different person -> returns false
+        assertNotEquals(new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), BENSON),
+                modelManager);
+    }
+
+    @Test
+    public void setPersonToDisplay_invalidPerson_nothingHappens() {
+        modelManager.addPerson(ALICE);
+        modelManager.setPersonToDisplay(ALICE);
+        modelManager.setPersonToDisplay(BENSON);
+
+        assertEquals(new ModelManager(modelManager.getAddressBook(),
+                modelManager.getUserPrefs(),
+                ALICE), modelManager);
+    }
+
+    @Test
+    public void getPersonToDisplay_personToDisplayEqualToPersonSet_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager = new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE);
+        // same person -> returns true
+        assertEquals(ALICE, modelManager.getPersonToDisplay());
+
+        // different person -> returns false
+        assertNotEquals(BENSON, modelManager.getPersonToDisplay());
+    }
+    @Test
+    public void addModule_invalidPerson_throwsException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> modelManager.addModule(BENSON, module));
+    }
+
+    @Test
+    public void deleteModule_invalidPerson_throwsException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> modelManager.deleteModule(BENSON, module));
+    }
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -102,6 +149,10 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        modelManager = new ModelManager(addressBook, userPrefs, ALICE);
+        modelManagerCopy = new ModelManager(addressBook, userPrefs, ALICE);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -121,8 +172,11 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different personToDisplay -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager = new ModelManager(addressBook, userPrefs);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

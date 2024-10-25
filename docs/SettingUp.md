@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Setting up and getting started"
-  pageNav: 3
+layout: default.md
+title: "Setting up and getting started"
+pageNav: 3
 ---
 
 # Setting up and getting started
@@ -52,7 +52,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Learn the design**
 
-   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [EduContacts’ architecture](DeveloperGuide.md#architecture).
 
 1. **Do the tutorials**
    These tutorials will help you get acquainted with the codebase.

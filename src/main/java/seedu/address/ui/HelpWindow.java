@@ -15,8 +15,32 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f15-2.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE =
+            "============================================================================================\n"
+            + "   H E L P   M E N U\n"
+            + "============================================================================================\n"
+            + "\n1. Add Student\n"
+            + "   - add [ID] n/ [STUDENT_NAME] p/ [PHONE_NUMBER] a/ [ADDRESS] c/ [COURSE] t/ [TAGS]\n"
+            + "\n2. Add a Student Grade\n"
+            + "   - grade [ID] m/ [MODULE] g/ [GRADE]\n"
+            + "\n3. Add Module\n"
+            + "   - module [ID] m/ [MODULE]\n"
+            + "\n4. Edit Student\n"
+            + "   - edit [ID] [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]\n"
+            + "   - edit [ID] m/ [OLD_MODULE] [NEW_MODULE]\n"
+            + "\n5. Find Student\n"
+            + "   - find [ID]\n"
+            + "\n6. Delete Student\n"
+            + "   - delete [ID]\n"
+            + "\n7. List Students\n"
+            + "   - list\n"
+            + "\n8. Clear Data\n"
+            + "   - clear\n"
+            + "\n9. Exit Application\n"
+            + "   - exit\n"
+            + "\n============================================================================================\n"
+            + "For more details, refer to the user guide: \n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

@@ -1,61 +1,55 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
+
 ---
 
 # About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Julian Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/juliantayyc.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](https://github.com/juliantayyc)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+### Ethan Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethan-goh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[Github](http://github.com/ethan-goh)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Ensure code follows the code quality requirements as outlined by the course.
 
-### Jean Doe
+### Brandon Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/btbrandon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](http://github.com/btbrandon)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Deliverables and Deadlines
+* Responsibilities: Ensure team deliverables meet the deadlines as outlined by the course.
 
-### James Doe
+### Jessica
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jessica2828.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](http://github.com/jessica2828)]
+
+* Role: Scheduling and Tracking
+* Responsibilities: Assigning and managing tasks
+
+### Jun Yu
+
+<img src="images/jyl27.png" width="200px">
+
+[[Github](http://github.com/jyl27)]
 
 * Role: Developer
 * Responsibilities: UI
