@@ -118,4 +118,26 @@ public class StudentCourseAssociation {
 
         return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
     }
+
+    /**
+     * Compares this {@code StudentCourseAssociation} with another {@code StudentCourseAssociation} for equality
+     * based on the primary identifiers: matriculation number, course code, and tutorial ID.
+     *
+     * @param other The other {@code StudentCourseAssociation} to compare this {@code StudentCourseAssociation} with
+     * @return true if the two SCAs are equal, false otherwise
+     */
+    public boolean isSameSca(StudentCourseAssociation other) {
+        if (other == this) {
+            return true;
+        }
+
+        return this.student.isSamePerson(other.student)
+                && this.course.isConflictCourse(other.course)
+                && this.tutorial.equals(other.tutorial);
+    }
+
+    @Override
+    public String toString() {
+        return student.toStringShort() + " - " + course.toString() + " - " + tutorial.toString();
+    }
 }

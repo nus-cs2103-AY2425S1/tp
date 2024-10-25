@@ -31,5 +31,4 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, CourseLis
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
-
 }

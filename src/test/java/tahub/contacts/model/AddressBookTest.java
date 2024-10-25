@@ -103,6 +103,14 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public Person getPersonByMatricNumber(String matricNumber) {
+            return persons.stream()
+                    .filter(person -> person.getMatricNumber().equals(matricNumber))
+                    .findFirst()
+                    .orElse(null);
+        }
     }
 
 }

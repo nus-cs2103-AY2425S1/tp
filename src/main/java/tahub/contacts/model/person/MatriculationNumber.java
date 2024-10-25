@@ -3,6 +3,9 @@ package tahub.contacts.model.person;
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Represents a Person's matriculation number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMatriculationNumber(String)}
@@ -20,6 +23,7 @@ public class MatriculationNumber {
      *
      * @param matricNumber A valid matricNumber.
      */
+    @JsonCreator
     public MatriculationNumber(String matricNumber) {
         requireNonNull(matricNumber);
         checkArgument(isValidMatriculationNumber(matricNumber), MESSAGE_CONSTRAINTS);
@@ -34,6 +38,7 @@ public class MatriculationNumber {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

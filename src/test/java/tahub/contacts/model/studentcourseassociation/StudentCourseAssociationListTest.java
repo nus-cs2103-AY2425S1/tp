@@ -1,12 +1,15 @@
 package tahub.contacts.model.studentcourseassociation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -21,8 +24,10 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tag.Tag;
 import tahub.contacts.model.tutorial.Tutorial;
+import tahub.contacts.testutil.PersonBuilder;
 
 public class StudentCourseAssociationListTest {
 
@@ -82,5 +87,54 @@ public class StudentCourseAssociationListTest {
         List<Tutorial> filteredTutorials = scaList.filterTutorialsByStudent(student1);
         List<Tutorial> expectedTutorials = List.of(tutorial1, tutorial2);
         assertEquals(expectedTutorials, filteredTutorials);
+    }
+
+    @Nested
+    @DisplayName("getFromStrings()")
+    class GetFromStrings {
+        @Test
+        @DisplayName("finds correct SCA if SCA is in list")
+        public void findsSca_scaInList() {
+            StudentCourseAssociation foundSca = scaList.getFromStrings(
+                    "A1234567X", "CS1010", "T01");
+            assertEquals(foundSca, sca1);
+        }
+
+        @Test
+        @DisplayName("throws runtime exception if SCA is not in list but inputs are valid")
+        public void throwsRuntimeException_scaNotInListInputsValid() {
+            assertThrows(ScaNotFoundException.class, () -> scaList.getFromStrings(
+                    "A1234567X", "AB2000", "T02"));
+        }
+    }
+
+    @Nested
+    @DisplayName("findMatch()")
+    class FindMatch {
+        @Test
+        @DisplayName("finds correct SCA if SCA with same matricNumber, courseCode, tutorialId is in list")
+        public void findsSca_scaInList() {
+            Course course = new Course(new CourseCode("CS1010"), new CourseName("Different Name"));
+            StudentCourseAssociation toFind = new StudentCourseAssociation(
+                    new PersonBuilder().withMatriculationNumber("A1234567X").build(),
+                    course,
+                    new Tutorial("T01", course)
+            );
+            StudentCourseAssociation foundSca = scaList.findMatch(toFind);
+            assertEquals(foundSca, sca1);
+        }
+
+        @Test
+        @DisplayName("throws ScaNotFoundException if SCA with same IDs is not in list")
+        public void throwsScaNotFoundException_scaNotInListInputsValid() {
+            Course course = new Course(new CourseCode("AA0000"), new CourseName("Different Name"));
+            StudentCourseAssociation toFind = new StudentCourseAssociation(
+                    new PersonBuilder().withMatriculationNumber("A4529999X").build(),
+                    course,
+                    new Tutorial("T99", course)
+            );
+
+            assertThrows(ScaNotFoundException.class, () -> scaList.findMatch(toFind));
+        }
     }
 }
