@@ -59,11 +59,10 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Removes the lesson at the specified index from the list.
+     * Removes the specified lesson from the list.
      *
      * @param lesson The lesson to be removed.
-     * @throws LessonNotInList If the index is invalid (less than 0 or greater than the size of the
-     *     list).
+     * @throws LessonNotInList If the lesson is not in the list
      */
     public void remove(Lesson lesson) {
         if (!contains(lesson)) {

@@ -13,7 +13,9 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
@@ -34,6 +36,7 @@ public class DeleteLessonCommandTest {
 
     private class ModelStubAcceptingLessonDeleted extends ModelStub {
         final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
         @Override
         public boolean hasLessons(Lesson lesson) {
@@ -45,11 +48,12 @@ public class DeleteLessonCommandTest {
         public void addLesson(Lesson lesson) {
             requireNonNull(lesson);
             lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
 
         @Override
-        public void deleteLesson(int index) {
-            lessonsAdded.remove(index);
+        public void deleteLesson(Lesson lesson) {
+            lessonsAdded.remove(lesson);
         }
 
         @Override
@@ -65,6 +69,11 @@ public class DeleteLessonCommandTest {
         @Override
         public ReadOnlyTutorEase getTutorEase() {
             return new TutorEase();
+        }
+
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            return lessons;
         }
     }
 
@@ -232,7 +241,7 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

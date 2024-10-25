@@ -14,6 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
 
@@ -75,8 +76,9 @@ public class JsonLessonScheduleStorageTest {
         assertEquals(original, readBack);
 
         // Modify data, overwrite existing file, and read back
-        original.addLesson(new LessonBuilder().withName(validPerson).build());
-        original.deleteLesson(0);
+        Lesson lesson = new LessonBuilder().withName(validPerson).build();
+        original.addLesson(lesson);
+        original.deleteLesson(lesson);
         jsonLessonScheduleStorage.saveLessonSchedule(original, filePath);
         readBack = jsonLessonScheduleStorage.readLessonSchedule(readOnlyTutorEase).get();
         assertEquals(original, readBack);
