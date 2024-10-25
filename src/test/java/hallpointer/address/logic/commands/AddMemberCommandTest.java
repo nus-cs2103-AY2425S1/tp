@@ -47,12 +47,18 @@ public class AddMemberCommandTest {
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
-        Member validMember = new MemberBuilder().build();
+        Member validMember = new MemberBuilder(ALICE).build();
         AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
+
+        // not case-sensitive
+        Member modifiedMember = new MemberBuilder(ALICE).withName("alice Pauline").build();
+        AddMemberCommand modifiedAddMemberCommand = new AddMemberCommand(modifiedMember);
+        assertThrows(CommandException.class,
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> modifiedAddMemberCommand.execute(modelStub));
     }
 
     @Test
