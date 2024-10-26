@@ -79,7 +79,7 @@ Shows a message explaining how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to UG Teach.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]`
 
@@ -112,21 +112,21 @@ Adds a student to the address book.
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in UG Teach.
 
 Format: `list`
 
 ### Editing a student : `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in the UG Teach.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 **Examples:**
 
-`edit 1 p/87438808 e/alexyeoh100@example.com` </br> Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
+* `edit 1 p/87438808 e/alexyeoh100@example.com` edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
 
-`edit 2 paid/1200.00 owed/0` </br> Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+* `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
 ![editResult.png](images/editResult.png)
 
 <box type="important" header="#### Constraints">
@@ -190,7 +190,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 Format: `pay INDEX hr/HOURS_PAID`
 
 Example:
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the UG Teach.
   ![payResult.png](images/payResult.png)
 
 <box type="important" header="#### Constraints">
