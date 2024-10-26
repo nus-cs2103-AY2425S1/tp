@@ -68,7 +68,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        role = source.getRole().roleName;
+        role = source.getRole() != null ? source.getRole().roleName : null;
         ownWedding = source.getOwnWedding() != null ? source.getOwnWedding().hashCode() : 0;
         weddingJobs.addAll(source.getWeddingJobs().stream()
                 .map(Wedding::hashCode)

@@ -54,7 +54,7 @@ public class RoleCommandParser implements Parser<RoleCommand> {
         RoleCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new RoleCommand.PersonWithRoleDescriptor();
 
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            personWithRoleDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
+            personWithRoleDescriptor.setRole(ParserUtil.parseOptionalRole(argMultimap.getValue(PREFIX_ROLE).get()));
         }
 
         return new RoleCommand(index, predicate, personWithRoleDescriptor);
@@ -72,7 +72,7 @@ public class RoleCommandParser implements Parser<RoleCommand> {
 
     private Role parseRoleToAssign(String role) throws ParseException {
 
-        return ParserUtil.parseRole(role);
+        return ParserUtil.parseOptionalRole(role);
     }
 
 }
