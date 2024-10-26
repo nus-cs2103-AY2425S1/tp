@@ -28,7 +28,7 @@ public class ContainsGeneralKeywordsPredicate implements Predicate<Person> {
      * @return True if individual posesses a field exactly matching the keyword, false otherwise
      */
     private boolean testPerson(Person person, String keyword) {
-        assert !keyword.isBlank(): "Keyword cannot be an empty value";
+        assert !keyword.isBlank() : "Keyword cannot be an empty value";
         if (StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)) {
             return true; // Returns true if names match
         } else if (StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)) {
