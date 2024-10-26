@@ -20,8 +20,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
-import javax.swing.text.html.Option;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */

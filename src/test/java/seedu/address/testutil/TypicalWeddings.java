@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.wedding.Wedding;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.JOHN;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * A utility class containing a list of {@code Wedding} objects to be used in tests.

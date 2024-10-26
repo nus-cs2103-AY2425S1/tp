@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.util.Optional;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
@@ -11,9 +13,6 @@ import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
-
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 
 /**

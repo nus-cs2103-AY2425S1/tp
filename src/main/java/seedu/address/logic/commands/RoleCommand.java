@@ -23,8 +23,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 
-import javax.swing.text.html.Option;
-
 /**
  * Tags existing person in the address book.
  */
@@ -52,7 +50,8 @@ public class RoleCommand extends Command {
      * @param index of the person in the filtered person list to assign role
      * @param personWithRoleDescriptor details of the person to assign role
      */
-    public RoleCommand(Index index, NameMatchesKeywordPredicate predicate, PersonWithRoleDescriptor personWithRoleDescriptor) {
+    public RoleCommand(Index index, NameMatchesKeywordPredicate predicate,
+                       PersonWithRoleDescriptor personWithRoleDescriptor) {
         requireNonNull(personWithRoleDescriptor);
 
         this.index = index;

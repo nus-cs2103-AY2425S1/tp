@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -24,7 +25,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Role role; // Single role representing role
+    private Optional<Role> role; // Single role representing role
     private Wedding wedding;
 
     /**
@@ -35,7 +36,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        role = new Role(DEFAULT_ROLE); // Default role
+        role = Optional.of(new Role(DEFAULT_ROLE)); // Default role
         wedding = null; // Default wedding is null
     }
 
@@ -104,7 +105,11 @@ public class PersonBuilder {
      * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withRole(String role) {
-        this.role = new Role(role);
+        if (role.isEmpty()) {
+            this.role = Optional.empty();
+        } else {
+            this.role = Optional.of(new Role(role));
+        }
         return this;
     }
 
