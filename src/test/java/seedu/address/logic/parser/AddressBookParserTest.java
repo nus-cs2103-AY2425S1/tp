@@ -157,4 +157,47 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand.name, command.name);
         assertEquals(expectedCommand.job, command.job);
     }
+
+    @Test
+    public void parseCommand_withExtraWhitespace() throws Exception {
+        String userInput = "view       n/    John Doe     j/    Software Engineer";
+        ViewStatusCommand command = (ViewStatusCommand) parser.parseCommand(userInput);
+
+        // Check that the parsed command is an instance of ViewStatusCommand
+        assertTrue(command instanceof ViewStatusCommand);
+
+        // Verify the parsed command details
+        Name expectedName = new Name("John Doe");
+        Job job = new Job("Software Engineer");
+        ViewStatusCommand expectedCommand = new ViewStatusCommand(expectedName, job);
+
+        // Assert the values of the parsed command match the expected command
+        assertEquals(expectedCommand.name, command.name);
+        assertEquals(expectedCommand.job, command.job);
+    }
+
+    @Test
+    public void parseCommand_invalidHireCommandFormat_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand("hire n/Amy Bee"));
+    }
+
+    @Test
+    public void parseCommand_invalidRejectCommandFormat_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RejectCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand("reject j/Software Engineer"));
+    }
+
+    @Test
+    public void parseCommand_invalidViewStatusFormat_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStatusCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand("view j/Software Engineer"));
+    }
+
+    @Test
+    public void parseCommand_invalidArgumentFormat_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand("add"));
+    }
+
 }
