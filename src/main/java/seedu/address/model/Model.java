@@ -115,6 +115,16 @@ public interface Model {
     boolean deleteTags(List<Tag> tags);
 
     /**
+     * Renames a tag from the tag list.
+     *
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag after renaming.
+     * @return true if the tag was successfully renamed,
+     * false if the original tag does not exist.
+     */
+    boolean renameTag(Tag existingTag, String newTagName);
+
+    /**
      * Checks if a tag exists in the tag list.
      *
      * @param tag The tag to check for existence.

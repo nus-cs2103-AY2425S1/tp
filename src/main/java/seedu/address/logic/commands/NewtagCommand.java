@@ -18,8 +18,8 @@ public class NewtagCommand extends Command {
             + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
             + "Example: " + COMMAND_WORD + " t/Bride's Friend";
 
-    public static final String MESSAGE_SUCCESS = "New tag added: ";
-    public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
+    public static final String MESSAGE_SUCCESS = "New tag(s) added: ";
+    public static final String MESSAGE_DUPLICATE = "One or more of the tags already exist.\n";
     public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
             + " tags.\nPlease remove some using deletetag.\n";
 

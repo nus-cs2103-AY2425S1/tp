@@ -43,6 +43,23 @@ public class TagList {
     }
 
     /**
+     * Renames a tag if it is already present.
+     *
+     * @param tag The tag to be renamed.
+     * @return true if the tag was renamed, false if it does not exist.
+     */
+    public boolean renameTag(Tag tag, String newTagName) {
+        int index = tags.indexOf(tag);
+        if (index == -1) {
+            return false;
+        }
+
+        Tag tagToEdit = tags.get(index);
+        tagToEdit.setTagName(newTagName);
+        return true;
+    }
+
+    /**
      * Sets the TagList based on a list from Storage.
      *
      * @param tags The tags to add.

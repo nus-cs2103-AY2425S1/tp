@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -165,6 +167,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean renameTag(Tag existingTag, String newTagName) {
+        boolean isSuccessful = addressBook.renameTag(existingTag, newTagName);
+        return isSuccessful;
+    }
+
+    @Override
     public boolean hasTag(Tag tag) {
         return addressBook.hasTag(tag);
     }
@@ -186,7 +194,9 @@ public class ModelManager implements Model {
 
     @Override
     public void updateTagList() {
-        tagList = this.addressBook.getTagList();
+        ObservableList<Tag> tl = this.addressBook.getTagList();
+        tagList.setAll(FXCollections.observableArrayList(tl));
+        System.out.println(tagList);
     }
 
     @Override
