@@ -89,24 +89,24 @@ Adds a student to the address book.
 **Output:**
 ![addResult.jpeg](images/addResult.jpeg)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
-1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
-3. **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
-4. **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-5. **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
+* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
+* **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`
-6. **SUBJECT** should only be:
+* **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
-`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics`  `GP`
+`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` and `GP`
 
 </box>
 
-<box type="tip" header="#### Tips">
+<box type="tip" header="##### Tips">
 
-1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
-2. <b>RATE</b> is the tuition fee per hour.
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
+* <b>RATE</b> is the tuition fee per hour.
     
 </box>
 
