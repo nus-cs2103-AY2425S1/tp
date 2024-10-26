@@ -54,7 +54,8 @@ public class PersonDetailedView extends UiPart<Region> {
         super(FXML);
         this.person = person;
 
-        Image profileImg = new Image(getClass().getResourceAsStream("/images/profilepicture.png"));
+        Image profileImg = new Image(getClass()
+                .getResourceAsStream("/" + this.person.getProfilePicFilePath().toString()));
         profileImage.setImage(profileImg);
 
         name.setText(person.getName().fullName);

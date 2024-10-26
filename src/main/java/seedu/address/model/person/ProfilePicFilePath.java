@@ -34,7 +34,7 @@ public class ProfilePicFilePath {
 
     @Override
     public String toString() {
-        return filePath.toString();
+        return filePath.toString().replace("\\", "/");
     }
 
     @Override
