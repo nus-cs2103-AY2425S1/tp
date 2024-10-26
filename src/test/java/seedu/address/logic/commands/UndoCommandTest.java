@@ -44,7 +44,6 @@ public class UndoCommandTest {
         CLEAR_COMMAND_LAST.getCommandHistory().get(CLEAR_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(CLEAR_COMMAND_LAST);
-
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, MESSAGE_UNDO_CLEAR);
 
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);

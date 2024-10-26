@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
@@ -12,7 +10,6 @@ import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
  * Undoes the latest command.
@@ -28,8 +25,13 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_COMMAND_SUCCESS = "Undo successful:\n%s";
     public static final String MESSAGE_UNDO_ADD = "%s has been unadded from SocialBook";
     public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
-    public static final String MESSAGE_UNDO_DELETE = "%s have been added back to SocialBook";
+    public static final String MESSAGE_UNDO_DELETE =
+            "%s and their appointments have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
+    public static final String MESSAGE_UNDO_DELETE_APPOINTMENT =
+            "Appointment for %s has been added back to appointments";
+    public static final String MESSAGE_UNDO_ADD_APPOINTMENT =
+            "Appointment for %s has been unadded from appointments";
     private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -58,41 +60,33 @@ public class UndoCommand extends Command {
         switch (latestCommandWord) {
         case "add":
             AddCommand addCommand = (AddCommand) latestCommand;
-            Person personToRemove = addCommand.getToAdd();
-            model.deletePerson(personToRemove);
-            pastCommands.remove();
-            resultMessage = String.format(MESSAGE_UNDO_ADD, personToRemove.getName());
+            resultMessage = addCommand.undo(model, pastCommands);
             break;
         case "edit":
             EditCommand editCommand = (EditCommand) latestCommand;
-            Person bfrEdit = editCommand.getUneditedPerson();
-            Person afterEdit = editCommand.getEditedPerson();
-            model.setPerson(afterEdit, bfrEdit);
-            pastCommands.remove();
-            resultMessage = String.format(MESSAGE_UNDO_EDIT, bfrEdit.getName());
+            resultMessage = editCommand.undo(model, pastCommands);
             break;
 
         case "delete":
             DeleteCommand dltCommand = (DeleteCommand) latestCommand;
-            List<Person> personsToAddBack = dltCommand.getPersonsToDelete();
-
-            for (int i = 0; i < personsToAddBack.size(); i++) {
-                model.addPerson(personsToAddBack.get(i), dltCommand.getTargetIndexes()[i].getZeroBased());
-            }
-            String namesAddedBack = personsToAddBack.stream()
-                    .map(person -> person.getName().toString())
-                    .collect(Collectors.joining(", "));
-            pastCommands.remove();
-            resultMessage = String.format(MESSAGE_UNDO_DELETE, namesAddedBack);
+            resultMessage = dltCommand.undo(model, pastCommands);
             break;
 
         case "clear":
             ClearCommand clearCommand = (ClearCommand) latestCommand;
-            model.setAddressBook(clearCommand.getModel().getAddressBook());
-            model.setUserPrefs(clearCommand.getModel().getUserPrefs());
-            pastCommands.remove();
-            resultMessage = MESSAGE_UNDO_CLEAR;
+            resultMessage = clearCommand.undo(model, pastCommands);
             break;
+
+        case "adda":
+            AddAppointmentCommand addAppointmentCommand = (AddAppointmentCommand) latestCommand;
+            resultMessage = addAppointmentCommand.undo(model, pastCommands);
+            break;
+
+        case "deletea":
+            DeleteAppointmentCommand deleteAppointmentCommand = (DeleteAppointmentCommand) latestCommand;
+            resultMessage = deleteAppointmentCommand.undo(model, pastCommands);
+            break;
+
         default:
             pastCommands.remove();
             break;

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,13 +9,17 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,6 +39,7 @@ public class DeleteCommand extends Command {
     private final Index[] targetIndexes;
     private final List<Person> personsToDelete = new ArrayList<>();
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private ObservableList<Appointment> deletedAppointments;
 
 
     /**
@@ -69,6 +75,10 @@ public class DeleteCommand extends Command {
                 + Arrays.stream(targetIndexes)
                 .map(index -> String.valueOf(index.getOneBased())) // Convert to String
                 .collect(Collectors.joining(", ")) + "]");
+        deletedAppointments = FXCollections.observableArrayList(personsToDelete.stream()
+                .map(person -> model.getPersonsAppointments(person))
+                .flatMap(List::stream)
+                .collect(Collectors.toList()));
 
         String s = personsToDelete.stream().map(person -> {
             model.deleteAppointments(person.getName());
@@ -90,6 +100,21 @@ public class DeleteCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        for (int i = 0; i < personsToDelete.size(); i++) {
+            model.addPerson(personsToDelete.get(i), this.getTargetIndexes()[i].getZeroBased());
+        }
+        for (int i = 0; i < deletedAppointments.size(); i++) {
+            model.addAppointment(deletedAppointments.get(i));
+        }
+        String namesAddedBack = personsToDelete.stream()
+                .map(person -> person.getName().toString())
+                .collect(Collectors.joining(", "));
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_DELETE, namesAddedBack);
     }
 
     @Override

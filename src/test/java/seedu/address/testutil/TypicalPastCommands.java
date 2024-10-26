@@ -37,6 +37,7 @@ public class TypicalPastCommands {
 
     public static final CommandHistory EDIT_COMMAND_LAST =
             createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_EDIT);
+
     private static CommandHistory CURR_PAST_COMMANDS = new CommandHistory();
     /**
      * Helper function to create CommandHistory with specified past commands.

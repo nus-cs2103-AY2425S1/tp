@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_CLEAR;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,12 +32,16 @@ public class ClearCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public Model getModel() {
-        return oldModel;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.setAddressBook(this.oldModel.getAddressBook());
+        model.setUserPrefs(this.oldModel.getUserPrefs());
+        pastCommands.remove();
+        return MESSAGE_UNDO_CLEAR;
     }
 }

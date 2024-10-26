@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_APPOINTMENT;
 
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+
 
 /**
  * Deletes an appointment identified using its displayed index from the appointment list.
@@ -25,6 +28,7 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment:\n%s";
 
     private final Index targetIndex;
+    private Appointment appointment = null;
 
     public DeleteAppointmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -40,7 +44,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         int sourceIndex = lastShownList.getSourceIndex(targetIndex.getZeroBased());
-        Appointment appointment = model.deleteAppointment(sourceIndex);
+        appointment = model.deleteAppointment(sourceIndex);
         return new CommandResult(String.format(
                 MESSAGE_DELETE_APPOINTMENT_SUCCESS, appointment), true, false, false);
     }
@@ -48,6 +52,14 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Appointment appointmentToAddBack = this.appointment;
+        model.addAppointment(appointmentToAddBack);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_DELETE_APPOINTMENT, appointmentToAddBack);
     }
 
     @Override

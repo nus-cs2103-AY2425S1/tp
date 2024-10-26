@@ -124,6 +124,11 @@ public interface Model {
      */
     void deleteAppointments(Name name);
 
+    /**
+     * Gets the appointments belonging to this person.
+     */
+    ObservableList<Appointment> getPersonsAppointments(Person person);
+
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();
 

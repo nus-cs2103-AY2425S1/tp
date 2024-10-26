@@ -166,6 +166,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Appointment> getPersonsAppointments(Person person) {
+        FilteredList<Appointment> filteredList = appointments
+                .filtered(appointment -> appointment.name().equals(person.getName()));
+        return filteredList;
+    }
+
+    @Override
     public List<Appointment> getConflictingAppointments(Appointment appointment) {
         return appointments.stream().filter(appointment::hasConflictWith).toList();
     }

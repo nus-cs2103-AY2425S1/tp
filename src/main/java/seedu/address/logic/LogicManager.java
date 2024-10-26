@@ -54,7 +54,6 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
         if (!(command instanceof UndoCommand)) {
-            System.out.println("hi");
             pastCommands.add(command);
         }
 

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -18,5 +19,9 @@ public abstract class Command {
     public abstract CommandResult execute(Model model) throws CommandException;
 
     public abstract String getCommandWord();
+
+    public String undo(Model model, CommandHistory pastCommands) {
+        return null;
+    };
 
 }
