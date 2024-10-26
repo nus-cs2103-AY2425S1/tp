@@ -60,6 +60,18 @@ public class Event {
         this.volunteers = volunteers != null ? volunteers : new HashSet<>();
     }
 
+    /**
+     * Constructs a {@code Event} with the same attributes as the given {@code Event}.
+     * @param event Event to copy.
+     */
+    public Event(Event event) {
+        this.name = event.getName();
+        this.attendees = event.getAttendees();
+        this.vendors = event.getVendors();
+        this.sponsors = event.getSponsors();
+        this.volunteers = event.getVolunteers();
+    }
+
     public String getName() {
         return name;
     }

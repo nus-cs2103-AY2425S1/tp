@@ -53,14 +53,16 @@ public class RemovePersonFromEventCommand extends Command {
             throw new CommandException(MESSAGE_EVENT_NOT_FOUND);
         }
 
-        Event event = eventManager.getEventList().get(eventIndex.getZeroBased());
+        //this is a copy of event list -> copied event, have to set it back again
+        Event originalEvent = eventManager.getEventList().get(eventIndex.getZeroBased());
+        Event event = new Event(originalEvent);
 
         if (personIndex.getZeroBased() >= event.getAllPersons().size()) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
         // get the person from address book, then remove from event
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person person = lastShownList.get(eventIndex.getZeroBased());
+        Person person = lastShownList.get(personIndex.getZeroBased());
         String personRole = event.getRole(person);
         if (personRole == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
@@ -68,8 +70,10 @@ public class RemovePersonFromEventCommand extends Command {
         // at this point, person should have a role in event
         assert(event.hasPerson(person));
         logger.info("Removing person " + person.getName() + " from event " + event.getName());
+        logger.info(event.getName() + " now has " + event.getAllPersons().size() + " people");
 
         event.removePerson(person, personRole);
+        eventManager.setEvent(originalEvent, event);
         return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
 
 
