@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
@@ -229,5 +230,13 @@ public class AddressBookParserTest {
         ExportCommand command = (ExportCommand) parser.parseCommand(
                 ExportCommand.COMMAND_WORD + " " + fileName);
         assertEquals(new ExportCommand(fileName, false), command);
+    }
+
+    @Test
+    public void parseCommand_import() throws Exception {
+        String fileName = "import.csv";
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ImportCommand(fileName), command);
     }
 }

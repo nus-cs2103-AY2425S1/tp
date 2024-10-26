@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_EMPTY_FILE;
-//import static seedu.address.logic.commands.ImportCommand.MESSAGE_INVALID_FILE;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_INVALID_HEADER;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -76,6 +75,12 @@ public class ImportCommandTest {
                         }
                     });
         }
+    }
+
+    @Test
+    public void getCommandTypeMethod() {
+        ImportCommand importCommand = new ImportCommand("file1.csv");
+        assertEquals(CommandType.IMPORTSTUDENT, importCommand.getCommandType());
     }
 
     @Test
@@ -302,4 +307,75 @@ public class ImportCommandTest {
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
 
+    @Test
+    public void execute_absolutePath() throws IOException, CommandException {
+        // Create file with absolute path
+        Path absolutePath = testDir.toAbsolutePath().resolve("absolute.csv");
+        try (FileWriter writer = new FileWriter(absolutePath.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
+        }
+        filesToCleanup.add(absolutePath);
+
+        ImportCommand importCommand = new ImportCommand(absolutePath.toString());
+        CommandResult result = importCommand.execute(model);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_incompleteEntry() throws Exception {
+        Path invalidFile = testDir.resolve("incomplete.csv");
+        try (FileWriter writer = new FileWriter(invalidFile.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            // Missing courses field
+            writer.write("John Doe,12345678,john@example.com\n");
+        }
+        filesToCleanup.add(invalidFile);
+
+        ImportCommand importCommand = new ImportCommand("incomplete.csv") {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testDir.resolve(filepath);
+            }
+        };
+
+        CommandResult result = importCommand.execute(model);
+
+        // Verify error file contents
+        Path errorFile = invalidFile.resolveSibling("error.csv");
+        assertTrue(Files.exists(errorFile));
+        filesToCleanup.add(errorFile);
+        List<String> errorLines = Files.readAllLines(errorFile);
+        assertTrue(errorLines.stream()
+                .anyMatch(line -> line.contains("Incomplete student entry")));
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS_WITH_ERRORS, 0, 1, errorFile),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void testEscapeSpecialCharactersWithNull() {
+        ImportCommand importCommand = new ImportCommand("test.csv") {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testDir.resolve(filepath);
+            }
+        };
+
+        // Make escapeSpecialCharacters and unescapeSpecialCharacters public for testing
+        String escapedNull = importCommand.escapeSpecialCharacters(null);
+        assertEquals("", escapedNull);
+    }
+
+    @Test
+    public void testUnescapeSpecialCharactersWithNull() {
+        ImportCommand importCommand = new ImportCommand("test.csv") {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testDir.resolve(filepath);
+            }
+        };
+
+        String unescapedNull = importCommand.unescapeSpecialCharacters(null);
+        assertEquals("", unescapedNull);
+    }
 }

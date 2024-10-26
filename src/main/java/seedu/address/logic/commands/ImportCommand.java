@@ -202,7 +202,11 @@ public class ImportCommand extends Command {
         }
     }
 
-    private String escapeSpecialCharacters(String data) {
+    /**
+     * Escapes special characters in CSV data.
+     * Made public for testing.
+     */
+    public String escapeSpecialCharacters(String data) {
         if (data == null) {
             return "";
         }
@@ -214,7 +218,11 @@ public class ImportCommand extends Command {
         return escapedData;
     }
 
-    private String unescapeSpecialCharacters(String data) {
+    /**
+     * Unescapes special characters in CSV data.
+     * Made public for testing.
+     */
+    public String unescapeSpecialCharacters(String data) {
         if (data == null) {
             return "";
         }
