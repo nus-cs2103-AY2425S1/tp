@@ -13,6 +13,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_FEE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_DAY;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_HOUR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_LEAP_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MINUTE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MONTH;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_YEAR;
@@ -20,7 +21,10 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_I
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_ZERO;
 import static tutorease.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_LEAP_YEAR_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE_LEAP_YEAR;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE_LEAP_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -139,6 +143,9 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_MINUTE
                         + DURATION_DESC,
                 String.format(INVALID_MINUTE_MESSAGE, 60));
+        assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_LEAP_YEAR
+                        + DURATION_DESC,
+                String.format(INVALID_DAY_MESSAGE, 29, 28));
 
         // invalid duration
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
@@ -150,5 +157,19 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
                         + INVALID_DURATION_TWENTY_FIVE,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validLeapYear_success() throws ParseException {
+        Lesson expectedLesson = new LessonBuilder()
+                .withStartDateTime(VALID_START_DATE_LEAP_YEAR)
+                .withEndDateTime(VALID_END_DATE_LEAP_YEAR)
+                .build();
+        StudentId studentId = new StudentId(VALID_STUDENT_ID);
+        AddLessonCommand expectedCommand = new AddLessonCommand(studentId, expectedLesson.getFee(),
+                expectedLesson.getStartDateTime(), expectedLesson.getEndDateTime());
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
+                        + START_DATE_TIME_LEAP_YEAR_DESC + DURATION_DESC,
+                expectedCommand);
     }
 }
