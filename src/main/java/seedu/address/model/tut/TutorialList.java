@@ -102,6 +102,24 @@ public class TutorialList {
                 .forEach(t -> t.add(student));
     }
 
+    /**
+     * Unassign student to the tutorial class.
+     *
+     * @param student Student to be unassigned
+     * @param tutorialId Target tutorial
+     */
+    public void unassignStudent(Student student, TutorialId tutorialId) {
+        requireNonNull(student);
+        requireNonNull(tutorialId);
+        for (Tutorial tutorial : tutorials) {
+            if (tutorial.getTutorialId().equals(tutorialId)) {
+                tutorial.deleteStudent(student);
+                break;
+            }
+        }
+    }
+
+
 
     /**
      * Deletes the specified student from all tutorials where the student is present.
