@@ -22,6 +22,9 @@ public class GiftUtil {
         GiftListStorage storage = new JsonGiftListStorage(path);
 
         Optional<ReadOnlyGiftList> giftListOptional = storage.readGiftList();
+        if (giftListOptional.isEmpty()) {
+            throw new DataLoadingException(new Exception("Gift list is empty"));
+        }
         ReadOnlyGiftList initialData = giftListOptional.get();
 
         return initialData.getRandomGift();
