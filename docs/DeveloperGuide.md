@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | user                      | hide private contact details                                                                               | minimize chance of someone else seeing them by accident                    |
 | `* *`  | user                      | store notes about clients' property preferences                                                            | tailor property recommendations to their needs                             |
 | `* *`  | user                      | set reminders for client follow-ups                                                                        | don't miss important communications                                        |
-| `* *`  | user                      | group clients by location preferences                                                                      | easily send property updates                                               |
+| `* *`  | user                      | group clients by address preferences                                                                      | easily send property updates                                               |
 | `* *`  | user                      | track status of property deals for each client (e.g. `interested`, `offer made`, `contract signed`)        | stay organised                                                             |
 | `* *`  | long-term user of the app | log the last interaction date with the client                                                              | maintain regular communication                                             |
 | `* *`  | expert user               | export my contact list to Excel or CSV                                                                     | share it with colleagues or for reporting purposes                         |
@@ -444,10 +444,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different address. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and address is retained.
 
 1. _{ more test cases …​ }_
 

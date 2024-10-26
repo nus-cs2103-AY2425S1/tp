@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.property;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASKING_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -26,13 +26,13 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_LOCATION + "LOCATION "
+            + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_ASKING_PRICE + "ASKING_PRICE "
             + PREFIX_TYPE + "TYPE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_LOCATION + "Clementi "
+            + PREFIX_ADDRESS + "Clementi "
             + PREFIX_ASKING_PRICE + "450000 "
             + PREFIX_TYPE + "HDB";
 

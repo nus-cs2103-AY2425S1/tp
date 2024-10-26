@@ -17,7 +17,7 @@ public class PropertyCard extends UiPart<Region> {
     public final Property property;
 
     /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+     * Note: Certain keywords such as "address" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
@@ -32,7 +32,7 @@ public class PropertyCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label locationA;
+    private Label addressA;
     @FXML
     private Label askingPrice;
     @FXML
@@ -47,7 +47,7 @@ public class PropertyCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(property.getName().toString());
         phone.setText(property.getPhone().toString());
-        locationA.setText(property.getLocation().toString());
+        addressA.setText(property.getAddress().toString());
         askingPrice.setText(property.getAskingPrice().toString());
         propertyType.setText(property.getPropertyType().toString());
     }

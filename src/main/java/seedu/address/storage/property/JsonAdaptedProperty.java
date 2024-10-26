@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Location;
 import seedu.address.model.property.Phone;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.PropertyType;
@@ -18,7 +18,7 @@ public class JsonAdaptedProperty {
 
     private final String name;
     private final String phone;
-    private final String location;
+    private final String address;
     private final String askingPrice;
     private final String propertyType;
 
@@ -28,12 +28,12 @@ public class JsonAdaptedProperty {
     @JsonCreator
     public JsonAdaptedProperty(@JsonProperty("name") String name,
             @JsonProperty("phone") String phone,
-            @JsonProperty("location") String location, @JsonProperty("askingPrice") String askingPrice,
+            @JsonProperty("address") String address, @JsonProperty("askingPrice") String askingPrice,
             @JsonProperty("propertyType") String propertyType) {
 
         this.name = name;
         this.phone = phone;
-        this.location = location;
+        this.address = address;
         this.askingPrice = askingPrice;
         this.propertyType = propertyType;
     }
@@ -44,7 +44,7 @@ public class JsonAdaptedProperty {
     public JsonAdaptedProperty(Property source) {
         name = source.getName().toString();
         phone = source.getPhone().toString();
-        location = source.getLocation().toString();
+        address = source.getAddress().toString();
         askingPrice = source.getAskingPrice().toString();
         propertyType = source.getPropertyType().toString();
 
@@ -75,14 +75,14 @@ public class JsonAdaptedProperty {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (location == null) {
+        if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Location.class.getSimpleName()));
+                    Address.class.getSimpleName()));
         }
-        if (!Location.isValidLocation(location)) {
-            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Location modelLocation = new Location(location);
+        final Address modelAddress = new Address(address);
 
         if (askingPrice == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -102,6 +102,6 @@ public class JsonAdaptedProperty {
         }
         final PropertyType modelpropertyType = new PropertyType(propertyType);
 
-        return new Property(modelName, modelPhone, modelLocation, modelAskingPrice, modelpropertyType);
+        return new Property(modelName, modelPhone, modelAddress, modelAskingPrice, modelpropertyType);
     }
 }

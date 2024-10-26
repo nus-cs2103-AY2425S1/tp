@@ -266,7 +266,7 @@ Examples:
 
 Adds a property to the property list.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER l/LOCATION a/ASKING_PRICE t/PROPERTY_TYPE`
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER l/ADDRESS a/ASKING_PRICE t/PROPERTY_TYPE`
 
 Examples:
 * `add n/John p/87152433 l/Paya Lebar a/200,000 t/Condominium`
@@ -281,7 +281,7 @@ Format: `view`
 
 Edits an existing property in the property list.
 
-Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/LOCATION] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
+Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/ADDRESS] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
 * Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed property list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -295,7 +295,7 @@ Examples:
 
 Find property based on its attributes.
 
-Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/LOCATION] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
+Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/ADDRESS] [a/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`

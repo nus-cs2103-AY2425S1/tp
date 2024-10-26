@@ -39,7 +39,7 @@ public class JsonPropertyListStorage implements PropertyListStorage {
     /**
      * Similar to {@link #readPropertyList()}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath address of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
     public Optional<ReadOnlyPropertyList> readPropertyList(Path filePath) throws DataLoadingException {
@@ -67,7 +67,7 @@ public class JsonPropertyListStorage implements PropertyListStorage {
     /**
      * Similar to {@link #savePropertyList(ReadOnlyPropertyList)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath address of the data. Cannot be null.
      */
     public void savePropertyList(ReadOnlyPropertyList propertyList, Path filePath) throws IOException {
         requireNonNull(propertyList);

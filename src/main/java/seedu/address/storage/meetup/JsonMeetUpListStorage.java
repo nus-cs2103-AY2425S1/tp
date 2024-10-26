@@ -39,7 +39,7 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
     /**
      * Similar to {@link #readMeetUpList()}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath address of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
     public Optional<ReadOnlyMeetUpList> readMeetUpList(Path filePath) throws DataLoadingException {
@@ -67,7 +67,7 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
     /**
      * Similar to {@link #saveMeetUpList(ReadOnlyMeetUpList)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath address of the data. Cannot be null.
      */
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
         requireNonNull(meetUpList);

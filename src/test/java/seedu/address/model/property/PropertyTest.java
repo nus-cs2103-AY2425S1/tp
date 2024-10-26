@@ -9,7 +9,7 @@ public class PropertyTest {
     @Test
     public void toStringMethod() {
         String expected = Property.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", location=" + ALICE.getLocation() + ", askingPrice=" + ALICE.getAskingPrice()
+                + ", address=" + ALICE.getAddress() + ", askingPrice=" + ALICE.getAskingPrice()
                 + ", propertyType=" + ALICE.getPropertyType() + "}";
         assertEquals(expected, ALICE.toString());
     }
