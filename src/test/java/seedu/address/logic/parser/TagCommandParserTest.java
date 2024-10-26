@@ -1,11 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,13 +28,12 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_validArgs_success() {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + VALID_TAG_BRIDES_FRIEND.getTagName();
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + BRIDES_SIDE.getTagName();
         Set<Tag> tags = new HashSet<>();
         List<Index> indexes = new ArrayList<>();
-        tags.add(VALID_TAG_BRIDES_FRIEND);
+        tags.add(BRIDES_SIDE);
         indexes.add(INDEX_FIRST_PERSON);
         TagCommand expectedCommand = new TagCommand(indexes, tags);
-        System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -44,14 +46,14 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_missingPrefix_throwsParseException() {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + VALID_TAG_BRIDES_FRIEND.getTagName();
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + BRIDES_SIDE.getTagName();
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingIndex_throwsParseException() {
-        String userInput = " " + PREFIX_TAG + VALID_TAG_BRIDES_FRIEND;
+        String userInput = " " + PREFIX_TAG + BRIDES_SIDE.getTagName();
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
@@ -73,8 +75,25 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        String userInput = "a " + PREFIX_TAG + VALID_TAG_BRIDES_FRIEND;
+        String userInput = "a " + PREFIX_TAG + BRIDES_SIDE;
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_tooManyIndexes_throwsParseException() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + INDEX_SECOND_PERSON.getOneBased() + " "
+                + INDEX_THIRD_PERSON.getOneBased()
+                + " 4"
+                + " 5"
+                + " 6"
+                + " 7"
+                + " 8"
+                + " 9"
+                + " 10"
+                + " 11 "
+                + PREFIX_TAG + BRIDES_SIDE.getTagName();
+        assertParseFailure(parser, userInput, MESSAGE_TOO_MANY_INDEXES);
     }
 }

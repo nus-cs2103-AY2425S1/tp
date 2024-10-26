@@ -20,7 +20,7 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteTagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, " t/bride's friend", new DeleteTagCommand(expectedTags));
@@ -38,7 +38,7 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_leadingAndTrailingSpaces_returnsDeleteTagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, "  t/ bride's friend   ", new DeleteTagCommand(expectedTags));

@@ -20,7 +20,7 @@ public class NewtagCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsNewtagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, " t/bride's friend", new NewtagCommand(expectedTags));
@@ -28,7 +28,7 @@ public class NewtagCommandParserTest {
 
     @Test
     public void parse_leadingAndTrailingSpaces_returnsNewtagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, " t/   bride's friend   ", new NewtagCommand(expectedTags));
@@ -67,7 +67,7 @@ public class NewtagCommandParserTest {
 
     @Test
     public void parse_multipleValidArgs_returnsNewtagCommand() {
-        Tag tagBridesFriend = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag tagBridesFriend = TypicalTags.BRIDES_SIDE;
         Tag tagColleagues = TypicalTags.COLLEAGUES;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(tagBridesFriend);

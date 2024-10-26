@@ -39,14 +39,21 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         try {
-            for (String indexStr : argMultimap.getPreamble().split("\\s+")) {
-                indexSet.add(ParserUtil.parseIndex(indexStr));
-                if (indexSet.size() > MAX_INDEXES) {
-                    throw new ParseException(Messages.MESSAGE_TOO_MANY_INDEXES);
+            List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
+            System.out.println(indexStrings.isEmpty() + indexStrings.toString() + indexStrings.size());
+            if (indexStrings.size() == 1 && indexStrings.get(0).isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
+            checkIndexLength(indexStrings);
+
+            for (String indexStr : indexStrings) {
+                if (!indexStr.isEmpty()) {
+                    checkIndex(indexStr);
+                    indexSet.add(ParserUtil.parseIndex(indexStr.trim()));
                 }
             }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
         for (String tagString : tagStrings) {
@@ -62,5 +69,18 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         return new TagCommand(new ArrayList<>(indexSet), tagSet);
+    }
+
+    private void checkIndex(String indexStr) throws ParseException {
+        if (!indexStr.matches("\\d+")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TagCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private void checkIndexLength(List<String> indexStrings) throws ParseException {
+        if (indexStrings.size() > MAX_INDEXES) {
+            throw new ParseException(Messages.MESSAGE_TOO_MANY_INDEXES);
+        }
     }
 }
