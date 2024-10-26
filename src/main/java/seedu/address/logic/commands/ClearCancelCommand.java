@@ -4,6 +4,9 @@ import seedu.address.model.Model;
 import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
+/**
+ * Indicates the clear operation is cancelled.
+ */
 public class ClearCancelCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Clear operation cancelled.";
     @Override

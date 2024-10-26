@@ -105,6 +105,13 @@ public class AddressBookParser {
         return this.pendingCommand != null;
     }
 
+    /**
+     * Parses user input into command for executing pending command.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public Command excutePendingCommand(String userInput) throws ParseException {
 
         if (userInput.equalsIgnoreCase("Y")) {
