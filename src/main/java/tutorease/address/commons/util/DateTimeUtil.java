@@ -9,10 +9,10 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Contains utility methods for handling date times.
  */
 public class DateTimeUtil {
-    private static String dateTimeFormat = "dd-MM-yyyy HH:mm";
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
+
+    public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final String INVALID_DATETIME_FORMAT_MESSAGE = "%s date time must be in the format of "
-            + dateTimeFormat;
+            + DATETIME_FORMAT;
     public static final String INVALID_DATETIME_FIELD_MESSAGE = "%s should be an integer";
     public static final String INVALID_DAY_MESSAGE = "Invalid Day: %d. "
             + "dd must be between 1 and %d for your given month and year";
@@ -20,6 +20,8 @@ public class DateTimeUtil {
     public static final String INVALID_YEAR_MESSAGE = "Invalid Year: %d. yyyy must be between 2000 and 2100";
     public static final String INVALID_HOUR_MESSAGE = "Invalid Hour: %d. HH must be between 0 and 23";
     public static final String INVALID_MINUTE_MESSAGE = "Invalid Minute: %d. mm must be between 0 and 59";
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
 
     /**
@@ -138,7 +140,7 @@ public class DateTimeUtil {
      *
      * @return The date time format.
      */
-    public static String getDateTimeFormat() {
-        return dateTimeFormat;
+    public static String getDatetimeFormat() {
+        return DATETIME_FORMAT;
     }
 }
