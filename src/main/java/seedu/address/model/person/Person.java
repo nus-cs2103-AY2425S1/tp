@@ -44,7 +44,6 @@ public class Person {
             new Phone(),
             new Email(),
             new Address(),
-            new DietaryPreference(),
             new Remark(),
             Collections.emptySet());
 
@@ -57,7 +56,6 @@ public class Person {
             new Phone(),
             new Email(),
             new Address(),
-            new DietaryPreference(),
             new Remark(),
             Collections.emptySet());
 
