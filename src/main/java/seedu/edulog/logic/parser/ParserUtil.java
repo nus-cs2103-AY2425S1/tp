@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.edulog.commons.core.index.Index;
 import seedu.edulog.commons.util.StringUtil;
 import seedu.edulog.logic.parser.exceptions.ParseException;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
@@ -133,17 +134,17 @@ public class ParserUtil {
      *
      * @throws ParseException if the description is not within 1 and 100 characters long.
      */
-    public static String parseDescription(String description) throws ParseException {
+    public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
 
         String trimmed = description.trim();
-        if (Lesson.checkEmptyDescription(trimmed)) {
-            throw new ParseException(Lesson.DESCRIPTION_EMPTY);
-        } else if (Lesson.checkTooLongDescription(trimmed)) {
-            throw new ParseException(Lesson.DESCRIPTION_TOO_LONG);
+        if (Description.checkEmptyDescription(trimmed)) {
+            throw new ParseException(Description.DESCRIPTION_EMPTY);
+        } else if (Description.checkTooLongDescription(trimmed)) {
+            throw new ParseException(Description.DESCRIPTION_TOO_LONG);
         }
 
-        return trimmed;
+        return new Description(trimmed);
     }
 
     /**

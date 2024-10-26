@@ -106,27 +106,6 @@ public class Lesson {
     }
 
     /**
-     * Checks that description is not empty, i.e. not "".
-     */
-    public static boolean checkEmptyDescription(String description) {
-        return description.isEmpty();
-    }
-
-    /**
-     * Checks if the description fits the character limit.
-     */
-    public static boolean checkTooLongDescription(String description) {
-        return description.length() > MAX_CHARACTER_LIMIT;
-    }
-
-    /**
-     * Checks if the description meets all description restrictions.
-     */
-    public static boolean checkValidDescription(String description) {
-        return !checkEmptyDescription(description) && !checkTooLongDescription(description);
-    }
-
-    /**
      * Checks if the day of week matches any of the 7 days of the week, spelt in full, example "Wednesday".
      * Non-case sensitive.
      */

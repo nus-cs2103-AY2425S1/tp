@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.edulog.commons.exceptions.IllegalValueException;
+import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
 
 /**
@@ -52,14 +53,14 @@ class JsonAdaptedLesson {
         // Description
 
         if (description == null) {
-            // TODO: Change all exceptions thrown below to "XXX.class.getSimpleName()" once fields are OOP-ized.
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
 
-        if (Lesson.checkEmptyDescription(description)) {
-            throw new IllegalValueException(Lesson.DESCRIPTION_EMPTY);
-        } else if (Lesson.checkTooLongDescription(description)) {
-            throw new IllegalValueException(Lesson.DESCRIPTION_TOO_LONG);
+        if (Description.checkEmptyDescription(description)) {
+            throw new IllegalValueException(Description.DESCRIPTION_EMPTY);
+        } else if (Description.checkTooLongDescription(description)) {
+            throw new IllegalValueException(Description.DESCRIPTION_TOO_LONG);
         }
 
         String modelDescription = description;

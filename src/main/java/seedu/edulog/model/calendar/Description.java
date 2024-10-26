@@ -1,5 +1,8 @@
 package seedu.edulog.model.calendar;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.edulog.commons.util.AppUtil.checkArgument;
+
 /**
  * Denotes the description of a Lesson, which is displayed in the Calendar.
  * The description must be used by the user to tag the Lesson in a uniquely identifiable manner - i.e. the description
@@ -21,7 +24,22 @@ public class Description {
      * A cap is placed on the description to prevent the Lesson description from excessively clogging the UI.
      */
     public static final String DESCRIPTION_TOO_LONG =
-        "Lesson description should be at most 100 characters long (whitespace-inclusive).";
+        "Lesson description should be at most " + MAX_CHARACTER_LIMIT + " characters long (whitespace-inclusive).";
+
+    public final String description;
+
+    /**
+     * Initializes a Description for a Lesson, with checks to ensure that lesson descriptions fit input restrictions,
+     * e.g. cannot be an empty string.
+     * @param description A String that is between 1 and {@value MAX_CHARACTER_LIMIT} characters long
+     */
+    public Description(String description) {
+        requireNonNull(description);
+        checkArgument(checkEmptyDescription(description), DESCRIPTION_EMPTY);
+        checkArgument(checkTooLongDescription(description), DESCRIPTION_TOO_LONG);
+
+        this.description = description;
+    }
 
     /**
      * Checks that description is not empty, i.e. not "".
@@ -35,12 +53,5 @@ public class Description {
      */
     public static boolean checkTooLongDescription(String description) {
         return description.length() > MAX_CHARACTER_LIMIT;
-    }
-
-    /**
-     * Checks if the description meets all description restrictions.
-     */
-    public static boolean checkValidDescription(String description) {
-        return !checkEmptyDescription(description) && !checkTooLongDescription(description);
     }
 }
