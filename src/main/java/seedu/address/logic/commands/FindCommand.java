@@ -19,12 +19,6 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String SPECIFIC_FIND_PREFIX = "s/";
 
-    /*
-     * The first character of a specific find must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "For more specific searches, use the \"s/\" prefix. When doing so, keywords need to be an exact match.\n"
@@ -77,7 +71,7 @@ public class FindCommand extends Command {
     public static boolean isValidSpecificFind(List<String> specificKeywords) {
         boolean result = true;
         for (int i = 0; i < specificKeywords.size(); i++) {
-            if (specificKeywords.get(i).matches(VALIDATION_REGEX)) {
+            if (specificKeywords.get(i).isBlank()) {
                 result = false;
             }
         }
