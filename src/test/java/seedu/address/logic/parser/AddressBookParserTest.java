@@ -66,7 +66,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_confirmation() throws Exception {
+    public void parseCommand_pendingCommand() throws Exception {
         try {
             parser.parseCommand("Y");
         } catch (Exception e) {
