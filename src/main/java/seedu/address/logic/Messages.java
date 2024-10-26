@@ -2,11 +2,13 @@ package seedu.address.logic;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 
 /**
@@ -21,6 +23,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_HAS_CLASHES = "\nYou have %d other students with clashing schedule:\n%s";
+    public static final String MESSAGE_REMINDER = "Reminder(s) for %s:\n";
 
 
     /**
@@ -97,5 +100,31 @@ public class Messages {
                 )
         );
     }
+
+    /**
+     * Generates a reminder message for lessons scheduled today.
+     *
+     * @param day The day of the week for today
+     * @param reminder A list of students who has lesson for today.
+     * @return A formatted reminder message indicating the day of today and details of lesson for today.
+     */
+    public static String getReminderMessage(Days day, List<Student> reminder) {
+        if (reminder.isEmpty()) {
+            return "Congratulations! You have no class for today!";
+        }
+
+        AtomicInteger index = new AtomicInteger(1); // Start the index at 1
+
+        String studentList = Messages.listFormat(reminder, student ->
+                String.format("%d) %s, %s, %s\n",
+                        index.getAndIncrement(),
+                        student.getName(),
+                        student.getSchedule().getTime(),
+                        student.getSubject())
+        );
+
+        return String.format(MESSAGE_REMINDER, day) + studentList;
+    }
+
 
 }

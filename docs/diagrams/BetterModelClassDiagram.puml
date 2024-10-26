@@ -5,14 +5,8 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniqueStudentList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueStudentList
-UniqueTagList -[hidden]down- UniqueStudentList
 
-UniqueTagList -right-> "*" Tag
 UniqueStudentList -right-> Student
-
-Student -up-> "*" Tag
 
 Student *--> Name
 Student *--> Phone
@@ -21,4 +15,5 @@ Student *--> Address
 Student *--> Schedule
 Student *--> Subject
 Student *--> PaidAmount
+Student *--> OwedAmount
 @enduml

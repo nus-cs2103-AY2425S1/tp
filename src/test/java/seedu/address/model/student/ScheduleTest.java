@@ -208,4 +208,13 @@ class ScheduleTest {
         assertEquals(schedule.hashCode(), sameSchedule.hashCode());
         assertNotEquals(schedule.hashCode(), differentSchedule.hashCode());
     }
+
+    @Test
+    public void getTimeTest() {
+        Schedule schedule = new Schedule("monday-1200-1300");
+        assertEquals("12:00 - 13:00", schedule.getTime());
+
+        schedule = new Schedule("FRIDaY-0000-2359");
+        assertEquals("00:00 - 23:59", schedule.getTime());
+    }
 }

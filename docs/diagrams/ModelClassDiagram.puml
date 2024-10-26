@@ -19,10 +19,10 @@ Class Email
 Class Name
 Class Phone
 Class Subject
-Class Tag
 Class Schedule
 Class "{abstract}\nFee" as Fee
 Class PaidAmount
+Class OwedAmount
 
 Class I #FFFFFF
 }
@@ -46,10 +46,11 @@ Student *--> Phone
 Student *--> Email
 Student *--> Address
 Student *--> Schedule
-Student *--> "*" Tag
 Student *--> Subject
 Student *--> PaidAmount
+Student *--> OwedAmount
 PaidAmount -up-|> Fee
+OwedAmount -up-|> Fee
 
 
 Student -[hidden]up--> I

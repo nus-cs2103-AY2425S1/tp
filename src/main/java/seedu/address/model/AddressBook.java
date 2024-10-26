@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -85,6 +86,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public List<Student> getClashingStudents(Student student) {
         requireNonNull(student);
         return students.getClashes(student);
+    }
+
+    /**
+     * Retrieves a list of students with whom {@code student} has lesson scheduled on the day.
+     * @param day The specified day to check for.
+     * @return List of students who have lesson scheduled on that day.
+     */
+    public List<Student> getScheduledStudents(Days day) {
+        requireNonNull(day);
+        return students.getScheduledOnDay(day);
     }
 
     /**
