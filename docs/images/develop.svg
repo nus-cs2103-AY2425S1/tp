@@ -1,0 +1,18 @@
+<svg width="1800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#ffffff" fill="#000000" stroke-width="0" x="-2.00048" y="-0.66681" width="1804.00092" height="601.33357" id="svg_25" rx="100"/>
+  <rect fill="#000000" x="88.66706" y="116" width="463.99997" height="410" id="svg_1" rx="50" stroke="#ffffff" stroke-width="30"/>
+  <rect fill="#fff" x="99.16703" y="125.8" width="442.99999" height="95" id="svg_4" stroke="#000" stroke-width="0"/>
+  <rect fill="#ffffff" x="180.66703" y="46" width="53" height="113.99999" id="svg_6" rx="20" stroke-width="15" stroke="#000000"/>
+  <rect fill="#fff" x="407.50036" y="46" width="53" height="113.99999" id="svg_8" rx="20" stroke-width="15" stroke="#000000"/>
+  <ellipse stroke="#000" fill="#fff" stroke-width="0" cx="320.8337" cy="431.01187" id="svg_14" rx="87.99998" ry="81.28812"/>
+  <ellipse stroke="#000000" fill="#fff" stroke-width="20" cx="321.66702" cy="320.50001" id="svg_10" rx="51.49999" ry="51.49999"/>
+  <rect stroke="#fff" fill="#000000" stroke-width="0" x="167.66703" y="421.49997" width="306" height="89.5" id="svg_16"/>
+  <rect fill="#000000" stroke-width="0" x="167.66703" y="540.99999" width="306" height="54" id="svg_18" stroke="#fff"/>
+  <text fill="#ffffff" stroke-width="0" x="322.3902" y="162.97274" id="svg_22" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve" stroke="#000000" transform="matrix(5.87528 0 0 5.87528 -950.321 -725.815)" font-weight="normal" font-style="normal">Develop</text>
+  <text fill="#ffffff" stroke-width="0" x="322.76224" y="385.33016" id="svg_24" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve" stroke="#000000" transform="matrix(8.75124 0 0 8.75124 -2035.69 -2906.73)" font-weight="normal" font-style="normal">Eventory</text>
+  <text transform="matrix(1.25489 0 0 1.25489 -41.6463 -79.7042)" stroke="#000000" xml:space="preserve" text-anchor="start" font-family="sans-serif" font-size="100" id="svg_3" y="377.214" x="146.13304" stroke-width="0" fill="#ffffff">&lt;      &gt;</text>
+ </g>
+
+</svg>

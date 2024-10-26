@@ -3,7 +3,6 @@ package seedu.address.model.types.common;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -50,21 +49,14 @@ public class DateTime {
         internalValidation = test.matches(VALIDATION_REGEX);
 
         try {
-            LocalDateTime parsedValue;
-            parsedValue = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
-            externalValidation = true;
+            LocalDateTime dateTime = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
+            String dateTimeString = dateTime.format(DATE_TIME_FORMATTER);
+            externalValidation = test.equals(dateTimeString); //Since LocalDateTime parser is lenient
         } catch (DateTimeParseException e) {
             externalValidation = false;
         }
 
         return internalValidation && externalValidation;
-    }
-
-    /**
-     * Returns a Duration object (can be negative) representing the difference from another LocalDateTime
-     */
-    public Duration compareTo(LocalDateTime otherLocalDateTime) {
-        return Duration.between(localDateTimeValue, otherLocalDateTime);
     }
 
     public LocalDateTime toLocalDateTime() {
