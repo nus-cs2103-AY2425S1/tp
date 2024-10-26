@@ -92,7 +92,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setNokPhone(ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
-            editPatientDescriptor.setAllergy(ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get()));
+            // TODO remove the comment yuancheng
+            // editPatientDescriptor.setAllergy(ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get()));
         }
         if (argMultimap.getValue(PREFIX_HEALTHRISK).isPresent()) {
             editPatientDescriptor.setHealthRisk(ParserUtil.parseHealthRisk(

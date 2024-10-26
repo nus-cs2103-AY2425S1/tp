@@ -18,6 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddFCommand;
@@ -39,13 +40,13 @@ import seedu.address.model.patient.Sex;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddFCommand object
  */
 public class AddFCommandParser implements Parser<AddFCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddFCommand
+     * and returns an AddFCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddFCommand parse(String args) throws ParseException {
@@ -61,7 +62,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE,
-                PREFIX_ADDRESS, PREFIX_ALLERGY, PREFIX_BLOODTYPE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_EMAIL,
                 PREFIX_HEALTHRECORD, PREFIX_HEALTHRISK, PREFIX_NOKNAME, PREFIX_NOKPHONE,
                 PREFIX_NOTE, PREFIX_PHONE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -71,7 +72,6 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
-        Allergy allergy = ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).orElse(""));
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).orElse(""));
         HealthRecord healthRecord = ParserUtil.parseHealthRecord(
                 argMultimap.getValue(PREFIX_HEALTHRECORD).orElse(""));
@@ -80,9 +80,11 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
         Name nokName = ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).orElse(""));
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
+        Set<Allergy> allergies = ParserUtil.parseAllergies(
+                argMultimap.getAllValues(PREFIX_ALLERGY));
         List<Appt> appts = new ArrayList<>();
 
-        Patient patient = new Patient(name, nric, birthDate, sex, phone, email, address, allergy,
+        Patient patient = new Patient(name, nric, birthDate, sex, phone, email, address, allergies,
                 bloodType, healthRIsk, healthRecord, note, nokName, nokPhone, appts);
 
         return new AddFCommand(patient);
