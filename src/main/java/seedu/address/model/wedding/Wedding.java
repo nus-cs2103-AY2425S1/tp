@@ -13,7 +13,6 @@ import seedu.address.model.person.Person;
  */
 public class Wedding {
     private Name name;
-    private Client stringClient;
     private Client client;
     private Date date;
     private Venue venue;
