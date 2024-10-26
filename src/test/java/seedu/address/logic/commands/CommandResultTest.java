@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,13 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+
+        // different showHistory value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
     }
 
     @Test
@@ -46,10 +49,13 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
+
+        // different showHistory value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
     }
 
     @Test
@@ -57,30 +63,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", showHistory=" + commandResult.isShowHistory() + "}";
         assertEquals(expected, commandResult.toString());
-    }
-
-    @Test
-    public void getPersonName() {
-        // Test case 1: Valid format with a name
-        CommandResult commandResult = new CommandResult("User: John Doe");
-        assertEquals("John Doe", commandResult.getPersonName());
-
-        // Test case 2: No colon in feedbackToUser
-        commandResult = new CommandResult("User John Doe");
-        assertEquals("", commandResult.getPersonName());
-
-        // Test case 3: Empty string in feedbackToUser
-        commandResult = new CommandResult("");
-        assertEquals("", commandResult.getPersonName());
-
-        // Test case 4: Colon but no name after it
-        commandResult = new CommandResult("User: ");
-        assertEquals("", commandResult.getPersonName());
-
-        // Test case 5: Colon with spaces and name after it
-        commandResult = new CommandResult("User:     Jane Doe  ");
-        assertEquals("Jane Doe", commandResult.getPersonName());
     }
 }

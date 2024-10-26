@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.commands.HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS;
-
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -193,10 +191,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            String personName = commandResult.getPersonName();
             personListPanel = new PersonListPanel(logic.getSortedFilteredPersonList());
 
-            if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
+            if (commandResult.isShowHistory()) {
                 switchMainPanel(personListPanel, historyListPanel);
             } else {
                 switchMainPanel(historyListPanel, personListPanel);
