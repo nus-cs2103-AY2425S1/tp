@@ -74,7 +74,8 @@ public class TagAddCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getJob(), editedTags);
 
-        setPersonInWedding(editedPerson, model, tagsToAdd);
+        updatePersonInWedding(editedPerson, personToEdit, model);
+        setPersonInWedding(editedPerson, personToEdit, model);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -134,8 +135,8 @@ public class TagAddCommand extends Command {
      * Matching tags are added to a separate set that keeps track of duplicate tags.
      * Unique tags are added to a separate list of tags.
      *
-     * @param person EditedPerson from the execute method above.
-     * @return A set of tags that contains distinct tags from both existing tags and
+     * @param person Person editedPerson from the execute method above.
+     * @return A Set of tags that contains distinct tags from both existing tags and
      *     those inputted by the user.
      */
     private Set<Tag> handleDuplicateTags(Person person) {
@@ -159,9 +160,9 @@ public class TagAddCommand extends Command {
 
     /**
      * Gets a list of weddings whose name matches that of the tags in the set.
-     * @param model current model containing necessary wedding address book.
-     * @param tags set of tags input by the user.
-     * @return a list of weddings that match the tag.
+     * @param model current Model containing necessary wedding address book.
+     * @param tags Set of tags input by the user.
+     * @return a List of weddings that match the tag.
      */
     private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
@@ -179,9 +180,9 @@ public class TagAddCommand extends Command {
 
     /**
      * Generates message based on whether tag can added, which depends on whether wedding exists or not.
-     * @param model current model containing necessary wedding address book.
-     * @param editedTags set of tags that exist as a wedding as well.
-     * @return a String message stating whether tag exists as a wedding or not.
+     * @param model current Model containing necessary wedding address book.
+     * @param editedTags Set of tags that exist as a wedding as well.
+     * @return String message stating whether tag exists as a wedding or not.
      * @throws CommandException
      */
     private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) throws CommandException {
@@ -205,18 +206,39 @@ public class TagAddCommand extends Command {
     }
 
     /**
-     * Sets the person being tagged as a participant in the wedding that matches the tag.
-     * @param editedPerson the person who has tags currently being added to them.
-     * @param model current model containing necessary wedding address book.
-     * @param editedTags set of tags that exist as a wedding as well.
+     * Updates the rest the list of weddings with the editedPerson.
+     * @param editedPerson Person whose new tags have been added to them.
+     * @param personToEdit Person who has tags currently being added to them.
+     * @param model current Model containing necessary wedding address book.
      */
-    private void setPersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
-        List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
+    private void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
 
         List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
                 .toList();
 
         for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+    }
+
+    /**
+     * Sets the person being tagged as a participant in the wedding that matches the tag.
+     * @param editedPerson Person whose tags have been added to them.
+     * @param personToEdit Person who has tags currently being added to them.
+     * @param model current Model containing necessary wedding address book.
+     */
+    private void setPersonInWedding(Person editedPerson, Person personToEdit, Model model) {
+        List<Wedding> weddingList = getWeddingfromTags(model, editedPerson.getTags());
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            set.remove(personToEdit);
             set.add(editedPerson);
         }
     }
