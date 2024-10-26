@@ -27,8 +27,9 @@ public class RemovePersonFromEventCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found in event";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/ [INDEX] [pi/ [PERSON INDEX]] : Removes a person from "
-           + "an event";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " ei/ [INDEX] [pi/ [PERSON INDEX]] : Removes a person from "
+            + "an event";
 
     private static final Logger logger = LogsCenter.getLogger(RemovePersonFromEventCommand.class);
 

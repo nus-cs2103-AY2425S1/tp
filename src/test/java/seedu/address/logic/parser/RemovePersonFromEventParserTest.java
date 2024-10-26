@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 
@@ -16,7 +17,7 @@ public class RemovePersonFromEventParserTest {
     private RemovePersonFromEventParser parser = new RemovePersonFromEventParser();
 
     @Test
-    public void parse_MissingParts_Failure() {
+    public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
@@ -29,7 +30,7 @@ public class RemovePersonFromEventParserTest {
 
     @Test
     public void parse_validArgs_returnsRemovePersonFromEventCommand() {
-         assertParseSuccess(parser, "remove ei/1 pi/1",
+        assertParseSuccess(parser, "remove ei/1 pi/1",
                  new RemovePersonFromEventCommand(Index.fromOneBased(1),
                          Index.fromOneBased(1)));
     }
