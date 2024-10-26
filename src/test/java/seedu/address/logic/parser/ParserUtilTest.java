@@ -16,6 +16,7 @@ import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 
@@ -151,6 +152,28 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePaidAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaidAmount((String) null));
+    }
+
+    @Test
+    public void parsePaidAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePaidAmount(INVALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithoutWhitespace_returnsPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(VALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithWhitespace_returnsTrimmedPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(WHITESPACE + VALID_COST_AMOUNT + WHITESPACE));
+    }
+
+    @Test
     public void parseRate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRate((String) null));
     }
@@ -205,7 +228,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHour_validValueWithourWhitespace_returnsHour() throws Exception {
+    public void parseHour_validValueWithoutWhitespace_returnsHour() throws Exception {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
