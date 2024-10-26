@@ -48,6 +48,12 @@ public class Messages {
             + "the person's wedding list.";
     public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
             + " This will create the required Wedding objects.";
+    public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
+            + " This will unassign all people for the Wedding object.";
+    public static final String MESSAGE_FORCE_TAG_TO_CONTACT = "Use f/ to force the tagging of contacts."
+            + " This will create the require Tags.";
+    public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
+            + " This will unassign all contacts with the Tag.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

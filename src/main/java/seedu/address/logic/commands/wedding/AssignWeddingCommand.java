@@ -94,6 +94,7 @@ public class AssignWeddingCommand extends Command {
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
+            wedding.increasePeopleCount();
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
@@ -125,6 +126,7 @@ public class AssignWeddingCommand extends Command {
         }
 
         AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
-        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd);
+        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd)
+                && this.force == otherCommand.force;
     }
 }

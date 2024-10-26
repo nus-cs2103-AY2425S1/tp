@@ -304,8 +304,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person person : persons) {
             Set<Tag> tagForPerson = person.getTags();
             for (Tag tag : tagForPerson) {
+                tag.increaseTaggedCount();
                 if (!this.hasTag(tag)) {
                     this.addTag(tag);
+                } else {
+                    this.setTag(tag, tag);
                 }
             }
         }
@@ -337,6 +340,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 if (!this.hasWedding(wedding)) {
                     this.addWedding(wedding);
                 }
+                wedding.increasePeopleCount();
             }
         }
     }

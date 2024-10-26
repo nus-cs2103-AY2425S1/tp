@@ -96,7 +96,6 @@ public class UntagCommand extends Command {
                 personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }

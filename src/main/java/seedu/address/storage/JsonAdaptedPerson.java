@@ -107,7 +107,8 @@ class JsonAdaptedPerson {
         final List<Task> personTasks = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            Tag toAdd = tag.toModelType();
+            personTags.add(toAdd);
         }
 
         for (JsonAdaptedTask task : tasks) {

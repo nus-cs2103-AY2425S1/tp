@@ -4,45 +4,96 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+Package Model as ModelPackage <<Rectangle>> {
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
+    Class Address
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Package "Person " {
+        Class UniquePersonList
+        Class Person
+        Class Email
+        Class Name
+        Class Phone
+        Class Vendor
+    }
 
-Class I #FFFFFF
+    Package "Wedding " {
+        Class UniqueWeddingList
+        Class Wedding
+        Class WeddingName
+    }
+
+    Package "Tag " {
+        Class UniqueTagList
+        Class Tag
+        Class TagName
+    }
+
+    Package "Task " {
+            Class UniqueTaskList
+            Class Task
+            Class Description
+            Class Todo
+            Class Event
+            Class Deadline
+            Class TaskName
+            Class Date
+        }
+
+    Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+HiddenOutside .down.> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager --> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueWeddingList
+AddressBook *--> "1" UniqueTagList
+AddressBook *--> "1" UniqueTaskList
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Task
+Person *--> "*" Wedding
+Vendor -up--|> Person
 
+UniqueWeddingList ---> "~* all" Wedding
+
+Wedding *--> "1" WeddingName
+Wedding *--> "0..2" Person
+Wedding *--> "1" Address
+
+UniqueTagList --> "~* all" Tag
+Tag *--> "1" TagName
+
+
+UniqueTaskList ---> "~* all" Task
+Task *-up-> "1" TaskName
+Task *-up-> "1" Description
+Task *-up-> "1" Date
+Todo -up-|> Task
+Event -up-|> Task
+Deadline -up-|> Task
+
+' Adjusted visibility of hidden lines for better organization
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
@@ -50,5 +101,9 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
+' Ensuring clarity in connections
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Wedding
+ModelManager --> "~* filtered" Task
+
 @enduml
