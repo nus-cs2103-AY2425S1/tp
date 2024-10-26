@@ -40,8 +40,8 @@ public class AddCommandIntegrationTest {
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddClientCommand(validPerson), model,
-                String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                expectedModel);
+                Messages.formatSuccessMessage(validPerson, AddClientCommand.MESSAGE_SUCCESS),
+                        expectedModel);
     }
 
     @Test
@@ -62,9 +62,8 @@ public class AddCommandIntegrationTest {
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddClientCommand(validPerson), model,
-                String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validPerson)
-                        + AddClientCommand.MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(validPerson)),
-                expectedModel);
+                Messages.formatSuccessMessage(validPerson, AddClientCommand.MESSAGE_SUCCESS),
+                        expectedModel);
     }
 
     @Test
@@ -73,13 +72,13 @@ public class AddCommandIntegrationTest {
         Person personWithCar = new PersonBuilder()
                 .withCar("SH8942L", VALID_CAR_VIN_A, "Toyota", "Corolla").build();
         assertCommandFailure(new AddClientCommand(personWithCar), modelWithCar,
-                "This car already exists in the address book");
+                "Car already exists in MATER.");
 
         // One Person in the list has a car with the same VRN
         personWithCar = new PersonBuilder()
                 .withCar(VALID_CAR_VRN_A, "33333333333333333", "Toyota", "Corolla").build();
         assertCommandFailure(new AddClientCommand(personWithCar), modelWithCar,
-                "This car already exists in the address book");
+                "Car already exists in MATER.");
     }
 
 }

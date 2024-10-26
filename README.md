@@ -23,21 +23,21 @@ Command: `add-client n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS vrn/VE
 
 Remove a client's profile from the system by specifying their unique client ID.
 
-Command: `delete-client CLIENT_ID`
+Command: `del-client CLIENT_ID`
 
 
 ### Edit Client
 
 Edit a client's profile, including personal information and car details.
-Command: `edit-client CLIENT_ID FIELD_TAG NEW_VALUE`
+Command: `edit CLIENT_ID FIELD NEW_VALUE`
 ### List Clients
 
 View a list of clients with details, limiting the number of entries returned based on usage needs.
-Command: `list-client LIMIT`
+Command: `list LIMIT`
 ### View Client
 
 View a specific client's profile by querying their unique client ID.
-Command: `view-client CLIENT_ID`
+Command: `view CLIENT_ID`
 
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-client 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `del-client 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-client 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("del-client 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete-client 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `del-client 1` Command" />
 
 <box type="info" seamless>
 
@@ -161,15 +161,20 @@ This section describes some noteworthy details on how certain features are imple
 
 The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
+<<<<<<< HEAD
 * `ViewClientCommandPasrser#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
+=======
+* `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view` command, parse the appropriate index to ViewClientCommand.
+>>>>>>> master
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
 Given below is an example usage scenario and how the View Client mechanism behaves at each step.
 
 Step 1. The user launches the application, all clients will be listed by default. **OR** The user calls a List/ Find command.
 
-Step 2. The user executes `view-client 1` command to view the first person in the Client list.
+Step 2. The user executes `view 1` command to view the first person in the Client list.
 
+<<<<<<< HEAD
 <box type="info" seamless>
 
 **Note:** Changes to Client details (via `edit-client`, `add-car`, `delete-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view-client` must be called again to reflect these changes.
@@ -181,12 +186,19 @@ Step 3. Before closing the existing `MATER - View Client` Window, the user execu
 <box type="info" seamless>
 
 **Note:** Only one `MATER - View Client` Window is to be displayed at all times. Calling `view-client` again while the window is open will refresh the window for the latest request.
+=======
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view 2` command to view the second person in the Client list.
+
+<box type="info" seamless>
+
+**Note:** Only one `MATER - View Client` Window to be displayed at all times. Calling `view` will display the latest request. Concurrent edits to Client details will not be updated on the `MATER - View Client` Window, `view` must be called again to reflect the changes.
+>>>>>>> master
 
 </box>
 
 Step 4. The user closes the `MATER - View Client` Window by either pressing the Close button (bottom) or Terminate button (top).
 
-The following sequence diagram shows how a `view-client` operation goes through the `UI` and `Logic` component:
+The following sequence diagram shows how a `view` operation goes through the `UI` and `Logic` component:
 
 <puml src="diagrams/ViewClientSequenceDiagram.puml" alt="ViewClientSequenceDiagram" />
 
@@ -196,7 +208,7 @@ The following sequence diagram shows how a `view-client` operation goes through 
 
 </box>
 
-The following activity diagram summarizes what happens when a user executes a `view-client` command:
+The following activity diagram summarizes what happens when a user executes a `view` command:
 
 <puml src="diagrams/ViewClientActivityDiagram.puml" width="250" />
 
@@ -220,24 +232,24 @@ The following activity diagram summarizes what happens when a user executes a `v
 
 The **Check Client** mechanism is facilitated by `CheckClientCommand` extending the `Command` family of classes, as elaborated in the Logic component of MATER. Additionally, it requires the following operations:
 
-* `CheckClientCommandParser#parse()` - Given the argument succeeding the `check-client` command, parses the appropriate index to `CheckClientCommand`.
+* `CheckClientCommandParser#parse()` - Given the argument succeeding the `check` command, parses the appropriate index to `CheckClientCommand`.
 * `CheckClientCommand#execute()` - Given the list of Clients, identifies the indexed Client and toggles the "checked-in" status of the Client's car. A car is either 'checked-in' or 'checked-out'.
 
 Given below is an example usage scenario and details on how the **Check Client** mechanism behaves at each step.
 
 **Step 1**: The user launches the application, where all clients are listed by default.
 
-**Step 2**: The user executes `check-client 1` command to toggle the "checked-in" status of the car for the first Client in the list.
+**Step 2**: The user executes `check 1` command to toggle the "checked-in" status of the car for the first Client in the list.
 
 **Step 3**: If the Client has a car associated, their car's "checked-in" status is toggled, and the success message indicating the action is displayed. If the Client does not have a car associated, an error message indicating there is **"No Car associated to Client to Check In"** is displayed.
 
 **Step 4**: The user may toggle the "checked-in" the status of other clients by providing the relevant index of the client they wish to edit the status of.
 
-The following sequence diagram shows how a `check-client` operation goes through the `Logic` component:
+The following sequence diagram shows how a `check` operation goes through the `Logic` component:
 
 <puml src="diagrams/CheckClientSequenceDiagram.puml" alt="CheckClientSequenceDiagram" />
 
-The following activity diagram summarizes what happens when a user executes a `check-client` command:
+The following activity diagram summarizes what happens when a user executes a `check` command:
 
 <puml src="diagrams/CheckClientActivityDiagram.puml" width="250" />
 

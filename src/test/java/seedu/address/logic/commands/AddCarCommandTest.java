@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -35,16 +36,29 @@ public class AddCarCommandTest {
 
     @Test
     public void execute_addCarToEligiblePerson_success() throws Exception {
+        // Create a valid person without a car
         Person validPerson = new PersonBuilder().build();
-        Car validCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"),
+        Car validCar = new Car(new Vrn("SJH9514P"), new Vin("KMHGH4JH3EU073801"),
                 new CarMake("Toyota"), new CarModel("Corolla"));
+
+        // Create a model stub that contains the person
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         modelStub.addPerson(validPerson); // Add person to the stub model
 
+        // Create the AddCarCommand to add the car to the first person
         AddCarCommand addCarCommand = new AddCarCommand(Index.fromOneBased(1), validCar);
+
+        // Build the expected message after adding the car
+        // The value 1 is passed to the string here as we know that the test only has 1 person inside the test stub.
+        Person validPersonWithCar = new PersonBuilder()
+                .withCar("SJH9514P", "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
+        String expectedMessage = Messages.formatSuccessMessage(validPersonWithCar,
+                AddCarCommand.MESSAGE_ADD_CAR_SUCCESS);
+
+        // Execute the command and capture the result
         CommandResult commandResult = addCarCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS, validCar), commandResult.getFeedbackToUser());
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
     @Test

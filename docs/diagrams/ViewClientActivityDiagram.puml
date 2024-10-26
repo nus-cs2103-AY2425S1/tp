@@ -4,7 +4,7 @@ skinparam ActivityFontSize 20
 skinparam ArrowFontSize 15
 start
 :User executes the
-view-client command;
+view command;
 
 if () then ([valid Client index])
     :Update Client details, Car details
