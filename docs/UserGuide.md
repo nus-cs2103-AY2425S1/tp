@@ -31,7 +31,7 @@ faster than traditional GUI apps.
 
    * `list contact` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/Software Engineer` : Adds a contact named `John Doe` to the Address Book.
+   * `add contact n/John Doe p/98765432 e/johnd@example.com r/Software Engineer` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete contact 3` : Deletes the 3rd contact shown in the current list.
 
@@ -50,13 +50,13 @@ faster than traditional GUI apps.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[s/SKILL]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -76,19 +76,45 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a contact: `add contact`
+### Adding a contact : `add contact`
 
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​`
+Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/Software Engineer`
-* `add n/Betsy Crowe s/Python e/betsycrowe@example.com r/Data Scientist p/1234567 s/Excel`
+* `add contact n/John Doe p/98765432 e/johnd@example.com r/Software Engineer`
+* `add contact n/Betsy Crowe s/Python e/betsycrowe@example.com r/Data Scientist p/1234567 s/Excel`
+
+### Adding a job : `add job`
+
+Adds a job to the address book. 
+The company attributed to the job being added must already 
+be in the address book.
+
+Format: `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Make sure to match job names and requirements to contact roles and skills to better utilise other features
+</div>
+
+Examples:
+* `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
+* `add job n/Data Scientist c/Apple s/90000 d/Needs to know AI s/Python`
+
+### Adding a company : `add company`
+
+Adds a company to the address book.
+
+Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+
+Examples:
+* `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
+* `add company n/Apple a/12 Ang Mo Kio Street 64, Singapore 569088 b/25 p/64815511`
 
 ### Listing all contacts : `list contact`
 
@@ -96,11 +122,23 @@ Shows a list of all contacts in the address book.
 
 Format: `list contact`
 
+### Listing all jobs : `list job`
+
+Shows a list of all jobs in the address book.
+
+Format: `list job`
+
+### Listing all companies : `list company`
+
+Shows a list of all companies in the address book.
+
+Format: `list company`
+
 ### Editing a contact : `edit`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -113,7 +151,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
 
-### Locating persons by name: `find`
+### Locating contacts by name : `find`
 
 Finds contacts whose names contain any of the given keywords.
 
@@ -144,6 +182,12 @@ Format: `delete contact INDEX`
 Examples:
 * `list contact` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a job : `delete job`
+
+Deletes the specified job from the address book.
+
+Format: `delete job INDEX`
 
 ### Clearing all entries : `clear`
 
@@ -194,12 +238,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples|
+|------------|------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`|
+| **Clear**  | `clear`|
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`|
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
+| **List**   | `list`|
+| **Help**   | `help`|
