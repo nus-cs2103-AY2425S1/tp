@@ -114,11 +114,17 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name, phone, email, address.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return this.equals(otherPerson);
+        if (otherPerson == null) {
+            return false;
+        }
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address);
     }
 
     /**

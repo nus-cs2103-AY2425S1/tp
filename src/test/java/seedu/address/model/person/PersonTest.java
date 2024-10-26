@@ -130,6 +130,7 @@ public class PersonTest {
                 + ", wedding=" + ALICE.getOwnWedding() + ", wedding jobs=" + ALICE.getWeddingJobs() + "}";
 
         assertEquals(expected, ALICE.toString());
+        // need to fix the fact that wedding=null
 
         expected = Person.class.getCanonicalName() + "{name=" + BENSON.getName() + ", phone=" + BENSON.getPhone()
                 + ", email=" + BENSON.getEmail() + ", address=" + BENSON.getAddress() + ", roles=" + BENSON.getRole()
