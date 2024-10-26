@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -29,6 +31,8 @@ public class AttendanceCard extends UiPart<Region> {
     private Label attendance;
     @FXML
     private Label otherAttendance;
+    @FXML
+    private ImageView attendanceStatusIcon;
 
     /**
      * Creates a {@code AttendanceCard} of the given tutorial
@@ -53,17 +57,17 @@ public class AttendanceCard extends UiPart<Region> {
     private void setAttendance() {
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
         if (attendanceList.isEmpty()) {
-            attendance.setText(": not attended");
+            attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText("No more attendance to show");
         } else if (currentWeekAttendance == null) {
-            attendance.setText(": not attended");
+            attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText(formatOtherAttendance(attendanceList));
         } else {
-            attendance.setText(" attended " + currentWeekAttendance.toDisplayString());
+            attendance.setText("attended " + currentWeekAttendance.toDisplayString());
             setAttendanceLabelAttendedStyle();
 
             List<Attendance> otherAttendanceList = attendanceList
@@ -113,7 +117,10 @@ public class AttendanceCard extends UiPart<Region> {
      */
     private void setAttendanceLabelNotAttendedStyle() {
         attendance.getStyleClass().clear();
-        attendance.setStyle("-fx-text-fill: #E58D8D");
+        attendance.setStyle("-fx-text-fill: #E58D8D; -fx-padding: 0 0 0 4");
+
+        Image icon = new Image("/images/cancel_icon.png");
+        attendanceStatusIcon.setImage(icon);
     }
 
     /**
@@ -121,6 +128,9 @@ public class AttendanceCard extends UiPart<Region> {
      */
     private void setAttendanceLabelAttendedStyle() {
         attendance.getStyleClass().clear();
-        attendance.setStyle("-fx-text-fill: #3E9B3F");
+        attendance.setStyle("-fx-text-fill: #52A853; -fx-padding: 0 0 0 4");
+
+        Image icon = new Image("/images/check_icon.png");
+        attendanceStatusIcon.setImage(icon);
     }
 }

@@ -8,13 +8,14 @@
 <?import javafx.scene.image.Image?>
 <VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
-        <Label fx:id="subject" style="-fx-text-fill: #262626; -fx-padding: 0 5 0 0" text="\$subject"/>
-        <HBox alignment="CENTER_LEFT">
-            <ImageView fitWidth="15" fitHeight="15">
-                <Image url="@/images/check_icon.png"/>
-            </ImageView>
-            <Label fx:id="attendance" style="-fx-text-fill: #262626" text="\$attendance"/>
+        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+            <Label fx:id="subject" style="-fx-text-fill: #262626; -fx-padding: 0 5 0 0" text="\$subject"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 2 5; -fx-background-radius: 7">
+            <ImageView fx:id="attendanceStatusIcon" fitWidth="15" fitHeight="15"/>
+            <Label fx:id="attendance" text="\$attendance"/>
         </HBox>
     </HBox>
-    <Label fx:id="otherAttendance" style="-fx-text-fill: #262626" visible="false" managed="false" wrapText="true"/>
+    <Label minWidth="230" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"
+           style="-fx-text-fill: #262626; -fx-padding: 5 0; -fx-font-size: 13; -fx-border-width: 0 0 2 0; -fx-border-color: #E4E4E4"/>
 </VBox>
