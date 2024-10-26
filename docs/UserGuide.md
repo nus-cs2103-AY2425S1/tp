@@ -153,7 +153,8 @@ Examples:
 
 Marks the specified elderly from ContactMate as called. 
 
-ContactMate will update the list to show the new next contact date of the elderly and sort the list accordingly.
+ContactMate will update the call history of the elderly.
+The sorting of the displayed person list will also be updated.
 You can also mark the specified elderly as called on a specific date and add notes.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
