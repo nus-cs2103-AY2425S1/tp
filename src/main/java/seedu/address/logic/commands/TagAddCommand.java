@@ -29,7 +29,7 @@ public class TagAddCommand extends Command {
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Adds a tag to the person identified "
             + "by their name. Also adds them as a participant in wedding given by specified tag.";
-    
+
   public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: "
             + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
