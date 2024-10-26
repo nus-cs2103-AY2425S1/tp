@@ -19,8 +19,8 @@ public class DeleteClientCommand extends Command {
     public static final String COMMAND_WORD = "del-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the indexed Client.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the indexed Client.\n\n"
+            + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Client deleted from MATER";

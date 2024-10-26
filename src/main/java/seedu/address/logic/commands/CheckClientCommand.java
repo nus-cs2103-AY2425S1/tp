@@ -20,8 +20,8 @@ public class CheckClientCommand extends Command {
     public static final String COMMAND_WORD = "check";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks In/ Out the indexed Client.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Checks In/ Out the indexed Client.\n\n"
+            + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_CHECK_IN_CLIENT_SUCCESS = "Checked In Client: %s (VRN: %s).";

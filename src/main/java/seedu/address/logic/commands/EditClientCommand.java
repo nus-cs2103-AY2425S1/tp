@@ -45,7 +45,7 @@ public class EditClientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the details of the indexed client. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values.\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -55,6 +55,7 @@ public class EditClientCommand extends Command {
             + "[" + PREFIX_VIN + "VEHICLE IDENTIFICATION NUMBER] "
             + "[" + PREFIX_MAKE + "VEHICLE MAKE] "
             + "[" + PREFIX_MODEL + "VEHICLE MODEL] "
+            + "[" + PREFIX_ISSUE + "ISSUE]\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_VRN + "SNP5701C";

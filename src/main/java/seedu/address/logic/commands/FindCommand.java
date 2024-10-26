@@ -16,8 +16,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Clients whose names or "
-            + "car VRN contain any of the specified keywords (case-insensitive)\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "car VRN contain any of the specified keywords (case-insensitive).\n\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]\n\n"
             + "Example: " + COMMAND_WORD + " john SJH9514P";
 
     private final NameContainsKeywordsPredicate predicate;

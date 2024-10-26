@@ -23,7 +23,7 @@ public class AddClientCommand extends Command {
 
     public static final String COMMAND_WORD = "add-client";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Client to MATER. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Client to MATER.\n\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -32,7 +32,7 @@ public class AddClientCommand extends Command {
             + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER (OPTIONAL) "
             + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER (OPTIONAL) "
             + PREFIX_MAKE + " VEHICLE MAKE (OPTIONAL) "
-            + PREFIX_MODEL + " VEHICLE MODEL (OPTIONAL) \n"
+            + PREFIX_MODEL + " VEHICLE MODEL (OPTIONAL)\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -41,7 +41,7 @@ public class AddClientCommand extends Command {
             + PREFIX_VRN + "SJH9514P "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
-            + PREFIX_MODEL + "Corolla ";
+            + PREFIX_MODEL + "Corolla";
 
     public static final String VEHICLE_DETAILS_MISSING =
             "Vehicle details are missing. Please provide all vehicle details.\n" + MESSAGE_USAGE;

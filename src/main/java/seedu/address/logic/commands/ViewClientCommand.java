@@ -16,8 +16,8 @@ import seedu.address.model.person.Person;
 public class ViewClientCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the details of the indexed Client.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Displays the details of the indexed Client.\n\n"
+            + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_VIEW_CLIENT_SUCCESS =
             "Mater - View Client window opened for";

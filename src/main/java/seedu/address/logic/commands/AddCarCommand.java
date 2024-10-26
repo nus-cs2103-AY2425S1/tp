@@ -23,17 +23,17 @@ public class AddCarCommand extends Command {
     public static final String COMMAND_WORD = "add-car";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a Car to the indexed Client, who must not be associated to a Car.\n"
+            + ": Adds a Car to the indexed Client, who must not be associated to a Car.\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER "
             + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER "
             + PREFIX_MAKE + " VEHICLE MAKE "
-            + PREFIX_MODEL + " VEHICLE MODEL\n"
+            + PREFIX_MODEL + " VEHICLE MODEL\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_VRN + "SJH9514P "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
-            + PREFIX_MODEL + "Corolla ";
+            + PREFIX_MODEL + "Corolla";
 
     public static final String MESSAGE_USER_ALREADY_HAS_CAR = "Client is already associated to a Car.";
     public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added to Client";
