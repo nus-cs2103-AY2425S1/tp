@@ -18,6 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.testutil.TypicalPersons;
 
 
 public class RemovePersonFromEventCommandTest {
@@ -57,7 +58,7 @@ public class RemovePersonFromEventCommandTest {
     * FIONA = 5
     * GEORGE = 6
      *
-     * Unused Persons:
+     * Unused Persons Not in TypicalPersons:
      * HOON = 7
      *
     */
@@ -104,21 +105,23 @@ public class RemovePersonFromEventCommandTest {
 
     @Test
     public void execute_personNotInEvent_throwsCommandException() {
+        model.addPerson(TypicalPersons.HOON);
         RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
                 Index.fromOneBased(1), Index.fromOneBased(7));
         assertCommandFailure(removePersonFromEventCommand, model,
                 RemovePersonFromEventCommand.MESSAGE_PERSON_NOT_FOUND);
     }
 
-
-
     @Test
-    public void execute_invalidEventIndexLarge_throwsCommandException() {
+    public void execute_personOutOfIndex_throwsCommandException() {
         RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
-                Index.fromOneBased(99), INDEX_FIRST_PERSON);
+                Index.fromOneBased(1), Index.fromOneBased(99));
         assertCommandFailure(removePersonFromEventCommand, model,
-                RemovePersonFromEventCommand.MESSAGE_EVENT_NOT_FOUND);
+                RemovePersonFromEventCommand.MESSAGE_PERSON_NOT_FOUND);
     }
+
+
+
 
 
     @Test
