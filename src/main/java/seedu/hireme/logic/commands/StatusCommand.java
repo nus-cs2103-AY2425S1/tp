@@ -2,8 +2,9 @@ package seedu.hireme.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
+import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.logic.commands.exceptions.CommandException;
@@ -64,14 +65,20 @@ public class StatusCommand extends Command<InternshipApplication> {
     @Override
     public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
         requireNonNull(model);
-        List<InternshipApplication> lastShownList = model.getFilteredList();
+        FilteredList<InternshipApplication> lastShownList =
+                (FilteredList<InternshipApplication>) model.getFilteredList();
+        Predicate prevPredicate = lastShownList.getPredicate() == null
+                ? Model.PREDICATE_SHOW_ALL : lastShownList.getPredicate();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
         }
 
         InternshipApplication internshipApplicationToUpdate = lastShownList.get(targetIndex.getZeroBased());
-        internshipApplicationToUpdate.setStatus(newStatus);
+        InternshipApplication updatedInternshipApplication = internshipApplicationToUpdate.deepCopy();
+        updatedInternshipApplication.setStatus(newStatus);
+        model.setItem(internshipApplicationToUpdate, updatedInternshipApplication);
+        model.updateFilteredList(prevPredicate);
         return new CommandResult(String.format(MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), newStatus.getValue()));
     }
