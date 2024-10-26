@@ -43,7 +43,7 @@ public class StartDateTimeTest {
     }
 
     @Test
-    public void constructor_invalidStartDateTime_NullPointerException() {
+    public void constructor_invalidStartDateTime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StartDateTime.createStartDateTime(null));
     }
 }

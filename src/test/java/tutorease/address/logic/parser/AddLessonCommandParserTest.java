@@ -33,7 +33,6 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Fee;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.testutil.LessonBuilder;
 
