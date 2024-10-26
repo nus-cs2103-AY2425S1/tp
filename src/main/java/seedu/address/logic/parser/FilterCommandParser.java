@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    public static final String MESSAGE_SUPPORT = "filter does not support Name, Email or Phone\n"
-            + "filter only supports Tag and RSVP Status";
+    public static final String MESSAGE_SUPPORT = "Filter does not support Name, Email or Phone\n"
+            + "Filter only supports Tag and RSVP Status";
     private final Set<Predicate<Person>> predicateSet = new HashSet<>();
 
     /**
