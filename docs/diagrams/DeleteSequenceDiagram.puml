@@ -104,6 +104,7 @@ activate DeleteCommand
 
 Model --> ConfirmCommand
 
+/' Not sure if need to include the getPersonList() call '/
 DeleteCommand -> Model : getPersonList()
 activate Model
 
