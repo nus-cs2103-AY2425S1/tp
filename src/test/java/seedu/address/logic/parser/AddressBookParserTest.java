@@ -52,14 +52,29 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
         assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
-        parser.parseCommand("N");
+        assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
         assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
-        parser.parseCommand("N");
+        assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         try {
             parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
+    }
+
+    @Test
+    public void parseCommand_confirmation() throws Exception {
+        try {
+            parser.parseCommand("Y");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
+
+        try {
+            parser.parseCommand("N");
         } catch (Exception e) {
             assertTrue(e instanceof ParseException);
         }
