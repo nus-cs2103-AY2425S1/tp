@@ -29,9 +29,9 @@ public class FindDoctorCommandTest {
     @Test
     public void equals() {
         FindDoctorPredicate firstPredicate =
-                new FindDoctorPredicate(Collections.singletonList("first"));
+                new FindDoctorPredicate("first");
         FindDoctorPredicate secondPredicate =
-                new FindDoctorPredicate(Collections.singletonList("second"));
+                new FindDoctorPredicate("second");
 
         FindDoctorCommand findFirstCommand = new FindDoctorCommand(firstPredicate);
         FindDoctorCommand findSecondCommand = new FindDoctorCommand(secondPredicate);
@@ -56,7 +56,7 @@ public class FindDoctorCommandTest {
     @Test
     public void execute_zeroKeyword_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_DOCTORS_LISTED_OVERVIEW, 0);
-        FindDoctorPredicate predicate = preparePredicate(" ");
+        FindDoctorPredicate predicate = preparePredicate("Karen KENNEDY");
         FindDoctorCommand command = new FindDoctorCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,17 +73,7 @@ public class FindDoctorCommandTest {
         assertEquals(Arrays.asList(KAREN), model.getFilteredPersonList());
     }
 
-    @Test
-    public void execute_multipleKeywords_multiplePersonFound() {
-        String expectedMessage = String.format(MESSAGE_DOCTORS_LISTED_OVERVIEW, 2);
-        FindDoctorPredicate predicate = preparePredicate("Karen KENNEDY");
-        FindDoctorCommand command = new FindDoctorCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(KENNEDY, KAREN), model.getFilteredPersonList());
-    }
-
     private FindDoctorPredicate preparePredicate(String userInput) {
-        return new FindDoctorPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new FindDoctorPredicate(userInput);
     }
 }

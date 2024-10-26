@@ -39,6 +39,27 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code name}.
+     *  Ignores case, as long as sentence contains name.
+     *  <br>examples:<pre>
+     *      containsNameIgnoreCase("ABc def", "abc") == true //contains abc
+     *      containsNameIgnoreCase("ABc def", "DEF") == true //contains DEF
+     *      containsNameIgnoreCase("ABc def", "ABde") == false //does not contain ABde
+     *      </pre>
+     * @param sentence cannot be null
+     * @param name cannot be null, cannot be empty
+     */
+    public static boolean containsNameIgnoreCase(String sentence, String name) {
+        requireNonNull(sentence);
+        requireNonNull(name);
+
+        String preppedName = name.trim();
+        checkArgument(!preppedName.isEmpty(), "Name parameter cannot be empty");
+
+        return sentence.toLowerCase().contains(preppedName.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
