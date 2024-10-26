@@ -14,7 +14,7 @@ import java.util.function.UnaryOperator;
 
 /**
  * A class to store a list of {@code Claim}.
- * This class ensures that the order of insertion is preserved and allows duplicate claims.
+ * This class ensures that the order of insertion is preserved and disallows duplicate claims.
  */
 public class ClaimList implements List<Claim> {
     private final List<Claim> claims;
