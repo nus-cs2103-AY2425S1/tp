@@ -50,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        role.getChildren().add(new Label(person.getRole().roleName));
+        person.getRole().ifPresent(personRole -> {
+            role.getChildren().add(new Label(personRole.roleName));
+        });
     }
 }

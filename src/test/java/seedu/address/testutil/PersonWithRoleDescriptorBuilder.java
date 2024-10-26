@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,7 +37,7 @@ public class PersonWithRoleDescriptorBuilder {
      * that we are building.
      */
     public PersonWithRoleDescriptorBuilder withRole(String role) {
-        descriptor.setRole(new Role(role));
+        descriptor.setRole(Optional.of(new Role(role)));
         return this;
     }
 

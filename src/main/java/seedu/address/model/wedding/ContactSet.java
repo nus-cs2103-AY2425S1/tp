@@ -78,7 +78,7 @@ public class ContactSet {
     public String toString() {
         ToStringBuilder str = new ToStringBuilder(this);
         for (Person person : set) {
-            Role role = person.getRole();
+            // Role role = person.getRole();
             str.add("person", person.toString());
         }
         return str.toString();

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,7 +24,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Role role;
+    private final Optional<Role> role;
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
@@ -43,8 +44,8 @@ public class Person {
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address);
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Role> role, Wedding ownWedding) {
+        requireAllNonNull(name, phone, email, address, role);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -77,7 +78,7 @@ public class Person {
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Role getRole() {
+    public Optional<Role> getRole() {
         return role;
     }
 

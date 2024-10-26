@@ -160,7 +160,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
+        Optional<Role> updatedRole = personToEdit.getRole();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRole, null); // to include wedding
@@ -199,8 +199,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Role role;
-
         public EditPersonDescriptor() {}
 
         /**
@@ -212,14 +210,13 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setRole(toCopy.role);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setName(Name name) {
@@ -254,23 +251,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code role} to this object's {@code role}.
-         * A defensive copy of {@code role} is used internally.
-         */
-        public void setRole(Role role) {
-            this.role = role;
-        }
-
-        /**
-         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code role} is null.
-         */
-        public Optional<Role> getRole() {
-            return (role != null) ? Optional.of(role) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -286,8 +266,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(role, otherEditPersonDescriptor.role);
+                    && Objects.equals(address, otherEditPersonDescriptor.address);
         }
 
         @Override
@@ -297,7 +276,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("role", role)
                     .toString();
         }
 

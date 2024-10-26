@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -154,12 +155,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Role parseRole(String role) throws ParseException {
+    public static Optional<Role> parseRole(String role) throws ParseException {
         String trimmedRole = role.trim();
+        if (trimmedRole.isEmpty()) {
+            return Optional.empty();
+        }
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Role(trimmedRole);
+        return Optional.of(new Role(trimmedRole));
     }
 
     /**

@@ -73,10 +73,4 @@ public class RoleCommandParser implements Parser<RoleCommand> {
     private boolean isNumeric(String str) {
         return str != null && str.matches("-?\\d+");
     }
-
-    private Role parseRoleToAssign(String role) throws ParseException {
-
-        return ParserUtil.parseRole(role);
-    }
-
 }
