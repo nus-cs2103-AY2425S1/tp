@@ -21,38 +21,24 @@ public class Lesson {
     public static final ArrayList<String> DAYS_OF_THE_WEEK = new ArrayList<String>(
         List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"));
 
-    public static final String NO_SAME_TIME =
-            "Lessons cannot start and end at the same time.";
-
     public static final String INVALID_DAY_OF_WEEK =
             "Day of the week must be spelt as "
             + "'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', or 'Sunday'"
             + "only (non case-sensitive).";
 
-    public static final String NOT_24H_FORMAT =
-            "Times provided must be in 24-hour time format. Examples: 0000, 1027, 1830, 2215, 2359.";
-
-
-    public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
-
     private Description description;
     private DayOfWeek startDay;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LessonTime times;
 
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Description description, DayOfWeek startDay, LocalTime startTime, LocalTime endTime) {
-        requireAllNonNull(description, startDay, startTime, endTime);
-
-
-        checkArgument(checkValidTimes(startTime, endTime), NO_SAME_TIME);
+    public Lesson(Description description, DayOfWeek startDay, LessonTime times) {
+        requireAllNonNull(description, startDay, times);
 
         this.description = description;
         this.startDay = startDay;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.times = times;
     }
 
     public Description getDescription() {
@@ -64,21 +50,23 @@ public class Lesson {
     }
 
     /**
-     * Getter method that attains the DayOfWeek representation of the start time for time-based methods. <br> <br>
-     * NOTE: If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
+     * Getter method that attains the LocalTime representation of the start time for time-based methods. <br> <br>
+     * NOTE: Avoid breaking abstraction here - do not call this getter function for functional code!
+     * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
     public LocalTime getStartTime() {
-        return startTime;
+        return times.getStartTime();
     }
 
     /**
-     * Getter method that attains the DayOfWeek representation of the end time for time-based methods. <br> <br>
-     * NOTE: If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
+     * Getter method that attains the LocalTime representation of the end time for time-based methods. <br> <br>
+     * NOTE: Avoid breaking abstraction here - do not call this getter function for functional code!
+     * If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
      * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
      */
     public LocalTime getEndTime() {
-        return endTime;
+        return times.getEndTime();
     }
 
     /**
@@ -86,7 +74,7 @@ public class Lesson {
      * Example: "1100", "2359".
      */
     public String getFormattedStartTime() {
-        return startTime.format(FORMAT_24H);
+        return times.getFormattedStartTime();
     }
 
     /**
@@ -94,17 +82,10 @@ public class Lesson {
      * Example: "1100", "2359".
      */
     public String getFormattedEndTime() {
-        return endTime.format(FORMAT_24H);
+        return times.getFormattedEndTime();
     }
 
     // Validator methods. TODO: OOP-ize =========================================
-
-    /**
-     * Checks that lesson times are not ambiguous, i.e. not the same start and end time.
-     */
-    public static boolean checkValidTimes(LocalTime time1, LocalTime time2) {
-        return !time1.equals(time2);
-    }
 
     /**
      * Checks if the day of week matches any of the 7 days of the week, spelt in full, example "Wednesday".
@@ -112,28 +93,6 @@ public class Lesson {
      */
     public static boolean checkValidDayOfWeek(String dayOfWeek) {
         return DAYS_OF_THE_WEEK.contains(dayOfWeek.toLowerCase());
-    }
-
-    /**
-     * Checks if a provided String conforms to a 24-hour time format specifier.
-     */
-    public static boolean checkValidLocalTime(String time) {
-        if (time.length() != 4) {
-            return false;
-        }
-
-        String hour = time.substring(0, 2);
-        String minute = time.substring(2);
-
-        // Ensure that hour is between 00 and 23, and minute is between 00 and 59
-        return hour.compareTo("23") <= 0 && minute.compareTo("59") <= 0;
-    }
-
-    /**
-     * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
-     */
-    public boolean spansTwoDays() {
-        return startTime.isBefore(endTime);
     }
 
     /**
@@ -184,19 +143,6 @@ public class Lesson {
         }
     }
 
-    /**
-     * Generates a LocalTime based on a String representation.
-     * Callers are advised to use {@link #checkValidLocalTime(String)} first and handle abnormal use cases themselves.
-     * Otherwise, an error message will be generated that may be visible to the user.
-     */
-    public static LocalTime processLocalTime(String time) {
-        checkArgument(checkValidLocalTime(time), Lesson.NOT_24H_FORMAT);
-
-        String hour = time.substring(0, 2);
-        String minute = time.substring(2);
-        return LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-    }
-
     // Identity methods ========================================================================================
 
     /**
@@ -217,14 +163,13 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
         return description.equals(otherLesson.description)
                 && startDay.equals(otherLesson.startDay)
-                && startTime.equals(otherLesson.startTime)
-                && endTime.equals(otherLesson.endTime);
+                && times.equals(otherLesson.times);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, startDay, startTime, endTime);
+        return Objects.hash(description, startDay, times);
     }
 
     @Override

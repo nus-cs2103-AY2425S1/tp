@@ -2,7 +2,6 @@ package seedu.edulog.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.AppUtil.checkArgument;
-import seedu.edulog.model.student.Name;
 
 /**
  * Denotes the description of a Lesson, which is displayed in the Calendar.

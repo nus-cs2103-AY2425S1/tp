@@ -13,6 +13,7 @@ import seedu.edulog.commons.util.StringUtil;
 import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.calendar.Description;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.model.calendar.LessonTime;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
 import seedu.edulog.model.student.Fee;
@@ -184,8 +185,8 @@ public class ParserUtil {
     public static LocalTime parseLocalTime(String time) throws ParseException {
         String trimmed = time.trim();
 
-        if (!Lesson.checkValidLocalTime(trimmed)) {
-            throw new ParseException(Lesson.NOT_24H_FORMAT);
+        if (!LessonTime.checkValidLessonTime(trimmed)) {
+            throw new ParseException(LessonTime.NOT_24H_FORMAT);
         }
 
         return Lesson.processLocalTime(trimmed);
