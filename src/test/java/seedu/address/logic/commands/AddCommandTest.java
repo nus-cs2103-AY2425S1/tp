@@ -204,6 +204,15 @@ public class AddCommandTest {
         public List<Appointment> getConflictingAppointments(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void setFilteredPersonListMasterPredicate(FilteredPersonListMasterPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

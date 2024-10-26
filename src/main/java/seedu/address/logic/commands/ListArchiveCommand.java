@@ -6,24 +6,22 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.model.Model;
 
 /**
- * Lists all current persons in the address book to the user.
+ * Lists all archived persons in the address book to the user.
  */
-public class ListCommand extends Command {
-
-    public static final String COMMAND_WORD = "list";
+public class ListArchiveCommand extends Command {
+    public static final String COMMAND_WORD = "listarchive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all current persons in the address book as a list with index numbers.\n"
+            + ": Lists all archived persons in the address book as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all current persons";
-
+    public static final String MESSAGE_SUCCESS = "Listed all archived persons";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setFilteredPersonListMasterPredicate(
-                Model.FilteredPersonListMasterPredicate.SHOW_ONLY_CURRENT_PERSONS);
+                Model.FilteredPersonListMasterPredicate.SHOW_ONLY_ARCHIVED_PERSONS);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

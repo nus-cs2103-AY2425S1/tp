@@ -32,6 +32,8 @@ public class Person {
 
     private final UpdatedAt updatedAt;
 
+    private final boolean isArchived;
+
     /**
      * Every field must be present and not null.
      */
@@ -50,6 +52,29 @@ public class Person {
         this.familySize = familySize;
         this.tags.addAll(tags);
         this.updatedAt = updatedAt;
+        this.isArchived = false;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt,
+                  boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.priority = priority;
+        this.remark = remark;
+        this.dateOfBirth = dateOfBirth;
+        this.income = income;
+        this.familySize = familySize;
+        this.tags.addAll(tags);
+        this.updatedAt = updatedAt;
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -98,6 +123,10 @@ public class Person {
 
     public UpdatedAt getUpdatedAt() {
         return updatedAt;
+    }
+
+    public boolean isArchived() {
+        return this.isArchived;
     }
 
     /**

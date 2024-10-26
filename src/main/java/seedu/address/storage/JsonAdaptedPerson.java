@@ -94,12 +94,7 @@ class JsonAdaptedPerson {
         updatedAt = source.getUpdatedAt().getValue().toString();
     }
 
-    /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
-     */
-    public Person toModelType() throws IllegalValueException {
+    private Person toModelType(boolean isArchived) throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -186,7 +181,25 @@ class JsonAdaptedPerson {
                 .orElseGet(UpdatedAt::now);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
-                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelUpdatedAt);
+                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelUpdatedAt, isArchived);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     */
+    public Person toModelType() throws IllegalValueException {
+        return toModelType(false);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted person object into the model's archived {@code Person} object
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     */
+    public Person toArchivedModelType() throws IllegalValueException {
+        return toModelType(true);
     }
 
     private static Optional<LocalDateTime> parseDateTime(String datetime) {

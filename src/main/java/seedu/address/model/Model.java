@@ -137,4 +137,35 @@ public interface Model {
      * Returns a list of appointments that conflict with the given appointment.
      */
     List<Appointment> getConflictingAppointments(Appointment appointment);
+
+    FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate();
+
+    void setFilteredPersonListMasterPredicate(FilteredPersonListMasterPredicate predicate);
+
+    /**
+     * Represents the main predicates for filteredPersonList.
+     * Each enum value is a subtype of {@link Predicate}.
+     * There are 3 cases.
+     * <ol>
+     *     <li>filteredPersonlist shows any person</li>
+     *     <li>filteredPersonlist shows only current (i.e. unarchived) persons</li>
+     *     <li>filteredPersonlist shows only archived persons</li>
+     * </ol>
+     */
+    enum FilteredPersonListMasterPredicate implements Predicate<Person> {
+        SHOW_ANY_PERSONS(person -> true),
+        SHOW_ONLY_CURRENT_PERSONS(person -> !person.isArchived()),
+        SHOW_ONLY_ARCHIVED_PERSONS(Person::isArchived);
+
+        private final Predicate<Person> predicate;
+
+        FilteredPersonListMasterPredicate(Predicate<Person> predicate) {
+            this.predicate = predicate;
+        }
+
+        @Override
+        public boolean test(Person person) {
+            return predicate.test(person);
+        }
+    }
 }
