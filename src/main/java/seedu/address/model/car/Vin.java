@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Vin {
 
-    public static final String MESSAGE_CONSTRAINTS =  "Vehicle Identification Numbers should only contain"
+    public static final String MESSAGE_CONSTRAINTS = "Vehicle Identification Numbers should only contain"
             + "alphanumeric characters (length 17). Characters should be capitalised and should not contain"
             + "spaces or be blank.";
     public static final String VALIDATION_REGEX = "^[A-Z0-9]{17}$";

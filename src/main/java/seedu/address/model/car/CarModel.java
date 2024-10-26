@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CarModel {
 
-    public static final String MESSAGE_CONSTRAINTS =  "Car model should only contain alphanumeric characters, "
+    public static final String MESSAGE_CONSTRAINTS = "Car model should only contain alphanumeric characters, "
             + "with the first character being a capital letter or number, and it should not be blank.";
     public static final String VALIDATION_REGEX = "[A-Z0-9][\\p{Alnum} .-]*";
 

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class Vrn {
 
-    public static final String MESSAGE_CONSTRAINTS =  "Vehicle Registration Number should be a valid Singapore"
+    public static final String MESSAGE_CONSTRAINTS = "Vehicle Registration Number should be a valid Singapore"
             + " Car Plate of the format XXX####Y and adhere to the following constraints:\n"
             + "1. Prefix XXX\n"
             + "      XXX: Alphabetical Series, Capitalised (A-Z, except I and O).\n"
@@ -82,7 +82,7 @@ public class Vrn {
 
     private static char checksumCalculateSuffix(int[] fixedNumbers) {
         char[] checksumLetters = {'A', 'Z', 'Y', 'X', 'U', 'T', 'S', 'R',
-                'P', 'M', 'L', 'K', 'J', 'H', 'G', 'E', 'D', 'C', 'B'};
+            'P', 'M', 'L', 'K', 'J', 'H', 'G', 'E', 'D', 'C', 'B'};
         int checksum = 0;
         for (int n : fixedNumbers) {
             checksum += n;
