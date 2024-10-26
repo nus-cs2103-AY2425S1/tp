@@ -247,7 +247,43 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Command history feature
+#### Implementation
+The command history feature is facilitated by `CommandTextHistory`. It has a `commandHistory` arraylist that stores the history of commands entered by the user as strings 
+and a `currentCommandIndex` that is initialised to be `-1` to keep track of the current command index in the command history.
+The `CommandTextHistory` class implements the following operations:
+* `CommandTextHistory#addCommandHistory(String commandText)` — Adds a command text to the command history.
+* `CommandTextHistory#getPreviousCommand()` — Returns the previous command text in the command history.
+* `CommandTextHistory#getNextCommand()` — Returns the next command text in the command history.
 
+##### Getting previous/next command
+The `getPreviousCommand()` method will first check if `commandHistory` is empty by checking if `currentCommandIndex` is more than `0`. 
+If it is not empty, it will decrement the `currentCommandIndex` and return the command text at that index.
+If it is empty, it will return an empty string.
+
+The `getNextCommand()` method will first check if `commandHistory` if `currentCommandIndex` is less than `commandHistory.size() - 1`.
+If it is, it will increment the `currentCommandIndex` and return the command text at that index.
+If it is not or `currentCommandIndex` is `-1` which means the commandHistory is empty, it will return an empty string.
+
+##### Adding command to history
+The `addCommandHistory(String commandText)` method will add the command text to the `commandHistory` arraylist and set the `currentCommandIndex` to the size of the `commandHistory` arraylist.
+This resets the `currentCommandIndex` to the end of the `commandHistory` arraylist after a new command is added.
+
+![AddCommandHistory0](images/AddCommandHistory0.png)
+The currentCommandIndex is reset to the size of the arraylist after a new command is added.
+![AddCommandHistory1](images/AddCommandHistory1.png)
+:information_source: **Note:** CommandTextHistory will store commands that were unsuccessful as well.
+
+These operations are exposed in the `Model` interface as `Model#addCommandTextToHistory(String commandText)`, `Model#getPreviousCommandTextFromHistory()` and `Model#getNextCommandTextFromHistory()` respectively.
+
+The following sequence diagram shows how the user can get previous command:
+![CommandTextHistorySequenceDiagram](images/CommandTextHistorySequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user interacts with this feature:
+![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
+
+#### Future Improvements
+* Implement a feature to clear the command history.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
