@@ -22,7 +22,6 @@ public class AgeContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         int age = Integer.parseInt(person.getAge().value);
-
         return keywords.stream().anyMatch(keyword -> {
             // Check for range
             var matcher = RANGE_PATTERN.matcher(keyword);

@@ -30,9 +30,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 String[] range = part.split("-");
                 if (range.length != 2) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FULL_RANGE));
                 }
-
                 try {
                     int start = Integer.parseInt(range[0].trim());
                     int end = Integer.parseInt(range[1].trim());
@@ -45,12 +44,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     }
                 } catch (NumberFormatException | ParseException e) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.INVALID_RANGE), e);
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_INVALID_RANGE), e);
                 }
             } else {
                 // Handle individual index
                 try {
-                    indices.add(ParserUtil.parseIndex(part));
+                    indices.add(ParserUtil.parseIndex(part.trim()));
                 } catch (ParseException e) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
