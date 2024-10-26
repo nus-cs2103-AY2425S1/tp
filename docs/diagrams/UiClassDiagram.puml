@@ -9,6 +9,8 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+Class FilePathBar
+Class MenuBar
 Class HelpWindow
 Class ResultDisplay
 Class VolunteerListPanel
@@ -32,6 +34,8 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+MainWindow *-down-> "1" MenuBar
+MainWindow *-down-> "1" FilePathBar
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" VolunteerListPanel
