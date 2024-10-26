@@ -17,7 +17,7 @@ public class FilterClientCommandParserTest {
     @Test
     public void parse_nameSpecified_success() {
         // Test for valid phone number
-        String userInput = FilterClientCommand.COMMAND_WORD + " " + PREFIX_NAME + name;
+        String userInput = String.format(" %s%s", PREFIX_NAME, name);
         assertParseSuccess(parser, userInput, new FilterClientCommand(new Name(name)));
     }
 
