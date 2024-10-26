@@ -36,7 +36,7 @@ public class MarkAttendanceByStudentCommand extends Command {
             + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
-            "Marked attendance of %1$s student for %2$s tutorial";
+            "Marked attendance of %1$s student for %2$s tutorial on %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
 
@@ -82,7 +82,7 @@ public class MarkAttendanceByStudentCommand extends Command {
         model.setParticipation(currentParticipation, updatedParticipation);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
-                studentToMarkAttendance.getName(), tutorial.getSubject()));
+                studentToMarkAttendance.getName(), tutorial.getSubject(), attendance));
     }
 
     @Override
