@@ -26,12 +26,14 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_HOUR = "+0.75";
+    private static final String INVALID_SUBJECT = "Physics!!";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_HOUR = "12.5";
+    private static final String VALID_SUBJECT = "Mathematics";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -284,20 +286,20 @@ public class ParserUtilTest {
     @Test
     public void parseSubject_invalidValue_throwsParseException() {
         // Invalid subject example: contains special characters or is empty
-        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("Math!")); // contains invalid characters
-        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("")); // empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(INVALID_SUBJECT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(""));
     }
 
     @Test
     public void parseSubject_validValueWithoutWhitespace_returnsSubject() throws Exception {
-        Subject expectedSubject = new Subject("Mathematics");
-        assertEquals(expectedSubject, ParserUtil.parseSubject("Mathematics"));
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
+        assertEquals(expectedSubject, ParserUtil.parseSubject(VALID_SUBJECT));
     }
 
     @Test
     public void parseSubject_validValueWithWhitespace_returnsTrimmedSubject() throws Exception {
-        String subjectWithWhitespace = WHITESPACE + "Science" + WHITESPACE;
-        Subject expectedSubject = new Subject("Science");
+        String subjectWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE;
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
         assertEquals(expectedSubject, ParserUtil.parseSubject(subjectWithWhitespace));
     }
 }
