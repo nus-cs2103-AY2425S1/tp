@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
-* `ViewClientCommandPasrser#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
+* `ViewClientCommandPasrser#parse()` given the arguments succeeding the `view` command, parse the appropriate index to ViewClientCommand.
 
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
@@ -173,15 +173,15 @@ Step 2. The user executes `view 1` command to view the first person in the Clien
 
 <box type="info" seamless>
 
-**Note:** Changes to Client details (via `edit-client`, `add-car`, `delete-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view-client` must be called again to reflect these changes.
+**Note:** Changes to Client details (via `edit`, `add-car`, `delete-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view` must be called again to reflect these changes.
 
 </box>
 
-Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view-client 2` command to view the second person in the Client list.
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view 2` command to view the second person in the Client list.
 
 <box type="info" seamless>
 
-**Note:** Only one `MATER - View Client` Window is to be displayed at all times. Calling `view-client` again while the window is open will refresh the window for the latest request.
+**Note:** Only one `MATER - View Client` Window is to be displayed at all times. Calling `view` again while the window is open will refresh the window for the latest request.
 
 </box>
 
