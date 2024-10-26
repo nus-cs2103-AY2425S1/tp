@@ -1,6 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_MISSING_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_HUGH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -13,6 +18,7 @@ import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Name;
+import seedu.address.model.student.StudentNumber;
 
 public class AddAssignmentCommandParserTest {
 
@@ -113,5 +119,39 @@ public class AddAssignmentCommandParserTest {
         );
 
         assertParseSuccess(parser, STATUS_ONLY_INPUT, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidStudentNumber_failure() {
+        assertParseFailure(parser,
+                VALID_INPUT + " "
+                        + PREFIX_STUDENT_NUMBER + INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS,
+                StudentNumber.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                VALID_INPUT + " "
+                        + PREFIX_STUDENT_NUMBER + INVALID_STUDENT_NUMBER_MISSING_LETTER,
+                StudentNumber.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validStudentNumber_success() {
+        Name name = new Name(VALID_NAME_BOB);
+        AddAssignmentCommand expectedCommand = new AddAssignmentCommand(
+                new Name("John Doe"),
+                new Assignment(
+                        new AssignmentName("CS2103 Project"),
+                        new Deadline("2024-12-01"),
+                        new Status("Y"),
+                        new Status("Y"),
+                        new Grade("85.5")
+                ),
+                new StudentNumber(VALID_STUDENT_NUMBER_HUGH)
+        );
+
+        assertParseSuccess(parser,
+                VALID_INPUT + " "
+                        + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_HUGH,
+                expectedCommand);
     }
 }

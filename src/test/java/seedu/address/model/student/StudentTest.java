@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
-import static seedu.address.testutil.TypicalAssignments.ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
@@ -107,7 +106,9 @@ public class StudentTest {
                 + "{name=" + HUGH.getName()
                 + ", contactNumber=" + HUGH.getPhone()
                 + ", tutorialGroup=" + HUGH.getTutorialGroup()
-                + ", studentNumber=" + HUGH.getStudentNumber() + "}";
+                + ", studentNumber=" + HUGH.getStudentNumber()
+                + ", assignments=" + HUGH.getAssignments()
+                + ", attendanceRecords=" + HUGH.getAttendanceRecord() + "}";
         assertEquals(expected, HUGH.toString());
     }
 
@@ -134,47 +135,6 @@ public class StudentTest {
     void deleteAssignment_nullQuery_throwsException() {
         // Verify that passing a null query throws an exception
         assertThrows(NullPointerException.class, () -> student.deleteAssignment(null));
-    }
-
-    @Test
-    void addAssignment_validAssignment_success() {
-        Assignment newAssignment = ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
-        student.addAssignment(newAssignment);
-        assertTrue(student.getAssignments().contains(newAssignment));
-    }
-
-    @Test
-    void addAssignmentAtIndex_validAssignment_success() {
-        Assignment newAssignment = ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
-        student.addAssignment(1, newAssignment);
-        assertEquals(newAssignment, student.getAssignments().get(1));
-    }
-
-    @Test
-    void deleteAssignmentByIndex_validIndex_success() {
-        Assignment deletedAssignment = student.deleteAssignment(1);
-        assertEquals(MATH_ASSIGNMENT_SUBMITTED, deletedAssignment);
-    }
-
-    @Test
-    void deleteLastAssignment_success() {
-        student.deleteLastAssignment();
-        assertFalse(student.getAssignments().contains(SCIENCE_ASSIGNMENT_GRADED));
-    }
-
-    @Test
-    void getAssignmentIndex_existingAssignment_success() {
-        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, null, null, null, null);
-        int index = student.getAssignmentIndex(query);
-        assertEquals(1, index);
-    }
-
-    @Test
-    void getAssignmentIndex_nonExistentAssignment_returnsMinusOne() {
-        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"),
-                null, null, null, null);
-        int index = student.getAssignmentIndex(query);
-        assertEquals(-1, index);
     }
 
     @Test
@@ -255,7 +215,7 @@ public class StudentTest {
     }
 
     @Test
-    void constructor_withAssignments_success() {
+    void constructor_withAssignmentsAndAttendance_success() {
         Name name = new Name("John Doe");
         Phone phone = new Phone("12345678");
         TutorialGroup tutorialGroup = new TutorialGroup("G01");
@@ -280,13 +240,13 @@ public class StudentTest {
     }
     @Test
     void getAttendanceRecordsString_noRecords_emptyString() {
-        Student student = new StudentBuilder().build_default();
+        Student student = new StudentBuilder().build();
         assertEquals("", student.getAttendanceRecordsString());
     }
 
     @Test
     void getAttendanceRecordsString_multipleRecords_success() {
-        Student student = new StudentBuilder().build_default();
+        Student student = new StudentBuilder().build();
         student.markAttendance(LocalDate.of(2024, 10, 22), "p");
         student.markAttendance(LocalDate.of(2024, 10, 23), "a");
 

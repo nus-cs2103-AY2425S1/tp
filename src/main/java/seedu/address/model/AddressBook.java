@@ -109,7 +109,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //student methods
 
-
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
@@ -194,7 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && students.equals(otherAddressBook.students);
     }
 
     @Override

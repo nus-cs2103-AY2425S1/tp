@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.commands.AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT_FOUND;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -144,7 +146,10 @@ public class JsonAdaptedStudent {
 
         for (JsonAdaptedAssignment assignment : assignments) {
             Assignment modelAssignment = assignment.toModelType();
-            student.addAssignment(modelAssignment);
+            if (!student.addAssignment(modelAssignment)) {
+                throw new IllegalValueException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_FOUND,
+                        modelAssignment.getAssignmentName(), student.getName()));
+            }
         }
 
         for (JsonAdaptedAttendanceRecord record : attendanceRecord) {

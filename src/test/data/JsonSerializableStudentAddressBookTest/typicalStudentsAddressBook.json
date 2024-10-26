@@ -20,6 +20,12 @@
       "email" : "dummy@example.com",
       "address" : "dummy address",
       "tutorialGroup" : "B11",
-      "studentNumber" : "A0123456M"
+      "studentNumber" : "A0123456M",
+      "attendanceRecord" : [ {
+        "date" : "2023-10-01",
+        "attendance" : {
+          "status" : "p"
+        }
+      } ]
     } ]
 }

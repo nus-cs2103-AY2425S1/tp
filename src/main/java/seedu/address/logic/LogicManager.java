@@ -53,10 +53,10 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        commandResult = command.execute(model);
         if (!(command instanceof UndoCommand)) {
             commandStack.push(command);
         }
-        commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

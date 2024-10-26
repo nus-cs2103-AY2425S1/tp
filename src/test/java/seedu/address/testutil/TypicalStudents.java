@@ -20,7 +20,6 @@ import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 
 
-
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.
  */
@@ -100,6 +99,6 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(DIDDY, HUGH));
+        return new ArrayList<>(Arrays.asList(HUGH, DIDDY, ALICE));
     }
 }
