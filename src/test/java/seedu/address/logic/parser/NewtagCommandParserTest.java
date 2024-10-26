@@ -23,7 +23,7 @@ public class NewtagCommandParserTest {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/bride's friend", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side", new NewtagCommand(expectedTags));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class NewtagCommandParserTest {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/   bride's friend   ", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/   bride's side   ", new NewtagCommand(expectedTags));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class NewtagCommandParserTest {
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(tagBridesFriend);
         expectedTags.add(tagColleagues);
-        assertParseSuccess(parser, " t/bride's friend t/colleagues", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side t/colleagues", new NewtagCommand(expectedTags));
     }
 
     @Test

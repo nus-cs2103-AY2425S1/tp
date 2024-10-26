@@ -23,17 +23,17 @@ public class DeleteTagCommandParserTest {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/bride's friend", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side", new DeleteTagCommand(expectedTags));
     }
 
     @Test
     public void parse_validArgsNoLeadingSpace_throwsParseException() {
-        assertParseFailure(parser, "t/bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, "t/bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgsNoPrefix_throwsParseException() {
-        assertParseFailure(parser, "bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, "bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class DeleteTagCommandParserTest {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "  t/ bride's friend   ", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, "  t/ bride's side   ", new DeleteTagCommand(expectedTags));
     }
 
     @Test
