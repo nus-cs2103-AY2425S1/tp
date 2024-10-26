@@ -19,6 +19,10 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+CLass Payment
+
+Class Tutorial
+Class UniqueTutorialList
 
 Class I #FFFFFF
 }
@@ -41,7 +45,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Payment
 Person *--> "*" Tag
+
+AddressBook *--> "1" UniqueTutorialList
+UniqueTutorialList --> Tutorial
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
