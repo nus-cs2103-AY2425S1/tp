@@ -55,6 +55,10 @@ public class Person {
 
     public void setOwnWedding(Wedding wedding) {
         ownWedding = wedding;
+        if (wedding == null) {
+            throw new NullPointerException("Wedding cannot be null.");
+        }
+        wedding.setClient(this);
     }
 
     public Name getName() {
