@@ -65,10 +65,6 @@ public class AddVendorCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasVendor(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_VENDOR);
-        }
-
         model.addPerson(toAdd);
         model.assignVendor(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

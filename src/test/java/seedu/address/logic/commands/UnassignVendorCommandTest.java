@@ -21,7 +21,6 @@ public class UnassignVendorCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    // To add: test cases to check for validity
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST);
