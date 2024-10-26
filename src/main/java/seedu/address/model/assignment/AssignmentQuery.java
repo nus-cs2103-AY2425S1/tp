@@ -7,11 +7,11 @@ import java.util.Optional;
  */
 public class AssignmentQuery {
 
-    private final Optional<AssignmentName> queryName;
-    private final Optional<Deadline> queryDeadline;
-    private final Optional<Status> querySubmissionStatus;
-    private final Optional<Status> queryGradingStatus;
-    private final Optional<Grade> queryGrade;
+    public final Optional<AssignmentName> queryName;
+    public final Optional<Deadline> queryDeadline;
+    public final Optional<Status> querySubmissionStatus;
+    public final Optional<Status> queryGradingStatus;
+    public final Optional<Grade> queryGrade;
 
     /**
      * Constructs an {@code AssignmentQuery}

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Address;
@@ -179,7 +180,7 @@ public class Student extends Person {
     }
 
     /**
-     * Deletes the first assignment matching the given assignment query.
+     * Deletes the assignment matching the given name
      *
      * @param assignmentName A valid assignment query.
      * @return the deleted assignment
@@ -190,6 +191,24 @@ public class Student extends Person {
             if (assignment.getAssignmentName().equals(assignmentName)) {
                 assignments.remove(assignment);
                 return assignment;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Edits the assignment matching the given name to the parameters specified
+     *
+     * @param assignmentQuery A valid assignment query.
+     * @return the deleted assignment
+     */
+    public AssignmentQuery editAssignment(AssignmentName assignmentName, AssignmentQuery assignmentQuery) {
+        requireAllNonNull(assignmentName);
+        for (Assignment assignment : assignments) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                AssignmentQuery oldAssignment = new AssignmentQuery(assignment);
+                assignment.edit(assignmentQuery);
+                return oldAssignment;
             }
         }
         return null;
