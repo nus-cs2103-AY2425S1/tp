@@ -164,19 +164,38 @@ public class AddCommandTest {
         public void deleteParticipation(Participation target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
         public void addParticipation(Participation participation) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
         public boolean hasParticipation(Participation participation) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setParticipation(Participation target, Participation editedParticipation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Participation> getParticipationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Tutorial> getTutorialList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
         public void updateFilteredTutorialList(Predicate<Tutorial> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void createTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,10 +205,12 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
