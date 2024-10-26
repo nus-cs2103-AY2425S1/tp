@@ -24,7 +24,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     private final ObservableList<Person> personList;
     private final ObservableList<Participation> participationList;
-    private final Map<Person, ObservableList<Participation>> participationMap;
+    private Map<Person, ObservableList<Participation>> participationMap;
 
     @FXML
     private ListView<Person> personListView;
@@ -39,7 +39,7 @@ public class PersonListPanel extends UiPart<Region> {
 
         this.personList = personList;
         this.participationList = participationList;
-        participationMap = groupParticipationByPerson(personList, participationList);
+        this.participationMap = createParticipationMap(personList, participationList);
 
         addListeners();
     }
@@ -64,7 +64,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * @return Map of participation associated with each person in the personList.
      */
-    private HashMap<Person, ObservableList<Participation>> groupParticipationByPerson(
+    private HashMap<Person, ObservableList<Participation>> createParticipationMap(
             ObservableList<Person> personList, ObservableList<Participation> participationList) {
         HashMap<Person, ObservableList<Participation>> participationMap = new HashMap<>();
 
@@ -84,20 +84,13 @@ public class PersonListPanel extends UiPart<Region> {
 
     /**
      * Adds listeners to ObservableList of persons and ObservableList of participation
-     * to modify participationMap accordingly on changes to any of the lists to update
-     * the UI on user input and execution of the command.
+     * to create or modify participationMap on changes to personList and participationList
+     * respectively to update the UI on user input and execution of the command.
      */
     private void addListeners() {
         // Listener for changes in the personList
         personList.addListener((ListChangeListener<Person>) change -> {
-            while (change.next()) {
-                for (Person removedPerson : change.getRemoved()) {
-                    participationMap.remove(removedPerson);
-                }
-                for (Person addedPerson : change.getAddedSubList()) {
-                    participationMap.put(addedPerson, FXCollections.observableArrayList());
-                }
-            }
+            this.participationMap = createParticipationMap(this.personList, this.participationList);
         });
 
         // Listener for changes in the participationList

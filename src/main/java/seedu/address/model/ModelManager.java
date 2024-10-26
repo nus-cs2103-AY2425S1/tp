@@ -126,7 +126,6 @@ public class ModelManager implements Model {
     @Override
     public void addParticipation(Participation participation) {
         addressBook.addParticipation(participation);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

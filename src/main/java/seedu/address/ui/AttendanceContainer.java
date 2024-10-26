@@ -44,6 +44,7 @@ public class AttendanceContainer extends UiPart<Region> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     setAttendanceList();
+                    setTutorial();
                 }
             }
         });
