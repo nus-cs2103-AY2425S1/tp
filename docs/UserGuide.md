@@ -30,7 +30,7 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to HiredFiredPro.
+   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com i/7.5` : Adds a candidate named `John Doe` to HiredFiredPro.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -68,7 +68,7 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -79,16 +79,16 @@ Format: `help`
 
 Adds a person to HiredFiredPro.
 
-Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags and skills (including 0)
 </box>
 
 Examples:
-* `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe j/Software Tester t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com i/5.0`
+* `add n/Betsy Crowe j/Software Tester t/friend e/betsycrowe@example.com  p/1234567 i/7 s/Python s/Java`
 
 ### Listing all persons : `list`
 
@@ -100,14 +100,17 @@ Format: `list`
 
 Edits an existing person in HiredFiredPro.
 
-Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVIEW_SCORE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* When editing skills, the existing skills of the person will be removed i.e. adding of skills is not cumulative.
+* You can remove all the person’s skills by typing `s/` without
+  specifying any skills after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -130,7 +133,7 @@ Format: `hire n/NAME j/JOB`
 
 ### Rejecting a person by name and job: `reject`
 
-Changes an existing person's status to "Rejected" in the address book.
+Changes an existing person's status to "Rejected" in HiredFiredPro.
 
 Format: `reject n/NAME j/JOB`
 
@@ -187,6 +190,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in HiredFiredPro.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Sorting persons by interview scores : `sort`
+
+Sorts the list of candidates in ascending or descending order based on their interview scores.
+
+Format: `sort ORDER`
+
+* `ORDER` can be either `a`(ascending) or `d`(descending).
+
+Examples:
+* `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores.
+* `find Alice Betsy Charlie` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from HiredFiredPro.
@@ -238,14 +253,16 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho j/Site Reliability Engineer p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
+**List**   | `list`
+**Add**    | `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​` <br> e.g., `add n/James Ho j/Site Reliability Engineer p/22224444 e/jamesho@example.com s/python s/java i/8.5 t/friend`
+**Edit**   | `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVIEW_SCORE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Hire**   | `hire n/NAME j/JOB`<br> e.g., `hire n/James Jake j/Software Engineer`
 **Reject**   | `reject n/NAME j/JOB` <br> e.g., `reject n/James Jake j/Software Engineer`
 **View**   | `view n/NAME j/JOB` <br>e.g., `view n/James Jake j/Software Engineer`
-**Edit**   | `edit INDEX [n/NAME] [j/JOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**Sort**   | `sort ORDER`<br> e.g., `sort a`
 **Help**   | `help`
+**Clear**  | `clear`
+**Exit**  | `exit`
+
