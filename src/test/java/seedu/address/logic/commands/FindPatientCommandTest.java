@@ -29,9 +29,9 @@ public class FindPatientCommandTest {
     @Test
     public void equals() {
         FindPatientPredicate firstPredicate =
-                new FindPatientPredicate(Collections.singletonList("first"));
+                new FindPatientPredicate("first");
         FindPatientPredicate secondPredicate =
-                new FindPatientPredicate(Collections.singletonList("second"));
+                new FindPatientPredicate("second");
 
         FindPatientCommand findFirstCommand = new FindPatientCommand(firstPredicate);
         FindPatientCommand findSecondCommand = new FindPatientCommand(secondPredicate);
@@ -56,7 +56,7 @@ public class FindPatientCommandTest {
     @Test
     public void execute_zeroKeyword_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
-        FindPatientPredicate predicate = preparePredicate(" ");
+        FindPatientPredicate predicate = preparePredicate("jane john");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,17 +73,7 @@ public class FindPatientCommandTest {
         assertEquals(Arrays.asList(JANE), model.getFilteredPersonList());
     }
 
-    @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 2);
-        FindPatientPredicate predicate = preparePredicate("jane john");
-        FindPatientCommand command = new FindPatientCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(JOHN, JANE), model.getFilteredPersonList());
-    }
-
     private FindPatientPredicate preparePredicate(String userInput) {
-        return new FindPatientPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new FindPatientPredicate(userInput);
     }
 }

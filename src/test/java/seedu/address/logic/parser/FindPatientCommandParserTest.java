@@ -34,10 +34,10 @@ public class FindPatientCommandParserTest {
     public void parse_validArgs_returnsFindPatientCommand() {
         // no leading and trailing whitespaces
         FindPatientCommand expectedFindPatientCommand =
-                new FindPatientCommand(new FindPatientPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindPatientCommand);
+                new FindPatientCommand(new FindPatientPredicate("Alice"));
+        assertParseSuccess(parser, "Alice", expectedFindPatientCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindPatientCommand);
+        assertParseSuccess(parser, " \n Alice", expectedFindPatientCommand);
     }
 }

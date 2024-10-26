@@ -26,12 +26,10 @@ public class FindPatientCommandParser implements Parser<FindPatientCommand> {
         }
 
         // Ensure that the input is a string of alphabets separated by spaces
-        if (args.matches("^.*[^a-zA-Z ].*$")) {
+        if (trimmedArgs.matches("^.*[^a-zA-Z ].*$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_ARGUMENT_FORMAT, FindPatientCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindPatientCommand(new FindPatientPredicate(Arrays.asList(nameKeywords)));
+        return new FindPatientCommand(new FindPatientPredicate(trimmedArgs));
     }
 }
