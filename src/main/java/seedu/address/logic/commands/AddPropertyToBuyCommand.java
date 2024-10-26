@@ -79,6 +79,7 @@ public class AddPropertyToBuyCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.sortPersonList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToBuyToBeAdded));
     }
 

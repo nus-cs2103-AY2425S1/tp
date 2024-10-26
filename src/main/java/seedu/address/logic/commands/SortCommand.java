@@ -76,7 +76,7 @@ public class SortCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_ORDER);
         }
 
-        model.sortPersonList(comparator);
+        model.sortPersonListWithComparator(comparator);
 
         logger.info("SortCommand executed successfully");
 

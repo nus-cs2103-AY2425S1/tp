@@ -21,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final AddressBookStatistics statistics;
+    private Comparator<Person> sortComparator;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -124,8 +125,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public void sortPersonList(Comparator<Person> comparator) {
-        persons.sort(comparator);
+    /**
+     * Sorts the list of contacts by specified field and order.
+     */
+    public void sortPersonList() {
+        persons.sort(sortComparator);
+    }
+
+    /**
+     * Sorts the list of contacts by specified field and order.
+     */
+    public void setSortComparator(Comparator<Person> comparator) {
+        this.sortComparator = comparator;
     }
 
     //// util methods
