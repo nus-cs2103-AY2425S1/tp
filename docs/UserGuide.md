@@ -129,13 +129,13 @@ Edits an existing student in the UG Teach.
 * `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
 ![editResult.png](images/editResult.png)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
-1. The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
-2. At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided.
 
-3. Existing values will be updated to the input values.
+* Existing values will be updated to the input values.
 </box>
 
 
