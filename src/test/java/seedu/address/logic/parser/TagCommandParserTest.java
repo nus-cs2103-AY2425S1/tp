@@ -7,10 +7,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.model.tag.Tag;
 
 public class TagCommandParserTest {
 
@@ -19,8 +23,9 @@ public class TagCommandParserTest {
     @Test
     public void parse_validArgs_success() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + VALID_TAG_BRIDES_FRIEND.getTagName();
-        System.out.println(userInput);
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, VALID_TAG_BRIDES_FRIEND);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(VALID_TAG_BRIDES_FRIEND);
+        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
         System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -55,7 +60,7 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_tooLongTag_throwsParseException() {
-        String longTag = "veryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
+        String longTag = "veryveryveryveryveryveryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + longTag;
         String expectedMessage = Messages.MESSAGE_INPUT_LENGTH_EXCEEDED;
         assertParseFailure(parser, userInput, expectedMessage);

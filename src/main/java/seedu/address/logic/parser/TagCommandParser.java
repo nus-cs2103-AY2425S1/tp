@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
@@ -33,24 +37,24 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!argMultimap.getValue(PREFIX_TAG).isPresent()) {
+        Set<Tag> tagSet = new HashSet<>();
+        List<String> tagStrings = argMultimap.getAllValues(PREFIX_TAG);
+        if (tagStrings.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        String trimmedTagName = argMultimap.getValue(PREFIX_TAG).get().trim().toLowerCase();
-        boolean isEmpty = trimmedTagName.isEmpty();
-        boolean isTooLong = trimmedTagName.length() > MAX_LENGTH;
-
-        if (isEmpty) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        for (String tagString : tagStrings) {
+            tagString = tagString.trim().toLowerCase();
+            boolean isEmpty = tagString.isEmpty();
+            boolean isTooLong = tagString.length() > MAX_LENGTH;
+            if (isEmpty) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            } else if (isTooLong) {
+                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED));
+            }
+            tagSet.add(new Tag(tagString));
         }
 
-        if (isTooLong) {
-            throw new ParseException(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED);
-        }
-
-        Tag tag = new Tag(trimmedTagName);
-
-        return new TagCommand(index, tag);
+        return new TagCommand(index, tagSet);
     }
 }

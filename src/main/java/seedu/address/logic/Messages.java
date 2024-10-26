@@ -43,7 +43,12 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        if (!person.getTags().isEmpty()) {
+            String tagsString = person.getTags().stream()
+                    .map(tag -> tag.toString())
+                    .collect(Collectors.joining(", "));
+            builder.append(tagsString);
+        }
         return builder.toString();
     }
 
