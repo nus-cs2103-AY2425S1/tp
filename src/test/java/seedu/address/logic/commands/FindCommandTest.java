@@ -54,6 +54,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    // Invalid Input (Empty input given)
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
@@ -64,6 +65,7 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
+    // Valid Input (Multiple matches found)
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
