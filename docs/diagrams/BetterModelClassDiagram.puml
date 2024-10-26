@@ -19,5 +19,6 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> StudentClass
+Person *--> Attendance
 Person *--> EcNumber
 @enduml

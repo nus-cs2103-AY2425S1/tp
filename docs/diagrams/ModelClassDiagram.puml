@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Tag
 Class StudentClass
+Class Attendance
 Class EcNumber
 
 Class I #FFFFFF
@@ -45,6 +46,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> StudentClass
+Person *--> Attendance
 Person *--> EcNumber
 
 Person -[hidden]up--> I
