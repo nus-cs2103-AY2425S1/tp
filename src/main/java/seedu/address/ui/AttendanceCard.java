@@ -3,14 +3,10 @@ package seedu.address.ui;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Attendance;
@@ -51,6 +47,9 @@ public class AttendanceCard extends UiPart<Region> {
         setAttendance();
     }
 
+    /**
+     * Sets the UI component to display current week's attendance and other attendance
+     */
     private void setAttendance() {
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
         if (attendanceList.isEmpty()) {
@@ -61,7 +60,7 @@ public class AttendanceCard extends UiPart<Region> {
         } else if (currentWeekAttendance == null) {
             attendance.setText(": not attended");
             setAttendanceLabelNotAttendedStyle();
-            
+
             otherAttendance.setText(formatOtherAttendance(attendanceList));
         } else {
             attendance.setText(" attended " + currentWeekAttendance.toDisplayString());
@@ -75,6 +74,9 @@ public class AttendanceCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Returns {@code Attendance} of the current week.
+     */
     private Attendance getCurrentWeekAttendance() {
         int currentWeek = LocalDate.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         for (Attendance attendance : attendanceList) {
@@ -86,6 +88,11 @@ public class AttendanceCard extends UiPart<Region> {
         return null;
     }
 
+    /**
+     * Returns a string representation of the list to be displayed in the UI.
+     *
+     * @param attendanceList The list of attendance that does not belong to the current week
+     */
     private String formatOtherAttendance(List<Attendance> attendanceList) {
         if (attendanceList.isEmpty()) {
             return "No more attendance to show";
@@ -101,11 +108,17 @@ public class AttendanceCard extends UiPart<Region> {
         return "Other attendance: " + attendance;
     }
 
+    /**
+     * Sets the style for label if there is no {@code Attendance} for the current week
+     */
     private void setAttendanceLabelNotAttendedStyle() {
         attendance.getStyleClass().clear();
         attendance.setStyle("-fx-text-fill: #E58D8D");
     }
 
+    /**
+     * Sets the style for label if there is an {@code Attendance} for the current week
+     */
     private void setAttendanceLabelAttendedStyle() {
         attendance.getStyleClass().clear();
         attendance.setStyle("-fx-text-fill: #3E9B3F");

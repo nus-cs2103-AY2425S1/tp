@@ -51,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
     private VBox attendanceContainerPlaceholder;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, ObservableList<Participation> participationList, int displayedIndex) {
         super(FXML);

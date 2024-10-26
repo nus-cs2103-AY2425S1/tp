@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -8,7 +7,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -63,6 +61,9 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * @return Map of participation associated with each person in the personList.
+     */
     private HashMap<Person, ObservableList<Participation>> groupParticipationByPerson(
             ObservableList<Person> personList, ObservableList<Participation> participationList) {
         HashMap<Person, ObservableList<Participation>> participationMap = new HashMap<>();
@@ -81,6 +82,11 @@ public class PersonListPanel extends UiPart<Region> {
         return participationMap;
     }
 
+    /**
+     * Adds listeners to ObservableList of persons and ObservableList of participation
+     * to modify participationMap accordingly on changes to any of the lists to update
+     * the UI on user input and execution of the command.
+     */
     private void addListeners() {
         // Listener for changes in the personList
         personList.addListener((ListChangeListener<Person>) change -> {
@@ -98,13 +104,15 @@ public class PersonListPanel extends UiPart<Region> {
         participationList.addListener((ListChangeListener<Participation>) change -> {
             while (change.next()) {
                 for (Participation removedParticipation : change.getRemoved()) {
-                    ObservableList<Participation> participations = participationMap.get(removedParticipation.getStudent());
+                    ObservableList<Participation> participations =
+                            participationMap.get(removedParticipation.getStudent());
                     if (participations != null) {
                         participations.remove(removedParticipation);
                     }
                 }
                 for (Participation addedParticipation : change.getAddedSubList()) {
-                    ObservableList<Participation> participations = participationMap.get(addedParticipation.getStudent());
+                    ObservableList<Participation> participations =
+                            participationMap.get(addedParticipation.getStudent());
                     if (participations != null) {
                         participations.add(addedParticipation);
                     }

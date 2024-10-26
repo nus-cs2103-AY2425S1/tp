@@ -11,7 +11,7 @@
         <Label fx:id="subject" style="-fx-text-fill: #262626; -fx-padding: 0 5 0 0" text="\$subject"/>
         <HBox alignment="CENTER_LEFT">
             <ImageView fitWidth="15" fitHeight="15">
-                <Image url="@/images/check.png"/>
+                <Image url="@/images/check_icon.png"/>
             </ImageView>
             <Label fx:id="attendance" style="-fx-text-fill: #262626" text="\$attendance"/>
         </HBox>
