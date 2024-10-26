@@ -51,7 +51,6 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-
         Command command = campusConnectParser.parseCommand(commandText);
         if (shouldSaveCampusConnect(command)) {
             model.saveCurrentCampusConnect();
@@ -100,9 +99,11 @@ public class LogicManager implements Logic {
     }
 
     private boolean shouldSaveCampusConnect(Command c) {
-        return !(c instanceof UndoCommand
-                || c instanceof RedoCommand
-                || c instanceof ListCommand
-                || c instanceof SuperFindCommand);
+        boolean isUndoCommand = c instanceof UndoCommand;
+        boolean isRedoCommand = c instanceof RedoCommand;
+        boolean isListCommand = c instanceof ListCommand;
+        boolean isSuperFindCommand = c instanceof SuperFindCommand;
+        boolean isSaveCommand = !(isUndoCommand || isRedoCommand || isListCommand || isSuperFindCommand);
+        return isSaveCommand;
     }
 }
