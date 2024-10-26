@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -37,9 +38,7 @@ public class AddCarCommandTest {
     public void execute_addCarToEligiblePerson_success() throws Exception {
         // Create a valid person without a car
         Person validPerson = new PersonBuilder().build();
-
-        // Create a valid car to be added to the person
-        Car validCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"),
+        Car validCar = new Car(new Vrn("SJH9514P"), new Vin("KMHGH4JH3EU073801"),
                 new CarMake("Toyota"), new CarModel("Corolla"));
 
         // Create a model stub that contains the person
@@ -51,14 +50,14 @@ public class AddCarCommandTest {
 
         // Build the expected message after adding the car
         // The value 1 is passed to the string here as we know that the test only has 1 person inside the test stub.
-        String expectedMessage = String.format(AddCarCommand.MESSAGE_ADD_CAR_SUCCESS,
-                "1", validCar.getVrn(), validCar.getVin(),
-                validCar.getCarMake(), validCar.getCarModel());
+        Person validPersonWithCar = new PersonBuilder()
+                .withCar("SJH9514P", "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
+        String expectedMessage = Messages.formatSuccessMessage(validPersonWithCar,
+                AddCarCommand.MESSAGE_ADD_CAR_SUCCESS);
 
         // Execute the command and capture the result
         CommandResult commandResult = addCarCommand.execute(modelStub);
 
-        // Check that the command result matches the expected success message
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 

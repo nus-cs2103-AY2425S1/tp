@@ -11,17 +11,16 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Views the details of an existing person in the address book.
+ * Displays the full details of an existing Client in the  MATER address book.
  */
 public class ViewClientCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the details of the client identified by the index number used in the displayed client list.\n"
+            + ": Displays the details of the indexed Client.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Client %1$s’s Details:\n"
-            + "H/P: %2$s\nEMAIL: %3$s\nADDRESS: %4$s\n%5$s";
-    public static final String MESSAGE_FAILURE = "Error! Please check if the client’s index is valid.";
+    public static final String MESSAGE_VIEW_CLIENT_SUCCESS =
+            "Mater - View Client window opened for";
 
     private final Index index;
 
@@ -44,13 +43,9 @@ public class ViewClientCommand extends Command {
         }
 
         Person clientToView = lastShownList.get(index.getZeroBased());
-        String carDetails = clientToView.getCar() == null ? "No car details available" : "VRN: "
-                + clientToView.getCar().getVrn() + "\nVIN: " + clientToView.getCar().getVin() + "\nMake: "
-                + clientToView.getCar().getCarMake() + "\nModel: " + clientToView.getCar().getCarModel();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToView.getName(),
-                clientToView.getPhone(), clientToView.getEmail(), clientToView.getAddress(), carDetails),
-                false, false, true, clientToView);
+        String message = Messages.formatSuccessMessage(clientToView, MESSAGE_VIEW_CLIENT_SUCCESS);
+        return new CommandResult(message, false, false, true, clientToView);
     }
 
     @Override

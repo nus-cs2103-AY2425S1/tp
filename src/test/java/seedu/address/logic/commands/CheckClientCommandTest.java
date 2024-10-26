@@ -37,19 +37,19 @@ public class CheckClientCommandTest {
      * @param index The index of the client to Check in/ out.
      */
     public void checkClientTestHelper(Person clientToCheck, Index index) {
-        CommandResult expectedCheckInResult = new CommandResult(
-                String.format(CheckClientCommand.MESSAGE_CHECK_IN_CLIENT_SUCCESS,
-                Messages.format(clientToCheck)));
-        CommandResult expectedCheckOutResult = new CommandResult(
-                String.format(CheckClientCommand.MESSAGE_CHECK_OUT_CLIENT_SUCCESS,
-                Messages.format(clientToCheck)));
-
         CheckClientCommand checkClientCommand = new CheckClientCommand(index);
         try {
             if (clientToCheck.getCar() == null) {
                 assertEquals(expectedNoCarToCheckMessage, checkClientCommand.execute(model));
                 return;
             }
+            CommandResult expectedCheckInResult = new CommandResult(
+                    String.format(CheckClientCommand.MESSAGE_CHECK_IN_CLIENT_SUCCESS,
+                    clientToCheck.getName(), clientToCheck.getVrn()));
+            CommandResult expectedCheckOutResult = new CommandResult(
+                    String.format(CheckClientCommand.MESSAGE_CHECK_OUT_CLIENT_SUCCESS,
+                    clientToCheck.getName(), clientToCheck.getVrn()));
+
             clientToCheck.setServicing();
             if (clientToCheck.isServicing()) {
                 assertEquals(expectedCheckInResult, checkClientCommand.execute(model));
