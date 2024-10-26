@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -55,6 +56,10 @@ public class RemovePersonFromEventCommandTest {
     * ELLE = 4
     * FIONA = 5
     * GEORGE = 6
+     *
+     * Unused Persons:
+     * HOON = 7
+     *
     */
     private Model model;
 
@@ -84,12 +89,43 @@ public class RemovePersonFromEventCommandTest {
 
     @Test
     public void execute_invalidEventIndex_throwsCommandException() {
-        EventManager eventManager = model.getEventManager();
         RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
                 Index.fromOneBased(3), INDEX_FIRST_PERSON);
         assertCommandFailure(removePersonFromEventCommand, model, RemovePersonFromEventCommand.MESSAGE_EVENT_NOT_FOUND);
     }
 
+    @Test
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), Index.fromOneBased(7));
+        assertCommandFailure(removePersonFromEventCommand, model,
+                RemovePersonFromEventCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_personNotInEvent_throwsCommandException() {
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), Index.fromOneBased(7));
+        assertCommandFailure(removePersonFromEventCommand, model,
+                RemovePersonFromEventCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
+
+    @Test
+    public void equals_sameCommand_returnsTrue() {
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), INDEX_FIRST_PERSON);
+        assertEquals(removePersonFromEventCommand, removePersonFromEventCommand);
+    }
+
+    @Test
+    public void equals_sameCommandDifferentIndex_returnsFalse() {
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), INDEX_FIRST_PERSON);
+        RemovePersonFromEventCommand removePersonFromEventCommand2 = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), Index.fromOneBased(2));
+        assertNotEquals(removePersonFromEventCommand, removePersonFromEventCommand2);
+    }
 
 
 }
