@@ -159,7 +159,9 @@ public class EditCommand extends Command {
             setAmount(toCopy.amount);
             setDescription(toCopy.description);
             setDate(toCopy.date);
-            setCategories(new HashSet<>(toCopy.categories));
+            if (toCopy.categories != null) {
+                setCategories(new HashSet<>(toCopy.categories));
+            }
         }
 
         /**
