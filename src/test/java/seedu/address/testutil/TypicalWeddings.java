@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.storage.JsonSerializableAddressBook;
 
 /**
  * A utility class containing a list of {@code Wedding} objects to be used in tests.
@@ -42,6 +44,9 @@ public class TypicalWeddings {
         AddressBook ab = new AddressBook();
         for (Wedding wedding : getTypicalWeddings()) {
             ab.addWedding(wedding);
+        }
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            ab.addPerson(person);
         }
         return ab;
     }
