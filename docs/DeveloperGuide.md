@@ -281,20 +281,21 @@ particular, this representative works with B2B sales.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …           | I want to …                                                                 | So that I can …                                                       |
-| -------- | ---------------- |-----------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                |
-| `* * *`  | user             | delete a contact                                                            | free up space in my app                                               |
-| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                         |
-| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                              |
-| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                      |
-| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                   |
+| Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
+| `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
+| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
+| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                               |
+| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
+| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
 | `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
+| `* *`    | user             | unpin a specific contact                                                    | clear the pin that is no longer needed                                 |
 | `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them               |
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
@@ -305,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
 | `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
 | `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
-| `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                    |
+| `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                     |
 | `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
 | `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
@@ -412,7 +413,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC6 - Add notes to a person contact**
+**Use case: UC6 - Export contact list**
+
+**MSS**
+
+1.  Actor requests to export contact list to a specific file.
+2.  System exports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the directory does not exist.
+
+  - 1a1. System creates the directory.
+
+    Use case resumes from step 2.
+
+- 1b. System detects that the file is used by another process.
+
+  - 1b1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC7 - Add notes to a person contact**
 
 **MSS**
 
@@ -436,47 +460,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC7 - Pin a person**
+**Use case: UC8 - Edit a note of a person contact**
 
 **MSS**
 
-1.  Actor performs <u>list all people (UC2)</u>.
-2.  Actor requests to pin a specific person.
-3.  System shows details of newly pinned person.
-
-**Extension**
-
-- 2a. The person is already pinned.
-
-  - 2a1. System shows duplicated pin message.
-
-    Use case ends.
-
-**Use case: UC8 - Export contact list**
-
-**MSS**
-1.  Actor requests to export contact list to a specific file.
-2.  System exports the contact information into the file.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. System detects that the directory does not exist.
-
-    - 1a1. System creates the directory.
-
-      Use case resumes from step 2.
-
-- 1b. System detects that the file is used by another process.
-
-    - 1b1. System shows an error message.
-
-      Use case ends.
-
-**Use case: UC9 - Edit a note of a person contact**
-
-**MSS**
 1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to edit a note to a specific person.
 3.  System shows details of the newly edited note of that person.
@@ -487,24 +474,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 - 2b. The note name is invalid.
 
-    - 2b1. System shows an error message.
+  - 2b1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 - 2c. The note index is invalid.
 
-    - 2c1. System shows an error message.
+  - 2c1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC10 - Delete note from a person contact**
+**Use case: UC9 - Delete note from a person contact**
 
 **MSS**
 
@@ -518,15 +504,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 - 2b. The note index is invalid.
 
-    - 2b1. System shows an error message.
+  - 2b1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
+
+**Use case: UC10 - Pin a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to pin a specific person.
+3.  System shows details of newly pinned person.
+
+**Extension**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The person is already pinned.
+
+  - 2b1. System shows duplicated pin message.
+
+    Use case ends.
+
+**Use case: UC11 - Unpin a person**
+
+_Similar to UC10 except without extension 2b._
 
 ### Non-Functional Requirements
 
