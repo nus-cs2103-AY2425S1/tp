@@ -14,7 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
-import seedu.address.model.claim.ClaimSet;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
@@ -79,8 +79,8 @@ public class AddClaimCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
 
-        ClaimSet claimSet = policy.getClaimSet();
-        if (!claimSet.add(claim)) {
+        ClaimList claimList = policy.getClaimList();
+        if (!claimList.add(claim)) {
             throw new CommandException(MESSAGE_CLAIM_EXISTS);
         }
 
