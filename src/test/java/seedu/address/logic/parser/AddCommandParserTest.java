@@ -35,6 +35,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.amyProperty;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDate;
@@ -43,11 +44,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -143,9 +140,11 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags()
-                .withDateOfCreation(LocalDate.now().toString()).build();
+                .withDateOfCreation(LocalDate.now().toString())
+                .withHistory(LocalDate.of(2024, 10, 26), "Created")
+                .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + REMARK_DESC_AMY + BIRTHDAY_DESC_AMY,
+                        + ADDRESS_DESC_AMY + REMARK_DESC_AMY + BIRTHDAY_DESC_AMY ,
                 new AddCommand(expectedPerson));
     }
 
