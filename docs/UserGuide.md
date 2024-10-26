@@ -238,6 +238,37 @@ Parameter | Requirements | Explanation
 
 ---
 
+<h3 style="color: #1877F2;">Checking in / out a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">check</span></h3>
+
+Checks in / out a client.
+
+**Format:**
+
+```shell
+check INDEX​
+```
+
+**Parameters:**
+
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+
+**Notes:**
+
+- The client must have a car to check in / out.
+- If the client is not checked in, `check` will check in the client.
+- If the client is checked in, `check` will check out the client.
+
+**Examples:**
+
+- `check 1`
+
+The following image is the result of executing `check 1`.
+![Result for 'check 1'](images/checkResult.png)
+
+---
+
 <h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
 Deletes a car from a client.
@@ -358,7 +389,8 @@ Parameter | Requirements | Explanation
 - `find SJH9514P`
   Returns client with car [VRN](#glossary) `SJH9514P`.
 
-![Result for 'find John SJH9514P'](images/findResult.png)
+The following image is the result of executing `find Jason SJH9514P`.
+![Result for 'find Jason SJH9514P'](images/findResult.png)
 
 ---
 
@@ -383,7 +415,8 @@ Parameter | Requirements | Explanation
 - `view 1`
   Returns client details of the 1st client in MATER.
 
-![Result for 'view 1'](images/viewClientResult.png)
+The following image is the result of executing `view 1`.
+![Result for 'view 1'](images/viewResult.png)
 
 ---
 
