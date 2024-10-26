@@ -38,7 +38,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TUTORIALID + "TUTORIAL_ID]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Samson Chew "
-            + PREFIX_STUDENTID + "A1234567U "
+            + PREFIX_STUDENTID + "A1234567X "
             + PREFIX_TUTORIALID + "T1001";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
@@ -99,6 +99,7 @@ public class EditCommand extends Command {
 
         // Update tutorial assignments if tutorial ID has changed
         if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
+            model.unassignStudent(studentToEdit, studentToEdit.getTutorialId());
             model.assignStudent(editedStudent, editedStudent.getTutorialId());
         }
 
@@ -213,11 +214,10 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditStudentDescriptor)) {
+            if (!(other instanceof EditStudentDescriptor otherEditStudentDescriptor)) {
                 return false;
             }
 
-            EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
             return Objects.equals(name, otherEditStudentDescriptor.name)
                     && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates)
                     && Objects.equals(studentId, otherEditStudentDescriptor.studentId)

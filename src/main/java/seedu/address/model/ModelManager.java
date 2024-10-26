@@ -214,6 +214,15 @@ public class ModelManager implements Model {
         tutorials.assignStudent(student, tutorialId);
     }
 
+    // In ModelManager.java
+    @Override
+    public void unassignStudent(Student student, TutorialId tutorialId) {
+        requireNonNull(student);
+        requireNonNull(tutorialId);
+        tutorials.unassignStudent(student, tutorialId);
+    }
+
+
     @Override
     public String listTutorials() {
         return getTutorialList().toString();
