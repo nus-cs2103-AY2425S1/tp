@@ -378,4 +378,50 @@ public class ImportCommandTest {
         String unescapedNull = importCommand.unescapeSpecialCharacters(null);
         assertEquals("", unescapedNull);
     }
+
+    @Test
+    public void execute_fileWithOnlyEmptyLines_throwsCommandException() throws IOException {
+        Path emptyLinesFile = testDir.resolve("emptyLines.csv");
+        try (FileWriter writer = new FileWriter(emptyLinesFile.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            writer.write("   \n");
+            writer.write("\n");
+            writer.write("\t\n");
+        }
+        filesToCleanup.add(emptyLinesFile);
+
+        ImportCommand importCommand = new ImportCommand("emptyLines.csv") {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testDir.resolve(filepath);
+            }
+        };
+
+        assertThrows(CommandException.class, MESSAGE_EMPTY_FILE, () ->
+                importCommand.execute(model));
+    }
+
+    @Test
+    public void execute_fileWithEmptyLinesAndValidEntry_success() throws IOException, CommandException {
+        Path mixedFile = testDir.resolve("mixed.csv");
+        try (FileWriter writer = new FileWriter(mixedFile.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            writer.write("\n");
+            writer.write("   \n");
+            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
+            writer.write("\t\n");
+            writer.write("\n");
+        }
+        filesToCleanup.add(mixedFile);
+
+        ImportCommand importCommand = new ImportCommand("mixed.csv") {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testDir.resolve(filepath);
+            }
+        };
+
+        CommandResult result = importCommand.execute(model);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
 }
