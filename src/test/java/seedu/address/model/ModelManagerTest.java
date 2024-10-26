@@ -17,8 +17,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class ModelManagerTest {
 
@@ -114,6 +116,40 @@ public class ModelManagerTest {
     @Test
     public void getFilteredConsultationList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredConsultationList().remove(0));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        assertFalse(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        modelManager.addLesson(lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void addLesson_addsLessonSuccessfully() {
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        modelManager.addLesson(lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void deleteLesson_deletesLessonSuccessfully() {
+        // Arrange
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        modelManager.addLesson(lesson);
+        assertTrue(modelManager.hasLesson(lesson)); // Ensure the lesson was added
+
+        // Act
+        modelManager.deleteLesson(lesson);
+
+        // Assert
+        assertFalse(modelManager.hasLesson(lesson)); // Ensure the lesson was deleted
     }
 
     @Test

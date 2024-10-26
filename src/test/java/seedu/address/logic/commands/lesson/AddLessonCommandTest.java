@@ -59,6 +59,14 @@ public class AddLessonCommandTest {
             lessonsAdded.add(lesson);
         }
 
+        @Test
+        public void getCommandType_returnsCorrectType() {
+            Lesson lesson = new LessonBuilder().build();
+            AddLessonCommand addLessonCommand = new AddLessonCommand(lesson);
+
+            assertEquals(AddLessonCommand.COMMAND_TYPE, addLessonCommand.getCommandType());
+        }
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
