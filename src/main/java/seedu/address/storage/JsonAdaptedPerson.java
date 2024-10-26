@@ -175,7 +175,9 @@ public class JsonAdaptedPerson {
         return subjects;
     }
 
-    public void setSubjects(List<JsonAdaptedSubject> subjects) {this.subjects = subjects;}
+    public void setSubjects(List<JsonAdaptedSubject> subjects) {
+        this.subjects = subjects;
+    }
 
     public String getRole() {
         return role;
