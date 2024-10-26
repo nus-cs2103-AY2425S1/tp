@@ -42,11 +42,11 @@ public class JsonAdaptedProperty {
      * Converts a given {@code Property} into this class for Jackson use.
      */
     public JsonAdaptedProperty(Property source) {
-        name = source.getName().toString();
-        phone = source.getPhone().toString();
-        location = source.getLocation().toString();
-        askingPrice = source.getAskingPrice().toString();
-        propertyType = source.getPropertyType().toString();
+        name = source.getName().fullName;
+        phone = source.getPhone().value;
+        location = source.getLocation().value;
+        askingPrice = source.getAskingPrice().value;
+        propertyType = source.getPropertyType().value;
 
     }
 

@@ -26,9 +26,21 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="locationA" styleClass="cell_small_label" text="\$locationA" />
-      <Label fx:id="askingPrice" styleClass="cell_small_label" text="\$askingPrice" />
-      <Label fx:id="propertyType" styleClass="cell_small_label" text="\$propertyType" />
+      <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
+        <Label text="Location:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="locationA" styleClass="cell_small_label" text="\$locationA"
+               GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </GridPane>
+      <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
+        <Label text="Property Type:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="propertyType" styleClass="cell_small_label" text="\$propertyType"
+               GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </GridPane>
+      <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
+        <Label text="Asking Price:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="askingPrice" styleClass="cell_small_label" text="\$askingPrice"
+               GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </GridPane>
     </VBox>
   </GridPane>
 </HBox>

@@ -48,7 +48,7 @@ public class PropertyCard extends UiPart<Region> {
         name.setText(property.getName().toString());
         phone.setText(property.getPhone().toString());
         locationA.setText(property.getLocation().toString());
-        askingPrice.setText(property.getAskingPrice().toString());
+        askingPrice.setText(property.getAskingPrice().toPrettyString());
         propertyType.setText(property.getPropertyType().toString());
     }
 }
