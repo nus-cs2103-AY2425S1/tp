@@ -25,37 +25,37 @@ public class EndDateTimeTest {
     }
 
     @Test
-    public void constructor_invalidDateTimeD_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> EndDateTime.createEndDateTime(INVALID_DAY));
+    public void constructor_invalidDateTimeD_throwsParseException() {
+        assertThrows(ParseException.class, () -> EndDateTime.createEndDateTime(INVALID_DAY));
     }
 
     @Test
-    public void constructor_invalidDateTimeM_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> EndDateTime.createEndDateTime(INVALID_MONTH));
+    public void constructor_invalidDateTimeM_throwsParseException() {
+        assertThrows(ParseException.class, () -> EndDateTime.createEndDateTime(INVALID_MONTH));
     }
 
     @Test
-    public void constructor_invalidDateTimeY_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> EndDateTime.createEndDateTime(INVALID_YEAR));
+    public void constructor_invalidDateTimeY_throwsParseException() {
+        assertThrows(ParseException.class, () -> EndDateTime.createEndDateTime(INVALID_YEAR));
     }
 
     @Test
-    public void constructor_invalidDateTimeH_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> EndDateTime.createEndDateTime(INVALID_HOUR));
+    public void constructor_invalidDateTimeH_throwsParseException() {
+        assertThrows(ParseException.class, () -> EndDateTime.createEndDateTime(INVALID_HOUR));
     }
 
     @Test
-    public void constructor_invalidDateTimeMM_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> EndDateTime.createEndDateTime(INVALID_MINUTE));
+    public void constructor_invalidDateTimeMM_throwsParseException() {
+        assertThrows(ParseException.class, () -> EndDateTime.createEndDateTime(INVALID_MINUTE));
     }
 
     @Test
-    public void constructor_invalidStartDateTime_throwsIllegalArgumentException() {
+    public void constructor_invalidStartDateTime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> EndDateTime.createEndDateTime(null, null));
     }
 
     @Test
-    public void constructor_invalidHour_throwsIllegalArgumentException() throws ParseException {
+    public void constructor_invalidHour_throwsParseException() throws ParseException {
         StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
         assertThrows(IllegalArgumentException.class, () ->
                 EndDateTime.createEndDateTime(startDateTime, INVALID_DURATION_ZERO));

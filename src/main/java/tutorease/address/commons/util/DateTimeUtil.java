@@ -11,15 +11,15 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 public class DateTimeUtil {
     private static String dateTimeFormat = "dd-MM-yyyy HH:mm";
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
-    public static final String INVALID_DATETIME_FORMAT = "%s date time must be in the format of "
+    public static final String INVALID_DATETIME_FORMAT_MESSAGE = "%s date time must be in the format of "
             + dateTimeFormat;
-    public static final String INVALID_DATETIME_FIELD = "%s should be an integer";
-    public static final String INVALID_DAY = "Invalid Day: %d. "
+    public static final String INVALID_DATETIME_FIELD_MESSAGE = "%s should be an integer";
+    public static final String INVALID_DAY_MESSAGE = "Invalid Day: %d. "
             + "dd must be between 1 and %d for your given month and year";
-    public static final String INVALID_MONTH = "Invalid Month: %d. MM must be between 1 and 12";
-    public static final String INVALID_YEAR = "Invalid Year: %d. yyyy must be between 2000 and 2100";
-    public static final String INVALID_HOUR = "Invalid Hour: %d. HH must be between 0 and 23";
-    public static final String INVALID_MINUTE = "Invalid Minute: %d. mm must be between 0 and 59";
+    public static final String INVALID_MONTH_MESSAGE = "Invalid Month: %d. MM must be between 1 and 12";
+    public static final String INVALID_YEAR_MESSAGE = "Invalid Year: %d. yyyy must be between 2000 and 2100";
+    public static final String INVALID_HOUR_MESSAGE = "Invalid Hour: %d. HH must be between 0 and 23";
+    public static final String INVALID_MINUTE_MESSAGE = "Invalid Minute: %d. mm must be between 0 and 59";
 
 
     /**
@@ -31,7 +31,7 @@ public class DateTimeUtil {
         String trimmedStartDateTime = dateTime.trim();
         String regex = "\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2}";
         if (!trimmedStartDateTime.matches(regex)) {
-            throw new ParseException(String.format(INVALID_DATETIME_FORMAT, dateTime));
+            throw new ParseException(String.format(INVALID_DATETIME_FORMAT_MESSAGE, dateTime));
         }
 
         try {
@@ -50,11 +50,11 @@ public class DateTimeUtil {
         assert dateParts.length == 3;
         assert timeParts.length == 2;
 
-        int day = NumbersUtil.parseInt(dateParts[0], String.format(INVALID_DATETIME_FIELD, dateParts[0]));
-        int month = NumbersUtil.parseInt(dateParts[1], String.format(INVALID_DATETIME_FIELD, dateParts[1]));
-        int year = NumbersUtil.parseInt(dateParts[2], String.format(INVALID_DATETIME_FIELD, dateParts[2]));
-        int hour = NumbersUtil.parseInt(timeParts[0], String.format(INVALID_DATETIME_FIELD, timeParts[0]));
-        int minute = NumbersUtil.parseInt(timeParts[1], String.format(INVALID_DATETIME_FIELD, timeParts[1]));
+        int day = NumbersUtil.parseInt(dateParts[0], String.format(INVALID_DATETIME_FIELD_MESSAGE, dateParts[0]));
+        int month = NumbersUtil.parseInt(dateParts[1], String.format(INVALID_DATETIME_FIELD_MESSAGE, dateParts[1]));
+        int year = NumbersUtil.parseInt(dateParts[2], String.format(INVALID_DATETIME_FIELD_MESSAGE, dateParts[2]));
+        int hour = NumbersUtil.parseInt(timeParts[0], String.format(INVALID_DATETIME_FIELD_MESSAGE, timeParts[0]));
+        int minute = NumbersUtil.parseInt(timeParts[1], String.format(INVALID_DATETIME_FIELD_MESSAGE, timeParts[1]));
 
         try {
             checkValidYear(year);
@@ -71,31 +71,31 @@ public class DateTimeUtil {
 
     private static void checkValidYear(int year) throws ParseException {
         if (year < 2000 || year > 2100) {
-            throw new ParseException(String.format(INVALID_YEAR, year));
+            throw new ParseException(String.format(INVALID_YEAR_MESSAGE, year));
         }
     }
 
     private static void checkValidMonth(int month) throws ParseException {
         if (month < 1 || month > 12) {
-            throw new ParseException(String.format(INVALID_MONTH, month));
+            throw new ParseException(String.format(INVALID_MONTH_MESSAGE, month));
         }
     }
 
     private static void checkValidDay(int day, int maxDay) throws ParseException {
         if (day < 1 || day > maxDay) {
-            throw new ParseException(String.format(INVALID_DAY, day, maxDay));
+            throw new ParseException(String.format(INVALID_DAY_MESSAGE, day, maxDay));
         }
     }
 
     private static void checkValidHour(int hour) throws ParseException {
         if (hour < 0 || hour > 23) {
-            throw new ParseException(String.format(INVALID_HOUR, hour));
+            throw new ParseException(String.format(INVALID_HOUR_MESSAGE, hour));
         }
     }
 
     private static void checkValidMinute(int minute) throws ParseException {
         if (minute < 0 || minute > 59) {
-            throw new ParseException(String.format(INVALID_MINUTE, minute));
+            throw new ParseException(String.format(INVALID_MINUTE_MESSAGE, minute));
         }
     }
 
@@ -110,7 +110,7 @@ public class DateTimeUtil {
         try {
             return LocalDateTime.parse(dateTime, formatter);
         } catch (Exception e) {
-            throw new ParseException(INVALID_DATETIME_FORMAT);
+            throw new ParseException(INVALID_DATETIME_FORMAT_MESSAGE);
         }
     }
 

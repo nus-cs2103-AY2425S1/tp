@@ -1,5 +1,10 @@
 package tutorease.address.logic.parser;
 
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_DAY_MESSAGE;
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_HOUR_MESSAGE;
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_MINUTE_MESSAGE;
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_MONTH_MESSAGE;
+import static tutorease.address.commons.util.DateTimeUtil.INVALID_YEAR_MESSAGE;
 import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.FEE_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_CHAR;
@@ -122,19 +127,19 @@ public class AddLessonCommandParserTest {
         // invalid startDateTime
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_DAY
                         + DURATION_DESC,
-                StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+                String.format(INVALID_DAY_MESSAGE, 0, 31));
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_MONTH
                         + DURATION_DESC,
-                StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+                String.format(INVALID_MONTH_MESSAGE, 0));
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_YEAR
                         + DURATION_DESC,
-                StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+                String.format(INVALID_YEAR_MESSAGE, 0));
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_HOUR
                         + DURATION_DESC,
-                StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+                String.format(INVALID_HOUR_MESSAGE, 25));
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + INVALID_START_DATE_MINUTE
                         + DURATION_DESC,
-                StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+                String.format(INVALID_MINUTE_MESSAGE, 60));
 
         // invalid duration
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
