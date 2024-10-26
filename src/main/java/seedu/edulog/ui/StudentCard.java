@@ -44,11 +44,11 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private ImageView paidStatusIcon;
+    @FXML
+    private Label fee;
 
     private final Image paidIcon = new Image(getClass().getResource("/images/paid.png").toExternalForm());
     private final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
-
-    private Label fee;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -64,6 +64,8 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        assert(paidIcon != null);
+        assert(unpaidIcon != null);
         paidStatusIcon.setImage(student.getHasPaid() ? paidIcon : unpaidIcon);
         fee.setText("$" + String.valueOf(student.getFee().value));
     }
