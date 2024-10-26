@@ -45,6 +45,7 @@ public class ClaimList implements List<Claim> {
 
     @Override
     public boolean addAll(Collection<? extends Claim> collection) {
+        requireNonNull(collection);
         boolean allAdded = true;
         for (Claim claim : collection) {
             if (!add(claim)) {
