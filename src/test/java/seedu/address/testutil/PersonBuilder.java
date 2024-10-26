@@ -125,6 +125,17 @@ public class PersonBuilder {
     }
 
     /**
+     * Adds the {@code weddingJob} to the {@code Person} that we are building.
+     *
+     * @param weddingJob The {@code Wedding} to set.
+     * @return The updated {@code PersonBuilder} instance.
+     */
+    public PersonBuilder addWeddingJob(Wedding weddingJob) {
+        this.weddingJobs.add(weddingJob);
+        return this;
+    }
+
+    /**
      * Sets the {@code weddingJobs} of the {@code Person} that we are building.
      *
      * @param weddingJobs The {@code Set<Wedding>} to set.

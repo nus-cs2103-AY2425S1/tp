@@ -170,6 +170,7 @@ public class Person {
                 && weddingJobs.equals(otherPerson.weddingJobs);
 
         // commented them out since they give null pointer exception
+        // need to use Optional
     }
 
     @Override
@@ -188,7 +189,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? nullString : ownWedding)
+                .add("wedding", ownWedding == null ? "null" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }
