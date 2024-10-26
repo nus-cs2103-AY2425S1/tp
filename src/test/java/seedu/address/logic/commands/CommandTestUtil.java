@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.testutil.AssignStudyGroupTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -40,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_DETAIL_BOB = "To follow up";
     public static final String VALID_STUDY_GROUP_TAG_1A = "1A";
     public static final String VALID_STUDY_GROUP_TAG_2B = "2B";
+    public static final String VALID_UNUSED_STUDY_GROUP_TAG_3A = "3A";
+    public static final String VALID_UNUSED_STUDY_GROUP_TAG_3B = "3B";
     public static final String VALID_TAG_AMY = VALID_STUDY_GROUP_TAG_2B;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -67,6 +70,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final AssignCommand.AssignStudyGroupTagDescriptor DESC_3A;
+    public static final AssignCommand.AssignStudyGroupTagDescriptor DESC_3B;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -77,12 +82,15 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withAge(VALID_AGE_BOB)
                 .withDetail(VALID_DETAIL_BOB).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A, VALID_STUDY_GROUP_TAG_2B)
                 .build();
+
+        DESC_3A = new AssignStudyGroupTagDescriptorBuilder().withStudyGroupTag(VALID_UNUSED_STUDY_GROUP_TAG_3A).build();
+
+        DESC_3B = new AssignStudyGroupTagDescriptorBuilder().withStudyGroupTag(VALID_UNUSED_STUDY_GROUP_TAG_3B).build();
     }
 
     /**
      * Executes the given {@code command}, confirms that <br>
-     * - the returned {@link CommandResult} matches {@code expectedCommandResult}
-     * <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
@@ -97,9 +105,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to
-     * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that
-     * takes a string {@code expectedMessage}.
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
+     * {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
@@ -111,8 +118,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in
-     * {@code actualModel} remain unchanged
+     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -126,8 +132,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given
-     * {@code targetIndex} in the {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
