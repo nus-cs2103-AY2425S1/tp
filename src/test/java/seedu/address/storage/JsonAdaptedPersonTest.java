@@ -41,9 +41,10 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedRole::new)
             .collect(Collectors.toList());
 
-    private static final List<Nric> VALID_CAREGIVERS = BENSON.getCaregivers().stream().collect(Collectors.toList());
+    private static final List<String> VALID_CAREGIVERS = BENSON.getCaregiversNric().stream()
+            .collect(Collectors.toList());
 
-    private static final List<Nric> VALID_PATIENTS = BENSON.getPatients().stream().collect(Collectors.toList());
+    private static final List<String> VALID_PATIENTS = BENSON.getPatientsNric().stream().collect(Collectors.toList());
 
     private static final List<JsonAdaptedNote> VALID_NOTES = BENSON.getNotes().stream()
         .map(JsonAdaptedNote::new)
