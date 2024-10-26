@@ -11,13 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
-import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -47,9 +44,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     PREFIX_EMAIL, PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG, PREFIX_TUTORIAL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        List<Predicate<Person>> predicates = PredicateFactory.createPredicates(argMultimap);
-        return new FindCommand(predicates);
+        return PredicateFactory.createPredicates(argMultimap);
     }
 
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

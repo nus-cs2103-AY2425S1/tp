@@ -1,17 +1,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.PredicateAdapter;
 
 /**
  * Finds and lists all persons in the address book based on given search criteria.
@@ -37,28 +41,41 @@ public class FindCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_TAG + "friend "
             + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
-
-    private final Predicate<Person> combinedPredicate;
-    private final List<Predicate<Person>> predicates;
+    private final List<Predicate<Person>> personPredicates;
+    private final List<Predicate<Participation>> participationPredicates;
 
     /**
-     * Constructs a {@code FindCommand} with a list of predicates that will be combined using logical AND,
-     * using {@code reduce} method of {@code Streams} .
+     * Constructs a {@code FindCommand} with specified predicates for filtering {@code Person}
+     * and {@code Participation} objects.
      *
-     * @param predicates The list of predicates to apply to the search.
-     * @throws NullPointerException If the provided list of predicates is {@code null}.
+     * <p>This command uses the provided {@code personPredicates} to filter {@code Person} objects
+     * and the {@code participationPredicates} to filter {@code Participation} records related with those persons.</p>
+     *
+     * @param personPredicates A list of {@code Predicate<Person>} for filtering persons based on specific conditions.
+     *                         Must not be {@code null}.
+     * @param participationPredicates A list of {@code Predicate<Participation>} for filtering participation records
+     *                                associated with each person. Must not be {@code null}.
+     * @throws NullPointerException if {@code personPredicates} or {@code participationPredicates} is {@code null}.
      */
-    public FindCommand(List<Predicate<Person>> predicates) {
-        requireNonNull(predicates);
-        this.predicates = predicates;
-        this.combinedPredicate = predicates.stream()
-                .reduce(x -> true, Predicate::and); // Combine predicates with logical AND
+    public FindCommand(List<Predicate<Person>> personPredicates,
+                       List<Predicate<Participation>> participationPredicates) {
+        requireAllNonNull(personPredicates, participationPredicates);
+        this.personPredicates = new ArrayList<>(personPredicates);
+        this.participationPredicates = new ArrayList<>(participationPredicates);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(this.combinedPredicate);
+
+        // PredicateAdapter converts Predicate<Participation> to Predicate<Person>
+        Predicate<Person> predicateForPersonFromParticipation = new PredicateAdapter(
+                participationPredicates,
+                model.getParticipationList());
+        this.personPredicates.add(predicateForPersonFromParticipation);
+        Predicate<Person> combinedPredicate = this.personPredicates.stream().reduce(x -> true, Predicate::and);
+
+        model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -75,13 +92,15 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return this.predicates.equals(otherFindCommand.predicates);
+        return this.personPredicates.equals(otherFindCommand.personPredicates)
+                && this.participationPredicates.equals(otherFindCommand.participationPredicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicates)
+                .add("person predicates", personPredicates)
+                .add("participation predicates", participationPredicates)
                 .toString();
     }
 }
