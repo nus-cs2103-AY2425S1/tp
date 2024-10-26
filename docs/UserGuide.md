@@ -260,6 +260,16 @@ Exits the program.
 
 Format: `exit`
 
+### Showing Top 3 Upcoming Appointments
+
+Automatically displays the top 3 upcoming appointments for all contacts when you open up PhysioPal.
+
+* This feature operates automatically upon application launch, so there is no need for any user commands.
+* If there are fewer than three upcoming appointments, the list will show all available appointments.
+
+Example display:
+![display for upcoming appointments](images/upcomingAppointmentDisplay.png)
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
