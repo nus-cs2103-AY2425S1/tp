@@ -2,8 +2,12 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.model.person.Property;
 
+/**
+ * Middleman between JSON and Property.
+ */
 public class JsonAdaptedProperty {
 
     // Fields to store property details as strings

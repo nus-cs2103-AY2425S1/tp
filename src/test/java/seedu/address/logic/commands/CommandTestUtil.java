@@ -57,8 +57,8 @@ public class CommandTestUtil {
     public static final String VALID_TOWN_BOB = "Metropolis";
     public static final String VALID_TYPE_AMY = "Apartment";
     public static final String VALID_TYPE_BOB = "House";
-    public static final String VALID_SIZE_AMY = "1200 sqft";
-    public static final String VALID_SIZE_BOB = "2500 sqft";
+    public static final String VALID_SIZE_AMY = "1200";
+    public static final String VALID_SIZE_BOB = "2500";
     public static final String VALID_BEDROOMS_AMY = "3";
     public static final String VALID_BEDROOMS_BOB = "4";
     public static final String VALID_BATHROOMS_AMY = "2";

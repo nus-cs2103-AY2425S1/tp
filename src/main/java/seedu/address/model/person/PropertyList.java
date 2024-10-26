@@ -31,11 +31,18 @@ public class PropertyList {
         this.properties = new ArrayList<>(properties);
     }
 
+    /**
+     * Constructs a new {@code PropertyList} instance containing the specified property.
+     *
+     * @param property the {@code Property} to be added to the property list.
+     * @throws NullPointerException if the provided property is {@code null}.
+     */
     public PropertyList(Property property) {
         requireNonNull(property);
         this.properties = new ArrayList<>();
         this.properties.add(property);
     }
+
 
     /**
      * Adds a new property to the list.

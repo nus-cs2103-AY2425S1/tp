@@ -141,16 +141,16 @@ public class AddPropertyCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("address", address)
-                .add("town", town)
-                .add("propertyType", propertyType)
-                .add("size", size)
-                .add("numberOfBedrooms", numberOfBedrooms)
-                .add("numberOfBathrooms", numberOfBathrooms)
-                .add("price", price)
-                .toString();
+        return String.format("%s{index=%s, address='%s', location='%s', type='%s', area=%.1f, bedrooms=%d, bathrooms=%d, price=%.1f}",
+                this.getClass().getCanonicalName(),
+                index,
+                address,
+                town,
+                propertyType,
+                size,
+                numberOfBedrooms,
+                numberOfBathrooms,
+                price);
     }
 }
 

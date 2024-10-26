@@ -145,23 +145,18 @@ public class TypicalPersons {
             .withPropertyList(idaPropertyList) // Using static property list
             .build();
 
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withRemark(VALID_REMARK_AMY).withBirthday(VALID_BIRTHDAY_AMY)
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).withRemark(VALID_REMARK_AMY)
+            .withBirthday(VALID_BIRTHDAY_AMY)
             .withDateOfCreation(VALID_DATE_OF_CREATION)
-            .withHistory(LocalDate.of(2024, 1, 12), "Created")
-            .withHistory(LocalDate.of(2024, 10, 10), "Attended seminar")
-            .withHistory(LocalDate.of(2024, 10, 11), "Met with client")
+            .withHistory(LocalDate.now(), VALID_LOG_MESSAGE)
             .withPropertyList(amyPropertyList) // Using static property list
             .build();
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withRemark(VALID_REMARK_BOB).withBirthday(VALID_BIRTHDAY_BOB)
-            .withDateOfCreation(VALID_DATE_OF_CREATION)
-            .withHistory(LocalDate.of(2024, 1, 12), "Created")
-            .withHistory(LocalDate.of(2024, 10, 10), "Attended seminar")
-            .withHistory(LocalDate.of(2024, 10, 11), "Met with client")
             .withPropertyList(bobPropertyList) // Using static property list
             .build();
 
