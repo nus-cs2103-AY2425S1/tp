@@ -64,7 +64,6 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
     public static final String MESSAGE_DUPLICATE_CAR = "Car already exists in MATER.";
     public static final String MESSAGE_NO_CAR_TO_EDIT_ISSUES = "Client does not have a Car to edit Issues.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditCarDescriptor editCarDescriptor;
@@ -109,13 +108,18 @@ public class EditClientCommand extends Command {
         if (personToEdit.getCar() != null) {
             Car carToEdit = personToEdit.getCar();
             editedCar = createEditedCar(carToEdit, editCarDescriptor);
-            if (carToEdit.equals(editedCar) && model.hasCar(editedCar) && isCarEdited) {
+            if ((carToEdit.equals(editedCar) || model.hasCar(editedCar)) && isCarEdited) {
                 throw new CommandException(MESSAGE_DUPLICATE_CAR);
             }
         }
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
-        if (personToEdit.equals(editedPerson) && model.hasPerson(editedPerson) && isPersonEdited) {
+
+        if (personToEdit.equals(editedPerson) && isPersonEdited) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if ((personToEdit.getName() != editedPerson.getName()) && model.hasPerson(editedPerson) && isPersonEdited) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
