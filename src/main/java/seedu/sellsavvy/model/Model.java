@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -93,13 +94,14 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    //TODO: change it to getSelectedPersonProperty
-    /** Returns an unmodifiable view of selected person */
-    ReadOnlyObjectProperty<Person> getSelectedPerson();
+    /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Person} */
+    ReadOnlyObjectProperty<Person> getSelectedPersonProperty();
 
-    //TODO: change it to getSelectedPerson
     /** Returns the selected person displayed*/
-    Person getSelectedPerson2();
+    Person getSelectedPerson();
+
+    /** Returns the selected OrderList displayed*/
+    OrderList getSelectedOrderList();
 
     /** Returns the {@code OrderList} displayed*/
     FilteredList<Order> getFilteredOrderList();
