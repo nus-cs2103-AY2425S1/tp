@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HireCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RejectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Job;
@@ -56,6 +57,26 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parse_sortCommand_success() throws Exception {
+        // Testing with valid ascending order argument 'a'
+        String arguments = "a";
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + arguments);
+
+        // Check if the parsed command has ascending order set to true
+        assertEquals(true, command.isAscending());
+    }
+
+    @Test
+    public void parse_sortCommand_successDescending() throws Exception {
+        // Testing with valid descending order argument 'd'
+        String arguments = "d";
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + arguments);
+
+        // Check if the parsed command has ascending order set to false
+        assertEquals(false, command.isAscending());
     }
 
     @Test
