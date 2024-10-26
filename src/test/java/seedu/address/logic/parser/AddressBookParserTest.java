@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearConfirmationCommand;
 import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
@@ -50,10 +51,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
+        parser.parseCommand("N");
 
         String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
+        parser.parseCommand("N");
 
         try {
             parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
