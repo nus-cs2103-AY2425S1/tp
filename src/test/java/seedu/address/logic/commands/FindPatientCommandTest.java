@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.JANE;
-import static seedu.address.testutil.TypicalPersons.JOHN;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithPatients;
 
 import java.util.Arrays;
