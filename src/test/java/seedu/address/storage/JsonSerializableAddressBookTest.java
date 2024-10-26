@@ -19,7 +19,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.testutil.TypicalWeddings;
 
 public class JsonSerializableAddressBookTest {
 

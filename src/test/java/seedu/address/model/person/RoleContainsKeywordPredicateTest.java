@@ -42,7 +42,7 @@ public class RoleContainsKeywordPredicateTest {
     }
 
     @Test
-    public void test_RoleContainsKeywords_returnsTrue() {
+    public void test_roleContainsKeywords_returnsTrue() {
         // One keyword
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("friends"));
         assertTrue(predicate.test(new PersonBuilder().withRole("friends").build()));
@@ -94,7 +94,8 @@ public class RoleContainsKeywordPredicateTest {
 
     @Test
     public void personHasMixedTags_someMatching_returnsTrue() {
-        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
+        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays
+                .asList("family", "colleague"));
         assertTrue(predicate.test(new PersonBuilder().withRole("family").build()));
     }
 
