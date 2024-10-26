@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
@@ -141,7 +140,7 @@ public class AddAssignmentCommand extends Command {
 
     @Override
     public boolean undo(Model model) {
-        student.deleteAssignment(new AssignmentQuery(assignment));
+        student.deleteAssignment(assignment.getAssignmentName());
         return true;
     }
 }

@@ -27,7 +27,6 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
-import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
@@ -114,18 +113,13 @@ public class StudentTest {
 
     @Test
     void deleteAssignment_validAssignment_success() throws CommandException {
-        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, null, null, null, null);
-        assertEquals(MATH_ASSIGNMENT_SUBMITTED, student.deleteAssignment(query));
+        assertEquals(MATH_ASSIGNMENT_SUBMITTED, student.deleteAssignment(ASSIGNMENT_NAME_A));
     }
 
     @Test
     void deleteAssignment_nonExistentAssignment_returnsNull() throws CommandException {
-        // Create an assignment query that does not match any existing assignment
-        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"),
-                null, null, null, null);
-
         // Execute delete
-        Assignment deletedAssignment = student.deleteAssignment(query);
+        Assignment deletedAssignment = student.deleteAssignment(new AssignmentName("Nonexistent assignment"));
 
         // Verify that the method returns null when the assignment does not exist
         assertEquals(null, deletedAssignment);
