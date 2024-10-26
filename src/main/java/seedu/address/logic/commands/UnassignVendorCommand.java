@@ -31,7 +31,6 @@ public class UnassignVendorCommand extends Command {
         + "as it still has a task.";
 
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
-    
     private final Index targetIndex;
 
     /**
