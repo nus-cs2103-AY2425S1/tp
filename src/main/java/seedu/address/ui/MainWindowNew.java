@@ -119,7 +119,7 @@ public class MainWindowNew extends UiPart<Stage> {
         });
     }
 
-    void fillInnerParts() {
+    void fillInnerParts(OverviewPanel overviewPanel) {
 
         this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -127,7 +127,7 @@ public class MainWindowNew extends UiPart<Stage> {
         this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        this.overviewPanel = new OverviewPanel();
+        this.overviewPanel = overviewPanel;
         overviewPanelPlaceholder.getChildren().add(overviewPanel.getRoot());
 
         this.personListPanel = new PersonListPanel(logic.getFilteredPersonList(), overviewPanel);
