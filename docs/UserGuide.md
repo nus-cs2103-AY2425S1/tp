@@ -138,8 +138,13 @@ Edits an existing student in the UG Teach.
 * Existing values will be updated to the input values.
 </box>
 
+<box type="tip" header="##### Tips">
 
+* You may refer to [`pay`](#receiving-payment-from-a-student--pay), 
+[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+for convenient ways to update the paid amount and owed amount.
 
+</box>
 
 ### Showing income data: `income`
 
