@@ -10,7 +10,16 @@ import java.util.List;
  * field
  */
 public class StudentComparator implements Comparator<Student> {
-
+    public static final String NAME_ASCENDING = "Name (ascending)";
+    public static final String NAME_DESCENDING = "Name (descending)";
+    public static final String PHONE_ASCENDING = "Phone (ascending)";
+    public static final String PHONE_DESCENDING = "Phone (descending)";
+    public static final String ADDRESS_ASCENDING = "Address (ascending)";
+    public static final String ADDRESS_DESCENDING = "Address (descending)";
+    public static final String GRADE_LEVEL_ASCENDING = "Grade level (ascending)";
+    public static final String GRADE_LEVEL_DESCENDING = "Grade level (descending)";
+    public static final String GROUP_ASCENDING = "Group (ascending)";
+    public static final String GROUP_DESCENDING = "Group (descending)";
     private final List<Comparator<Student>> comparators;
     private final List<String> comparatorMessages;
 
@@ -48,33 +57,38 @@ public class StudentComparator implements Comparator<Student> {
 
     public static StudentComparatorByField getComparatorForName(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getName), "Name (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getName), NAME_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getName).reversed(), "Name (descending)");
+        return new StudentComparatorByField(Comparator.comparing(Student::getName).reversed(), NAME_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForPhone(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getPhone), "Phone (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getPhone), PHONE_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(), "Phone (descending)");
+        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(), PHONE_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForAddress(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getAddress), "Address (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getAddress), ADDRESS_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getAddress).reversed(),
-                "Address (descending)");
+        return new StudentComparatorByField(Comparator.comparing(Student::getAddress).reversed(), ADDRESS_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForGradeLevel(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel),
-                    "Grade Level (ascending)");
+            return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel), GRADE_LEVEL_ASCENDING);
         }
         return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel).reversed(),
-                "Grade Level (descending)");
+                GRADE_LEVEL_DESCENDING);
+    }
+
+    public static StudentComparatorByField getComparatorForGroup(SortOrder sortOrder) {
+        if (sortOrder.isAscending()) {
+            return new StudentComparatorByField(Comparator.comparing(Student::getGroup), GROUP_ASCENDING);
+        }
+        return new StudentComparatorByField(Comparator.comparing(Student::getGroup).reversed(), GROUP_DESCENDING);
     }
 
     /**

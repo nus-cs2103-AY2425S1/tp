@@ -1,5 +1,7 @@
 package keycontacts.model.student;
 
+import static keycontacts.model.student.StudentComparator.NAME_ASCENDING;
+import static keycontacts.model.student.StudentComparator.PHONE_DESCENDING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -125,6 +127,6 @@ public class StudentComparatorTest {
         comparator.addComparator(StudentComparator.getComparatorForName(new StudentComparator.SortOrder("ASC")));
         comparator.addComparator(StudentComparator.getComparatorForPhone(new StudentComparator.SortOrder("DESC")));
 
-        assertEquals("Name (ascending), Phone (descending)", comparator.getSortDescription());
+        assertEquals(String.join(", ", NAME_ASCENDING, PHONE_DESCENDING), comparator.getSortDescription());
     }
 }

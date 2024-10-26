@@ -45,7 +45,11 @@ public class TypicalStudents {
 
     /**
      * When editing any entry below, take note to change typicalStudentsStudentDirectory.json.
-     * All typical students are not in a group initially.
+     * Some conventions to follow to allow for easier and more straightforward testing
+     * 1. All typical students have a regular lesson on one sequential day of the week
+     * (e.g. Alice on Monday, Benson on Tuesday and so on). The regular lesson should start at or after 12pm
+     * 2. All makeup lessons should happen on the same day as the student's regular lesson, and be before 12pm.
+     * 3. All students should either be in no group, or be in a group on their own
      */
     public static final Student ALICE = new StudentBuilder()
             .withName("Alice Pauline")
