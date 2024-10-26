@@ -37,19 +37,19 @@ activate LogCommand
 LogCommand --> LogCommandParser :
 deactivate LogCommand
 
-LogCommandParser --> AddressBookParser : d
+LogCommandParser --> AddressBookParser : lg
 deactivate LogCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 LogCommandParser -[hidden]-> AddressBookParser
 destroy LogCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : lg
 deactivate AddressBookParser
 
 LogicManager -> LogCommand : execute(m)
 activate LogCommand
 
-LogCommand -> Model : deletePerson(1)
+LogCommand -> Model : setPerson(1)
 activate Model
 
 Model --> LogCommand
