@@ -6,38 +6,40 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 
 /**
- * Represents datetime of a wedding in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDatetime(String)}
+ * Represents date of a wedding in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Datetime {
+public class Date {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in the format of dd/MM/yyyy";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in the format of DD/MM/YYYY";
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|20)\\d\\d$";
     public final String value;
 
     /**
-     * Constructs an {@code Datetime}.
+     * Constructs an {@code Date}.
      *
-     * @param datetime A valid datetime.
+     * @param date A valid date.
      */
-    public Datetime(String datetime) {
-        requireNonNull(datetime);
-        checkArgument(isValidDatetime(datetime), MESSAGE_CONSTRAINTS);
-        this.value = datetime;
+    public Date(String date) {
+        requireNonNull(date);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        this.value = date;
     }
 
     /**
-     * Returns true if a given string is a valid datetime.
+     * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDatetime(String test) {
+    public static boolean isValidDate(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
         try {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDate.parse(test, dateFormatter);
             return true;
         } catch (DateTimeParseException e) {
@@ -57,12 +59,12 @@ public class Datetime {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Datetime)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 
-        Datetime otherDatetime = (Datetime) other;
-        return value.equals(otherDatetime.value);
+        Date otherDate = (Date) other;
+        return value.equals(otherDate.value);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 
@@ -25,7 +25,7 @@ public class WeddingUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_WEDDING_NAME + wedding.getWeddingName().value + " ");
         sb.append(PREFIX_VENUE + wedding.getVenue().value + " ");
-        sb.append(PREFIX_DATETIME + wedding.getDatetime().value + " ");
+        sb.append(PREFIX_DATE + wedding.getDate().value + " ");
         return sb.toString();
     }
 }

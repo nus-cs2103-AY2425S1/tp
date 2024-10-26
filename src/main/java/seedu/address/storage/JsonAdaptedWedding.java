@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
@@ -25,7 +25,7 @@ public class JsonAdaptedWedding {
 
     private final String weddingName;
     private final String venue;
-    private final String dateTime;
+    private final String date;
     private final List<JsonAdaptedPerson> participants = new ArrayList<>();
 
     /**
@@ -33,11 +33,11 @@ public class JsonAdaptedWedding {
      */
     @JsonCreator
     public JsonAdaptedWedding(@JsonProperty("weddingName") String weddingName,
-            @JsonProperty("venue") String venue, @JsonProperty("dateTime") String dateTime,
+            @JsonProperty("venue") String venue, @JsonProperty("date") String date,
             @JsonProperty("participants") List<JsonAdaptedPerson> participants) {
         this.weddingName = weddingName;
         this.venue = venue;
-        this.dateTime = dateTime;
+        this.date = date;
         if (participants != null) {
             this.participants.addAll(participants);
         }
@@ -49,7 +49,7 @@ public class JsonAdaptedWedding {
     public JsonAdaptedWedding(Wedding source) {
         weddingName = source.getWeddingName().toString();
         venue = source.getVenue().toString();
-        dateTime = source.getDatetime().toString();
+        date = source.getDate().toString();
         participants.addAll(source.getParticipants().stream()
                 .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList()));
@@ -84,17 +84,17 @@ public class JsonAdaptedWedding {
         }
         final Venue modelVenue = new Venue(venue);
 
-        if (dateTime == null) {
+        if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Datetime.class.getSimpleName()));
+                    Date.class.getSimpleName()));
         }
-        if (!Datetime.isValidDatetime(dateTime)) {
-            throw new IllegalValueException(Datetime.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(date)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Datetime modelDatetime = new Datetime(dateTime);
+        final Date modelDate = new Date(date);
 
         final Set<Person> modelParticpants = new HashSet<>(participantList);
-        return new Wedding(modelWeddingName, modelVenue, modelDatetime, modelParticpants);
+        return new Wedding(modelWeddingName, modelVenue, modelDate, modelParticpants);
     }
 
 }

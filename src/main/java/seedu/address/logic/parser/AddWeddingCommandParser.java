@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 
@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
@@ -25,20 +25,20 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
      */
     public AddWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATETIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddWeddingCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATETIME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE);
         WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(PREFIX_WEDDING_NAME).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
-        Datetime datetime = ParserUtil.parseDatetime(argMultimap.getValue(PREFIX_DATETIME).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
 
-        Wedding wedding = new Wedding(name, venue, datetime);
+        Wedding wedding = new Wedding(name, venue, date);
 
         return new AddWeddingCommand(wedding);
     }

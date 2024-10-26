@@ -61,8 +61,8 @@ public class Messages {
         builder.append(wedding.getWeddingName())
                 .append("; Venue: ")
                 .append(wedding.getVenue())
-                .append("; Datetime: ")
-                .append(wedding.getDatetime());
+                .append("; Date: ")
+                .append(wedding.getDate());
         return builder.toString();
     }
 

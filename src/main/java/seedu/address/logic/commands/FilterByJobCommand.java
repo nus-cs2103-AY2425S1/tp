@@ -14,10 +14,11 @@ import seedu.address.model.person.JobContainsKeywordsPredicate;
 public class FilterByJobCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose jobs contain any of "
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + ": Filters all persons whose jobs contain any of "
             + "the specified keywords (case-insensitive)\n"
-            + " and displays them as a list with index numbers.\n"
+            + " and displays them as a list with index numbers.";
+
+    public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " Photographer" + " OR " + COMMAND_WORD + " caterer";
 

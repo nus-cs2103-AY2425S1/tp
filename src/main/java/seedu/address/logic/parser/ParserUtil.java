@@ -15,7 +15,7 @@ import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tag;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.WeddingName;
 
@@ -171,18 +171,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String datetime} into an {@code Datetime}.
+     * Parses a {@code String date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code datetime} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Datetime parseDatetime(String datetime) throws ParseException {
-        requireNonNull(datetime);
-        String trimmedDatetime = datetime.trim();
-        if (!Datetime.isValidDatetime(trimmedDatetime)) {
-            throw new ParseException(Datetime.MESSAGE_CONSTRAINTS);
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Datetime(trimmedDatetime);
+        return new Date(trimmedDate);
     }
 
 

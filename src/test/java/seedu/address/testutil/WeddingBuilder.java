@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
@@ -17,11 +17,11 @@ public class WeddingBuilder {
 
     public static final String DEFAULT_WEDDING_NAME = "Jonus Ho & Izzat Syazani";
     public static final String DEFAULT_VENUE = "Pasir Ris Hotel Ball Room";
-    public static final String DEFAULT_DATETIME = "02/11/2024";
+    public static final String DEFAULT_DATE = "02/11/2024";
 
     private WeddingName weddingName;
     private Venue venue;
-    private Datetime datetime;
+    private Date date;
     private Set<Person> participants;
 
     /**
@@ -30,7 +30,7 @@ public class WeddingBuilder {
     public WeddingBuilder() {
         weddingName = new WeddingName(DEFAULT_WEDDING_NAME);
         venue = new Venue(DEFAULT_VENUE);
-        datetime = new Datetime(DEFAULT_DATETIME);
+        date = new Date(DEFAULT_DATE);
         participants = new HashSet<>();
     }
 
@@ -40,7 +40,7 @@ public class WeddingBuilder {
     public WeddingBuilder(Wedding weddingToCopy) {
         weddingName = weddingToCopy.getWeddingName();
         venue = weddingToCopy.getVenue();
-        datetime = weddingToCopy.getDatetime();
+        date = weddingToCopy.getDate();
         participants = weddingToCopy.getParticipants();
     }
 
@@ -61,10 +61,10 @@ public class WeddingBuilder {
     }
 
     /**
-     * Sets the {@code Datetime} of the {@code Wedding} that we are building.
+     * Sets the {@code Date} of the {@code Wedding} that we are building.
      */
-    public WeddingBuilder withDatetime(String datetime) {
-        this.datetime = new Datetime(datetime);
+    public WeddingBuilder withDate(String date) {
+        this.date = new Date(date);
         return this;
     }
 
@@ -78,7 +78,7 @@ public class WeddingBuilder {
     }
 
     public Wedding build() {
-        return new Wedding(weddingName, venue, datetime, participants);
+        return new Wedding(weddingName, venue, date, participants);
     }
 
 }

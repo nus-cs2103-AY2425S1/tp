@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_NAME_ONE;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_FOUR;
@@ -49,7 +49,7 @@ public class WeddingBookTest {
     public void resetData_withDuplicateWeddings_throwsDuplicateWeddingException() {
         // Two weddings with the same identity
         Wedding editedWedding = new WeddingBuilder(WEDDING_ONE).withWeddingName(VALID_WEDDING_NAME_ONE)
-                .withVenue(VALID_VENUE_ONE).withDatetime(VALID_DATETIME_ONE).build();
+                .withVenue(VALID_VENUE_ONE).withDate(VALID_DATE_ONE).build();
         List<Wedding> newWeddings = Arrays.asList(WEDDING_ONE, editedWedding);
         WeddingBookStub newData = new WeddingBookStub(newWeddings);
 
