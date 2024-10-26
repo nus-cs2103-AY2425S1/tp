@@ -49,7 +49,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ## Features
 
-<box type="info" seamless>**Notes about the command format:**<br>
+<box type="info"><md>**Notes about the command format:**</md><br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -60,7 +60,9 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE**.
+* No two students can have both same **NAME** and **PHONE**, but different students may share a **PHONE** number.
+
+> Reason: Siblings can use a parent's phone number as their **PHONE**. 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -70,7 +72,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
