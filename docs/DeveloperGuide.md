@@ -173,7 +173,7 @@ Step 2. The user executes `view 1` command to view the first person in the Clien
 
 <box type="info" seamless>
 
-**Note:** Changes to Client details (via `edit`, `add-car`, `delete-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view` must be called again to reflect these changes.
+**Note:** Changes to Client details (via `edit`, `add-car`, `del-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view` must be called again to reflect these changes.
 
 </box>
 
