@@ -12,10 +12,10 @@ UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
-UniqueSkillList -right-> "*" Skill
+UniqueSkillList -down-> "*" Skill
 
+Person --up-> "1" Tag : Job Status
 Person -up-> "*" Tag
-Person -up-> "1" Tag : Job Status
 Person -up-> "*" Skill
 
 Person *--> Name
