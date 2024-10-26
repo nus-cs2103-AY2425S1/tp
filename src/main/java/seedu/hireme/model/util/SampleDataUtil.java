@@ -22,8 +22,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook<InternshipApplication> getSampleAddressBook() {
-        AddressBook<InternshipApplication> sampleAb = new AddressBook<>();
+    public static ReadOnlyAddressBook getSampleAddressBook() {
+        AddressBook sampleAb = new AddressBook();
         for (InternshipApplication sampleInternship : getSampleInternships()) {
             sampleAb.addItem(sampleInternship);
         }

@@ -2,12 +2,11 @@ package seedu.hireme.logic.parser;
 
 import seedu.hireme.logic.commands.Command;
 import seedu.hireme.logic.parser.exceptions.ParseException;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.
  */
-public interface Parser<T extends Command<InternshipApplication>> {
+public interface Parser<T extends Command> {
 
     /**
      * Parses {@code userInput} into a command and returns it.

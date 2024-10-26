@@ -23,7 +23,7 @@ import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook<InternshipApplication> addressBook = new AddressBook<>();
+    private final AddressBook addressBook = new AddressBook();
 
     @Test
     public void constructor() {
@@ -37,7 +37,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook<InternshipApplication> newData = getTypicalAddressBook();
+        AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -91,7 +91,7 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook<InternshipApplication> {
+    private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<InternshipApplication> applications = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<InternshipApplication> applications) {

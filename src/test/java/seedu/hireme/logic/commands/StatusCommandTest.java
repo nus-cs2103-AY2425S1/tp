@@ -22,11 +22,11 @@ import seedu.hireme.model.internshipapplication.Status;
 
 public class StatusCommandTest {
 
-    private Model<InternshipApplication> model = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getClonedAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Model<InternshipApplication> clonedModel = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
+        Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
 
         InternshipApplication internshipApplicationToUpdate = clonedModel
                 .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
@@ -36,7 +36,7 @@ public class StatusCommandTest {
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), Status.ACCEPTED.getValue());
 
-        ModelManager<InternshipApplication> expectedModel = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
 
         InternshipApplication updatedApplication = new InternshipApplication(
                 internshipApplicationToUpdate.getCompany(),
@@ -94,7 +94,7 @@ public class StatusCommandTest {
         assertEquals(expected, statusCommand.toString());
     }
 
-    private void showNoInternshipApplication(Model<InternshipApplication> model) {
+    private void showNoInternshipApplication(Model model) {
         model.updateFilteredList(p -> false);
         assertTrue(model.getFilteredList().isEmpty());
     }

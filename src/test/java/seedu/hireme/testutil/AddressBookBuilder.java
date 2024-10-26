@@ -10,13 +10,13 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class AddressBookBuilder {
 
-    private AddressBook<InternshipApplication> addressBook;
+    private final AddressBook addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook<>();
+        addressBook = new AddressBook();
     }
 
-    public AddressBookBuilder(AddressBook<InternshipApplication> addressBook) {
+    public AddressBookBuilder(AddressBook addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook<InternshipApplication> build() {
+    public AddressBook build() {
         return addressBook;
     }
 }

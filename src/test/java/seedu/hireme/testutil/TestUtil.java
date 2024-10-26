@@ -35,21 +35,21 @@ public class TestUtil {
     /**
      * Returns the middle index of the internship application in the {@code model}'s internship application list.
      */
-    public static Index getMidIndex(Model<InternshipApplication> model) {
+    public static Index getMidIndex(Model model) {
         return Index.fromOneBased(model.getFilteredList().size() / 2);
     }
 
     /**
      * Returns the last index of the internship application in the {@code model}'s internship application list.
      */
-    public static Index getLastIndex(Model<InternshipApplication> model) {
+    public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredList().size());
     }
 
     /**
      * Returns the internship application in the {@code model}'s internship application list at {@code index}.
      */
-    public static InternshipApplication getInternshipApplication(Model<InternshipApplication> model, Index index) {
+    public static InternshipApplication getInternshipApplication(Model model, Index index) {
         return model.getFilteredList().get(index.getZeroBased());
     }
 }

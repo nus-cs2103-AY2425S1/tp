@@ -21,7 +21,7 @@ import seedu.hireme.storage.Storage;
 /**
  * The main LogicManager of the app.
  */
-public class LogicManager implements Logic<InternshipApplication> {
+public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
@@ -29,14 +29,14 @@ public class LogicManager implements Logic<InternshipApplication> {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final Model<InternshipApplication> model;
-    private final Storage<InternshipApplication> storage;
+    private final Model model;
+    private final Storage storage;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model<InternshipApplication> model, Storage<InternshipApplication> storage) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
@@ -47,7 +47,7 @@ public class LogicManager implements Logic<InternshipApplication> {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command<InternshipApplication> command = addressBookParser.parseCommand(commandText);
+        Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -62,7 +62,7 @@ public class LogicManager implements Logic<InternshipApplication> {
     }
 
     @Override
-    public ReadOnlyAddressBook<InternshipApplication> getAddressBook() {
+    public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
     }
 

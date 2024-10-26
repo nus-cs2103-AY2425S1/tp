@@ -5,13 +5,12 @@ import static java.util.Objects.requireNonNull;
 import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.model.Model;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
 /**
  * Filters and lists all internship applications with specified status
  */
-public class FilterCommand extends Command<InternshipApplication> {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "/filter";
 
@@ -27,7 +26,7 @@ public class FilterCommand extends Command<InternshipApplication> {
     }
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredList(statusPredicate);
         return new CommandResult(String.format(Messages.MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW,

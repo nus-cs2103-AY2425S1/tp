@@ -4,21 +4,20 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.hireme.model.AddressBook;
 import seedu.hireme.model.Model;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command<InternshipApplication> {
+public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "/clear";
     public static final String MESSAGE_SUCCESS = "HireMe has been cleared!";
 
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook<>());
+        model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

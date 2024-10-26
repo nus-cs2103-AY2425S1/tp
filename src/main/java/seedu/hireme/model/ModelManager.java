@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,17 +13,18 @@ import javafx.collections.transformation.FilteredList;
 import seedu.hireme.commons.core.GuiSettings;
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.commons.util.CollectionUtil;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Represents the in-memory model of the address book data.
  *
- * @param <T> the type of elements in the AddressBook, which extends {@code HireMeComparable}
  */
-public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
+public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final AddressBook<T> addressBook;
+    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredList<T> filtered;
+    private final FilteredList<InternshipApplication> filtered;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -30,13 +32,13 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param addressBook The address book containing the application data.
      * @param userPrefs   The user preferences.
      */
-    public ModelManager(ReadOnlyAddressBook<T> addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         CollectionUtil.requireAllNonNull(addressBook, userPrefs);
 
         logger.info("Initializing ModelManager with AddressBook and UserPrefs");
         logger.fine("AddressBook: " + addressBook + ", UserPrefs: " + userPrefs);
 
-        this.addressBook = new AddressBook<>(addressBook);
+        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filtered = new FilteredList<>(this.addressBook.getList());
 
@@ -47,7 +49,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * Initializes a ModelManager with default values.
      */
     public ModelManager() {
-        this(new AddressBook<>(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
         logger.info("Initialized default ModelManager");
     }
 
@@ -124,7 +126,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param addressBook the new address book data.
      */
     @Override
-    public void setAddressBook(ReadOnlyAddressBook<T> addressBook) {
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
@@ -134,7 +136,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @return the current {@code ReadOnlyAddressBook}.
      */
     @Override
-    public ReadOnlyAddressBook<T> getAddressBook() {
+    public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
 
@@ -145,7 +147,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @return true if the item exists in the address book, otherwise false.
      */
     @Override
-    public boolean hasItem(T item) {
+    public boolean hasItem(InternshipApplication item) {
         requireNonNull(item);
         return addressBook.hasItem(item);
     }
@@ -156,7 +158,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param target the item to delete.
      */
     @Override
-    public void deleteItem(T target) {
+    public void deleteItem(InternshipApplication target) {
         addressBook.removeItem(target);
     }
 
@@ -166,11 +168,9 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param item the item to add.
      */
     @Override
-    public void addItem(T item) {
+    public void addItem(InternshipApplication item) {
         addressBook.addItem(item);
-        @SuppressWarnings("unchecked")
-        Predicate<T> showAll = (Predicate<T>) PREDICATE_SHOW_ALL;
-        updateFilteredList(showAll);
+        updateFilteredList(PREDICATE_SHOW_ALL);
     }
 
     /**
@@ -180,7 +180,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param edited the edited item.
      */
     @Override
-    public void setItem(T target, T edited) {
+    public void setItem(InternshipApplication target, InternshipApplication edited) {
         CollectionUtil.requireAllNonNull(target, edited);
         addressBook.setItem(target, edited);
     }
@@ -193,7 +193,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @return an unmodifiable view of the filtered list.
      */
     @Override
-    public ObservableList<T> getFilteredList() {
+    public ObservableList<InternshipApplication> getFilteredList() {
         return filtered;
     }
 
@@ -203,7 +203,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param predicate the new predicate to filter the list.
      */
     @Override
-    public void updateFilteredList(Predicate<T> predicate) {
+    public void updateFilteredList(Predicate<InternshipApplication> predicate) {
         requireNonNull(predicate);
         filtered.setPredicate(predicate);
     }
@@ -214,9 +214,17 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
      * @param comparator the sorting order used to sort the list.
      */
     @Override
-    public void sortFilteredList(Comparator<T> comparator) {
+    public void sortFilteredList(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
         addressBook.sortItems(comparator);
+    }
+
+    /**
+     * Provides status insights of items in the list
+     */
+    @Override
+    public Map<Status, Integer> getInsights() {
+        return addressBook.getInsights();
     }
 
     /**
@@ -231,11 +239,11 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
             return true;
         }
 
-        if (!(other instanceof ModelManager<?>)) {
+        if (!(other instanceof ModelManager)) {
             return false;
         }
 
-        ModelManager<?> otherModelManager = (ModelManager<?>) other;
+        ModelManager otherModelManager = (ModelManager) other;
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)

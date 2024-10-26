@@ -21,7 +21,6 @@ import seedu.hireme.model.ModelManager;
 import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.ReadOnlyUserPrefs;
 import seedu.hireme.model.UserPrefs;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.util.SampleDataUtil;
 import seedu.hireme.storage.AddressBookStorage;
 import seedu.hireme.storage.JsonAddressBookStorage;
@@ -41,9 +40,9 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic<InternshipApplication> logic;
-    protected Storage<InternshipApplication> storage;
-    protected Model<InternshipApplication> model;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
     protected Config config;
 
     @Override
@@ -59,10 +58,10 @@ public class MainApp extends Application {
 
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
 
-        AddressBookStorage<InternshipApplication> addressBookStorage =
+        AddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(userPrefs.getHireMeFilePath());
 
-        storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,15 +75,15 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model<InternshipApplication> initModelManager(Storage<InternshipApplication> storage,
+    private Model initModelManager(Storage storage,
                                                           ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook<InternshipApplication>> addressBookOptional;
-        ReadOnlyAddressBook<InternshipApplication> initialData;
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
@@ -92,10 +91,10 @@ public class MainApp extends Application {
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook<>();
+            initialData = new AddressBook();
         }
 
-        return new ModelManager<InternshipApplication>(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -122,7 +121,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
@@ -153,7 +152,7 @@ public class MainApp extends Application {
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
+            if (prefsOptional.isEmpty()) {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());

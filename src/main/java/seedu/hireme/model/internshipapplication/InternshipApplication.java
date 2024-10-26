@@ -5,13 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.hireme.commons.util.ToStringBuilder;
-import seedu.hireme.model.HireMeComparable;
 
 /**
  * Represents an InternshipApplication in the system.
  * Guarantees: details are present and not null, field values are validated, and the object is immutable.
  */
-public class InternshipApplication implements HireMeComparable<InternshipApplication> {
+public class InternshipApplication {
 
     // Identity fields
     private final Company company;
@@ -128,7 +127,6 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
      * @param otherInternship The other internship application to compare.
      * @return True if the specified internship application is the same as the current one, false otherwise.
      */
-    @Override
     public boolean isSame(InternshipApplication otherInternship) {
         if (otherInternship == this) {
             return true;

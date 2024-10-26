@@ -3,19 +3,23 @@ package seedu.hireme.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.hireme.commons.util.ToStringBuilder;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.UniqueList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSame comparison)
  */
-public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddressBook<T> {
+public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueList<T> items;
+    private final UniqueList items;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +29,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      *   among constructors.
      */
     {
-        items = new UniqueList<>();
+        items = new UniqueList();
     }
 
     public AddressBook() {}
@@ -33,7 +37,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
     /**
      * Creates an AddressBook using the items in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook<T> toBeCopied) {
+    public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -44,14 +48,14 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      * Replaces the contents of the list with {@code internship applications}.
      * {@code internship applications} must not contain duplicate items.
      */
-    public void setItems(List<T> items) {
+    public void setItems(List<InternshipApplication> items) {
         this.items.setItems(items);
     }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook<T> newData) {
+    public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setItems(newData.getList());
@@ -60,7 +64,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
     /**
      * Returns true if a item with the same identity as {@code item} exists in the address book.
      */
-    public boolean hasItem(T item) {
+    public boolean hasItem(InternshipApplication item) {
         requireNonNull(item);
         return items.contains(item);
     }
@@ -69,7 +73,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      * Adds an item to the address book.
      * The item must not already exist in the address book.
      */
-    public void addItem(T p) {
+    public void addItem(InternshipApplication p) {
         items.add(p);
     }
 
@@ -78,7 +82,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      * {@code target} must exist in the address book.
      * The item identity of {@code edited} must not be the same as another existing item in the address book.
      */
-    public void setItem(T target, T edited) {
+    public void setItem(InternshipApplication target, InternshipApplication edited) {
         requireNonNull(edited);
 
         items.setItem(target, edited);
@@ -88,16 +92,27 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeItem(T key) {
+    public void removeItem(InternshipApplication key) {
         items.remove(key);
     }
 
     /**
      * Sorts the items in the address book according to the {@code comparator}.
      */
-    public void sortItems(Comparator<T> comparator) {
+    public void sortItems(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
         items.sortItems(comparator);
+    }
+    /**
+     * Provides status insights of items in the list
+     */
+    public Map<Status, Integer> getInsights() {
+        Map<Status, Integer> map = new HashMap<>();
+        for (Status status : Status.values()) {
+            int count = items.countItems(i -> i.getStatus().equals(status));
+            map.put(status, count);
+        }
+        return map;
     }
 
     //// util methods
@@ -110,7 +125,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
     }
 
     @Override
-    public ObservableList<T> getList() {
+    public ObservableList<InternshipApplication> getList() {
         return items.asUnmodifiableObservableList();
     }
 
@@ -121,7 +136,7 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook<?> otherAddressBook)) {
+        if (!(other instanceof AddressBook otherAddressBook)) {
             return false;
         }
 

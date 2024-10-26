@@ -2,9 +2,11 @@ package seedu.hireme.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.hireme.commons.util.ToStringBuilder;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Represents the result of a command execution.
@@ -19,13 +21,16 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final Map<Status, Integer> insights;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Map<Status, Integer> insights) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.insights = insights;
     }
 
     /**
@@ -33,7 +38,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +51,9 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+    public Map<Status, Integer> getInsights() {
+        return insights;
     }
 
     @Override
@@ -60,9 +68,12 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
+        boolean isInsightsEqual = Objects.equals(insights, otherCommandResult.insights);
+
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && isInsightsEqual;
     }
 
     @Override
@@ -76,6 +87,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("insights", insights)
                 .toString();
     }
 

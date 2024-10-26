@@ -21,7 +21,7 @@ import seedu.hireme.model.internshipapplication.exceptions.InternshipNotFoundExc
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class UniqueListTest {
-    private final UniqueList<InternshipApplication> uniqueList = new UniqueList<>();
+    private final UniqueList uniqueList = new UniqueList();
 
     @Test
     public void contains_nullInternship_throwsNullPointerException() {
@@ -81,7 +81,7 @@ public class UniqueListTest {
     public void setItem_editedInternshipIsSameInternship_success() {
         uniqueList.add(GOOGLE);
         uniqueList.setItem(GOOGLE, GOOGLE);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(GOOGLE);
         assertEquals(expectedUniqueList, uniqueList);
     }
@@ -94,7 +94,7 @@ public class UniqueListTest {
                 .withDate(VALID_DATE_YAHOO)
                 .build();
         uniqueList.setItem(GOOGLE, editedGoogle);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(editedGoogle);
         assertEquals(expectedUniqueList, uniqueList);
     }
@@ -103,7 +103,7 @@ public class UniqueListTest {
     public void setItem_editedInternshipHasDifferentIdentity_success() {
         uniqueList.add(GOOGLE);
         uniqueList.setItem(GOOGLE, YAHOO);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(YAHOO);
         assertEquals(expectedUniqueList, uniqueList);
     }
@@ -129,19 +129,19 @@ public class UniqueListTest {
     public void remove_existingInternship_removesInternship() {
         uniqueList.add(GOOGLE);
         uniqueList.remove(GOOGLE);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
     public void setItems_nullUniqueList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueList.setItems((UniqueList<InternshipApplication>) null));
+        assertThrows(NullPointerException.class, () -> uniqueList.setItems((UniqueList) null));
     }
 
     @Test
     public void setItems_uniqueList_replacesOwnListWithProvidedUniqueList() {
         uniqueList.add(GOOGLE);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(YAHOO);
         uniqueList.setItems(expectedUniqueList);
         assertEquals(expectedUniqueList, uniqueList);
@@ -157,7 +157,7 @@ public class UniqueListTest {
         uniqueList.add(GOOGLE);
         List<InternshipApplication> internshipList = Collections.singletonList(YAHOO);
         uniqueList.setItems(internshipList);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<>();
+        UniqueList expectedUniqueList = new UniqueList();
         expectedUniqueList.add(YAHOO);
         assertEquals(expectedUniqueList, uniqueList);
     }

@@ -15,7 +15,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
 /**
  * Adds an internship application to the address book.
  */
-public class AddCommand extends Command<InternshipApplication> {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "/a";
 
@@ -46,7 +46,7 @@ public class AddCommand extends Command<InternshipApplication> {
     }
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasItem(toAdd)) {

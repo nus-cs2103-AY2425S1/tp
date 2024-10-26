@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 public class HelpCommandTest {
-    private Model<InternshipApplication> model = new ModelManager<>();
-    private Model<InternshipApplication> expectedModel = new ModelManager<>();
+    private final Model model = new ModelManager();
+    private final Model expectedModel = new ModelManager();
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false, null);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

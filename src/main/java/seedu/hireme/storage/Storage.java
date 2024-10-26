@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.hireme.commons.exceptions.DataLoadingException;
-import seedu.hireme.model.HireMeComparable;
 import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.ReadOnlyUserPrefs;
 import seedu.hireme.model.UserPrefs;
@@ -13,7 +12,7 @@ import seedu.hireme.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage<T extends HireMeComparable<T>> extends AddressBookStorage<T>, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -25,9 +24,9 @@ public interface Storage<T extends HireMeComparable<T>> extends AddressBookStora
     Path getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook<T>> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook<T> addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
 }

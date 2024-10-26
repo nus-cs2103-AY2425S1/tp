@@ -1,12 +1,11 @@
 package seedu.hireme.logic.commands;
 
 import seedu.hireme.model.Model;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command<InternshipApplication> {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "/help";
 
@@ -16,7 +15,7 @@ public class HelpCommand extends Command<InternshipApplication> {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+    public CommandResult execute(Model model) {
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, null);
     }
 }

@@ -46,5 +46,4 @@ public class Messages {
                 .append(internship.getDateOfApplication());
         return builder.toString();
     }
-
 }

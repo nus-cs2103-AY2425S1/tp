@@ -11,7 +11,6 @@ import seedu.hireme.MainApp;
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.commons.util.StringUtil;
 import seedu.hireme.logic.Logic;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * The manager of the UI component.
@@ -23,13 +22,13 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    private Logic<InternshipApplication> logic;
+    private final Logic logic;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic<InternshipApplication> logic) {
+    public UiManager(Logic logic) {
         this.logic = logic;
     }
 
