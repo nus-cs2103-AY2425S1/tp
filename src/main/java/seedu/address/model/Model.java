@@ -143,4 +143,15 @@ public interface Model {
      */
     void deleteParticipation(Participation target);
 
+    /**
+     * Replaces the given participation {@code target} with {@code editedParticipation}.
+     * {@code target} must exist in the address book.
+     * The participation identity of {@code editedParticipation} must not be the same as another
+     * existing participation in the address book.
+     */
+    void setParticipation(Participation target, Participation editedParticipation);
+
+    /** Returns an unmodifiable view of the participation list */
+    ObservableList<Participation> getParticipationList();
+
 }

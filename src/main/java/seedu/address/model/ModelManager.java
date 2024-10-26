@@ -134,6 +134,12 @@ public class ModelManager implements Model {
         addressBook.removeParticipation(target);
     }
 
+    @Override
+    public void setParticipation(Participation target, Participation editedParticipation) {
+        requireAllNonNull(target, editedParticipation);
+        addressBook.setParticipation(target, editedParticipation);
+    }
+
     //// tutorial-level operations
 
     @Override
@@ -201,6 +207,14 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTutorials.setPredicate(predicate);
     }
+
+    //=========== Participation List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Participation} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Participation> getParticipationList() { return addressBook.getParticipationList();}
 
     @Override
     public boolean equals(Object other) {
