@@ -9,6 +9,9 @@ import seedu.edulog.model.gift.Gift;
 import seedu.edulog.storage.GiftListStorage;
 import seedu.edulog.storage.JsonGiftListStorage;
 
+/**
+ * Utility class for generating random gift ideas.
+ */
 public class GiftUtil {
     public static Gift getRandomGift() throws DataLoadingException {
         Optional<ReadOnlyGiftList> giftListOptional;

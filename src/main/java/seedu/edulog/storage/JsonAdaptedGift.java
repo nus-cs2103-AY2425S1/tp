@@ -9,7 +9,7 @@ import seedu.edulog.model.gift.Gift;
 /**
  * Jackson-friendly version of {@link Gift}.
  */
-class JsonAdaptedGift extends Gift{
+class JsonAdaptedGift extends Gift {
 
 
     /**

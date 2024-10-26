@@ -9,11 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.edulog.commons.exceptions.IllegalValueException;
-import seedu.edulog.model.EduLog;
 import seedu.edulog.model.GiftList;
-import seedu.edulog.model.gift.Gift;
 import seedu.edulog.model.ReadOnlyGiftList;
-import seedu.edulog.storage.JsonAdaptedGift;
+import seedu.edulog.model.gift.Gift;
 
 /**
  * An Immutable GiftList that is serializable to JSON format.

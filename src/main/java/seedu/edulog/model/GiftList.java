@@ -25,13 +25,13 @@ public class GiftList implements ReadOnlyGiftList {
         gifts = FXCollections.observableArrayList();
     }
 
+    public GiftList() {}
+
     @Override
     public ObservableList<Gift> getGiftList() {
         return gifts;
     }
 
-    public GiftList() {}
-    
     public void addGift(Gift gift) {
         gifts.add(gift);
     }
