@@ -7,11 +7,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
@@ -24,8 +27,10 @@ public class TagCommandParserTest {
     public void parse_validArgs_success() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + VALID_TAG_BRIDES_FRIEND.getTagName();
         Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
         tags.add(VALID_TAG_BRIDES_FRIEND);
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+        indexes.add(INDEX_FIRST_PERSON);
+        TagCommand expectedCommand = new TagCommand(indexes, tags);
         System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

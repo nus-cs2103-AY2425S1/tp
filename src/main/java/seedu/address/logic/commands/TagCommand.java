@@ -31,22 +31,22 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "bride's side";
 
-    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged guest: %1$s";
-    public static final String MESSAGE_TAG_NOT_CREATED = "Tag must be created first using 'newtag' command: ";
-    public static final String MESSAGE_DUPLICATE_TAG = "This guest already has tag(s): ";
+    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged guest(s):\n";
+    public static final String MESSAGE_TAG_NOT_CREATED = "Tag(s) must be created first using 'newtag' command: ";
+    public static final String MESSAGE_DUPLICATE_TAG = "Some guest(s) already have tag(s): ";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndexes;
     private final Set<Tag> tags;
 
     /**
-     * @param targetIndex of the person in the filtered person list to tag
+     * @param targetIndexes of the person in the filtered person list to tag
      * @param tags set of tags to tag the person with
      */
-    public TagCommand(Index targetIndex, Set<Tag> tags) {
-        requireNonNull(targetIndex);
+    public TagCommand(List<Index> targetIndexes, Set<Tag> tags) {
+        requireNonNull(targetIndexes);
         requireNonNull(tags);
 
-        this.targetIndex = targetIndex;
+        this.targetIndexes = targetIndexes;
         this.tags = tags;
     }
 
@@ -55,54 +55,64 @@ public class TagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(personToTag.getTags());
         Set<Tag> missingTags = new HashSet<>();
         Set<Tag> duplicateTags = new HashSet<>();
-        Set<Tag> toAddTags = new HashSet<>();
+        StringBuilder successMessage = new StringBuilder();
+        StringBuilder finalMessage = new StringBuilder();
 
-        for (Tag tag : tags) {
-            if (!model.hasTag(tag)) {
-                missingTags.add(tag);
-            } else if (newTags.contains(tag)) {
-                duplicateTags.add(tag);
-            } else {
-                newTags.add(tag);
-                toAddTags.add(tag);
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+            Set<Tag> newTags = new HashSet<>(personToTag.getTags());
+            boolean updated = false;
+
+            for (Tag tag : tags) {
+                if (!model.hasTag(tag)) {
+                    missingTags.add(tag);
+                } else if (newTags.contains(tag)) {
+                    duplicateTags.add(tag);
+                } else {
+                    newTags.add(tag);
+                    updated = true;
+                }
+            }
+
+            if (updated) {
+                Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
+                        personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
+                model.setPerson(personToTag, updatedPerson);
+                if (successMessage.length() > 0) {
+                    successMessage.append("\n");
+                }
+                successMessage.append(Messages.format(updatedPerson));
             }
         }
-
-        StringBuilder errorMessages = new StringBuilder();
-        if (!missingTags.isEmpty()) {
-            String missingTagsString = missingTags.stream().map(Tag::toString).collect(Collectors.joining(", "));
-            errorMessages.append(MESSAGE_TAG_NOT_CREATED).append(missingTagsString);
+        if (successMessage.length() > 0) {
+            finalMessage.append(MESSAGE_TAG_PERSON_SUCCESS).append(successMessage);
         }
-        if (!duplicateTags.isEmpty()) {
-            if (errorMessages.length() > 0) {
-                errorMessages.append("\n");
+        if (!missingTags.isEmpty() || !duplicateTags.isEmpty()) {
+            if (finalMessage.length() > 0) {
+                finalMessage.append("\n");
             }
-            String duplicateTagsString = duplicateTags.stream().map(Tag::toString).collect(Collectors.joining(", "));
-            System.out.println(duplicateTagsString);
-            errorMessages.append(MESSAGE_DUPLICATE_TAG).append(duplicateTagsString);
-            System.out.println(errorMessages);
-        }
-
-        if (!toAddTags.isEmpty()) {
-            Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
-                    personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
-            model.setPerson(personToTag, updatedPerson);
-            String successMessage = String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(updatedPerson));
-            if (errorMessages.length() > 0) {
-                successMessage += "\n" + errorMessages.toString();
+            if (!missingTags.isEmpty()) {
+                finalMessage.append(MESSAGE_TAG_NOT_CREATED)
+                        .append(missingTags.stream()
+                                .map(Tag::toString)
+                                .collect(Collectors.joining(", ")));
             }
-            return new CommandResult(successMessage);
-        } else {
-            throw new CommandException(errorMessages.toString());
+            if (!duplicateTags.isEmpty()) {
+                if (!missingTags.isEmpty()) {
+                    finalMessage.append("\n");
+                }
+                finalMessage.append(MESSAGE_DUPLICATE_TAG)
+                        .append(duplicateTags.stream()
+                                .map(Tag::toString)
+                                .collect(Collectors.joining(", ")));
+            }
         }
+        return new CommandResult(finalMessage.toString());
     }
 
     @Override
@@ -117,13 +127,13 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex) && tags.equals(otherTagCommand.tags);
+        return targetIndexes.equals(otherTagCommand.targetIndexes) && tags.equals(otherTagCommand.tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndexes", targetIndexes)
                 .add("tags", tags)
                 .toString();
     }

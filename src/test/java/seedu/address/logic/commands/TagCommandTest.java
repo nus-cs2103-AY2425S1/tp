@@ -4,18 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,8 +49,10 @@ public class TagCommandTest {
         assertFalse(personToTag.getTags().contains(validTag));
 
         Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
         tags.add(validTag);
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+        indexes.add(INDEX_FIRST_PERSON);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
@@ -57,55 +62,123 @@ public class TagCommandTest {
                                           RsvpStatus.PENDING, updatedTags);
         expectedModel.setPerson(personToTag, updatedPerson);
         expectedModel.addTag(validTag);
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS, Messages.format(updatedPerson));
+        String expectedMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS + Messages.format(updatedPerson);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_tagAlreadyOnPerson_throwsCommandException() {
-        Tag existingTag = new Tag("friends");
-        model.addTag(existingTag);
-        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        Set<Tag> newTags = new HashSet<>(originalPerson.getTags());
-        newTags.add(existingTag);
-        Person personToTag = new Person(originalPerson.getName(), originalPerson.getPhone(), originalPerson.getEmail(),
-                                        RsvpStatus.PENDING, newTags);
-
-        model.setPerson(originalPerson, personToTag);
+    public void execute_tagExistsAndNotOnMultiplePersons_success() {
+        Tag validTag = new Tag("uniqueTag");
+        model.addTag(validTag);
+        Person firstPersonToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToTag = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        assertFalse(firstPersonToTag.getTags().contains(validTag));
+        assertFalse(secondPersonToTag.getTags().contains(validTag));
 
         Set<Tag> tags = new HashSet<>();
-        tags.add(existingTag);
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+        List<Index> indexes = new ArrayList<>();
+        tags.add(validTag);
+        indexes.add(INDEX_FIRST_PERSON);
+        indexes.add(INDEX_SECOND_PERSON);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
 
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_DUPLICATE_TAG + existingTag);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> firstPersonUpdatedTags = new HashSet<>(firstPersonToTag.getTags());
+        firstPersonUpdatedTags.add(validTag);
+        Set<Tag> secondPersonUpdatedTags = new HashSet<>(secondPersonToTag.getTags());
+        secondPersonUpdatedTags.add(validTag);
+
+        Person firstUpdatedPerson = new Person(firstPersonToTag.getName(), firstPersonToTag.getPhone(),
+                firstPersonToTag.getEmail(), RsvpStatus.PENDING, firstPersonUpdatedTags);
+        expectedModel.setPerson(firstPersonToTag, firstUpdatedPerson);
+
+        Person secondUpdatedPerson = new Person(secondPersonToTag.getName(), secondPersonToTag.getPhone(),
+                secondPersonToTag.getEmail(), RsvpStatus.PENDING, secondPersonUpdatedTags);
+        expectedModel.setPerson(secondPersonToTag, secondUpdatedPerson);
+        expectedModel.addTag(validTag);
+        String expectedMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS
+                + Messages.format(firstUpdatedPerson) + "\n"
+                + Messages.format(secondUpdatedPerson);
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_tagNotFound_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_bulkTagging_someGuestsAlreadyHaveTagReportsProperly() {
+        // Guests at indexes 1 and 2 has the tag "friends", but guest at index 3 does not
+        Tag friendTag = new Tag("friends");
+        model.addTag(friendTag);
+        assertTrue(model.hasTag(friendTag));
 
-        Person personToUntag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        List<Index> indexes = List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(friendTag);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
 
-        Set<Tag> initialTags = new HashSet<>(personToUntag.getTags());
-        initialTags.remove(new Tag("nonexistenttag"));
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
+        updatedTags.add(friendTag);
 
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, new Tag("nonexistenttag"));
-        assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND);
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
+                RsvpStatus.PENDING, updatedTags);
+        expectedModel.setPerson(personToTag, updatedPerson);
+        expectedModel.addTag(friendTag);
+        String expectedSuccessMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS + Messages.format(updatedPerson);
+        String expectedDuplicateMessage = TagCommand.MESSAGE_DUPLICATE_TAG + friendTag;
+
+        String expectedMessage = expectedSuccessMessage + "\n" + expectedDuplicateMessage;
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_tagNotCreatedYet_throwsCommandException() {
+    public void execute_bulkTagging_someTagsNotCreatedReportsProperly() {
+        // Tags "bride's side" and "friends" are created, but not "nonexistent" tag
+        Tag friendTag = new Tag("friends");
         Tag nonExistentTag = new Tag("nonexistent");
+        model.addTag(friendTag);
+        assertTrue(model.hasTag(BRIDES_SIDE));
+        assertTrue(model.hasTag(friendTag));
         assertFalse(model.hasTag(nonExistentTag));
 
+        List<Index> indexes = List.of(INDEX_THIRD_PERSON);
         Set<Tag> tags = new HashSet<>();
+        tags.add(friendTag);
+        tags.add(BRIDES_SIDE);
         tags.add(nonExistentTag);
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
 
-        assertCommandFailure(tagCommand, model,
-                TagCommand.MESSAGE_TAG_NOT_CREATED + nonExistentTag);
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
+        updatedTags.add(friendTag);
+        updatedTags.add(BRIDES_SIDE);
+
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
+                RsvpStatus.PENDING, updatedTags);
+        expectedModel.setPerson(personToTag, updatedPerson);
+        expectedModel.addTag(friendTag);
+        expectedModel.addTag(BRIDES_SIDE);
+        String expectedSuccessMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS + Messages.format(updatedPerson);
+        String expectedTagNotCreatedMessage = TagCommand.MESSAGE_TAG_NOT_CREATED + nonExistentTag;
+
+        String expectedMessage = expectedSuccessMessage + "\n" + expectedTagNotCreatedMessage;
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        List<Index> indexList = new ArrayList<>();
+        indexList.add(outOfBoundIndex);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(BRIDES_SIDE);
+        TagCommand tagCommand = new TagCommand(indexList, tags);
+
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -118,15 +191,21 @@ public class TagCommandTest {
         Set<Tag> anotherTagSet = new HashSet<>();
         anotherTagSet.add(anotherTag);
 
-        TagCommand tagFirstCommand = new TagCommand(INDEX_FIRST_PERSON, bridesSideTagSet);
-        TagCommand tagSecondCommand = new TagCommand(INDEX_SECOND_PERSON, bridesSideTagSet);
-        TagCommand tagFirstDifferentTagCommand = new TagCommand(INDEX_FIRST_PERSON, anotherTagSet);
+        List<Index> firstIndex = new ArrayList<>();
+        firstIndex.add(INDEX_FIRST_PERSON);
+
+        List<Index> secondIndex = new ArrayList<>();
+        secondIndex.add(INDEX_SECOND_PERSON);
+
+        TagCommand tagFirstCommand = new TagCommand(firstIndex, bridesSideTagSet);
+        TagCommand tagSecondCommand = new TagCommand(secondIndex, bridesSideTagSet);
+        TagCommand tagFirstDifferentTagCommand = new TagCommand(firstIndex, anotherTagSet);
 
         // same object -> returns true
         assertTrue(tagFirstCommand.equals(tagFirstCommand));
 
         // same values -> returns true
-        TagCommand tagFirstCommandCopy = new TagCommand(INDEX_FIRST_PERSON, bridesSideTagSet);
+        TagCommand tagFirstCommandCopy = new TagCommand(firstIndex, bridesSideTagSet);
         assertTrue(tagFirstCommand.equals(tagFirstCommandCopy));
 
         // different types -> returns false

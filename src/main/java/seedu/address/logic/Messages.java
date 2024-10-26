@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INPUT_LENGTH_EXCEEDED = "The input length cannot exceed 50 characters";
+    public static final String MESSAGE_TOO_MANY_INDEXES = "The number of target guests cannot exceed 10.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

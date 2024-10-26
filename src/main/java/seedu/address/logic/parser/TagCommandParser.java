@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class TagCommandParser implements Parser<TagCommand> {
     public static final int MAX_LENGTH = 50;
+    public static final int MAX_INDEXES = 10;
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
@@ -29,18 +31,22 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
-        }
-
+        Set<Index> indexSet = new HashSet<>();
         Set<Tag> tagSet = new HashSet<>();
         List<String> tagStrings = argMultimap.getAllValues(PREFIX_TAG);
         if (tagStrings.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            for (String indexStr : argMultimap.getPreamble().split("\\s+")) {
+                indexSet.add(ParserUtil.parseIndex(indexStr));
+                if (indexSet.size() > MAX_INDEXES) {
+                    throw new ParseException(Messages.MESSAGE_TOO_MANY_INDEXES);
+                }
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
         for (String tagString : tagStrings) {
@@ -55,6 +61,6 @@ public class TagCommandParser implements Parser<TagCommand> {
             tagSet.add(new Tag(tagString));
         }
 
-        return new TagCommand(index, tagSet);
+        return new TagCommand(new ArrayList<>(indexSet), tagSet);
     }
 }
