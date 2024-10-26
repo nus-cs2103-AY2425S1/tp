@@ -56,7 +56,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
     @FXML
     private Button copyButton;
 
@@ -64,7 +63,6 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
     @FXML
     private TableView<HelpCommand> helpTable;
-
 
 
     /**
