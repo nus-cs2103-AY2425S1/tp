@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
 !include style.puml
 skinparam ArrowFontStyle plain
@@ -8,7 +7,7 @@ actor User as user
 
 box Ui UI_COLOR_T1
 participant ":CommandBox" as CommandBox UI_COLOR
-participant ":commandTextField:TextField" as commandTextField UI_COLOR
+participant "commandTextField:TextField" as commandTextField UI_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
