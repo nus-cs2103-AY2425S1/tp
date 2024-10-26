@@ -2,10 +2,13 @@ package seedu.address.logic.parser.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
@@ -30,7 +33,7 @@ public class AddToConsultCommandParser implements Parser<AddToConsultCommand> {
     public AddToConsultCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX);
 
         Index index;
 
@@ -41,7 +44,7 @@ public class AddToConsultCommandParser implements Parser<AddToConsultCommand> {
                 AddToConsultCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getAllValues(PREFIX_NAME).isEmpty()) {
+        if (argMultimap.getAllValues(PREFIX_NAME).isEmpty() && argMultimap.getAllValues(PREFIX_INDEX).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToConsultCommand.MESSAGE_USAGE));
         }
 
@@ -57,6 +60,14 @@ public class AddToConsultCommandParser implements Parser<AddToConsultCommand> {
             studentNames.add(name);
         }
 
-        return new AddToConsultCommand(index, studentNames);
+
+        List<Index> indices = new ArrayList<>();
+        for (String stringNameIndex: argMultimap.getAllValues(PREFIX_INDEX)) {
+            // throws ParseException, with the message being invalid index
+            Index nameIndex = ParserUtil.parseIndex(stringNameIndex);
+            indices.add(nameIndex);
+        }
+
+        return new AddToConsultCommand(index, studentNames, indices);
     }
 }
