@@ -30,7 +30,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -40,8 +40,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-
+1. Refer to the [Features](#features) below for more details.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -53,45 +52,70 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are **optional**.<br>
+  * e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times.<br>
+  * e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Commamnd PopUp:**<br>
+
+![CommandPopUp](images/commandpopup.png)
+We have implemented a Command Suggestion PopUp for your convenience!
+
+As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
+
+Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
+* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.
+    * _In the image the **current selection** would be `editgame`._
+
+* If your **current selection** is correct press `tab` to autocomplete it within the command box.
+
+* The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
+**List**   | `list`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Editgame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Game**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+
 
 --------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
+ 
+Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close the window if it is in **focus**.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
 
 ### Adding a person: `add`
 
@@ -101,7 +125,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags, games and preferred times(including 0)   
+**Tip:** A person can have any number of tags, games and preferred times (including 0)   
 **Tip:** PREFERRED TIME should be in the form of "Day HHmm" with exactly 1 space in between
 </box>
 
@@ -109,11 +133,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal pt/Monday 2100`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
@@ -130,7 +150,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Matthew g/Overwatch` Edits the name of the 2nd person to be `Matthew` with game `Overwatch`.
+*  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
 ### Editing a game : `editgame`
