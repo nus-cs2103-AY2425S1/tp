@@ -7,7 +7,7 @@ import seedu.address.ui.CommandTabChange;
 /**
  * Requests confirmation before clear operation.
  */
-public class ConfirmationCommand extends Command {
+public class ClearConfirmationCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Are you sure you want to clear all data? (Y/N)";
     @Override
