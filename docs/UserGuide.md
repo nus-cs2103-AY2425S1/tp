@@ -49,19 +49,19 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are **optional**.<br>
+* Items in square brackets are **optional**.  
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times.<br>
+* Items with `…`​ after them can be used multiple times.  
   e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order.  
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.  
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -75,8 +75,8 @@ We have implemented a Command Suggestion PopUp for your convenience!
 As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
 
 Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
-* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.
-    * _In the image the **current selection** would be `editgame`._
+* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.  
+   _In the image the **current selection** would be `editgame`._
 
 * If your **current selection** is correct press `tab` to autocomplete it within the command box.
 
