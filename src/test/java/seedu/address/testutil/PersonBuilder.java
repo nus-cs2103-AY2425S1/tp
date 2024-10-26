@@ -156,6 +156,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Add a new property.
+     */
+    public PersonBuilder withPropertyList(Property property) {
+        this.propertyList.addProperty(property);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, remark, birthday, tags, dateOfCreation, history, propertyList);
     }
