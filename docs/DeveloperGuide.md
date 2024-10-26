@@ -389,7 +389,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
-3. ContactMate deletes the elderly and and shows the updated list with the elderly removed.
+3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
 
