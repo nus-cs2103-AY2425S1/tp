@@ -103,6 +103,7 @@ public class LogicManager implements Logic {
         boolean isRedoCommand = c instanceof RedoCommand;
         boolean isListCommand = c instanceof ListCommand;
         boolean isSuperFindCommand = c instanceof SuperFindCommand;
-        return !(isUndoCommand || isRedoCommand || isListCommand || isSuperFindCommand);
+        boolean isSaveCommand = !(isUndoCommand || isRedoCommand || isListCommand || isSuperFindCommand);
+        return isSaveCommand;
     }
 }
