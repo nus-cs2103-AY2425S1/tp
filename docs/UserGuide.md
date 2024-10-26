@@ -70,11 +70,11 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
 
 ### Adding a student: `add`
