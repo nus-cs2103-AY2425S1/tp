@@ -18,11 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -144,7 +140,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Allergy updatedAllergy = editPatientDescriptor.getAllergy().orElse(patientToEdit.getAllergy());
+        // Allergy updatedAllergy = editPatientDescriptor.getAllergy().orElse(patientToEdit.getAllergy());
         BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
         HealthRisk updatedHealthRisk = editPatientDescriptor.getHealthRisk().orElse(patientToEdit.getHealthRisk());
         HealthRecord updatedHealthRecord = editPatientDescriptor.getHealthRecord()
@@ -154,8 +150,9 @@ public class EditCommand extends Command {
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
         List<Appt> updatedAppts = editPatientDescriptor.getAppts().orElse(patientToEdit.getAppts());
 
+        // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
-                updatedEmail, updatedAddress, updatedAllergy, updatedBloodType, updatedHealthRisk, updatedHealthRecord,
+                updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk, updatedHealthRecord,
                 updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
     }
 
@@ -202,7 +199,7 @@ public class EditCommand extends Command {
         private Note note;
         private Name nokName;
         private Phone nokPhone;
-        private List<Appt> appts = new ArrayList<>();
+        private List<Appt> appts;
 
         public EditPatientDescriptor() {}
 
