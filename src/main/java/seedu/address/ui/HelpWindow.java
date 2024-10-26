@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -50,7 +51,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Press Esc to close this window!"
+    public static final String HELP_MESSAGE = "Press Esc or F1 to close this window!"
             + "\nRefer to the user guide for more info: " + USERGUIDE_URL;
 
 
@@ -78,7 +79,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
         // Add key event filter for ESC key to close the window
         getRoot().addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == javafx.scene.input.KeyCode.ESCAPE) {
+            if (event.getCode() == javafx.scene.input.KeyCode.ESCAPE ||
+                    event.getCode() == javafx.scene.input.KeyCode.F1) {
                 hide();
                 event.consume();
             }
@@ -119,10 +121,12 @@ public class HelpWindow extends UiPart<Stage> {
                         text.setText(null);
                     } else {
                         // Retrieve the full description using getDescription()
-                        HelpCommand helpCommand = getTableRow().getItem();
-                        if (helpCommand != null) {
+                        try {
+                            HelpCommand helpCommand = getTableRow().getItem();
                             text.setText(helpCommand.getDescription());
                             setPrefHeight(text.getBoundsInLocal().getHeight() + 1); // Add padding
+                        } catch (NullPointerException e) {
+                            //do nothing
                         }
                     }
                 }
