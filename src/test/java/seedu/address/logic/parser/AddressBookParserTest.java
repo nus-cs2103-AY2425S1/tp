@@ -95,13 +95,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                  parser.parseCommand("unknownCommand"));
     }
 
     @Test
@@ -178,26 +179,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_invalidHireCommandFormat_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), () ->
-                parser.parseCommand("hire n/Amy Bee"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HireCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand("hire n/Amy Bee"));
     }
 
     @Test
     public void parseCommand_invalidRejectCommandFormat_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RejectCommand.MESSAGE_USAGE), () ->
-                parser.parseCommand("reject j/Software Engineer"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RejectCommand.MESSAGE_USAGE), () -> parser.parseCommand("reject j/Software Engineer"));
     }
 
     @Test
     public void parseCommand_invalidViewStatusFormat_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStatusCommand.MESSAGE_USAGE), () ->
-                parser.parseCommand("view j/Software Engineer"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewStatusCommand.MESSAGE_USAGE), () -> parser.parseCommand("view j/Software Engineer"));
     }
 
     @Test
     public void parseCommand_invalidArgumentFormat_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), () ->
-                parser.parseCommand("add"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_USAGE), () -> parser.parseCommand("add"));
     }
 
 }
