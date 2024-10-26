@@ -1,7 +1,6 @@
 package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
 import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;

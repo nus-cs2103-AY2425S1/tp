@@ -1,21 +1,17 @@
 package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
-import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 
 import java.time.LocalDateTime;
 
-import tutorease.address.commons.util.DateTimeUtil;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime implements Comparable<DateTime> {
-    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + getDateTimeFormat();
     private final LocalDateTime dateTime;
     /**
      * Constructs a {@code DateTime}.
