@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
-import java.util.function.ToDoubleBiFunction;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -28,13 +28,18 @@ public class DeleteLessonCommand extends Command {
             + ": Deletes the lesson between a tutor and tutee, identified by their respective index numbers "
             + "in the displayed person list.\n"
             + "Parameters: TUTORINDEX TUTEEINDEX (must be positive integers)\n"
-            + "Example: " + COMMAND_WORD + " 1 3";
+            + "Example: " + COMMAND_WORD + " 1 3" + " " + PREFIX_SUBJECT + "Math";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 
     public static final String MESSAGE_INVALID_TUTOR_INDEX = "The person index provided is not a Tutor";
 
     public static final String MESSAGE_INVALID_TUTEE_INDEX = "The person index provided is not a Tutee";
+
+    public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be deleted "
+            + "must have the same subject";
+
+    public static final String MESSAGE_INVALID_LESSON = "The lesson to be deleted does not exist in the address book";
 
     private final Index tutorIndex;
 
@@ -67,9 +72,13 @@ public class DeleteLessonCommand extends Command {
         // check if the lesson to be deleted is valid by checking if the tutor and tutee are
         // associated with a Lesson with the correct subject
 
-
         Person tutorToDelete = lastShownList.get(tutorIndex.getZeroBased());
         Person tuteeToDelete = lastShownList.get(tuteeIndex.getZeroBased());
+
+        // check if the tutor, tutee and the lesson to be added have the same subject
+        if (!tutorToDelete.hasSubject(this.subject) || !tuteeToDelete.hasSubject(this.subject)) {
+            throw new CommandException(MESSAGE_INVALID_SUBJECT);
+        }
 
         if (!(tutorToDelete instanceof Tutor)) {
             throw new CommandException(MESSAGE_INVALID_TUTOR_INDEX);
@@ -77,6 +86,9 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TUTEE_INDEX);
         }
         Lesson lessonToDelete = new Lesson((Tutor) tutorToDelete, (Tutee) tuteeToDelete, subject);
+        if (!model.hasLesson(lessonToDelete)) {
+            throw new CommandException(MESSAGE_INVALID_LESSON);
+        }
 
         model.deleteLesson(lessonToDelete);
         model.commitAddressBook();

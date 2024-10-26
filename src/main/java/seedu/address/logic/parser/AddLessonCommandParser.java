@@ -22,7 +22,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddLessonCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT)) {
@@ -30,13 +29,19 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT);
-
-        Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
-        System.out.println(indexes[0].getOneBased());
-        Index tutorIndex = indexes[0];
-        Index tuteeIndex = indexes[1];
-        Subject subject = new Subject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        return new AddLessonCommand(tutorIndex, tuteeIndex, subject);
+        try {
+            Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
+            Index tutorIndex = indexes[0];
+            Index tuteeIndex = indexes[1];
+            Subject subject = new Subject(argMultimap.getValue(PREFIX_SUBJECT).get());
+            return new AddLessonCommand(tutorIndex, tuteeIndex, subject);
+        } catch (ParseException | IllegalArgumentException pe) {
+            if (pe instanceof IllegalArgumentException) {
+                throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            }
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
+        }
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +29,7 @@ public class AddLessonCommand extends Command {
             + ": Adds a lesson taught by the tutor to the tutee identified by their respective index numbers "
             + "in the displayed persons list.\n"
             + "Parameters: TUTORINDEX TUTEEINDEX (must be positive integers)\n"
-            + "Example: " + COMMAND_WORD + " 1 3";
+            + "Example: " + COMMAND_WORD + " 1 3" + " " + PREFIX_SUBJECT + "Math";
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added Lesson: %1$s";
 
@@ -38,8 +39,8 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
 
-    public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be added " +
-            "must have the same subject";
+    public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be added "
+            + "must have the same subject";
 
     private final Index tutorIndex;
 

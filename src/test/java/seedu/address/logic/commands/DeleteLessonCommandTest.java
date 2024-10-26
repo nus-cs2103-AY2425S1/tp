@@ -60,7 +60,8 @@ public class DeleteLessonCommandTest {
 
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromZeroBased(0),
                 Index.fromZeroBased(3), subject);
-        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, Messages.format(lesson));
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
+                Messages.format(lesson));
 
         expectedModel.deleteLesson(lesson);
         expectedModel.commitAddressBook();

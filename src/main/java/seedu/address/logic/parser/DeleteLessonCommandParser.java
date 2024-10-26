@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.model.person.Subject.MESSAGE_CONSTRAINTS;
 
 import java.util.stream.Stream;
 
@@ -27,19 +28,19 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT);
 
-        Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
-        Index tutorIndex = indexes[0];
-        Index tuteeIndex = indexes[1];
-        Subject subject = new Subject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        return new DeleteLessonCommand(tutorIndex, tuteeIndex, subject);
-//        try {
-//            Index[] indices = ParserUtil.parseIndices(args);
-//            return new DeleteLessonCommand(indices[0], indices[1]);
-//        } catch (ParseException pe) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), pe);
-//        }
-
+        try {
+            Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
+            Index tutorIndex = indexes[0];
+            Index tuteeIndex = indexes[1];
+            Subject subject = new Subject(argMultimap.getValue(PREFIX_SUBJECT).get());
+            return new DeleteLessonCommand(tutorIndex, tuteeIndex, subject);
+        } catch (ParseException | IllegalArgumentException pe) {
+            if (pe instanceof IllegalArgumentException) {
+                throw new ParseException(MESSAGE_CONSTRAINTS);
+            }
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), pe);
+        }
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {
