@@ -40,15 +40,15 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private final Model<InternshipApplication> model = new ModelManager<>();
-    private Logic<InternshipApplication> logic;
+    private final Model model = new ModelManager();
+    private Logic logic;
 
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager<InternshipApplication> storage = new StorageManager<InternshipApplication>(addressBookStorage,
+        StorageManager storage = new StorageManager(addressBookStorage,
                 userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -96,7 +96,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model<InternshipApplication> expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -124,7 +124,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -136,7 +136,7 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model<InternshipApplication> expectedModel) {
+            String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -153,7 +153,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook, Path filePath)
+            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -161,7 +161,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager<InternshipApplication> storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
@@ -169,7 +169,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE
                 + COMPANY_EMAIL_DESC_APPLE + DATE_DESC_APPLE;
         InternshipApplication expectedApplication = new InternshipApplicationBuilder(APPLE).build();
-        ModelManager<InternshipApplication> expectedModel = new ModelManager<>();
+        ModelManager expectedModel = new ModelManager();
         expectedModel.addItem(expectedApplication);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

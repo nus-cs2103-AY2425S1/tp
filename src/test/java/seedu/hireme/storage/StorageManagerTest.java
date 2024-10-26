@@ -15,20 +15,19 @@ import seedu.hireme.commons.core.GuiSettings;
 import seedu.hireme.model.AddressBook;
 import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.UserPrefs;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 public class StorageManagerTest {
 
     @TempDir
     public Path testFolder;
 
-    private StorageManager<InternshipApplication> storageManager;
+    private StorageManager storageManager;
 
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager<>(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -57,11 +56,11 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook<InternshipApplication> original = getTypicalAddressBook();
+        AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         assertTrue(storageManager.readAddressBook().isPresent());
-        ReadOnlyAddressBook<InternshipApplication> retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook<InternshipApplication>(retrieved));
+        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new AddressBook(retrieved));
     }
 
     @Test

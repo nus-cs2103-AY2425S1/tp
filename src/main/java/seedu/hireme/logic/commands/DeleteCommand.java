@@ -14,7 +14,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
 /**
  * Deletes an internship application identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command<InternshipApplication> {
+public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "/d";
 
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command<InternshipApplication> {
     }
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<InternshipApplication> lastShownList = model.getFilteredList();
 

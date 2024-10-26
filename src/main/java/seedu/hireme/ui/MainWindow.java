@@ -16,7 +16,6 @@ import seedu.hireme.logic.Logic;
 import seedu.hireme.logic.commands.CommandResult;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,13 +27,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic<InternshipApplication> logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private InternshipApplicationListPanel internshipApplicationListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -54,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic<InternshipApplication> logic) {
+    public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies

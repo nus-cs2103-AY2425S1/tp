@@ -6,12 +6,11 @@ import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.internshipapplication.DateComparator;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Sorts the internship applications list by either the earliest or latest application dates.
  */
-public class SortCommand extends Command<InternshipApplication> {
+public class SortCommand extends Command {
     public static final String COMMAND_WORD = "/sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -27,7 +26,7 @@ public class SortCommand extends Command<InternshipApplication> {
     }
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortFilteredList(comparator);
         return new CommandResult(String.format(Messages.MESSAGE_INTERNSHIP_APPLICATIONS_SORTED_OVERVIEW,

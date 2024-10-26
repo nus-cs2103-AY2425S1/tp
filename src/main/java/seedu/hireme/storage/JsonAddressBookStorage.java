@@ -13,16 +13,15 @@ import seedu.hireme.commons.exceptions.IllegalValueException;
 import seedu.hireme.commons.util.FileUtil;
 import seedu.hireme.commons.util.JsonUtil;
 import seedu.hireme.model.ReadOnlyAddressBook;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage<InternshipApplication> {
+public class JsonAddressBookStorage implements AddressBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
@@ -35,7 +34,7 @@ public class JsonAddressBookStorage implements AddressBookStorage<InternshipAppl
 
     //To-do: edit this readAddressBook() to read data from data file for HireMe
     @Override
-    public Optional<ReadOnlyAddressBook<InternshipApplication>> readAddressBook() throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(filePath);
     }
 
@@ -45,7 +44,7 @@ public class JsonAddressBookStorage implements AddressBookStorage<InternshipAppl
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook<InternshipApplication>> readAddressBook(Path filePath)
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath)
             throws DataLoadingException {
         requireNonNull(filePath);
 
@@ -64,7 +63,7 @@ public class JsonAddressBookStorage implements AddressBookStorage<InternshipAppl
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
@@ -73,7 +72,7 @@ public class JsonAddressBookStorage implements AddressBookStorage<InternshipAppl
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook, Path filePath)
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
             throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);

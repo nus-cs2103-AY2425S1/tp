@@ -15,19 +15,18 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.hireme.commons.core.GuiSettings;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.hireme.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
-    private ModelManager<InternshipApplication> modelManager = new ModelManager<InternshipApplication>();
+    private ModelManager modelManager = new ModelManager();
 
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook<>(), new AddressBook<>(modelManager.getAddressBook()));
+        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
     @Test
@@ -96,14 +95,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook<InternshipApplication> addressBook = new AddressBookBuilder().withApplication(GOOGLE)
+        AddressBook addressBook = new AddressBookBuilder().withApplication(GOOGLE)
                 .withApplication(YAHOO).build();
-        AddressBook<InternshipApplication> differentAddressBook = new AddressBook<>();
+        AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager<InternshipApplication>(addressBook, userPrefs);
-        ModelManager<InternshipApplication> modelManagerCopy = new ModelManager<>(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -116,12 +115,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager<>(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = GOOGLE.getCompany().getName().getValue().split("\\s+");
         modelManager.updateFilteredList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager<>(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredList(PREDICATE_SHOW_ALL);
@@ -129,6 +128,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setHireMeFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager<>(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

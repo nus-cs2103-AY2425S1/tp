@@ -76,16 +76,16 @@ public class TypicalInternshipApplications {
     /**
      * Returns an {@code AddressBook} with all the typical internship applications.
      */
-    public static AddressBook<InternshipApplication> getTypicalAddressBook() {
-        AddressBook<InternshipApplication> ab = new AddressBook<>();
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
         for (InternshipApplication internshipApp : getTypicalInternshipApplications()) {
             ab.addItem(internshipApp);
         }
         return ab;
     }
 
-    public static AddressBook<InternshipApplication> getClonedAddressBook() {
-        AddressBook<InternshipApplication> clonedAb = new AddressBook<>();
+    public static AddressBook getClonedAddressBook() {
+        AddressBook clonedAb = new AddressBook();
         for (InternshipApplication internshipApp : getTypicalInternshipApplications()) {
             clonedAb.addItem(internshipApp.deepCopy());
         }

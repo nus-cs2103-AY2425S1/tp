@@ -20,18 +20,18 @@ import seedu.hireme.testutil.InternshipApplicationBuilder;
  */
 public class AddCommandIntegrationTest {
 
-    private Model<InternshipApplication> model;
+    private Model model;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newInternshipApplication_success() {
         InternshipApplication validApplication = new InternshipApplicationBuilder().build();
 
-        Model<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addItem(validApplication);
 
         assertCommandSuccess(new AddCommand(validApplication), model,

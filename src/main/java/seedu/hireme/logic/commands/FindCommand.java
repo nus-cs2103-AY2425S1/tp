@@ -5,14 +5,13 @@ import static java.util.Objects.requireNonNull;
 import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.model.Model;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all internship applications in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command<InternshipApplication> {
+public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "/f";
 
@@ -29,7 +28,7 @@ public class FindCommand extends Command<InternshipApplication> {
     }
 
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW,

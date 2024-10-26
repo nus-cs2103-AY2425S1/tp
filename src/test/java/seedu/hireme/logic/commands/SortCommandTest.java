@@ -22,17 +22,16 @@ import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
 import seedu.hireme.model.UserPrefs;
 import seedu.hireme.model.internshipapplication.DateComparator;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 
 public class SortCommandTest {
-    private Model<InternshipApplication> model =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
-    private Model<InternshipApplication> expectedModel =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
+    private final Model model =
+            new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel =
+            new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {

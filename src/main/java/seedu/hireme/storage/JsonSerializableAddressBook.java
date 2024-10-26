@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook<InternshipApplication> source) {
+    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         internships.addAll(source.getList().stream().map(JsonAdaptedInternship::new).collect(Collectors.toList()));
     }
 
@@ -46,8 +46,8 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook<InternshipApplication> toModelType() throws IllegalValueException {
-        AddressBook<InternshipApplication> addressBook = new AddressBook<>();
+    public AddressBook toModelType() throws IllegalValueException {
+        AddressBook addressBook = new AddressBook();
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
             InternshipApplication internship = jsonAdaptedInternship.toModelType();
             if (addressBook.hasItem(internship)) {

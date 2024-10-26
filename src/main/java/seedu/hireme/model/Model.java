@@ -11,7 +11,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
 /**
  * The API of the Model component.
  */
-public interface Model<T> {
+public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<InternshipApplication> PREDICATE_SHOW_ALL = unused -> true;
 
@@ -48,47 +48,47 @@ public interface Model<T> {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook<T> addressBook);
+    void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook<T> getAddressBook();
+    ReadOnlyAddressBook getAddressBook();
 
     /**
      * Returns true if an item with the same identity as {@code item} exists in the address book.
      */
-    boolean hasItem(T item);
+    boolean hasItem(InternshipApplication item);
 
     /**
      * Deletes the given item.
      * The item must exist in the address book.
      */
-    void deleteItem(T target);
+    void deleteItem(InternshipApplication target);
 
     /**
      * Adds the given item.
      * {@code item} must not already exist in the address book.
      */
-    void addItem(T item);
+    void addItem(InternshipApplication item);
 
     /**
      * Replaces the given item {@code target} with {@code edited}.
      * {@code target} must exist in the address book.
      * The item identity of {@code edited} must not be the same as another existing item in the address book.
      */
-    void setItem(T target, T edited);
+    void setItem(InternshipApplication target, InternshipApplication edited);
 
     /** Returns an unmodifiable view of the filtered list */
-    ObservableList<T> getFilteredList();
+    ObservableList<InternshipApplication> getFilteredList();
 
     /**
      * Updates the filter of the filtered list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredList(Predicate<T> predicate);
+    void updateFilteredList(Predicate<InternshipApplication> predicate);
 
     /**
      * Sorts the filtered list using the given {@code comparator}.
      * @throws NullPointerException if {@code comparator} is null.
      */
-    void sortFilteredList(Comparator<T> comparator);
+    void sortFilteredList(Comparator<InternshipApplication> comparator);
 }

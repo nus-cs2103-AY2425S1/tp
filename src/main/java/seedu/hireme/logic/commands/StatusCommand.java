@@ -15,7 +15,7 @@ import seedu.hireme.model.internshipapplication.Status;
 /**
  * Changes the status of an internship application identified using its displayed index.
  */
-public class StatusCommand extends Command<InternshipApplication> {
+public class StatusCommand extends Command {
 
     /** Command word for accepting an application. */
     public static final String COMMAND_WORD_ACCEPT = "/accept";
@@ -63,7 +63,7 @@ public class StatusCommand extends Command<InternshipApplication> {
      * @throws CommandException If the target index is invalid.
      */
     @Override
-    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         FilteredList<InternshipApplication> lastShownList =
                 (FilteredList<InternshipApplication>) model.getFilteredList();

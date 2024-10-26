@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.commons.exceptions.DataLoadingException;
-import seedu.hireme.model.HireMeComparable;
 import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.ReadOnlyUserPrefs;
 import seedu.hireme.model.UserPrefs;
@@ -15,16 +14,16 @@ import seedu.hireme.model.UserPrefs;
 /**
  * Manages storage of AddressBook data in local storage.
  */
-public class StorageManager<T extends HireMeComparable<T>> implements Storage<T> {
+public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage<T> addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final AddressBookStorage addressBookStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage<T> addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         logger.info("StorageManager initialized with AddressBookStorage and UserPrefsStorage.");
@@ -60,26 +59,26 @@ public class StorageManager<T extends HireMeComparable<T>> implements Storage<T>
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook<T>> readAddressBook() throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         logger.info("Reading AddressBook from default file path.");
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook<T>> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         logger.info("Reading AddressBook from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook<T> addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         logger.info("Saving AddressBook to default file path.");
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
         logger.fine("AddressBook saved successfully.");
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook<T> addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.info("Saving AddressBook to file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
         logger.fine("AddressBook saved successfully to file: " + filePath);

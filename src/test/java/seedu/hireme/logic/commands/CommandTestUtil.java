@@ -63,9 +63,9 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command<InternshipApplication> command, Model<InternshipApplication>
+    public static void assertCommandSuccess(Command command, Model
             actualModel, CommandResult expectedCommandResult,
-                                            Model<InternshipApplication> expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -79,9 +79,9 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command<InternshipApplication> command, Model<InternshipApplication>
+    public static void assertCommandSuccess(Command command, Model
             actualModel, String expectedMessage,
-            Model<InternshipApplication> expectedModel) {
+            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -92,11 +92,11 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command<InternshipApplication> command, Model<InternshipApplication>
+    public static void assertCommandFailure(Command command, Model
             actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook<InternshipApplication> expectedAddressBook = new AddressBook<>(actualModel.getAddressBook());
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<InternshipApplication> expectedFilteredList = new ArrayList<>(actualModel.getFilteredList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
@@ -108,7 +108,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showInternshipApplicationAtIndex(Model<InternshipApplication> model, Index targetIndex) {
+    public static void showInternshipApplicationAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredList().size());
 
         InternshipApplication internshipApplication = model.getFilteredList().get(targetIndex.getZeroBased());

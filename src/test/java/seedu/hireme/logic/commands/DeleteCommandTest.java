@@ -25,7 +25,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class DeleteCommandTest {
 
-    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +36,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete));
 
-        ModelManager<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteItem(internshipApplicationToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete));
 
-        Model<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteItem(internshipApplicationToDelete);
         showNoInternshipApplication(expectedModel);
 
@@ -114,7 +114,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoInternshipApplication(Model<InternshipApplication> model) {
+    private void showNoInternshipApplication(Model model) {
         model.updateFilteredList(p -> false);
 
         assertTrue(model.getFilteredList().isEmpty());

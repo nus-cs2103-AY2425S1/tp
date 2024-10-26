@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
 import seedu.hireme.model.UserPrefs;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 /**
@@ -32,8 +31,8 @@ import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 // Todo add more test cases to deal with prefix predicates
 public class FindCommandTest {
-    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
-    private Model<InternshipApplication> expectedModel = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -116,13 +115,13 @@ public class FindCommandTest {
 
     @Test
     public void execute_commonKeyword_multipleInternshipApplicationsFound() {
-        Model<InternshipApplication> modelWithGoogleAndYahoo = new ModelManager<>(getTypicalAddressBook(),
+        Model modelWithGoogleAndYahoo = new ModelManager(getTypicalAddressBook(),
                                                                                   new UserPrefs());
         modelWithGoogleAndYahoo.addItem(GOOGLE);
         String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("oo");
         FindCommand command = new FindCommand(predicate);
-        Model<InternshipApplication> expectedModel = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addItem(GOOGLE);
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, modelWithGoogleAndYahoo, expectedMessage, expectedModel);

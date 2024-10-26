@@ -22,7 +22,7 @@ import seedu.hireme.commons.core.LogsCenter;
  * to be the entry point of the application, we avoid this issue.
  */
 public class Main {
-    private static Logger logger = LogsCenter.getLogger(Main.class);
+    private static final Logger logger = LogsCenter.getLogger(Main.class);
 
     public static void main(String[] args) {
 

@@ -7,14 +7,14 @@ import seedu.hireme.commons.core.GuiSettings;
 import seedu.hireme.logic.commands.CommandResult;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
-import seedu.hireme.model.HireMeComparable;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ReadOnlyAddressBook;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * API of the Logic component
  */
-public interface Logic<T extends HireMeComparable<T>> {
+public interface Logic {
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -29,10 +29,10 @@ public interface Logic<T extends HireMeComparable<T>> {
      *
      * @see Model#getAddressBook()
      */
-    ReadOnlyAddressBook<T> getAddressBook();
+    ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of internship applications */
-    ObservableList<T> getFilteredList();
+    ObservableList<InternshipApplication> getFilteredList();
 
     /**
      * Returns the user prefs' address book file path.
