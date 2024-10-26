@@ -7,12 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -91,9 +94,35 @@ public class HelpWindow extends UiPart<Stage> {
         commandColumn.setMinWidth(100);
 
         TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Usage");
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionColumn.setCellFactory(col -> {
+            TableCell<HelpCommand, String> cell = new TableCell<>() {
+                private final Text text = new Text();
 
-        table.setEditable(true);
+                {
+                    text.wrappingWidthProperty().bind(descriptionColumn.widthProperty());
+                    setGraphic(text);
+                    setPrefHeight(Control.USE_COMPUTED_SIZE);
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        text.setText(null);
+                    } else {
+                        // Retrieve the full description using getDescription()
+                        HelpCommand helpCommand = getTableRow().getItem();
+                        if (helpCommand != null) {
+                            text.setText(helpCommand.getDescription());
+                            setPrefHeight(text.getBoundsInLocal().getHeight() + 1); // Add padding
+                        }
+                    }
+                }
+            };
+            return cell;
+        });
+
+        table.setEditable(false);
 
         ObservableList<HelpCommand> data =
                 FXCollections.observableArrayList(new HelpCommand("Add",
