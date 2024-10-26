@@ -25,6 +25,7 @@ public class RejectCommandTest {
 
     private Model model = new ModelManager();
 
+    // Valid Input (Change an existing candidate's status to Rejected)
     @Test
     public void execute_personAcceptedByModel_rejectSuccessful() throws Exception {
         Person validPerson = new Person(
@@ -49,6 +50,7 @@ public class RejectCommandTest {
         assertFalse(validPersonRejected.getTags().contains(Person.TAG_HIRED));
     }
 
+    // Invalid Input (Candidate's status is already rejected when executing reject command)
     @Test
     public void execute_personAlreadyRejected_throwsCommandException() {
         Person validPerson = new Person(
@@ -68,6 +70,7 @@ public class RejectCommandTest {
                 "Error: Candidate Amy Bee is already marked as rejected.");
     }
 
+    // Invalid Input (Candidate does not exist in the database)
     @Test
     public void execute_personNotFound_throwsPersonNotFoundException() {
         Person nonExistentPerson = new Person(
@@ -85,6 +88,7 @@ public class RejectCommandTest {
         assertThrows(CommandException.class, () -> rejectCommand.execute(model));
     }
 
+    // Invalid Input (Specified job in input does not match candidate's job in database)
     @Test
     public void execute_personWithDifferentJob_throwsPersonNotFoundException() {
         Person validPerson = new Person(
@@ -103,6 +107,7 @@ public class RejectCommandTest {
         assertThrows(CommandException.class, () -> rejectCommand.execute(model));
     }
 
+    // Valid Input (Change an existing candidate's status to Rejected and the candidate has multiple tags)
     @Test
     public void execute_personWithMultipleTags_rejectSuccessful() throws Exception {
         Person validPerson = new Person(
@@ -128,6 +133,7 @@ public class RejectCommandTest {
         assertTrue(validPersonRejected.getTags().contains(new Tag("interviewed")));
     }
 
+    // Tests if the test message matches the exception message being thrown
     @Test
     public void execute_jobNotFound_throwsJobNotFoundException() {
         Person validPerson = new Person(
