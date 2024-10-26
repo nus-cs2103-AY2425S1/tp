@@ -66,6 +66,20 @@ If you can type fast, GamerBook can get your contact management tasks done faste
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Commamnd PopUp:**<br>
+
+![CommandPopUp](images/commandpopup.png)
+
+* We have implemented a Command suggestion PopUp for your convenience!
+
+* As long as the command box is currently the UI element **in focus** and **at least one** letter is detected inside the command box, it will show the possible commands that you can choose to autocomplete it to.
+
+* Underneath each suggested command is the syntax for that command and what parameters are needed to complete it, parameters in `[square brackets]` are **optional** _(Note: For comamnds without any additional parameters there is instead a description on what the command does)_
+
+* To access the autocomplete functionality press `shift + up` or `shift + down` while it is open, it will highlight the **current selection** in **blue**
+
+* If Your current selection is correct press `tab` to autocomplete it within the command box.
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -83,6 +97,7 @@ Action     | Format, Examples
 **Help**   | `help`
 
 --------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
