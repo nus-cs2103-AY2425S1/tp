@@ -4,9 +4,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.TextArea?>
+<VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
         <Label fx:id="subject" styleClass="cell_small_label" text="\$subject"/>
         <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance"/>
     </HBox>
+    <Label fx:id="otherAttendance" styleClass="cell_small_label" visible="false" managed="false" wrapText="true"/>
 </VBox>
