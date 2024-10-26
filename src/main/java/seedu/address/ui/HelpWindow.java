@@ -102,8 +102,8 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
                                 + "[e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
                         new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME]"
-                                + " [s/SKILLLEVEL] [r/ROLE]​`"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., "
+                                + " [s/SKILL_LEVEL] [r/ROLE]`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` \ne.g., "
                                 + "`find James Jake`"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("List", "`list`"),

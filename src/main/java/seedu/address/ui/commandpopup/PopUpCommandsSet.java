@@ -27,6 +27,7 @@ public class PopUpCommandsSet {
         commandSet.add("favgame");
         commandSet.add("unfavgame");
         commandSet.add("undo");
+        commandSet.add("exit");
         return commandSet;
     }
 
