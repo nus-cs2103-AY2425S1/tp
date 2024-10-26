@@ -17,7 +17,7 @@ import seedu.address.model.person.Attendance;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a person identified using it's displayed index from the address book.
+ * Marks the attendance of all students in the tutorial.
  */
 public class MarkAttendanceByTutorialCommand extends Command {
 
