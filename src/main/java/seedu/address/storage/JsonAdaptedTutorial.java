@@ -49,7 +49,7 @@ public class JsonAdaptedTutorial {
 
     public JsonAdaptedTutorial(Tutorial source) {
         this.tutName = source.getTutName().tutName;
-        this.tutorialId = source.getTutorialId().toString();
+        this.tutorialId = source.getTutorialId().getValue();
         this.students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .toList());

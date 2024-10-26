@@ -1,7 +1,6 @@
 package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,6 +39,13 @@ public abstract class TutorialId {
     }
 
     /**
+     * Returns value of the Tutorial id.
+     *
+     * @return Tutorial id.
+     */
+    public abstract String getValue();
+
+    /**
      * Creates an instance of an existing tutorial class.
      *
      * @param value The string value representing the class code.
@@ -61,8 +67,12 @@ public abstract class TutorialId {
         }
 
         @Override
-        public String toString() {
+        public String getValue() {
             return value;
+        }
+        @Override
+        public String toString() {
+            return "No tutorial assigned";
         }
 
     }
@@ -73,12 +83,16 @@ public abstract class TutorialId {
         @JsonCreator
         public Exist(@JsonProperty("tutorialId") String tutorialId) {
             requireNonNull(tutorialId);
-            checkArgument(isValidTutorialId(tutorialId));
             this.value = tutorialId;
         }
 
         @Override
         public String toString() {
+            return value;
+        }
+
+        @Override
+        public String getValue() {
             return value;
         }
 

@@ -25,8 +25,8 @@ public class UnattendCommand extends Command {
             + PREFIX_TUTORIALID + "TUTORIAL_CLASS "
             + "[" + PREFIX_ATTENDANCEDATE + "ATTENDANCE DATE] \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENTID + "1001 "
-            + PREFIX_TUTORIALID + "1001 "
+            + PREFIX_STUDENTID + "A1234567U "
+            + PREFIX_TUTORIALID + "T1001 "
             + PREFIX_ATTENDANCEDATE + "2024/02/21";
     public static final String MESSAGE_SUCCESS = "Marked as absent";
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";

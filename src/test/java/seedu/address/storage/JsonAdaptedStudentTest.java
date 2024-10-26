@@ -78,14 +78,6 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_invalidTutorialId_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, INVALID_TUTORIAL_ID);
-        String expectedMessage = TutorialId.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
-    }
-
-    @Test
     public void toModelType_nullTutorialId_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
                 VALID_PRESENT_DATES, VALID_STUDENT_ID, null);

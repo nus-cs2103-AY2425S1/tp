@@ -214,11 +214,10 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditStudentDescriptor)) {
+            if (!(other instanceof EditStudentDescriptor otherEditStudentDescriptor)) {
                 return false;
             }
 
-            EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
             return Objects.equals(name, otherEditStudentDescriptor.name)
                     && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates)
                     && Objects.equals(studentId, otherEditStudentDescriptor.studentId)

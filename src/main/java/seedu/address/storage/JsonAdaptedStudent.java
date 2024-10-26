@@ -75,9 +75,6 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TutorialId.class.getSimpleName()));
         }
-        if (!TutorialId.isValidTutorialId(tutorialId)) {
-            throw new IllegalValueException(TutorialId.MESSAGE_CONSTRAINTS);
-        }
         final TutorialId modelTutorialId = TutorialId.of(tutorialId);
 
         final PresentDates modelPresentDates;
