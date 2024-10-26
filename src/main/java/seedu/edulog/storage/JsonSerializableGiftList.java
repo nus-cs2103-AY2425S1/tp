@@ -19,8 +19,6 @@ import seedu.edulog.model.gift.Gift;
 @JsonRootName(value = "giftlist")
 class JsonSerializableGiftList {
 
-    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-
     private final List<JsonAdaptedGift> gifts = new ArrayList<>();
 
     /**
@@ -30,6 +28,7 @@ class JsonSerializableGiftList {
     public JsonSerializableGiftList(@JsonProperty("gifts") List<JsonAdaptedGift> gifts) {
         this.gifts.addAll(gifts);
     }
+
     /**
      * Converts a given {@code ReadOnlyGiftList} into this class for Jackson use.
      *

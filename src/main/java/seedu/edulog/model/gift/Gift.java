@@ -3,8 +3,7 @@ package seedu.edulog.model.gift;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Gift in the edulog book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidGiftName(String)}
+ * Represents a Gift in the gift list.
  */
 public class Gift {
 
@@ -43,6 +42,7 @@ public class Gift {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return giftName;
     }

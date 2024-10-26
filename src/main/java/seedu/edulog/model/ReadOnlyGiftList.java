@@ -13,6 +13,9 @@ public interface ReadOnlyGiftList {
      */
     ObservableList<Gift> getGiftList();
 
+    /**
+     * Gets a random gift from the gift list.
+     */
     Gift getRandomGift();
 
 }

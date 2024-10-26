@@ -11,7 +11,6 @@ import seedu.edulog.model.gift.Gift;
  */
 class JsonAdaptedGift extends Gift {
 
-
     /**
      * Constructs a {@code JsonAdaptedGift} with the given {@code giftName}.
      */

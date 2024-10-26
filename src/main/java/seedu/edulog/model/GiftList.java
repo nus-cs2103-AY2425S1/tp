@@ -7,8 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.edulog.model.gift.Gift;
 
 /**
- * Wraps all data at the giftlist-book level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Wraps all data for giftlist
  */
 public class GiftList implements ReadOnlyGiftList {
     private final ObservableList<Gift> gifts;
@@ -19,7 +18,7 @@ public class GiftList implements ReadOnlyGiftList {
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * among constructors.
      */
     {
         gifts = FXCollections.observableArrayList();
@@ -36,6 +35,9 @@ public class GiftList implements ReadOnlyGiftList {
         gifts.add(gift);
     }
 
+    /**
+     * Gets a random gift from the gift list.
+     */
     @Override
     public Gift getRandomGift() {
         return gifts.get(random.nextInt(gifts.size()));

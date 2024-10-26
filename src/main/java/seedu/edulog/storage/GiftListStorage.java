@@ -1,6 +1,5 @@
 package seedu.edulog.storage;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -29,17 +28,5 @@ public interface GiftListStorage {
      * @see #getGiftListFilePath()
      */
     Optional<ReadOnlyGiftList> readGiftList(Path filePath) throws DataLoadingException;
-
-    /**
-     * Saves the given {@link ReadOnlyGiftList} to the storage.
-     * @param giftList cannot be null.
-     * @throws IOException if there was any problem writing to the file.
-     */
-    void saveGiftList(ReadOnlyGiftList giftList) throws IOException;
-
-    /**
-     * @see #saveGiftList(ReadOnlyGiftList)
-     */
-    void saveGiftList(ReadOnlyGiftList giftList, Path filePath) throws IOException;
 
 }

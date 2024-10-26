@@ -13,13 +13,17 @@ import seedu.edulog.storage.JsonGiftListStorage;
  * Utility class for generating random gift ideas.
  */
 public class GiftUtil {
-    public static Gift getRandomGift() throws DataLoadingException {
-        Optional<ReadOnlyGiftList> giftListOptional;
-        ReadOnlyGiftList initialData;
-        GiftListStorage storage = new JsonGiftListStorage(Path.of("src", "main", "data", "gifts.json"));
 
-        giftListOptional = storage.readGiftList();
-        initialData = giftListOptional.get();
+    /**
+     * Returns a random gift from the gift list.
+     */
+    public static Gift getRandomGift() throws DataLoadingException {
+        Path path = Path.of("src", "main", "data", "gifts.json");
+        GiftListStorage storage = new JsonGiftListStorage(path);
+
+        Optional<ReadOnlyGiftList> giftListOptional = storage.readGiftList();
+        ReadOnlyGiftList initialData = giftListOptional.get();
+
         return initialData.getRandomGift();
     }
 }
