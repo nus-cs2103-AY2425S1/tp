@@ -101,6 +101,11 @@ public class MarkCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
             }
         }
+
+        if (model.isHistoryView()) {
+            throw new CommandException(Messages.MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW);
+        }
+
         model.markAsContacted(personToMark, contactRecord);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,

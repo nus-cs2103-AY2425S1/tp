@@ -286,4 +286,12 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
     }
+
+    @Test
+    public void restrictedUsageInHistoryView() {
+        model.setHistoryView(true);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW);
+    }
 }

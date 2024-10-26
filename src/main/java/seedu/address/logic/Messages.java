@@ -20,6 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_CALL_HISTORY = "This person has no call history";
+    public static final String MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW = "This command is restricted in history view. "
+            + "Use 'list' to return to the person list view to use this command.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -82,6 +82,18 @@ public interface Model {
     boolean hasSimilarPerson(Person person, Person exclude);
 
     /**
+     * Returns true if the current view is the history view.
+     */
+    boolean isHistoryView();
+
+    /**
+     * Sets the current view to the history view.
+     *
+     * @param historyView True if the current view is the history view, false otherwise
+     */
+    void setHistoryView(boolean historyView);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

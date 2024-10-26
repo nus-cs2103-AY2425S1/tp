@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final ObservableList<ContactRecord> displayedCallHistory;
     private final CommandTextHistory commandTextHistory;
+    private boolean historyView = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -128,7 +129,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -163,6 +163,7 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        setHistoryView(false);
     }
 
     //=========== Call History ================================================================================
@@ -179,6 +180,17 @@ public class ModelManager implements Model {
         for (int i = callHistory.size() - 1; i >= 0; i--) {
             displayedCallHistory.add(callHistory.get(i));
         }
+        setHistoryView(true);
+    }
+
+    @Override
+    public boolean isHistoryView() {
+        return historyView;
+    }
+
+    @Override
+    public void setHistoryView(boolean historyView) {
+        this.historyView = historyView;
     }
 
     /**
