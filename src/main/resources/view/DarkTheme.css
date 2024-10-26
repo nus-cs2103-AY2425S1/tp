@@ -373,3 +373,14 @@
     -fx-background-color: #43A047;
     -fx-border-color: #A5D6A7;
 }
+
+#isArchived {
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16;
+    -fx-padding: 0 10;
+    -fx-background-color: #2E2E2E;
+    -fx-border-color: #4A90E2;
+    -fx-text-fill: #E0E0E0;
+}

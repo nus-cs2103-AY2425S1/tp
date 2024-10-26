@@ -26,6 +26,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="isArchived" text="Archived">
+          <HBox.margin>
+            <Insets top="2" bottom="2" left="4" />
+          </HBox.margin>
+        </Label>
         <Label fx:id="priority" text="\$priority">
           <HBox.margin>
             <Insets left="4" />

@@ -92,6 +92,7 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Can be used with {@link FilteredPersonListMasterPredicate}
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -144,13 +145,15 @@ public interface Model {
 
     /**
      * Represents the main predicates for filteredPersonList.
-     * Each enum value is a subtype of {@link Predicate}.
-     * There are 3 cases.
+     * Each enum value is also a {@link Predicate}.
+     * <p>
+     * There are 3 cases for filteredPersonList:
      * <ol>
-     *     <li>filteredPersonlist shows any person</li>
-     *     <li>filteredPersonlist shows only current (i.e. unarchived) persons</li>
-     *     <li>filteredPersonlist shows only archived persons</li>
+     *     <li>filteredPersonList shows any person</li>
+     *     <li>filteredPersonList shows only current (i.e. unarchived) persons</li>
+     *     <li>filteredPersonList shows only archived persons</li>
      * </ol>
+     * </p>
      */
     enum FilteredPersonListMasterPredicate implements Predicate<Person> {
         SHOW_ANY_PERSONS(person -> true),
