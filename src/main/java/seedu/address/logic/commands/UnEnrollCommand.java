@@ -30,7 +30,7 @@ public class UnEnrollCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "2"
             + PREFIX_TUTORIAL + "physics";
-    public static final String MESSAGE_SUCCESS = "%1$s(student) removed from %2$s(tutorial)";
+    public static final String MESSAGE_SUCCESS = "%1$s(student) no longer enrolled in %2$s(tutorial)";
     public static final String MESSAGE_NO_SUCH_PARTICIPATION = "This person are not in this tutorial currently";
 
     private final Index index;
@@ -68,16 +68,12 @@ public class UnEnrollCommand extends Command {
         Tutorial tutorial = optionalTutorial.get();
 
         Participation p = new seedu.address.model.participation.Participation(student, tutorial, new ArrayList<>());
-        if (!(tutorial.hasParticipation(p) || student.hasParticipation(p) || model.hasParticipation(p))) {
+        if (!model.hasParticipation(p)) {
             throw new CommandException(MESSAGE_NO_SUCH_PARTICIPATION);
         }
 
-        tutorial.removeParticipation(p);
-        student.removeParticipation(p);
         model.deleteParticipation(p);
-        model.setPerson(student, student);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student, tutorial));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getFullName(), tutorial.getSubject()));
     }
 
     @Override
