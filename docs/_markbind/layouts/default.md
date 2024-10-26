@@ -31,7 +31,7 @@
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
-  * [Command]({{ baseUrl }}/UserGuide.html#commands)
+  * [Commands]({{ baseUrl }}/UserGuide.html#commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
