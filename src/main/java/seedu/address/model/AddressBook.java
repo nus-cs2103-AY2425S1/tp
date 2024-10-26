@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -22,8 +23,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
     private final ObservableList<Consultation> consults;
+    private final ObservableList<Lesson> lessons;
 
-    /*
+     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
@@ -33,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         students = new UniqueStudentList();
         consults = FXCollections.observableArrayList();
+        lessons = FXCollections.observableArrayList();
     }
 
     public AddressBook() {}
@@ -180,6 +183,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return FXCollections.unmodifiableObservableList(consults);
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -193,12 +197,38 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return students.equals(otherAddressBook.students)
-                && consults.equals(otherAddressBook.consults);
+                && consults.equals(otherAddressBook.consults)
+                && lessons.equals(otherAddressBook.lessons);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(students, consults);
+        return Objects.hash(students, consults, lessons);
+    }
+
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.contains(lesson);
+    }
+
+    public void addLesson(Lesson lesson) {
+        lessons.add(lesson);
+        
+        // Sort by date first, and then by time if the dates are the same
+        lessons.sort((l1, l2) -> {
+            int dateComparison = l1.getDate().compareTo(l2.getDate());
+            if (dateComparison == 0) {
+                return l1.getTime().compareTo(l2.getTime()); // Compare by time if dates are the same
+            }
+            return dateComparison; // Otherwise, compare by date
+        });
+    }
+
+    public void removeLesson(Lesson lesson) {
+        lessons.remove(lesson);
+    }
+
+    public ObservableList<Lesson> getLessonList() {
+        return FXCollections.unmodifiableObservableList(lessons);
     }
 }
-

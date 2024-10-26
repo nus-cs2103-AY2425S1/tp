@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
@@ -18,6 +19,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true for lessons */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -133,4 +137,30 @@ public interface Model {
      * @return An Optional containing the student if found, or empty if not.
      */
     Optional<Student> findStudentByName(seedu.address.model.student.Name name);
+
+    /**
+     * Returns true if a lesson with the same details as {@code lesson} exists in TAHub.
+     */
+    boolean hasLesson(Lesson lesson);
+
+    /**
+     * Adds the given lesson.
+     * @param lesson Lesson to be added.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Deletes the given lesson.
+     * The lesson must exist in TAHub.
+     */
+    void deleteLesson(Lesson lesson);
+
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 }
