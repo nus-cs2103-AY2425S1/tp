@@ -41,6 +41,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_RELATION = "HW";
     private static final String INVALID_RSVP = "yes";
+    private static final String INVALID_BUDGET = "one hundred";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -406,6 +407,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRelationPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRelationPredicate(INVALID_RELATION));
+    }
+
+    @Test
     public void parseRelationPredicate_validValueWithoutWhitespace_success() throws Exception {
         RelationContainsKeywordsPredicate expectedRelationPredicate =
                 new RelationContainsKeywordsPredicate(Arrays.asList(VALID_RELATION.split(" ")));
@@ -415,6 +421,11 @@ public class ParserUtilTest {
     @Test
     public void parseBudgetPredicate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseBudgetPredicate((String) null));
+    }
+
+    @Test
+    public void parseBudgetPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBudgetPredicate(INVALID_BUDGET));
     }
 
     @Test
