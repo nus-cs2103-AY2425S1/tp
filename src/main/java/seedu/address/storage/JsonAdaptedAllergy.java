@@ -13,15 +13,15 @@ public class JsonAdaptedAllergy {
     private final String allergy;
 
     /**
-     * Constructs a {@code JsonAdaptedHealthService} with the given {@code healthServiceName}.
+     * Constructs a {@code JsonAdaptedAllergy} with the given {@code allergy}.
      */
     @JsonCreator
-    public JsonAdaptedAllergy(String healthServiceName) {
-        this.allergy = healthServiceName;
+    public JsonAdaptedAllergy(String allergy) {
+        this.allergy = allergy;
     }
 
     /**
-     * Converts a given {@code HealthService} into this class for Jackson use.
+     * Converts a given {@code Allergy} into this class for Jackson use.
      */
     public JsonAdaptedAllergy(Allergy source) {
         allergy = source.value;

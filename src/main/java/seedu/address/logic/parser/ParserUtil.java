@@ -229,22 +229,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String healthService} into a {@code HealthService}.
+     * Parses a {@code String allergy} into a {@code Allergy}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code healthService} is invalid.
+     * @throws ParseException if the given {@code allergy} is invalid.
      */
     public static Allergy parseAllergies(String allergy) throws ParseException {
         requireNonNull(allergy);
         String trimmedAllergy = allergy.trim();
         if (!Allergy.isValidAllergy(trimmedAllergy)) {
-            throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
         }
         return new Allergy(trimmedAllergy);
     }
 
     /**
-     * Parses {@code Collection<String> healthServices} into a {@code Set<HealthService>}.
+     * Parses {@code Collection<String> allergy} into a {@code Set<Allergy>}.
      */
     public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
