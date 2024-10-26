@@ -6,9 +6,13 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.chart.PieChart?>
+<?import java.net.URL?>
 <fx:root resizable="false" title="Insights" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene>
+            <stylesheets>
+                <URL value="@InsightsWindow.css" />
+            </stylesheets>
             <HBox alignment="CENTER" fx:id="helpMessageContainer">
                 <children>
                     <PieChart fx:id="pieChart" />
