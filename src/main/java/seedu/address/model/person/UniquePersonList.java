@@ -145,7 +145,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        boolean check = internalList.equals(otherUniquePersonList.internalList);
         return internalList.equals(otherUniquePersonList.internalList);
     }
 
