@@ -126,6 +126,11 @@ public class EditClientCommand extends Command {
             throw new CommandException(MESSAGE_NO_CAR_TO_EDIT_ISSUES);
         }
 
+        // check if person was checked in.
+        if(personToEdit.isServicing()) {
+            editedPerson.setServicing();
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
