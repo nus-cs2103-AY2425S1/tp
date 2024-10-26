@@ -21,6 +21,7 @@ Class Phone
 Class Tag
 Class StudentClass
 Class Sex
+Class EcNumber
 
 Class I #FFFFFF
 }
@@ -46,6 +47,7 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> StudentClass
 Person *--> Sex
+Person *--> EcNumber
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
