@@ -143,7 +143,8 @@ class JsonAdaptedPerson {
 
         final Boolean modelIsArchived = isArchived;
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPostalCode, modelTags, modelOrderTracker, modelIsArchived);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelPostalCode, modelTags, modelOrderTracker, modelIsArchived);
     }
 
 }
