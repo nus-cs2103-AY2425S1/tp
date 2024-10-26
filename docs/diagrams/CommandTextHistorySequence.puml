@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam dpi 300
+actor User as user
+
+box Ui UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":commandTextField:TextField" as commandTextField UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":CommandTextHistory" as CommandTextHistory MODEL_COLOR
+participant "commandHistory:ArrayList<String>" as commandHistory MODEL_COLOR
+end box
+
+user -> CommandBox : press UP button
+activate CommandBox
+CommandBox -> LogicManager : getPreviousCommand()
+activate LogicManager
+LogicManager -> Model : getPreviousCommand()
+activate Model
+Model -> CommandTextHistory : getPreviousCommand()
+activate CommandTextHistory
+CommandTextHistory -> commandHistory : get(currentCommandIndex)
+activate commandHistory
+commandHistory --> CommandTextHistory : command
+deactivate commandHistory
+CommandTextHistory --> Model : command
+deactivate CommandTextHistory
+Model --> LogicManager : command
+deactivate Model
+LogicManager --> CommandBox : command
+deactivate LogicManager
+CommandBox -> commandTextField : setText(command)
+deactivate CommandBox
+activate commandTextField
+commandTextField --> user : show command in text field
+deactivate commandTextField
+
+@enduml
