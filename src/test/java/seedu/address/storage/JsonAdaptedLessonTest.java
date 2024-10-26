@@ -69,4 +69,20 @@ public class JsonAdaptedLessonTest {
 
         assertEquals(expectedLesson, modelLesson);
     }
+
+    @Test
+    public void jsonAdaptedLesson_fromLesson_success() {
+        // Create a Lesson instance
+        Student student = new StudentBuilder().withName("Alice Pauline").build();
+        Lesson lesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME), Arrays.asList(student));
+
+        // Convert the Lesson to JsonAdaptedLesson
+        JsonAdaptedLesson jsonAdaptedLesson = new JsonAdaptedLesson(lesson);
+
+        // Verify the converted values
+        assertEquals(VALID_DATE, jsonAdaptedLesson.getDate());
+        assertEquals(VALID_TIME, jsonAdaptedLesson.getTime());
+        assertEquals(1, jsonAdaptedLesson.getStudents().size());
+        assertEquals(student.getName().fullName, jsonAdaptedLesson.getStudents().get(0).getName());
+    }
 }

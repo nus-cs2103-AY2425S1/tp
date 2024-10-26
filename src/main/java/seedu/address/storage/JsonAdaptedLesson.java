@@ -20,7 +20,7 @@ class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     public static final String STUDENT_NOT_FOUND_MESSAGE = "Student %s"
-        + " does not exist in the address book, or details do not match!";
+            + " does not exist in the address book, or details do not match!";
 
     private final String date;
     private final String time;
@@ -31,8 +31,8 @@ class JsonAdaptedLesson {
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("date") String date,
-                             @JsonProperty("time") String time,
-                             @JsonProperty("students") List<JsonAdaptedStudent> students) {
+            @JsonProperty("time") String time,
+            @JsonProperty("students") List<JsonAdaptedStudent> students) {
         this.date = date;
         this.time = time;
         if (students != null) {
@@ -52,10 +52,41 @@ class JsonAdaptedLesson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
+     * Returns the date of the lesson.
      *
-     * @param addressBook AddressBook instance to verify that the student(s) exist in.
-     * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
+     * @return A string representing the date of the lesson.
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Returns the time of the lesson.
+     *
+     * @return A string representing the time of the lesson.
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * Returns a list of students attending the lesson.
+     *
+     * @return A new list containing the {@code JsonAdaptedStudent} objects
+     *         representing the students.
+     */
+    public List<JsonAdaptedStudent> getStudents() {
+        return new ArrayList<>(students);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted lesson object into the model's
+     * {@code Lesson} object.
+     *
+     * @param addressBook AddressBook instance to verify that the student(s) exist
+     *                    in.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted lesson.
      */
     public Lesson toModelType(AddressBook addressBook) throws IllegalValueException {
         if (date == null) {

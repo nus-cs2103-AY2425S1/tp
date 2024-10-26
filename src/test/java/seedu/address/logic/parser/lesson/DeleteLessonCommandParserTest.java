@@ -27,6 +27,13 @@ public class DeleteLessonCommandParserTest {
     @Test
     public void parse_noArgs_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            DeleteLessonCommand.MESSAGE_USAGE));
+                DeleteLessonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArgs_returnsOptionalEmpty() throws Exception {
+        // Simulate an empty argument
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteLessonCommand.MESSAGE_USAGE));
     }
 }

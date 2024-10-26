@@ -50,6 +50,14 @@ public class AddLessonCommandTest {
         assertFalse(addJan1stLesson.equals(addFeb2ndLesson));
     }
 
+    @Test
+    public void getCommandType_returnsCorrectType() {
+        Lesson lesson = new LessonBuilder().build();
+        AddLessonCommand addLessonCommand = new AddLessonCommand(lesson);
+
+        assertEquals(AddLessonCommand.COMMAND_TYPE, addLessonCommand.getCommandType());
+    }
+
     private class ModelStubAcceptingLessonAdded extends ModelStub {
         final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
 
