@@ -19,6 +19,14 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> PolicySet
-PolicySet *--> ClaimList
+
+PolicySet --> "0..3" Policy
+
+Policy *--> PremiumAmount
+Policy *--> CoverageAmount
+Policy *--> ExpiryDate
+Policy *--> ClaimList
+
+ClaimList --> "*" Claim
 
 @enduml
