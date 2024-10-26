@@ -1,5 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_FIONA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_FIONA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FIONA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_FIONA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +27,10 @@ public class TypicalVendors {
             .withAddress("98, Bishan Street 12, #01-029").withEmail("boris@example.com")
             .withPhone("81723624")
             .withTags("caterer").build();
+
+    // Manually added - Vendor's details found in {@code CommandTestUtil}
+    public static final Vendor FIONA = new VendorBuilder().withName(VALID_NAME_FIONA).withPhone(VALID_PHONE_FIONA)
+            .withEmail(VALID_EMAIL_FIONA).withAddress(VALID_ADDRESS_FIONA).withTags(VALID_TAG_FRIEND).build();
 
     private TypicalVendors() {} // prevents instantiation
 

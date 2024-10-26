@@ -159,16 +159,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedVendor}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    public void setVendor(Vendor target, Vendor editedVendor) {
-        requireNonNull(editedVendor);
-        vendors.setVendor(target, editedVendor);
-    }
-
-    /**
      * Removes {@code key} from this {@code vendors}.
      * {@code key} must exist in the address book.
      */

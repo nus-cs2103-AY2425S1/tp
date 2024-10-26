@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -15,25 +14,56 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddVendorCommand;
+import seedu.address.logic.commands.AssignVendorCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.CreateTaskCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.findcommand.*;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTasksCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UnassignVendorCommand;
+import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.findcommand.FindAddressCommand;
+import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.findcommand.FindEmailCommand;
+import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.findcommand.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindWeddingCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Vendor;
-import seedu.address.model.person.keywordspredicate.*;
+import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalTasks;
+import seedu.address.testutil.VendorBuilder;
+
 
 public class AddressBookParserTest {
 
@@ -94,7 +124,7 @@ public class AddressBookParserTest {
     public void parseCommand_findEmail() throws Exception {
         List<String> keywords = Arrays.asList("sally@gmail.com", "bob@example.com");
         FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " a/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " e/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -102,7 +132,7 @@ public class AddressBookParserTest {
     public void parseCommand_findPhone() throws Exception {
         List<String> keywords = Arrays.asList("99394835");
         FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " a/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " p/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
     }
 

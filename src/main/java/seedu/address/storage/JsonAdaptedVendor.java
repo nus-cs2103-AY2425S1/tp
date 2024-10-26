@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,23 +15,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
 
-class JsonAdaptedVendor {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
-    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
+class JsonAdaptedVendor extends JsonAdaptedPerson {
 
     /**
      * Constructs a {@code JsonAdaptedVendor} with the given vendor details.
@@ -43,54 +29,16 @@ class JsonAdaptedVendor {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
                              @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-        if (weddings != null) {
-            this.weddings.addAll(weddings);
-        }
-        if (tasks != null) {
-            this.tasks.addAll(tasks);
-        }
+        super(name, phone, email, address, tags, weddings, tasks);
     }
 
     /**
      * Converts a given {@code Vendor} into this class for Jackson use.
      */
     public JsonAdaptedVendor(Vendor source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
-        weddings.addAll(source.getWeddings().stream()
-                .map(JsonAdaptedWedding::new)
-                .collect(Collectors.toList()));
-        tasks.addAll(source.getTasks().stream()
-                .map(this::mapToJsonAdaptedTask)
-                .collect(Collectors.toList()));
+        super(source);
     }
 
-    /**
-     * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
-     */
-    private JsonAdaptedTask mapToJsonAdaptedTask(Task task) {
-        if (task instanceof Todo) {
-            return new JsonAdaptedTodo((Todo) task);
-        } else if (task instanceof Deadline) {
-            return new JsonAdaptedDeadline((Deadline) task);
-        } else if (task instanceof Event) {
-            return new JsonAdaptedEvent((Event) task);
-        } else {
-            throw new IllegalArgumentException("Unknown task type");
-        }
-    }
 
     /**
      * Converts this Jackson-friendly adapted vendor object into the model's {@code Vendor} object.
@@ -98,58 +46,58 @@ class JsonAdaptedVendor {
      * @throws IllegalValueException if there were any data constraints violated in the adapted vendor.
      */
     public Vendor toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        final List<Wedding> personWeddings = new ArrayList<>();
-        final List<Task> personTasks = new ArrayList<>();
+        final List<Tag> vendorTags = new ArrayList<>();
+        final List<Wedding> vendorWeddings = new ArrayList<>();
+        final List<Task> vendorTasks = new ArrayList<>();
 
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        for (JsonAdaptedTag tag : getTags()) {
+            vendorTags.add(tag.toModelType());
         }
 
-        for (JsonAdaptedTask task : tasks) {
-            personTasks.add(task.toModelType());
+        for (JsonAdaptedTask task : getTasks()) {
+            vendorTasks.add(task.toModelType());
         }
 
-        for (JsonAdaptedWedding wedding : weddings) {
+        for (JsonAdaptedWedding wedding : getWeddings()) {
             if (!Wedding.isValidWeddingName(wedding.getWeddingName())) {
                 throw new IllegalValueException(Wedding.MESSAGE_CONSTRAINTS);
             }
-            personWeddings.add(wedding.toModelType());
+            vendorWeddings.add(wedding.toModelType());
         }
 
-        if (name == null) {
+        // Validation and conversion of inherited fields using getters
+        if (getName() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!Name.isValidName(getName())) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Name modelName = new Name(getName());
 
-        if (phone == null) {
+        if (getPhone() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
+        if (!Phone.isValidPhone(getPhone())) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Phone modelPhone = new Phone(getPhone());
 
-        if (email == null) {
+        if (getEmail() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
+        if (!Email.isValidEmail(getEmail())) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Email modelEmail = new Email(getEmail());
 
-        if (address == null) {
+        if (getAddress() == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
+        final Address modelAddress = new Address(getAddress());
 
-        final Address modelAddress = new Address(address);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
-        final Set<Task> modelTasks = new HashSet<>(personTasks);
+        final Set<Tag> modelTags = new HashSet<>(vendorTags);
+        final Set<Wedding> modelWeddings = new HashSet<>(vendorWeddings);
+        final Set<Task> modelTasks = new HashSet<>(vendorTasks);
 
         return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }

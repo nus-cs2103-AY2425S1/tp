@@ -56,7 +56,7 @@ public class AssignVendorCommandTest {
                 String.format(AssignVendorCommand.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
     }
 
-    @Disabled // disabled, to find why it doesnt work
+    @Disabled // disabled, to figure out why it doesn't work
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);

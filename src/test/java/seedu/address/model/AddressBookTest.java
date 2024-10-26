@@ -94,6 +94,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasVendor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasVendor(null));
+    }
+
+    @Test
+    public void hasVendor_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
+    public void hasVendor_vendorInAddressBook_returnsTrue() {
+        addressBook.addVendor(ALICE);
+        assertTrue(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
