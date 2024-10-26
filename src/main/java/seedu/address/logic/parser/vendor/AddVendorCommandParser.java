@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.vendor;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,7 +12,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddVendorCommand;
+import seedu.address.logic.commands.vendor.AddVendorCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;

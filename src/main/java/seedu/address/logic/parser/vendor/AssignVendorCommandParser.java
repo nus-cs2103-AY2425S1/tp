@@ -1,10 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.vendor;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AssignVendorCommand;
+import seedu.address.logic.commands.vendor.AssignVendorCommand;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

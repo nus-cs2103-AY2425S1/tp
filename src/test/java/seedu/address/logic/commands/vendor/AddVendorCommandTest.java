@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.vendor;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -147,6 +147,11 @@ public class AddVendorCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Vendor> getFilteredVendorList() {
             throw new AssertionError("This method should not be called.");
         }
 
