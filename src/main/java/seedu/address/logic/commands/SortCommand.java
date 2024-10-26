@@ -67,7 +67,7 @@ public class SortCommand extends Command {
             return false;
         }
 
-        SortCommand otherSortCommand = (SortCommand) other;
-        return sortBy.equals(otherSortCommand.sortBy);
+        SortCommand otherCommand = (SortCommand) other;
+        return sortBy.equals(otherCommand.sortBy);
     }
 }
