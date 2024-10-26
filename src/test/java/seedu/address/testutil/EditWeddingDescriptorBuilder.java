@@ -17,6 +17,9 @@ public class EditWeddingDescriptorBuilder {
         descriptor = new EditWeddingDescriptor();
     }
 
+    /**
+     * Initializes the EditWeddingDescriptorBuilder with the data of {@code descriptor}.
+     */
     public EditWeddingDescriptorBuilder(EditWeddingDescriptor descriptor) {
         this.descriptor = new EditWeddingDescriptor();
         if (descriptor.getName().isPresent()) {

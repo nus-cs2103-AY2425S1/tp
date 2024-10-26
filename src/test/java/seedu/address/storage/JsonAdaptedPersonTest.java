@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_ROLE = BENSON.getRole().roleName;
-    private static final int VALID_OWN_WEDDING = BENSON.getOwnWedding() != null ?
-            BENSON.getOwnWedding().hashCode() : 0;
+    private static final int VALID_OWN_WEDDING = BENSON.getOwnWedding() != null
+            ? BENSON.getOwnWedding().hashCode() : 0;
     private static final List<Integer> VALID_WEDDING_JOBS = new ArrayList<>();
     private static final List<Wedding> VALID_WEDDING_LIST = new ArrayList<>();
 

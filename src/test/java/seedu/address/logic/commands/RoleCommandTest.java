@@ -34,7 +34,8 @@ public class RoleCommandTest {
         String newTag = "friend";
 
         // Create the tag command descriptor with one tag
-        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(newTag).build();
+        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(newTag)
+                .build();
 
         RoleCommand tagCommand = new RoleCommand(indexLastPerson, null, descriptor);
 
@@ -60,7 +61,8 @@ public class RoleCommandTest {
         Person personToTag = model.getFilteredPersonList().get(0);
 
         Name name = new Name(VALID_NAME_AMY);
-        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().withRole(VALID_TAG_FRIEND).build();
+        RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder()
+                .withRole(VALID_TAG_FRIEND).build();
 
         RoleCommand tagCommand = new RoleCommand(indexLastPerson, null, descriptor);
 
