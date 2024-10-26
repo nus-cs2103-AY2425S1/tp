@@ -138,6 +138,33 @@ public class AddListingCommandTest {
                 AddListingCommand.MESSAGE_NOT_SELLER, () -> addListingCommand.execute(modelStub));
     }
 
+    @Test
+    public void execute_sellerDoesNotExist_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
+
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_buyerDoesNotExist_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(ALICE);
+        // DANIEL does not exist
+        modelStub.addPerson(GEORGE);
+
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
+    }
+
     // equals and toString methods
     @Test
     public void equals() {
