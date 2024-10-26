@@ -12,6 +12,7 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Property; // Import Property
 import seedu.address.model.person.PropertyList; // Import PropertyList
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
