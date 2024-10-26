@@ -23,10 +23,12 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.BudgetContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.RelationContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -396,6 +398,30 @@ public class ParserUtilTest {
         CompanyContainsKeywordsPredicate expectedCompanyPredicate =
                 new CompanyContainsKeywordsPredicate(Arrays.asList(VALID_COMPANY.split(" ")));
         assertEquals(expectedCompanyPredicate, ParserUtil.parseCompanyPredicate(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseRelationPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRelationPredicate((String) null));
+    }
+
+    @Test
+    public void parseRelationPredicate_validValueWithoutWhitespace_success() throws Exception {
+        RelationContainsKeywordsPredicate expectedRelationPredicate =
+                new RelationContainsKeywordsPredicate(Arrays.asList(VALID_RELATION.split(" ")));
+        assertEquals(expectedRelationPredicate, ParserUtil.parseRelationPredicate(VALID_RELATION));
+    }
+
+    @Test
+    public void parseBudgetPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBudgetPredicate((String) null));
+    }
+
+    @Test
+    public void parseBudgetPredicate_validValueWithoutWhitespace_success() throws Exception {
+        BudgetContainsKeywordsPredicate expectedBudgetPredicate =
+                new BudgetContainsKeywordsPredicate(Arrays.asList(VALID_BUDGET.split(" ")));
+        assertEquals(expectedBudgetPredicate, ParserUtil.parseBudgetPredicate(VALID_BUDGET));
     }
 
     @Test
