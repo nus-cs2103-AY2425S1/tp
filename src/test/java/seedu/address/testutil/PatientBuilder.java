@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
@@ -46,7 +48,7 @@ public class PatientBuilder {
     private Birthdate birthdate;
     private Sex sex;
     private Address address;
-    private Allergy allergy;
+    private Set<Allergy> allergies;
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private HealthRecord healthRecord;
@@ -68,7 +70,8 @@ public class PatientBuilder {
         nric = new Nric(DEFAULT_NRIC);
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
-        allergy = new Allergy(DEFAULT_ALLERGY);
+        allergies = new HashSet<>();
+
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
         healthRecord = new HealthRecord(DEFAULT_HEALTHRECORD);
@@ -89,7 +92,7 @@ public class PatientBuilder {
         nric = patientToCopy.getNric();
         birthdate = patientToCopy.getBirthdate();
         sex = patientToCopy.getSex();
-        allergy = patientToCopy.getAllergy();
+        allergies = patientToCopy.getAllergies();
         bloodType = patientToCopy.getBloodType();
         healthRisk = patientToCopy.getHealthRisk();
         healthRecord = patientToCopy.getHealthRecord();
@@ -161,7 +164,7 @@ public class PatientBuilder {
      * Sets the {@code Allergy} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAllergy(String allergy) {
-        this.allergy = new Allergy(allergy);
+        this.allergies.add(new Allergy(allergy));
         return this;
     }
 
@@ -217,7 +220,7 @@ public class PatientBuilder {
      * Builds a patient based on the fields that were set.
      */
     public Patient build() {
-        return new Patient(name, nric, birthdate, sex, phone, email, address, allergy, bloodType,
+        return new Patient(name, nric, birthdate, sex, phone, email, address, allergies, bloodType,
                 healthRisk, healthRecord, note, nokName, nokPhone, appts);
     }
 
