@@ -9,9 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -160,10 +162,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
+        Role role = personToEdit.getRole();
+        Wedding ownWedding = personToEdit.getOwnWedding();
+        Set<Wedding> weddingJobs = personToEdit.getWeddingJobs();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRole, null); // to include wedding
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                role, ownWedding);
+        editedPerson.setWeddingJobs(weddingJobs);
+        return editedPerson;
     }
 
     @Override
@@ -200,6 +206,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Role role;
+        private Set<Wedding> weddingJobs;
 
         public EditPersonDescriptor() {}
 
@@ -213,6 +220,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setRole(toCopy.role);
+            setWeddings(toCopy.weddingJobs);
         }
 
         /**
@@ -271,6 +279,14 @@ public class EditCommand extends Command {
             return (role != null) ? Optional.of(role) : Optional.empty();
         }
 
+        public void setWeddings(Set<Wedding> weddingJobs) {
+            this.weddingJobs = weddingJobs;
+        }
+
+        public Optional<Set<Wedding>> getWeddingJobs() {
+            return (weddingJobs != null) ? Optional.of(Collections.unmodifiableSet(weddingJobs)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -301,7 +317,5 @@ public class EditCommand extends Command {
                     .toString();
         }
 
-        public void setWedding(Wedding wedding) {
-        }
     }
 }

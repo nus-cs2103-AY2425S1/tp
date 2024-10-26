@@ -103,6 +103,17 @@ public class Person {
     }
 
     /**
+     * Adds a list of wedding jobs to the pre-existing list.
+     *
+     * @param weddingJobs {@code Set<Wedding>} to be added to the list of wedding jobs
+     */
+    public void setWeddingJobs(Set<Wedding> weddingJobs) {
+        for (Wedding wedding : weddingJobs) {
+            this.addWeddingJob(wedding);
+        }
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
