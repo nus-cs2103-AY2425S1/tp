@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.contact.commands.FindCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
+import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -126,5 +128,13 @@ public class AddressBookParserTest {
         Command expected = new AddEventCommand(new Event("sumo bot festival"));
         assertEquals(expected, new AddressBookParser()
                 .parseCommand(AddEventCommand.COMMAND_WORD + " sumo bot festival"));
+    }
+
+    @Test
+    public void parseCommand_removePersonFromEvent() throws ParseException {
+        Command expected = new RemovePersonFromEventCommand(Index.fromOneBased(1),
+                Index.fromOneBased(1));
+        assertEquals(expected, new AddressBookParser()
+                .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 pi/1"));
     }
 }
