@@ -78,7 +78,7 @@ public class CommandTextFlow extends TextFlow {
         case "clear" -> "clear - Clears all entries from the gamer address book";
         case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
-                + "[t/TAG]... [pt/PREFERRED TIME]...";
+                + "[t/TAG]... [pt/PREFERRED_TIME]...";
         case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILL_LEVEL] [r/ROLE]";
         case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
         case "list" -> "list - Shows a list of all persons in the gamer address book";
