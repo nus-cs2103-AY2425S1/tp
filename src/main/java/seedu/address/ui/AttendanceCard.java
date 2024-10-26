@@ -55,12 +55,18 @@ public class AttendanceCard extends UiPart<Region> {
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
         if (attendanceList.isEmpty()) {
             attendance.setText(": not attended");
+            setAttendanceLabelNotAttendedStyle();
+
             otherAttendance.setText("No more attendance to show");
         } else if (currentWeekAttendance == null) {
             attendance.setText(": not attended");
+            setAttendanceLabelNotAttendedStyle();
+            
             otherAttendance.setText(formatOtherAttendance(attendanceList));
         } else {
-            attendance.setText(" Attended on: " + currentWeekAttendance.toDisplayString());
+            attendance.setText(" attended " + currentWeekAttendance.toDisplayString());
+            setAttendanceLabelAttendedStyle();
+
             List<Attendance> otherAttendanceList = attendanceList
                     .stream()
                     .filter(attendance -> !attendance.equals(currentWeekAttendance))
@@ -93,5 +99,15 @@ public class AttendanceCard extends UiPart<Region> {
             }
         }
         return "Other attendance: " + attendance;
+    }
+
+    private void setAttendanceLabelNotAttendedStyle() {
+        attendance.getStyleClass().clear();
+        attendance.setStyle("-fx-text-fill: #E58D8D");
+    }
+
+    private void setAttendanceLabelAttendedStyle() {
+        attendance.getStyleClass().clear();
+        attendance.setStyle("-fx-text-fill: #3E9B3F");
     }
 }

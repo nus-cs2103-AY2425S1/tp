@@ -18,3 +18,13 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.attendance_container {
+    -fx-background-color: #F3F8FB;
+    -fx-background-radius: 7;
+    -fx-padding: 10;
+}
+
+.attendance_cell_label_attended {
+    -fx-text-fill: #64A265;
+}

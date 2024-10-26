@@ -4,11 +4,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
-        <Label fx:id="subject" styleClass="cell_small_label" text="\$subject"/>
-        <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance"/>
+        <Label fx:id="subject" style="-fx-text-fill: #262626; -fx-padding: 0 5 0 0" text="\$subject"/>
+        <HBox alignment="CENTER_LEFT">
+            <ImageView fitWidth="15" fitHeight="15">
+                <Image url="@/images/check.png"/>
+            </ImageView>
+            <Label fx:id="attendance" style="-fx-text-fill: #262626" text="\$attendance"/>
+        </HBox>
     </HBox>
-    <Label fx:id="otherAttendance" styleClass="cell_small_label" visible="false" managed="false" wrapText="true"/>
+    <Label fx:id="otherAttendance" style="-fx-text-fill: #262626" visible="false" managed="false" wrapText="true"/>
 </VBox>
