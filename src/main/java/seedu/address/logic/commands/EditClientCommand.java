@@ -127,7 +127,7 @@ public class EditClientCommand extends Command {
         }
 
         // check if person was checked in.
-        if(personToEdit.isServicing()) {
+        if (personToEdit.isServicing()) {
             editedPerson.setServicing();
         }
 
