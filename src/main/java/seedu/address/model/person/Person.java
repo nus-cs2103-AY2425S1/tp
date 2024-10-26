@@ -270,8 +270,7 @@ public class Person {
                 .add("birthday", birthday)
                 .add("dateOfCreation", dateOfCreation)
                 .add("history", history)
-                .add("propertyList", propertyList)
+                .add("properties", propertyList)
                 .toString();
     }
-
 }
