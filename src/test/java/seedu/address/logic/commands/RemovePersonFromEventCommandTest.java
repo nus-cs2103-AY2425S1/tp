@@ -90,7 +90,7 @@ public class RemovePersonFromEventCommandTest {
     @Test
     public void execute_invalidEventIndex_throwsCommandException() {
         RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
-                Index.fromOneBased(3), INDEX_FIRST_PERSON);
+                Index.fromOneBased(9), INDEX_FIRST_PERSON);
         assertCommandFailure(removePersonFromEventCommand, model, RemovePersonFromEventCommand.MESSAGE_EVENT_NOT_FOUND);
     }
 
