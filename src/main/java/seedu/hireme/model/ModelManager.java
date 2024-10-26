@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.hireme.commons.core.GuiSettings;
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.commons.util.CollectionUtil;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -215,6 +217,14 @@ public class ModelManager implements Model {
     public void sortFilteredList(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
         addressBook.sortItems(comparator);
+    }
+
+    /**
+     * Provides status insights of items in the list
+     */
+    @Override
+    public Map<Status, Integer> getInsights() {
+        return addressBook.getInsights();
     }
 
     /**

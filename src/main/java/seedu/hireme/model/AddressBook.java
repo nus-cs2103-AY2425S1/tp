@@ -3,11 +3,14 @@ package seedu.hireme.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.UniqueList;
 
 /**
@@ -99,6 +102,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sortItems(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
         items.sortItems(comparator);
+    }
+    /**
+     * Provides status insights of items in the list
+     */
+    public Map<Status, Integer> getInsights() {
+        Map<Status, Integer> map = new HashMap<>();
+        for (Status status : Status.values()) {
+            int count = items.countItems(i -> i.getStatus().equals(status));
+            map.put(status, count);
+        }
+        return map;
     }
 
     //// util methods

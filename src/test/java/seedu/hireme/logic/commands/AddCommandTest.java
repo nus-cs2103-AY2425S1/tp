@@ -26,6 +26,7 @@ import seedu.hireme.model.Model;
 import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.ReadOnlyUserPrefs;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class AddCommandTest {
@@ -201,6 +202,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredList(Predicate<InternshipApplication> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public java.util.Map<Status, Integer> getInsights() {
             throw new AssertionError("This method should not be called.");
         }
 

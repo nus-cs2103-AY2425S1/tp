@@ -16,6 +16,7 @@ import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
+import seedu.hireme.logic.commands.InsightsCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.commands.StatusCommand;
@@ -91,6 +92,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case InsightsCommand.COMMAND_WORD:
+            return new InsightsCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

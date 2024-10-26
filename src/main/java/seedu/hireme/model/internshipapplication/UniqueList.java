@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,6 +128,14 @@ public class UniqueList implements Iterable<InternshipApplication> {
     public void sortItems(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
         internalList.sort(comparator);
+    }
+
+    /**
+     * Counts items in the list that satisfy the given predicate
+     * @param predicate The predicate applied on the items
+     */
+    public int countItems(Predicate<InternshipApplication> predicate) {
+        return (int) internalList.stream().filter(predicate).count();
     }
 
     /**

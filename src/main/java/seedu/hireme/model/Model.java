@@ -2,11 +2,13 @@ package seedu.hireme.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.hireme.commons.core.GuiSettings;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * The API of the Model component.
@@ -85,6 +87,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredList(Predicate<InternshipApplication> predicate);
+
+    /**
+     * Provides status insights of items in the list
+     */
+    Map<Status, Integer> getInsights();
 
     /**
      * Sorts the filtered list using the given {@code comparator}.
