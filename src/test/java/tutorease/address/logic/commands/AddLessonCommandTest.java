@@ -64,8 +64,8 @@ public class AddLessonCommandTest {
         StudentId studentId = new StudentId("1");
         AddLessonCommand addLessonCommand = new AddLessonCommand(studentId, validLesson.getFee(),
                 validLesson.getStartDateTime(), validLesson.getEndDateTime());
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                () -> addLessonCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                addLessonCommand.execute(modelStub));
     }
 
     @Test
