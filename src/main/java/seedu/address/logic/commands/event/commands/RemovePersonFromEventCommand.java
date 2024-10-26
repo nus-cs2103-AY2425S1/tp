@@ -17,20 +17,28 @@ import seedu.address.model.person.Person;
 
 
 
+/**
+ * Removes a person from an event
+ */
 public class RemovePersonFromEventCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(RemovePersonFromEventCommand.class);
 
     public static final String COMMAND_WORD = "remove";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "e/ [INDEX] [p/ [PERSON INDEX]] : Removes a person from " +
-            "an event";
     public static final String MESSAGE_SUCCESS = "Person %1$s removed from event %2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found in event";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/ [INDEX] [pi/ [PERSON INDEX]] : Removes a person from "
+           + "an event";
+
+    private static final Logger logger = LogsCenter.getLogger(RemovePersonFromEventCommand.class);
+
+
     private final Index eventIndex;
     private final Index personIndex;
 
+    /**
+     * Creates a RemovePersonFromEventCommand to remove the specified {@code Person} from the specified {@code Event}
+     */
     public RemovePersonFromEventCommand(Index eventIndex, Index personIndex) {
         requireAllNonNull(eventIndex, personIndex);
         this.eventIndex = eventIndex;
@@ -67,6 +75,14 @@ public class RemovePersonFromEventCommand extends Command {
 
 
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RemovePersonFromEventCommand // instanceof handles nulls
+                && eventIndex.equals(((RemovePersonFromEventCommand) other).eventIndex)
+                && personIndex.equals(((RemovePersonFromEventCommand) other).personIndex)); // state check
     }
 
 
