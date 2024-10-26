@@ -35,7 +35,7 @@ public class Lesson {
 
     public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
 
-    private String description;
+    private Description description;
     private DayOfWeek startDay;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -43,8 +43,9 @@ public class Lesson {
     /**
      * Every field must be present and not null.
      */
-    public Lesson(String description, DayOfWeek startDay, LocalTime startTime, LocalTime endTime) {
+    public Lesson(Description description, DayOfWeek startDay, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(description, startDay, startTime, endTime);
+
 
         checkArgument(checkValidTimes(startTime, endTime), NO_SAME_TIME);
 
@@ -54,7 +55,7 @@ public class Lesson {
         this.endTime = endTime;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
@@ -138,7 +139,7 @@ public class Lesson {
     /**
      * Returns true if lesson has the given description
      */
-    public boolean isDescription(String description) {
+    public boolean isDescription(Description description) {
         return this.description.equals(description);
     }
 

@@ -1,7 +1,7 @@
 package seedu.edulog.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.edulog.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.edulog.storage.lesson.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.edulog.testutil.Assert.assertThrows;
 import static seedu.edulog.testutil.TypicalLessons.SEC_2_MATH;
 
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.calendar.Lesson;
+import seedu.edulog.storage.lesson.JsonAdaptedLesson;
 
 public class JsonAdaptedLessonTest {
     private static final String EMPTY_DESCRIPTION = "";

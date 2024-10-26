@@ -13,6 +13,7 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.ReadOnlyEduLog;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
+import seedu.edulog.storage.lesson.JsonAdaptedLesson;
 
 /**
  * An Immutable EduLog that is serializable to JSON format.

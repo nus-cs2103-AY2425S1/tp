@@ -1,4 +1,4 @@
-package seedu.edulog.storage;
+package seedu.edulog.storage.lesson;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -13,7 +13,7 @@ import seedu.edulog.model.calendar.Lesson;
 /**
  * Jackson-friendly version of {@link Lesson}.
  */
-class JsonAdaptedLesson {
+public class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
