@@ -49,7 +49,10 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ## Features
 
-<box type="info" seamless>**Notes about the command format:**<br>
+<box type="info">
+
+##### Notes about the command format
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -89,7 +92,9 @@ Adds a student to UG Teach.
 **Output:**
 ![addResult.jpeg](images/addResult.jpeg)
 
-<box type="important" header="##### Constraints">
+<box type="important">
+
+##### Constraints
 
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
@@ -133,7 +138,8 @@ Edits an existing student in the UG Teach.
 
 * The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
-* At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided. You may refer to
+[Constraints of Add command](#constraints) for acceptable values of each field.
 
 * Existing values will be updated to the input values.
 </box>
