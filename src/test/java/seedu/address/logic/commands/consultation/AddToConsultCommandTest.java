@@ -2,121 +2,126 @@ package seedu.address.logic.commands.consultation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConsultations.getTypicalConsultations;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
-import org.junit.jupiter.api.Test;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
-import seedu.address.testutil.ModelStub;
-import seedu.address.testutil.StudentBuilder;
 
 public class AddToConsultCommandTest {
 
-    private final Index validIndex = Index.fromOneBased(1);
-    private final ObservableList<Name> studentNames = FXCollections.observableArrayList(new Name("John Doe"),
-        new Name("Harry Ng"));
-    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(new Name("John Doe"),
-            new Name("John Doe"));
+    private Model model;
+
+    private final String index1 = "1";
+    private final Index validConsultIndex = Index.fromOneBased(Integer.parseInt(index1));
+    private final ObservableList<Name> studentNames = FXCollections.observableArrayList(
+            new Name(AMY.getName().fullName),
+            new Name(BOB.getName().fullName));
+
+    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(
+            new Name(AMY.getName().fullName),
+            new Name(AMY.getName().fullName));
+
+    private final ObservableList<Index> studentIndices = FXCollections.observableArrayList(
+            INDEX_FIRST_STUDENT,
+            INDEX_SECOND_STUDENT);
+
+    private final ObservableList<Index> duplicateStudentIndices = FXCollections.observableArrayList(
+            INDEX_FIRST_STUDENT,
+            INDEX_FIRST_STUDENT);
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_addStudentsToConsult_success() throws Exception {
-        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
-        AddToConsultCommand command = new AddToConsultCommand(validIndex, studentNames);
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex, studentNames, studentIndices);
 
-        CommandResult result = command.execute(modelStub);
-        Consultation consultation = modelStub.getFilteredConsultationList().get(0);
+        CommandResult result = command.execute(model);
+        Consultation consultation = model.getFilteredConsultationList().get(validConsultIndex.getZeroBased());
 
-        // After execution, the consultation should have the students added
-        assertEquals(2, consultation.getStudents().size());
-        assertEquals("John Doe", consultation.getStudents().get(0).getName().fullName);
-        assertEquals("Harry Ng", consultation.getStudents().get(1).getName().fullName);
+        assertEquals(5, consultation.getStudents().size()); // 2 from names, 2 from indices, and 1 existing student
     }
 
     @Test
     public void execute_invalidConsultationIndex_throwsCommandException() {
-        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
-        Index invalidIndex = Index.fromOneBased(5);
-        AddToConsultCommand command = new AddToConsultCommand(invalidIndex, studentNames);
+        Index invalidConsultIndex = Index.fromOneBased(model.getFilteredConsultationList().size() + 1);
+        AddToConsultCommand command = new AddToConsultCommand(invalidConsultIndex, studentNames, studentIndices);
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+        assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
-    public void execute_studentNotFound_throwsCommandException() {
-        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
-        ObservableList<Name> invalidStudentNames = FXCollections.observableArrayList(new Name("Non Existent"));
+    public void execute_invalidStudentIndices_throwsCommandException() {
+        ObservableList<Index> invalidIndices = FXCollections.observableArrayList(Index.fromOneBased(model.getFilteredStudentList().size() + 1));
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex, studentNames, invalidIndices);
 
-        AddToConsultCommand command = new AddToConsultCommand(validIndex, invalidStudentNames);
+        String formattedOutOfBoundIndices = invalidIndices.stream()
+                .map(index -> String.valueOf(index.getOneBased()))
+                .collect(Collectors.joining(", "));
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, formattedOutOfBoundIndices));
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() throws Exception {
-        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
-        AddToConsultCommand command = new AddToConsultCommand(validIndex, duplicateStudentNames);
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+    public void execute_someOfManyInvalidIndexUnfilteredList_throwsCommandException() {
+        ObservableList<Index> someInvalidIndices = FXCollections.observableArrayList(Index.fromOneBased(model.getFilteredStudentList().size() + 1), INDEX_FIRST_STUDENT);
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex, studentNames, someInvalidIndices);
+
+        String formattedOutOfBoundIndices = String.valueOf(model.getFilteredStudentList().size() + 1);
+
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, formattedOutOfBoundIndices));
     }
 
-    // Model stub that contains a consultation and can return students by name
-    private class ModelStubWithConsultation extends ModelStub {
+    @Test
+    public void execute_duplicateStudentByIndex_throwsCommandException() throws Exception {
+        ObservableList<Index> duplicateIndices = FXCollections.observableArrayList(INDEX_FIRST_STUDENT, INDEX_FIRST_STUDENT);
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex, FXCollections.observableArrayList(), duplicateIndices);
 
-        private final Consultation consultation = new Consultation(
-                new seedu.address.model.consultation.Date("2024-10-20"),
-                new seedu.address.model.consultation.Time("14:00"),
-                FXCollections.observableArrayList());
+        assertThrows(CommandException.class, () -> command.execute(model), "Expected duplicate student exception.");
+    }
 
-        private ArrayList<Consultation> consults;
+    @Test
+    public void execute_validIndexFilteredList_success() throws Exception {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        ModelStubWithConsultation() {
-            this.consults = new ArrayList<>();
-            this.consults.add(consultation);
-        }
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex, FXCollections.observableArrayList(), studentIndices);
 
-        @Override
-        public void setConsult(Consultation target, Consultation editedConsult) {
-            int index = this.consults.indexOf(target);
-            this.consults.set(index, editedConsult);
-        }
+        CommandResult result = command.execute(model);
+        Consultation consultation = model.getFilteredConsultationList().get(validConsultIndex.getZeroBased());
 
-        @Override
-        public ObservableList<Consultation> getFilteredConsultationList() {
-            return FXCollections.observableArrayList(consults);
-        }
+        assertEquals(3, consultation.getStudents().size()); // 1 existing + 2 added by index
+    }
 
-        @Override
-        public Optional<Student> findStudentByName(Name name) {
-            // Use StudentBuilder to create valid students
-            Student johnDoe = new StudentBuilder()
-                    .withName("John Doe")
-                    .withPhone("91234567")
-                    .withEmail("johndoe@example.com")
-                    .withCourses("CS2103T")
-                    .build();
-
-            Student harryNg = new StudentBuilder()
-                    .withName("Harry Ng")
-                    .withPhone("98765432")
-                    .withEmail("harryng@example.com")
-                    .withCourses("CS2101")
-                    .build();
-
-            if (johnDoe.getName().equals(name)) {
-                return Optional.of(johnDoe);
-            } else if (harryNg.getName().equals(name)) {
-                return Optional.of(harryNg);
-            }
-
-            return Optional.empty();
-        }
+    // Additional utility to match typical setup for filtered list views
+    private void showNoStudent(Model model) {
+        model.updateFilteredStudentList(p -> false);
+        assertEquals(0, model.getFilteredStudentList().size());
     }
 }
