@@ -18,7 +18,7 @@ public class DeleteCarCommand extends Command {
     public static final String COMMAND_WORD = "del-car";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the Car of the indexed Client, who must be associated to a Car.\n"
+            + ": Deletes the Car of the indexed Client, who must be associated to a Car. "
             + "Car must not be Checked In.\n\n"
             + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";

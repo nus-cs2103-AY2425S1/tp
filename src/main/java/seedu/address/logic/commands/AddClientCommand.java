@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISSUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -28,11 +29,12 @@ public class AddClientCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS " // + "[" + PREFIX_TAG + "TAG]...\n"
-            + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER (OPTIONAL) "
-            + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER (OPTIONAL) "
-            + PREFIX_MAKE + " VEHICLE MAKE (OPTIONAL) "
-            + PREFIX_MODEL + " VEHICLE MODEL (OPTIONAL)\n\n"
+            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER] "
+            + "[" + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER] "
+            + "[" + PREFIX_MAKE + " VEHICLE MAKE] "
+            + "[" + PREFIX_MODEL + " VEHICLE MODEL] "
+            + "[" + PREFIX_ISSUE + " ISSUE]...\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -41,7 +43,9 @@ public class AddClientCommand extends Command {
             + PREFIX_VRN + "SJH9514P "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
-            + PREFIX_MODEL + "Corolla";
+            + PREFIX_MODEL + "Corolla "
+            + PREFIX_ISSUE + "Engine "
+            + PREFIX_ISSUE + "Gearbox";
 
     public static final String VEHICLE_DETAILS_MISSING =
             "Vehicle details are missing. Please provide all vehicle details.\n" + MESSAGE_USAGE;
