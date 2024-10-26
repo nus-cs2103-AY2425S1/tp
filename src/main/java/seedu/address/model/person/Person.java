@@ -27,6 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Priority priority;
     private final Remark remark;
+    private final ReminderList reminderList = new ReminderList();
 
     /**
      * Every field must be present and not null.
@@ -72,6 +73,10 @@ public class Person {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public ReminderList getReminderList() {
+        return reminderList;
     }
 
     /**
@@ -138,6 +143,7 @@ public class Person {
                 .add("tags", tags)
                 .add("priority", priority)
                 .add("remark", remark)
+                .add("reminders", reminderList)
                 .toString();
     }
 

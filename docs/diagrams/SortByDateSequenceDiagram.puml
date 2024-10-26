@@ -1,0 +1,19 @@
+@startuml
+actor User as u
+
+u -> SortByDateCommandParser : parse(arguments)
+SortByDateCommandParser -> SortByDateCommand : new SortByDateCommand(comparator)
+u -> LogicManager : execute("sd")
+LogicManager -> AddressBookParser : parseCommand("sd recent")
+AddressBookParser -> SortByDateCommandParser : parse(arguments)
+SortByDateCommandParser -> SortByDateCommand : create SortByDateCommand(DateRecentToDistantComparator)
+
+SortByDateCommand -> LogicManager : returns SortByDateCommand
+LogicManager -> ModelManager : SortByDateCommand.execute()
+ModelManager -> DateRecentToDistantComparator : new DateRecentToDistantComparator()
+ModelManager -> ModelManager : updateSortedPersonList(DateRecentToDistantComparator)
+
+SortByDateCommand -> LogicManager : return CommandResult(MESSAGE_SUCCESS)
+LogicManager -> u : display success message
+
+@enduml

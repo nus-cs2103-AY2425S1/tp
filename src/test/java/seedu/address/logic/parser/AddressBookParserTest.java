@@ -22,9 +22,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortByDateCommand;
 import seedu.address.logic.commands.SortByPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompoundedPredicate;
+import seedu.address.model.person.DateDistantToRecentComparator;
+import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.OrgContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -116,6 +119,22 @@ public class AddressBookParserTest {
         assertEquals(new FindCommand(new CompoundedPredicate(new NameContainsKeywordsPredicate(keywords),
                         new OrgContainsKeywordsPredicate(Arrays.asList("")))),
                 command);
+    }
+
+    @Test
+    public void parseCommand_sortDate() throws Exception {
+        SortByDateCommand command = (SortByDateCommand) parser.parseCommand(
+                SortByDateCommand.COMMAND_WORD + " recent");
+
+        assertEquals(new SortByDateCommand(new DateRecentToDistantComparator()), command);
+    }
+
+    @Test
+    public void parseCommand_sortDate_alt() throws Exception {
+        SortByDateCommand command = (SortByDateCommand) parser.parseCommand(
+                SortByDateCommand.ALT_COMMAND_WORD + " distant");
+
+        assertEquals(new SortByDateCommand(new DateDistantToRecentComparator()), command);
     }
 
     @Test
