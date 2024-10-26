@@ -243,25 +243,34 @@ Examples:<br>`settle 1 amount/500.00`
 
 Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+**Format:** `delete INDEX`
 
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
+**Examples:**
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find n/Bernice` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+**Output:**
+![deleteResult.png](images/deleteResult.png)
+
+<box type="important" header="##### Constraints">
+
+* The index refers to the index number shown in the **displayed** student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+</box>
 
 ### Getting a reminder for today : `remind`
 
 Get a reminder on all your lessons scheduled for `today`. Automatically reminds you when you launch the app.
 
-Format: `remind`
+**Format:** `remind`
+
+**Output:**
+![remindResult.png](images/remindResult.png)
 
 <box type="tip" header="##### Tips">
 
-If you would like to see your schedule for other days, you can use the [`find` command](#finding-students-information-find) 
+* If you would like to see your schedule for other days, you can use the [`find` command](#finding-students-information-find) 
 to find your schedule for a specific day of the week.
 
 </box>
