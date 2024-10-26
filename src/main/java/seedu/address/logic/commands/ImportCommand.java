@@ -135,7 +135,7 @@ public class ImportCommand extends Command {
     /**
      * Resolves the file path, handling both home directory paths (starting with ~) and parent directory paths.
      */
-    private Path resolveFilePath(String filepath) {
+    protected Path resolveFilePath(String filepath) {
         // If path starts with ~, expand to user home directory
         if (filepath.startsWith("~")) {
             return Paths.get(System.getProperty("user.home"))
