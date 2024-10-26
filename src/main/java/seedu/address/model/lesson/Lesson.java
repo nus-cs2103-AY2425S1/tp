@@ -1,13 +1,13 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
-import seedu.address.model.student.Student;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Time;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Lesson in the system.

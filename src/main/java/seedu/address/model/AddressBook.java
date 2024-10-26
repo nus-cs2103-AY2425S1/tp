@@ -25,7 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Consultation> consults;
     private final ObservableList<Lesson> lessons;
 
-     /*
+    /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
@@ -66,13 +66,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the lesson list with {@code lesson}.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons.setAll(lessons);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setStudents(newData.getStudentList());
         setConsults(newData.getConsultList());
+        setLessons(newData.getLessonList());
     }
 
     //// student-level operations
@@ -184,6 +191,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
+    /**
+     * Checks if this {@code AddressBook} is equal to another object.
+     *
+     * @param other The object to compare with.
+     * @return true if both AddressBooks have the same students, consultations, and lessons, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -201,19 +214,38 @@ public class AddressBook implements ReadOnlyAddressBook {
                 && lessons.equals(otherAddressBook.lessons);
     }
 
+    /**
+     * Returns the hash code for this {@code AddressBook}.
+     *
+     * @return The hash code based on students, consultations, and lessons.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(students, consults, lessons);
     }
 
+    /**
+     * Checks if the address book contains the specified {@code Lesson}.
+     *
+     * @param lesson The lesson to check.
+     * @return true if the lesson exists in the address book, false otherwise.
+     * @throws NullPointerException if {@code lesson} is null.
+     */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
         return lessons.contains(lesson);
     }
 
+    /**
+     * Adds a {@code Lesson} to the address book and sorts the lesson list by date.
+     * If two lessons have the same date, they are further sorted by time.
+     *
+     * @param lesson The lesson to add.
+     * @throws NullPointerException if {@code lesson} is null.
+     */
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
-        
+
         // Sort by date first, and then by time if the dates are the same
         lessons.sort((l1, l2) -> {
             int dateComparison = l1.getDate().compareTo(l2.getDate());
@@ -224,10 +256,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         });
     }
 
+    /**
+     * Removes a {@code Lesson} from the address book.
+     *
+     * @param lesson The lesson to remove.
+     * @throws NullPointerException if {@code lesson} is null.
+     */
     public void removeLesson(Lesson lesson) {
         lessons.remove(lesson);
     }
 
+    /**
+     * Returns an unmodifiable view of the lesson list.
+     *
+     * @return An unmodifiable {@code ObservableList} containing all lessons in the address book.
+     */
     public ObservableList<Lesson> getLessonList() {
         return FXCollections.unmodifiableObservableList(lessons);
     }

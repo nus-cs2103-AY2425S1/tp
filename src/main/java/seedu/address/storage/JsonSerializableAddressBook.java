@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
@@ -20,22 +21,28 @@ import seedu.address.model.student.Student;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedConsultation> consults = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given data.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                       @JsonProperty("consults") List<JsonAdaptedConsultation> consults) {
-        // Null checks are required in case an address book has students but no consults etc.
+                                       @JsonProperty("consults") List<JsonAdaptedConsultation> consults,
+                                       @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+        // Null checks are required in case an address book has students but no consults or lessons.
         if (students != null) {
             this.students.addAll(students);
         }
         if (consults != null) {
             this.consults.addAll(consults);
+        }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
     }
 
@@ -47,6 +54,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).toList());
         consults.addAll(source.getConsultList().stream().map(JsonAdaptedConsultation::new).toList());
+        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).toList());
     }
 
     /**
@@ -67,7 +75,13 @@ class JsonSerializableAddressBook {
             Consultation consult = jsonAdaptedConsultation.toModelType(addressBook);
             addressBook.addConsult(consult);
         }
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType(addressBook);
+            if (addressBook.hasLesson(lesson)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+            }
+            addressBook.addLesson(lesson);
+        }
         return addressBook;
     }
-
 }
