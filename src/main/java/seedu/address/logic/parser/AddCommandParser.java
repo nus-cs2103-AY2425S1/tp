@@ -10,13 +10,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.DateOfCreation;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PropertyList;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,7 +60,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         History history = History.addActivity(new History(dateOfCreation.getDateOfCreation()),
                 dateOfCreation.getDateOfCreation(), "Created");
         PropertyList propertyList = new PropertyList();
-        Person person = new Person(name, phone, email, address, remark, birthday, tagList, dateOfCreation, history, propertyList);
+        Person person = new Person(name, phone, email, address, remark,
+                birthday, tagList, dateOfCreation, history, propertyList);
         return new AddCommand(person);
     }
 

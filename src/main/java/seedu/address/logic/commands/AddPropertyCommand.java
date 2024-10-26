@@ -13,7 +13,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -141,7 +140,8 @@ public class AddPropertyCommand extends Command {
 
     @Override
     public String toString() {
-        return String.format("%s{index=%s, address='%s', location='%s', type='%s', area=%.1f, bedrooms=%d, bathrooms=%d, price=%.1f}",
+        return String.format("%s{index=%s, address='%s', location='%s', type='%s',"
+                        + " area=%.1f, bedrooms=%d, bathrooms=%d, price=%.1f}",
                 this.getClass().getCanonicalName(),
                 index,
                 address,

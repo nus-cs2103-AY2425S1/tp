@@ -1,8 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.BATHROOMS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BEDROOMS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PRICE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PROPERTY_ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SIZE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TOWN_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BATHROOMS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BEDROOMS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SIZE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOWN_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -25,8 +39,8 @@ public class AddPropertyCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // No index provided
-        assertParseFailure(parser, PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY +
-                SIZE_DESC_AMY + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + PRICE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY
+                + SIZE_DESC_AMY + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + PRICE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // No fields provided
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
@@ -54,14 +68,14 @@ public class AddPropertyCommandParserTest {
     public void parse_invalidValue_failure() {
         // Invalid size
         String expectedMessage = String.format(ParserUtil.MESSAGE_INVALID_DOUBLE, "invalidSize");
-        assertParseFailure(parser, "1" + PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY +
-                        " " + PREFIX_SIZE + "invalidSize" + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + PRICE_DESC_AMY,
+        assertParseFailure(parser, "1" + PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY
+                        + " " + PREFIX_SIZE + "invalidSize" + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + PRICE_DESC_AMY,
                 expectedMessage);
 
         // Invalid price
         String expectedPriceMessage = String.format(ParserUtil.MESSAGE_INVALID_DOUBLE, "invalidPrice");
-        assertParseFailure(parser, "1" + PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY +
-                        SIZE_DESC_AMY + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + " " + PREFIX_PRICE + "invalidPrice",
+        assertParseFailure(parser, "1" + PROPERTY_ADDRESS_DESC_AMY + TOWN_DESC_AMY + TYPE_DESC_AMY
+                        + SIZE_DESC_AMY + BEDROOMS_DESC_AMY + BATHROOMS_DESC_AMY + " " + PREFIX_PRICE + "invalidPrice",
                 expectedPriceMessage);
     }
 
@@ -69,9 +83,9 @@ public class AddPropertyCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PROPERTY_ADDRESS_DESC_AMY +
-                TOWN_DESC_AMY + TYPE_DESC_AMY + SIZE_DESC_AMY + BEDROOMS_DESC_AMY +
-                BATHROOMS_DESC_AMY + PRICE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PROPERTY_ADDRESS_DESC_AMY
+                + TOWN_DESC_AMY + TYPE_DESC_AMY + SIZE_DESC_AMY + BEDROOMS_DESC_AMY
+                + BATHROOMS_DESC_AMY + PRICE_DESC_AMY;
 
         AddPropertyCommand expectedCommand = new AddPropertyCommand(targetIndex,
                 VALID_PROPERTY_ADDRESS_AMY, VALID_TOWN_AMY, VALID_TYPE_AMY,

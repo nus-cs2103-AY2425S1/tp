@@ -3,20 +3,20 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOWN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SIZE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BEDROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BATHROOMS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -118,7 +118,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // PROPERTY STUFF
-    public static final String INVALID_PROPERTY_ADDRESS_DESC = " " + PREFIX_PROPERTY_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_PROPERTY_ADDRESS_DESC = " " + PREFIX_PROPERTY_ADDRESS;
     public static final String INVALID_TOWN_DESC = " " + PREFIX_TOWN; // empty string not allowed for town
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE; // empty string not allowed for type
     public static final String INVALID_SIZE_DESC = " " + PREFIX_SIZE; // empty string not allowed for size
