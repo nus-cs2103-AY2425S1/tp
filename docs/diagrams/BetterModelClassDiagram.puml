@@ -6,17 +6,21 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
+AddressBook *-down-> "1" UniqueSkillList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
+UniqueSkillList -down-> "*" Skill
 
+Person --up-> "1" Tag : Job Status
 Person -up-> "*" Tag
-Person -up-> "1" Tag : Job Status
+Person -up-> "*" Skill
 
 Person *--> Name
+Person *--> Job
 Person *--> Phone
 Person *--> Email
-Person *--> Job
+Person *--> InterviewScore
 @enduml
