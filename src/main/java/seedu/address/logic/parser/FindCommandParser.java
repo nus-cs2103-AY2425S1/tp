@@ -9,14 +9,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.FindCommandPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhonePredicate;
 import seedu.address.model.person.RoomNumber;
@@ -37,6 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     @Override
     public FindCommand parse(String args) throws ParseException {
+        Logger logger = LogsCenter.getLogger(FindCommandParser.class);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -54,20 +56,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         Optional<String> roomNumber = parseRoomNumber(argMultimap.getValue(PREFIX_ROOM_NUMBER).orElse(null));
         Optional<List<String>> tagList = parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Predicate<Person> combinedPredicate = p -> true;
-
+        FindCommandPredicate combinedPredicate = new FindCommandPredicate();
         if (name.isPresent()) {
-            combinedPredicate = combinedPredicate
-                    .and(new NameContainsKeywordsPredicate(Arrays.asList(name.get().split("\\s+"))));
+            combinedPredicate
+                    .addNameContainsKeywordsPredicate(
+                            new NameContainsKeywordsPredicate(Arrays.asList(name.get().split("\\s+"))));
         }
         if (contactNumber.isPresent()) {
-            combinedPredicate = combinedPredicate.and(new PhonePredicate(contactNumber.get()));
+            combinedPredicate.addPhonePredicate(new PhonePredicate(contactNumber.get()));
         }
         if (roomNumber.isPresent()) {
-            combinedPredicate = combinedPredicate.and(new RoomNumberPredicate(roomNumber.get()));
+            combinedPredicate.addRoomNumberPredicate(new RoomNumberPredicate(roomNumber.get()));
         }
         if (tagList.isPresent() && !tagList.get().isEmpty()) {
-            combinedPredicate = combinedPredicate.and(new TagContainsKeywordsPredicate(tagList.get()));
+            combinedPredicate.addTagContainsKeywordsPredicate(new TagContainsKeywordsPredicate(tagList.get()));
         }
 
         return new FindCommand(combinedPredicate);
