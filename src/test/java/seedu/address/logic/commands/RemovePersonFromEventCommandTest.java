@@ -111,10 +111,20 @@ public class RemovePersonFromEventCommandTest {
     }
 
 
+
+    @Test
+    public void execute_invalidEventIndexLarge_throwsCommandException() {
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(99), INDEX_FIRST_PERSON);
+        assertCommandFailure(removePersonFromEventCommand, model,
+                RemovePersonFromEventCommand.MESSAGE_EVENT_NOT_FOUND);
+    }
+
+
     @Test
     public void equals_sameCommand_returnsTrue() {
         RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
-                Index.fromOneBased(1), INDEX_FIRST_PERSON);
+                Index.fromOneBased(21), INDEX_FIRST_PERSON);
         assertEquals(removePersonFromEventCommand, removePersonFromEventCommand);
     }
 
