@@ -3,18 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_TUTORIAL_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -45,8 +41,8 @@ public class CloseTutorialCommand extends Command {
     }
 
     /**
-     * Executes the command to close a tutorial. If the tutorial exists, all students will be unenrolled,
-     * and the tutorial will be marked as closed. (Check UnEnrollCommand to see its implementation)
+     * Executes the command to close a tutorial. If the tutorial exists, all related participation will be deleted,
+     * through looping through the entire participation list, and the tutorial will be marked as closed.
      *
      * @param model {@code Model} which the command operates on.
      * @return CommandResult which indicates the success of the tutorial closure.
@@ -67,7 +63,12 @@ public class CloseTutorialCommand extends Command {
                 .orElseThrow(() -> new CommandException(
                         String.format(MESSAGE_TUTORIAL_NOT_FOUND, toCloseTutorial.getSubject())));
 
-        removeStudentsFromTutorialParticipation(model, tutorialToCloseFromList);
+        List<Participation> allParticipationsCopy = new ArrayList<>(model.getParticipationList());
+        for (Participation eachParticipation: allParticipationsCopy) {
+            if (eachParticipation.getTutorial().equals(tutorialToCloseFromList)) {
+                model.deleteParticipation(eachParticipation);
+            }
+        }
         model.deleteTutorial(tutorialToCloseFromList);
 
         return new CommandResult(String.format(
@@ -75,38 +76,4 @@ public class CloseTutorialCommand extends Command {
                 Messages.formatTutorial(tutorialToCloseFromList))
         );
     }
-
-    /**
-     * Unenrolls all students from the given tutorial by executing {@code UnEnrollCommand} for each student.
-     *
-     * @param model    The {@code Model} on which the command operates.
-     * @param tutorial The tutorial from which students will be unenrolled.
-     * @throws CommandException if an error occurs during the unenrollment process.
-     */
-    private void removeStudentsFromTutorialParticipation(Model model, Tutorial tutorial) throws CommandException {
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> lastShownStudentList = model.getFilteredPersonList();
-        List<Participation> tutorialParticipationCopy = new ArrayList<>(tutorial.getParticipationList());
-        for (Participation eachParticipation : tutorialParticipationCopy) {
-            Person student = eachParticipation.getStudent();
-            Index studentIndex = getIndexOfPerson(lastShownStudentList, student);
-            new UnEnrollCommand(studentIndex, tutorial.getSubject()).execute(model);
-        }
-    }
-
-    /**
-     * Finds the index of the given student in a list of all students.
-     *
-     * @param allPersons The list of all persons in the system.
-     * @param student    The student whose index is to be found.
-     * @return The index of the student.
-     */
-    private Index getIndexOfPerson(List<Person> allPersons, Person student) {
-        int index = allPersons.indexOf(student);
-        if (index == -1) {
-            throw new PersonNotFoundException();
-        }
-        return Index.fromZeroBased(index);
-    }
-
 }
