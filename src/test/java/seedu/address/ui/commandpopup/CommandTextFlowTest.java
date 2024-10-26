@@ -37,7 +37,7 @@ public class CommandTextFlowTest extends Application {
         assertNotNull(commandTextFlow);
         assertEquals("add", commandTextFlow.getCommandText());
         assertEquals("add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... "
-                + "[pt/PREFERRED TIME]...", commandTextFlow.getDetailText());
+                + "[pt/PREFERRED_TIME]...", commandTextFlow.getDetailText());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CommandTextFlowTest extends Application {
         // Check that the detail text is correctly set
         Text detailText = (Text) commandTextFlow.getChildren().get(2);
         assertEquals("add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... "
-                + "[pt/PREFERRED TIME]...", detailText.getText());
+                + "[pt/PREFERRED_TIME]...", detailText.getText());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class CommandTextFlowTest extends Application {
         CommandTextFlow editCommandTextFlow = new CommandTextFlow("edit", "edit");
         assertEquals("edit", editCommandTextFlow.getCommandText());
         assertEquals("edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
-                + "[t/TAG]... [pt/PREFERRED TIME]...", editCommandTextFlow.getDetailText());
+                + "[t/TAG]... [pt/PREFERRED_TIME]...", editCommandTextFlow.getDetailText());
 
         // Check highlight for the "edit" command
         Text highlightedText = (Text) editCommandTextFlow.getChildren().get(0);

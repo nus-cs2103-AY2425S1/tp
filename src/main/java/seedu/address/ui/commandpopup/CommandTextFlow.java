@@ -26,7 +26,6 @@ public class CommandTextFlow extends TextFlow {
         super();
         this.commandText = command;
         this.detailText = getDetailForCommand(command);
-
         // Style the command text with highlighting
         buildCommandText(command, filter);
         // Add separator
@@ -34,7 +33,7 @@ public class CommandTextFlow extends TextFlow {
         // Add detail text
         Text details = new Text(detailText);
         details.setFont(Font.font("Comfortaa", FontWeight.NORMAL, 14));
-        details.setFill(Color.WHITE);
+        details.setFill(Color.grayRgb(210));
         getChildren().add(details);
 
         // Set padding for the entire flow
@@ -59,6 +58,7 @@ public class CommandTextFlow extends TextFlow {
         if (!text.toLowerCase().equals(filter.toLowerCase())) {
             Text textAfter = new Text(text.substring(filterIndex + filter.length()));
             textAfter.setFont(Font.font("Comfortaa", FontWeight.BOLD, size));
+            textAfter.setFill(Color.WHITE);
             getChildren().add(textAfter);
         }
 
@@ -74,17 +74,18 @@ public class CommandTextFlow extends TextFlow {
     private String getDetailForCommand(String command) {
         // Switch statement to determine the detail text for each command
         return switch (command.toLowerCase()) {
-        case "add" -> "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/PREFERRED TIME]...";
+        case "add" -> "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/PREFERRED_TIME]...";
         case "clear" -> "clear - Clears all entries from the gamer address book";
         case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
-                + "[t/TAG]... [pt/PREFERRED TIME]...";
-        case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]";
+                + "[t/TAG]... [pt/PREFERRED_TIME]...";
+        case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILL_LEVEL] [r/ROLE]";
         case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
         case "list" -> "list - Shows a list of all persons in the gamer address book";
         case "help" -> "help - Shows program help instructions and command summary";
         case "save" -> "save - Saves the gamer address book data";
         case "load" -> "load - Loads the gamer address book data";
+        case "exit" -> "exit - Closes the gamer address book";
         default -> "No additional information available";
         };
     }

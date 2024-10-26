@@ -7,12 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -47,7 +50,8 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide for more info: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Press Esc to close this window!"
+            + "\nRefer to the user guide for more info: " + USERGUIDE_URL;
 
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -72,6 +76,13 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
+        // Add key event filter for ESC key to close the window
+        getRoot().addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == javafx.scene.input.KeyCode.ESCAPE) {
+                hide();
+                event.consume();
+            }
+        });
     }
 
     /**
@@ -91,9 +102,35 @@ public class HelpWindow extends UiPart<Stage> {
         commandColumn.setMinWidth(100);
 
         TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Usage");
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionColumn.setCellFactory(col -> {
+            TableCell<HelpCommand, String> cell = new TableCell<>() {
+                private final Text text = new Text();
 
-        table.setEditable(true);
+                {
+                    text.wrappingWidthProperty().bind(descriptionColumn.widthProperty());
+                    setGraphic(text);
+                    setPrefHeight(Control.USE_COMPUTED_SIZE);
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        text.setText(null);
+                    } else {
+                        // Retrieve the full description using getDescription()
+                        HelpCommand helpCommand = getTableRow().getItem();
+                        if (helpCommand != null) {
+                            text.setText(helpCommand.getDescription());
+                            setPrefHeight(text.getBoundsInLocal().getHeight() + 1); // Add padding
+                        }
+                    }
+                }
+            };
+            return cell;
+        });
+
+        table.setEditable(false);
 
         ObservableList<HelpCommand> data =
                 FXCollections.observableArrayList(new HelpCommand("Add",
@@ -102,8 +139,8 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
                                 + "[e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
                         new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME]"
-                                + " [s/SKILLLEVEL] [r/ROLE]​`"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., "
+                                + " [s/SKILL_LEVEL] [r/ROLE]`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` \ne.g., "
                                 + "`find James Jake`"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("List", "`list`"),
