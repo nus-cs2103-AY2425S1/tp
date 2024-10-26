@@ -34,8 +34,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String nric;
-    private final List<Nric> caregivers = new ArrayList<>();
-    private final List<Nric> patients = new ArrayList<>();
+    private final List<String> caregivers = new ArrayList<>();
+    private final List<String> patients = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
@@ -47,8 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles,
-            @JsonProperty("caregivers") List<Nric> caregivers,
-            @JsonProperty("patients") List<Nric> patients,
+            @JsonProperty("caregivers") List<String> caregivers,
+            @JsonProperty("patients") List<String> patients,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
             @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.name = name;
@@ -88,8 +88,8 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         roles.addAll(source.getRoles().stream().map(JsonAdaptedRole::new).collect(Collectors.toList()));
-        patients.addAll(source.getPatients());
-        caregivers.addAll(source.getCaregivers());
+        patients.addAll(source.getPatientsNric());
+        caregivers.addAll(source.getCaregiversNric());
         List<JsonAdaptedAppointment> adaptedAppointments = source.getAppointments().stream()
                 .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList());
@@ -156,9 +156,11 @@ class JsonAdaptedPerson {
         }
 
         final Set<Nric> caregiverNrics = caregivers.stream()
+                .map(Nric::new)
                 .collect(Collectors.toSet());
 
         final Set<Nric> patientNrics = patients.stream()
+                .map(Nric::new)
                 .collect(Collectors.toSet());
 
         final List<Appointment> appointmentList = new ArrayList<>();

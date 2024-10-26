@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
@@ -198,6 +199,24 @@ public class Person {
      */
     public Set<Nric> getPatients() {
         return Collections.unmodifiableSet(patients);
+    }
+
+    /**
+     * Returns an immutable set of NRICs of the patients, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<String> getPatientsNric() {
+        return patients.stream().map(Nric::toString).collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns an immutable set of NRICs of the caregivers, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<String> getCaregiversNric() {
+        return caregivers.stream().map(Nric::toString).collect(Collectors.toSet());
     }
 
     /**
