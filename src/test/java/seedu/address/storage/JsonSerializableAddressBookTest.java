@@ -19,6 +19,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalWeddings;
+import seedu.address.testutil.WeddingBuilder;
 
 public class JsonSerializableAddressBookTest {
 
@@ -79,7 +81,8 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_validWeddingWithClients_success() throws Exception {
         // Create test data
         Person client = TypicalPersons.ALICE;
-        Wedding wedding = new Wedding(new Name("Test Wedding"), null, null, null);
+        Wedding wedding = new WeddingBuilder().withClient(client)
+                .withDate("2022-01-01").withVenue("Test Venue").build();
         client.setOwnWedding(wedding);
 
         // Create JSON adapted versions

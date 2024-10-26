@@ -62,10 +62,10 @@ public class SampleDataUtil {
 
     public static void setUpWeddings(Person[] persons, Wedding[] weddings) {
         // Set up clients
-        weddings[0].addClient(persons[0]);
-        weddings[1].addClient(persons[1]);
-        weddings[2].addClient(persons[2]);
-        weddings[3].addClient(persons[3]);
+        weddings[0].setClient(persons[0]);
+        weddings[1].setClient(persons[1]);
+        weddings[2].setClient(persons[2]);
+        weddings[3].setClient(persons[3]);
         // Set up jobs
         persons[7].addWeddingJob(weddings[0]);
         persons[0].addWeddingJob(weddings[1]);

@@ -75,7 +75,7 @@ class JsonSerializableAddressBook {
         for (Wedding wedding : addressBook.getWeddingList()) {
             for (Person person : addressBook.getPersonList()) {
                 if (person.getOwnWedding() != null && person.getOwnWedding().equals(wedding)) {
-                    wedding.addClient(person);
+                    person.setOwnWedding(wedding);
                 }
             }
         }
