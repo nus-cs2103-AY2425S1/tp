@@ -176,7 +176,7 @@ Otherwise, it creates a new instance of `FindCommand` that corresponds to the us
   `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
 
 
-Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`. 
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
 `setPredicate` updates the `filteredList` in `model` to contain all InternshipApplication that contains the keyword
 
 ### Filter internship applications
