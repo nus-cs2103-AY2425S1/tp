@@ -420,7 +420,7 @@ public class ParserUtilTest {
     @Test
     public void parseBudgetPredicate_validValueWithoutWhitespace_success() throws Exception {
         BudgetContainsKeywordsPredicate expectedBudgetPredicate =
-                new BudgetContainsKeywordsPredicate(Arrays.asList(VALID_BUDGET.split(" ")));
+                new BudgetContainsKeywordsPredicate(Arrays.asList(VALID_BUDGET + ".00"));
         assertEquals(expectedBudgetPredicate, ParserUtil.parseBudgetPredicate(VALID_BUDGET));
     }
 
