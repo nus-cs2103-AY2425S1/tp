@@ -1,13 +1,11 @@
 package seedu.hireme.logic;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.hireme.logic.parser.Prefix;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
-import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Container for user visible messages.
@@ -46,20 +44,6 @@ public class Messages {
                 .append(internship.getRole())
                 .append("; Date: ")
                 .append(internship.getDateOfApplication());
-        return builder.toString();
-    }
-
-    /**
-     * Formats the {@code insightsMap} for display to the user.
-     */
-    public static String formatInsights(Map<Status, Integer> insightsMap) {
-        final StringBuilder builder = new StringBuilder();
-        for (Map.Entry<Status, Integer> entry: insightsMap.entrySet()) {
-            builder.append(entry.getKey().toString())
-                    .append(": ")
-                    .append(entry.getValue().toString())
-                    .append("\n");
-        }
         return builder.toString();
     }
 }

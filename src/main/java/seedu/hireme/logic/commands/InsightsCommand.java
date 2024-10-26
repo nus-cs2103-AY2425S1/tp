@@ -4,22 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Map;
 
-import seedu.hireme.logic.Messages;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * Provide status insight of internship applications
+ * Provide status insights of internship applications
  */
 public class InsightsCommand extends Command {
     public static final String COMMAND_WORD = "/insights";
-
+    public static final String SHOWING_INSIGHTS_MESSAGE = "Opened insights window.";
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         Map<Status, Integer> insightsMap = model.getInsights();
-        return new CommandResult(Messages.formatInsights(insightsMap));
+        return new CommandResult(SHOWING_INSIGHTS_MESSAGE, false, false, insightsMap);
     }
 }

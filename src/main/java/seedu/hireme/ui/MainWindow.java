@@ -1,5 +1,6 @@
 package seedu.hireme.ui;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.hireme.logic.Logic;
 import seedu.hireme.logic.commands.CommandResult;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private InternshipApplicationListPanel internshipApplicationListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
+    private final InsightsWindow insightsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        insightsWindow = new InsightsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +151,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the insights window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleInsights(Map<Status, Integer> insights) {
+        if (!insightsWindow.isShowing()) {
+            insightsWindow.show(insights);
+        } else {
+            insightsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +176,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        insightsWindow.hide();
         primaryStage.hide();
     }
 
@@ -180,6 +197,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            } else if (commandResult.getInsights() != null) {
+                handleInsights(commandResult.getInsights());
             }
 
             if (commandResult.isExit()) {
