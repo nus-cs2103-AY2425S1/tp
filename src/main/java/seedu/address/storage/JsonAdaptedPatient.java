@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -37,7 +39,7 @@ class JsonAdaptedPatient {
     private final String phone;
     private final String email;
     private final String address;
-    private final String allergy;
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final String bloodType;
     private final String healthRisk;
     private final String healthRecord;
@@ -54,7 +56,7 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("allergy") String allergy,
+            @JsonProperty("address") String address, @JsonProperty("allergy") List<JsonAdaptedAllergy> allergies,
             @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
             @JsonProperty("healthRecord") String healthRecord, @JsonProperty("note") String note,
             @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone,
@@ -65,8 +67,10 @@ class JsonAdaptedPatient {
         this.birthDate = birthDate;
         this.phone = phone;
         this.email = email;
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
+        }
         this.address = address;
-        this.allergy = allergy;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
         this.healthRecord = healthRecord;
@@ -89,7 +93,9 @@ class JsonAdaptedPatient {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress() == null ? "" : source.getAddress().value;
-        allergy = source.getAllergy() == null ? "" : source.getAllergy().value;
+        allergies.addAll(source.getAllergies().stream()
+                .map(JsonAdaptedAllergy::new)
+                .collect(Collectors.toList()));
         bloodType = source.getBloodType() == null ? "" : source.getBloodType().value;
         healthRisk = source.getHealthRisk() == null ? "" : source.getHealthRisk().value;
         healthRecord = source.getHealthRecord() == null ? "" : source.getHealthRecord().value;
@@ -107,6 +113,11 @@ class JsonAdaptedPatient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
+        final List<Allergy> personAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
+            personAllergies.add(allergy.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -158,12 +169,6 @@ class JsonAdaptedPatient {
         }
         final Address modelAddress = address.isEmpty() ? null : new Address(address);
 
-        if (allergy == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Allergy.class.getSimpleName()));
-        }
-        final Allergy modelAllergy = allergy.isEmpty() ? null : new Allergy(allergy);
-
         if (bloodType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Address.class.getSimpleName()));
@@ -211,8 +216,10 @@ class JsonAdaptedPatient {
             }
         }
 
+        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
+
         return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
-                modelAddress, modelAllergy, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
+                modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
                 modelNokName, modelNokPhone, modelAppts);
     }
 

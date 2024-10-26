@@ -229,21 +229,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String allergy} into an {@code Allergy}.
+     * Parses a {@code String healthService} into a {@code HealthService}.
      * Leading and trailing whitespaces will be trimmed.
-     * returns null if the given {@code allergy} is an empty string
-     * @throws ParseException if the given {@code allergy} is invalid.
+     *
+     * @throws ParseException if the given {@code healthService} is invalid.
      */
-    public static Allergy parseAllergy(String allergy) throws ParseException {
+    public static Allergy parseAllergies(String allergy) throws ParseException {
         requireNonNull(allergy);
-        if (allergy.isEmpty()) {
-            return null;
-        }
         String trimmedAllergy = allergy.trim();
         if (!Allergy.isValidAllergy(trimmedAllergy)) {
-            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
         }
         return new Allergy(trimmedAllergy);
+    }
+
+    /**
+     * Parses {@code Collection<String> healthServices} into a {@code Set<HealthService>}.
+     */
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergy : allergies) {
+            allergySet.add(parseAllergies(allergy));
+        }
+        return allergySet;
     }
 
     /**

@@ -2,10 +2,7 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.ApptSorter;
@@ -28,7 +25,7 @@ public class Patient {
 
     // Data fields
     private Address address;
-    private Allergy allergy;
+    private Set<Allergy> allergies = new HashSet<>();
     private BloodType bloodType;
     private HealthRisk healthRisk;
     private HealthRecord healthRecord;
@@ -57,7 +54,7 @@ public class Patient {
         this.phone = phone;
         this.email = email;
         this.address = null;
-        this.allergy = null;
+        this.allergies.clear();
         this.bloodType = null;
         this.healthRisk = null;
         this.healthRecord = null;
@@ -72,7 +69,7 @@ public class Patient {
      * The other fields can be null
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
-                   Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
+                   Email email, Address address, Set<Allergy> allergies, BloodType bloodType, HealthRisk healthRisk,
                    HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
@@ -82,7 +79,7 @@ public class Patient {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.allergy = allergy;
+        this.allergies = allergies;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
         this.healthRecord = healthRecord;
@@ -124,8 +121,8 @@ public class Patient {
         return nokPhone;
     }
 
-    public Allergy getAllergy() {
-        return allergy;
+    public Set<Allergy> getAllergies() {
+        return allergies;
     }
 
     public BloodType getBloodType() {

@@ -97,7 +97,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        //assertParseFailure(parser, VALID_NRIC_AMY, EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, VALID_NRIC_AMY, EditCommand.MESSAGE_NOT_EDITED);
 
         // no NRIC and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
