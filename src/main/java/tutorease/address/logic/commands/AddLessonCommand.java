@@ -62,7 +62,7 @@ public class AddLessonCommand extends LessonCommand {
         requireNonNull(model);
         ObservableList<Person> personList = model.getFilteredPersonList();
 
-        if (studentId.getValue() > personList.size()) {
+        if (studentId.getValue() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person student = personList.get(studentId.getValue());
