@@ -13,6 +13,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ListingBuilder;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,10 +24,16 @@ import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
+import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 public class AddListingCommandTest {
@@ -76,11 +83,13 @@ public class AddListingCommandTest {
     @Test
     public void constructor_nullBuyers_success() throws CommandException {
         ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
                 null).execute(modelStub);
+        Listing listingWithNoBuyers = new ListingBuilder(PASIR_RIS).withBuyers().build();
 
-        assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(PASIR_RIS)),
+        assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(listingWithNoBuyers)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
     }
@@ -88,11 +97,13 @@ public class AddListingCommandTest {
     @Test
     public void execute_listingAcceptedByModel_addSuccessful() throws CommandException {
         ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
 
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
                 new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))).execute(modelStub);
-
         assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(PASIR_RIS)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
@@ -104,12 +115,70 @@ public class AddListingCommandTest {
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
                 new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
                 AddListingCommand.MESSAGE_DUPLICATE_LISTING, () -> addListingCommand.execute(modelStub));
     }
 
+    @Test
+    public void execute_buyerAsSeller_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
+        modelStub.addPerson(FIONA);
+        modelStub.addPerson(DANIEL);
+        modelStub.addPerson(GEORGE);
+
+        assertThrows(CommandException.class,
+                AddListingCommand.MESSAGE_NOT_SELLER, () -> addListingCommand.execute(modelStub));
+    }
+
     // equals and toString methods
+    @Test
+    public void equals() {
+        AddListingCommand addPasirRisCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+
+        AddListingCommand addTampinesCommand = new AddListingCommand(TAMPINES.getName(), TAMPINES.getPrice(),
+                TAMPINES.getArea(), TAMPINES.getAddress(), TAMPINES.getRegion(), BENSON.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), ELLE.getName())));
+
+        // same object -> return true
+        assertTrue(addPasirRisCommand.equals(addPasirRisCommand));
+
+        // same values -> returns true
+        AddListingCommand addPasirRisCommandCopy = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertTrue(addPasirRisCommand.equals(addPasirRisCommandCopy));
+
+        // different values -> return false
+        assertFalse(addPasirRisCommand.equals(addTampinesCommand));
+
+        // different types -> return false
+        assertFalse(addPasirRisCommand.equals(1));
+
+        // null -> return false
+        assertFalse(addPasirRisCommand.equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        String expected = AddListingCommand.class.getCanonicalName()
+                + "{toAdd=" + PASIR_RIS.getName()
+                + ", address=" + PASIR_RIS.getAddress()
+                + ", seller=" + ALICE.getName()
+                + "}";
+        assertEquals(expected, addListingCommand.toString());
+    }
 
     /**
      * A default model stub that have all of the methods failing.
@@ -245,10 +314,18 @@ public class AddListingCommandTest {
      */
     private class ModelStubWithListing extends AddListingCommandTest.ModelStub {
         private final Listing listing;
+        private final ArrayList<Listing> listingsAdded = new ArrayList<>();
+        private final ArrayList<Person> persons = new ArrayList<>();
 
         ModelStubWithListing(Listing listing) {
             requireNonNull(listing);
             this.listing = listing;
+        }
+
+        @Override
+        public void addListing(Listing listing) {
+            requireNonNull(listing);
+            listingsAdded.add(listing);
         }
 
         @Override
@@ -257,14 +334,40 @@ public class AddListingCommandTest {
             return this.listing.isSameListing(listing);
         }
 
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            persons.add(person);
+        }
+
+        @Override
+        public ObservableList<Listing> getFilteredListingList() {
+            return javafx.collections.FXCollections.observableList(listingsAdded);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableList(persons);
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            requireNonNull(name);
+            return this.getFilteredPersonList()
+                    .stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst()
+                    .orElse(null);
+        }
+
     }
 
     /**
      * A Model stub that always accept the listing being added.
      */
     private class ModelStubAcceptingListingAdded extends AddListingCommandTest.ModelStub {
-        final ArrayList<Listing> listingsAdded = new ArrayList<>();
-        final ArrayList<Person> persons = new ArrayList<>();
+        private final ArrayList<Listing> listingsAdded = new ArrayList<>();
+        private final ArrayList<Person> persons = new ArrayList<>();
 
         @Override
         public boolean hasListing(Listing listing) {
@@ -281,6 +384,12 @@ public class AddListingCommandTest {
         @Override
         public ReadOnlyListings getListings() {
             return new Listings();
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            persons.add(person);
         }
 
         @Override

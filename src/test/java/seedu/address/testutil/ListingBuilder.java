@@ -179,7 +179,7 @@ public class ListingBuilder {
      * @return The current {@code ListingBuilder} object.
      */
     public ListingBuilder withBuyers(Person ... buyers) {
-        this.buyers = new HashSet<Person>(List.of(SampleDataUtil.getSamplePersons()));
+        this.buyers = new HashSet<Person>(List.of(buyers));
         return this;
     }
 
