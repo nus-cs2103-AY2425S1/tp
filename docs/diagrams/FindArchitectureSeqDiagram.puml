@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+
+user -[USER_COLOR]> ui : "find n/Alex t/friend"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("find n/Alex t/friend")
+activate logic LOGIC_COLOR
+logic -[LOGIC_COLOR]> model : updateFilteredPersonList()
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> logic:
+deactivate model MODEL_COLOR
+
+logic --[LOGIC_COLOR]> ui: update list of contacts shown
+deactivate logic
+
+
+
+ui --[UI_COLOR]> user
+deactivate ui
+
+
+
+
+@enduml
