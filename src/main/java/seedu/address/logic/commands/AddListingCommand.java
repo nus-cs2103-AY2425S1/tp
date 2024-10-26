@@ -82,6 +82,7 @@ public class AddListingCommand extends Command {
         this.buyers = buyers;
     }
 
+    // needs SLAP
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -133,9 +134,9 @@ public class AddListingCommand extends Command {
         }
 
         return this.listingName.equals(otherCommand.listingName) && this.price.equals(otherCommand.price)
-        && this.area.equals(otherCommand.area) && this.address.equals(otherCommand.address)
-        && this.region.equals(otherCommand.region) && this.seller.equals(otherCommand.seller)
-        && this.buyers.equals(otherCommand.buyers);
+            && this.area.equals(otherCommand.area) && this.address.equals(otherCommand.address)
+            && this.region.equals(otherCommand.region) && this.seller.equals(otherCommand.seller)
+            && this.buyers.equals(otherCommand.buyers);
     }
 
     @Override

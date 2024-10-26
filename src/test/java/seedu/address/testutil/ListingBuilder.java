@@ -12,7 +12,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Listing objects.
