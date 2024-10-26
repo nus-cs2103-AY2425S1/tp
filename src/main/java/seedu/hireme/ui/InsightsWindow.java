@@ -38,7 +38,7 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the insights window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -72,14 +72,14 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the insights window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the insights window.
      */
     public void hide() {
         pieChart.getData().clear();
@@ -87,7 +87,7 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the insights window.
      */
     public void focus() {
         getRoot().requestFocus();
