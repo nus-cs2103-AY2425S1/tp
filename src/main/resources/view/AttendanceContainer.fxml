@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ListView?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets top="5" right="5" bottom="5" left="5" />
@@ -18,5 +17,5 @@
         <Label styleClass="cell_small_label" text=" | "/>
         <Label fx:id="dateRange" styleClass="cell_small_label" text="\$date range"/>
     </HBox>
-    <ListView fx:id="attendanceListView" />
+    <VBox fx:id="attendanceList" />
 </VBox>

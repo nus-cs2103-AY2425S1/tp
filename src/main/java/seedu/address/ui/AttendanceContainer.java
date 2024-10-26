@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.participation.Participation;
 
 /**
@@ -32,7 +33,7 @@ public class AttendanceContainer extends UiPart<Region> {
     @FXML
     private Label dateRange;
     @FXML
-    private ListView<Participation> attendanceListView;
+    private VBox attendanceList;
 
     /**
      * Creates a {@code AttendanceContainer} with the given list of participation list
@@ -44,34 +45,20 @@ public class AttendanceContainer extends UiPart<Region> {
         participationList.addListener((ListChangeListener<Participation>) change -> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
-                    FXCollections.sort(participationList, Comparator.comparing(Participation::getTutorialSubject));
+                    setAttendanceList();
                 }
         }});
 
-        attendanceListView.setItems(participationList);
-        attendanceListView.setCellFactory(listView -> new AttendanceListViewCell());
-
-        setParticipationListViewStyle();
+        setAttendanceList();
         setDisplayDate();
         setTutorial();
     }
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
-     */
-    class AttendanceListViewCell extends ListCell<Participation> {
-        @Override
-        protected void updateItem(Participation participation, boolean empty) {
-            super.updateItem(participation, empty);
-
-            if (empty || participation == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new AttendanceCard(participation.getTutorialSubject(),
-                        participation.getAttendanceList()).getRoot());
-            }
-        }
+    private void setAttendanceList() {
+        attendanceList.getChildren().clear();
+        participationList.forEach(participation -> attendanceList.getChildren()
+                .add(new AttendanceCard(participation.getTutorialSubject(),
+                        participation.getAttendanceList()).getRoot()));
     }
 
     private void setDisplayDate() {
@@ -100,8 +87,4 @@ public class AttendanceContainer extends UiPart<Region> {
         }
     }
 
-    private void setParticipationListViewStyle() {
-        attendanceListView.setFixedCellSize(25);
-        attendanceListView.setPrefHeight(25 * participationList.size());
-    }
 }
