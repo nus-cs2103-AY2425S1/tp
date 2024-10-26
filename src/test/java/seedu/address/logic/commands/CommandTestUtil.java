@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignments;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_REMARK_MATH = "Weak at Math";
+    public static final String VALID_REMARK_ENGLISH = "Weak at English";
     public static final String VALID_ASSIGNMENT_NAME_MATH = "Math Homework";
     public static final int VALID_MAX_SCORE_MATH = 100;
     public static final int VALID_SCORE_MATH = 100;
@@ -50,6 +54,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_MATH;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_ENGLISH;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -61,6 +67,9 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+    public static final EditCommand.EditStudentDescriptor DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -69,6 +78,16 @@ public class CommandTestUtil {
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_FRIEND).withAssignmentList(getTypicalAssignments()).build();
+        DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_FRIEND).withRemark(REMARK_DESC_AMY).build();
+        DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(REMARK_DESC_BOB)
+                .withAssignmentList(getTypicalAssignments()).build();
     }
 
     /**

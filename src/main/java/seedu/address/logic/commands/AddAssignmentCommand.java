@@ -42,6 +42,8 @@ public class AddAssignmentCommand extends Command {
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
     public AddAssignmentCommand(Index index, AssignmentDescriptor toAddDescriptor) {
+        assert toAddDescriptor != null;
+        assert index != null;
         requireNonNull(toAddDescriptor);
         requireNonNull(index);
         this.index = index;

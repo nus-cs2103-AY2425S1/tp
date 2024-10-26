@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -98,7 +100,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags,
+                studentToEdit.getAssignmentList(), studentToEdit.getRemark());
     }
 
     @Override
@@ -134,6 +137,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
+        private List<Assignment> assignmentList = new ArrayList<>();
+        private String remark;
 
         public EditStudentDescriptor() {}
 
@@ -146,6 +151,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
+            setAssignmentList(toCopy.assignmentList);
+            // SetRemark is not yet called in EditStudentDescriptorBuilder to wait until editing remark is implemented
         }
 
         /**
@@ -196,6 +203,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setAssignmentList(List<Assignment> assignmentList) {
+            this.assignmentList = assignmentList;
+        }
+
+        public Optional<List<Assignment>> getAssignmentList() {
+            return assignmentList != null ? Optional.of(assignmentList) : Optional.empty();
+        }
+
+        public Optional<String> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -211,7 +234,9 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditStudentDescriptor.name)
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags);
+                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
+                    && Objects.equals(assignmentList, otherEditStudentDescriptor.assignmentList)
+                    && Objects.equals(remark, otherEditStudentDescriptor.remark);
         }
 
         @Override
@@ -221,6 +246,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("tags", tags)
+                    .add("assignments", assignmentList)
+                    .add("remark", remark)
                     .toString();
         }
     }

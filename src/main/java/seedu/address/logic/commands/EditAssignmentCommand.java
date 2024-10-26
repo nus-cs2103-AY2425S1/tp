@@ -46,6 +46,8 @@ public class EditAssignmentCommand extends Command {
      * @param newScore the new score to be set for the assignment
      */
     public EditAssignmentCommand(Index studentIndex, Index assignmentIndex, int newScore) {
+        assert studentIndex != null;
+        assert assignmentIndex != null;
         requireNonNull(studentIndex);
         requireNonNull(assignmentIndex);
         this.studentIndex = studentIndex;

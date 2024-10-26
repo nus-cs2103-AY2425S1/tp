@@ -40,6 +40,8 @@ public class DeleteAssignmentCommand extends Command {
      * @param assignmentIndex of the assignment belonging to the assignmentList of the student
      */
     public DeleteAssignmentCommand(Index studentIndex, Index assignmentIndex) {
+        assert studentIndex != null;
+        assert assignmentIndex != null;
         requireNonNull(studentIndex);
         requireNonNull(assignmentIndex);
         this.studentIndex = studentIndex;

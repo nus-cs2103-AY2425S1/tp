@@ -4,15 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+
+
 
 public class EditStudentDescriptorTest {
 
@@ -51,6 +57,14 @@ public class EditStudentDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different remark -> returns false
+        editedAmy = DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different assignment list -> returns false
+        editedAmy = DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -60,7 +74,9 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getName().orElse(null) + ", phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + "}";
+                + editStudentDescriptor.getTags().orElse(null) + ", assignments="
+                + editStudentDescriptor.getAssignmentList().orElse(new ArrayList<>()) + ", remark="
+                + editStudentDescriptor.getRemark().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }

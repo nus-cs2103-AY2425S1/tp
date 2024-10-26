@@ -47,6 +47,8 @@ public class GradeAssignmentCommand extends Command {
      * @param score of the assignment
      */
     public GradeAssignmentCommand(Index studentIndex, Index assignmentIndex, int score) {
+        assert studentIndex != null;
+        assert assignmentIndex != null;
         requireNonNull(studentIndex);
         requireNonNull(assignmentIndex);
         this.studentIndex = studentIndex;
