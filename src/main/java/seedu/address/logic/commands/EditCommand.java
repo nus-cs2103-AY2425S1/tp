@@ -41,7 +41,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_EVENT + "EVENTS] "
             + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -97,10 +96,9 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Event> updatedEvents = editPersonDescriptor.getEvents().orElse(personToEdit.getEvents());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedEvents, updatedRoles);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedRoles);
     }
 
     @Override
@@ -134,7 +132,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Set<Event> events;
         private Set<Role> roles;
 
         public EditPersonDescriptor() {}
@@ -147,7 +144,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setEvents(toCopy.events);
             setRoles(toCopy.roles);
         }
 
@@ -155,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, events, roles);
+            return CollectionUtil.isAnyNonNull(name, phone, email, roles);
         }
 
         public void setName(Name name) {
@@ -182,13 +178,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setEvents(Set<Event> events) {
-            this.events = (events != null) ? new HashSet<>(events) : null;
-        }
-
-        public Optional<Set<Event>> getEvents() {
-            return (events != null) ? Optional.of(Collections.unmodifiableSet(events)) : Optional.empty();
-        }
 
         /**
          * Sets {@code roles} to this object's {@code roles}.
@@ -221,7 +210,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(events, otherEditPersonDescriptor.events)
                     && Objects.equals(roles, otherEditPersonDescriptor.roles);
         }
 
@@ -231,7 +219,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("events", events)
                     .add("roles", roles)
                     .toString();
         }

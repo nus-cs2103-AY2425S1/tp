@@ -22,9 +22,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .anyMatch(keyword -> (StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
-                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)
-                        || StringUtil.containsSubstringIgnoreCase(person.getEvents().stream().map(Event::toString)
-                        .reduce("", (x, y) -> x + " " + y), keyword)));
+                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)));
     }
 
     @Override

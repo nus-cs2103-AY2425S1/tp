@@ -42,6 +42,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+
     //// list overwrite operations
 
     /**
@@ -161,19 +162,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.asUnmodifiableObservableList();
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof AddressBook otherAddressBook)) {
             return false;
         }
-
         return persons.equals(otherAddressBook.persons) && events.equals(otherAddressBook.events);
     }
+
+    public Person findPerson(String person) {
+        return persons.findPerson(person);
+    }
+
 
     @Override
     public int hashCode() {

@@ -78,7 +78,7 @@ public class EditEventCommand extends Command {
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
 
-        return new Event(updatedName);
+        return new Event(updatedName, null, null, null);
     }
 
     @Override

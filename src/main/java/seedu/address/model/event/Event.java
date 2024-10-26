@@ -3,6 +3,11 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.role.athlete.SportString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents an {@code Event} in the address book.
@@ -10,13 +15,19 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Event {
     // Identity fields
     private final EventName name;
+    private final SportString sport;
+    private final Venue venue;
+    private final Set<Person> participants = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name) {
+    public Event(EventName name, SportString sport, Venue venue, Set<Person> participants) {
         requireAllNonNull(name);
         this.name = name;
+        this.sport = sport;
+        this.venue = venue;
+        this.participants.addAll(participants);
     }
 
     /**
@@ -24,6 +35,28 @@ public class Event {
      */
     public EventName getName() {
         return name;
+    }
+
+    /**
+     * Returns the sport of the event.
+     */
+    public SportString getSport() {
+        return sport;
+    }
+
+    /**
+     * Returns the venue of the event.
+     */
+    public Venue getVenue() {
+        return venue;
+    }
+
+    /**
+     * Returns an immutable participant set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getParticipants() {
+        return Set.copyOf(participants);
     }
 
     /**

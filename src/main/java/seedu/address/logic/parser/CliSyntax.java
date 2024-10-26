@@ -12,4 +12,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_EVENT = new Prefix("s/");
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
 
+    public static final Prefix PREFIX_VENUE = new Prefix("v/");
+    public static final Prefix PREFIX_SPORT = new Prefix("sp/");
+    public static final Prefix PREFIX_PARTICIPANTS = new Prefix("pa/");
+
+
+
 }
