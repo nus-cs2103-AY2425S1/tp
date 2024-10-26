@@ -214,7 +214,9 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Participation> getParticipationList() { return addressBook.getParticipationList();}
+    public ObservableList<Participation> getParticipationList() {
+        return addressBook.getParticipationList();
+    }
 
     @Override
     public boolean equals(Object other) {
