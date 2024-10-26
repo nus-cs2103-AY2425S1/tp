@@ -55,7 +55,8 @@ public class TagDeleteCommandTest {
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
+                Messages.tagSetToString(stubTagList), Messages.format(editedPerson), Messages.format(editedPerson),
+                Messages.tagSetToString(stubTagList));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
@@ -81,7 +82,7 @@ public class TagDeleteCommandTest {
         String expectedMessage1 = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST + "\n",
                 VALID_TAG_WEDDING2, Messages.format(originalPerson));
         String expectedMessage2 = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                VALID_TAG_WEDDING1, Messages.format(editedPerson));
+                VALID_TAG_WEDDING1, Messages.format(editedPerson), Messages.format(editedPerson), VALID_TAG_WEDDING1);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
@@ -128,7 +129,8 @@ public class TagDeleteCommandTest {
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
+                Messages.tagSetToString(stubTagList), Messages.format(editedPerson), Messages.format(editedPerson),
+                Messages.tagSetToString(stubTagList));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
