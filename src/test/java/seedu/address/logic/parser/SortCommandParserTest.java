@@ -55,16 +55,19 @@ public class SortCommandParserTest {
         SortCommand descendingDateOfLastVisitSortCommand =
                 new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, false);
 
+
         assertParseSuccess(parser, " n/ ", ascendingNameSortCommand);
         assertParseSuccess(parser, " n/ascending   ", ascendingNameSortCommand);
         assertParseSuccess(parser, " n/asc", ascendingNameSortCommand);
 
         assertParseSuccess(parser, " d/", ascendingDateOfLastVisitSortCommand);
         assertParseSuccess(parser, " d/ascending   ", ascendingDateOfLastVisitSortCommand);
-        assertParseSuccess(parser, " d/asc", ascendingDateOfLastVisitSortCommand);
+        assertParseSuccess(parser, " d/   asc", ascendingDateOfLastVisitSortCommand);
+        assertParseSuccess(parser, " d/a", ascendingDateOfLastVisitSortCommand);
 
         assertParseSuccess(parser, " n/descending", descendingNameSortCommand);
-        assertParseSuccess(parser, " n/desc", descendingNameSortCommand);
+        assertParseSuccess(parser, " n/  desc", descendingNameSortCommand);
+        assertParseSuccess(parser, " n/d", descendingNameSortCommand);
 
         assertParseSuccess(parser, " d/descending", descendingDateOfLastVisitSortCommand);
         assertParseSuccess(parser, " d/desc", descendingDateOfLastVisitSortCommand);
