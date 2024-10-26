@@ -28,17 +28,18 @@ public class TagAddCommand extends Command {
     public static final String COMMAND_WORD = "tag-add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a tag to the person identified "
-            + "by their name. "
+            + "by their name. Also adds them as a participant in wedding given by specified tag."
             + "Parameters: "
             + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui "
             + PREFIX_TAG + "Jane and Tom 230412";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) '%1$s' to contact: %2$s.";
-    public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the tag(s) '%2$s'.";
-    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: %1$s does not exist in KnottyPlanners";
-    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet. "
-            + "Wedding needs to be created with Tag(s): '%2$s' using add-wedding first.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag(s) '%1$s' to Contact: '%2$s'." + "\n"
+            + "Contact: '%3$s' has been added to Wedding(s): '%4$s'.";
+    public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the Tag(s) '%2$s'.";
+    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
+    public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet." + "\n"
+            + "Wedding needs to be created with Tag(s): '%2$s' using command 'add-wedding' first.";
 
     private final Name name;
     private final Set<Tag> tagsToAdd;
@@ -113,11 +114,13 @@ public class TagAddCommand extends Command {
             if (tagsInBoth.isEmpty() && !tagsToAdd.isEmpty()) {
                 // if there are no duplicates, this is a clean addition
                 return String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.tagSetToString(tagsToAdd),
-                        Messages.getName(editedPerson));
+                        Messages.getName(editedPerson), Messages.getName(editedPerson),
+                        Messages.tagSetToString(tagsToAdd));
             } else { // if there are some duplicates
                 // gets the tags that we actually want to add
                 String nonDuplicateTagsExist = String.format(MESSAGE_ADD_TAG_SUCCESS + "\n",
-                        Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson));
+                        Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson),
+                        Messages.getName(editedPerson), Messages.tagSetToString(tagsInNeither));
                 // gets the duplicate tags that we dont want to add
                 String duplicateTagsExist = String.format(MESSAGE_DUPLICATE_TAGS,
                         Messages.getName(editedPerson), Messages.tagSetToString(tagsInBoth));

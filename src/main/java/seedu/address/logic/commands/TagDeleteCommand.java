@@ -25,15 +25,16 @@ public class TagDeleteCommand extends Command {
     public static final String COMMAND_WORD = "tag-delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified tag from the person identified "
-            + "by their name. "
+            + "by their name. Also deletes them as participant from the wedding given by specified tag."
             + "Parameters: "
-            + "tag-delete n/NAME t/[TAG]\n"
+            + "tag-delete n/NAME & NAME t/[TAG]\n"
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "
-            + "t/ Jane and Tom 230412";
+            + "t/ Jane Lim & Tom Koh";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing tags: '%1$s' from contact: %2$s";
-    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: %1$s does not exist in KnottyPlanners";
-    public static final String MESSAGE_TAG_DOESNT_EXIST = "Given tag(s): '%1$s' do not exist for contact: %2$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: %2$s." + "\n"
+            + "Contact: '%3$s' has been removed from Wedding(s): '%4$s'.";
+    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
+    public static final String MESSAGE_TAG_DOESNT_EXIST = "Given Tag(s): '%1$s' do not exist for Contact: '%2$s'.";
 
     private final Name name;
     private final Set<Tag> tagsToDelete;
@@ -120,13 +121,15 @@ public class TagDeleteCommand extends Command {
                 String tagsNotExist = String.format(MESSAGE_TAG_DOESNT_EXIST + "\n",
                         Messages.tagSetToString(tagsInNeither), Messages.format(personToEdit));
                 String tagsExist = String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsInBoth),
-                        Messages.format(editedPerson));
+                        Messages.format(editedPerson), Messages.format(editedPerson),
+                        Messages.tagSetToString(tagsInBoth));
                 return tagsNotExist + tagsExist;
             }
         }
         deletePersonInWedding(editedPerson, model, tagsToDelete);
         return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
-                Messages.format(editedPerson));
+                Messages.format(editedPerson), Messages.format(editedPerson),
+                Messages.tagSetToString(tagsToDelete));
     }
 
     /**
