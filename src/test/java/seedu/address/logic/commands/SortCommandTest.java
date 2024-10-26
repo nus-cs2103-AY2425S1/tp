@@ -24,45 +24,29 @@ public class SortCommandTest {
 
     @Test
     public void execute_nameAscendingOrder_success() {
-        SortCommand sortCommand = new SortCommand(PersonComparator.NAME, true);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PersonComparator.NAME, "ascending");
-        Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
-                .NAME, true), new UserPrefs());
-
-        assertCommandSuccess(sortCommand, modelDescendingName, expectedMessage, expectedModel);
+        executeSuccessfulSortTest(PersonComparator.NAME, true, modelAscendingDateOfLastVisit);
     }
 
     @Test
     public void execute_nameDescendingOrder_success() {
-        SortCommand sortCommand = new SortCommand(PersonComparator.NAME, false);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PersonComparator.NAME, "descending");
-        Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
-                .NAME, false), new UserPrefs());
-
-        assertCommandSuccess(sortCommand, modelAscendingName, expectedMessage, expectedModel);
+        executeSuccessfulSortTest(PersonComparator.NAME, false, modelDescendingDateOfLastVisit);
     }
 
     @Test
     public void execute_dateOfLastVisitAscending_success() {
-        SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, true);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PersonComparator.DATE_OF_LAST_VISIT, "ascending");
-        Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
-                .DATE_OF_LAST_VISIT, true), new UserPrefs());
-
-        assertCommandSuccess(sortCommand, modelDescendingName, expectedMessage, expectedModel);
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, true, modelDescendingName);
     }
 
     @Test
     public void execute_dateOfLastVisitDescending_success() {
-        SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, false);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PersonComparator.DATE_OF_LAST_VISIT, "descending");
-        Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
-                .DATE_OF_LAST_VISIT, false), new UserPrefs());
+        executeSuccessfulSortTest(PersonComparator.DATE_OF_LAST_VISIT, false, modelAscendingName);
+    }
 
+    private void executeSuccessfulSortTest(String sortParameter, boolean isAscending, Model model) {
+        SortCommand sortCommand = new SortCommand(sortParameter, isAscending);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
+                sortParameter, isAscending ? "ascending" : "descending");
+        Model expectedModel = new ModelManager(getTypicalAddressBook(sortParameter, isAscending), new UserPrefs());
         assertCommandSuccess(sortCommand, modelDescendingName, expectedMessage, expectedModel);
     }
 
