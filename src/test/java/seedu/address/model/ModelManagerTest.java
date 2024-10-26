@@ -12,14 +12,19 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -33,8 +38,25 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+    public void setPersons_validList_setsPersons() {
+        List<Person> persons = List.of(ALICE, BENSON);
+        modelManager.setPersons(persons);
+        assertEquals(persons, modelManager.getAddressBook().getPersonList());
+    }
+
+    @Test
+    public void setPersons_nullList_throwsNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setPersons(null));
+    }
+
+    @Test
+    public void getSortedPersonList_returnsSortedPersons() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+        ObservableList<Person> sortedPersons = modelManager.getSortedPersonList();
+        assertEquals(2, sortedPersons.size());
+        assertEquals(ALICE, sortedPersons.get(0));
+        assertEquals(BENSON, sortedPersons.get(1));
     }
 
     @Test
@@ -105,6 +127,16 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    }
+
+    @Test
+    public void constructor_withAddressBookAndUserPrefs_initializesCorrectly() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+
+        assertEquals(addressBook, modelManager.getAddressBook());
+        assertEquals(userPrefs, modelManager.getUserPrefs());
     }
 
     @Test

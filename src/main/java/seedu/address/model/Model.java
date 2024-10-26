@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -56,6 +58,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /** Replaces the current list of persons with the given list. */
+    void setPersons(List<Person> persons);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
@@ -75,6 +80,10 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void updateSortedPersonList(Comparator<Person> comparator);
+
+    ObservableList<Person> getSortedPersonList();
 
     void markAsHired(Person person);
 

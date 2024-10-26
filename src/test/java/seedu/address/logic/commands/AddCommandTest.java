@@ -10,12 +10,15 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -157,6 +160,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getSortedPersonList() {
+            return FXCollections.observableArrayList();
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
@@ -218,6 +231,11 @@ public class AddCommandTest {
 
         @Override
         public boolean isJobPresent(Job job) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersons(List<Person> persons) {
             throw new AssertionError("This method should not be called.");
         }
     }

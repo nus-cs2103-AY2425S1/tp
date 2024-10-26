@@ -57,6 +57,13 @@ public class InterviewScore {
         return interviewScore;
     }
 
+    /**
+     * Returns the interview score as a float.
+     */
+    public float toFloat() {
+        return Float.parseFloat(interviewScore);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
