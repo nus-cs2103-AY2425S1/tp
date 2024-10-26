@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -32,8 +33,9 @@ public class MarkAttendanceByStudentCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
-                outOfBoundIndex, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
-                "Math");
+                outOfBoundIndex,
+                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -48,7 +50,7 @@ public class MarkAttendanceByStudentCommandTest {
 
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
                 outOfBoundIndex, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
-                "Math");
+                new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -57,10 +59,10 @@ public class MarkAttendanceByStudentCommandTest {
     public void equals() {
         MarkAttendanceByStudentCommand markAttendanceFirstCommand = new MarkAttendanceByStudentCommand(
                 INDEX_FIRST_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
-                "Math");
+                new Tutorial("Math"));
         MarkAttendanceByStudentCommand markAttendanceSecondCommand = new MarkAttendanceByStudentCommand(
                 INDEX_SECOND_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
-                "Chemistry");
+                new Tutorial("Chemistry"));
 
         // same object -> returns true
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommand));
@@ -68,7 +70,7 @@ public class MarkAttendanceByStudentCommandTest {
         // same values -> returns true
         MarkAttendanceByStudentCommand markAttendanceFirstCommandCopy = new MarkAttendanceByStudentCommand(
                 INDEX_FIRST_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
-                "Math");
+                new Tutorial("Math"));
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommandCopy));
 
         // different types -> returns false
@@ -85,12 +87,16 @@ public class MarkAttendanceByStudentCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Tutorial tutorial = new Tutorial("Math");
+
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
-                INDEX_FIRST_PERSON, attendance, "Math");
+                INDEX_FIRST_PERSON, attendance, tutorial);
+
         String expected = MarkAttendanceByStudentCommand.class.getCanonicalName()
                 + "{targetIndex=" + targetIndex + ", "
                 + "attendance=" + attendance + ", "
-                + "tutorial=Math}";
+                + "tutorial=" + tutorial + "}";
+
         assertEquals(expected, markAttendanceCommand.toString());
     }
 }
