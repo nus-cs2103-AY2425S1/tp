@@ -22,7 +22,6 @@ public class UnpinCommand extends Command {
 
     public static final String MESSAGE_UNPIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
 
-    
     private final Index targetIndex;
 
     /**

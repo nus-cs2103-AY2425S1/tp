@@ -20,10 +20,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-
-/**
- * Contains integration tests (interaction with the Model) for {@code PinCommand}.
- */
 public class PinCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
