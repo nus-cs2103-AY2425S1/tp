@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudyGroupTag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Study group names should only contain alphanumeric characters and dashes";
+    public static final String MESSAGE_CONSTRAINTS = "Study group names should only contain alphanumeric "
+            + "characters and dashes";
 
     /*
      * The study group name must be alphanumeric.
