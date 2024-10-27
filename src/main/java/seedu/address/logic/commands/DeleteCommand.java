@@ -91,14 +91,6 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
     }
 
-    public Index[] getTargetIndexes() {
-        return targetIndexes;
-    }
-
-    public List<Person> getPersonsToDelete() {
-        return personsToDelete;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
@@ -116,6 +108,9 @@ public class DeleteCommand extends Command {
 
         for (Map.Entry<Person, Integer> entry : entryList) {
             model.addPerson(entry.getKey(), entry.getValue());
+        }
+        for (Appointment appointment: deletedAppointments) {
+            model.addAppointment(appointment);
         }
         String namesAddedBack = personsToDelete.stream()
                 .map(person -> person.getName().toString())
