@@ -71,6 +71,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_archive() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setIsArchived(true);
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.ARCHIVE_COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_download() throws Exception {
         assertTrue(parser.parseCommand(DownloadCommand.COMMAND_WORD) instanceof DownloadCommand);
     }
