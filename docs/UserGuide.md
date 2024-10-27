@@ -237,11 +237,13 @@ Examples:
 * `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
 * `delete n/John Doe` followed by `delete-n` cancels the delete operation.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear-addressbook` & `clear-weddingbook`
 
-You can delete ALL contacts and ALL weddings from the application.
+You can delete ALL contacts in the address book from the application.
 
-Format: `clear`
+Format: 
+* `clear-addressbook` clears all contacts in address book.
+* `clear-weddingbook` clears all weddings in wedding book.
 
 ![clear message](images/clearMsg.png)
 
