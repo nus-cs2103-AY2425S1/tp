@@ -4,16 +4,14 @@ import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.FEE_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
-import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.AddContactCommand;
-import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.DeleteContactCommand;
 import tutorease.address.logic.commands.EditContactCommand;
 import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.LessonCommand;
-import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.model.person.Person;
 
 /**

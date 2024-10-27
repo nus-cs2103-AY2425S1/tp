@@ -13,7 +13,6 @@ import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sun.glass.utils.NativeLibLoader;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.logic.commands.AddContactCommand;
