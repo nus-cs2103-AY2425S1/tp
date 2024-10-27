@@ -5,7 +5,9 @@ import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -104,11 +106,16 @@ public class DeleteCommand extends Command {
 
     @Override
     public String undo(Model model, CommandHistory pastCommands) {
+        Map<Person, Integer> personToIndexMap = new HashMap<>();
+
         for (int i = 0; i < personsToDelete.size(); i++) {
-            model.addPerson(personsToDelete.get(i), this.getTargetIndexes()[i].getZeroBased());
+            personToIndexMap.put(personsToDelete.get(i), targetIndexes[i].getZeroBased());
         }
-        for (int i = 0; i < deletedAppointments.size(); i++) {
-            model.addAppointment(deletedAppointments.get(i));
+        List<Map.Entry<Person, Integer>> entryList = new ArrayList<>(personToIndexMap.entrySet());
+        entryList.sort(Map.Entry.comparingByValue());
+
+        for (Map.Entry<Person, Integer> entry : entryList) {
+            model.addPerson(entry.getKey(), entry.getValue());
         }
         String namesAddedBack = personsToDelete.stream()
                 .map(person -> person.getName().toString())
