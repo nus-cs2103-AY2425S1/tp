@@ -42,6 +42,7 @@ public class Hours implements Comparable<Hours> {
 
     @Override
     public int compareTo(Hours hours) {
+        // To sort by descending order
         return -this.hours.compareTo(hours.hours);
     }
 

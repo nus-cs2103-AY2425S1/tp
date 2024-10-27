@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
@@ -27,6 +30,7 @@ public class SortCommand extends Command {
 
     public final SortOption sortOption;
 
+    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
     /**
      * Constructs a SortCommand with no sort option, which will reset the list to the default order.
      */
@@ -54,18 +58,24 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.clearPersonSort();
+        logger.fine("Cleared existing person list sort in model");
 
         if (sortOption == null) {
+            logger.fine("No sort option provided, resetting to default order");
             return new CommandResult(MESSAGE_DEFAULT_SUCCESS);
         }
 
         if (!model.hasPersonsOfType(sortOption.getRelatedClass())) {
+            logger.warning("No persons of type " + sortOption.getRelatedClass()
+                    + " found. Reset list to default order");
             return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
                     sortOption.getRoleAsString()));
         }
 
+        logger.fine("Updating sort with sort option: " + sortOption);
         updateSort(model);
 
+        logger.info("SortCommand executed successfully, sorted by " + sortOption);
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
     }
 
