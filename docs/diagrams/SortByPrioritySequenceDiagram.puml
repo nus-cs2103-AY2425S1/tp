@@ -1,0 +1,26 @@
+@startuml
+actor User as u
+
+u -> MainWindow : executeCommand(commandText)
+MainWindow -> LogicManager: execute(commandText)
+LogicManager -> AddressBookParser: parseCommand(commandText)
+AddressBookParser -> SortByPriorityCommandParser: SortByPriorityCommandParser()
+AddressBookParser -> SortByPriorityCommandParser: parse(args)
+SortByPriorityCommandParser -> SortByPriorityCommand: SortByPriorityCommand()
+alt args == "high"
+    SortByPriorityCommandParser -> PriorityHighToLowComparator : PriorityHighToLowComparator()
+    PriorityHighToLowComparator -> SortByPriorityCommand: bind to SortByPriorityCommand
+else args == "low"
+    SortByPriorityCommandParser -> PriorityLowToHighComparator : PriorityLowToHighComparator()
+    PriorityLowToHighComparator -> SortByPriorityCommand: bind to SortByPriorityCommand
+end
+SortByPriorityCommandParser -> AddressBookParser: return SortByPriorityCommand
+AddressBookParser -> LogicManager: return SortByPriorityCommand
+LogicManager -> SortByPriorityCommand: execute(model)
+SortByPriorityCommand -> Model: updatedSortedPersonList(comparator)
+SortByPriorityCommand -> CommandResult: CommandResult()
+SortByPriorityCommand -> LogicManager: return CommandResult
+LogicManager -> MainWindow: return CommandResult
+MainWindow -> u: display CommandResult content
+
+@enduml
