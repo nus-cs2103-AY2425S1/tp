@@ -268,7 +268,7 @@ If it is not or `currentCommandIndex` is `-1` which means the commandHistory is 
 ##### Adding command to history
 The `addCommandHistory(String commandText)` method will add the command text to the `commandHistory` arraylist and set the `currentCommandIndex` to the size of the `commandHistory` arraylist.
 This resets the `currentCommandIndex` to the end of the `commandHistory` arraylist after a new command is added. We set the `currentCommandIndex` to `size` instead of `size - 1`
-as the current command to be entered is not in the arraylist yet and the command that was just entered is at index `size -1`.
+as the current command to be entered is not in the arraylist yet and the command that was just entered is at index `size - 1`.
 
 
 Take a look at this example:
