@@ -18,6 +18,7 @@ import seedu.edulog.logic.commands.DisplayCalendarCommand;
 import seedu.edulog.logic.commands.EditCommand;
 import seedu.edulog.logic.commands.ExitCommand;
 import seedu.edulog.logic.commands.FindCommand;
+import seedu.edulog.logic.commands.GiftCommand;
 import seedu.edulog.logic.commands.HelpCommand;
 import seedu.edulog.logic.commands.ListCommand;
 import seedu.edulog.logic.commands.MarkAllCommand;
@@ -98,6 +99,9 @@ public class EduLogParser {
 
         case DisplayCalendarCommand.COMMAND_WORD:
             return new DisplayCalendarCommand();
+
+        case GiftCommand.COMMAND_WORD:
+            return new GiftCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
