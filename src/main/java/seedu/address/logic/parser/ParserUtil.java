@@ -170,7 +170,6 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         try {
-            System.out.println(trimmedDate);
             return LocalDate.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid date format. Please use YYYY-MM-DD.");
