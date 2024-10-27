@@ -47,7 +47,8 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**: NIL
 
 * **Documentation**:
-  * User Guide: NIL
+  * User Guide:
+    * Updated User Guide to include all features up to release `v1.4` [#131](https://github.com/AY2425S1-CS2103-F13-4/tp/pull/131)
   * Developer Guide:
     * Added use cases for company features [#45](https://github.com/AY2425S1-CS2103-F13-4/tp/pull/45)
 * **Community**:
