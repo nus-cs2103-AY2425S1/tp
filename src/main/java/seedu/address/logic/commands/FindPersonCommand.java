@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 public class FindPersonCommand extends FindCommand<Person> {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " person : Finds all appointments matching the following parameters.\n"
+            + " person : Finds all persons matching the following parameters.\n"
             + "To specify name, use the parameter n/[NAME] where [NAME] is a list of names, non-case-sensitive,"
             + "separated by spaces.\n"
             + "Parameters: n/[NAME]\n"
