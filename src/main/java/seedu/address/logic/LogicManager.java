@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandStack;
 import seedu.address.logic.commands.UndoCommand;
@@ -57,6 +58,7 @@ public class LogicManager implements Logic {
         if (!(command instanceof UndoCommand)) {
             commandStack.push(command);
         }
+        CommandHistory.addCommand(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
