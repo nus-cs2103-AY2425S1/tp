@@ -134,7 +134,9 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -359,9 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. No contacts stored in the System.
 
-  - 1a1. System informs Actor that they have no contacts stored.
-
-    Use case ends.
+  Use case ends.
 
 **Use case: UC3 - Delete a person**
 
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor request to see specific person.
+1.  Actor requests to see specific person's detail.
 2.  System shows person's contact details.
 
     Use case ends.
@@ -411,11 +411,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. No contacts match keywords.
 
-  - 1a1. System informs Actor that they have no contacts that match.
+  Use case ends.
 
-    Use case ends.
-
-**Use case: UC6 - Add notes to a person contact**
+**Use case: UC6 - Add note to a person contact**
 
 **MSS**
 
@@ -433,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 2b. The note name is invalid.
+- 2b. The note content is invalid.
 
   - 2b1. System shows an error message.
 
@@ -451,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The person is already pinned.
 
-  - 2a1. System shows duplicated pin message.
+  - 2a1. System shows already pinned message.
 
     Use case ends.
 
@@ -478,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC9 - Edit a note of a person contact**
+**Use case: UC9 - Edit note of a person contact**
 
 **MSS**
 
@@ -496,13 +494,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 2b. The note name is invalid.
+- 2b. The note index is invalid.
 
   - 2b1. System shows an error message.
 
     Use case ends.
 
-- 2c. The note index is invalid.
+- 2c. The note content is invalid.
 
   - 2c1. System shows an error message.
 
