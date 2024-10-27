@@ -195,7 +195,7 @@ public class TagAddCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearAddressBookCommand()));
 
         // different tag -> returns false
         Tag newStubTag = new Tag(VALID_TAG_WEDDING4);

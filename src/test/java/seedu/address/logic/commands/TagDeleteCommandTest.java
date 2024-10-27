@@ -179,7 +179,7 @@ public class TagDeleteCommandTest {
         assertFalse(standardDeleteCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardDeleteCommand.equals(new ClearCommand()));
+        assertFalse(standardDeleteCommand.equals(new ClearAddressBookCommand()));
 
         // different tag -> returns false
         Tag newStubTag1 = new Tag(VALID_TAG_WEDDING4);
