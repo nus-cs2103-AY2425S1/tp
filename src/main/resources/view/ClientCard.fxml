@@ -25,7 +25,6 @@
         <Label fx:id="phone" styleClass="card-details" text="\$phone" />
         <Label fx:id="email" styleClass="card-details" text="\$email" />
         <Label fx:id="address" styleClass="card-details" text="\$address" />
-        <Label fx:id="date" styleClass="card-details" text="\$date" />
       </VBox>
 
       <FlowPane fx:id="tags" styleClass="card-tags" />

@@ -1,16 +1,18 @@
-package seedu.ddd.testutil;
+package seedu.ddd.testutil.contact;
 
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_SERVICE_1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,6 @@ public class TypicalContacts {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withDate("2000-01-01")
             .withId(1)
             .build();
     public static final Vendor BENSON = new VendorBuilder()
@@ -47,7 +48,6 @@ public class TypicalContacts {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withDate("01/01/2000")
             .withId(3)
             .build();
     public static final Vendor DANIEL = new VendorBuilder()
@@ -64,7 +64,6 @@ public class TypicalContacts {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
-            .withDate("01 Jan 2000")
             .withId(5)
             .build();
     public static final Client FIONA = new ClientBuilder()
@@ -72,7 +71,6 @@ public class TypicalContacts {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
-            .withDate("31 Dec 2000")
             .withId(6)
             .build();
     public static final Vendor GEORGE = new VendorBuilder()
@@ -100,12 +98,23 @@ public class TypicalContacts {
             .build();
 
     // Manually added - Contacts' details found in {@code CommandTestUtil}
-    public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDate(VALID_DATE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Vendor BOB = new VendorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withService(VALID_SERVICE_BOB)
-            .withTags(VALID_TAG_FRIEND).build();
+    public static final Client VALID_CLIENT = new ClientBuilder()
+            .withName(VALID_CLIENT_NAME)
+            .withPhone(VALID_CLIENT_PHONE)
+            .withEmail(VALID_CLIENT_EMAIL)
+            .withAddress(VALID_CLIENT_ADDRESS)
+            .withTags(VALID_TAG_1)
+            .withId(VALID_CLIENT_ID)
+            .build();
+    public static final Vendor VALID_VENDOR = new VendorBuilder()
+            .withName(VALID_VENDOR_NAME)
+            .withPhone(VALID_VENDOR_PHONE)
+            .withEmail(VALID_VENDOR_EMAIL)
+            .withAddress(VALID_VENDOR_ADDRESS)
+            .withService(VALID_VENDOR_SERVICE_1)
+            .withTags(VALID_TAG_1, VALID_TAG_2)
+            .withId(VALID_VENDOR_ID)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -7,46 +7,61 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.ContactId;
+import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.EventId;
 
 class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
-    private final int eventId;
+
+    private final String name;
     private final String description;
-    private final List<JsonAdaptedContactId> clientIds = new ArrayList<>();
-    private final List<JsonAdaptedContactId> vendorIds = new ArrayList<>();
+    private final String date;
+    private final int eventId;
+
+    private final List<JsonAdaptedContactId> clientIds;
+    private final List<JsonAdaptedContactId> vendorIds;
 
     /**
      * Constructs a {@code JsonAdapted} with the given event details.
      */
     @JsonCreator
     public JsonAdaptedEvent(
-            @JsonProperty("description") String description,
-            @JsonProperty("clientIds") List<JsonAdaptedContactId> clientIds,
-            @JsonProperty("vendorIds") List<JsonAdaptedContactId> vendorIds,
-            @JsonProperty("eventId") int eventId
+        @JsonProperty("name") String name,
+        @JsonProperty("description") String description,
+        @JsonProperty("date") String date,
+        @JsonProperty("clientIds") List<JsonAdaptedContactId> clientIds,
+        @JsonProperty("vendorIds") List<JsonAdaptedContactId> vendorIds,
+        @JsonProperty("eventId") int eventId
     ) {
-        this.eventId = eventId;
+        this.name = name;
         this.description = description;
-        this.clientIds.addAll(clientIds);
-        this.vendorIds.addAll(vendorIds);
+        this.date = date;
+        this.clientIds = new ArrayList<>(clientIds);
+        this.vendorIds = new ArrayList<>(vendorIds);
+        this.eventId = eventId;
     }
 
     /**
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
+        name = source.getName().fullName;
         description = source.getDescription().description;
-        eventId = source.getEventId().eventId;
+        date = source.getDate().toString();
+
+        clientIds = new ArrayList<>();
         clientIds.addAll(source.getClientIds().stream()
                 .map(JsonAdaptedContactId::new)
                 .toList());
+        vendorIds = new ArrayList<>();
         vendorIds.addAll(source.getVendorIds().stream()
                 .map(JsonAdaptedContactId::new)
                 .toList());
+        eventId = source.getEventId().eventId;
     }
 
     /**
@@ -55,6 +70,15 @@ class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
@@ -64,12 +88,21 @@ class JsonAdaptedEvent {
         }
         final Description modelDescription = new Description(description);
 
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Date.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(date)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Date modelDate = new Date(date);
+
         if (!EventId.isValidEventId(eventId)) {
             throw new IllegalValueException(EventId.MESSAGE_CONSTRAINTS);
         }
         final EventId modelEventId = new EventId(eventId);
 
-        return new Event(modelDescription, modelEventId);
+        return new Event(modelName, modelDescription, modelDate, modelEventId);
     }
 
     /**

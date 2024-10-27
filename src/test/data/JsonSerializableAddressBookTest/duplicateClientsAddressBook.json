@@ -5,7 +5,6 @@
     "phone" : "12345678",
     "email" : "contact@abccatering.com",
     "address" : "Blk 123 Bukit Merah St 7",
-    "date" : "2000-01-01",
     "tags" : [ "vegetarian", "budget" ],
     "id" : 0,
     "eventIds": []
@@ -15,7 +14,6 @@
     "phone" : "12345678",
     "email" : "contact@abccatering.com",
     "address" : "Blk 123 Bukit Merah St 7",
-    "date" : "2000-01-01",
     "tags" : [ "vegetarian", "budget" ],
     "id" : 1,
     "eventIds": []

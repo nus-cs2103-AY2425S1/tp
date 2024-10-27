@@ -3,11 +3,11 @@ package seedu.ddd.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class AddressBookTest {
 
@@ -72,7 +72,9 @@ public class AddressBookTest {
     @Test
     public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addContact(ALICE);
-        Contact editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ClientBuilder(ALICE)
+                .withAddress(VALID_VENDOR_ADDRESS)
+                .withTags(VALID_TAG_1)
                 .build();
         assertTrue(addressBook.hasContact(editedAlice));
     }

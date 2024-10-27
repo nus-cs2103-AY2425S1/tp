@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.common.ContactId;
-import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class ContactContactIdPredicateTest {
 

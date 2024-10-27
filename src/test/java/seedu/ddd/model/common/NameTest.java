@@ -1,11 +1,10 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.common;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
 
 public class NameTest {
 

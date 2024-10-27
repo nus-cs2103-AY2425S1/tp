@@ -1,11 +1,11 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.common;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.ddd.commons.util.AppUtil;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

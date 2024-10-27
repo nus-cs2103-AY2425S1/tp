@@ -1,4 +1,4 @@
-package seedu.ddd.model.tag;
+package seedu.ddd.model.common;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,8 +10,8 @@ import seedu.ddd.commons.util.AppUtil;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names can contain alphabets, digits and dashes";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\-]+";
 
     public final String tagName;
 

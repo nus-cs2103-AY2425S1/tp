@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
-import static seedu.ddd.testutil.TypicalContacts.BENSON;
+import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContacts.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.ddd.testutil.TypicalEvents.WEDDING_A;
-import static seedu.ddd.testutil.TypicalEvents.WEDDING_B;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
+import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_B;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,6 @@ import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.event.common.predicate.DescriptionContainsKeywordsPredicate;
 import seedu.ddd.model.event.common.predicate.EventIdPredicate;
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListEventCommand.

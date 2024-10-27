@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.AddEventCommand.MESSAGE_DUPLICATE_EVENT;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_CLIENT_CONTACT_ID_SET;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_DESCRIPTION;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_EVENT_ID;
-import static seedu.ddd.testutil.EventBuilder.DEFAULT_VENDOR_CONTACT_ID_SET;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ID;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_CLIENT_CONTACT_ID_SET;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DATE;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_DESCRIPTION;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_ID;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_NAME;
+import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_CONTACT_ID_SET;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_1;
+import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DESCRIPTION_2;
+import static seedu.ddd.testutil.event.TypicalEvents.VALID_EVENT;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -33,82 +39,161 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.EventBuilder;
-import seedu.ddd.testutil.VendorBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
+import seedu.ddd.testutil.contact.VendorBuilder;
+import seedu.ddd.testutil.event.EventBuilder;
 
 public class AddEventCommandTest {
-    @Test
-    public void constructor_nullClientIds_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(null,
-                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
-    }
 
     @Test
-    public void constructor_nullVendorIds_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                null, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID));
+    public void constructor_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            null,
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        ));
     }
 
     @Test
     public void constructor_nullDescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, null, DEFAULT_EVENT_ID));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            null,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        ));
+    }
+
+    @Test
+    public void constructor_nullDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            DEFAULT_EVENT_DESCRIPTION,
+            null,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        ));
+    }
+
+
+    @Test
+    public void constructor_nullClientIds_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            null,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        ));
+    }
+
+    @Test
+    public void constructor_nullVendorIds_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            null,
+            DEFAULT_EVENT_ID
+        ));
     }
 
     @Test
     public void constructor_nullEventId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, null));
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            null
+        ));
     }
 
     @Test
     public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        CommandResult commandResult = new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        ).execute(modelStub);
+
         Event validEvent = new EventBuilder().build();
-
-        CommandResult commandResult = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID).execute(modelStub);
-
-        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
-                commandResult.getFeedbackToUser());
-
+        String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent));
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(List.of(validEvent), modelStub.eventsAdded);
     }
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        AddEventCommand addEventCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, DEFAULT_DESCRIPTION, DEFAULT_EVENT_ID);
         ModelStub modelStub = new ModelStubWithEvent();
-
+        AddEventCommand addEventCommand = new AddEventCommand(
+            VALID_EVENT.getName(),
+            DEFAULT_EVENT_DESCRIPTION,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        );
         assertThrows(CommandException.class,
                 MESSAGE_DUPLICATE_EVENT, () -> addEventCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        AddEventCommand addEventOneCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 1"), DEFAULT_EVENT_ID);
-        AddEventCommand addEventTwoCommand = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 2"), DEFAULT_EVENT_ID);
+        Description description1 = new Description(VALID_EVENT_DESCRIPTION_1);
+        AddEventCommand addEventCommand1 = new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            description1,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        );
+        Description description2 = new Description(VALID_EVENT_DESCRIPTION_2);
+        AddEventCommand addEventCommand2 = new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            description2,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        );
 
         // same object -> returns true
-        assertTrue(addEventOneCommand.equals(addEventOneCommand));
+        assertTrue(addEventCommand1.equals(addEventCommand1));
 
         // same values -> returns true
-        AddEventCommand addEventOneCommandCopy = new AddEventCommand(DEFAULT_CLIENT_CONTACT_ID_SET,
-                DEFAULT_VENDOR_CONTACT_ID_SET, new Description("Description 1"), DEFAULT_EVENT_ID);
-        assertTrue(addEventOneCommand.equals(addEventOneCommandCopy));
+        AddEventCommand addEventCommand3 = new AddEventCommand(
+            DEFAULT_EVENT_NAME,
+            description1,
+            DEFAULT_EVENT_DATE,
+            DEFAULT_EVENT_CLIENT_CONTACT_ID_SET,
+            DEFAULT_EVENT_VENDOR_CONTACT_ID_SET,
+            DEFAULT_EVENT_ID
+        );
+        assertTrue(addEventCommand1.equals(addEventCommand3));
 
         // different types -> returns false
-        assertFalse(addEventOneCommand.equals(1));
+        assertFalse(addEventCommand1.equals(1));
 
         // null -> returns false
-        assertFalse(addEventOneCommand.equals(null));
+        assertFalse(addEventCommand1.equals(null));
 
         // different person -> returns false
-        assertFalse(addEventOneCommand.equals(addEventTwoCommand));
+        assertFalse(addEventCommand1.equals(addEventCommand2));
     }
 
 
@@ -269,18 +354,18 @@ public class AddEventCommandTest {
         @Override
         public boolean hasClientId(ContactId contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(ClientBuilder.DEFAULT_ID));
+            return contactId.equals(new ContactId(VALID_CLIENT_ID));
         }
 
         @Override
         public boolean hasVendorId(ContactId contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VendorBuilder.DEFAULT_ID));
+            return contactId.equals(new ContactId(VALID_VENDOR_ID));
         }
 
         @Override
         public Contact getContact(ContactId contactId) {
-            if (contactId.equals(new ContactId(VALID_ID_AMY))) {
+            if (contactId.equals(new ContactId(VALID_CLIENT_ID))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();
@@ -314,18 +399,18 @@ public class AddEventCommandTest {
         @Override
         public boolean hasClientId(ContactId contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(ClientBuilder.DEFAULT_ID));
+            return contactId.equals(new ContactId(VALID_CLIENT_ID));
         }
 
         @Override
         public boolean hasVendorId(ContactId contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VendorBuilder.DEFAULT_ID));
+            return contactId.equals(new ContactId(VALID_VENDOR_ID));
         }
 
         @Override
         public Contact getContact(ContactId contactId) {
-            if (contactId.equals(new ContactId(VALID_ID_AMY))) {
+            if (contactId.equals(new ContactId(VALID_CLIENT_ID))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();

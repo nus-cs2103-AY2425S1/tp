@@ -1,6 +1,5 @@
 package seedu.ddd.storage;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -10,9 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.commons.util.JsonUtil;
-//import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
-//import seedu.ddd.testutil.TypicalAddressBook;
 
 public class JsonSerializableAddressBookTest {
 
@@ -27,16 +24,14 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_EVENTS_FILE = TEST_DATA_FOLDER.resolve("duplicateEventsAddressBook.json");
     private static final Path MISMATCH_ASSOCIATION_FILE = TEST_DATA_FOLDER.resolve("mismatchAddressBook.json");
 
-    /*
-    @Test
-    public void toModelType_typicalContactsFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
-                JsonSerializableAddressBook.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalContactsAddressBook = TypicalAddressBook.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalContactsAddressBook);
-    }
-    */
+    // @Test
+    // public void toModelType_typicalContactsFile_success() throws Exception {
+    //     JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
+    //             JsonSerializableAddressBook.class).get();
+    //     AddressBook addressBookFromFile = dataFromFile.toModelType();
+    //     AddressBook typicalContactsAddressBook = TypicalAddressBook.getTypicalAddressBook();
+    //     assertEquals(addressBookFromFile, typicalContactsAddressBook);
+    // }
 
     @Test
     public void toModelType_nonExistentContact_throwsIllegalValueException() throws Exception {
@@ -97,4 +92,5 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_ASSOCIATION_MISMATCH,
                 dataFromFile::toModelType);
     }
+
 }

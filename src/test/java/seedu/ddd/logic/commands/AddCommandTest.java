@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.VendorBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
+import seedu.ddd.testutil.contact.VendorBuilder;
 
 public class AddCommandTest {
 

@@ -19,11 +19,11 @@ import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.ParserUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.tag.Tag;
 
 //This class was generated with the help of ChatGPT for the logic to combine different predicates.
 /**

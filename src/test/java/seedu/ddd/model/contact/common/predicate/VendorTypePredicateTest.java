@@ -3,8 +3,8 @@ package seedu.ddd.model.contact.common.predicate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
-import static seedu.ddd.testutil.TypicalContacts.BOB;
+import static seedu.ddd.testutil.contact.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.contact.TypicalContacts.VALID_VENDOR;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class VendorTypePredicateTest {
     @Test
     public void test_contactIsAVendor_returnsTrue() {
         VendorTypePredicate predicate = new VendorTypePredicate();
-        assertTrue(predicate.test(BOB));
+        assertTrue(predicate.test(VALID_VENDOR));
     }
 
     @Test

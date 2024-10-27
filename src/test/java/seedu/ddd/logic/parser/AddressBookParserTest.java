@@ -21,10 +21,9 @@ import seedu.ddd.logic.commands.HelpCommand;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Contact;
-//import seedu.ddd.model.contact.common.Predicate.NameContainsKeywordsPredicate;
-import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.ContactUtil;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
+import seedu.ddd.testutil.contact.ClientBuilder;
+import seedu.ddd.testutil.contact.ContactUtil;
 
 public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();

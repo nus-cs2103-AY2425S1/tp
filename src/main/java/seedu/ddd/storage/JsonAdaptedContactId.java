@@ -8,6 +8,7 @@ import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.EventId;
 
 class JsonAdaptedContactId {
+
     private final int contactId;
 
     /**
@@ -19,7 +20,7 @@ class JsonAdaptedContactId {
     }
 
     /**
-     * Converts a given {@code EventId} into this class for Jackson use.
+     * Converts a given {@code ContactId} into this class for Jackson use.
      */
     public JsonAdaptedContactId(ContactId source) {
         contactId = source.contactId;
@@ -41,4 +42,5 @@ class JsonAdaptedContactId {
         }
         return new ContactId(contactId);
     }
+
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.testutil.EventBuilder;
+import seedu.ddd.testutil.event.EventBuilder;
 
 public class DescriptionContainsKeywordsPredicateTest {
 

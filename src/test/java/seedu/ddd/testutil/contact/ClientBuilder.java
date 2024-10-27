@@ -1,24 +1,24 @@
-package seedu.ddd.testutil;
+package seedu.ddd.testutil.contact;
 
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_TAGS;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.event.common.EventId;
-import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;
 
 /**
@@ -26,48 +26,37 @@ import seedu.ddd.model.util.SampleDataUtil;
  */
 public class ClientBuilder {
 
-    public static final String DEFAULT_NAME = VALID_NAME_AMY;
-    public static final String DEFAULT_PHONE = VALID_PHONE_AMY;
-    public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
-    public static final String DEFAULT_ADDRESS = VALID_ADDRESS_AMY;
-    public static final String DEFAULT_DATE = VALID_DATE_AMY;
-    public static final String DEFAULT_ID = VALID_ID_AMY;
-
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Date date;
     private Set<Tag> tags;
     private ContactId contactId;
     private Set<EventId> eventIds;
 
     /**
-     * Creates a {@code ClientBuilder} with the default details.
-     */
-    public ClientBuilder() {
-        name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        date = new Date(DEFAULT_DATE);
-        tags = new HashSet<>();
-        contactId = new ContactId(DEFAULT_ID);
-        eventIds = new HashSet<>();
-    }
-
-    /**
      * Initializes the ClientBuilder with the data of {@code clientToCopy}.
      */
     public ClientBuilder(Client clientToCopy) {
-        name = clientToCopy.getName();
-        phone = clientToCopy.getPhone();
-        email = clientToCopy.getEmail();
-        address = clientToCopy.getAddress();
-        date = clientToCopy.getDate();
+        name = new Name(clientToCopy.getName().fullName);
+        phone = new Phone(clientToCopy.getPhone().value);
+        email = new Email(clientToCopy.getEmail().value);
+        address = new Address(clientToCopy.getAddress().value);
         tags = new HashSet<>(clientToCopy.getTags());
-        contactId = clientToCopy.getId();
-        eventIds = new HashSet<>(clientToCopy.getEventIds());
+        contactId = new ContactId(clientToCopy.getId().contactId);
+    }
+
+    /**
+     * Creates a {@code ClientBuilder} with the default details.
+     */
+    public ClientBuilder() {
+        name = DEFAULT_CLIENT_NAME;
+        phone = DEFAULT_CLIENT_PHONE;
+        email = DEFAULT_CLIENT_EMAIL;
+        address = DEFAULT_CLIENT_ADDRESS;
+        tags = new HashSet<>(DEFAULT_CLIENT_TAGS);
+        contactId = DEFAULT_CLIENT_ID;
+        eventIds = new HashSet<>();
     }
 
     /**
@@ -111,17 +100,17 @@ public class ClientBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Client} that we are building.
+     * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
-    public ClientBuilder withDate(String date) {
-        this.date = new Date(date);
+    public ClientBuilder withId(int id) {
+        this.contactId = new ContactId(id);
         return this;
     }
 
     /**
      * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
-    public ClientBuilder withId(int id) {
+    public ClientBuilder withId(String id) {
         this.contactId = new ContactId(id);
         return this;
     }
@@ -134,8 +123,12 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Creates a {@code Client} from the current fields;
+     */
     public Client build() {
-        return new Client(name, phone, email, address, date, tags, contactId);
+        requireAllNonNull(name, phone, email, address, tags, contactId);
+        return new Client(name, phone, email, address, tags, contactId);
     }
 
 }

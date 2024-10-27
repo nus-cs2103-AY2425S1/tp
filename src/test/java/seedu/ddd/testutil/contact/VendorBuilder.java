@@ -1,35 +1,31 @@
-package seedu.ddd.testutil;
+package seedu.ddd.testutil.contact;
 
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_ADDRESS;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_EMAIL;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_ID;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_NAME;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_PHONE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_SERVICE;
+import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_TAGS;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Vendor objects.
  */
 public class VendorBuilder {
-    public static final String DEFAULT_NAME = VALID_NAME_BOB;
-    public static final String DEFAULT_PHONE = VALID_PHONE_BOB;
-    public static final String DEFAULT_EMAIL = VALID_EMAIL_BOB;
-    public static final String DEFAULT_ADDRESS = VALID_ADDRESS_BOB;
-    public static final String DEFAULT_SERVICE = VALID_SERVICE_BOB;
-    public static final String DEFAULT_ID = VALID_ID_BOB;
 
     private Name name;
     private Phone phone;
@@ -40,29 +36,29 @@ public class VendorBuilder {
     private ContactId contactId;
 
     /**
-     * Creates a {@code VendorBuilder} with the default details.
+     * Initializes the VendorBuilder with the data of {@code contactToCopy}.
      */
-    public VendorBuilder() {
-        name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        service = new Service(DEFAULT_SERVICE);
-        tags = new HashSet<>();
-        contactId = new ContactId(DEFAULT_ID);
+    public VendorBuilder(Vendor vendorToCopy) {
+        name = new Name(vendorToCopy.getName().fullName);
+        phone = new Phone(vendorToCopy.getPhone().value);
+        email = new Email(vendorToCopy.getEmail().value);
+        address = new Address(vendorToCopy.getAddress().value);
+        service = new Service(vendorToCopy.getService().value);
+        tags = new HashSet<>(vendorToCopy.getTags());
+        contactId = new ContactId(vendorToCopy.getId().contactId);
     }
 
     /**
-     * Initializes the VendorBuilder with the data of {@code contactToCopy}.
+     * Creates a {@code VendorBuilder} with the default details.
      */
-    public VendorBuilder(Vendor contactToCopy) {
-        name = contactToCopy.getName();
-        phone = contactToCopy.getPhone();
-        email = contactToCopy.getEmail();
-        address = contactToCopy.getAddress();
-        service = contactToCopy.getService();
-        tags = new HashSet<>(contactToCopy.getTags());
-        contactId = contactToCopy.getId();
+    public VendorBuilder() {
+        name = DEFAULT_VENDOR_NAME;
+        phone = DEFAULT_VENDOR_PHONE;
+        email = DEFAULT_VENDOR_EMAIL;
+        address = DEFAULT_VENDOR_ADDRESS;
+        service = DEFAULT_VENDOR_SERVICE;
+        tags = new HashSet<>(DEFAULT_VENDOR_TAGS);
+        contactId = DEFAULT_VENDOR_ID;
     }
 
     /**
@@ -121,7 +117,19 @@ public class VendorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ID} of the {@code Vendor} that we are building.
+     */
+    public VendorBuilder withId(String id) {
+        this.contactId = new ContactId(id);
+        return this;
+    }
+
+    /**
+     * Creates a {@code Vendor} from the current fields;
+     */
     public Vendor build() {
+        requireAllNonNull(name, phone, email, address, service, tags, contactId);
         return new Vendor(name, phone, email, address, service, tags, contactId);
     }
 }

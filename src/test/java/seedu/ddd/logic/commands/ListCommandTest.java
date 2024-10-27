@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.ddd.testutil.TypicalContacts.CARL;
-import static seedu.ddd.testutil.TypicalContacts.ELLE;
-import static seedu.ddd.testutil.TypicalContacts.FIONA;
+import static seedu.ddd.testutil.contact.TypicalContacts.CARL;
+import static seedu.ddd.testutil.contact.TypicalContacts.ELLE;
+import static seedu.ddd.testutil.contact.TypicalContacts.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;

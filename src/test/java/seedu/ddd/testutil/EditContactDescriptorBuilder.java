@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.model.common.Name;
+import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.tag.Tag;
 
 /**
  * A utility class to help with building EditContactDescriptor objects.

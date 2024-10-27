@@ -1,4 +1,4 @@
-package seedu.ddd.testutil;
+package seedu.ddd.testutil.event;
 
 import seedu.ddd.model.event.common.Event;
 
