@@ -113,7 +113,6 @@ public class Person {
         Set<Tag> newTagSet = new HashSet<>();
         newTagSet.addAll(this.getTags());
         newTagSet.remove(t);
-        assert newTagSet.contains(t);
         return new Person(this.name, this.phone, this.email, newTagSet);
     }
 
