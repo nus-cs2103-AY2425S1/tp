@@ -45,7 +45,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void getParseRegex_regex() {
+    public void regex_modelNeither() {
         Pattern pattern = parser.getParserRegex();
 
         Matcher matcher = pattern.matcher("cmd  zz  arg");
@@ -61,6 +61,25 @@ public class AddressBookParserTest {
         assertEquals("cmd", commandWord);
         assertEquals(ModelType.NEITHER, modelType);
         assertEquals("  zz  arg", arguments);
+    }
+
+    @Test
+    public void regex_modelNotNeither() {
+        Pattern pattern = parser.getParserRegex();
+
+        Matcher matcher = pattern.matcher("cmd  p  arg");
+        assert matcher.matches();
+
+        String commandWord = matcher.group("commandWord");
+        String modelTypeShortHand = matcher.group("modelType");
+        ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
+        String arguments = (modelType == ModelType.NEITHER)
+                ? matcher.group("combined")
+                : matcher.group("arguments");
+
+        assertEquals("cmd", commandWord);
+        assertEquals(ModelType.PERSON, modelType);
+        assertEquals("  arg", arguments);
     }
 
     @Test
