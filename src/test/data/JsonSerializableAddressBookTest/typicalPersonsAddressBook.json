@@ -23,6 +23,17 @@
           "date": "2024-10-11",
           "activities": ["Met with client"]
         }
+      ],
+      "properties": [
+        {
+          "address": "Block 14 Clementi Ave 3 #10-10",
+          "town": "Clementi",
+          "type": "HDB",
+          "size": "100",
+          "bedrooms": "2",
+          "bathrooms": "2",
+          "price": "600000"
+        }
       ]
     },
     {
@@ -47,13 +58,24 @@
           "date": "2024-10-01",
           "activities": ["Attended team meeting"]
         }
+      ],
+      "properties": [
+        {
+          "address": "23, Holland Road",
+          "town": "Holland Village",
+          "type": "Condo",
+          "size": "85",
+          "bedrooms": "1",
+          "bathrooms": "1",
+          "price": "800000"
+        }
       ]
     },
     {
       "name": "Carl Kurz",
       "phone": "95352563",
       "email": "heinz@example.com",
-      "address": "wall street",
+      "address": "Wall Street",
       "remark": "",
       "birthday": "2001-03-03",
       "tags": [],
@@ -63,13 +85,24 @@
           "date": "2021-09-10",
           "activities": ["Created"]
         }
+      ],
+      "properties": [
+        {
+          "address": "45, Marine Parade",
+          "town": "Marine Parade",
+          "type": "Landed",
+          "size": "300",
+          "bedrooms": "5",
+          "bathrooms": "4",
+          "price": "2500000"
+        }
       ]
     },
     {
       "name": "Daniel Meier",
       "phone": "87652533",
       "email": "cornelia@example.com",
-      "address": "10th street",
+      "address": "10th Street",
       "remark": "",
       "birthday": "2001-04-04",
       "tags": ["friends"],
@@ -79,13 +112,24 @@
           "date": "2012-02-19",
           "activities": ["Created"]
         }
+      ],
+      "properties": [
+        {
+          "address": "88, Orchard Road",
+          "town": "Orchard",
+          "type": "Condo",
+          "size": "120",
+          "bedrooms": "3",
+          "bathrooms": "2",
+          "price": "1500000"
+        }
       ]
     },
     {
       "name": "Elle Meyer",
       "phone": "9482224",
       "email": "werner@example.com",
-      "address": "michegan ave",
+      "address": "Michegan Ave",
       "remark": "",
       "birthday": "2001-05-05",
       "tags": [],
@@ -95,13 +139,24 @@
           "date": "2024-02-20",
           "activities": ["Created"]
         }
+      ],
+      "properties": [
+        {
+          "address": "99, Yishun Ave 11",
+          "town": "Yishun",
+          "type": "HDB",
+          "size": "95",
+          "bedrooms": "3",
+          "bathrooms": "2",
+          "price": "500000"
+        }
       ]
     },
     {
       "name": "Fiona Kunz",
       "phone": "9482427",
       "email": "lydia@example.com",
-      "address": "little tokyo",
+      "address": "Little Tokyo",
       "remark": "",
       "birthday": "2001-06-06",
       "tags": [],
@@ -111,13 +166,24 @@
           "date": "2018-01-29",
           "activities": ["Created"]
         }
+      ],
+      "properties": [
+        {
+          "address": "10, Serangoon Ave 5",
+          "town": "Serangoon",
+          "type": "Landed",
+          "size": "350",
+          "bedrooms": "4",
+          "bathrooms": "3",
+          "price": "2200000"
+        }
       ]
     },
     {
       "name": "George Best",
       "phone": "9482442",
       "email": "anna@example.com",
-      "address": "4th street",
+      "address": "4th Street",
       "remark": "",
       "birthday": "2001-07-07",
       "tags": [],
@@ -126,6 +192,17 @@
         {
           "date": "2019-12-11",
           "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "77, Bukit Timah Road",
+          "town": "Bukit Timah",
+          "type": "Condo",
+          "size": "70",
+          "bedrooms": "2",
+          "bathrooms": "1",
+          "price": "900000"
         }
       ]
     }

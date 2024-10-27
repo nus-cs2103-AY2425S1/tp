@@ -42,6 +42,8 @@ public class LogCommandTest {
         String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
+        System.out.println("MODEL:" + model.getAddressBook() + "\n");
+        System.out.println("EXPECTED MODEL:" + expectedModel.getAddressBook());
         assertCommandSuccess(logCommand, model, expectedMessage, expectedModel);
     }
 

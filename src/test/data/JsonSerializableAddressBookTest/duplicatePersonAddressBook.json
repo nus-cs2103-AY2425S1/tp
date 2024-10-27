@@ -22,21 +22,51 @@
           "date": "2024-10-11",
           "activities": ["Met with client"]
         }
+      ],
+      "properties": [
+        {
+          "address": "Block 14 Clementi Ave 3 #10-10",
+          "town": "Clementi",
+          "type": "HDB",
+          "size": "100",
+          "bedrooms": "2",
+          "bathrooms": "2",
+          "price": "600000"
+        }
       ]
     },
     {
       "name": "Alice Pauline",
       "phone": "94351253",
-      "email": "pauline@example.com",
-      "address": "4th street",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
       "remark": "",
-      "birthday": "2008-08-08",
-      "tags": [],
+      "birthday": "2001-01-01",
+      "tags": ["friends"],
       "dateOfCreation": "2024-01-12",
       "history": [
         {
           "date": "2024-01-12",
           "activities": ["Created"]
+        },
+        {
+          "date": "2024-10-10",
+          "activities": ["Attended seminar"]
+        },
+        {
+          "date": "2024-10-11",
+          "activities": ["Met with client"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "Block 14 Clementi Ave 3 #10-10",
+          "town": "Clementi",
+          "type": "HDB",
+          "size": "100",
+          "bedrooms": "2",
+          "bathrooms": "2",
+          "price": "600000"
         }
       ]
     }
