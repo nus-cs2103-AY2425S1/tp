@@ -385,9 +385,39 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ### Managing Appointments
-[To be filled up]
+
+#### Adding Appointments : `addAppt`
+
+Allows doctors to schedule an appointment with a patient.
+
+Format: `addAppt AppointmentName i/NRIC @d/DATE @t/TIME`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Adds Appointment Time and Appointment Name to the patient with the specified `NRIC` in MediBase3.
+> * Appointment time intervals cannot overlap with other existing appointment time intervals.
+> * You can schedule an appointment to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been added.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Deleting Appointments : `delAppt`
+
+Allows doctors to delete an appointment with a patient.
+
+Format: `delAppt i/NRIC @d/DATE @t/TIME`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> * Unlike addAppt, there is no need for AppointmentName preamble.
+> * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
+> * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
