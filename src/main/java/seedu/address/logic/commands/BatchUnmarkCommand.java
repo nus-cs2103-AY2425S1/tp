@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -13,13 +19,10 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-public class BatchUnmarkCommand extends Command{
+/**
+ * Unmarks the attendance of all students in the current list.
+ */
+public class BatchUnmarkCommand extends Command {
     public static final String COMMAND_WORD = "batch-unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -35,14 +38,14 @@ public class BatchUnmarkCommand extends Command{
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Person p : lastShownList) {
             if (p instanceof Student) {
                 Student studentToUnmark = (Student) p;
-                Student unmarkedStudent = createNewStudentWithMarkedAttendance(studentToUnmark);
+                Student unmarkedStudent = createNewStudentWithUnmarkedAttendance(studentToUnmark);
                 model.setPerson(p, unmarkedStudent);
             }
         }
@@ -58,7 +61,7 @@ public class BatchUnmarkCommand extends Command{
     /**
      * Creates and returns a {@code Student} with decremented AttendanceCount.
      */
-    public Student createNewStudentWithMarkedAttendance(Student studentToUnmark) {
+    public Student createNewStudentWithUnmarkedAttendance(Student studentToUnmark) {
         assert studentToUnmark != null;
 
         this.hasStudent = true;
@@ -73,7 +76,7 @@ public class BatchUnmarkCommand extends Command{
         if (currentAttendanceCountInt == 0) {
             return studentToUnmark;
         }
-        Integer newAttendanceCountInt= studentToUnmark.getAttendanceCount().integerCount() - 1;
+        Integer newAttendanceCountInt = studentToUnmark.getAttendanceCount().integerCount() - 1;
         String newAttendanceCountStr = newAttendanceCountInt.toString();
         AttendanceCount newAttendanceCount = new AttendanceCount(newAttendanceCountStr);
         return new Student(name, role, phone, email, address, tags, newAttendanceCount);

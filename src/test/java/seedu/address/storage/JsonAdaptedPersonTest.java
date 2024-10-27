@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 
@@ -41,6 +43,19 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+
+    @Test
+    public void toModelType_studentRole_returnsStudent() throws IllegalValueException {
+        JsonAdaptedPerson student = new JsonAdaptedPerson(ALICE);
+        assertTrue(student.toModelType() instanceof Student);
+    }
+
+    @Test
+    public void toModelType_parentRole_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson student = new JsonAdaptedPerson(DANIEL);
+        assertTrue(student.toModelType() instanceof Person);
+        assertFalse(student.toModelType() instanceof Student);
+    }
 
     @Test
     public void toModelTypePerson_validPersonDetails_returnsPerson() throws Exception {

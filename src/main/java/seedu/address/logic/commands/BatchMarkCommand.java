@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -13,14 +19,11 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-public class BatchMarkCommand extends Command{
+/**
+ * Marks the attendance of all students in the current list.
+ */
+public class BatchMarkCommand extends Command {
     public static final String COMMAND_WORD = "batch-mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -69,7 +72,7 @@ public class BatchMarkCommand extends Command{
         Email email = studentToMark.getEmail();
         Address address = studentToMark.getAddress();
         Set<Tag> tags = studentToMark.getTags();
-        Integer newAttendanceCountInt= studentToMark.getAttendanceCount().integerCount() + 1;
+        Integer newAttendanceCountInt = studentToMark.getAttendanceCount().integerCount() + 1;
         String newAttendanceCountStr = newAttendanceCountInt.toString();
         AttendanceCount newAttendanceCount = new AttendanceCount(newAttendanceCountStr);
         return new Student(name, role, phone, email, address, tags, newAttendanceCount);

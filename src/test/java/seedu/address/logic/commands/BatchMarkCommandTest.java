@@ -1,16 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.StudentBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -22,8 +11,21 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getParentOnlyAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
+
 
 
 public class BatchMarkCommandTest {
@@ -125,7 +127,7 @@ public class BatchMarkCommandTest {
     }
 
     @Test
-    public void toStringMethod () {
+    public void toStringMethod() {
         String expected = BatchMarkCommand.class.getCanonicalName() + "{}";
         BatchMarkCommand batchMarkCommand = new BatchMarkCommand();
         assertEquals(expected, batchMarkCommand.toString());
