@@ -42,7 +42,7 @@ public class ReminderManager {
         LocalDate latestDeadline = null;
 
         for (Person person : persons) {
-            var deadline = person.getDeadline();
+            Deadline deadline = person.getDeadline();
             if (!deadline.isOverdue()) {
                 LocalDate deadlineDate = deadline.value;
 
