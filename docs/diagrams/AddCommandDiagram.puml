@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
+participant ":AddCommandParser" as ACP LOGIC_COLOR
+participant "AddCommand" as AC LOGIC_COLOR
+participant "CommandResult" as CR LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "Model" as M MODEL_COLOR
+end box
+
+[-> LM : execute("add n/John Doe ...")
+activate LM
+
+LM -> ABP : parseCommand("add n/John Doe ...")
+activate ABP
+
+create ACP
+ABP -> ACP : create & parse("n/John Doe ...")
+activate ACP
+
+ACP -> ACP : validate & tokenize args
+deactivate ACP
+
+create AC
+ACP -> AC : create AddCommand
+deactivate ACP
+
+ABP --> LM : AddCommand (AC)
+deactivate ABP
+
+LM -> AC : execute(M)
+activate AC
+
+AC -> M : hasPerson(toAdd)
+activate M
+M --> AC : false (no duplicate)
+deactivate M
+
+AC -> M : addPerson(toAdd)
+activate M
+deactivate M
+
+create CR
+AC -> CR : create CommandResult("New person added")
+deactivate AC
+
+AC --> LM : CommandResult (CR)
+deactivate AC
+
+[<-- LM
+deactivate LM
+@enduml

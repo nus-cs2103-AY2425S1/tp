@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.MonthPaid;
 import seedu.address.ui.BarChartWindow;
@@ -20,9 +22,12 @@ public class BarChartCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Map<String, Integer> distributionOfMonthsPaid = new HashMap<>();
+        if (model.getFilteredPersonList().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_LIST_TO_VISUALIZE);
+        }
         model.getFilteredPersonList().forEach(person -> {
             assert person != null : "person should not be null";
             Set<MonthPaid> monthsPaid = person.getMonthsPaid();
