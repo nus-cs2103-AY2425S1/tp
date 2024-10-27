@@ -17,19 +17,21 @@ administrators.
 1. [Installation](#1-installation)
 2. [Command Instructions](#2-command-instructions)
    - [2.1 Viewing Help](#21-viewing-help--help)
-   - [2.2 Adding a Person](#22-adding-a-person-add)
-   - [2.3 Listing All Persons](#23-listing-all-persons-list)
-   - [2.4 Editing a Person](#24-editing-a-person-edit)
-   - [2.5 Locating Persons by Name](#25-locating-persons-by-name-find)
-   - [2.6 Deleting a Person](#26-deleting-a-person-delete)
-   - [2.7 Clearing All Entries](#27-clearing-all-entries-clear)
-   - [2.8 Exiting the Program](#28-exiting-the-program-exit)
-   - [2.9 Saving the Data](#29-saving-the-data)
-   - [2.10 Editing the Data File](#210-editing-the-data-file)
-   - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed-markpaid)
-   - [2.12 Displaying Pie Chart of Class Distribution](#212-displaying-pie-chart-of-class-distribution-pie)
-   - [2.13 Displaying Bar Chart](#213-displaying-bar-chart-bar)
-   - [2.14 Viewing Command History](#214-viewing-command-history-arrow-keys)
+   - [2.2 Adding a Person](#22-adding-a-person--add)
+   - [2.3 Deleting a Person](#23-deleting-a-person--delete)
+   - [2.4 Marking a Payment as Completed](#24-marking-a-payment-as-completed)
+   - [2.5 Editing a Person](#25-editing-a-person-edit)
+   - [2.6 Listing All Persons](#26-listing-all-persons-list)
+   - [2.7 Finding a Persons](#27-locating-persons-by-name-find)
+   - [2.8 Clearing All Entries](#28-clearing-all-entries-clear)
+   - [2.9 Undo/Redo](#29-undoredo)
+   - [2.10 Displaying Pie Chart of Class Distribution](#210-displaying-pie-chart-of-class-distribution-pie)
+   - [2.11 Displaying Bar Chart](#211-displaying-bar-chart-bar)
+   - [2.12 Viewing Command History](#212-viewing-command-history-arrow-keys)
+   - [2.13 Info Size Window](#213-info-size-window)
+   - [2.14 Editing the Data File](#214-editing-the-data-file)
+   - [2.15 Saving the Data](#215-saving-the-data)
+   - [2.16 Exiting the Program](#216-exiting-the-program-exit)
 3. [FAQ](#3-faq)
 
 
@@ -95,7 +97,7 @@ administrators.
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.1 Viewing Help : `help`
+### 2.1 Viewing Help: `help`
 
 Command Format: `help`
 
@@ -165,7 +167,7 @@ After entering the `list` command, all persons stored in the address book will b
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.4 Editing a Person: `edit`
+### 2.5 Editing a Person: `edit`
 
 Edits an existing person in the address book.
 
