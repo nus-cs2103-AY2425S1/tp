@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.ExpiryDate;
@@ -23,7 +24,9 @@ class JsonAdaptedPolicyTest {
     final double premiumAmount = 400.0;
     final double coverageAmount = 4000.0;
     final String expiryDate = "12/23/2024";
-    final List<JsonAdaptedClaim> claims = new ArrayList<>();
+    final List<JsonAdaptedClaim> claims = List.of(
+            new JsonAdaptedClaim("pending", "surgery")
+    );
 
     final PremiumAmount expectedPremiumAmount = new PremiumAmount(premiumAmount);
     final CoverageAmount expectedCoverageAmount = new CoverageAmount(coverageAmount);
@@ -39,6 +42,7 @@ class JsonAdaptedPolicyTest {
         assertEquals(expectedPremiumAmount, modelPolicy.getPremiumAmount());
         assertEquals(expectedCoverageAmount, modelPolicy.getCoverageAmount());
         assertEquals(expectedExpiryDate, modelPolicy.getExpiryDate());
+        assertEquals(ClaimStatus.PENDING, modelPolicy.getClaimList().get(0).getStatus());
     }
 
     @Test
