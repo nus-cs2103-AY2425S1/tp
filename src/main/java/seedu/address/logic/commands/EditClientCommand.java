@@ -109,7 +109,10 @@ public class EditClientCommand extends Command {
         if (personToEdit.getCar() != null) {
             Car carToEdit = personToEdit.getCar();
             editedCar = createEditedCar(carToEdit, editCarDescriptor);
-            if ((carToEdit.equals(editedCar) || model.hasCar(editedCar)) && isCarEdited) {
+            if (carToEdit.equals(editedCar) && isCarEdited) {
+                throw new CommandException(MESSAGE_FIELD_VALUES_SAME);
+            }
+            if (model.hasCar(editedCar) && isCarEdited) {
                 throw new CommandException(MESSAGE_DUPLICATE_CAR);
             }
         }
