@@ -12,30 +12,54 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Installation
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the `.jar` file of the latest release, from [here](https://github.com/AY2425S1-CS2103T-F08-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+2. Move the `.jar` file into an empty folder.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Open a command window in that folder.
+3.1 Right-click on the folder.
+3.2 Select `Open in Terminal`.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+4. Ensure that _Java 17_ is installed in your computer. 
+   <br>4.1 Type in `java –version`.
+   <br>4.2 Press `Enter` to run the command.
+   <br>4.3 Check the installed Java version, as circled below:
+   <img src="images/check_java_version.png" width="600px">
 
-   * `list` : Lists all contacts.
+5. Run ResearchRoster!
+   <br> 5.1 Type in `java -jar "researchroster.jar"`.
+   <br> 5.2 Press `Enter` to run the command.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+### Introduction to the GUI
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+Upon running ResearchRoster, a GUI similar to below should be displayed.
 
-   * `clear` : Deletes all contacts.
+[screenshot of GUI]
 
-   * `exit` : Exits the app.
+//point and list out important components, e.g., command box, output area, (list of) person cards etc.]
 
-1. Refer to the [Features](#features) below for details of each command.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ResearchRoster provides sample data upon first run.
+</div>
+
+### CLI Tutorial
+
+1. Type your desired command into the command box, as circled below.
+   <img src="images/type_command.png" width="600px">
+
+2. Press `Enter` to execute the command.
+
+Below are some example commands for you to try out!
+
+* `help`: Opens the help window.
+* `add n/Alice Lee e/alice@gmail.com g/F a/23 t/1A`: Adds a contact of the specified participant to the address book.
+* `delete 3`: Deletes the 3rd contact displayed in the list.
+* `list`: Lists all contacts.
+* `exit`: Exits ResearchRoster.
+
+_Refer to the [Features](#features) section for details of each command!_
 
 --------------------------------------------------------------------------------------------------------------------
 
