@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,10 +36,12 @@ public class AddToConsultCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to the Consultation: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_NAME
-            = "%s is already added to the consultation!";
-    public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_INDEX
-            = "%s at index %d is already added to the consultation!";
+
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student(s) %s not found";
+    public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_NAME =
+            "%s is already added to the consultation!";
+    public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_INDEX =
+            "%s at index %d is already added to the consultation!";
 
 
 
@@ -80,7 +81,8 @@ public class AddToConsultCommand extends Command {
 
         for (Name studentName : studentNames) {
             Student student = model.findStudentByName(studentName)
-                    .orElseThrow(() -> new CommandException("Student not found: " + studentName));
+                    .orElseThrow(() -> new CommandException(
+                            String.format(MESSAGE_STUDENT_NOT_FOUND, studentName)));
             try {
                 editedConsultation.addStudent(student);
             } catch (DuplicateStudentException e) {

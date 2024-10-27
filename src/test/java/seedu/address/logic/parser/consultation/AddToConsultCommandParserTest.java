@@ -18,21 +18,20 @@ import seedu.address.model.student.Name;
 
 public class AddToConsultCommandParserTest {
 
+    private static final List<Index> EMPTY_INDEX_LIST = new ArrayList<>();
+    private static final List<Name> EMPTY_NAME_LIST = new ArrayList<>();
+    private static final String JOHN_STRING = "John Doe";
+    private static final Name JOHN_NAME = new Name(JOHN_STRING);
+    private static final String HARRY_STRING = "Harry Ng";
+    private static final Name HARRY_NAME = new Name(HARRY_STRING);
+    private static final String FIRST_INDEX_STRING = "1";
+    private static final Index FIRST_INDEX = Index.fromOneBased(Integer.parseInt(FIRST_INDEX_STRING));
+    private static final String SECOND_INDEX_STRING = "2";
+    private static final Index SECOND_INDEX = Index.fromOneBased(Integer.parseInt(SECOND_INDEX_STRING));
+    private static final String INVALID_INDEX_NEGATIVE = "-1";
+    private static final String INVALID_INDEX_LETTERS = "ABC";
+
     private AddToConsultCommandParser parser = new AddToConsultCommandParser();
-
-    private final List<Index> EMPTY_INDEX_LIST = new ArrayList<>();
-    private final List<Name> EMPTY_NAME_LIST = new ArrayList<>();
-    private final String JOHN_STRING = "John Doe";
-    private final Name JOHN_NAME = new Name(JOHN_STRING);
-    private final String HARRY_STRING = "Harry Ng";
-    private final Name HARRY_NAME = new Name(HARRY_STRING);
-    private final String FIRST_INDEX_STRING = "1";
-    private final Index FIRST_INDEX = Index.fromOneBased(Integer.parseInt(FIRST_INDEX_STRING));
-    private final String SECOND_INDEX_STRING = "2";
-    private final Index SECOND_INDEX = Index.fromOneBased(Integer.parseInt(SECOND_INDEX_STRING));
-    private final String INVALID_INDEX_NEGATIVE = "-1";
-    private final String INVALID_INDEX_LETTERS = "ABC";
-
 
 
     @Test
