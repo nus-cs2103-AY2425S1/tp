@@ -29,8 +29,16 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.findcommand.FindAddressCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.findcommand.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindWeddingCommand;
+import seedu.address.logic.commands.vendor.AddVendorCommand;
+import seedu.address.logic.commands.vendor.AssignVendorCommand;
+import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
@@ -38,7 +46,13 @@ import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
+import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
 import seedu.address.model.task.Task;
@@ -48,6 +62,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TypicalTasks;
+import seedu.address.testutil.VendorBuilder;
+
 
 public class AddressBookParserTest {
 
@@ -89,11 +105,51 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findAddress() throws Exception {
+        List<String> keywords = Arrays.asList("Jurong West Street");
+        FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " a/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findEmail() throws Exception {
+        List<String> keywords = Arrays.asList("sally@gmail.com", "bob@example.com");
+        FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " e/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findPhone() throws Exception {
+        List<String> keywords = Arrays.asList("99394835");
+        FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " p/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findTag() throws Exception {
+        List<String> keywords = Arrays.asList("florist");
+        FindTagCommand command = (FindTagCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " t/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findWedding() throws Exception {
+        List<String> keywords = Arrays.asList("Snoopy's", "wedding");
+        FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " w/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -204,6 +260,28 @@ public class AddressBookParserTest {
     public void parseCommand_listTask() throws Exception {
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD) instanceof ListTasksCommand);
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD + " 3") instanceof ListTasksCommand);
+    }
+
+    @Test
+    public void parseCommand_assignVendor() throws Exception {
+        AssignVendorCommand command = (AssignVendorCommand) parser.parseCommand(
+                AssignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new AssignVendorCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_unassignVendor() throws Exception {
+        UnassignVendorCommand command = (UnassignVendorCommand) parser.parseCommand(
+                UnassignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new UnassignVendorCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_addVendor() throws Exception {
+        Vendor vendor = new VendorBuilder().build();
+        String userInput = AddVendorCommand.COMMAND_WORD + " n/Alison Longwood";
+        AddVendorCommand command = (AddVendorCommand) parser.parseCommand(userInput);
+        assertEquals(new AddVendorCommand(vendor), command);
     }
 
     @Test

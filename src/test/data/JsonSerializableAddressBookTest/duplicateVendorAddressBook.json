@@ -1,0 +1,27 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "friends" ]
+  }],
+  "vendors": [{
+    "name": "Alice Pauline",
+    "phone": "728373874",
+    "email": "alice@gmail.com",
+    "address": "364 Tampines East, #01-039",
+    "tags": [ "florist" ],
+    "tasks": []
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "friends" ],
+    "tasks": []
+  }],
+  "tags": ["florist", "friends"],
+  "weddings": [],
+  "tasks": []
+}

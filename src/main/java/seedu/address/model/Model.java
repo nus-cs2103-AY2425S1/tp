@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -76,6 +77,23 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Returns true if a vendor with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasVendor(Person person);
+
+    /**
+     * Assigns the given person to be a vendor.
+     * {@code vendor} must not already exist as a vendor in the address book.
+     */
+    void assignVendor(Person person);
+
+    /**
+     * Unassigns the vendor to just be a normal person contact in the WedLinker.
+     */
+    void unassignVendor(Person person);
+
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -86,6 +104,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered vendors list */
+    ObservableList<Vendor> getFilteredVendorList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.

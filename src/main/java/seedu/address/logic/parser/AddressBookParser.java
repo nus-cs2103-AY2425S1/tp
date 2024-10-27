@@ -24,6 +24,9 @@ import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.vendor.AddVendorCommand;
+import seedu.address.logic.commands.vendor.AssignVendorCommand;
+import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
@@ -31,6 +34,9 @@ import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.vendor.AddVendorCommandParser;
+import seedu.address.logic.parser.vendor.AssignVendorCommandParser;
+import seedu.address.logic.parser.vendor.UnassignVendorCommandParser;
 import seedu.address.logic.parser.wedding.AssignWeddingCommandParser;
 import seedu.address.logic.parser.wedding.CreateWeddingCommandParser;
 import seedu.address.logic.parser.wedding.DeleteWeddingCommandParser;
@@ -88,9 +94,13 @@ public class AddressBookParser {
         case UntagCommand.COMMAND_WORD -> new UntagCommandParser().parse(arguments);
         case AssignWeddingCommand.COMMAND_WORD -> new AssignWeddingCommandParser().parse(arguments);
         case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
+        case AssignVendorCommand.COMMAND_WORD -> new AssignVendorCommandParser().parse(arguments);
+        case AddVendorCommand.COMMAND_WORD -> new AddVendorCommandParser().parse(arguments);
+        case UnassignVendorCommand.COMMAND_WORD -> new UnassignVendorCommandParser().parse(arguments);
         case CreateTaskCommand.COMMAND_WORD -> new CreateTaskCommandParser().parse(arguments);
         case ListTasksCommand.COMMAND_WORD -> new ListTasksCommand();
         case DeleteTaskCommand.COMMAND_WORD -> new DeleteTaskCommandParser().parse(arguments);
+
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
