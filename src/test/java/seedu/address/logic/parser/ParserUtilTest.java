@@ -15,8 +15,12 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Subject;
+import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
 
 
 
@@ -25,15 +29,19 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_COST_AMOUNT = "+123.12";
     private static final String INVALID_HOUR = "+0.75";
     private static final String INVALID_SUBJECT = "Physics!!";
+    private static final String INVALID_SCHEDULE = "Monday 1600-1800";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_COST_AMOUNT = "300.25";
     private static final String VALID_HOUR = "12.5";
     private static final String VALID_SUBJECT = "Mathematics";
+    private static final String VALID_SCHEDULE = "Monday-1600-1800";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -151,6 +159,72 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePaidAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaidAmount((String) null));
+    }
+
+    @Test
+    public void parsePaidAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePaidAmount(INVALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithoutWhitespace_returnsPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(VALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parsePaidAmount_validValueWithWhitespace_returnsTrimmedPaidAmount() throws Exception {
+        PaidAmount expectedPaidAmount = new PaidAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedPaidAmount, ParserUtil.parsePaidAmount(WHITESPACE + VALID_COST_AMOUNT + WHITESPACE));
+    }
+
+    @Test
+    public void parseRate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRate((String) null));
+    }
+
+    @Test
+    public void parseRate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate(INVALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parseRate_validValueWithoutWhitespace_returnsRate() throws Exception {
+        Rate expectedRate = new Rate(VALID_COST_AMOUNT);
+        assertEquals(expectedRate, ParserUtil.parseRate(VALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parseRate_validValueWithWhitespace_returnsTrimmedRate() throws Exception {
+        Rate expectedRate = new Rate(VALID_COST_AMOUNT);
+        assertEquals(expectedRate, ParserUtil.parseRate(WHITESPACE + VALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parseOwedAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOwedAmount((String) null));
+    }
+
+    @Test
+    public void parseOwedAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOwedAmount(INVALID_COST_AMOUNT));
+    }
+
+    @Test
+    public void parseOwedAmount_validValueWithWhitespace_returnsTrimmedOwedAmount() throws Exception {
+        OwedAmount expectedOwedAmount = new OwedAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedOwedAmount, ParserUtil.parseOwedAmount(VALID_COST_AMOUNT + WHITESPACE));
+    }
+
+    @Test
+    public void parseOwedAmount_validValueWithoutWhitespace_returnsOwedAmount() throws Exception {
+        OwedAmount expectedOwedAmount = new OwedAmount(VALID_COST_AMOUNT);
+        assertEquals(expectedOwedAmount, ParserUtil.parseOwedAmount(VALID_COST_AMOUNT));
+    }
+
+    @Test
     public void parseHour_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseHour((String) null));
     }
@@ -161,7 +235,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHour_validValueWithourWhitespace_returnsHour() throws Exception {
+    public void parseHour_validValueWithoutWhitespace_returnsHour() throws Exception {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
@@ -172,6 +246,30 @@ public class ParserUtilTest {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(hourWithWhitespace));
     }
+
+    @Test
+    public void parseSchedule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSchedule((String) null));
+    }
+
+    @Test
+    public void parseSchedule_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSchedule(INVALID_SCHEDULE));
+    }
+
+    @Test
+    public void parseSchedule_validValueWithourWhitespace_returnsSchedule() throws Exception {
+        Schedule expectedSchedule = ParserUtil.parseSchedule(VALID_SCHEDULE);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(VALID_SCHEDULE));
+    }
+
+    @Test
+    public void parseSchedule_validValueWithWhitespace_returnsTrimmedSchedule() throws Exception {
+        String scheduleWithWhitespace = WHITESPACE + VALID_SCHEDULE + WHITESPACE;
+        Schedule expectedSchedule = ParserUtil.parseSchedule(VALID_SCHEDULE);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(scheduleWithWhitespace));
+    }
+
     @Test
     public void parseAmount_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
