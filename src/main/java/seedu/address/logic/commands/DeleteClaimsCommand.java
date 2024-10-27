@@ -22,6 +22,8 @@ import seedu.address.model.policy.PolicyType;
 
 /**
  * Deletes a claim from an existing policy in the address book.
+ * This command allows the user to remove a specified claim from a policy type of a person identified by their index.
+ * If no matching person, policy type, or claim is found, an appropriate error message is returned.
  */
 public class DeleteClaimsCommand extends Command {
 
@@ -66,6 +68,14 @@ public class DeleteClaimsCommand extends Command {
         this.claimDescription = claimDescription;
     }
 
+    /**
+     * Executes the delete claim command by removing the specified claim from a person's policy.
+     * Updates the model if successful, or throws a CommandException if the person, policy, or claim is invalid.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return A CommandResult indicating the outcome of the command execution.
+     * @throws CommandException If the index is invalid, the policy type is not found, or no matching claim found.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -82,6 +92,13 @@ public class DeleteClaimsCommand extends Command {
         return new CommandResult(successMessage);
     }
 
+    /**
+     * Retrieves the person from the model based on the provided index.
+     *
+     * @param model The model containing the list of persons.
+     * @return The person at the specified index.
+     * @throws CommandException If the person index is invalid.
+     */
     private Person getPersonFromModel(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -90,9 +107,15 @@ public class DeleteClaimsCommand extends Command {
         return lastShownList.get(personIndex.getZeroBased());
     }
 
+    /**
+     * Deletes the specified claim from the given policy.
+     *
+     * @param policy The policy from which the claim is to be removed.
+     * @throws CommandException If no matching claim is found.
+     */
     private void deleteClaimFromPolicy(Policy policy) throws CommandException {
         Claim claimToDelete = new Claim(claimStatus, claimDescription);
-        boolean claimRemoved = policy.getClaimList().remove(claimToDelete);
+        boolean claimRemoved = policy.removeClaim(claimToDelete);
         if (!claimRemoved) {
             throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
         }
@@ -110,12 +133,25 @@ public class DeleteClaimsCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Formats the success message after deleting a claim.
+     *
+     * @param person The person whose claim was deleted.
+     * @return The formatted success message.
+     */
     private String formatSuccessMessage(Person person) {
         return String.format(MESSAGE_DELETE_CLAIM_SUCCESS, policyType, person.getName(), claimStatus, claimDescription);
     }
 
 
-
+    /**
+     * Finds the policy of the specified type for the given person.
+     *
+     * @param person     The person whose policies are to be searched.
+     * @param policyType The type of policy to find.
+     * @return The policy of the specified type.
+     * @throws CommandException If no policy of the specified type is found.
+     */
     private Policy findPolicyByType(Person person, PolicyType policyType) throws CommandException {
         Optional<Policy> policyOptional = person.getPolicies().stream()
                 .filter(policy -> policy.getType().equals(policyType))

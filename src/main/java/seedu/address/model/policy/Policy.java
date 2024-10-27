@@ -122,21 +122,23 @@ public abstract class Policy {
     }
 
     /**
-     * Add a claim to this policy's claim set.
+     * Adds a claim to this policy's claim set.
      *
      * @param claim The claim to add.
+     * @return True if the claim was added successfully, false if it was already present.
      */
-    public void addClaim(Claim claim) {
-        claimList.add(claim);
+    public boolean addClaim(Claim claim) {
+        return claimList.add(claim);
     }
 
     /**
-     * Remove a claim from this policy's claim set.
+     * Removes a claim from this policy's claim set.
      *
      * @param claim The claim to remove.
+     * @return True if the claim was removed successfully, false if it was not found.
      */
-    public void removeClaim(Claim claim) {
-        claimList.remove(claim);
+    public boolean removeClaim(Claim claim) {
+        return claimList.remove(claim);
     }
 
     @Override
