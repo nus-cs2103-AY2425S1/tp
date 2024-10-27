@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TalentConnect is a **desktop app catered to third-party recruiters, optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). It boasts specialised features for 
+managing your candidates, jobs, and companies, to help elevate your work in recruitment.
+If you can type fast, TalentConnect can help you complete your recruitment management tasks 
+faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,28 +18,28 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list contact` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add contact n/John Doe p/98765432 e/johnd@example.com r/Software Engineer` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete contact 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contents in the address book.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,13 +50,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[s/SKILL]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -65,61 +69,99 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact : `add contact`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of skills (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add contact n/John Doe p/98765432 e/johnd@example.com r/Software Engineer`
+* `add contact n/Betsy Crowe s/Python e/betsycrowe@example.com r/Data Scientist p/1234567 s/Excel`
 
-### Listing all persons : `list`
+### Adding a job : `add job`
 
-Shows a list of all persons in the address book.
+Adds a job to the address book. 
+The company attributed to the job being added must already 
+be in the address book.
 
-Format: `list`
+Format: `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Make sure to match job names and requirements to contact roles and skills to better utilise other features
+</div>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
+* `add job n/Data Scientist c/Apple s/90000 d/Needs to know AI s/Python`
 
-### Locating persons by name: `find`
+### Adding a company : `add company`
 
-Finds persons whose names contain any of the given keywords.
+Adds a company to the address book.
+
+Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+
+Examples:
+* `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
+* `add company n/Apple a/12 Ang Mo Kio Street 64, Singapore 569088 b/25 p/64815511`
+
+### Listing all contacts : `list contact`
+
+Shows a list of all contacts in the address book.
+
+Format: `list contact`
+
+### Listing all jobs : `list job`
+
+Shows a list of all jobs in the address book.
+
+Format: `list job`
+
+### Listing all companies : `list company`
+
+Shows a list of all companies in the address book.
+
+Format: `list company`
+
+### Editing a contact : `edit`
+
+Edits an existing contact in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing skills, the existing skills of the contact will be removed i.e. adding of skills is not cumulative.
+* You can remove all the contact’s skills by typing `s/` without
+    specifying any skills after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
+
+### Locating contacts by name : `find`
+
+Finds all contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -127,19 +169,123 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete contact`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
-Format: `delete INDEX`
+Format: `delete contact INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list contact` followed by `delete contact 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete contact 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a job : `delete job`
+
+Deletes the specified job from the address book.
+
+Format: `delete job INDEX`
+
+* Deletes the job at the specified `INDEX`.
+* The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a job already matched with a contact removes the match from the contact as well.
+
+Examples:
+* `list job` followed by `delete job 2` deletes the 2nd job in the address book.
+* If the job at index 2 is matched with contact at index 1, `delete job 2` will remove the 
+match from the contact at index 1.
+
+### Deleting a company : `delete company`
+
+Deletes the specified company from the address book.
+
+Format: `delete company INDEX`
+
+* Deletes the company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a company with jobs attributed to it also causes those jobs to be deleted.
+
+Examples:
+* `list company` followed by `delete company 2` deletes the 2nd company in the address book.
+* If the company at index 1 has a job attributed to it, `delete company 1` will also delete the job.
+
+### Screening contacts by a job's name : `screen job`
+
+Screens the list of contacts in the address book with the name of the
+job specified.
+
+Format: `screen job INDEX`
+
+* Uses the name of the job at the specified `INDEX` to filter the 
+list of contacts to contacts with role matching the name.
+* The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The filter is case-insensitive i.e. `Cleaner` will match `cleaner`.
+
+Examples:
+* If the job at index 1 has name `Software Engineer`, `screen job 1` will
+show a contact with role `Software Engineer`.
+* If the job at index 2 has name `Data Scientist`, `screen job 2` will 
+show a contact with role `data scientist`.
+
+### Matching a contact with a job : `match`
+
+Matches a contact to a job.
+
+Format: `match CONTACT_INDEX JOB_INDEX`
+
+* Matches the contact at the specified `CONTACT_INDEX` and the job
+at the specified `JOB_INDEX` together.
+* The contact index refers to the index number shown in the displayed contact list.
+* The job index refers to the index number shown in the displayed job list.
+* Both indices **must be positive integers** 1, 2, 3, …​
+* Both the contact and job specified **cannot already be matched**.
+
+Examples:
+* `match 1 2` will match the contact at index 1 and job at index 2 together.
+* `match 2 3` will match the contact at index 2 and job at index 3 together.
+
+### Undoing a matched contact and job : `unmatch`
+
+Undoes a matching between a contact and job.
+
+Format: `unmatch CONTACT_INDEX JOB_INDEX`
+
+* Undoes the matching of a contact at the specified `CONTACT_INDEX` and a job
+at the specified `JOB_INDEX`.
+* The contact index refers to the index number shown in the displayed contact list.
+* The job index refers to the index number shown in the displayed job list.
+* Both indices **must be positive integers** 1, 2, 3, …​
+* The contact and job **must already be matched together**.
+
+Examples:
+* `unmatch 2 2` will undo the matching between the contact at index 2 and
+the job at index 2 if they were matched beforehand.
+* If `match 1 2` was called previously, calling `unmatch 1 2` will undo the matching
+if the shown list was in the same condition as when the previous command was called.
+
+### Viewing jobs and contacts associated with a company : `view company`
+
+Views all jobs and contacts currently associated with the specified company.
+
+Format: `view company INDEX`
+
+* Views all contacts and jobs associated with a company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Using this command **requires all lists to be fully shown beforehand**.
+
+Examples:
+* If a job is from a company at index 1, `view company 1` will show the job
+in the job list.
+* If a job is from a company at index 2 and the job is matched with a contact,
+`view company 2` will show the job in the job list 
+and the contact in the contact list.
 
 ### Clearing all entries : `clear`
 
@@ -159,11 +305,13 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file:<br>
+`[JAR file location]/data/addressbook.json`.<br>
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -188,12 +336,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                               |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**   | `list`                                                                                                                                                                |
+| **Help**   | `help`                                                                                                                                                                |
