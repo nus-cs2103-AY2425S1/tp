@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AttendCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -44,6 +45,18 @@ import seedu.address.testutil.StudentUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_exceedCharLimit_throwsParseException() {
+        String testString1 = "0".repeat(501);
+        String testString2 = "a".repeat(10000);
+        assertThrows(ParseException.class, Messages.MESSAGE_EXCEED_MAX_LENGTH, () -> {
+            parser.parseCommand(testString1);
+        });
+        assertThrows(ParseException.class, Messages.MESSAGE_EXCEED_MAX_LENGTH, () -> {
+            parser.parseCommand(testString2);
+        });
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
