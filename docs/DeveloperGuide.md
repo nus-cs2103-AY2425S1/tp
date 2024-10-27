@@ -251,9 +251,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Owe feature
 
-_{Explain here how the data archiving feature will be implemented}_
+The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
+<puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
+
+#### Design considerations:
+
+**Aspect: How owe executes:**
+
+* **Alternative 1 (current choice):** Calculations for amount owed done by UGTeach.
+    * Pros: User friendly.
+    * Cons: May have performance issues due to the need to fetch data and perform calculations.
+
+* **Alternative 2:** Calculations for amount owed done by the user.
+    * Pros: Easy to implement.
+    * Cons: Might not be user-friendly as user would need to find out what is the 
+    tuition rate charged and calculate how much tuition fee did the student owe.
 
 
 --------------------------------------------------------------------------------------------------------------------
