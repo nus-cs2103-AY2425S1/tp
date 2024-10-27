@@ -37,7 +37,7 @@ public class DeleteAssignmentCommand extends Command {
         }
 
         model.deleteAssignment(assignment);
-        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignment.getTitle()));
+        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignment.toStringWithoutStats()));
     }
 
     @Override

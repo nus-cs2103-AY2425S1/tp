@@ -137,4 +137,12 @@ public class Assignment {
                     + " (" + numOfCompletedStudents + " student has completed!)";
         }
     }
+
+    /**
+     * Returns formatted string of the assignment with only title and due date, without completion statistics.
+     */
+    public String toStringWithoutStats() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        return title + " due on " + formatter.format(dueDate);
+    }
 }

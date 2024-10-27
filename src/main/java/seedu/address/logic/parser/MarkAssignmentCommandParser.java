@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
@@ -25,8 +26,9 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
     public MarkAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        String indexProvided = argMultimap.getPreamble();
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || indexProvided.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE));
         }
@@ -34,10 +36,10 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(indexProvided);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE), pe);
+                    String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX));
         }
 
         String title = argMultimap.getValue(PREFIX_NAME).get();

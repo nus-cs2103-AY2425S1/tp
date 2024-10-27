@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -15,7 +14,6 @@ import java.util.Date;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
@@ -144,7 +142,8 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(dueDateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("The specified date and time does not exist, please check again!" + e.getMessage());
+            throw new ParseException("The specified date and time does not exist, please check again!"
+                    + e.getMessage());
         }
     }
 }
