@@ -61,6 +61,22 @@ public class Car {
     }
 
     /**
+     * Returns true if both Cars have the same Vrn or Vin.
+     * This defines a weaker notion of equality between two Cars.
+     */
+    public boolean hasMatchingVrnAndVin(Car otherCar) {
+        if (otherCar == this) {
+            return true;
+        }
+
+        if (otherCar == null) {
+            return false;
+        }
+
+        return this.vrn.equals(otherCar.getVrn()) && this.vin.equals(otherCar.getVin());
+    }
+
+    /**
      * Returns true if both Cars have the same CarMake and CarModel.
      * This defines a weaker notion of equality between two Cars.
      */
