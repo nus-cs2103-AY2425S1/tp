@@ -96,21 +96,21 @@ Adds a student to UG Teach.
 
 ##### Constraints
 
-* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
+* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
 * **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
-      <i>Example: </i> `12.00`, `0.0` or `7`
+      <i>Example: </i> `12.00`, `0.0` or `7`.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
-`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` and `GP`
+`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
 
 </box>
 
 <box type="tip" header="##### Tips">
 
-* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit).
 * <b>RATE</b> is the tuition fee per hour.
     
 </box>
