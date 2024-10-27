@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,9 +16,7 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.model.policy.PremiumAmount;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 class JsonAdaptedPolicy {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Policy's %s field is missing!";
@@ -49,7 +51,7 @@ class JsonAdaptedPolicy {
         this.premiumAmount = source.getPremiumAmount().value;
         this.coverageAmount = source.getCoverageAmount().value;
         this.expiryDate = source.getExpiryDate().toString();
-        this.claims.addAll(source.getClaimList().stream()
+        this.claims.addAll(source.getList().stream()
                 .map(JsonAdaptedClaim::new)
                 .collect(Collectors.toList()));
     }
@@ -93,7 +95,8 @@ class JsonAdaptedPolicy {
         }
         final ClaimList modelClaims = new ClaimList();
         modelClaims.addAll(policyClaims);
-        return Policy.makePolicy(modelPolicyType, modelPremiumAmount, modelCoverageAmount, modelExpiryDate, modelClaims);
+        return Policy.makePolicy(modelPolicyType, modelPremiumAmount, modelCoverageAmount, modelExpiryDate,
+                modelClaims);
     }
 
 }

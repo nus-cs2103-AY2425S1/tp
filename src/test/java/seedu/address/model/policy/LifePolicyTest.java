@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.claim.ClaimList;
+
 public class LifePolicyTest {
     private final LifePolicy life = new LifePolicy();
     private final PremiumAmount defaultPremiumAmount = life.getPremiumAmount();
@@ -15,15 +17,18 @@ public class LifePolicyTest {
     @Test
     public void constructor_negativeAmounts_useDefaultValues() {
         // null premiumAmount
-        LifePolicy nullPremiumAmount = new LifePolicy(null, defaultCoverageAmount, defaultExpiryDate);
+        LifePolicy nullPremiumAmount = new LifePolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, new ClaimList());
         assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
         // null coverageAmount
-        LifePolicy nullCoverageAmount = new LifePolicy(defaultPremiumAmount, null, defaultExpiryDate);
+        LifePolicy nullCoverageAmount = new LifePolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, new ClaimList());
         assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
         // null expiryDate
-        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount,
+                null, new ClaimList());
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 

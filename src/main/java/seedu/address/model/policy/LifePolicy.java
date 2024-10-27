@@ -1,9 +1,9 @@
 package seedu.address.model.policy;
 
-import seedu.address.model.claim.ClaimList;
-
 import java.time.LocalDate;
 import java.time.Period;
+
+import seedu.address.model.claim.ClaimList;
 
 /**
  * A Policy of type Life.
