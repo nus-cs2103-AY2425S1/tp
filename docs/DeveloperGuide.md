@@ -127,6 +127,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* Each person may contain 1 Education, Health and Life Policy contained in PolicySet.
+* Each policy contains a ClaimList which can contain any number of claims.
 
 <box type="info" seamless>
 
@@ -408,7 +410,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. Prudy shows an error message.
 
       Use case ends.
+    * 
+**Use case: UC6 - Add a claim to a policy**
 
+**MSS**
+
+1. User requests to add a claim to a specific policy for a client in the list.
+2. Prudy adds the claim under the specified policy for the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given client index is invalid.
+    * 1a1. Prudy shows an error message indicating the invalid client index.
+
+      Use case ends.
+
+* 1b. The specified policy type is invalid.
+    * 1b1. Prudy shows an error message indicating that the policy type not valid.
+
+      Use case ends.
+
+* 1c. The claim details are invalid (e.g., missing required fields or incorrect format).
+    * 1c1. Prudy shows an error message indicating the invalid claim details.
+
+      Use case ends.
+
+* 1d. The same claim already exists under the specified policy.
+    * 1d1. Prudy shows an error message indicating the duplicate claim.
+
+      Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
