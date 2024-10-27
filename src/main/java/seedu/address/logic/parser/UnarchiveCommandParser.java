@@ -14,8 +14,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 public class UnarchiveCommandParser implements Parser<UnarchiveCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PinCommand
-     * and returns a PinCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UnarchiveCommand
+     * and returns a UnarchiveCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public UnarchiveCommand parse(String args) throws ParseException {

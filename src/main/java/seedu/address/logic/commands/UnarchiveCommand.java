@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
+
 
 /**
  * Unarchives a person identified using its displayed index.
@@ -57,8 +57,6 @@ public class UnarchiveCommand extends Command {
         }
 
         assert resultMessages.size() == targetIndices.size();
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);
 
         if (resultMessages.size() == 1) {
             return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
