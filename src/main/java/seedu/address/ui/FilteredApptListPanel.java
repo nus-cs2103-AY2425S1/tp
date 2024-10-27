@@ -23,7 +23,7 @@ public class FilteredApptListPanel extends UiPart<Region> {
     private ListView<FilteredAppointment> apptListView;
 
     /**
-     * Creates a {@Code FilteredApptListPanel} with the given {@code TreeSet<FilteredAppointment>}
+     * Creates a {@Code FilteredApptListPanel} with the given {@code TreeSet<filteredappointment>}
      * @param filteredAppointments
      */
     public FilteredApptListPanel(TreeSet<FilteredAppointment> filteredAppointments) {
@@ -34,7 +34,7 @@ public class FilteredApptListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code FilteredAppointment} uisng a {@code ApptCard}
+     * Custom {@code ListCell} that displays the graphics of a {@code filteredappointment} uisng a {@code ApptCard}
      */
     class FilteredApptListViewCell extends ListCell<FilteredAppointment> {
         @Override

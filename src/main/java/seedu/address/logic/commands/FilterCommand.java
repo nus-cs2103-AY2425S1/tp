@@ -37,7 +37,11 @@ public class FilterCommand extends Command {
 
     private final AppointmentDateFilter dateFilter;
 
+    /**
+     * Creates an FilterCommand to filter commands based on the date and {code@ HealthService}
+     */
     public FilterCommand(AppointmentDateFilter dateFilter) {
+        requireNonNull(dateFilter);
         this.dateFilter = dateFilter;
     }
 
