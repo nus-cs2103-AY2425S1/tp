@@ -44,7 +44,6 @@ public class AutocompleteParser {
         ExitCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
         GradeCommand.COMMAND_WORD,
-        HelpCommand.COMMAND_WORD,
         UndoCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
     };
@@ -77,9 +76,10 @@ public class AutocompleteParser {
     public HashMap<String, String> parseCommand(String userInput, ReadOnlyAddressBook ab, int caretPosition) {
         String wordUnderCaret = getWordFromCaretPosition(userInput, caretPosition);
 
-        if (shouldReturnEmptyList(userInput, wordUnderCaret)) {
+        if (shouldReturnEmptyList(wordUnderCaret)) {
             return new HashMap<>();
         }
+        assert(!wordUnderCaret.isEmpty());
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + wordUnderCaret.trim(), prefixes);
         int startIndex = getPreviousWhitespaceIndex(userInput, caretPosition);
@@ -103,12 +103,11 @@ public class AutocompleteParser {
     /**
      * Checks if the conditions for returning an empty list of suggestions are met.
      *
-     * @param userInput The full user input string.
      * @param wordUnderCaret The word that is currently being typed under the caret.
-     * @return true if the input or word under caret is empty or ends with a space, otherwise false.
+     * @return true if word under caret is empty.
      */
-    private boolean shouldReturnEmptyList(String userInput, String wordUnderCaret) {
-        return userInput.isEmpty() || wordUnderCaret.isEmpty() || wordUnderCaret.endsWith(" ");
+    private boolean shouldReturnEmptyList(String wordUnderCaret) {
+        return wordUnderCaret.isEmpty();
     }
 
     /**
@@ -239,26 +238,22 @@ public class AutocompleteParser {
     }
 
     /**
-     * Generates suggestions for commands based on the current user input.
+     * Gets the full user input string with the suggestion slotted in
      *
      * @param fullUserInput The full user input string.
      * @param word The word that is currently being typed under the caret.
      * @param command The word to replace the word under the caret.
      * @param startIndex The index of the start of the word under the caret.
      * @param endIndex The index of the end of the word under the caret.
-     * @return A HashMap of command suggestions.
+     * @return Full user input string with the suggestion slotted in
      */
     private String getCompleteStringWithReplacement(String fullUserInput, String word, String command,
                                                     int startIndex, int endIndex) {
-        String newString;
-        if (word.length() > 1 && word.charAt(1) == '/') {
-            newString = word.substring(0, 2) + command;
-        } else {
-            newString = command;
-        }
+        String stringToSlotIn;
+        stringToSlotIn = getStringWithPrefix(word, command);
 
         StringBuffer buf = new StringBuffer(fullUserInput);
-        buf.replace(startIndex + 1, endIndex, newString);
+        buf.replace(startIndex + 1, endIndex, stringToSlotIn);
         return buf.toString();
     }
 
@@ -275,18 +270,15 @@ public class AutocompleteParser {
         if (directory.exists() && directory.isDirectory()) {
             // List all files and directories in the specified path
             File[] files = directory.listFiles();
+            assert (files != null);
             ArrayList<String> result = new ArrayList<>();
-            if (files != null) {
-                for (File file : files) {
-                    // add file name if it is a json file
-                    if (isJson(file)) {
-                        result.add(file.getName());
-                    }
+            for (File file : files) {
+                // add file name if it is a json file
+                if (isJson(file)) {
+                    result.add(file.getName());
                 }
-                return result;
-            } else {
-                return new ArrayList<>();
             }
+            return result;
         } else {
             return new ArrayList<>();
         }
@@ -298,6 +290,17 @@ public class AutocompleteParser {
      * */
     private boolean isJson(File file) {
         return file.isFile() && file.getName().toLowerCase().endsWith(".json");
+    }
+
+    private String getStringWithPrefix(String word, String command) {
+        if (word.length() <= 1) {
+            return command;
+        }
+        // Add prefix to beginning if it's a field
+        if (word.charAt(1) == '/') {
+            return word.substring(0, 2) + command;
+        }
+        return command;
     }
 }
 
