@@ -32,7 +32,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_ROLE + person.getRole().roleName + " ");
+        person.getRole().ifPresent(role -> sb.append(PREFIX_ROLE + role.roleName + " "));
         person.getWeddingJobs().stream().forEach(
                 s -> sb.append(PREFIX_WEDDING + s.getName().toString() + " ")
         );

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,7 +24,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Role role;
+    private final Optional<Role> role;
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
@@ -43,8 +44,8 @@ public class Person {
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address);
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Role> role, Wedding ownWedding) {
+        requireAllNonNull(name, phone, email, address, role);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -81,7 +82,7 @@ public class Person {
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Role getRole() {
+    public Optional<Role> getRole() {
         return role;
     }
 
@@ -107,11 +108,28 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Adds a list of wedding jobs to the pre-existing list.
+     *
+     * @param weddingJobs {@code Set<Wedding>} to be added to the list of wedding jobs
+     */
+    public void setWeddingJobs(Set<Wedding> weddingJobs) {
+        for (Wedding wedding : weddingJobs) {
+            this.addWeddingJob(wedding);
+        }
+    }
+
+    /**
+     * Returns true if both persons have the same name, phone, email, address.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return this.equals(otherPerson);
+        if (otherPerson == null) {
+            return false;
+        }
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address);
     }
 
     /**
@@ -163,6 +181,7 @@ public class Person {
                 && weddingJobs.equals(otherPerson.weddingJobs);
 
         // commented them out since they give null pointer exception
+        // need to use Optional
     }
 
     @Override
@@ -181,7 +200,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? nullString : ownWedding)
+                .add("wedding", ownWedding == null ? "null" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }

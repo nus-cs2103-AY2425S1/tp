@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -7,6 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
+
 
 /**
  * A utility class to help with building {@code Person} objects.
@@ -23,8 +28,10 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Role role; // Single role representing role
-    private Wedding wedding;
+    private Optional<Role> role;
+    private Wedding ownWedding;
+    private Set<Wedding> weddingJobs = new HashSet<>();
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +41,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        role = new Role(DEFAULT_ROLE); // Default role
-        wedding = null; // Default wedding is null
+        role = Optional.of(new Role(DEFAULT_ROLE));
+        ownWedding = null;
     }
 
     /**
@@ -49,7 +56,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         role = personToCopy.getRole();
-        wedding = personToCopy.getOwnWedding();
+        ownWedding = personToCopy.getOwnWedding();
+        weddingJobs.addAll(personToCopy.getWeddingJobs());
     }
 
     /**
@@ -103,18 +111,44 @@ public class PersonBuilder {
      * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withRole(String role) {
-        this.role = new Role(role);
+        if (role.isEmpty()) {
+            this.role = Optional.empty();
+        } else {
+            this.role = Optional.of(new Role(role));
+        }
         return this;
     }
 
     /**
      * Sets the {@code Wedding} of the {@code Person} that we are building.
      *
-     * @param wedding The wedding to set.
+     * @param ownWedding The wedding to set.
      * @return The updated {@code PersonBuilder} instance.
      */
-    public PersonBuilder withWedding(Wedding wedding) {
-        this.wedding = wedding;
+    public PersonBuilder withOwnWedding(Wedding ownWedding) {
+        this.ownWedding = ownWedding;
+        return this;
+    }
+
+    /**
+     * Adds the {@code weddingJob} to the {@code Person} that we are building.
+     *
+     * @param weddingJob The {@code Wedding} to set.
+     * @return The updated {@code PersonBuilder} instance.
+     */
+    public PersonBuilder addWeddingJob(Wedding weddingJob) {
+        this.weddingJobs.add(weddingJob);
+        return this;
+    }
+
+    /**
+     * Sets the {@code weddingJobs} of the {@code Person} that we are building.
+     *
+     * @param weddingJobs The {@code Set<Wedding>} to set.
+     * @return The updated {@code PersonBuilder} instance.
+     */
+    public PersonBuilder withWeddingJobs(Set<Wedding> weddingJobs) {
+        this.weddingJobs.addAll(weddingJobs);
         return this;
     }
 
@@ -124,6 +158,8 @@ public class PersonBuilder {
      * @return The built {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, role, wedding);
+        Person person = new Person(name, phone, email, address, role, ownWedding);
+        person.setWeddingJobs(weddingJobs);
+        return person;
     }
 }

@@ -31,7 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_ROLE = BENSON.getRole().roleName;
+    private static final String VALID_ROLE = BENSON.getRole().map(r -> r.roleName).orElse("");
     private static final int VALID_OWN_WEDDING = BENSON.getOwnWedding() != null
             ? BENSON.getOwnWedding().hashCode() : 0;
     private static final List<Integer> VALID_WEDDING_JOBS = new ArrayList<>();

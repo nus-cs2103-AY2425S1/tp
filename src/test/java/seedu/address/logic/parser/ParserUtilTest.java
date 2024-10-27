@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -145,46 +147,46 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOptionalRole(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseOptionalRole(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_TAG));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Role expectedTag = new Role(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseOptionalRole(VALID_TAG_1));
+        assertEquals(expectedTag, ParserUtil.parseRole(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Role expectedTag = new Role(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseOptionalRole(tagWithWhitespace));
+        assertEquals(expectedTag, ParserUtil.parseRole(tagWithWhitespace));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOptionalRole(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseOptionalRole(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_TAG));
     }
 
     @Test
     public void parseTags_emptyRole_throwsParseException() throws Exception {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOptionalRole(""));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(""));
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Role actualTagSet = ParserUtil.parseOptionalRole(VALID_TAG_1);
-        Role expectedTagSet = new Role(VALID_TAG_1);
+        Optional<Role> actualTagSet = ParserUtil.parseRole(VALID_TAG_1);
+        Optional<Role> expectedTagSet = Optional.of(new Role(VALID_TAG_1));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
