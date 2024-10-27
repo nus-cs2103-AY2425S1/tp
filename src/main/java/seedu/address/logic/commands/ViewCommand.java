@@ -24,11 +24,11 @@ public class ViewCommand extends Command {
             + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " " + "alice";
 
-    public static final String DUPLICATE_VIEW_MESSAGE =
-            "\nDuplicates found. Please specify the name of your client further.";
+    public static final String MORE_THAN_ONE_PERSON_VIEW_MESSAGE =
+            "\nMultiple clients found. Please specify the name of your client further.";
 
     public static final String NO_PERSON_FOUND_VIEW_MESSAGE =
-            "\nClient not found in ClientHub. Use the list command to see all clients";
+            "\nClient not found. Use the list command to see all clients";
 
     public static final String SHOWING_VIEW_MESSAGE = "Opened view window.";
 
@@ -49,16 +49,17 @@ public class ViewCommand extends Command {
         if (model.getDisplayPersons().isEmpty()) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
-                    model.getDisplayPersons().size())
-                    + "\nClient not found in ClientHub. Use the list command to see all clients");
+                    model.getDisplayPersonsListSize())
+                    + NO_PERSON_FOUND_VIEW_MESSAGE
+            );
         }
 
         // Check if there are duplicates
         if (model.getDisplayPersons().size() > 1) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                    model.getDisplayPersons().size())
-                    + "\nDuplicates found. Please specify the name of your client further."
+                    String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
+                    model.getDisplayPersonsListSize())
+                    + MORE_THAN_ONE_PERSON_VIEW_MESSAGE
             );
         }
         return new CommandResult(
