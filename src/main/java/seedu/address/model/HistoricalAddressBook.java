@@ -1,25 +1,42 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.Stack;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+
 /**
- * An Address Book that remembers its history.
+ * A wrapper for individual address books produced by executing commands.
+ * Facilitates undo/redo.
  */
-public class HistoricalAddressBook extends AddressBook {
+public class HistoricalAddressBook implements ReadOnlyAddressBook {
 
     private final Stack<ReadOnlyAddressBook> addressBookHistory;
     private final Stack<ReadOnlyAddressBook> addressBookUndoHistory;
+    private final AddressBook currentAddressBook;
 
     /**
-     * Constructor for a {@code HistoricalAddressBook} object
+     * Constructor for a {@code HistoricalAddressBook} object.
+     * Initializes while setting current data to the {@code ReadOnlyAddressBook} provided.
      * @param initialAddressBook The first recorded AddressBook
      */
     public HistoricalAddressBook(ReadOnlyAddressBook initialAddressBook) {
-        super(initialAddressBook);
-
         addressBookHistory = new Stack<>();
         addressBookUndoHistory = new Stack<>();
-        addressBookHistory.push(new AddressBook(this));
+        currentAddressBook = new AddressBook(initialAddressBook);
+        addressBookHistory.push(currentAddressBook);
+    }
+
+    /**
+     * Constructor for a {@code HistoricalAddressBook} object.
+     * Initializes with no data.
+     */
+    public HistoricalAddressBook() {
+        addressBookHistory = new Stack<>();
+        addressBookUndoHistory = new Stack<>();
+        currentAddressBook = new AddressBook();
+        addressBookHistory.push(currentAddressBook);
     }
 
     /**
@@ -28,7 +45,7 @@ public class HistoricalAddressBook extends AddressBook {
      */
     public void save() {
         addressBookUndoHistory.clear();
-        addressBookHistory.push(new AddressBook(this));
+        addressBookHistory.push(new AddressBook(currentAddressBook));
     }
 
     /**
@@ -39,7 +56,7 @@ public class HistoricalAddressBook extends AddressBook {
             throw new RuntimeException("There is no command to undo.");
         }
         addressBookUndoHistory.push(addressBookHistory.pop());
-        resetData(addressBookHistory.peek());
+        currentAddressBook.resetData(addressBookHistory.peek());
     }
 
     /**
@@ -50,7 +67,7 @@ public class HistoricalAddressBook extends AddressBook {
             throw new RuntimeException("There is no command to redo.");
         }
         addressBookHistory.push(addressBookUndoHistory.pop());
-        resetData(addressBookHistory.peek());
+        currentAddressBook.resetData(addressBookHistory.peek());
     }
 
     /**
@@ -64,6 +81,63 @@ public class HistoricalAddressBook extends AddressBook {
      * Checks whether it is possible to perform redo operation
      */
     public boolean canRedo() {
-        return addressBookUndoHistory.size() > 0;
+        return !addressBookUndoHistory.isEmpty();
+    }
+
+    // ======================= Wrapper functions =========================
+
+    //// list overwrite operations
+
+    /**
+     * @see AddressBook#setPersons(List)
+     */
+    public void setPersons(List<Person> persons) {
+        currentAddressBook.setPersons(persons);
+    }
+
+    /**
+     * @see AddressBook#resetData(ReadOnlyAddressBook)
+     */
+    public void resetData(ReadOnlyAddressBook newData) {
+        currentAddressBook.resetData(newData);
+        save();
+    }
+
+    //// person-level operations
+
+    /**
+     * @see AddressBook#hasPerson(Person)
+     */
+    public boolean hasPerson(Person person) {
+        return currentAddressBook.hasPerson(person);
+    }
+
+    /**
+     * @see AddressBook#addPerson(Person)
+     */
+    public void addPerson(Person p) {
+        currentAddressBook.addPerson(p);
+        save();
+    }
+
+    /**
+     * @see AddressBook#setPerson(Person, Person)
+     */
+    public void setPerson(Person target, Person editedPerson) {
+        currentAddressBook.setPerson(target, editedPerson);
+        save();
+    }
+
+    /**
+     * @see AddressBook#removePerson(Person)
+     */
+    public void removePerson(Person key) {
+        currentAddressBook.removePerson(key);
+        save();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return currentAddressBook.getPersonList();
     }
 }
