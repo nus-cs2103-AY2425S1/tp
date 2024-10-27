@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Tag
 Class StudentClass
+Class RegisterNumber
 Class Sex
 Class EcName
 Class EcNumber
@@ -47,6 +48,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> StudentClass
+Person *--> RegisterNumber
 Person *--> Sex
 Person *--> EcName
 Person *--> EcNumber

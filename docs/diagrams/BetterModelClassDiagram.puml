@@ -19,6 +19,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> StudentClass
+Person *--> RegisterNumber
 Person *--> Sex
 Person *--> EcName
 Person *--> EcNumber
