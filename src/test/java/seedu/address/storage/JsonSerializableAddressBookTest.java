@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.WeddingBuilder;
 
 public class JsonSerializableAddressBookTest {
 
@@ -28,13 +28,15 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path INVALID_WEDDING_FILE = TEST_DATA_FOLDER.resolve("invalidWeddingAddressBook.json");
     private static final Path DUPLICATE_WEDDING_FILE = TEST_DATA_FOLDER.resolve("duplicateWeddingAddressBook.json");
+    private static final Path TYPICAL_WEDDINGS_FILE = TEST_DATA_FOLDER.resolve("typicalWeddingsAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
+        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBookFilterWithWeddings();
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
@@ -79,7 +81,8 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_validWeddingWithClients_success() throws Exception {
         // Create test data
         Person client = TypicalPersons.ALICE;
-        Wedding wedding = new Wedding(new Name("Test Wedding"), null, null, null);
+        Wedding wedding = new WeddingBuilder().withClient(client)
+                .withDate("2022-01-01").withVenue("Test Venue").build();
         client.setOwnWedding(wedding);
 
         // Create JSON adapted versions

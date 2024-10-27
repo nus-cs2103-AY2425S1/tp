@@ -33,7 +33,7 @@ public class RoleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": assigns a role to person identified "
             + "by full name. "
             + "Example: " + COMMAND_WORD + PREFIX_NAME
-            + "Alex Yeoh " + PREFIX_ROLE + "food vendor";
+            + " Alex Yeoh " + PREFIX_ROLE + "food vendor";
 
     public static final String MESSAGE_ADD_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
