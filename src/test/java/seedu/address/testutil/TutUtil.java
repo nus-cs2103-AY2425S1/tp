@@ -18,7 +18,7 @@ public class TutUtil {
     public static final TutDate TUT_DATE;
 
     public static final Tutorial NONE = Tutorial.none();
-    // Creates new TUT_DATE instance, with 14/10/2024 as date
+    // Creates new TUT_DATE instance, with 2024-10-14 as date
     static {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2024, Calendar.OCTOBER, 14);

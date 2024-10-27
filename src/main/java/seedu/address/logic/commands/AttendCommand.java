@@ -30,7 +30,7 @@ public class AttendCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENTID + "A1234567U "
             + PREFIX_TUTORIALID + "T1001 "
-            + PREFIX_ATTENDANCEDATE + "2024/02/21";
+            + PREFIX_ATTENDANCEDATE + "2024-02-21";
     public static final String MESSAGE_SUCCESS = "Attendance recorded";
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
 
@@ -67,7 +67,7 @@ public class AttendCommand extends Command {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return "Student: " + studentId.toString() + "\n" + "Date: " + sdf.format(tutDate) + "\n"
                 + "Tutorial ID: " + tutorialId.toString();
     }
