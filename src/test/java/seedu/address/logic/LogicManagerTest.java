@@ -13,11 +13,15 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SKILLS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +37,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -177,4 +182,21 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void getSummaryData_correctSummaryData() {
+        // Set up expected summary data
+        Map<String, Long> expectedSummaryData = new HashMap<>();
+        for (String status : Status.VALID_STATUSES) {
+            expectedSummaryData.put(status, 0L);
+        }
+        model.addPerson(new PersonBuilder(ALICE).build());
+        model.addPerson(new PersonBuilder(BOB).build());
+        expectedSummaryData.put(ALICE.getStatus().value, expectedSummaryData.get(ALICE.getStatus().value) + 1);
+        expectedSummaryData.put(BOB.getStatus().value, expectedSummaryData.get(BOB.getStatus().value) + 1);
+
+        // Verify that getSummaryData returns the correct data from LogicManager
+        assertEquals(expectedSummaryData, logic.getSummaryData());
+    }
+
 }
