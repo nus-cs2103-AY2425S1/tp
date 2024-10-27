@@ -125,6 +125,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public int getDisplayPersonsListSize() {
+            return this.getDisplayPersons().size();
+        }
+
+        @Override
         public void setClientHub(ReadOnlyClientHub newData) {
             throw new AssertionError("This method should not be called.");
         }
