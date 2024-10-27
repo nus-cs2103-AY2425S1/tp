@@ -2,18 +2,26 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Person;
 
 /**
  * Deletes a Car belonging to a person already present in the MATER address book.
  */
 public class DeleteCarCommand extends Command {
+
+
+    // This initializes an empty set of issues to pass into the updated person slot.
+    // It only makes sense that when a car is deleted from MATER, its issues would also not be recorded anymore.
+    public static final Set<Issue> blankSlate = Collections.emptySet();
 
     public static final String COMMAND_WORD = "del-car";
 
@@ -66,7 +74,7 @@ public class DeleteCarCommand extends Command {
                 personToDeleteCarFrom.getPhone(),
                 personToDeleteCarFrom.getEmail(),
                 personToDeleteCarFrom.getAddress(),
-                personToDeleteCarFrom.getIssues()
+                blankSlate
         );
 
         // This method call effectively replaces the old user with the new user with a car.
