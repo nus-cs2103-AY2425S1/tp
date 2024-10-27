@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
 /**
  * Parses input arguments and creates a new FindAppointmentCommand object
  */
-    public class FindPersonCommandParser implements Parser<FindPersonCommand> {
+public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindAppointmentCommand
@@ -35,7 +35,6 @@ import seedu.address.model.person.Person;
                 PREFIX_STATUS, PREFIX_TAG, PREFIX_PERSON_ID);
 
         return new FindPersonCommand(parsePredicate(argMultimap));
-
     }
 
     /**
