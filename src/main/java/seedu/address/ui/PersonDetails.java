@@ -35,6 +35,9 @@ public class PersonDetails {
     @FXML
     private Label addressLabel;
 
+    @FXML
+    private VBox propertyList;
+
 
 
 
@@ -47,10 +50,11 @@ public class PersonDetails {
     public void setPersonDetails(Person person) {
         nameLabel.setText(person.getName().fullName);
         phoneLabel.setText(person.getPhone().value);
-        emailLabel.setText(person.getEmail().value);
+        emailLabel.setT     ext(person.getEmail().value);
         addressLabel.setText(person.getAddress().value);
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
+        person.ge
 
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
             Label historyLabel = new Label(date.toString());
