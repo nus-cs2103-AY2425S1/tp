@@ -14,8 +14,12 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class DateUtil {
 
-    private static final String DATE_FORMAT = "uuuu-MM-dd";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT)
+    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "The given date is invalid and does not exist "
+            + "in the calendar.";
+    private static final String DATE_VALIDATION_FORMAT = "uuuu-MM-dd";
+    private static final String DATE_FORMAT_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_VALIDATION_FORMAT)
             .withResolverStyle(ResolverStyle.STRICT);
     private static final Logger logger = LogsCenter.getLogger(DateUtil.class);
 
@@ -36,12 +40,20 @@ public class DateUtil {
                 .orElse(false);
     }
 
+    /**
+     * Returns if a given string is in the correct date format.
+     */
+    public static boolean isCorrectDateFormat(String date) {
+        return date.matches(DATE_FORMAT_PATTERN);
+    }
+
     private static Optional<LocalDate> parseDate(String date) {
         try {
             LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
             logger.fine("Parsed date: " + parsedDate);
             return Optional.of(parsedDate);
         } catch (DateTimeException e) {
+            System.out.println(e.getMessage());
             logger.warning("Unable to parse date: " + date);
             return Optional.empty();
         }

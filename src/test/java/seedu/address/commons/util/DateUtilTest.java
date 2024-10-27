@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.DateUtil.isCorrectDateFormat;
 import static seedu.address.commons.util.DateUtil.isDateAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
@@ -22,8 +23,14 @@ public class DateUtilTest {
         assertFalse(isValidDate(" ")); // spaces only
         assertFalse(isValidDate("example")); // non-numeric
         assertFalse(isValidDate("2022-13-01")); // invalid month
-        assertFalse(isValidDate("2022-12-32")); // invalid day
+        assertFalse(isValidDate("2023-02-29")); // invalid day
         assertFalse(isValidDate("2022/12/12")); // invalid format
+    }
+
+    @Test
+    public void isCorrectDateFormat_correctFormat_returnsTrue() {
+        assertTrue(isCorrectDateFormat("2022-12-12"));
+        assertTrue(isCorrectDateFormat("2023-02-29")); // returns true even if date does not exist
     }
 
     @Test
