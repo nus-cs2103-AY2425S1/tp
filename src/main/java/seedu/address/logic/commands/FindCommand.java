@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+
 /**
  * Finds and lists all persons or appointments in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public abstract class FindCommand<T> extends Command {
 
@@ -18,7 +20,7 @@ public abstract class FindCommand<T> extends Command {
         + ": Finds all persons or appointments whose names contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " alice bob charlie";
+        + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " n/ alice bob charlie";
 
     protected final Predicate<T> predicate;
 

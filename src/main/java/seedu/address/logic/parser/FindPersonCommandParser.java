@@ -42,20 +42,18 @@ import seedu.address.model.person.Person;
      * Returns a composed {@code Predicate}, given the argument multimap.
      */
     private Predicate<Person> parsePredicate(ArgumentMultimap argMultimap) throws ParseException {
-        Predicate<Person> predicate = PREDICATE_SHOW_ALL_PERSONS;
-
         if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME)) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String args = argMultimap.getValue(PREFIX_NAME).get();
-            predicate = predicate.and(new NameContainsKeywordsPredicate(
-                Arrays.asList(args.split("\\s+"))));
+            return new NameContainsKeywordsPredicate(Arrays.asList(args.split("\\s+")));
         }
 
-        return predicate;
+        // Default case, though this should typically not be reached due to the exception above
+        return PREDICATE_SHOW_ALL_PERSONS;
     }
 
     /**

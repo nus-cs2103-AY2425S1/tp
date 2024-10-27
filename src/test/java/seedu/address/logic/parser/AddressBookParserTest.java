@@ -89,9 +89,6 @@ public class AddressBookParserTest {
             EditAppointmentCommand.COMMAND_WORD + " "
                 + APPOINTMENT_ENTITY_STRING + " " + INDEX_FIRST_APPOINTMENT.getOneBased() + " "
                 + AppointmentUtil.getEditAppointmentDescriptorDetails(descriptor));
-        System.out.println(command);
-        System.out.println(new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, descriptor));
-        System.out.println("HI");
         assertEquals(new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, descriptor), command);
     }
 
@@ -103,10 +100,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + " " + "foo bar baz");
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        List<String> keywords = Arrays.asList("John", "Doe");
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
+        FindPersonCommand actualCommand = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + " n/" +
+                        String.join(" ", keywords));
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
