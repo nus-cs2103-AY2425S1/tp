@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# BA€ User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+BA€ is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BA€ can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -68,7 +68,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a window showing all commands and usage examples.
 
 ![help message](images/helpMessage.png)
 
@@ -145,6 +145,34 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Filtering contacts `filter`
+
+Filters the contact list by name and/or tags.
+
+Format: `filter [n/NAME] [t/TAG]…​`
+
+* Filters the contact list by name and/or tags.
+* n/NAME specifies a name (or partial name) to filter by.
+* t/TAG specifies a tag to filter by. You can provide multiple tags.
+* If both n/NAME and t/TAG are provided, the command will display contacts matching both the name and tags.
+* If no parameters are provided, the full list is displayed.
+
+Examples:
+* filter n/John filters and displays all contacts whose names contain "John".
+* filter t/client filters and displays all contacts tagged as "client".
+* filter n/John t/friend t/coworker filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
+* filter n/Jo n/Al filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
+  ![result for 'filter n/Jo n/Al t/worth](images/filterJoAliWorth.png)
+
+<box type="tip" seamless>
+
+**Tip:** Use the command buttons provided to get command template
+<div style="text-align: center;">
+    <img src="images/v1.4/FilterGUIButton.png" alt="Using filter button" width=545 />
+</div>
+
+</box>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -203,3 +231,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Filter** | `filter [n/NAME] [t/TAG]…​`<br> e.g., `filter n/John t/client t/friend`
