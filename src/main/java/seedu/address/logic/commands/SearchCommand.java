@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +22,7 @@ public class SearchCommand extends Command {
             + "Parameters: "
             + PREFIX_BEGIN + "start time"
             + PREFIX_END + "end time"
-            + "Example: " + COMMAND_WORD + PREFIX_BEGIN + "2024-10-10 00:00" + PREFIX_END + "2024-10-12 00:00";
+            + "Example: " + COMMAND_WORD + PREFIX_BEGIN + " 2024-10-10 00:00 " + PREFIX_END + " 2024-10-12 00:00";
 
     public static final String MESSAGE_SUCCESS = "Search successful";
     private LocalDateTime begin;
@@ -70,6 +68,11 @@ public class SearchCommand extends Command {
             return false;
         }
         SearchCommand otherSearchCommand = (SearchCommand) other;
-        return begin.equals(otherSearchCommand.begin) && end.equals(otherSearchCommand.end);
+        boolean isBeginEqual = (begin == null && otherSearchCommand.begin == null) ||
+                (begin != null && begin.equals(otherSearchCommand.begin));
+        boolean isEndEqual = (end == null && otherSearchCommand.end == null) ||
+                (end != null && end.equals(otherSearchCommand.end));
+
+        return isBeginEqual && isEndEqual;
     }
 }

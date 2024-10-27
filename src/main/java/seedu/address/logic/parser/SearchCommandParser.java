@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,12 +18,16 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BEGIN, PREFIX_END);
-        if (!checkValidPrefixCount(argMultimap)) {
+        if (!checkValidPrefixCount(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
         LocalDateTime begin = strToLocalDateTime(argMultimap.getValue(PREFIX_BEGIN));
         LocalDateTime end = strToLocalDateTime(argMultimap.getValue(PREFIX_END));
+        if (begin != null && end != null && end.isBefore(begin)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        }
         return new SearchCommand(begin, end);
     }
 
