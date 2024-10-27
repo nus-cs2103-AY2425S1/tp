@@ -11,9 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.PersonDataReceiver;
 import seedu.address.model.person.Person;
-import seedu.address.ui.OverviewPanel;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,24 +23,21 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final OverviewPanel overviewPanel;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, OverviewPanel overviewPanel) {
-        requireAllNonNull(addressBook, userPrefs, overviewPanel);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.overviewPanel = overviewPanel;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new OverviewPanel());
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -114,12 +109,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public void viewPerson(Person person) {
-        PersonDataReceiver personDataReceiver = new PersonDataReceiver(overviewPanel);
-        personDataReceiver.receivePersonData(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

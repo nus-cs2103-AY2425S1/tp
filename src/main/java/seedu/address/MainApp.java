@@ -28,7 +28,6 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.OverviewPanel;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -61,12 +60,11 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        OverviewPanel overviewPanel = new OverviewPanel();
-        model = initModelManager(storage, userPrefs, overviewPanel);
+        model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic, overviewPanel);
+        ui = new UiManager(logic);
     }
 
     /**
@@ -74,7 +72,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, OverviewPanel overviewPanel) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -92,7 +90,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, overviewPanel);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

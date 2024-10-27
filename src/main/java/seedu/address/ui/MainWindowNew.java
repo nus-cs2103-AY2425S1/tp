@@ -119,7 +119,7 @@ public class MainWindowNew extends UiPart<Stage> {
         });
     }
 
-    void fillInnerParts(OverviewPanel overviewPanel) {
+    void fillInnerParts() {
 
         this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -127,7 +127,7 @@ public class MainWindowNew extends UiPart<Stage> {
         this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        this.overviewPanel = overviewPanel;
+        this.overviewPanel = new OverviewPanel();
         overviewPanelPlaceholder.getChildren().add(overviewPanel.getRoot());
 
         this.personListPanel = new PersonListPanel(logic.getFilteredPersonList(), overviewPanel);
@@ -200,6 +200,14 @@ public class MainWindowNew extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            String[] feedbackToUser = commandResult.getFeedbackToUser().split(" ");
+            if (feedbackToUser[0].equals("Viewed")) {
+                int index = Integer.parseInt(commandText.split(" ")[1]);
+                System.out.println(index);
+                personListPanel.selectPersonAtIndex(index - 1);
+            }
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

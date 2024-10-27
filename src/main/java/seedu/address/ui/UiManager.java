@@ -25,14 +25,11 @@ public class UiManager implements Ui {
     private Logic logic;
     private MainWindowNew mainWindow;
 
-    private OverviewPanel overviewPanel;
-
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic, OverviewPanel overviewPanel) {
+    public UiManager(Logic logic) {
         this.logic = logic;
-        this.overviewPanel = overviewPanel;
     }
 
     @Override
@@ -45,7 +42,7 @@ public class UiManager implements Ui {
         try {
             mainWindow = new MainWindowNew(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts(overviewPanel);
+            mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

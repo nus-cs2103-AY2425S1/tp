@@ -56,6 +56,12 @@ public class PersonListPanel extends UiPart<Region> {
         personDataReceiver.receivePersonData(person);
     }
 
+    public void selectPersonAtIndex(int index) {
+        if (index >= 0 && index < personListView.getItems().size()) {
+            personListView.getSelectionModel().select(index);
+            personListView.scrollTo(index); // Optional: scroll to selected person
+        }
+    }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
