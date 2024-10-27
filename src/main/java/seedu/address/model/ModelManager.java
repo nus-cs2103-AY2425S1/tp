@@ -126,6 +126,18 @@ public class ModelManager implements Model {
         addressBook.sortByPin();
     }
 
+    // Archive related Methods
+    
+    @Override
+    public void archivePerson(Person person) {
+        person.setArchived(true);
+    }
+
+    @Override
+    public void unarchivePerson(Person person) {
+        person.setArchived(false);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

@@ -1,30 +1,30 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.PinCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
- * Parses input arguments and creates a new PinCommand object
+ * Parses input arguments and creates a new ArchiveCommand object
  */
-public class PinCommandParser implements Parser<PinCommand> {
+public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PinCommand
      * and returns a PinCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public PinCommand parse(String args) throws ParseException {
+    public ArchiveCommand parse(String args) throws ParseException {
         try {
             List<Index> indices = ParserUtil.parseIndexes(args);
-            return new PinCommand(indices);
+            return new ArchiveCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PinCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
         }
     }
 

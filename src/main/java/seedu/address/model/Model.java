@@ -14,6 +14,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that finds unarchived persons*/
+    Predicate<Person> PREDICATE_SHOW_UNARCHIVED_PERSONS = person -> !person.isArchived();
+
+    /** {@code Predicate} that finds archived persons*/
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = person -> person.isArchived();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -85,6 +91,16 @@ public interface Model {
      * Unpins the given person to the top of the address book.
      */
     void unpinPerson(Person person);
+
+    /**
+     * Archives the given person to the top of the address book.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person to the top of the address book.
+     */
+    void unarchivePerson(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

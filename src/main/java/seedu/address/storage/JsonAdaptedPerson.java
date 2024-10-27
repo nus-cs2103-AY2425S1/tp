@@ -31,12 +31,13 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final boolean isPinned;
+    private final boolean isArchived;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     public JsonAdaptedPerson(String name, String phone, String email, String address,
-                             List<JsonAdaptedTag> tags, boolean isPinned) {
+                             List<JsonAdaptedTag> tags, boolean isPinned, boolean isArchived) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +46,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.isPinned = isPinned;
+        this.isArchived = isArchived;
     }
 
     /**
@@ -57,6 +59,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         isPinned = source.getPinned();
+        isArchived = source.isArchived();
     }
 
     @JsonCreator
@@ -65,12 +68,13 @@ class JsonAdaptedPerson {
             @JsonProperty("education") String education, @JsonProperty("grade") String grade,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("parentEmail") String parentEmail,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
+            @JsonProperty("isArcived") boolean isArchived) {
         if (parentName != null) {
             return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, parentPhone,
-                    parentEmail, tags, isPinned);
+                    parentEmail, tags, isPinned, isArchived);
         }
-        return new JsonAdaptedPerson(name, phone, email, address, tags, isPinned);
+        return new JsonAdaptedPerson(name, phone, email, address, tags, isPinned, isArchived);
     }
 
     public static JsonAdaptedPerson of(Person source) {
@@ -102,6 +106,10 @@ class JsonAdaptedPerson {
 
     public boolean getPinned() {
         return isPinned;
+    }
+
+    public boolean isArchived() {
+            return isArchived;
     }
 
     /**
@@ -148,7 +156,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, isPinned);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, isPinned, isArchived);
     }
 
 }

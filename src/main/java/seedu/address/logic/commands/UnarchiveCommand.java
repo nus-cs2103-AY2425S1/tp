@@ -10,25 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
 
 /**
- * Archives a person identified using its displayed index.
+ * Unarchives a person identified using its displayed index.
  */
-public class ArchiveCommand extends Command {
+public class UnarchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "archive";
+    public static final String COMMAND_WORD = "unarchive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Archives the persons identified by the index numbers used in the displayed persons list.\n"
+            + ": Unarchives the persons identified by the index numbers used in the displayed persons list.\n"
             + "Parameters: INDEX (one or more, all must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
-    public static final String MESSAGE_ARCHIVE_PEOPLE_SUCCESS = "Archived People: \n%1$s";
+    public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Person: %1$s";
+    public static final String MESSAGE_UNARCHIVE_PEOPLE_SUCCESS = "Unarchived People: \n%1$s";
 
     private final List<Index> targetIndices;
 
-    public ArchiveCommand(List<Index> targetIndices) {
+    public UnarchiveCommand(List<Index> targetIndices) {
         this.targetIndices = targetIndices;
     }
 
@@ -37,30 +38,32 @@ public class ArchiveCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        List<Person> peopleToArchive = new ArrayList<>();
+        List<Person> peopleToUnarchive = new ArrayList<>();
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
-            Person personToArchive = lastShownList.get(index.getZeroBased());
-            peopleToArchive.add(personToArchive);
+            Person personToUnarchive = lastShownList.get(index.getZeroBased());
+            peopleToUnarchive.add(personToUnarchive);
         }
 
-        assert peopleToArchive.size() == targetIndices.size();
+        assert peopleToUnarchive.size() == targetIndices.size();
 
         List<String> resultMessages = new ArrayList<>();
-        for (Person person : peopleToArchive) {
-            model.archivePerson(person);
+        for (Person person : peopleToUnarchive) {
+            model.unarchivePerson(person);
             resultMessages.add(Messages.format(person));
         }
 
         assert resultMessages.size() == targetIndices.size();
 
+        model.updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);
+
         if (resultMessages.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
+            return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
         } else {
-            return new CommandResult(String.format(MESSAGE_ARCHIVE_PEOPLE_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_UNARCHIVE_PEOPLE_SUCCESS,
                     String.join("\n", resultMessages)));
         }
     }
@@ -72,11 +75,11 @@ public class ArchiveCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ArchiveCommand)) {
+        if (!(other instanceof UnarchiveCommand)) {
             return false;
         }
 
-        ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
-        return targetIndices.equals(otherArchiveCommand.targetIndices);
+        UnarchiveCommand otherUnarchiveCommand = (UnarchiveCommand) other;
+        return targetIndices.equals(otherUnarchiveCommand.targetIndices);
     }
 }
