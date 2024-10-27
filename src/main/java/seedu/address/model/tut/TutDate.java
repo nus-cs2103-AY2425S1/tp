@@ -19,7 +19,7 @@ import seedu.address.model.student.exceptions.StudentNotInTutDateException;
  */
 public class TutDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in correct format (dd/mm/yyyy)!";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in correct format (yyyy-MM-dd)!";
     private final Date date;
     private final Set<StudentId> students;
 

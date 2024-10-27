@@ -18,10 +18,10 @@ box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("attend s/A1234567U\nc/T1001 d/2024/02/21")
+[-> LogicManager : execute("attend s/A1234567U\nc/T1001 d/2024-02-21")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("attend s/A1234567U\nc/T1001 d/2024/02/21")
+LogicManager -> AddressBookParser : parseCommand("attend s/A1234567U\nc/T1001 d/2024-02-21")
 activate AddressBookParser
 
 create AttendCommandParser
@@ -31,7 +31,7 @@ activate AttendCommandParser
 AttendCommandParser --> AddressBookParser
 deactivate AttendCommandParser
 
-AddressBookParser -> AttendCommandParser : parse("s/A1234567U\nc/T1001 d/2024/02/21")
+AddressBookParser -> AttendCommandParser : parse("s/A1234567U\nc/T1001 d/2024-02-21")
 activate AttendCommandParser
 
 create StudentId

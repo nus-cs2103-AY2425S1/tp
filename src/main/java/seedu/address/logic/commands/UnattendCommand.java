@@ -18,7 +18,7 @@ import seedu.address.model.student.TutorialId;
  */
 public class UnattendCommand extends Command {
     public static final String COMMAND_WORD = "deleteAtt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark student as absent for particular date and "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete student attendance for particular date and "
             + "tutorial class. "
             + "Parameters: "
             + PREFIX_STUDENTID + "STUDENT_ID "
@@ -27,8 +27,8 @@ public class UnattendCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENTID + "A1234567U "
             + PREFIX_TUTORIALID + "T1001 "
-            + PREFIX_ATTENDANCEDATE + "2024/02/21";
-    public static final String MESSAGE_SUCCESS = "Marked as absent";
+            + PREFIX_ATTENDANCEDATE + "2024-02-21";
+    public static final String MESSAGE_SUCCESS = "Student attendance deleted";
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
 
     private final StudentId studentId;

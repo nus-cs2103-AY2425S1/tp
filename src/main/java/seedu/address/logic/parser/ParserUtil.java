@@ -110,12 +110,13 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         try {
-            return new SimpleDateFormat("yyyy/MM/dd").parse(date);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            format.setLenient(false);
+            return format.parse(date);
         } catch (java.text.ParseException e) {
             throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
         }
     }
-
 
     /**
      * Parses a due date string into a {@link LocalDateTime} object.
