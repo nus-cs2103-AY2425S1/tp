@@ -49,13 +49,13 @@ public class SampleDataUtil {
         return new Event[] {
             new Event(new EventName("Oscars"), new Time("2021-10-01 14:00"),
                 new Venue("Hollywood"), getSamplePersons()[0],
-                List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
+                Set.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
             new Event(new EventName("Photo Shoot"), new Time("2021-10-02 14:00"),
                 new Venue("Park"), getSamplePersons()[1],
-                List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
+                Set.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
             new Event(new EventName("Brand Event"), new Time("2021-10-03 14:00"),
                 new Venue("Mall"), getSamplePersons()[1],
-                List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
+                Set.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
         };
     }
 
