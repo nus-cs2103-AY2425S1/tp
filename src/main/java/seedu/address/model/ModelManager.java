@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -111,6 +115,20 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Map<String, Long> getSummaryData() {
+        Map<String, Long> summaryData = new HashMap<>();
+        for (String status : Status.VALID_STATUSES) {
+            summaryData.put(status, 0L);
+        }
+
+        addressBook.getPersonList().stream()
+                .collect(Collectors.groupingBy(person -> person.getStatus().value, Collectors.counting()))
+                .forEach(summaryData::put);
+
+        return summaryData;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -144,5 +162,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

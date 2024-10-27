@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -46,6 +48,8 @@ public class MainWindowNew extends UiPart<Stage> {
 
     @FXML
     private MenuItem reportBugItem;
+    @FXML
+    private MenuItem summaryMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -74,7 +78,6 @@ public class MainWindowNew extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         reportBugWindow = new ReportBugWindow();
-
     }
 
     public Stage getPrimaryStage() {
@@ -95,7 +98,6 @@ public class MainWindowNew extends UiPart<Stage> {
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
-
         /*
          * TODO: the code below can be removed once the bug reported here
          * https://bugs.openjdk.java.net/browse/JDK-8131666
@@ -120,7 +122,6 @@ public class MainWindowNew extends UiPart<Stage> {
     }
 
     void fillInnerParts() {
-
         this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -128,11 +129,15 @@ public class MainWindowNew extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         this.overviewPanel = new OverviewPanel();
+
+        // Display summary data as default
+        Map<String, Long> summaryData = logic.getSummaryData(); // Assume `getSummaryData` returns a valid summary map
+        overviewPanel.showSummary(summaryData);
+
         overviewPanelPlaceholder.getChildren().add(overviewPanel.getRoot());
 
         this.personListPanel = new PersonListPanel(logic.getFilteredPersonList(), overviewPanel);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
     }
 
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -168,6 +173,38 @@ public class MainWindowNew extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays the summary in the command result panel.
+     */
+    @FXML
+    public void handleSummary() {
+        try {
+            executeCommand("summary");
+            showSummaryInOverviewPanel();
+        } catch (CommandException | ParseException e) {
+            logger.warning("Failed to execute summary command: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Displays the summary in the command result panel.
+     */
+    private void showSummaryInOverviewPanel() {
+        Map<String, Long> summaryData = logic.getSummaryData();
+        overviewPanel.showSummary(summaryData);
+    }
+
+    /**
+     * Updates the {@code OverviewPanel} to display the details of a specified {@code Person}.
+     *
+     * @param person The person whose details are to be displayed in the overview panel.
+     */
+    public void showOverviewPanel(Person person) {
+        if (overviewPanel != null) {
+            overviewPanel.updateOverviewDetails(person);
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -189,7 +226,6 @@ public class MainWindowNew extends UiPart<Stage> {
         return personListPanel;
     }
 
-
     /**
      * Executes the command and returns the result.
      *
@@ -200,6 +236,11 @@ public class MainWindowNew extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // Check if the commandText was the summary command and update the overview panel accordingly
+            if (commandText.trim().equalsIgnoreCase("summary")) {
+                showSummaryInOverviewPanel();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

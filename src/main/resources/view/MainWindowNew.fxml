@@ -35,7 +35,7 @@
                                     <MenuItem fx:id="closeMenuItem" text="Close" />
                             </Menu>
                             <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="Summary">
-                                    <MenuItem fx:id="summaryMenuItem" mnemonicParsing="false" text="Summary" />
+                                <MenuItem fx:id="summaryMenuItem" mnemonicParsing="false" onAction="#handleSummary" text="Summary" />
                             </Menu>
                             <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="Help">
                                     <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Commands" />

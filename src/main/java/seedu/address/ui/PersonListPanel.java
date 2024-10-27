@@ -32,6 +32,7 @@ public class PersonListPanel extends UiPart<Region> {
         personDataReceiver = new PersonDataReceiver(overviewPanel);
 
         // Add mouse click event listener
+        personListView.setOnMouseClicked(event -> refreshPersonSelection());
         personListView.getSelectionModel().selectedItemProperty().addListener((
                 observable, oldValue, newValue) -> handlePersonSelection(newValue));
     }
@@ -74,4 +75,16 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Refreshes the current selection in the {@code personListView} by re-sending
+     * the data of the currently selected {@code Person} to the receiver.
+     * This method is useful for ensuring that the selected person's data is
+     * displayed or updated in the overview panel, especially after a change in view or state.
+     */
+    public void refreshPersonSelection() {
+        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            sendDataToReceiver(selectedPerson);
+        }
+    }
 }
