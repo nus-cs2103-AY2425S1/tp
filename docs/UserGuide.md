@@ -255,18 +255,22 @@ After entering the `list` command, all persons stored in the address book will b
 
 ### 2.7 Finding A Person: `find`
 
-Finds persons whose names, class IDs, or both contain any of the given keywords.
+The `find` command allows you to list persons by their names, class IDs, or payment status (paid/unpaid).
 
 **Command Format:**
-- Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
-- Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
-- Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD2 [MORE_KEYWORDS2]`
+- **By Name:** `find n/KEYWORD [MORE_KEYWORDS]`
+- **By Class ID:** `find c/KEYWORD [MORE_KEYWORDS]`
+- **By Name and Class ID:** `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD2 [MORE_KEYWORDS2]`
+- **By Payment Date:** `find m/YEARMONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
+- **By Unpaid Status:** `find !m/YEARMONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
+
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
 * Only the name is searched when using `n/` format.
 * Partially matched words will be matched, e.g., `Han` will match `Hans`.
 * find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and class IDs containing `KEYWORD2`.
+* For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
 
 
 **Example Usage:**
