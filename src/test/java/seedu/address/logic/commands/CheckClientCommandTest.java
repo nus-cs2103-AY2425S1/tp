@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -26,9 +27,6 @@ import seedu.address.model.person.Person;
  */
 public class CheckClientCommandTest {
 
-    private static final CommandResult expectedNoCarToCheckMessage = new CommandResult(
-            CheckClientCommand.MESSAGE_NO_CAR_TO_CHECK);
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     /**
@@ -40,7 +38,8 @@ public class CheckClientCommandTest {
         CheckClientCommand checkClientCommand = new CheckClientCommand(index);
         try {
             if (clientToCheck.getCar() == null) {
-                assertEquals(expectedNoCarToCheckMessage, checkClientCommand.execute(model));
+                assertThrows(CommandException.class,
+                        CheckClientCommand.MESSAGE_NO_CAR_TO_CHECK, () -> checkClientCommand.execute(model));
                 return;
             }
             CommandResult expectedCheckInResult = new CommandResult(
