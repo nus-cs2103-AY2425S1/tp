@@ -155,6 +155,52 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getAssociatedEvents_vendorHasAssociations_returnsCorrectEvents() {
+        // Create vendor and events, and set up associations
+        Vendor vendor = new VendorBuilder().withName("Vendor 1").build();
+        Event event1 = new EventBuilder().withName("Event 1").build();
+        Event event2 = new EventBuilder().withName("Event 2").build();
+
+        // Add vendor and events to the model
+        model.addVendor(vendor);
+        model.addEvent(event1);
+        model.addEvent(event2);
+
+        // Assign the vendor to the events
+        model.assignVendorToEvent(vendor, event1);
+        model.assignVendorToEvent(vendor, event2);
+
+        // Get associated events through LogicManager and verify
+        ObservableList<Event> associatedEvents = logic.getAssociatedEvents(vendor);
+        assertEquals(2, associatedEvents.size());
+        assertEquals(event1, associatedEvents.get(0));
+        assertEquals(event2, associatedEvents.get(1));
+    }
+
+    @Test
+    public void getAssociatedVendors_eventHasAssociations_returnsCorrectVendors() {
+        // Create event and vendors, and set up associations
+        Event event = new EventBuilder().withName("Event 1").build();
+        Vendor vendor1 = new VendorBuilder().withName("Vendor 1").build();
+        Vendor vendor2 = new VendorBuilder().withName("Vendor 2").build();
+
+        // Add event and vendors to the model
+        model.addEvent(event);
+        model.addVendor(vendor1);
+        model.addVendor(vendor2);
+
+        // Assign the vendors to the event
+        model.assignVendorToEvent(vendor1, event);
+        model.assignVendorToEvent(vendor2, event);
+
+        // Get associated vendors through LogicManager and verify
+        ObservableList<Vendor> associatedVendors = logic.getAssociatedVendors(event);
+        assertEquals(2, associatedVendors.size());
+        assertEquals(vendor1, associatedVendors.get(0));
+        assertEquals(vendor2, associatedVendors.get(1));
+    }
+
+    @Test
     public void getAssociation_newAssociation_updateSuccessful() {
         ObjectProperty<Association> observedState = new SimpleObjectProperty<>();
         ObservableList<Association> associations = logic.getAssociationList();
