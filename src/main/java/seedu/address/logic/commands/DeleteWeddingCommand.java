@@ -64,9 +64,6 @@ public class DeleteWeddingCommand extends Command {
                 weddingToDelete.getVenue(),
                 weddingToDelete.getDate());
 
-        // Print confirmation prompt
-        System.out.println(confirmationMessage);
-
         // Store the weddingToDelete in a static context
         StaticContext.setWeddingToDelete(weddingToDelete);
 

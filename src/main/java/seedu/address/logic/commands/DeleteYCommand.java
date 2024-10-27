@@ -2,6 +2,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,7 +48,7 @@ public class DeleteYCommand extends Command {
         requireNonNull(model);
 
         if (!(weddingToDelete == null)) {
-            deleteTagsWithWedding();
+            deleteTagsWithWedding(model);
             model.deleteWedding(weddingToDelete);
             // Clear history of weddingToDelete from StaticContext once delete operation is done
             StaticContext.setWeddingToDelete(null);
@@ -63,11 +64,17 @@ public class DeleteYCommand extends Command {
     /**
      * Deletes the tag of the wedding from the participants associated in the wedding to be deleted.
      */
-    private void deleteTagsWithWedding() {
+    private void deleteTagsWithWedding(Model model) {
         Set<Person> weddingParticipants = weddingToDelete.getParticipants();
         for (Person participant : weddingParticipants) {
             participant.getTags().removeIf(tag -> tag.getTagName().equals(weddingToDelete.getWeddingName().toString()));
+            Person newPerson = new Person(
+                    participant.getName(), participant.getPhone(), participant.getEmail(),
+                    participant.getAddress(), participant.getJob(),
+                    participant.getTags());
+            model.setPerson(participant, newPerson);
         }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
