@@ -1,9 +1,6 @@
 package seedu.address.model.lesson;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
@@ -18,6 +15,7 @@ public class Lesson {
     private final Date date;
     private final Time time;
     private final List<Student> students;
+    private final HashMap<Student, Boolean> attendanceMap;
 
     /**
      * Constructs a {@code Lesson}.
@@ -26,13 +24,17 @@ public class Lesson {
      * @param time The time of the lesson.
      * @param students A list of students attending the lesson.
      *                 This list can be empty but must not be null.
-     * @throws NullPointerException if {@code date} or {@code time} is null.
+     * @throws NullPointerException if any of the arguments are null.
      */
     public Lesson(Date date, Time time, List<Student> students) {
-        requireAllNonNull(date, time);
+        requireAllNonNull(date, time, students);
         this.date = date;
         this.time = time;
-        this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
+        this.students = new ArrayList<>();
+        this.students.addAll(students);
+        // fill out the default attendance as false
+        this.attendanceMap = new HashMap<>();
+        this.students.forEach(student -> this.attendanceMap.put(student, false));
     }
 
     /**
@@ -79,6 +81,26 @@ public class Lesson {
      */
     public void removeStudent(Student student) {
         students.remove(student);
+    }
+
+    /**
+     * Sets the attendance of the student to the specified value.
+     *
+     * @param student The student to mark.
+     * @param isAttending True if the student is attending this lesson, false otherwise.
+     */
+    public void setAttendance(Student student, boolean isAttending) {
+        this.attendanceMap.put(student, isAttending);
+    }
+
+    /**
+     * Returns true if this student is marked as having attended this lesson.
+     *
+     * @param student The student to check.
+     * @return True if the student is marked as having attended the lesson.
+     */
+    public boolean getAttendance(Student student) {
+        return this.attendanceMap.get(student);
     }
 
     /**
