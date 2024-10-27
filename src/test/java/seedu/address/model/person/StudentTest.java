@@ -72,4 +72,27 @@ public class StudentTest {
         Student student = new StudentBuilder().withClasses("Class A", "Class B").build();
         assertEquals("[Class A, Class B]", student.getClasses().toString());
     }
+
+    @Test
+    public void testDaysAttendedProperty() {
+        // Create a student with initial attendance
+        Student student = new StudentBuilder().withDaysAttended(5).build();
+
+        // Access the daysAttendedProperty and verify its initial value
+        assertNotNull(student.daysAttendedProperty(), "daysAttendedProperty should not be null");
+        assertEquals(5, student.daysAttendedProperty().get(), "Initial daysAttended value should be 5");
+
+        // Increment attendance and verify if property reflects the updated value
+        student.getDaysAttended().increment();
+        assertEquals(6, student.daysAttendedProperty().get(), "daysAttended value should update to 6 after increment");
+
+        // Decrement attendance and verify if property reflects the updated value
+        student.getDaysAttended().decrement();
+        assertEquals(5, student.daysAttendedProperty().get(), "daysAttended value should revert to 5 after decrement");
+
+        // Reset attendance and verify if property reflects the reset value
+        student.getDaysAttended().reset();
+        assertEquals(0, student.daysAttendedProperty().get(), "daysAttended value should reset to 0");
+    }
+
 }
