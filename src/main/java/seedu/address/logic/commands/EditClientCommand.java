@@ -60,6 +60,7 @@ public class EditClientCommand extends Command {
             + PREFIX_VRN + "SNP5701C";
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client in MATER";
     public static final String MESSAGE_NOT_EDITED = "At least one field must be edited.";
+    public static final String MESSAGE_FIELD_VALUES_SAME = "Edited field is the same as the initial field.";
     public static final String MESSAGE_CAR_DOES_NOT_EXIST = "Client does not have a Car to edit.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
     public static final String MESSAGE_DUPLICATE_CAR = "Car already exists in MATER.";
@@ -116,7 +117,7 @@ public class EditClientCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
 
         if (personToEdit.equals(editedPerson) && isPersonEdited) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(MESSAGE_FIELD_VALUES_SAME);
         }
 
         if ((!personToEdit.isSamePerson(editedPerson)) && model.hasPerson(editedPerson) && isPersonEdited) {

@@ -127,7 +127,7 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(
                 INDEX_FIRST_PERSON, descriptor, new EditCarDescriptor(), true, false);
         try {
-            assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_NOT_EDITED);
+            assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_FIELD_VALUES_SAME);
         } catch (AssertionError e) {
             System.out.println("Test failed with error: " + e.getMessage());
             throw e; // rethrow the exception to ensure the test still fails
@@ -143,7 +143,7 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build(), new EditCarDescriptor(), true, false);
 
-        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_NOT_EDITED);
+        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_FIELD_VALUES_SAME);
     }
 
     @Test
