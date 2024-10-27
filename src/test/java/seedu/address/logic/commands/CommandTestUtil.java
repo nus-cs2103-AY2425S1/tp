@@ -124,8 +124,11 @@ public class CommandTestUtil {
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        EventManager expectedEventManager = new EventManager(actualModel.getEventManager());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, new EventManager()));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel,
+                actualModel.getEventManager()));
+        assertEquals(expectedEventManager, actualModel.getEventManager());
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }

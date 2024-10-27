@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
+
 
 public class EventTest {
 
@@ -220,5 +223,29 @@ public class EventTest {
     @Test
     public void isValidEvent_invalidInput_false() {
         assertFalse(Event.isValidEvent(""));
+    }
+
+    @Test
+    public void getRole_validRole_true() {
+        try {
+            Event event = new Event("Event1");
+            Person personAttendee = new PersonBuilder().withRoles("attendee").build();
+            event.addPerson(personAttendee, "attendee");
+            assertEquals("attendee", event.getRole(personAttendee));
+            Person personVendor = new PersonBuilder().withRoles("vendor").build();
+            event.addPerson(personVendor, "vendor");
+            assertEquals("vendor", event.getRole(personVendor));
+            Person personSponsor = new PersonBuilder().withRoles("sponsor").build();
+            event.addPerson(personSponsor, "sponsor");
+            assertEquals("sponsor", event.getRole(personSponsor));
+            Person personVolunteer = new PersonBuilder().withRoles("volunteer").build();
+            event.addPerson(personVolunteer, "volunteer");
+            assertEquals("volunteer", event.getRole(personVolunteer));
+            Person personNoRole = new PersonBuilder().build();
+            assertNull(event.getRole(personNoRole));
+        } catch (Exception e) {
+            assert false;
+        }
+
     }
 }
