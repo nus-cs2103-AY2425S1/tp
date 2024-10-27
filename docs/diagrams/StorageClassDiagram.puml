@@ -15,11 +15,14 @@ Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
 package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+Class "<<interface>>\nEduContactsStorage" as AddressBookStorage
+Class JsonEduContactsStorage
+Class JsonSerializableEduContacts
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Class JsonAdaptedModule
+Class JsonAdaptedGrade
+Class JsonAdaptedPerson
+
 }
 
 }
@@ -35,9 +38,10 @@ Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonEduContactsStorage .up.|> AddressBookStorage
+JsonEduContactsStorage ..> JsonSerializableEduContacts
+JsonSerializableEduContacts --> "*" JsonAdaptedPerson
+JsonAdaptedPerson --> "*" JsonAdaptedModule
+
 
 @enduml
