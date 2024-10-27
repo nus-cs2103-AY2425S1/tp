@@ -414,7 +414,7 @@ Example:
 
 #### Deleting Appointments : `delAppt`
 
-Allow doctors to delete an appointment with a patient.
+Allow doctors to delete an appointment. 
 
 Format: `delAppt i/NRIC @d/DATE @t/TIME`
 
