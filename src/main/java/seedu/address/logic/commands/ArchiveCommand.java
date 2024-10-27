@@ -24,7 +24,7 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
-    public static final String MESSAGE_ARCHIVE_PEOPLE_SUCCESS = "Deleted People: \n%1$s";
+    public static final String MESSAGE_ARCHIVE_PEOPLE_SUCCESS = "Archived People: \n%1$s";
 
     private final List<Index> targetIndices;
 
