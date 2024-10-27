@@ -46,6 +46,21 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Command summary
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
+**List**   | `list`
+**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
+**Remind**   | `remind`
+**Help**   | `help`
+**Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
 
 ## Features
 
@@ -89,7 +104,7 @@ Adds a student to the address book.
 **Output:**
 ![addResult.jpeg](images/addResult.jpeg)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
 1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
 2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
@@ -103,7 +118,7 @@ Adds a student to the address book.
 
 </box>
 
-<box type="tip" header="#### Tips">
+<box type="tip" header="##### Tips">
 
 1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
 2. <b>RATE</b> is the tuition fee per hour.
@@ -129,7 +144,7 @@ Edits an existing student in the address book.
 `edit 2 paid/1200.00 owed/0` </br> Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
 ![editResult.png](images/editResult.png)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
 1. The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
@@ -158,7 +173,7 @@ Examples:
 * `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan`<br>
   ![result for `find n/yeoh d/Friday`](images/findResult.png)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 <markdown>
 * <b>DAY</b> must be one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * <b>KEYWORD</b> must be only alphanumeric characters.
@@ -166,7 +181,7 @@ Examples:
 </markdown>
 </box>
 
-<box type="tip" header="#### Tips:">
+<box type="tip" header="##### Tips">
 <markdown>
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
@@ -193,7 +208,7 @@ Example:
 * `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
   ![payResult.png](images/payResult.png)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
 1. The index refers to the index number shown in the displayed student list.
 2. The index **must be a positive integer** 1, 2, 3, …​
@@ -231,7 +246,7 @@ Examples:<br>`settle 1 amount/500.00`
 
 ![settleResult.png](images%2FsettleResult.png)
 
-<box type="important" header="#### Constraints">
+<box type="important" header="##### Constraints">
 
 1. The index refers to the index number shown in the displayed student list.
 2. The index **must be a positive integer** 1, 2, 3, …​
@@ -314,18 +329,3 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**List**   | `list`
-**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
-**Remind**   | `remind`
-**Help**   | `help`
-**Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
