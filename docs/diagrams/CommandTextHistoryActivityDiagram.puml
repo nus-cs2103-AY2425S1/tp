@@ -14,7 +14,8 @@ case ([press up button])
     else ([else])
     endif
 case ([press down button])
-    if () then ([currentCommandIndex \n        < size - 1])
+    if () then ([currentCommandIndex
+        < size - 1])
         :CommandTextHistory
         gets next command;
     else ([else])
