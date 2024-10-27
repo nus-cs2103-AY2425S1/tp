@@ -153,7 +153,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearAddressBookCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(new Name("Bob"), new Name("Alice"), DESC_AMY)));
