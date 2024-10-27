@@ -27,7 +27,7 @@ public class NameAndClassIdContainsKeywordsPredicate implements Predicate<Person
     @Override
     public boolean test(Person person) {
         return classIdKeywords.stream()
-                .anyMatch(keyword -> regexMatch(person.getClassId().value , keyword))
+                .anyMatch(keyword -> regexMatch(person.getClassId().value, keyword))
                 && nameKeywords.stream().anyMatch(keyword -> regexMatch(person.getName().fullName, keyword));
     }
 

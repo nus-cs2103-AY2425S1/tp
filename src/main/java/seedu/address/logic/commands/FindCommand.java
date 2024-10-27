@@ -1,14 +1,18 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOT_MONTHPAID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.MonthPaidContainsKeywordsPredicate;
 import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NotMonthPaidContainsKeywordsPredicate;
 
 
 
@@ -26,7 +30,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example 1: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie\n"
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_CLASSID + "1 2\n"
-            + "Example 3: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_CLASSID + "1\n";
+            + "Example 3: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_CLASSID + "1\n"
+            + "Example 4: " + COMMAND_WORD + " " + PREFIX_MONTHPAID + "2022-12\n"
+            + "Example 5: " + COMMAND_WORD + " " + PREFIX_NOT_MONTHPAID + "2022-12\n";;
 
     public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
 
@@ -35,6 +41,9 @@ public class FindCommand extends Command {
     private final ClassIdContainsKeywordsPredicate predicateClassId;
 
     private final NameAndClassIdContainsKeywordsPredicate predicateNameAndClassId;
+
+    private final MonthPaidContainsKeywordsPredicate predicateM;
+    private final NotMonthPaidContainsKeywordsPredicate predicateNotM;
 
 
     /**
@@ -45,6 +54,8 @@ public class FindCommand extends Command {
         this.predicate = predicate;
         this.predicateClassId = null;
         this.predicateNameAndClassId = null;
+        this.predicateM = null;
+        this.predicateNotM = null;
     }
 
     /**
@@ -55,6 +66,8 @@ public class FindCommand extends Command {
         this.predicateClassId = predicate;
         this.predicate = null;
         this.predicateNameAndClassId = null;
+        this.predicateM = null;
+        this.predicateNotM = null;
     }
 
     /**
@@ -65,8 +78,33 @@ public class FindCommand extends Command {
         this.predicateNameAndClassId = predicate;
         this.predicate = null;
         this.predicateClassId = null;
+        this.predicateM = null;
+        this.predicateNotM = null;
     }
 
+    /**
+     * Stores the predicate to be used to filter the list of persons by month paid
+     * @param predicate
+     */
+    public FindCommand(MonthPaidContainsKeywordsPredicate predicate) {
+        this.predicateM = predicate;
+        this.predicate = null;
+        this.predicateClassId = null;
+        this.predicateNameAndClassId = null;
+        this.predicateNotM = null;
+    }
+
+    /**
+     * Stores the predicate to be used to filter the list of persons by month paid
+     * @param predicate
+     */
+    public FindCommand(NotMonthPaidContainsKeywordsPredicate predicate) {
+        this.predicateNotM = predicate;
+        this.predicate = null;
+        this.predicateClassId = null;
+        this.predicateNameAndClassId = null;
+        this.predicateM = null;
+    }
 
 
     @Override
@@ -77,6 +115,10 @@ public class FindCommand extends Command {
             model.updateFilteredPersonList(predicate);
         } else if (predicateClassId != null) {
             model.updateFilteredPersonList(predicateClassId);
+        } else if (predicateM != null) {
+            model.updateFilteredPersonList(predicateM);
+        } else if (predicateNotM != null) {
+            model.updateFilteredPersonList(predicateNotM);
         } else {
             model.updateFilteredPersonList(predicateNameAndClassId);
         }
@@ -102,6 +144,10 @@ public class FindCommand extends Command {
             return predicate.equals(otherFindCommand.predicate);
         } else if (predicateClassId != null) {
             return predicateClassId.equals(otherFindCommand.predicateClassId);
+        } else if (predicateM != null) {
+            return predicateM.equals(otherFindCommand.predicateM);
+        } else if (predicateNotM != null) {
+            return predicateNotM.equals(otherFindCommand.predicateNotM);
         } else {
             assert(predicateNameAndClassId != null);
             return predicateNameAndClassId.equals(otherFindCommand.predicateNameAndClassId);
@@ -118,6 +164,14 @@ public class FindCommand extends Command {
         } else if (predicateClassId != null) {
             return new ToStringBuilder(this)
                     .add("predicate", predicateClassId)
+                    .toString();
+        } else if (predicateM != null) {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicateM)
+                    .toString();
+        } else if (predicateNotM != null) {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicateNotM)
                     .toString();
         } else {
             return new ToStringBuilder(this)
