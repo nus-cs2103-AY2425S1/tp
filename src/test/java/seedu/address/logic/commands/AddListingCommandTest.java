@@ -32,6 +32,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -193,6 +194,12 @@ public class AddListingCommandTest {
 
         // null -> return false
         assertFalse(addPasirRisCommand.equals(null));
+
+        // any one value is different -> return false
+        AddListingCommand differentArea = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                new Area(50), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(differentArea));
     }
 
     @Test

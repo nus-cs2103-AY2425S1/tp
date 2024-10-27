@@ -143,8 +143,10 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Price parsePrice(String price) {
-        BigDecimal decimalPrice = new BigDecimal(price);
-        return new Price(price, decimalPrice);
+        requireNonNull(price);
+        String priceTrimmed = price.trim();
+        BigDecimal decimalPrice = new BigDecimal(priceTrimmed);
+        return new Price(priceTrimmed, decimalPrice);
     }
 
     /**
@@ -152,7 +154,9 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Area parseArea(String area) {
-        int intArea = Integer.parseInt(area);
+        requireNonNull(area);
+        String areaTrimmed = area.trim();
+        int intArea = Integer.parseInt(areaTrimmed);
         return new Area(intArea);
     }
 
@@ -161,6 +165,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Region parseRegion(String region) throws ParseException {
+        requireNonNull(region);
         String normalizedInput = region.trim().toUpperCase().replace(" ", "");
         for (Region r : Region.values()) {
             if (r.name().equals(normalizedInput)) {
