@@ -1,94 +1,104 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.EditVendorCommand.MESSAGE_DUPLICATE_VENDOR;
+import static seedu.address.logic.commands.EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS;
+import static seedu.address.testutil.TypicalVendors.ALICE;
+import static seedu.address.testutil.TypicalVendors.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
+import seedu.address.testutil.VendorBuilder;
 
-/**
- * Contains unit tests for
- * {@code EditCommand}.
- */
 public class EditCommandTest {
 
-    @Test
-    public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditCommandStub editCommand = new EditCommandStub(targetIndex);
-        String expected = EditCommandStub.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, editCommand.toString());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditCommand editCommand = new EditCommandStub(targetIndex);
-        assertEquals(editCommand, editCommand);
+    public void executeAllFieldsSpecifiedSuccess() throws Exception {
+        Vendor editedVendor = new VendorBuilder().withName("Alice Edited").build();
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder(editedVendor).build();
+        EditCommand editCommand = new EditVendorCommand(Index.fromOneBased(1), descriptor);
+
+        CommandResult commandResult = editCommand.execute(model);
+
+        Vendor actualVendor = model.getFilteredVendorList().get(0);
+        assertEquals(String.format(MESSAGE_EDIT_VENDOR_SUCCESS, Messages.format(editedVendor)),
+                commandResult.getFeedbackToUser());
+        assertEquals(editedVendor.getName(), actualVendor.getName());
+        assertEquals(editedVendor.getPhone(), actualVendor.getPhone());
+        assertEquals(editedVendor.getDescription(), actualVendor.getDescription());
+        assertEquals(editedVendor.getTags(), actualVendor.getTags());
     }
 
     @Test
-    public void equals_differentType_returnsFalse() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditCommand editCommand = new EditCommandStub(targetIndex);
-        assertNotEquals(editCommand, new Object());
+    public void executeDuplicateVendorThrowsCommandException() {
+        Vendor vendorInList = model.getFilteredVendorList().get(0);
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder(vendorInList).build();
+        EditCommand editCommand = new EditVendorCommand(Index.fromOneBased(2), descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_DUPLICATE_VENDOR);
     }
 
     @Test
-    public void equals_null_returnsFalse() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditCommand editCommand = new EditCommandStub(targetIndex);
-        assertNotEquals(editCommand, null);
+    public void executeInvalidIndexThrowsCommandException() {
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName("Invalid").build();
+        EditCommand editCommand = new EditVendorCommand(Index.fromOneBased(100), descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model),
+                Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test
-    public void equals_differentIndex_returnsFalse() {
-        EditCommand editCommand1 = new EditCommandStub(Index.fromOneBased(1));
-        EditCommand editCommand2 = new EditCommandStub(Index.fromOneBased(2));
-        assertNotEquals(editCommand1, editCommand2);
+    public void executePartialUpdatesSuccess() throws Exception {
+        Vendor editedVendor = new VendorBuilder(ALICE).withName("New Name").build();
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName("New Name").build();
+        EditCommand editCommand = new EditVendorCommand(Index.fromOneBased(1), descriptor);
+
+        CommandResult commandResult = editCommand.execute(model);
+        Vendor actualVendor = model.getFilteredVendorList().get(0);
+
+        assertEquals(String.format(MESSAGE_EDIT_VENDOR_SUCCESS, Messages.format(editedVendor)),
+                commandResult.getFeedbackToUser());
+        assertEquals("New Name", actualVendor.getName().toString());
+        assertEquals(ALICE.getPhone(), actualVendor.getPhone());
+        assertEquals(ALICE.getDescription(), actualVendor.getDescription());
+        assertEquals(ALICE.getTags(), actualVendor.getTags());
     }
 
     @Test
-    public void equals_sameIndexDifferentDescriptor_returnsFalse() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditVendorDescriptor descriptor1 = new EditVendorDescriptorBuilder().withName("Vendor 1").build();
-        EditVendorDescriptor descriptor2 = new EditVendorDescriptorBuilder().withName("Vendor 2").build();
+    public void executePartialUpdatesMultipleFieldsSuccess() throws Exception {
+        Vendor editedVendor = new VendorBuilder(ALICE).withName("Updated Name").withPhone("12345678").build();
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder()
+                .withName("Updated Name")
+                .withPhone("12345678")
+                .build();
+        EditCommand editCommand = new EditVendorCommand(Index.fromOneBased(1), descriptor);
 
-        EditCommand editCommand1 = new EditCommandStub(targetIndex, descriptor1);
-        EditCommand editCommand2 = new EditCommandStub(targetIndex, descriptor2);
+        CommandResult commandResult = editCommand.execute(model);
+        Vendor actualVendor = model.getFilteredVendorList().get(0);
 
-        assertNotEquals(editCommand1, editCommand2);
-    }
-
-    @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        Index targetIndex = Index.fromOneBased(1);
-        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName("Vendor").build();
-        EditCommand editCommand = new EditCommandStub(targetIndex, descriptor);
-
-        assertThrows(NullPointerException.class, () -> editCommand.execute(null));
-    }
-
-    private class EditCommandStub extends EditCommand {
-        public EditCommandStub(Index targetIndex) {
-            super(targetIndex);
-        }
-
-        public EditCommandStub(Index targetIndex, EditVendorDescriptor descriptor) {
-            super(targetIndex, descriptor);
-        }
-
-        @Override
-        public CommandResult execute(Model model) throws CommandException {
-            requireNonNull(model);
-            return null;
-        }
+        assertEquals(String.format(MESSAGE_EDIT_VENDOR_SUCCESS, Messages.format(editedVendor)),
+                commandResult.getFeedbackToUser());
+        assertEquals("Updated Name", actualVendor.getName().toString());
+        assertEquals("12345678", actualVendor.getPhone().toString());
+        assertEquals(ALICE.getDescription(), actualVendor.getDescription());
+        assertEquals(ALICE.getTags(), actualVendor.getTags());
     }
 }
