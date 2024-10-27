@@ -70,37 +70,50 @@ public class DeleteClaimsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person person = getPersonFromModel(model);
+        Policy policy = findPolicyByType(person, policyType);
 
+        deleteClaimFromPolicy(policy);
+
+        Person updatedPerson = createUpdatedPerson(person);
+        updateModel(model, person, updatedPerson);
+
+        String successMessage = formatSuccessMessage(person);
+        return new CommandResult(successMessage);
+    }
+
+    private Person getPersonFromModel(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
         if (personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
         }
+        return lastShownList.get(personIndex.getZeroBased());
+    }
 
-        Person person = lastShownList.get(personIndex.getZeroBased());
-
-        Policy policy = findPolicyByType(person, policyType);
-
+    private void deleteClaimFromPolicy(Policy policy) throws CommandException {
         Claim claimToDelete = new Claim(claimStatus, claimDescription);
         boolean claimRemoved = policy.getClaimList().remove(claimToDelete);
-
         if (!claimRemoved) {
             throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
         }
+    }
 
+    private Person createUpdatedPerson(Person person) {
         PolicySet updatedPolicySet = new PolicySet();
         updatedPolicySet.addAll(person.getPolicies());
-
-        Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+        return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), updatedPolicySet);
-
-        model.setPerson(person, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        String successMessage = String.format(
-                MESSAGE_DELETE_CLAIM_SUCCESS, policyType, person.getName(), claimStatus, claimDescription);
-
-        return new CommandResult(successMessage);
     }
+
+    private void updateModel(Model model, Person originalPerson, Person updatedPerson) {
+        model.setPerson(originalPerson, updatedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    private String formatSuccessMessage(Person person) {
+        return String.format(MESSAGE_DELETE_CLAIM_SUCCESS, policyType, person.getName(), claimStatus, claimDescription);
+    }
+
 
 
     private Policy findPolicyByType(Person person, PolicyType policyType) throws CommandException {
