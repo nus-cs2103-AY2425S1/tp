@@ -202,17 +202,19 @@ Examples:
 
 Updates the amount of tuition fee paid by the specified student after a lesson.
 
-Format: `pay INDEX hr/HOURS_PAID`
+**Format:** `pay INDEX hr/HOURS_PAID`
 
-Example:
+**Example:**
 * `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
-  ![payResult.png](images/payResult.png)
+  
+**Output:**
+![payResult.png](images/payResult.png)
 
 <box type="important" header="##### Constraints">
 
-1. The index refers to the index number shown in the displayed student list.
-2. The index **must be a positive integer** 1, 2, 3, …​
-3. Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
 
 </box>
 
@@ -220,19 +222,23 @@ Example:
 
 Updates the amount of tuition fee owed by a specified student after a lesson.
 
-Format: `owe INDEX hr/HOURS_OWED`
+**Format:** `owe INDEX hr/HOURS_OWED`
 
-Example: 
-* `owe 1 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
+**Example:** 
+* `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
+
+**Output:**
 ![oweResult.png](images/oweResult.png)
 
 <box type="important" header="##### Constraints">
-    Hours owed by a student must be a positive multiple of 0.5.
+    
+* **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
 </box>
 
 <box type="tip" header="##### Tips">
 
-In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
 
 </box>
 
