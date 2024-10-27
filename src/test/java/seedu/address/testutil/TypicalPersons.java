@@ -78,7 +78,8 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withSubjects("Physics")
             .withClasses("7A", "7B")
-            .withTags("hardworking", "athlete").build();
+            .withTags("hardworking", "athlete")
+            .withDaysAttended(10).build();
 
     public static final Student CHRIS = new StudentBuilder().withName("Chris Lim")
             .withGender("male")

@@ -23,23 +23,23 @@ public class AddTeacherCommand extends Command {
     public static final String COMMAND_WORD = "teacher";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a teacher to the address book. "
-        + "Parameters: "
-        + PREFIX_NAME + " NAME "
-        + PREFIX_GENDER + " GENDER "
-        + PREFIX_PHONE + " PHONE "
-        + PREFIX_EMAIL + " EMAIL "
-        + PREFIX_ADDRESS + " ADDRESS "
-        + PREFIX_SUBJECT + " SUBJECT "
-        + PREFIX_CLASSES + " CLASSES "
-        + "\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + " John Doe "
-        + PREFIX_GENDER + " male "
-        + PREFIX_PHONE + " 98765432 "
-        + PREFIX_EMAIL + " johnd@example.com "
-        + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
-        + PREFIX_SUBJECT + " Physics "
-        + PREFIX_CLASSES + " 7A,7B ";
+            + "Parameters: "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_GENDER + " GENDER "
+            + PREFIX_PHONE + " PHONE "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS "
+            + PREFIX_SUBJECT + " SUBJECT "
+            + PREFIX_CLASSES + " CLASSES "
+            + "\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_GENDER + " male "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_SUBJECT + " Physics "
+            + PREFIX_CLASSES + " 7A,7B ";
 
     public static final String MESSAGE_SUCCESS = "New teacher added: %1$s";
     public static final String MESSAGE_DUPLICATE_TEACHER = "This teacher already exists in the address book";
@@ -84,7 +84,7 @@ public class AddTeacherCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", toAdd)
-            .toString();
+                .add("toAdd", toAdd)
+                .toString();
     }
 }

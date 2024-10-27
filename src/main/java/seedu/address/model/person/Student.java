@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.IntegerProperty;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +41,10 @@ public class Student extends Person {
 
     public DaysAttended getDaysAttended() {
         return daysAttended;
+    }
+
+    public IntegerProperty daysAttendedProperty() {
+        return daysAttended.daysAttendedProperty();
     }
     @Override
     public String toString() {
