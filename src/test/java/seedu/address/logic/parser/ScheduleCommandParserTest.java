@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.SchedulePredicate;
+
+import java.time.LocalDateTime;
+
 public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();
 
@@ -24,14 +27,15 @@ public class ScheduleCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         ScheduleCommand expectedScheduleCommand =
-              new ScheduleCommand(new SchedulePredicate(new Date("16 February 2024")));
-        assertParseSuccess(parser, " d/ 16 February 2024", expectedScheduleCommand);
+              new ScheduleCommand(new SchedulePredicate(
+                      new Date(LocalDateTime.of(2024, 2, 16, 18, 45))));
+        assertParseSuccess(parser, " d/ 16/2/2024 1845", expectedScheduleCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n d/ 16 February 2024 \n \t", expectedScheduleCommand);
+        assertParseSuccess(parser, " \n d/ 16/2/2024 1845 \n \t", expectedScheduleCommand);
 
         //empty preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " \n d/ 16 February 2024 \n \t",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " \n d/ 16/2/2024 1845 \n \t",
               expectedScheduleCommand);
     }
 

@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -27,9 +28,9 @@ public class ScheduleCommandTest {
     @Test
     public void equals() {
         SchedulePredicate firstPredicate =
-              new SchedulePredicate(new Date("12 September 2024"));
+              new SchedulePredicate(new Date(LocalDateTime.of(2023, 2, 16, 18, 45)));
         SchedulePredicate secondPredicate =
-              new SchedulePredicate(new Date("26 May 2025"));
+              new SchedulePredicate(new Date(LocalDateTime.of(2024, 5, 26, 15, 0)));
 
         ScheduleCommand scheduleFirstCommand = new ScheduleCommand(firstPredicate);
         ScheduleCommand scheduleSecondCommand = new ScheduleCommand(secondPredicate);
@@ -54,7 +55,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        SchedulePredicate predicate = new SchedulePredicate(new Date("16 November 1999"));
+        SchedulePredicate predicate = new SchedulePredicate(
+                new Date(LocalDateTime.of(2023, 2, 16, 18, 45)));
         ScheduleCommand command = new ScheduleCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -64,7 +66,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        SchedulePredicate predicate = new SchedulePredicate(new Date("16 November 2024"));
+        SchedulePredicate predicate = new SchedulePredicate(
+                new Date(LocalDateTime.of(2024,12,3,16,30)));
         ScheduleCommand command = new ScheduleCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,7 +76,8 @@ public class ScheduleCommandTest {
 
     @Test
     public void toStringMethod() {
-        SchedulePredicate predicate = new SchedulePredicate(new Date("16 March 2025"));
+        SchedulePredicate predicate = new SchedulePredicate(
+                new Date(LocalDateTime.of(2023, 2, 16, 18, 45)));
         ScheduleCommand scheduleCommand = new ScheduleCommand(predicate);
         String expected = ScheduleCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, scheduleCommand.toString());

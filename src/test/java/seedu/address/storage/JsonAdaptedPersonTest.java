@@ -29,7 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final JsonAdaptedTag VALID_TAG = new JsonAdaptedTag(BENSON.getTag().toString());
     private static final JsonAdaptedAllergy VALID_ALLERGY = new JsonAdaptedAllergy(BENSON.getAllergy().toString());
-    private static final String VALID_DATE = BENSON.getDate().toString();
+    private static final JsonAdaptedDate VALID_DATE = new JsonAdaptedDate(BENSON.getDate().toString());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

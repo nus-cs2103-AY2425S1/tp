@@ -15,6 +15,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -106,12 +107,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_date() throws Exception {
-        final Date date = new Date("01/01/2024");
+        final Date date = new Date(LocalDateTime.of(2021,1,1,17, 45));
         DateCommand command = (DateCommand) parser.parseCommand(DateCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + VALID_NAME_AMY + " "
                 + PREFIX_PHONE + VALID_PHONE_AMY + " "
                 + PREFIX_EMAIL + VALID_EMAIL_AMY + " "
-                + PREFIX_DATE + date.value);
+                + PREFIX_DATE + date);
         assertEquals(new DateCommand(Optional.of(VALID_NAME_AMY), Optional.of(VALID_PHONE_AMY),
                 Optional.of(VALID_EMAIL_AMY), date), command);
     }
@@ -130,9 +131,10 @@ public class AddressBookParserTest {
     public void parseCommand_schedule() throws Exception {
         //tag only
         ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
-              ScheduleCommand.COMMAND_WORD + " " + "d/ 16 February 2024"
+              ScheduleCommand.COMMAND_WORD + " " + "d/16/2/2024 1745"
         );
-        assertEquals(new ScheduleCommand(new SchedulePredicate(new Date("16 February 2024"))),
+        assertEquals(new ScheduleCommand(new SchedulePredicate(
+                new Date(LocalDateTime.of(2024,2,16,17, 45)))),
               command);
 
     }

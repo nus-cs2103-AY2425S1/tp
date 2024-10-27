@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +36,10 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_DATE_AMY = "12 Dec 2024";
-    public static final String VALID_DATE_BOB = "11/5/2025";
+    public static final LocalDateTime VALID_DATE_AMY
+            = LocalDateTime.of(2024,12,28,16,30);
+    public static final LocalDateTime VALID_DATE_BOB
+            = LocalDateTime.of(2025,2,18,18,30);
     public static final String VALID_TAG_HIGH_RISK = "High Risk";
     public static final String VALID_TAG_MEDIUM_RISK = "Medium Risk";
     public static final String VALID_TAG_LOW_RISK = "Low Risk";

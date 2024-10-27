@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
@@ -14,6 +17,10 @@ import seedu.address.model.person.SchedulePredicate;
  * Parses input arguments and creates a new ScheduleCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
+    private static final String DATE_PATTERN =
+            "^([1-9]|[12][0-9]|3[01])/([1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3])[0-5][0-9]$";
+    private static final String FORMAT_PATTERN = "^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     /**
      * Parses {@code userInput} into a command and returns it.
      *
@@ -34,12 +41,73 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
-        Date date = new Date(argMultimap.getValue(PREFIX_DATE).orElse(""));
+        Date date;
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            String dateString = argMultimap.getValue(PREFIX_DATE).get();
+            LocalDateTime dateTime = parseDateTime(dateString);
+            date = new Date(dateTime);
+        } else {
+            date = new Date(LocalDateTime.MIN); // Default constructor if no date is provided
+        }
 
         return new ScheduleCommand(new SchedulePredicate(date));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a date string into a {@code LocalDateTime} object.
+     *
+     * <p>This method checks if the provided date string matches the expected format and
+     * validates the values of the date and time. The expected format is 'd/M/yyyy HHmm'.
+     * For example, '2/12/2024 1800' represents 2nd December 2024 at 18:00 hours.</p>
+     *
+     * @param date The date string to be parsed.
+     * @return A {@code LocalDateTime} object representing the parsed date and time.
+     * @throws ParseException If the date format is invalid or if the date and time values are incorrect.
+     */
+    public LocalDateTime parseDateString(String date) throws ParseException {
+        validateDateFormat(date);
+        return parseDateTime(date);
+    }
+
+    /**
+     * Validates the date format and checks if the values are correct.
+     *
+     * @param date The date string to validate.
+     * @throws ParseException If the date format is invalid or if the date and time values are incorrect.
+     */
+    private void validateDateFormat(String date) throws ParseException {
+        if (!date.matches(DATE_PATTERN)) {
+            if (!date.matches(FORMAT_PATTERN)) {
+                throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
+                        + "For example, '2/12/2024 1800'.");
+            } else {
+                throw new ParseException("Invalid date or time values! "
+                        + "Ensure day, month, hour, and minute ranges are correct.");
+            }
+        }
+    }
+
+
+    /**
+     * Parses the date string into a {@code LocalDateTime} object.
+     *
+     * @param date The date string to parse.
+     * @return A {@code LocalDateTime} object representing the parsed date and time.
+     * @throws ParseException If the date and time values are incorrect.
+     */
+    private LocalDateTime parseDateTime(String date) throws ParseException {
+        try {
+            return LocalDateTime.parse(date, FORMATTER);
+        } catch (DateTimeParseException e) {
+            //LocalDateTime handles cases where there may be a "31/02/2024" and this is invalid as February
+            // only has a maximum of 29 days
+            throw new ParseException("Invalid date and time value! Ensure day, month, hour, and minute ranges "
+                    + "are correct in the format d/M/yyyy HHmm. "
+                    + "For example, '2/12/2024 1800'");
+        }
     }
 }
