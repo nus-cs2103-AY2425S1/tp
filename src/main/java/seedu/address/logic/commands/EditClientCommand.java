@@ -116,10 +116,10 @@ public class EditClientCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
 
         if (personToEdit.equals(editedPerson) && isPersonEdited) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
-        if ((personToEdit.getName() != editedPerson.getName()) && model.hasPerson(editedPerson) && isPersonEdited) {
+        if ((!personToEdit.isSamePerson(editedPerson)) && model.hasPerson(editedPerson) && isPersonEdited) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
