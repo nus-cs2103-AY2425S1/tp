@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -265,9 +264,10 @@ public class AutocompleteParser {
 
     /**
      * Gets all the file names in the directory "archived".
-     * @return An ArrayList with all the name of json file
      * Will return an empty list if the directory does not exist.
-     * */
+     * @return An ArrayList with all the name of json file
+     */
+
     private ArrayList<String> getAllFilesInArchiveDirectory() {
         File directory = Paths.get("archived").toFile();
 
