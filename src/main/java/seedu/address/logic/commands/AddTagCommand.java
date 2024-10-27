@@ -35,6 +35,9 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Tag added: %1$s";
     public static final String MESSAGE_NOT_ADD = "At least one tag to be provided.";
+
+    public static final String MESSAGE_CONTAINS_DUPLICATE_TAG = "%1$s already contains some " +
+            "tags you want to add";
     private final Index index;
     private final Set<Tag> tagSet;
 
@@ -60,6 +63,10 @@ public class AddTagCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
+        if (personToEdit.containsDuplicateTag(this.tagSet)) {
+            throw new CommandException(String.format(MESSAGE_CONTAINS_DUPLICATE_TAG,
+                    Messages.format(personToEdit)));
+        }
 
         model.addPersonTags(personToEdit, this.tagSet);
         return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.format(personToEdit)));

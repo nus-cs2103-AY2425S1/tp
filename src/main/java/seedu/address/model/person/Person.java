@@ -119,13 +119,25 @@ public class Person {
 
     /**
      * Adds a tag into a person.
-     * Assumes the person does not contain the tag
+     * Assumes the person does not contain any tag in the new tag set.
      */
     public Person addTag(Set<? extends Tag> tagSet) {
         Set<Tag> newTagSet = new HashSet<>();
         newTagSet.addAll(this.getTags());
         newTagSet.addAll(tagSet);
         return new Person(this.name, this.phone, this.email, newTagSet);
+    }
+
+    /**
+     * Returns true if person contain any tag in the new tag set.
+     */
+    public boolean containsDuplicateTag(Set<? extends Tag> tagSet) {
+        for (Tag t : this.tags) {
+            if (tagSet.contains(t)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

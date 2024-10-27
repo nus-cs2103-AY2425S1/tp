@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_NOT_ADD;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -33,14 +35,14 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         Optional<Set<Tag>> op =
                 parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG));
 
         if (op.isEmpty()) {
-            throw new ParseException("");
+            throw new ParseException(MESSAGE_NOT_ADD);
         }
 
         return new AddTagCommand(index, op.get());
