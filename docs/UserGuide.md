@@ -100,7 +100,7 @@ Adds a student to UG Teach.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-* **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
+* **RATE**, **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
