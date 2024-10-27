@@ -81,6 +81,10 @@ public class DeleteYCommand extends Command {
         }
 
         DeleteYCommand otherDeleteYCommand = (DeleteYCommand) other;
+
+        if (weddingToDelete != null) {
+            return weddingToDelete.equals(otherDeleteYCommand.weddingToDelete);
+        }
         return personToDelete.equals(otherDeleteYCommand.personToDelete);
     }
 }

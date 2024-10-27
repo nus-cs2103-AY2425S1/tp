@@ -17,7 +17,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 public class DeleteNCommandTest {
 
@@ -29,7 +31,7 @@ public class DeleteNCommandTest {
     }
 
     @Test
-    public void execute_cancelDeletion_success() throws CommandException {
+    public void execute_cancelPersonDeletion_success() throws CommandException {
         Person personToDelete = new PersonBuilder().build();
         StaticContext.setPersonToDelete(personToDelete);
 
@@ -38,6 +40,18 @@ public class DeleteNCommandTest {
 
         assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
         assertNull(StaticContext.getPersonToDelete());
+    }
+
+    @Test
+    public void execute_cancelWeddingDeletion_success() throws CommandException {
+        Wedding weddingToDelete = new WeddingBuilder().build();
+        StaticContext.setWeddingToDelete(weddingToDelete);
+
+        DeleteNCommand deleteNCommand = new DeleteNCommand();
+        CommandResult commandResult = deleteNCommand.execute(model);
+
+        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        assertNull(StaticContext.getWeddingToDelete());
     }
 
     @Test
