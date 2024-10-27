@@ -41,7 +41,7 @@ As you read the user guide, you might encounter some unfamiliar technical terms.
 | JSON      | JavaScript Object Notation(JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.                   |
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
-
+| Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
 ### Text Formatting Conventions
 We will be using different text formatting styles to help you better understand the content of the user guide.
 
@@ -330,7 +330,7 @@ Examples:
 > 
 > * Remember that `NRIC` and `GENDER` are case-insensitive!
 > E.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
-> * Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
+> * Made a mistake or a typo? You can use the [`edit` command](#editing-a-patient--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
 
