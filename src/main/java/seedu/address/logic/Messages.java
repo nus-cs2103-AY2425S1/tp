@@ -20,6 +20,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_LIST_TO_MARKPAID = "No persons in the displayed list to mark as paid.";
 
+    public static final String MESSAGE_EMPTY_LIST_TO_VISUALIZE = "No persons in the displayed list to visualize.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -1,10 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -13,10 +17,11 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class BarChartCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
 
     @Test
-    public void execute_barChartCommand_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
+    public void execute_barChartCommand_success() throws CommandException {
+
 
         // Create new persons
         Person person1 = new PersonBuilder().withName("Amy").withPhone("12345678").withEmail("alice@example.com")
@@ -41,8 +46,15 @@ public class BarChartCommandTest {
         // Execute the command
         BarChartCommand barChartCommand = new BarChartCommand();
         CommandResult result = barChartCommand.execute(model);
-
-        // Verify the result
         assertEquals(BarChartCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+
+    }
+
+    @Test
+    public void execute_barChartCommand_failure() {
+        model = new ModelManager(new AddressBook(), new UserPrefs(), new CommandHistory());
+
+        BarChartCommand barChartCommand = new BarChartCommand();
+        assertCommandFailure(barChartCommand, model, Messages.MESSAGE_EMPTY_LIST_TO_VISUALIZE);
     }
 }

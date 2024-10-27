@@ -1,0 +1,28 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class BarChartCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_SUCCESS: String
+  +execute(Model): CommandResult
+}
+Class CommandResult
+Class Model
+Class BarChartWindow {
+  +setData(Map<String, Integer>): void
+}
+Class MonthPaid {
+  +monthPaidValue: String
+}
+
+BarChartCommand -up-|> Command
+BarChartCommand .right> CommandResult : returns >
+BarChartCommand ..> Model : uses >
+BarChartCommand ..> BarChartWindow : uses >
+BarChartCommand ..> MonthPaid : uses >
+
+@enduml
