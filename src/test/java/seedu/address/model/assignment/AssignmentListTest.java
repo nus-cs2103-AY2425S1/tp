@@ -18,6 +18,7 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TypicalAssignments;
 import seedu.address.testutil.TypicalStudents;
 
@@ -136,6 +137,20 @@ public class AssignmentListTest {
         AssignmentList newData = getTypicalAssignmentList();
         assignments.resetData(newData);
         assertEquals(newData, assignments);
+    }
+
+    @Test
+    public void reassignStudent_replacesData() {
+        AssignmentList assignments = getTypicalAssignmentList();
+        Student oldStudent = new StudentBuilder().withStudentId("A1234567I").build();
+        Student newStudent = new StudentBuilder().withStudentId("A9876543R").build();
+        for (Assignment assignment : assignments.getAssignments()) {
+            assignments.setStatus(assignment, oldStudent, true);
+        }
+        assignments.reassignStudent(oldStudent, newStudent);
+        for (Assignment assignment : assignments.getAssignments()) {
+            assertTrue(assignment.getStatus(newStudent.getStudentId().value));
+        }
     }
 
 }
