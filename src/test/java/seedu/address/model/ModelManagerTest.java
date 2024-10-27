@@ -310,7 +310,8 @@ public class ModelManagerTest {
         modelManager.addTutorial(tutorial);
 
         // Create a student and assign them to the tutorial
-        Student student = new StudentBuilder().withName("Alice").withStudentId("A0123456X").withTutorialId("T1001").build();
+        Student student = new StudentBuilder().withName("Alice")
+                .withStudentId("A0123456X").withTutorialId("T1001").build();
         modelManager.addStudent(student);
         modelManager.assignStudent(student, tutorialId);
 
@@ -327,7 +328,8 @@ public class ModelManagerTest {
     @Test
     public void unassignStudent_withUnassignedTutorialId_noActionTaken() {
         // Initialize the ModelManager
-        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
+        ModelManager modelManager = new ModelManager(new AddressBook(),
+                new UserPrefs(), new AssignmentList(), new TutorialList());
 
         // Create a student with an unassigned tutorial ID
         Student student = new StudentBuilder().withName("Bob").withStudentId("A1234567X")
@@ -345,7 +347,8 @@ public class ModelManagerTest {
     @Test
     public void unassignStudent_fromNonExistentTutorial_noExceptionThrown() {
         // Initialize the ModelManager
-        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
+        ModelManager modelManager = new ModelManager(new AddressBook(),
+                new UserPrefs(), new AssignmentList(), new TutorialList());
 
         // Create a student assigned to a tutorial ID that doesn't exist in the tutorial list
         TutorialId nonExistentTutorialId = TutorialId.of("T9999");
