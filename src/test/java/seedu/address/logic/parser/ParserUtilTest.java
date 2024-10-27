@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -183,8 +185,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Role actualTagSet = ParserUtil.parseRole(VALID_TAG_1);
-        Role expectedTagSet = new Role(VALID_TAG_1);
+        Optional<Role> actualTagSet = ParserUtil.parseRole(VALID_TAG_1);
+        Optional<Role> expectedTagSet = Optional.of(new Role(VALID_TAG_1));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

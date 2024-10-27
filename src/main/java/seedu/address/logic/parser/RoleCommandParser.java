@@ -11,7 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
-import seedu.address.model.role.Role;
 
 /**
  * Parses input arguments and creates a new RoleCommand object
@@ -69,10 +68,4 @@ public class RoleCommandParser implements Parser<RoleCommand> {
     private boolean isNumeric(String str) {
         return str != null && str.matches("-?\\d+");
     }
-
-    private Role parseRoleToAssign(String role) throws ParseException {
-
-        return ParserUtil.parseRole(role);
-    }
-
 }

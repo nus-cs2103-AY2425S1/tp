@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.RoleCommand.PersonWithRoleDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.role.Role;
@@ -32,7 +34,7 @@ public class PersonWithRoleDescriptorBuilder {
      * that we are building.
      */
     public PersonWithRoleDescriptorBuilder withRole(String role) {
-        descriptor.setRole(new Role(role));
+        descriptor.setRole(Optional.of(new Role(role)));
         return this;
     }
 

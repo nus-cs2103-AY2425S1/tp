@@ -162,12 +162,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Role role = personToEdit.getRole();
+        Optional<Role> updatedRole = personToEdit.getRole();
         Wedding ownWedding = personToEdit.getOwnWedding();
         Set<Wedding> weddingJobs = personToEdit.getWeddingJobs();
 
         Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                role, ownWedding);
+                updatedRole.orElse(null), ownWedding);
         editedPerson.setWeddingJobs(weddingJobs);
         return editedPerson;
     }
@@ -227,7 +227,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setName(Name name) {
@@ -302,8 +302,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(role, otherEditPersonDescriptor.role);
+                    && Objects.equals(address, otherEditPersonDescriptor.address);
         }
 
         @Override
@@ -313,7 +312,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("role", role)
                     .toString();
         }
 

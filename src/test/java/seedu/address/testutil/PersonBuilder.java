@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +28,10 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Role role; // Single role representing role
+    private Optional<Role> role;
     private Wedding ownWedding;
     private Set<Wedding> weddingJobs = new HashSet<>();
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,8 +41,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        role = new Role(DEFAULT_ROLE); // Default role
-        ownWedding = null; // Default wedding is null
+        role = Optional.of(new Role(DEFAULT_ROLE));
+        ownWedding = null;
     }
 
     /**
@@ -109,7 +111,11 @@ public class PersonBuilder {
      * @return The updated {@code PersonBuilder} instance.
      */
     public PersonBuilder withRole(String role) {
-        this.role = new Role(role);
+        if (role.isEmpty()) {
+            this.role = Optional.empty();
+        } else {
+            this.role = Optional.of(new Role(role));
+        }
         return this;
     }
 
