@@ -19,7 +19,6 @@ import seedu.address.model.role.Role;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 
-
 /**
  * Contains unit tests for {@code EditPersonDescriptor}.
  */
