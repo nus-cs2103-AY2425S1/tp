@@ -77,7 +77,7 @@ public class DeleteWeddingCommandTest {
         assertFalse(standardWeddingCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardWeddingCommand.equals(new ClearCommand()));
+        assertFalse(standardWeddingCommand.equals(new ListCommand()));
 
         // different name -> returns false
         DeleteWeddingCommand commandWithDifferentValues = new DeleteWeddingCommand(VALID_WEDDING_NAME_TWO);
