@@ -17,7 +17,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
+1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
 
