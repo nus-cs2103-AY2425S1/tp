@@ -18,8 +18,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +30,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -153,7 +151,8 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        List<Appt> updatedAppts = editPatientDescriptor.getAppts().orElse(patientToEdit.getAppts());
+        ApptList updatedAppts = editPatientDescriptor.getAppts()
+                .orElseGet(() -> new ApptList(patientToEdit.getAppts()));
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
@@ -204,7 +203,7 @@ public class EditCommand extends Command {
         private Note note;
         private Name nokName;
         private Phone nokPhone;
-        private List<Appt> appts;
+        private ApptList appts;
 
         public EditPatientDescriptor() {}
 
@@ -337,12 +336,12 @@ public class EditCommand extends Command {
         }
 
 
-        public void setAppts(List<Appt> appts) {
-            this.appts = (appts != null) ? new ArrayList<>(appts) : null;
+        public void setAppts(ApptList appts) {
+            this.appts = (appts != null) ? new ApptList() : null;
         }
 
-        public Optional<List<Appt>> getAppts() {
-            return (appts != null) ? Optional.of(Collections.unmodifiableList(appts)) : Optional.empty();
+        public Optional<ApptList> getAppts() {
+            return Optional.ofNullable(appts);
         }
 
         @Override

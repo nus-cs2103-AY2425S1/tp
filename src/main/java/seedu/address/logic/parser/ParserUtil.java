@@ -5,10 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +17,7 @@ import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -367,18 +366,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> dates} into a {@code List<Appt>}.
+     * Parses {@code Collection<String> dates} into a {@code ApptList}.
      */
-    public static List<Appt> parseAppts(Collection<String> dates) throws ParseException {
+    public static ApptList parseAppts(Collection<String> dates) throws ParseException {
         requireNonNull(dates);
-        final List<Appt> apptList = new ArrayList<>();
+        final ApptList apptList = new ApptList();
         for (String date : dates) {
             String trimmedDate = date.trim();
             if (!Appt.isValidAppt(trimmedDate)) {
                 throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
             }
             LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            apptList.add(parseSingleAppt(trimmedDateTime));
+            apptList.addAppt(parseSingleAppt(trimmedDateTime));
         }
         return apptList;
     }

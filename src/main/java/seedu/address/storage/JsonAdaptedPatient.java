@@ -24,6 +24,7 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
+import seedu.address.model.patient.ApptList;
 
 /**
  * Jackson-friendly version of {@link Patient}.
@@ -209,10 +210,10 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appt.class.getSimpleName()));
         }
-        final List<Appt> modelAppts = new ArrayList<>();
+        final ApptList modelAppts = new ApptList();
         if (appts != null) {
             for (JsonAdaptedAppt appt : appts) {
-                modelAppts.add(appt.toModelType());
+                modelAppts.addAppt(appt.toModelType());
             }
         }
 
