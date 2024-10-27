@@ -71,7 +71,7 @@ public class TypicalPatients {
     public static final Patient KEANU = new PatientBuilder().withName("Keanu Reeves").withNric("S9975483H").withSex("M")
             .withBirthdate("1997-11-30").withPhone("86526969").withEmail("keanureeves@example.com")
             .withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+").withNokName("Mila Kunis")
-            .withNokPhone("84126990").withAllergy("peanuts").withHealthRisk("LOW").withHealthRecord("diabetes")
+            .withNokPhone("84126990").withAllergy("peanuts").withHealthRisk("LOW").withExistingCondition("diabetes")
             .withNote("Patient has previous gunshot wound to chest").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -54,7 +54,7 @@ public class EditCommandTest {
                 .withBirthdate("1997-11-30").withPhone("86526969")
                 .withEmail("keanureeves@example.com").withAddress("Blk 512 Ang Mo Kio Ave 2").withBloodType("O+")
                 .withNokName("Mila Kunis").withNokPhone("84126990").withAllergy("peanuts, cake").withHealthRisk("LOW")
-                .withHealthRecord("diabetes").withNote("Patient has previous gunshot wound to chest").build();
+                .withExistingCondition("diabetes").withNote("Patient has previous gunshot wound to chest").build();
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName("Keanu Reeves Tan")
                 .withNric("S9712385J").withAllergy("peanuts, cake")

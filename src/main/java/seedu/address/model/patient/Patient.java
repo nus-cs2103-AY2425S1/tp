@@ -30,7 +30,7 @@ public class Patient {
     private Set<Allergy> allergies = new HashSet<>();
     private BloodType bloodType;
     private HealthRisk healthRisk;
-    private HealthRecord healthRecord;
+    private ExistingCondition existingCondition;
     private Note note;
     private Name nokName;
     private Phone nokPhone;
@@ -59,7 +59,7 @@ public class Patient {
         this.allergies.clear();
         this.bloodType = null;
         this.healthRisk = null;
-        this.healthRecord = null;
+        this.existingCondition = null;
         this.note = null;
         this.nokName = null;
         this.nokPhone = null;
@@ -72,7 +72,7 @@ public class Patient {
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
                    Email email, Address address, Set<Allergy> allergies, BloodType bloodType, HealthRisk healthRisk,
-                   HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, ApptList appts) {
+                   ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
@@ -84,7 +84,7 @@ public class Patient {
         this.allergies = allergies;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
-        this.healthRecord = healthRecord;
+        this.existingCondition = existingCondition;
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
@@ -139,8 +139,8 @@ public class Patient {
         return note;
     }
 
-    public HealthRecord getHealthRecord() {
-        return healthRecord;
+    public ExistingCondition getExistingCondition() {
+        return existingCondition;
     }
 
     public Address getAddress() {
