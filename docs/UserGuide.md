@@ -15,22 +15,32 @@ BA€ is a **desktop app for managing contacts, optimized for use via a  Line In
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Installation
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).                                            
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-2/tp/releases).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Copy the file to the folder you want to use as the _home folder_ for BA€.
+
+### Launching BA€
+
+1. **Open Your Command Terminal** 
+   - Navigate to the folder where you saved the `.jar` file using the `cd` command.
+1. **Start the App**
+   - Enter the following command: `java -jar tp.jar`
+   - Within a few seconds, the BA€ Address Book interface should display and should look something like this:
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Using BA€
 
-   * `list` : Lists all contacts.
+1. To get started, try entering some of these commands in the command box at the top of the app:
+
+   * `help` : Opens the help menu detailing each command with an example format.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+
+   * `list` : Lists all contacts.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -38,7 +48,7 @@ BA€ is a **desktop app for managing contacts, optimized for use via a  Line In
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. For more details on each command, refer to the [Features](#features) below.
 
 --------------------------------------------------------------------------------------------------------------------
 
