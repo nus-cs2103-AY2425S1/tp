@@ -56,7 +56,7 @@ public class Course {
         }
 
         Course otherCourse = (Course) other;
-        return course.equals(otherCourse.course);
+        return course.toUpperCase().equals(otherCourse.course.toUpperCase());
     }
 
     @Override
