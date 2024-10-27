@@ -82,7 +82,7 @@ Shows a message explaining how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to UG Teach.
+Adds a student to the address book.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -117,13 +117,13 @@ Adds a student to UG Teach.
 
 ### Listing all students : `list`
 
-Shows a list of all students in UG Teach.
+Shows a list of all students in the address book.
 
 Format: `list`
 
 ### Editing a student : `edit`
 
-Edits an existing student in the UG Teach.
+Edits an existing student in the address book.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -204,7 +204,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 Format: `pay INDEX hr/HOURS_PAID`
 
 Example:
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the UG Teach.
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
   ![payResult.png](images/payResult.png)
 
 <box type="important" header="#### Constraints">
