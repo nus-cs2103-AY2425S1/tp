@@ -46,7 +46,7 @@ destroy CreateDoctorCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> CreateDoctorCommand : execute(Doctor)
+LogicManager -> CreateDoctorCommand : execute(m)
 activate CreateDoctorCommand
 
 CreateDoctorCommand -> Model : addPerson(Doctor)
