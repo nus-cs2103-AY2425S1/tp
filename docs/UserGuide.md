@@ -57,7 +57,7 @@ KeyContacts is a **desktop app for piano teachers to manager their students' inf
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `pn/PIECE…​` can be used as `pn/Moonlight Sonata`, `pn/Moonlight Sonata pn/Ode to Joy` etc.
 
-* Parameters can be in any order.<br>
+* If not explicitly stated, parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -79,7 +79,10 @@ Format: `help`
 
 Adds a student to the student directory.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
+
+* If a group is not provided, or left blank (`g/`), the student will not be assigned to any group.
+* The student will be assigned all existing lessons which other students in the group have.
 
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
@@ -94,9 +97,10 @@ Format: `list`
 
 Edits an existing student in the student directory.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* If the group is left blank (`g/`), the student will be removed from any existing group. This also removes all of the student's lessons.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -135,6 +139,7 @@ Schedules a regular lesson for the specified student in the student directory.
 Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
 * Schedules the regular lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Regular lessons are shared across students in the same group.
 * If the student already has an existing regular lesson, it will be overwritten by the new regular lesson given.
 * `DAY` must be a day of the week (e.g. Monday, Tuesday etc.) or its 3-letter abbreviation (e.g. Mon, Tue etc.). This parameter is case-insensitive.
 * `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
@@ -148,7 +153,8 @@ Cancels a regular lesson at a specific date for the specified student in the stu
 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
-* Cancels a regular lesson for the student at the specified `INDEX`. The index refers to the index number showin in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Cancels a regular lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Cancelled lessons are shared across students in the same group.
 * `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
 * `DATE` must fall on the student's regular lesson `DAY`, and `START_TIME` must match the student's lesson `START_TIME`.
 
@@ -162,6 +168,7 @@ Schedules a makeup lesson for the specified student in the student directory.
 Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Makeup lessons are shared across students in the same group.
 * `DATE` must be in the format `DD-MM-YYYY`.
 * `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
 
@@ -271,9 +278,9 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1 g/James' Group`
 **List**   | `list`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL]`<br> e.g.,`edit 2 n/James Lee p/81234567`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.,`edit 2 n/James Lee p/81234567`
 **Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **Unassign** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g, `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 **Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
