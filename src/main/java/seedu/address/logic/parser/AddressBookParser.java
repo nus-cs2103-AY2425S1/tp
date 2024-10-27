@@ -12,6 +12,7 @@ import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.commands.ClearAddressBookCommand;
+import seedu.address.logic.commands.ClearWeddingBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteNCommand;
@@ -80,6 +81,9 @@ public class AddressBookParser {
 
         case ClearAddressBookCommand.COMMAND_WORD:
             return new ClearAddressBookCommand();
+
+        case ClearWeddingBookCommand.COMMAND_WORD:
+            return new ClearWeddingBookCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
