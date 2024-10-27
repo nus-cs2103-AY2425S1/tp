@@ -32,7 +32,7 @@ public class FindCommand extends Command {
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_CLASSID + "1 2\n"
             + "Example 3: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_CLASSID + "1\n"
             + "Example 4: " + COMMAND_WORD + " " + PREFIX_MONTHPAID + "2022-12\n"
-            + "Example 5: " + COMMAND_WORD + " " + PREFIX_NOT_MONTHPAID + "2022-12\n";;
+            + "Example 5: " + COMMAND_WORD + " " + PREFIX_NOT_MONTHPAID + "2022-12\n";
 
     public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
 
