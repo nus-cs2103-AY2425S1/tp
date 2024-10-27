@@ -86,6 +86,7 @@ public class EditCommand extends Command {
             if (model.hasStudentWithId(editedStudent.getStudentId())) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENTID);
             }
+            model.reassignAssignmentStatuses(studentToEdit, editedStudent);
         }
 
         // Check if new tutorial exists if tutorial ID is changed
