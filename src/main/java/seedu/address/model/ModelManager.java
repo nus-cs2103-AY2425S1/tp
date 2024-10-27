@@ -154,6 +154,17 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    @Override
+    public void deleteAllStudents() {
+        requireNonNull(filteredStudents);
+
+        ObservableList<Student> studentsToDelete = FXCollections.observableArrayList(filteredStudents);
+
+        for (Student student : studentsToDelete) {
+            addressBook.removeStudent(student);
+        }
+    }
+
 
 
     //=========== Filtered Person List Accessors =============================================================
@@ -177,6 +188,7 @@ public class ModelManager implements Model {
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
     }
+
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
