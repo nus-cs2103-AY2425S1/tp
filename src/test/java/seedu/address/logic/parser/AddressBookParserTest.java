@@ -141,7 +141,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_search() throws Exception {
         SearchCommand searchCommandBeginEnd = (SearchCommand) parser.parseCommand(
-                SearchCommand.COMMAND_WORD + " " + PREFIX_BEGIN + "2024-10-10 00:00 " + PREFIX_END + "2024-10-12 00:00");
+                SearchCommand.COMMAND_WORD + " " + PREFIX_BEGIN
+                        + "2024-10-10 00:00 " + PREFIX_END + "2024-10-12 00:00");
         SearchCommand searchCommandBegin = (SearchCommand) parser.parseCommand(
                 SearchCommand.COMMAND_WORD + " " + PREFIX_BEGIN + "2024-10-10 00:00 ");
         SearchCommand searchCommandEnd = (SearchCommand) parser.parseCommand(
