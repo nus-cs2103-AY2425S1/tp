@@ -1,23 +1,25 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 
-import java.util.Set;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Deletes a wedding identified by its name from the wedding book.
+ */
 public class DeleteWeddingCommand extends Command {
     public static final String COMMAND_WORD = "delete-wedding";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the wedding identified by the wedding name used in the address book.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: n/NAME & NAME\n"
-            + "Example: " + COMMAND_WORD + " n/Jonus Ho & Izzat Syazani";
+            + "Parameters: w/NAME & NAME\n"
+            + "Example: " + COMMAND_WORD + " w/Jonus Ho & Izzat Syazani";
 
     public static final String MESSAGE_NO_MATCH_FOUND = "No wedding with the name '%1$s' found.";
     public static final String MESSAGE_MISSING_NAME = "Wedding name is required.";
@@ -29,37 +31,46 @@ public class DeleteWeddingCommand extends Command {
             Date: %3$s
             """;
 
-    private final Wedding toDelete;
+    private final String weddingName;
 
     /**
-     * Creates an AddWeddingCommand to add the specified {@code Wedding}
-     * @param wedding
+     * Creates a DeleteWeddingCommand to delete the Wedding with the specified {@code String}
+     * @param weddingName
      */
-    public DeleteWeddingCommand(Wedding wedding) {
-        requireNonNull(wedding);
-        this.toDelete = wedding;
+    public DeleteWeddingCommand(String weddingName) {
+        this.weddingName = weddingName.trim();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasWedding(toDelete)) {
-            throw new CommandException(MESSAGE_NO_MATCH_FOUND);
+        if (weddingName.isEmpty()) {
+            throw new CommandException(MESSAGE_MISSING_NAME);
         }
 
-        deleteTagsWithWedding();
-        model.deleteWedding(toDelete);
+        List<Wedding> matchingWeddings = model.getFilteredWeddingList().stream()
+                .filter(wedding -> wedding.getWeddingName().toString().equalsIgnoreCase(weddingName))
+                .toList();
 
-        return new CommandResult(String.format(MESSAGE_CONFIRMATION_PROMPT, toDelete.getWeddingName(),
-                toDelete.getVenue(), toDelete.getDate()));
-    }
-
-    private void deleteTagsWithWedding() throws CommandException {
-        Set<Person> weddingParticipants = toDelete.getParticipants();
-        for (Person participant : weddingParticipants) {
-            participant.getTags().removeIf(tag -> tag.getTagName().equals(toDelete.getWeddingName().toString()));
+        if (matchingWeddings.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NO_MATCH_FOUND, weddingName));
         }
+
+        Wedding weddingToDelete = matchingWeddings.get(0);
+
+        String confirmationMessage = String.format(MESSAGE_CONFIRMATION_PROMPT,
+                weddingToDelete.getWeddingName(),
+                weddingToDelete.getVenue(),
+                weddingToDelete.getDate());
+
+        // Print confirmation prompt
+        System.out.println(confirmationMessage);
+
+        // Store the weddingToDelete in a static context
+        StaticContext.setWeddingToDelete(weddingToDelete);
+
+        return new CommandResult(confirmationMessage);
     }
 
     @Override
@@ -74,13 +85,6 @@ public class DeleteWeddingCommand extends Command {
         }
 
         DeleteWeddingCommand otherDeleteWeddingCommand = (DeleteWeddingCommand) other;
-        return toDelete.equals(otherDeleteWeddingCommand.toDelete);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toDelete", toDelete)
-                .toString();
+        return weddingName.equals(otherDeleteWeddingCommand.weddingName);
     }
 }
