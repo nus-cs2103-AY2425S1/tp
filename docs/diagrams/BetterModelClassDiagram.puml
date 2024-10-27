@@ -20,5 +20,6 @@ Person *--> Email
 Person *--> Address
 Person *--> StudentClass
 Person *--> Sex
+Person *--> EcName
 Person *--> EcNumber
 @enduml
