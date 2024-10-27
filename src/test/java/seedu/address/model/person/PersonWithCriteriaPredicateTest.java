@@ -9,11 +9,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Range;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonWithCriteriaPredicateTest {
@@ -52,6 +55,10 @@ public class PersonWithCriteriaPredicateTest {
 
         // null range list
         assertThrows(NullPointerException.class, () -> new PersonWithCriteriaPredicate(null));
+
+        // null Tag Set
+        assertThrows(NullPointerException.class, () -> new PersonWithCriteriaPredicate(
+                List.of(new Range<Integer>(1, 2)), null));
 
         // invalid range type
         Range<String> range = new Range<>("Alice", "Bob");
@@ -102,6 +109,29 @@ public class PersonWithCriteriaPredicateTest {
                 LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)
         ));
         assertFalse(predicate.test(new PersonBuilder().withAge("19").addAppointment("01/01/2024 1200").build()));
+
+    }
+
+    @Test
+    public void test_personWithTags() {
+        List<Range<?>> criteria = new ArrayList<>();
+        Set<Tag> tags = new HashSet<>();
+        // no tag
+        PersonWithCriteriaPredicate predicate = new PersonWithCriteriaPredicate(criteria, tags);
+        assertTrue(predicate.test(new PersonBuilder().build()));
+
+        // one tag
+        tags.add(new Tag("surgery"));
+        predicate = new PersonWithCriteriaPredicate(criteria, tags);
+        assertTrue(predicate.test(new PersonBuilder().withTags("surgery").build()));
+
+        // match all tags
+        tags.add(new Tag("medication"));
+        predicate = new PersonWithCriteriaPredicate(criteria, tags);
+        assertTrue(predicate.test(new PersonBuilder().withTags("medication", "surgery").build()));
+
+        // matching some but not all tags
+        assertFalse(predicate.test(new PersonBuilder().withTags("medication").build()));
     }
 
     @Test

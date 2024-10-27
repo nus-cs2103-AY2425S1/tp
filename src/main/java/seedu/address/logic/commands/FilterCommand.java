@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,10 +21,12 @@ public class FilterCommand extends Command {
             + "or age group are within the specified range. \n"
             + "Parameters: "
             + PREFIX_AGE + "AGE RANGE "
-            + PREFIX_APPOINTMENT + "APPOINTMENT \n"
+            + PREFIX_APPOINTMENT + "APPOINTMENT "
+            + PREFIX_TAG + "TAG \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AGE + " 70-79 "
-            + PREFIX_APPOINTMENT + " 01/01/2024-01/01/2025";
+            + PREFIX_APPOINTMENT + " 01/01/2024-01/01/2025 "
+            + PREFIX_TAG + " obesity";
 
     private final PersonWithCriteriaPredicate criteria;
     /**

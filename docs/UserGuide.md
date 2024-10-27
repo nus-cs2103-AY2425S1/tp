@@ -135,7 +135,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * You can remove all the person’s appointments by typing `ap/` without
-  specifying any tags after it.
+  specifying any appointments after it.
 
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
@@ -153,7 +153,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
-        `Hay 874` will return contacts `Hayley /p99999999`, `Bons /p87444444`
+        `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
 
 Examples:
 * `find John` returns `john` and `Johnny Doe`
@@ -165,13 +165,15 @@ Examples:
 
 Filter persons whose age and/or appointment dates are within the specified range.
 
-Format: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND]`
+Format: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
 
 * The order of the keywords does not matter. 
-* Only appointment dates and/or age group can be used to filter.
+* Only appointment dates and/or age group and/or tags can be used to filter.
 * Dates must be in `dd-MM-yyyy` format.
+* Tags can be specified multiple times.
+  e.g. `filter t/medication t/Dr Tan`
 * Each value for each field has to be a range (i.e. lower bound - upper bound)
-* At least one field (age or appointment dates) has to be specified.
+* At least one field (age or appointment dates or tags) has to be specified.
 * Range are inclusive (i.e. age 79 is considered True in specified range'79-99')
 * Persons must within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
   e.g. `filter b/70-99 ap/01/01/2025 - 01/01/2026` will return `Roy b/87 ap/11/11/2025`.
@@ -180,6 +182,7 @@ Examples:
 * `filter b/70-79`
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
+* `filter b/70-79 t/medication t/Dr Tan`
 
 
 ### Editing a person's notes : `note`
@@ -339,17 +342,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` 
-**Clear**  | `clear`
-**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
-**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` 
-**Export** | `export` 
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
-**Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
-**Help**   | `help`
-**List**   | `list` <br/>`list *` (to list starred contacts) 
-**Sort**   | `sort` (to sort contacts based on appointment dates) 
-**Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
-**Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 
+| Action     | Format, Examples                                                                                                                                                                                                                    |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                             |
+| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`                                                                                                                                                           |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com`                                                                          |
+| **Export** | `export`                                                                                                                                                                                                                            |
+| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan``                                                         |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`                                                                                                                                                                      |
+| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`                                                                                                                 |
+| **Help**   | `help`                                                                                                                                                                                                                              |
+| **List**   | `list` <br/>`list *` (to list starred contacts)                                                                                                                                                                                     |
+| **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                                |
+| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
+| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |

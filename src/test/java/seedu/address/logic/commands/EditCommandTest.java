@@ -128,7 +128,8 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withTags("friends", VALID_TAG_HUSBAND).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .withTags("Diet Plan", "Obesity", VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(model.getFilteredPersonList().get(0).getName(),
                 new EditPersonDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build());
 
