@@ -139,7 +139,7 @@ Edits an existing student in the UG Teach.
 
 <box type="important" header="##### Constraints">
 
-* The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
 
 * At least one of the optional fields must be provided. You may refer to
 [Constraints of Add command](#constraints) for acceptable values of each field.
