@@ -13,19 +13,20 @@ import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
+ * @param <T> the type of the builder (either PersonBuilder or its subclass)
  */
-public class PersonBuilder {
+public class PersonBuilder<T extends PersonBuilder<T>> {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    protected Name name;
+    protected Phone phone;
+    protected Email email;
+    protected Address address;
+    protected Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -52,41 +53,50 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public T withName(String name) {
         this.name = new Name(name);
-        return this;
+        return self();
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public T withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public T withAddress(String address) {
         this.address = new Address(address);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public T withPhone(String phone) {
         this.phone = new Phone(phone);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public T withEmail(String email) {
         this.email = new Email(email);
-        return this;
+        return self();
+    }
+
+    /**
+     * Returns this builder instance cast to the correct type.
+     * @return this builder
+     */
+    @SuppressWarnings("unchecked")
+    protected T self() {
+        return (T) this;
     }
 
     public Person build() {
