@@ -22,9 +22,9 @@ end box
 
 user -> CommandBox : press UP button
 activate CommandBox
-CommandBox -> LogicManager : getPreviousCommand()
+CommandBox -> LogicManager : getPreviousCommandTextFromHistory()
 activate LogicManager
-LogicManager -> Model : getPreviousCommand()
+LogicManager -> Model : getPreviousCommandTextFromHistory()
 activate Model
 Model -> CommandTextHistory : getPreviousCommand()
 activate CommandTextHistory
