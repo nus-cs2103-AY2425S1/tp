@@ -55,16 +55,16 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [owe/OWED_AMOUNT]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [owe/OWED_AMOUNT]` can be used as `n/John Doe owe/100.00` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE**, but different students may share a **PHONE** number.
+* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE** number.
 
-> Reason: Siblings can use a parent's phone number as their **PHONE**. 
+> Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
