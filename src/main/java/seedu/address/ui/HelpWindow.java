@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FilterByJobCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -28,6 +29,7 @@ public class HelpWindow extends UiPart<Stage> {
             AddCommand.COMMAND_FUNCTION + '\n'
             + AddWeddingCommand.COMMAND_FUNCTION + '\n'
             + DeleteCommand.COMMAND_FUNCTION + '\n'
+            + DeleteWeddingCommand.COMMAND_FUNCTION + '\n'
             + EditCommand.COMMAND_FUNCTION + '\n'
             + FilterByJobCommand.COMMAND_FUNCTION + '\n'
             + FindCommand.COMMAND_FUNCTION + '\n'
