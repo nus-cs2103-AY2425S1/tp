@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new SearchCommandParser().parse(modelType, arguments);
 
         case ScheduleCommand.COMMAND_WORD:
-            return new ScheduleParser().parse(modelType, arguments);
+            return new ScheduleCommandParser().parse(modelType, arguments);
 
         case LinkPersonCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(modelType, arguments);

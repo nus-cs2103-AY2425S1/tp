@@ -18,7 +18,7 @@ public class EventInSchedulePredicate implements Predicate<Event> {
      * This constructor is used to create a filter for the past N or next N days of events
      * @param range the number of days in the future/past.
      */
-    public EventInSchedulePredicate(Integer range) {
+    public EventInSchedulePredicate(int range) {
         if (range >= 0) {
             startDate = DateTimeUtil.getCurrentDateTime();
             endDate = DateTimeUtil.getCurrentDateTime().withHour(23).withMinute(59).withSecond(59)

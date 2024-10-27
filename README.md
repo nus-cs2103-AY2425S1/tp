@@ -3,18 +3,17 @@
 ![Ui](docs/images/Ui.png)
 
 ### **Eventory** is a desktop app for event organisers and planners
-* Features <br>
-  * Enhanced Contact Management
-    * Tagging & Filtering: Have tags and filters to find specific people quickly
-    * Custom Fields: Store additional crucial information about the person
-  * Better Planning Tools
-    * Communication History: Store notes and communication history
-    * Task Assignment: Assign tasks to contacts
-  * Automated Communication
-    * Bulk Messaging: Send messages to multiple contacts
-    * Scheduled Messaging: Send messages in advance
-* The project simulates an ongoing software project for a desktop application (called _Eventory_) used for organising contacts and tasks related to events.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* For the detailed documentation of this project, see the **[Eventory Website](https://ay2425s1-cs2103t-t12-1.github.io/tp/)**.
-* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+#### Features
+* Enhanced Contact Management
+  * Store All Your Contacts: Add phone numbers, emails, addresses, and tags
+  * Contact Linking: Add contacts to events
+  * Advanced Filters: Filter by name and tag
+* Comprehensive Event Management
+  * Track All Your Events: Add locations, start dates, and tags
+  * Timeline View: Countdown for upcoming events
+  * Advanced Filters: Filter by name, tag, or date
+* Automated Communication
+  * Automated Message Generation: Copy and send event summaries
+
+For the detailed documentation of this project, see the **[Eventory Website](https://ay2425s1-cs2103t-t12-1.github.io/tp/)**. <br>
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

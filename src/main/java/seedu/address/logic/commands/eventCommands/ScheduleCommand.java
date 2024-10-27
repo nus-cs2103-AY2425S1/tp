@@ -24,48 +24,18 @@ public class ScheduleCommand extends Command {
             + "the next/past N days or input a date to find events on that date\n"
             + "The events are displayed as a list with index numbers.\n"
             + "Parameters: NUM_OF_DAYS or YYYY-MM-DD\n"
-            + "Example: " + COMMAND_WORD + " 5 or " + COMMAND_WORD + " 2024-01-01";
+            + "Example: " + COMMAND_WORD + " 7 or " + COMMAND_WORD + " 2024-01-01";
 
-    private enum CommandType {
-        NUM_OF_DAYS,
-        SPECIFIC_DATE,
-    }
+    private EventInSchedulePredicate predicate;
 
-    private final CommandType commandType;
-
-    private Integer numOfDays;
-
-    private DateTime specificDate;
-
-    /**
-     * Constructs an ScheduleCommand with a positive or negative number of days
-     * This constructor is used when you want to specify a date for which events before/after that are displayed
-     * @param numOfDays the number of days in the future/past.
-     */
-    public ScheduleCommand(int numOfDays) {
-        this.commandType = CommandType.NUM_OF_DAYS;
-        this.numOfDays = numOfDays;
-    }
-
-    /**
-     * Constructs an ScheduleCommand with a specific date
-     * This constructor is used when you want to specify a date for which events before/after that are displayed
-     * @param specificDate the number of days in the future/past.
-     */
-    public ScheduleCommand(DateTime specificDate) {
-        this.commandType = CommandType.SPECIFIC_DATE;
-        this.specificDate = specificDate;
+    public ScheduleCommand(EventInSchedulePredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (commandType == CommandType.NUM_OF_DAYS) {
-            model.updateFilteredEventList(new EventInSchedulePredicate(numOfDays));
-        } else {
-            model.updateFilteredEventList(new EventInSchedulePredicate(specificDate));
-        }
-
+        model.updateFilteredEventList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
@@ -82,29 +52,14 @@ public class ScheduleCommand extends Command {
         }
 
         ScheduleCommand otherScheduleCommand = (ScheduleCommand) other;
-
-        if (otherScheduleCommand.commandType != commandType) {
-            return false;
-        }
-
-        if (commandType == CommandType.NUM_OF_DAYS) {
-            return otherScheduleCommand.numOfDays.equals(numOfDays);
-        } else {
-            return otherScheduleCommand.specificDate.equals(specificDate);
-        }
+        return predicate.equals(otherScheduleCommand.predicate);
 
     }
 
     @Override
     public String toString() {
-        if (commandType == CommandType.NUM_OF_DAYS) {
-            return new ToStringBuilder(this)
-                    .add("Number of Days", numOfDays)
-                    .toString();
-        } else {
-            return new ToStringBuilder(this)
-                    .add("Specific Date", specificDate)
-                    .toString();
-        }
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

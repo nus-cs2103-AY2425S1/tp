@@ -6,11 +6,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.eventcommands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.DateTime;
+import seedu.address.model.types.common.EventInSchedulePredicate;
 
 /**
  * Parses input arguments and creates a new ScheduleCommand object
  */
-public class ScheduleParser implements Parser<Command> {
+public class ScheduleCommandParser implements Parser<Command> {
 
     private static final DateTime DEFAULT_DATE = new DateTime("1970-01-01 00:00");
 
@@ -44,9 +45,9 @@ public class ScheduleParser implements Parser<Command> {
         }
 
         if (isInt) {
-            return new ScheduleCommand(range);
+            return new ScheduleCommand(new EventInSchedulePredicate(range));
         } else {
-            return new ScheduleCommand(date);
+            return new ScheduleCommand(new EventInSchedulePredicate(date));
         }
     }
 }
