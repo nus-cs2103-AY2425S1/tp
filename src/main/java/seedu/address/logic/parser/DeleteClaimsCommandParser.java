@@ -28,42 +28,89 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
     public DeleteClaimsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS,
                 PREFIX_CLAIM_DESC);
+        Index personIndex = parsePersonIndex(argMultimap);
+        validatePrefixes(argMultimap);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
-        Index personIndex;
+        PolicyType policyType = parsePolicyType(argMultimap);
+        ClaimStatus claimStatus = parseClaimStatus(argMultimap);
+        String claimDescription = parseClaimDescription(argMultimap);
+
+        return new DeleteClaimsCommand(personIndex, policyType, claimStatus, claimDescription);
+    }
+
+    /**
+     * Parses the person index from the given argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed arguments.
+     * @return The parsed person index.
+     * @throws ParseException If the index is not a valid positive integer.
+     */
+    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
         try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
                     pe);
         }
+    }
 
+    /**
+     * Validates that all required prefixes are present in the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed arguments.
+     * @throws ParseException If any required prefix is missing.
+     */
+    private void validatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_POLICY_TYPE).isEmpty()
                 || argMultimap.getValue(PREFIX_CLAIM_STATUS).isEmpty()
                 || argMultimap.getValue(PREFIX_CLAIM_DESC).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
-
-        PolicyType policyType;
-        try {
-            policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
-                    pe);
-        }
-
-        ClaimStatus claimStatus;
-        try {
-            claimStatus = ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
-                    pe);
-        }
-
-        String claimDescription = argMultimap.getValue(PREFIX_CLAIM_DESC).orElseThrow(() ->
-                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE)));
-
-        return new DeleteClaimsCommand(personIndex, policyType, claimStatus, claimDescription);
     }
+
+    /**
+     * Parses the policy type from the given argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed arguments.
+     * @return The parsed policy type.
+     * @throws ParseException If the policy type is invalid.
+     */
+    private PolicyType parsePolicyType(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
+                    pe);
+        }
+    }
+
+    /**
+     * Parses the claim status from the given argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed arguments.
+     * @return The parsed claim status.
+     * @throws ParseException If the claim status is invalid.
+     */
+    private ClaimStatus parseClaimStatus(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
+                    pe);
+        }
+    }
+
+    /**
+     * Parses the claim description from the given argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed arguments.
+     * @return The parsed claim description.
+     * @throws ParseException If the claim description is not present.
+     */
+    private String parseClaimDescription(ArgumentMultimap argMultimap) throws ParseException {
+        return argMultimap.getValue(PREFIX_CLAIM_DESC).orElseThrow(() ->
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE)));
+    }
+
 }
