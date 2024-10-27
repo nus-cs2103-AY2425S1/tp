@@ -2,11 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -16,6 +20,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.Venue;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.role.athlete.SportString;
 
 /**
  * Edits the details of an existing {@link Event} in the address book.
@@ -28,7 +35,10 @@ public class EditEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME\n]"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "IFG";
+            + PREFIX_NAME + "IFG"
+            + PREFIX_SPORT + "Chess"
+            + PREFIX_VENUE + "Stadium"
+            + PREFIX_PARTICIPANTS + "Alice";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -77,8 +87,11 @@ public class EditEventCommand extends Command {
         assert eventToEdit != null;
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
+        SportString updatedSport = editEventDescriptor.getSport().orElse(eventToEdit.getSport());
+        Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
+        Set<Person> updatedParticipants = editEventDescriptor.getParticipants().orElse(eventToEdit.getParticipants());
 
-        return new Event(updatedName, null, null, null);
+        return new Event(updatedName, updatedSport, updatedVenue, updatedParticipants);
     }
 
     @Override
@@ -109,6 +122,11 @@ public class EditEventCommand extends Command {
      */
     public static class EditEventDescriptor {
         private EventName name;
+        private SportString sport;
+
+        private Venue venue;
+
+        private Set<Person> participants;
 
         public EditEventDescriptor() {}
 
@@ -129,6 +147,30 @@ public class EditEventCommand extends Command {
 
         public Optional<EventName> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setSport(SportString sport) {
+            this.sport = sport;
+        }
+
+        public Optional<SportString> getSport() {
+            return Optional.ofNullable(sport);
+        }
+
+        public void setVenue(Venue venue) {
+            this.venue = venue;
+        }
+
+        public Optional<Venue> getVenue() {
+            return Optional.ofNullable(venue);
+        }
+
+        public void setParticipants(Set<Person> participants) {
+            this.participants = participants;
+        }
+
+        public Optional<Set<Person>> getParticipants() {
+            return Optional.ofNullable(participants);
         }
 
         @Override
