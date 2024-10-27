@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -219,6 +220,11 @@ public class ModelManager implements Model {
     public void unassignStudent(Student student, TutorialId tutorialId) {
         requireNonNull(student);
         requireNonNull(tutorialId);
+        System.out.println("Tutorial Id:" + tutorialId.getValue());
+        System.out.println("Checking result:" + !Objects.equals(tutorialId.getValue(), "-1"));
+        /*if (!Objects.equals(tutorialId.getValue(), "-1")) {
+           tutorials.unassignStudent(student, tutorialId);
+        }*/
         tutorials.unassignStudent(student, tutorialId);
     }
 

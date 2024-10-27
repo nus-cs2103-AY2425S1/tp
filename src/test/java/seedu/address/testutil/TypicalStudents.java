@@ -122,4 +122,5 @@ public class TypicalStudents {
                 ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE
         ));
     }
+
 }

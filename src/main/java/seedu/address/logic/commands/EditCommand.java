@@ -98,11 +98,8 @@ public class EditCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
 
-        // Update tutorial assignments if tutorial ID has changed
-        if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
-            model.unassignStudent(studentToEdit, studentToEdit.getTutorialId());
-            model.assignStudent(editedStudent, editedStudent.getTutorialId());
-        }
+        model.unassignStudent(studentToEdit, studentToEdit.getTutorialId());
+        model.assignStudent(editedStudent, editedStudent.getTutorialId());
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
