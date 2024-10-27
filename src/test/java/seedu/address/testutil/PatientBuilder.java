@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.patient.Address;
@@ -19,6 +17,7 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
+import seedu.address.model.patient.ApptList;
 
 /**
  * A utility class to help with building Patient objects.
@@ -55,7 +54,7 @@ public class PatientBuilder {
     private Note note;
     private Name nokName;
     private Phone nokPhone;
-    private List<Appt> appts;
+    private ApptList appts;
 
     //TODO to add default values for the rest of the fields, and add with___ methods for all fields
 
@@ -78,7 +77,7 @@ public class PatientBuilder {
         note = new Note(DEFAULT_NOTE);
         nokName = new Name(DEFAULT_NOKNAME);
         nokPhone = new Phone(DEFAULT_NOKPHONE);
-        appts = new ArrayList<>();
+        appts = new ApptList();
     }
 
     /**
@@ -100,7 +99,7 @@ public class PatientBuilder {
         nokName = patientToCopy.getNokName();
         nokPhone = patientToCopy.getNokPhone();
         for (Appt appt: patientToCopy.getAppts()) {
-            appts.add(new Appt(appt.getDateTime()));
+            appts.addAppt(new Appt(appt.getDateTime()));
         }
     }
 

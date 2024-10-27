@@ -20,13 +20,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Nric;
 
 /**
@@ -124,7 +123,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code dateTime} contain only one element which is an empty string, it will be parsed into a
      * {@code List<Appt>} containing zero appointments.
      */
-    public Optional<List<Appt>> parseApptsForEdit(Collection<String> dateTime) throws ParseException {
+    public Optional<ApptList> parseApptsForEdit(Collection<String> dateTime) throws ParseException {
         assert dateTime != null;
 
         if (dateTime.isEmpty()) {

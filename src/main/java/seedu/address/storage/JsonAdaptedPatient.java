@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -209,10 +210,10 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appt.class.getSimpleName()));
         }
-        final List<Appt> modelAppts = new ArrayList<>();
+        final ApptList modelAppts = new ApptList();
         if (appts != null) {
             for (JsonAdaptedAppt appt : appts) {
-                modelAppts.add(appt.toModelType());
+                modelAppts.addAppt(appt.toModelType());
             }
         }
 
