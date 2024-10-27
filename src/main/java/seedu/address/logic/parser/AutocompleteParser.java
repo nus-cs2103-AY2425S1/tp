@@ -4,6 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.address.logic.commands.AddCommand;
@@ -257,6 +261,43 @@ public class AutocompleteParser {
         StringBuffer buf = new StringBuffer(fullUserInput);
         buf.replace(startIndex + 1, endIndex, newString);
         return buf.toString();
+    }
+
+    /**
+     * Gets all the file names in the directory "archived".
+     * @return An ArrayList with all the name of json file
+     * Will return an empty list if the directory does not exist.
+     * */
+    private ArrayList<String> getAllFilesInArchiveDirectory() {
+        File directory = Paths.get("archived").toFile();
+
+        // Check if the directory exists and is indeed a directory
+        if (directory.exists() && directory.isDirectory()) {
+            // List all files and directories in the specified path
+            File[] files = directory.listFiles();
+            ArrayList<String> result = new ArrayList<>();
+            if (files != null) {
+                for (File file : files) {
+                    // add file name if it is a json file
+                    if (isJson(file)) {
+                        result.add(file.getName());
+                    }
+                }
+                return result;
+            } else {
+                return new ArrayList<>();
+            }
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * checks if the given file is a json file.
+     * @param file the file to check
+     * */
+    private boolean isJson(File file) {
+        return file.isFile() && file.getName().toLowerCase().endsWith(".json");
     }
 }
 
