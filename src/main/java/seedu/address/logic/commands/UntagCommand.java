@@ -65,38 +65,27 @@ public class UntagCommand extends Command {
             }
             Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
             Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
-            boolean updated = false;
+            boolean isUpdated = false;
 
             for (Tag tag : tags) {
                 if (!newTags.contains(tag)) {
                     missingTags.add(tag);
                 } else {
                     newTags.remove(tag);
-                    updated = true;
+                    isUpdated = true;
                 }
             }
 
-            if (updated) {
-                Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
-                        personToUntag.getEmail(), personToUntag.getRsvpStatus(), newTags);
-                model.setPerson(personToUntag, updatedPerson);
-                if (!successMessage.isEmpty()) {
-                    successMessage.append("\n");
-                }
-                successMessage.append(Messages.format(updatedPerson));
+            if (isUpdated) {
+                Person updatedPerson = setPerson(model, personToUntag, newTags);
+                updateSuccessMessage(successMessage, updatedPerson);
             }
         }
         if (!successMessage.isEmpty()) {
             finalMessage.append(MESSAGE_UNTAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty()) {
-            if (!finalMessage.isEmpty()) {
-                finalMessage.append("\n");
-            }
-            finalMessage.append(MESSAGE_TAG_NOT_FOUND)
-                    .append(missingTags.stream()
-                            .map(Tag::toString)
-                            .collect(Collectors.joining(", ")));
+            updateFinalMessage(finalMessage, missingTags);
         }
         return new CommandResult(finalMessage.toString());
     }
@@ -122,5 +111,29 @@ public class UntagCommand extends Command {
                 .add("targetIndexes", targetIndexes)
                 .add("tag", tags)
                 .toString();
+    }
+
+    private Person setPerson(Model model, Person personToUntag, Set<Tag> newTags) {
+        Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
+                personToUntag.getEmail(), personToUntag.getRsvpStatus(), newTags);
+        model.setPerson(personToUntag, updatedPerson);
+        return updatedPerson;
+    }
+
+    private void updateSuccessMessage(StringBuilder successMessage, Person updatedPerson) {
+        if (!successMessage.isEmpty()) {
+            successMessage.append("\n");
+        }
+        successMessage.append(Messages.format(updatedPerson));
+    }
+
+    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> missingTags) {
+        if (!finalMessage.isEmpty()) {
+            finalMessage.append("\n");
+        }
+        finalMessage.append(MESSAGE_TAG_NOT_FOUND)
+                .append(missingTags.stream()
+                        .map(Tag::toString)
+                        .collect(Collectors.joining(", ")));
     }
 }

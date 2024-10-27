@@ -67,7 +67,7 @@ public class TagCommand extends Command {
             }
             Person personToTag = lastShownList.get(targetIndex.getZeroBased());
             Set<Tag> newTags = new HashSet<>(personToTag.getTags());
-            boolean updated = false;
+            boolean isUpdated = false;
 
             for (Tag tag : tags) {
                 if (!model.hasTag(tag)) {
@@ -76,42 +76,20 @@ public class TagCommand extends Command {
                     duplicateTags.add(tag);
                 } else {
                     newTags.add(tag);
-                    updated = true;
+                    isUpdated = true;
                 }
             }
 
-            if (updated) {
-                Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
-                        personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
-                model.setPerson(personToTag, updatedPerson);
-                if (!successMessage.isEmpty()) {
-                    successMessage.append("\n");
-                }
-                successMessage.append(Messages.format(updatedPerson));
+            if (isUpdated) {
+                Person updatedPerson = setPerson(model, personToTag, newTags);
+                updateSuccessMessage(successMessage, updatedPerson);
             }
         }
         if (!successMessage.isEmpty()) {
             finalMessage.append(MESSAGE_TAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty() || !duplicateTags.isEmpty()) {
-            if (!finalMessage.isEmpty()) {
-                finalMessage.append("\n");
-            }
-            if (!missingTags.isEmpty()) {
-                finalMessage.append(MESSAGE_TAG_NOT_CREATED)
-                        .append(missingTags.stream()
-                                .map(Tag::toString)
-                                .collect(Collectors.joining(", ")));
-            }
-            if (!duplicateTags.isEmpty()) {
-                if (!missingTags.isEmpty()) {
-                    finalMessage.append("\n");
-                }
-                finalMessage.append(MESSAGE_DUPLICATE_TAG)
-                        .append(duplicateTags.stream()
-                                .map(Tag::toString)
-                                .collect(Collectors.joining(", ")));
-            }
+            updateFinalMessage(finalMessage, duplicateTags, missingTags);
         }
         return new CommandResult(finalMessage.toString());
     }
@@ -137,5 +115,40 @@ public class TagCommand extends Command {
                 .add("targetIndexes", targetIndexes)
                 .add("tags", tags)
                 .toString();
+    }
+
+    private Person setPerson(Model model, Person personToTag, Set<Tag> newTags) {
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
+                personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
+        model.setPerson(personToTag, updatedPerson);
+        return updatedPerson;
+    }
+
+    private void updateSuccessMessage(StringBuilder successMessage, Person updatedPerson) {
+        if (!successMessage.isEmpty()) {
+            successMessage.append("\n");
+        }
+        successMessage.append(Messages.format(updatedPerson));
+    }
+
+    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> duplicateTags, Set<Tag> missingTags) {
+        if (!finalMessage.isEmpty()) {
+            finalMessage.append("\n");
+        }
+        if (!missingTags.isEmpty()) {
+            finalMessage.append(MESSAGE_TAG_NOT_CREATED)
+                    .append(missingTags.stream()
+                            .map(Tag::toString)
+                            .collect(Collectors.joining(", ")));
+        }
+        if (!duplicateTags.isEmpty()) {
+            if (!missingTags.isEmpty()) {
+                finalMessage.append("\n");
+            }
+            finalMessage.append(MESSAGE_DUPLICATE_TAG)
+                    .append(duplicateTags.stream()
+                            .map(Tag::toString)
+                            .collect(Collectors.joining(", ")));
+        }
     }
 }
