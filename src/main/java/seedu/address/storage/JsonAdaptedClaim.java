@@ -44,7 +44,6 @@ class JsonAdaptedClaim {
             throw new IllegalValueException("Invalid claim status: " + status);
         }
         final ClaimStatus modelStatus = ClaimStatus.fromString(status);
-
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "Description"));

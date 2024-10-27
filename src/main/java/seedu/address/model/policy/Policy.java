@@ -34,7 +34,7 @@ public abstract class Policy {
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
-        this.claimList = new ClaimList();
+        this.claimList = claims;
     }
 
     /**

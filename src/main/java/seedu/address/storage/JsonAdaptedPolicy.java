@@ -49,7 +49,7 @@ class JsonAdaptedPolicy {
         this.premiumAmount = source.getPremiumAmount().value;
         this.coverageAmount = source.getCoverageAmount().value;
         this.expiryDate = source.getExpiryDate().toString();
-        this.claims.addAll(source.getList().stream()
+        this.claims.addAll(source.getClaimList().stream()
                 .map(JsonAdaptedClaim::new)
                 .collect(Collectors.toList()));
     }
