@@ -86,6 +86,10 @@ public class TutorialList {
         if (!hasTutorial(tutorial)) {
             throw new TutNoFoundException();
         }
+        tutorials.stream()
+                .filter(x -> x.equals(tutorial))
+                .forEach(t -> t.getStudents().stream()
+                        .forEach(student -> assignStudent(student, TutorialId.none())));
         this.tutorials.remove(tutorial);
     }
 
