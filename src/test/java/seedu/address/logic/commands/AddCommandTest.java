@@ -211,6 +211,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isHistoryView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setHistoryView(boolean historyView) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addCommandTextToHistory(String commandText) {
             throw new AssertionError("This method should not be called.");
         }

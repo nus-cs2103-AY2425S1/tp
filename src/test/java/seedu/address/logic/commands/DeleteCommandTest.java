@@ -173,4 +173,11 @@ public class DeleteCommandTest {
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
     }
+
+    @Test
+    public void restrictedUsageInHistoryView() {
+        model.setHistoryView(true);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW);
+    }
 }

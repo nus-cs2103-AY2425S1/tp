@@ -146,6 +146,10 @@ public class EditCommand extends Command {
             finalMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
         }
 
+        if (model.isHistoryView()) {
+            throw new CommandException(Messages.MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

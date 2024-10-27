@@ -190,4 +190,12 @@ public class MarkCommandTest {
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
     }
+
+    @Test
+    public void restrictedUsageInHistoryView() {
+        model.setHistoryView(true);
+        ContactRecord validRecord = new ContactRecordBuilder().build();
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, validRecord);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_USAGE_RESTRICTED_IN_HISTORY_VIEW);
+    }
 }
