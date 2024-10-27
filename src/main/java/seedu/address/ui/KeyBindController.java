@@ -47,7 +47,7 @@ public class KeyBindController {
             event.consume();
         }
     }
-    
+
     /**
      * Sets up key bindings for focus traversal and command handling across UI components.
      */
@@ -56,6 +56,7 @@ public class KeyBindController {
         this.textField = commandTextField;
         TextArea resultTextArea = resultDisplay.getResultTextArea();
         ListView<Person> personListView = personListPanel.getPersonListView();
+
 
         // Disable default tab traversal
         commandTextField.setFocusTraversable(false);
@@ -75,10 +76,8 @@ public class KeyBindController {
         resultTextArea.addEventFilter(KeyEvent.KEY_PRESSED, event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
 
-        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    handleKeyEvent(event, focusPersonListView, undoCommand, redoCommand);
-                }
-                );
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event ->
+                    handleKeyEvent(event, focusPersonListView, undoCommand, redoCommand));
 
         personListView.addEventFilter(KeyEvent.KEY_PRESSED, event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
