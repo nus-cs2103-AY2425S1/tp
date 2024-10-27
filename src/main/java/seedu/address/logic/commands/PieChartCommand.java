@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.ui.PieChartWindow;
 
@@ -17,9 +19,12 @@ public class PieChartCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Map<String, Integer> numOfStudentsInEachClass = new HashMap<>();
+        if (model.getFilteredPersonList().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_LIST_TO_VISUALIZE);
+        }
         model.getFilteredPersonList().forEach(person -> {
             assert person.getClassId() != null;
             String classId = person.getClassId().value;
