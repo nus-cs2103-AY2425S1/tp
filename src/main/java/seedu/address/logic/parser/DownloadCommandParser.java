@@ -25,7 +25,7 @@ public class DownloadCommandParser implements Parser<DownloadCommand> {
     public DownloadCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.isPreambleEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DownloadCommand.MESSAGE_USAGE));
         }
 
