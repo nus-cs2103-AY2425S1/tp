@@ -97,9 +97,10 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription_whitespace() {
-        assertTrue(Description.isValidDescription(" ")); // single space
+        assertFalse(Description.isValidDescription(" ")); // single space
+        assertFalse(Description.isValidDescription("            ")); // multiple spaces
         assertTrue(Description.isValidDescription("  Loves coding ")); // leading and trailing spaces
-        assertTrue(Description.isValidDescription("Loves    coding")); // multiple spaces
+        assertTrue(Description.isValidDescription("Loves    coding")); // multiple spaces in between words
     }
 
 

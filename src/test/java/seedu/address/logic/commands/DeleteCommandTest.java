@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureDelete;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithNewList;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -195,7 +195,7 @@ public class DeleteCommandTest {
                 Arrays.asList(name)));
 
         // Expect a CommandException for vague delete message
-        assertCommandFailureDelete(deleteCommand, name, model, Messages.MESSAGE_VAGUE_DELETE);
+        assertCommandFailureWithNewList(deleteCommand, name, model, Messages.MESSAGE_VAGUE_DELETE);
     }
 
 }
