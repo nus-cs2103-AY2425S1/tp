@@ -26,7 +26,7 @@ public class Allergy implements Comparable<Allergy> {
         requireNonNull(allergyName);
         checkArgument(!allergyName.isEmpty(), MESSAGE_EMPTY_FIELD);
         checkArgument(isValidAllergyName(allergyName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
-        this.allergyName = allergyName;
+        this.allergyName = allergyName.toUpperCase();
     }
 
     /**
