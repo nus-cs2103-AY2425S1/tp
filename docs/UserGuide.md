@@ -97,6 +97,13 @@ Examples:
 t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
 * `add n/Betsy Crowe t/SoftEng Inc. e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+1. The deadline could be the date you need to submit the project to the client
+2. The deadline could be the date by which you need to follow up with a potential client
+</div>
+
+
 ### View Client List : `list`
 
 Displays a list of all clients and their details.
@@ -128,6 +135,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Updates the first person’s phone number to `91234567` and email address to `johndoe@example.com`
 *  `edit 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 1 ps/completed py/paid cs/old` Updates the project status, payment status and client status of the 1st person to be `completed`, `paid` and `old` respectively.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+1. The deadline field will show an `[OVERDUE]` tag if the deadline has passed and the client status is still `active`, so if the client has paid, and you're business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `[OVERDUE]`.
+</div>
 
 ### Locating Clients By Name: `find`
 
