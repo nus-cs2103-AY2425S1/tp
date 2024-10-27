@@ -28,9 +28,10 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND =
             "No %ss found. The list is reset to its default order.";
 
+    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
+
     public final SortOption sortOption;
 
-    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
     /**
      * Constructs a SortCommand with no sort option, which will reset the list to the default order.
      */

@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Volunteer;
 
-/*
+/**
  * A utility class to help with building Volunteer objects.
  */
 public class VolunteerBuilder extends PersonBuilder<VolunteerBuilder> {
@@ -12,7 +12,7 @@ public class VolunteerBuilder extends PersonBuilder<VolunteerBuilder> {
 
     private Hours hours;
 
-    /*
+    /**
      * Creates a {@code VolunteerBuilder} with the default details.
      */
     public VolunteerBuilder() {
@@ -20,7 +20,7 @@ public class VolunteerBuilder extends PersonBuilder<VolunteerBuilder> {
         this.hours = new Hours(DEFAULT_HOURS);
     }
 
-    /*
+    /**
      * Sets the {@code Hours} of the {@code Volunteer} that we are building.
      */
     public VolunteerBuilder withHours(String hours) {
