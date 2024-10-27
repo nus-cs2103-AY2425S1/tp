@@ -74,7 +74,7 @@ public class ViewClientCommandTest {
     public void toString_success() {
         String name = "Bob";
         ViewClientCommand command = new ViewClientCommand(new Name(name));
-        String expectedString =  "seedu.address.logic.commands.ViewClientCommand{toShowClient=" + name + "}";
+        String expectedString = "seedu.address.logic.commands.ViewClientCommand{toShowClient=" + name + "}";
         assertEquals(expectedString, command.toString());
     }
 
