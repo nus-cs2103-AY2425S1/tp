@@ -172,6 +172,8 @@ Example: `archive pa/mybook.json`
 
 The file name must ends with ".json" and must not contain any slash "/".
 
+There should be only one file name provided.
+
 #### Warning
 
 All the entries in the current address book will be cleared.
@@ -189,6 +191,8 @@ Format: `load pa/PATH`
 Example: `load pa/mybook.json`
 
 The file name must ends with ".json", must not contain any slash "/" and must point to an existing address book .json file.
+
+There should be only one file name provided.
 
 #### Warning
 Avoid loading non-address book .json files as it may result in unexpected behaviours
