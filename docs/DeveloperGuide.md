@@ -261,17 +261,30 @@ The `getPreviousCommand()` method will first check if `commandHistory` is empty 
 If it is not empty, it will decrement the `currentCommandIndex` and return the command text at that index.
 If it is empty, it will return an empty string.
 
-The `getNextCommand()` method will first check if `commandHistory` if `currentCommandIndex` is less than `commandHistory.size() - 1`.
+The `getNextCommand()` method will first check if `currentCommandIndex` is less than `commandHistory.size() - 1`.
 If it is, it will increment the `currentCommandIndex` and return the command text at that index.
 If it is not or `currentCommandIndex` is `-1` which means the commandHistory is empty, it will return an empty string.
 
 ##### Adding command to history
 The `addCommandHistory(String commandText)` method will add the command text to the `commandHistory` arraylist and set the `currentCommandIndex` to the size of the `commandHistory` arraylist.
-This resets the `currentCommandIndex` to the end of the `commandHistory` arraylist after a new command is added.
+This resets the `currentCommandIndex` to the end of the `commandHistory` arraylist after a new command is added. We set the `currentCommandIndex` to `size` instead of `size - 1`
+as the current command to be entered is not in the arraylist yet and the command that was just entered is at index `size -1`.
 
-![AddCommandHistory0](images/AddCommandHistory0.png)
-The currentCommandIndex is reset to the size of the arraylist after a new command is added.
-![AddCommandHistory1](images/AddCommandHistory1.png)
+
+Take a look at this example:
+
+Currently, the `commandHistory` arraylist only contains 4 commands and we are viewing the 2nd command that we entered.
+We want to get the next command that we entered. So, after clicking the UP button, `CommandTextHistory#getNextCommand()` is called.
+
+![CommandHistory0](images/CommandHistory0.png)
+
+`currentCommandIndex` is not at the end of `commandHistory` so it will increment `currentCommandIndex` and return the command "list" to the TextField.
+![CommandHistory1](images/CommandHistory1.png)
+
+Now, let's say we enter in the "list" command that is in the `TextField`. The new "list" command is added to the back of the `commandHistory` arraylist, taking up position at index 4.
+Then, we set the `currentCommandIndex` to be the size of the arraylist, anticipating the next command to be added, as shown below.
+![CommandHistory2](images/CommandHistory2.png)
+
 :information_source: **Note:** CommandTextHistory will store commands that were unsuccessful as well.
 
 These operations are exposed in the `Model` interface as `Model#addCommandTextToHistory(String commandText)`, `Model#getPreviousCommandTextFromHistory()` and `Model#getNextCommandTextFromHistory()` respectively.
