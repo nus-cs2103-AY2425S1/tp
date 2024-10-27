@@ -43,7 +43,7 @@ public class DeleteClaimsCommand extends Command {
             + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s";
     public static final String MESSAGE_NO_CLAIM_FOUND = "No claim matching the specified status "
             + "and description was found.";
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid.";
+    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for person: %2$s";
 
     private final Index personIndex;
