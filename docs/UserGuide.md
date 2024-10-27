@@ -87,17 +87,22 @@ Underneath each suggested command is the syntax for that command and what parame
 
 ## Command summary
 
-Action     | Format, Examples
------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help`
-**List**   | `list`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Editgame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-
+| Action        | Format, Examples                                                                                                                                                                            |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**      | `help`                                                                                                                                                                                      |
+| **List**      | `list`                                                                                                                                                                                      |
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague` |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       |
+| **EditGame**  | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                    |
+| **FavGame**   | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                     |
+| **UnFavGame** | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                 |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **FindTime**  | `find TIME-TIME [TIME-TIME]`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                      |
+| **Clear**     | `clear`                                                                                                                                                                                     |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
+| **Save**      | `save`                                                                                                                                                                                      |
+| **Load**      | `load`                                                                                                                                                                                      |
+| **Exit**      | `exit`                                                                                                                                                                                      |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
