@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class "<<enumeration>>\nAttendanceStatus" {
+    PRESENT
+    ABSENT
+    NOT_TAKEN_PLACE
+}
+
+Person -r-> "*" Tutorials
+Tutorials -r-> "1""<<enumeration>>\nAttendanceStatus"
+@enduml
