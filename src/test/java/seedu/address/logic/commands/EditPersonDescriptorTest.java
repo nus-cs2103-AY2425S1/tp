@@ -69,7 +69,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getBirthday().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", dateOfCreation="
                 + editPersonDescriptor.getDateofCreation().orElse(null) + ", history="
-                + editPersonDescriptor.getHistory().orElse(null) + "}";
+                + editPersonDescriptor.getHistory().orElse(null) + ", propertyList="
+                + editPersonDescriptor.getPropertyList().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
