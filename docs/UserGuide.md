@@ -82,7 +82,7 @@ administrators.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -179,7 +179,7 @@ Updates the payment status of a student to completed.
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
-* The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The `YEAR-MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The index **must be within the range** of the number of people in the list.
 * The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
 
@@ -193,6 +193,7 @@ Updates the payment status of a student to completed.
 
 
 [Back to Table of Contents](#table-of-contents)
+
 ***
 
 ### 2.5 Editing a Person: `edit`
@@ -224,6 +225,7 @@ Edits an existing person in the address book.
 - The `edit` command is particularly useful for keeping contact information up to date.
 
 [Back to Table of Contents](#table-of-contents)
+
 ***
 
 ### 2.6 Listing All Persons: `list`
@@ -261,8 +263,8 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 - **By Name:** `find n/KEYWORD [MORE_KEYWORDS]`
 - **By Class ID:** `find c/KEYWORD [MORE_KEYWORDS]`
 - **By Name and Class ID:** `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD2 [MORE_KEYWORDS2]`
-- **By Payment Date:** `find m/YEARMONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
-- **By Unpaid Status:** `find !m/YEARMONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
+- **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
+- **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
 
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
@@ -319,6 +321,7 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 - Consider exporting your data before using the `clear` command if you need a backup.
 
 [Back to Table of Contents](#table-of-contents)
+
 ***
 
 ### 2.9 Undo/Redo Commands: `undo` and `redo`
@@ -471,6 +474,7 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
+
 ***
 
 ### 2.16 Exiting the Program: `exit`
