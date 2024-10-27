@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,25 +23,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class EduContactsTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final EduContacts eduContacts = new EduContacts();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), eduContacts.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> eduContacts.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyEduContacts_replacesData() {
+        EduContacts newData = getTypicalEduContacts();
+        eduContacts.resetData(newData);
+        assertEquals(newData, eduContacts);
     }
 
     @Test
@@ -50,77 +50,77 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        EduContactsStub newData = new EduContactsStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> eduContacts.resetData(newData));
     }
 
     @Test
     public void addPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.addPerson(null));
+        assertThrows(NullPointerException.class, () -> eduContacts.addPerson(null));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> eduContacts.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInEduContacts_returnsFalse() {
+        assertFalse(eduContacts.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInEduContacts_returnsTrue() {
+        eduContacts.addPerson(ALICE);
+        assertTrue(eduContacts.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInEduContacts_returnsTrue() {
+        eduContacts.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(eduContacts.hasPerson(editedAlice));
     }
 
     @Test
-    public void addModule_personNotInAddressBook_throwsIllegalArgumentException() {
+    public void addModule_personNotInEduContacts_throwsIllegalArgumentException() {
         Module module = new Module("CS2101");
-        assertThrows(IllegalArgumentException.class, () -> addressBook.addModule(ALICE, module));
+        assertThrows(IllegalArgumentException.class, () -> eduContacts.addModule(ALICE, module));
     }
 
     @Test
-    public void removeModule_personNotInAddressBook_throwsIllegalArgumentException() {
+    public void removeModule_personNotInEduContacts_throwsIllegalArgumentException() {
         Module module = new Module("CS2101");
-        assertThrows(IllegalArgumentException.class, () -> addressBook.removeModule(ALICE, module));
+        assertThrows(IllegalArgumentException.class, () -> eduContacts.removeModule(ALICE, module));
     }
 
     @Test
     public void removeModule_moduleNotInPerson_throwsIllegalArgumentException() {
-        addressBook.addPerson(ALICE);
+        eduContacts.addPerson(ALICE);
         Module module = new Module("CS2101");
-        assertThrows(IllegalArgumentException.class, () -> addressBook.removeModule(ALICE, module));
+        assertThrows(IllegalArgumentException.class, () -> eduContacts.removeModule(ALICE, module));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> eduContacts.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = EduContacts.class.getCanonicalName() + "{persons=" + eduContacts.getPersonList() + "}";
+        assertEquals(expected, eduContacts.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyEduContacts whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class EduContactsStub implements ReadOnlyEduContacts {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        EduContactsStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

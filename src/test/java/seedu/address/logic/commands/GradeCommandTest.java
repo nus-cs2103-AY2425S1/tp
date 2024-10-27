@@ -11,12 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EduContacts;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -32,7 +32,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class GradeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEduContacts(), new UserPrefs());
 
     @Test
     public void execute_gradeAcceptedByModel_addSuccessful() {
@@ -50,7 +50,7 @@ public class GradeCommandTest {
 
         String expectedMessage = String.format(GradeCommand.MESSAGE_SUCCESS, validModule);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), newStudent);
 
         assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
@@ -58,7 +58,7 @@ public class GradeCommandTest {
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
-        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in the address book
+        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in EduContacts
         Module validModule = new Module(VALID_MODULE_AMY);
         Grade validGrade = new Grade(VALID_GRADE_AMY);
         GradeCommand gradeCommand = new GradeCommand(invalidStudentId, validModule, validGrade);
