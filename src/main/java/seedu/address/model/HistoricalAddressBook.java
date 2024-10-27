@@ -42,6 +42,18 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Constructor for a {@code HistoricalAddressBook} object.
+     * Uses the memory reference of all parameters given.
+     * Note: To be used only for testing.
+     */
+    public HistoricalAddressBook(Stack<ReadOnlyAddressBook> addressBookHistory,
+                                 Stack<ReadOnlyAddressBook> addressBookUndoHistory, AddressBook currentAddressBook) {
+        this.addressBookHistory = addressBookHistory;
+        this.addressBookUndoHistory = addressBookUndoHistory;
+        this.currentAddressBook = currentAddressBook;
+    }
+
+    /**
      * Saves the current {@code AddressBook}
      * Clear the undo history
      */

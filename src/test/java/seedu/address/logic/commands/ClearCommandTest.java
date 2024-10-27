@@ -3,12 +3,16 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Stack;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.CommandHistory;
+import seedu.address.model.HistoricalAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
@@ -16,7 +20,13 @@ public class ClearCommandTest {
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
+        Stack<ReadOnlyAddressBook> expectedHistoryStack = new Stack<>();
+        expectedHistoryStack.add(new HistoricalAddressBook());
+        HistoricalAddressBook expectedHistoricalAddressBook = new HistoricalAddressBook(
+                expectedHistoryStack, new Stack<>(), new AddressBook()
+        );
         Model expectedModel = new ModelManager();
+        expectedModel.setAddressBook(expectedHistoricalAddressBook);
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

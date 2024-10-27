@@ -43,7 +43,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new HistoricalAddressBook(new AddressBook()), new UserPrefs(), new CommandHistory());
+        this(new HistoricalAddressBook(), new UserPrefs(), new CommandHistory());
     }
 
 
