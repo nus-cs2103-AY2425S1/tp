@@ -65,7 +65,7 @@ public class AddTaskCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+                Name.MESSAGE_CONSTRAINTS);
 
         // empty task description
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_TASK_DESC + TASK_DEADLINE_DESC_BOB,

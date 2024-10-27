@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import org.junit.jupiter.api.Test;
 
@@ -78,7 +79,7 @@ public class DeleteTaskCommandParserTest {
 
     @Test
     public void parse_invalidIndexArgs_throwsParseException() {
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_TASK_INDEX, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_TASK_INDEX, MESSAGE_INVALID_INDEX);
     }
 
 }
