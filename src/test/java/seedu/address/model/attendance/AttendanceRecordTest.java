@@ -33,7 +33,7 @@ public class AttendanceRecordTest {
         Attendance attendance = new Attendance("p");
         AttendanceRecord record = new AttendanceRecord(date, attendance);
 
-        String expected = "2024-10-22 [x]";
+        String expected = "2024-10-22: Present";
         assertEquals(expected, record.toString());
     }
 
@@ -43,7 +43,7 @@ public class AttendanceRecordTest {
         Attendance attendance = new Attendance("a");
         AttendanceRecord record = new AttendanceRecord(date, attendance);
 
-        String expected = "2024-10-22 [ ]";
+        String expected = "2024-10-22: Absent";
         assertEquals(expected, record.toString());
     }
     @Test

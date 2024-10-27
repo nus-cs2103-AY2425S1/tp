@@ -32,6 +32,6 @@ class AttendanceRowTest {
         Student student = new StudentBuilder().withName("John Doe").build();
         AttendanceRow attendanceRow = new AttendanceRow(student);
         LocalDate date = LocalDate.of(2023, 10, 9);
-        assertEquals("Absent", attendanceRow.getAttendanceForDate(date));
+        assertEquals("N/A", attendanceRow.getAttendanceForDate(date));
     }
 }

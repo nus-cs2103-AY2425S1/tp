@@ -2,7 +2,11 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,15 +33,22 @@ import seedu.address.model.student.TutorialGroup;
 
 
 public class AttendanceWindow {
-
     private final TutorialGroup tutorialGroup;
     private TableView<AttendanceRow> table;
     private ObservableList<AttendanceRow> data;
 
+    /**
+     * Creates a new AttendanceWindow for the specified tutorial group.
+     * @param tutorialGroup The tutorial group to display attendance for.
+     */
     public AttendanceWindow(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
     }
 
+    /**
+     * Displays the attendance window.
+     * @param model The model to get the student data from.
+     */
     public void show(Model model) {
         Platform.runLater(() -> { });
         Stage stage = new Stage();
@@ -150,3 +161,4 @@ public class AttendanceWindow {
         return tutorialGroup;
     }
 }
+

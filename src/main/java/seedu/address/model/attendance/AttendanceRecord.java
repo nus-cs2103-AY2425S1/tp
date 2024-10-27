@@ -1,11 +1,15 @@
 package seedu.address.model.attendance;
 
 import java.time.LocalDate;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+
+/**
+ * Represents an attendance record for a single date.
+ */
 public class AttendanceRecord implements Observable {
     private final LocalDate date;
     private Attendance attendance;
@@ -46,14 +50,13 @@ public class AttendanceRecord implements Observable {
     }
 
     private void notifyListeners() {
-        System.out.println("AttendanceRecord.notifyListeners for " );
         for (InvalidationListener listener : listeners) {
             listener.invalidated(this);
         }
     }
 
     @Override
-    public boolean equals (Object other) {
+    public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
