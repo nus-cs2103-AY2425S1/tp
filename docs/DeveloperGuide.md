@@ -92,7 +92,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(":remove 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `:remove 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove 1` Command" />
 
 <box type="info" seamless>
 
@@ -180,7 +180,7 @@ Step 2. The user executes `:remove 5` command to add the 5th person in the addre
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add -n David …​` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -308,6 +308,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
+* value privacy and self-hosting
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
@@ -316,18 +317,35 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                                     | So that I can…​                                                           |
+|----------|--------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | first-time user                            | add contacts to my contact book                                  | store my contacts                                                         |
+| `* * *`  | user                                       | add contacts to my contact book using only partial details       | store contacts that I may not have full information about                 |
+| `* * *`  | user                                       | see all my contacts                                              | see and manage my contacts                                                |
+| `* * *`  | user                                       | delete contacts                                                  | remove contacts I do not need anymore                                     |
+| `* *`    | first-time user                            | see sample contacts                                              | explore the app's features without adding real data                       |
+| `* *`    | first-time user                            | clear sample data and start fresh                                | input my real contacts securely                                           |
+| `* *`    | first-time user                            | view a tutorial on the app                                       | learn how to use the app quickly                                          |
+| `* *`    | first-time user                            | quickly access a CLI command cheat sheet                         | learn essential commands without slowing down                             |
+| `* *`    | new user                                   | secure my contact data with a password                           | feel confident that my client information is protected                    |
+| `* *`    | new user                                   | choose to encrypt the contact data that is stored                | ensure my client information cannot be accessed from the storage location |
+| `* *`    | new and inexperienced user                 | undo actions like deletions (CTRL+Z)                             | recover data quickly if I make a mistake                                  |
+| `* *`    | new and inexperienced user                 | be prompted with why an invalid command is invalid               | receive immediate and specific feedback if I type an invalid command      |
+| `* *`    | new user                                   | open up a settings menu                                          | configure keyboard shortcuts                                              |
+| `* *`    | returning user                             | search contacts using partial details (name, email)              | find relevant contacts faster                                             |
+| `* *`    | user                                       | edit contact details                                             | avoid errors when updating information                                    |
+| `* *`    | user whose contacts span multiple projects | tag contacts with a project or organisation name                 | organise my contacts better                                               |
+| `* *`    | user                                       | filter contacts by project or organisation                       | quickly locate clients related to specific tasks                          |
+| `* *`    | experienced user                           | use keyboard shortcuts to bring up the CLI                       | execute commands faster                                                   |
+| `* *`    | experienced user                           | use keyboard shortcuts to manage contacts                        | manage my contacts faster                                                 |
+| `* *`    | new user                                   | import contacts from a CSV or another format (e.g. Apple's .vcf) | quickly populate my contact book without manual entry                     |
+| `*`      | returning user                             | customise the app's theme                                        | make my user experience more personalised as I use the app more           |
+| `*`      | user                                       | multi-select contacts for deletion                               | manage my list more efficiently                                           |
+| `*`      | frequent user                              | navigate command history with arrow keys                         | quickly fill the search field and modify and execute previous commands    |
+| `*`      | power user                                 | export my contact list to CSV or JSON format                     | use it in other tools or projects                                         |
+| `*`      | programmer                                 | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and CipherContacts more effectively                 |
+| `*`      | frequent user                              | pin important contacts                                           | have them appear at the top of my list for easy access                    |
+| `*`      | long time user                             | archive old contacts                                             | clean up my contact book without having to delete contacts                |                                          |
 
 ### Use cases
 
