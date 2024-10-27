@@ -32,13 +32,14 @@ public class MarkAssignmentCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("1"));
 
         // No index
-        assertThrows(ParseException.class, () -> parser.parse(PREFIX_NAME + "Assignment 1"));
+        assertThrows(ParseException.class, () -> parser.parse(PREFIX_NAME + "Assignment"));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
         // Invalid index
         assertThrows(ParseException.class, () -> parser.parse("a " + PREFIX_NAME + "Assignment 1"));
+        assertThrows(ParseException.class, () -> parser.parse("-1 " + PREFIX_NAME + "Assignment 2"));
     }
 
     @Test
