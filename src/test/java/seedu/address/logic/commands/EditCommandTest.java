@@ -14,7 +14,9 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,6 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -35,8 +38,21 @@ import seedu.address.testutil.StudentBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            new AssignmentList(), new TutorialList());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new AssignmentList(), getTypicalTutorialList());
+
+        // Assign students to their tutorials in the model
+        for (Student student : model.getAddressBook().getStudentList()) {
+            TutorialId tutorialId = student.getTutorialId();
+            if (model.hasTutorial(tutorialId)) {
+                model.assignStudent(student, tutorialId);
+            }
+        }
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

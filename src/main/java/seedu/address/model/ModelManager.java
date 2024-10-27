@@ -222,9 +222,9 @@ public class ModelManager implements Model {
         requireNonNull(tutorialId);
         System.out.println("Tutorial Id:" + tutorialId.getValue());
         System.out.println("Checking result:" + !Objects.equals(tutorialId.getValue(), "-1"));
-//        if (!Objects.equals(tutorialId.getValue(), "-1")) {
-//            tutorials.unassignStudent(student, tutorialId);
-//        }
+        /*if (!Objects.equals(tutorialId.getValue(), "-1")) {
+           tutorials.unassignStudent(student, tutorialId);
+        }*/
         tutorials.unassignStudent(student, tutorialId);
     }
 
