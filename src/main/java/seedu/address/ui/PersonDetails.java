@@ -5,6 +5,7 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 
@@ -14,12 +15,10 @@ import seedu.address.model.person.Person;
  * all features for the person object, and displays the details line by line.
  */
 public class PersonDetails {
-    private static final String SEPARATOR = "______________________________"
-            + "_________________________________\n\n";
     @FXML
     private Label birthdayLabel;
     @FXML
-    private Label historyLabel;
+    private VBox history;
     @FXML
     private Label remarkLabel;
     @FXML
@@ -53,13 +52,16 @@ public class PersonDetails {
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
 
-        StringBuilder historyText = new StringBuilder();
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-            historyText.append(date.toString()).append(": \n");
-            historyText.append(String.join(", \n", activities)).append("\n" + SEPARATOR); // Separate each entry
+            Label historyLabel = new Label(date.toString());
+            historyLabel.setStyle("-fx-background-color: #293f3f; -fx-text-fill: #D9B08C; -fx-padding: 5");
+            history.getChildren().add(historyLabel);
+            activities.forEach(entry -> {
+                Label activityLabel = new Label("\t - " + entry);
+                activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 2");
+                history.getChildren().add(activityLabel);
+            });
         });
-
-        historyLabel.setText(historyText.toString());
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
