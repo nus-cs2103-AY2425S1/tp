@@ -24,6 +24,9 @@ public class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Event list contains duplicate event(s).";
+    public static final String MESSAGE_NON_EXISTENT_VENDOR = "Association contains non-existent vendor ID";
+    public static final String MESSAGE_NON_EXISTENT_EVENT = "Association contains non-existent event ID";
+    public static final String MESSAGE_DUPLICATE_ASSOCIATION = "Duplicate association found in JSON.";
 
     private final List<JsonAdaptedVendor> vendors = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
@@ -92,16 +95,14 @@ public class JsonSerializableAddressBook {
             Event event = eventMap.get(eventId);
 
             if (vendor == null) {
-                throw new IllegalValueException(
-                        String.format("Association contains non-existent vendor with ID: %s", vendorId));
+                throw new IllegalValueException(MESSAGE_NON_EXISTENT_VENDOR);
             }
             if (event == null) {
-                throw new IllegalValueException(
-                        String.format("Association contains non-existent event with ID: %s", eventId));
+                throw new IllegalValueException(MESSAGE_NON_EXISTENT_EVENT);
             }
 
             if (addressBook.isVendorAssignedToEvent(vendor, event)) {
-                throw new IllegalValueException("Duplicate association found in JSON.");
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ASSOCIATION);
             }
 
             addressBook.assignVendorToEvent(vendor, event);
@@ -109,5 +110,4 @@ public class JsonSerializableAddressBook {
 
         return addressBook;
     }
-
 }
