@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -33,11 +31,10 @@ public class FindCommandParser implements Parser<FindCommand<?>> {
         }
 
         String entityType = getEntity(trimmedArgs);
-        String[] keywords = getArgs(trimmedArgs);
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
-            return new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+            return new FindPersonCommandParser().parse(trimmedArgs);
         case APPOINTMENT_ENTITY_STRING:
             return new FindAppointmentCommandParser().parse(trimmedArgs);
         default:
@@ -47,23 +44,7 @@ public class FindCommandParser implements Parser<FindCommand<?>> {
 
     private String getEntity(String args) {
         String[] nameKeywords = args.split("\\s+");
-        String entityType = nameKeywords[0];
-        return entityType;
+        return nameKeywords[0];
     }
 
-    private String[] getArgs(String args) throws ParseException {
-        String[] nameKeywords = args.split("\\s+");
-        String entityType = nameKeywords[0];
-
-        nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
-        if (nameKeywords.length == 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return nameKeywords;
-    }
-
-    private String getArgString(String args) {
-        return args.substring(args.indexOf(' ') + 1);
-    }
 }
