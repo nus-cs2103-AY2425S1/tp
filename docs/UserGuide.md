@@ -221,12 +221,18 @@ Marks attendance for all students in the displayed list.
 
 Format: `batch-mark`
 
+Example:
+* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries 1, 2 and 3
+
 
 ### Unmark attendance for a group of students: `batch-unmark`
 
 Unmarks attendance for all students in the displayed list. 
 
 Format: `batch-unmark`
+
+Example:
+* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
 
 ### Clearing all entries : `clear`
 
