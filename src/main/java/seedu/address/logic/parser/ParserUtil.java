@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -220,5 +221,21 @@ public class ParserUtil {
             throw new ParseException(Medicine.MESSAGE_CONSTRAINTS);
         }
         return new Medicine(trimmedMedicine);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseAppointmentDate(String date) throws ParseException {
+        requireNonNull(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            return LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Expected format: YYYY-MM-DD", e);
+        }
     }
 }
