@@ -31,6 +31,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
+import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -124,8 +125,6 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_editPolicy() throws Exception {
-        // This is hardcoded for now.
-        // Will change in future commits.
         EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(
                 EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life" + " pa/200");
@@ -135,8 +134,6 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {
-        // This is hardcoded for now.
-        // Will change in future commits.
         DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
                 DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
@@ -172,6 +169,28 @@ public class AddressBookParserTest {
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
     }
 
+    @Test
+    public void parseCommand_listPolicies() throws Exception {
+        // valid usage of the ListPoliciesCommand with a valid person index
+        ListPoliciesCommand command = (ListPoliciesCommand) parser.parseCommand(
+                ListPoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ListPoliciesCommand(INDEX_FIRST_PERSON), command);
+
+        // index is not a number
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListPoliciesCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand(ListPoliciesCommand.COMMAND_WORD + " abc"));
+
+        // index is a negative number
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListPoliciesCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand(ListPoliciesCommand.COMMAND_WORD + " -1"));
+
+        // no index is provided
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListPoliciesCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand(ListPoliciesCommand.COMMAND_WORD));
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

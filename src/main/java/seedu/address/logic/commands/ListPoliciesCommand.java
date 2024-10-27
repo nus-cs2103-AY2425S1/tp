@@ -60,8 +60,14 @@ public class ListPoliciesCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ListPoliciesCommand // instanceof handles nulls
-                && personIndex == ((ListPoliciesCommand) other).personIndex);
+        if (this == other) {
+            return true; // short circuit if same object
+        }
+        if (!(other instanceof ListPoliciesCommand)) {
+            return false; // check null and type compatibility
+        }
+        ListPoliciesCommand otherCommand = (ListPoliciesCommand) other;
+        return personIndex.equals(otherCommand.personIndex);
     }
+
 }
