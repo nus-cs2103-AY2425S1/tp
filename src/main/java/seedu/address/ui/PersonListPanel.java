@@ -59,7 +59,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     /**
      * Selects a person in the {@code personListView} at the specified zero-based index.
-     *If the index is valid, the corresponding item will be selected and the view will scroll to it.
+     * If the index is valid, the corresponding item will be selected and the view will scroll to it.
      *
      * @param index The index of the person to select.
      */
