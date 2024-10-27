@@ -1,0 +1,16 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User inputs delete command;
+:Parse command;
+if () then ([Valid index])
+    :Delete person from model;
+    :Commit to history;
+    :Show success message;
+else ([else])
+    :Show error message;
+endif
+stop
+@enduml

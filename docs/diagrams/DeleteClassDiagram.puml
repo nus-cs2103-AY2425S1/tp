@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+class DeleteCommand {
+    - ArrayList<Index> targetIndexes
+    + DeleteCommand(ArrayList<Index> targetIndexes)
+    + execute(Model model)
+}
+
+class "<<interface>>\nModel" {
+    + void deletePerson(Person target)
+}
+
+class "{abstract}\nCommand"{
+    + abstract execute(Model model)
+}
+
+class ModelManager {
+    + void deletePerson(Person target)
+}
+
+class AddressBook {
+    + void removePerson(Person key)
+}
+class VersionedAddressBook {
+    + void removePerson(Person key)
+}
+
+class UniquePersonList {
+    - ObservableList<Person> internalList
+    + void remove(Person toRemove)
+}
+
+DeleteCommand ..|> "{abstract}\nCommand"
+ModelManager ..|> "<<interface>>\nModel"
+DeleteCommand --> ModelManager :Call
+ModelManager --> VersionedAddressBook :Call
+VersionedAddressBook --> UniquePersonList :Call
+VersionedAddressBook --|> AddressBook
+@enduml

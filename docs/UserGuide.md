@@ -4,7 +4,7 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# AB-3 User Guide
+# VBook User Guide
 
 VBook is a **desktop app for freelance software developers to manage contacts, optimized for use via a Command Line
 Interface** (CLI) while still
@@ -24,28 +24,14 @@ tasks done faster than traditional GUI apps.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar vbook.jar` command
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar {{ jarFile }}` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
    open the help window.<br>
-
-   ### Command Summary
-   | Action     | Format                                                                                           | Examples                                                                                                                                        |
-   |------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-   | **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`     | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
-   | **Clear**  | `:clear`                                                                                         | `:clear`                                                                                                                                        |
-   | **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX1, INDEX2, ...`                                              | `:remove -i 3,4,5`<br/>`:rm -i 3,4,5`                                                                                                           |
-   | **Edit**   | `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br/>`:ed INDEX -n NAME...` | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
-   | **Exit**   | `:exit`                                                                                          | `:exit`                                                                                                                                         |
-   | **Export** | `:export`                                                                                        | `:export`                                                                                                                                       |
-   | **Find**   | `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`                                  | `:find -n david -l serangoon`                                                                                                                   |
-   | **Help**   | `:help`                                                                                          | `:help`                                                                                                                                         |
-   | **List**   | `:list`<br/>`:ls`                                                                                | `:list`<br/>`:ls`                                                                                                                               |
-   | **Redo**   | `:redo`                                                                                          | `:redo`                                                                                                                                         |
-   | **Undo**   | `:undo`                                                                                          | `:undo`                                                                                                                                         |
+    {{ commandSummary }}
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -227,7 +213,7 @@ Refer to the [Features](#features) below for details of each command.
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty
+If your changes to the data file makes its format invalid, VBook will discard all data and start with an empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -252,4 +238,4 @@ the data of your previous AddressBook home folder.
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
 
--------------------------------------------------------------------------------------------------------------------- 
+--------------------------------------------------------------------------------------------------------------------
