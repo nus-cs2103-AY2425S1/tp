@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -21,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_IS_FAVORITE = false;
+    public static final String DEFAULT_DEPARTMENT = "HR";
 
     private Name name;
     private Phone phone;
@@ -28,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private boolean isFavorite;
+    private Department department;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         isFavorite = DEFAULT_IS_FAVORITE;
+        department = new Department(DEFAULT_DEPARTMENT);
     }
 
     /**
@@ -50,6 +54,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        department = personToCopy.getDepartment();
     }
 
     /**
@@ -100,8 +105,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Department} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDepartment(String department) {
+        this.department = new Department(department);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, isFavorite);
+        return new Person(name, phone, email, address, tags, isFavorite, department);
     }
 
 }
