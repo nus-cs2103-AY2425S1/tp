@@ -34,9 +34,12 @@ public class KeyBind {
     }
 
     /**
-     * Checks if the provided key event matches this key binding.
+     * Checks if the provided key event matches this key binding, and fulfils any extra conditions.
      */
     public boolean matches(KeyEvent event) {
+        if (condition == null) {
+            return event.getCode() == code;
+        }
         return event.getCode() == code
                 && condition.test(event);
     }

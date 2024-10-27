@@ -39,7 +39,7 @@ public class KeyBindController {
             }
         }
 
-        // Always consume TAB
+        // Always consume TAB, in case earlier disabling of tab traversal does not work
         if (event.getCode() == KeyCode.TAB) {
             event.consume();
         }
@@ -48,14 +48,14 @@ public class KeyBindController {
      * Sets up key bindings for focus traversal and command handling across UI components.
      */
     public void initialize() {
-        // Disable default tab traversal
-        commandBox.getRoot().setFocusTraversable(false);
-        personListPanel.getRoot().setFocusTraversable(false);
-        resultDisplay.getRoot().setFocusTraversable(false);
-
         TextField commandTextField = commandBox.getCommandTextField();
         TextArea resultTextArea = resultDisplay.getResultTextArea();
         ListView<Person> personListView = personListPanel.getPersonListView();
+
+        // Disable default tab traversal
+        commandTextField.setFocusTraversable(false);
+        resultTextArea.setFocusTraversable(false);
+        personListView.setFocusTraversable(false);
 
         KeyBind focusCommandBox = new KeyBind(KeyCode.SEMICOLON, commandTextField::requestFocus);
 

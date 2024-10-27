@@ -1,0 +1,232 @@
+2024-10-27T12:37:03.660Z - info: Website generation started at 8:37:03 PM
+2024-10-27T12:37:03.788Z - info: Building assets...
+2024-10-27T12:37:03.838Z - info: Assets built
+2024-10-27T12:37:03.838Z - info: Generating pages...
+2024-10-27T12:37:08.104Z - debug:  
+2024-10-27T12:37:08.632Z - debug:  
+2024-10-27T12:37:09.444Z - debug:  
+2024-10-27T12:37:09.915Z - debug:  
+2024-10-27T12:37:09.935Z - debug:  
+2024-10-27T12:37:10.161Z - debug:  
+2024-10-27T12:37:10.161Z - debug:  
+2024-10-27T12:37:10.161Z - debug:  
+2024-10-27T12:37:10.263Z - debug:  
+2024-10-27T12:37:10.326Z - debug:  
+2024-10-27T12:37:10.339Z - debug:  
+2024-10-27T12:37:10.430Z - debug:  
+2024-10-27T12:37:10.430Z - debug:  
+2024-10-27T12:37:10.527Z - debug:  
+2024-10-27T12:37:10.539Z - debug:  
+2024-10-27T12:37:10.544Z - debug:  
+2024-10-27T12:37:10.555Z - debug:  
+2024-10-27T12:37:10.571Z - debug:  
+2024-10-27T12:37:10.587Z - debug:  
+2024-10-27T12:37:11.054Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /UserGuide.html#quick-start' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\index.md'
+2024-10-27T12:37:11.055Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /DeveloperGuide.html#architecture' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:37:11.056Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/TracingCode.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:37:11.057Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/AddRemark.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:37:11.058Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/RemovingFields.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:37:11.060Z - info: Pages built
+2024-10-27T12:37:11.474Z - info: Site data built
+2024-10-27T12:37:11.474Z - info: Website generation complete! Total build time: 7.876s
+2024-10-27T12:37:11.517Z - info: Serving "C:\Users\potat\Desktop\nus\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2024-10-27T12:37:11.518Z - info: Press CTRL+C to stop ...
+2024-10-27T12:40:54.530Z - info: Website generation started at 8:40:54 PM
+2024-10-27T12:40:54.602Z - info: Building assets...
+2024-10-27T12:40:54.635Z - info: Assets built
+2024-10-27T12:40:54.636Z - info: Generating pages...
+2024-10-27T12:41:02.593Z - debug:  
+2024-10-27T12:41:05.637Z - debug:  
+2024-10-27T12:41:09.190Z - debug:  
+2024-10-27T12:41:09.401Z - debug:  
+2024-10-27T12:41:09.738Z - debug:  
+2024-10-27T12:41:10.031Z - debug:  
+2024-10-27T12:41:10.604Z - debug:  
+2024-10-27T12:41:10.835Z - debug:  
+2024-10-27T12:41:11.186Z - debug:  
+2024-10-27T12:41:11.222Z - debug:  
+2024-10-27T12:41:11.309Z - debug:  
+2024-10-27T12:41:11.427Z - debug:  
+2024-10-27T12:41:11.558Z - debug:  
+2024-10-27T12:41:11.637Z - debug:  
+2024-10-27T12:41:11.661Z - debug:  
+2024-10-27T12:41:11.741Z - debug:  
+2024-10-27T12:41:11.837Z - debug:  
+2024-10-27T12:41:11.882Z - debug:  
+2024-10-27T12:41:11.962Z - debug:  
+2024-10-27T12:41:13.060Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /UserGuide.html#quick-start' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\index.md'
+2024-10-27T12:41:13.065Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /DeveloperGuide.html#architecture' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:41:13.066Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/TracingCode.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:41:13.067Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/AddRemark.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:41:13.068Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/RemovingFields.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:41:13.072Z - info: Pages built
+2024-10-27T12:41:13.469Z - info: Site data built
+2024-10-27T12:41:13.469Z - info: Website generation complete! Total build time: 19.02s
+2024-10-27T12:41:13.517Z - info: Serving "C:\Users\potat\Desktop\nus\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2024-10-27T12:41:13.517Z - info: Press CTRL+C to stop ...
+2024-10-27T12:42:51.943Z - info: Website generation started at 8:42:51 PM
+2024-10-27T12:42:52.019Z - info: Building assets...
+2024-10-27T12:42:52.065Z - info: Assets built
+2024-10-27T12:42:52.066Z - info: Generating pages...
+2024-10-27T12:42:52.203Z - debug:  Error: ENOENT: no such file or directory, open 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\diagrams\DeleteSequenceDiagram.puml'
+    at Object.readFileUtf8 (node:internal/fs/sync:25:18)
+    at Object.readFileSync (node:fs:441:19)
+    at Object.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\default\markbind-plugin-plantuml.js:143:44)
+    at Plugin.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\Plugin.js:119:21)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\PluginManager.js:195:20
+    at Array.forEach (<anonymous>)
+    at PluginManager.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\PluginManager.js:194:37)
+    at NodeProcessor.traverse (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:343:28)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:346:22
+    at Array.forEach (<anonymous>)
+    at NodeProcessor.traverse (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:345:27)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:370:42
+    at Array.map (<anonymous>)
+    at DomHandler._callback (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:367:43)
+    at DomHandler._handleCallback.DomHandler.onerror (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\domhandler\index.js:52:8)
+    at DomHandler.onend (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\domhandler\index.js:46:7)
+2024-10-27T12:42:52.204Z - error: Error reading C:\Users\potat\Desktop\nus\CS2103T\tp\docs\diagrams\DeleteSequenceDiagram.puml for <puml> tag
+2024-10-27T12:42:59.684Z - debug:  
+2024-10-27T12:43:00.067Z - debug:  
+2024-10-27T12:43:00.676Z - debug:  
+2024-10-27T12:43:00.680Z - debug:  
+2024-10-27T12:43:01.482Z - debug:  
+2024-10-27T12:43:01.482Z - debug:  
+2024-10-27T12:43:02.199Z - debug:  
+2024-10-27T12:43:02.438Z - debug:  
+2024-10-27T12:43:03.288Z - debug:  
+2024-10-27T12:43:03.446Z - debug:  
+2024-10-27T12:43:03.725Z - debug:  
+2024-10-27T12:43:04.245Z - debug:  
+2024-10-27T12:43:08.482Z - debug:  
+2024-10-27T12:43:08.598Z - debug:  
+2024-10-27T12:43:08.870Z - debug:  
+2024-10-27T12:43:09.300Z - debug:  
+2024-10-27T12:43:09.306Z - debug:  
+2024-10-27T12:43:09.527Z - debug:  
+2024-10-27T12:43:09.532Z - debug:  
+2024-10-27T12:43:09.550Z - debug:  
+2024-10-27T12:43:09.734Z - debug:  
+2024-10-27T12:43:09.850Z - debug:  
+2024-10-27T12:43:10.902Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /UserGuide.html#quick-start' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\index.md'
+2024-10-27T12:43:10.905Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /DeveloperGuide.html#architecture' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:43:10.906Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/TracingCode.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:43:10.907Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/AddRemark.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:43:10.909Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/RemovingFields.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:43:10.912Z - info: Pages built
+2024-10-27T12:43:11.342Z - info: Site data built
+2024-10-27T12:43:11.342Z - info: Website generation complete! Total build time: 19.616s
+2024-10-27T12:43:11.390Z - info: Serving "C:\Users\potat\Desktop\nus\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2024-10-27T12:43:11.390Z - info: Press CTRL+C to stop ...
+2024-10-27T12:44:43.265Z - info: Website generation started at 8:43:42 PM
+2024-10-27T12:44:43.385Z - info: Building assets...
+2024-10-27T12:44:43.435Z - info: Assets built
+2024-10-27T12:44:43.437Z - info: Generating pages...
+2024-10-27T12:44:43.681Z - debug:  Error: ENOENT: no such file or directory, open 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\diagrams\DeleteSequenceDiagram.puml'
+    at Object.readFileUtf8 (node:internal/fs/sync:25:18)
+    at Object.readFileSync (node:fs:441:19)
+    at Object.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\default\markbind-plugin-plantuml.js:143:44)
+    at Plugin.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\Plugin.js:119:21)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\PluginManager.js:195:20
+    at Array.forEach (<anonymous>)
+    at PluginManager.processNode (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\plugins\PluginManager.js:194:37)
+    at NodeProcessor.traverse (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:343:28)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:346:22
+    at Array.forEach (<anonymous>)
+    at NodeProcessor.traverse (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:345:27)
+    at C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:370:42
+    at Array.map (<anonymous>)
+    at DomHandler._callback (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\@markbind\core\src\html\NodeProcessor.js:367:43)
+    at DomHandler._handleCallback.DomHandler.onerror (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\domhandler\index.js:52:8)
+    at DomHandler.onend (C:\Users\potat\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\domhandler\index.js:46:7)
+2024-10-27T12:44:43.683Z - error: Error reading C:\Users\potat\Desktop\nus\CS2103T\tp\docs\diagrams\DeleteSequenceDiagram.puml for <puml> tag
+2024-10-27T12:44:50.111Z - debug:  
+2024-10-27T12:44:50.617Z - debug:  
+2024-10-27T12:44:54.997Z - debug:  
+2024-10-27T12:44:55.381Z - debug:  
+2024-10-27T12:44:55.922Z - debug:  
+2024-10-27T12:44:55.923Z - debug:  
+2024-10-27T12:44:57.186Z - debug:  
+2024-10-27T12:44:58.489Z - debug:  
+2024-10-27T12:44:58.556Z - debug:  
+2024-10-27T12:44:58.741Z - debug:  
+2024-10-27T12:44:58.743Z - debug:  
+2024-10-27T12:44:58.744Z - debug:  
+2024-10-27T12:44:58.774Z - debug:  
+2024-10-27T12:44:59.047Z - debug:  
+2024-10-27T12:44:59.059Z - debug:  
+2024-10-27T12:44:59.245Z - debug:  
+2024-10-27T12:44:59.345Z - debug:  
+2024-10-27T12:44:59.349Z - debug:  
+2024-10-27T12:44:59.358Z - debug:  
+2024-10-27T12:44:59.572Z - debug:  
+2024-10-27T12:44:59.585Z - debug:  
+2024-10-27T12:45:00.015Z - debug:  
+2024-10-27T12:45:01.431Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /UserGuide.html#quick-start' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\index.md'
+2024-10-27T12:45:01.436Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /DeveloperGuide.html#architecture' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:45:01.437Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/TracingCode.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:45:01.439Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/AddRemark.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:45:01.440Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/RemovingFields.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T12:45:01.444Z - info: Pages built
+2024-10-27T12:45:01.931Z - info: Site data built
+2024-10-27T12:45:01.931Z - info: Website generation complete! Total build time: 79.303s
+2024-10-27T12:45:02.000Z - info: Serving "C:\Users\potat\Desktop\nus\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2024-10-27T12:45:02.001Z - info: Press CTRL+C to stop ...
+2024-10-27T13:04:24.186Z - info: Website generation started at 9:04:24 PM
+2024-10-27T13:04:24.241Z - info: Building assets...
+2024-10-27T13:04:24.284Z - info: Assets built
+2024-10-27T13:04:24.285Z - info: Generating pages...
+2024-10-27T13:04:29.478Z - debug:  
+2024-10-27T13:04:29.830Z - debug:  
+2024-10-27T13:04:29.914Z - debug:  
+2024-10-27T13:04:30.574Z - debug:  
+2024-10-27T13:04:30.574Z - debug:  
+2024-10-27T13:04:30.654Z - debug:  
+2024-10-27T13:04:30.660Z - debug:  
+2024-10-27T13:04:30.661Z - debug:  
+2024-10-27T13:04:30.782Z - debug:  
+2024-10-27T13:04:30.864Z - debug:  
+2024-10-27T13:04:30.878Z - debug:  
+2024-10-27T13:04:30.894Z - debug:  
+2024-10-27T13:04:30.954Z - debug:  
+2024-10-27T13:04:30.972Z - debug:  
+2024-10-27T13:04:30.984Z - debug:  
+2024-10-27T13:04:31.096Z - debug:  
+2024-10-27T13:04:31.173Z - debug:  
+2024-10-27T13:04:31.176Z - debug:  
+2024-10-27T13:04:31.188Z - debug:  
+2024-10-27T13:04:31.724Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /UserGuide.html#quick-start' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\index.md'
+2024-10-27T13:04:31.726Z - warn: You might have an invalid hash for intra-link! Ignore this warning if it was intended.'
+  /DeveloperGuide.html#architecture' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T13:04:31.727Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/TracingCode.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T13:04:31.728Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/AddRemark.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T13:04:31.729Z - warn: You might have an invalid intra-link! Ignore this warning if it was intended.
+'/tutorials/RemovingFields.html' found in file 'C:\Users\potat\Desktop\nus\CS2103T\tp\docs\SettingUp.md'
+2024-10-27T13:04:31.731Z - info: Pages built
+2024-10-27T13:04:32.006Z - info: Site data built
+2024-10-27T13:04:32.006Z - info: Website generation complete! Total build time: 7.908s
+2024-10-27T13:04:32.057Z - info: Serving "C:\Users\potat\Desktop\nus\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2024-10-27T13:04:32.057Z - info: Press CTRL+C to stop ...
