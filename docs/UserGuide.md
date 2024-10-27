@@ -491,20 +491,20 @@ Parameter | Requirements | Explanation
 
 <h3 style="color: #1877F2;">Saving the Data</h3>
 
-MATER data are saved automatically in the hard disk after any command that changes the data. There is no need to save manually.
+MATER's data is saved automatically in the hard disk after any command that changes its data. There is no need to save data manually.
 
 ---
 
 <h3 style="color: #1877F2;">Editing the Data File</h3>
 
-MATER data are saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this data file.
+MATER's data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this data file.
 
 <box type="warning" seamless>
 
 **Caution: FOR EXPERT USERS ONLY**
 
-- If your changes to the data file make its format invalid, MATER will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.
-- Certain edits can cause the MATER to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If your changes to the data file make its format invalid, MATER will discard all data and start with an empty data file at the next run. It is strongly recommended to create a backup of the file before editing it.
+- Certain edits can cause MATER to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
