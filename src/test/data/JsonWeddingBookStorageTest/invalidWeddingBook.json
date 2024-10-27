@@ -2,7 +2,7 @@
   "weddings" : [ {
     "weddingName" : "adam and steve",
     "venue" : "Orchard Hotel",
-    "dateTime" : "12/11/2024",
+    "date" : "12/11/2024",
     "participants" : [ ]
   } ]
 }
