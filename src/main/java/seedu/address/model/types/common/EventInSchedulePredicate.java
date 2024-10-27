@@ -45,7 +45,8 @@ public class EventInSchedulePredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         LocalDateTime eventLocalDateTime = event.getStartTime().toLocalDateTime();
-        return eventLocalDateTime.isAfter(startDate) && eventLocalDateTime.isBefore(endDate);
+        return (eventLocalDateTime.isAfter(startDate) || eventLocalDateTime.isEqual(startDate))
+                && (eventLocalDateTime.isBefore(endDate) || eventLocalDateTime.isEqual(endDate));
     }
 
     @Override
