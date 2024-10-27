@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -59,7 +57,7 @@ public class ViewClientCommandTest {
         String expectedMessage = clientName + "'s Client tab displayed!";
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_NAME_DISPLAYED),
-                () -> viewClientCommand.execute(model));
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_NAME_DISPLAYED), ()
+                -> viewClientCommand.execute(model));
     }
 }

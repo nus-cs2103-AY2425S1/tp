@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -79,15 +77,15 @@ public class ClientWindow extends UiPart<Stage> implements Initializable {
         // create key handler
         root.setOnShown(event -> {
             // track key press (keyEvent) when window is focused
-                root.getScene().setOnKeyPressed(keyEvent -> {
-                    // check the code of the key pressed
-                    switch (keyEvent.getCode()) {
-                    // if key pressed is escape, hide the window
-                    case ESCAPE -> hide();
-                    // else do nothing by default
-                    default -> {}
-                    }
-                });
+            root.getScene().setOnKeyPressed(keyEvent -> {
+                // check the code of the key pressed
+                switch (keyEvent.getCode()) {
+                // if key pressed is escape, hide the window
+                case ESCAPE -> hide();
+                // else do nothing by default
+                default -> { }
+                }
+            });
         });
     }
 
