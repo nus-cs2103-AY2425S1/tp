@@ -83,9 +83,9 @@ public class RemarkCommandParserTest {
 
     @Test
     public void parse_noPersonIndexSpecified_throwsParseException() {
-        assertParseFailure(parser, AddRemarkCommand.ADD_REMARK_PARAM + " Some remark",
+        assertParseFailure(parser, String.format(" %s Some remark", AddRemarkCommand.ADD_REMARK_PARAM),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
-        assertParseFailure(parser, DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1",
+        assertParseFailure(parser, String.format(" %s 1", DeleteRemarkCommand.DELETE_REMARK_PARAM),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
     }
 
