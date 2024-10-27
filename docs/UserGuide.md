@@ -25,44 +25,43 @@ In this comprehensive user guide, we will take you to experience a full journey 
 [2. How to use this User Guide](#how-to-use-this-user-guide)
 - [2.1 Navigating the Document](#navigating-the-document)
 - [2.2 Sections](#sections)
-- [2.3 Icons](#icons)
 
 [3. Getting Started](#getting-started)
 - [3.1 Installation](#installation)
 - [3.2 Graphical User Interface Layout](#graphical-user-interface-layout)
-    - [3.2.1 User Interface Overview](#user-interface-overview)
-    - [3.2.2 Additional UI Components](#additional-ui-components)
+  - [3.2.1 User Interface Overview](#user-interface-overview)
+  - [3.2.2 Additional UI Components](#additional-ui-components)
 - [3.3 How to use TrackMate commands](#how-to-use-track-mate-nus-commands)
-    - [3.3.1 Parameter Prefixes](#parameter-prefixes)
-    - [3.3.2 Parameters](#parameters)
-    - [3.3.3 Command Format](#command-format)
+  - [3.3.1 Parameter Prefixes](#parameter-prefixes)
+  - [3.3.2 Parameters](#parameters)
+  - [3.3.3 Command Format](#command-format)
 
 [4. Commands](#commands)
 - [4.1 Student Data Related Commands](#student-data-commands)
-    - [4.1.1 Adding a student: `add`](#adding-a-student-add)
-    - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
-    - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
-    - [4.1.4 Listing students: `listStu`](#listing-students-listStu)
-    - [4.1.5 Find Students by Name: `find`](#find-students-find)
+  - [4.1.1 Adding a student: `add`](#adding-a-student-add)
+  - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
+  - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
+  - [4.1.4 Listing students: `listStu`](#listing-students-listStu)
+  - [4.1.5 Find Students by Name: `find`](#find-students-find)
 - [4.2 Tutorial Data Related Commands](#tutorial-data-commands)
-    - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
-    - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
-    - [4.2.3 Listing tutorials: `listTut`](#listing-tutorials-listTut)
+  - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
+  - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
+  - [4.2.3 Listing tutorials: `listTut`](#listing-tutorials-listTut)
 - [4.3 Assignment Data Related Commands](#assignment-data-commands)
-    - [4.3.1 Adding an assignment: `addAsg`](#adding-an-assigment-addAsg)
-    - [4.3.2 Deleting an assignment: `deleteTut`](#deleting-an-assignment-deleteAsg)
-    - [4.3.3 Listing assignments: `listAsg`](#listing-assignments-listAsg)
-    - [4.3.4 Marking an assignment: `markAsg`](#marking-an-assignment-markAsg)
-    - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
-    - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
+  - [4.3.1 Adding an assignment: `addAsg`](#adding-an-assigment-addAsg)
+  - [4.3.2 Deleting an assignment: `deleteTut`](#deleting-an-assignment-deleteAsg)
+  - [4.3.3 Listing assignments: `listAsg`](#listing-assignments-listAsg)
+  - [4.3.4 Marking an assignment: `markAsg`](#marking-an-assignment-markAsg)
+  - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
+  - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
 - [4.4 Attendance Data Related Commands](#attendance-data-commands)
   - [4.4.1 Marking an attendance: `attend`](#adding-an-assigment-addAsg)
   - [4.4.2 Unmarking an attendance: `TBC`](#deleting-an-assignment-deleteAsg)
 - [4.5 General Commands](#general-commands)
-    - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
-    - [4.5.2 Clearing all entries: `clear`](#clearing-all-entries-clear)
-    - [4.5.3 Exiting the program: `exit`](#exiting-the-program-exit)
-    - [4.5.4 Viewing help: `help`](#viewing-help-help)
+  - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
+  - [4.5.2 Clearing all entries: `clear`](#clearing-all-entries-clear)
+  - [4.5.3 Exiting the program: `exit`](#exiting-the-program-exit)
+  - [4.5.4 Viewing help: `help`](#viewing-help-help)
 - [4.6 Saving the Data](#saving-the-data)
 - [4.7 Editing the Data File](#editing-the-data-file)
 
@@ -82,10 +81,10 @@ In this comprehensive user guide, we will take you to experience a full journey 
 ### 1.1 What is TrackMate
 <a id="what-is-trackmate"></a>
 
-TrackMate is a desktop application specifically designed for teaching assistants (TAs) who work at the School of 
-Computing (SoC) of National University of Singapore (NUS). By providing an efficient solution to manage student data, 
-TrackMate simplifies the process of tracking assignments, tutorials, and attendance. With its powerful Command Line 
-Interface (CLI), TrackMate allows TAs to efficiently manage student information while enhancing productivity in their 
+TrackMate is a desktop application specifically designed for teaching assistants (TAs) who work at the School of
+Computing (SoC) of National University of Singapore (NUS). By providing an efficient solution to manage student data,
+TrackMate simplifies the process of tracking assignments, tutorials, and attendance. With its powerful Command Line
+Interface (CLI), TrackMate allows TAs to efficiently manage student information while enhancing productivity in their
 administrative tasks.
 
 Overview of Main Features:
@@ -96,30 +95,30 @@ Overview of Main Features:
 ### 1.2 User Proficiency and Expectations
 <a id="user-proficiency-and-expectations"></a>
 
-* Level of Relatedness: Users of TrackMate are TAs within SoC who are actively involved in managing students’ 
-academic progress, particularly in tutorials, assignments, and attendance tracking.
+* Level of Relatedness: Users of TrackMate are TAs within SoC who are actively involved in managing students’
+  academic progress, particularly in tutorials, assignments, and attendance tracking.
 
 
-* Comprehension: Users are expected to have a working knowledge of academic processes such as student grading, 
-tutorial scheduling, and attendance monitoring within the context of NUS.
+* Comprehension: Users are expected to have a working knowledge of academic processes such as student grading,
+  tutorial scheduling, and attendance monitoring within the context of NUS.
 
 
-* Prior Knowledge: TrackMate assumes users have basic computer proficiency, particularly in navigating CLI 
-environments, and are comfortable managing data related to student performance.
+* Prior Knowledge: TrackMate assumes users have basic computer proficiency, particularly in navigating CLI
+  environments, and are comfortable managing data related to student performance.
 
 
-* Desire for Efficiency: Users of TrackMate prioritize streamlined workflows, allowing them to manage student 
-data effectively while reducing the time spent on repetitive tasks.
+* Desire for Efficiency: Users of TrackMate prioritize streamlined workflows, allowing them to manage student
+  data effectively while reducing the time spent on repetitive tasks.
 
 ### 1.3 Why This Guide Matters
 <a id="why-this-guide-matters"></a>
 
-This guide is crafted to ensure that you make the most of TrackMate's functionality. Whether you are just starting 
-out or are an experienced TA, the guide will walk you through using the tool efficiently, offering shortcuts and tips 
-to enhance your experience. By following the steps outlined here, you'll be able to simplify your workflow, allowing 
+This guide is crafted to ensure that you make the most of TrackMate's functionality. Whether you are just starting
+out or are an experienced TA, the guide will walk you through using the tool efficiently, offering shortcuts and tips
+to enhance your experience. By following the steps outlined here, you'll be able to simplify your workflow, allowing
 you to focus more on teaching and less on administrative tasks.
 
-We’re here to help you make the most out of your TA experience with TrackMate. Let’s dive in and explore how TrackMate 
+We’re here to help you make the most out of your TA experience with TrackMate. Let’s dive in and explore how TrackMate
 can transform the way you manage student data at SoC!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -127,24 +126,39 @@ can transform the way you manage student data at SoC!
 ## 2. How to use this User Guide
 <a id="how-to-use-this-user-guide"></a>
 
-This section is designed to help users effectively navigate the User Guide for TrackMate. Below, you'll find 
+This section is designed to help users effectively navigate the User Guide for TrackMate. Below, you'll find
 information on how to interpret icons, formatting, and instructions provided throughout the document.
 
 ### 2.1 Navigating the Document:
 
-TO BE DONE
+- **Table of Contents:** Located at the beginning of the document, the Table of Contents provides an overview of the topics covered. Users can click on any section title to jump directly to that part of the guide.
+
+
+- **Section Organization:** Each section is organized with headings and subheadings, breaking down information into manageable chunks. Users can easily locate specific topics or commands by scanning through the contents.
 
 ### 2.2 Sections:
 <a id="sections"></a>
 
 Below is a detailed overview of the main sections within this User Guide and what can be expected from each section.
 
-TO BE DONE
+- [Installation](#installation): If you're new to TrackMate or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
-### 2.3 Icons:
-<a id="icons"></a>
 
-TO BE DONE
+- [Getting Started](#getting-started): Designed for beginners, this section provides an introductory overview of TrackMate, covering essential information such as the [Layout](#graphical-user-interface-layout) and [Command format](#command-format).
+
+
+- [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
+
+
+- [Command Summary](#command-summary): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+
+
+- [FAQ](#faq): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
+
+
+<box type="info" seamless>
+For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 ## 3. Getting Started
@@ -168,11 +182,11 @@ TO BE CHANGED
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
-    * `clear` : Deletes all contacts.
-    * `exit` : Exits the app.
+  * `list` : Lists all contacts.
+  * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+  * `delete 3` : Deletes the 3rd contact shown in the current list.
+  * `clear` : Deletes all contacts.
+  * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -192,13 +206,13 @@ TO BE DONE
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
 
-TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the 
+TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the
 Commands section, let’s familiarize ourselves with the basic components and format of a command.
 
 #### 3.3.1 Parameter Prefixes:
 <a id="parameter-prefixes"></a>
 
-In TrackMate, a parameter prefix acts as a delimiter for specifying different types of parameters in commands. 
+In TrackMate, a parameter prefix acts as a delimiter for specifying different types of parameters in commands.
 Here's a reference table for common parameter prefixes and their corresponding parameters:
 
 | Parameter Prefix | Corresponding Parameter |
@@ -216,8 +230,8 @@ Here's a reference table for common parameter prefixes and their corresponding p
 #### 3.3.2 Parameters:
 <a id="parameters"></a>
 
-In TrackMate, a parameter represents a placeholder where users input data. 
-Parameters typically follow immediately after their corresponding Parameter Prefixes. 
+In TrackMate, a parameter represents a placeholder where users input data.
+Parameters typically follow immediately after their corresponding Parameter Prefixes.
 Essentially they are to be supplied by the user.
 
 
@@ -256,7 +270,7 @@ To understand how a full command is interpreted, we will utilise the following e
 > 1. `COMMAND` + `PARAMETER_PREFIX` + `PARAMETER`
 > 2. `COMMAND` + `PARAMETER`
 > 3. `COMMAND`
-> 
+>
 > The second format applies specifically to delete commands!
 
 **Notes about the command format:**<br>
@@ -272,8 +286,8 @@ TO BE DONE
 ## 4. Commands
 <a id="commands"></a>
 
-This section provides comprehensive guidance on how to use each command, detailing their functionalities and 
-usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) 
+This section provides comprehensive guidance on how to use each command, detailing their functionalities and
+usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters)
 section for detailed information
 
 ### 4.1 Student Data Commands:
@@ -389,7 +403,7 @@ Format: `deleteAsg ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
 * Deletes the assignment based on the `ASSIGNMENT_TITLE`
-    * The `ASSIGNMENT_TITLE` must exist in the assignment list.
+  * The `ASSIGNMENT_TITLE` must exist in the assignment list.
 * No prefix is required for `deleteAsg` command.
 * The command should only consist of exactly two words: `deleteAsg` and a valid `ASSIGNMENT_NAME`
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
@@ -420,7 +434,7 @@ Command Details & Constraints:
 Format: `markAsg INDEX n/ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
-* Using the given index of the student, TrackMate will mark his/her assignment status as completed. 
+* Using the given index of the student, TrackMate will mark his/her assignment status as completed.
 * Assignment with the given title must exist.
 * Student at the specified index must exist.
 
@@ -466,15 +480,37 @@ Example:
 ### 4.4 Attendance Data Related Commands:
 <a id="assignment-data-commands"></a>
 
-#### 4.4.1 Marking an attendance: `attend`
+#### 4.4.1 Marking an attendance: `markAtt`
 <a id="adding-an-attendance-add"></a>
+> Maintain accurate records of student attendance across various tutorial classes.
 
-> TO BE DONE
+Format: `markAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`
 
-#### 4.4.2 Unmarking an attendance: `TBC`
+Command Details & Constraints:
+* Mark the student attendance based on student ID and tutorial ID
+* The tutorial ID given must exist in the tutorial list.
+* Date is optional (default date is today)
+
+Example:
+1. `markAtt s/1001 c/1001 d/2024/02/21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+2. `markAtt s/1001 c/1001` marks the attendance of student 1001 in tutorial class 1001 on today's date.
+
+#### 4.4.2 Unmarking an attendance: `deleteAtt`
 <a id="unmarking-an-attendance-add"></a>
+> Remove records of student attendance across various tutorial classes.
 
-> TO BE DONE
+Format: `deleteAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`
+
+Command Details & Constraints:
+* Delete the student attendance based on student ID and tutorial ID
+* The tutorial ID given must exist in the tutorial list.
+* Date is optional (default date is today)
+
+Example:
+1. `deleteAtt s/1001 c/1001 d/2024/02/21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+2. `deleteAtt s/1001 c/1001` deletes the attendance of student 1001 in tutorial class 1001 on today's date.
+
+
 
 ### 4.5 General Commands:
 <a id="general-commands"></a>
@@ -544,7 +580,7 @@ TO BE CHANGED
 <a id="faq"></a>
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLink-NUS home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackMate home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -576,28 +612,28 @@ TO BE DONE
 ## 8. Command summary
 <a id="command-summary"></a>
 
-| Action            | Format, Examples                                                                                                                                                       |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`    |
-| **Clear**          | `clear`                                                                                                                                                               |
-| **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                                                                                            |
-| **Edit Student**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                          |
-| **Find Student**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List Students**   | `listStu`                                                                                                                                                            |
-| **Add Tutorial**    | `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`<br> e.g., `addTut tn/CS1010 id/1011`                                                                                     |
-| **List Tutorials**  | `listTut`                                                                                                                                                            |
-| **Delete Tutorial** | `deleteTut [TUTORIAL ID]`<br> e.g., `deleteTut 1011`                                                                                                                 |
-| **Add Assignment**  | `addAsg n/[ASSIGNMENT TITLE] d/[DUE DATE]`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                                                                       |
+| Action            | Format, Examples                                                                                                                                                    |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**          | `clear`                                                                                                                                                             |
+| **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                                                                                           |
+| **Edit Student**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **Find Student**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                          |
+| **List Students**   | `listStu`                                                                                                                                                           |
+| **Add Tutorial**    | `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`<br> e.g., `addTut tn/CS1010 id/1011`                                                                                   |
+| **List Tutorials**  | `listTut`                                                                                                                                                           |
+| **Delete Tutorial** | `deleteTut [TUTORIAL ID]`<br> e.g., `deleteTut 1011`                                                                                                                |
+| **Add Assignment**  | `addAsg n/[ASSIGNMENT TITLE] d/[DUE DATE]`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                                                                      |
 | **Delete Assignment**| `deleteAsg [ASSIGNMENT TITLE]`<br> e.g., `deleteAsg Assignment 1`                                                                                                   |
-| **List Assignments**| `listAsg`                                                                                                                                                            |
-| **Mark Attendance** | `attend s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024/02/21`                                                               |
-| **Unmark Attendance**| `unmarkAttend s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `unmarkAttend s/1001 c/1001 d/2024/02/21`                                                  |
-| **Mark Assignment** | `markAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `markAsg 1 n/Assignment 1`                                                                                           |
-| **Unmark Assignment**| `unmarkAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                                                                      |
-| **Check Assignment**| `checkAsg n/[ASSIGNMENT TITLE]`<br> e.g., `checkAsg n/Assignment 1`                                                                                                   |
-| **Clear**          | `clear`                                                                                                                                                               |
-| **Help**           | `help`                                                                                                                                                                |
-| **Exit**           | `exit`                                                                                                                                                                |
+| **List Assignments**| `listAsg`                                                                                                                                                           |
+| **Mark Attendance** | `markAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024/02/21`                                                            |
+| **Unmark Attendance**| `deletedAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `deleteAtd s/1001 c/1001 d/2024/02/21`                                                      |
+| **Mark Assignment** | `markAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `markAsg 1 n/Assignment 1`                                                                                         |
+| **Unmark Assignment**| `unmarkAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                                                                     |
+| **Check Assignment**| `checkAsg n/[ASSIGNMENT TITLE]`<br> e.g., `checkAsg n/Assignment 1`                                                                                                 |
+| **Clear**          | `clear`                                                                                                                                                             |
+| **Help**           | `help`                                                                                                                                                              |
+| **Exit**           | `exit`                                                                                                                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -17,7 +17,7 @@ import seedu.address.model.student.TutorialId;
  * Marks a student as absent for a particular date and tutorial class.
  */
 public class UnattendCommand extends Command {
-    public static final String COMMAND_WORD = "absent";
+    public static final String COMMAND_WORD = "deleteAtt";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark student as absent for particular date and "
             + "tutorial class. "
             + "Parameters: "

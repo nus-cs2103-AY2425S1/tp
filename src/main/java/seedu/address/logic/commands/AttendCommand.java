@@ -20,7 +20,7 @@ import seedu.address.model.student.TutorialId;
  * Otherwise, it returns an error message indicating the class or student is invalid.
  */
 public class AttendCommand extends Command {
-    public static final String COMMAND_WORD = "attend";
+    public static final String COMMAND_WORD = "markAtt";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Record Student attendance for particular date and "
             + "tutorial class. "
             + "Parameters: "

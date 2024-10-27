@@ -115,6 +115,7 @@ public class AddressBookParser {
 
         case DeleteTutorialCommand.COMMAND_WORD:
             return new DeleteTutorialCommandParser().parse(arguments);
+
         case ListTutorialCommand.COMMAND_WORD:
             return new ListTutorialCommand();
 
