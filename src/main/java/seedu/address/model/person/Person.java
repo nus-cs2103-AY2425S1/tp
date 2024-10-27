@@ -103,11 +103,28 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Adds a list of wedding jobs to the pre-existing list.
+     *
+     * @param weddingJobs {@code Set<Wedding>} to be added to the list of wedding jobs
+     */
+    public void setWeddingJobs(Set<Wedding> weddingJobs) {
+        for (Wedding wedding : weddingJobs) {
+            this.addWeddingJob(wedding);
+        }
+    }
+
+    /**
+     * Returns true if both persons have the same name, phone, email, address.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return this.equals(otherPerson);
+        if (otherPerson == null) {
+            return false;
+        }
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address);
     }
 
     /**
@@ -159,6 +176,7 @@ public class Person {
                 && weddingJobs.equals(otherPerson.weddingJobs);
 
         // commented them out since they give null pointer exception
+        // need to use Optional
     }
 
     @Override
@@ -177,7 +195,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? nullString : ownWedding)
+                .add("wedding", ownWedding == null ? "null" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }
