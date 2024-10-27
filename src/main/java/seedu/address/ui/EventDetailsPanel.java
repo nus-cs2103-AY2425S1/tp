@@ -76,6 +76,8 @@ public class EventDetailsPanel extends UiPart<Region> {
         if (event != null) {
             name.setText(event.getName().fullName);
             date.setText(event.getDate().toString());
+            // Empty tags will leave behind the last set of tags,
+            // so we clear the tags before adding new tags
             event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
