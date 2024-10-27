@@ -20,8 +20,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.MonthPaidContainsKeywordsPredicate;
 import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NotMonthPaidContainsKeywordsPredicate;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -113,6 +116,58 @@ public class FindCommandTest {
     }
 
     @Test
+    public void test_monthPaidContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for month paid
+        MonthPaidContainsKeywordsPredicate predicate =
+                new MonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-12"));
+        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+
+        // Only one matching keyword
+        predicate =
+                new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-11", "2022-12"));
+        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+    }
+
+    @Test
+    public void test_monthPaidContainsKeywordsWithMatchers_returnsFalse() {
+        // Non-matching month paid
+        MonthPaidContainsKeywordsPredicate predicate =
+                new MonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-11"));
+        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+
+        // Non-matching both months paid
+        predicate =
+                new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-10", "2022-11"));
+        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+    }
+
+    @Test
+    public void test_notMonthPaidContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for not month paid
+        NotMonthPaidContainsKeywordsPredicate predicate =
+                new NotMonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-11"));
+        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+
+        // Only one non-matching keyword
+        predicate =
+                new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-10", "2022-11"));
+        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+    }
+
+    @Test
+    public void test_notMonthPaidContainsKeywordsWithMatchers_returnsFalse() {
+        // Matching month paid
+        NotMonthPaidContainsKeywordsPredicate predicate =
+                new NotMonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-12"));
+        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+
+        // Matching one of the months paid
+        predicate =
+                new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-11", "2022-12"));
+        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+    }
+
+    @Test
     public void test_executeWithMultipleKeywordsMultiplePersonsFound_returnSuccess() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
@@ -121,7 +176,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
-
 
 
     @Test

@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_CLASSID = new Prefix("c/");
     public static final Prefix PREFIX_FEES = new Prefix("f/");
     public static final Prefix PREFIX_MONTHPAID = new Prefix("m/");
+    public static final Prefix PREFIX_NOT_MONTHPAID = new Prefix("!m/");
 }
