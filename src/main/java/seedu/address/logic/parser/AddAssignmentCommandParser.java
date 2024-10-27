@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -18,6 +19,7 @@ import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Name;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new AddAssignmentCommand object
@@ -32,7 +34,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
     @Override
     public AddAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE
+                PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
@@ -58,6 +60,14 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
             ));
         } else {
             grade = Grade.getDefault();
+        }
+
+        if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isPresent()) {
+            StudentNumber studentNumber =
+                    ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
+            return new AddAssignmentCommand(name,
+                    new Assignment(assignmentName, deadline, submissionStatus, gradingStatus, grade),
+                    studentNumber);
         }
 
         return new AddAssignmentCommand(name,

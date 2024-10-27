@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -73,13 +73,7 @@ public class DeleteStudentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Student> studentList = model.getFilteredStudentList();
-        ArrayList<Student> listToCheck = new ArrayList<>();
-
-        for (Student student : studentList) {
-            if (student.getName().equals(name)) {
-                listToCheck.add(student);
-            }
-        }
+        List<Student> listToCheck = model.getAllStudentsByName(name);
 
         if (listToCheck.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
@@ -93,7 +87,7 @@ public class DeleteStudentCommand extends Command {
             if (studentToDelete == null) {
                 throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
             }
-            model.deleteStudent(studentToDelete);
+            index = model.deleteStudent(studentToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name, studentNumber));
         }
 

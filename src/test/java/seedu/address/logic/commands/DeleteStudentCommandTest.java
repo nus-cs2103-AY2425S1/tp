@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -297,6 +298,11 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return FXCollections.observableArrayList();
+        }
+
     }
 
     /**
@@ -352,6 +358,13 @@ public class DeleteStudentCommandTest {
                 }
             }
             return -1;
+        }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return students.stream()
+                    .filter(s -> s.getName().equals(name))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
         }
 
     }
