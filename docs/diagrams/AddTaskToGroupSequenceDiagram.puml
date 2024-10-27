@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+participant AddTaskToGroupCommand
+participant Task
+participant Model
+participant AddressBook
+participant Group
+participant UniqueTaskList
+participant CommandResult
+
+User -> AddTaskToGroupCommand : execute(model)
+activate AddTaskToGroupCommand
+
+create Task
+AddTaskToGroupCommand -> Task
+activate Task
+
+Task --> AddTaskToGroupCommand : task
+deactivate Task
+
+AddTaskToGroupCommand -> Model : getGroupByName(groupName)
+activate Model
+
+Model --> AddTaskToGroupCommand : group
+deactivate Model
+
+AddTaskToGroupCommand -> Model : addTaskToGroup(task, group)
+activate Model
+
+Model -> AddressBook : addTaskToGroup(task, group)
+activate AddressBook
+
+AddressBook -> Group : addTask(task)
+activate Group
+
+deactivate Group
+deactivate AddressBook
+deactivate Model
+
+alt task doesn't exist in address book
+    AddTaskToGroupCommand -> Model : addTask(task)
+    activate Model
+
+    Model -> AddressBook : addTask(task)
+    activate AddressBook
+
+    AddressBook -> UniqueTaskList : addTask(task)
+    activate UniqueTaskList
+
+    deactivate UniqueTaskList
+    deactivate AddressBook
+    deactivate Model
+
+else task already exists
+    AddTaskToGroupCommand -> Model : increaseGroupWithTask(task)
+    activate Model
+
+    Model -> AddressBook : incrementTask(task)
+    activate AddressBook
+
+    deactivate AddressBook
+    deactivate Model
+end
+
+create CommandResult
+AddTaskToGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTaskToGroupCommand
+deactivate CommandResult
+
+AddTaskToGroupCommand --> User : return CommandResult
+deactivate AddTaskToGroupCommand
+
+@enduml
