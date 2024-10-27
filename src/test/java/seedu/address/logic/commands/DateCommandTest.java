@@ -33,7 +33,8 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for DateCommand.
  */
 public class DateCommandTest {
-    private static final LocalDateTime DATE_STUB = LocalDateTime.of(2025,6,24,14,15);
+    private static final LocalDateTime DATE_STUB =
+            LocalDateTime.of(2025, 6, 24, 14, 15);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

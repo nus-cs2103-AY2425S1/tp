@@ -107,7 +107,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_date() throws Exception {
-        final Date date = new Date(LocalDateTime.of(2021,1,1,17, 45));
+        final Date date = new Date(LocalDateTime.of(2021, 1, 1, 17, 45));
         DateCommand command = (DateCommand) parser.parseCommand(DateCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + VALID_NAME_AMY + " "
                 + PREFIX_PHONE + VALID_PHONE_AMY + " "
@@ -134,7 +134,7 @@ public class AddressBookParserTest {
               ScheduleCommand.COMMAND_WORD + " " + "d/16/2/2024 1745"
         );
         assertEquals(new ScheduleCommand(new SchedulePredicate(
-                new Date(LocalDateTime.of(2024,2,16,17, 45)))),
+                new Date(LocalDateTime.of(2024, 2, 16, 17, 45)))),
               command);
 
     }

@@ -6,13 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.SchedulePredicate;
-
-import java.time.LocalDateTime;
 
 public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();

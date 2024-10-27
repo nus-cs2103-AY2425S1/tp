@@ -67,7 +67,7 @@ public class ScheduleCommandTest {
     public void execute_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         SchedulePredicate predicate = new SchedulePredicate(
-                new Date(LocalDateTime.of(2024,12,3,16,30)));
+                new Date(LocalDateTime.of(2024, 12, 3, 16, 30)));
         ScheduleCommand command = new ScheduleCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
