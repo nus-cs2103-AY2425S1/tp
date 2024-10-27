@@ -72,6 +72,11 @@ again, type `help` and press Enter.
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
   e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
+* Every student added will be assigned a `STUDENT_ID` that begins with S followed by a 5 digit number (e.g. S00003).
+> **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
+` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
+of replacing S00001).
+
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
