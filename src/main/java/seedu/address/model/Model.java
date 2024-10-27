@@ -36,43 +36,43 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' EduContacts file path.
      */
-    Path getAddressBookFilePath();
+    Path getEduContactsFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' EduContacts file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setEduContactsFilePath(Path eduContactsFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces EduContacts data with the data in {@code eduContacts}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setEduContacts(ReadOnlyEduContacts eduContacts);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the EduContacts */
+    ReadOnlyEduContacts getEduContacts();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in EduContacts.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in EduContacts.
      */
     void deletePerson(Person target);
 
     /**
      * Deletes the given module for the given person.
-     * The person and the corresponding module must exist in the address book.
+     * The person and the corresponding module must exist in EduContacts.
      */
     void deleteModule(Person target, Module module);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in EduContacts.
      */
     void addPerson(Person person);
 
@@ -83,8 +83,8 @@ public interface Model {
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in EduContacts.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in EduContacts.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -99,7 +99,7 @@ public interface Model {
 
     /**
      * Displays the given person {@code personToDisplay} and their details.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in EduContacts.
      */
     void setPersonToDisplay(Person personToDisplay);
 
