@@ -98,4 +98,22 @@ class JsonAdaptedPolicyTest {
                 "12-23-2024", claims);
         assertThrows(IllegalValueException.class, policy::toModelType, ExpiryDate.MESSAGE_CONSTRAINTS);
     }
+    @Test
+    void toModelType_nullPolicyType_throwsIllegalValueException() {
+        JsonAdaptedPolicy adaptedPolicy = new JsonAdaptedPolicy(
+                null, premiumAmount, coverageAmount, expiryDate, claims);
+
+        IllegalValueException exception = assertThrows(IllegalValueException.class, adaptedPolicy::toModelType);
+        assertEquals(String.format(JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORMAT,
+                PolicyType.class.getSimpleName()), exception.getMessage());
+    }
+    @Test
+    void toModelType_nullExpiryDate_throwsIllegalValueException() {
+        JsonAdaptedPolicy adaptedPolicy = new JsonAdaptedPolicy(
+                "health", premiumAmount, coverageAmount, null, claims);
+
+        IllegalValueException exception = assertThrows(IllegalValueException.class, adaptedPolicy::toModelType);
+        assertEquals(String.format(JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()),
+                exception.getMessage());
+    }
 }

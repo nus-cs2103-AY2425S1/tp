@@ -54,4 +54,12 @@ class JsonAdaptedClaim {
         }
         return new Claim(modelStatus, description);
     }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
