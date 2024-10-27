@@ -30,7 +30,6 @@
         </HBox>
         <!-- Check-In Status Button -->
         <Button fx:id="checkInStatusButton" text="Checked-Out" styleClass="checkin_status_button" />
-        
         <padding>
           <Insets top="20" right="30" bottom="20" left="30"/>
         </padding>
