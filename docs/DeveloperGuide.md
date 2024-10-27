@@ -95,6 +95,12 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
+Several commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to handle these commands:
+
+Here is a class diagram showing the classes related to the `AbstractEditCommand`:
+
+<puml src="diagrams/AbstractEditCommandClassDiagram.puml" width="550"/>
+
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
