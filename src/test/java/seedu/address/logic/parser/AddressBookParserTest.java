@@ -29,6 +29,7 @@ import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListClaimsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -172,6 +173,41 @@ public class AddressBookParserTest {
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
     }
 
+    @Test
+    public void parseCommand_listClaims() throws Exception {
+        // valid inputs
+        ListClaimsCommand expectedCommand = new ListClaimsCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH);
+        String validInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_POLICY_TYPE + "health";
+        Command command = parser.parseCommand(validInput);
+        assertEquals(expectedCommand, command);
+
+        // missing policy type
+        String missingPolicyTypeInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(missingPolicyTypeInput));
+
+        // non-numeric index
+        String nonNumericIndexInput = ListClaimsCommand.COMMAND_WORD + " a " + PREFIX_POLICY_TYPE + "health";
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(nonNumericIndexInput));
+
+        // invalid policy type
+        String invalidPolicyTypeInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_POLICY_TYPE + "invalidPolicy";
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(invalidPolicyTypeInput));
+
+        // extra arguments
+        String extraArgumentsInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_POLICY_TYPE + "health extraArg";
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(extraArgumentsInput));
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
