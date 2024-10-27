@@ -5,7 +5,7 @@ import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
- * Indicates the clear operation is cancelled.
+ * Cancels a pending clear command.
  */
 public class ClearCancelCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Clear operation cancelled.";

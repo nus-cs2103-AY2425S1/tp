@@ -46,7 +46,7 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
 
         if (this.havePendingCommand()) {
-            return excutePendingCommand(userInput);
+            return executePendingCommand(userInput);
         }
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -112,7 +112,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command excutePendingCommand(String userInput) throws ParseException {
+    public Command executePendingCommand(String userInput) throws ParseException {
 
         if (userInput.equalsIgnoreCase("Y")) {
             Command command = this.pendingCommand;
