@@ -30,7 +30,7 @@ public abstract class Policy {
      */
     public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate,
                   ClaimList claims) {
-        requireAllNonNull(premiumAmount, coverageAmount, expiryDate);
+        requireAllNonNull(premiumAmount, coverageAmount, expiryDate, claims);
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;

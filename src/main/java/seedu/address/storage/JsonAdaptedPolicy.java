@@ -40,7 +40,9 @@ class JsonAdaptedPolicy {
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
-        this.claims.addAll(claims);
+        if (claims != null) {
+            this.claims.addAll(claims);
+        }
     }
 
     /**

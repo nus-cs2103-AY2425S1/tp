@@ -39,7 +39,7 @@ public class LifePolicy extends Policy {
                 premiumAmount == null ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
                 coverageAmount == null ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
                 expiryDate == null ? new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)) : expiryDate,
-                claims);
+                claims == null ? new ClaimList() : claims);
     }
 
     @Override
