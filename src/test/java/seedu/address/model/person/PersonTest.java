@@ -46,12 +46,12 @@ public class PersonTest {
 
         // name differs in multi-space and single space, all other attributes same -> returns true
         updatedBob = new PersonBuilder(BOB).withName("Bob  Choo").build();
-        assertFalse(BOB.isSamePerson(updatedBob));
+        assertTrue(BOB.isSamePerson(updatedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns True
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         updatedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(updatedBob));
+        assertTrue(BOB.isSamePerson(updatedBob));
     }
 
     @Test
