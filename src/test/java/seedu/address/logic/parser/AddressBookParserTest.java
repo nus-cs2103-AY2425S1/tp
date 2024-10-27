@@ -31,20 +31,24 @@ import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
 import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
+import seedu.address.logic.commands.lesson.AddLessonCommand;
+import seedu.address.logic.commands.lesson.DeleteLessonCommand;
+import seedu.address.logic.commands.lesson.ListLessonsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.ConsultationBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
-
 
 public class AddressBookParserTest {
 
@@ -129,7 +133,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listconsults() throws Exception {
-        // Ensure the parser returns an instance of ListConsultsCommand when "listconsults" is input
+        // Ensure the parser returns an instance of ListConsultsCommand when
+        // "listconsults" is input
         assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD) instanceof ListConsultsCommand);
         assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD + " extraArgs") instanceof ListConsultsCommand);
     }
@@ -195,8 +200,7 @@ public class AddressBookParserTest {
                 new NameContainsKeywordsPredicate(List.of("bar")),
                 new NameContainsKeywordsPredicate(List.of("baz")),
                 new IsStudentOfCoursePredicate(List.of("CS2101")),
-                new IsStudentOfCoursePredicate(List.of("CS2102"))
-        ));
+                new IsStudentOfCoursePredicate(List.of("CS2102"))));
         assertEquals(expectedCommand, command);
     }
 
@@ -214,8 +218,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
@@ -229,5 +233,33 @@ public class AddressBookParserTest {
         ExportCommand command = (ExportCommand) parser.parseCommand(
                 ExportCommand.COMMAND_WORD + " " + fileName);
         assertEquals(new ExportCommand(fileName, false), command);
+    }
+
+    @Test
+    public void parseCommand_addLesson() throws Exception {
+        Lesson lesson = new LessonBuilder().build();
+        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(
+                AddLessonCommand.COMMAND_WORD + " d/" + lesson.getDate() + " t/" + lesson.getTime());
+        assertEquals(new AddLessonCommand(lesson), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        String arguments = "1"; // Assuming 1 is the index for the lesson to delete
+        DeleteLessonCommand command = (DeleteLessonCommand) parser.parseCommand(
+                DeleteLessonCommand.COMMAND_WORD + " " + arguments);
+
+        // Create the expected DeleteLessonCommand object with the first index
+        Set<Index> indexSet = new HashSet<>();
+        indexSet.add(Index.fromOneBased(1));
+        DeleteLessonCommand expectedCommand = new DeleteLessonCommand(indexSet);
+
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_listLessons() throws Exception {
+        assertTrue(parser.parseCommand(ListLessonsCommand.COMMAND_WORD) instanceof ListLessonsCommand);
+        assertTrue(parser.parseCommand(ListLessonsCommand.COMMAND_WORD + " extraArgs") instanceof ListLessonsCommand);
     }
 }
