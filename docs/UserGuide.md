@@ -184,34 +184,15 @@ Examples:
 *  `tag-delete n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
 *  `tag-delete n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
-### Locating Contacts by name: `find`
-
-You can quickly look up contacts by name and view all their details using `find`.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* `find` searches by `NAME` field.
-* `KEYWORD` is not case-sensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-![find message](images/findMsg.png)
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
 ### Filtering Contacts by Job: `filter`
 
-If you are looking for contacts with a specific job, you can use `filter` to filter out a list of contacts whose job matches your input.
+If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose job matches your input.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]`
+Format: `filter n/KEYWORD` or `filter j/KEYWORD`
 
-* `filter` filters by `job` field.
+* `filter` filters by `name` or `job` field.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
-* Only full words will be matched e.g. `photog` will not match `Photographer`
+* Only full words will be matched e.g. `jak` will not match `Jake`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
 * Persons matching all keywords will be returned (i.e. `AND` search).
@@ -220,8 +201,9 @@ Format: `filter KEYWORD [MORE_KEYWORDS]`
 ![filter message](images/filterMsg.png)
 
 Examples:
-* `filter Photographer` returns `John` and `Ernest` whose jobs are photographers
-* `filter caterer` returns `Adam` whose job is a caterer
+* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers
+* `filter n/caterer` returns `Adam` whose job is a caterer
+* `filter n/John` returns `John` whose name is John
 
 ### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
@@ -307,7 +289,6 @@ Action            | Format, Examples
 **Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
 **Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`
 **Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June & James`
-**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter**          | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter soundman dj`
+**Filter**          | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`
 **List**          | `list`
 **Help**          | `help`

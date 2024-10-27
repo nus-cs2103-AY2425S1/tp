@@ -5,26 +5,26 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.JobContainsKeywordsPredicate;
+import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose job contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name or job contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FilterByJobCommand extends Command {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + ": Filters all persons whose jobs contain any of "
-            + "the specified keywords (case-insensitive)\n"
-            + " and displays them as a list with index numbers.";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD
+            + ": Filters all persons whose names or jobs contain any of "
+            + "the specified keywords (case-insensitive)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " Photographer" + " OR " + COMMAND_WORD + " caterer";
+            + "Parameters: n/KEYWORD or j/KEYWORD\n"
+            + "Example: " + COMMAND_WORD + " n/John OR " + COMMAND_WORD + " j/Photographer";
 
-    private final JobContainsKeywordsPredicate predicate;
+    private final NameOrJobContainsKeywordsPredicate predicate;
 
-    public FilterByJobCommand(JobContainsKeywordsPredicate predicate) {
+    public FilterCommand(NameOrJobContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -43,11 +43,11 @@ public class FilterByJobCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FilterByJobCommand otherFilterByJobCommand)) {
+        if (!(other instanceof FilterCommand otherFilterCommand)) {
             return false;
         }
 
-        return predicate.equals(otherFilterByJobCommand.predicate);
+        return predicate.equals(otherFilterCommand.predicate);
     }
 
     @Override

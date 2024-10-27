@@ -9,11 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING3;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,17 +24,15 @@ import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterByJobCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -126,14 +122,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -176,11 +164,18 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filterByJob() throws Exception {
-        List<String> keywords = Arrays.asList("Engineer", "Doctor");
-        FilterByJobCommand command = (FilterByJobCommand) parser.parseCommand(
-                FilterByJobCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterByJobCommand(new JobContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_filter() throws Exception {
+        // Test filtering by name
+        List<String> nameKeywords = List.of("John");
+        FilterCommand nameCommand = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " n/" + String.join(" ", nameKeywords));
+        assertEquals(new FilterCommand(new NameOrJobContainsKeywordsPredicate(nameKeywords, List.of())), nameCommand);
+
+        // Test filtering by job
+        List<String> jobKeywords = List.of("Photographer");
+        FilterCommand jobCommand = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " j/" + String.join(" ", jobKeywords));
+        assertEquals(new FilterCommand(new NameOrJobContainsKeywordsPredicate(List.of(), jobKeywords)), jobCommand);
     }
 
     @Test
