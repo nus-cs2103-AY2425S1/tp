@@ -12,15 +12,14 @@ import java.util.regex.Pattern;
  */
 public class Vrn {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Vehicle Registration Number should be a valid Singapore Car Plate "
-                    + "of the format XXX####Y and adhere to the following constraints:\n"
-                    + "1. Prefix XXX\n"
-                    + "      XXX: Alphabetical Series, Capitalised (A-Z, except I and O).\n"
-                    + "2. Number ####\n"
-                    + "      ####: Number Series (0-9999, without leading zeros)\n"
-                    + "3. Suffix Y\n"
-                    + "      Y: Checksum Letter, Capitalised (A-Z, except F, I, N, O, Q, V and W)";
+    public static final String MESSAGE_CONSTRAINTS = "Vehicle Registration Number should be a valid Singapore"
+            + " Car Plate of the format XXX####Y and adhere to the following constraints:\n"
+            + "1. Prefix XXX\n"
+            + "      XXX: Alphabetical Series, Capitalised (A-Z, except I and O).\n"
+            + "2. Number ####\n"
+            + "      ####: Number Series (0-9999, without leading zeros)\n"
+            + "3. Suffix Y\n"
+            + "      Y: Checksum Letter, Capitalised (A-Z, except F, I, N, O, Q, V and W)";
     public static final String VALIDATION_REGEX = "([A-HJ-NP-Z]{1,3})([1-9]\\d{0,3})([A-EGHJ-MPR-UX-Z])$";
 
     public final String vrn;

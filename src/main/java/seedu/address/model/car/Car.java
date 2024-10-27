@@ -110,9 +110,9 @@ public class Car {
 
         Car otherPerson = (Car) other;
         return this.vrn.equals(otherPerson.vrn)
-            && this.vin.equals(otherPerson.vin)
-            && this.carMake.equals(otherPerson.carMake)
-            && this.carModel.equals(otherPerson.carModel);
+                && this.vin.equals(otherPerson.vin)
+                && this.carMake.equals(otherPerson.carMake)
+                && this.carModel.equals(otherPerson.carModel);
     }
 
     @Override
@@ -124,11 +124,11 @@ public class Car {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("vrn", this.vrn)
-            .add("vin", this.vin)
-            .add("make", this.carMake)
-            .add("model", this.carModel)
-            .toString();
+                .add("vrn", this.vrn)
+                .add("vin", this.vin)
+                .add("make", this.carMake)
+                .add("model", this.carModel)
+                .toString();
     }
 
 }

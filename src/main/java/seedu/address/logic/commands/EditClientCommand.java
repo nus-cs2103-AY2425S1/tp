@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISSUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -45,7 +46,7 @@ public class EditClientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the details of the indexed client. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values.\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -55,6 +56,7 @@ public class EditClientCommand extends Command {
             + "[" + PREFIX_VIN + "VEHICLE IDENTIFICATION NUMBER] "
             + "[" + PREFIX_MAKE + "VEHICLE MAKE] "
             + "[" + PREFIX_MODEL + "VEHICLE MODEL] "
+            + "[" + PREFIX_ISSUE + "ISSUE]\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_VRN + "SNP5701C";
@@ -130,6 +132,11 @@ public class EditClientCommand extends Command {
         // check if there is a car to edit issues to
         if (editedPerson.getCar() == null && editedPerson.getIssues().size() > 0) {
             throw new CommandException(MESSAGE_NO_CAR_TO_EDIT_ISSUES);
+        }
+
+        // check if person was checked in.
+        if (personToEdit.isServicing()) {
+            editedPerson.setServicing();
         }
 
         model.setPerson(personToEdit, editedPerson);
