@@ -1,20 +1,11 @@
-# DLTbook
 
-[![CI Status](https://github.com/AY2425S1-CS2103T-T08-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions)
-[![codecov](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp/graph/badge.svg?token=GJFEY8Q088)](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp)
 
 ![Ui](docs/images/Ui.png)
 
-DLTbook is an address book designed to manage and store the public addresses of your contacts across various blockchain networks, simplifying crypto transactions by keeping all addresses in one place.
-
-## Target user
-
-CS students interested in using stablecoins for transactions
-
-## Value proposition
-
-For NUS CS Students who use Crypto for transactions dissatisfied with the hassle of tracking public addresses manually due to high complexity of manually doing so, DLTbook offers a DLT public address tracking platform that aggregates this data.
-
-## Acknowledgements
-
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This is **a sample project for Software Engineering (SE) students**.<br>
+  Example usages:
+  *As an address book with the ability to manage the public addresses you have collected from your friends and family to send them crypto-currencies(BTC,ETH,SOL,SUI,etc).
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) .
+  * It comes with a **reasonable level of user and developer documentation**.
+* It is named `Distributed Ledger Technology book` (`DLTbook` for short) because it was initially created as a part of a project to manage addresses for sending crypto-currencies.
+* If you would like to contribute code to this project, create a PR.

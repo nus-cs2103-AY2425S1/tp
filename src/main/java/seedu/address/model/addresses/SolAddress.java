@@ -1,9 +1,9 @@
 package seedu.address.model.addresses;
 
 /**
- * Represents a BTC public address in the address book.
+ * Represents a SOL public address in the address book.
  */
-public class BtcAddress extends PublicAddress {
+public class SolAddress extends PublicAddress {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
@@ -11,12 +11,12 @@ public class BtcAddress extends PublicAddress {
     public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "[^\\s].*"; // TODO: Update regex
 
     /**
-     * Constructs a {@code BtcAddress}.
+     * Constructs a {@code SolAddress}.
      *
      * @param publicAddress A valid public address.
      * @param label         A label for the public address.
      */
-    public BtcAddress(String publicAddress, String label) {
+    public SolAddress(String publicAddress, String label) {
         super(publicAddress, label);
     }
 
@@ -32,7 +32,7 @@ public class BtcAddress extends PublicAddress {
 
     @Override
     public Network getNetwork() {
-        return Network.BTC;
+        return Network.SOL;
     }
 
 }
