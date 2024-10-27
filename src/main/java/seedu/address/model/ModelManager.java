@@ -282,6 +282,11 @@ public class ModelManager implements Model {
         this.assignmentList.resetData(assignments);
     }
 
+    @Override
+    public void reassignAssignmentStatuses(Student oldStudent, Student newStudent) {
+        assignmentList.reassignStudent(oldStudent, newStudent);
+    }
+
     //=========== Filtered Student List (student ID)
 
     @Override

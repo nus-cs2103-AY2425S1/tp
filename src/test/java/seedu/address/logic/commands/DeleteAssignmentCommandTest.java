@@ -33,7 +33,7 @@ public class DeleteAssignmentCommandTest {
         Assignment assignment = model.getAssignmentList().getAssignments().get(0);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(assignment);
         String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
-                assignment.toString());
+                assignment.toStringWithoutStats());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 getTypicalAssignmentList(), new TutorialList());
         expectedModel.deleteAssignment(assignment);

@@ -198,6 +198,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void reassignAssignmentStatuses(Student oldStudent, Student newStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }

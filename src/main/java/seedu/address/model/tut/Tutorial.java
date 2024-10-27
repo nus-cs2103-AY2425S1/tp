@@ -126,6 +126,10 @@ public abstract class Tutorial {
      */
     public abstract void deleteStudent(Student student);
 
+    public static void clearStudentsInNone() {
+        None.none().reset();
+    }
+
     private static Tutorial exist(TutName tutName, TutorialId tutorialId) {
         return new Exist(tutName, tutorialId);
     }
@@ -238,6 +242,10 @@ public abstract class Tutorial {
                 throw new StudentNotFoundException();
             }
             students.remove(student);
+        }
+
+        private void reset() {
+            students.clear();
         }
 
     }
