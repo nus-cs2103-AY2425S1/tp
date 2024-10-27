@@ -401,6 +401,15 @@ Format: `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`
 > * You can schedule an appointment to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been added.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
+Example:
+* `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
+> * Appointment List Panel is displayed in chronological order.
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting Appointments : `delAppt`
@@ -411,12 +420,17 @@ Format: `delAppt i/NRIC @d/DATE @t/TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
+> 
 > * Unlike addAppt, there is no need for AppointmentName preamble.
 > * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
 > * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
-[Back to Table of Contents](#table-of-contents)
+Example:
+* `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
+
+
+  [Back to Table of Contents](#table-of-contents)
 
 ### Managing Medical Conditions
 
@@ -439,8 +453,8 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> * `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -464,8 +478,8 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> * `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
