@@ -127,6 +127,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getDisplayPersons());
     }
 
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -139,6 +140,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName)));
 
         assertEquals(1, model.getDisplayPersons().size());
+    }
+
+    /**
+     * Asserts that the given {@code command} successfully deletes the person with the given {@code name} in the
+     * {@code actualModel}, and the filtered list in the {@code actualModel} is updated to show all persons.
+     */
+    public static void assertCommandFailureWithNewList(DeleteCommand command, String name,
+                                                  Model actualModel, String expectedMessage) {
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getDisplayPersons())
+                .stream().filter(p -> p.getName().fullName
+                .toLowerCase().contains(name.toLowerCase())).toList();
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedFilteredList, actualModel.getDisplayPersons());
     }
 
 }
