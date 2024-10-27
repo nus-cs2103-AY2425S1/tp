@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -41,6 +43,25 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void getParseRegex_regex() {
+        Pattern pattern = parser.getParserRegex();
+
+        Matcher matcher = pattern.matcher("cmd  zz  arg");
+        assert matcher.matches();
+
+        String commandWord = matcher.group("commandWord");
+        String modelTypeShortHand = matcher.group("modelType");
+        ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
+        String arguments = (modelType == ModelType.NEITHER)
+                ? matcher.group("combined")
+                : matcher.group("arguments");
+
+        assertEquals("cmd", commandWord);
+        assertEquals(ModelType.NEITHER, modelType);
+        assertEquals("  zz  arg", arguments);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {

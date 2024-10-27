@@ -102,4 +102,11 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * For testing of the regex
+     */
+    public Pattern getParserRegex() {
+        return BASIC_COMMAND_FORMAT;
+    }
+
 }
