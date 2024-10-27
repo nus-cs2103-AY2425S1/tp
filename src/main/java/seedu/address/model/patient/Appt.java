@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
+import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Patient's appointment date in the address book.
