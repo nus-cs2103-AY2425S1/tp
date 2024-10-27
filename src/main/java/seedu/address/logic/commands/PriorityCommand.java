@@ -19,8 +19,8 @@ public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "setPriority";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns/updates "
-            + "a priority of a patient in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets "
+            + "priority to an existing patient in MediBase3.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
             + "!/Priority\n"
