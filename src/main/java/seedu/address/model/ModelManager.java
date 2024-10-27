@@ -120,6 +120,11 @@ public class ModelManager implements Model {
         clientHub.setPerson(target, editedPerson);
     }
 
+    @Override
+    public int getDisplayPersonsListSize() {
+        return this.getDisplayPersons().size();
+    }
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedClientHub}

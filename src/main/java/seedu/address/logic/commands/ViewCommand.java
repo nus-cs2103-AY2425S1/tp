@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -23,6 +24,12 @@ public class ViewCommand extends Command {
             + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " " + "alice";
 
+    public static final String MORE_THAN_ONE_PERSON_VIEW_MESSAGE =
+            "\nMultiple clients found. Please specify the name of your client further.";
+
+    public static final String NO_PERSON_FOUND_VIEW_MESSAGE =
+            "\nClient not found. Use the list command to see all clients";
+
     public static final String SHOWING_VIEW_MESSAGE = "Opened view window.";
 
     private final NameContainsKeywordsPredicate predicate;
@@ -32,7 +39,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         // In the list, it will show the person that is viewed
@@ -40,19 +47,19 @@ public class ViewCommand extends Command {
 
         // Check if there is anyone in the filtered list
         if (model.getDisplayPersons().isEmpty()) {
-            return new CommandResult(
+            throw new CommandException(
                     String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
-                            model.getDisplayPersons().size())
-                            + "\nPlease specify the name further to view."
+                    model.getDisplayPersonsListSize())
+                    + NO_PERSON_FOUND_VIEW_MESSAGE
             );
         }
 
         // Check if there are duplicates
         if (model.getDisplayPersons().size() > 1) {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                            model.getDisplayPersons().size())
-                            + "\nDuplicates found. Please specify the name further."
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
+                    model.getDisplayPersonsListSize())
+                    + MORE_THAN_ONE_PERSON_VIEW_MESSAGE
             );
         }
         return new CommandResult(
