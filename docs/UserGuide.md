@@ -82,7 +82,7 @@ Adds a student to the student directory.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 
 * If a group is not provided, or left blank (`g/`), the student will not be assigned to any group.
-* The student will be assigned all existing lessons which other students in the group have.
+* The student will be assigned all the lessons of other students in the group.
 
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
@@ -100,7 +100,7 @@ Edits an existing student in the student directory.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* If the group is left blank (`g/`), the student will be removed from any existing group. This also removes all of the student's lessons.
+* If the group is left blank (`g/`), the student will be removed from any existing group. This also removes all the student's lessons.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
