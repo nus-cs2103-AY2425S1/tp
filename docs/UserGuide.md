@@ -89,7 +89,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
+involved in.
 
 </box>
 
@@ -99,7 +100,7 @@ Examples:
 
 ### Listing All Contacts : `list`
 
-You can view all contacts.
+You can view all contacts. Contacts are listed in order that they were added.
 
 Format: `list`
 
@@ -109,11 +110,11 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
-Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
+Format: `add-wedding w/NAME & NAME v/VENUE d/DATE`
 
 <box type="tip" seamless>
 
-**Tip:** Datetime must be a valid date in the format of dd/MM/yyyy
+**Tip:** Date must be a valid date in the format of **dd/MM/yyyy**
 
 </box>
 
@@ -127,7 +128,7 @@ Examples:
 
 You can edit an existing contact's details such as their name, phone number, email etc.
 
-Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
+Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB] [t/NEW_TAG]`
 
 <box type="tip" seamless>
 
@@ -138,7 +139,10 @@ Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 ![edit message](images/editMsg.png)
 
 Examples:
-*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
+*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be 
+`91234567` and `johndoe@example.com` respectively.
+  *  `edit n/James new/Clark e/clarknewemail@example.com j/Florist` Edits the name, email and job to be
+`James`, `clarknewemail@example.com` and `Florist` respectively.
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
@@ -182,11 +186,11 @@ Examples:
 
 ### Locating Contacts by name: `find`
 
-You can quickly lookup contacts by name and view all their details using `find`.
+You can quickly look up contacts by name and view all their details using `find`.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* `find` searches by `NAME`.
+* `find` searches by `NAME` field.
 * `KEYWORD` is not case-sensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -205,9 +209,8 @@ If you are looking for contacts with a specific job, you can use `filter` to fil
 
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
-* `filter` filters by `job`.
+* `filter` filters by `job` field.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
-* The order of the keywords does not matter. e.g. `Photographer Lighting` will match `Lighting Photographer`
 * Only full words will be matched e.g. `photog` will not match `Photographer`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
@@ -229,7 +232,10 @@ You can delete a person from your list of contacts.
 * The contact is deleted if `delete-y` is entered.
 * The contact is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `delete INDEX` followed by `delete-y` or `delete-n`
+Format: `delete n/NAME` followed by `delete-y` or `delete-n`
+
+**IMPORTANT:** `delete n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be 
+affected.
 
 ![delete message](images/deleteMsg.png)
 
@@ -253,7 +259,8 @@ Format: `exit`
 
 ### Saving the data
 
-Knotty Planner data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Knotty Planner data will be saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ### Editing the data file
 
