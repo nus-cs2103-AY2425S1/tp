@@ -137,7 +137,7 @@ public class Subject {
         }
 
         Subject otherSubject = (Subject) other;
-        return subjectName.equals(otherSubject.subjectName);
+        return subjectName.equalsIgnoreCase(otherSubject.subjectName);
     }
 
     @Override

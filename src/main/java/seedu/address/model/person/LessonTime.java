@@ -99,7 +99,7 @@ public class LessonTime {
         }
 
         LessonTime otherLessonTime = (LessonTime) other;
-        return lessonDay.equals(otherLessonTime.getLessonDay())
+        return lessonDay.equalsIgnoreCase(otherLessonTime.getLessonDay())
                 && lessonStart.equals(otherLessonTime.getLessonStart())
                 && lessonEnd.equals(otherLessonTime.getLessonEnd());
     }

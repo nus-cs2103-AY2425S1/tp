@@ -95,7 +95,7 @@ public class Level {
             return false;
         }
 
-        return levelName.equals(otherLevel.levelName);
+        return levelName.equalsIgnoreCase(otherLevel.levelName);
     }
 
     @Override
