@@ -64,6 +64,10 @@ public class CommandTestUtil {
     public static final String VALID_END_DATE = "01-01-2024 13:00";
 
     public static final String VALID_DURATION = "1";
+    public static final String VALID_DURATION_WITH_POINT_FIVE = "1.5";
+    public static final String VALID_DURATION_LOWER_BOUND = "0.5";
+    public static final String VALID_DURATION_UPPER_BOUND = "24";
+    public static final String VALID_DURATION_WITH_DECIMALS = "24.000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -107,9 +111,12 @@ public class CommandTestUtil {
     public static final String INVALID_START_DATE_HOUR = " " + PREFIX_START_DATE + INVALID_HOUR;
     public static final String INVALID_MINUTE = "03-03-2000 12:60";
     public static final String INVALID_START_DATE_MINUTE = " " + PREFIX_START_DATE + INVALID_MINUTE;
-    public static final String INVALID_DURATION_CHAR = " " + PREFIX_DURATION + "a";
-    public static final String INVALID_DURATION_ZERO = " " + PREFIX_DURATION + "0";
-    public static final String INVALID_DURATION_TWENTY_FIVE = " " + PREFIX_DURATION + "25";
+    public static final String INVALID_DURATION_CHAR = "a";
+    public static final String INVALID_DURATION_ZERO = "0";
+    public static final String INVALID_DURATION_TWENTY_FIVE = "25";
+    public static final String INVALID_DURATION_TWENTY_FIVE_POINT_FIVE = "25.5";
+    public static final String INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE = "1.33";
+    public static final String INVALID_DURATION_NEGATIVE = "-1";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
