@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>list students(UC01)</ins>.
+1. User requests to <ins>list students(UC02)</ins>.
 2. User enters command to delete a specific student.
 3. System displays list with specified student deleted from the list.
 
@@ -396,11 +396,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2a1-2a2 are repeated until index entered is correct.
 * Use cases resumes from step 3.
 
+
 * 2b. System detects error in format of entered command.
     * 2b1. System displays error message and does not clear command line.
     * 2b2. User enters new command.
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use cases resumes from step 3.
+
+**Use case: UC05 - Find student entries**
+
+**MSS**
+
+1. User enters command to find students.
+1. System displays list with students with matching details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+* 1b. System detects error in parameters.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters command with correct parameters.
+* Steps 1b1-1b2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
 
 *{More to be added}*
 
