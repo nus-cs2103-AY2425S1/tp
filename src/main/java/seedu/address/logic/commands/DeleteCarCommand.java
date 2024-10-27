@@ -21,7 +21,7 @@ public class DeleteCarCommand extends Command {
 
     // This initializes an empty set of issues to pass into the updated person slot.
     // It only makes sense that when a car is deleted from MATER, its issues would also not be recorded anymore.
-    public static final Set<Issue> blankSlate = Collections.emptySet();
+    public static final Set<Issue> EMPTY_SET_OF_ISSUES = Collections.emptySet();
 
     public static final String COMMAND_WORD = "del-car";
 
@@ -74,7 +74,7 @@ public class DeleteCarCommand extends Command {
                 personToDeleteCarFrom.getPhone(),
                 personToDeleteCarFrom.getEmail(),
                 personToDeleteCarFrom.getAddress(),
-                blankSlate
+                EMPTY_SET_OF_ISSUES
         );
 
         // This method call effectively replaces the old user with the new user with a car.
