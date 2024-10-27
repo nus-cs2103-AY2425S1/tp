@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Before getting next command
+
+package Commands <<rectangle>> {
+    class Command0 as "add...\n<font size=10><color:#555555>0</color></font>"
+    class Command1 as "find roy\n<font size=10><color:#555555>1</color></font>"
+    class Command2 as "list\n<font size=10><color:#555555>2</color></font>"
+    class Command3 as "delete 5\n<font size=10><color:#555555>3</color></font>"
+}
+Command0 -[hidden]right-> Command1
+Command1 -[hidden]right-> Command2
+Command2 -[hidden]right-> Command3
+
+
+class Pointer as "currentCommandIndex" #FFFFFF
+class TextField as "TextField: "find roy"" #FFFFFF
+
+Pointer -up-> Command1
+TextField -[hidden]up-> Pointer
+
+@enduml
