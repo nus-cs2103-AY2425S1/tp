@@ -56,6 +56,15 @@ public class AttendanceRecordTest {
     }
 
     @Test
+    public void equals_differentObject_failure() {
+        LocalDate date = LocalDate.of(2024, 10, 22);
+        Attendance attendance = new Attendance("p");
+        AttendanceRecord record = new AttendanceRecord(date, attendance);
+
+        assertEquals(record.equals("3"), false);
+    }
+
+    @Test
     public void equals_differentObjectSameValues_success() {
         LocalDate date = LocalDate.of(2024, 10, 22);
         Attendance attendance1 = new Attendance("p");
