@@ -49,7 +49,7 @@ public class MarkCommand extends Command {
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
         if (!(personToMark instanceof Student)) {
-            return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
+            throw new CommandException(String.format(MESSAGE_CANNOT_MARK_PARENT));
         } else {
             Student studentToMark = (Student) personToMark;
             Student markedStudent = createNewStudent(studentToMark);

@@ -24,9 +24,9 @@ public class ResetAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "reset-att";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets all attendance to 0.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets all attendance to 0 in this list.";
 
-    public static final String MESSAGE_RESET_ATTENDANCE_SUCCESS = "Attendance set to 0 for all students";
+    public static final String MESSAGE_RESET_ATTENDANCE_SUCCESS = "Attendance set to 0 for all students in this list";
 
 
 
@@ -48,10 +48,9 @@ public class ResetAttendanceCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with AttendanceCount of 0.
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code STUDENT} with AttendanceCount of 0.
      */
-    static Student createNewStudentWithZeroAttendance(Student studentToReset) {
+    public static Student createNewStudentWithZeroAttendance(Student studentToReset) {
         assert studentToReset != null;
 
         Name name = studentToReset.getName();

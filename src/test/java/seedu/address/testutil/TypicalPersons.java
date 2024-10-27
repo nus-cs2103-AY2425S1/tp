@@ -33,7 +33,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withRole("Student").withAttendanceCount("3")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -86,5 +86,17 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, CARLMEIER, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getParentOnlyAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getParents()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    public static List<Person> getParents() {
+        return new ArrayList<>(Arrays.asList(CARLMEIER, GEORGE, BOB));
     }
 }

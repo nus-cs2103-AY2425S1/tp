@@ -54,7 +54,7 @@ public class UnmarkCommand extends Command {
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
         if (!(personToUnmark instanceof Student)) {
-            return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
+            throw new CommandException(String.format(MESSAGE_CANNOT_MARK_PARENT));
         } else {
             Student studentToUnmark = (Student) personToUnmark;
             if (studentToUnmark.getAttendanceCount().integerCount() == 0) {

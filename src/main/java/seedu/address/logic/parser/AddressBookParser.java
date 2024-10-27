@@ -11,6 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BatchDeleteCommand;
 import seedu.address.logic.commands.BatchEditCommand;
+import seedu.address.logic.commands.BatchMarkCommand;
+import seedu.address.logic.commands.BatchUnmarkCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -100,6 +102,12 @@ public class AddressBookParser {
 
         case BatchEditCommand.COMMAND_WORD:
             return new BatchEditCommandParser().parse(arguments);
+
+        case BatchMarkCommand.COMMAND_WORD:
+            return new BatchMarkCommand();
+
+        case BatchUnmarkCommand.COMMAND_WORD:
+            return new BatchUnmarkCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
