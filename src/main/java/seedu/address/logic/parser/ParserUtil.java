@@ -7,13 +7,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressFactory;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -110,24 +113,20 @@ public class ParserUtil {
         requireNonNull(paLabel);
 
         String trimmedPublicAddress = publicAddress.trim();
-        if (!PublicAddress.isValidPublicAddress(trimmedPublicAddress)) {
-            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
-        }
-
         String trimmedPaLabel = paLabel.trim();
-        if (!PublicAddress.isValidPublicAddressLabel(trimmedPaLabel)) {
-            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
-        }
-
         Network parsedNetwork = parseNetwork(network);
 
-        return PublicAddressFactory.createPublicAddress(parsedNetwork, trimmedPublicAddress, trimmedPaLabel);
+        try {
+            return PublicAddressFactory.createPublicAddress(parsedNetwork, trimmedPublicAddress, trimmedPaLabel);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**
      * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
      */
-    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
+    public static PublicAddressesComposition parsePublicAddresses(Collection<String> publicAddresses)
             throws ParseException {
         requireNonNull(publicAddresses);
         Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
@@ -139,12 +138,11 @@ public class ParserUtil {
             String[] addressArgs = trimmedPublicAddress.split(delimiter);
 
             if (addressArgs.length != 2) {
-                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+                throw new ParseException("Missing arguments for public address");
             }
 
             String network = addressArgs[0];
             String address = addressArgs[1];
-            // TODO: END of tokenizer
 
             Network parsedNetwork = parseNetwork(network);
             PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_LABEL, network);
@@ -154,7 +152,21 @@ public class ParserUtil {
             }
             publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
         }
-        return publicAddressesMap;
+        return new PublicAddressesComposition(publicAddressesMap);
+    }
+
+    /**
+     * Parses Label for BTC Address by cleaning the string input given by the user
+     *
+     * @param label
+     * @return
+     */
+    public static String parsePublicAddressLabel(String label) throws ParseException {
+        requireNonNull(label);
+        if (!PublicAddress.isValidPublicAddressLabel(label)) {
+            throw new ParseException(PublicAddress.MESSAGE_LABEL_CONSTRAINTS);
+        }
+        return label.strip();
     }
 
     /**
@@ -193,6 +205,8 @@ public class ParserUtil {
     public static Network parseNetwork(String network) throws ParseException {
         requireNonNull(network);
         String trimmedNetwork = network.trim();
+        Logger logger = LogsCenter.getLogger(ParserUtil.class);
+        logger.info(trimmedNetwork);
         try {
             return Network.valueOf(trimmedNetwork);
         } catch (IllegalArgumentException e) {
