@@ -1,10 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -13,9 +17,10 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class PieChartCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
 
     @Test
-    public void execute_piChartCommand_success() {
+    public void execute_piChartCommand_success() throws CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
 
         // Create new persons
@@ -40,5 +45,12 @@ public class PieChartCommandTest {
 
         // Verify the result
         assertEquals(PieChartCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_barChartCommand_failure() {
+        model = new ModelManager(new AddressBook(), new UserPrefs(), new CommandHistory());
+        PieChartCommand pieChartCommand = new PieChartCommand();
+        assertCommandFailure(pieChartCommand, model, Messages.MESSAGE_EMPTY_LIST_TO_VISUALIZE);
     }
 }

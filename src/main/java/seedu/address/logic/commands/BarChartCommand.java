@@ -22,7 +22,7 @@ public class BarChartCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Map<String, Integer> distributionOfMonthsPaid = new HashMap<>();
         if (model.getFilteredPersonList().isEmpty()) {
