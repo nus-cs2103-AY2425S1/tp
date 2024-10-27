@@ -20,7 +20,7 @@ public class GroupTest {
     @Test
     public void isValidGroupName() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> Group.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> Group.isValidGroupName(null));
     }
 
 }

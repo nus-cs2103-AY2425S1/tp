@@ -128,7 +128,7 @@ public class ParserUtil {
     public static Group parseGroup(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Group.isValidTagName(trimmedTag)) {
+        if (!Group.isValidGroupName(trimmedTag)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         return new Group(trimmedTag);
