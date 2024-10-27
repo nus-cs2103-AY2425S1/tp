@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
