@@ -17,7 +17,6 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":CommandTextHistory" as CommandTextHistory MODEL_COLOR
-participant "commandHistory:ArrayList<String>" as commandHistory MODEL_COLOR
 end box
 
 user -> CommandBox : press UP button
@@ -28,10 +27,6 @@ LogicManager -> Model : getPreviousCommandTextFromHistory()
 activate Model
 Model -> CommandTextHistory : getPreviousCommand()
 activate CommandTextHistory
-CommandTextHistory -> commandHistory : get(currentCommandIndex)
-activate commandHistory
-commandHistory --> CommandTextHistory : command
-deactivate commandHistory
 CommandTextHistory --> Model : command
 deactivate CommandTextHistory
 Model --> LogicManager : command

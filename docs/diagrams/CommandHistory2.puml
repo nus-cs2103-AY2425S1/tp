@@ -12,7 +12,7 @@ package Commands <<rectangle>> {
     class Command2 as "list\n<font size=10><color:#555555>2</color></font>"
     class Command3 as "delete 5\n<font size=10><color:#555555>3</color></font>"
     class Command4 as "list\n<font size=10><color:#555555>4</color></font>"
-    class Command5 as "\n<font size=10><color:#555555>5</color></font>"
+    class Command5 as "\n<font size=10><color:#555555>5</color></font>" #FFFFFF
 }
 Command0 -[hidden]right-> Command1
 Command1 -[hidden]right-> Command2

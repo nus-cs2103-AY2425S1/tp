@@ -11,12 +11,10 @@ package Commands <<rectangle>> {
     class Command1 as "find roy\n<font size=10><color:#555555>1</color></font>"
     class Command2 as "list\n<font size=10><color:#555555>2</color></font>"
     class Command3 as "delete 5\n<font size=10><color:#555555>3</color></font>"
-    class Command4 as "\n<font size=10><color:#555555>4</color></font>"
 }
 Command0 -[hidden]right-> Command1
 Command1 -[hidden]right-> Command2
 Command2 -[hidden]right-> Command3
-Command3 -[hidden]right-> Command4
 
 class Pointer as "currentCommandIndex" #FFFFFF
 class TextField as "TextField: "list"" #FFFFFF

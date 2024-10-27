@@ -8,16 +8,14 @@ start
 :User makes an action;
 switch()
 case ([press up button])
-    if () then ([currentCommandIndex < size])
+    if () then ([currentCommandIndex > 0])
         :CommandTextHistory gets previous command;
     else ([else])
-        :Nothing happens;
     endif
 case ([press down button])
-    if () then ([currentCommandIndex >= 0])
+    if () then ([currentCommandIndex < size - 1])
         :CommandTextHistory gets next command;
     else ([else])
-        :Nothing happens;
     endif
 case ([enters new command])
     :CommandTextHistory adds new command;

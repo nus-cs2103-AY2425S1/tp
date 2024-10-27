@@ -250,7 +250,7 @@ _{more aspects and alternatives to be added}_
 ### Command history feature
 #### Implementation
 The command history feature is facilitated by `CommandTextHistory`. It has a `commandHistory` arraylist that stores the history of commands entered by the user as strings 
-and a `currentCommandIndex` that is initialised to be `0` to keep track of the current command index in the command history. `currentCommandIndex` keeps track of 
+and a `currentCommandIndex` that is initialised to be `0` to keep track of the current command index in the command history.
 The `CommandTextHistory` class implements the following operations:
 * `CommandTextHistory#addCommandHistory(String commandText)` — Adds a command text to the command history.
 * `CommandTextHistory#getPreviousCommand()` — Returns the previous command text in the command history.
@@ -263,8 +263,8 @@ If there are previous commands, it will decrement the `currentCommandIndex`.
 The `getNextCommand()` method will first check if there are more commands available ahead in the history by checking if `currentCommandIndex < commandHistory.size() - 1`.
 If there are following commands, it will increment the `currentCommandIndex`.
 
-After decrementing or incrementing, the method checks if `currentCommandIndex` is still within the bounds of `commandHistory`. 
-If the index is out of bounds, the method returns an empty string "", indicating there are no more commands to retrieve in that direction.
+After decrementing or incrementing, the method checks if `currentCommandIndex` is still within the bounds of `commandHistory`.
+If the index is out of bounds, the method returns an empty string `""`, indicating that there is no such command to be retrieved.
 If `currentCommandIndex` is within bounds, it retrieves and returns the command at the updated index in `commandHistory`.
 
 ##### Adding command to history
