@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
@@ -86,7 +87,7 @@ public class StorageManagerTest {
          */
         LessonSchedule original = new LessonSchedule();
         storageManager.saveLessonSchedule(original);
-        LessonSchedule retrieved = storageManager.readLessonSchedule(getTypicalTutorEase()).get();
+        ReadOnlyLessonSchedule retrieved = storageManager.readLessonSchedule(getTypicalTutorEase()).get();
         assertEquals(original, retrieved);
     }
 }

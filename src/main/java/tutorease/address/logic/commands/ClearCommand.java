@@ -2,6 +2,7 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.TutorEase;
 
@@ -18,6 +19,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setTutorEase(new TutorEase());
+        model.setLessonSchedule(new LessonSchedule());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

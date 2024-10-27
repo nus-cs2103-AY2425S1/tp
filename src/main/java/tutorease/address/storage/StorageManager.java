@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.UserPrefs;
@@ -96,7 +97,8 @@ public class StorageManager implements Storage {
      * @throws DataLoadingException if there was any problem reading from the file.
      */
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException {
+    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase)
+            throws DataLoadingException {
         return readLessonSchedule(lessonScheduleStorage.getLessonScheduleFilePath(), tutorEase);
     }
 
@@ -109,7 +111,7 @@ public class StorageManager implements Storage {
      * @throws DataLoadingException if there was any problem reading from the file.
      */
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
+    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
             DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return lessonScheduleStorage.readLessonSchedule(filePath, tutorEase);
@@ -121,7 +123,7 @@ public class StorageManager implements Storage {
      * @throws IOException if there was any problem writing to the file.
      */
     @Override
-    public void saveLessonSchedule(LessonSchedule lessonSchedule) throws IOException {
+    public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) throws IOException {
         saveLessonSchedule(lessonSchedule, lessonScheduleStorage.getLessonScheduleFilePath());
     }
 
@@ -132,7 +134,7 @@ public class StorageManager implements Storage {
      * @throws IOException if there was any problem writing to the file.
      */
     @Override
-    public void saveLessonSchedule(LessonSchedule lessonSchedule, Path filePath) throws IOException {
+    public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         lessonScheduleStorage.saveLessonSchedule(lessonSchedule, filePath);
     }

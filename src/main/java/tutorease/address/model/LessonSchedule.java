@@ -10,7 +10,7 @@ import tutorease.address.model.lesson.UniqueLessonList;
  * Wraps all data at the lesson-schedule level
  * Duplicates are not allowed (by .isOverlapping comparison)
  */
-public class LessonSchedule {
+public class LessonSchedule implements ReadOnlyLessonSchedule {
     private final UniqueLessonList lessons;
 
     {
@@ -23,7 +23,7 @@ public class LessonSchedule {
     /**
      * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}
      */
-    public LessonSchedule(LessonSchedule toBeCopied) {
+    public LessonSchedule(ReadOnlyLessonSchedule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -87,7 +87,7 @@ public class LessonSchedule {
     /**
      * Replaces the contents of this lesson schedule with {@code newData}.
      */
-    public void resetData(LessonSchedule newData) {
+    public void resetData(ReadOnlyLessonSchedule newData) {
         lessons.setLessons(newData.getLessonList());
     }
 
