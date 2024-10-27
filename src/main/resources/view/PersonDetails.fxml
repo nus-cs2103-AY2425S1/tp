@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="589.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
+<VBox prefHeight="670.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
     <Label alignment="TOP_LEFT" text="Name:" />
     <Label fx:id="nameLabel" prefHeight="37.0" prefWidth="499.0" />
@@ -48,11 +48,11 @@
             <Label fx:id="remarkLabel" wrapText="true" />
         </content>
     </ScrollPane>
-
     <Label text="History:" />
-    <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="437.0">
+    <ScrollPane fitToWidth="true" maxHeight="400.0">
         <content>
-            <Label fx:id="historyLabel" wrapText="true" />
+            <VBox fx:id="history" prefWidth="419.0" spacing="10.0">
+            </VBox>
         </content>
     </ScrollPane>
 </children>

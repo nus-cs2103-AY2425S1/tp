@@ -1,7 +1,7 @@
 /* Style for the VBox that contains all the labels */
 VBox {
     -fx-spacing: 10; /* Add space between labels */
-    -fx-padding: 20; /* Add padding around the VBox */
+    -fx-padding: 5; /* Add padding around the VBox */
     -fx-background-color: #2C3531; /* Dark green background */
     -fx-border-color: #116466; /* Teal border */
     -fx-border-width: 2px;
@@ -40,13 +40,22 @@ ScrollPane {
     -fx-background-color: #2C3531; /* Set the viewport to your dark color */
 }
 
-#historyLabel {
-  -fx-background-color: #2C3531; /* Background matches the ScrollPane */
-    -fx-text-fill: #D9B08C; /* Text color for contrast (light color against dark background) */
-    -fx-padding: 10; /* Add some padding around the text */
-    -fx-font-size: 14px; /* Optional: Adjust the font size for better readability */
-    -fx-border-color: #D9B08C; /* Optional: Adding a subtle border to the label */
-    -fx-border-width: 0 0 1 0; /* Only bottom border */
+/* History section styling */
+#history {
+    -fx-border-color: #116466;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 0;
+    -fx-background-color: #415756;
+}
+#history .label {
+    -fx-background-color: #415756;
+    -fx-text-fill: #D9B08C;
+    -fx-padding: 1;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-spacing: 1;
+    -fx-max-width: Infinity;  /* Makes label grow */
 }
 
 /* Add a drop shadow effect to the VBox */
