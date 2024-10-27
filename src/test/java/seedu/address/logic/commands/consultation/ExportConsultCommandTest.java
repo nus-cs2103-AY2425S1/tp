@@ -2,6 +2,7 @@ package seedu.address.logic.commands.consultation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalConsultations.getTypicalConsultations;
 
@@ -145,6 +146,97 @@ public class ExportConsultCommandTest {
                 consultation.getDate().getValue(),
                 consultation.getTime().getValue(),
                 studentsString);
+    }
+
+    @Test
+    public void testEscapeSpecialCharactersWithQuotes() {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test", false, dataDir);
+
+        // Test double quotes are properly escaped
+        String withDoubleQuotes = "Hello\"World";
+        assertEquals("\"Hello\"\"World\"", exportCommand.escapeSpecialCharacters(withDoubleQuotes));
+
+        // Test both quotes and commas
+        String withQuotesAndCommas = "Hello\"World,Test";
+        assertEquals("\"Hello\"\"World,Test\"", exportCommand.escapeSpecialCharacters(withQuotesAndCommas));
+    }
+
+    @Test
+    public void execute_directoryCreationFails_throwsCommandException() throws IOException {
+        // Create a read-only parent directory
+        Path readOnlyDir = temporaryFolder.resolve("readonly");
+        Files.createDirectory(readOnlyDir);
+        readOnlyDir.toFile().setReadOnly();
+
+        // Try to create a subdirectory in the read-only directory
+        Path invalidDir = readOnlyDir.resolve("data");
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test", false, invalidDir);
+
+        try {
+            assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                    String.format(ExportConsultCommand.MESSAGE_FAILURE, "Could not create directory:"));
+        } finally {
+            // Clean up: Reset directory permissions so it can be deleted
+            readOnlyDir.toFile().setWritable(true);
+        }
+    }
+
+    @Test
+    public void execute_homeDirectoryCopyFails_returnsSuccessWithDataFileOnly() throws Exception {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+
+        // Create a command that simulates home directory copy failure
+        ExportConsultCommand exportCommand = new ExportConsultCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                // Return a path that will cause IOException during copy
+                return temporaryFolder.resolve("nonexistent").resolve("directory").resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message only mentions data file
+        String expectedMessage = String.format(ExportConsultCommand.MESSAGE_SUCCESS,
+                model.getFilteredConsultationList().size(), dataFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_writeFailure_cleansUpAndThrowsCommandException() throws IOException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+
+        // Make the directory read-only after creation
+        dataDir.toFile().setReadOnly();
+
+        ExportConsultCommand exportCommand = new ExportConsultCommand(filename, false, dataDir);
+
+        try {
+            assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                    String.format(ExportConsultCommand.MESSAGE_FAILURE, ""));
+            assertFalse(Files.exists(dataFile), "Partial file should be cleaned up");
+        } finally {
+            // Reset permissions for cleanup
+            dataDir.toFile().setWritable(true);
+        }
+    }
+
+    @Test
+    public void getHomeFilePath_returnsCorrectPath() {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test", false, dataDir);
+        String filename = "testfile";
+        Path expected = Paths.get(System.getProperty("user.home"), filename + ".csv");
+        Path actual = exportCommand.getHomeFilePath(filename);
+        assertEquals(expected, actual);
+
+        // Test with different filename
+        String anotherFilename = "another";
+        Path anotherExpected = Paths.get(System.getProperty("user.home"), anotherFilename + ".csv");
+        Path anotherActual = exportCommand.getHomeFilePath(anotherFilename);
+        assertEquals(anotherExpected, anotherActual);
     }
 
     private class ModelStubWithConsultations extends ModelStub {
