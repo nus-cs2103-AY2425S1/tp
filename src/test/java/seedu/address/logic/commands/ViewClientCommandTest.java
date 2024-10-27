@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -68,6 +67,13 @@ public class ViewClientCommandTest {
         ViewClientCommand commandOne = new ViewClientCommand(new Name("Bob"));
         ViewClientCommand commandTwo = commandOne;
         assertTrue(commandOne.equals(commandTwo));
+    }
+
+    @Test
+    public void equal_differentObject_failure() {
+        ViewClientCommand commandOne = new ViewClientCommand(new Name("Bob"));
+        DeleteCommand commandTwo = new DeleteCommand(new Name("Bob"));
+        assertFalse(commandOne.equals(commandTwo));
     }
 
     @Test
