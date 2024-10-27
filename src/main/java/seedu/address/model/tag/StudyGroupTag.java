@@ -4,17 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a StudyGroupTag in the address book. Guarantees: immutable; name
- * is valid as declared in {@link #isValidStudyGroupName(String)}
+ * Represents a StudyGroupTag in the address book. Guarantees: immutable; name is valid as declared in
+ * {@link #isValidStudyGroupName(String)}
  */
 public class StudyGroupTag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Study group names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Study group names should only contain alphanumeric characters and dashes";
 
     /*
      * The study group name must be alphanumeric.
      */
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}-]+";
 
     public final String studyGroupName;
 
