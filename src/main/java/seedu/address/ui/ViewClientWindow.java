@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -41,6 +42,9 @@ public class ViewClientWindow extends UiPart<Stage> {
 
     @FXML
     private FlowPane issues;
+
+    @FXML
+    private Button checkInStatusButton;
 
     /**
      * Creates a new ViewClientWindow.
@@ -101,6 +105,11 @@ public class ViewClientWindow extends UiPart<Stage> {
         clientPhoneLabel.setText("Phone: " + client.getPhone());
         clientEmailLabel.setText("Email: " + client.getEmail());
         clientAddressLabel.setText("Address: " + client.getAddress());
+
+        // Set Check-in Status
+        boolean isCheckedIn = client.isServicing();
+        checkInStatusButton.setText(isCheckedIn ? "Checked-In" : "Checked-Out");
+        checkInStatusButton.setStyle(isCheckedIn ? "-fx-background-color: #4CAF50;" : "-fx-background-color: #af4c4c;");
 
         correctAsOfLabel.setText("Correct as of: " + getCurrentDateTimeString());
 

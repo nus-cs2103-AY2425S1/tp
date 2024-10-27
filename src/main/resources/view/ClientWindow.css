@@ -78,3 +78,20 @@
 .scene {
     -fx-background-color: #2B2B2B;
 }
+
+.checkin_status_button {
+    -fx-background-color: #af4c4c;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-cursor: hand;
+    -fx-border: none;
+}
+
+.checkin_status_button:hover {
+    -fx-background-color: #6d2e2e;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
