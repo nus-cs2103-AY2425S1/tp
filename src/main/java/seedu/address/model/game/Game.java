@@ -51,9 +51,9 @@ public class Game {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
-        this.username = null;
-        this.skillLevel = null;
-        this.role = null;
+        this.username = new Username("");
+        this.skillLevel = new SkillLevel("");
+        this.role = new Role("");
         this.isFavourite = false;
     }
 

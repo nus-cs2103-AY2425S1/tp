@@ -141,7 +141,7 @@ public class ParserUtil {
         if (!Game.isValidGameName(trimmedGame)) {
             throw new ParseException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Game(trimmedGame, new Username(""), new SkillLevel(""), new Role(""), false);
+        return new Game(trimmedGame);
     }
 
     /**
