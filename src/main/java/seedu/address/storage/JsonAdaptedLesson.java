@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Date;
@@ -36,7 +38,7 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
-            @JsonProperty("attendanceMap") Map<JsonAdaptedStudent, Boolean> attendanceMap) {
+            @JsonProperty("attendanceMap") Set<Pair<JsonAdaptedStudent, Boolean>> attendanceMap) {
         this.date = date;
         this.time = time;
         this.students = new ArrayList<>();
@@ -46,7 +48,7 @@ class JsonAdaptedLesson {
             this.students.addAll(students);
         }
         if (attendanceMap != null) {
-            this.attendanceMap.putAll(attendanceMap);
+            attendanceMap.forEach(pair -> this.attendanceMap.put(pair.getKey(), pair.getValue()));
         }
 
     }
@@ -65,6 +67,7 @@ class JsonAdaptedLesson {
             boolean attendance = source.getAttendance(student);
             students.add(jsonAdaptedStudent);
             attendanceMap.put(jsonAdaptedStudent, attendance);
+            // attendanceMap.add(new Pair<>(jsonAdaptedStudent, attendance));
         }
     }
 
@@ -125,7 +128,6 @@ class JsonAdaptedLesson {
         final List<Student> modelStudents = new ArrayList<>();
         final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
 
-        // Update student list and maps in the same loop for efficiency
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
 
@@ -136,8 +138,8 @@ class JsonAdaptedLesson {
             }
 
             modelStudents.add(modelStudent);
-            boolean attendance = attendanceMap.get(student);
-            modelAttendanceMap.put(modelStudent, attendance);
+            // if the student is not found in attendanceMap, defaults to no attendance
+            modelAttendanceMap.put(modelStudent, attendanceMap.getOrDefault(student, false));
         }
 
         return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);

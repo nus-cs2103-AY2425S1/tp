@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Date;
@@ -24,9 +27,11 @@ public class JsonAdaptedLessonTest {
     private static final String VALID_TIME = "10:00";
     private static final List<JsonAdaptedStudent> VALID_STUDENTS = Collections.singletonList(
             new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()));
-    private static final Map<JsonAdaptedStudent, Boolean> VALID_MAP = Collections.singletonMap(
-            new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false
-    );
+    private static final Map<JsonAdaptedStudent, Boolean> VALID_MAPS = Collections.singletonMap(
+            new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false);
+    private static final Pair<JsonAdaptedStudent, Boolean> VALID_PAIR =
+            new Pair<>(new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false);
+    private static final Set<Pair<JsonAdaptedStudent, Boolean>> VALID_MAP = new HashSet<>(List.of(VALID_PAIR));
     private static final String INVALID_DATE = "invalid-date";
     private static final String INVALID_TIME = "invalid-time";
 
@@ -66,8 +71,10 @@ public class JsonAdaptedLessonTest {
         addressBook.addStudent(student);
 
         JsonAdaptedStudent jsonStudent = new JsonAdaptedStudent(student);
+        HashSet<Pair<JsonAdaptedStudent, Boolean>> hashSet = new HashSet<>(List.of(
+                new Pair<>(jsonStudent, false)));
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(
-                VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent), Collections.singletonMap(jsonStudent, false));
+                VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent), hashSet);
 
         Lesson modelLesson = lesson.toModelType(addressBook);
         Lesson expectedLesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME),
