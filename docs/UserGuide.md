@@ -19,7 +19,7 @@ administrators.
    - [2.1 Viewing Help](#21-viewing-help--help)
    - [2.2 Adding a Person](#22-adding-a-person--add)
    - [2.3 Deleting a Person](#23-deleting-a-person--delete)
-   - [2.4 Marking a Payment as Completed](#24-marking-a-payment-as-completed)
+   - [2.4 Marking a Payment Date](#24-marking-a-payment-date--markpaid)
    - [2.5 Editing a Person](#25-editing-a-person-edit)
    - [2.6 Listing All Persons](#26-listing-all-persons-list)
    - [2.7 Finding a Persons](#27-locating-persons-by-name-find)
@@ -33,6 +33,7 @@ administrators.
    - [2.15 Saving the Data](#215-saving-the-data)
    - [2.16 Exiting the Program](#216-exiting-the-program-exit)
 3. [FAQ](#3-faq)
+4. [Glossary](#4-glossary)
 
 
 
@@ -381,7 +382,7 @@ Updates the payment status of a student to completed.
 
 ### 2.12 Displaying Pie Chart of Class Distribution: `pie`
 
-Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
+Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualise the number of students in each class, helping them efficiently allocate class sizes.
 
 **Command Format:** `pie`
 
@@ -399,7 +400,7 @@ For example, given the following data set with 4 students:
 **Tips:**
 
 - Use the `pie` command to get a quick overview of class sizes, which is particularly useful for planning and class allocation.
-- Make sure the data is up-to-date before using the `pie` command for accurate visualization.
+- Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -426,7 +427,7 @@ Displays a bar chart showing the number of students who made payments for each m
 
 - Use the `bar` command to monitor payment trends and identify any seasonal patterns.
 - This feature can help tuition center administrators manage cash flow and forecast future payment periods.
-- Ensure that all payment records are updated for accurate chart visualization.
+- Ensure that all payment records are updated for accurate chart visualisation.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -463,10 +464,54 @@ Allows users to quickly access previously entered commands using the up and down
 
 ***
 
+<div style="page-break-after: always;"></div>
+
+# 4. Glossary
+
+- **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
+
+- **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
+
+- **GUI (Graphical User Interface)**: A user-friendly interface with graphical elements like buttons, icons, and windows, allowing users to interact with the application more visually.
+
+- **Command Format**: The specific way a command should be typed to work properly in EduTuTu. Following the exact format is essential for the command to be understood by the application.
+
+- **Index**: A unique number assigned to each person entry in EduTuTu, used to identify and select entries for actions like editing or deleting.
+
+- **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
+
+- **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
+
+- **Pie Chart**: A circular chart divided into slices that shows the proportion of students in each class. It provides a visual overview of class distributions.
+
+- **Bar Chart**: A chart with rectangular bars representing data (e.g., monthly payments) on the x-axis and values on the y-axis, helpful for viewing trends over time.
+
+- **Undo/Redo**: Commands that let users revert (undo) the last action or reapply (redo) a previous action. Useful for correcting mistakes.
+
+- **Command History**: A feature that stores a log of previously entered commands. Users can navigate this history using arrow keys to quickly repeat recent commands.
+
+- **JSON File**: A text file format for storing data in an organised way, readable by humans and computers. EduTuTu saves all data in a JSON file for easy access and editing.
+
+- **Payment Status**: Indicates whether a student’s monthly payment is complete or pending. EduTuTu includes commands to mark payments as completed.
+
+- **Parameter**: A value or setting provided by the user within a command to specify details like a name or phone number. Parameters help customise commands to suit specific actions.
+
+- **Backup**: A saved copy of data, which can be restored if the original data is lost or corrupted. It’s advisable to back up the JSON data file before editing it directly.
+
+- **Clear**: A command used to remove all entries from the address book, resetting the data.
+
+- **Exit**: A command that closes the EduTuTu application safely.
+
+- **Storage File**: The file where EduTuTu data is automatically saved. No manual saving is needed, as data is updated after every command.
+
+[Back to Table of Contents](#table-of-contents)
+
+***
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -475,18 +520,24 @@ Allows users to quickly access previously entered commands using the up and down
 
 ## Command summary
 
-| Action        | Format, Examples                                                                                                                                                      |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Bar Chart** | `bar`                                                                                                                                                                 |
-| **Clear**     | `clear`                                                                                                                                                               |
-| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Exit**      | `exit`                                                                                                                                                                |
-| **Help**      | `help`                                                                                                                                                                |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**      | `list`                                                                                                                                                                |
-| **Mark Paid** | `mark INDEX`<br> e.g., `mark 1` (Marks the 1st student's payment as completed)                                                                                        |
-| **Pie Chart** | `pie`                                                                                                                                                                 |
+| Action                      | Format, Examples                                                                                                                                                      |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Bar Chart**               | `bar`                                                                                                                                                                 |
+| **Clear**                   | `clear`                                                                                                                                                               |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Exit**                    | `exit`                                                                                                                                                                |
+| **Help**                    | `help`                                                                                                                                                                |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                          |
+| **List**                    | `list`                                                                                                                                                                |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                               |
+| **Pie Chart**               | `pie`                                                                                                                                                                 |
+| **Undo**                    | `undo`<br> Reverts the last action taken                                                                                                                              |
+| **Redo**                    | `redo`<br> Reapplies the last action that was undone                                                                                                                  |
+| **Viewing Command History** | *No command needed*<br> Use the arrow keys to navigate through previous commands                                                                                      |
+| **View Student Details**    | `info INDEX` <br> isplays detailed information of a specific student at the given `INDEX` in a new window                                                             |
+| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                            |
+| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                                    |
 
 [Back to Table of Contents](#table-of-contents)
