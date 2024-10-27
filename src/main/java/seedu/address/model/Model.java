@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -65,10 +66,15 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Delete a tag from a person.
+     * Deletes a tag from a person.
      * The person must exist as well as the tag
      */
     void deletePersonTag(Person p, Tag tag);
+
+    /**
+     * Adds a set of tag to person
+     */
+    void addPersonTags(Person p, Set<? extends Tag>t);
 
     /**
      * Adds the given person.

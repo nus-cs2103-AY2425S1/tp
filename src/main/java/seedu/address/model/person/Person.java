@@ -100,19 +100,31 @@ public class Person {
     }
 
     /**
-     * Checks whether the person has the tags
+     * Checks whether the person has the tags.
      */
     public boolean hasTag(Tag t) {
         return this.getTags().contains(t);
     }
 
     /**
-     * Remove a tag from a person
+     * Removes a tag from a person.
      */
     public Person removeTag(Tag t) {
         Set<Tag> newTagSet = new HashSet<>();
         newTagSet.addAll(this.getTags());
         newTagSet.remove(t);
+        assert newTagSet.contains(t);
+        return new Person(this.name, this.phone, this.email, newTagSet);
+    }
+
+    /**
+     * Adds a tag into a person.
+     * Assumes the person does not contain the tag
+     */
+    public Person addTag(Set<? extends Tag> tagSet) {
+        Set<Tag> newTagSet = new HashSet<>();
+        newTagSet.addAll(this.getTags());
+        newTagSet.addAll(tagSet);
         return new Person(this.name, this.phone, this.email, newTagSet);
     }
 

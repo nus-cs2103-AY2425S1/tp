@@ -36,11 +36,14 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
         }
 
-        AddTagCommand.AddTagDescriptor addTagDescriptor = new AddTagCommand.AddTagDescriptor();
+        Optional<Set<Tag>> op =
+                parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG));
 
-        parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
+        if (op.isEmpty()) {
+            throw new ParseException("");
+        }
 
-        return new AddTagCommand(index, addTagDescriptor);
+        return new AddTagCommand(index, op.get());
     }
 
     /**

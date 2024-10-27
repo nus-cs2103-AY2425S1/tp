@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -109,6 +110,12 @@ public class ModelManager implements Model {
     @Override
     public void deletePersonTag(Person p, Tag t) {
         campusConnect.removePersonTag(p, t);
+        refreshTagList();
+    }
+
+    @Override
+    public void addPersonTags(Person p, Set<? extends Tag> t) {
+        campusConnect.addPersonTags(p, t);
         refreshTagList();
     }
 

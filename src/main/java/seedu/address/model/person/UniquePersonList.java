@@ -114,11 +114,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Delete a tag from a person
+     * Deletes a tag from a person.
      */
     public void deletePersonTag(Person p, Tag t) {
         requireNonNull(p);
         Person replace = p.removeTag(t);
+        setPerson(p, replace);
+    }
+
+    /**
+     * Adds a set of tag to a person.
+     */
+    public void addPersonTags(Person p, Set<? extends Tag> t) {
+        requireNonNull(p);
+        Person replace = p.addTag(t);
         setPerson(p, replace);
     }
 

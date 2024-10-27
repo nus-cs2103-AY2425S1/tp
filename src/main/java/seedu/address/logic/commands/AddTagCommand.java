@@ -36,18 +36,17 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Tag added: %1$s";
     public static final String MESSAGE_NOT_ADD = "At least one tag to be provided.";
     private final Index index;
-    private final AddTagCommand.AddTagDescriptor addTagDescriptor;
+    private final Set<Tag> tagSet;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param addTagDescriptor details to edit the person with
+     * Constructs add tag command object.
      */
-    public AddTagCommand(Index index, AddTagCommand.AddTagDescriptor addTagDescriptor) {
+    public AddTagCommand(Index index, Set<Tag> tagSet) {
         requireNonNull(index);
-        requireNonNull(addTagDescriptor);
+        requireNonNull(tagSet);
 
         this.index = index;
-        this.addTagDescriptor = new AddTagCommand.AddTagDescriptor(addTagDescriptor);
+        this.tagSet = tagSet;
     }
 
     @Override
@@ -60,36 +59,10 @@ public class AddTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, addTagDescriptor);
 
 
-        model.deletePerson(personToEdit);
-
-        model.insertPerson(editedPerson, index.getZeroBased());
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson)));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, AddTagCommand.AddTagDescriptor addTagDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Set<Tag> currentTags = personToEdit.getTags();
-        Optional<Set<Tag>> optionalNewTags = addTagDescriptor.getTags();
-        Set<Tag> updatedTags = new HashSet<Tag>();
-        if (optionalNewTags.isPresent()) {
-            Set<Tag> newTags = optionalNewTags.get();
-            updatedTags.addAll(newTags);
-        }
-        updatedTags.addAll(currentTags);
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+        model.addPersonTags(personToEdit, this.tagSet);
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.format(personToEdit)));
     }
 
     @Override
@@ -104,102 +77,14 @@ public class AddTagCommand extends Command {
         }
 
         AddTagCommand otherAddTagCommand = (AddTagCommand) other;
-        return index.equals(otherAddTagCommand.index)
-                && addTagDescriptor.equals(otherAddTagCommand.addTagDescriptor);
+        return index.equals(otherAddTagCommand.index) && this.tagSet.equals(otherAddTagCommand.tagSet);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", addTagDescriptor)
+                .add("tag list to add:", tagSet)
                 .toString();
-    }
-
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
-    public static class AddTagDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Set<Tag> tags;
-
-        public AddTagDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public AddTagDescriptor(AddTagCommand.AddTagDescriptor toAdd) {
-            setName(toAdd.name);
-            setPhone(toAdd.phone);
-            setEmail(toAdd.email);
-            setTags(toAdd.tags);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof AddTagCommand.AddTagDescriptor)) {
-                return false;
-            }
-
-            AddTagCommand.AddTagDescriptor otherAddTagDescriptor = (AddTagCommand.AddTagDescriptor) other;
-            return Objects.equals(tags, otherAddTagDescriptor.tags);
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .add("tags", tags)
-                    .toString();
-        }
     }
 }
