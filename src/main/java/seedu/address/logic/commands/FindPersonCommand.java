@@ -33,6 +33,15 @@ public class FindPersonCommand extends FindCommand<Person> {
     }
 
     /**
+     * Returns the predicate to be used for finding the person.
+     *
+     * @return the predicate to be used for finding the person.
+     */
+    public Predicate<Person> getPredicate() {
+        return predicate;
+    }
+
+    /**
      * Returns the message to be displayed after finding the person.
      *
      * @return the message to be displayed after finding all persons.

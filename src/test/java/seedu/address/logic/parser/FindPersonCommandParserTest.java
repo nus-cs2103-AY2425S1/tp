@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,4 @@ public class FindPersonCommandParserTest {
         FindPersonCommandParser parser = new FindPersonCommandParser();;
         assertDoesNotThrow(() -> parser.parse(" person n/John"));
     }
-
-
 }
