@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks names should be ";
+    public static final String VALIDATION_REGEX = "\\p{Print}*";
 
     public final String remarkName;
 
@@ -50,13 +50,6 @@ public class Remark {
     @Override
     public int hashCode() {
         return remarkName.hashCode();
-    }
-
-    /**
-     * Format state as text for viewing.
-     */
-    public String toString() {
-        return '[' + remarkName + ']';
     }
 
 }

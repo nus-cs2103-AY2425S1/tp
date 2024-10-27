@@ -27,6 +27,19 @@ public class RemarkCommandParserTest {
     }
 
     @Test
+    public void parse_missingRemark_returnsRemarkCommand() {
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_REMARK;
+        assertParseSuccess(parser, userInput, new RemarkCommand(INDEX_FIRST_STUDENT, new Remark("")));
+    }
+
+    @Test
+    public void parse_emptyRemark_returnsRemarkCommand() {
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + PREFIX_REMARK + "   "; // Empty remark
+        assertParseSuccess(parser, userInput, new RemarkCommand(INDEX_FIRST_STUDENT, new Remark("")));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, INVALID_INDEX, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
@@ -37,12 +50,6 @@ public class RemarkCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + PREFIX_REMARK + VALID_REMARK_MATH;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingRemark_throwsParseException() {
-        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_REMARK;
-        assertParseFailure(parser, userInput, RemarkCommand.MESSAGE_NO_REMARK);
     }
 
     @Test
@@ -76,13 +83,6 @@ public class RemarkCommandParserTest {
                 + PREFIX_REMARK + VALID_REMARK_MATH + " " + PREFIX_REMARK + VALID_REMARK_MATH;
         assertParseFailure(parser, duplicateRemarkInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
-    }
-
-    @Test
-    public void parse_emptyRemark_throwsParseException() {
-        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " "
-                + PREFIX_REMARK + "   "; // Empty remark
-        assertParseFailure(parser, userInput, RemarkCommand.MESSAGE_NO_REMARK);
     }
 
     @Test
