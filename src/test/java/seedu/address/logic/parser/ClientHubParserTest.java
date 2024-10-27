@@ -168,6 +168,14 @@ public class ClientHubParserTest {
     }
 
     @Test
+    public void parseShortCommand_viewCommand() throws Exception {
+        String keyword = "Alice";
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.SHORT_COMMAND_WORD + " " + keyword);
+        assertEquals(new ViewCommand(new NameContainsKeywordsPredicate(List.of(keyword))), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));

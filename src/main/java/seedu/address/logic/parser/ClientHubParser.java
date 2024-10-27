@@ -59,38 +59,17 @@ public class ClientHubParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case AddCommand.SHORT_COMMAND_WORD:
+        case AddCommand.COMMAND_WORD, AddCommand.SHORT_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD, DeleteCommand.SHORT_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-        case DeleteCommand.SHORT_COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ListCommand.SHORT_COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
 
         case FindPhoneCommand.COMMAND_WORD:
             return new FindPhoneCommandParser().parse(arguments);
@@ -104,14 +83,23 @@ public class ClientHubParser {
         case FindAddressCommand.COMMAND_WORD:
             return new FindAddressCommandParser().parse(arguments);
 
-        case SortCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD, ListCommand.SHORT_COMMAND_WORD:
+            return new ListCommand();
+
+        case SortCommand.COMMAND_WORD, SortCommand.SHORT_COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
-        case SortCommand.SHORT_COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
-
-        case ViewCommand.COMMAND_WORD:
+        case ViewCommand.COMMAND_WORD, ViewCommand.SHORT_COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
