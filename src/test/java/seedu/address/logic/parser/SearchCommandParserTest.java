@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 class SearchCommandParserTest {
 
-    private SearchCommandParser parser = new SearchCommandParser();;
+    private SearchCommandParser parser = new SearchCommandParser();
 
     @Test
     void parse_validInputBothBeginAndEnd_returnsSearchCommand() throws ParseException {
@@ -54,9 +54,12 @@ class SearchCommandParserTest {
         String inputBegin = " " + PREFIX_BEGIN + "10-10-2024 00:00";
         String inputEnd = " " + PREFIX_END + "10-10-2024 00:00";
         String inputBeginEnd = " " + PREFIX_BEGIN + "10-10-2024 00:00" + " " + PREFIX_END + "10-10-2024 01:00";
-        assertParseFailure(parser, inputBegin, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, inputEnd, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, inputBeginEnd, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, inputBegin
+                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, inputEnd
+                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, inputBeginEnd
+                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
     }
 
     @Test

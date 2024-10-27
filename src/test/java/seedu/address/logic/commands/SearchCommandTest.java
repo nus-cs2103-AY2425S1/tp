@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -54,8 +54,8 @@ public class SearchCommandTest {
         SearchCommand searchCommand = new SearchCommand(begin, end);
         expectedModel.updateFilteredPersonList(person -> {
             Schedule schedule = person.getSchedule();
-            return schedule.getDateTime() != null &&
-                    schedule.getDateTime().isAfter(begin) && schedule.getDateTime().isBefore(end);
+            return schedule.getDateTime() != null
+                    && schedule.getDateTime().isAfter(begin) && schedule.getDateTime().isBefore(end);
         });
         assertCommandSuccess(searchCommand, model, SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -65,7 +65,8 @@ public class SearchCommandTest {
         SearchCommand searchCopyCommand = new SearchCommand(begin, end);
         SearchCommand searchBeginCommand = new SearchCommand(begin, null);
         SearchCommand searchEndCommand = new SearchCommand(null, end);
-        SearchCommand searchSecondCommand = new SearchCommand(LocalDateTime.of(2024, 11, 21, 11, 0), LocalDateTime.of(2024, 12, 21, 11, 0));
+        SearchCommand searchSecondCommand = new SearchCommand(LocalDateTime.of(2024, 11, 21, 11, 0)
+                , LocalDateTime.of(2024, 12, 21, 11, 0));
         // same object -> returns true
         assertTrue(searchCommand.equals(searchCommand));
         assertTrue(searchBeginCommand.equals(searchBeginCommand));
