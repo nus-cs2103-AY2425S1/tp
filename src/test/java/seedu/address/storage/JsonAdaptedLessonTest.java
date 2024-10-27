@@ -23,7 +23,10 @@ public class JsonAdaptedLessonTest {
     private static final String VALID_TIME = "10:00";
     private static final List<JsonAdaptedStudent> VALID_STUDENTS = Collections.singletonList(
             new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()));
-    private static final List<Boolean> VALID_MAP = List.of(false);
+    private static final List<Boolean> VALID_MAPS = List.of(false);
+    private static final List<Pair<JsonAdaptedStudent, Boolean>> VALID_MAP = Collections.singletonList(new Pair<>(
+            new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false));
+
     private static final String INVALID_DATE = "invalid-date";
     private static final String INVALID_TIME = "invalid-time";
 
@@ -64,7 +67,7 @@ public class JsonAdaptedLessonTest {
 
         JsonAdaptedStudent jsonStudent = new JsonAdaptedStudent(student);
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(
-                VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent), List.of(false));
+                VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent), List.of(new Pair<>(jsonStudent, false)));
 
         Lesson modelLesson = lesson.toModelType(addressBook);
         Lesson expectedLesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME),

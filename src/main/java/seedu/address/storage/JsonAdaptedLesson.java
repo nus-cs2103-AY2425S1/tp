@@ -31,7 +31,7 @@ class JsonAdaptedLesson {
      * Attempting to use the Pair class caused InaccessibleObjectException on GitHub CI.
      * Using a Map is not feasible because there is no map key deserializer available.
      */
-    private final List<Boolean> attendanceMap;
+    private final List<Pair<JsonAdaptedStudent, Boolean>> attendanceMap;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -40,20 +40,17 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
-            @JsonProperty("attendanceMap") List<Boolean> attendanceMap) {
+            @JsonProperty("attendanceMap") List<Pair<JsonAdaptedStudent, Boolean>> attendanceMap) {
         this.date = date;
         this.time = time;
         this.students = new ArrayList<>();
         this.attendanceMap = new ArrayList<>();
         // Null check required because the JsonCreator constructor may be called with null if the fields do not exist
-        // If students is null, attendanceMap is irrelevant and safe to ignore
         if (students != null) {
             this.students.addAll(students);
-            if (attendanceMap != null && attendanceMap.size() == students.size()) {
-                this.attendanceMap.addAll(attendanceMap);
-            } else {
-                this.students.forEach(s -> this.attendanceMap.add(false));
-            }
+        }
+        if (attendanceMap != null) {
+            this.attendanceMap.addAll(attendanceMap);
         }
     }
 
@@ -70,7 +67,7 @@ class JsonAdaptedLesson {
             JsonAdaptedStudent jsonAdaptedStudent = new JsonAdaptedStudent(student);
             boolean attendance = source.getAttendance(student);
             students.add(jsonAdaptedStudent);
-            attendanceMap.add(attendance);
+            attendanceMap.add(new Pair<>(jsonAdaptedStudent, attendance));
         }
     }
 
@@ -131,8 +128,6 @@ class JsonAdaptedLesson {
         final List<Student> modelStudents = new ArrayList<>();
         final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
 
-        assert students.size() == attendanceMap.size();
-        int i = 0;
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
             // Check to ensure student data matches an existing student
@@ -141,9 +136,18 @@ class JsonAdaptedLesson {
                         String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent.getName().fullName));
             }
             modelStudents.add(modelStudent);
-            modelAttendanceMap.put(modelStudent, attendanceMap.get(i++));
+            modelAttendanceMap.put(modelStudent, getAttendance(student));
         }
 
         return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);
+    }
+
+    private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
+        for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceMap) {
+            if (pair.getKey().equals(jsonStudent)) {
+                return pair.getVal();
+            }
+        }
+        return false; // the default attendance is false if data is not found
     }
 }
