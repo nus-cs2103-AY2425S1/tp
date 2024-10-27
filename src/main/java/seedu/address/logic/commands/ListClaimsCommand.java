@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -58,34 +57,62 @@ public class ListClaimsCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (personIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
-        }
+        Person person = getPersonByIndex(lastShownList, personIndex);
+        Policy policy = getPolicyByType(person, policyType);
 
-        Person person = lastShownList.get(personIndex.getZeroBased());
-
-        // find the policy of the specified type
-        Optional<Policy> policyOptional = person.getPolicies().stream()
-                .filter(policy -> policy.getType().equals(policyType))
-                .findFirst();
-
-        if (policyOptional.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, person.getName()));
-        }
-
-        // get the claims from the policy
-        List<Claim> claims = policyOptional.get().getClaimList().getList();
+        List<Claim> claims = policy.getClaimList().getList();
 
         if (claims.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_NO_CLAIMS, policyType, person.getName()));
         }
 
-        String claimsString = claims.stream()
-                .map(Claim::toString)
-                .collect(Collectors.joining("\n"));
+        String claimsString = formatClaims(claims);
 
         return new CommandResult(String.format(MESSAGE_LIST_CLAIMS_SUCCESS, policyType, person.getName(),
                 claimsString));
+    }
+
+    /**
+     * Retrieves the person from the list based on the provided index.
+     *
+     * @param lastShownList The list of persons.
+     * @param index The index of the person.
+     * @return The person at the specified index.
+     * @throws CommandException If the index is out of bounds.
+     */
+    private Person getPersonByIndex(List<Person> lastShownList, Index index) throws CommandException {
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+        }
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    /**
+     * Finds the policy of the specified type for the given person.
+     *
+     * @param person The person whose policies are to be searched.
+     * @param policyType The type of policy to find.
+     * @return The policy of the specified type.
+     * @throws CommandException If no policy of the specified type is found.
+     */
+    private Policy getPolicyByType(Person person, PolicyType policyType) throws CommandException {
+        return person.getPolicies().stream()
+                .filter(policy -> policy.getType().equals(policyType))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType,
+                        person.getName())));
+    }
+
+    /**
+     * Formats the list of claims into a string for display.
+     *
+     * @param claims The list of claims to format.
+     * @return A formatted string representation of the claims.
+     */
+    private String formatClaims(List<Claim> claims) {
+        return claims.stream()
+                .map(Claim::toString)
+                .collect(Collectors.joining("\n"));
     }
 
     @Override
