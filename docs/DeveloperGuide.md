@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User adds the student to the system (UC01).
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
 * Use case resumes from step 1.
 
 * 2a. System detects error in entered command.
