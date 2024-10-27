@@ -146,11 +146,11 @@ public class CommandTestUtil {
      * Asserts that the given {@code command} successfully deletes the person with the given {@code name} in the
      * {@code actualModel}, and the filtered list in the {@code actualModel} is updated to show all persons.
      */
-    public static void assertCommandFailureWithNewList(DeleteCommand command, String name,
+    public static void assertCommandFailureWithNewList(Command command, String userInput,
                                                   Model actualModel, String expectedMessage) {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getDisplayPersons())
                 .stream().filter(p -> p.getName().fullName
-                .toLowerCase().contains(name.toLowerCase())).toList();
+                .toLowerCase().contains(userInput.toLowerCase())).toList();
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedFilteredList, actualModel.getDisplayPersons());
