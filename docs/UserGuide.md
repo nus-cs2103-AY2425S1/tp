@@ -110,11 +110,11 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
-Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
+Format: `add-wedding w/NAME & NAME v/VENUE d/DATE`
 
 <box type="tip" seamless>
 
-**Tip:** Datetime must be a valid date in the format of **dd/MM/yyyy**
+**Tip:** Date must be a valid date in the format of **dd/MM/yyyy**
 
 </box>
 
