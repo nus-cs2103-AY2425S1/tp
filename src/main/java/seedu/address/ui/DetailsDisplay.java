@@ -44,6 +44,8 @@ public class DetailsDisplay extends UiPart<Region> {
     private Label level;
     @FXML
     private Label tasks;
+    @FXML
+    private FlowPane lessonTimes;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -61,6 +63,8 @@ public class DetailsDisplay extends UiPart<Region> {
                 .forEach(subject -> subjects.getChildren()
                         .add(new Label(person.getLevel().levelName + " " + subject.subjectName)));
         tasks.setText(person.getTaskList().toDescription());
+        person.getLessonTimes().forEach(lessonTime ->
+                lessonTimes.getChildren().add(new Label(lessonTime.toString())));
     }
 }
 

@@ -27,7 +27,10 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="subjects" />
+      <VBox spacing="5">
+        <FlowPane fx:id="subjects" />
+        <FlowPane fx:id="lessonTimes" />
+      </VBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />

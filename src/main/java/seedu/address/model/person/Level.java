@@ -29,14 +29,12 @@ public class Level {
         IP,
     }
 
-
     public static final String MESSAGE_CONSTRAINTS = "Level must be in the format 'Year Track' "
             + "where Year is one of: " + Arrays.toString(Year.values())
             + " and Track is one of: " + Arrays.toString(Track.values())
             + " with the exception of S5 which is only allowed to have the Track NA";
 
     public final String levelName;
-
 
     /**
      * Constructs a {@code Level}.

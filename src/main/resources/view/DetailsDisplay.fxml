@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox fillWidth="true" spacing="10">
+    <VBox fillWidth="true" spacing="10" style="-fx-padding: 20;">
 
         <VBox spacing="10" styleClass="vbox-border">
             <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
@@ -15,6 +15,7 @@
             <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" wrapText="true"/>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
             <FlowPane fx:id="subjects" />
+            <FlowPane fx:id="lessonTimes" />
         </VBox>
 
         <Separator styleClass="custom-separator" />

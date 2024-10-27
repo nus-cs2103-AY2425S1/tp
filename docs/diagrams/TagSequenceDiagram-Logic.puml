@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag n/John l/S1 NA")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tag n/John l/S1 NA")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate
+
+AddressBookParser -> TagCommandParser : parse("n/John l/S1 NA")
+activate TagCommandParser
+
+create TagCommand
+TagCommandParser -> TagCommand
+activate TagCommand
+
+TagCommand --> TagCommandParser :
+deactivate TagCommand
+
+TagCommandParser --> AddressBookParser : t
+deactivate TagCommandParser
+
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : execute()
+activate TagCommand
+
+TagCommand -> Model : setPerson(personToTag, personWithTags)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+TagCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+TagCommand --> LogicManager : r
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
