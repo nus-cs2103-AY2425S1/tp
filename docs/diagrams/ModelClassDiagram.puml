@@ -14,11 +14,13 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
+Class Student
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class AttendanceCount
 
 Class I #FFFFFF
 }
@@ -42,6 +44,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Student -left|> Person
+Student *--> AttendanceCount
+
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
