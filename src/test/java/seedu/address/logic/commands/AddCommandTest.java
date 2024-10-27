@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -170,6 +171,16 @@ public class AddCommandTest {
         @Override
         public ActiveTags getActiveTags() {
             return new ActiveTags(new HashMap<>());
+        }
+
+        @Override
+        public WeddingName getCurrentWeddingName() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCurrentWeddingName(WeddingName weddingName) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

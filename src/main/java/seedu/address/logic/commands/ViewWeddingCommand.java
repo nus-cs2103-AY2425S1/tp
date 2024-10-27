@@ -52,6 +52,7 @@ public class ViewWeddingCommand extends Command {
         PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
 
         model.updateFilteredPersonList(predicate);
+        model.setCurrentWeddingName(targetWeddingName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetWeddingName));
     }
 

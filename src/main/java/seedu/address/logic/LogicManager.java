@@ -66,6 +66,8 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        logger.info("Current Wedding: " + model.getCurrentWeddingName());
+
         return commandResult;
     }
 
