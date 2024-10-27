@@ -31,7 +31,7 @@ public class ModuleCommand extends Command {
             + PREFIX_MODULE + "CS2103T ";
 
     public static final String MESSAGE_SUCCESS = "New module added for Student %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in EduContacts";
     public static final String MESSAGE_DUPLICATE_MODULE = "The module %1$s already exists for this student";
 
     private final Module module;
