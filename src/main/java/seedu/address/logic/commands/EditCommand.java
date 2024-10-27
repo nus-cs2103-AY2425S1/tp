@@ -37,6 +37,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String ARCHIVE_COMMAND_WORD = "archive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -104,11 +105,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         PostalCode updatedPostalCode = editPersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedIsArchive = editPersonDescriptor.getIsArchived().orElse(personToEdit.isArchived());
         // To be updated
         OrderTracker updatedTracker = personToEdit.getOrderTracker();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode,
-                    updatedTags, updatedTracker);
+                    updatedTags, updatedTracker, updatedIsArchive);
 
     }
 
@@ -147,6 +149,7 @@ public class EditCommand extends Command {
         private Address address;
         private PostalCode postalCode;
         private Set<Tag> tags;
+        private Boolean isArchived;
         private OrderTracker tracker;
 
         public EditPersonDescriptor() {}
@@ -162,6 +165,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setPostalCode(toCopy.postalCode);
             setTags(toCopy.tags);
+            setIsArchived(toCopy.isArchived);
             setTracker(toCopy.tracker);
         }
 
@@ -242,6 +246,15 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setIsArchived(Boolean isArchived) {
+            this.isArchived = isArchived;
+        }
+
+        public Optional<Boolean> getIsArchived() {
+            return Optional.ofNullable(isArchived);
+        }
+
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -259,7 +272,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(postalCode, otherEditPersonDescriptor.postalCode)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(isArchived, otherEditPersonDescriptor.isArchived);
         }
 
         @Override
@@ -271,6 +285,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("postalCode", postalCode)
                     .add("tags", tags)
+                    .add("isArchived", isArchived)
                     .toString();
         }
     }
