@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -93,6 +94,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasVendor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasVendor(null));
+    }
+
+    @Test
+    public void hasVendor_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
+    public void hasVendor_vendorInAddressBook_returnsTrue() {
+        addressBook.addVendor(ALICE);
+        assertTrue(addressBook.hasVendor(ALICE));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
@@ -103,6 +120,8 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
         private final ObservableList<Wedding> weddings = FXCollections.observableArrayList();
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -110,6 +129,7 @@ public class AddressBookTest {
         AddressBookStub(Collection<Person> persons, Collection<Tag> tags,
                         Collection<Wedding> weddings, Collection<Task> tasks) {
             this.persons.setAll(persons);
+            this.vendors.setAll(vendors);
             this.tags.setAll(tags);
             this.weddings.setAll(weddings);
             this.tasks.setAll(tasks);
@@ -118,6 +138,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Vendor> getVendorList() {
+            return vendors;
         }
 
         @Override
