@@ -36,23 +36,9 @@ public class AddToConsultCommandTest {
 
     private Model model;
 
-    private final String index1 = "1";
-    private final Index validConsultIndex = Index.fromOneBased(Integer.parseInt(index1));
-    private final ObservableList<Name> studentNames = FXCollections.observableArrayList(
-            new Name(AMY.getName().fullName),
-            new Name(BOB.getName().fullName));
-
-    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(
-            new Name(AMY.getName().fullName),
-            new Name(AMY.getName().fullName));
-
-    private final ObservableList<Index> studentIndices = FXCollections.observableArrayList(
-            INDEX_FIRST_STUDENT,
-            INDEX_SECOND_STUDENT);
-
-    private final ObservableList<Index> duplicateStudentIndices = FXCollections.observableArrayList(
-            INDEX_FIRST_STUDENT,
-            INDEX_FIRST_STUDENT);
+    private final Index validConsultIndex = Index.fromOneBased(1);
+    private final ObservableList<Name> studentNames = FXCollections.observableArrayList(new Name(AMY.getName().fullName), new Name(BOB.getName().fullName));
+    private final ObservableList<Index> studentIndices = FXCollections.observableArrayList(INDEX_FIRST_STUDENT, INDEX_SECOND_STUDENT);
 
     @BeforeEach
     public void setUp() {
