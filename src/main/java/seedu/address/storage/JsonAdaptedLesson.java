@@ -26,6 +26,11 @@ class JsonAdaptedLesson {
     private final String date;
     private final String time;
     private final List<JsonAdaptedStudent> students;
+    /**
+     * A list of attendance values implicitly paired with the list of students by index.
+     * Attempting to use the Pair class caused InaccessibleObjectException on GitHub CI.
+     * Using a Map is not feasible because there is no map key deserializer available.
+     */
     private final List<Boolean> attendanceMap;
 
     /**
@@ -41,13 +46,15 @@ class JsonAdaptedLesson {
         this.students = new ArrayList<>();
         this.attendanceMap = new ArrayList<>();
         // Null check required because the JsonCreator constructor may be called with null if the fields do not exist
+        // If students is null, attendanceMap is irrelevant and safe to ignore
         if (students != null) {
             this.students.addAll(students);
+            if (attendanceMap != null && attendanceMap.size() == students.size()) {
+                this.attendanceMap.addAll(attendanceMap);
+            } else {
+                this.students.forEach(s -> this.attendanceMap.add(false));
+            }
         }
-        if (attendanceMap != null) {
-            this.attendanceMap.addAll(attendanceMap);
-        }
-
     }
 
     /**
@@ -124,23 +131,17 @@ class JsonAdaptedLesson {
         final List<Student> modelStudents = new ArrayList<>();
         final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
 
+        assert students.size() == attendanceMap.size();
         int i = 0;
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
-
             // Check to ensure student data matches an existing student
             if (!addressBook.hasStudent(modelStudent)) {
                 throw new IllegalValueException(
                         String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent.getName().fullName));
             }
-
             modelStudents.add(modelStudent);
-            // if the student is not found in attendanceMap, defaults to no attendance
-            if (i < attendanceMap.size()) {
-                modelAttendanceMap.put(modelStudent, attendanceMap.get(i++));
-            } else {
-                modelAttendanceMap.put(modelStudent, false);
-            }
+            modelAttendanceMap.put(modelStudent, attendanceMap.get(i++));
         }
 
         return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);
