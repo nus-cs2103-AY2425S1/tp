@@ -18,47 +18,47 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
+import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SearchEventCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
  */
-public class SearchEventCommandTest {
+public class FindEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        EventTagContainsKeywordsPredicate firstPredicate =
-                new EventTagContainsKeywordsPredicate(Collections.singletonList("first"));
-        EventTagContainsKeywordsPredicate secondPredicate =
-                new EventTagContainsKeywordsPredicate(Collections.singletonList("second"));
+        EventNameContainsKeywordsPredicate firstPredicate =
+                new EventNameContainsKeywordsPredicate(Collections.singletonList("first"));
+        EventNameContainsKeywordsPredicate secondPredicate =
+                new EventNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        SearchEventCommand searchFirstCommand = new SearchEventCommand(firstPredicate);
-        SearchEventCommand searchSecondCommand = new SearchEventCommand(secondPredicate);
+        FindEventCommand findFirstCommand = new FindEventCommand(firstPredicate);
+        FindEventCommand findSecondCommand = new FindEventCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(searchFirstCommand.equals(searchFirstCommand));
+        assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        SearchEventCommand searchFirstCommandCopy = new SearchEventCommand(firstPredicate);
-        assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
+        FindEventCommand findFirstCommandCopy = new FindEventCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(searchFirstCommand.equals(1));
+        assertFalse(findFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(searchFirstCommand.equals(null));
+        assertFalse(findFirstCommand.equals(null));
 
         // different event -> returns false
-        assertFalse(searchFirstCommand.equals(searchSecondCommand));
+        assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventTagContainsKeywordsPredicate predicate = preparePredicate(" ");
-        SearchEventCommand command = new SearchEventCommand(predicate);
+        EventNameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredEventList());
@@ -67,8 +67,8 @@ public class SearchEventCommandTest {
     @Test
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventTagContainsKeywordsPredicate predicate = preparePredicate("Hobby Music");
-        SearchEventCommand command = new SearchEventCommand(predicate);
+        EventNameContainsKeywordsPredicate predicate = preparePredicate("Expo Party Night");
+        FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ANIME, BARBEQUE, CONCERT), model.getFilteredEventList());
@@ -76,16 +76,16 @@ public class SearchEventCommandTest {
 
     @Test
     public void toStringMethod() {
-        EventTagContainsKeywordsPredicate predicate = new EventTagContainsKeywordsPredicate(Arrays.asList("keyword"));
-        SearchEventCommand searchEventCommand = new SearchEventCommand(predicate);
-        String expected = SearchEventCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, searchEventCommand.toString());
+        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FindEventCommand findEventCommand = new FindEventCommand(predicate);
+        String expected = FindEventCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findEventCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code EventTagContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code EventNameContainsKeywordsPredicate}.
      */
-    private EventTagContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new EventTagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private EventNameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new EventNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

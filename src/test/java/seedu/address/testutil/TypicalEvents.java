@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BOOK
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CULTURE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LITERATURE;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,31 +19,33 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.types.event.Event;
 
 /**
+ * "2024-10-15 14:30"
  * A utility class containing a list of {@code Event} objects to be used in tests.
  */
 public class TypicalEvents {
     public static final Event ANIME = new EventBuilder().withName("Anime Expo")
-            .withAddress("123, Jurong West Ave 6, #08-111").withStartTime("2024-10-15 14:30")
+            .withAddress("123, Jurong West Ave 6, #08-111").withStartTime(nowPlusDays(2))
             .withTags("hobby").build();
     public static final Event BARBEQUE = new EventBuilder().withName("Barbeque Party")
-            .withAddress("231, Yishun Ave 2, #10-03").withStartTime("2024-12-20 16:30")
+            .withAddress("231, Yishun Ave 2, #10-03").withStartTime(nowPlusDays(4))
             .withTags("hobby", "friends").build();
     public static final Event CONCERT = new EventBuilder().withName("Concert Night")
-            .withAddress("123, Orchard Rd, #05-01").withStartTime("2024-11-15 19:00")
+            .withAddress("123, Orchard Rd, #05-01").withStartTime(nowPlusDays(6))
             .withTags("music").build();
 
     public static final Event DINNER = new EventBuilder().withName("Family Dinner")
-            .withAddress("45, Changi Rd, #02-02").withStartTime("2024-11-30 18:00").build();
+            .withAddress("45, Changi Rd, #02-02").withStartTime(nowPlusDays(8)).build();
 
     public static final Event EXHIBITION = new EventBuilder().withName("Art Exhibition")
-            .withAddress("88, Bukit Timah Rd, #03-04").withStartTime("2024-10-28 10:00").build();
+            .withAddress("88, Bukit Timah Rd, #03-04").withStartTime(nowPlusDays(10)).build();
 
     public static final Event FASHION_SHOW = new EventBuilder().withName("Fashion Show")
-            .withAddress("12, Marina Blvd, #01-01").withStartTime("2024-11-10 20:00").build();
+            .withAddress("12, Marina Blvd, #01-01").withStartTime(nowPlusDays(12)).build();
 
     public static final Event GALA = new EventBuilder().withName("Charity Gala")
-            .withAddress("77, Raffles Ave, #10-07").withStartTime("2024-12-05 19:30").build();
+            .withAddress("77, Raffles Ave, #10-07").withStartTime(nowPlusDays(14)).build();
 
+    // Extra Unused Events if Fixed Time is needed, feel free to edit if needed
     public static final Event HIKING_TRIP = new EventBuilder().withName("Weekend Hiking Trip")
             .withAddress("Trailhead at Bukit Timah").withStartTime("2024-11-22 08:00").build();
 
@@ -71,5 +75,13 @@ public class TypicalEvents {
 
     public static List<Event> getTypicalEvents() {
         return new ArrayList<>(Arrays.asList(ANIME, BARBEQUE, CONCERT, DINNER, EXHIBITION, FASHION_SHOW, GALA));
+    }
+
+    /**
+     * Returns a String of the current time with x days added, formatted by "yyyy-MM-dd HH:mm"
+     */
+    public static String nowPlusDays(long x) {
+        LocalDateTime added = LocalDateTime.now().plusDays(x);
+        return added.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
