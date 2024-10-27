@@ -238,4 +238,4 @@ the data of your previous AddressBook home folder.
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
 
--------------------------------------------------------------------------------------------------------------------- 
+--------------------------------------------------------------------------------------------------------------------
