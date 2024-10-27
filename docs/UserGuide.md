@@ -64,7 +64,7 @@ Cher is a **desktop app for managing contacts, optimized for use via a Command L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a pop-up window with our comprehensive User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -77,7 +77,7 @@ Adds a person to Cher.
 
 Format: `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Role can either be student, teacher, parent or staff, case-insensitive.
+Role can either be student or parent, case-insensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -162,16 +162,58 @@ Examples:
 
 ### Deleting in a batch : `batch-delete`
 
-Delete all contacts from cher with contains **all** the specified tags.
+Deletes all contacts from cher with contains **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
 
+### Mark attendance for a single student: `mark`
+
+Marks the attendance of a specified student. 
+
+Format: `mark INDEX`
+
+* Marks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
+
+### Unmark attendance for a single student: `unmark`
+
+Unmarks the attendance of a specified student. 
+
+Format: `unmark INDEX`
+
+* Unmarks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
+
+### Reset attendance: `reset-att`
+
+Resets the attendance count of all students in displayed list to 0. 
+
+Format: `reset-att`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
+</div>
+
+### Mark attendance for a group of students: `batch-mark`
+
+Marks attendance for all students in the displayed list. 
+
+Format: `batch-mark`
 
 
-Examples:
-![Batch delete example data](images/ForBatchDeleteExampleData.png)
-* `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
-* `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
+### Unmark attendance for a group of students: `batch-unmark`
+
+Unmarks attendance for all students in the displayed list. 
+
+Format: `batch-unmark`
 
 ### Clearing all entries : `clear`
 
@@ -228,5 +270,10 @@ Action | Format, Examples
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Mark** | `mark INDEX` <br> e.g., `mark 2`
+**Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
+**Batch Mark** | `batch-mark`
+**Batch Unmark** | `batch-unmark`
+**Reset Attendance** | `reset-att` 
 **List** | `list`
 **Help** | `help`
