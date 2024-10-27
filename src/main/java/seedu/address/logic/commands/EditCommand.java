@@ -167,7 +167,7 @@ public class EditCommand extends Command {
         Set<Wedding> weddingJobs = personToEdit.getWeddingJobs();
 
         Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRole.orElse(null), ownWedding);
+                updatedRole, ownWedding);
         editedPerson.setWeddingJobs(weddingJobs);
         return editedPerson;
     }
@@ -312,8 +312,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("role", role != null ? role.toString() : "")
                     .toString();
         }
-
     }
 }
