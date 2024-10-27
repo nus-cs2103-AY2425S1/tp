@@ -27,7 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     private boolean searchMode = false;
-    private Predicate lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
+    private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -159,6 +159,10 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
         lastPredicate = predicate;
+    }
+
+    public Predicate<Person> getLastPredicate() {
+        return lastPredicate;
     }
 
     /**
