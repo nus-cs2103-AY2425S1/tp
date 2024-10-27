@@ -27,12 +27,12 @@
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
-              <Insets right="5.0" />
+              <Insets left="10.0" right="5.0" />
             </HBox.margin>
           </Label>
           <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
             <HBox.margin>
-              <Insets left="5.0" top="5.0"/>
+              <Insets left="10.0" top="5.0"/>
             </HBox.margin>
           </Button>
         </children>
