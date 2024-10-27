@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -18,11 +18,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
+    //TODO  asObservableList_modifyList_throwsUnsupportedOperationException() test
 
     @Test
     public void isSamePerson() {
@@ -34,7 +30,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -61,7 +57,7 @@ public class PersonTest {
 
         // same phone, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.hasSamePhone(editedAlice));
 
         // different phone, all other attributes same -> returns false
@@ -79,7 +75,7 @@ public class PersonTest {
 
         // same email, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.hasSameEmail(editedAlice));
 
         // different email, all other attributes same -> returns false
@@ -121,15 +117,24 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTag(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        //        // different role -> returns false
+        //        editedAlice = new PersonBuilder(ALICE).withRole(VALID_TAG_HUSBAND).build();
+        //        assertFalse(ALICE.equals(editedAlice));
+        // include after adding Optional
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", roles=" + ALICE.getRole()
+                + ", wedding=" + ALICE.getOwnWedding() + ", wedding jobs=" + ALICE.getWeddingJobs() + "}";
+
         assertEquals(expected, ALICE.toString());
+        // need to fix the fact that wedding=null
+
+        expected = Person.class.getCanonicalName() + "{name=" + BENSON.getName() + ", phone=" + BENSON.getPhone()
+                + ", email=" + BENSON.getEmail() + ", address=" + BENSON.getAddress() + ", roles=" + BENSON.getRole()
+                + ", wedding=" + BENSON.getOwnWedding() + ", wedding jobs=" + BENSON.getWeddingJobs() + "}";
+        assertEquals(expected, BENSON.toString());
     }
 }

@@ -2,13 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -24,31 +24,28 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Tag role;
-
-    private final Set<Tag> tags = new HashSet<>(); // to remove
+    private final Optional<Role> role;
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) { // to remove
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.role = null;
-        this.ownWedding = null;
-    }
+    //    /**
+    //     * Every field must be present and not null.
+    //     */
+    //    public Person(Name name, Phone phone, Email email, Address address, Role role) {
+    //        requireAllNonNull(name, phone, email, address, role);
+    //        this.name = name;
+    //        this.phone = phone;
+    //        this.email = email;
+    //        this.address = address;
+    //        this.role = role;
+    //        this.ownWedding = null;
+    //    }
 
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address);
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Role> role, Wedding ownWedding) {
+        requireAllNonNull(name, phone, email, address, role);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -77,17 +74,13 @@ public class Person {
         return address;
     }
 
-    public Tag getRole() {
-        return role;
-    }
-
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() { // to remove
-        return Collections.unmodifiableSet(tags);
-    } // to remove
+    public Optional<Role> getRole() {
+        return role;
+    }
 
     public Wedding getOwnWedding() {
         return ownWedding;
@@ -111,11 +104,28 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Adds a list of wedding jobs to the pre-existing list.
+     *
+     * @param weddingJobs {@code Set<Wedding>} to be added to the list of wedding jobs
+     */
+    public void setWeddingJobs(Set<Wedding> weddingJobs) {
+        for (Wedding wedding : weddingJobs) {
+            this.addWeddingJob(wedding);
+        }
+    }
+
+    /**
+     * Returns true if both persons have the same name, phone, email, address.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return this.equals(otherPerson);
+        if (otherPerson == null) {
+            return false;
+        }
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address);
     }
 
     /**
@@ -167,11 +177,13 @@ public class Person {
                 && weddingJobs.equals(otherPerson.weddingJobs);
 
         // commented them out since they give null pointer exception
+        // need to use Optional
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address);
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, role);
     }
 
     @Override
@@ -183,8 +195,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tag", role == null ? nullString : role)
-                .add("wedding", ownWedding == null ? nullString : ownWedding)
+                .add("roles", role)
+                .add("wedding", ownWedding == null ? "null" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }

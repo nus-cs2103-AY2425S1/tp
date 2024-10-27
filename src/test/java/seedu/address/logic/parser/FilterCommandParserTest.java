@@ -25,9 +25,9 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_justPrefix_throwsParseException() {
-        assertParseFailure(parser, "t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
     }
 
-    //Todo test valid parse
+    //Todo parse_validArgs_returnsFilterCommand()
 }

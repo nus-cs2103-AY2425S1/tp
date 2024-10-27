@@ -17,7 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 public class JsonAdaptedPersonTest {
@@ -31,9 +31,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_ROLE = BENSON.getRole() != null ? BENSON.getRole().tagName : null;
-    private static final int VALID_OWN_WEDDING = BENSON.getOwnWedding() != null ?
-            BENSON.getOwnWedding().hashCode() : 0;
+    private static final String VALID_ROLE = BENSON.getRole().map(r -> r.roleName).orElse("");
+    private static final int VALID_OWN_WEDDING = BENSON.getOwnWedding() != null
+            ? BENSON.getOwnWedding().hashCode() : 0;
     private static final List<Integer> VALID_WEDDING_JOBS = new ArrayList<>();
     private static final List<Wedding> VALID_WEDDING_LIST = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, INVALID_ROLE, VALID_OWN_WEDDING, VALID_WEDDING_JOBS);
-        assertThrows(IllegalValueException.class, Tag.MESSAGE_CONSTRAINTS, () ->
+        assertThrows(IllegalValueException.class, Role.MESSAGE_CONSTRAINTS, () ->
                 person.toModelType(VALID_WEDDING_LIST));
     }
 
