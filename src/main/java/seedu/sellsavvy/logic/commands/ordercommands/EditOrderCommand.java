@@ -2,9 +2,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,10 +18,10 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**

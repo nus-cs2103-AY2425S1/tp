@@ -2,19 +2,19 @@ package seedu.sellsavvy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.stream.Stream;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**

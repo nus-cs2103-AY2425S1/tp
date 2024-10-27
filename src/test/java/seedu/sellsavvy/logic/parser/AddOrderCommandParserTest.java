@@ -1,26 +1,26 @@
 package seedu.sellsavvy.logic.parser;
 
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.QUANTITY_DESC_ATLAS;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.QUANTITY_DESC_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DATE_DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DATE_DESC_BOTTLE;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_NEGATIVE;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_STRING;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_ZERO;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_DATE_DESC;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_DATE_DIGIT;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_DATE_NO_HYPHEN;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_DATE_VALUE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_ITEM_DESC;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_NEGATIVE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_STRING;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.INVALID_QUANTITY_ZERO;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.ITEM_DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.ITEM_DESC_BOTTLE;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.QUANTITY_DESC_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.QUANTITY_DESC_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_ATLAS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -31,10 +31,10 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class AddOrderCommandParserTest {

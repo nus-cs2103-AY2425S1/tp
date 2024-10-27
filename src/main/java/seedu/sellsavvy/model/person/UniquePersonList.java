@@ -9,11 +9,11 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;

@@ -8,9 +8,9 @@ import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 public class JsonAdaptedOrderTest {

@@ -2,9 +2,9 @@ package seedu.sellsavvy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;

@@ -3,9 +3,9 @@ package seedu.sellsavvy.model.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
@@ -80,7 +80,8 @@ public class OrderTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Order.class.getCanonicalName() + "{item=" + ATLAS.getItem() + ", quantity=" + ATLAS.getQuantity()
+        String expected = Order.class.getCanonicalName()
+                + "{item=" + ATLAS.getItem() + ", quantity=" + ATLAS.getQuantity()
                 + ", date=" + ATLAS.getDate() + ", status=" + ATLAS.getStatus() + "}";
         assertEquals(expected, ATLAS.toString());
     }

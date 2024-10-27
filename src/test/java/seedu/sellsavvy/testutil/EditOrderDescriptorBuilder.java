@@ -1,10 +1,10 @@
 package seedu.sellsavvy.testutil;
 
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**
@@ -70,7 +70,8 @@ class JsonAdaptedOrder {
         final Date modelDate = new Date(date);
 
         if (quantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
+            throw new
+                    IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
         }
         if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
