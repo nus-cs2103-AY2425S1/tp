@@ -62,7 +62,6 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             return new DateCommand(name, phone, email, new Date(date));
         } catch (IllegalValueException ive) {
-            //change to deal with new messages
             throw new ParseException(ive.getMessage(), ive);
         }
     }
@@ -137,27 +136,29 @@ public class DateCommandParser implements Parser<DateCommand> {
      * @throws ParseException If the date and time values are incorrect.
      */
     private LocalDateTime parseDateTime(String date) throws ParseException {
+        String[] dateAndTime = date.split(" ");
+        String[] dateParts = dateAndTime[0].split("/");
+
+        int day = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int year = Integer.parseInt(dateParts[2]);
+
+        // Check month-day combinations, including leap year validation
+        if (month == 2) {
+            if (day > 29 || (day == 29 && year % 4 != 0)) {
+                throw new ParseException("Invalid date: February " + day + " is only valid in leap years.");
+            }
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            if (day > 30) {
+                throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 30 days.");
+            }
+        } else if (day > 31) {
+            throw new ParseException("Invalid date: Day cannot exceed 31.");
+        }
+
         try {
-            LocalDateTime temp = LocalDateTime.parse(date, FORMATTER);
-            if (temp.getMonth() == Month.FEBRUARY && temp.getDayOfMonth() >= 29) {
-                if (temp.getDayOfMonth() > 29 || temp.getYear() % 4 != 0) {
-                    throw new ParseException("Invalid date: February " + temp.getDayOfMonth()
-                            + " is only valid in leap years.");
-                }
-            }
-
-            if (temp.getMonth() == Month.APRIL || temp.getMonth() == Month.JUNE || temp.getMonth() == Month.SEPTEMBER
-                    || temp.getMonth() == Month.DECEMBER) {
-                if (temp.getDayOfMonth() == 31) {
-                    throw new ParseException("Invalid date: " + temp.getMonth()
-                            + " cannot have more than 30 days.");
-                }
-            }
-
-            return temp;
+            return LocalDateTime.parse(date, FORMATTER);
         } catch (DateTimeParseException e) {
-            //LocalDateTime handles cases where there may be a "31/02/2024" and this is invalid as February
-            // only has a maximum of 29 days
             throw new ParseException("Invalid date and time format! Please use the format 'd/M/yyyy HHmm'. "
                     + "For example, '2/12/2024 1800'. Ensure day, month, hour, and minute ranges are correct.");
         }
