@@ -91,7 +91,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the user guide in a browser window.
+     * Opens the user guide, using the default browser.
      */
     @FXML
     private void openUserGuide() throws IOException {
