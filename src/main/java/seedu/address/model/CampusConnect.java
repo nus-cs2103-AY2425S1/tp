@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import javafx.collections.ObservableList;
@@ -137,10 +138,17 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Delete a tag from a person.
+     * Deletes a tag from a person.
      */
     public void removePersonTag(Person p, Tag t) {
         persons.deletePersonTag(p, t);
+    }
+
+    /**
+     * Adds a new Tag to person
+     */
+    public void addPersonTags(Person p, Set<? extends Tag> tagList) {
+        persons.addPersonTags(p, tagList);
     }
 
     //// util methods
