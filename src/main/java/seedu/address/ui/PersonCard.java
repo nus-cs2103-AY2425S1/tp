@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Adds the user interface elements for the public addresses of the given person.
-     *
+     * <p>
      * This method iterates through the public address entries of the person. For each non-empty entry,
      * it creates a label displaying the network name followed by each public address indented by two spaces.
      * The labels are then added to the `publicAddress` Pane.
@@ -78,12 +78,12 @@ public class PersonCard extends UiPart<Region> {
         publicAddress.getChildren().clear();
 
         // Delete VBox if the person has no public addresses
-        if (person.getPublicAddresses().isEmpty()) {
+        if (person.getPublicAddressesComposition().isEmpty()) {
             VBox parent = (VBox) publicAddress.getParent();
             parent.getChildren().remove(publicAddress);
         }
-
-        person.getPublicAddresses().entrySet().stream()
+        // fix mess
+        person.getPublicAddressesComposition().getPublicAddresses().entrySet().stream()
                 .filter(entry -> !entry.getValue().isEmpty())
                 .flatMap(entry -> {
                     Network network = entry.getKey();

@@ -1,15 +1,13 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -24,23 +22,23 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"), new HashMap<>(),
-                    getTagSet("friends")),
+                new Address("Blk 30 Geylang Street 29, #06-40"), new PublicAddressesComposition(),
+                getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new HashMap<>(),
-                    getTagSet("colleagues", "friends")),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new PublicAddressesComposition(),
+                getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new HashMap<>(),
-                    getTagSet("neighbours")),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new PublicAddressesComposition(),
+                getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new HashMap<>(),
-                    getTagSet("family")),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new PublicAddressesComposition(),
+                getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"), new HashMap<>(),
-                    getTagSet("classmates")),
+                new Address("Blk 47 Tampines Street 20, #17-35"), new PublicAddressesComposition(),
+                getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"), new HashMap<>(),
-                    getTagSet("colleagues"))
+                new Address("Blk 45 Aljunied Street 85, #11-31"), new PublicAddressesComposition(),
+                getTagSet("colleagues"))
         };
     }
 
@@ -57,25 +55,25 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
     public static Set<Tag> getCryptoTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
     /**
      * Returns a map containing the sets of public addresses given.
      */
-    public static Map<Network, Set<PublicAddress>> getPublicAddressMap(PublicAddress... publicAddresses) {
-        return Arrays.stream(publicAddresses)
-                .collect(Collectors.groupingBy(
-                        PublicAddress::getNetwork,
-                        Collectors.toSet()
-                ));
+    public static PublicAddressesComposition getPublicAddressMap(PublicAddress... publicAddresses) {
+        return new PublicAddressesComposition(Arrays.stream(publicAddresses)
+            .collect(Collectors.groupingBy(
+                PublicAddress::getNetwork,
+                Collectors.toSet()
+            )));
     }
 
 }

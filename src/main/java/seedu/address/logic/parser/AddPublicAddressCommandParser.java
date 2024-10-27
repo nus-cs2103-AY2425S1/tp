@@ -16,6 +16,7 @@ import seedu.address.logic.commands.AddPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -39,8 +40,8 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
     public AddPublicAddressCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
-                        PREFIX_PUBLIC_ADDRESS_LABEL);
+            ArgumentTokenizer.tokenize(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
+                PREFIX_PUBLIC_ADDRESS_LABEL);
 
         Index index;
 
@@ -48,30 +49,31 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddPublicAddressCommand.MESSAGE_USAGE), pe);
+                AddPublicAddressCommand.MESSAGE_USAGE), pe);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
-                PREFIX_PUBLIC_ADDRESS_LABEL)) {
+            PREFIX_PUBLIC_ADDRESS_LABEL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddPublicAddressCommand.MESSAGE_USAGE));
+                AddPublicAddressCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
-                PREFIX_PUBLIC_ADDRESS_LABEL);
+            PREFIX_PUBLIC_ADDRESS_LABEL);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         String networkString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get();
         String publicAddressString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get();
         String publicAddressLabelString =
-                argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get(); // okay as prefixes are confirmed to be present
+            argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get(); // okay as prefixes are confirmed to be present
 
         Network network = ParserUtil.parseNetwork(networkString);
         PublicAddress publicAddress = ParserUtil.parsePublicAddress(publicAddressString,
-                publicAddressLabelString, networkString);
+            publicAddressLabelString, networkString);
 
-        Map<Network, Set<PublicAddress>> publicAddresses = Map.of(network, Set.of(publicAddress));
+        PublicAddressesComposition publicAddresses =
+            new PublicAddressesComposition((Map.of(network, Set.of(publicAddress))));
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         return new AddPublicAddressCommand(index, editPersonDescriptor);

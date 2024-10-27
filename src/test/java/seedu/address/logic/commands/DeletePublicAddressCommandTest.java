@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,20 +27,21 @@ import seedu.address.testutil.PersonBuilder;
  * {@code DeletePublicAddressCommand}.
  */
 public class DeletePublicAddressCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void execute_validIndexValidNetwork_success() throws Exception {
         Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeletePublicAddressCommand deletePublicAddressCommand =
-                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
-        updatedPerson.setPublicAddressesByNetwork(Network.BTC, new HashSet<>());
+        updatedPerson.addPublicAddressToNetwork(Network.BTC, new HashSet<>());
         expectedModel.setPerson(personToDeleteAddress, updatedPerson);
 
         String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                updatedPerson.getPublicAddresses());
+            updatedPerson.getPublicAddressesComposition());
 
         assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
     }
@@ -49,23 +50,23 @@ public class DeletePublicAddressCommandTest {
     public void execute_validIndexValidNetworkValidLabel_success() throws Exception {
         Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HashSet<PublicAddress> addresses = new HashSet<>(
-                personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
+            personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
         );
         addresses.add(new BtcAddress("12345", "test2"));
         addresses.add(new BtcAddress("12345", "test"));
 
-        personToDeleteAddress.setPublicAddressesByNetwork(Network.BTC, new HashSet<>(addresses));
+        personToDeleteAddress.addPublicAddressToNetwork(Network.BTC, new HashSet<>(addresses));
         DeletePublicAddressCommand deletePublicAddressCommand =
-                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "test");
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "test");
 
         addresses.remove(new BtcAddress("12345", "test"));
         Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
-        updatedPerson.setPublicAddressesByNetwork(Network.BTC, new HashSet<>(addresses));
+        updatedPerson.addPublicAddressToNetwork(Network.BTC, new HashSet<>(addresses));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToDeleteAddress, updatedPerson);
 
         String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                updatedPerson.getPublicAddresses());
+            updatedPerson.getPublicAddressesComposition());
 
         assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
     }
@@ -74,7 +75,7 @@ public class DeletePublicAddressCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePublicAddressCommand deletePublicAddressCommand =
-                new DeletePublicAddressCommand(outOfBoundIndex, Network.BTC);
+            new DeletePublicAddressCommand(outOfBoundIndex, Network.BTC);
 
         assertCommandFailure(deletePublicAddressCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -83,24 +84,24 @@ public class DeletePublicAddressCommandTest {
     public void equals() {
         DeletePublicAddressCommand deleteFirstCommand = new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
         DeletePublicAddressCommand deleteSecondCommand =
-                new DeletePublicAddressCommand(Index.fromOneBased(2), Network.BTC);
+            new DeletePublicAddressCommand(Index.fromOneBased(2), Network.BTC);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeletePublicAddressCommand deleteFirstCommandCopy =
-                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(1, deleteFirstCommand);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(null, deleteFirstCommand);
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 
 

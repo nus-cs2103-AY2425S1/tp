@@ -72,7 +72,7 @@ public class EditPublicAddressCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Person personToEdit = getPersonToEdit(model);
 
-        if (!personToEdit.hasPublicAddressWithLabel(publicAddress.getNetwork(), publicAddress.label)) {
+        if (!personToEdit.hasPublicAddressWithLabelWithinNetwork(publicAddress.getNetwork(), publicAddress.label)) {
             logger.warning(String.format(
                     "Attempted to edit a public address with a non-matching label %1$s for network %2$s on person %3$s",
                     publicAddress.label, publicAddress.getNetwork(), personToEdit.getName()));
@@ -104,11 +104,10 @@ public class EditPublicAddressCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditPublicAddressCommand)) {
+        if (!(other instanceof EditPublicAddressCommand otherCommand)) {
             return false;
         }
 
-        EditPublicAddressCommand otherCommand = (EditPublicAddressCommand) other;
         return index.equals(otherCommand.index) && publicAddress.equals(otherCommand.publicAddress);
     }
 
