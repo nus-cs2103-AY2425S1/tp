@@ -1,21 +1,32 @@
 package seedu.address.ui;
 
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  *  The client window provides detailed information about the clients, such as name, phone, email, address, conditions
  *  and schedule
  */
-public class ClientWindow extends UiPart<Stage> {
+public class ClientWindow extends UiPart<Stage> implements Initializable {
 
     private static final Logger logger = LogsCenter.getLogger(ClientWindow.class);
     private static final String FXML = "ClientWindow.fxml";
@@ -36,10 +47,21 @@ public class ClientWindow extends UiPart<Stage> {
     private Label clientCondition;
 
     @FXML
-    private Label clientSchedule;
+    private ImageView clientImage;
 
     @FXML
-    private ImageView clientImage;
+    private TableView<Schedule> clientScheduleTable;
+
+    @FXML
+    private TableColumn<Schedule, String> clientScheduleDate;
+
+    @FXML
+    private TableColumn<Schedule, String> clientScheduleDetails;
+
+    @FXML
+    private TableColumn<Schedule, String> clientSchedulePaymentStatus;
+
+    private ObservableList<Schedule> scheduleList;
 
     /**
      * Creates a new ClientWindow.
@@ -70,12 +92,16 @@ public class ClientWindow extends UiPart<Stage> {
         clientEmail.setText(client.getEmail().value);
         clientAddress.setText(client.getAddress().value);
         // might have to change this later on after condition is compulsory
-        if (client.getTags().toString().isEmpty()) {
-            clientCondition.setText("no condition");
+        if (client.getTags().isEmpty()) {
+            clientCondition.setText("-");
         } else {
             clientCondition.setText(client.getTags().toString());
         }
-        clientSchedule.setText(client.getSchedules().toString());
+        // convert use Set<Schedule> into a List<Schedule>
+        ArrayList<Schedule> scheduleArrayList = new ArrayList<>(client.getSchedules());
+        // set scheduleList accordingly
+        scheduleList = FXCollections.observableArrayList(scheduleArrayList);
+        clientScheduleTable.setItems(scheduleList);
     }
 
     /**
@@ -121,5 +147,15 @@ public class ClientWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        clientScheduleDate.setCellValueFactory(new PropertyValueFactory<Schedule, String>("dateTime"));
+        clientScheduleDetails.setCellValueFactory(new PropertyValueFactory<Schedule, String>("notes"));
+        clientSchedulePaymentStatus.setCellValueFactory(new PropertyValueFactory<Schedule, String>("isPaid"));
+        scheduleList = FXCollections.observableArrayList();
+        clientScheduleTable.setItems(scheduleList);
     }
 }
