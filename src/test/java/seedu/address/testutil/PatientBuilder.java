@@ -9,7 +9,7 @@ import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -34,7 +34,7 @@ public class PatientBuilder {
     public static final String DEFAULT_ALLERGY = "Nuts";
     public static final String DEFAULT_BLOODTYPE = "A+";
     public static final String DEFAULT_HEALTHRISK = "HIGH";
-    public static final String DEFAULT_HEALTHRECORD = "Undergoing treatment for cancer";
+    public static final String DEFAULT_EXISTINGCONDITION = "Undergoing treatment for cancer";
     public static final String DEFAULT_NOTE = "Requires special care";
     public static final String DEFAULT_NOKNAME = "Tay Bee";
     public static final String DEFAULT_NOKPHONE = "90184718";
@@ -50,7 +50,7 @@ public class PatientBuilder {
     private Set<Allergy> allergies;
     private BloodType bloodType;
     private HealthRisk healthRisk;
-    private HealthRecord healthRecord;
+    private ExistingCondition existingCondition;
     private Note note;
     private Name nokName;
     private Phone nokPhone;
@@ -73,7 +73,7 @@ public class PatientBuilder {
 
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
-        healthRecord = new HealthRecord(DEFAULT_HEALTHRECORD);
+        existingCondition = new ExistingCondition(DEFAULT_EXISTINGCONDITION);
         note = new Note(DEFAULT_NOTE);
         nokName = new Name(DEFAULT_NOKNAME);
         nokPhone = new Phone(DEFAULT_NOKPHONE);
@@ -94,7 +94,7 @@ public class PatientBuilder {
         allergies = patientToCopy.getAllergies();
         bloodType = patientToCopy.getBloodType();
         healthRisk = patientToCopy.getHealthRisk();
-        healthRecord = patientToCopy.getHealthRecord();
+        existingCondition = patientToCopy.getExistingCondition();
         note = patientToCopy.getNote();
         nokName = patientToCopy.getNokName();
         nokPhone = patientToCopy.getNokPhone();
@@ -186,8 +186,8 @@ public class PatientBuilder {
     /**
      * Sets the {@code Health Record} of the {@code Patient} that we are building.
      */
-    public PatientBuilder withHealthRecord(String healthRecord) {
-        this.healthRecord = new HealthRecord(healthRecord);
+    public PatientBuilder withExistingCondition(String existingCondition) {
+        this.existingCondition = new ExistingCondition(existingCondition);
         return this;
     }
 
@@ -220,7 +220,7 @@ public class PatientBuilder {
      */
     public Patient build() {
         return new Patient(name, nric, birthdate, sex, phone, email, address, allergies, bloodType,
-                healthRisk, healthRecord, note, nokName, nokPhone, appts);
+                healthRisk, existingCondition, note, nokName, nokPhone, appts);
     }
 
 }

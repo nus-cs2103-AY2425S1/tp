@@ -14,7 +14,7 @@ import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -55,7 +55,7 @@ public class EditPatientDescriptorBuilder {
         descriptor.setNokPhone(patient.getNokPhone());
         descriptor.setAllergy(patient.getAllergies());
         descriptor.setHealthRisk(patient.getHealthRisk());
-        descriptor.setHealthRecord(patient.getHealthRecord());
+        descriptor.setExistingCondition(patient.getExistingCondition());
         descriptor.setAppts(patient.getAppts());
         descriptor.setNote(patient.getNote());
     }
@@ -161,10 +161,10 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code healthRecord} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code existingCondition} of the {@code EditPatientDescriptor} that we are building.
      */
-    public EditPatientDescriptorBuilder withHealthRecord(String healthRecord) {
-        descriptor.setHealthRecord(new HealthRecord(healthRecord));
+    public EditPatientDescriptorBuilder withExistingCondition(String existingCondition) {
+        descriptor.setExistingCondition(new ExistingCondition(existingCondition));
         return this;
     }
 

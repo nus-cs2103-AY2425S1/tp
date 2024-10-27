@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -43,7 +43,7 @@ public class AddFCommand extends Command {
             + "[" + PREFIX_NOKPHONE + "NEXT-OF-KIN PHONE] "
             + "[" + PREFIX_ALLERGY + "ALLERGY] "
             + "[" + PREFIX_HEALTHRISK + "HEALTH RISK] "
-            + "[" + PREFIX_HEALTHRECORD + "PAST HEALTH RECORD] "
+            + "[" + PREFIX_EXISTINGCONDITION + "PAST HEALTH RECORD] "
             + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -58,7 +58,7 @@ public class AddFCommand extends Command {
             + PREFIX_NOKPHONE + "91234567 "
             + PREFIX_ALLERGY + "nuts, shellfish "
             + PREFIX_HEALTHRISK + "HIGH "
-            + PREFIX_HEALTHRECORD + "Diabetes "
+            + PREFIX_EXISTINGCONDITION + "Diabetes "
             + PREFIX_NOTE + "Patient needs extra care";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";

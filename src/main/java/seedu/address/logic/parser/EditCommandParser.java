@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -43,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE,
-                        PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_HEALTHRECORD,
+                        PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION,
                         PREFIX_APPOINTMENT, PREFIX_NOTE);
 
         Nric nric;
@@ -56,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
-                PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_HEALTHRECORD, PREFIX_APPOINTMENT, PREFIX_NOTE);
+                PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_APPOINTMENT, PREFIX_NOTE);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -98,9 +98,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setHealthRisk(ParserUtil.parseHealthRisk(
                     argMultimap.getValue(PREFIX_HEALTHRISK).get()));
         }
-        if (argMultimap.getValue(PREFIX_HEALTHRECORD).isPresent()) {
-            editPatientDescriptor.setHealthRecord(ParserUtil.parseHealthRecord(
-                    argMultimap.getValue(PREFIX_HEALTHRECORD).get()));
+        if (argMultimap.getValue(PREFIX_EXISTINGCONDITION).isPresent()) {
+            editPatientDescriptor.setExistingCondition(ParserUtil.parseExistingCondition(
+                    argMultimap.getValue(PREFIX_EXISTINGCONDITION).get()));
         }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPatientDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));

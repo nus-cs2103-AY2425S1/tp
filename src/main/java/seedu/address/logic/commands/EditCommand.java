@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -34,7 +34,7 @@ import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -65,7 +65,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NOKPHONE + "NEXT-OF-KIN PHONE] "
             + "[" + PREFIX_ALLERGY + "ALLERGY] "
             + "[" + PREFIX_HEALTHRISK + "HEALTH RISK] "
-            + "[" + PREFIX_HEALTHRECORD + "PAST HEALTH RECORD] "
+            + "[" + PREFIX_EXISTINGCONDITION + "PAST HEALTH RECORD] "
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT DATE T TIME] "
             + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
             + "Example: " + COMMAND_WORD + " T0489364Y "
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
             + PREFIX_NOKPHONE + "91234567 "
             + PREFIX_ALLERGY + "nuts, shellfish "
             + PREFIX_HEALTHRISK + "HIGH "
-            + PREFIX_HEALTHRECORD + "Diabetes "
+            + PREFIX_EXISTINGCONDITION + "Diabetes "
             + PREFIX_APPOINTMENT + "2022-12-31T14:00"
             + PREFIX_NOTE + "Patient needs extra care";
 
@@ -146,8 +146,8 @@ public class EditCommand extends Command {
         // Allergy updatedAllergy = editPatientDescriptor.getAllergy().orElse(patientToEdit.getAllergy());
         BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
         HealthRisk updatedHealthRisk = editPatientDescriptor.getHealthRisk().orElse(patientToEdit.getHealthRisk());
-        HealthRecord updatedHealthRecord = editPatientDescriptor.getHealthRecord()
-                .orElse(patientToEdit.getHealthRecord());
+        ExistingCondition updatedExistingCondition = editPatientDescriptor.getExistingCondition()
+                .orElse(patientToEdit.getExistingCondition());
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
@@ -156,8 +156,8 @@ public class EditCommand extends Command {
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
-                updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk, updatedHealthRecord,
-                updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
+                updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk,
+                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
     }
 
     @Override
@@ -199,7 +199,7 @@ public class EditCommand extends Command {
         private Allergy allergy;
         private BloodType bloodType;
         private HealthRisk healthRisk;
-        private HealthRecord healthRecord;
+        private ExistingCondition existingCondition;
         private Note note;
         private Name nokName;
         private Phone nokPhone;
@@ -222,7 +222,7 @@ public class EditCommand extends Command {
             setAllergy(toCopy.allergy);
             setBloodType(toCopy.bloodType);
             setHealthRisk(toCopy.healthRisk);
-            setHealthRecord(toCopy.healthRecord);
+            setExistingCondition(toCopy.existingCondition);
             setNote(toCopy.note);
             setNokName(toCopy.nokName);
             setNokPhone(toCopy.nokPhone);
@@ -234,7 +234,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergy, bloodType,
-                    healthRisk, healthRecord, note, nokName, nokPhone, appts);
+                    healthRisk, existingCondition, note, nokName, nokPhone, appts);
         }
 
         public void setName(Name name) {
@@ -307,11 +307,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(healthRisk);
         }
 
-        public void setHealthRecord(HealthRecord healthRecord) {
-            this.healthRecord = healthRecord;
+        public void setExistingCondition(ExistingCondition existingCondition) {
+            this.existingCondition = existingCondition;
         }
-        public Optional<HealthRecord> getHealthRecord() {
-            return Optional.ofNullable(healthRecord);
+        public Optional<ExistingCondition> getExistingCondition() {
+            return Optional.ofNullable(existingCondition);
         }
 
         public void setNote(Note note) {

@@ -87,7 +87,7 @@
                             stylesheets="@DarkTheme.css" wrapText="true" />
                         <Label fx:id="healthRisk" styleClass="label-text"
                             stylesheets="@DarkTheme.css" wrapText="true" />
-                        <Label fx:id="healthRecord" styleClass="label-text"
+                        <Label fx:id="existingCondition" styleClass="label-text"
                             stylesheets="@DarkTheme.css" wrapText="true" />
                         <Label fx:id="nokName" styleClass="label-text" stylesheets="@DarkTheme.css"
                             wrapText="true" />

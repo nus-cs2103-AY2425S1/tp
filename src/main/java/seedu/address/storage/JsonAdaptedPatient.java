@@ -17,7 +17,7 @@ import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -43,7 +43,7 @@ class JsonAdaptedPatient {
     private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final String bloodType;
     private final String healthRisk;
-    private final String healthRecord;
+    private final String existingCondition;
     private final String note;
     private final String nokName;
     private final String nokPhone;
@@ -59,7 +59,7 @@ class JsonAdaptedPatient {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("allergy") List<JsonAdaptedAllergy> allergies,
             @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
-            @JsonProperty("healthRecord") String healthRecord, @JsonProperty("note") String note,
+            @JsonProperty("existingCondition") String existingCondition, @JsonProperty("note") String note,
             @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone,
             @JsonProperty("appts") List<JsonAdaptedAppt> appts) {
         this.name = name;
@@ -74,7 +74,7 @@ class JsonAdaptedPatient {
         this.address = address;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
-        this.healthRecord = healthRecord;
+        this.existingCondition = existingCondition;
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
@@ -99,7 +99,7 @@ class JsonAdaptedPatient {
                 .collect(Collectors.toList()));
         bloodType = source.getBloodType() == null ? "" : source.getBloodType().value;
         healthRisk = source.getHealthRisk() == null ? "" : source.getHealthRisk().value;
-        healthRecord = source.getHealthRecord() == null ? "" : source.getHealthRecord().value;
+        existingCondition = source.getExistingCondition() == null ? "" : source.getExistingCondition().value;
         note = source.getNote() == null ? "" : source.getNote().value;
         nokName = source.getNokName() == null ? "" : source.getNokName().fullName;
         nokPhone = source.getNokPhone() == null ? "" : source.getNokPhone().value;
@@ -182,11 +182,12 @@ class JsonAdaptedPatient {
         }
         final HealthRisk modelHealthRisk = healthRisk.isEmpty() ? null : new HealthRisk(healthRisk);
 
-        if (healthRecord == null) {
+        if (existingCondition == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    HealthRecord.class.getSimpleName()));
+                    ExistingCondition.class.getSimpleName()));
         }
-        final HealthRecord modelHealthRecord = healthRecord.isEmpty() ? null : new HealthRecord(healthRecord);
+        final ExistingCondition modelExistingCondition =
+                existingCondition.isEmpty() ? null : new ExistingCondition(existingCondition);
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -220,7 +221,7 @@ class JsonAdaptedPatient {
         final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
 
         return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
-                modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
+                modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelExistingCondition, modelNote,
                 modelNokName, modelNokPhone, modelAppts);
     }
 

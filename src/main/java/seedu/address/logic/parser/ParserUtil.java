@@ -21,7 +21,7 @@ import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -273,21 +273,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String healthRecord} into an {@code HealthRecord}.
+     * Parses a {@code String existingCondition} into an {@code ExistingCondition}.
      * Leading and trailing whitespaces will be trimmed.
-     * returns null if the given {@code healthRecord} is an empty string
-     * @throws ParseException if the given {@code healthRecord} is invalid.
+     * returns null if the given {@code existingCondition} is an empty string
+     * @throws ParseException if the given {@code existingCondition} is invalid.
      */
-    public static HealthRecord parseHealthRecord(String healthRecord) throws ParseException {
-        requireNonNull(healthRecord);
-        if (healthRecord.isEmpty()) {
+    public static ExistingCondition parseExistingCondition(String existingCondition) throws ParseException {
+        requireNonNull(existingCondition);
+        if (existingCondition.isEmpty()) {
             return null;
         }
-        String trimmedHealthRecord = healthRecord.trim();
-        if (!HealthRecord.isValidHealthRecord(trimmedHealthRecord)) {
-            throw new ParseException(HealthRecord.MESSAGE_CONSTRAINTS);
+        String trimmedExistingCondition = existingCondition.trim();
+        if (!ExistingCondition.isValidExistingCondition(trimmedExistingCondition)) {
+            throw new ParseException(ExistingCondition.MESSAGE_CONSTRAINTS);
         }
-        return new HealthRecord(trimmedHealthRecord);
+        return new ExistingCondition(trimmedExistingCondition);
     }
 
     /**

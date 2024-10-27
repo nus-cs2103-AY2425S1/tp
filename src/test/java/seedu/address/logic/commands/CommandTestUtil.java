@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -65,8 +65,8 @@ public class CommandTestUtil {
     public static final String VALID_ALLERGY_BOB = "ceterizine dihydrochloride";
     public static final String VALID_HEALTHRISK_AMY = "HIGH";
     public static final String VALID_HEALTHRISK_BOB = "LOW";
-    public static final String VALID_HEALTHRECORD_AMY = "diabetes, hypertension, dementia";
-    public static final String VALID_HEALTHRECORD_BOB = "cancer";
+    public static final String VALID_EXISTINGCONDITION_AMY = "diabetes, hypertension, dementia";
+    public static final String VALID_EXISTINGCONDITION_BOB = "cancer";
     public static final String VALID_APPOINTMENT_AMY = "2025-12-10T14:30";
     public static final String VALID_APPOINTMENT_BOB = "2025-12-11T14:00";
     public static final String VALID_NOTE_AMY = "Patient needs extra care";
@@ -101,8 +101,8 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY_BOB;
     public static final String HEALTHRISK_DESC_AMY = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_AMY;
     public static final String HEALTHRISK_DESC_BOB = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_BOB;
-    public static final String HEALTHRECORD_DESC_AMY = " " + PREFIX_HEALTHRECORD + VALID_HEALTHRECORD_AMY;
-    public static final String HEALTHRECORD_DESC_BOB = " " + PREFIX_HEALTHRECORD + VALID_HEALTHRECORD_BOB;
+    public static final String EXISTINGCONDITION_DESC_AMY = " " + PREFIX_EXISTINGCONDITION + VALID_EXISTINGCONDITION_AMY;
+    public static final String EXISTINGCONDITION_DESC_BOB = " " + PREFIX_EXISTINGCONDITION + VALID_EXISTINGCONDITION_BOB;
     public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
     public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
@@ -130,7 +130,7 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withBloodType(VALID_BLOODTYPE_AMY).withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY)
                 .withAllergy(VALID_ALLERGY_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
-                .withHealthRecord(VALID_HEALTHRECORD_AMY).withAppts(VALID_APPOINTMENT_AMY)
+                .withExistingCondition(VALID_EXISTINGCONDITION_AMY).withAppts(VALID_APPOINTMENT_AMY)
                 .withNote(VALID_NOTE_AMY).build();
 
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -138,7 +138,7 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withBloodType(VALID_BLOODTYPE_BOB).withNokName(VALID_NOKNAME_BOB).withNokPhone(VALID_NOKPHONE_BOB)
                 .withAllergy(VALID_ALLERGY_BOB).withHealthRisk(VALID_HEALTHRISK_BOB)
-                .withHealthRecord(VALID_HEALTHRECORD_BOB).withAppts(VALID_APPOINTMENT_BOB)
+                .withExistingCondition(VALID_EXISTINGCONDITION_BOB).withAppts(VALID_APPOINTMENT_BOB)
                 .withNote(VALID_NOTE_BOB).build();
     }
 
