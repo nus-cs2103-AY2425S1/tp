@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DownloadCommandParser" as DownloadCommandParser LOGIC_COLOR
+participant "d:DownloadCommand" as DownloadCommand LOGIC_COLOR
+participant ":StorageManager" as StorageManager LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("download t/vegan")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("download t/vegan")
+activate AddressBookParser
+
+create DownloadCommandParser
+AddressBookParser -> DownloadCommandParser
+activate DownloadCommandParser
+
+DownloadCommandParser --> AddressBookParser
+deactivate DownloadCommandParser
+
+AddressBookParser -> DownloadCommandParser : parse(" t/vegan")
+activate DownloadCommandParser
+
+create DownloadCommand
+DownloadCommandParser -> DownloadCommand
+activate DownloadCommand
+
+DownloadCommand --> DownloadCommandParser :
+deactivate DownloadCommand
+
+DownloadCommandParser --> AddressBookParser : d
+deactivate DownloadCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DownloadCommandParser -[hidden]-> AddressBookParser
+destroy DownloadCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DownloadCommand : execute(m)
+activate DownloadCommand
+
+DownloadCommand -> Model : getFilteredPersonListFromAddressBook(tagList)
+activate Model
+
+Model --> DownloadCommand : addressBookJson
+deactivate Model
+
+DownloadCommand -> StorageManager : saveCsvToFile(addressBookCsv)
+activate StorageManager
+destroy StorageManager
+
+create CommandResult
+DownloadCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DownloadCommand
+deactivate CommandResult
+
+DownloadCommand --> LogicManager : r
+deactivate DownloadCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
