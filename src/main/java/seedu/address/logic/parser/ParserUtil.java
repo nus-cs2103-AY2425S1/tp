@@ -157,13 +157,14 @@ public class ParserUtil {
      */
     public static Optional<Role> parseRole(String role) throws ParseException {
         requireNonNull(role);
-        if (role.isEmpty()) {
+        String trimmedRole = role.trim();
+        if (trimmedRole.isEmpty()) {
             return Optional.empty();
         }
-        if (!Role.isValidRoleName(role)) {
+        if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return Optional.of(new Role(role));
+        return Optional.of(new Role(trimmedRole));
     }
 
     /**
