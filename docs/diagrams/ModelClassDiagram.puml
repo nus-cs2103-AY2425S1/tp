@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class PostalCode
 
 Class I #FFFFFF
 }
@@ -41,6 +42,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> PostalCode
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
