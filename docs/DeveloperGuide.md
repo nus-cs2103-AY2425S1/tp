@@ -508,7 +508,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Search not performed. UGTeach shows an error message.
     
     1. Other incorrect find commands to try: `find d/`, `find d/foo`<br>
-    (where days supplied does not match any day or is empty)<br>
+    (where days supplied does not match any day or contains only whitespace)<br>
        Expected: Similar to previous.
 
 1. Finding students by name or day
@@ -523,7 +523,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Other incorrect find commands to try: `find n/ d/Thursday`, `find n/Alex! d/Thursday`, `find n/Alex d/Thur`<br>
    (where keywords supplied contains non-alphanumeric characters or only whitespace) or<br>
-   (where days supplied does not match any day or is empty)<br>
+   (where days supplied does not match any day or contains only whitespace)<br>
       Expected: Similar to previous.
 
 
