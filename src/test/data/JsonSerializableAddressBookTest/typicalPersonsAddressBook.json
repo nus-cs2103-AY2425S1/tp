@@ -5,42 +5,56 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tag" : "High Risk"
+    "tag" : "High Risk",
+    "allergy" : "Penicillin",
+    "date" : "16 November 2024"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tag" : "High Risk"
+    "tag" : "High Risk",
+    "allergy" : "Fish, Soy",
+    "date" : "16 November 2024"
   }, {
     "name" : "Carl Kurz",
     "phone" : "94351253",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tag" : "Low Risk"
+    "tag" : "Low Risk",
+    "allergy" : "None",
+    "date" : ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tag" : "Low Risk"
+    "tag" : "Low Risk",
+    "allergy" : "Gluten",
+    "date" : ""
   }, {
     "name" : "Elle Meyer",
     "phone" : "94822242",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tag" : "Low Risk"
+    "tag" : "Low Risk",
+    "allergy" : "Lactose",
+    "date" : ""
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tag" : "Low Risk"
+    "tag" : "Low Risk",
+    "allergy" : "Soy, Eggs",
+    "date" : ""
   }, {
     "name" : "George Best",
     "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tag" : "Low Risk"
+    "tag" : "Low Risk",
+    "allergy" : "Peanuts",
+    "date" : ""
   } ]
 }

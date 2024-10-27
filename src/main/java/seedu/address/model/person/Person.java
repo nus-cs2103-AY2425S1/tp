@@ -21,17 +21,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Tag tag;
+    private final Allergy allergy;
+    private final Date date;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag) {
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Allergy allergy, Date date) {
         requireAllNonNull(name, phone, email, address, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
+        this.allergy = allergy;
+        this.date = date;
     }
 
     public Name getName() {
@@ -50,6 +54,10 @@ public class Person {
         return address;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -58,6 +66,9 @@ public class Person {
         return tag;
     }
 
+    public Allergy getAllergy() {
+        return allergy;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -91,13 +102,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tag.equals(otherPerson.tag);
+                && tag.equals(otherPerson.tag)
+                && allergy.equals(otherPerson.allergy);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tag);
+        return Objects.hash(name, phone, email, address, tag, allergy);
     }
 
     @Override
@@ -108,6 +120,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tag", tag)
+                .add("allergy", allergy)
+                .add("date", date)
                 .toString();
     }
 

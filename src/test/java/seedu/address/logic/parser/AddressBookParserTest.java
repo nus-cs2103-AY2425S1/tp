@@ -4,6 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -17,6 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -24,11 +32,14 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasFeaturePredicate;
+import seedu.address.model.person.SchedulePredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -94,12 +105,34 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filterByTag() throws Exception {
+    public void parseCommand_date() throws Exception {
+        final Date date = new Date("01/01/2024");
+        DateCommand command = (DateCommand) parser.parseCommand(DateCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_NAME_AMY + " "
+                + PREFIX_PHONE + VALID_PHONE_AMY + " "
+                + PREFIX_EMAIL + VALID_EMAIL_AMY + " "
+                + PREFIX_DATE + date.value);
+        assertEquals(new DateCommand(Optional.of(VALID_NAME_AMY), Optional.of(VALID_PHONE_AMY),
+                Optional.of(VALID_EMAIL_AMY), date), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
         //tag only
         FilterCommand command = (FilterCommand) parser.parseCommand(
               FilterCommand.COMMAND_WORD + " " + "t/ High Risk"
         );
-        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null)),
+        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null, null, null)),
+              command);
+
+    }
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        //tag only
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+              ScheduleCommand.COMMAND_WORD + " " + "d/ 16 February 2024"
+        );
+        assertEquals(new ScheduleCommand(new SchedulePredicate(new Date("16 February 2024"))),
               command);
 
     }

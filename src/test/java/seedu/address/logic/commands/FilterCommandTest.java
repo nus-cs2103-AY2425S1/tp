@@ -29,18 +29,18 @@ public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private PersonHasFeaturePredicate highTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null);
 
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null);
 
     private PersonHasFeaturePredicate phoneOnlyPredicate =
-          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value));
+          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value), null, null);
 
     private PersonHasFeaturePredicate phoneAndTagPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value), null, null);
 
     @Test
     public void equals() {
@@ -80,6 +80,13 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(mediumTagOnlyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(), model.getFilteredPersonList());
+
+        //Phone only
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        command = new FilterCommand(phoneOnlyPredicate);
+        expectedModel.updateFilteredPersonList(phoneOnlyPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
@@ -91,12 +98,6 @@ public class FilterCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(ALICE), model.getFilteredPersonList());
 
-        //Phone only
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        command = new FilterCommand(phoneOnlyPredicate);
-        expectedModel.updateFilteredPersonList(phoneOnlyPredicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
