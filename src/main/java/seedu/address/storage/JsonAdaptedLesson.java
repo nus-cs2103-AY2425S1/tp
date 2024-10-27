@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +26,8 @@ class JsonAdaptedLesson {
 
     private final String date;
     private final String time;
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students;
+    private final Map<JsonAdaptedStudent, Boolean> attendanceMap;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -32,12 +35,20 @@ class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
-            @JsonProperty("students") List<JsonAdaptedStudent> students) {
+            @JsonProperty("students") List<JsonAdaptedStudent> students,
+            @JsonProperty("attendanceMap") Map<JsonAdaptedStudent, Boolean> attendanceMap) {
         this.date = date;
         this.time = time;
+        this.students = new ArrayList<>();
+        this.attendanceMap = new HashMap<>();
+        // Null check required because the JsonCreator constructor may be called with null if the fields do not exist
         if (students != null) {
             this.students.addAll(students);
         }
+        if (attendanceMap != null) {
+            this.attendanceMap.putAll(attendanceMap);
+        }
+
     }
 
     /**
@@ -46,9 +57,15 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         date = source.getDate().toString();
         time = source.getTime().toString();
-        students.addAll(source.getStudents().stream()
-                .map(JsonAdaptedStudent::new)
-                .toList());
+        students = new ArrayList<>();
+        attendanceMap = new HashMap<>();
+
+        for (Student student : source.getStudents()) {
+            JsonAdaptedStudent jsonAdaptedStudent = new JsonAdaptedStudent(student);
+            boolean attendance = source.getAttendance(student);
+            students.add(jsonAdaptedStudent);
+            attendanceMap.put(jsonAdaptedStudent, attendance);
+        }
     }
 
     /**
@@ -106,17 +123,23 @@ class JsonAdaptedLesson {
         final Time modelTime = new Time(time);
 
         final List<Student> modelStudents = new ArrayList<>();
+        final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
 
+        // Update student list and maps in the same loop for efficiency
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
+
             // Check to ensure student data matches an existing student
             if (!addressBook.hasStudent(modelStudent)) {
                 throw new IllegalValueException(
                         String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent.getName().fullName));
             }
+
             modelStudents.add(modelStudent);
+            boolean attendance = attendanceMap.get(student);
+            modelAttendanceMap.put(modelStudent, attendance);
         }
 
-        return new Lesson(modelDate, modelTime, modelStudents);
+        return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);
     }
 }
