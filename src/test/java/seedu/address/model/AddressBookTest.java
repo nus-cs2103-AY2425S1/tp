@@ -34,8 +34,6 @@ import seedu.address.testutil.VendorBuilder;
 public class AddressBookTest {
 
     private final AddressBook addressBook = new AddressBook();
-    private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
-    private final Event anotherEvent = new Event(new Name("Another Event"), new Date("2024-10-11"));
 
     @Test
     public void constructor() {

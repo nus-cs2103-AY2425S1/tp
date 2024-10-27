@@ -66,7 +66,7 @@ public class JsonAdaptedEventTest {
 
     @Test
     public void toModelType_nullId_throwsIllegalValueException() {
-        JsonAdaptedEvent event = new JsonAdaptedEvent(null, VALID_NAME, VALID_DATE);
+        JsonAdaptedEvent event = new JsonAdaptedEvent(null, VALID_NAME, VALID_DATE, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, UniqueId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
@@ -75,7 +75,7 @@ public class JsonAdaptedEventTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_NAME, VALID_DATE, invalidTags);
+        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_ID, VALID_NAME, VALID_DATE, invalidTags);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 

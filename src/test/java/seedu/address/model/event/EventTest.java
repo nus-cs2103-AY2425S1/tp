@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalEvents.WEDDING;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
