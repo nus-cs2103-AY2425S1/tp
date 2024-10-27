@@ -139,7 +139,93 @@ Adds a person to Edututu.
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.3 Listing All Persons: `list`
+### 2.3 Deleting a Person: `delete`
+
+Deletes the specified person from the address book.
+
+**Command Format:** `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Example Usage:**
+
+`delete 3`
+
+*Input: User enters the `delete 3` command to remove the 3rd person in the displayed list.*  
+![Ui](images/deletecommandinput.png)
+
+*Output: The UI updates to reflect the deletion of the person.*  
+![Ui](images/deletecommandafter.png)
+
+
+**Tips:**
+
+- Use the `delete` command to remove outdated or incorrect entries from the address book.
+- Make sure to confirm the index number before deleting to avoid removing the wrong person.
+- The `delete` command is especially useful when cleaning up your list of contacts.
+
+[Back to Table of Contents](#table-of-contents)
+
+***
+
+### 2.4 Marking a Payment as Completed: `markpaid`
+
+Updates the payment status of a student to completed.
+
+**Format:** `markpaid INDEX m/YEAR_MONTH`
+
+* Marks the payment of the person at the specified `INDEX` for the given month and year.
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The index **must be within the range** of the number of people in the list.
+* The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
+
+
+**Example Usage:**
+*Input: User enters the `markpaid 1 /m 2024-10` mark the first student as paid for October 2024.*
+![Ui](images/markpaidcommandinput.png)
+
+*Output: The UI updates to show the payment status of the student.*
+![Ui](images/markpaidafter.png)
+
+
+[Back to Table of Contents](#table-of-contents)
+***
+
+### 2.5 Editing a Person: `edit`
+
+Edits an existing person in the address book.
+
+**Command Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+**Example Usage:**
+
+`edit 1 p/91088511 e/wongwaihin7@gmail.com`
+
+*Input: User enters the `edit` command to change the phone number and email address of the 1st person.*  
+![Ui](images/editcommandinput.png)
+
+*Output: The UI updates to show the edited details.*  
+![Ui](images/aftereditcommand.png)
+
+**Tips:**
+
+- Use the `edit` command to update a person’s details when changes occur.
+- Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
+- The `edit` command is particularly useful for keeping contact information up to date.
+
+[Back to Table of Contents](#table-of-contents)
+***
+
+### 2.6 Listing All Persons: `list`
 
 The `list` command displays a list of all persons currently stored in EduTuTu.
 
@@ -165,42 +251,8 @@ After entering the `list` command, all persons stored in the address book will b
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
-### 2.5 Editing a Person: `edit`
-
-Edits an existing person in the address book.
-
-**Command Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-
-**Example Usage:**
-
-`edit 1 p/91088511 e/wongwaihin7@gmail.com`  
-
-*Input: User enters the `edit` command to change the phone number and email address of the 1st person.*  
-![Ui](images/editcommandinput.png)
-
-*Output: The UI updates to show the edited details.*  
-![Ui](images/aftereditcommand.png)
-
-**Tips:**
-
-- Use the `edit` command to update a person’s details when changes occur.
-- Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
-- The `edit` command is particularly useful for keeping contact information up to date.
-
-[Back to Table of Contents](#table-of-contents)
-
-***
-<div style="page-break-after: always;"></div>
-
-### 2.5 Locating Persons by Name: `find`
+### 2.7 Locating Persons by Name: `find`
 
 Finds persons whose names, class IDs, or both contain any of the given keywords.
 
@@ -218,7 +270,7 @@ Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 **Example Usage:**
 
-`find n/Kim`  
+`find n/Kim`
 
 *Input: User enters the `find` command to search for persons whose names contain the keyword `Kim`.*  
 ![find image](images/findBefore.png)
@@ -235,41 +287,8 @@ Finds persons whose names, class IDs, or both contain any of the given keywords.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
-### 2.6 Deleting a Person: `delete`
-
-Deletes the specified person from the address book.
-
-**Command Format:** `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-**Example Usage:**
-
-`delete 3`  
-
-*Input: User enters the `delete 3` command to remove the 3rd person in the displayed list.*  
-![Ui](images/deletecommandinput.png)
-
-*Output: The UI updates to reflect the deletion of the person.*  
-![Ui](images/deletecommandafter.png)
-
-
-**Tips:**
-
-- Use the `delete` command to remove outdated or incorrect entries from the address book.
-- Make sure to confirm the index number before deleting to avoid removing the wrong person.
-- The `delete` command is especially useful when cleaning up your list of contacts.
-
-[Back to Table of Contents](#table-of-contents)
-
-***
-<div style="page-break-after: always;"></div>
-
-### 2.7 Clearing All Entries: `clear`
+### 2.8 Clearing All Entries: `clear`
 
 Clears all entries from the address book.
 
@@ -280,7 +299,7 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 
 **Example Usage:**
 
-`clear`  
+`clear`
 
 *Input: User enters the `clear` command to remove all entries.*  
 ![Ui](images/clearinput.png)
@@ -295,91 +314,18 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 - Consider exporting your data before using the `clear` command if you need a backup.
 
 [Back to Table of Contents](#table-of-contents)
-
-
 ***
-<div style="page-break-after: always;"></div>
 
-### 2.8 Exiting the Program: `exit`
+### 2.9 Undo/Redo Commands: `Undo` and `Redo`
 
-**Command Format:** `exit`
-
-Exits the program.
-
-Exiting the program can be done in two ways:
-
-**Method 1:**
-1. Click the `File` button at the top right corner of the window.  
-   ![Ui](images/exitcommand.png)
-2. Click on the `Exit` button.
-3. The program will close.
-
-**Method 2:**
-1. Type the command `exit` in the command box and press Enter.
-   ![Ui](images/exitcommandinput.png)
-
-
-2. The program will close.
-
-**Tips:**
-
-- Use the `exit` command when you want to close the program quickly through the command box.
-- Both methods achieve the same result, so use whichever is more convenient.
+The `Undo` and `Redo` commands allow you to reverse or redo the most recent changes made to the address book.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.9 Saving the Data
-
-EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-[Back to Table of Contents](#table-of-contents)
-
-***
-<div style="page-break-after: always;"></div>
-
-### 2.10 Editing the Data File
-
-EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing this data file.
-
-> **Caution:**
-> - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
-> - Certain edits can cause EduTuTu to behave unexpectedly (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
-
-[Back to Table of Contents](#table-of-contents)
-
-***
-<div style="page-break-after: always;"></div>
-
-### 2.11 Marking a Payment as Completed: `markpaid`
-
-Updates the payment status of a student to completed.
-
-**Format:** `markpaid INDEX m/YEAR_MONTH`
-
-* Marks the payment of the person at the specified `INDEX` for the given month and year.
-* The `INDEX` refers to the index number shown in the displayed person list.
-* The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
-* The index **must be within the range** of the number of people in the list.
-* The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
-
-
-**Example Usage:**
-*Input: User enters the `markpaid 1 /m 2024-10` mark the first student as paid for October 2024.*
-  ![Ui](images/markpaidcommandinput.png)
-
-*Output: The UI updates to show the payment status of the student.*
-  ![Ui](images/markpaidafter.png)
-
-
-[Back to Table of Contents](#table-of-contents)
-
-***
-<div style="page-break-after: always;"></div>
-
-### 2.12 Displaying Pie Chart of Class Distribution: `pie`
+### 2.10 Displaying Pie Chart of Class Distribution: `pie`
 
 Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
 
@@ -406,34 +352,30 @@ For example, given the following data set with 4 students:
 ***
 <div style="page-break-after: always;"></div>
 
-### 2.13 Displaying Bar Chart: `bar`
+### 2.11 Displaying Bar Chart: `bar`
 
 Displays a bar chart showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
 
-**Command Format:** `bar`
+Command Format: bar
 
 * The x-axis represents the months (e.g., 2024-01, 2024-02, etc.).
 * The y-axis shows the number of students who made their payments during each month.
 * If no payments were made in a given month, the value for that month will be zero.
 
-*Input: User enters the `bar` command.*  
-![Ui](images/barinput.png)
-
-*Output: A bar chart is displayed, showing the number of students who made payments for each month.*
+*Input: User enters the bar command.*  
 ![Ui](images/bar.png)
 
-**Tips:**
+Tips:
 
-- Use the `bar` command to monitor payment trends and identify any seasonal patterns.
+- Use the bar command to monitor payment trends and identify any seasonal patterns.
 - This feature can help tuition center administrators manage cash flow and forecast future payment periods.
-- Ensure that all payment records are updated for accurate chart visualization.
+- Ensure that all payment records are updated for accurate chart visualisation.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
-### 2.14 Viewing Command History: `Arrow Keys`
+### 2.12 Viewing Command History: `Arrow Keys`
 
 Allows users to quickly access previously entered commands using the up and down arrow keys.
 
@@ -452,7 +394,86 @@ Allows users to quickly access previously entered commands using the up and down
 [Back to Table of Contents](#table-of-contents)
 
 ***
+
+
+### 2.13 Displaying Detailed Information: `info`
+
+Displays the detailed information of a student in the list.
+
+**Format:** `info INDEX`
+
+* Shows the detailed information of the person at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The index **must be within the range** of the number of people in the list.
+* Additionally, clicking on a student’s entry in the GUI triggers a pop-up window displaying the same detailed information.
+
+**Example Usage:**
+*Input: User enters the `info 1` command to display detailed information for the first student.*
+![Ui](images/infocommandinput.png)
+
+*Output: A window pops up with the detailed information of the student.*
+![Ui](images/infocommandoutput.png)
+
+***
 <div style="page-break-after: always;"></div>
+
+### 2.14 Editing the Data File
+
+EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing this data file.
+
+> **Caution:**
+> - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
+> - Certain edits can cause EduTuTu to behave unexpectedly (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
+
+[Back to Table of Contents](#table-of-contents)
+
+***
+
+### 2.15 Saving the Data
+
+EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back to Table of Contents](#table-of-contents)
+
+### 2.16 Exiting the Program: `exit`
+
+**Command Format:** exit
+
+Exits the program.
+
+Exiting the program can be done in two ways:
+
+Method 1:
+1. Click the File button at the top right corner of the window.  
+   ![Ui](images/exitcommand.png)
+2. Click on the Exit button.
+3. The program will close.
+
+Method 2:
+1. Type the command exit in the command box and press Enter.
+   ![Ui](images/exitcommandinput.png)
+
+
+2. The program will close.
+
+Tips:
+
+- Use the exit command when you want to close the program quickly through the command box.
+- Both methods achieve the same result, so use whichever is more convenient.
+
+Back to Table of Contents
+
+
+
+
+***
+<div style="page-break-after: always;"></div>
+
+
+
+
+<div style="page-break-after: always;"></div>
+
 
 # 3. FAQ
 
