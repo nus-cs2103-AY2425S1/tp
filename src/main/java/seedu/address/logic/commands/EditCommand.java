@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -30,7 +29,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -66,7 +64,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ALLERGY + "ALLERGY] "
             + "[" + PREFIX_HEALTHRISK + "HEALTH RISK] "
             + "[" + PREFIX_EXISTINGCONDITION + "PAST HEALTH RECORD] "
-            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT DATE T TIME] "
             + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
             + "Example: " + COMMAND_WORD + " T0489364Y "
             + PREFIX_NAME + "John Doe "
@@ -82,13 +79,11 @@ public class EditCommand extends Command {
             + PREFIX_ALLERGY + "nuts, shellfish "
             + PREFIX_HEALTHRISK + "HIGH "
             + PREFIX_EXISTINGCONDITION + "Diabetes "
-            + PREFIX_APPOINTMENT + "2022-12-31T14:00"
             + PREFIX_NOTE + "Patient needs extra care";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
-    public static final String WRONG_NRIC = "NRIC provided has to be a current valid NRIC in the system.";
 
     private final Nric nric;
     private final EditPatientDescriptor editPatientDescriptor;
@@ -151,13 +146,11 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        ApptList updatedAppts = editPatientDescriptor.getAppts()
-                .orElseGet(() -> new ApptList(patientToEdit.getAppts()));
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk,
-                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
+                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, null);
     }
 
     @Override
@@ -203,7 +196,6 @@ public class EditCommand extends Command {
         private Note note;
         private Name nokName;
         private Phone nokPhone;
-        private ApptList appts;
 
         public EditPatientDescriptor() {}
 
@@ -226,7 +218,6 @@ public class EditCommand extends Command {
             setNote(toCopy.note);
             setNokName(toCopy.nokName);
             setNokPhone(toCopy.nokPhone);
-            setAppts(toCopy.appts);
         }
 
         /**
@@ -234,7 +225,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergy, bloodType,
-                    healthRisk, existingCondition, note, nokName, nokPhone, appts);
+                    healthRisk, existingCondition, note, nokName, nokPhone);
         }
 
         public void setName(Name name) {
@@ -333,15 +324,6 @@ public class EditCommand extends Command {
         }
         public Optional<Phone> getNokPhone() {
             return Optional.ofNullable(nokPhone);
-        }
-
-
-        public void setAppts(ApptList appts) {
-            this.appts = (appts != null) ? new ApptList() : null;
-        }
-
-        public Optional<ApptList> getAppts() {
-            return Optional.ofNullable(appts);
         }
 
         @Override
