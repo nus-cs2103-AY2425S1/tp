@@ -2,25 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
@@ -40,8 +31,6 @@ import seedu.address.model.person.role.committee.Position;
 import seedu.address.model.person.role.sponsor.Sponsor;
 import seedu.address.model.person.role.volunteer.Volunteer;
 import seedu.address.model.person.role.volunteer.VolunteerRole;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.Storage;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -50,7 +39,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static FilteredList<Person> personList;
+    private static FilteredList<Person> personList;
 
     public static void setPersonList(FilteredList<Person> personsList) {
         personList = personsList;
@@ -330,6 +319,12 @@ public class ParserUtil {
         return eventSet;
     }
 
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
     public static Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
@@ -339,16 +334,26 @@ public class ParserUtil {
         return new Venue(trimmedVenue);
     }
 
+    /**
+     * Parses {@code Collection<String> participants} into a {@code Set<Person>}.
+     *
+     * @throws ParseException if the given {@code participant} is invalid (i.e. not in the addressbook).
+     */
     public static Set<Person> parseParticipants(Collection<String> participants) throws ParseException {
         requireNonNull(participants);
         final Set<Person> participantSet = new HashSet<>();
 
         for (String participantName : participants) {
+            boolean isParticipantValid = false;
             for (Person person : personList) {
                 if (person.getNameString().equals(participantName)) {
                     participantSet.add(person);
+                    isParticipantValid = true;
                     break;
                 }
+            }
+            if (isParticipantValid == false) {
+                throw new ParseException("Participant " + participantName + " does not exist in the address book.");
             }
         }
         return participantSet;

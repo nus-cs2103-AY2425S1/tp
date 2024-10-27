@@ -45,6 +45,4 @@ public class Venue {
         return venue.hashCode();
     }
 
-
-
 }

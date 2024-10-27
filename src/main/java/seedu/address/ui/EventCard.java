@@ -49,7 +49,6 @@ public class EventCard extends UiPart<Region> {
         value.setText(event.getName().toString());
         sport.setText(event.getSport().toString());
         venue.setText(event.getVenue().toString());
-
         event.getParticipants().stream()
                 .forEach(person -> persons.getChildren().add(new Label(person.getName().toString())));
     }

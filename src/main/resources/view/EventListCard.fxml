@@ -29,7 +29,9 @@
             </HBox>
             <Label fx:id="sport" text="\$first" styleClass="cell_big_label" />
             <Label fx:id="venue" text="\$first" styleClass="cell_small_label" />
-            <FlowPane fx:id="persons" />
+            <HBox>
+                <FlowPane fx:id="persons" />
+            </HBox>
         </VBox>
     </GridPane>
 </HBox>

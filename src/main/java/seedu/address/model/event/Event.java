@@ -2,12 +2,13 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.athlete.SportString;
 
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Represents an {@code Event} in the address book.

@@ -1,21 +1,19 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.athlete.SportString;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -28,6 +26,10 @@ public class JsonAdaptedEvent {
     private final String venue;
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+
+    /**
+     * Constructs a {@code JsonAdaptedEvent} with the given event details.
+     */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name,
                             @JsonProperty("sport") String sport,
@@ -41,6 +43,9 @@ public class JsonAdaptedEvent {
         }
     }
 
+    /**
+     * Converts a given {@code Event} into this class for Jackson use.
+     */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().toString();
         sport = source.getSport().toString();
