@@ -14,8 +14,11 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class DateUtil {
 
+    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "The given date is invalid and does not exist "
+            + "in the calendar.";
     private static final String DATE_VALIDATION_FORMAT = "uuuu-MM-dd";
     private static final String DATE_FORMAT_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
+
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_VALIDATION_FORMAT)
             .withResolverStyle(ResolverStyle.STRICT);
     private static final Logger logger = LogsCenter.getLogger(DateUtil.class);

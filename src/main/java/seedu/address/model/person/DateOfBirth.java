@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateUtil.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST;
 import static seedu.address.commons.util.DateUtil.isCorrectDateFormat;
 import static seedu.address.commons.util.DateUtil.isDateAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
@@ -14,8 +15,7 @@ public class DateOfBirth {
     public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should not be after today's date.";
     public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be in the format of yyyy-MM-dd"
             + " and should not be blank.";
-    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "The given date is invalid and does not exist "
-            + "in the calendar.";
+
 
     public final String value;
 
@@ -26,7 +26,6 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dob) {
         requireNonNull(dob);
-        assert dob.length() == 10 : "Date of birth should be 10 characters long";
         checkArgument(isCorrectDateFormat(dob), MESSAGE_CONSTRAINTS_WRONG_FORMAT);
         checkArgument(isValidDate(dob), MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
         checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS_FUTURE_DATE);

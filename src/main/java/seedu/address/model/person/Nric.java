@@ -22,7 +22,6 @@ public class Nric {
      */
     public Nric(String nric) {
         requireNonNull(nric);
-        assert nric.length() == 9 : "NRIC should be 9 characters long";
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         this.value = nric.toUpperCase();
     }
