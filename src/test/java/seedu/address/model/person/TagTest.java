@@ -9,7 +9,7 @@ public class TagTest {
 
     @Test
     public void equals() {
-        Tag tag = new Tag("Hello");
+        Tag tag = new Tag("Emily Tan & Jude Law");
 
         // same object -> returns true
         assertTrue(tag.equals(tag));
@@ -25,7 +25,7 @@ public class TagTest {
         assertFalse(tag.equals(null));
 
         // different tag -> returns false
-        Tag differentTag = new Tag("Bye");
+        Tag differentTag = new Tag("Jean Tan & James Loh");
         assertFalse(tag.equals(differentTag));
     }
 }
