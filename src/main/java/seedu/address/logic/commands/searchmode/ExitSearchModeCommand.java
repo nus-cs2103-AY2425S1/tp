@@ -7,22 +7,21 @@ import seedu.address.model.event.EventManager;
 
 import static java.util.Objects.requireNonNull;
 
-public class InitSearchModeCommand extends Command {
-    public static final String COMMAND_WORD = "searchmode";
+public class ExitSearchModeCommand extends Command {
+    public static final String COMMAND_WORD = "exitsearchmode";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enters search mode.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits search mode.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Entered search mode.";
+    public static final String MESSAGE_SUCCESS = "Exited search mode.";
 
-    public InitSearchModeCommand() {
+    public ExitSearchModeCommand() {
     }
     @Override
     public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
-        model.setSearchMode(true);
-        // empties the current displayed list
-        model.updateFilteredPersonList(person -> false);
+        model.setSearchMode(false);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
