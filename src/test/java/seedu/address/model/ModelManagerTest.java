@@ -11,12 +11,16 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Status;
 import seedu.address.testutil.AddressBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -128,5 +132,21 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void getSummaryData_correctSummaryData() {
+        // Set up expected summary data
+        Map<String, Long> expectedSummaryData = new HashMap<>();
+        for (String status : Status.VALID_STATUSES) {
+            expectedSummaryData.put(status, 0L);
+        }
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+        expectedSummaryData.put(ALICE.getStatus().value, expectedSummaryData.get(ALICE.getStatus().value) + 1);
+        expectedSummaryData.put(BENSON.getStatus().value, expectedSummaryData.get(BENSON.getStatus().value) + 1);
+
+        // Verify that getSummaryData returns the correct data
+        assertEquals(expectedSummaryData, modelManager.getSummaryData());
     }
 }
