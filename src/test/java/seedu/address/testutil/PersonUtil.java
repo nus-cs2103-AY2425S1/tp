@@ -56,6 +56,8 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getTelegramHandle().ifPresent(telegramHandle -> sb.append(PREFIX_TELEHANDLE)
                 .append(telegramHandle.value).append(" "));
+        descriptor.getContactType().ifPresent(contactType -> sb.append(PREFIX_CONTACTTYPE)
+                .append(contactType.value).append(" "));
         descriptor.getModuleName().ifPresent(moduleName -> sb.append(PREFIX_MOD).append(moduleName).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark).append(" "));
         if (descriptor.getTags().isPresent()) {

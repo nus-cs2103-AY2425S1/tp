@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -36,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone().isPresent() ? person.getPhone().get() : null);
         descriptor.setEmail(person.getEmail().isPresent() ? person.getEmail().get() : null);
         descriptor.setTelegramHandle(person.getTelegramHandle());
+        descriptor.setContactType(person.getContactType());
         descriptor.setModuleName(person.getModuleName());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
@@ -70,6 +72,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTelegramHandle(String telegramHandle) {
         descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ContactType} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withContactType(String contactType) {
+        descriptor.setContactType(new ContactType(contactType));
         return this;
     }
 
