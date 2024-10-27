@@ -40,7 +40,6 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         try {
             List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
-            System.out.println(indexStrings.isEmpty() + indexStrings.toString() + indexStrings.size());
             if (indexStrings.size() == 1 && indexStrings.get(0).isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
             }
@@ -63,7 +62,7 @@ public class TagCommandParser implements Parser<TagCommand> {
             if (isEmpty) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
             } else if (isTooLong) {
-                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED));
+                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_LENGTH));
             }
             tagSet.add(new Tag(tagString));
         }

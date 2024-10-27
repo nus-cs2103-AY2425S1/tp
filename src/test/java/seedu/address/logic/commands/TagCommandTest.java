@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
+import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -107,7 +108,7 @@ public class TagCommandTest {
     @Test
     public void execute_bulkTagging_someGuestsAlreadyHaveTagReportsProperly() {
         // Guests at indexes 1 and 2 has the tag "friends", but guest at index 3 does not
-        Tag friendTag = new Tag("friends");
+        Tag friendTag = FRIENDS;
         model.addTag(friendTag);
         assertTrue(model.hasTag(friendTag));
 
@@ -136,7 +137,7 @@ public class TagCommandTest {
     @Test
     public void execute_bulkTagging_someTagsNotCreatedReportsProperly() {
         // Tags "bride's side" and "friends" are created, but not "nonexistent" tag
-        Tag friendTag = new Tag("friends");
+        Tag friendTag = FRIENDS;
         Tag nonExistentTag = new Tag("nonexistent");
         model.addTag(friendTag);
         assertTrue(model.hasTag(BRIDES_SIDE));

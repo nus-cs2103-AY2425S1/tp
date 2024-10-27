@@ -24,12 +24,13 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the guest identified by the index number used in the displayed guest list "
-                + "with predefined tag(s). \n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Tags the guest(s) identified by the index number(s) used in the displayed guest list "
+                + "with the predefined tag(s). \n"
+            + "Parameters: INDEX... (must be a positive integer(s))\n"
             + "[" + PREFIX_TAG + "TAG]... (must be created using 'newtag' command first)\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "bride's side";
+            + "Example: " + COMMAND_WORD + " 1 2 "
+            + PREFIX_TAG + "bride's side" + " "
+            + PREFIX_TAG + "groom's side";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged guest(s):\n";
     public static final String MESSAGE_TAG_NOT_CREATED = "Tag(s) must be created first using 'newtag' command: ";
@@ -39,8 +40,8 @@ public class TagCommand extends Command {
     private final Set<Tag> tags;
 
     /**
-     * @param targetIndexes of the person in the filtered person list to tag
-     * @param tags set of tags to tag the person with
+     * @param targetIndexes of the guest in the filtered person list to tag
+     * @param tags set of tags to tag the guest with
      */
     public TagCommand(List<Index> targetIndexes, Set<Tag> tags) {
         requireNonNull(targetIndexes);

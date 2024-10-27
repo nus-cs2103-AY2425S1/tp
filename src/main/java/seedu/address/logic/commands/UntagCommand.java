@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,28 +24,30 @@ public class UntagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Untags a tag from the person identified by the index number used in the displayed person list. \n "
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_TAG + "TAG]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "bride's side";
+            + ": Untags the guest(s) identified by the index number(s) used in the displayed guest list "
+                + "with the predefined tag(s). \n"
+            + "Parameters: INDEX... (must be positive integer(s))\n"
+            + "[" + PREFIX_TAG + "TAG]... (must be a tag on the guest)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 "
+            + PREFIX_TAG + "bride's side" + " "
+            + PREFIX_TAG + "groom's side";
 
-    public static final String MESSAGE_UNTAG_PERSON_SUCCESS = "Untagged Person: %1$s";
-    public static final String MESSAGE_TAG_NOT_FOUND = "This person does not have this tag.";
+    public static final String MESSAGE_UNTAG_PERSON_SUCCESS = "Untagged guest(s):\n";
+    public static final String MESSAGE_TAG_NOT_FOUND = "Some guest(s) do not have the tag(s): ";
 
-    private final Index targetIndex;
-    private final Tag tag;
+    private final List<Index> targetIndexes;
+    private final Set<Tag> tags;
 
     /**
-     * @param targetIndex of the person in the filtered person list to untag
-     * @param tag to remove from the person
+     * @param targetIndexes of the guest in the filtered person list to untag
+     * @param tags set of tags to remove from the guest
      */
-    public UntagCommand(Index targetIndex, Tag tag) {
-        requireNonNull(targetIndex);
-        requireNonNull(tag);
+    public UntagCommand(List<Index> targetIndexes, Set<Tag> tags) {
+        requireNonNull(targetIndexes);
+        requireNonNull(tags);
 
-        this.targetIndex = targetIndex;
-        this.tag = tag;
+        this.targetIndexes = targetIndexes;
+        this.tags = tags;
     }
 
     @Override
@@ -52,24 +55,50 @@ public class UntagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Set<Tag> missingTags = new HashSet<>();
+        StringBuilder successMessage = new StringBuilder();
+        StringBuilder finalMessage = new StringBuilder();
+
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
+            Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
+            boolean updated = false;
+
+            for (Tag tag : tags) {
+                if (!newTags.contains(tag)) {
+                    missingTags.add(tag);
+                } else {
+                    newTags.remove(tag);
+                    updated = true;
+                }
+            }
+
+            if (updated) {
+                Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
+                        personToUntag.getEmail(), personToUntag.getRsvpStatus(), newTags);
+                model.setPerson(personToUntag, updatedPerson);
+                if (!successMessage.isEmpty()) {
+                    successMessage.append("\n");
+                }
+                successMessage.append(Messages.format(updatedPerson));
+            }
         }
-
-        Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
-
-        if (!personToUntag.getTags().contains(tag)) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        if (!successMessage.isEmpty()) {
+            finalMessage.append(MESSAGE_UNTAG_PERSON_SUCCESS).append(successMessage);
         }
-
-        Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
-        newTags.remove(tag);
-
-        Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
-                personToUntag.getEmail(), personToUntag.getRsvpStatus(), newTags);
-        model.setPerson(personToUntag, updatedPerson);
-
-        return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS, Messages.format(updatedPerson)));
+        if (!missingTags.isEmpty()) {
+            if (!finalMessage.isEmpty()) {
+                finalMessage.append("\n");
+            }
+            finalMessage.append(MESSAGE_TAG_NOT_FOUND)
+                    .append(missingTags.stream()
+                            .map(Tag::toString)
+                            .collect(Collectors.joining(", ")));
+        }
+        return new CommandResult(finalMessage.toString());
     }
 
     @Override
@@ -84,14 +113,14 @@ public class UntagCommand extends Command {
         }
 
         UntagCommand otherTagCommand = (UntagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex) && tag.equals(otherTagCommand.tag);
+        return targetIndexes.equals(otherTagCommand.targetIndexes) && tags.equals(otherTagCommand.tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("tag", tag)
+                .add("targetIndexes", targetIndexes)
+                .add("tag", tags)
                 .toString();
     }
 }

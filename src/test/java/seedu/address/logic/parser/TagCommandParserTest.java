@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.TagCommandParser.MAX_INDEXES;
+import static seedu.address.logic.parser.TagCommandParser.MAX_LENGTH;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -70,7 +71,7 @@ public class TagCommandParserTest {
     public void parse_tooLongTag_throwsParseException() {
         String longTag = "veryveryveryveryveryveryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + longTag;
-        String expectedMessage = Messages.MESSAGE_INPUT_LENGTH_EXCEEDED;
+        String expectedMessage = String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_LENGTH);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
