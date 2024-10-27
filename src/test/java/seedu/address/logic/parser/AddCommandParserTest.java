@@ -144,7 +144,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags()
                 .withDateOfCreation(LocalDate.now().toString())
-                .withHistory(LocalDate.of(2024, 10, 26), "Created")
+                .withHistory(LocalDate.of(2026, 1, 26), "Created")
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY + REMARK_DESC_AMY + BIRTHDAY_DESC_AMY ,

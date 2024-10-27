@@ -31,29 +31,30 @@ import seedu.address.model.person.PropertyList;
  */
 public class TypicalPersons {
     // Create properties for each person
-    public static final Property AMY_PROPERTY = Property.of("321 Cherry Pl",
-            "Springfield", "Condo", 95.0, 3, 2, 320000);
-    public static final Property ALICE_PROPERTY = Property.of("123 Maple St",
-            "Springfield", "Condo", 85.0, 2, 1, 250000);
-    public static final Property BENSON_PROPERTY = Property.of("456 Oak Ave",
-            "Springfield", "HDB", 75.0, 3, 2, 200000);
-    public static final Property CARL_PROPERTY = Property.of("789 Pine Rd",
-            "Springfield", "Landed", 120.0, 4, 3, 500000);
-    public static final Property DANIEL_PROPERTY = Property.of("321 Elm St",
-            "Springfield", "Condo", 90.0, 2, 2, 300000);
-    public static final Property ELLE_PROPERTY = Property.of("654 Birch Blvd",
-            "Springfield", "HDB", 70.0, 2, 1, 180000);
-    public static final Property FIONA_PROPERTY = Property.of("987 Cedar Ct",
-            "Springfield", "Landed", 110.0, 4, 3, 550000);
-    public static final Property GEORGE_PROPERTY = Property.of("234 Spruce Dr",
-            "Springfield", "Condo", 80.0, 2, 2, 275000);
+    public static final Property ALICE_PROPERTY = Property.of(
+            "Block 14 Clementi Ave 3 #10-10", "Clementi", "HDB", 100.0, 2, 2, 600000);
+    public static final Property BENSON_PROPERTY = Property.of(
+            "23, Holland Road", "Holland Village", "Condo", 85.0, 1, 1, 800000);
+    public static final Property CARL_PROPERTY = Property.of(
+            "45, Marine Parade", "Marine Parade", "Landed", 300.0, 5, 4, 2500000);
+    public static final Property DANIEL_PROPERTY = Property.of(
+            "88, Orchard Road", "Orchard", "Condo", 120.0, 3, 2, 1500000);
+    public static final Property ELLE_PROPERTY = Property.of(
+            "99, Yishun Ave 11", "Yishun", "HDB", 95.0, 3, 2, 500000);
+    public static final Property FIONA_PROPERTY = Property.of(
+            "10, Serangoon Ave 5", "Serangoon", "Landed", 350.0, 4, 3, 2200000);
+    public static final Property GEORGE_PROPERTY = Property.of(
+            "77, Bukit Timah Road", "Bukit Timah", "Condo", 70.0, 2, 1, 900000);
     public static final Property HOON_PROPERTY = Property.of("876 Fir Way",
             "Springfield", "HDB", 65.0, 1, 1, 150000);
     public static final Property IDA_PROPERTY = Property.of("543 Willow Ln",
             "Springfield", "Landed", 100.0, 3, 2, 450000);
+    public static final Property AMY_PROPERTY = Property.of("321 Cherry Pl",
+            "Springfield", "Condo", 95.0, 3, 2, 320000);
     public static final Property BOB_PROPERTY = Property.of("654 Poplar St",
             "Springfield", "HDB", 80.0, 2, 1, 190000);
 
+    // Assign properties to each person’s property list
     public static final PropertyList ALICE_PROPERTY_LIST = new PropertyList(ALICE_PROPERTY);
     public static final PropertyList BENSON_PROPERTY_LIST = new PropertyList(BENSON_PROPERTY);
     public static final PropertyList CARL_PROPERTY_LIST = new PropertyList(CARL_PROPERTY);
@@ -92,7 +93,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
+            .withEmail("heinz@example.com").withAddress("Wall Street")
             .withRemark("")
             .withBirthday("2001-03-03")
             .withDateOfCreation("2021-09-10")
@@ -101,7 +102,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th Street").withTags("friends")
             .withRemark("")
             .withBirthday("2001-04-04")
             .withDateOfCreation("2012-02-19")
@@ -110,7 +111,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withEmail("werner@example.com").withAddress("Michegan Ave")
             .withRemark("")
             .withBirthday("2001-05-05")
             .withDateOfCreation("2024-02-20")
@@ -119,7 +120,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withEmail("lydia@example.com").withAddress("Little Tokyo")
             .withRemark("")
             .withBirthday("2001-06-06")
             .withDateOfCreation("2018-01-29")
@@ -128,7 +129,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
+            .withEmail("anna@example.com").withAddress("4th Street")
             .withRemark("")
             .withBirthday("2001-07-07")
             .withDateOfCreation("2019-12-11")
@@ -138,7 +139,7 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("4th street")
+            .withEmail("stefan@example.com").withAddress("4th Street")
             .withRemark("")
             .withBirthday("2001-08-08")
             .withDateOfCreation("2020-03-03")
@@ -147,7 +148,7 @@ public class TypicalPersons {
             .build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("9482448")
-            .withEmail("frank@example.com").withAddress("high street")
+            .withEmail("frank@example.com").withAddress("High Street")
             .withRemark("")
             .withBirthday("2001-09-09")
             .withDateOfCreation("2022-06-15")
