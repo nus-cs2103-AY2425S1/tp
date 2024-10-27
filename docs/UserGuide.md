@@ -72,8 +72,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 ### Viewing help : `help`
 
-If you require additional assistance, the `help` command shows a message with a link to the user guide,
-explaining how to use the commands with detailed descriptions.
+You can view a popup with an overview of all commands, and also a link to this user guide if you need more details.
 
 Format: `help`
 
@@ -82,7 +81,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the contact list.
+You can add a person to the list of contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
@@ -90,18 +89,17 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
-**Tip:** Fields can be added in any order. The order of the fields does not matter.
 **Tip:** A person can have any number of tags (including 0)
 
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 j/Caterer`
+* `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Prison j/Caterer t/stacy & sam`
 
 ### Listing All Contacts : `list`
 
-Shows a list of all persons in the contact list.
+You can view all contacts.
 
 Format: `list`
 
@@ -109,21 +107,17 @@ Format: `list`
 
 ### Adding a wedding: `add-wedding`
 
-Adds a person to the contact list.
+You can add a wedding to the list of weddings.
 
 Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
 
-![add wedding message](images/addWeddingMsg.png)
-
-Examples:
-* `add-wedding w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/11/11/2024`
-
 <box type="tip" seamless>
 
-**Tip:** Fields can be added in any order. The order of the fields does not matter.
 **Tip:** Datetime must be a valid date in the format of dd/MM/yyyy
 
 </box>
+
+![add wedding message](images/addWeddingMsg.png)
 
 Examples:
 * `add-wedding w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
@@ -131,71 +125,75 @@ Examples:
 
 ### Editing A Contact : `edit`
 
-Edits an existing person in the address book.
+You can edit an existing contact's details such as their name, phone number, email etc.
 
 Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 
-![edit message](images/editMsg.png)
+<box type="tip" seamless>
 
-* Edits the person with the specified `NAME`.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+**Tip:** You must provide at least one of the optional fields.
+
+</box>
+
+![edit message](images/editMsg.png)
 
 Examples:
 *  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
-*  `edit n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
 ### Adding Tag(s) to A Contact
-Add tag(s) to an existing person in the address book.
+If you need to associate your contacts with a particular wedding, you can use `tag-add` to add them to the wedding.
 
 Format: `tag-add n/NAME t/TAG...`
 
-![tag-add message](images/tagadd1.png)
-![tag-add message](images/tagaddMsg.png)
+<box type="tip" seamless>
 
-* Tags the person with the specified `NAME`.
-* Existing values will be updated together with the input values.
+**Tip #1:** The name of the tag must match the wedding that you want to add the contact to.
+
+**Tip #2:** You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
+
+</box>
+
+![tag-add message](images/tagadd1.png)
 
 Examples:
-*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June`
-and `Adam and Steve 16 June` to John Doe.
-*  `tag-add n/Betsy Crower t/Wedding at Park Gala` Adds the tag `Wedding at Park Gala` to Betsy Crower.
+*  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
+*  `tag-add n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
 ### Deleting Tag(s) from A Contact
-Delete tag(s) from an existing person in the address book.
+If you need to remove your contacts from a particular wedding, you can use `tag-delete` to remove them from the wedding.
 
 Format: `tag-delete n/NAME t/TAG...`
 
-![tag-delete message](images/tagdeleteMsg.png)
-![tag-delete message](images/tagdeleteMsg1.png)
+<box type="tip" seamless>
 
-* Deletes tag(s) from the person with the specified `NAME`.
-* Existing values that match input values will be deleted.
+**Tip #1:** The name of the tag must match the wedding that you want to delete the contact from.
+
+**Tip #2:** You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
+
+</box>
+
+![tag-delete message](images/tagdeleteMsg.png)
 
 Examples:
-*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June`
-and `Adam and Steve 16 June` from John Doe.
-*  `tag-delete n/Betsy Crower t/Wedding at Park Gala` Deletes the tag `Wedding at Park Gala` from Betsy Crower.
+*  `tag-delete n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
+*  `tag-delete n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
 ### Locating Contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+You can quickly lookup contacts by name and view all their details using `find`.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-![find message](images/findMsg.png)
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* `find` searches by `NAME`.
+* `KEYWORD` is not case-sensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+![find message](images/findMsg.png)
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -203,18 +201,20 @@ Examples:
 
 ### Filtering Contacts by Job: `filter`
 
-Filters persons whose jobs contain any of the given keywords.
+If you are looking for contacts with a specific job, you can use `filter` to filter out a list of contacts whose job matches your input.
 
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `photographer` will match `Photographer`
-* The order of the keywords does not matter. e.g. `Photographer` will match `photographer`
-* Only the job is searched.
+* `filter` filters by `job`.
+* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
+* The order of the keywords does not matter. e.g. `Photographer Lighting` will match `Lighting Photographer`
 * Only full words will be matched e.g. `photog` will not match `Photographer`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
 * Persons matching all keywords will be returned (i.e. `AND` search).
   e.g. `Photographer Wedding` will return `Wedding Photographer`
+
+![filter message](images/filterMsg.png)
 
 Examples:
 * `filter Photographer` returns `John` and `Ernest` whose jobs are photographers
@@ -222,16 +222,16 @@ Examples:
 
 ### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
-Deletes the specified person from the address book, with confirmation prompt.
-
-Format: `delete INDEX` followed by `delete-y` or `delete-n`
-
-![delete message](images/deleteMsg.png)
+You can delete a person from your list of contacts.
 
 * Deletes the person with the specified `NAME` from the address book.
 * The contact's details are shown for confirmation.
 * The contact is deleted if `delete-y` is entered.
 * The contact is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
+
+Format: `delete INDEX` followed by `delete-y` or `delete-n`
+
+![delete message](images/deleteMsg.png)
 
 Examples:
 * `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
@@ -239,7 +239,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+You can delete ALL contacts and ALL weddings from the application.
 
 Format: `clear`
 
@@ -247,7 +247,7 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program and saves data.
+You can exit application and save any new changes.
 
 Format: `exit`
 
@@ -292,11 +292,13 @@ _Details coming soon ..._
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June`
+**Add Wedding**   | `add w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`
 **Clear**         | `clear`
 **Delete**        | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
 **Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
-**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June and James 16 June`
-**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June and James 16 June`
+**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`
+**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June & James`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter**          | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter soundman dj`
 **List**          | `list`
 **Help**          | `help`
