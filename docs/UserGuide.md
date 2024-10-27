@@ -26,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    <br>4.1 Type in `java –version`.
    <br>4.2 Press `Enter` to run the command.
    <br>4.3 Check the installed Java version, as circled below:
-   <img src="images/check_java_version.png" width="600px">
+   <br><img src="images/check_java_version.png" width="600px">
 
 5. Run ResearchRoster!
    <br> 5.1 Type in `java -jar "researchroster.jar"`.
@@ -47,7 +47,7 @@ ResearchRoster provides sample data upon first run.
 ### CLI Tutorial
 
 1. Type your desired command into the command box, as circled below.
-   <img src="images/type_command.png" width="600px">
+   <br><img src="images/type_command.png" width="600px">
 
 2. Press `Enter` to execute the command.
 
