@@ -756,20 +756,24 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 ## Command summary
 
 
-| Action         | Format                                                                                  | Examples                                                                                                       |
-|----------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **AddAllergy** | `addAllergy i/NRIC al/ALLERGY…`                                                         | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **Clear**      | `clear`                                                                                 | -                                                                                                              |
-| **Delete**     | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
-| **DelAllergy** | `delAllergy i/NRIC al/ALLERGY…`                                                         | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **Edit**       | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |
-| **FindNric**   | `findNric NRIC`                                                                         | `findNric S1234567A`                                                                                           |
-| **FindMedCon** | `findMedCon KEYWORD [MORE_KEYWORDS]`                                                    | `findMedCon diabetes arthritis`                                                                                |
-| **List**       | `list`                                                                                  | -                                                                                                              |
-| **ListPrio**   | `listPrio !/PRIORITY`                                                                   | `listPrio !/High`                                                                                              |
-| **Help**       | `help`                                                                                  | -                                                                                                              |
+| Action           | Format                                                                                  | Examples                                                                                                       |
+|------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **AddAllergy**   | `addAllergy i/NRIC al/ALLERGY…`                                                         | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
+| **AddAppt**      | `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`                                        | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
+| **AddMedCon**    | `addMedCon i/NRIC c/CONDITION...`                                                       | `addMedCon i/S1234567A c/High Blood Pressure`                                                                  |
+| **Clear**        | `clear`                                                                                 | -                                                                                                              |
+| **Delete**       | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
+| **DelAllergy**   | `delAllergy i/NRIC al/ALLERGY…`                                                         | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
+| **DelAppt**      | `delAppt i/NRIC @d/DATE @t/TIME`                                                        | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
+| **DelMedCon**    | `delMedCon i/NRIC c/CONDITION...`                                                       | `delMedCon i/S1234567A c/High Blood Pressure`                                                                  |
+| **Edit**         | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |
+| **FindNric**     | `findNric NRIC`                                                                         | `findNric S1234567A`                                                                                           |
+| **FindMedCon**   | `findMedCon KEYWORD [MORE_KEYWORDS]`                                                    | `findMedCon diabetes arthritis`                                                                                |
+| **List**         | `list`                                                                                  | -                                                                                                              |
+| **ListPrio**     | `listPrio !/PRIORITY`                                                                   | `listPrio !/High`                                                                                              |
+| **Help**         | `help`                                                                                  | -                                                                                                              |
 
 
 
