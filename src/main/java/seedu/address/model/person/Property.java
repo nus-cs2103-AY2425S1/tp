@@ -121,4 +121,22 @@ public class Property {
                 address, town, propertyType, size,
                 numberOfBedrooms, numberOfBathrooms, price);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Property other = (Property) obj;
+        return Double.compare(other.size, size) == 0
+                && numberOfBedrooms == other.numberOfBedrooms
+                && numberOfBathrooms == other.numberOfBathrooms
+                && Double.compare(other.price, price) == 0
+                && address.equals(other.address)
+                && town.equals(other.town)
+                && propertyType.equals(other.propertyType);
+    }
 }

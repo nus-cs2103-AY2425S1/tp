@@ -248,7 +248,8 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && remark.equals(otherPerson.remark)
                 && dateOfCreation.equals(otherPerson.dateOfCreation)
-                && birthday.equals(otherPerson.birthday);
+                && birthday.equals(otherPerson.birthday)
+                && propertyList.equals(otherPerson.propertyList);
     }
 
     @Override

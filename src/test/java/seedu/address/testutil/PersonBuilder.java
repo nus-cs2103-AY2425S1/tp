@@ -160,7 +160,7 @@ public class PersonBuilder {
     /**
      * Add a new property.
      */
-    public PersonBuilder withPropertyList(Property property) {
+    public PersonBuilder withProperty(Property property) {
         this.propertyList.addProperty(property);
         return this;
     }

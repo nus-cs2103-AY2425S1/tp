@@ -119,7 +119,8 @@ public class EditCommand extends Command {
         PropertyList updatedPropertyList = editPersonDescriptor.getPropertyList()
                 .orElse(personToEdit.getPropertyList());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRemark, updatedBirthday, updatedTags, updatedDateOfCreation, updatedHistory);
+                updatedRemark, updatedBirthday, updatedTags, updatedDateOfCreation,
+                updatedHistory, updatedPropertyList);
     }
 
     @Override

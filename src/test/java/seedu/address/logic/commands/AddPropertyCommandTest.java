@@ -37,8 +37,7 @@ public class AddPropertyCommandTest {
                 85.0, 2, 2, 500000.0);
 
         AddPropertyCommand command = new AddPropertyCommand(
-                INDEX_FIRST_PERSON, "123 Main St", "Central", "Condo",
-                85.0, 2, 2, 500000.0);
+                INDEX_FIRST_PERSON, newProperty);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PropertyList updatedPropertyList = PropertyList.addProperty(personToEdit.getPropertyList(), newProperty);
@@ -47,9 +46,9 @@ public class AddPropertyCommandTest {
         String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_addPropertyFilteredList_success() {
@@ -60,8 +59,7 @@ public class AddPropertyCommandTest {
                 70.0, 1, 1, 400000.0);
 
         AddPropertyCommand command = new AddPropertyCommand(
-                INDEX_FIRST_PERSON, "456 Orchard Rd", "Orchard", "Apartment",
-                70.0, 1, 1, 400000.0);
+                INDEX_FIRST_PERSON, newProperty);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PropertyList updatedPropertyList = PropertyList.addProperty(personInFilteredList.getPropertyList(),

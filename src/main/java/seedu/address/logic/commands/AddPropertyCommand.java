@@ -83,6 +83,23 @@ public class AddPropertyCommand extends Command {
         this.price = price;
     }
 
+    /**
+     * Constructs an {@code AddPropertyCommand} with the specified details.
+     *
+     * @param property The actual property.
+     */
+    public AddPropertyCommand(Index index, Property property) {
+        requireAllNonNull(property);
+        this.index = index;
+        this.address = property.getAddress();
+        this.town = property.getTown();
+        this.propertyType = property.getPropertyType();
+        this.size = property.getSize();
+        this.numberOfBedrooms = property.getNumberOfBedrooms();
+        this.numberOfBathrooms = property.getNumberOfBathrooms();
+        this.price = property.getPrice();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
