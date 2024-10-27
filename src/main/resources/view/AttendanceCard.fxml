@@ -5,16 +5,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <HBox>
-        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
-            <Label fx:id="subject" style="-fx-padding: 0 5 0 0" text="\$subject"/>
+<VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="attendance_card">
+    <Label fx:id="subject" style="-fx-padding: 0 0 8 0; -fx-font-weight: bold; -fx-font-size: 14" text="\$subject"/>
+    <VBox spacing="5">
+        <HBox alignment="CENTER_LEFT">
+            <HBox HBox.hgrow="ALWAYS" >
+                <Label text="Attendance" style="-fx-font-size: 12"/>
+            </HBox>
+            <Label text="view all" style="-fx-font-size: 12; -fx-text-fill: #4D4D4D"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 2 5; -fx-background-radius: 7">
-            <ImageView fx:id="attendanceStatusIcon" fitWidth="15" fitHeight="15"/>
-            <Label fx:id="attendance" text="\$attendance"/>
+        <HBox>
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" style="-fx-padding: 0">
+                <Label text="Current week" style="-fx-font-size: 12; -fx-text-fill: #4C4C4C"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 3 6; -fx-background-radius: 7">
+                <ImageView fx:id="attendanceStatusIcon" fitWidth="15" fitHeight="15"/>
+                <Label fx:id="attendance" text="\$attendance"/>
+            </HBox>
+
         </HBox>
-    </HBox>
-    <Label minWidth="230" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"
-           style="-fx-padding: 5 0; -fx-border-width: 0 0 2 0; -fx-border-color: #E4E4E4"/>
+    </VBox>
+    <Label minWidth="230" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"/>
 </VBox>

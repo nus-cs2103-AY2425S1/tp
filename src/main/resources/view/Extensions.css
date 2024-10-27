@@ -19,8 +19,14 @@
     -fx-text-fill: white;
 }
 
-.attendance_container {
+.attendance_card {
     -fx-background-color: #F3F8FB;
-    -fx-background-radius: 7;
-    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+#otherAttendance {
+    -fx-text-fill: #4C4C4C;
+    -fx-font-size: 12;
+    -fx-padding: 7 0 5 0;
 }

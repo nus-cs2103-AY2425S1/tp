@@ -8,7 +8,9 @@ import java.time.temporal.TemporalAdjusters;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.participation.Participation;
@@ -44,14 +46,12 @@ public class AttendanceContainer extends UiPart<Region> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     setAttendanceList();
-                    setTutorial();
                 }
             }
         });
 
         setAttendanceList();
         setDisplayDate();
-        setTutorial();
     }
 
     /**
@@ -59,10 +59,14 @@ public class AttendanceContainer extends UiPart<Region> {
      * attendanceList to be displayed in the UI.
      */
     private void setAttendanceList() {
-        attendanceList.getChildren().clear();
-        participationList.forEach(participation -> attendanceList.getChildren()
-                .add(new AttendanceCard(participation.getTutorialSubject(),
-                        participation.getAttendanceList()).getRoot()));
+        if (participationList.isEmpty()) {
+            setEmptyParticipationPlaceholder();
+        } else {
+            attendanceList.getChildren().clear();
+            participationList.forEach(participation -> attendanceList.getChildren()
+                    .add(new AttendanceCard(participation.getTutorialSubject(),
+                            participation.getAttendanceList()).getRoot()));
+        }
     }
 
     /**
@@ -79,22 +83,17 @@ public class AttendanceContainer extends UiPart<Region> {
     }
 
     /**
-     * Sets the label to display the tutorials taken by the student.
+     * Sets the attendanceList to show a message if there is no participation for the student.
      */
-    private void setTutorial() {
-        StringBuilder tutorials = new StringBuilder();
-        for (int i = 0; i < participationList.size(); i++) {
-            tutorials.append(participationList.get(i).getTutorial().getSubject());
-            if (i != participationList.size() - 1) {
-                tutorials.append(" | ");
-            }
-        }
+    private void setEmptyParticipationPlaceholder() {
+        Label label = new Label("Not enrolled in any tutorial");
+        label.setStyle("-fx-background-color: #F3F8FB; -fx-background-radius: 5; -fx-padding: 10 15");
 
-        if (tutorials.isEmpty()) {
-            tutorial.setText("Not enrolled in any tutorial");
-        } else {
-            tutorial.setText(tutorials.toString());
-        }
+        HBox emptyState = new HBox(label);
+        emptyState.setAlignment(Pos.CENTER);
+
+        attendanceList.getChildren().clear();
+        attendanceList.getChildren().add(emptyState);
     }
 
 }

@@ -123,7 +123,7 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: white;
 }
 
 .pane-with-border {
@@ -137,14 +137,17 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #EDF8ED;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-max-width: 800;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #262626;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: #262626 !important;
 }
 
 .status-bar .label {
@@ -310,14 +313,17 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
-    -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-background-color: transparent;
+    -fx-background-insets: 5;
+    -fx-border-color: #C7D6D7;
     -fx-border-insets: 0;
     -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-max-width: 800;
+    -fx-padding: 8;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-size: 13;
+    -fx-text-fill: #262626;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -325,7 +331,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent;
     -fx-background-radius: 0;
 }
 
