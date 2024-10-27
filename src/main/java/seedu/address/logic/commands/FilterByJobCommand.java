@@ -16,7 +16,7 @@ public class FilterByJobCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_FUNCTION = COMMAND_WORD + ": Filters all persons whose jobs contain any of "
             + "the specified keywords (case-insensitive)\n"
-            + " and displays them as a list with index numbers.";
+            + "and displays them as a list with index numbers.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD\n"
