@@ -155,14 +155,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteAllStudents() {
-        requireNonNull(filteredStudents);
+    public void replaceStudentList(ObservableList<Student> studentList) {
+        addressBook.replaceStudentList(studentList);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
 
-        ObservableList<Student> studentsToDelete = FXCollections.observableArrayList(filteredStudents);
-
-        for (Student student : studentsToDelete) {
-            addressBook.removeStudent(student);
-        }
+    @Override
+    public ObservableList<Student> deleteAllStudents() {
+        return addressBook.removeAllStudents();
     }
 
 

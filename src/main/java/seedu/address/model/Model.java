@@ -104,10 +104,13 @@ public interface Model {
     /**
      * Deletes the given student.
      * The student must exist in the address book.
-     *
-     * @return
      */
     int deleteStudent(Student target);
+
+    /**
+     * Deletes all students in the list.
+     */
+    ObservableList<Student> deleteAllStudents();
 
     /**
      * Adds the given student.
@@ -144,5 +147,13 @@ public interface Model {
      */
     List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
 
+    /**
+     * Returns a list of students with the given name.
+     */
     ObservableList<Student> getAllStudentsByName(Name name);
+
+    /**
+     * Replaces the current student list with the given list.
+     */
+    void replaceStudentList(ObservableList<Student> studentList);
 }

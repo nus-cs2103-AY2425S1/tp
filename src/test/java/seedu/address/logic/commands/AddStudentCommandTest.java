@@ -82,7 +82,7 @@ public class AddStudentCommandTest {
     }
 
     @Test
-    public void undo_validStudent() throws CommandException {
+    public void undo() throws CommandException {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
         AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
@@ -198,7 +198,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void deleteAllStudents() {
+        public ObservableList<Student> deleteAllStudents() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -223,6 +223,11 @@ public class AddStudentCommandTest {
 
         @Override
         public ObservableList<Student> getAllStudentsByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
             throw new AssertionError("This method should not be called.");
         }
 

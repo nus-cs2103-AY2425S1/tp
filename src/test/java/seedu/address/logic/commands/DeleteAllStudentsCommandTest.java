@@ -22,19 +22,22 @@ import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class DeleteAllStudentsCommandTest {
+
+    private DeleteAllStudentsCommand command = new DeleteAllStudentsCommand();
+
     @Test
-    public void execute_deleteSingleStudent_success() throws Exception {
+    public void execute_deleteSingleStudent_success() {
         Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456L").build();
 
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
 
-        CommandResult commandResult = new DeleteAllStudentsCommand().execute(modelStub);
+        CommandResult commandResult = command.execute(modelStub);
 
         assertEquals(DeleteAllStudentsCommand.MESSAGE_DELETE_STUDENT_SUCCESS, commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_deleteMultipleStudents_success() throws Exception {
+    public void execute_deleteMultipleStudents_success() {
         Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
         Student validStudent2 = new StudentBuilder().withName("May Ng Zi Wei").withStudentNumber("A0123456Y").build();
         Student validStudent3 = new StudentBuilder().withName("Lynn Han").withStudentNumber("A9876543Z").build();
@@ -43,9 +46,25 @@ public class DeleteAllStudentsCommandTest {
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
                 validStudent3, validStudent4);
 
-        CommandResult commandResult = new DeleteAllStudentsCommand().execute(modelStub);
+        CommandResult commandResult = command.execute(modelStub);
 
         assertEquals(DeleteAllStudentsCommand.MESSAGE_DELETE_STUDENT_SUCCESS, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void undo() {
+        Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        Student validStudent2 = new StudentBuilder().withName("May Ng Zi Wei").withStudentNumber("A0123456Y").build();
+        Student validStudent3 = new StudentBuilder().withName("Lynn Han").withStudentNumber("A9876543Z").build();
+        Student validStudent4 = new StudentBuilder().withName("Richard").withStudentNumber("A1111111B").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+        command.execute(modelStub);
+        command.undo(modelStub);
+
+        ModelStubWithStudent expectedModelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+        assertEquals(expectedModelStub.getFilteredStudentList(), modelStub.getFilteredStudentList());
     }
 
     private class ModelStub implements Model {
@@ -158,7 +177,8 @@ public class DeleteAllStudentsCommandTest {
             return studentList;
         }
 
-        public void deleteAllStudents() {
+        public ObservableList<Student> deleteAllStudents() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -175,12 +195,22 @@ public class DeleteAllStudentsCommandTest {
         public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single student.
      */
-    private class ModelStubWithStudent extends DeleteAllStudentsCommandTest.ModelStub {
+    private class ModelStubWithStudent extends ModelStub {
 
         private final ObservableList<Student> students = FXCollections.observableArrayList();
 
@@ -221,21 +251,16 @@ public class DeleteAllStudentsCommandTest {
             return 1;
         }
 
-    }
-
-    private class ModelStubWithNoStudent extends DeleteAllStudentsCommandTest.ModelStub {
         @Override
-        public ObservableList<Student> getFilteredStudentList() {
-            return FXCollections.observableArrayList();
-        }
-        @Override
-        public Student getStudentByName(Name name) {
-            return null;
+        public ObservableList<Student> deleteAllStudents() {
+            ObservableList<Student> deletedStudents = FXCollections.observableArrayList(students);
+            students.clear();
+            return deletedStudents;
         }
 
         @Override
-        public boolean hasStudent(Student student) {
-            return false;
+        public void replaceStudentList(ObservableList<Student> studentList) {
+            students.setAll(studentList);
         }
     }
 }

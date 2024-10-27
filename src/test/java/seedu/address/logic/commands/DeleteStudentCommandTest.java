@@ -284,7 +284,7 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void deleteAllStudents() {
+        public ObservableList<Student> deleteAllStudents() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -306,6 +306,11 @@ public class DeleteStudentCommandTest {
         @Override
         public ObservableList<Student> getAllStudentsByName(Name name) {
             return FXCollections.observableArrayList();
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
+            throw new AssertionError("This method should not be called.");
         }
 
     }
