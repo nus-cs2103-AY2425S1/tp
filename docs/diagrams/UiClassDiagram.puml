@@ -12,7 +12,11 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
+Class TaskListPanel
+Class WeddingListPanel
 Class PersonCard
+Class TaskCard
+Class WeddingCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,24 +36,35 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
+MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" TaskListPanel
+MainWindow *-down-> "1" WeddingListPanel
+
 PersonListPanel -down-> "*" PersonCard
+WeddingListPanel -down-> "*" WeddingCard
+TaskListPanel -down-> "*" TaskCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
+TaskListPanel --|> UiPart
+WeddingListPanel --|> UiPart
 PersonCard --|> UiPart
+TaskCard --|> UiPart
+WeddingCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+PersonCard ....> Model
+TaskCard ....> Model
+WeddingCard ....> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
