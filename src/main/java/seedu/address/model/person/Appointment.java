@@ -3,11 +3,11 @@ package seedu.address.model.person;
 import static java.util.Objects.isNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT_WITH_TIME;
+import static seedu.address.logic.parser.ParserUtil.TIME;
 import static seedu.address.logic.parser.ParserUtil.parseDateTime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import seedu.address.model.person.exceptions.TimeParseException;
 
@@ -49,8 +49,7 @@ public class Appointment {
 
         try {
             LocalDateTime temp = parseDateTime(test);
-            return temp.toLocalTime().isAfter(LocalTime.of(8, 29))
-                    && temp.toLocalTime().isBefore(LocalTime.of(21, 31));
+            return true;
 
         } catch (TimeParseException e) {
             return false;
@@ -102,6 +101,20 @@ public class Appointment {
                 .toLocalDate().isAfter(TODAY);
     }
 
+    /**
+     * Returns the end time of the appointment, which is 15 minutes after {@code dateTime}.
+     */
+    public String getEndTime() {
+        if (dateTime.equals("-")) {
+            return "-";
+        } else {
+            return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
+                                .toLocalTime()
+                                .plusMinutes(15)
+                                .format(TIME);
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,9 +125,20 @@ public class Appointment {
         if (!(other instanceof Appointment)) {
             return false;
         }
-
         Appointment otherAppointment = (Appointment) other;
-        return dateTime.equals(otherAppointment.dateTime);
+
+        if (this.dateTime.equals("-") || otherAppointment.dateTime.equals("-")) {
+            return this.dateTime.equals(otherAppointment.dateTime);
+        }
+
+        // checks if time is within 15 min intervals
+        LocalDateTime time = LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME);
+        LocalDateTime otherTime = LocalDateTime.parse(otherAppointment.dateTime, ENGLISH_FORMAT_WITH_TIME);
+        return time.toLocalDate().isEqual(otherTime.toLocalDate())
+                && (otherTime.isAfter(time.minusMinutes(15))
+                && otherTime.isBefore(time.plusMinutes(15)));
+
+
     }
 
     @Override

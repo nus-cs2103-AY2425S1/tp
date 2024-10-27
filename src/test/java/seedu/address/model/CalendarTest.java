@@ -32,6 +32,13 @@ public class CalendarTest {
     }
 
     @Test
+    public void hasAppointment_appointmentSlotTaken_returnsTrue() {
+        calendar.addAppointment(ALICE);
+        Person temp = new PersonBuilder(BOB).withAppointment("01 January 2024 13:40").build();
+        assertTrue(calendar.hasAppointment(temp));
+    }
+
+    @Test
     public void hasAppointment_appointmentNotInCalendar_returnsFalse() {
         assertFalse(calendar.hasAppointment(ALICE));
     }

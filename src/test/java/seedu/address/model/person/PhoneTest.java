@@ -34,6 +34,8 @@ public class PhoneTest {
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("12345678")); // exactly 8 numbers
+        assertTrue(Phone.isValidPhone("123")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("1234567890")); // exactly 10 numbers
         assertTrue(Phone.isValidPhone("76482644")); // random 8 numbers
     }
 
