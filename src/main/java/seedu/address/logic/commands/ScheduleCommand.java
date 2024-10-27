@@ -36,10 +36,10 @@ public class ScheduleCommand extends Command {
             + PREFIX_NOTE + "first appointment ";
 
     public static final String MESSAGE_SUCCESS = "Scheduled %s for %s";
-    public static final String MESSAGE_INVALID_TIME = "Scheduled time must be a weekday and"
-            + "on the hour between 0900 and 1700";
+    public static final String MESSAGE_INVALID_TIME = "Scheduled time must be a weekday and "
+            + "on the hour (e.g., 0900, 1000) between 0900 and 1600, inclusive.";
     public static final String MESSAGE_SLOT_TAKEN = "The selected time slot is already taken.";
-    public static final String MESSAGE_INVALID_NAME = "Person not found";
+    public static final String MESSAGE_INVALID_NAME = "Person not found.";
     public static final String MESSAGE_INVALID_DATE = "Format of the date must be in YYYY-MM-DD";
     private String name;
     private Set<Schedule> scheduleSet;
