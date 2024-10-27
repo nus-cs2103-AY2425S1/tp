@@ -16,19 +16,19 @@ administrators.
 
 1. [Installation](#1-installation)
 2. [Command Instructions](#2-command-instructions)
-   - [2.1 Viewing Help](#21-viewing-help--help)
-   - [2.2 Adding a Person](#22-adding-a-person--add)
-   - [2.3 Deleting a Person](#23-deleting-a-person--delete)
-   - [2.4 Marking a Payment Date](#24-marking-a-payment-date--markpaid)
+   - [2.1 Viewing Help](#21-viewing-help-help)
+   - [2.2 Adding a Person](#22-adding-a-person-add)
+   - [2.3 Deleting a Person](#23-deleting-a-person-delete)
+   - [2.4 Marking a Payment Date](#24-marking-a-payment-date-markpaid)
    - [2.5 Editing a Person](#25-editing-a-person-edit)
    - [2.6 Listing All Persons](#26-listing-all-persons-list)
-   - [2.7 Finding a Persons](#27-locating-persons-by-name-find)
+   - [2.7 Finding a Person](#27-finding-a-person-find)
    - [2.8 Clearing All Entries](#28-clearing-all-entries-clear)
-   - [2.9 Undo/Redo](#29-undoredo)
+   - [2.9 Undo/Redo Commands](#29-undoredo-commands-undo-and-redo)
    - [2.10 Displaying Pie Chart of Class Distribution](#210-displaying-pie-chart-of-class-distribution-pie)
    - [2.11 Displaying Bar Chart](#211-displaying-bar-chart-bar)
    - [2.12 Viewing Command History](#212-viewing-command-history-arrow-keys)
-   - [2.13 Info Size Window](#213-info-size-window)
+   - [2.13 View Student Details](#213-view-student-details-info)
    - [2.14 Editing the Data File](#214-editing-the-data-file)
    - [2.15 Saving the Data](#215-saving-the-data)
    - [2.16 Exiting the Program](#216-exiting-the-program-exit)
@@ -171,11 +171,11 @@ Deletes the specified person from the address book.
 
 ***
 
-### 2.4 Marking a Payment as Completed: `markpaid`
+### 2.4 Marking a Payment Date: `markpaid`
 
 Updates the payment status of a student to completed.
 
-**Format:** `markpaid INDEX m/YEAR_MONTH`
+**Format:** `markpaid INDEX m/YEAR-MONTH`
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
@@ -185,7 +185,7 @@ Updates the payment status of a student to completed.
 
 
 **Example Usage:**
-*Input: User enters the `markpaid 1 /m 2024-10` mark the first student as paid for October 2024.*
+*Input: User enters the `markpaid 1 m/2024-10` mark the first student as paid for October 2024.*
 ![Ui](images/markpaidcommandinput.png)
 
 *Output: The UI updates to show the payment status of the student.*
@@ -253,7 +253,7 @@ After entering the `list` command, all persons stored in the address book will b
 
 ***
 
-### 2.7 Locating Persons by Name: `find`
+### 2.7 Finding A Person: `find`
 
 Finds persons whose names, class IDs, or both contain any of the given keywords.
 
@@ -317,9 +317,41 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 [Back to Table of Contents](#table-of-contents)
 ***
 
-### 2.9 Undo/Redo Commands: `Undo` and `Redo`
+### 2.9 Undo/Redo Commands: `undo` and `redo`
 
-The `Undo` and `Redo` commands allow you to reverse or redo the most recent changes made to the address book.
+**Command Format:** `undo` and `redo`
+
+The `undo` and `redo` commands allow you to reverse or reapply the most recent changes made to the address book.
+
+**Format:**
+- `undo` – Reverses the most recent change to the address book.
+- `redo` – Reapplies the most recent change that was undone.
+
+* The `undo` command can be used to revert the last command that modified the address book.
+* The `redo` command can be used only if an `undo` was performed previously.
+* Both commands are also accessible through the GUI toolbar, where clicking `Undo` or `Redo` will perform the respective action.
+
+**Example Usage:**
+*Input: User enters the `undo` command to reverse the last change.*
+![Ui](images/undoCommandinput.png)
+
+*Output: The UI updates to reflect the reversal of the most recent change.*
+![Ui](images/undocommandoutput.png)
+
+*Input: User then enters the `redo` command to reapply the change.
+The UI updates to reflect the reapplication of the previously undone change*
+![Ui](images/redocommandinput.png)
+
+**Tips:**
+
+- Use the `undo` command immediately after making a change you wish to revert. This is helpful if you've added, deleted, or modified an entry by mistake.
+- The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
+- Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive backups, consider exporting your data regularly.
+- Both `undo` and `redo` can be accessed through the toolbar in the GUI for quick navigation.
+
+
+
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -357,7 +389,7 @@ For example, given the following data set with 4 students:
 
 Displays a bar chart showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
 
-Command Format: bar
+Command Format: `bar`
 
 * The x-axis represents the months (e.g., 2024-01, 2024-02, etc.).
 * The y-axis shows the number of students who made their payments during each month.
@@ -397,11 +429,11 @@ Allows users to quickly access previously entered commands using the up and down
 ***
 
 
-### 2.13 Displaying Detailed Information: `info`
+### 2.13 View Student Details: `info`
 
 Displays the detailed information of a student in the list.
 
-**Format:** `info INDEX`
+**Command Format:** `info`
 
 * Shows the detailed information of the person at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed person list.
@@ -435,6 +467,7 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
+***
 
 ### 2.16 Exiting the Program: `exit`
 
