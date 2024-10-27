@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -13,11 +12,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
@@ -50,8 +47,6 @@ public class RoleCommandTest {
 
         // Execute the command and assert success
         CommandResult result = roleCommand.execute(model);
-        System.out.println(expectedModel.getAddressBook());
-        System.out.println(model.getAddressBook());
         assertEquals(String.format(RoleCommand.MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(expectedPerson)),
                 result.getFeedbackToUser());
         assertTrue(expectedModel.equals(model));
@@ -59,19 +54,19 @@ public class RoleCommandTest {
     }
 
     @Test
-    public void execute_tagAlreadyExists_throwsCommandException() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+    public void execute_roleAlreadyExists_throwsCommandException() {
+        Index indexFirstPerson = INDEX_FIRST_PERSON;
 
-        Person personToTag = model.getFilteredPersonList().get(0);
+        // assuming first person is Alice with role "florist"
+        Person personToAssign = model.getFilteredPersonList().get(0);
 
-        Name name = new Name(VALID_NAME_AMY);
         RoleCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder()
-                .withRole(VALID_TAG_FRIEND).build();
+                .withRole("florist").build();
 
-        RoleCommand tagCommand = new RoleCommand(indexLastPerson, null, descriptor);
+        RoleCommand tagCommand = new RoleCommand(indexFirstPerson, null, descriptor);
 
         assertThrows(CommandException.class, () -> tagCommand.execute(model),
-                String.format(RoleCommand.MESSAGE_DUPLICATE_ROLE, personToTag.getName()));
+                String.format(RoleCommand.MESSAGE_DUPLICATE_ROLE, personToAssign.getName()));
     }
 
     @Test
