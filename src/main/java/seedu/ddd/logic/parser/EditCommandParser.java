@@ -52,8 +52,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        // Should not contain duplicates prefixes.
-        // Should either specify date for client or service for vendor.
+        // Should not contain duplicates prefixes (except for PREFIX_TAG).
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SERVICE, PREFIX_ID);
 

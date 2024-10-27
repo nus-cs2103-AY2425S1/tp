@@ -1,6 +1,7 @@
 package seedu.ddd.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
@@ -71,22 +73,25 @@ public class SampleDataUtil {
             getTagSet(SAMPLE_TAG_1),
             new ContactId(SAMPLE_VENDOR_ID)
         );
+
         Event sampleEvent = new Event(
             new Name(SAMPLE_EVENT_NAME),
             new Description(SAMPLE_EVENT_DESCRIPTION),
             new Date(SAMPLE_EVENT_DATE),
+            List.of(sampleClient),
+            List.of(sampleVendor),
             new EventId(SAMPLE_EVENT_ID)
         );
 
-        sampleEvent.addClient(sampleClient);
-        sampleEvent.addVendor(sampleVendor);
-        sampleClient.addEvent(sampleEvent);
-        sampleVendor.addEvent(sampleEvent);
-
         AddressBook sampleAb = new AddressBook();
-        sampleAb.addContact(sampleClient);
-        sampleAb.addContact(sampleVendor);
         sampleAb.addEvent(sampleEvent);
+
+        // contacts added only after event has been created
+        List<Contact> contacts = List.of(sampleClient, sampleVendor);
+        for (Contact contact : contacts) {
+            contact.addEvent(sampleEvent);
+            sampleAb.addContact(contact);
+        }
 
         AddressBook.setNextContactId(SAMPLE_NEXT_CONTACT_ID);
         AddressBook.setNextEventId(SAMPLE_NEXT_EVENT_ID);

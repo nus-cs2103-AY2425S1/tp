@@ -21,7 +21,7 @@ public class Date {
     private static final List<DateTimeFormatter> FORMATTERS = Stream.of(VALID_DATE_PATTERNS)
             .map(DateTimeFormatter::ofPattern)
             .toList();
-    public static final String MESSAGE_CONSTRAINTS = "Supported ate formats: " + Stream.of(VALID_DATE_PATTERNS)
+    public static final String MESSAGE_CONSTRAINTS = "Supported date formats: " + Stream.of(VALID_DATE_PATTERNS)
             .collect(Collectors.joining(", "));
 
     public final LocalDate date;
