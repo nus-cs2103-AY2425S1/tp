@@ -17,7 +17,7 @@ public class ListPrioCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all patients whose Priority "
             + "matches the given Priority level.\n"
-            + "Parameters: !/Priority\n"
+            + "Parameter: !/Priority\n"
             + "Example: " + COMMAND_WORD + " !/HIGH\n";
 
     private final PriorityMatchesPredicate predicate;
