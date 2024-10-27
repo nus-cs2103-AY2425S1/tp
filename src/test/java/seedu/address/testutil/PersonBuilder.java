@@ -127,6 +127,9 @@ public class PersonBuilder {
      */
     public PersonBuilder withOwnWedding(Wedding ownWedding) {
         this.ownWedding = ownWedding;
+        if (ownWedding != null) {
+            ownWedding.setClient((this.build()));
+        }
         return this;
     }
 

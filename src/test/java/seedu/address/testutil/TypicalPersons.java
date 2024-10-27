@@ -42,14 +42,12 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withRole("florist")
             .withOwnWedding(ALICE_WEDDING)
-            .addWeddingJob(AMY_WEDDING)
-            .addWeddingJob(JOHN_WEDDING)
             .build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98756432").withRole("caterer")
-            .addWeddingJob(GEORGE_WEDDING).addWeddingJob(ELLE_WEDDING).build();
+            .addWeddingJob(GEORGE_WEDDING).build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRole("florist")
@@ -114,6 +112,21 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         return ab;
+    }
+
+    public static AddressBook getTypicalAddressBookFilterWithWeddings() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsFilter()) {
+            ab.addPerson(person);
+        }
+        for (Wedding wedding : getTypicalWeddings()) {
+            ab.addWedding(wedding);
+        }
+        return ab;
+    }
+
+    public static List<Wedding> getTypicalWeddings() {
+        return new ArrayList<>(Arrays.asList(ALICE_WEDDING, GEORGE_WEDDING));
     }
 
     public static List<Person> getTypicalPersons() {
