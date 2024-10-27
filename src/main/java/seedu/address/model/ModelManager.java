@@ -191,8 +191,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortingOrder(Comparator<Person> comparator) {
-        sortedPersons.setComparator(comparator);
+    public void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate) {
+        requireNonNull(masterPredicate);
+        filteredPersonListMasterPredicate = masterPredicate;
+        filteredPersons.setPredicate(filteredPersonListMasterPredicate);
     }
 
     @Override
@@ -201,9 +203,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setFilteredPersonListMasterPredicate(FilteredPersonListMasterPredicate predicate) {
-        requireNonNull(predicate);
-        filteredPersonListMasterPredicate = predicate;
+    public void updateSortingOrder(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
     }
 
     @Override

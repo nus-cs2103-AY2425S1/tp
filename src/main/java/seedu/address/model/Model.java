@@ -92,10 +92,20 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * Can be used with {@link FilteredPersonListMasterPredicate}
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the main filter of the filtered person list to filter by the given {@code masterPredicate}
+     * @throws NullPointerException if {@code masterPredicate} is null.
+     */
+    void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate);
+
+    /**
+     * Gets the main filter of the filtered person list
+     */
+    FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate();
 
     /**
      * Updates the order of the person list according to the given parameter.
@@ -138,10 +148,6 @@ public interface Model {
      * Returns a list of appointments that conflict with the given appointment.
      */
     List<Appointment> getConflictingAppointments(Appointment appointment);
-
-    FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate();
-
-    void setFilteredPersonListMasterPredicate(FilteredPersonListMasterPredicate predicate);
 
     /**
      * Represents the main predicates for filteredPersonList.

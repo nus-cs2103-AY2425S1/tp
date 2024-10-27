@@ -166,6 +166,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateSortingOrder(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
@@ -202,15 +212,6 @@ public class AddCommandTest {
 
         @Override
         public List<Appointment> getConflictingAppointments(Appointment appointment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        public void setFilteredPersonListMasterPredicate(FilteredPersonListMasterPredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
