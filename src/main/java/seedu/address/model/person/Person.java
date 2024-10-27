@@ -28,19 +28,6 @@ public class Person {
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
-    //    /**
-    //     * Every field must be present and not null.
-    //     */
-    //    public Person(Name name, Phone phone, Email email, Address address, Role role) {
-    //        requireAllNonNull(name, phone, email, address, role);
-    //        this.name = name;
-    //        this.phone = phone;
-    //        this.email = email;
-    //        this.address = address;
-    //        this.role = role;
-    //        this.ownWedding = null;
-    //    }
-
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
@@ -55,10 +42,11 @@ public class Person {
     }
 
     public void setOwnWedding(Wedding wedding) {
-        ownWedding = wedding;
+
         if (wedding == null) {
             throw new NullPointerException("Wedding cannot be null.");
         }
+        ownWedding = wedding;
         wedding.setClient(this);
     }
 
