@@ -150,6 +150,7 @@ Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`
 * `find t/TP` returns the list of contacts with TP tag <br>
   ![result for 'findTp'](images/findTp.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -159,7 +160,6 @@ Format:
 `delete n/NAME`
 `delete n/NAME p/PHONE_NUMBER`
 `delete n/NAME e/EMAIL`
-
 
 * Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME` and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
@@ -171,6 +171,36 @@ Examples:
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete n/Betsy` will delete contact with the full name Betsy.
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
+
+### Adding/Removing remark for a person : `remark`
+
+#### Add a remark for the specified person from the address book.
+
+Format:
+`remark INDEX r/REMARK`
+
+- The `INDEX` refers to the index number shown in the displayed person list.
+- Ensure that the specified `INDEX` is a positive integer (1, 2, 3, ...).
+- The remark must be between **0 and 50 characters** in length.
+- If the remark exceeds 50 characters, it will not be accepted.
+
+**Examples**:
+- `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
+
+#### Remove a remark for a person : `remark`
+`remark INDEX`  
+`remark INDEX r/`
+
+Format:
+- Using `remark INDEX` will remove the existing remark for the person at the specified `INDEX`.
+- Using `remark INDEX r/` will also clear the remark for the person at the specified `INDEX`.
+
+**Examples**:
+- `remark 3` removes the remark for the 3rd person in the address book.
+- `remark 1 r/` clears the remark for the 1st person in the address book.
+
+- Ensure that the specified `INDEX` is a positive integer (1, 2, 3, ...).
+- If the index refers to a person who does not have a remark, the command will still execute but no changes will be made.
 
 ### Clearing all entries : `clear`
 

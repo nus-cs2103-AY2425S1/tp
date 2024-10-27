@@ -109,7 +109,6 @@ public class Person {
                 .add("email", email)
                 .add("jobCode", jobCode)
                 .add("tag", tag)
-                .add("remark", remark)
                 .toString();
     }
 

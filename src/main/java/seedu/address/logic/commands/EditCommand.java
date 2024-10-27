@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -42,8 +41,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_JOBCODE + "JOB CODE] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_REMARK + "REMARK] \n"
+            + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,7 +98,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         JobCode updatedJobCode = editPersonDescriptor.getJobCode().orElse(personToEdit.getJobCode());
         Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedJobCode, updatedTag, updatedRemark);
     }
@@ -153,7 +151,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setJobCode(toCopy.jobCode);
             setTag(toCopy.tag);
-            setRemark(toCopy.remark);
         }
 
         /**
@@ -203,14 +200,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tag);
         }
 
-        public void setRemark(Remark remark) {
-            this.remark = remark;
-        }
-
-        public Optional<Remark> getRemark() {
-            return Optional.ofNullable(remark);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -227,8 +216,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(jobCode, otherEditPersonDescriptor.jobCode)
-                    && Objects.equals(tag, otherEditPersonDescriptor.tag)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark);
+                    && Objects.equals(tag, otherEditPersonDescriptor.tag);
         }
 
         @Override
@@ -239,7 +227,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("job code", jobCode)
                     .add("tag", tag)
-                    .add("remark", remark)
                     .toString();
         }
     }
