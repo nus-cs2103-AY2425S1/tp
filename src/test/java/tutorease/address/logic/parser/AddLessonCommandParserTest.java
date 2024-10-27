@@ -16,6 +16,13 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_I
 import static tutorease.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_DURATION_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_FEE_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.UPPERCASE_STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_FEE;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -147,5 +154,28 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
                         + " " + PREFIX_DURATION + INVALID_DURATION_TWENTY_FIVE,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
+    }
+    @Test
+    public void parse_upperCasePrefixes_success() throws ParseException {
+        Lesson expectedLesson = new LessonBuilder()
+                .withFee(VALID_FEE)
+                .withStartDateTime(VALID_START_DATE)
+                .withEndDateTime(VALID_END_DATE)
+                .build();
+        StudentId studentId = new StudentId(VALID_STUDENT_ID);
+        AddLessonCommand expectedCommand = new AddLessonCommand(studentId, expectedLesson.getFee(),
+                expectedLesson.getStartDateTime(), expectedLesson.getEndDateTime());
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + UPPERCASE_STUDENT_ID_DESC + FEE_DESC
+                        + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + UPPERCASE_FEE_DESC
+                        + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
+                        + UPPERCASE_START_DATE_TIME_DESC + DURATION_DESC,
+                expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
+                        + START_DATE_TIME_DESC + UPPERCASE_DURATION_DESC,
+                expectedCommand);
     }
 }
