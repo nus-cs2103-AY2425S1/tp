@@ -42,4 +42,14 @@ public class NricTest {
         assertTrue(Nric.isValidNric("M1234567C"));
 
     }
+
+    @Test
+    public void equals() {
+        Nric nric = new Nric("T1234567Z");
+
+        assertTrue(nric.equals(new Nric("T1234567Z")));
+        assertTrue(nric.equals(nric));
+        assertFalse(nric.equals(null));
+        assertFalse(nric.equals(new Nric("F9876543E")));
+    }
 }

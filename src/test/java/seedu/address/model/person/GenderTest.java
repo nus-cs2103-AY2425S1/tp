@@ -40,4 +40,15 @@ public class GenderTest {
         assertTrue(Gender.isValidGender("m"));
 
     }
+
+    @Test
+    public void equals() {
+        Gender gender = new Gender("M");
+
+        assertTrue(gender.equals(new Gender("M")));
+        assertTrue(gender.equals(gender));
+        assertFalse(gender.equals(null));
+        assertFalse(gender.equals(new Gender("F")));
+
+    }
 }
