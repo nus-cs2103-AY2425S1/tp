@@ -51,7 +51,7 @@ public class ViewCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof View)) {
+        if (!(other instanceof ViewCommand)) {
             return false;
         }
 
