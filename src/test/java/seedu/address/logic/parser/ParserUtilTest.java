@@ -18,9 +18,9 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Subject;
-import seedu.address.model.student.Schedule;
 import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
+import seedu.address.model.student.Subject;
 
 
 
