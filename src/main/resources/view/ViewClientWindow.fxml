@@ -28,6 +28,9 @@
           <Region HBox.hgrow="ALWAYS"/>
           <Label fx:id="correctAsOfLabel" styleClass="client_correct_as_of_label"/>
         </HBox>
+        <!-- Check-In Status Button -->
+        <Button fx:id="checkInStatusButton" text="Checked-Out" styleClass="checkin_status_button" />
+        
         <padding>
           <Insets top="20" right="30" bottom="20" left="30"/>
         </padding>
@@ -42,6 +45,9 @@
         <Label fx:id="clientAddressLabel" text="Client's Home Address Not Found"
             styleClass="client_details_field_label"/>
 
+        <!-- Label for Check-in Status -->
+        <Label fx:id="clientCheckInStatusLabel" text="Check-in Status Not Found"
+            styleClass="client_details_field_label"/>
         <!-- Car Details -->
         <Label text="Car Details" styleClass="client_details_header_label" />
         <Label fx:id="clientCarDetailsLabel" text="Client's Car Details Not Found"
