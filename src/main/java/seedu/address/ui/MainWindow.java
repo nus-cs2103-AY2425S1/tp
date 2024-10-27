@@ -35,6 +35,12 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private double windowWidth;
+    private double windowHeight;
+    private double windowX;
+    private double windowY;
+    private boolean isMaximized;
+    private boolean isFullScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -167,12 +173,38 @@ public class MainWindow extends UiPart<Stage> {
     private void handleInspect(CommandResult commandResult) {
         logger.info("Changing UI...");
 
-        InspectWindow inspectWindow;
-        inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
+        storeWindowSize();
+        InspectWindow inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
+        keepWindowSize(inspectWindow.getPrimaryStage());
         inspectWindow.show();
         inspectWindow.fillInnerParts();
         inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
         AddressBookParser.setInspect(true);
+    }
+
+    /**
+     * Stores the current window size before changing windows.
+     */
+    private void storeWindowSize() {
+        windowWidth = primaryStage.getWidth();
+        windowHeight = primaryStage.getHeight();
+        windowX = primaryStage.getX();
+        windowY = primaryStage.getY();
+        isMaximized = primaryStage.isMaximized();
+        isFullScreen = primaryStage.isFullScreen();
+    }
+
+    /**
+     * Sets the window size of the next window to match the size of the current window
+     * @param stage (window to be switched to)
+     */
+    private void keepWindowSize(Stage stage) {
+        stage.setFullScreen(isFullScreen);
+        stage.setWidth(windowWidth);
+        stage.setHeight(windowHeight);
+        stage.setX(windowX);
+        stage.setY(windowY);
+        stage.setMaximized(isMaximized);
     }
 
     public PersonListPanel getPersonListPanel() {
