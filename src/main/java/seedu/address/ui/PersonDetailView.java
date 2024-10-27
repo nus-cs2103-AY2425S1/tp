@@ -96,11 +96,15 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
             if (event.isPersonAttending(person)) {
                 Label eventName = new Label(event.getEventName());
                 eventName.getStyleClass().add("grid-content-name");
+                Label eventLocation = new Label(event.getLocation().toString());
+                eventLocation.getStyleClass().add("grid-content-location");
                 Label eventDate = new Label(event.getDate().format(DATE_FORMATTER));
                 eventDate.getStyleClass().add("grid-content-date");
 
+
                 eventsAttending.add(eventName, 0, rowIndex);
-                eventsAttending.add(eventDate, 1, rowIndex);
+                eventsAttending.add(eventLocation, 1, rowIndex);
+                eventsAttending.add(eventDate, 2, rowIndex);
 
                 rowIndex++;
             }
@@ -109,7 +113,7 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
         if (rowIndex == 2) {
             Label noEventsLabel = new Label("No upcoming events");
             noEventsLabel.getStyleClass().add("grid-content-name");
-            eventsAttending.add(noEventsLabel, 0, rowIndex, 2, 1);
+            eventsAttending.add(noEventsLabel, 0, rowIndex, 3, 1);
             GridPane.setHalignment(noEventsLabel, HPos.CENTER);
         }
     }
