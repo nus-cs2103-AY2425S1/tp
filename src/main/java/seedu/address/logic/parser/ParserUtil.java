@@ -156,6 +156,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code role} is invalid.
      */
     public static Optional<Role> parseRole(String role) throws ParseException {
+        requireNonNull(role);
         String trimmedRole = role.trim();
         if (trimmedRole.isEmpty()) {
             return Optional.empty();

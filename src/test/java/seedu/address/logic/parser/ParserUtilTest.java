@@ -41,7 +41,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -157,14 +157,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Role expectedTag = new Role(VALID_TAG_1);
+        Optional<Role> expectedTag = Optional.of(new Role(VALID_TAG_1));
         assertEquals(expectedTag, ParserUtil.parseRole(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Role expectedTag = new Role(VALID_TAG_1);
+        Optional<Role> expectedTag = Optional.of(new Role(VALID_TAG_1));
         assertEquals(expectedTag, ParserUtil.parseRole(tagWithWhitespace));
     }
 
@@ -180,7 +180,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_emptyRole_throwsParseException() throws Exception {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(""));
+        String emptyTag = "";
+        Optional<Role> expectedTag = Optional.empty();
+        assertEquals(expectedTag, ParserUtil.parseRole(emptyTag));
     }
 
     @Test

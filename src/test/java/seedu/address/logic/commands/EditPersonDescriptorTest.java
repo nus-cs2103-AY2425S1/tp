@@ -10,15 +10,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.role.Role;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+
 
 /**
  * Contains unit tests for {@code EditPersonDescriptor}.
  */
 public class EditPersonDescriptorTest {
+
+    private Optional<Role> role = Optional.empty();
 
     /**
      * Tests the {@code equals} method of {@code EditPersonDescriptor} for various scenarios.
