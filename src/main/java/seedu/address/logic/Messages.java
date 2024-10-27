@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -45,8 +46,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append(" | Address: ")
                 .append(person.getAddress())
-                .append("; Role: ")
-                .append(person.getRole());
+                .append("| Role: ")
+                .append(person.getRole().map(Role::toString).orElse(null));
         return builder.toString();
     }
 

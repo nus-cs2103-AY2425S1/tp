@@ -52,7 +52,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
 
     private final Person toAdd;
-    private final Set<Index> weddingIndices = new HashSet<>();
+    private Set<Index> weddingIndices;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
     public AddCommand(Person person, Set<Index> weddingIndices) {
         requireNonNull(person);
         toAdd = person;
-        this.weddingIndices.addAll(weddingIndices);
+        this.weddingIndices = weddingIndices != null ? weddingIndices : new HashSet<>();
     }
 
     @Override
@@ -108,5 +108,10 @@ public class AddCommand extends Command {
 
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s{toAdd=%s}", this.getClass().getCanonicalName(), toAdd);
     }
 }

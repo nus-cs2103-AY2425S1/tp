@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -85,7 +85,7 @@ public class EditCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid edit fields
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, EditCommand.MESSAGE_NOT_EDITED); // invalid role field
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, EditCommand.MESSAGE_NOT_EDITED); // invalid role field
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
                 EditCommand.MESSAGE_NOT_EDITED);
 

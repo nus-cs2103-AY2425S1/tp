@@ -281,6 +281,11 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return javafx.collections.FXCollections.observableArrayList(); // Empty list for simplicity
+        }
     }
 
 }

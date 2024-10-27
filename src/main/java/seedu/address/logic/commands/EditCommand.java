@@ -312,8 +312,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("role", role != null ? role.toString() : "")
                     .toString();
         }
-
     }
 }
