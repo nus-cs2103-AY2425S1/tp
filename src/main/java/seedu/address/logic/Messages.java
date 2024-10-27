@@ -24,9 +24,10 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! "
-            + "Please use the format: yyyy-MM-dd HHmm";
+            + "Please use the format: yyyy-MM-dd HHmm\nMonths must be between 01-12, and days between 01-31.";
     public static final String MESSAGE_INVALID_REMINDER_FORMAT = "Invalid reminder time! "
             + "Please enter either: n day/hour(s)";
+    public static final String MESSAGE_INVALID_DATE = "Given date does not exist!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
