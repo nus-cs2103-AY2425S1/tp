@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Storage STORAGE_COLOR_T1
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonAddressBookStorage" as JsonABStorage STORAGE_COLOR
+participant "jsab:JsonSerializableAddressBook" as JsonSerializableAB STORAGE_COLOR
+end box
+
+box Commons LOGIC_COLOR_T1
+participant "<<class>>\n:JsonUtil" as JsonUtil LOGIC_COLOR_T2
+participant "<<class>>\n:FileUtil" as FileUtil LOGIC_COLOR_T2
+end box
+
+[-> StorageManager : saveAddressBook(ab)
+activate StorageManager
+
+StorageManager -> JsonABStorage : getAddressBookFilePath()
+activate JsonABStorage
+
+JsonABStorage --> StorageManager : fp
+deactivate JsonABStorage
+
+StorageManager -> JsonABStorage : saveAddressBook(ab, fp)
+activate JsonABStorage
+
+JsonABStorage -> FileUtil : createIfMissing(fp)
+activate FileUtil
+
+opt File does not exist
+FileUtil -> FileUtil : createFile(fp)
+activate FileUtil
+FileUtil -> FileUtil : createParentDirsOfFile(fp)
+activate FileUtil
+FileUtil --> FileUtil
+deactivate FileUtil
+FileUtil --> FileUtil
+deactivate FileUtil
+end opt
+FileUtil --> JsonABStorage
+deactivate FileUtil
+
+create JsonSerializableAB
+JsonABStorage -> JsonSerializableAB
+activate JsonSerializableAB
+JsonSerializableAB --> JsonABStorage
+deactivate JsonSerializableAB
+
+JsonABStorage -> JsonUtil : saveJsonFile(jsab, fp)
+activate JsonUtil
+
+JsonUtil -> JsonUtil : serializeObjectToJsonFile(fp, jsab)
+activate JsonUtil
+JsonUtil -> JsonUtil : toJsonString(jsab)
+activate JsonUtil
+JsonUtil --> JsonUtil : jstring
+deactivate JsonUtil
+
+JsonUtil -> FileUtil : writeToFile(fp, jstring)
+activate FileUtil
+FileUtil --> JsonUtil
+deactivate FileUtil
+JsonUtil --> JsonUtil
+deactivate JsonUtil
+JsonUtil --> JsonABStorage
+deactivate JsonUtil
+JsonABStorage --> StorageManager
+deactivate JsonABStorage
+<-- StorageManager
+deactivate StorageManager
+@enduml
