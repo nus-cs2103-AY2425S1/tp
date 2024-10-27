@@ -32,7 +32,6 @@ import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.StudentBuilder;
 
 public class ModelManagerTest {
 
