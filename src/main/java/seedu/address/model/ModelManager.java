@@ -16,45 +16,45 @@ import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of EduContacts data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final EduContacts eduContacts;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Person personToDisplay;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given eduContacts and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyEduContacts eduContacts, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(eduContacts, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with EduContacts: " + eduContacts + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.eduContacts = new EduContacts(eduContacts);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.eduContacts.getPersonList());
     }
 
     /**
-     * Initializes a ModelManager with the given addressBook, userPrefs and personToDisplay.
+     * Initializes a ModelManager with the given eduContacts, userPrefs and personToDisplay.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Person personToDisplay) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyEduContacts eduContacts, ReadOnlyUserPrefs userPrefs, Person personToDisplay) {
+        requireAllNonNull(eduContacts, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with EduContacts: " + eduContacts + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.eduContacts = new EduContacts(eduContacts);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.eduContacts.getPersonList());
         setPersonToDisplay(personToDisplay);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EduContacts(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -82,50 +82,50 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getEduContactsFilePath() {
+        return userPrefs.getEduContactsFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setEduContactsFilePath(Path eduContactsFilePath) {
+        requireNonNull(eduContactsFilePath);
+        userPrefs.setEduContactsFilePath(eduContactsFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== EduContacts ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setEduContacts(ReadOnlyEduContacts eduContacts) {
+        this.eduContacts.resetData(eduContacts);
         setPersonToDisplay(null);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyEduContacts getEduContacts() {
+        return eduContacts;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return eduContacts.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        eduContacts.removePerson(target);
         if (target.isSamePerson(personToDisplay)) {
             setPersonToDisplay(null);
         }
     }
     @Override
     public void deleteModule(Person target, Module module) {
-        addressBook.removeModule(target, module);
+        eduContacts.removeModule(target, module);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        eduContacts.addPerson(person);
 
         setPersonToDisplay(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -133,7 +133,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addModule(Person person, Module module) {
-        addressBook.addModule(person, module);
+        eduContacts.addModule(person, module);
 
         setPersonToDisplay(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        eduContacts.setPerson(target, editedPerson);
         setPersonToDisplay(editedPerson);
     }
 
@@ -151,7 +151,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedEduContacts}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -168,7 +168,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setPersonToDisplay(Person personToDisplay) {
-        if (personToDisplay == null || addressBook.hasPerson(personToDisplay)) {
+        if (personToDisplay == null || eduContacts.hasPerson(personToDisplay)) {
             this.personToDisplay = personToDisplay;
         }
     }
@@ -191,7 +191,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
 
-        return addressBook.equals(otherModelManager.addressBook)
+        return eduContacts.equals(otherModelManager.eduContacts)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && Objects.equals(personToDisplay, otherModelManager.personToDisplay);

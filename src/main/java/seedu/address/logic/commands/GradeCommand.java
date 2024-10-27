@@ -35,7 +35,7 @@ public class GradeCommand extends Command {
             + PREFIX_GRADE + "A+ ";
 
     public static final String MESSAGE_SUCCESS = "New grade added for %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in EduContacts";
     public static final String MESSAGE_MODULE_NOT_FOUND = "The student does not take the module %1$s";
 
     private final Module module;

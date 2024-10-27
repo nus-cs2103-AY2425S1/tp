@@ -9,12 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EduContacts;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,7 +28,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class ModuleCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEduContacts(), new UserPrefs());
 
     @Test
     public void execute_moduleAcceptedByModel_addSuccessful() {
@@ -41,7 +41,7 @@ public class ModuleCommandTest {
 
         String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, studentId);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
 
         assertCommandSuccess(moduleCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class ModuleCommandTest {
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
-        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in the address book
+        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in EduContacts
         Module validModule = new Module(VALID_MODULE_AMY);
         ModuleCommand moduleCommand = new ModuleCommand(invalidStudentId, validModule);
 

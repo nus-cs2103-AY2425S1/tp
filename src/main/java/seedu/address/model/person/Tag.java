@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Person's Tag in the address book.
+ * Represents a Person's Tag in EduContacts.
  * Guarantees: immutable; is valid as declared in {@link #isValidTag(String)}
  */
 public class Tag {
