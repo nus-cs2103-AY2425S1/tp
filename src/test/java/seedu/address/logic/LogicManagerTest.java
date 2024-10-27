@@ -142,7 +142,7 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        // Inject logic with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
@@ -164,5 +164,40 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void getPreviousCommand_navigatesThroughCommandHistory() {
+        logic.addCommandToHistory("add Alice");
+        logic.addCommandToHistory("delete 1");
+        logic.addCommandToHistory("edit 1 Bob");
+
+        assertEquals("edit 1 Bob", logic.getPreviousCommand());
+        assertEquals("delete 1", logic.getPreviousCommand());
+        assertEquals("add Alice", logic.getPreviousCommand());
+        assertEquals("add Alice", logic.getPreviousCommand()); // Stays on first command
+    }
+
+    @Test
+    void getNextCommand_navigatesForwardInCommandHistory() {
+        logic.addCommandToHistory("add Alice");
+        logic.addCommandToHistory("delete 1");
+
+        logic.getPreviousCommand(); // "delete 1"
+        logic.getPreviousCommand(); // "add Alice"
+
+        assertEquals("delete 1", logic.getNextCommand());
+        assertEquals("", logic.getNextCommand()); // No further commands, expect empty
+    }
+
+    @Test
+    void addCommandToHistory_resetsCurrentIndexToEnd() {
+        logic.addCommandToHistory("add Alice");
+        logic.addCommandToHistory("delete 1");
+
+        logic.getPreviousCommand(); // Go to "delete 1"
+        logic.addCommandToHistory("edit 1 Bob"); // Adding new command resets currentIndex
+
+        assertEquals("edit 1 Bob", logic.getPreviousCommand());
     }
 }
