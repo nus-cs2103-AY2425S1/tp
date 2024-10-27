@@ -6,9 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,6 +24,7 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Tags existing person in the address book.
@@ -177,6 +180,8 @@ public class RoleCommand extends Command {
         private Email email;
         private Address address;
         private Optional<Role> role;
+        private Wedding ownWedding;
+        private Set<Wedding> weddingJobs = new HashSet<>();
 
         public PersonWithRoleDescriptor() {
         }

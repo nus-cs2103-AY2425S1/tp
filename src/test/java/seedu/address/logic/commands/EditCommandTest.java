@@ -46,7 +46,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Person personAtFirstIndex = model.getFilteredPersonList().get(0);
         Person expectedPerson = new PersonBuilder(editedPerson)
-                .withRole(personAtFirstIndex.getRole().roleName)
+                .withRole(personAtFirstIndex.getRole().map(role -> role.roleName).orElse(null))
                 .withOwnWedding(personAtFirstIndex.getOwnWedding())
                 .withWeddingJobs(personAtFirstIndex.getWeddingJobs()).build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
