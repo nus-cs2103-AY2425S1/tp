@@ -425,7 +425,7 @@ Format: `exit`
 Adds a public address to a contact.
 
 
-Format: `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`
+Format: `addpa c/NETWORK n/NAME l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 
 * Adds a public address to a contact based on the NAME
@@ -443,7 +443,7 @@ Format: `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 Examples:
 
-* `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+* `addPublicAddress c/ETH n/Travis l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
 
 ### Editing a public address of a contact : `editpa`
 
@@ -513,9 +513,9 @@ Format: `deletepa INDEX c/NETWORK [w/WALLET_NAME]`
 
 Examples:
 
-* `deletePublicAddress 1 c/BTC w/wallet1` deletes the public address of the 1st person in the BTC Network with the wallet name `wallet1`.
+* `deletepa 1 c/BTC w/wallet1` deletes the public address of the 1st person in the BTC Network with the wallet name `wallet1`.
 
-* `deletePublicAddress 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
+* `deletepa 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
 
 
 ### Searching for a public address : `publicAddressSearch`
