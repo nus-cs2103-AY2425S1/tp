@@ -297,71 +297,66 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void unassignStudent_studentAssignedToTutorial_success() {
-        // Initialize the ModelManager with empty data
-        ModelManager modelManager = new ModelManager(new AddressBook(),
-                new UserPrefs(), new AssignmentList(), new TutorialList());
+    public void unassignStudent_fromExistingTutorial_studentRemoved() {
+        // Initialize the ModelManager with an address book and tutorials
+        AddressBook addressBook = new AddressBook();
+        TutorialList tutorialList = new TutorialList();
+        ModelManager modelManager = new ModelManager(addressBook, new UserPrefs(), new AssignmentList(), tutorialList);
 
-        // Create a tutorial and a student
+        // Create a tutorial and add it to the tutorial list
         TutorialId tutorialId = TutorialId.of("T1001");
         TutName tutName = new TutName("CS2103");
         Tutorial tutorial = Tutorial.of(tutName, tutorialId);
-
-        Student student = new StudentBuilder().withName("Alice").withStudentId("A0123456X")
-                .withTutorialId(tutorialId.getValue()).build();
-
-        // Add the tutorial and student to the model
         modelManager.addTutorial(tutorial);
-        modelManager.addStudent(student);
 
-        // Assign the student to the tutorial
+        // Create a student and assign them to the tutorial
+        Student student = new StudentBuilder().withName("Alice").withStudentId("A0123456X").withTutorialId("T1001").build();
+        modelManager.addStudent(student);
         modelManager.assignStudent(student, tutorialId);
+
+        // Verify the student is in the tutorial
         assertTrue(tutorial.getStudents().contains(student));
 
         // Unassign the student from the tutorial
         modelManager.unassignStudent(student, tutorialId);
 
-        // Verify that the student is no longer in the tutorial's student list
+        // Verify the student is no longer in the tutorial
         assertFalse(tutorial.getStudents().contains(student));
     }
 
     @Test
-    public void unassignStudent_tutorialDoesNotExist_noException() {
-        // Initialize the ModelManager with empty data
-        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
-                new AssignmentList(), new TutorialList());
+    public void unassignStudent_withUnassignedTutorialId_noActionTaken() {
+        // Initialize the ModelManager
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
 
-        // Create a student
-        Student student = new StudentBuilder().withName("Alice").withStudentId("A0123456X")
-                .withTutorialId("T1001").build();
-
-        // Add the student to the model
-        modelManager.addStudent(student);
-
-        // Attempt to unassign the student from a non-existent tutorial
-        // Should not throw an exception
-        modelManager.unassignStudent(student, TutorialId.of("T1001"));
-
-        // Since the tutorial doesn't exist, nothing happens
-        // We can check that the student's tutorialId is unchanged
-        assertEquals("T1001", student.getTutorialId().getValue());
-    }
-
-    @Test
-    public void unassignStudent_studentWithUnassignedTutorialId_noEffect() {
-        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
-                new AssignmentList(), new TutorialList());
-
-        Student student = new StudentBuilder().withName("Bob").withStudentId("A1234567M")
+        // Create a student with an unassigned tutorial ID
+        Student student = new StudentBuilder().withName("Bob").withStudentId("A1234567X")
                 .withTutorialId(TutorialId.none().toString()).build();
-
         modelManager.addStudent(student);
 
-        // Attempt to unassign student who has an unassigned tutorial ID
+        // Unassign the student (should have no effect)
         modelManager.unassignStudent(student, student.getTutorialId());
 
         // Since the tutorial ID is unassigned, nothing should happen
-        // Verify student's tutorial ID remains unchanged
+        // Verify that no exceptions are thrown and the student's tutorial ID remains the same
         assertEquals(TutorialId.none().toString(), student.getTutorialId().getValue());
+    }
+
+    @Test
+    public void unassignStudent_fromNonExistentTutorial_noExceptionThrown() {
+        // Initialize the ModelManager
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
+
+        // Create a student assigned to a tutorial ID that doesn't exist in the tutorial list
+        TutorialId nonExistentTutorialId = TutorialId.of("T9999");
+        Student student = new StudentBuilder().withName("Charlie").withStudentId("A7654321X")
+                .withTutorialId(nonExistentTutorialId.getValue()).build();
+        modelManager.addStudent(student);
+
+        // Attempt to unassign the student from the non-existent tutorial
+        modelManager.unassignStudent(student, nonExistentTutorialId);
+
+        // Verify that no exceptions are thrown and the student's tutorial ID remains unchanged
+        assertEquals(nonExistentTutorialId, student.getTutorialId());
     }
 }
