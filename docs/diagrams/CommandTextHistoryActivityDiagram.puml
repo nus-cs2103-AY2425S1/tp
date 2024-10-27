@@ -9,7 +9,8 @@ start
 switch()
 case ([press up button])
     if () then ([currentCommandIndex > 0])
-        :CommandTextHistory \ngets previous command;
+        :CommandTextHistory
+        gets previous command;
     else ([else])
     endif
 case ([press down button])
