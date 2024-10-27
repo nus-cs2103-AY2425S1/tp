@@ -65,7 +65,7 @@ public class FindCommand extends Command {
         }
 
         model.setPersonToDisplay(toFind);
-        return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, Messages.format(toFind)));
+        return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, Messages.format(toFind)), true);
     }
 
     @Override

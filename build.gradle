@@ -65,7 +65,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'educontacts.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'
