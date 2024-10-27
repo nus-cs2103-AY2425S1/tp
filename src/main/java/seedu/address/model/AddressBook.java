@@ -98,6 +98,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortByPin();
     }
 
+    // Archive related Methods
+
+    public void archivePerson(Person person) {
+        persons.archivePerson(person);
+    }
+
+    public void unarchivePerson(Person person) {
+        persons.unarchivePerson(person);
+    }
+
     //// util methods
 
     @Override

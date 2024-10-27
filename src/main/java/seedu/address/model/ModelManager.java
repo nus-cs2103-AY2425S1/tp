@@ -130,12 +130,12 @@ public class ModelManager implements Model {
     
     @Override
     public void archivePerson(Person person) {
-        person.setArchived(true);
+        addressBook.archivePerson(person);
     }
 
     @Override
     public void unarchivePerson(Person person) {
-        person.setArchived(false);
+        addressBook.unarchivePerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

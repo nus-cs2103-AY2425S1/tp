@@ -58,6 +58,9 @@ public class UnarchiveCommand extends Command {
 
         assert resultMessages.size() == targetIndices.size();
 
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ARCHIVED_PERSONS);
+
         if (resultMessages.size() == 1) {
             return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
         } else {

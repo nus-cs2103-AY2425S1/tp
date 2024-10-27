@@ -98,6 +98,30 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void archivePerson(Person person) {
+        requireNonNull(person);
+
+        int index = internalList.indexOf(person);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person personToArchive = internalList.get(index);
+        personToArchive.setArchived(true);
+    }
+
+    public void unarchivePerson(Person person) {
+        requireNonNull(person);
+
+        int index = internalList.indexOf(person);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person personToArchive = internalList.get(index);
+        personToArchive.setArchived(false);
+    }
+
     /**
      * Sorts the list by placing all the pinned people to the top of the list.
      */
