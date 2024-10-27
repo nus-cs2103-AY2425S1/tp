@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -60,4 +62,20 @@ public class ViewClientCommandTest {
         assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_NAME_DISPLAYED), ()
                 -> viewClientCommand.execute(model));
     }
+
+    @Test
+    public void equal_success() {
+        ViewClientCommand commandOne = new ViewClientCommand(new Name("Bob"));
+        ViewClientCommand commandTwo = commandOne;
+        assertTrue(commandOne.equals(commandTwo));
+    }
+
+    @Test
+    public void toString_success() {
+        String name = "Bob";
+        ViewClientCommand command = new ViewClientCommand(new Name(name));
+        String expectedString =  "seedu.address.logic.commands.ViewClientCommand{toShowClient=" + name + "}";
+        assertEquals(expectedString, command.toString());
+    }
+
 }
