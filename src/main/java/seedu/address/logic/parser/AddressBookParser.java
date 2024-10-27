@@ -11,7 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddWeddingCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearAddressBookCommand;
+import seedu.address.logic.commands.ClearWeddingBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteNCommand;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.FilterByJobCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -85,14 +87,20 @@ public class AddressBookParser {
         case DeleteWeddingCommand.COMMAND_WORD:
             return new DeleteWeddingCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearAddressBookCommand.COMMAND_WORD:
+            return new ClearAddressBookCommand();
+
+        case ClearWeddingBookCommand.COMMAND_WORD:
+            return new ClearWeddingBookCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListWeddingCommand.COMMAND_WORD:
+            return new ListWeddingCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
