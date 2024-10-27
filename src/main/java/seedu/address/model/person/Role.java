@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS =
-            "The role should be either student, parent, teacher or staff, and it should not be blank";
+            "The role should be either student or parent, and it should not be blank";
 
     public final String roleName;
 
@@ -29,9 +29,7 @@ public class Role {
      */
     public static boolean isValidRole(String test) {
         return test.toLowerCase().equals("student")
-                || test.toLowerCase().equals("parent")
-                || test.toLowerCase().equals("teacher")
-                || test.toLowerCase().equals("staff");
+                || test.toLowerCase().equals("parent");
     }
 
     @Override
@@ -46,12 +44,12 @@ public class Role {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 
         Role otherRole = (Role) other;
-        return roleName.equals(otherRole.roleName);
+        return roleName.toLowerCase().equals(otherRole.roleName.toLowerCase());
     }
 
     @Override
