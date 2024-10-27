@@ -1,10 +1,18 @@
 package seedu.address.model.lesson;
 
-import java.util.*;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
  * Represents a Lesson in the system.
@@ -15,26 +23,30 @@ public class Lesson {
     private final Date date;
     private final Time time;
     private final List<Student> students;
-    private final HashMap<Student, Boolean> attendanceMap;
+    private final Map<Student, Boolean> attendanceMap;
 
     /**
-     * Constructs a {@code Lesson}.
+     * Constructs a {@code Lesson} with the given arguments.
+     * The students in the student list must be present in the attendanceMap.
+     * If the attendanceMap contains extra students not present in the list, they are ignored.
      *
      * @param date The date of the lesson.
      * @param time The time of the lesson.
-     * @param students A list of students attending the lesson.
-     *                 This list can be empty but must not be null.
-     * @throws NullPointerException if any of the arguments are null.
+     * @param students A list of students attending the lesson. The list may be empty, but not null.
+     * @param attendanceMap A map of students to their attendance, represented by a boolean.
      */
-    public Lesson(Date date, Time time, List<Student> students) {
-        requireAllNonNull(date, time, students);
+    public Lesson(Date date, Time time, List<Student> students, Map<Student, Boolean> attendanceMap) {
+        requireAllNonNull(date, time, students, attendanceMap);
         this.date = date;
         this.time = time;
         this.students = new ArrayList<>();
-        this.students.addAll(students);
-        // fill out the default attendance as false
         this.attendanceMap = new HashMap<>();
-        this.students.forEach(student -> this.attendanceMap.put(student, false));
+
+        for (Student student : students) {
+            assert attendanceMap.containsKey(student); // students in list must exist in attendanceMap
+            this.students.add(student);
+            this.attendanceMap.put(student, attendanceMap.get(student));
+        }
     }
 
     /**
@@ -59,10 +71,18 @@ public class Lesson {
      * Returns an immutable list of students attending the lesson.
      *
      * @return A list of students attending the lesson.
-     * @throws UnsupportedOperationException if an attempt is made to modify the returned list.
      */
     public List<Student> getStudents() {
         return Collections.unmodifiableList(students);
+    }
+
+    /**
+     * Returns an immutable map of students to their attendance, represented by a boolean.
+     *
+     * @return A map of students to their attendance.
+     */
+    public Map<Student, Boolean> getAttendanceMap() {
+        return Collections.unmodifiableMap(attendanceMap);
     }
 
     /**
@@ -72,6 +92,7 @@ public class Lesson {
      */
     public void addStudent(Student student) {
         students.add(student);
+        this.attendanceMap.put(student, false); // also set default attendance as false
     }
 
     /**
@@ -81,6 +102,7 @@ public class Lesson {
      */
     public void removeStudent(Student student) {
         students.remove(student);
+        this.attendanceMap.remove(student);
     }
 
     /**
@@ -88,8 +110,12 @@ public class Lesson {
      *
      * @param student The student to mark.
      * @param isAttending True if the student is attending this lesson, false otherwise.
+     * @throws StudentNotFoundException if the student is not in the attendance map.
      */
-    public void setAttendance(Student student, boolean isAttending) {
+    public void setAttendance(Student student, boolean isAttending) throws StudentNotFoundException {
+        if (!this.attendanceMap.containsKey(student)) {
+            throw new StudentNotFoundException();
+        }
         this.attendanceMap.put(student, isAttending);
     }
 
@@ -99,7 +125,10 @@ public class Lesson {
      * @param student The student to check.
      * @return True if the student is marked as having attended the lesson.
      */
-    public boolean getAttendance(Student student) {
+    public boolean getAttendance(Student student) throws StudentNotFoundException {
+        if (!this.attendanceMap.containsKey(student)) {
+            throw new StudentNotFoundException();
+        }
         return this.attendanceMap.get(student);
     }
 
@@ -122,30 +151,19 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
         return date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
-                && students.equals(otherLesson.students);
+                && students.equals(otherLesson.students)
+                && attendanceMap.equals(otherLesson.attendanceMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, time, students);
+        return Objects.hash(date, time, students, attendanceMap);
     }
 
     @Override
     public String toString() {
-        return String.format("Lesson[date=%s, time=%s, students=%s]", date, time, students);
+        return String.format("Lesson[date=%s, time=%s, students=%s, attendanceMap=%s]",
+                date, time, students, attendanceMap);
     }
 
-    /**
-     * Ensures that none of the arguments passed to the constructor are null.
-     *
-     * @param objects The objects to check for null values.
-     * @throws NullPointerException if any object is null.
-     */
-    private void requireAllNonNull(Object... objects) {
-        for (Object obj : objects) {
-            if (obj == null) {
-                throw new NullPointerException("Fields date and time must be non-null");
-            }
-        }
-    }
 }
