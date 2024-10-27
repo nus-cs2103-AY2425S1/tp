@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.TagCommandParser.MAX_INDEXES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -94,6 +95,6 @@ public class TagCommandParserTest {
                 + " 10"
                 + " 11 "
                 + PREFIX_TAG + BRIDES_SIDE.getTagName();
-        assertParseFailure(parser, userInput, MESSAGE_TOO_MANY_INDEXES);
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_INDEXES, MAX_INDEXES));
     }
 }

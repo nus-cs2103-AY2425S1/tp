@@ -80,7 +80,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
     private void checkIndexLength(List<String> indexStrings) throws ParseException {
         if (indexStrings.size() > MAX_INDEXES) {
-            throw new ParseException(Messages.MESSAGE_TOO_MANY_INDEXES);
+            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, MAX_INDEXES));
         }
     }
 }

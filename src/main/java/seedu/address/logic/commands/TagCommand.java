@@ -83,17 +83,17 @@ public class TagCommand extends Command {
                 Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
                         personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
                 model.setPerson(personToTag, updatedPerson);
-                if (successMessage.length() > 0) {
+                if (!successMessage.isEmpty()) {
                     successMessage.append("\n");
                 }
                 successMessage.append(Messages.format(updatedPerson));
             }
         }
-        if (successMessage.length() > 0) {
+        if (!successMessage.isEmpty()) {
             finalMessage.append(MESSAGE_TAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty() || !duplicateTags.isEmpty()) {
-            if (finalMessage.length() > 0) {
+            if (!finalMessage.isEmpty()) {
                 finalMessage.append("\n");
             }
             if (!missingTags.isEmpty()) {
