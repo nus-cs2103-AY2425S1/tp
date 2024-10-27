@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS = "Student ID should be in the format: A followed by seven digits"
-            + "and an uppercase character and should not start or end with spaces.\"";
+            + " and an uppercase character and should not start or end with spaces.\"";
 
     public static final String VALIDATION_REGEX = "^A\\d{7}[A-Z]$";
 
