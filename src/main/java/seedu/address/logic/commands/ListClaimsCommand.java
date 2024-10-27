@@ -31,7 +31,7 @@ public class ListClaimsCommand extends Command {
             + PREFIX_POLICY_TYPE + "health";
 
     public static final String MESSAGE_LIST_CLAIMS_SUCCESS = "Claims listed for policy type '%1$s' of person: "
-            + "%2$s\n%3$s";
+            + "%2$s\n\n%3$s";
     public static final String MESSAGE_NO_CLAIMS = "No claims found for policy type '%1$s' of person: %2$s";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for person: %2$s";
