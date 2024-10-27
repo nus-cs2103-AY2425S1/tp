@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Stack;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +27,7 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         addressBookHistory = new Stack<>();
         addressBookUndoHistory = new Stack<>();
         currentAddressBook = new AddressBook(initialAddressBook);
-        addressBookHistory.push(currentAddressBook);
+        addressBookHistory.push(currentAddressBook.copy());
     }
 
     /**
@@ -36,7 +38,7 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         addressBookHistory = new Stack<>();
         addressBookUndoHistory = new Stack<>();
         currentAddressBook = new AddressBook();
-        addressBookHistory.push(currentAddressBook);
+        addressBookHistory.push(currentAddressBook.copy());
     }
 
     /**
@@ -45,7 +47,7 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
      */
     public void save() {
         addressBookUndoHistory.clear();
-        addressBookHistory.push(new AddressBook(currentAddressBook));
+        addressBookHistory.push(currentAddressBook.copy());
     }
 
     /**
@@ -84,28 +86,48 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         return !addressBookUndoHistory.isEmpty();
     }
 
+    public AddressBook getCurrentAddressBook() {
+        return currentAddressBook;
+    }
+
+    public Stack<ReadOnlyAddressBook> getAddressBookHistory() {
+        return addressBookHistory;
+    }
+
+    public Stack<ReadOnlyAddressBook> getAddressBookUndoHistory() {
+        return addressBookUndoHistory;
+    }
+
     // ======================= Wrapper functions =========================
 
     //// list overwrite operations
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     * Saves the current {@code Person} data into {@code Undo} history
+     * before setting persons.
      * @see AddressBook#setPersons(List)
      */
     public void setPersons(List<Person> persons) {
         currentAddressBook.setPersons(persons);
+        save();
     }
 
     /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Saves the current {@code Person} data into {@code Undo} history
+     * before resetting data.
      * @see AddressBook#resetData(ReadOnlyAddressBook)
      */
     public void resetData(ReadOnlyAddressBook newData) {
-        currentAddressBook.resetData(newData);
-        save();
+        setPersons(newData.getPersonList());
     }
 
     //// person-level operations
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      * @see AddressBook#hasPerson(Person)
      */
     public boolean hasPerson(Person person) {
@@ -113,6 +135,10 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     * Saves the current {@code Person} data into {@code Undo} history
+     * before adding the person.
      * @see AddressBook#addPerson(Person)
      */
     public void addPerson(Person p) {
@@ -121,6 +147,11 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Saves the current {@code Person} data into {@code Undo} history
+     * before setting the person.
      * @see AddressBook#setPerson(Person, Person)
      */
     public void setPerson(Person target, Person editedPerson) {
@@ -129,6 +160,10 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     * Saves the current {@code Person} data into {@code Undo} history
+     * before removing the person.
      * @see AddressBook#removePerson(Person)
      */
     public void removePerson(Person key) {
@@ -139,5 +174,32 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return currentAddressBook.getPersonList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HistoricalAddressBook)) {
+            return false;
+        }
+
+        HistoricalAddressBook otherHistoricalAddressBook = (HistoricalAddressBook) other;
+        return CollectionUtil.isCollectionEqual(addressBookHistory, otherHistoricalAddressBook.addressBookHistory)
+                && CollectionUtil.isCollectionEqual(addressBookUndoHistory,
+                otherHistoricalAddressBook.addressBookUndoHistory)
+                && currentAddressBook.equals(otherHistoricalAddressBook.currentAddressBook);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("addressBookHistory", addressBookHistory)
+                .add("addressBookUndoHistory", addressBookUndoHistory)
+                .add("currentAddressBook", currentAddressBook)
+                .toString();
     }
 }

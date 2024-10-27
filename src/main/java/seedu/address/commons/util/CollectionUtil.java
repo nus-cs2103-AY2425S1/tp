@@ -35,20 +35,20 @@ public class CollectionUtil {
     }
 
     /**
-     * Returns true if {@code dequeA} has the same items in the same ordering as {@code dequeB}.
+     * Returns true if {@code collectionA} has the same items in the same ordering as {@code collectionB}.
      */
-    public static boolean isCollectionEqual(Collection<?> dequeA, Collection<?> dequeB) {
-        requireAllNonNull(dequeA, dequeB);
-        if (dequeA.size() != dequeB.size()) {
+    public static boolean isCollectionEqual(Collection<?> collectionA, Collection<?> collectionB) {
+        requireAllNonNull(collectionA, collectionB);
+        if (collectionA.size() != collectionB.size()) {
             return false;
         }
-        if (dequeA.isEmpty()) {
+        if (collectionA.isEmpty()) {
             return true;
         }
 
         //adapted from https://stackoverflow.com/questions/77306409/java-how-to-tell-if-two-arraydeque-are-equal
-        Iterator<?> aIter = dequeA.iterator();
-        Iterator<?> bIter = dequeB.iterator();
+        Iterator<?> aIter = collectionA.iterator();
+        Iterator<?> bIter = collectionB.iterator();
 
         while (aIter.hasNext()) {
             if (!Objects.equals(aIter.next(), bIter.next())) {
