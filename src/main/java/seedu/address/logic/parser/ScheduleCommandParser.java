@@ -20,7 +20,7 @@ public class ScheduleCommandParser implements Parser<Command> {
      * and returns a ScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parse(ModelType modelType, String args) throws ParseException {
+    public ScheduleCommand parse(ModelType modelType, String args) throws ParseException {
         args = args.strip();
         boolean isInt = true;
         boolean isDate = true;

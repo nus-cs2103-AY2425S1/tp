@@ -7,7 +7,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.EventInSchedulePredicate;
 
 /**

@@ -12,7 +12,9 @@ import static seedu.address.testutil.TypicalEvents.DINNER;
 import static seedu.address.testutil.TypicalEvents.EXHIBITION;
 import static seedu.address.testutil.TypicalEvents.FASHION_SHOW;
 import static seedu.address.testutil.TypicalEvents.GALA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.HIKING_TRIP;
+import static seedu.address.testutil.TypicalEvents.getExtendedAddressBook;
+import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,11 +25,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.types.common.DateTime;
+import seedu.address.model.types.common.DateTimeUtil;
 import seedu.address.model.types.common.EventInSchedulePredicate;
 
 public class ScheduleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model extendedModel = new ModelManager(getExtendedAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model extendedExpectedModel = new ModelManager(getExtendedAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -73,16 +78,37 @@ public class ScheduleCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredEventList());
     }
 
-    //    @Test
-    //    public void execute_year_multipleEventsFound() {
-    //        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 7);
-    //        EventInSchedulePredicate predicate = new EventInSchedulePredicate(365);
-    //        ScheduleCommand command = new ScheduleCommand(predicate);
-    //        expectedModel.updateFilteredEventList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(ANIME, BARBEQUE, CONCERT, DINNER, EXHIBITION, FASHION_SHOW, GALA),
-    //                model.getFilteredEventList());
-    //    }
+    @Test
+    public void execute_year_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 7);
+        EventInSchedulePredicate predicate = new EventInSchedulePredicate(365);
+        ScheduleCommand command = new ScheduleCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ANIME, BARBEQUE, CONCERT, DINNER, EXHIBITION, FASHION_SHOW, GALA),
+                model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_today_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        EventInSchedulePredicate predicate = new EventInSchedulePredicate(
+                new DateTime(DateTimeUtil.getCurrentDateTimeString()));
+        ScheduleCommand command = new ScheduleCommand(predicate);
+        extendedExpectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, extendedModel, expectedMessage, extendedExpectedModel);
+        assertEquals(Collections.emptyList(), extendedModel.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_specificDate_oneEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        EventInSchedulePredicate predicate = new EventInSchedulePredicate(new DateTime("2025-12-01 08:00"));
+        ScheduleCommand command = new ScheduleCommand(predicate);
+        extendedExpectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, extendedModel, expectedMessage, extendedExpectedModel);
+        assertEquals(Arrays.asList(HIKING_TRIP), extendedModel.getFilteredEventList());
+    }
 
     @Test
     public void toStringMethod() {

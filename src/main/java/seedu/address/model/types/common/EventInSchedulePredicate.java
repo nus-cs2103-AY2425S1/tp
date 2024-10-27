@@ -1,5 +1,7 @@
 package seedu.address.model.types.common;
 
+import static seedu.address.model.types.common.DateTimeUtil.DATE_TIME_FORMATTER;
+
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
@@ -58,12 +60,15 @@ public class EventInSchedulePredicate implements Predicate<Event> {
         }
 
         EventInSchedulePredicate otherEventInSchedulePredicate = (EventInSchedulePredicate) other;
-        return startDate.equals(otherEventInSchedulePredicate.startDate)
-                && endDate.equals(otherEventInSchedulePredicate.endDate);
+        return startDate.format(DATE_TIME_FORMATTER).equals(
+                otherEventInSchedulePredicate.startDate.format(DATE_TIME_FORMATTER))
+                && endDate.format(DATE_TIME_FORMATTER).equals(
+                        otherEventInSchedulePredicate.endDate.format(DATE_TIME_FORMATTER));
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("start", startDate).add("end", endDate).toString();
+        return new ToStringBuilder(this).add("start", startDate.format(DATE_TIME_FORMATTER))
+                .add("end", endDate.format(DATE_TIME_FORMATTER)).toString();
     }
 }
