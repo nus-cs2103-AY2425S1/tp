@@ -73,7 +73,7 @@ Format: `help`
 
 ### Add Client Details: `add`
 
-Allows the user to add a new client with details about payment status, client status, and project status.
+Allows the user to add a new client with details including client name and contact details, payment status, client status, project status and project deadline.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
@@ -81,7 +81,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
 * A person can have any number of tags (including 0)
 * `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
-* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
+* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`)
 * `NAME` must not exist in Clientele+ already.
 * `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
 * `EMAIL`  Standard email format “user@example.com”
@@ -89,12 +89,19 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
 * `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
 * `TAG` Should be alphanumeric. May contain spaces.
-
+* `DEADLINE` Should be in the following format: `DD-MM-YYYY`. Example: `10-10-2024` represents **10th October 2024**
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
-t/friends ps/in progress py/pending cs/active`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01
+t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
+* `add n/Betsy Crowe t/SoftEng Inc. e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+1. The deadline could be the date you need to submit the project to the client
+2. The deadline could be the date by which you need to follow up with a potential client
+</div>
+
 
 ### View Client List : `list`
 
@@ -107,7 +114,7 @@ Format: `list`
 Allows updating of various statuses of an existing client.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
-[ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
+[ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
 
 * `NAME` Acceptable values are same as in add command
 * `PHONE_NUMBER` Acceptable values are same as in add command
@@ -115,6 +122,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * `PAYMENT STATUS` Acceptable values are same as in add command
 * `CLIENT STATUS` Acceptable values are same as in add command
 * `PROJECT STATUS` Acceptable values are same as in add command
+* `DEADLINE` Acceptable values are same as in add command
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -127,17 +135,22 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 1 ps/completed py/paid cs/old` Updates the project status, payment status and client status of the 1st person to be `completed`, `paid` and `old` respectively.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+1. The deadline field will show an `[OVERDUE]` tag if the deadline has passed and the client status is still `active`, so if the client has paid, and you're business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `[OVERDUE]`.
+</div>
+
 ### Locating Clients By Name: `find`
 
 Finds persons in address book who match parameters specified. Values matched are case insensitive.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/deadline]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` 
+* Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B`
     matches `Hans Bo`
 * Phone number, email, address, project status, payment status, client status must match the exact string
   e.g. `cs/in progress` will not match `cs/in prog`
@@ -259,11 +272,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friends ps/in progress py/pending cs/active`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] d/DEADLINE` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friends ps/in progress py/pending cs/active d/10-11-2024`
 **Clear** | `clear`
 **Delete** | `delete [n/NAME] [id/ID]`<br> e.g., `delete n/John Doe` or `delete id/4`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/deadline]`<br> e.g., `find n/James Jake ps/completed py/paid`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g., `find n/James Jake ps/completed py/paid`
 **Sort** | `sort FIELD` <br> e.g., `sort name` or `sort deadline`
 **List** | `list`
 **Help** | `help`
