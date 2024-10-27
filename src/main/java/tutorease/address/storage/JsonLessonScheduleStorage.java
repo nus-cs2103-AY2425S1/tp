@@ -13,7 +13,6 @@ import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.commons.util.FileUtil;
 import tutorease.address.commons.util.JsonUtil;
-import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 
@@ -33,7 +32,8 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     }
 
     @Override
-    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException {
+    public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase)
+            throws DataLoadingException {
         return readLessonSchedule(filePath, tutorEase);
     }
 

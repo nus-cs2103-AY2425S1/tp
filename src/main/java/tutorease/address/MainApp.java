@@ -25,7 +25,6 @@ import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.util.SampleDataUtil;
 import tutorease.address.storage.JsonLessonScheduleStorage;
-import tutorease.address.storage.JsonSerializableLessonSchedule;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.LessonScheduleStorage;

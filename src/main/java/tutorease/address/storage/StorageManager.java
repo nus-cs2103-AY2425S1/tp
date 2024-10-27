@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.exceptions.DataLoadingException;
-import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
