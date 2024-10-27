@@ -23,7 +23,8 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AgentAssist agentAssist;
+    private AgentAssist historyAgentAssist = null;
+    private AgentAssist currentAgentAssist;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
@@ -37,13 +38,20 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + agentAssist + " and user prefs " + userPrefs);
 
-        this.agentAssist = new AgentAssist(agentAssist);
+        this.currentAgentAssist = new AgentAssist(agentAssist);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.agentAssist.getPersonList());
+        filteredPersons = new FilteredList<>(this.currentAgentAssist.getPersonList());
     }
 
     public ModelManager() {
         this(new AgentAssist(), new UserPrefs());
+    }
+
+    /**
+     * Save the history of the AgentAssist.
+     */
+    private void safeHistory() {
+        historyAgentAssist = currentAgentAssist.getCopy();
     }
 
 
@@ -86,36 +94,50 @@ public class ModelManager implements Model {
 
     @Override
     public void setAgentAssist(ReadOnlyAgentAssist agentAssist) {
-        this.agentAssist.resetData(agentAssist);
+        safeHistory();
+        this.currentAgentAssist.resetData(agentAssist);
     }
 
     @Override
     public ReadOnlyAgentAssist getAgentAssist() {
-        return agentAssist;
+        return currentAgentAssist;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return agentAssist.hasPerson(person);
+        return currentAgentAssist.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        agentAssist.removePerson(target);
+        safeHistory();
+        currentAgentAssist.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        agentAssist.addPerson(person);
+        safeHistory();
+        currentAgentAssist.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        safeHistory();
+        currentAgentAssist.setPerson(target, editedPerson);
+    }
 
-        agentAssist.setPerson(target, editedPerson);
+    @Override
+    public void undoCommand() {
+        requireNonNull(this.historyAgentAssist);
+        this.setAgentAssist(this.historyAgentAssist);
+    }
+
+    @Override
+    public boolean hasPreviousCommand() {
+        return this.historyAgentAssist != null;
     }
 
     //=========== Selected Person ===========================================================================
@@ -185,7 +207,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return agentAssist.equals(otherModelManager.agentAssist)
+        return currentAgentAssist.equals(otherModelManager.currentAgentAssist)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

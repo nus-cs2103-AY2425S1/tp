@@ -94,6 +94,15 @@ public class AgentAssist implements ReadOnlyAgentAssist {
         persons.remove(key);
     }
 
+    /**
+     * Gets a copy of the current AgentAssist.
+     */
+    public AgentAssist getCopy() {
+        AgentAssist newAgentAssist = new AgentAssist();
+        newAgentAssist.setPersons(this.getPersonList());
+        return newAgentAssist;
+    }
+
     //// util methods
 
     @Override
