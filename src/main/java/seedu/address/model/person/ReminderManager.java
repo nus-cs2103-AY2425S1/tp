@@ -1,11 +1,16 @@
 package seedu.address.model.person;
 
-import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
+
+/**
+ * Manages reminders for upcoming deadlines of persons in the address book.
+ * It tracks the latest deadline and displays reminders accordingly.
+ */
 public class ReminderManager {
     private static final String MESSAGE_NO_REMINDERS = "No upcoming reminders.";
     private static final String MESSAGE_DEADLINE_IN = "'s deadline is in ";
@@ -19,7 +24,8 @@ public class ReminderManager {
 
     /**
      * Initializes the ReminderManager with the list of persons.
-     * @param persons ObservableList<Person> from the address book.
+     *
+     * @param persons ObservableList of {@code Person} from the address book.
      */
     public ReminderManager(ObservableList<Person> persons) {
         this.persons = persons;

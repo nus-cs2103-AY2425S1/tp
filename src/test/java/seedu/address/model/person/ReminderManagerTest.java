@@ -1,17 +1,17 @@
 package seedu.address.model.person;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.testutil.PersonBuilder;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.testutil.PersonBuilder;
 
 public class ReminderManagerTest {
 
@@ -51,16 +51,16 @@ public class ReminderManagerTest {
     public void getLatestReminders_dueToday() {
         List<String> reminders = reminderManager.getLatestReminders();
         assertEquals(1, reminders.size());
-        assertEquals("John's deadline is due today.", reminders.get(0));  // John is due today
+        assertEquals("John's deadline is due today.", reminders.get(0)); // John is due today
     }
 
     @Test
     public void getLatestReminders_dueInFuture() {
-        personList.remove(person1);  // Remove John to test future deadlines
+        personList.remove(person1); // Remove John to test future deadlines
 
         List<String> reminders = reminderManager.getLatestReminders();
         assertEquals(1, reminders.size());
-        assertEquals("Alice's deadline is in 2 days.", reminders.get(0));  // Alice is due in 2 days
+        assertEquals("Alice's deadline is in 2 days.", reminders.get(0)); // Alice is due in 2 days
     }
 
     @Test
@@ -83,16 +83,16 @@ public class ReminderManagerTest {
 
     @Test
     public void getNextReminder_noReminders() {
-        personList.clear();  // Clear the list to simulate no upcoming reminders
+        personList.clear(); // Clear the list to simulate no upcoming reminders
 
         String reminder = reminderManager.getNextReminder();
-        assertEquals("No upcoming reminders.", reminder);  // No reminders available
+        assertEquals("No upcoming reminders.", reminder); // No reminders available
     }
 
     @Test
     public void getNextReminder_futureDeadline_doesNotRotate() {
         // Future deadlines should not rotate until they are the latest
-        personList.remove(person1);  // Remove John to test future deadlines
+        personList.remove(person1); // Remove John to test future deadlines
         assertEquals("Alice's deadline is in 2 days.", reminderManager.getNextReminder());
         assertEquals("Alice's deadline is in 2 days.", reminderManager.getNextReminder());
     }

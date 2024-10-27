@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import javafx.application.Platform;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,6 +12,10 @@ import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import seedu.address.model.person.ReminderManager;
 
+/**
+ * A UI component that displays the status bar footer with reminders.
+ * The footer shows an icon and text that rotates through upcoming deadlines.
+ */
 public class StatusBarFooter extends UiPart<GridPane> {
 
     private static final String FXML = "StatusBarFooter.fxml";
@@ -26,6 +30,11 @@ public class StatusBarFooter extends UiPart<GridPane> {
 
     private final ReminderManager reminderManager;
 
+    /**
+     * Constructs a StatusBarFooter that displays reminders with an icon.
+     *
+     * @param reminderManager The ReminderManager that provides the reminders to display.
+     */
     public StatusBarFooter(ReminderManager reminderManager) {
         super(FXML);
         this.reminderManager = reminderManager;
@@ -37,6 +46,10 @@ public class StatusBarFooter extends UiPart<GridPane> {
         startReminderRotation();
     }
 
+    /**
+     * Loads and configures the reminder icon to be displayed next to the reminder text.
+     * The icon's size adjusts relative to the parent HBox's height.
+     */
     private void initializeReminderIcon() {
         try {
             Image image = new Image(getClass().getResourceAsStream(REMINDER_ICON));
@@ -54,6 +67,10 @@ public class StatusBarFooter extends UiPart<GridPane> {
         }
     }
 
+    /**
+     * Starts the reminder rotation by updating the text every 3 seconds with the next upcoming reminder.
+     * If no reminders are found, it displays "No upcoming reminders".
+     */
     private void startReminderRotation() {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(3), event -> {
