@@ -25,6 +25,7 @@ import tutorease.address.model.TutorEase;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
+import tutorease.address.testutil.GuardianBuilder;
 import tutorease.address.testutil.LessonBuilder;
 import tutorease.address.testutil.StudentBuilder;
 
@@ -39,6 +40,33 @@ public class AddLessonCommandTest {
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
             -> addLessonCommand.execute(modelStub));
+    }
+    @Test
+    public void execute_guardian_throwsCommandException() throws ParseException {
+        ModelStub modelStub = new ModelStubAcceptingLessonAdded();
+        modelStub.addPerson(new GuardianBuilder().build());
+        StudentId studentId = new StudentId("1");
+        Lesson lesson = new LessonBuilder().build();
+        AddLessonCommand addLessonCommand = new AddLessonCommand(studentId, lesson.getFee(),
+                lesson.getStartDateTime(), lesson.getEndDateTime());
+
+        assertThrows(CommandException.class, AddLessonCommand.MESSAGE_INVALID_ROLE, ()
+            -> addLessonCommand.execute(modelStub));
+    }
+    @Test
+    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+        modelStub.addPerson(new StudentBuilder().build());
+        Lesson validLesson = new LessonBuilder().build();
+        StudentId studentId = new StudentId("1");
+        AddLessonCommand addLessonCommand = new AddLessonCommand(studentId, validLesson.getFee(),
+                validLesson.getStartDateTime(), validLesson.getEndDateTime());
+
+        CommandResult commandResult = addLessonCommand.execute(modelStub);
+
+        assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
+                commandResult.getFeedbackToUser());
+        assertEquals(validLesson, modelStub.lessonsAdded.get(0));
     }
     @Test
     public void execute_lessonAcceptedByModel_addSuccessful() throws Exception {
