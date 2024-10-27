@@ -4,6 +4,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -16,6 +17,8 @@ public class KeyBindController {
     private CommandBox commandBox;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+
+    private TextField textField;
 
 
     /**
@@ -44,11 +47,13 @@ public class KeyBindController {
             event.consume();
         }
     }
+    
     /**
      * Sets up key bindings for focus traversal and command handling across UI components.
      */
     public void initialize() {
         TextField commandTextField = commandBox.getCommandTextField();
+        this.textField = commandTextField;
         TextArea resultTextArea = resultDisplay.getResultTextArea();
         ListView<Person> personListView = personListPanel.getPersonListView();
 
@@ -61,19 +66,21 @@ public class KeyBindController {
 
         KeyBind focusPersonListView = new KeyBind(KeyCode.ESCAPE, personListView::requestFocus);
 
-        KeyBind undoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(UndoCommand.COMMAND_WORD),
+        KeyBind undoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(UndoCommand.COMMAND_WORD, false),
                 event -> event.isControlDown() && !event.isShiftDown());
 
-        KeyBind redoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(RedoCommand.COMMAND_WORD),
+        KeyBind redoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(RedoCommand.COMMAND_WORD, false),
                 event -> event.isControlDown() && event.isShiftDown());
 
-        resultTextArea.setOnKeyPressed(event ->
+        resultTextArea.addEventFilter(KeyEvent.KEY_PRESSED, event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
 
-        commandTextField.setOnKeyPressed(event ->
-                handleKeyEvent(event, focusPersonListView, undoCommand, redoCommand));
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    handleKeyEvent(event, focusPersonListView, undoCommand, redoCommand);
+                }
+                );
 
-        personListView.setOnKeyPressed(event ->
+        personListView.addEventFilter(KeyEvent.KEY_PRESSED, event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
 
 

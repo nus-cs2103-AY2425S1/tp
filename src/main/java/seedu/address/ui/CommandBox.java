@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -31,10 +32,14 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
-    void handleCommand(String commandText) {
+    void handleCommand(String commandText, boolean shouldResetCommandBox) {
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+
+            if (shouldResetCommandBox) {
+                commandTextField.setText("");
+            }
+
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -50,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        handleCommand(commandText);
+        handleCommand(commandText, true);
     }
 
     /**
