@@ -389,7 +389,7 @@ to `91234567` and `johndoe@example.com` respectively.
 
 #### Adding Appointments : `addAppt`
 
-Allows doctors to schedule an appointment with a patient.
+Allow doctors to schedule an appointment with a patient.
 
 Format: `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`
 
@@ -405,7 +405,7 @@ Format: `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`
 
 #### Deleting Appointments : `delAppt`
 
-Allows doctors to delete an appointment with a patient.
+Allow doctors to delete an appointment with a patient.
 
 Format: `delAppt i/NRIC @d/DATE @t/TIME`
 
