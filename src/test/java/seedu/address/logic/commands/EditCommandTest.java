@@ -123,6 +123,22 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_editToDuplicateModule_failure() {
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setOldModule(editedPerson.getModules().get(0));
+        descriptor.setNewModule(editedPerson.getModules().get(1));
+        StudentId studentId = editedPerson.getStudentId();
+
+        EditCommand editCommand = new EditCommand(studentId, descriptor);
+
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+    }
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
