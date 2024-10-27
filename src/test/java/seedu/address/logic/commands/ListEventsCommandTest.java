@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +14,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListPersonCommandTest {
+public class ListEventsCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,19 +26,10 @@ public class ListPersonCommandTest {
     }
 
     @Test
-    public void execute_personListIsNotFiltered_showsSameList() {
+    public void execute_eventList_showsSameList() {
         CommandResult expectedCommandResult = new CommandResult(
-                ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false);
+                ListEventsCommand.MESSAGE_SUCCESS, false, false, false, true);
 
-        assertCommandSuccess(new ListPersonCommand(), model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
-    public void execute_personListIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        CommandResult expectedCommandResult = new CommandResult(
-                ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false);
-
-        assertCommandSuccess(new ListPersonCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ListEventsCommand(), model, expectedCommandResult, expectedModel);
     }
 }

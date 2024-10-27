@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListPersonCommand extends Command {
+public class ListPersonsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_FLAG = "-p";

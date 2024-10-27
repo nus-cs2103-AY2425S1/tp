@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all events in the event book to the user.
  */
-public class ListEventCommand extends Command {
+public class ListEventsCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_FLAG = "-e";
 
