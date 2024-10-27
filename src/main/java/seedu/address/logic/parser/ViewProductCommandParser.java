@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
+
 import java.util.Arrays;
 
-import seedu.address.logic.commands.ViewAllProductCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
@@ -20,7 +21,7 @@ public class ViewProductCommandParser implements Parser<ViewProductCommand> {
     public ViewProductCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            return new ViewAllProductCommand();
+            return new ViewProductCommand(PREDICATE_SHOW_ALL_PRODUCTS);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

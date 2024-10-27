@@ -19,7 +19,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ViewAllSupplierCommand;
 import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.supplier.NameContainsKeywordsPredicate;
@@ -75,8 +74,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_viewAllSupplier() throws Exception {
-        assertTrue(parser.parseCommand(ViewAllSupplierCommand.COMMAND_WORD) instanceof ViewAllSupplierCommand);
+    public void parseCommand_viewSupplier() throws Exception {
+        assertTrue(parser.parseCommand(ViewSupplierCommand.COMMAND_WORD) instanceof ViewSupplierCommand);
+        assertTrue(parser.parseCommand(ViewSupplierCommand.COMMAND_WORD + " 3") instanceof ViewSupplierCommand);
     }
 
     @Test

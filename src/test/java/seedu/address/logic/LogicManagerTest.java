@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -21,7 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ViewAllSupplierCommand;
+import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -63,8 +64,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String ViewAllSupplierCommandStr = ViewAllSupplierCommand.COMMAND_WORD;
-        assertCommandSuccess(ViewAllSupplierCommandStr, ViewAllSupplierCommand.MESSAGE_SUCCESS, model);
+        String ViewSupplierCommandStr = ViewSupplierCommand.COMMAND_WORD;
+        String expectedMessage = String.format(MESSAGE_SUPPLIERS_LISTED_OVERVIEW, 0);
+        assertCommandSuccess(ViewSupplierCommandStr, expectedMessage, model);
     }
 
     @Test
