@@ -120,7 +120,8 @@ public class ExportWindow extends UiPart<Stage> {
 
                     String department = person.getDepartment().toString();
 
-                    String result = toCsv(name, phone, email, address, formattedTags.toString(), isFavourite, department);
+                    String result = toCsv(name, phone, email, address,
+                            formattedTags.toString(), isFavourite, department);
                     writer.write(result);
                     writer.newLine();
                     System.out.println(result);

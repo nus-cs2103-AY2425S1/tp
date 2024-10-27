@@ -116,7 +116,8 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (department == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Department.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Department.class.getSimpleName()));
         }
         if (!Department.isValidDepartment(department)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
