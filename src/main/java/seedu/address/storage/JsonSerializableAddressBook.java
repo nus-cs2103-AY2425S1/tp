@@ -20,7 +20,7 @@ import seedu.address.model.vendor.Vendor;
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+public class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Event list contains duplicate event(s).";

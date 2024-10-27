@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.EditVendorCommand.MESSAGE_EDIT_VENDOR_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
@@ -8,9 +9,23 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
+
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
+import seedu.address.model.vendor.Description;
+import seedu.address.model.vendor.Phone;
+import seedu.address.model.vendor.Vendor;
+import seedu.address.storage.JsonSerializableAddressBook;
 
 /**
  * Parent abstract class for edit commands.
@@ -38,7 +53,11 @@ public abstract class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one valid field to edit must be provided.";
 
     protected final Index index;
+    private EditVendorDescriptor editVendorDescriptor;
 
+    /**
+     * @param targetIndex in the filtered list to edit
+     */
     public EditCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.index = targetIndex;
@@ -46,6 +65,7 @@ public abstract class EditCommand extends Command {
 
     /**
      * @param targetIndex in the filtered list to edit
+     * @param editVendorDescriptor
      */
     public EditCommand(Index index, EditVendorDescriptor editVendorDescriptor) {
         requireNonNull(index);
@@ -68,7 +88,7 @@ public abstract class EditCommand extends Command {
         Vendor editedVendor = createEditedVendor(vendorToEdit, editVendorDescriptor);
 
         if (!vendorToEdit.isSameVendor(editedVendor) && model.hasVendor(editedVendor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_VENDOR);
+            throw new CommandException(JsonSerializableAddressBook.MESSAGE_DUPLICATE_VENDOR);
         }
 
         model.setVendor(vendorToEdit, editedVendor);

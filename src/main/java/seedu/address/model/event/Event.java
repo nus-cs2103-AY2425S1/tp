@@ -44,11 +44,12 @@ public class Event {
      * @param name The name of the event.
      * @param date The date of the event.
      */
-    public Event(UniqueId id, Name name, Date date) {
-        requireAllNonNull(id, name, date);
+    public Event(UniqueId id, Name name, Date date, Set<Tag> tags) {
+        requireAllNonNull(id, name, date, tags);
         this.id = id;
         this.name = name;
         this.date = date;
+        this.tags.addAll(tags);
     }
 
     public UniqueId getId() {
