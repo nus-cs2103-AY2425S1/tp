@@ -127,7 +127,7 @@ public abstract class Tutorial {
     public abstract void deleteStudent(Student student);
 
     public static void clearStudentsInNone() {
-        new None().reset();
+        None.none().reset();
     }
 
     private static Tutorial exist(TutName tutName, TutorialId tutorialId) {

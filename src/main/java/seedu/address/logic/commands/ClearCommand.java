@@ -21,8 +21,8 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         model.setAssignments(new AssignmentList());
-        model.setTutorials(new TutorialList());
         Tutorial.clearStudentsInNone();
+        model.setTutorials(new TutorialList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
