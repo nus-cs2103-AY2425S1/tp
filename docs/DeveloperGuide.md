@@ -247,7 +247,60 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Command history feature
+#### Implementation
+The command history feature is facilitated by `CommandTextHistory`. It has a `commandHistory` arraylist that stores the history of commands entered by the user as strings 
+and a `currentCommandIndex` that is initialised to be `0` to keep track of the current command index in the command history.
+The `CommandTextHistory` class implements the following operations:
+* `CommandTextHistory#addCommandHistory(String commandText)` — Adds a command text to the command history.
+* `CommandTextHistory#getPreviousCommand()` — Returns the previous command text in the command history.
+* `CommandTextHistory#getNextCommand()` — Returns the next command text in the command history.
 
+##### Getting previous/next command
+The `getPreviousCommand()` method will first check if there are previous commands available by checking if `currentCommandIndex > 0 `. 
+If there are previous commands, it will decrement the `currentCommandIndex`. 
+
+The `getNextCommand()` method will first check if there are more commands available ahead in the history by checking if `currentCommandIndex < commandHistory.size() - 1`.
+If there are following commands, it will increment the `currentCommandIndex`.
+
+After decrementing or incrementing, the method checks if `currentCommandIndex` is still within the bounds of `commandHistory`.
+If the index is out of bounds, the method returns an empty string `""`, indicating that there is no such command to be retrieved.
+If `currentCommandIndex` is within bounds, it retrieves and returns the command at the updated index in `commandHistory`.
+
+##### Adding command to history
+The `addCommandHistory(String commandText)` method will append the command text to the `commandHistory` arraylist and set the `currentCommandIndex` to the size of the `commandHistory` arraylist.
+This resets the `currentCommandIndex` to 1 position after the end of the `commandHistory` arraylist after a new command is added. We set the `currentCommandIndex` to `size` instead of `size - 1`
+as the current command to be entered is not in the arraylist yet and the command that was just entered is at index `size - 1`.
+
+
+Take a look at this example:
+
+Currently, the `commandHistory` arraylist only contains 4 commands, and we are viewing the 2nd command that we entered.
+We want to get the next command that we entered. So, after clicking the UP button, `CommandTextHistory#getNextCommand()` is called.
+
+![CommandHistory0](images/CommandHistory0.png)
+
+`currentCommandIndex` is not at the end of `commandHistory` so it will increment `currentCommandIndex` and return the command "list" to the TextField.
+
+![CommandHistory1](images/CommandHistory1.png)
+
+Now, let's say we enter in "list" command that is in the `TextField`. The new "list" command is added to the back of the `commandHistory` arraylist, taking up position at index 4.
+Then, we set the `currentCommandIndex` to be the size of the arraylist, anticipating the next command to be added, as shown below.
+
+![CommandHistory2](images/CommandHistory2.png)
+
+:information_source: **Note:** CommandTextHistory will store commands that were unsuccessful as well.
+
+These operations are exposed in the `Model` interface as `Model#addCommandTextToHistory(String commandText)`, `Model#getPreviousCommandTextFromHistory()` and `Model#getNextCommandTextFromHistory()` respectively.
+
+The following sequence diagram shows how the user can get previous command:
+![CommandTextHistorySequenceDiagram](images/CommandTextHistorySequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user interacts with this feature:
+![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
+
+#### Future Improvements
+* Implement a feature to clear the command history.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -394,7 +447,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
     * Command is only allowed in `personList` view.
-3. ContactMate deletes the elderly and confirms the successful deletion for Staff.
+3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
 

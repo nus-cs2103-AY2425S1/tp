@@ -135,6 +135,9 @@ public interface Model {
      */
     ObservableList<ContactRecord> getDisplayedCallHistory();
 
+    /**
+     * Returns the person in the address book with the given Nric.
+     */
     Person getPersonByNric(Nric nric);
 
     /**

@@ -32,14 +32,14 @@ public class TypicalPersons {
             .withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends")
+            .withTags("wheelchairBound")
             .withCallFrequency("7").build();
 
     public static final Person BENSON = new PersonBuilder().withNric("S0233700B")
             .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends")
+            .withTags("wheelchairBound", "livingAlone")
             .withCallFrequency("7").build();
 
     public static final Person CARL = new PersonBuilder().withNric("S6192793Z")
@@ -48,7 +48,7 @@ public class TypicalPersons {
             .withCallFrequency("7").build();
     public static final Person DANIEL = new PersonBuilder().withNric("S0589789J")
             .withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("livingAlone")
             .withCallFrequency("7").build();
     public static final Person ELLE = new PersonBuilder().withNric("S5674593I")
             .withName("Elle Meyer").withPhone("9482224")

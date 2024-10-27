@@ -21,7 +21,7 @@ public class CommandTextHistory {
      */
     public CommandTextHistory() {
         commandHistory = new ArrayList<>();
-        currentCommandIndex = -1;
+        currentCommandIndex = 0;
     }
 
     /**
