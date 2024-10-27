@@ -25,6 +25,17 @@ public class AutocompleteParserTest {
     }
 
     @Test
+    public void parseCommand_emptyInput_returnsNoSuggestions() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser();
+        String userInput = "";
+
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                0);
+
+        assertEquals(suggestions, new HashMap<>());
+    }
+
+    @Test
     public void parseCommand_blankInput_returnsNoSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
         String userInput = " ";
@@ -48,11 +59,12 @@ public class AutocompleteParserTest {
 
     // Test for command parsing
     @Test
-    public void parseCommand_adInput_returnsAddCommandSuggestion() {
+    public void parseCommand_aInput_returnsAddArchiveCommandSuggestion() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "ad";
+        String userInput = "a";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
         expectedSuggestions.put("add", "add");
+        expectedSuggestions.put("archive", "archive");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
