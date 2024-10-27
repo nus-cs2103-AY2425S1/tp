@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs an add command;
+:Parse the input;
+if () then ([else])
+  :Create an instance of AddCommand;
+  :AddCommand executes the command;
+  :Create a student to be added;
+  if () then ([else])
+    :Add the student to the address book;
+    :Update the filtered list with all students including the new added one;
+    :Check clashing schedule;
+    if () then ([new schedule clashes])
+      :Show MESSAGE_HAS_CLASHES;
+    else ([else])
+    endif
+    :Show MESSAGE_SUCCESS of AddCommand;
+    stop
+  else ([student is already in the address book])
+    :Show MESSAGE_DUPLICATE;
+    stop
+  endif
+else ([invalid format])
+    :Show MESSAGE_USAGE of AddCommand;
+    stop
+endif
+
+@enduml
