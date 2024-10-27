@@ -12,7 +12,7 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.Count;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
@@ -76,10 +76,10 @@ public class MarkOrderCommand extends Command {
 
         Item item = order.getItem();
         Date date = order.getDate();
-        Count count = order.getCount();
+        Quantity quantity = order.getQuantity();
         Status status = Status.COMPLETED;
 
-        return new Order(item, count, date, status);
+        return new Order(item, quantity, date, status);
     }
 
     @Override

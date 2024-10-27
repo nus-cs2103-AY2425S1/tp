@@ -4,31 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the item count of a Person's Order in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidCount(String)}
+ * Represents the item quantity of a Person's Order in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
-public class Count {
+public class Quantity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Item count should be a positive integer";
+            "Item quantity should be a positive integer";
     public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
     public final String value;
 
     /**
-     * Constructs a {@code Count}.
+     * Constructs a {@code Quantity}.
      *
-     * @param count A valid item count.
+     * @param quantity A valid item quantity.
      */
-    public Count(String count) {
-        requireNonNull(count);
-        checkArgument(isValidCount(count), MESSAGE_CONSTRAINTS);
-        value = count;
+    public Quantity(String quantity) {
+        requireNonNull(quantity);
+        checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
+        value = quantity;
     }
 
     /**
-     * Returns true if a given string is a valid count number.
+     * Returns true if a given string is a valid quantity number.
      */
-    public static boolean isValidCount(String test) {
+    public static boolean isValidQuantity(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -44,12 +44,12 @@ public class Count {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Count)) {
+        if (!(other instanceof Quantity)) {
             return false;
         }
 
-        Count otherCount = (Count) other;
-        return value.equals(otherCount.value);
+        Quantity otherQuantity = (Quantity) other;
+        return value.equals(otherQuantity.value);
     }
 
     @Override

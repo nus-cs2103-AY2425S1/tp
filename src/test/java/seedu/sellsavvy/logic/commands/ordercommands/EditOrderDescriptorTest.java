@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_BOTTLE;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 
@@ -40,7 +40,7 @@ public class EditOrderDescriptorTest {
         assertFalse(DESC_ATLAS.equals(editedAtlas));
 
         // different quantity -> returns false
-        editedAtlas = new EditOrderDescriptorBuilder(DESC_ATLAS).withQuantity(VALID_COUNT_BOTTLE).build();
+        editedAtlas = new EditOrderDescriptorBuilder(DESC_ATLAS).withQuantity(VALID_QUANTITY_BOTTLE).build();
         assertFalse(DESC_ATLAS.equals(editedAtlas));
 
         // different date -> returns false

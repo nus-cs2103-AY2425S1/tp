@@ -1,6 +1,6 @@
 package seedu.sellsavvy.testutil;
 
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 
@@ -31,7 +31,7 @@ public class OrderUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_ITEM + order.getItem().fullDescription + " ");
         sb.append(PREFIX_DATE + order.getDate().value + " ");
-        sb.append(PREFIX_COUNT + order.getCount().value);
+        sb.append(PREFIX_QUANTITY + order.getQuantity().value);
         return sb.toString();
     }
 
@@ -48,7 +48,7 @@ public class OrderUtil {
     public static String getEditOrderDescriptorDetails(EditOrderDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getItem().ifPresent(item -> sb.append(PREFIX_ITEM).append(item.fullDescription).append(" "));
-        descriptor.getQuantity().ifPresent(quantity -> sb.append(PREFIX_COUNT).append(quantity.value).append(" "));
+        descriptor.getQuantity().ifPresent(quantity -> sb.append(PREFIX_QUANTITY).append(quantity.value).append(" "));
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
         return sb.toString();
     }

@@ -2,7 +2,7 @@ package seedu.sellsavvy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 
@@ -24,7 +24,7 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
     public EditOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ITEM, PREFIX_COUNT, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_ITEM, PREFIX_QUANTITY, PREFIX_DATE);
 
         Index index;
 
@@ -35,15 +35,15 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
                     EditOrderCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ITEM, PREFIX_COUNT, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ITEM, PREFIX_QUANTITY, PREFIX_DATE);
 
         EditOrderDescriptor editOrderDescriptor = new EditOrderDescriptor();
 
         if (argMultimap.getValue(PREFIX_ITEM).isPresent()) {
             editOrderDescriptor.setItem(ParserUtil.parseItem(argMultimap.getValue(PREFIX_ITEM).get()));
         }
-        if (argMultimap.getValue(PREFIX_COUNT).isPresent()) {
-            editOrderDescriptor.setQuantity(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
+        if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
+            editOrderDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editOrderDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));

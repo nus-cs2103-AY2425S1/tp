@@ -17,7 +17,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
-import seedu.sellsavvy.model.order.Count;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.person.Address;
@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ITEM = "World M@p";
-    private static final String INVALID_COUNT = "0";
+    private static final String INVALID_QUANTITY = "0";
     private static final String INVALID_DATE = "12-12-12";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -43,7 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_ITEM = "World Map";
-    private static final String VALID_COUNT = "2";
+    private static final String VALID_QUANTITY = "2";
     private static final String VALID_DATE = "12-12-2025";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -230,26 +230,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCount_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCount((String) null));
+    public void parseQuantity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity((String) null));
     }
 
     @Test
-    public void parseCount_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT));
+    public void parseQuantity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseQuantity(INVALID_QUANTITY));
     }
 
     @Test
-    public void parseCount_validValueWithoutWhitespace_returnsCount() throws Exception {
-        Count expectedCount = new Count(VALID_COUNT);
-        assertEquals(expectedCount, ParserUtil.parseCount(VALID_COUNT));
+    public void parseQuantity_validValueWithoutWhitespace_returnsQuantity() throws Exception {
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(VALID_QUANTITY));
     }
 
     @Test
-    public void parseCount_validValueWithWhitespace_returnsTrimmedCount() throws Exception {
-        String countWithWhitespace = WHITESPACE + VALID_COUNT + WHITESPACE;
-        Count expectedCount = new Count(VALID_COUNT);
-        assertEquals(expectedCount, ParserUtil.parseCount(countWithWhitespace));
+    public void parseQuantity_validValueWithWhitespace_returnsTrimmedQuantity() throws Exception {
+        String quantityWithWhitespace = WHITESPACE + VALID_QUANTITY + WHITESPACE;
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(quantityWithWhitespace));
     }
 
     @Test

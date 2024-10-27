@@ -14,7 +14,7 @@ public class Order {
 
     // Item fields
     private final Item item;
-    private final Count count;
+    private final Quantity quantity;
 
     // Data fields
     private final Date date;
@@ -23,10 +23,10 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Item item, Count count, Date date, Status status) {
-        requireAllNonNull(item, count, date);
+    public Order(Item item, Quantity quantity, Date date, Status status) {
+        requireAllNonNull(item, quantity, date);
         this.item = item;
-        this.count = count;
+        this.quantity = quantity;
         this.date = date;
         this.status = status;
     }
@@ -35,8 +35,8 @@ public class Order {
         return item;
     }
 
-    public Count getCount() {
-        return count;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
     public Date getDate() {
@@ -77,7 +77,7 @@ public class Order {
 
         Order otherOrder = (Order) other;
         return item.equals(otherOrder.item)
-                && count.equals(otherOrder.count)
+                && quantity.equals(otherOrder.quantity)
                 && date.equals(otherOrder.date)
                 && status.equals(otherOrder.status);
     }
@@ -85,14 +85,14 @@ public class Order {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(item, count, date, status);
+        return Objects.hash(item, quantity, date, status);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("item", item)
-                .add("count", count)
+                .add("quantity", quantity)
                 .add("date", date)
                 .add("status", status)
                 .toString();
