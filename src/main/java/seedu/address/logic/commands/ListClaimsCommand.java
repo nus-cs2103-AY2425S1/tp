@@ -111,9 +111,11 @@ public class ListClaimsCommand extends Command {
      */
     private String formatClaims(List<Claim> claims) {
         return claims.stream()
-                .map(Claim::toString)
+                .map(claim -> String.format("Claim Status: %s | Claim Description: %s",
+                        claim.getStatus().toString(), claim.getClaimDescription()))
                 .collect(Collectors.joining("\n"));
     }
+
 
     @Override
     public boolean equals(Object other) {
