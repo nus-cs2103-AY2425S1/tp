@@ -37,6 +37,7 @@ public class LogicManager implements Logic {
 
     private final EventManager eventManager;
 
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */

@@ -26,6 +26,8 @@ public class ModelManager implements Model {
     private final EventManager eventManager;
     private final FilteredList<Person> filteredPersons;
 
+    private boolean searchMode = false;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -155,6 +157,20 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Checks the search mode of the model.
+     */
+    public boolean getSearchMode() {
+        return searchMode;
+    }
+
+    /**
+     * Sets the search mode of the model.
+     */
+    public void setSearchMode(boolean searchMode) {
+        this.searchMode = searchMode;
     }
 
     @Override
