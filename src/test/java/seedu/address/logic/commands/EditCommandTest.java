@@ -241,4 +241,31 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void execute_editWithoutChangingTutorialId_unassignNotCalled() {
+        Index indexFirstStudent = Index.fromOneBased(1);
+        Student firstStudent = model.getFilteredStudentList().get(indexFirstStudent.getZeroBased());
+
+        // Create an edited student without changing tutorial ID
+        Student editedStudent = new StudentBuilder(firstStudent).withName(VALID_NAME_BOB).build();
+
+        // Create the descriptor with only the name changed
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build();
+
+        // Create the EditCommand
+        EditCommand editCommand = new EditCommand(indexFirstStudent, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                Messages.format(editedStudent));
+
+        // Expected model remains the same except for the student's name
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new AssignmentList(), getTypicalTutorialList());
+        expectedModel.setStudent(firstStudent, editedStudent);
+
+        // No need to unassign or assign since tutorial ID hasn't changed
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
 }
