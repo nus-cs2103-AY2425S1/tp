@@ -104,8 +104,9 @@ public class EditPolicyCommand extends Command {
         PremiumAmount updatedPremiumAmount = descriptor.getPremiumAmount().orElse(policyToEdit.getPremiumAmount());
         CoverageAmount updatedCoverageAmount = descriptor.getCoverageAmount().orElse(policyToEdit.getCoverageAmount());
         ExpiryDate updatedExpiryDate = descriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
+
         Policy policy = Policy.makePolicy(descriptor.getPolicyType(), updatedPremiumAmount,
-                updatedCoverageAmount, updatedExpiryDate);
+                updatedCoverageAmount, updatedExpiryDate, policyToEdit.getClaimList());
         return policy;
     }
 

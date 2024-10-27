@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.Policy;
@@ -57,7 +58,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         ExpiryDate expiryDate = ParserUtil.parseExpiryDate(
                 argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).orElse(""));
 
-        Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate);
+        Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate, new ClaimList());
         return new AddPolicyCommand(index, policy);
     }
 }
