@@ -35,7 +35,8 @@ public class ArchiveCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.ARCHIVE_MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.ARCHIVE_MESSAGE_USAGE),
+                    pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
