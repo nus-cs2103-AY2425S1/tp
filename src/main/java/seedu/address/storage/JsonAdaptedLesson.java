@@ -3,13 +3,10 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Date;
@@ -29,7 +26,7 @@ class JsonAdaptedLesson {
     private final String date;
     private final String time;
     private final List<JsonAdaptedStudent> students;
-    private final Map<JsonAdaptedStudent, Boolean> attendanceMap;
+    private final List<Boolean> attendanceMap;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -38,17 +35,17 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
-            @JsonProperty("attendanceMap") Set<Pair<JsonAdaptedStudent, Boolean>> attendanceMap) {
+            @JsonProperty("attendanceMap") List<Boolean> attendanceMap) {
         this.date = date;
         this.time = time;
         this.students = new ArrayList<>();
-        this.attendanceMap = new HashMap<>();
+        this.attendanceMap = new ArrayList<>();
         // Null check required because the JsonCreator constructor may be called with null if the fields do not exist
         if (students != null) {
             this.students.addAll(students);
         }
         if (attendanceMap != null) {
-            attendanceMap.forEach(pair -> this.attendanceMap.put(pair.getKey(), pair.getValue()));
+            this.attendanceMap.addAll(attendanceMap);
         }
 
     }
@@ -60,14 +57,13 @@ class JsonAdaptedLesson {
         date = source.getDate().toString();
         time = source.getTime().toString();
         students = new ArrayList<>();
-        attendanceMap = new HashMap<>();
+        attendanceMap = new ArrayList<>();
 
         for (Student student : source.getStudents()) {
             JsonAdaptedStudent jsonAdaptedStudent = new JsonAdaptedStudent(student);
             boolean attendance = source.getAttendance(student);
             students.add(jsonAdaptedStudent);
-            attendanceMap.put(jsonAdaptedStudent, attendance);
-            // attendanceMap.add(new Pair<>(jsonAdaptedStudent, attendance));
+            attendanceMap.add(attendance);
         }
     }
 
@@ -128,6 +124,7 @@ class JsonAdaptedLesson {
         final List<Student> modelStudents = new ArrayList<>();
         final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
 
+        int i = 0;
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
 
@@ -139,7 +136,11 @@ class JsonAdaptedLesson {
 
             modelStudents.add(modelStudent);
             // if the student is not found in attendanceMap, defaults to no attendance
-            modelAttendanceMap.put(modelStudent, attendanceMap.getOrDefault(student, false));
+            if (i < attendanceMap.size()) {
+                modelAttendanceMap.put(modelStudent, attendanceMap.get(i++));
+            } else {
+                modelAttendanceMap.put(modelStudent, false);
+            }
         }
 
         return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);
