@@ -14,11 +14,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.role.Role;
 
+import java.util.Optional;
 /**
  * Contains unit tests for {@code EditPersonDescriptor}.
  */
 public class EditPersonDescriptorTest {
+
+    private Optional<Role> role = Optional.empty();
 
     /**
      * Tests the {@code equals} method of {@code EditPersonDescriptor} for various scenarios.

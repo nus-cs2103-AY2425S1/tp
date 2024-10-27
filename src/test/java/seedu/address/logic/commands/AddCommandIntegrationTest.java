@@ -26,9 +26,12 @@ public class AddCommandIntegrationTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
+    /**
+     * Verifies that a new person is successfully added.
+     */
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().withName("New Person").withEmail("newperson@example.com").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
@@ -38,11 +41,13 @@ public class AddCommandIntegrationTest {
                 expectedModel);
     }
 
+    /**
+     * Verifies that trying to add a duplicate person throws a CommandException.
+     */
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList, null), model,
                 AddCommand.MESSAGE_DUPLICATE_CONTACT);
     }
-
 }
