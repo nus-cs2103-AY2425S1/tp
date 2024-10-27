@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+
 <VBox prefWidth="250" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       styleClass="attendance_container">
     <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0">
-        <Label text="Classes" style="-fx-text-fill: #262626; -fx-font-weight: bold; -fx-padding: 0 5 0 0"/>
+        <Label text="Classes" style="-fx-font-weight: bold; -fx-padding: 0 5 0 0"/>
         <HBox HBox.hgrow="NEVER" style="-fx-background-color: #77C8E7; -fx-padding: 3; -fx-background-radius: 20">
             <ImageView fitHeight="16" fitWidth="16">
                 <Image url="@/images/classes_icon.png"/>
             </ImageView>
         </HBox>
     </HBox>
-    <Label fx:id="tutorial" text="\$tutorials" style="-fx-text-fill: #262626; -fx-padding: 2 0"/>
+    <Label fx:id="tutorial" text="\$tutorials" style="-fx-padding: 2 0"/>
     <HBox alignment="CENTER_LEFT" style="-fx-padding: 8 0 6 0">
-        <Label text="Attendance" style="-fx-text-fill: #262626; -fx-font-weight: bold; -fx-padding: 0 4 0 0"/>
-        <Label fx:id="week" text="\$current week" style="-fx-text-fill: #262626; -fx-font-size: 13"/>
-        <Label text=" | " style="-fx-text-fill: #262626; -fx-font-size: 13"/>
-        <Label fx:id="dateRange" text="\$date range" style="-fx-text-fill: #262626; -fx-font-size: 13"/>
+        <Label text="Attendance" style="-fx-font-weight: bold; -fx-padding: 0 4 0 0"/>
+        <Label fx:id="week" text="\$current week"/>
+        <Label text=" | "/>
+        <Label fx:id="dateRange" text="\$date range"/>
     </HBox>
     <VBox fx:id="attendanceList" spacing="7"/>
 </VBox>

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -120,7 +121,7 @@ public class AttendanceCard extends UiPart<Region> {
         attendance.setStyle("-fx-text-fill: #E58D8D; -fx-padding: 0 0 0 4");
 
         Image icon = new Image("/images/cancel_icon.png");
-        attendanceStatusIcon.setImage(icon);
+        Platform.runLater(() -> attendanceStatusIcon.setImage(icon));
     }
 
     /**
@@ -131,6 +132,6 @@ public class AttendanceCard extends UiPart<Region> {
         attendance.setStyle("-fx-text-fill: #52A853; -fx-padding: 0 0 0 4");
 
         Image icon = new Image("/images/check_icon.png");
-        attendanceStatusIcon.setImage(icon);
+        Platform.runLater(() -> attendanceStatusIcon.setImage(icon));
     }
 }

@@ -3,13 +3,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+
 <VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
-            <Label fx:id="subject" style="-fx-text-fill: #262626; -fx-padding: 0 5 0 0" text="\$subject"/>
+            <Label fx:id="subject" style="-fx-padding: 0 5 0 0" text="\$subject"/>
         </HBox>
         <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 2 5; -fx-background-radius: 7">
             <ImageView fx:id="attendanceStatusIcon" fitWidth="15" fitHeight="15"/>
@@ -17,5 +16,5 @@
         </HBox>
     </HBox>
     <Label minWidth="230" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"
-           style="-fx-text-fill: #262626; -fx-padding: 5 0; -fx-font-size: 13; -fx-border-width: 0 0 2 0; -fx-border-color: #E4E4E4"/>
+           style="-fx-padding: 5 0; -fx-border-width: 0 0 2 0; -fx-border-color: #E4E4E4"/>
 </VBox>
