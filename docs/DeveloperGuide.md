@@ -527,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to filter Clients by keywords
+1.  User requests to filter Clients by keywords.
 2.  MATER shows the list of filtered Clients and displays a confirmation message.
 
     Use case ends.
