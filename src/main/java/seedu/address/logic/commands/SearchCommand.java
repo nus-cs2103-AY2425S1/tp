@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
-
+/**
+ * Searches for schedules within a specified time period.
+ */
 public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "search";
@@ -27,10 +29,23 @@ public class SearchCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Search successful";
     private LocalDateTime begin;
     private LocalDateTime end;
+    /**
+     * Constructs a SearchCommand with the specified begin and end times.
+     *
+     * @param begin The beginning of the time range to search.
+     * @param end The end of the time range to search.
+     */
     public SearchCommand(LocalDateTime begin, LocalDateTime end) {
         this.begin = begin;
         this.end = end;
     }
+    /**
+     * Executes the search command on the given model.
+     * Filters the person list based on the presence and values of begin and end times.
+     *
+     * @param model The model in which the command is executed.
+     * @return The result of the command execution.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -55,8 +70,8 @@ public class SearchCommand extends Command {
 
     private boolean hasScheduleBetweenBeginAndEnd(Person person) {
         Schedule schedule = person.getSchedule();
-        return schedule.getDateTime() != null &&
-                schedule.getDateTime().isAfter(begin) && schedule.getDateTime().isBefore(end);
+        return schedule.getDateTime() != null
+                && schedule.getDateTime().isAfter(begin) && schedule.getDateTime().isBefore(end);
     }
     @Override
     public boolean equals(Object other) {
@@ -68,10 +83,10 @@ public class SearchCommand extends Command {
             return false;
         }
         SearchCommand otherSearchCommand = (SearchCommand) other;
-        boolean isBeginEqual = (begin == null && otherSearchCommand.begin == null) ||
-                (begin != null && begin.equals(otherSearchCommand.begin));
-        boolean isEndEqual = (end == null && otherSearchCommand.end == null) ||
-                (end != null && end.equals(otherSearchCommand.end));
+        boolean isBeginEqual = (begin == null && otherSearchCommand.begin == null)
+                || (begin != null && begin.equals(otherSearchCommand.begin));
+        boolean isEndEqual = (end == null && otherSearchCommand.end == null)
+                || (end != null && end.equals(otherSearchCommand.end));
 
         return isBeginEqual && isEndEqual;
     }
