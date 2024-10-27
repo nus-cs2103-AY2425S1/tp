@@ -54,7 +54,7 @@ public class StudentDetailsPanel extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
-        remark.setText(student.getRemark());
+        remark.setText(student.getRemark().remarkName);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> detailsTags.getChildren().add(new Label(tag.tagName)));

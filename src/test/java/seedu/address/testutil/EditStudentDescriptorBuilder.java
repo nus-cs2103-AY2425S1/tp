@@ -8,10 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -88,7 +85,7 @@ public class EditStudentDescriptorBuilder {
      * Sets the {@code Remark} of the {@code EditStudentDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withRemark(String remark) {
-        descriptor.setRemark(remark);
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 

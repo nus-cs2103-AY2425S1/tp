@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.model.student.Remark;
 
 public class RemarkCommandParserTest {
 
@@ -22,7 +23,7 @@ public class RemarkCommandParserTest {
     public void parse_validArgs_returnsRemarkCommand() {
         String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + PREFIX_REMARK + VALID_REMARK_MATH;
-        assertParseSuccess(parser, userInput, new RemarkCommand(INDEX_FIRST_STUDENT, VALID_REMARK_MATH));
+        assertParseSuccess(parser, userInput, new RemarkCommand(INDEX_FIRST_STUDENT, new Remark(VALID_REMARK_MATH)));
     }
 
     @Test

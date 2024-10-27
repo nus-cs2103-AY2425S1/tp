@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Remark;
 
 /**
  * Parses input arguments and creates a new RemarkCommand object.
@@ -39,10 +40,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         }
 
         // Extract remark, ensuring it is non-empty and trimmed
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("").trim();
-        if (remark.isEmpty()) {
-            throw new ParseException(RemarkCommand.MESSAGE_NO_REMARK);
-        }
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
         return new RemarkCommand(studentIndex, remark);
     }

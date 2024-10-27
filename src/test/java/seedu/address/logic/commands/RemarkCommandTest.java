@@ -19,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 
 /**
@@ -32,9 +33,9 @@ public class RemarkCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Student studentToAddRemark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, VALID_REMARK_MATH);
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, new Remark(VALID_REMARK_MATH));
 
-        Student updatedStudent = new Student(studentToAddRemark, VALID_REMARK_MATH);
+        Student updatedStudent = new Student(studentToAddRemark, new Remark(VALID_REMARK_MATH));
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS,
                 Messages.format(updatedStudent));
@@ -48,7 +49,7 @@ public class RemarkCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, VALID_REMARK_MATH);
+        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_MATH));
 
         assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -58,9 +59,9 @@ public class RemarkCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student studentToAddRemark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, VALID_REMARK_MATH);
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, new Remark(VALID_REMARK_MATH));
 
-        Student updatedStudent = new Student(studentToAddRemark, VALID_REMARK_MATH);
+        Student updatedStudent = new Student(studentToAddRemark, new Remark(VALID_REMARK_MATH));
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS,
                 Messages.format(updatedStudent));
@@ -73,7 +74,7 @@ public class RemarkCommandTest {
 
     @Test
     public void execute_emptyRemark_throwsCommandException() {
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, "");
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, new Remark(""));
 
         assertCommandFailure(remarkCommand, model, RemarkCommand.MESSAGE_NO_REMARK);
     }
@@ -86,8 +87,8 @@ public class RemarkCommandTest {
 
     @Test
     public void equals() {
-        String firstRemark = "Weak in Math";
-        String secondRemark = "Strong in Science";
+        Remark firstRemark = new Remark("Weak in Math");
+        Remark secondRemark = new Remark("Strong in Science");
 
         RemarkCommand remarkFirstCommand = new RemarkCommand(INDEX_FIRST_STUDENT, firstRemark);
         RemarkCommand remarkSecondCommand = new RemarkCommand(INDEX_SECOND_STUDENT, secondRemark);
@@ -111,7 +112,7 @@ public class RemarkCommandTest {
 
     @Test
     public void toStringMethod() {
-        String remark = "Weak at English";
+        Remark remark = new Remark ("Weak at English");
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_STUDENT, remark);
         String expected = RemarkCommand.class.getCanonicalName() + "{studentIndex=" + INDEX_FIRST_STUDENT
                 + ", remark=" + remark + "}";
