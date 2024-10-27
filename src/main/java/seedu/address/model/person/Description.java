@@ -11,7 +11,11 @@ public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 500"
             + "characters";
 
-    public static final String VALIDATION_REGEX = "^.{1,500}$";
+    // Allow printable characters excluding control characters
+    public static final String VALIDATION_REGEX = "^[\\p{Print}&&[^\\p{Cntrl}]]*$";
+
+    public static final int MAX_LENGTH = 500;
+    public static final int MIN_LENGTH = 1;
 
     public final String description;
 
@@ -53,6 +57,6 @@ public class Description {
     }
 
     public static boolean isValidDescription(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH && test.length() >= MIN_LENGTH;
     }
 }

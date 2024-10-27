@@ -121,6 +121,7 @@ public class NameContainsKeywordsDeletePredicateTest {
         predicate = new NameContainsKeywordsDeletePredicate(Arrays.asList("Alice", "Car"));
         assertFalse(predicate.isExact(new PersonBuilder().withName("Alice Carol").build()));
     }
+
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");

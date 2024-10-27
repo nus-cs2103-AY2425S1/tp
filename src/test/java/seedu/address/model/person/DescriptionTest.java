@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -58,18 +60,47 @@ public class DescriptionTest {
         Description description = new Description("Valid Description");
 
         // same values -> returns true
-        assertTrue(description.equals(new Description("Valid Description")));
+        assertEquals(description, new Description("Valid Description"));
 
         // same object -> returns true
         assertTrue(description.equals(description));
 
         // null -> returns false
-        assertFalse(description.equals(null));
+        assertNotEquals(description, null);
 
         // different types -> returns false
         assertFalse(description.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(description.equals(new Description("Other Valid Description")));
+        assertNotEquals(description, new Description("Other Valid Description"));
+
+        // description different casing -> returns false
+        assertNotEquals(description, new Description("valid description"));
     }
+
+    @Test
+    public void isValidDescription_specialCharacters() {
+        assertTrue(Description.isValidDescription("Loves coding!")); // punctuation
+        assertTrue(Description.isValidDescription("1234567890")); // numbers
+        assertTrue(Description.isValidDescription("Coding @ Night")); // special characters
+        assertFalse(Description.isValidDescription("\t")); // tab character
+        assertFalse(Description.isValidDescription("\n")); // newline character
+    }
+
+    @Test
+    public void hashCode_consistency() {
+        Description description1 = new Description("Valid Description");
+        Description description2 = new Description("Valid Description");
+
+        assertEquals(description1.hashCode(), description2.hashCode());
+    }
+
+    @Test
+    public void isValidDescription_whitespace() {
+        assertTrue(Description.isValidDescription(" ")); // single space
+        assertTrue(Description.isValidDescription("  Loves coding ")); // leading and trailing spaces
+        assertTrue(Description.isValidDescription("Loves    coding")); // multiple spaces
+    }
+
+
 }

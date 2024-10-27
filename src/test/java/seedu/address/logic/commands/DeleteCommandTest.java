@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureDelete;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -144,4 +145,57 @@ public class DeleteCommandTest {
 
         assertTrue(model.getDisplayPersons().isEmpty());
     }
+
+    @Test
+    public void execute_emptyList_throwsCommandException() {
+        // Clear the current model's list
+        model.setClientHub(new ClientHub());
+
+        // Attempt to delete a person when the list is empty
+        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
+                Arrays.asList("NonexistentName".split("\\s+")));
+        DeleteCommand deleteCommand = new DeleteCommand(predicate);
+
+        // Expect a CommandException with the person not found message
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_caseInsensitiveNameMatching_success() {
+        // Get the first person in the unfiltered list
+        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        // Create a predicate using a different case
+        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
+                Arrays.asList(personToDelete.getName().fullName.toUpperCase().split("\\s+")));
+
+        // Create the DeleteCommand with the case-insensitive predicate
+        DeleteCommand deleteCommand = new DeleteCommand(predicate);
+
+        // Expected success message
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        // Create the expected model and delete the person
+        Model expectedModel = new ModelManager(model.getClientHub(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        // Perform the delete operation
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleMatchingNames_throwsCommandException() {
+        // Get the first person in the list and use a name that could match multiple entries
+        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        String name = personToDelete.getName().fullName.split("\\s+")[0];
+
+        // Create a DeleteCommand for the name that could have multiple matches
+        DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsDeletePredicate(
+                Arrays.asList(name)));
+
+        // Expect a CommandException for vague delete message
+        assertCommandFailureDelete(deleteCommand, name, model, Messages.MESSAGE_VAGUE_DELETE);
+    }
+
 }
