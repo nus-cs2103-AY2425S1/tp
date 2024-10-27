@@ -21,6 +21,10 @@ public class Messages {
     public static final String MESSAGE_NO_TAG = "The person does not contain the tag";
     public static final String MESSAGE_TAG_NOT_FOUND = "There is no tag presented in the command!";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Tag %1$s is deleted from student %2$s";
+
+    public static final String MESSAGE_UNDO_FAILURE = "Already at the oldest change";
+
+    public static final String MESSAGE_REDO_FAILURE = "Already at the latest change";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

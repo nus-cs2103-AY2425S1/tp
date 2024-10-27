@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_UNDO_FAILURE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalCampusConnect;
@@ -16,11 +18,10 @@ import seedu.address.model.person.Person;
 public class UndoCommandTest {
     private Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
     @Test
-    public void execute_emptyHistoryStack_success() {
+    public void execute_emptyHistoryStack_failure() {
         ModelManager expectedModel = new ModelManager(model.getCampusConnect(), new UserPrefs());
         UndoCommand undoCommand = new UndoCommand();
-        String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(undoCommand, expectedModel, MESSAGE_UNDO_FAILURE);
     }
 
     @Test
