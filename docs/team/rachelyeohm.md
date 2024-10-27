@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: Rachel Yeo Hui Min's Project Portfolio Page
 ---
 
