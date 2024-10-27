@@ -166,6 +166,19 @@ public class ModelManager implements Model {
         listings.setListing(target, editedListing);
     }
 
+    /**
+     * Returns the listing with the same name as {@code name} exists in Listings.
+     */
+    @Override
+    public Listing getListingByName(Name name) {
+        requireNonNull(name);
+        return this.getFilteredListingList()
+                .stream()
+                .filter(listing -> listing.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

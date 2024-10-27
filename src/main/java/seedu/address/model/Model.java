@@ -135,6 +135,11 @@ public interface Model {
      */
     void setListing(Listing target, Listing editedListing);
 
+    /**
+     * Returns the listing with the same name as {@code name} exists in Listings.
+     */
+    Listing getListingByName(Name name);
+
 
     // Returns the listing with the same name as {@code listing} exists in the address book.
     //Person getPersonByName(Name name);
