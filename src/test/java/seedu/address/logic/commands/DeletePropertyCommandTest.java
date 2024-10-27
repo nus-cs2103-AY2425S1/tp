@@ -9,11 +9,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_BEDOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BEDOK;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertPropertyCommandFailure;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ import seedu.address.model.property.Unit;
  */
 public class DeletePropertyCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+    private Model model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
             getTypicalClientBook(), getTypicalMeetingBook());
 
     @Test
@@ -51,8 +50,10 @@ public class DeletePropertyCommandTest {
         String expectedMessage = String.format(DeletePropertyCommand.MESSAGE_DELETE_PROPERTY_SUCCESS,
                 Messages.format(propertyToDelete));
 
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(),
                 getTypicalPropertyBook(), getTypicalClientBook(), getTypicalMeetingBook());
+
+        expectedModel.deleteProperty(propertyToDelete);
 
         assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);
     }
@@ -62,7 +63,7 @@ public class DeletePropertyCommandTest {
         PostalCode notFoundPostalCode = new PostalCode(VALID_NOTFOUND_POSTALCODE_CLEMENTI);
         Unit unit = new Unit(VALID_UNIT_ADMIRALTY);
         DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(notFoundPostalCode, unit);
-        assertCommandFailure(deletePropertyCommand, model,
+        assertPropertyCommandFailure(deletePropertyCommand, model,
                 String.format("Property not found. ", notFoundPostalCode, unit));
     }
 
@@ -71,7 +72,7 @@ public class DeletePropertyCommandTest {
         PostalCode postalCode = new PostalCode(VALID_POSTALCODE_ADMIRALTY);
         Unit notFoundUnit = new Unit(VALID_NOTFOUND_UNIT_CLEMENTI);
         DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(postalCode, notFoundUnit);
-        assertCommandFailure(deletePropertyCommand, model,
+        assertPropertyCommandFailure(deletePropertyCommand, model,
                 String.format("Property not found. ", postalCode, notFoundUnit));
     }
 
@@ -80,7 +81,7 @@ public class DeletePropertyCommandTest {
         PostalCode notFoundPostalCode = new PostalCode(VALID_NOTFOUND_POSTALCODE_CLEMENTI);
         Unit notFoundUnit = new Unit(VALID_NOTFOUND_UNIT_CLEMENTI);
         DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(notFoundPostalCode, notFoundUnit);
-        assertCommandFailure(deletePropertyCommand, model,
+        assertPropertyCommandFailure(deletePropertyCommand, model,
                 String.format("Property not found. ", notFoundPostalCode, notFoundUnit));
     }
 

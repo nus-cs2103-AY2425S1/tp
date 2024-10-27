@@ -14,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
     private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
     private Path meetingBookFilePath = Paths.get("data" , "meetingbook.json");
@@ -38,7 +37,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setClientBookFilePath(newUserPrefs.getClientBookFilePath());
+        setPropertyBookFilePath(newUserPrefs.getPropertyBookFilePath());
+        setMeetingBookFilePath(newUserPrefs.getMeetingBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -48,15 +49,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
-    }
-
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
-    }
-
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
     }
 
     public Path getClientBookFilePath() {
@@ -81,7 +73,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && clientBookFilePath.equals(otherUserPrefs.clientBookFilePath)
+                && propertyBookFilePath.equals(otherUserPrefs.propertyBookFilePath)
+                && meetingBookFilePath.equals(otherUserPrefs.meetingBookFilePath);
     }
 
     public Path getPropertyBookFilePath() {
@@ -104,14 +98,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, clientBookFilePath, propertyBookFilePath, meetingBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nClient book file location : " + clientBookFilePath);
+        sb.append("\nProperty book file location : " + propertyBookFilePath);
+        sb.append("\nMeeting book file location : " + meetingBookFilePath);
         return sb.toString();
     }
 }

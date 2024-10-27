@@ -12,14 +12,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.ClientGridParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager.DisplayMode;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.storage.Storage;
 
@@ -36,7 +34,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final ClientGridParser clientGridParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -44,7 +42,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        clientGridParser = new ClientGridParser();
     }
 
     @Override
@@ -52,11 +50,10 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = clientGridParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
             storage.saveClientBook(model.getClientBook());
             storage.savePropertyBook(model.getPropertyBook());
             storage.saveMeetingBook(model.getMeetingBook());
@@ -67,16 +64,6 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
     }
 
     @Override
@@ -92,13 +79,13 @@ public class LogicManager implements Logic {
         return model.getFilteredMeetingList();
     }
 
-    public ObjectProperty<DisplayMode> getDisplayMode() {
-        return model.getDisplayMode();
+    @Override
+    public Path getClientBookFilePath() {
+        return model.getClientBookFilePath();
     }
 
-    @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObjectProperty<DisplayMode> getDisplayMode() {
+        return model.getDisplayMode();
     }
 
     @Override

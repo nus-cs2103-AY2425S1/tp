@@ -2,18 +2,19 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static org.mockito.Mockito.when;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,7 +27,7 @@ public class AddMeetingCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+        model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
                 getTypicalClientBook(), getTypicalMeetingBook());
         meeting = mock(Meeting.class); // Mocking a Meeting object
     }
@@ -35,7 +36,7 @@ public class AddMeetingCommandTest {
     public void execute_newMeeting_success() {
         Meeting validMeeting = new MeetingBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
         expectedModel.addMeeting(validMeeting);
 
@@ -48,9 +49,15 @@ public class AddMeetingCommandTest {
 
     @Test
     public void execute_duplicateMeeting_throwsCommandException() {
-        Meeting meetingInList = model.getMeetingBook().getMeetingList().get(0);
-        assertCommandFailure(new AddMeetingCommand(meetingInList), model,
-                AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
+        // Arrange
+        AddMeetingCommand addMeetingCommand = new AddMeetingCommand(meeting);
+
+        // Stubbing the behavior of model to simulate the presence of a duplicate buyer
+        when(model.hasMeeting(meeting)).thenReturn(true);
+
+        // Act & Assert
+        assertThrows(CommandException.class, () -> addMeetingCommand.execute(model),
+                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER);
     }
 
     @Test
