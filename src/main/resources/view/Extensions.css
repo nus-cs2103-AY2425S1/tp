@@ -30,3 +30,16 @@
     -fx-font-size: 12;
     -fx-padding: 7 0 5 0;
 }
+
+.attendance-pane {
+    -fx-background-color: transparent;
+}
+
+.attendance-pane .scroll-bar .thumb {
+    -fx-background-color: derive(#9b9b9b, 70%);
+    -fx-background-insets: 2.5;
+}
+
+.attendance-pane .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 0 4 0 4;
+}

@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
+<?import javafx.scene.control.ScrollPane?>
 <VBox prefWidth="250" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <HBox alignment="CENTER" style="-fx-padding: 0 0 10 0">
         <HBox alignment="CENTER_LEFT">
@@ -22,5 +23,7 @@
             <Label fx:id="dateRange" text="\$date range" style="-fx-font-size: 12"/>
         </HBox>
     </HBox>
-    <VBox fx:id="attendanceList" spacing="8"/>
+    <ScrollPane styleClass="attendance-pane" fitToWidth="true" maxHeight="200">
+            <VBox fx:id="attendanceList" spacing="8" style="-fx-background-color: white"/>
+    </ScrollPane>
 </VBox>

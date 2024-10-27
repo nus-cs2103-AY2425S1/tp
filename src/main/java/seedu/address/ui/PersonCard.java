@@ -56,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, ObservableList<Participation> participationList, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -65,6 +65,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (tags.getChildren().isEmpty()) {
+            tags.setManaged(false);
+        }
 
         attendanceContainer = new AttendanceContainer(participationList);
         attendanceContainerPlaceholder.getChildren().add(attendanceContainer.getRoot());

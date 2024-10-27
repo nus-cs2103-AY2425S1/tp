@@ -23,8 +23,7 @@
                 <ImageView fx:id="attendanceStatusIcon" fitWidth="15" fitHeight="15"/>
                 <Label fx:id="attendance" text="\$attendance"/>
             </HBox>
-
         </HBox>
     </VBox>
-    <Label minWidth="230" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"/>
+    <Label minWidth="220" fx:id="otherAttendance" visible="false" managed="false" wrapText="true"/>
 </VBox>
