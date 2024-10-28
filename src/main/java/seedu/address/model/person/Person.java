@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,9 +25,6 @@ public class Person {
     // Data fields
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
-
-    // Exception messages
-    private static final String MESSAGE_MISSING_FIELD = "%s is missing.";
 
     /**
      * All fields must not be null. Name and Phone must be present.
@@ -110,7 +106,7 @@ public class Person {
 
     @Override
     public String toString() {
-        ToStringBuilder result =  new ToStringBuilder(this)
+        ToStringBuilder result = new ToStringBuilder(this)
                 .add("name", name).add("phone", phone);
 
         if (!email.isPresent()) {
