@@ -50,7 +50,8 @@ public class AttendanceRecord implements Observable {
     }
 
     private void notifyListeners() {
-        for (InvalidationListener listener : listeners) {
+        List<InvalidationListener> listenersCopy = new ArrayList<>(listeners);
+        for (InvalidationListener listener : listenersCopy) {
             listener.invalidated(this);
         }
     }

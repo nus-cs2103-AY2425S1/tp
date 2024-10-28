@@ -38,7 +38,7 @@ public class AttendanceRow {
     }
 
     public String getAttendanceForDate(LocalDate date) {
-        return attendanceByDate.getOrDefault(date, "N/A");
+        return attendanceByDate.getOrDefault(date, "");
     }
 
     /**
