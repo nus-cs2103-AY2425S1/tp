@@ -9,6 +9,8 @@ import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
+import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
 import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -61,23 +63,42 @@ public class MemberTest {
     }
 
     @Test
-    public void addPoints_validPoints_increasesTotalPoints() {
+    public void hasSession_nullSession_throwsNullPointerException() {
         Member member = new MemberBuilder(ALICE).build();
-        Point pointsToAdd = new Point("10");
-        member.addPoints(pointsToAdd);
-        assertEquals(new Point("10"), member.getTotalPoints());
+        assertThrows(NullPointerException.class, () -> member.hasSession(null));
+    }
+
+    @Test
+    public void hasSession_sessionNotInMember_returnsFalse() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertFalse(member.hasSession(new SessionBuilder(REHEARSAL).build()));
+
+        member.addSession(new SessionBuilder(ATTENDANCE).build());
+        assertFalse(member.hasSession(new SessionBuilder(REHEARSAL).build()));
+    }
+
+    @Test
+    public void hasSession_sessionInMember_returnsTrue() {
+        Member member = new MemberBuilder(ALICE).build();
+        member.addSession(new SessionBuilder(MEETING).build());
+        assertTrue(member.hasSession(new SessionBuilder(MEETING).build()));
+
+        member.addSession(new SessionBuilder(ATTENDANCE).build());
+        assertTrue(member.hasSession(new SessionBuilder(MEETING).build()));
+        assertTrue(member.hasSession(new SessionBuilder(ATTENDANCE).build()));
+    }
+
+    @Test
+    public void hasSession_sessionInMemberDifferentCase_returnsTrue() {
+        Member member = new MemberBuilder(ALICE).build();
+        member.addSession(new SessionBuilder(MEETING).build());
+        assertTrue(member.hasSession(new SessionBuilder(MEETING).withSessionName("meeting w1").build()));
     }
 
     @Test
     public void addSession_nullSession_throwsNullPointerException() {
         Member member = new MemberBuilder(ALICE).build();
         assertThrows(NullPointerException.class, () -> member.addSession(null));
-    }
-
-    @Test
-    public void removeSession_nullSession_throwsNullPointerException() {
-        Member member = new MemberBuilder(ALICE).build();
-        assertThrows(NullPointerException.class, () -> member.removeSession(null));
     }
 
     @Test
@@ -88,6 +109,18 @@ public class MemberTest {
         member.addSession(newSession);
         assertTrue(member.getSessions().contains(newSession));
         assertEquals(newSession.getPoints(), member.getTotalPoints());
+
+        Session rehearsal = new SessionBuilder(REHEARSAL).build();
+        member.addSession(rehearsal);
+        assertTrue(member.getSessions().contains(rehearsal));
+        assertEquals(rehearsal.getPoints().add(newSession.getPoints()),
+                member.getTotalPoints());
+    }
+
+    @Test
+    public void removeSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.removeSession(null));
     }
 
     @Test
@@ -95,9 +128,15 @@ public class MemberTest {
         Member member = new MemberBuilder(ALICE).build();
         Session newSession = new Session(new SessionName(VALID_NAME_BOB),
                 new SessionDate("10 Nov 2025"), new Point("10"));
+        Session rehearsal = new SessionBuilder(REHEARSAL).build();
+        member.addSession(rehearsal);
         member.addSession(newSession);
         member.removeSession(newSession.getSessionName());
         assertFalse(member.getSessions().contains(newSession));
+        assertEquals(rehearsal.getPoints(), member.getTotalPoints());
+
+        member.removeSession(rehearsal.getSessionName());
+        assertFalse(member.getSessions().contains(rehearsal));
         assertEquals(new Point("0"), member.getTotalPoints());
     }
 

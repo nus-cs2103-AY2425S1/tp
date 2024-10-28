@@ -93,6 +93,6 @@ public class MemberBuilder {
     }
 
     public Member build() {
-        return new Member(name, telegram, room, tags, points, sessions);
+        return new Member(name, telegram, room, tags, sessions);
     }
 }

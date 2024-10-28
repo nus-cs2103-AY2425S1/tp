@@ -85,6 +85,16 @@ public class FindMemberCommandTest {
     }
 
     @Test
+    public void execute_keywordsDifferentCase_singleMemberFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("eLLE");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredMemberList());
+    }
+
+    @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindMemberCommand findMemberCommand = new FindMemberCommand(predicate);

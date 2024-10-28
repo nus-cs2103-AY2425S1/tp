@@ -26,7 +26,7 @@ public class SampleDataUtil {
         return new Member[] {
             new Member(new Name("Alex Yeoh"), new Telegram("alex_yeoh98"),
                 new Room("12/04/201"),
-                getTagSet("subcommLeader"), new Point("10"),
+                getTagSet("subcommLeader"),
                 getSessionSet(
                     new Session(new SessionName("AGM"), new SessionDate("24 Sep 2024"), new Point("6")),
                     new Session(new SessionName("Team Meeting"), new SessionDate("02 Oct 2024"), new Point("4"))
@@ -34,30 +34,26 @@ public class SampleDataUtil {
             new Member(new Name("Bernice Yu"), new Telegram("BobLim23"),
                 new Room("5/03/102"),
                 getTagSet("competitionLeader", "achiever"),
-                new Point("10"),
                 getSessionSet(
                     new Session(new SessionName("Workshop"), new SessionDate("15 Oct 2024"), new Point("10"))
                 )),
             new Member(new Name("Charlotte Oliveiro"), new Telegram("oliveiro"),
                 new Room("3/02/301"),
-                getTagSet("team1"), new Point("5"),
+                getTagSet("team1"),
                 getSessionSet(
                     new Session(new SessionName("Team Bonding"), new SessionDate("20 Sep 2024"), new Point("5"))
                 )),
             new Member(new Name("David Li"), new Telegram("davidLiOnly"),
                 new Room("14/06/301"),
                 getTagSet("team3"),
-                new Point("0"),
                 getSessionSet()), // Empty session set
             new Member(new Name("Irfan Ibrahim"), new Telegram("ibrahim_irfan"),
                 new Room("3/05/323"),
                 getTagSet("team2"),
-                new Point("0"),
                 getSessionSet()), // Empty session set
             new Member(new Name("Roy Balakrishnan"), new Telegram("roy_da_bomb"),
                 new Room("8/04/258"),
                 getTagSet("team2"),
-                new Point("0"),
                 getSessionSet()) // Empty session set
         };
     }

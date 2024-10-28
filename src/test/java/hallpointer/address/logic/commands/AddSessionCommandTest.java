@@ -4,7 +4,10 @@ import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
+import static hallpointer.address.testutil.TypicalMembers.BOB;
+import static hallpointer.address.testutil.TypicalMembers.CARL;
 import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
+import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -73,31 +76,6 @@ class AddSessionCommandTest {
         assertEquals(Collections.unmodifiableSet(resultSessions),
                 modelStub.getFilteredMemberList().get(0).getSessions());
     }
-    @Test
-    public void execute_duplicateSession_throwsCommandException() {
-        Session validSession = new SessionBuilder().build();
-        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
-        modelStub.addMember(new MemberBuilder().withSessions(validSession).build());
-        Set<Index> indices = new HashSet<>();
-        indices.add(INDEX_FIRST_MEMBER);
-
-        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
-
-        assertThrows(CommandException.class,
-                AddSessionCommand.MESSAGE_DUPLICATE_SESSION, () -> addSessionCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_invalidIndex_throwsCommandException() {
-        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
-        Session validSession = new SessionBuilder().build();
-        Set<Index> indices = new HashSet<>();
-        indices.add(Index.fromOneBased(2)); // Invalid index as there is only one member
-
-        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
-
-        assertThrows(CommandException.class, () -> addSessionCommand.execute(modelStub));
-    }
 
     @Test
     public void execute_sessionAcceptedByModelMultipleMembers_addSuccessful() throws Exception {
@@ -107,7 +85,7 @@ class AddSessionCommandTest {
         Set<Session> resultSessions = new HashSet<>();
 
         indices.add(INDEX_FIRST_MEMBER);
-        indices.add(Index.fromOneBased(2));
+        indices.add(INDEX_SECOND_MEMBER);
         modelStub.addMember(new MemberBuilder().build());
         modelStub.addMember(new MemberBuilder().withName("Bob").build());
 
@@ -128,6 +106,56 @@ class AddSessionCommandTest {
                 modelStub.getFilteredMemberList().get(0).getSessions());
         assertEquals(Collections.unmodifiableSet(resultSessions),
                 modelStub.getFilteredMemberList().get(1).getSessions());
+    }
+
+    @Test
+    public void execute_duplicateSession_throwsCommandException() {
+        Session validSession = new SessionBuilder(REHEARSAL).build();
+        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
+        modelStub.addMember(new MemberBuilder().withSessions(validSession).build());
+        Set<Index> indices = new HashSet<>();
+        indices.add(INDEX_FIRST_MEMBER);
+
+        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
+        assertThrows(CommandException.class,
+                AddSessionCommand.MESSAGE_DUPLICATE_SESSION, () -> addSessionCommand.execute(modelStub));
+
+        // not case-sensitive
+        Session modifiedSession = new SessionBuilder(REHEARSAL).withSessionName("Rehearsal w1").build();
+        AddSessionCommand modifiedAddSessionCommand = new AddSessionCommand(modifiedSession, indices);
+        assertThrows(CommandException.class,
+                AddSessionCommand.MESSAGE_DUPLICATE_SESSION, () -> modifiedAddSessionCommand.execute(modelStub));
+
+        // one fails means all fails and nothing happens
+        modelStub.addMember(new MemberBuilder(BOB).build());
+        modelStub.addMember(new MemberBuilder(CARL).withSessions(validSession).build());
+        indices = new HashSet<>();
+        indices.add(INDEX_SECOND_MEMBER);
+        indices.add(INDEX_THIRD_MEMBER);
+        AddSessionCommand newAddSessionCommand = new AddSessionCommand(validSession, indices);
+        assertThrows(CommandException.class,
+                AddSessionCommand.MESSAGE_DUPLICATE_SESSION, () -> newAddSessionCommand.execute(modelStub));
+        assertTrue(modelStub.getFilteredMemberList().get(1).getSessions().isEmpty());
+    }
+
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
+        Session validSession = new SessionBuilder().build();
+        Set<Index> indices = new HashSet<>();
+        indices.add(INDEX_THIRD_MEMBER); // Invalid index as there is only one member
+
+        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
+        assertThrows(CommandException.class, () -> addSessionCommand.execute(modelStub));
+
+        // all must be valid
+        indices = new HashSet<>();
+        indices.add(INDEX_FIRST_MEMBER);
+        indices.add(Index.fromOneBased(90));
+        modelStub.addMember(new MemberBuilder().build());
+
+        AddSessionCommand modifiedAddSessionCommand = new AddSessionCommand(validSession, indices);
+        assertThrows(CommandException.class, () -> modifiedAddSessionCommand.execute(modelStub));
     }
 
     @Test

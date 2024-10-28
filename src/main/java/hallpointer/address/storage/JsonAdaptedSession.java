@@ -16,8 +16,8 @@ import hallpointer.address.model.session.SessionName;
  */
 public class JsonAdaptedSession {
     private final String sessionName;
-    private final String points;
     private final String date;
+    private final JsonAdaptedPoint points;
 
     /**
      * Constructs a {@code JsonAdaptedSession} with the given session details.
@@ -28,11 +28,11 @@ public class JsonAdaptedSession {
      */
     @JsonCreator
     public JsonAdaptedSession(@JsonProperty("sessionName") String sessionName,
-                              @JsonProperty("points") String points,
-                              @JsonProperty("date") String date) {
+                              @JsonProperty("date") String date,
+                              @JsonProperty("points") JsonAdaptedPoint points) {
         this.sessionName = sessionName;
-        this.points = points.substring(0, points.indexOf(" points")).trim();
         this.date = date;
+        this.points = points;
     }
 
     /**
@@ -42,8 +42,8 @@ public class JsonAdaptedSession {
      */
     public JsonAdaptedSession(Session source) {
         sessionName = source.getSessionName().toString();
-        points = source.getPoints().toString();
         date = source.getDate().toString();
+        points = new JsonAdaptedPoint(source.getPoints());
     }
 
     /**
@@ -72,12 +72,10 @@ public class JsonAdaptedSession {
         final SessionDate modelDate = new SessionDate(date);
 
         if (points == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Point.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Point.class.getSimpleName()));
         }
-        if (!Point.isValidPoints(points)) {
-            throw new IllegalValueException(Point.MESSAGE_CONSTRAINTS);
-        }
-        final Point modelPoints = new Point(points);
+        final Point modelPoints = points.toModelType();
 
         Session session = new Session(modelName, modelDate, modelPoints);
 
