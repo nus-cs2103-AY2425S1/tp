@@ -7,11 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "postalCode": "123000",
     "tags" : [ "Vegan" ],
-    "isArchived": false,
-    "orderHistory" : [ {
-      "order" : "pizza",
-      "timestamp" : "2024-10-26T19:59:16.283392"
-    } ]
+    "isArchived": false
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

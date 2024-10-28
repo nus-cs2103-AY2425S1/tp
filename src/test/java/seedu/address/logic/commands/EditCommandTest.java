@@ -27,7 +27,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -38,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withOrderHistory(TypicalPersons.TYPICAL_ORDER_HISTORY).build();
+        Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
