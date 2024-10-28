@@ -1,7 +1,7 @@
 package seedu.address.model.event;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.person.Person;
 
@@ -14,12 +14,12 @@ public class Event {
     private final Time time;
     private final Venue venue;
     private final Person celebrity;
-    private final List<Person> contacts;
+    private final Set<Person> contacts;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name, Time time, Venue venue, Person person, List<Person> contacts) {
+    public Event(EventName name, Time time, Venue venue, Person person, Set<Person> contacts) {
         this.name = name;
         this.time = time;
         this.venue = venue;
@@ -43,7 +43,7 @@ public class Event {
         return celebrity;
     }
 
-    public List<Person> getContacts() {
+    public Set<Person> getContacts() {
         return contacts;
     }
 
