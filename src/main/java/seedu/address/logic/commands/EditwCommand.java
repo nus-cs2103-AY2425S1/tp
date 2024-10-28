@@ -53,6 +53,11 @@ public class EditwCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!editWeddingDescriptor.isAnyFieldEdited()) {
+            throw new CommandException("No fields specified to edit.");
+        }
+
         List<Wedding> lastShownList = model.getFilteredWeddingList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
