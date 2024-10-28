@@ -52,5 +52,11 @@ public class AddressTest {
 
         // different values -> returns false
         assertFalse(address.equals(new Address("Other Valid Address")));
+
+        //case-insensitive
+        assertTrue(address.equals(new Address("valid address")));
+
+        // Ignores differences in whitespaces
+        assertTrue(address.equals(new Address("Valid  Address")));
     }
 }

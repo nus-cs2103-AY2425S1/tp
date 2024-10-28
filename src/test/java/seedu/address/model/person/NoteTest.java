@@ -31,5 +31,11 @@ public class NoteTest {
 
         // different values -> returns false
         assertFalse(note.equals(new Note("Other Valid Note")));
+
+        // case-insensitive -> return true
+        assertTrue(note.equals(new Note("valid note")));
+
+        // ignore difference in whitespaces -> return true
+        assertTrue(note.equals(new Note("Valid   Note")));
     }
 }
