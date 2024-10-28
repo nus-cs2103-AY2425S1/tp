@@ -48,6 +48,8 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
     public static final String MESSAGE_INVALID_TIME = "Invalid time. Please use the HH:MM format";
     public static final String MESSAGE_NO_APPOINTMENT = "This appointment does not exist in CareLink";
+    public static final String MESSAGE_INVALID_START_END_TIME = "Start time must be before end time";
+    public static final String MESSAGE_START_TIME_IN_PAST = "Start time must be in the future";
     private final Nric findPatientNric;
     private final LocalDateTime findStartDateTime;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -83,6 +85,14 @@ public class EditAppointmentCommand extends Command {
 
         if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
             throw new CommandException(MESSAGE_NO_APPOINTMENT);
+        }
+
+        if (!editAppointmentDescriptor.getStartTime().get().isBefore(editAppointmentDescriptor.getEndTime().get())) {
+            throw new CommandException(MESSAGE_INVALID_START_END_TIME);
+        }
+
+        if (editAppointmentDescriptor.getStartTime().get().isBefore(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_START_TIME_IN_PAST);
         }
 
         model.editAppointment(appointmentToEdit, patient, editedAppointment);
