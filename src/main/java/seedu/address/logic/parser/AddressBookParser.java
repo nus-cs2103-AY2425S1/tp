@@ -95,7 +95,7 @@ public class AddressBookParser {
             return new RatingCommandParser().parse(arguments);
 
         case WelcomeCommand.COMMAND_WORD:
-        return new WelcomeCommand();
+            return new WelcomeCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
