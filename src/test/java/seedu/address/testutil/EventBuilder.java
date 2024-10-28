@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +16,8 @@ import seedu.address.model.person.Person;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Interview";
-    public static final String DEFAULT_TIME = "2021-10-01 14:00";
+    public static final LocalDateTime DEFAULT_START_TIME = LocalDateTime.parse("2015-02-20T06:30:00");
+    public static final LocalDateTime DEFAULT_END_TIME = LocalDateTime.parse("2015-02-20T07:30:00");
     public static final String DEFAULT_VENUE = "Esplanade";
 
     private EventName name;
@@ -29,7 +31,7 @@ public class EventBuilder {
      */
     public EventBuilder() {
         name = new EventName(DEFAULT_NAME);
-        time = new Time(DEFAULT_TIME);
+        time = new Time(DEFAULT_START_TIME, DEFAULT_END_TIME);
         venue = new Venue(DEFAULT_VENUE);
         celebrity = new PersonBuilder().build();
         contacts = new HashSet<>(TypicalPersons.getTypicalPersons());
@@ -66,8 +68,8 @@ public class EventBuilder {
     /**
      * Sets the {@code Time} of the {@code Event} that we are building.
      */
-    public EventBuilder withTime(String time) {
-        this.time = new Time(time);
+    public EventBuilder withTime(LocalDateTime startTime, LocalDateTime endTime) {
+        this.time = new Time(startTime, endTime);
         return this;
     }
 

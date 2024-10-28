@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Name;
-
 /**
  * Represents an Event venue in the address book.
  * Guarantees: details are present and not null, field values are validated.
@@ -34,7 +32,7 @@ public class Venue {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Venue)) {
             return false;
         }
 
