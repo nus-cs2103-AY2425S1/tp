@@ -26,7 +26,7 @@
       </stylesheets>
       <VBox>
         <SplitPane orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
-          <VBox minWidth="400" prefWidth="500">
+          <VBox minWidth="300" prefWidth="550">
             <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
               <Menu mnemonicParsing="false" text="File">
                 <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -50,8 +50,8 @@
               </padding>
             </StackPane>
           </VBox>
-          <VBox fx:id="restaurantList" styleClass="pane-with-border" minWidth="400"
-            prefWidth="400"
+          <VBox fx:id="restaurantList" styleClass="pane-with-border" minWidth="300"
+            prefWidth="350"
             VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />

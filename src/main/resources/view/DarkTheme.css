@@ -359,29 +359,33 @@
 }
 
 #tags {
-    -fx-hgap: 7;
+    -fx-hgap: 5;
     -fx-vgap: 3;
 }
 
 #tags .label {
-    -fx-text-fill: black;
-    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+    -fx-background-color: #2E8EDD;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-font-size: 11;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
 }
 
 #prices {
-    -fx-hgap: 7;
+    -fx-hgap: 5;
     -fx-vgap: 3;
 }
 
 #prices .label {
-    -fx-text-fill: black;
-    -fx-background-color: #55aa69;
+    -fx-text-fill: white;
+    -fx-background-color: #59A446;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-font-size: 11;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
 }
