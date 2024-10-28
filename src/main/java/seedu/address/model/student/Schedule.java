@@ -16,14 +16,13 @@ import java.util.Objects;
  */
 public class Schedule {
     public static final String MESSAGE_CONSTRAINTS = """
-            Schedule should be in the format of Day-startTime-endTime
-            and adhere to the following constraints:
-            1. Day should be a valid day of the week:
+            Schedule should be in the format of DAY-START_TIME-END_TIME, and adhere to the following constraints:
+            1. DAY should be a valid day of the week:
             Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-            2. startTime and endTime should be in the format of HHMM
-            3. startTime should be strictly before endTime
-            4. startTime and endTime should be within the range of 0000 to 2359
-            There should be no whitespace in between the day, startTime and endTime
+            2. START_TIME and END_TIME should be in the format of HHmm
+            3. START_TIME should be strictly before END_TIME
+            4. START_TIME and END_TIME should be within the range of 0000 to 2359
+            5. There should be only one '-' and no whitespace in between the DAY, START_TIME and END_TIME
             """;
 
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
