@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -61,6 +62,9 @@ public class TypicalPersons {
     public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
     public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();
 
+    public static final Participation ALICE_MATH = new Participation(ALICE, MATH);
+    public static final Participation BENSON_MATH = new Participation(BENSON, MATH);
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -76,6 +80,9 @@ public class TypicalPersons {
         for (Tutorial tutorial : getTypicalTutorials()) {
             ab.addTutorial(tutorial);
         }
+        for (Participation participation : getTypicalParticipations()) {
+            ab.addParticipation(participation);
+        }
         return ab;
     }
 
@@ -85,5 +92,9 @@ public class TypicalPersons {
 
     public static List<Tutorial> getTypicalTutorials() {
         return new ArrayList<>(Arrays.asList(MATH, SCIENCE));
+    }
+
+    public static List<Participation> getTypicalParticipations() {
+        return new ArrayList<>(Arrays.asList(ALICE_MATH, BENSON_MATH));
     }
 }
