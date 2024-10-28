@@ -1,5 +1,8 @@
 package seedu.ddd.logic.parser;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -19,4 +22,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ID = new Prefix("id/");
     public static final Prefix PREFIX_DESC = new Prefix("des/");
 
+    public static final Prefix[] ALL_PREFIXES = {
+        PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+        PREFIX_CLIENTS, PREFIX_VENDORS, PREFIX_DATE, PREFIX_SERVICE, PREFIX_ID, PREFIX_DESC
+    };
 }

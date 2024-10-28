@@ -8,8 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ddd.commons.core.LogsCenter;
-import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.AddEventCommand;
+import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.DeleteCommand;
@@ -53,8 +52,9 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        // I wish to change this to another one but i don't know where to store the constant
+        case AddContactCommand.COMMAND_WORD:
+            return new AddCommandFlagParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -67,9 +67,6 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
-
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

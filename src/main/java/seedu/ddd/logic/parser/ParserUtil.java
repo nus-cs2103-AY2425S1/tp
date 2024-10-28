@@ -1,6 +1,13 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_FLAGS;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.CommandFlag.CLIENT;
+import static seedu.ddd.logic.parser.CommandFlag.EVENT;
+import static seedu.ddd.logic.parser.CommandFlag.VENDOR;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -197,5 +204,30 @@ public class ParserUtil {
             contactIdSet.add(parseId(id));
         }
         return contactIdSet;
+    }
+
+    /**
+     * Parses {@code ArgumentMultimap argMultimap} into a {@code Set<Id>}.
+     */
+    public static CommandFlag parseFlags(ArgumentMultimap argMultimap) throws ParseException {
+        boolean isClientPresent = argMultimap.getValue(FLAG_CLIENT).isPresent();
+        boolean isVendorPresent = argMultimap.getValue(FLAG_VENDOR).isPresent();
+        boolean isEventPresent = argMultimap.getValue(FLAG_EVENT).isPresent();
+
+        // Check if exactly one flag is present
+        if ((isClientPresent && isVendorPresent) || (isClientPresent && isEventPresent) || (
+                isVendorPresent && isEventPresent)) {
+            throw new ParseException(MESSAGE_MULTIPLE_FLAGS);
+        }
+
+        if (isClientPresent) {
+            return CLIENT;
+        } else if (isVendorPresent) {
+            return VENDOR;
+        } else if (isEventPresent) {
+            return EVENT;
+        } else {
+            return null;
+        }
     }
 }

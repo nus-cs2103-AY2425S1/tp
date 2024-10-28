@@ -17,7 +17,7 @@ import seedu.ddd.testutil.contact.ClientBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddContactCommandIntegrationTest {
 
     private Model model;
 
@@ -33,16 +33,16 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addContact(validContact);
 
-        assertCommandSuccess(new AddCommand(validContact), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
+        assertCommandSuccess(new AddContactCommand(validContact), model,
+                String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateContact_throwsCommandException() {
         Contact contactInList = model.getAddressBook().getContactList().get(0);
-        assertCommandFailure(new AddCommand(contactInList), model,
-                AddCommand.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(new AddContactCommand(contactInList), model,
+                AddContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
 }

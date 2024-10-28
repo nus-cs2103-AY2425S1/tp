@@ -1,7 +1,6 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -23,23 +22,16 @@ import seedu.ddd.model.event.common.EventId;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddEventCommandParser implements Parser<AddEventCommand> {
+public class AddEventCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddEventCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS);
-
-        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS)
-                || !argMultimap.getPreamble().isEmpty())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddEventCommand.MESSAGE_USAGE));
-        }
+    // takes in CommandFlag as of now because im thinking if i should create an abstract parent AddCommandParser class
+    public AddEventCommand parse(ArgumentMultimap argMultimap, CommandFlag commandFlag) throws ParseException {
+        requireNonNull(argMultimap);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESC, PREFIX_DATE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
