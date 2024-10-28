@@ -152,8 +152,6 @@ public class DateCommandParser implements Parser<DateCommand> {
             if (day > 30) {
                 throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 30 days.");
             }
-        } else if (day > 31) {
-            throw new ParseException("Invalid date: Day cannot exceed 31.");
         }
 
         try {

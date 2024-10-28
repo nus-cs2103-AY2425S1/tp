@@ -23,7 +23,10 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ALLERGY = "#";
     private static final String INVALID_DATE_FORMAT = "12-31-2024 12 00";
-    private static final String INVALID_DATE_VALUE = "29/2/2025 1200";
+    private static final String INVALID_DATE_VALUE_LEAP = "29/2/2025 1200";
+
+    private static final String INVALID_DATE_VALUE_EDGE = "31/4/2024 1200";
+    private static final String INVALID_DATE_VALUE = "32/5/2024 1200";
 
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -141,7 +144,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidDate_throwsIllegalValueException() {
         // Use an invalid date format (e.g., non-leap year 29 February).
-        JsonAdaptedDate invalidDate = new JsonAdaptedDate(INVALID_DATE_VALUE);
+        JsonAdaptedDate invalidDate = new JsonAdaptedDate(INVALID_DATE_VALUE_LEAP);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidDate);
         String expectedMessage = "Invalid date: February 29 is only valid in leap years.";
@@ -168,4 +171,23 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
+    @Test
+    public void toModelType_invalidDateValue_throwsIllegalValueException() {
+        JsonAdaptedDate invalidAprilDate = new JsonAdaptedDate(INVALID_DATE_VALUE_EDGE);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidAprilDate);
+        String expectedMessage = "Invalid date: APRIL cannot have more than 30 days.";
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+
+        JsonAdaptedDate invalidMayDate = new JsonAdaptedDate(INVALID_DATE_VALUE);
+        JsonAdaptedPerson personTemp = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidMayDate);
+        String expectedMessageTemp =
+                "Invalid date or time values! Ensure day, month, hour, and minute ranges are correct.";
+        assertThrows(IllegalValueException.class, expectedMessageTemp, personTemp::toModelType);
+    }
+
+
+
 }
