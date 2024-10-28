@@ -126,4 +126,25 @@ public class PersonBuilder {
     public Person buildDoctor() {
         return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
     }
+    /**
+     * builds a patient class with name and phone
+     */
+    public Person buildPatient(String newName, String newPhone) {
+        name = new Name(newName);
+        phone = new Phone(newPhone);
+        return new Person(name, role, phone, email, address, remark, tags);
+    }
+
+    /**
+     * builds a doctor class with name and phone
+     */
+    public Person buildDoctor(String newName, String newPhone) {
+        name = new Name(newName);
+        phone = new Phone(newPhone);
+        return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
+    }
+
+    public Person buildPatient(Remark remark) {
+        return new Person(name, DEFAULT_PATIENT_ROLE, phone, email, address, remark, tags);
+    }
 }

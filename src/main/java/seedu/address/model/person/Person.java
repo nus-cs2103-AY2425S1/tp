@@ -28,7 +28,7 @@ public class Person implements Appointmentable {
     private final Email email;
     private final int id;
     private final Address address;
-    private final Remark remark;
+    private Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private List<Appointment> appointments;
 
@@ -244,6 +244,9 @@ public class Person implements Appointmentable {
 
     }
 
+    public void editRemark(Remark remark) {
+        this.remark = remark;
+    }
 
     @Override
     public boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
