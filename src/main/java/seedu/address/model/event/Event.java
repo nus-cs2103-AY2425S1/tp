@@ -92,14 +92,15 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same time.
+     * Returns true if the event overlaps with the other event.
      */
     public boolean isOverlap(Event otherEvent) {
         if (otherEvent == this) {
             return true;
         }
 
-        return otherEvent != null &&
-                this.time.isOverlap(otherEvent.time);
+        return otherEvent != null
+                && this.time.isOverlap(otherEvent.time)
+                && this.celebrity.equals(otherEvent.celebrity);
     }
 }
