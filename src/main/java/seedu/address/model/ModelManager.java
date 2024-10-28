@@ -110,6 +110,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void sortPersonListByName() {
+        addressBook.sortByName();
+    }
+
+    @Override
+    public void sortPersonListByID() {
+        addressBook.sortByID();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -125,11 +135,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void sortPersonList() {
-        addressBook.sort();
     }
 
     @Override

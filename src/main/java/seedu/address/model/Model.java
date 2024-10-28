@@ -88,5 +88,10 @@ public interface Model {
     /**
      * Sorts the person list by name in alphabetical order.
      */
-    void sortPersonList();
+    void sortPersonListByName();
+
+    /**
+     * Sorts the person list by internalID in alphabetical order.
+     */
+    void sortPersonListByID();
 }

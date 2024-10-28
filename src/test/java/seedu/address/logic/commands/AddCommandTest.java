@@ -159,7 +159,11 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortPersonList() {
+        public void sortPersonListByName() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void sortPersonListByID() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -24,7 +24,7 @@ public class SortCommandTest {
     public void setUp() {
         model = new ModelManager(getUnsortedAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortPersonList();
+        expectedModel.sortPersonListByName();
     }
 
     @Test

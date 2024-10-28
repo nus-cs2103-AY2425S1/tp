@@ -101,8 +101,15 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Sorts the list by name in alphabetical order.
      */
-    public void sort() {
+    public void sortByName() {
         internalList.sort(Comparator.comparing(person -> person.getName().fullName));
+    }
+
+    /**
+     * Sorts the list by ID in alphabetical order.
+     */
+    public void sortByID() {
+        internalList.sort(Comparator.comparing(person -> person.getId()));
     }
 
     /**

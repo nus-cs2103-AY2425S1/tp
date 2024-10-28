@@ -179,7 +179,7 @@ public class UniquePersonListTest {
             uniquePersonList.add(person);
         }
 
-        uniquePersonList.sort();
+        uniquePersonList.sortByName();
 
         List<Person> expectedUniquePersonList = getTypicalPersons();
         assertEquals(expectedUniquePersonList, uniquePersonList.asUnmodifiableObservableList());
