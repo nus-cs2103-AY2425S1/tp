@@ -13,6 +13,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -21,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.StudyGroupsContainKeywordsPredicate;
 import seedu.address.testutil.AssignStudyGroupTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -143,6 +145,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the persons that are tagged with {@code studyGroupName} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonWithStudyGroupTag(Model model, String studyGroupName) {
+        StudyGroupsContainKeywordsPredicate studyGroupPredicate = new StudyGroupsContainKeywordsPredicate(
+                Collections.singletonList(studyGroupName));
+        model.updateFilteredPersonList(studyGroupPredicate);
+
+        for (Person p : model.getFilteredPersonList()) {
+            assertTrue(studyGroupPredicate.test(p));
+        }
     }
 
 }

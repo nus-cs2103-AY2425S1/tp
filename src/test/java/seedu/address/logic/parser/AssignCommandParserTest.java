@@ -24,7 +24,7 @@ public class AssignCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsAssignCommand() {
         AssignStudyGroupTagDescriptor descriptor3A = new AssignStudyGroupTagDescriptor();
         descriptor3A.setStudyGroupTag(new StudyGroupTag(VALID_UNUSED_STUDY_GROUP_TAG_3A));
         AssignStudyGroupTagDescriptor descriptor3B = new AssignStudyGroupTagDescriptor();

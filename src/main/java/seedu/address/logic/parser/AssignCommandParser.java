@@ -37,11 +37,11 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         List<AssignStudyGroupTagDescriptor> assignStudyGroupTagDescriptors;
         try {
-            assignStudyGroupTagDescriptors = Arrays.stream(args.trim().split("\\s+"))
+            assignStudyGroupTagDescriptors = Arrays.stream(studyGroups)
                     .map(name -> {
                         try {
                             AssignStudyGroupTagDescriptor assignStudyGroupTagDescriptor =
-                                    new AssignStudyGroupTagDescriptor();
+                                  new AssignStudyGroupTagDescriptor();
                             assignStudyGroupTagDescriptor.setStudyGroupTag(ParserUtil.parseStudyGroup(name));
                             return assignStudyGroupTagDescriptor;
                         } catch (ParseException e) {
