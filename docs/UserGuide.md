@@ -51,7 +51,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `exit` : Exits the app.
 
-1. For more details on each command, refer to the [Features](#features) below.
+1. For more details on each command, refer to the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
 
