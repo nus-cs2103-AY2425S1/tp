@@ -1,14 +1,12 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * The Task class represents a general task with a description and a completion status.
  * It serves as the base class for more specific types of tasks such as Todo, Deadline, and Event.
  */
 public class Task {
-    private final String id;
     protected Description description;
     protected boolean isDone;
 
@@ -19,19 +17,6 @@ public class Task {
      * @param description The description of the task.
      */
     public Task(String description) {
-        this.id = UUID.randomUUID().toString();
-        this.description = new Description(description);
-        this.isDone = false;
-    }
-
-    /**
-     * Constructs a Task with the specified ID and description.
-     * The task is initially marked as not done.
-     *
-     * @param description The description of the task.
-     */
-    public Task(String id, String description) {
-        this.id = id;
         this.description = new Description(description);
         this.isDone = false;
     }
@@ -43,18 +28,8 @@ public class Task {
      * @param description The description of the task.
      */
     public Task(Description description) {
-        this.id = UUID.randomUUID().toString();
         this.description = description;
         this.isDone = false;
-    }
-
-    /**
-     * Returns the unique ID of the task.
-     *
-     * @return The unique ID of the task.
-     */
-    public String getId() {
-        return id;
     }
 
     /**
@@ -129,7 +104,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getId().equals(getId());
+                && otherTask.getDescription().equals(getDescription());
     }
 
     /**
@@ -149,8 +124,7 @@ public class Task {
 
         Task otherTask = (Task) other;
         return description.equals(otherTask.description)
-                && isDone == otherTask.isDone
-                && id.equals(otherTask.id);
+                && isDone == otherTask.isDone;
     }
 
     /**
@@ -164,7 +138,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, isDone);
+        return Objects.hash(description, isDone);
     }
 }
 

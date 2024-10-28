@@ -25,18 +25,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a Deadline task with the specified id, description and deadline date.
-     *
-     * @param id          The id of the task
-     * @param description The description of the task.
-     * @param by          The deadline date in the format "yyyy-MM-dd".
-     */
-    public Deadline(String id, String description, String by) {
-        super(id, description);
-        this.by = new Date(by);
-    }
-
-    /**
      * Constructs a Deadline task with the specified description, deadline date and isDone status.
      *
      * @param description The description of the task.
@@ -45,20 +33,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description);
-        this.by = new Date(by);
-        this.isDone = isDone;
-    }
-
-    /**
-     * Constructs a Deadline task with the specified description, deadline date and isDone status.
-     *
-     * @param id          The id of the task
-     * @param description The description of the task.
-     * @param by          The deadline date in the format "yyyy-MM-dd".
-     * @param isDone      The completion status of the event.
-     */
-    public Deadline(String id, String description, String by, boolean isDone) {
-        super(id, description);
         this.by = new Date(by);
         this.isDone = isDone;
     }
@@ -85,13 +59,12 @@ public class Deadline extends Task {
         Deadline otherDeadline = (Deadline) other;
         return description.equals(otherDeadline.description)
                 && isDone == otherDeadline.isDone
-                && by.equals(otherDeadline.by)
-                && this.getId() == otherDeadline.getId();
+                && by.equals(otherDeadline.by);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), description, isDone, by);
+        return Objects.hash(description, isDone, by);
     }
 
     /**

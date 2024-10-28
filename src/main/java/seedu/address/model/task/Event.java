@@ -28,20 +28,6 @@ public class Event extends Task {
     /**
      * Constructs an Event task with the specified description, start date, and end date.
      *
-     * @param id          The id of the event
-     * @param description The description of the event.
-     * @param from        The start date of the event in the format "yyyy-MM-dd".
-     * @param to          The end date of the event in the format "yyyy-MM-dd".
-     */
-    public Event(String id, String description, String from, String to) {
-        super(id, description);
-        this.from = new Date(from);
-        this.to = new Date(to);
-    }
-
-    /**
-     * Constructs an Event task with the specified description, start date, and end date.
-     *
      * @param description The description of the event.
      * @param from        The start date of the event in the format "yyyy-MM-dd".
      * @param to          The end date of the event in the format "yyyy-MM-dd".
@@ -49,22 +35,6 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to, boolean isDone) {
         super(description);
-        this.from = new Date(from);
-        this.to = new Date(to);
-        this.isDone = isDone;
-    }
-
-    /**
-     * Constructs an Event task with the specified id, description, start date, and end date.
-     *
-     * @param id          The id of the event
-     * @param description The description of the event.
-     * @param from        The start date of the event in the format "yyyy-MM-dd".
-     * @param to          The end date of the event in the format "yyyy-MM-dd".
-     * @param isDone      The completion status of the event.
-     */
-    public Event(String id, String description, String from, String to, boolean isDone) {
-        super(id, description);
         this.from = new Date(from);
         this.to = new Date(to);
         this.isDone = isDone;
@@ -98,13 +68,12 @@ public class Event extends Task {
         return description.equals(otherEvent.description)
                 && isDone == otherEvent.isDone
                 && from.equals(otherEvent.from)
-                && to.equals(otherEvent.to)
-                && this.getId() == otherEvent.getId();
+                && to.equals(otherEvent.to);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), description, isDone, from, to);
+        return Objects.hash(description, isDone, from, to);
     }
 
     /**
