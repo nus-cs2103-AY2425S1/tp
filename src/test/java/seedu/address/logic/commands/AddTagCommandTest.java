@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -36,6 +38,7 @@ public class AddTagCommandTest {
         int startingModelSize = model.getCampusConnect().getPersonList().size();
         Set<Tag> tags = new HashSet<>(List.of(new Tag("sample")));
 
+        // index >= size of PersonList
         Index index = Index.fromZeroBased(startingModelSize);
         AddTagCommand addTagCommand = new AddTagCommand(index, tags);
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
@@ -87,6 +90,39 @@ public class AddTagCommandTest {
         expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(GEORGE));
         expectedModel.addPersonTags(GEORGE, twoTags);
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        Index indexZero = Index.fromZeroBased(0);
+        Index indexOne = Index.fromZeroBased(1);
+
+        Set<Tag> tagsZero = new HashSet<>(List.of(new Tag("sample")));
+        Set<Tag> tagsOne = new HashSet<>(List.of(new Tag("sample"), new Tag("honkydonky")));
+
+        AddTagCommand addTagZeroCommand = new AddTagCommand(indexZero, tagsZero);
+        AddTagCommand addTagOneCommand;
+
+        // same object -> returns true
+        assertEquals(addTagZeroCommand, addTagZeroCommand);
+
+        // same values -> returns true
+        AddTagCommand addTagZeroCommandCopy = new AddTagCommand(indexZero, tagsZero);
+        assertEquals(addTagZeroCommand, addTagZeroCommandCopy);
+
+        // different types -> returns false
+        assertNotEquals(1, addTagZeroCommand);
+
+        // null -> returns false
+        assertNotEquals(null, addTagZeroCommand);
+
+        // different index -> returns false
+        addTagOneCommand = new AddTagCommand(indexOne, tagsZero);
+        assertNotEquals(addTagZeroCommand, addTagOneCommand);
+
+        // different tags -> returns false
+        addTagOneCommand = new AddTagCommand(indexZero, tagsOne);
+        assertNotEquals(addTagZeroCommand, addTagOneCommand);
     }
 }
 
