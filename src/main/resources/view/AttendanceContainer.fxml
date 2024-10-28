@@ -24,6 +24,6 @@
         </HBox>
     </HBox>
     <ScrollPane styleClass="attendance-pane" fitToWidth="true" maxHeight="200">
-            <VBox fx:id="attendanceList" spacing="8" style="-fx-background-color: white"/>
+            <VBox fx:id="attendanceList" spacing="10" style="-fx-background-color: white"/>
     </ScrollPane>
 </VBox>

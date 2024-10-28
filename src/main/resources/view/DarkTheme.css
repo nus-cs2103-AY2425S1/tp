@@ -140,8 +140,8 @@
 
 .result-display {
     -fx-background-color: #EDF8ED;
-    -fx-background-radius: 10;
     -fx-padding: 10;
+    -fx-background-radius: 10;
     -fx-max-width: 800;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
@@ -300,14 +300,14 @@
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 3.5 0 3.5 0;
 }
 
 #cardPane {
     -fx-background-color: white;
     -fx-border-width: 0 0 2.5 0;
     -fx-border-color: #EDEDED;
-    -fx-padding: 12 15;
+    -fx-padding: 15 20;
 }
 
 #commandTypeLabel {
