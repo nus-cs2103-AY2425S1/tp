@@ -69,7 +69,7 @@ public class FilterOrderCommandTest {
 
     @Test
     public void execute_statusCompleted_oneOrderListed() {
-        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 1, "Completed");
+        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 1, Status.COMPLETED.getValue());
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.COMPLETED);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
@@ -86,7 +86,7 @@ public class FilterOrderCommandTest {
 
     @Test
     public void execute_statusPending_threeOrdersListed() {
-        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 3, "Pending");
+        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 3, Status.PENDING.getValue());
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.PENDING);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
