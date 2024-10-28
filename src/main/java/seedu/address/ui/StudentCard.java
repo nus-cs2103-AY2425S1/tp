@@ -1,23 +1,21 @@
 package seedu.address.ui;
 
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
-import seedu.address.model.tut.TutDate;
-
 
 /**
- * A UI component that displays information of a {@code Student}.
+ * Represents a card containing information about a student.
  */
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
-
-    public final Student student;
+    private final Student student;
+    private final StudentProfile studentProfile;
 
     @FXML
     private HBox cardPane;
@@ -30,42 +28,42 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label tutorialId;
     @FXML
-    private FlowPane attendanceFlowPane; // Use FlowPane instead of a single Label
+    private FlowPane attendanceFlowPane;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
+     * @param student The student to display.
+     * @param displayedIndex The index number to display on the card.
+     * @param studentProfile The profile to update when this card is clicked.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex, StudentProfile studentProfile) {
         super(FXML);
         this.student = student;
+        this.studentProfile = studentProfile;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         studentId.setText(student.getStudentId().value);
         tutorialId.setText(student.getTutorialId().toString());
 
-        // Populate attendance dates into the FlowPane
         updateAttendanceLabels();
 
-        // Listen for changes in the presentDates property
-        student.presentDatesProperty().addListener((observable, oldValue, newValue) -> {
-            updateAttendanceLabels();
-        });
+        // Add click listener to update the profile
+        cardPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleCardClick());
+    }
 
-        // Listen for changes in the dates set within presentDates
-        student.getPresentDates().getDates().addListener((SetChangeListener<TutDate>) change -> {
-            updateAttendanceLabels();
+    private void updateAttendanceLabels() {
+        attendanceFlowPane.getChildren().clear();
+        student.getPresentDates().getDates().forEach(date -> {
+            Label dateLabel = new Label(date.toString());
+            dateLabel.getStyleClass().add("attendance-date-label");
+            attendanceFlowPane.getChildren().add(dateLabel);
         });
     }
 
     /**
-     * Updates the FlowPane with the student's attendance dates.
+     * Updates the profile with the selected student's details.
      */
-    private void updateAttendanceLabels() {
-        attendanceFlowPane.getChildren().clear();
-        for (TutDate date : student.getPresentDates().getDates()) {
-            Label dateLabel = new Label(date.toString());
-            dateLabel.getStyleClass().add("attendance-date-label");
-            attendanceFlowPane.getChildren().add(dateLabel);
-        }
+    private void handleCardClick() {
+        studentProfile.setStudent(student);
     }
 }

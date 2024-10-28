@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.StudentProfile"
-            prefHeight="400.0" prefWidth="600.0">
+<HBox id="profilePane" fx:id="profilePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="150" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="15" />
+            </padding>
 
-</AnchorPane>
+            <!-- Student Profile Information -->
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label styleClass="cell_big_label" text="Name:"/>
+                <Label fx:id="nameLabel" styleClass="cell_big_label" />
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label styleClass="cell_small_label" text="Student ID:"/>
+                <Label fx:id="studentIdLabel" styleClass="cell_small_label"/>
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label styleClass="cell_small_label" text="Tutorial ID:"/>
+                <Label fx:id="tutorialIdLabel" styleClass="cell_small_label"/>
+            </HBox>
+
+            <!-- Attendance Section with Wrapper Box -->
+            <VBox spacing="5" alignment="TOP_LEFT" styleClass="studentDetailsEntries">
+                <Label styleClass="studentDetailsLabels" text="Attendance:"/>
+                <FlowPane fx:id="attendanceFlowPane" hgap="5" vgap="5" prefWrapLength="250"/>
+            </VBox>
+        </VBox>
+    </GridPane>
+</HBox>

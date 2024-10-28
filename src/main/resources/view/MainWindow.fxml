@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="TrackMate" minWidth="1100" minHeight="700" onCloseRequest="#handleExit">
   <icons>
@@ -88,7 +90,10 @@
               <Insets top="10" right="10" bottom="20" left="20"/>
             </padding>
             <StackPane fx:id="studentDetailsContainer" styleClass="studentDetailsContainer"
-                       VBox.vgrow="ALWAYS"/>
+                       VBox.vgrow="ALWAYS">
+              <!-- StudentProfile Pane directly included -->
+              <fx:include source="StudentProfile.fxml"/>
+            </StackPane>
           </VBox>
 
           <!-- Student List -->
