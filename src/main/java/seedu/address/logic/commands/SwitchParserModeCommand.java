@@ -38,11 +38,11 @@ public class SwitchParserModeCommand extends Command {
         assert mode != null;
         try {
             AbcliParser.switchMode(mode);
-            boolean showMeetUpList = this.mode == ParserMode.MEETUP;
-            boolean showBuyerList = this.mode == ParserMode.BUYER;
-            boolean showPropertyList = this.mode == ParserMode.PROPERTY;
+            boolean isShowingMeetUpList = this.mode == ParserMode.MEETUP;
+            boolean isShowingBuyerList = this.mode == ParserMode.BUYER;
+            boolean isShowingPropertyList = this.mode == ParserMode.PROPERTY;
             return new CommandResult(SWITCH_SUCCESS_MESSAGE + mode, false,
-                    false, showMeetUpList, showBuyerList, showPropertyList);
+                    false, isShowingMeetUpList, isShowingBuyerList, isShowingPropertyList);
         } catch (InvalidParserModeException e) {
             throw new CommandException(e.getMessage());
         }
