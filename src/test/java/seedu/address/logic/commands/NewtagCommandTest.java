@@ -24,7 +24,7 @@ public class NewtagCommandTest {
 
     @Test
     public void execute_newTag_success() {
-        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
         NewtagCommand newTagCommand = new NewtagCommand(newTags);
@@ -40,7 +40,7 @@ public class NewtagCommandTest {
 
     @Test
     public void execute_multipleNewTags_success() {
-        Tag tagBridesFriend = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag tagBridesFriend = TypicalTags.BRIDES_SIDE;
         Tag tagColleagues = TypicalTags.COLLEAGUES;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(tagBridesFriend);
@@ -60,7 +60,7 @@ public class NewtagCommandTest {
 
     @Test
     public void execute_duplicateTag_failure() {
-        Tag duplicateTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag duplicateTag = TypicalTags.BRIDES_SIDE;
         List<Tag> duplicateTags = new ArrayList<>();
         duplicateTags.add(duplicateTag);
         model.addTags(duplicateTags);
@@ -73,7 +73,7 @@ public class NewtagCommandTest {
 
     @Test
     public void execute_tooManyTags_failure() {
-        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
 

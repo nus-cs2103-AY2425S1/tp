@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,29 +21,29 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteTagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag expectedTag = BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/bride's friend", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side", new DeleteTagCommand(expectedTags));
     }
 
     @Test
     public void parse_validArgsNoLeadingSpace_throwsParseException() {
-        assertParseFailure(parser, "t/bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, "t/bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgsNoPrefix_throwsParseException() {
-        assertParseFailure(parser, "bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, "bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_leadingAndTrailingSpaces_returnsDeleteTagCommand() {
-        Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
-        expectedTag.setTagName("bride's friend");
+        Tag expectedTag = BRIDES_SIDE;
+
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "  t/ bride's friend   ", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, "  t/ bride's side   ", new DeleteTagCommand(expectedTags));
     }
 
     @Test
@@ -83,7 +84,7 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_multipleValidArgs_returnsDeleteTagCommand() {
-        Tag expectedTagBride = TypicalTags.BRIDES_SIDE;
+        Tag expectedTagBride = BRIDES_SIDE;
         Tag expectedTagGroom = TypicalTags.GROOMS_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTagBride);

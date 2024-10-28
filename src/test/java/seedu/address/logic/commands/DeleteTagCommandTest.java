@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
+import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_existingTag_success() {
-        Tag existingTag = VALID_TAG_BRIDES_FRIEND;
+        Tag existingTag = BRIDES_SIDE;
         List<Tag> existingTags = new ArrayList<Tag>();
         existingTags.add(existingTag);
         model.addTag(existingTag);
@@ -41,7 +41,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_nonExistentTag_failure() {
-        Tag nonExistentTag = VALID_TAG_BRIDES_FRIEND;
+        Tag nonExistentTag = BRIDES_SIDE;
         List<Tag> nonExistentTags = new ArrayList<>();
         nonExistentTags.add(nonExistentTag);
 
