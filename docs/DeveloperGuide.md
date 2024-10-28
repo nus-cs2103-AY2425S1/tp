@@ -48,9 +48,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="550"  alt="Storage Class Diagram"/>
 
 The `Storage` component,
+
 * can save address book data, transaction book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from `AddressBookStorage`, `TransactionBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -100,8 +101,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 </div>
 
@@ -140,12 +140,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 - **Alternative 1 (current choice):** Saves the entire address book.
-
   - Pros: Easy to implement.
   - Cons: May have performance issues in terms of memory usage.
 
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+- **Alternative 2:** Individual command knows how to undo/redo by itself.
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
@@ -175,9 +173,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 </div>
 
 ### Launch and shutdown
@@ -185,13 +182,13 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
+   
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
@@ -208,6 +205,52 @@ The available gradle tasks are: guiTests, nonGuiTests, allTests.
 As an example, you can run `gradle nonGuiTests` in the gradle terminal for all tests excluding GUI related tests.
 You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > terminal icon _(Execute Gradle tasks)_.
 
+### Adding a person
+
+1. Adding a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the list command. Multiple persons in the list.
+   
+   2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+      Expected: A new contact named John Doe is added to the list. Details of the added contact shown in the status message.
+   
+   3. Test case: `add n/ p/ e/ a/`<br>
+      Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+   
+   4. Other incorrect add commands to try: `add n/John Doe`, `add p/98765432`, `add e/johnd@example.com`, `add a/John street, block 123, #01-01`<br>
+      Expected: Similar to previous.
+
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `edit 1 n/Jane Doe`<br>
+      Expected: First contact's name is changed to Jane Doe. Details of the edited contact shown in the status message.
+
+   3. Test case: `edit 0 n/Jane Doe`<br>
+      Expected: No person is edited. Error details shown in the status message.
+
+   4. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe` (where x is larger than the list size),
+      `edit 1`<br>
+      Expected: Similar to previous.
+
+### Adding a remark for a person
+
+1. Adding a remark for a person using the `remark` command while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `remark 1 r/Likes to swim`<br>
+      Expected: First contact's remark is updated to "Likes to swim". Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case: `remark 0 r/Likes to swim`<br>
+      Expected: No person's remark is updated. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect remark commands to try: `remark`, `remark x r/Likes to swim` (where x is larger than the list size), `remark 1`<br>
+     Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -215,10 +258,10 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
