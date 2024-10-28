@@ -404,7 +404,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ##### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+For advanced users, feel free to update patient and appointment data directly by editing the [data files](#faq) in the `data` folder.
 
 <box type="warning" seamless>
 
@@ -447,6 +447,8 @@ computer?<br>
 **A**: Since the data is saved in the `addressbook.json` and `appointmentbook.json` files in the `data` 
 folder, you can copy these files to another location as a backup.
 
+<br><br>
+
 ---
 
 <br>
@@ -456,3 +458,4 @@ folder, you can copy these files to another location as a backup.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+<br>
