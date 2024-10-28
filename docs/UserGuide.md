@@ -19,8 +19,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 2. Move the `.jar` file into an empty folder.
 
 3. Open a command window in that folder.
-3.1 Right-click on the folder.
-3.2 Select `Open in Terminal`.
+   <br>3.1 Right-click on the folder.
+   <br>3.2 For _Windows_: Select `Open in Terminal`.
+   <br>&ensp;&ensp;&ensp;&nbsp;For _MacOS_: Select `Services` > `New Terminal at Folder`.
 
 4. Ensure that _Java 17_ is installed in your computer. 
    <br>4.1 Type in `java –version`.
@@ -29,8 +30,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    <br><img src="images/check_java_version.png" width="600px">
 
 5. Run ResearchRoster!
-   <br> 5.1 Type in `java -jar "researchroster.jar"`.
-   <br> 5.2 Press `Enter` to run the command.
+   <br>5.1 Type in `java -jar "researchroster.jar"`.
+   <br>5.2 Press `Enter` to run the command.
 
 ### Introduction to the GUI
 
