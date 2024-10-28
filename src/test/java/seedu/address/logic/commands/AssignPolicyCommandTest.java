@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_AMOUNT_DUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_INVESTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -89,6 +92,15 @@ public class AssignPolicyCommandTest {
         AssignPolicyCommand assignPolicyCommand = new AssignPolicyCommand(outOfBoundIndex, validPolicy);
 
         assertCommandFailure(assignPolicyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void checkEquals() {
+        Policy policy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2,
+                VALID_INSURANCE_PAYMENT_DATE + " " + VALID_INSURANCE_AMOUNT_DUE);
+        Index targetIndex = Index.fromZeroBased(0);
+        AssignPolicyCommand assignPolicyCommand = new AssignPolicyCommand(targetIndex, policy);
+        assertTrue(assignPolicyCommand.equals(assignPolicyCommand));
     }
 
 }

@@ -91,9 +91,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete John")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png) 
+![Interactions Inside the Logic Component for the `delete John` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -326,17 +326,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the delete command with the Index of the person to be deleted.
+1. User enters the delete command with the Index or Name of the person to be deleted.
 2. AgentConnect validates the input.
-3. AgentConnect confirms the deletion request by showing the contact details.
-4. AgentConnect deletes the contact and shows a success message
+3. AgentConnect confirms the deletion request by showing a confirmation dialog with the Name of the person to be deleted.
+4. AgentConnect deletes the contact and shows a success message.
 
     Use case ends.
 
 **Extensions**
-* 2a. Contact not found (Invalid Index)
+* 2a. Contact not found (Invalid Index or Name).
+  * 2a1. AgentConnect shows an error message indicating Index or Name is invalid.
+  * 2a2. User can retry with a valid Index or valid Name.
+  * Use case resumes from step 2.
+* 2b. Duplicate Person detected (same name)
+  * 2b1. AgentConnect updates the list in the GUI with the duplicates and prompts the user to delete by index.
+  * 2b2. User selects the index to delete the duplicate person.
+  * 2b3. Use case resumes from step 3.
+
+**Use case: Delete a policy**
+
+**MSS**
+
+1. User enters the delete command with the index of the client and the index of the policy to be deleted.
+2. AgentConnect validates the input.
+3. AgentConnect deletes the policy and shows a success message.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Client not found (Invalid Index).
   * 2a1. AgentConnect shows an error message indicating Index is invalid.
-  * 2a2. User can retry with a valid Index
+  * 2a2. User can retry with a valid Index.
+  * Use case resumes from step 2.
+* 2b. Policy not found (Invalid policy Index).
+  * 2b1. AgentConnect shows an error message indicating policy Index is invalid.
+  * 2b2. User can retry with a valid policy Index.
+  * Use case resumes from step 2.
+
+**Use case: Undo a Delete Command**
+
+**MSS**
+
+1. User enters the undo command after deleting a person or policy.
+2. AgentConnect validates the input.
+3. AgentConnect restores the deleted person or policy.
+4. AgentConnect shows a success message confirming the undo operation.
+
+    Use case ends.
+
+**Extensions**
+* 2a. No delete operation to undo.
+  * 2a1. AgentConnect shows an error message indicating no delete operation to undo.
+  * Use case ends.
 
 **Use case: Sort Clients**
 

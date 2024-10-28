@@ -24,9 +24,12 @@ import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -179,6 +182,7 @@ public class ParserUtil {
         return new Appointment(appointment);
     }
 
+
     /**
      * Parses a {@code String policyArgs} into a {@code Policy}.
      *
@@ -206,7 +210,9 @@ public class ParserUtil {
         String paydateString = argMultimap.getValue(PREFIX_NEXT_PAYMENT_DATE).get();
         String paymentAmount = argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get();
         String insurancePayment = paydateString + " " + paymentAmount;
-
+        if (!Payment.isValidInsurancePayment(insurancePayment)) {
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+        }
         if (!Policy.isValidPolicy(nameString, startDateString, endDateString, insurancePayment)) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }

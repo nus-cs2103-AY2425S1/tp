@@ -43,9 +43,12 @@ public class AssignPolicyCommandParser implements Parser<AssignPolicyCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
                 PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE,
                 PREFIX_PAYMENT_AMOUNT);
-
-        Policy policy = ParserUtil.parsePolicy(args);
-        return new AssignPolicyCommand(index, policy);
+        try {
+            Policy policy = ParserUtil.parsePolicy(args);
+            return new AssignPolicyCommand(index, policy);
+        } catch (ParseException pe) {
+            throw new ParseException(pe.getMessage() + "\n" + AssignPolicyCommand.MESSAGE_USAGE);
+        }
     }
 
 

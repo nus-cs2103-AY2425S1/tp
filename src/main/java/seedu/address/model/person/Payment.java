@@ -25,7 +25,7 @@ public class Payment {
 
     public final String value;
     private LocalDate paymentDueDate;
-    private final BigDecimal amount;
+    private BigDecimal amount;
 
     /**
      * Constructs an {@code InsurancePayment}.
@@ -69,6 +69,7 @@ public class Payment {
     public void updatePaymentDueDate(Policy policy) {
         if (policy.isExpiringSoon()) {
             paymentDueDate = LocalDate.MAX;
+            amount = BigDecimal.valueOf(0);
         } else {
             paymentDueDate = paymentDueDate.plusYears(1);
         }

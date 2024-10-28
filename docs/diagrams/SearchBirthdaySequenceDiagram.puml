@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SearchBirthdayCommandParser" as SearchBirthdayCommandParser LOGIC_COLOR
+participant "s:SearchBirthdayCommand" as SearchBirthdayCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("search b/2000-04-25 to 2000-05-25")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("search b/2000-04-25 to 2000-05-25")
+activate AddressBookParser
+
+create SearchBirthdayCommandParser
+AddressBookParser -> SearchBirthdayCommandParser
+activate SearchBirthdayCommandParser
+
+SearchBirthdayCommandParser --> AddressBookParser
+deactivate SearchBirthdayCommandParser
+
+AddressBookParser -> SearchBirthdayCommandParser : parse("2000-04-25 to 2000-05-25")
+activate SearchBirthdayCommandParser
+
+create SearchBirthdayCommand
+SearchBirthdayCommandParser -> SearchBirthdayCommand
+activate SearchBirthdayCommand
+
+SearchBirthdayCommand --> SearchBirthdayCommandParser
+deactivate SearchBirthdayCommand
+
+SearchBirthdayCommandParser --> AddressBookParser : s
+deactivate SearchBirthdayCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SearchBirthdayCommandParser -[hidden]-> AddressBookParser
+destroy SearchBirthdayCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SearchBirthdayCommand : execute(m)
+activate SearchBirthdayCommand
+
+alt Invalid date format
+    SearchBirthdayCommand -> LogicManager : throw CommandException
+    deactivate SearchBirthdayCommand
+else No birthdays found
+    SearchBirthdayCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchBirthdayCommand
+    deactivate Model
+
+    SearchBirthdayCommand -> LogicManager : CommandResult("No birthdays found.")
+    deactivate SearchBirthdayCommand
+else Birthdays found
+    SearchBirthdayCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchBirthdayCommand
+    deactivate Model
+
+    create CommandResult
+    SearchBirthdayCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> SearchBirthdayCommand
+    deactivate CommandResult
+
+    SearchBirthdayCommand --> LogicManager : r
+    deactivate SearchBirthdayCommand
+end
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
