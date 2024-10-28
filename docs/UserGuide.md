@@ -189,6 +189,25 @@ date `2024-01-24`.
 * `clear` : Deletes all contacts.
 * `exit` : Exits the app.
 
+10. Refer to the [Command Section](#commands) below for details of 
+all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
+
+### 3.2 Graphical User Interface Layout:
+<a id="graphical-user-interface-layout"></a>
+
+#### 3.2.1 User Interface Overview:
+<a id="user-interface-overview"></a>
+
+## To update UI component picture here: 
+![startingGUI.png](images/startingGUI.png)
+
+### Add UI Components descriptions here
+
+### #### 3.2.2 Additional UI Components:
+<a id="additional-ui-components"></a>
+![startingGUI.png](images/startingGUI.png)
+
+### Add additiona UI Components description here
 - [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
 
 
