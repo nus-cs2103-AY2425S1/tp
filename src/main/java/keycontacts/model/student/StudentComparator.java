@@ -96,6 +96,7 @@ public class StudentComparator implements Comparator<Student> {
      * Can be either ascending (ASC) or descending (DESC)
      */
     public static class SortOrder {
+        public static final String INVALID_SORT_ORDER = "Invalid sort order";
 
         private static final String ASCENDING = "ASC";
         private static final String DESCENDING = "DESC";
@@ -108,7 +109,7 @@ public class StudentComparator implements Comparator<Student> {
          */
         public SortOrder(String sortOrder) {
             if (!isValidSortOrder(sortOrder)) {
-                throw new IllegalArgumentException("Invalid sort order");
+                throw new IllegalArgumentException(INVALID_SORT_ORDER);
             }
             this.sortOrder = sortOrder;
         }

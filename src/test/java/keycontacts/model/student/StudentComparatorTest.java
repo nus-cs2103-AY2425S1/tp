@@ -32,9 +32,13 @@ public class StudentComparatorTest {
         GradeLevel student2GradeLevel = new GradeLevel("ABRSM 2");
         GradeLevel student3GradeLevel = new GradeLevel("Trinity 1");
 
-        student1 = new Student(student1Name, student1Phone, student1Address, student1GradeLevel, new Group(""));
-        student2 = new Student(student2Name, student2Phone, student2Address, student2GradeLevel, new Group(""));
-        student3 = new Student(student3Name, student3Phone, student3Address, student3GradeLevel, new Group(""));
+        Group student1Group = new Group("Group1");
+        Group student2Group = new Group("Group2");
+        Group student3Group = new Group("Group1");
+
+        student1 = new Student(student1Name, student1Phone, student1Address, student1GradeLevel, student1Group);
+        student2 = new Student(student2Name, student2Phone, student2Address, student2GradeLevel, student2Group);
+        student3 = new Student(student3Name, student3Phone, student3Address, student3GradeLevel, student3Group);
     }
 
     @Test
@@ -102,8 +106,6 @@ public class StudentComparatorTest {
         StudentComparator comparator = new StudentComparator();
         comparator.addComparator(StudentComparator.getComparatorForGradeLevel(new StudentComparator.SortOrder("ASC")));
 
-        System.out.println(comparator.compare(student1, student2));
-        System.out.println(comparator.compare(student2, student1));
         assertTrue(comparator.compare(student1, student2) > 0);
         assertTrue(comparator.compare(student2, student1) < 0);
         assertEquals(0, comparator.compare(student1, student3));
@@ -114,12 +116,32 @@ public class StudentComparatorTest {
         StudentComparator comparator = new StudentComparator();
         comparator.addComparator(StudentComparator.getComparatorForGradeLevel(new StudentComparator.SortOrder("DESC")));
 
-        System.out.println(comparator.compare(student1, student2));
-        System.out.println(comparator.compare(student2, student1));
         assertTrue(comparator.compare(student1, student2) < 0);
         assertTrue(comparator.compare(student2, student1) > 0);
         assertEquals(0, comparator.compare(student1, student3));
     }
+
+    @Test
+    public void testCompareByGroupAscending() {
+        StudentComparator comparator = new StudentComparator();
+        comparator.addComparator(StudentComparator.getComparatorForGroup(new StudentComparator.SortOrder("ASC")));
+
+        assertTrue(comparator.compare(student1, student2) < 0);
+        assertTrue(comparator.compare(student2, student1) > 0);
+        assertEquals(0, comparator.compare(student1, student3));
+    }
+
+    @Test
+    public void testCompareByGroupDescending() {
+        StudentComparator comparator = new StudentComparator();
+        comparator.addComparator(StudentComparator.getComparatorForGroup(new StudentComparator.SortOrder("DESC")));
+
+        assertTrue(comparator.compare(student1, student2) > 0);
+        assertTrue(comparator.compare(student2, student1) < 0);
+        assertEquals(0, comparator.compare(student1, student3));
+    }
+
+
 
     @Test
     public void testGetSortDescription() {
@@ -129,4 +151,5 @@ public class StudentComparatorTest {
 
         assertEquals(String.join(", ", NAME_ASCENDING, PHONE_DESCENDING), comparator.getSortDescription());
     }
+
 }

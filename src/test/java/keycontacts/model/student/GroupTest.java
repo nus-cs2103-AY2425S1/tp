@@ -81,4 +81,25 @@ public class GroupTest {
 
         assertEquals(testGroup.hashCode(), group.hashCode());
     }
+
+    @Test
+    public void compareTo() {
+        String validGroup1 = "Valid Group 1";
+        String validGroup2 = "Valid Group 2";
+        Group group = new Group(validGroup1);
+        Group group2 = new Group(validGroup2);
+        Group noGroup = new Group(Group.NO_GROUP_STRING);
+
+        // same value
+        assertEquals(0, group.compareTo(group));
+        assertEquals(0, noGroup.compareTo(noGroup));
+
+        // different value
+        assertEquals(validGroup1.compareTo(validGroup2), group.compareTo(group2));
+        assertEquals(validGroup2.compareTo(validGroup1), group2.compareTo(group));
+
+        // comparing with no group
+        assertEquals(1, noGroup.compareTo(group));
+        assertEquals(-1, group.compareTo(noGroup));
+    }
 }

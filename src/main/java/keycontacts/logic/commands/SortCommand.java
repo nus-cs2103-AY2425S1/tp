@@ -44,7 +44,6 @@ public class SortCommand extends Command {
         if (this.comparator == null) {
             return new CommandResult(MESSAGE_SORT_CLEAR);
         }
-        System.out.println(comparator);
         return new CommandResult(MESSAGE_SUCCESS + comparator.getSortDescription());
     }
 

@@ -95,7 +95,7 @@ public class Group implements Comparable<Group> {
         } else if (isNoGroup()) {
             return 1;
         } else if (o.isNoGroup()) {
-            return 0;
+            return -1;
         }
         return groupName.compareTo(o.groupName);
     }
