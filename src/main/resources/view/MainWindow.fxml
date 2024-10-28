@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
@@ -42,13 +43,26 @@
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
-            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder"
-              styleClass="pane-with-border"
-              minHeight="450" prefHeight="450" maxHeight="450">
+
+            <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder"
+              styleClass="pane-with-border">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
+
+
+            <StackPane VBox.vgrow="NEVER" fx:id="imagePlaceholder" styleClass="pane-with-border"
+              minHeight="150" prefHeight="150" maxHeight="150">
+              <padding>
+                <Insets top="30" right="10" bottom="30" left="10" />
+              </padding>
+              <ImageView>
+                <Image url="@/images/grubybara.png" />
+              </ImageView>
+            </StackPane>
+
+
           </VBox>
           <VBox fx:id="restaurantList" styleClass="pane-with-border" minWidth="300"
             prefWidth="350"
