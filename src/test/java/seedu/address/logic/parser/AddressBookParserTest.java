@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -23,7 +21,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -36,7 +33,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -171,68 +167,6 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
-    }
-
-    @Test
-    public void parseCommand_deleteClaims() throws Exception {
-        // valid command with all necessary arguments
-        String validInput = DeleteClaimsCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_POLICY_TYPE + "health "
-                + PREFIX_CLAIM_STATUS + "PENDING "
-                + PREFIX_CLAIM_DESC + "Hospitalization";
-        DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
-                INDEX_FIRST_PERSON, PolicyType.HEALTH, ClaimStatus.PENDING, "Hospitalization");
-        Command command = parser.parseCommand(validInput);
-        assertEquals(expectedCommand, command);
-
-        // missing claim description
-        String missingDescriptionInput = DeleteClaimsCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_POLICY_TYPE + "health "
-                + PREFIX_CLAIM_STATUS + "PENDING";
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(missingDescriptionInput));
-
-        // missing claim status
-        String missingStatusInput = DeleteClaimsCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_POLICY_TYPE + "health "
-                + PREFIX_CLAIM_DESC + "Hospitalization";
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(missingStatusInput));
-
-        // missing policy type
-        String missingPolicyTypeInput = DeleteClaimsCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_CLAIM_STATUS + "PENDING "
-                + PREFIX_CLAIM_DESC + "Hospitalization";
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(missingPolicyTypeInput));
-
-        // invalid index format (non-numeric)
-        String nonNumericIndexInput = DeleteClaimsCommand.COMMAND_WORD + " "
-                + "abc "
-                + PREFIX_POLICY_TYPE + "health "
-                + PREFIX_CLAIM_STATUS + "PENDING "
-                + PREFIX_CLAIM_DESC + "Hospitalization";
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(nonNumericIndexInput));
-
-        // extra invalid arguments
-        //        String extraArgumentsInput = DeleteClaimsCommand.COMMAND_WORD + " "
-        //                + INDEX_FIRST_PERSON.getOneBased() + " "
-        //                + PREFIX_POLICY_TYPE + "health "
-        //                + PREFIX_CLAIM_STATUS + "PENDING "
-        //                + PREFIX_CLAIM_DESC + "Hospitalization "
-        //                + "extraArgument";
-        //        assertThrows(ParseException.class,
-        //                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), () ->
-        //                        parser.parseCommand(extraArgumentsInput));
     }
 
     @Test

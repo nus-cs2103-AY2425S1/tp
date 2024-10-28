@@ -1,192 +1,130 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Assertions;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
-import seedu.address.testutil.PersonBuilder;
-
 
 public class DeleteClaimsCommandTest {
 
     private Model model;
-    private final Claim validClaim = new Claim(ClaimStatus.PENDING, "Surgery");
     private final PolicyType validPolicyType = PolicyType.HEALTH;
+    private final Index validClaimIndex = Index.fromOneBased(1);
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager();
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
-    public void constructor_nullIndex_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new DeleteClaimsCommand(null, validPolicyType, ClaimStatus.PENDING,
-                        "Surgery"));
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        // set an out-of-bounds person index
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(outOfBoundsIndex, validPolicyType,
+                validClaimIndex);
+
+        assertCommandFailure(deleteClaimsCommand, model, DeleteClaimsCommand.MESSAGE_INVALID_PERSON_INDEX);
     }
 
     @Test
-    public void constructor_nullPolicyType_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new DeleteClaimsCommand(INDEX_FIRST_PERSON, null, ClaimStatus.PENDING,
-                        "Surgery"));
+    public void execute_noPolicyOfType_throwsCommandException() {
+        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_FIRST_PERSON, PolicyType.LIFE,
+                validClaimIndex);
+        assertCommandFailure(deleteClaimsCommand, model, String.format(DeleteClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE,
+                PolicyType.LIFE, model.getFilteredPersonList().get(0).getName()));
     }
 
     @Test
-    public void constructor_nullClaimStatus_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType, null, "Surgery"));
+    public void execute_claimIndexOutOfBounds_throwsCommandException() {
+        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_SECOND_PERSON, validPolicyType,
+                validClaimIndex);
+        assertCommandFailure(deleteClaimsCommand, model, DeleteClaimsCommand.MESSAGE_NO_CLAIM_FOUND);
     }
 
     @Test
-    public void constructor_nullDescription_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType, ClaimStatus.PENDING, null));
+    public void execute_validClaimDeletion_updatesModelAndReturnsSuccessMessage() {
+        // create a person with a health policy and a claim
+        Person personWithClaim = createPersonWithHealthPolicyAndClaim(
+                "John Doe", "98765432", "john@example.com", "123 Main St");
+
+        // replace the person in the model with the person that includes a claim
+        model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithClaim);
+
+        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_SECOND_PERSON, PolicyType.HEALTH,
+                INDEX_FIRST_CLAIM);
+
+        String expectedMessage = String.format(DeleteClaimsCommand.MESSAGE_DELETE_CLAIM_SUCCESS, PolicyType.HEALTH,
+                personWithClaim.getName(), ClaimStatus.PENDING, "Surgery claim");
+
+        assertCommandSuccess(deleteClaimsCommand, model, expectedMessage, model);
     }
 
-    @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        DeleteClaimsCommand command = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType, ClaimStatus.PENDING,
-                "Surgery");
-        assertThrows(NullPointerException.class, () -> command.execute(null));
-    }
 
-    @Test
-    public void execute_invalidIndex_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(outOfBoundIndex, validPolicyType,
-                ClaimStatus.PENDING,
-                "Surgery");
-        assertCommandFailure(deleteClaimsCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_noPolicyType_throwsCommandException() {
-        Person person = createPersonWithoutPolicies();
-        model.addPerson(person);
-
-        DeleteClaimsCommand command = new DeleteClaimsCommand(INDEX_FIRST_PERSON, PolicyType.LIFE, ClaimStatus.PENDING,
-                "Surgery");
-        assertCommandFailure(command, model, String.format(DeleteClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE,
-                PolicyType.LIFE, person.getName()));
-    }
-
-    @Test
-    public void execute_noMatchingClaim_throwsCommandException() {
-        Person person = createPersonWithPolicy();
-        model.addPerson(person);
-
-        DeleteClaimsCommand command = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType, ClaimStatus.APPROVED,
-                "Nonexistent claim");
-        assertCommandFailure(command, model, DeleteClaimsCommand.MESSAGE_NO_CLAIM_FOUND);
-    }
-
-    //    @Test
-    //    public void execute_deleteClaim_success() {
-    //        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //
-    //        // Get Benson Meier, who is the second person in the typical list
-    //        Person originalPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-    //        PolicyType policyType = PolicyType.HEALTH;
-    //
-    //        // Add a claim to Benson's Health policy
-    //        Claim claimToDelete = new Claim(ClaimStatus.PENDING, "Surgery");
-    //        Policy healthPolicy = originalPerson.getPolicies().stream()
-    //                .filter(policy -> policy.getType().equals(policyType))
-    //                .findFirst()
-    //                .orElseThrow(() -> new AssertionError("Health policy not found"));
-    //
-    //        // Add the claim to the policy
-    //        healthPolicy.addClaim(claimToDelete);
-    //
-    //        // Update the PolicySet for the person
-    //        PolicySet updatedPolicySet = new PolicySet();
-    //        updatedPolicySet.addAll(originalPerson.getPolicies());
-    //
-    //        // Create a new Person object with the updated policies
-    //        Person updatedPerson = new Person(
-    //                originalPerson.getName(),
-    //                originalPerson.getPhone(),
-    //                originalPerson.getEmail(),
-    //                originalPerson.getAddress(),
-    //                originalPerson.getTags(),
-    //                updatedPolicySet
-    //        );
-    //
-    //        // Update the model with the modified person
-    //        model.setPerson(originalPerson, updatedPerson);
-    //
-    //        // Ensure the claim was added
-    //        assertTrue(healthPolicy.getClaimList().contains(claimToDelete), "The claim should have been added to the
-    //        policy");
-    //
-    //        // Create the DeleteClaimsCommand
-    //        DeleteClaimsCommand command = new DeleteClaimsCommand(INDEX_SECOND_PERSON, policyType,
-    //        ClaimStatus.PENDING,
-    //        "Surgery");
-    //
-    //        // Expected success message
-    //        String expectedMessage = String.format(DeleteClaimsCommand.MESSAGE_DELETE_CLAIM_SUCCESS, policyType,
-    //                updatedPerson.getName(), ClaimStatus.PENDING, "Surgery");
-    //
-    //        // Create the expected model state after deletion
-    //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        healthPolicy.removeClaim(claimToDelete);
-    //        expectedModel.setPerson(updatedPerson, updatedPerson);
-    //
-    //        // Execute the command and verify the result
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //    }
 
     @Test
     public void equals() {
-        DeleteClaimsCommand deleteFirstCommand = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType,
-                ClaimStatus.PENDING, "Surgery");
-        DeleteClaimsCommand deleteSecondCommand = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType,
-                ClaimStatus.APPROVED, "Dental");
+        DeleteClaimsCommand deleteClaimCommand1 = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType,
+                validClaimIndex);
+        DeleteClaimsCommand deleteClaimCommand2 = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType,
+                validClaimIndex);
 
         // same object -> returns true
-        Assertions.assertEquals(deleteFirstCommand, deleteFirstCommand);
+        assert(deleteClaimCommand1.equals(deleteClaimCommand1));
 
         // same values -> returns true
-        DeleteClaimsCommand deleteFirstCommandCopy = new DeleteClaimsCommand(INDEX_FIRST_PERSON, validPolicyType,
-                ClaimStatus.PENDING, "Surgery");
-        Assertions.assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
+        assert(deleteClaimCommand1.equals(deleteClaimCommand2));
 
-        // different types -> returns false
-        Assertions.assertFalse(deleteFirstCommand.equals(5));
+        // different index -> returns false
+        DeleteClaimsCommand deleteClaimDifferentIndex = new DeleteClaimsCommand(INDEX_SECOND_PERSON, validPolicyType,
+                validClaimIndex);
+        assert(!deleteClaimCommand1.equals(deleteClaimDifferentIndex));
 
-        // null -> returns false
-        Assertions.assertFalse(deleteFirstCommand.equals(null));
+        // different policy type -> returns false
+        DeleteClaimsCommand deleteClaimDifferentPolicy = new DeleteClaimsCommand(INDEX_FIRST_PERSON, PolicyType.LIFE,
+                validClaimIndex);
+        assert(!deleteClaimCommand1.equals(deleteClaimDifferentPolicy));
 
-        // different claim -> returns false
-        Assertions.assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different claim index -> returns false
+        DeleteClaimsCommand deleteClaimDifferentClaimIndex = new DeleteClaimsCommand(INDEX_FIRST_PERSON,
+                validPolicyType, Index.fromOneBased(2));
+        assert(!deleteClaimCommand1.equals(deleteClaimDifferentClaimIndex));
     }
 
-    private Person createPersonWithPolicy() {
-        // initialize a person with a health policy (without claims)
-        HealthPolicy policy = new HealthPolicy();
-        return new PersonBuilder().withPolicy(policy).build();
+    public static Person createPersonWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
+        Claim claim = new Claim(ClaimStatus.PENDING, "Surgery claim");
+
+        HealthPolicy healthPolicy = new HealthPolicy(null, null, null,
+                new ClaimList());
+        healthPolicy.addClaim(claim);
+        PolicySet policySet = new PolicySet();
+        policySet.add(healthPolicy);
+
+        return new Person(new Name(name), new Phone(phone), new Email(email),
+                new Address(address), Set.of(), policySet);
     }
 
-    private Person createPersonWithoutPolicies() {
-        // create a person without any policies
-        return new PersonBuilder().build();
-    }
+
 }

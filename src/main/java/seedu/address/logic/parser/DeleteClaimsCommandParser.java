@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -92,7 +91,8 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         try {
             return ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLAIM_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
+                    pe);
         }
     }
 

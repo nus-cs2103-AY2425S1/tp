@@ -32,7 +32,7 @@ public class DeleteClaimsCommand extends Command {
             + ": Deletes a claim from the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE "
-            + PREFIX_CLAIM_INDEX + "CLAIM_INDEX(position in the list of claims for the specified policy)\n"
+            + PREFIX_CLAIM_INDEX + "CLAIM_INDEX(must be a positive integer)\n"
             + "Note: Use the 'list-claims' command to find the appropriate claim index "
             + "for the specified policy type.\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
