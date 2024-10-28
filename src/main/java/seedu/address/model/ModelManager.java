@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Wedding> filteredWeddings;
     private ActiveTags activeTags; //Stores all currently used tags
+    private WeddingName currentWeddingName; //Stores currently viewed wedding, null if not in wedding view
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
         activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
+        currentWeddingName = null;
     }
 
     public ModelManager() {
@@ -191,6 +194,16 @@ public class ModelManager implements Model {
     @Override
     public ActiveTags getActiveTags() {
         return activeTags;
+    }
+
+    @Override
+    public WeddingName getCurrentWeddingName() {
+        return currentWeddingName;
+    }
+
+    @Override
+    public void setCurrentWeddingName(WeddingName currentWeddingName) {
+        this.currentWeddingName = currentWeddingName;
     }
 
     @Override
