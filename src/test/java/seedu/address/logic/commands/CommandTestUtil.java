@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String VALID_ASKING_PRICE_BRENDA = "600000";
     public static final String VALID_PROPERTY_TYPE_ALAN = "HDB";
     public static final String VALID_PROPERTY_TYPE_BRENDA = "Terrace";
-    public static final String VALID_ADDRESS_ALAN = "Clementi Avenue Blk 102 #02-02";
+    public static final String VALID_ADDRESS_ALAN = "Woodlands Avenue Blk 102 #02-02";
     public static final String VALID_ADDRESS_BRENDA = "Bukit Timah Rd #01-01";
     public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
 

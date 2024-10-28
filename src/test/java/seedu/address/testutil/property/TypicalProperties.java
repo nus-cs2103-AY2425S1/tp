@@ -31,7 +31,7 @@ public class TypicalProperties {
     public static final Property CARL = new PropertyBuilder().withLandlordName("Carl Kurz").withPhone("95352563")
             .withAddress("Aljunied Crescent Blk 102 #02-02").withAskingPrice("1500000").withPropertyType("HDB").build();
     public static final Property DANIEL = new PropertyBuilder().withLandlordName("Daniel Meier").withPhone("87652533")
-            .withAddress("Bukit Timah Rd #01-01").withAskingPrice("3500000").withPropertyType("Terrace").build();
+            .withAddress("Bukit Batok Rd #01-01").withAskingPrice("3500000").withPropertyType("Terrace").build();
     public static final Property ELLE = new PropertyBuilder().withLandlordName("Elle Meyer").withPhone("92822224")
             .withAddress("Marsiling Rd Blk 105 #03-02").withAskingPrice("6000000").withPropertyType("HDB").build();
     public static final Property FIONA = new PropertyBuilder().withLandlordName("Fiona Kunz").withPhone("94822272")
