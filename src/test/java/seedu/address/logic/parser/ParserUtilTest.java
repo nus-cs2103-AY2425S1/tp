@@ -29,7 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ROLE_1 = "#friend";
+    private static final String INVALID_ROLE_2 = "";
     private static final String INVALID_DATE = "31 December 2024";
     private static final String INVALID_VENUE = "";
     private static final String INVALID_CLIENT_INDEX = "-1";
@@ -40,7 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "92345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
+    private static final String VALID_ROLE_1 = "friend";
     private static final String VALID_DATE = "2024-12-31";
     private static final String VALID_VENUE = "Chijmes";
     private static final String VALID_CLIENT_INDEX = "1";

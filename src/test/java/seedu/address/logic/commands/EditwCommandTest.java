@@ -1,27 +1,19 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.TypicalPersons.JOHN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Arrays;
+import static seedu.address.testutil.TypicalPersons.JOHN;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.EditwCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.role.Role;
+import seedu.address.model.person.Name;
 import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
-import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModelStubAcceptingWeddingAdded;
-import seedu.address.testutil.PersonBuilder;
 
 class EditwCommandTest {
 

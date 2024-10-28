@@ -1,14 +1,14 @@
 package seedu.address.testutil;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
-
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * A Model stub that always accept the person being added.
@@ -22,11 +22,23 @@ public class ModelStubAcceptingPersonAdded extends ModelStub {
         return personsAdded.stream().anyMatch(person::isSamePerson);
     }
 
+    /**
+     * Checks if a person with the same phone number already exists in the list.
+     *
+     * @param person The person to check.
+     * @return true if a person with the same phone number exists; otherwise, false.
+     */
     public boolean hasPhone(Person person) {
         requireNonNull(person);
         return personsAdded.stream().anyMatch(person::hasSamePhone);
     }
 
+    /**
+     * Checks if a person with the same email already exists in the list.
+     *
+     * @param person The person to check.
+     * @return true if a person with the same email exists; otherwise, false.
+     */
     public boolean hasEmail(Person person) {
         requireNonNull(person);
         return personsAdded.stream().anyMatch(person::hasSameEmail);

@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.wedding.Wedding;
-import java.util.ArrayList;
 
+/**
+ * A Model stub that always accept the wedding being added.
+ */
 public class ModelStubAcceptingWeddingAdded extends ModelStub {
     private final ArrayList<Wedding> weddingsAdded = new ArrayList<>();
 

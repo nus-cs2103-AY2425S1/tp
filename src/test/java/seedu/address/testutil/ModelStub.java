@@ -1,22 +1,21 @@
 package seedu.address.testutil;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.AddCommandTest;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * A default model stub that have all of the methods failing.
+ */
 public class ModelStub implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
