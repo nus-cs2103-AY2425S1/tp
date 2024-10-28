@@ -14,6 +14,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that finds unarchived persons*/
+    Predicate<Person> PREDICATE_SHOW_UNARCHIVED_PERSONS = person -> !person.isArchived();
+
+    /** {@code Predicate} that finds archived persons*/
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = person -> person.isArchived();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -86,6 +92,16 @@ public interface Model {
      */
     void unpinPerson(Person person);
 
+    /**
+     * Archives the given person to the top of the address book.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person to the top of the address book.
+     */
+    void unarchivePerson(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -99,28 +115,4 @@ public interface Model {
      * Sorts the person list to put all pinned persons at the top of the list.
      */
     void sortByPin();
-
-    // Archive-related Methods
-
-    /** Returns an unmodifiable view of the archived person list */
-    ObservableList<Person> getFilteredArchivedPersonList();
-
-    /**
-     * Updates the filter of the filtered archived person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredArchivedPersonList(Predicate<Person> predicate);
-
-    /**
-     * Archives the given person by moving them to the archived person list.
-     * The person must exist in the active address book person list.
-     */
-    void archivePerson(Person person);
-
-    /**
-     * Unarchives the given person by moving them back to the active person list.
-     * The person must exist in the archived person list.
-     */
-    void unarchivePerson(Person person);
-
 }

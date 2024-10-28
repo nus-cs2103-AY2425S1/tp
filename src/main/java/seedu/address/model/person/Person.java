@@ -25,6 +25,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isPinned;
+    private boolean isArchived;
 
     /**
      * Every field must be present and not null.
@@ -38,18 +39,21 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.isPinned = false;
+        this.isArchived = false;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isPinned) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isPinned,
+                  boolean isArchived) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.isPinned = isPinned;
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -81,8 +85,16 @@ public class Person {
         return isPinned;
     }
 
+    public boolean isArchived() {
+        return isArchived;
+    }
+
     public void setPinned(boolean pinned) {
         isPinned = pinned;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 
     /**
@@ -124,7 +136,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, isPinned);
+        return Objects.hash(name, phone, email, address, tags, isPinned, isArchived);
     }
 
     @Override
@@ -136,6 +148,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("isPinned", String.valueOf(isPinned))
+                .add("isArchived", String.valueOf(isArchived))
                 .toString();
     }
 
