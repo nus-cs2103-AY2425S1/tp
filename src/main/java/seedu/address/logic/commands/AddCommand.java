@@ -66,6 +66,11 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
         String tagMsg = handleWeddingDoesntExist(model, toAdd.getTags());
 
         if (model.hasPerson(toAdd)) {
@@ -98,7 +103,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Generates message based on whether tag can added, which depends on whether wedding exists or not.
+     * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
      * @param model current Model containing necessary wedding address book.
      * @param editedTags Set of tags that exist as a wedding as well.
      * @return String message stating whether tag exists as a wedding or not.
@@ -106,7 +111,7 @@ public class AddCommand extends Command {
      */
     private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) {
         List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
-        if (weddingList.isEmpty()) {
+        if (weddingList.isEmpty() && !editedTags.isEmpty()) {
             Set<Tag> tagsDontExist = new HashSet<>(editedTags);
             editedTags.removeAll(editedTags);
             return String.format(MESSAGE_WEDDING_DOESNT_EXIST,
