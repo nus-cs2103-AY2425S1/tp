@@ -76,7 +76,7 @@ public class RentalInformationListPanel extends UiPart<Region> {
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code RentalInformation} using a
-     * {@code RentalInformationCard}.
+     * {@code RentalInformationListCard}.
      */
     class RentalInformationListViewCell extends ListCell<RentalInformation> {
         @Override
@@ -87,7 +87,7 @@ public class RentalInformationListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new RentalInformationCard(rentalInformation, getIndex() + 1).getRoot());
+                setGraphic(new RentalInformationListCard(rentalInformation, getIndex() + 1).getRoot());
             }
         }
     }
