@@ -118,11 +118,13 @@ Adds a student to the address book.
 
 </box>
 
+
 <box type="tip" header="##### Tips">
 
 1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit)
 2. <b>RATE</b> is the tuition fee per hour.
-    
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+</markdown>
 </box>
 
 ### Listing all students : `list`
@@ -151,6 +153,12 @@ Edits an existing student in the address book.
 2. At least one of the optional fields must be provided.
 
 3. Existing values will be updated to the input values.
+</box>
+
+<box type="tip" header="##### Tips">
+<markdown>
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+</markdown>
 </box>
 
 
