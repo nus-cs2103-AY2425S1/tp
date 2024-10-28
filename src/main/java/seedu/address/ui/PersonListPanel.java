@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -56,7 +57,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, participationMap.get(person), getIndex() + 1).getRoot());
+                Platform.runLater(() -> setGraphic(new PersonCard(person, participationMap.get(person), getIndex() + 1).getRoot()));
             }
         }
     }

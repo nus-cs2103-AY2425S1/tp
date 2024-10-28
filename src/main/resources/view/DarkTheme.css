@@ -341,7 +341,7 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #tags .label {
