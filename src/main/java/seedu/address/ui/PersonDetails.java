@@ -46,7 +46,47 @@ public class PersonDetails {
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
 
+        // Set consistent styles for email, address, and remark
+        String commonStyle = "\"-fx-font-size: 13px; -fx-text-fill: #D9B08C;";
+        phoneLabel.setStyle(commonStyle);
+        emailLabel.setStyle(commonStyle);
+        addressLabel.setStyle(commonStyle);
+        birthdayLabel.setStyle(commonStyle);
+        remarkLabel.setStyle(commonStyle);
 
+        person.getPropertyList().getProperties().forEach(property -> {
+            FlowPane propertyLabel = new FlowPane();
+            propertyLabel.setHgap(10); // Horizontal gap between labels
+            propertyLabel.setVgap(5); // Vertical gap between labels
+            propertyLabel.setStyle("-fx-padding: 10; -fx-background-color: #293f3f; "
+                    + "-fx-border-color: #D9B08C; -fx-border-radius: 8; "
+                    + "-fx-background-radius: 8; -fx-text-fill: #D9B08C;");
+
+            Label addressLabel = new Label("Address: " + property.getAddress());
+            addressLabel.setStyle(commonStyle); // Set the same style
+
+            Label townLabel = new Label("Town: " + property.getTown());
+            townLabel.setStyle(commonStyle); // Set the same style
+
+            Label typeLabel = new Label("Type: " + property.getPropertyType());
+            typeLabel.setStyle(commonStyle); // Set the same style
+
+            Label sizeLabel = new Label("Size: " + property.getSize() + " sqm");
+            sizeLabel.setStyle(commonStyle); // Set the same style
+
+            Label bedroomsLabel = new Label("Bedrooms: " + property.getNumberOfBedrooms());
+            bedroomsLabel.setStyle(commonStyle); // Set the same style
+
+            Label bathroomsLabel = new Label("Bathrooms: " + property.getNumberOfBathrooms());
+            bathroomsLabel.setStyle(commonStyle); // Set the same style
+
+            Label priceLabel = new Label("Price: $" + property.getPrice());
+            priceLabel.setStyle(commonStyle); // Set to the same style as others
+
+            propertyLabel.getChildren().addAll(addressLabel, townLabel, typeLabel,
+                    sizeLabel, bedroomsLabel, bathroomsLabel, priceLabel);
+            propertyList.getChildren().add(propertyLabel);
+        });
 
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
             Label historyLabel = new Label(date.toString());
