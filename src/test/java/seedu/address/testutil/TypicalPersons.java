@@ -36,16 +36,6 @@ import seedu.address.model.person.Teacher;
  */
 public class TypicalPersons {
 
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withGender("male")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withSubject("Chemistry", "Physics").withClasses("7A").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withGender("male")
-            .withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withSubject("Physics").withClasses("8A, 8C").build();
-
-
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)

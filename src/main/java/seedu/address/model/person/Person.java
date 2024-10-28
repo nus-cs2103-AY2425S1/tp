@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Student.STUDENT_TYPE;
+import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,8 +19,6 @@ import seedu.address.model.tag.Tag;
  */
 public abstract class Person {
 
-    public static final String TEACHER_TYPE = "teacher";
-    public static final String STUDENT_TYPE = "student";
 
     // Identity fields
     private final Name name;
@@ -185,13 +185,13 @@ public abstract class Person {
         }
     }
 
+    /**
+     * Returns the type of the person.
+     *
+     * @return The type of the person.
+     * @throws InvalidPersonTypeException if the type of the person is not recognized.
+     */
     public String getType() {
-        if (this instanceof Student) {
-            return STUDENT_TYPE;
-        } else if (this instanceof Teacher) {
-            return TEACHER_TYPE;
-        } else {
-            throw new InvalidPersonTypeException();
-        }
+        throw new InvalidPersonTypeException();
     }
 }

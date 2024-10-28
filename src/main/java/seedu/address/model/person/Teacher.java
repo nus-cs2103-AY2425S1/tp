@@ -13,6 +13,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Teacher extends Person {
 
+
+    public static final String TEACHER_TYPE = "teacher";
+
     /**
      * Constructs a {@code Teacher} with the specified details.
      *
@@ -104,4 +107,9 @@ public class Teacher extends Person {
             && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
     }
 
+    @Override
+    public String getType() {
+        return TEACHER_TYPE;
+
+    }
 }

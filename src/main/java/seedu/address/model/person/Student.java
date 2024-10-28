@@ -11,6 +11,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    public static final String STUDENT_TYPE = "student";
     private final DaysAttended daysAttended;
 
     /**
@@ -122,5 +123,10 @@ public class Student extends Person {
 
         return otherPerson instanceof Student
             && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
+    }
+
+    @Override
+    public String getType() {
+        return STUDENT_TYPE;
     }
 }

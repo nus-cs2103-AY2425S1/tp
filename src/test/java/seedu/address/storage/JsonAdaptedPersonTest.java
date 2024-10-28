@@ -3,8 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalTeachers.TEACHER_BOB;
+import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
+import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,26 +29,26 @@ public class JsonAdaptedPersonTest {
 
     private static final Integer INVALID_DAYS_ATTENDED = -1;
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_GENDER = BENSON.getGender().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_NAME = STUDENT_BENSON.getName().toString();
+    private static final String VALID_GENDER = STUDENT_BENSON.getGender().toString();
+    private static final String VALID_PHONE = STUDENT_BENSON.getPhone().toString();
+    private static final String VALID_EMAIL = STUDENT_BENSON.getEmail().toString();
+    private static final String VALID_ADDRESS = STUDENT_BENSON.getAddress().toString();
     private static final Integer VALID_DAYS_ATTENDED = 1;
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final List<JsonAdaptedTag> VALID_TAGS = STUDENT_BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedSubject> VALID_SUBJECTS = BENSON.getSubjects().stream()
+    private static final List<JsonAdaptedSubject> VALID_SUBJECTS = STUDENT_BENSON.getSubjects().stream()
             .map(JsonAdaptedSubject::new)
             .collect(Collectors.toList());
-    private static final List<String> VALID_CLASSES = BENSON.getClasses().stream()
+    private static final List<String> VALID_CLASSES = STUDENT_BENSON.getClasses().stream()
             .map(String::toString)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(TEACHER_BOB);
-        assertEquals(TEACHER_BOB, person.toModelType());
+        JsonAdaptedPerson person = new JsonAdaptedPerson(TEACHER_DANIEL);
+        assertEquals(TEACHER_DANIEL, person.toModelType());
     }
 
     @Test

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.model.person.Person.STUDENT_TYPE;
+import static seedu.address.model.person.Student.STUDENT_TYPE;
 
 import java.util.HashSet;
 import java.util.Set;
