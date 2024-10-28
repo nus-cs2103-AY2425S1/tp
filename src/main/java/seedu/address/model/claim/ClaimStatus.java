@@ -7,6 +7,26 @@ public enum ClaimStatus {
     PENDING,
     APPROVED,
     REJECTED;
+    public static final String MESSAGE_CONSTRAINTS = "Claim status can only be "
+            + getValidClaimStatusesAsString() + ".";
+
+    /**
+     * Returns true if the provided string matches any valid {@code ClaimStatus}.
+     *
+     * @param status The string to check.
+     * @return True if the string corresponds to a valid claim status, false otherwise.
+     */
+    public static boolean isValidClaimStatus(String status) {
+        if (status == null) {
+            return false;
+        }
+        for (ClaimStatus claimStatus : ClaimStatus.values()) {
+            if (claimStatus.name().equalsIgnoreCase(status)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns the string representation of the claim status.
@@ -34,5 +54,26 @@ public enum ClaimStatus {
             }
         }
         throw new IllegalArgumentException("Invalid policy type: " + type);
+    }
+    /**
+     * Returns a string listing all valid claim statuses in a readable format,
+     * e.g., "Pending, Approved, or Rejected."
+     *
+     * @return A comma-separated string of valid claim statuses.
+     */
+    public static String getValidClaimStatusesAsString() {
+        StringBuilder result = new StringBuilder();
+        ClaimStatus[] statuses = ClaimStatus.values();
+
+        for (int i = 0; i < statuses.length; i++) {
+            result.append(statuses[i].toString());
+            if (i < statuses.length - 2) {
+                result.append(", ");
+            } else if (i == statuses.length - 2) {
+                result.append(", or ");
+            }
+        }
+
+        return result.toString();
     }
 }
