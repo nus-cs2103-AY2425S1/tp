@@ -120,7 +120,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setAskingPrice(toCopy.askingPrice);
-            setType(toCopy.type);
+            setPropertyType(toCopy.type);
         }
 
         /**
@@ -163,7 +163,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(askingPrice);
         }
 
-        public void setType(PropertyType type) {
+        public void setPropertyType(PropertyType type) {
             this.type = type;
         }
 

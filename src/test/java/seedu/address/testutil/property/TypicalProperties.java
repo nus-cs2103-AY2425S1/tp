@@ -1,15 +1,15 @@
 package seedu.address.testutil.property;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TYPE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BRENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_ALAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_BRENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LANDLORD_NAME_ALAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LANDLORD_NAME_BRENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BRENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TYPE_ALAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TYPE_BRENDA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,12 +46,14 @@ public class TypicalProperties {
             .withAddress("Shinjuku Blk 102 #02-02").withAskingPrice("1200000").withPropertyType("Condominium").build();
 
     // Manually added - Property's details found in {@code CommandTestUtil}
-    public static final Property AMY = new PropertyBuilder().withLandlordName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withAskingPrice(VALID_ASKING_PRICE_AMY).withPropertyType(VALID_PROPERTY_TYPE_AMY)
-            .withAddress(VALID_ADDRESS_AMY).build();
-    public static final Property BOB = new PropertyBuilder().withLandlordName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withAskingPrice(VALID_ASKING_PRICE_BOB).withPropertyType(VALID_PROPERTY_TYPE_BOB)
-            .withAddress(VALID_ADDRESS_BOB).build();
+    public static final Property AMY = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
+            .withPhone(VALID_PHONE_ALAN)
+            .withAskingPrice(VALID_ASKING_PRICE_ALAN).withPropertyType(VALID_PROPERTY_TYPE_ALAN)
+            .withAddress(VALID_ADDRESS_ALAN).build();
+    public static final Property BOB = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_BRENDA)
+            .withPhone(VALID_PHONE_BRENDA)
+            .withAskingPrice(VALID_ASKING_PRICE_BRENDA).withPropertyType(VALID_PROPERTY_TYPE_BRENDA)
+            .withAddress(VALID_ADDRESS_BRENDA).build();
 
     private TypicalProperties() {} // prevents instantiation
 
