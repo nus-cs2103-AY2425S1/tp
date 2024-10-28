@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Ask {
     public static final String MESSAGE_CONSTRAINTS =
-            "Ask price must be a non-negative integer with only numeric characters";
+            "Ask price must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
     private static final Logger logger = LogsCenter.getLogger(Ask.class);
     public final String value;
