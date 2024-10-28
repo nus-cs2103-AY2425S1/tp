@@ -332,6 +332,16 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseContactAttribute_unknownAttributeWithoutWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactAttribute("gamer"));
+    }
+
+    @Test
+    public void parseContactAttribute_unknownAttributeWithWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactAttribute(WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
     public void parseContactAttribute_dateAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
         String expectedAttribute = "date";
         assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_DELIVERY_ATTRIBUTE_DATE));
