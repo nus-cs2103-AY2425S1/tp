@@ -89,7 +89,7 @@ public class AssignContactToWeddingCommand extends Command {
 
         for (Person person : newContactsAssignedToWedding) {
             if (existingPersonsInWedding.contains(person.getId())) {
-                // this keeps the user in that wedding view to show them that they have already assigned that person to the wedding.
+                // this keeps the user in that wedding view
                 Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
                 PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
                 model.updateFilteredPersonList(predicate);
