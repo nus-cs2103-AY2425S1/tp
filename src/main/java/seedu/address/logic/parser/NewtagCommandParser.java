@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.NewtagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -14,7 +15,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new NewtagCommand object.
  */
 public class NewtagCommandParser implements Parser<NewtagCommand> {
-    public static final int MAX_LENGTH = 50;
     public static final String VALIDATION_REGEX = "[\\p{Alnum}' ]+";
 
     /**
@@ -25,7 +25,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      */
     public boolean isValidArgument(String argument) {
         boolean isEmpty = argument.isEmpty();
-        boolean isTooLong = argument.length() > MAX_LENGTH;
+        boolean isTooLong = argument.length() > Index.MAX_INDEXES;
         boolean isValidCharacters = argument.matches(VALIDATION_REGEX);
         if (isEmpty || isTooLong || !isValidCharacters) {
             return false;

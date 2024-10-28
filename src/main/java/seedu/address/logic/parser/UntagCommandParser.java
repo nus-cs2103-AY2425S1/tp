@@ -19,8 +19,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new UntagCommand object
  */
 public class UntagCommandParser implements Parser<UntagCommand> {
-    public static final int MAX_LENGTH = 50;
-    public static final int MAX_INDEXES = 10;
+    public static final String VALIDATION_REGEX = "\\d+";
 
     /**
      * Parses the given {@code String} of arguments in the context of the UntagCommand
@@ -40,17 +39,12 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
         try {
             List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
-            if (indexStrings.size() == 1 && indexStrings.get(0).isEmpty()) {
+            boolean isValidIndexes = indexStrings.size() != 1 || !indexStrings.get(0).isEmpty();
+            if (!isValidIndexes) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
             }
             checkIndexLength(indexStrings);
-
-            for (String indexStr : indexStrings) {
-                if (!indexStr.isEmpty()) {
-                    checkIndex(indexStr);
-                    indexSet.add(ParserUtil.parseIndex(indexStr.trim()));
-                }
-            }
+            addIndexToSet(indexStrings, indexSet);
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
@@ -58,11 +52,12 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         for (String tagString : tagStrings) {
             tagString = tagString.trim().toLowerCase();
             boolean isEmpty = tagString.isEmpty();
-            boolean isTooLong = tagString.length() > MAX_LENGTH;
+            boolean isTooLong = tagString.length() > Tag.MAX_CHARACTER_LENGTH;
             if (isEmpty) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
             } else if (isTooLong) {
-                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_LENGTH));
+                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED,
+                        Tag.MAX_CHARACTER_LENGTH));
             }
             tagSet.add(new Tag(tagString));
         }
@@ -71,15 +66,24 @@ public class UntagCommandParser implements Parser<UntagCommand> {
     }
 
     private void checkIndex(String indexStr) throws ParseException {
-        if (!indexStr.matches("\\d+")) {
+        if (!indexStr.matches(VALIDATION_REGEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UntagCommand.MESSAGE_USAGE));
         }
     }
 
     private void checkIndexLength(List<String> indexStrings) throws ParseException {
-        if (indexStrings.size() > MAX_INDEXES) {
-            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, MAX_INDEXES));
+        if (indexStrings.size() > Index.MAX_INDEXES) {
+            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
+        }
+    }
+
+    private void addIndexToSet(List<String> indexStrings, Set<Index> indexSet) throws ParseException {
+        for (String indexStr : indexStrings) {
+            if (!indexStr.isEmpty()) {
+                checkIndex(indexStr);
+                indexSet.add(ParserUtil.parseIndex(indexStr.trim()));
+            }
         }
     }
 }

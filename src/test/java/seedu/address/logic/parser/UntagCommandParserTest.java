@@ -5,8 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.TagCommandParser.MAX_INDEXES;
-import static seedu.address.logic.parser.TagCommandParser.MAX_LENGTH;
+import static seedu.address.model.tag.Tag.MAX_CHARACTER_LENGTH;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -72,7 +71,7 @@ public class UntagCommandParserTest {
     public void parse_tooLongTag_throwsParseException() {
         String longTag = "veryveryveryveryveryveryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + longTag;
-        String expectedMessage = String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_LENGTH);
+        String expectedMessage = String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_CHARACTER_LENGTH);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
@@ -97,6 +96,6 @@ public class UntagCommandParserTest {
                 + " 10"
                 + " 11 "
                 + PREFIX_TAG + BRIDES_SIDE.getTagName();
-        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_INDEXES, MAX_INDEXES));
+        assertParseFailure(parser, userInput, String.format(MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
     }
 }
