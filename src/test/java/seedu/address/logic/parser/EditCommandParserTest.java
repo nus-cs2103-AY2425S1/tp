@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -79,5 +80,31 @@ public class EditCommandParserTest {
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_newNameSpecified_success() {
+        String userInput = NAME_DESC_AMY + " " + PREFIX_NEW_NAME + VALID_NAME_AMY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand expectedCommand = new EditCommand(new Name(VALID_NAME_AMY), new Name(VALID_NAME_AMY), descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_phoneSpecified_success() {
+        String userInput = NAME_DESC_AMY + PHONE_DESC_BOB;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        EditCommand expectedCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_noFieldsEdited_failure() {
+
+        assertParseFailure(parser, NAME_DESC_AMY, EditCommand.MESSAGE_NOT_EDITED);
     }
 }

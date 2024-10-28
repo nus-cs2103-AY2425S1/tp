@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -158,6 +160,27 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(new Name("Alice"), new Name("Alice"), DESC_BOB)));
+    }
+
+    @Test
+    public void createEditedPerson_nullPerson_throwsAssertionError() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        assertThrows(AssertionError.class, () ->
+                EditCommand.createEditedPerson(null, new Name(VALID_NAME_BOB), descriptor));
+    }
+
+    @Test
+    public void equals_newNameComparison_success() {
+        EditCommand commandWithNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        EditCommand commandWithSameNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        assertTrue(commandWithNewName.equals(commandWithSameNewName));
+    }
+
+    @Test
+    public void equals_jobComparison_success() {
+        EditPersonDescriptor descriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        EditPersonDescriptor sameDescriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        assertTrue(descriptorWithJob.equals(sameDescriptorWithJob));
     }
 
     @Test
