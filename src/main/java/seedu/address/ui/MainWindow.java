@@ -234,11 +234,15 @@ public class MainWindow extends UiPart<Stage> {
             case LISTCONSULT:
             case ADDCONSULT:
             case DELETECONSULT:
+            case ADDTOCONSULT:
+            case REMOVEFROMCONSULT:
                 handleTab(TAB_CONSULTATIONS_INDEX);
                 break;
             case LISTLESSONS:
             case ADDLESSON:
             case DELETELESSON:
+            case ADDTOLESSON:
+            case REMOVEFROMLESSON:
                 handleTab(TAB_LESSONS_INDEX);
                 break;
             default:
