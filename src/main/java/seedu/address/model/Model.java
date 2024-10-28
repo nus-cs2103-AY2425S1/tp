@@ -14,10 +14,10 @@ import seedu.address.model.student.Student;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluate to true for students */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluate to true for consultations*/
     Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true for lessons */
@@ -154,6 +154,15 @@ public interface Model {
      * The lesson must exist in TAHub.
      */
     void deleteLesson(Lesson lesson);
+
+    /**
+     * Replaces the given Lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in TAHub.
+     *
+     * @param target Target Lesson to replace.
+     * @param editedLesson Lesson instance to replace the target with.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
 
     /** Returns an unmodifiable view of the filtered lesson list */
     ObservableList<Lesson> getFilteredLessonList();

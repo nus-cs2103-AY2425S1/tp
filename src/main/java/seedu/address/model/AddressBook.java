@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -151,6 +152,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         consults.set(index, editedConsult);
+    }
+
+    /**
+     * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
+     * {@code target} must exist in TAHub.
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        int index = lessons.indexOf(target);
+        if (index == -1) {
+            throw new LessonNotFoundException();
+        }
+
+        lessons.set(index, editedLesson);
     }
 
     /**

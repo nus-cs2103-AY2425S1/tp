@@ -196,6 +196,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setLesson(Lesson target, Lesson newLesson) {
+        requireAllNonNull(target, newLesson);
+        addressBook.setLesson(target, newLesson);
+    }
+
+    @Override
     public void deleteLesson(Lesson lesson) {
         addressBook.removeLesson(lesson);
     }
@@ -225,7 +231,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents)
-                && filteredConsultations.equals(otherModelManager.filteredConsultations);
+                && filteredConsultations.equals(otherModelManager.filteredConsultations)
+                && filteredLessons.equals(otherModelManager.filteredLessons);
     }
 
 }
