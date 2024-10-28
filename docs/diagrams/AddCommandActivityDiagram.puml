@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+<style>
+activityDiagram {
+  activity {
+    BackgroundColor #8bc7f0
+    BorderColor #33668E
+    FontColor #000000
+    FontName arial
+  }
+
+  diamond {
+    BackgroundColor yellow
+    LineColor #000000
+    FontColor green
+    FontName arial
+    FontSize 15
+  }
+
+  arrow {
+    FontColor blue
+    FontName arial
+    FontSize 15
+  }
+}
+document {
+   BackgroundColor transparent
+}
+</style>
+
+start
+:Accept user input command;
+:Execute the input;
+:Parse the input;
+if () then ([invalid command format])
+    :Show MESSAGE_INVALID_COMMAND_FORMAT;
+    stop
+else ([else])
+    :Parse the arguments;
+    if () then ([else])
+        :Create an AddCommand object;
+        :Execute AddCommand;
+        :Create a student to be added;
+        :Check duplicates;
+        if () then ([else])
+            :Add the student to the address book;
+            :Update the filtered list with all students
+            including the new added one;
+            :Check clashing schedule;
+            if () then ([new schedule clashes])
+                :Show MESSAGE_HAS_CLASHES;
+            else ([else])
+            endif
+            :Show MESSAGE_SUCCESS of AddCommand;
+             stop
+        else ([student is already in the address book])
+            :Show MESSAGE_DUPLICATE;
+        stop
+        endif
+    else ([invalid arg format])
+        :Show MESSAGE_USAGE of AddCommand;
+    stop
+endif
+
+@enduml
