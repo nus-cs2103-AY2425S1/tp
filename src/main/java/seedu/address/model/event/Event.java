@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,6 +34,10 @@ public class Event {
 
     public Time getTime() {
         return time;
+    }
+
+    public LocalDateTime getStartTime() {
+        return time.getLocalDateStartTime();
     }
 
     public Venue getVenue() {
