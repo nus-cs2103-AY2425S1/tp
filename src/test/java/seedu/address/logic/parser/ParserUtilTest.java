@@ -30,24 +30,23 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    public static final String INVALID_DATE = "31 December 2024";
-    public static final String INVALID_VENUE = "";
-    public static final String INVALID_CLIENT_INDEX = "-1";
-    public static final String INVALID_CLIENT_NAME = "@my";
-    public static final Collection<String> INVALID_LIST_OF_JOBS = new LinkedList<>();
+    private static final String INVALID_DATE = "31 December 2024";
+    private static final String INVALID_VENUE = "";
+    private static final String INVALID_CLIENT_INDEX = "-1";
+    private static final String INVALID_CLIENT_NAME = "@my";
+    private static final Collection<String> INVALID_LIST_OF_JOBS = new LinkedList<>();
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "92345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
-    public static final String VALID_DATE = "2024-12-31";
-    public static final String VALID_VENUE = "Chijmes";
-    public static final String VALID_CLIENT_INDEX = "1";
-    public static final String VALID_CLIENT_NAME = "Amy";
-    public static final Collection<String> VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE = new LinkedList<>();
-
-    public static final Collection<String> VALID_LIST_OF_JOBS_WITH_WHITESPACE = new LinkedList<>();
+    private static final String VALID_DATE = "2024-12-31";
+    private static final String VALID_VENUE = "Chijmes";
+    private static final String VALID_CLIENT_INDEX = "1";
+    private static final String VALID_CLIENT_NAME = "Amy";
+    private static final Collection<String> VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE = new LinkedList<>();
+    private static final Collection<String> VALID_LIST_OF_JOBS_WITH_WHITESPACE = new LinkedList<>();
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -305,8 +304,7 @@ public class ParserUtilTest {
         HashSet<Index> expectedSet = new HashSet<>();
         expectedSet.add(Index.fromOneBased(1));
         expectedSet.add(Index.fromOneBased(3));
-        assertEquals(expectedSet, ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE));
-//        assertTrue(expectedSet.equals(ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE)));
+        assertTrue(expectedSet.equals(ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE)));
     }
 
     @Test
