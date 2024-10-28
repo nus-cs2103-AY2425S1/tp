@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.ParserMode;
+import seedu.address.logic.parser.exceptions.InvalidParserModeException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -42,7 +43,7 @@ public class SwitchParserModeCommand extends Command {
             boolean showPropertyList = this.mode == ParserMode.PROPERTY;
             return new CommandResult(SWITCH_SUCCESS_MESSAGE + mode, false,
                     false, showMeetUpList, showBuyerList, showPropertyList);
-        } catch (ParseException e) {
+        } catch (InvalidParserModeException e) {
             throw new CommandException(e.getMessage());
         }
     }

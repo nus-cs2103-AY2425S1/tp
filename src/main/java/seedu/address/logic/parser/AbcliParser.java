@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.buyer.BuyerCommandParser;
+import seedu.address.logic.parser.exceptions.InvalidParserModeException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.meetup.MeetUpCommandParser;
 import seedu.address.logic.parser.property.PropertyCommandParser;
@@ -66,7 +67,7 @@ public class AbcliParser {
      * @param mode mode to switch to
      * @throws ParseException if the mode doesn't exist
      */
-    public static void switchMode(ParserMode mode) throws ParseException {
+    public static void switchMode(ParserMode mode) throws InvalidParserModeException {
         assert buyerCommandParser != null;
         assert meetUpCommandParser != null;
         assert propertyCommandParser != null;
@@ -88,7 +89,7 @@ public class AbcliParser {
 
         default:
             logger.finer("This mode does not exist: " + mode);
-            throw new ParseException(MESSAGE_INVALID_PARSER_MODE);
+            throw new InvalidParserModeException(MESSAGE_INVALID_PARSER_MODE);
         }
     }
 
