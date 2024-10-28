@@ -194,11 +194,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(addressBook, userPrefs, filteredPersons);
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
