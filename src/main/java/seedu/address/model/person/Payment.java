@@ -24,8 +24,8 @@ public class Payment {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public final String value;
-    private final LocalDate paymentDueDate;
-    private final BigDecimal amount;
+    private LocalDate paymentDueDate;
+    private BigDecimal amount;
 
     /**
      * Constructs an {@code InsurancePayment}.
@@ -61,8 +61,18 @@ public class Payment {
             return false;
         }
     }
-
-
+    /**
+     * Updates the payment due date of the insurance payment.
+     * @param policy
+     */
+    public void updatePaymentDueDate(Policy policy) {
+        if (policy.isExpiringSoon()) {
+            paymentDueDate = LocalDate.MAX;
+            amount = BigDecimal.ZERO;
+        } else {
+            paymentDueDate = paymentDueDate.plusYears(1);
+        }
+    }
 
     public LocalDate getPaymentDueDate() {
         return paymentDueDate;
@@ -70,6 +80,9 @@ public class Payment {
 
     @Override
     public String toString() {
+        if (amount.equals(BigDecimal.ZERO) || paymentDueDate.equals(LocalDate.MAX)) {
+            return "Fully paid";
+        }
         return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
 
@@ -82,6 +95,5 @@ public class Payment {
     public int hashCode() {
         return value.hashCode();
     }
-
 
 }

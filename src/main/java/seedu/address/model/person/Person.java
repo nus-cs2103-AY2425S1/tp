@@ -205,6 +205,21 @@ public class Person {
     }
 
     /**
+     * Returns the policy with the given name, or null if no such policy exists.
+     *
+     * @param policyName the name of the policy to search for
+     * @return the policy with the given name, or null if no such policy exists
+     */
+    public Policy getPolicyByName(String policyName) {
+        for (Policy policy : policies) {
+            if (policy.getPolicyName().equals(policyName)) {
+                return policy;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns true if both persons have the same name and address.
      * This defines a weaker notion of equality between two persons.
      */
