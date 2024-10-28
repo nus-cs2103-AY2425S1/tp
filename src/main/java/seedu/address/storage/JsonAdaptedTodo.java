@@ -17,16 +17,17 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedTodo} with the given {@code description}.
      */
     @JsonCreator
-    public JsonAdaptedTodo(@JsonProperty("description") String description,
+    public JsonAdaptedTodo(@JsonProperty("id") String id,
+                           @JsonProperty("description") String description,
                            @JsonProperty("isDone") boolean isDone) {
-        super(description, isDone);
+        super(id, description, isDone);
     }
 
     /**
      * Converts a given {@code Todo} into this class for Jackson use.
      */
     public JsonAdaptedTodo(Todo source) {
-        super(source.getDescription(), source.getIsDone());
+        super(source.getId(),source.getDescription(), source.getIsDone());
     }
 
 
@@ -39,7 +40,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     @Override
     public Task toModelType() throws IllegalValueException {
         Description modelDescription = toModelDescription();
-        return new Todo(modelDescription.toString(), isDone);
+        return new Todo(id, modelDescription.toString(), isDone);
     }
 }
 

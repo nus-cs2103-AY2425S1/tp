@@ -10,7 +10,6 @@ public class TodoTest {
 
     private static final String VALID_DESCRIPTION = "Buy groceries";
     private static final String VALID_DESCRIPTION_TRIMMED = "Clean the house";
-    private static final Description DESCRIPTION_OBJ = new Description("Complete homework");
 
     @Test
     public void constructor_validStringDescription_success() {
@@ -19,21 +18,9 @@ public class TodoTest {
     }
 
     @Test
-    public void constructor_validDescriptionObject_success() {
-        Todo todo = new Todo(DESCRIPTION_OBJ);
-        assertEquals("[T][ ] Complete homework", todo.toString());
-    }
-
-    @Test
     public void constructor_withDoneStatus_success() {
         Todo todo = new Todo(VALID_DESCRIPTION, true);
         assertEquals("[T][X] Buy groceries", todo.toString());
-    }
-
-    @Test
-    public void constructor_withDescriptionObjectAndDoneStatus_success() {
-        Todo todo = new Todo(DESCRIPTION_OBJ, true);
-        assertEquals("[T][X] Complete homework", todo.toString());
     }
 
     @Test

@@ -16,8 +16,13 @@ public class Todo extends Task {
         super(description);
     }
 
-    public Todo(Description description) {
-        super(description);
+    /**
+     * Constructs a Todo task with the specified id and description.
+     *
+     * @param description The description of the todo task.
+     */
+    public Todo(String id, String description) {
+        super(id, description);
     }
 
     /**
@@ -32,13 +37,13 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructs a Todo task with the specified Description type description and isDone status.
+     * Constructs a Todo task with the specified ID, description and isDone status.
      *
      * @param description The description of the todo task.
      * @param isDone      The completion status of the event.
      */
-    public Todo(Description description, boolean isDone) {
-        super(description);
+    public Todo(String id, String description, boolean isDone) {
+        super(id, description);
         this.isDone = isDone;
     }
 
@@ -59,12 +64,13 @@ public class Todo extends Task {
 
         Todo otherTodo = (Todo) other;
         return description.equals(otherTodo.description)
-                && isDone == otherTodo.isDone;
+                && isDone == otherTodo.isDone
+                && this.getId() == otherTodo.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, isDone);
+        return Objects.hash(getId(), description, isDone);
     }
 
     /**

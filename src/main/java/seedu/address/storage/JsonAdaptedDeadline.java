@@ -23,10 +23,11 @@ public class JsonAdaptedDeadline extends JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedDeadline} with the given {@code description} and {@code by}.
      */
     @JsonCreator
-    public JsonAdaptedDeadline(@JsonProperty("description") String description,
+    public JsonAdaptedDeadline(@JsonProperty("id") String id,
+                               @JsonProperty("description") String description,
                                @JsonProperty("isDone") Boolean isDone,
                                @JsonProperty("by") String by) {
-        super(description, isDone);
+        super(id, description, isDone);
         this.by = by;
     }
 
@@ -34,7 +35,7 @@ public class JsonAdaptedDeadline extends JsonAdaptedTask {
      * Converts a given {@code Deadline} into this class for Jackson use.
      */
     public JsonAdaptedDeadline(Deadline source) {
-        super(source.getDescription(), source.getIsDone());
+        super(source.getId(), source.getDescription(), source.getIsDone());
         by = source.getBy().toString();
     }
 
@@ -56,7 +57,7 @@ public class JsonAdaptedDeadline extends JsonAdaptedTask {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 
-        return new Deadline(modelDescription.toString(), by, isDone);
+        return new Deadline(id, modelDescription.toString(), by, isDone);
     }
 }
 

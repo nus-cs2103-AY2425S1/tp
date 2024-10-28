@@ -28,6 +28,7 @@ public abstract class JsonAdaptedTask {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
+    protected final String id;
     protected final String description;
     protected final boolean isDone;
 
@@ -38,8 +39,10 @@ public abstract class JsonAdaptedTask {
      * @param isDone A boolean indicating if the task is completed.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("description") String description,
+    public JsonAdaptedTask(@JsonProperty("id") String id,
+                           @JsonProperty("description") String description,
                            @JsonProperty("isDone") boolean isDone) {
+        this.id = id;
         this.description = description;
         this.isDone = isDone;
     }
@@ -59,5 +62,17 @@ public abstract class JsonAdaptedTask {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(description);
+    }
+
+    /**
+     * Converts the id string into a valid {@code Task} object ID.
+     *
+     * @throws IllegalValueException if the id is missing or invalid.
+     */
+    protected String toModelId() throws IllegalValueException {
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ID"));
+        }
+        return id;
     }
 }

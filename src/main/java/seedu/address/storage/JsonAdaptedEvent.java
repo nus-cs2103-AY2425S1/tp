@@ -25,11 +25,12 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedEvent} with the given {@code description} and {@code from} and {@code to}.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("description") String description,
+    public JsonAdaptedEvent(@JsonProperty("id") String id,
+                            @JsonProperty("description") String description,
                             @JsonProperty("isDone") boolean isDone,
                             @JsonProperty("from") String from,
                             @JsonProperty("to") String to) {
-        super(description, isDone);
+        super(id, description, isDone);
         this.from = from;
         this.to = to;
     }
@@ -38,7 +39,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        super(source.getDescription(), source.getIsDone());
+        super(source.getId(), source.getDescription(), source.getIsDone());
         from = source.getFrom().toString();
         to = source.getTo().toString();
     }
@@ -61,7 +62,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Event(modelDescription.toString(), from, to, isDone);
+        return new Event(id, modelDescription.toString(), from, to, isDone);
     }
 }
 
