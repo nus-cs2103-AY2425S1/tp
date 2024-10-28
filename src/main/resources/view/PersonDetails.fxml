@@ -48,6 +48,12 @@
             <Label fx:id="remarkLabel" wrapText="true" />
         </content>
     </ScrollPane>
+    <Label text="Properties:" />
+    <ScrollPane fitToWidth="true" maxHeight="75.0">
+        <content>
+            <VBox fx:id="propertyList" prefHeight="75.0" />
+        </content>
+    </ScrollPane>
     <Label text="History:" />
     <ScrollPane fitToWidth="true" maxHeight="400.0">
         <content>
