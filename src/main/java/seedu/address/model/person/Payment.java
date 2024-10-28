@@ -61,7 +61,6 @@ public class Payment {
             return false;
         }
     }
-    
     /**
      * Updates the payment due date of the insurance payment.
      * @param policy
