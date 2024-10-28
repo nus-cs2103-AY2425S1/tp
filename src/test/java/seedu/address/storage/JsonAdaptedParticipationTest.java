@@ -6,19 +6,19 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.MATH;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import org.junit.jupiter.api.function.Executable;
-import org.junit.jupiter.api.Test;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class JsonAdaptedParticipationTest {
 
