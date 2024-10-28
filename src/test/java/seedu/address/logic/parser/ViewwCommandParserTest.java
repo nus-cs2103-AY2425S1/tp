@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewwCommand;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 

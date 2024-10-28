@@ -37,8 +37,7 @@ public class ViewwCommandParser implements Parser<ViewwCommand> {
                         Arrays.asList(nameKeywords));
 
                 return new ViewwCommand(null, predicate);
-            }
-            else {
+            } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE));
             }

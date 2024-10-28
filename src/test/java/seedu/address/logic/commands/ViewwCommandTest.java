@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -8,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEDDING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookFilterWithWeddings;
 
 import java.util.Arrays;
@@ -100,7 +98,7 @@ public class ViewwCommandTest {
 
     @Test
     public void execute_noMatchesKeyword_throwsCommandException() {
-        List<String> nonExistentKeyword =Arrays.asList("nonexistent");
+        List<String> nonExistentKeyword = Arrays.asList("nonexistent");
         NameMatchesWeddingPredicate predicate = new NameMatchesWeddingPredicate(nonExistentKeyword);
         ViewwCommand viewwCommand = new ViewwCommand(null, predicate);
 

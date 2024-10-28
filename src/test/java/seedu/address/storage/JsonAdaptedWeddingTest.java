@@ -105,49 +105,49 @@ public class JsonAdaptedWeddingTest {
     }
 
     @Test
-    public void equals_SameObject_ReturnsTrue() {
+    public void equals_sameObject_returnsTrue() {
         assertTrue(ALICE_JSON.equals(ALICE_JSON));
     }
 
     @Test
-    public void equals_NullObject_ReturnsFalse() {
+    public void equals_nullObject_returnsFalse() {
         assertFalse(ALICE_JSON.equals(null));
     }
 
     @Test
-    public void equals_DifferentClass_ReturnsFalse() {
+    public void equals_differentClass_returnsFalse() {
         assertFalse(ALICE_JSON.equals("not a wedding"));
     }
 
     @Test
-    public void equals_SameValues_ReturnsTrue() {
+    public void equals_sameValues_returnsTrue() {
         JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
                 VALID_NAME, VALID_CLIENT, VALID_DATE, VALID_VENUE);
         assertTrue(ALICE_JSON.equals(wedding1));
     }
 
     @Test
-    public void equals_DifferentValues_ReturnsFalse() {
+    public void equals_differentValues_returnsFalse() {
         JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
                 "Not Alice", VALID_CLIENT, VALID_DATE, VALID_VENUE);
         assertFalse(ALICE_JSON.equals(wedding1));
     }
     @Test
-    public void hashCode_SameValues_SameHashCode() {
+    public void hashCode_sameValues_sameHashCode() {
         JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
                 VALID_NAME, VALID_CLIENT, VALID_DATE, VALID_VENUE);
         assertEquals(ALICE_JSON.hashCode(), wedding1.hashCode());
     }
 
     @Test
-    public void hashCode_DifferentValues_DifferentHashCode() {
+    public void hashCode_differentValues_differentHashCode() {
         JsonAdaptedWedding wedding1 = new JsonAdaptedWedding(
                 "Not Alice", VALID_CLIENT, VALID_DATE, VALID_VENUE);
         assertFalse(ALICE_WEDDING.hashCode() == wedding1.hashCode());
     }
 
     @Test
-    public void hashCode_ConsistentResults() {
+    public void hashCode_consistentResults() {
         // Hash code should be consistent across multiple calls
         int initialHashCode = ALICE_JSON.hashCode();
         assertEquals(initialHashCode, ALICE_JSON.hashCode());

@@ -161,27 +161,27 @@ public class JsonAdaptedPersonTest {
         assertEquals(testWedding, modelPerson.getWeddingJobs().iterator().next());
     }
     @Test
-    public void equals_SameObject_ReturnsTrue() {
+    public void equals_sameObject_returnsTrue() {
         assertTrue(BENSON_JSON.equals(BENSON_JSON));
     }
 
     @Test
-    public void equals_NullObject_ReturnsFalse() {
+    public void equals_nullObject_returnsFalse() {
         assertFalse(BENSON_JSON.equals(null));
     }
 
     @Test
-    public void equals_DifferentClass_ReturnsFalse() {
+    public void equals_differentClass_returnsFalse() {
         assertFalse(BENSON_JSON.equals("not a person"));
     }
 
     @Test
-    public void equals_SameValues_ReturnsTrue() {
+    public void equals_sameValues_returnsTrue() {
         assertTrue(BENSON_JSON.equals(BENSON_JSON_COPY));
     }
 
     @Test
-    public void equals_DifferentValues_ReturnsFalse() {
+    public void equals_differentValues_returnsFalse() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 "Different Name",
                 VALID_PHONE,
@@ -195,7 +195,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void equals_NullTags_HandledCorrectly() {
+    public void equals_nullTags_handledCorrectly() {
         JsonAdaptedPerson person1WithNullTags = new JsonAdaptedPerson(
                 "John Doe",
                 "john@example.com",
@@ -218,7 +218,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void equals_EmptyTags_HandledCorrectly() {
+    public void equals_emptyTags_handledCorrectly() {
         JsonAdaptedPerson person1WithEmptyTags = new JsonAdaptedPerson(
                 "John Doe",
                 "john@example.com",
@@ -241,12 +241,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void hashCode_SameValues_SameHashCode() {
+    public void hashCode_sameValues_sameHashCode() {
         assertEquals(BENSON_JSON.hashCode(), BENSON_JSON_COPY.hashCode());
     }
 
     @Test
-    public void hashCode_DifferentValues_DifferentHashCode() {
+    public void hashCode_differentValues_differentHashCode() {
         JsonAdaptedPerson person2 = new JsonAdaptedPerson(
                 "Different Name",
                 VALID_PHONE,
@@ -260,7 +260,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void hashCode_ConsistentResults() {
+    public void hashCode_consistentResults() {
         // Hash code should be consistent across multiple calls
         int initialHashCode = BENSON_JSON.hashCode();
         assertEquals(initialHashCode, BENSON_JSON.hashCode());
@@ -268,7 +268,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void hashCode_NullTags_ConsistentHashCode() {
+    public void hashCode_nullTags_consistentHashCode() {
         // Null tags should not affect hash code
         JsonAdaptedPerson personWithNullTags = new JsonAdaptedPerson(
                 "John Doe",
@@ -285,7 +285,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void hashCode_EmptyTags_ConsistentHashCode() {
+    public void hashCode_emptyTags_consistentHashCode() {
         JsonAdaptedPerson personWithEmptyTags = new JsonAdaptedPerson(
                 "John Doe",
                 "john@example.com",
