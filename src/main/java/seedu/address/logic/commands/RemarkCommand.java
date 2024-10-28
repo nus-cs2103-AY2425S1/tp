@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 
 /**
@@ -33,13 +34,13 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_NO_REMARK = "Remark cannot be empty!";
 
     private final Index studentIndex;
-    private final String remark;
+    private final Remark remark;
 
     /**
      * @param studentIndex of the student in the filtered student list
      * @param remark to add to the student
      */
-    public RemarkCommand(Index studentIndex, String remark) {
+    public RemarkCommand(Index studentIndex, Remark remark) {
         assert studentIndex != null;
         assert remark != null;
 
@@ -57,10 +58,6 @@ public class RemarkCommand extends Command {
 
         if (studentIndex.getZeroBased() >= lastShownList.size() || studentIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-
-        if (remark.isBlank()) {
-            throw new CommandException(MESSAGE_NO_REMARK);
         }
 
         Student studentToAddRemark = lastShownList.get(studentIndex.getZeroBased());

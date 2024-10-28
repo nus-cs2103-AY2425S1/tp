@@ -28,7 +28,7 @@ public class JsonAdaptedStudentTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_REMARK = BENSON.getRemark();
+    private static final String VALID_REMARK = BENSON.getRemark().remarkName;
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
