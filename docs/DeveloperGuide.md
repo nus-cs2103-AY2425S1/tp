@@ -513,10 +513,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding students by name or day
    1. Test case: `find n/Alex d/Thursday`<br>
-      Expected: Only students whose name contains keyword `Alex` **OR** tuition day falls on `Thursday` listed.
+      Expected: Only students whose name contains keyword `Alex`<br>
+      **AND** their tuition day falls on `Thursday` listed.
    
    1. Test case: `find d/Thursday n/Alex `<br>
       Expected: Similar to previous.
+
+   1. Test case: `find d/Alex Bernice d/Wednesday Thursday`<br>
+      Expected: Only students whose name contains keyword `Alex` **OR** `Bernice`<br>
+      **AND** their tuition day falls on `Wednesday` **OR** `Thursday` listed.
    
    1. Test case: `find n/Alex d/`<br>
       Expected: Search not performed. UGTeach shows an error message.
