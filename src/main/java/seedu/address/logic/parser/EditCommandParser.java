@@ -51,9 +51,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
             editPersonDescriptor.setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
         }
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            editPersonDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
-        }
 
         if (!editPersonDescriptor.isAnyFieldEdited() && newName == null) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
