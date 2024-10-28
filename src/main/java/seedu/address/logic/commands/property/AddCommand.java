@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_ADDRESS + "Clementi Rd Blk 23 #10-02 "
             + PREFIX_ASKING_PRICE + "450000 "
             + PREFIX_TYPE + "HDB";
 

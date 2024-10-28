@@ -39,7 +39,7 @@ public class JsonBuyerListStorage implements BuyerListStorage {
     /**
      * Similar to {@link #readBuyerList()}.
      *
-     * @param filePath address of the data. Cannot be null.
+     * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
     public Optional<ReadOnlyBuyerList> readBuyerList(Path filePath) throws DataLoadingException {
@@ -67,7 +67,7 @@ public class JsonBuyerListStorage implements BuyerListStorage {
     /**
      * Similar to {@link #saveBuyerList(ReadOnlyBuyerList)}.
      *
-     * @param filePath address of the data. Cannot be null.
+     * @param filePath location of the data. Cannot be null.
      */
     public void saveBuyerList(ReadOnlyBuyerList buyerList, Path filePath) throws IOException {
         requireNonNull(buyerList);

@@ -19,7 +19,7 @@ public class MeetUpCard extends UiPart<Region> {
     public final MeetUp meetUp;
 
     /**
-     * Note: Certain keywords such as "address" and "resources" are reserved keywords in JavaFX.
+     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *

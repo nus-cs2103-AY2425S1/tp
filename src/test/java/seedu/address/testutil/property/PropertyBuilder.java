@@ -14,7 +14,7 @@ public class PropertyBuilder {
 
     public static final String DEFAULT_LANDLORD_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_ADDRESS = "Bishan";
+    public static final String DEFAULT_ADDRESS = "Bishan Rd #01-01";
     public static final String DEFAULT_ASKING_PRICE = "600000";
     public static final String DEFAULT_PROPERTY_TYPE = "HDB";
 

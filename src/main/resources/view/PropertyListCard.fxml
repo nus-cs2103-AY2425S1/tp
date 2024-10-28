@@ -26,7 +26,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="addressA" styleClass="cell_small_label" text="\$addressA" />
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="askingPrice" styleClass="cell_small_label" text="\$askingPrice" />
       <Label fx:id="propertyType" styleClass="cell_small_label" text="\$propertyType" />
     </VBox>

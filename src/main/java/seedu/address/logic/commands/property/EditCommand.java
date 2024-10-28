@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TYPE + "TYPE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_ADDRESS + "San Francisco "
+            + PREFIX_ADDRESS + "Clementi Rd Blk 23 #10-02 "
             + PREFIX_ASKING_PRICE + "5000000 "
             + PREFIX_TYPE + "Condominium";
 
