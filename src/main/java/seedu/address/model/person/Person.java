@@ -5,30 +5,35 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are not null, Name and Phone are present, field values are validated, immutable.
  */
 public class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final Optional<Email> email;
 
     // Data fields
-    private final Address address;
+    private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Exception messages
+    private static final String MESSAGE_MISSING_FIELD = "%s is missing.";
+
     /**
-     * Every field must be present and not null.
+     * All fields must not be null. Name and Phone must be present.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -45,11 +50,11 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
-    public Address getAddress() {
+    public Optional<Address> getAddress() {
         return address;
     }
 
@@ -105,13 +110,22 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+        ToStringBuilder result =  new ToStringBuilder(this)
+                .add("name", name).add("phone", phone);
+
+        if (!email.isPresent()) {
+            result.add("email", " ");
+        } else {
+            result.add("email", email.get());
+        }
+
+        if (!address.isPresent()) {
+            result.add("address", " ");
+        } else {
+            result.add("address", address.get());
+        }
+
+        return result.add("tags", tags).toString();
     }
 
 }
