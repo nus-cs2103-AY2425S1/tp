@@ -419,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User enters new command.
 
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+* Use case resumes from step 2.
 
 *{More to be added}*
 
