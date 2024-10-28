@@ -184,6 +184,21 @@ public class EditCommandTest {
     }
 
     @Test
+    public void equals_differentNewName_returnsFalse() {
+        EditCommand commandWithNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        EditCommand commandWithDifferentNewName = new EditCommand(new Name("Alice"), new Name("Charlie"), DESC_AMY);
+        assertFalse(commandWithNewName.equals(commandWithDifferentNewName));
+    }
+
+    @Test
+    public void equals_differentJob_returnsFalse() {
+        EditPersonDescriptor descriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        EditPersonDescriptor differentDescriptorWithJob = new EditPersonDescriptorBuilder()
+                .withJob("Different Job").build();
+        assertFalse(descriptorWithJob.equals(differentDescriptorWithJob));
+    }
+
+    @Test
     public void toStringMethod() {
         Name currentName = new Name("Alice");
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
