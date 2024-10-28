@@ -172,6 +172,7 @@ that you want to keep your `TrackMate.jar` file in.
 
 7. After navigating to the directory, enter the `java -jar TrackMate.jar` command to run the application.
 
+
 8. Wait a few seconds and a GUI should pop up, similar to the one shown below.
 
 ![startingGUI.png](images/startingGUI.png)
