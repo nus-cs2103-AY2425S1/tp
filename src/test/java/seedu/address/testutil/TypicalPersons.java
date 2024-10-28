@@ -119,13 +119,13 @@ public class TypicalPersons {
         for (Person person : getTypicalPersonsFilter()) {
             ab.addPerson(person);
         }
-        for (Wedding wedding : getTypicalWeddings()) {
+        for (Wedding wedding : getTypicalValidWeddings()) {
             ab.addWedding(wedding);
         }
         return ab;
     }
 
-    public static List<Wedding> getTypicalWeddings() {
+    public static List<Wedding> getTypicalValidWeddings() {
         return new ArrayList<>(Arrays.asList(ALICE_WEDDING, GEORGE_WEDDING));
     }
 
