@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Name;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;

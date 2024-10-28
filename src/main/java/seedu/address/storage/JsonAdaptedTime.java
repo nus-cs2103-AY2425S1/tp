@@ -1,20 +1,24 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Time;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Time;
+
+/**
+ * Jackson-friendly version of {@link Time}.
+ */
 public class JsonAdaptedTime {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Time's %s field is missing!";
     public final String startTime;
     public final String endTime;
 
     /**
-     * Constructs a {@code JsonAdaptedEvent} with the given event details.
+     * Constructs a {@code JsonAdaptedTime} with the given event details.
      */
     @JsonCreator
     public JsonAdaptedTime(@JsonProperty("startTime") String startTime,
@@ -24,7 +28,7 @@ public class JsonAdaptedTime {
     }
 
     /**
-     * Converts a given {@code Event} into this class for Jackson use.
+     * Converts a given {@code Time} into this class for Jackson use.
      */
     public JsonAdaptedTime(Time source) {
         startTime = source.getStartTime();
