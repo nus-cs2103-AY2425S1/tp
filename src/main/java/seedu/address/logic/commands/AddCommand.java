@@ -51,9 +51,9 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasStudent(toAdd)) {
+        /*if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
+        }*/
 
         if (model.hasStudentWithId(toAdd.getStudentId())) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
