@@ -2,7 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -56,5 +56,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    ObjectProperty<DisplayMode> getDisplayMode();
+    ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode();
 }

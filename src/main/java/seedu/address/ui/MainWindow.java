@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
 
         // Add listener to modify display appropriately
-        logic.getDisplayMode().addListener((observable, oldValue, newValue) -> {
+        logic.getReadOnlyDisplayMode().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
             case CLIENTS:
                 listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
