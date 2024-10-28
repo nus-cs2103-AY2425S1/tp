@@ -217,8 +217,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the meetup at the given {@code targetIndex} in the
-     * {@code model}'s meetup list.
+     * Updates {@code model}'s filtered list to show only the meet-up at the given {@code targetIndex} in the
+     * {@code model}'s meet-up list.
      */
     public static void showMeetUpAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredMeetUpList().size());
@@ -238,8 +238,10 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPropertyList().size());
 
         Property property = model.getFilteredPropertyList().get(targetIndex.getZeroBased());
-        final String[] splitName = property.getAddress().value.split("\\s+");
-        model.updateFilteredPropertyList(new AddressContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        final String[] splitAddress = property.getAddress().value.split("\\s+");
+        model.updateFilteredPropertyList(new AddressContainsKeywordsPredicate(Arrays.asList(splitAddress[0])));
+
         assertEquals(1, model.getFilteredPropertyList().size());
     }
+
 }

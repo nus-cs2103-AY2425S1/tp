@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASKING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.property.AddCommand;
 import seedu.address.logic.commands.property.EditCommand.EditPropertyDescriptor;
@@ -30,6 +31,7 @@ public class PropertyUtil {
         sb.append(PREFIX_PHONE + property.getPhone().value + " ");
         sb.append(PREFIX_ADDRESS + property.getAddress().value + " ");
         sb.append(PREFIX_ASKING_PRICE + property.getAskingPrice().value + " ");
+        sb.append(PREFIX_TYPE + property.getPropertyType().value + " ");
         return sb.toString();
     }
 
@@ -43,6 +45,7 @@ public class PropertyUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getAskingPrice().ifPresent(askingPrice -> sb.append(PREFIX_ASKING_PRICE).append(askingPrice.value)
                 .append(" "));
+        descriptor.getType().ifPresent(propertyType -> sb.append(PREFIX_TYPE).append(propertyType.value).append(" "));
         return sb.toString();
     }
 }

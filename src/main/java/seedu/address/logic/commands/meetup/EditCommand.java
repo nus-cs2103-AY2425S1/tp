@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
 
     private final Index targetIndex;
-    private final EditCommand.EditMeetUpDescriptor editMeetUpDescriptor;
+    private final EditMeetUpDescriptor editMeetUpDescriptor;
 
     /**
      * Creates an EditCommand to edit the specified {@code MeetUp} by its index
@@ -99,7 +99,7 @@ public class EditCommand extends Command {
      * edited with {@code editBuyerDescriptor}.
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
-                                             EditCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
+                                             EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
         Name updatedName = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
@@ -154,7 +154,7 @@ public class EditCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code addedBuyers} is used internally.
          */
-        public EditMeetUpDescriptor(EditCommand.EditMeetUpDescriptor toCopy) {
+        public EditMeetUpDescriptor(EditMeetUpDescriptor toCopy) {
             setName(toCopy.name);
             setInfo(toCopy.info);
             setFrom(toCopy.from);
@@ -225,18 +225,29 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditMeetUpDescriptor)) {
+            if (!(other instanceof EditMeetUpDescriptor)) {
                 return false;
             }
 
-            EditCommand.EditMeetUpDescriptor otherEditMeetUpDescriptor =
-                    (EditCommand.EditMeetUpDescriptor) other;
+            EditMeetUpDescriptor otherEditMeetUpDescriptor =
+                    (EditMeetUpDescriptor) other;
 
             return Objects.equals(name, otherEditMeetUpDescriptor.name)
                     && Objects.equals(info, otherEditMeetUpDescriptor.info)
                     && Objects.equals(from, otherEditMeetUpDescriptor.from)
                     && Objects.equals(to, otherEditMeetUpDescriptor.to)
                     && Objects.equals(addedBuyers, otherEditMeetUpDescriptor.addedBuyers);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("info", info)
+                    .add("from", from)
+                    .add("to", to)
+                    .add("addedBuyers", addedBuyers)
+                    .toString();
         }
     }
 }
