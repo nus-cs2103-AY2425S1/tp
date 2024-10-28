@@ -22,6 +22,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+    public static final String MESSAGE_MISSING_PERSON = "Celebrity %s does not exist in the address book.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -65,6 +66,10 @@ class JsonSerializableAddressBook {
             Event event = jsonAdaptedEvent.toModelType();
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            if (!addressBook.hasPerson(event.getCelebrity())) {
+                throw new IllegalValueException(String.format(MESSAGE_MISSING_PERSON,
+                        event.getCelebrity().getName().fullName));
             }
             addressBook.addEvent(event);
         }
