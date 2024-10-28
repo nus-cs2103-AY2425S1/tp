@@ -5,27 +5,82 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Grade;
+import seedu.address.testutil.StudentBuilder;
 
 public class GradeCommandTest {
-    private static final String GRADE_STUB = "0";
+    private static final String GRADE_STUB = "1";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_addGradeUnfilteredList_success() {
+        Student firstStudent = (Student) model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent).withGrade(GRADE_STUB).build();
+
+        GradeCommand gradeCommand = new GradeCommand(INDEX_FIRST_PERSON,
+                new Grade(editedStudent.getGrade().gradeIndex));
+
+        String expectedMessage = String.format(GradeCommand.MESSAGE_ADD_GRADE_SUCCESS, editedStudent.getName());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstStudent, editedStudent);
+
+        assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteGradeUnfilteredList_success() {
+        Student firstStudent = (Student) model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent).withGrade("0").build();
+
+        GradeCommand gradeCommand = new GradeCommand(INDEX_FIRST_PERSON,
+                new Grade(editedStudent.getGrade().toString()));
+
+        String expectedMessage = String.format(GradeCommand.MESSAGE_DELETE_GRADE_SUCCESS, editedStudent.getName());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstStudent, editedStudent);
+
+        assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Student firstStudent = (Student) model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent)
+                .withGrade(GRADE_STUB).build();
+
+        GradeCommand gradeCommand = new GradeCommand(INDEX_FIRST_PERSON,
+                new Grade(editedStudent.getGrade().gradeIndex));
+
+        String expectedMessage = String.format(GradeCommand.MESSAGE_ADD_GRADE_SUCCESS, editedStudent.getName());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstStudent, editedStudent);
+
+        assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         GradeCommand gradeCommand = new GradeCommand(outOfBoundIndex, new Grade(VALID_GRADE_BOB));
 
@@ -37,7 +92,7 @@ public class GradeCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidStudentIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
