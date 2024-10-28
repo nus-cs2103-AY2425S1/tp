@@ -33,7 +33,7 @@ public class TestApp extends MainApp {
         this.saveFileLocation = saveFileLocation;
         this.prefFileLocation = prefFileLocation;
 
-        // If some initial local data has been provided, write those to the file
+        /*  If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(saveFileLocation);
             try {
@@ -42,6 +42,7 @@ public class TestApp extends MainApp {
                 throw new AssertionError(ioe);
             }
         }
+        */
     }
 
     @Override

@@ -45,18 +45,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
-
-    @Test
-    public void selection_modelSelectedPersonChanged_selectionChanges() {
-        initUi(TYPICAL_PERSONS);
-        Person secondPerson = TYPICAL_PERSONS.get(INDEX_SECOND_PERSON.getZeroBased());
-        guiRobot.interact(() -> selectedPerson.set(secondPerson));
-        guiRobot.pauseForHuman();
-
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedPerson, selectedPerson);
-    }
+    
 
     /**
      * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
@@ -83,7 +72,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
             Address address = new Address("a");
-            Person person = new Person(name, phone, email, address, Collections.emptySet());
+            Person person = new Person(name, phone, email, address, Collections.emptySet(),Collections.emptyMap(),Collections.emptySet());
             backingList.add(person);
         }
         return backingList;
@@ -95,7 +84,7 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     private void initUi(ObservableList<Person> backingList) {
         PersonListPanel personListPanel =
-                new PersonListPanel(backingList, selectedPerson, selectedPerson::set);
+                new PersonListPanel(backingList);
         uiPartExtension.setUiPart(personListPanel);
 
         personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
