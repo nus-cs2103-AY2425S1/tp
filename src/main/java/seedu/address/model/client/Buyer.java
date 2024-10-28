@@ -17,6 +17,7 @@ public class Buyer extends Client {
      * @param email The email address of the buyer.
      */
     public Buyer(Name name, Phone phone, Email email) {
+        // null check enforced in Client constructor
         super(name, phone, email);
     }
 
@@ -24,11 +25,18 @@ public class Buyer extends Client {
      * Returns true if both clients are buyers and have the same phone number.
      * This defines a weaker notion of equality between two clients.
      */
+    @Override
     public boolean isSameClient(Client otherClient) {
         if (otherClient == this) {
             return true;
         }
 
+        // Ensure that otherClient is not null before proceeding
+        if (otherClient == null) {
+            return false;
+        }
+
+        // Check if otherClient is a Buyer and compare phone numbers
         return otherClient instanceof Buyer
                 && otherClient.getPhone().equals(getPhone());
     }
@@ -56,9 +64,10 @@ public class Buyer extends Client {
 
         Buyer otherPerson = (Buyer) other;
 
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email);
+        // Use Objects.equals to avoid potential null pointer issues
+        return Objects.equals(name, otherPerson.name)
+                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(email, otherPerson.email);
     }
 
     @Override
@@ -75,6 +84,7 @@ public class Buyer extends Client {
     public boolean isBuyer() {
         return true;
     }
+
     @Override
     public boolean isSeller() {
         return false;

@@ -16,6 +16,7 @@ public enum ClientTypes {
      * Represents a seller client.
      */
     SELLER("seller");
+
     public static final String CLIENT_TYPE_CONSTRAINTS = "Client types should only be `BUYER` or `SELLER`";
     private final String type;
 
@@ -25,6 +26,7 @@ public enum ClientTypes {
      * @param type The string representation of the client type.
      */
     ClientTypes(String type) {
+        assert type != null && !type.isEmpty() : "Client type string should not be null or empty";
         this.type = type;
     }
 
@@ -38,7 +40,10 @@ public enum ClientTypes {
     }
 
     /**
-     * Returns if a given string is a valid type.
+     * Returns if a given string is a valid client type.
+     *
+     * @param test The string to validate as a client type.
+     * @return true if the string represents a valid client type, false otherwise.
      */
     public static boolean isValidClientType(String test) {
         if (test == null) {

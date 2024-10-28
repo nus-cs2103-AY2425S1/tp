@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,6 +36,9 @@ public class AddSellerCommand extends AddClientCommand {
     /** Error message shown when attempting to add a duplicate seller. */
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
 
+    /** Logger to log relevant information for debugging purposes. */
+    private static final Logger logger = LogsCenter.getLogger(AddSellerCommand.class);
+
     /**
      * Constructs an {@code AddSellerCommand} to add the specified {@code Seller}.
      *
@@ -40,6 +46,9 @@ public class AddSellerCommand extends AddClientCommand {
      */
     public AddSellerCommand(Seller seller) {
         super(seller);
+        // Ensure that the seller is not null
+        assert seller != null : "Seller should not be null";
+        logger.info("AddSellerCommand created for seller: " + seller);
     }
 
     /**
@@ -53,12 +62,21 @@ public class AddSellerCommand extends AddClientCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Defensive programming: Ensure that toAdd is a valid seller and not null
+        assert toAdd != null : "Seller to be added cannot be null";
+        logger.info("Executing AddSellerCommand for seller: " + toAdd);
+
         if (model.hasClient(toAdd)) {
             if (toAdd instanceof Seller) {
+                logger.warning("Attempted to add a duplicate seller: " + toAdd);
                 throw new CommandException(MESSAGE_DUPLICATE_SELLER);
             }
         }
+
         model.addClient(toAdd);
+
+        logger.info("Successfully added seller: " + toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS_SELLER, Messages.format(toAdd)));
     }
 

@@ -31,10 +31,13 @@ public class ClientBook implements ReadOnlyClientBook {
     public ClientBook() {}
 
     /**
-     * Creates an ClientBook using the Clients in the {@code toBeCopied}
+     * Creates a ClientBook using the Clients in the {@code toBeCopied}.
+     *
+     * @param toBeCopied The data to be copied into this ClientBook.
      */
     public ClientBook(ReadOnlyClientBook toBeCopied) {
         this();
+        requireNonNull(toBeCopied, "The data to be copied cannot be null.");
         resetData(toBeCopied);
     }
 
@@ -42,55 +45,75 @@ public class ClientBook implements ReadOnlyClientBook {
 
     /**
      * Replaces the contents of the client list with {@code clients}.
-     * {@code clients} must not contain duplicate clients.
+     * {@code clients} must not contain duplicate clients and must not be null.
+     *
+     * @param clients The new list of clients.
      */
     public void setClients(List<Client> clients) {
+        requireNonNull(clients, "Client list cannot be null.");
+        // Ensure the list does not contain null elements
+        for (Client client : clients) {
+            requireNonNull(client, "Client in the list cannot be null.");
+        }
         this.clients.setClients(clients);
     }
 
     /**
      * Resets the existing data of this {@code ClientBook} with {@code newData}.
+     *
+     * @param newData The new data to replace the current client book data.
      */
     public void resetData(ReadOnlyClientBook newData) {
-        requireNonNull(newData);
-
+        requireNonNull(newData, "New data cannot be null.");
         setClients(newData.getClientList());
     }
 
     //// client-level operations
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in the client book.
+     *
+     * @param client The client to check for existence.
+     * @return True if the client exists, false otherwise.
      */
     public boolean hasClient(Client client) {
-        requireNonNull(client);
+        requireNonNull(client, "Client cannot be null.");
         return clients.contains(client);
     }
 
     /**
-     * Adds a client to the address book.
-     * The client must not already exist in the address book.
+     * Adds a client to the client book.
+     * The client must not already exist in the client book.
+     *
+     * @param p The client to add.
      */
     public void addClient(Client p) {
+        requireNonNull(p, "Client to add cannot be null.");
         clients.add(p);
     }
 
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in the client book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the client book.
+     *
+     * @param target The client to replace.
+     * @param editedClient The new client details to replace with.
      */
     public void setClient(Client target, Client editedClient) {
-        requireNonNull(editedClient);
-
+        requireNonNull(target, "Target client cannot be null.");
+        requireNonNull(editedClient, "Edited client cannot be null.");
         clients.setClient(target, editedClient);
     }
 
     /**
      * Removes {@code key} from this {@code ClientBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the client book.
+     *
+     * @param key The client to remove.
      */
     public void removeClient(Client key) {
+        requireNonNull(key, "Client to remove cannot be null.");
         clients.remove(key);
     }
 

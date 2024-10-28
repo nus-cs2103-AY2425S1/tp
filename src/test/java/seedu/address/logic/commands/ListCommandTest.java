@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import java.lang.reflect.Modifier;
@@ -26,9 +25,9 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+        model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
                 getTypicalClientBook(), getTypicalMeetingBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
+        expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
     }
 

@@ -5,26 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUYERS_ONLY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
+import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
 import static seedu.address.testutil.TypicalMeetings.MEETING_BEDOK;
 import static seedu.address.testutil.TypicalMeetings.MEETING_CLEMENTI;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalProperty.BEDOK;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.value.WritableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -35,10 +33,9 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
 import seedu.address.testutil.MeetingBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -48,8 +45,9 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
         assertEquals(new ClientBook(), new ClientBook(modelManager.getClientBook()));
+        assertEquals(new PropertyBook(), new PropertyBook(modelManager.getPropertyBook()));
+        assertEquals(new MeetingBook(), new MeetingBook(modelManager.getMeetingBook()));
     }
 
     @Test
@@ -60,16 +58,18 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("meeting/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("new/client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("new/property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("new/meeting/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -86,18 +86,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
-    }
-
-    @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
-    }
-
-    @Test
     public void setClientBookFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setClientBookFilePath(null));
     }
@@ -109,27 +97,16 @@ public class ModelManagerTest {
         assertEquals(path, modelManager.getClientBookFilePath());
     }
 
-    // ==================== AddressBook Related Tests ====================
-
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void setMeetingBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setMeetingBookFilePath(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void setMeetingBookFilePath_validPath_setsMeetingBookFilePath() {
+        Path path = Paths.get("data/meetingbook.json");
+        modelManager.setMeetingBookFilePath(path);
+        assertEquals(path, modelManager.getMeetingBookFilePath());
     }
 
     // ==================== ClientBook Related Tests ====================
@@ -163,7 +140,7 @@ public class ModelManagerTest {
 
     @Test
     public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("data/propertybook.json");
         modelManager.setPropertyBookFilePath(path);
         assertEquals(path, modelManager.getPropertyBookFilePath());
     }
@@ -179,6 +156,16 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
     }
 
+    @Test
+    public void hasProperty_nullProperty_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProperty(null));
+    }
+
+    @Test
+    public void hasProperty_propertyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProperty(BEDOK));
+    }
+
     // ==================== MeetingBook Related Tests ====================
 
     @Test
@@ -190,7 +177,7 @@ public class ModelManagerTest {
     public void getMeetingBook_returnsCorrectMeetingBook() {
         MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
                 .withMeeting(MEETING_CLEMENTI).build();
-        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+        modelManager = new ModelManager(new UserPrefs(),
                 new PropertyBook(), new ClientBook(), meetingBook);
         assertEquals(meetingBook, modelManager.getMeetingBook());
     }
@@ -199,7 +186,7 @@ public class ModelManagerTest {
     public void deleteMeeting_meetingInMeetingBook_success() {
         MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
                 .withMeeting(MEETING_CLEMENTI).build();
-        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+        modelManager = new ModelManager(new UserPrefs(),
                 new PropertyBook(), new ClientBook(), meetingBook);
         modelManager.deleteMeeting(MEETING_BEDOK);
 
@@ -212,7 +199,7 @@ public class ModelManagerTest {
         ObservableList<Meeting> expectedList = FXCollections.observableArrayList(MEETING_BEDOK, MEETING_CLEMENTI);
         MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
                 .withMeeting(MEETING_CLEMENTI).build();
-        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+        modelManager = new ModelManager(new UserPrefs(),
                 new PropertyBook(), new ClientBook(), meetingBook);
 
         assertEquals(expectedList, modelManager.getFilteredMeetingList());
@@ -222,7 +209,7 @@ public class ModelManagerTest {
     public void updateFilteredMeetingList_predicateUpdatesList() {
         MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
                 .withMeeting(MEETING_CLEMENTI).build();
-        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+        modelManager = new ModelManager(new UserPrefs(),
                 new PropertyBook(), new ClientBook(), meetingBook);
 
         // Apply predicate to only include meetings with the title "Meeting at Bedok"
@@ -233,23 +220,37 @@ public class ModelManagerTest {
         assertEquals(expectedList, modelManager.getFilteredMeetingList());
     }
 
+    @Test
+    public void hasMeeting_nullMeeting_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasMeeting(null));
+    }
+
+    @Test
+    public void hasMeeting_meetingNotInMeetingBook_returnsFalse() {
+        assertFalse(modelManager.hasMeeting(MEETING_ADMIRALTY));
+    }
+
+    @Test
+    public void hasMeeting_meetingInAddressBook_returnsTrue() {
+        modelManager.addMeeting(MEETING_ADMIRALTY);
+        assertTrue(modelManager.hasMeeting(MEETING_ADMIRALTY));
+    }
+
     // ==================== Equality Tests ====================
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         ClientBook clientBook = new ClientBookBuilder().withClient(CARL).withClient(DANIEL).build();
         MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK).withMeeting(MEETING_CLEMENTI)
                 .build();
 
-        AddressBook differentAddressBook = new AddressBook();
         PropertyBook propertyBook = new PropertyBook();
         ClientBook differentClientBook = new ClientBook();
         MeetingBook differentMeetingBook = new MeetingBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, propertyBook, clientBook, meetingBook);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, propertyBook, clientBook, meetingBook);
+        modelManager = new ModelManager(userPrefs, propertyBook, clientBook, meetingBook);
+        ModelManager modelManagerCopy = new ModelManager(userPrefs, propertyBook, clientBook, meetingBook);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -261,43 +262,72 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new PropertyBook(),
+        // different client book -> returns false
+        assertFalse(modelManager.equals(new ModelManager(userPrefs, new PropertyBook(),
                 differentClientBook, differentMeetingBook)));
-
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new PropertyBook(), clientBook,
-                meetingBook)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
+        differentUserPrefs.setClientBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(differentUserPrefs, new PropertyBook(),
                 clientBook, meetingBook)));
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
-        // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
-
-        // Assert that the result is an instance of BooleanProperty
-        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    public void getReadOnlyDisplayMode_returnsReadOnlyObjectPropertyType() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of ReadOnlyObjectProperty<DisplayMode>
+        assertTrue(
+                modelManager.getReadOnlyDisplayMode() instanceof ReadOnlyObjectProperty<?>,
+                "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
+        );
     }
 
     @Test
-    public void getIsDisplayClientsProperty_isObservable() {
-        // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
-
-        // Assert that the result is an instance of Observable
-        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    public void getReadOnlyDisplayMode_isObservable() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of Observable
+        assertTrue(
+                modelManager.getReadOnlyDisplayMode() instanceof Observable,
+                "Expected result to be an instance of Observable"
+        );
     }
+    @Test
+    public void getReadOnlyDisplayMode_isImmutable() {
+        // Get the read-only display mode property
+        ReadOnlyObjectProperty<ModelManager.DisplayMode> displayModeProperty = modelManager.getReadOnlyDisplayMode();
+
+        // Check that the property cannot be cast to a WritableObjectValue
+        assertFalse(displayModeProperty instanceof WritableObjectValue, "Expected display mode to not be writable");
+    }
+    @Test
+    public void setDisplayClients_setsDisplayModeToClients() {
+        // Set display mode to CLIENTS
+        modelManager.setDisplayClients();
+        assertEquals(
+                ModelManager.DisplayMode.CLIENTS, modelManager.getReadOnlyDisplayMode().getValue(),
+                "Expected display mode to be CLIENTS"
+        );
+    }
+
+    @Test
+    public void setDisplayProperties_setsDisplayModeToProperties() {
+        // Set display mode to PROPERTIES
+        modelManager.setDisplayProperties();
+        assertEquals(
+                ModelManager.DisplayMode.PROPERTIES, modelManager.getReadOnlyDisplayMode().getValue(),
+                "Expected display mode to be PROPERTIES"
+        );
+    }
+
+    @Test
+    public void setDisplayMeetings_setsDisplayModeToMeetings() {
+        // Set display mode to MEETINGS
+        modelManager.setDisplayMeetings();
+        assertEquals(
+                ModelManager.DisplayMode.MEETINGS, modelManager.getReadOnlyDisplayMode().getValue(),
+                "Expected display mode to be MEETINGS"
+        );
+    }
+
 
     @Test
     public void testBuyerPredicate() {

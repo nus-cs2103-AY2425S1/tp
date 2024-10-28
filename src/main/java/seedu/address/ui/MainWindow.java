@@ -31,10 +31,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private ClientListPanel clientListPanel;
 
     private PropertyListPanel propertyListPanel;
+    private MeetingListPanel meetingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -117,25 +117,35 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // Instantiates the various panels
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList());
 
         // Initialise clientListPanel to display Clients
         listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
 
         // Add listener to modify display appropriately
-        logic.getIsDisplayClientsProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+        logic.getReadOnlyDisplayMode().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+            case CLIENTS:
                 listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
-            } else {
+                break;
+            case PROPERTIES:
                 listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+                break;
+            case MEETINGS:
+                listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
+                break;
+            default:
+                throw new RuntimeException("Invalid Display Mode: " + newValue);
             }
         });
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getClientBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -180,10 +190,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**

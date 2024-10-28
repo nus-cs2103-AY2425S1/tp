@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -157,6 +157,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Proposed\] Add Buyer Feature
+
+#### Proposed Implementation
+The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
+The sequence diagram is shown as such:
+<puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
+
+### \[Proposed\] Delete Buyer Feature
+
+#### Proposed Implementation
+The deletebuyer command takes in the phone number of the buyer and deletes the buyer from the client book based on the phone number.
+The sequence diagram is shown as such:
+<puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
+
+### \[Proposed\] Filter property feature
+
+#### Proposed Implementation
+The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
+The sequence diagram is shown as such:
+<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -326,9 +347,14 @@ Extensions:
     * Steps 1a1-1a2 are repeated until the data entered are correct.
         
         Use case ends.
-    
 
-**Use case: UC2 - Delete Client**
+* 2a. ClientGrid detects that the buyer/ seller already exists in the client book
+
+    * 2a1. ClientGrid informs the real estate agent that the buyer/ seller already exists in the client book and does not add the duplicate buyer/ seller.
+
+      Use case ends.
+
+**Use case: UC2 - Delete Client (Buyer or Seller)**
 
 MSS:
 1. Real estate agent requests to delete a buyer or seller based on their phone number.
@@ -388,7 +414,7 @@ Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
+* 1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -404,14 +430,85 @@ Extensions:
 
     * Use case ends.
 
-**Use case: UC5 - List buyers, sellers, clients or properties**
+**Use case: UC5 - List Clients (i.e. Buyers and/or Sellers), Properties or Meetings**
 
 MSS:
 
-1. Real Estate Agent requests to view a list of buyers, sellers, clients or properties
-2. ClientGrid will respond with the corresponding list
+1. Real Estate Agent requests to view a list of clients (i.e. buyers and/or sellers), properties or meetings
+2. ClientGrid will display the corresponding list with each entry presented inside a card
 
 Use case ends.
+
+**Use case: UC6 - Filter Client**
+
+MSS:
+1. Real estate agent requests to filter the clients by entering a name prefix.
+2. ClientGrid will filter and display the clients whose names start with the provided prefix.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new name prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
+
+**Use case: UC7 - Add Meeting**
+
+MSS:
+1. Real estate agent requests to add a meeting based on the meeting’s meeting title and meeting date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
+2. ClientGrid will add the meeting and indicate success.
+   Use case ends.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+
+    * 1a1. ClientGrid requests for the correct data.
+
+    * 1a2. Real estate agent enters new data.
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    * Use case resumes from step 2.
+
+* 1b. ClientGrid is unable to find a matching buyer, seller, or property entry in the meeting book.
+
+    * 1b1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the meeting book.
+
+    * Use case ends.
+
+**Use case: UC8 - Delete Meeting**
+
+Guarantees:
+* If meeting was in the meeting book originally, it would be removed from meeting book with no side effects.
+
+MSS:
+1. Real estate agent requests to delete a meeting based on the meeting’s meeting title and meeting date.
+2. ClientGrid will delete the respective meeting and indicate success.
+   Use case ends.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+
+    * 1a1. ClientGrid requests for the correct data.
+
+    * 1a2. Real estate agent enters new data.
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    * Use case resumes from step 2.
+
+* 1b. ClientGrid is unable to find a matching meeting entry in the meeting book.
+
+    * 1b1. ClientGrid informs real estate agent that the meeting does not exist in the meeting book.
+
+    * Use case ends.
 
 ### Non-Functional Requirements
 
@@ -422,9 +519,11 @@ Use case ends.
 5. Should be able to handle case of corrupted file
 
 ### Glossary
-
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Clients**: Buyers or Sellers of properties the real estate agent is managing
+* **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
+* **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
+* **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,9 @@ package seedu.address.model.property;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -11,6 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Property {
+    private static final Logger logger = LogsCenter.getLogger(Property.class);
     private final PostalCode postalCode;
     private final Unit unit;
     private final Type type;
@@ -22,6 +25,8 @@ public class Property {
      * If the type is landed, then unit of a landed property will always default to 00-00
      */
     public Property(PostalCode postalCode, Unit unit, Type type, Ask ask, Bid bid) {
+        logger.info(String.format("Creating Property object with PostalCode: %s, Unit: %s, Type: %s, Ask: %s, Bid: %s",
+                        postalCode, unit, type, ask, bid));
         requireAllNonNull(postalCode, unit, type, ask, bid);
         this.postalCode = postalCode;
         this.type = type;
@@ -32,6 +37,7 @@ public class Property {
         } else {
             this.unit = unit;
         }
+        logger.info("Property object created");
     }
 
     public PostalCode getPostalCode() {
@@ -61,6 +67,8 @@ public class Property {
      * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
+        logger.info(String.format("Checking property sameness between %s and %s", this, otherProperty));
+
         if (otherProperty == this) {
             return true;
         } else if (otherProperty == null) {

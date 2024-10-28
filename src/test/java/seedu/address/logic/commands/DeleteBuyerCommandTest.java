@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 
 public class DeleteBuyerCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
             getTypicalPropertyBook(), getTypicalClientBook(), getTypicalMeetingBook());
     @Test
     public void execute_phoneNumberFound_assertCommandSuccess() {
@@ -45,7 +44,7 @@ public class DeleteBuyerCommandTest {
         // null -> returns false
         assertFalse(standardCommand.equals(null));
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ExitCommand()));
         // different buyer -> return false
         assertFalse(standardCommand.equals(new DeleteBuyerCommand(new Phone(VALID_PHONE_BOB))));
     }
