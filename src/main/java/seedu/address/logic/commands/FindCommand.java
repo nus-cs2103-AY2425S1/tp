@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,7 +35,9 @@ public class FindCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_RSVP + "RSVP] "
-            + "[" + PREFIX_COMPANY + "COMPANY]...\n"
+            + "[" + PREFIX_RELATION + "RELATION] "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_BUDGET + "BUDGET]...\n"
             + "Note: Only 1 prefix can be specified per command use!\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Amy";
 

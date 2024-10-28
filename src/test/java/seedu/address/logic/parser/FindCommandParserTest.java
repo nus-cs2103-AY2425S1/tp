@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BUDGET_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -13,12 +14,15 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_RSVP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RELATION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RSVP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RELATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RSVP_ACCEPTED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -37,10 +41,12 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.BudgetContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.RelationContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -115,6 +121,20 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new CompanyContainsKeywordsPredicate(Arrays.asList(VALID_COMPANY_AMY.split(" "))));
         assertParseSuccess(parser, COMPANY_DESC_AMY, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validRelationPrefix_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new RelationContainsKeywordsPredicate(Arrays.asList(VALID_RELATION_AMY.split(" "))));
+        assertParseSuccess(parser, RELATION_DESC_AMY, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validBudgetPrefix_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new BudgetContainsKeywordsPredicate(Arrays.asList(VALID_BUDGET_AMY.split(" "))));
+        assertParseSuccess(parser, BUDGET_DESC_AMY, expectedFindCommand);
     }
 
     @Test

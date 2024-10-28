@@ -3,17 +3,21 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.parseAddressPredicate;
+import static seedu.address.logic.parser.ParserUtil.parseBudgetPredicate;
 import static seedu.address.logic.parser.ParserUtil.parseCompanyPredicate;
 import static seedu.address.logic.parser.ParserUtil.parseEmailPredicate;
 import static seedu.address.logic.parser.ParserUtil.parseNamePredicate;
 import static seedu.address.logic.parser.ParserUtil.parsePhonePredicate;
+import static seedu.address.logic.parser.ParserUtil.parseRelationPredicate;
 import static seedu.address.logic.parser.ParserUtil.parseRsvpPredicate;
 import static seedu.address.logic.parser.ParserUtil.parseTagPredicate;
 
@@ -40,16 +44,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY);
+                        PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY, PREFIX_RELATION, PREFIX_BUDGET);
 
         if (!isOnlyOneDistinctPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY, PREFIX_RELATION, PREFIX_BUDGET)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RSVP,
-                PREFIX_COMPANY);
+                PREFIX_COMPANY, PREFIX_RELATION, PREFIX_BUDGET);
 
         return new FindCommand(getPredicate(argMultimap));
     }
@@ -68,6 +73,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         Optional<String> address = argMultimap.getValue(PREFIX_ADDRESS);
         Optional<String> rsvp = argMultimap.getValue(PREFIX_RSVP);
         Optional<String> company = argMultimap.getValue(PREFIX_COMPANY);
+        Optional<String> relation = argMultimap.getValue(PREFIX_RELATION);
+        Optional<String> budget = argMultimap.getValue(PREFIX_BUDGET);
         List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
 
         if (name.isPresent()) {
@@ -82,6 +89,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             return parseRsvpPredicate(rsvp.get());
         } else if (company.isPresent()) {
             return parseCompanyPredicate(company.get());
+        } else if (relation.isPresent()) {
+            return parseRelationPredicate(relation.get());
+        } else if (budget.isPresent()) {
+            return parseBudgetPredicate(budget.get());
         } else if (!tags.isEmpty()) {
             return parseTagPredicate(tags);
         } else {

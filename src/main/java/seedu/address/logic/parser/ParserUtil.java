@@ -21,10 +21,12 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.BudgetContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.RelationContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -300,6 +302,33 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new TagContainsKeywordsPredicate(tagParts);
+    }
+
+    /**
+     * Parses a {@code String relation} into a {@code RelationContainsKeywordsPredicate}
+     *
+     * @throws ParseException If the relation is invalid.
+     */
+    public static RelationContainsKeywordsPredicate parseRelationPredicate(String relation) throws ParseException {
+        requireNonNull(relation);
+        if (!Relation.isValidRelation(relation)) {
+            throw new ParseException(Relation.MESSAGE_CONSTRAINTS);
+        }
+        return new RelationContainsKeywordsPredicate(splitAndTrim(relation));
+    }
+
+    /**
+     * Parses a {@code String budget} into a {@code BudgetContainsKeywordsPredicate}
+     *
+     * @throws ParseException If the budget is invalid.
+     */
+    public static BudgetContainsKeywordsPredicate parseBudgetPredicate(String budget) throws ParseException {
+        requireNonNull(budget);
+        if (!Budget.isValidBudget(budget)) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
+        Budget b = new Budget(budget);
+        return new BudgetContainsKeywordsPredicate(splitAndTrim(b.toString()));
     }
 
     /**
