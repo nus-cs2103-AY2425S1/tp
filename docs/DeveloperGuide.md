@@ -406,9 +406,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <ins>list students(UC02)</ins>.
-2. User enters command to settle outstanding fees for the specified student.
-3. System updates the total tuition fee paid and total tuition fee owed by the student.
-4. System displays success message.
+1. User enters command to settle outstanding fees for the specified student. 
+1. System updates the total tuition fee paid and total tuition fee owed by the student.
+1. System displays success message.
 
    Use case ends.
 
