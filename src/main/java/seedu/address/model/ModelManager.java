@@ -130,9 +130,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPersonList(Comparator<Person> comparator) {
+    public void sortPersonListWithComparator(Comparator<Person> comparator) {
         requireNonNull(comparator);
-        addressBook.sortPersonList(comparator);
+        addressBook.setSortComparator(comparator);
+        addressBook.sortPersonList();
+    }
+
+    @Override
+    public void sortPersonList() {
+        addressBook.sortPersonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================

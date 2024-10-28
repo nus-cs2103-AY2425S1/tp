@@ -75,6 +75,8 @@ public class AddPropertyToSellCommand extends Command {
             personToEdit.addSellProperty(propertyToSellToBeAdded);
         }
 
+        model.sortPersonList();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToSellToBeAdded));
     }
 
