@@ -78,7 +78,6 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: #fdf5f5;
-    -fx-border-width: 0;
 }
 
 .split-pane {
@@ -152,6 +151,12 @@
 
 .stack-pane {
      -fx-background-color: #fdf5f5;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0; /* Makes the divider look smaller */
+    -fx-background-color: transparent; /* Makes the divider transparent */
+    -fx-cursor: default;
 }
 
 .pane-with-border {

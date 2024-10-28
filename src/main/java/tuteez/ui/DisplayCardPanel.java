@@ -4,11 +4,10 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Person;
 
@@ -20,7 +19,7 @@ public class DisplayCardPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(DisplayCardPanel.class);
 
     @FXML
-    private ListView<Person> displayCardListView;
+    private VBox displayCardContainer;
 
     private ObjectProperty<Optional<Person>> lastViewedPerson;
 
@@ -30,11 +29,8 @@ public class DisplayCardPanel extends UiPart<Region> {
     public DisplayCardPanel(ObjectProperty<Optional<Person>> lastViewedPerson) {
         super(FXML);
         this.lastViewedPerson = lastViewedPerson;
-        displayCardListView.setItems(FXCollections.observableArrayList());
-
         lastViewedPerson.addListener((observable, oldPerson, newPerson) -> updateDisplayCard(newPerson));
 
-        displayCardListView.setCellFactory(listView -> new DisplayCardListViewCell());
     }
 
     /**
@@ -43,8 +39,11 @@ public class DisplayCardPanel extends UiPart<Region> {
      * @param personToDisplay The person whose details will be displayed.
      */
     private void updateDisplayCard(Optional<Person> personToDisplay) {
-        displayCardListView.getItems().clear();
-        personToDisplay.ifPresent(displayCardListView.getItems()::add);
+        displayCardContainer.getChildren().clear(); // Clear previous content
+        personToDisplay.ifPresent(person -> {
+            DisplayCard displayCard = new DisplayCard(Optional.of(person));
+            displayCardContainer.getChildren().add(displayCard.getRoot()); // Add display card to container
+        });
     }
 
     /**

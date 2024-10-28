@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -57,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane splitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -134,6 +138,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        lockSplitPaneDivider();
     }
 
 
@@ -163,6 +169,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void handleMenuBarClick() {
         resultDisplayPlaceholder.requestFocus();
+    }
+
+    private void lockSplitPaneDivider() {
+        splitPane.setDividerPositions(0.5); // Set initial position
+        splitPane.getDividers().get(0).positionProperty().addListener((obs, oldPos, newPos) -> {
+            splitPane.setDividerPositions(0.5); // Reset to desired position to prevent movement
+        });
     }
 
     /**

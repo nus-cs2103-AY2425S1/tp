@@ -2,18 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="250" />
-        </columnConstraints>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+    <GridPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
@@ -30,18 +27,22 @@
                 <Label fx:id="name" text="\$first" styleClass="card_big_label" />
             </HBox>
 
-            <!-- Tags and Lessons -->
+            <!-- Headings for Tags and Lessons -->
+            <Label text="Tags:" styleClass="card_heading" />
             <FlowPane fx:id="tags" />
+
+            <Label text="Lessons:" styleClass="card_heading" />
             <FlowPane fx:id="lessons" />
 
-            <!-- Phone, Telegram, Address, and Email -->
+            <!-- Headings for Contact Information -->
+            <Label text="Contact Information:" styleClass="card_heading" />
             <Label fx:id="phone" styleClass="card_small_label" text="\$phone" />
             <Label fx:id="telegram" styleClass="card_small_label" text="\$telegram" managed="${telegram.visible}" />
             <Label fx:id="address" styleClass="card_small_label" text="\$address" managed="${address.visible}" />
             <Label fx:id="email" styleClass="card_small_label" text="\$email" managed="${email.visible}" />
-
-            <!-- Remarks -->
-            <VBox fx:id="remarks">
+            <!-- Headings for Remarks -->
+            <Label text="Remarks:" styleClass="card_heading" />
+            <VBox fx:id="remarks" spacing="5">
             </VBox>
         </VBox>
     </GridPane>
