@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.EditAssignmentCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;

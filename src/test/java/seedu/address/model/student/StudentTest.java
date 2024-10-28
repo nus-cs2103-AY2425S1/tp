@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
-import static seedu.address.testutil.TypicalAssignments.DEADLINE_A;
 import static seedu.address.testutil.TypicalAssignments.DEADLINE_C;
 import static seedu.address.testutil.TypicalAssignments.GRADE_90;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;

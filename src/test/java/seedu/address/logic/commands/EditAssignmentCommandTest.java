@@ -11,9 +11,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
-import com.sun.javafx.scene.paint.MaterialHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -72,8 +72,8 @@ class EditAssignmentCommandTest {
                 assignmentQuery);
 
         // Expect a CommandException due to no student found
-        assertThrows(CommandException.class,
-                () -> command.execute(model), EditAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
+        assertThrows(CommandException.class, () -> command.execute(model),
+                EditAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test
@@ -100,8 +100,7 @@ class EditAssignmentCommandTest {
                 MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery);
 
         // Expect a CommandException due to duplicate students
-        assertThrows(CommandException.class,
-                () -> command.execute(model),
+        assertThrows(CommandException.class, () -> command.execute(model),
                 String.format(EditAssignmentCommand.MESSAGE_DUPLICATE_STUDENT,
                         HUGH.getStudentNumber().toString() + ", " + anotherStudent.getStudentNumber().toString()));
     }

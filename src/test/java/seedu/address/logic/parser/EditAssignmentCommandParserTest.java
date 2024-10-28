@@ -19,6 +19,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.EditAssignmentCommand;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
@@ -46,8 +47,8 @@ public class EditAssignmentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_MATH + DEADLINE_DESC_2024_10_20 +
-                GRADE_DESC_80 + STATUS_DESC_Y + STATUS_DESC_Y;
+        String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_MATH + DEADLINE_DESC_2024_10_20
+                + GRADE_DESC_80 + STATUS_DESC_Y + STATUS_DESC_Y;
 
         EditAssignmentCommand expectedCommand = new EditAssignmentCommand(
                 new Name(VALID_NAME_AMY), new AssignmentName(VALID_ASSIGNMENT_MATH),
@@ -73,8 +74,8 @@ public class EditAssignmentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecifiedWithStudentNumber_success() {
-        String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_MATH + DEADLINE_DESC_2024_10_20 +
-                GRADE_DESC_80 + STATUS_DESC_Y + STATUS_DESC_Y + STUDENT_NUMBER_DESC_HUGH;
+        String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_MATH + DEADLINE_DESC_2024_10_20
+                + GRADE_DESC_80 + STATUS_DESC_Y + STATUS_DESC_Y + STUDENT_NUMBER_DESC_HUGH;
 
         EditAssignmentCommand expectedCommand = new EditAssignmentCommand(
                 new Name(VALID_NAME_AMY), new AssignmentName(VALID_ASSIGNMENT_MATH),
