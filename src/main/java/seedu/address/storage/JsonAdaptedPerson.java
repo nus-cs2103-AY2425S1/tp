@@ -109,7 +109,7 @@ class JsonAdaptedPerson {
     }
 
     public boolean isArchived() {
-            return isArchived;
+        return isArchived;
     }
 
     /**

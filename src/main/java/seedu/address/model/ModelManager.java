@@ -127,7 +127,6 @@ public class ModelManager implements Model {
     }
 
     // Archive related Methods
-    
     @Override
     public void archivePerson(Person person) {
         addressBook.archivePerson(person);

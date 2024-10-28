@@ -98,6 +98,13 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Archives the specified person by setting their archived status to true.
+     *
+     * @param person The person to be archived. Must not be null.
+     * @throws NullPointerException If the specified person is null.
+     * @throws PersonNotFoundException If the person is not found in the internal list.
+     */
     public void archivePerson(Person person) {
         requireNonNull(person);
 
@@ -110,6 +117,13 @@ public class UniquePersonList implements Iterable<Person> {
         personToArchive.setArchived(true);
     }
 
+    /**
+     * Unarchives the specified person by setting their archived status to false.
+     *
+     * @param person The person to be unarchived. Must not be null.
+     * @throws NullPointerException If the specified person is null.
+     * @throws PersonNotFoundException If the person is not found in the internal list.
+     */
     public void unarchivePerson(Person person) {
         requireNonNull(person);
 
