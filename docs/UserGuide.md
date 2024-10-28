@@ -301,7 +301,7 @@ Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 * The contact index refers to the index number of the contact in the overall `list` view of the wedding planner.
 * The contact index **must be a positive integer** 1, 2, 3, ...
 
-**Stronly Recommended:**
+**Strongly Recommended:**
 Type `list` to execute the list command and see the overall contacts list to determine the correct index of the contact you are assigning.
 
 <br><br/>
