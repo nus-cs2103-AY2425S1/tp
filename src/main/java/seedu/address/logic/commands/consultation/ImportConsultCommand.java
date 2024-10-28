@@ -84,30 +84,32 @@ public class ImportConsultCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_HEADER);
             }
 
-            String line;
-            boolean hasValidEntries = false;
-            while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-                hasValidEntries = true;
-                try {
-                    Consultation consultation = parseConsultation(line, model);
-                    if (!model.hasConsult(consultation)) {
-                        model.addConsult(consultation);
-                        successCount++;
-                        logger.fine("Successfully imported consultation: " + consultation);
-                    } else {
-                        errorEntries.add(new String[]{line, "Duplicate consultation"});
-                        errorCount++;
-                        logger.fine("Duplicate consultation found: " + consultation);
-                    }
-                } catch (IllegalArgumentException e) {
-                    errorEntries.add(new String[]{line, e.getMessage()});
-                    errorCount++;
-                    logger.fine("Error parsing consultation entry: " + e.getMessage());
-                }
-            }
+            //            String line;
+            //            boolean hasValidEntries = false;
+            //            while ((line = reader.readLine()) != null) {
+            //                if (line.trim().isEmpty()) {
+            //                    continue;
+            //                }
+            //                hasValidEntries = true;
+            //                try {
+            //                    Consultation consultation = parseConsultation(line, model);
+            //                    if (!model.hasConsult(consultation)) {
+            //                        model.addConsult(consultation);
+            //                        successCount++;
+            //                        logger.fine("Successfully imported consultation: " + consultation);
+            //                    } else {
+            //                        errorEntries.add(new String[]{line, "Duplicate consultation"});
+            //                        errorCount++;
+            //                        logger.fine("Duplicate consultation found: " + consultation);
+            //                    }
+            //                } catch (IllegalArgumentException e) {
+            //                    errorEntries.add(new String[]{line, e.getMessage()});
+            //                    errorCount++;
+            //                    logger.fine("Error parsing consultation entry: " + e.getMessage());
+            //                }
+            //            }
+
+            boolean hasValidEntries = parseFileEntries(errorEntries, reader, model);
 
             if (!hasValidEntries) {
                 throw new CommandException(MESSAGE_EMPTY_FILE);
@@ -126,6 +128,42 @@ public class ImportConsultCommand extends Command {
             logger.warning("Error reading import file: " + e.getMessage());
             throw new CommandException(String.format(MESSAGE_INVALID_FILE, e.getMessage()));
         }
+    }
+
+    /**
+     * Helper function to parse a .csv file
+     * @param errorEntries A List to be populated with error entries
+     * @param reader A BufferedReader instance to read the file
+     * @return A boolean representing whether the file had valid entries
+     */
+    private boolean parseFileEntries(List<String[]> errorEntries,
+                                     BufferedReader reader,
+                                     Model model) throws IOException {
+        String line;
+        boolean hasValidEntries = false;
+        while ((line = reader.readLine()) != null) {
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+            hasValidEntries = true;
+            try {
+                Consultation consultation = parseConsultation(line, model);
+                if (!model.hasConsult(consultation)) {
+                    model.addConsult(consultation);
+                    successCount++;
+                    logger.fine("Successfully imported consultation: " + consultation);
+                } else {
+                    errorEntries.add(new String[]{line, "Duplicate consultation"});
+                    errorCount++;
+                    logger.fine("Duplicate consultation found: " + consultation);
+                }
+            } catch (IllegalArgumentException e) {
+                errorEntries.add(new String[]{line, e.getMessage()});
+                errorCount++;
+                logger.fine("Error parsing consultation entry: " + e.getMessage());
+            }
+        }
+        return hasValidEntries;
     }
 
     /**
@@ -173,22 +211,30 @@ public class ImportConsultCommand extends Command {
             String time = parts[1].trim();
             String studentsStr = unescapeSpecialCharacters(parts[2]);
 
-            List<Student> students = new ArrayList<>();
-            if (!studentsStr.isEmpty()) {
-                for (String studentName : studentsStr.split(";")) {
-                    String trimmedName = studentName.trim();
-                    Optional<Student> student = model.findStudentByName(new Name(trimmedName));
-                    if (student.isEmpty()) {
-                        throw new IllegalArgumentException(String.format(MESSAGE_STUDENT_NOT_FOUND, trimmedName));
-                    }
-                    students.add(student.get());
-                }
-            }
+            List<Student> students = getStudentsFromString(studentsStr, model);
 
             return new Consultation(new Date(date), new Time(time), students);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid data format: " + e.getMessage());
         }
+    }
+
+    /**
+     * Extracts a list of Students from a semicolon-separated string.
+     */
+    private List<Student> getStudentsFromString(String studentsStr, Model model) throws IllegalArgumentException {
+        List<Student> students = new ArrayList<>();
+        if (!studentsStr.isEmpty()) {
+            for (String studentName : studentsStr.split(";")) {
+                String trimmedName = studentName.trim();
+                Optional<Student> student = model.findStudentByName(new Name(trimmedName));
+                if (student.isEmpty()) {
+                    throw new IllegalArgumentException(String.format(MESSAGE_STUDENT_NOT_FOUND, trimmedName));
+                }
+                students.add(student.get());
+            }
+        }
+        return students;
     }
 
     /**
