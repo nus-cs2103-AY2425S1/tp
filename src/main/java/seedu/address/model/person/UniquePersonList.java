@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -27,6 +30,13 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    /**
+     * Returns the number of contacts in the list.
+     */
+    public int size() {
+        return internalList.size();
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -62,6 +72,20 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Gets the index of the first archived contact in the list.
+     */
+    public Index getFirstArchivedIndex() {
+        for (int i = 0; i < size(); i++) {
+            Person person = internalList.get(i);
+            if (person.isArchived()) {
+                Index firstArchivedIndex = Index.fromZeroBased(i);
+                return firstArchivedIndex;
+            }
+        }
+        return Index.fromZeroBased(size());
     }
 
     /**
@@ -123,6 +147,78 @@ public class UniquePersonList implements Iterable<Person> {
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
+    }
+
+    /**
+     * Reverses the {@code UniquePersonList}.
+     * <p>
+     * Used when sorting the {@code UniquePersonList} by a specified attribute, in descending order.
+     */
+    public void reversePersonList() {
+        int index = getFirstArchivedIndex().getZeroBased();
+        Collections.reverse(internalList.subList(0, index));
+        Collections.reverse(internalList.subList(index, internalList.size()));
+    }
+
+    /**
+     * Checks if the archive status of two contacts are the same.
+     */
+    public boolean isSameArchiveStatus(Person p1, Person p2) {
+        return p1.isArchived() == p2.isArchived();
+    }
+
+    /**
+     * Sorts the backing list using the {@code Email} attribute of each {@code Person}, in ascending order.
+     */
+    public void sortByEmail() {
+        internalList.sort((p1, p2) -> {
+            if (isSameArchiveStatus(p1, p2)) {
+                return p1.getEmail().value.compareTo(p2.getEmail().value);
+            } else {
+                return p1.getArchive().value.compareTo(p2.getArchive().value);
+            }
+        });
+    }
+
+    /**
+     * Sorts the backing list using the {@code Name} attribute of each {@code Person}, in ascending order.
+     */
+    public void sortByName() {
+        internalList.sort((p1, p2) -> {
+            if (isSameArchiveStatus(p1, p2)) {
+                // If both archived or both not archived, compare address as normal.
+                return p1.getName().fullName.compareTo(p2.getName().fullName);
+            } else {
+                //  Not archived (i.e. false) will always come first.
+                return p1.getArchive().value.compareTo(p2.getArchive().value);
+            }
+        });
+    }
+
+    /**
+     * Sorts the backing list using the {@code Phone} attribute of each {@code Person}, in ascending order.
+     */
+    public void sortByPhone() {
+        internalList.sort((p1, p2) -> {
+            if (isSameArchiveStatus(p1, p2)) {
+                return p1.getPhone().value.compareTo(p2.getPhone().value);
+            } else {
+                return p1.getArchive().value.compareTo(p2.getArchive().value);
+            }
+        });
+    }
+
+    /**
+     * Sorts the backing list using the {@code Role} attribute of each {@code Person}, in ascending order.
+     */
+    public void sortByRole() {
+        internalList.sort((p1, p2) -> {
+            if (isSameArchiveStatus(p1, p2)) {
+                return p1.getRole().getValue().compareTo(p2.getRole().getValue());
+            } else {
+                return p1.getArchive().value.compareTo(p2.getArchive().value);
+            }
+        });
     }
 
     @Override

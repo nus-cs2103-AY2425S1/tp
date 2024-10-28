@@ -228,7 +228,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code String} delivery attribute is invalid.
      */
-    public static String parseAttribute(String attribute) throws ParseException {
+    public static String parseDeliveryAttribute(String attribute) throws ParseException {
         requireNonNull(attribute);
         String trimmedAttribute = attribute.trim().toLowerCase(); // Make input case-insensitive.
         if (trimmedAttribute.equals("address")
@@ -239,7 +239,26 @@ public class ParserUtil {
             || trimmedAttribute.equals("status")) {
             return trimmedAttribute;
         } else {
-            throw new ParseException(SortCommand.MESSAGE_UNKNOWN_ATTRIBUTE);
+            throw new ParseException(SortCommand.MESSAGE_UNKNOWN_ATTRIBUTE_INSPECT);
+        }
+    }
+
+    /**
+     * Parses a {@code String} contact attribute to ensure it is a valid contact attribute.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String} contact attribute is invalid.
+     */
+    public static String parseContactAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.trim().toLowerCase(); // Make input case-insensitive.
+        if (trimmedAttribute.equals("email")
+            || trimmedAttribute.equals("name")
+            || trimmedAttribute.equals("phone")
+            || trimmedAttribute.equals("role")) {
+            return trimmedAttribute;
+        } else {
+            throw new ParseException(SortCommand.MESSAGE_UNKNOWN_ATTRIBUTE_MAIN);
         }
     }
 }

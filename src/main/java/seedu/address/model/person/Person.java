@@ -12,6 +12,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.DeliveryList;
@@ -36,6 +37,8 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
+
+    private final Archive archive = new Archive(false); // Change this when implementing.
 
     /**
      * Every field must be present and not null.
@@ -72,6 +75,14 @@ public class Person {
 
     public Worker getWorker() {
         return worker;
+    }
+
+    public Archive getArchive() {
+        return archive;
+    }
+
+    public boolean isArchived() {
+        return archive.isArchived();
     }
 
     /**
