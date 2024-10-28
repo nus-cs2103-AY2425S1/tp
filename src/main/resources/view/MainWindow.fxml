@@ -22,7 +22,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@GrubTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
       <VBox>
