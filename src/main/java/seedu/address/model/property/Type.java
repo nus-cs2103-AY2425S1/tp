@@ -17,7 +17,7 @@ public class Type {
      * Specifies allowed property types
      */
     public static final String MESSAGE_CONSTRAINTS =
-            "Type can only be case-insensetive HDB, CONDO, LANDED";
+            "Type must exactly be HDB, CONDO, LANDED and may be case-insensitive";
     public static final String VALIDATION_REGEX = String.format("^(?i)(%s)$", String.join("|",
             java.util.Arrays.stream(PropertyType.values())
                     .map(Enum::name)

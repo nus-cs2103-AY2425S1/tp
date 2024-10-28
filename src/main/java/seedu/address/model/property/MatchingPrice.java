@@ -13,7 +13,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class MatchingPrice {
     public static final String MESSAGE_CONSTRAINTS =
-            "Matching price should be an integer";
+            "Matching price must be a non-negative integer smaller than 1,000,000 (thousand) "
+            + "with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String REMOVE_ZERO_PADDING_REGEX = "^0+(?!$)";
     public static final int MAX_PRICE = 999999;
