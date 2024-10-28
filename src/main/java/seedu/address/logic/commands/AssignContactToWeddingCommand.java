@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.ParserUtil.parsePersonListToString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
+import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
 
 
@@ -70,12 +72,13 @@ public class AssignContactToWeddingCommand extends Command {
         // get a list of all the Persons that the user is trying to assign to the wedding
         ArrayList<Person> newContactsAssignedToWedding = new ArrayList<>();
 
+        // new line added so that the user is essentially in 'list' mode before assigning people to wedding
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Index i : assignedPersonIndexList) {
             if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + " "
-                        + Messages.MESSAGE_TRY_PERSON_LIST_MODE);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
             } else {
                 Person personToAdd = lastShownList.get(i.getZeroBased());
                 newContactsAssignedToWedding.add(personToAdd);
@@ -98,6 +101,11 @@ public class AssignContactToWeddingCommand extends Command {
         model.setWedding(weddingToModify, newWedding);
 
         String assignedPersonNames = parsePersonListToString(newContactsAssignedToWedding);
+
+        //new code from view wedding command
+        Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
+        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
+        model.updateFilteredPersonList(predicate);
 
         return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), assignedPersonNames));
