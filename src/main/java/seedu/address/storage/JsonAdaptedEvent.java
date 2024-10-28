@@ -1,7 +1,8 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,16 +23,17 @@ class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
 
     private final String name;
-    private final String time;
+    private final JsonAdaptedTime time;
     private final String venue;
     private final JsonAdaptedPerson celebrity;
-    private final List<JsonAdaptedPerson> contacts = new ArrayList<>();
+    private final Set<JsonAdaptedPerson> contacts = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") String time,
+    public JsonAdaptedEvent(@JsonProperty("name") String name,
+                            @JsonProperty("time") JsonAdaptedTime time,
                             @JsonProperty("venue") String venue,
                             @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
                             @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
@@ -47,7 +49,7 @@ class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().getEventName();
-        time = source.getTime().getTime();
+        time = new JsonAdaptedTime(source.getTime());
         venue = source.getVenue().getVenue();
         celebrity = new JsonAdaptedPerson(source.getCelebrity());
         contacts.addAll(source.getContacts().stream()
@@ -61,7 +63,7 @@ class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
-        final List<Person> eventContacts = new ArrayList<>();
+        final Set<Person> eventContacts = new HashSet<>();
         for (JsonAdaptedPerson contact : contacts) {
             eventContacts.add(contact.toModelType());
         }
@@ -76,7 +78,7 @@ class JsonAdaptedEvent {
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        final Time eventTime = new Time(time);
+        final Time eventTime = time.toModelType();
 
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
