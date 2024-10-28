@@ -39,27 +39,20 @@
                             <Insets top="10" bottom="8" left="5"/>
                         </padding>
                     </FlowPane>
-                    <HBox spacing="5" alignment="CENTER_LEFT">
-                        <padding>
-                            <Insets left="8"/>
-                        </padding>
-                        <Label text="Phone:       " styleClass="details_field_headers" />
-                        <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
+
+                    <HBox alignment="CENTER_LEFT">
+                        <VBox alignment="CENTER_LEFT" spacing="10" minWidth="70">
+                            <Label text="Phone:" styleClass="details_field_headers" />
+                            <Label text="Email:" styleClass="details_field_headers" />
+                            <Label text="Remark:" styleClass="details_field_headers" />
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" spacing="3">
+                            <Label fx:id="phone" text="\$phone" styleClass="details_small_label" />
+                            <Label fx:id="email" text="\$email" styleClass="details_small_label" />
+                            <Label fx:id="remark" text="\$remark" styleClass="details_small_label" />
+                        </VBox>
                     </HBox>
-                    <HBox spacing="5" alignment="CENTER_LEFT">
-                        <padding>
-                            <Insets left="8"/>
-                        </padding>
-                        <Label text="Email:          " styleClass="details_field_headers" />
-                        <Label fx:id="email" styleClass="details_small_label" text="\$email" />
-                    </HBox>
-                    <HBox spacing="5" alignment="CENTER_LEFT">
-                        <padding>
-                            <Insets left="8"/>
-                        </padding>
-                        <Label text="Remark:     " styleClass="details_field_headers" />
-                        <Label fx:id="remark" styleClass="details_small_label" text="\$remark" />
-                    </HBox>
+
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <padding>
                             <Insets top="10" left="8"/>

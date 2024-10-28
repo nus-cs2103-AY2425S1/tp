@@ -167,6 +167,9 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
+            if (tagName.length() > Tag.MAXIMUM_NAME_LENGTH) {
+                throw new ParseException(String.format(Tag.MESSAGE_NAME_TOO_LONG, Tag.MAXIMUM_NAME_LENGTH));
+            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
