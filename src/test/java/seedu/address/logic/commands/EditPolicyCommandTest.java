@@ -18,7 +18,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.claim.ClaimList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -84,7 +83,7 @@ public class EditPolicyCommandTest {
     public void execute_validEditCommand_policyUpdated() throws Exception {
         // Create a policy for the person
         Policy existingPolicy = Policy.makePolicy(PolicyType.LIFE, new PremiumAmount(2500),
-                new CoverageAmount(60000), new ExpiryDate("12/31/2025"), new ClaimList());
+                new CoverageAmount(60000), new ExpiryDate("12/31/2025"), null);
         PolicySet policy = new PolicySet();
         policy.add(existingPolicy);
 
@@ -120,7 +119,7 @@ public class EditPolicyCommandTest {
 
         // Create the expected edited policy
         Policy updatedPolicy = Policy.makePolicy(newPolicyType, newPremiumAmount,
-                newCoverageAmount, newExpiryDate, new ClaimList());
+                newCoverageAmount, newExpiryDate, null);
 
         // Check the command result message
         String expectedMessage = String.format("Updated policy\n\n%s policy for %s has been changed to:\n%s ",
@@ -145,7 +144,7 @@ public class EditPolicyCommandTest {
         // Create a person with a specific policy type (e.g., HEALTH)
         PolicyType existingPolicyType = PolicyType.HEALTH; // Existing policy type
         Policy existingPolicy = Policy.makePolicy(existingPolicyType, new PremiumAmount(1500),
-                new CoverageAmount(10000.50), new ExpiryDate("09/14/2024"), new ClaimList());
+                new CoverageAmount(10000.50), new ExpiryDate("09/14/2024"), null);
         PolicySet policies = new PolicySet();
         policies.add(existingPolicy);
         Person personWithPolicy = new Person(new Name("John Doe"), new Phone("12345678"), new Email("john@example.com"),
@@ -167,7 +166,7 @@ public class EditPolicyCommandTest {
     public void execute_invalidPolicyType_failure() {
         PolicyType existingPolicyType = PolicyType.HEALTH;
         Policy existingPolicy = Policy.makePolicy(existingPolicyType, new PremiumAmount(1500),
-                new CoverageAmount(10000.50), new ExpiryDate("09/14/2024"), new ClaimList());
+                new CoverageAmount(10000.50), new ExpiryDate("09/14/2024"), null);
         PolicySet policies = new PolicySet();
         policies.add(existingPolicy);
         Person personWithPolicy = new Person(new Name("Jane Doe"), new Phone("98765432"),

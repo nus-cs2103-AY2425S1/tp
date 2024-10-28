@@ -25,24 +25,24 @@ public class PolicyTest {
     public void makePolicy_returnCorrectPolicy() {
         // return LifePolicy
         Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
-        Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return HealthPolicy
         expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
-        actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return EducationPolicy
         expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
-        actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
     }
 
     @Test
     public void makePolicy_nullPolicyType_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Policy.makePolicy(
-                null, premiumAmount, coverageAmount, expiryDate, new ClaimList()));
+                null, premiumAmount, coverageAmount, expiryDate, null));
     }
 
     @Test
