@@ -163,6 +163,12 @@ On execution, the new created `Student` is then be checked if it is a duplicate 
 
 Else, the `Schedule` of the new `Student` is checked if it clashes with any current `Schedule`s so that a warning message will be sent together with the successful message afterward.
 
+Below is an activity diagram when [Adding a new student](#add-a-new-student)
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
+
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram"/>
+
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:

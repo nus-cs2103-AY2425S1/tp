@@ -10,7 +10,7 @@ activityDiagram {
     BorderColor #33668E
     FontColor #000000
     FontName arial
-    FontSize 25
+    FontSize 30
   }
 
   diamond {
@@ -22,9 +22,10 @@ activityDiagram {
   }
 
   arrow {
-    FontColor blue
+    FontColor #000000
     FontName arial
     FontSize 25
+    Bold true
   }
 
   partition {
@@ -77,15 +78,13 @@ else ([else])
             |ModelManager|
             :Add the student
             to the address book;
-            :Update the filtered list
-            with all students including
-            the new added one;
+            :Update the filtered list;
             :Check clashing schedules;
-            if () then ([else])
-            else ([new schedule
-            clashes])
+            if () then ([new
+schedule clashes])
                 |UiManager|
                 :Show MESSAGE_HAS_CLASHES;
+            else ([else])
             endif
             :Show MESSAGE_SUCCESS
             of AddCommand;
