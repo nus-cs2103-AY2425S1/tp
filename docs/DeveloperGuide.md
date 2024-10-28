@@ -75,7 +75,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java" style="text-decoration: underline;"><strong><code>Ui.java</strong></code></a>)
+### UI Component
+(<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java" style="text-decoration: underline;"><strong><code>Ui.java</strong></code></a>)
+
 The `UI` component handles interactions between the user and the app's graphical interface, leveraging JavaFX to define and display various UI elements.
 
 1. **Structure**:
@@ -103,7 +105,8 @@ The `UI` component handles interactions between the user and the app's graphical
     * Maintains a reference to `Logic`, relying on it for command execution.
     * Accesses specific `Model` classes to display `Person` objects managed within `Model`.
 
-### Logic Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java" style="text-decoration: underline;"><strong><code>Logic.java</strong></code></a>)
+### Logic Component
+(<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java" style="text-decoration: underline;"><strong><code>Logic.java</strong></code></a>)
 
 
 The `Logic` component processes user inputs passed through the UI, utilizing a series of parsers to generate `Command` instances, which are then executed. Here’s an overview:
@@ -138,7 +141,8 @@ The `Logic` component processes user inputs passed through the UI, utilizing a s
         * Each `XYZCommandParser` (e.g., `AddCommandParser`) implements the `Parser` interface, allowing for consistent handling and testing.
         * The parser processes the user command, creating the relevant `Command` object (e.g., `AddCommand`), which `AddressBookParser` returns to `Logic`.
 
-### Model Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/model/Model.java" style="text-decoration: underline;"><strong><code>Model.java</strong></code></a>)
+### Model Component
+(<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/model/Model.java" style="text-decoration: underline;"><strong><code>Model.java</strong></code></a>)
 
 
 The `Model` component handles the data and state management for the app, storing all entities and providing an interface for accessing and updating them.
@@ -165,7 +169,8 @@ The `Model` component handles the data and state management for the app, storing
         * The `Model` does not rely on other components, as it represents the app’s core data entities, which should be logically self-contained.
 
 
-### Storage component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java" style="text-decoration: underline;"><strong><code>Storage.java</strong></code></a>)
+### Storage component
+(<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java" style="text-decoration: underline;"><strong><code>Storage.java</strong></code></a>)
 
 1. **Functionality**:
     * Supports saving and loading both address book data and user preferences as JSON files.
@@ -181,6 +186,7 @@ The `Model` component handles the data and state management for the app, storing
     * Diagram illustrating `Storage` structure:
 
       <puml src="diagrams/StorageClassDiagram.puml" width="600" />
+    
 ### Common classes
 
 Classes used by multiple components are in the 
@@ -188,7 +194,8 @@ Classes used by multiple components are in the
 package.
 
 Notable classes include `StringUtil` and `ToStringBuilder` which help to perform operations like checking whether a string
-includes non-zero unsigned integer, or whether there is a partial match for a word. These can be found in `seedu.address.commons.util`.
+includes non-zero unsigned integer, or whether there is a partial match for a word. These can be found in
+<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/commons/util" style="text-decoration: underline;"><strong><code>seedu.address.commons.util</strong></code></a>.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -383,11 +390,11 @@ Those without any stars are user stories that were considered but will not be im
 
 (For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `user`, unless specified otherwise)
 
-> Use Cases beginning with 'UC' cover core AddressBook functionality.
+> Use Cases beginning with 'UC' cover core Wedlinker functionalities.
 >
-> Use Cases beginning with 'UCSH' cover non-core AddressBook functionality.
-
-**Use case: UC01 List all Contacts**
+> Use Cases beginning with 'UCSH' cover non-core Wedlinker functionalities.
+---
+### **Use case: UC01 - List all Contacts**
 
 **MSS**
 
@@ -398,13 +405,13 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UC02 Add a Contact**
+### **Use case: UC02 - Add a Contact**
 
 **MSS**
 
 1.  User requests to add contact with the corresponding details.
 2.  The system adds the contact and displays a success message.
-3.  The system shows the new contact in the address book.
+3.  The system shows the new contact in WedLinker.
 
     Use case ends.
 
@@ -415,15 +422,50 @@ Those without any stars are user stories that were considered but will not be im
 
       Use case ends.
 
+### **Use case: UC03 - Similar to <ins>[UC02](#use-case-uc02---add-a-contact)</ins> except Add Wedding**
 
-**Use case: UC03 Add Phone Number to Contact**
+**MSS**
+
+1.  User requests to add wedding with the corresponding details.
+2.  The system adds the wedding and displays a success message.
+3.  The system shows the new wedding in WedLinker.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The system detects an error in the entered data.
+    * 1a1. The system displays an error message.
+
+      Use case ends.
+
+### **Use case: UC04 - Similar to <ins>[UC02](#use-case-uc02---add-a-contact)</ins> except Add Task**
+
+**MSS**
+
+1.  User requests to add task with the corresponding details.
+2.  The system adds the task and displays a success message.
+3.  The system shows the new task in WedLinker.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The system detects an error in the entered data.
+    * 1a1. The system displays an error message.
+
+      Use case ends.
+
+---
+
+### **Use case: UC05 - Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will be stored in two different contacts.
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
+1. User <ins>lists all contacts UC01</ins>.
 2. User requests to add phone number for a contact with the corresponding details.
 3. The system adds the phone number to the contact and displays a success message.
 4. The system displays the updated contact information in the address book.
@@ -443,8 +485,7 @@ Those without any stars are user stories that were considered but will not be im
       Use case resumes at step 1.
 
 
-
-**Use case: UC04 Add Address to Contact**
+### **Use case: UC04 - Similar to <ins>UC03</ins> except add Address** 
 
 **MSS**
 
@@ -470,7 +511,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UC05 Add Email to Contact**
+### **Use case: UC05 - Similar to <ins>UC03</ins> except add Email**
 
 **MSS**
 
@@ -493,9 +534,9 @@ Those without any stars are user stories that were considered but will not be im
 
       Use case resumes at step 1.
 
+---
 
-
-**Use case: UC06 Search for Contacts by Name**
+### **Use case: UC06 - Search for Contacts by Name**
 
 **MSS**
 
@@ -506,7 +547,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UC07 Filter by Tag**
+### **Use case: UC07 - Similar to <ins>UC06</ins> except by Tag**
 
 **MSS**
 
@@ -521,9 +562,9 @@ Those without any stars are user stories that were considered but will not be im
 
   Use case ends.
 
+---
 
-
-**Use case: UC08 Create Tags**
+### **Use case: UC08 - Create Tag**
 
 **MSS**
 
@@ -542,7 +583,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UC09 Tagging a contact with a specified tag**
+### **Use case: UC09 - Tagging a contact with a specified tag**
 
 **MSS**
 
@@ -573,7 +614,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UC10 Delete Contact**
+### **Use case: UC10 - Delete Contact**
 
 **MSS**
 
@@ -598,7 +639,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH01 Edit details for a contact**
+### **Use case: UCSH01 - Edit details for a contact**
 
 **MSS**
 
@@ -642,7 +683,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH02 Clear all contacts from the system**
+### **Use case: UCSH02 - Clear all contacts from the system**
 
 **Guarantees:**
 * No persons will be left in the system.
@@ -654,7 +695,7 @@ Those without any stars are user stories that were considered but will not be im
 
    Use case ends.
 
-**Use case: UCSH03 Receive a prompt when deleting a contact**
+### **Use case: UCSH03 - Receive a prompt when deleting a contact**
 
 **MSS**
 
@@ -688,7 +729,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH04 Receive a prompt when clearing the system**
+### **Use case: UCSH04 - Receive a prompt when clearing the system**
 
 **MSS**
 
@@ -709,7 +750,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH05 Assign dietary requirement to contact**
+### **Use case: UCSH05 - Assign dietary requirement to contact**
 
 **MSS**
 
@@ -732,7 +773,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH06 Sort contacts in alphabetical order**
+### **Use case: UCSH06 Sort - contacts in alphabetical order**
 
 **MSS**
 
@@ -749,7 +790,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 
-**Use case: UCSH07 Add additional information for a person**
+### **Use case: UCSH07 - Add additional information for a person**
 
 **MSS**
 
@@ -780,7 +821,7 @@ Those without any stars are user stories that were considered but will not be im
       Use case resumes at step 1.
 
 
-**Use case: UCSH08 See sample contacts in the system before starting to modify it**
+### **Use case: UCSH08 - See sample contacts in the system before starting to modify it**
 
 Preconditions: User has not added or edited contacts previously.
 
@@ -793,7 +834,7 @@ Preconditions: User has not added or edited contacts previously.
 
 
 
-**Use case: UCSH09 Reload sample contacts in the system**
+### **Use case: UCSH09 - Reload sample contacts in the system**
 
 **MSS**
 
@@ -804,7 +845,7 @@ Preconditions: User has not added or edited contacts previously.
 
 
 
-**Use case: UCSH10 See a list of all possible commands**
+### **Use case: UCSH10 - See a list of all possible commands**
 
 **MSS**
 
