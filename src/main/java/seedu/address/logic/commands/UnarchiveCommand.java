@@ -76,7 +76,7 @@ public class UnarchiveCommand extends Command {
     }
 
     /**
-     * @return the {@link Person} to be archived if it exists,
+     * @return the {@link Person} to be unarchived if it exists,
      *      otherwise {@code null} if person does not exist or command has not yet been executed.
      */
     public Person getPersonToUnarchive() {

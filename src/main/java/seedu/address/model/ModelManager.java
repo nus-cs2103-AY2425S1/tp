@@ -198,11 +198,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate() {
-        return filteredPersonListMasterPredicate;
-    }
-
-    @Override
     public void updateSortingOrder(Comparator<Person> comparator) {
         sortedPersons.setComparator(comparator);
     }

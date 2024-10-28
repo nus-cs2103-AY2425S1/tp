@@ -103,11 +103,6 @@ public interface Model {
     void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate);
 
     /**
-     * Gets the main filter of the filtered person list
-     */
-    FilteredPersonListMasterPredicate getFilteredPersonListMasterPredicate();
-
-    /**
      * Updates the order of the person list according to the given parameter.
      *
      * @param comparator Specifies new comparison criteria to order person list by.
@@ -153,16 +148,14 @@ public interface Model {
      * Represents the main predicates for filteredPersonList.
      * Each enum value is also a {@link Predicate}.
      * <p>
-     * There are 3 cases for filteredPersonList:
+     * There are 2 cases for filteredPersonList:
      * <ol>
-     *     <li>filteredPersonList shows any person</li>
      *     <li>filteredPersonList shows only current (i.e. unarchived) persons</li>
      *     <li>filteredPersonList shows only archived persons</li>
      * </ol>
      * </p>
      */
     enum FilteredPersonListMasterPredicate implements Predicate<Person> {
-        SHOW_ANY_PERSONS(person -> true),
         SHOW_ONLY_CURRENT_PERSONS(person -> !person.isArchived()),
         SHOW_ONLY_ARCHIVED_PERSONS(Person::isArchived);
 
