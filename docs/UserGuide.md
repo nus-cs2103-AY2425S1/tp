@@ -18,9 +18,9 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for ClientGrid.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clientGrid.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -272,12 +272,6 @@ Examples:
 
   ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -286,17 +280,29 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClientGrid data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Client, meeting, and property data are automatically saved as separate JSON files in `[JAR file location]/data/`:
+- `clientbook.json` for client (i.e. buyers and sellers) entries
+- `meetingbook.json` for meeting entries
+- `propertybook.json` for property entries
+
+```css
+📁 [JAR file location]
+└── 📁 data
+    ├── clientbook.json
+    ├── meetingbook.json
+    └── propertybook.json
+```
+Advanced users are welcome to directly update data by editing these individual files in the data directory.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ClientGrid will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -308,7 +314,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous ClientGrid home folder. ([See Data File Structure](#editing-the-data-file))
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -319,18 +325,22 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List**   | `list k/KEY`
-**Help**   | `help`
-**Add Buyer** | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
-**Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
-**Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
-**Delete Seller** | `deleteseller p/PHONE_NUMBER`
-**Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
-**Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
-**Filtering Properties** | `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
-**Filtering Clients** | `filterclient n/NAME`
-**Delete Meeting** | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
+| Action                | Format, Examples                                                                  |
+|-----------------------|-----------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                            |
+| **List**              | `list k/KEY`                                                                      |
+| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                        |
+| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                    |
+| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                      |
+| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                     |
+| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                      |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                      |
+| **Filter Clients**    | `filterclient n/NAME`                                                             |
+| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                     |
+| **Add Meeting**       | `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`                 |
+| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                   |
+| **Exit**              | `exit`                                                                            |
+
+
