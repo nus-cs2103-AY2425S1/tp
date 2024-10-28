@@ -107,7 +107,8 @@ public class EditCommand extends Command {
         // To be updated
         OrderTracker updatedTracker = personToEdit.getOrderTracker();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode, updatedTags, updatedTracker);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode,
+                    updatedTags, updatedTracker);
 
     }
 

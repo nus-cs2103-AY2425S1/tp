@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Track all the order history of a customer
