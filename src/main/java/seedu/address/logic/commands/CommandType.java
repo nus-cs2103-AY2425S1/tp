@@ -27,5 +27,7 @@ public enum CommandType {
     // Command Type for Lesson
     ADDLESSON,
     DELETELESSON,
-    LISTLESSONS
+    LISTLESSONS,
+    ADDTOLESSON,
+    REMOVEFROMLESSON
 }

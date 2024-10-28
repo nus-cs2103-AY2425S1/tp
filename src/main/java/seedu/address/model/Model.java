@@ -62,7 +62,8 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in
+     * the address book.
      */
     boolean hasStudent(Student student);
 
@@ -90,19 +91,24 @@ public interface Model {
     ObservableList<Student> getFilteredStudentList();
 
     /**
-     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered student list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
-     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
+     * Returns true if a student with the same identity as {@code student} exists in
+     * the address book.
+     * Returns true if a consultation with the same details as {@code consult}
+     * exists in TAHub.
      */
     boolean hasConsult(Consultation consult);
 
     /**
      * Adds the given consult.
+     *
      * @param consult Consultation to be added.
      */
     void addConsult(Consultation consult);
@@ -111,7 +117,7 @@ public interface Model {
      * Replaces the given Consultation {@code target} with {@code editedConsult}.
      * {@code target} must exist in TAHub.
      *
-     * @param target Target consultation to replace.
+     * @param target        Target consultation to replace.
      * @param editedConsult Consultation instance to replace the target with.
      */
     void setConsult(Consultation target, Consultation editedConsult);
@@ -120,7 +126,9 @@ public interface Model {
     ObservableList<Consultation> getFilteredConsultationList();
 
     /**
-     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered consultation list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredConsultationList(Predicate<Consultation> predicate);
@@ -133,18 +141,21 @@ public interface Model {
 
     /**
      * Finds a student by their name.
+     *
      * @param name The name of the student to search for.
      * @return An Optional containing the student if found, or empty if not.
      */
     Optional<Student> findStudentByName(seedu.address.model.student.Name name);
 
     /**
-     * Returns true if a lesson with the same details as {@code lesson} exists in TAHub.
+     * Returns true if a lesson with the same details as {@code lesson} exists in
+     * TAHub.
      */
     boolean hasLesson(Lesson lesson);
 
     /**
      * Adds the given lesson.
+     *
      * @param lesson Lesson to be added.
      */
     void addLesson(Lesson lesson);
@@ -168,7 +179,9 @@ public interface Model {
     ObservableList<Lesson> getFilteredLessonList();
 
     /**
-     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered lesson list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
