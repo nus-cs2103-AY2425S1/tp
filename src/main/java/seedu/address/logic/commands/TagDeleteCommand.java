@@ -25,7 +25,8 @@ public class TagDeleteCommand extends Command {
     public static final String COMMAND_WORD = "tag-delete";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the specified tag from the person identified "
-            + "by their name. Also deletes them as participant from the wedding given by specified tag.";
+            + "by their name.\n"
+            + "Also deletes them as participant from the wedding given by specified tag.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: "
