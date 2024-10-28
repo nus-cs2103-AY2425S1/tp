@@ -47,9 +47,9 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
 
     - **Check if Java is installed:**
         1. Open your command terminal:
-            - **Windows**: Press `Windows + R`, type `cmd`, and hit Enter.
-            - **Mac**: Press `Command + Space`, type `Terminal`, and hit Enter.
-            - **Linux**: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
+            - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
+            - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
+            - Linux: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
         2. Once the terminal is open, type the following command and press Enter:
            ```bash
            java -version
@@ -77,30 +77,29 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
     
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-    1. **Windows**:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
         - Locate the downloaded `.jar` file in your `Downloads` folder.
-        - Right-click on the `.jar` file, select **Copy**.
-        - Navigate to the folder where you want to store the TAHub, right-click and select **Paste**.
+        - Right-click on the `.jar` file, select Copy.
+        - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
 
-    2. **Mac**:
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
         - Open the **Finder** and go to your `Downloads` folder.
-        - Right-click (or `Control + Click`) on the `.jar` file and choose **Copy**.
-        - Go to the folder where you want to keep the file, then right-click and select **Paste**.
+        - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
+        - Go to the folder where you want to keep the file, then right-click and select Paste.
 
-    3. **Linux**:
+    3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
-        - Right-click on the `.jar` file, choose **Copy**.
-        - Go to the destination folder, right-click and select **Paste**.
+        - Right-click on the `.jar` file, choose Copy.
+        - Go to the destination folder, right-click and select Paste.
 
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
-    1. **Windows**:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
         - Open the folder where you saved the `.jar` file.
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
-            2. In the **General** tab, you will see the **Location** field. Copy the location path.
-            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`).
+            2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`))
         - Open the **Command Prompt**:
             - Press `Windows + R`, type `cmd`, and press Enter.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
@@ -112,7 +111,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
           java -jar TAHub.jar
           ```
 
-    2. **Mac/Linux**:
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
         - To get the full path of the folder where the `.jar` file is located:
             - Open **Finder** or **File Explorer**.
@@ -128,7 +127,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
-   ![Ui](images/Ui.png)
+   ![Screenshot 2024-10-26 at 12.01.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5510gx%2FScreenshot%202024-10-26%20at%2012.01.46%E2%80%AFAM.png)
 
    
 5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
@@ -175,13 +174,18 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+Expected output:
+![Screenshot 2024-10-25 at 11.39.25 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_MgpP52%2FScreenshot%202024-10-25%20at%2011.39.25%E2%80%AFPM.png)
+
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
+Expected output:
+![Screenshot 2024-10-25 at 11.41.57 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_LjHJ9D%2FScreenshot%202024-10-25%20at%2011.41.57%E2%80%AFPM.png)
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
@@ -196,6 +200,9 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+Expected output:
+![Screenshot 2024-10-25 at 11.43.48 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_jF8XEd%2FScreenshot%202024-10-25%20at%2011.43.48%E2%80%AFPM.png)
 
 ### Editing a person : `edit`
 
@@ -212,7 +219,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` 
+
+Expected output:
+![Screenshot 2024-10-25 at 11.45.25 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_etAWPb%2FScreenshot%202024-10-25%20at%2011.45.25%E2%80%AFPM.png)
 
 ### Locating persons by name: `find`
 
@@ -230,6 +240,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+Expected output:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -246,6 +258,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+Expected output:
+![Screenshot 2024-10-25 at 11.46.29 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_2FLfCO%2FScreenshot%202024-10-25%20at%2011.46.29%E2%80%AFPM.png)
+
 ### Adding or editing a grade: `addGrade`
 
 Adds or updates a grade for a person in the address book. If a grade with the same test name already exists, it will be overwritten.
@@ -259,8 +274,11 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 * If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
-* `grade 2 n/Midterm s/85 w/20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+* `addGrade 2 n/Midterm s/85 w/20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
 * `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
+
+Expected output:
+![Screenshot 2024-10-25 at 11.47.07 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_xofQdm%2FScreenshot%202024-10-25%20at%2011.47.07%E2%80%AFPM.png)
 
 ### Deleting a grade from a person: `deleteGrade`
 
@@ -275,6 +293,9 @@ Format: `deleteGrade INDEX n/TEST_NAME`
 Examples:
 * `deleteGrade 2 n/Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
 * `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+
+Expected output:
+![Screenshot 2024-10-25 at 11.49.30 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_i8CF6o%2FScreenshot%202024-10-25%20at%2011.49.30%E2%80%AFPM.png)
 
 ### Marking attendance: `mark`
 
@@ -291,6 +312,9 @@ Examples:
 * `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
 * `find Betsy` followed by `mark 1 d/31/01/2024 10:00 m/Absent` Sets the attendance to 'Absent' on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
+Expected output:
+![Screenshot 2024-10-25 at 11.49.57 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_yOZ75B%2FScreenshot%202024-10-25%20at%2011.49.57%E2%80%AFPM.png)
+
 ### Unmarking attendance: `unmark`
 
 Deletes the attendance record for the specified date for a person in the address book. All the remaining attendance records for that person will be retained.
@@ -304,15 +328,21 @@ Examples:
 * `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
 * `find Betsy` followed by `unmark 1 d/31/01/2024 10:00` deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
+Expected output:
+![Screenshot 2024-10-25 at 11.51.05 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_LVUqJ5%2FScreenshot%202024-10-25%20at%2011.51.05%E2%80%AFPM.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+Expected output:
+![Screenshot 2024-10-25 at 11.51.56 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_PJ6pA8%2FScreenshot%202024-10-25%20at%2011.51.56%E2%80%AFPM.png)
+
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and closes.
 
 Format: `exit`
 
