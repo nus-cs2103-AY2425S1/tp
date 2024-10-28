@@ -34,6 +34,7 @@ public class SwitchParserModeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert mode != null;
         try {
             AbcliParser.switchMode(mode);
             boolean showMeetUpList = this.mode == ParserMode.MEETUP;

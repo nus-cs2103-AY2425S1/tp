@@ -40,6 +40,8 @@ public class AbcliParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public static Command parseCommand(String userInput) throws ParseException {
+        assert currentParser != null;
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -58,6 +60,9 @@ public class AbcliParser {
      * @throws ParseException if the mode doesn't exist
      */
     public static void switchMode(ParserMode mode) throws ParseException {
+        assert buyerCommandParser != null;
+        assert meetUpCommandParser != null;
+        assert propertyCommandParser != null;
         requireNonNull(mode);
 
         switch (mode) {
