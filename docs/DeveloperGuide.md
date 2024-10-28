@@ -197,15 +197,15 @@ lifeline till the diagram's end.
 
 **Design of Tag Constraints**
 - **Current Implementation (Alternative 1)**:
-    - Description: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1` and `s1` are 
-      treated as identical, and `math` and `MATH` are treated as identical).
-    - Pros: Enforces a standardized format for tags, ensuring brevity and uniformity.
-    - Cons: Reduces user flexibility in customizing tags.
+    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and 
+      `s1 na` are treated as identical, and `math` and `MATH` are treated as identical).
+    - **Pros**: Enforces a standardized format for tags, ensuring brevity and uniformity.
+    - **Cons**: Reduces user flexibility in customizing tags.
 
 - **Alternative 2**:
-    - Description: Users can create tags without specific constraints.
-    - Pros: Provides greater flexibility for users to create custom tags. 
-    - Cons: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
+    - **Descriptio**n: Users can create tags without specific constraints.
+    - **Pros**: Provides greater flexibility for users to create custom tags. 
+    - **Cons**: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
 
 ***
 
