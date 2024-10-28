@@ -21,10 +21,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AssignCommand.AssignStudyGroupTagDescriptor;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.StudyGroupTag;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AssignCommand.
@@ -74,6 +77,51 @@ public class AssignCommandTest {
             assertNotEquals(model.getFilteredPersonList().get(i), controlModel.getFilteredPersonList().get(i));
 
         }
+    }
+
+    @Test
+    public void execute_oneStudyGroupSpecifiedUnfilteredList_success() {
+        AssignStudyGroupTagDescriptor descriptor3A = new AssignStudyGroupTagDescriptor();
+        descriptor3A.setStudyGroupTag(new StudyGroupTag(VALID_UNUSED_STUDY_GROUP_TAG_3A));
+
+        List<AssignStudyGroupTagDescriptor> descriptors = Collections.singletonList(descriptor3A);
+        AssignCommand assignCommand = new AssignCommand(descriptors);
+
+        String expectedMessage = AssignCommand.MESSAGE_SUCCESS;
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        for (Person p : expectedModel.getFilteredPersonList()) {
+            PersonBuilder personInList = new PersonBuilder(p);
+            Person editedPerson = personInList.withAppendStudyGroupTags(VALID_UNUSED_STUDY_GROUP_TAG_3A).build();
+            expectedModel.setPerson(p, editedPerson);
+        }
+
+        assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_oneStudyGroupSpecifiedFilteredList_success() {
+        showPersonWithStudyGroupTag(model, VALID_STUDY_GROUP_TAG_1A);
+
+        AssignStudyGroupTagDescriptor descriptor3A = new AssignStudyGroupTagDescriptor();
+        descriptor3A.setStudyGroupTag(new StudyGroupTag(VALID_UNUSED_STUDY_GROUP_TAG_3A));
+
+        List<AssignStudyGroupTagDescriptor> descriptors = Collections.singletonList(descriptor3A);
+        AssignCommand assignCommand = new AssignCommand(descriptors);
+
+        String expectedMessage = AssignCommand.MESSAGE_SUCCESS;
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPersonWithStudyGroupTag(expectedModel, VALID_STUDY_GROUP_TAG_1A);
+
+        for (Person p : expectedModel.getFilteredPersonList()) {
+            PersonBuilder personInList = new PersonBuilder(p);
+            Person editedPerson = personInList.withAppendStudyGroupTags(VALID_UNUSED_STUDY_GROUP_TAG_3A).build();
+            expectedModel.setPerson(p, editedPerson);
+        }
+
+        assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
