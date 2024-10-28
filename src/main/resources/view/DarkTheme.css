@@ -78,8 +78,14 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: derive(#F4F4F4, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-border-color: transparent transparent transparent #d5e9d4;
 }
+
+.split-pane:vertical .split-pane-divider {
+    -fx-background-color: derive(#F4F4F4, 20%);
+    -fx-border-color: transparent transparent transparent #d5e9d4;
+}
+
 
 .split-pane {
     -fx-border-radius: 1;
@@ -89,8 +95,9 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 5;
+    -fx-padding: 5 5 5 5;
     -fx-background-color: derive(white, 20%);
+    -fx-background-radius: 8;
 }
 
 .list-cell {
@@ -286,6 +293,8 @@
 .scroll-bar {
     -fx-background-color: derive(#6B8A63, 20%);
     -fx-background-radius: 6;
+    -fx-margin: 2;
+    -fx-padding: 0;
 }
 
 .scroll-bar .thumb {
@@ -335,7 +344,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 0;
     -fx-font-family: "Verdana";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: black;
     -fx-background-radius: 16;
 }
