@@ -23,7 +23,7 @@ TrueRental is a **desktop app for managing contacts, optimized for use via a Com
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar truerental.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](https://github.com/user-attachments/assets/a0260908-89a7-45ae-9e0c-e27a61c86d36)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -96,16 +96,16 @@ Examples:
 * `cadd n/John Doe p/98765432 e/johnd@example.com`
 * `cadd n/Betsy Crowe e/betsycrowe@example.com t/criminal t/friend `
 
-### Adding a client: `radd`
+### Adding a rental information for a client: `radd`
 
-Adds a specific client's rental information to the address book.
+Adds a rental information for the specific client to the address book.
 
-Format: `radd c/CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
 
 Examples:
-* `radd c/1 a/65 Anderson Road m/3000 d/0`
-* `radd c/1 a/65 Berkeley Road e/2024-10-31`
-* `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 cl/Steven Lim dd/20 m/2750`
+* `radd 1 a/65 Anderson Road m/3000 d/0`
+* `radd 1 a/65 Berkeley Road e/2024-10-31`
+* `radd 3 a/65 Den Road s/2024-09-01 e/2025-08-30 cl/Steven Lim dd/20 m/2750`
 
 ### Listing all clients : `list`
 
@@ -118,25 +118,24 @@ Format: `list`
 
 Shows a list of all rental information related to a specific client in the address book.
 
-Format: `rview INDEX`
+Format: `rview CLIENT_INDEX`
 
-* Lists all rental information related to the client at the specified `INDEX`.
+* Lists all rental information related to the client at the specified `CLIENT_INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `rview 1` <br>
-![result for 'rview 1'](images/rview1Result.png)
 
 ### Editing a client : `cedit`
 
 Edits an existing client in the address book.
 
-Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 Note: 
 * To edit a client's information, it must have at least **one** of the optional fields.
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `CLIENT_INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
@@ -148,7 +147,7 @@ Examples:
 *  `cedit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `cedit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Editing a client : `redit`
+### Editing a client's rental information: `redit`
 
 Edits a specific client's rental information in the address book.
 
@@ -156,7 +155,7 @@ Format: `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [
 
 Note: 
 * To edit a client's rental information, it must have at least **one** of the optional fields.
-* Edits the client at the specified `CLIENT_INDEX` and 'RENTAL_INDEX'. The `CLIENT_INDEX` refers to the client index number shown in the displayed client list and the `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list. All indexes **must be a positive integer** 1, 2, 3, …​
+* Edits the client's rental information at the specified `CLIENT_INDEX` and `RENTAL_INDEX`. The `CLIENT_INDEX` refers to the client index number shown in the displayed client list and the `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list. All indexes **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 
 Examples:
@@ -185,9 +184,9 @@ Examples:
 
 Deletes the specified client from the address book.
 
-Format: `cdelete INDEX`
+Format: `cdelete CLIENT_INDEX`
 
-* Deletes the client at the specified `INDEX` and all related rental information.
+* Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 

@@ -62,6 +62,16 @@ public class DepositTest {
 
         // different values -> returns false
         assertFalse(deposit.equals(new Deposit("10")));
+
+        // value is null
+        // one null
+        assertFalse(deposit.equals(new Deposit()));
+
+        deposit = new Deposit();
+        assertFalse(deposit.equals(new Deposit("10")));
+
+        // both null
+        assertTrue(deposit.equals(new Deposit()));
     }
 
     @Test
@@ -76,7 +86,7 @@ public class DepositTest {
     }
 
     @Test
-    public void isSameToString() {
+    public void toStringMethod() {
         Deposit deposit = new Deposit("100");
 
         // same deposit
@@ -85,5 +95,9 @@ public class DepositTest {
         // different deposit
         assertNotEquals(deposit.toString(), new Deposit("200").toString());
         assertNotEquals(deposit.toString(), new Deposit("100.35").toString());
+
+        // null value in deposit
+        deposit = new Deposit();
+        assertEquals("null", deposit.toString());
     }
 }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandPromptsSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RENTAL;
@@ -36,6 +36,8 @@ public class DeleteRentalCommandTest {
         RentalInformation rentalToDelete = secondClient.getRentalInformation().get(INDEX_FIRST_RENTAL.getZeroBased());
         DeleteRentalCommand deleteRentalCommand = new DeleteRentalCommand(INDEX_SECOND_PERSON, INDEX_FIRST_RENTAL);
 
+        String expectedPrompt = String.format(DeleteRentalCommand.MESSAGE_PROMPT,
+                Messages.formatRentalInformation(rentalToDelete));
         String expectedMessage = String.format(DeleteRentalCommand.MESSAGE_DELETE_RENTAL_SUCCESS,
                 Messages.formatRentalInformation(rentalToDelete));
 
@@ -45,7 +47,7 @@ public class DeleteRentalCommandTest {
                 .build();
         expectedModel.setPerson(secondClient, editedClient);
 
-        assertCommandSuccess(deleteRentalCommand, model, expectedMessage, expectedModel);
+        assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
 
     @Test
@@ -73,6 +75,8 @@ public class DeleteRentalCommandTest {
         RentalInformation rentalToDelete = firstClient.getRentalInformation().get(INDEX_FIRST_RENTAL.getZeroBased());
         DeleteRentalCommand deleteRentalCommand = new DeleteRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL);
 
+        String expectedPrompt = String.format(DeleteRentalCommand.MESSAGE_PROMPT,
+                Messages.formatRentalInformation(rentalToDelete));
         String expectedMessage = String.format(DeleteRentalCommand.MESSAGE_DELETE_RENTAL_SUCCESS,
                 Messages.formatRentalInformation(rentalToDelete));
 
@@ -80,7 +84,7 @@ public class DeleteRentalCommandTest {
         Client editedClient = new PersonBuilder(firstClient).withRentalInformation().build();
         expectedModel.setPerson(firstClient, editedClient);
 
-        assertCommandSuccess(deleteRentalCommand, model, expectedMessage, expectedModel);
+        assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
 
     @Test

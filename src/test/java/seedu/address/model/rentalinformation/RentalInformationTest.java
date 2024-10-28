@@ -16,20 +16,32 @@ public class RentalInformationTest {
                 "31/12/2024", "15", "3500", "7000", "David");
         RentalInformation differentFromSample = new RentalInformation("Ave 2 Bishan", "01/06/2024",
                 "31/12/2024", "30", "2500", "7500", "Steven");
-        RentalInformation differentAddress = new RentalInformation("Ave 2 Bishan", "01/01/2024",
+
+        RentalInformation sameAddressDifferentRentalStartDate = new RentalInformation("Ave 1 Bishan", "02/01/2024",
                 "31/12/2024", "15", "3500", "7000", "David");
-        RentalInformation differentRentalStartDate = new RentalInformation("Ave 1 Bishan", "02/01/2024",
-                "31/12/2024", "15", "3500", "7000", "David");
-        RentalInformation differentRentalEndDate = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+        RentalInformation sameAddressDifferentRentalEndDate = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "30/12/2024", "15", "3500", "7000", "David");
-        RentalInformation differentRentDueDate = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+        RentalInformation sameAddressDifferentRentDueDate = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "20", "3500", "7000", "David");
-        RentalInformation differentMonthlyRent = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+        RentalInformation sameAddressDifferentMonthlyRent = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "15", "4000", "7000", "David");
-        RentalInformation differentDeposit = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+        RentalInformation sameAddressDifferentDeposit = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "15", "3500", "9000", "David");
-        RentalInformation differentCustomerList = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+        RentalInformation sameAddressDifferentCustomerList = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "15", "3500", "7000", "Steven");
+
+        RentalInformation differentAddressSameRentalStartDate = new RentalInformation("Ave 2 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+        RentalInformation differentAddressSameRentalEndDate = new RentalInformation("Ave 3 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+        RentalInformation differentAddressSameRentDueDate = new RentalInformation("Ave 4 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+        RentalInformation differentAddressSameMonthlyRent = new RentalInformation("Ave 5 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+        RentalInformation differentAddressSameDeposit = new RentalInformation("Ave 6 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+        RentalInformation differentAddressSameCustomerList = new RentalInformation("Ave 7 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
 
         // same values -> returns true
         assertTrue(sample.equals(sameAsSample));
@@ -46,26 +58,41 @@ public class RentalInformationTest {
         // different rental information -> returns false
         assertFalse(sample.equals(differentFromSample));
 
-        // different address
-        assertFalse(sample.equals(differentAddress));
+        // same address, different rental start date
+        assertTrue(sample.equals(sameAddressDifferentRentalStartDate));
 
-        // different rental start date
-        assertFalse(sample.equals(differentRentalStartDate));
+        // same address, different rental end date
+        assertTrue(sample.equals(sameAddressDifferentRentalEndDate));
 
-        // different rental end date
-        assertFalse(sample.equals(differentRentalEndDate));
+        // same address, different rent due date
+        assertTrue(sample.equals(sameAddressDifferentRentDueDate));
 
-        // different rent due date
-        assertFalse(sample.equals(differentRentDueDate));
+        // same address, different monthly rent
+        assertTrue(sample.equals(sameAddressDifferentMonthlyRent));
 
-        // different monthly rent
-        assertFalse(sample.equals(differentMonthlyRent));
+        // same address, different deposit
+        assertTrue(sample.equals(sameAddressDifferentDeposit));
 
-        // different deposit
-        assertFalse(sample.equals(differentDeposit));
+        // same address, different customer list
+        assertTrue(sample.equals(sameAddressDifferentCustomerList));
 
-        // different customer list
-        assertFalse(sample.equals(differentCustomerList));
+        // different address, same rental start date
+        assertFalse(sample.equals(differentAddressSameRentalStartDate));
+
+        // different address, same rental end date
+        assertFalse(sample.equals(differentAddressSameRentalEndDate));
+
+        // different address, same rent due date
+        assertFalse(sample.equals(differentAddressSameRentDueDate));
+
+        // different address, same monthly rent
+        assertFalse(sample.equals(differentAddressSameMonthlyRent));
+
+        // different address, same deposit
+        assertFalse(sample.equals(differentAddressSameDeposit));
+
+        // different address, same customer list
+        assertFalse(sample.equals(differentAddressSameCustomerList));
     }
 
     @Test

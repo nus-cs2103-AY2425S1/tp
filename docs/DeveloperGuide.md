@@ -99,6 +99,15 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cadd n/John Doe p/91231231 e/john@example.com")` API call as an example.
+
+<puml src="diagrams/AddClientSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `cadd n/John Doe p/91231231 e/john@example.com` Command" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
@@ -118,7 +127,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
 
 The `Model` component,

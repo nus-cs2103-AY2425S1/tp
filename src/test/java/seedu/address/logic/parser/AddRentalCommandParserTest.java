@@ -174,43 +174,89 @@ public class AddRentalCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parse_missingAddressPrefix_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE);
 
         // missing address prefix
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE, expectedMessage);
+
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE, expectedMessage);
+
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE, expectedMessage);
+
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE, expectedMessage);
+
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE, expectedMessage);
+
+        assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE,
+                expectedMessage);
+
         assertParseFailure(parser, "1" + VALID_ADDRESS_ONE + RENTAL_START_DATE_DESC_ONE
                 + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
                 + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+    }
 
-        // missing rental start date prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + VALID_RENTAL_START_DATE_ONE
-                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
-                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+    @Test
+    public void parse_missingOtherFields_success() {
+        RentalInformation expectedRentalInformation;
 
-        // missing rental end date prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
-                + VALID_RENTAL_END_DATE_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
-                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+        // missing rental start date
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalEndDate(VALID_RENTAL_END_DATE_ONE).withRentDueDate(VALID_RENT_DUE_DATE_ONE)
+                .withMonthlyRent(VALID_MONTHLY_RENT_ONE).withDeposit(VALID_DEPOSIT_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE
+                + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
 
-        // missing rent due date prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
-                + RENTAL_END_DATE_DESC_ONE + VALID_RENT_DUE_DATE_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
-                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+        // missing rental end date
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentDueDate(VALID_RENT_DUE_DATE_ONE)
+                .withMonthlyRent(VALID_MONTHLY_RENT_ONE).withDeposit(VALID_DEPOSIT_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE
+                + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
 
-        // missing monthly rent prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
-                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + VALID_MONTHLY_RENT_ONE + DEPOSIT_DESC_ONE
-                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+        // missing rent due date
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
+                .withMonthlyRent(VALID_MONTHLY_RENT_ONE).withDeposit(VALID_DEPOSIT_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
 
-        // missing deposit prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
-                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + VALID_DEPOSIT_ONE
-                + CUSTOMER_LIST_DESC_ONE, expectedMessage);
+        // missing monthly rent
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
+                .withRentDueDate(VALID_RENT_DUE_DATE_ONE).withDeposit(VALID_DEPOSIT_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + DEPOSIT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
 
-        // missing customer list prefix
-        assertParseFailure(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
-                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE
-                + VALID_CUSTOMER_LIST_ONE, expectedMessage);
+        // missing deposit
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
+                .withRentDueDate(VALID_RENT_DUE_DATE_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + CUSTOMER_LIST_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
+
+        // missing customer list
+        expectedRentalInformation = new RentalInformationBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
+                .withRentDueDate(VALID_RENT_DUE_DATE_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE)
+                .withDeposit(VALID_DEPOSIT_ONE).build();
+        assertParseSuccess(parser, "1" + ADDRESS_DESC_ONE + RENTAL_START_DATE_DESC_ONE
+                + RENTAL_END_DATE_DESC_ONE + RENT_DUE_DATE_DESC_ONE + MONTHLY_RENT_DESC_ONE + DEPOSIT_DESC_ONE,
+                new AddRentalCommand(INDEX_FIRST_PERSON, expectedRentalInformation));
     }
 
     @Test

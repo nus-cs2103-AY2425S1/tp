@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_ADDRESS_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_EMAIL_DESC_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_INVALID_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_NAME_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_PHONE_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -28,7 +29,7 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_validName_returnsFindCommand() {
@@ -77,6 +78,12 @@ public class FindCommandParserTest {
                         new EmailContainsKeywordsPredicate(keywords),
                         new RentalInformationContainsKeywordsPredicate(keywords));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_ADDRESS_DESC_ONE, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidKeyword_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORD_INVALID_EMPTY,
+                String.format(FindCommandParser.MESSAGE_CONSTRAINTS));
     }
 
     @Test

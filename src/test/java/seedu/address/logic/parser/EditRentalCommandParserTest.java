@@ -82,6 +82,9 @@ public class EditRentalCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid rental index
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditRentalCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1 r/a" + VALID_RENTAL_START_DATE_ONE, expectedMessage);
         // invalid rental start date
         assertParseFailure(parser, "1 r/1" + INVALID_RENTAL_START_DATE_DESC, RentalDate.MESSAGE_CONSTRAINTS);
         // invalid rental end date
@@ -170,6 +173,14 @@ public class EditRentalCommandParserTest {
         descriptor = new EditRentalDescriptorBuilder().withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
         expectedCommand = new EditRentalCommand(targetIndex, INDEX_FIRST_RENTAL, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_noFieldSpecified_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + " r/1";
+
+        assertParseFailure(parser, userInput, EditRentalCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test

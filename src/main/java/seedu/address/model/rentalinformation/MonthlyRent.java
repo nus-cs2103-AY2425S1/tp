@@ -12,7 +12,7 @@ public class MonthlyRent {
             "Monthly Rent should only contain numbers, and in 2 decimal places if needed";
     public static final String VALIDATION_REGEX = "^(0|(?!0)\\d+)(\\.\\d{2})?$";
 
-    public final double monthlyRent;
+    public final Double monthlyRent;
 
     /**
      * Constructs a {@code MonthlyRent}.
@@ -23,6 +23,13 @@ public class MonthlyRent {
         requireNonNull(monthlyRent);
         checkArgument(isValidMonthlyRent(monthlyRent), MESSAGE_CONSTRAINTS);
         this.monthlyRent = Double.parseDouble(monthlyRent);
+    }
+
+    /**
+     * Constructs an {@code MonthlyRent} with monthlyRent as null (not provided).
+     */
+    public MonthlyRent() {
+        monthlyRent = null;
     }
 
     /**
@@ -38,7 +45,7 @@ public class MonthlyRent {
 
     @Override
     public String toString() {
-        return Double.toString(monthlyRent);
+        return monthlyRent == null ? "null" : Double.toString(monthlyRent);
     }
 
     @Override
@@ -53,11 +60,17 @@ public class MonthlyRent {
         }
 
         MonthlyRent otherMonthlyRent = (MonthlyRent) other;
-        return this.monthlyRent == otherMonthlyRent.monthlyRent;
+        if (this.monthlyRent == null && otherMonthlyRent.monthlyRent == null) {
+            return true;
+        } else if (this.monthlyRent == null || otherMonthlyRent.monthlyRent == null) {
+            return false;
+        }
+
+        return this.monthlyRent.equals(otherMonthlyRent.monthlyRent);
     }
 
     @Override
     public int hashCode() {
-        return Double.valueOf(monthlyRent).hashCode();
+        return monthlyRent.hashCode();
     }
 }

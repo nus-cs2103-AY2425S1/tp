@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CUSTOMER_LIST;
@@ -66,12 +67,13 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullRentalStartDate_throwsIllegalValueException() {
+    public void toModelType_nullRentalStartDate_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, null, VALID_RENTAL_END_DATE_ONE,
                         VALID_RENT_DUE_DATE_ONE, VALID_MONTHLY_RENT_ONE, VALID_DEPOSIT_ONE, VALID_CUSTOMER_LIST_ONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RentalDate.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 
     @Test
@@ -85,12 +87,13 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullRentalEndDate_throwsIllegalValueException() {
+    public void toModelType_nullRentalEndDate_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, VALID_RENTAL_START_DATE_ONE, null,
                         VALID_RENT_DUE_DATE_ONE, VALID_MONTHLY_RENT_ONE, VALID_DEPOSIT_ONE, VALID_CUSTOMER_LIST_ONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RentalDate.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 
     @Test
@@ -104,13 +107,14 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullRentDueDate_throwsIllegalValueException() {
+    public void toModelType_nullRentDueDate_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, VALID_RENTAL_START_DATE_ONE,
                         VALID_RENTAL_END_DATE_ONE, null, VALID_MONTHLY_RENT_ONE, VALID_DEPOSIT_ONE,
                         VALID_CUSTOMER_LIST_ONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RentDueDate.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 
     @Test
@@ -124,13 +128,14 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullMonthlyRent_throwsIllegalValueException() {
+    public void toModelType_nullMonthlyRent_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, VALID_RENTAL_START_DATE_ONE,
                         VALID_RENTAL_END_DATE_ONE, VALID_RENT_DUE_DATE_ONE, null, VALID_DEPOSIT_ONE,
                         VALID_CUSTOMER_LIST_ONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MonthlyRent.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 
     @Test
@@ -144,13 +149,14 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullDeposit_throwsIllegalValueException() {
+    public void toModelType_nullDeposit_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, VALID_RENTAL_START_DATE_ONE,
                         VALID_RENTAL_END_DATE_ONE, VALID_RENT_DUE_DATE_ONE, VALID_MONTHLY_RENT_ONE, null,
                         VALID_CUSTOMER_LIST_ONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Deposit.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 
     @Test
@@ -164,12 +170,13 @@ public class JsonAdaptedRentalInformationTest {
     }
 
     @Test
-    public void toModelType_nullCustomerList_throwsIllegalValueException() {
+    public void toModelType_nullCustomerList_success() {
         JsonAdaptedRentalInformation rentalInformation =
                 new JsonAdaptedRentalInformation(VALID_ADDRESS_ONE, VALID_RENTAL_START_DATE_ONE,
                         VALID_RENTAL_END_DATE_ONE, VALID_RENT_DUE_DATE_ONE, VALID_MONTHLY_RENT_ONE, VALID_DEPOSIT_ONE,
                         null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CustomerList.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, rentalInformation::toModelType);
+        assertDoesNotThrow(() -> {
+            rentalInformation.toModelType();
+        });
     }
 }

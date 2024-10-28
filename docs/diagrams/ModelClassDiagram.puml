@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+scale 2
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
@@ -13,12 +14,19 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
-Class Address
+Class Client
 Class Email
 Class Name
 Class Phone
 Class Tag
+
+Class RentalInformation
+Class RentalDate
+Class Address
+Class RentDueDate
+Class MonthlyRent
+Class Deposit
+Class CustomerList
 
 Class I #FFFFFF
 }
@@ -36,19 +44,32 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+UniquePersonList --> "~* all" Client
+Client *--> "1" Name
+Client *--> "0..1" Phone
+Client *--> "0..1" Email
+Client *--> "*" Tag
+Client *--> "*" RentalInformation
 
-Person -[hidden]up--> I
+RentalInformation *--> "0..1" RentalDate
+RentalInformation *--> "0..1" RentalDate
+RentalInformation *--> "1" Address
+RentalInformation *--> "0..1" RentDueDate
+RentalInformation *--> "0..1" MonthlyRent
+RentalInformation *--> "0..1" Deposit
+RentalInformation *--> "0..1" CustomerList
+
+note top of RentalDate : (No space to show association roles\n in the diagram) The association roles for \nRentalDate are rental start date and \nrental end date respectively.
+note right of Client : Note that at least one of Phone or\n Email is required for Client.
+
+Client -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+MonthlyRent -[hidden]right-> RentalDate
+RentalDate -[hidden]right-> RentDueDate
+
+ModelManager --> "~* filtered" Client
 @enduml

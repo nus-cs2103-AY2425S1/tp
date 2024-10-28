@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandPromptsSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -32,13 +32,14 @@ public class DeleteClientCommandTest {
         Client clientToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteClientCommand deleteCommand = new DeleteClientCommand(INDEX_FIRST_PERSON);
 
+        String expectedPrompt = String.format(DeleteClientCommand.MESSAGE_PROMPT, Messages.format(clientToDelete));
         String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(clientToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(clientToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandPromptsSuccess(deleteCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
 
     @Test
@@ -56,6 +57,7 @@ public class DeleteClientCommandTest {
         Client clientToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteClientCommand deleteCommand = new DeleteClientCommand(INDEX_FIRST_PERSON);
 
+        String expectedPrompt = String.format(DeleteClientCommand.MESSAGE_PROMPT, Messages.format(clientToDelete));
         String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(clientToDelete));
 
@@ -63,7 +65,7 @@ public class DeleteClientCommandTest {
         expectedModel.deletePerson(clientToDelete);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandPromptsSuccess(deleteCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
 
     @Test

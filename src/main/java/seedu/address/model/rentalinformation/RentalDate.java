@@ -31,6 +31,14 @@ public class RentalDate {
     }
 
     /**
+     * Constructs an {@code RentalDate} with rentalDate as null (not provided).
+     */
+    public RentalDate() {
+        rentalDate = null;
+    }
+
+
+    /**
      * Validates a rental date string against a predefined regex pattern.
      *
      * @param test The string to be validated as a rental date.
@@ -60,7 +68,9 @@ public class RentalDate {
 
     @Override
     public String toString() {
-        return RentalUtil.convertLocalDateToStringWithFormat(rentalDate, "dd MMM yyyy");
+        return rentalDate == null
+                ? "null"
+                : RentalUtil.convertLocalDateToStringWithFormat(rentalDate, "dd MMM yyyy");
     }
 
     @Override
@@ -75,6 +85,12 @@ public class RentalDate {
         }
 
         RentalDate otherRentalDate = (RentalDate) other;
+        if (this.rentalDate == null && otherRentalDate.rentalDate == null) {
+            return true;
+        } else if (this.rentalDate == null || otherRentalDate.rentalDate == null) {
+            return false;
+        }
+
         return rentalDate.isEqual(otherRentalDate.rentalDate);
     }
 

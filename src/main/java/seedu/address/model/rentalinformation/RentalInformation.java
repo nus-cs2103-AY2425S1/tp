@@ -90,16 +90,6 @@ public class RentalInformation {
         return customerList;
     }
 
-    public String getString() {
-        return "Address: " + address + "\n"
-                + "Rental start date: " + rentalStartDate + "\n"
-                + "Rental end date: " + rentalEndDate + "\n"
-                + "Rental due date: " + rentDueDate + "\n"
-                + "Monthly rent: " + monthlyRent + "\n"
-                + "Deposit: " + deposit + "\n"
-                + "Customer list: " + customerList + "\n";
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,13 +102,7 @@ public class RentalInformation {
         }
 
         RentalInformation otherRentalInformation = (RentalInformation) other;
-        return this.address.equals(otherRentalInformation.address)
-                && this.rentalStartDate.equals(otherRentalInformation.rentalStartDate)
-                && this.rentalEndDate.equals(otherRentalInformation.rentalEndDate)
-                && this.rentDueDate.equals(otherRentalInformation.rentDueDate)
-                && this.monthlyRent.equals(otherRentalInformation.monthlyRent)
-                && this.deposit.equals(otherRentalInformation.deposit)
-                && this.customerList.equals(otherRentalInformation.customerList);
+        return this.address.equals(otherRentalInformation.address);
     }
 
     @Override
