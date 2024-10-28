@@ -99,7 +99,8 @@ public class FavoriteCommand extends Command {
     @Override
     public String toString() {
         return "FavoriteCommand{" +
-                "index=" + index +
-                '}';
+                "index="
+                + index
+                + '}';
     }
 }
