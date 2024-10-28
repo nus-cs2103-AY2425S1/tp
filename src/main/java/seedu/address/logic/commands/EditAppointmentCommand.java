@@ -3,10 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -31,21 +30,19 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an appointment from the person identified "
             + "By the patient's NRIC number, date and start time"
             + "\nParameters: "
-            + PREFIX_FIND_NRIC + "PATIENT_NRIC\n"
-            + PREFIX_FIND_DATE + "DATE (DD/MM/YYYY) \n"
-            + PREFIX_FIND_START_TIME + "START_TIME (HH:MM) \n"
-            + PREFIX_NRIC + "NEW_PATIENT_NRIC\n"
-            + PREFIX_DATE + "NEW_DATE (DD/MM/YYYY) \n"
-            + PREFIX_START_TIME + "NEW_START_TIME (HH:MM) \n"
-            + PREFIX_END_TIME + "NEW_END_TIME (HH:MM) \n"
+            + PREFIX_NRIC + "PATIENT_NRIC\n"
+            + PREFIX_DATE + "DATE (DD/MM/YYYY) \n"
+            + PREFIX_START_TIME + "START_TIME (HH:MM) \n"
+            + PREFIX_NEW_DATE + "NEW_DATE (DD/MM/YYYY) \n"
+            + PREFIX_NEW_START_TIME + "NEW_START_TIME (HH:MM) \n"
+            + PREFIX_NEW_END_TIME + "NEW_END_TIME (HH:MM) \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FIND_NRIC + "S1234567A "
-            + PREFIX_FIND_DATE + "01/01/2025 "
-            + PREFIX_FIND_START_TIME + "10:00"
-            + PREFIX_NRIC + "S7654321B "
-            + PREFIX_DATE + "02/02/2025 "
-            + PREFIX_START_TIME + "11:00 "
-            + PREFIX_END_TIME + "12:00";
+            + PREFIX_NRIC + "S1234567A "
+            + PREFIX_DATE + "01/01/2025 "
+            + PREFIX_START_TIME + "10:00"
+            + PREFIX_NEW_DATE + "02/02/2025 "
+            + PREFIX_NEW_START_TIME + "11:00 "
+            + PREFIX_NEW_END_TIME + "12:00";
     public static final String MESSAGE_SUCCESS = "Edited appointment: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
     public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
@@ -105,14 +102,14 @@ public class EditAppointmentCommand extends Command {
             EditAppointmentDescriptor editAppointmentDescriptor) {
         assert appointmentToEdit != null;
 
-        String updatedName = editAppointmentDescriptor.getName().orElse(appointmentToEdit.getName());
-        Nric updatedNric = editAppointmentDescriptor.getNric().orElse(appointmentToEdit.getNric());
+        String name = appointmentToEdit.getName();
+        Nric nric = appointmentToEdit.getNric();
         LocalDateTime updatedStartTime = editAppointmentDescriptor.getStartTime()
                 .orElse(appointmentToEdit.getStartTime());
         LocalDateTime updatedEndTime = editAppointmentDescriptor.getEndTime()
                 .orElse(appointmentToEdit.getEndTime());
 
-        return new Appointment(updatedName, updatedNric, updatedStartTime, updatedEndTime);
+        return new Appointment(name, nric, updatedStartTime, updatedEndTime);
     }
 
     @Override
@@ -146,7 +143,6 @@ public class EditAppointmentCommand extends Command {
      */
     public static class EditAppointmentDescriptor {
         private String name;
-        private Nric nric;
         private LocalDateTime startTime;
         private LocalDateTime endTime;
 
@@ -159,13 +155,12 @@ public class EditAppointmentCommand extends Command {
          */
         public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
             setName(toCopy.name);
-            setNric(toCopy.nric);
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, nric, startTime, endTime);
+            return CollectionUtil.isAnyNonNull(name, startTime, endTime);
         }
 
         public void setName(String name) {
@@ -174,14 +169,6 @@ public class EditAppointmentCommand extends Command {
 
         public Optional<String> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
-        }
-
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
         }
 
         public void setStartTime(LocalDateTime startDateTime) {
@@ -213,7 +200,6 @@ public class EditAppointmentCommand extends Command {
 
             EditAppointmentDescriptor otherEditPersonDescriptor = (EditAppointmentDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(startTime, otherEditPersonDescriptor.startTime)
                     && Objects.equals(endTime, otherEditPersonDescriptor.endTime);
         }
@@ -222,7 +208,6 @@ public class EditAppointmentCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("nric", nric)
                     .add("startTime", startTime)
                     .add("endTime", endTime)
                     .toString();
