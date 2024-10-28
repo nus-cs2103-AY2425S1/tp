@@ -84,31 +84,6 @@ public class ImportConsultCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_HEADER);
             }
 
-            //            String line;
-            //            boolean hasValidEntries = false;
-            //            while ((line = reader.readLine()) != null) {
-            //                if (line.trim().isEmpty()) {
-            //                    continue;
-            //                }
-            //                hasValidEntries = true;
-            //                try {
-            //                    Consultation consultation = parseConsultation(line, model);
-            //                    if (!model.hasConsult(consultation)) {
-            //                        model.addConsult(consultation);
-            //                        successCount++;
-            //                        logger.fine("Successfully imported consultation: " + consultation);
-            //                    } else {
-            //                        errorEntries.add(new String[]{line, "Duplicate consultation"});
-            //                        errorCount++;
-            //                        logger.fine("Duplicate consultation found: " + consultation);
-            //                    }
-            //                } catch (IllegalArgumentException e) {
-            //                    errorEntries.add(new String[]{line, e.getMessage()});
-            //                    errorCount++;
-            //                    logger.fine("Error parsing consultation entry: " + e.getMessage());
-            //                }
-            //            }
-
             boolean hasValidEntries = parseFileEntries(errorEntries, reader, model);
 
             if (!hasValidEntries) {
