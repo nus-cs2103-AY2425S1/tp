@@ -1,11 +1,16 @@
 package tuteez.model.person.lesson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.logic.commands.AddCommand;
+import tuteez.model.person.Person;
+import tuteez.model.person.UniquePersonList;
 
 /**
  * A container for all Lesson instances
@@ -63,18 +68,29 @@ public class LessonManager {
      * @return {@code true} if the lesson clashes with any existing lessons on the same day,
      *         {@code false} otherwise.
      */
-    public boolean isClashingWithExistingLesson(Lesson lesson) {
-        Day lessonDay = lesson.getLessonDay();
-        TreeSet<Lesson> lessonsOnDay = dayLessonsMap.get(lessonDay);
-        for (Lesson lessonOnDay : lessonsOnDay) {
-            assert lessonOnDay != null;
-            if (Lesson.isClashingWithOtherLesson(lessonOnDay, lesson)) {
-                String logMessage = String.format("%s clashes with %s", lessonOnDay, lesson);
-                logger.info(logMessage);
-                return true;
+    public Map<Person, ArrayList<Lesson>> getClashingLessons(UniquePersonList studentList, Lesson lesson) {
+        // ArrayList<Lesson> clashingLessonArr = new ArrayList<>();
+        // Day lessonDay = lesson.getLessonDay();
+        // TreeSet<Lesson> lessonsOnDay = dayLessonsMap.get(lessonDay);
+        // for (Lesson lessonOnDay : lessonsOnDay) {
+        // assert lessonOnDay != null;
+        //    if (Lesson.isClashingWithOtherLesson(lessonOnDay, lesson)) {
+        //        String logMessage = String.format("%s clashes with %s", lessonOnDay, lesson);
+        //        logger.info(logMessage);
+        //        clashingLessonArr.add(lessonOnDay);
+        //    }
+        // }
+        // return clashingLessonArr;
+        Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
+        Iterator<Person> students = studentList.iterator();
+        while (students.hasNext()) {
+            Person stu = students.next();
+            ArrayList<Lesson> clashedLessons = stu.getLessonsThatClash(lesson);
+            if (!clashedLessons.isEmpty()) {
+                clashingLessonMap.put(stu, clashedLessons);
             }
         }
-        return false;
+        return clashingLessonMap;
     }
 
     /**
