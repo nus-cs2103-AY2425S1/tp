@@ -14,7 +14,7 @@ public class NameValidator extends Validator<String> {
      * Returns an instance of {@code NameValidator}.
      * Ensures only one instance of {@code NameValidator} is created.
      *
-     * @return the instance of {@code NameValidator}.
+     * @return NameValidator the instance of {@code NameValidator}.
      */
     public static NameValidator of() {
         if (instance == null) {

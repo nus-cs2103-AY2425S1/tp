@@ -15,7 +15,7 @@ public class StatusValidator extends Validator<String> {
      * Returns an instance of {@code StatusValidator}.
      * Ensures only one instance of {@code StatusValidator} is created.
      *
-     * @return the instance of {@code NameValidator}.
+     * @return StatusValidator the instance of {@code StatusValidator}.
      */
     public static StatusValidator of() {
         if (instance == null) {

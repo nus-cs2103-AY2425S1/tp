@@ -1,5 +1,6 @@
 package seedu.hireme.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.Assert.assertThrows;
@@ -138,6 +139,43 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    //---------------- Tests for getPercentageString --------------------------------------
+
+    /*
+     * Equivalence Partitions: x = 0, x < 0, x > 0 for both value and total
+     */
+
+    @Test
+    public void getPercentageString_invalidInputs_emptyString() {
+        // Negative values
+        assertEquals("", StringUtil.getPercentageString(-1, 10));
+        assertEquals("", StringUtil.getPercentageString(-1, -10));
+        assertEquals("", StringUtil.getPercentageString(-1.05, -10.05));
+        assertEquals("", StringUtil.getPercentageString(-10, -1));
+
+        // Zero value
+        assertEquals("", StringUtil.getPercentageString(-1, 0));
+        assertEquals("", StringUtil.getPercentageString(1, 0));
+        assertEquals("", StringUtil.getPercentageString(1.505, 0));
+
+        // Percentage > 100
+        assertEquals("", StringUtil.getPercentageString(3, 1));
+        assertEquals("", StringUtil.getPercentageString(3.99, 1));
+    }
+
+    @Test
+    public void getPercentageString_validInputs_formattedString() {
+        // Positive values
+        assertEquals("10.00%", StringUtil.getPercentageString(1, 10));
+        assertEquals("27.77%", StringUtil.getPercentageString(3.61, 13));
+
+        // Percentage = 0
+        assertEquals("0.00%", StringUtil.getPercentageString(0, 1));
+
+        // Percentage = 100
+        assertEquals("100.00%", StringUtil.getPercentageString(1, 1));
     }
 
 }
