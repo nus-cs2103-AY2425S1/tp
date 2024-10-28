@@ -80,7 +80,7 @@ public class ListClaimsCommandTest {
         Person person = modelWithClaims.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
         String expectedMessage = String.format(ListClaimsCommand.MESSAGE_LIST_CLAIMS_SUCCESS,
-                PolicyType.HEALTH, person.getName(), "Claim Status: Pending | Claim Description: Hospitalization");
+                PolicyType.HEALTH, person.getName(), "1. Claim Status: Pending | Claim Description: Hospitalization");
 
         assertCommandSuccess(command, modelWithClaims, expectedMessage, modelWithClaims);
     }
