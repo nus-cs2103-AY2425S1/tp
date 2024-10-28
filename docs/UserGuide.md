@@ -450,7 +450,6 @@ Displays the detailed information of a student in the list.
 Displaying the detailed command window can be done in two ways:
 
 Method 1:
-
 **Example Usage:**
 *Input: User enters the `info 1` command to display detailed information for the first student.*
 ![Ui](images/infocommandinput.png)
