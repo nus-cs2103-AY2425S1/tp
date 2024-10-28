@@ -23,12 +23,27 @@ public class MarkAttendanceByStudentCommandParserTest {
                 Attendance.VALID_DATE_FORMAT));
         MarkAttendanceByStudentCommand expectedCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, new Tutorial("Math"));
+
         assertParseSuccess(parser, "1 attend/12/12/2024 tut/Math", expectedCommand);
+        assertParseSuccess(parser, "1 tut/Math attend/12/12/2024", expectedCommand);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
+        //no arguments specified
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
+
+        //index not specified
+        assertParseFailure(parser, "attend/12/12/2024 tut/Math",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
+
+        //attendance not specified
+        assertParseFailure(parser, "1 tut/Math",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
+
+        //tutorial not specified
+        assertParseFailure(parser, "1 attend/12/12/2024",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
     }
 }

@@ -26,7 +26,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the all the students in the specified tutorial.\n"
             + "Parameters: "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
+            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]"
             + "[" + PREFIX_TUTORIAL + "TUTORIAL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ATTENDANCE + "20/10/2024"
