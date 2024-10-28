@@ -71,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox propertyListPane;
-    
+
     @FXML
     private Label modeLabel;
 
