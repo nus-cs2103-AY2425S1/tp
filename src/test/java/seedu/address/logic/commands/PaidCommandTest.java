@@ -1,19 +1,21 @@
-/*package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_INSURANCE_PAYMENT;
 import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_POLICY_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.NON_EXISTENT_POLICY_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_PAID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAID_INSURANCE_PAYMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_INVESTMENT;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Policy;
-//import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class PaidCommandTest {
 
@@ -36,7 +38,7 @@ public class PaidCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
-    /*@Test
+    @Test
     public void execute_validIndexAndPolicy_success() {
         Person personToUpdate = new PersonBuilder().build();
         Policy oldPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
@@ -89,4 +91,4 @@ public class PaidCommandTest {
                 EXPIRING_POLICY_NAME, personToUpdate.getName()));
     }
 
-}*/
+}
