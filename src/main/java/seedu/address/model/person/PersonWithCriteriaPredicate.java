@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -11,6 +12,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Range;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a person's age and appointment dates are within a given range.
@@ -18,6 +20,7 @@ import seedu.address.model.appointment.Appointment;
 public class PersonWithCriteriaPredicate implements Predicate<Person> {
     public static final String MESSAGE_CONSTRAINTS = "All ranges should be of type Integer or LocalDate.";
     private final List<Range<?>> ranges;
+    private final Set<Tag> tags;
 
     /**
      * Constructs a {@code PersonWithCriteriaPredicate} with the given list of ranges.
@@ -30,6 +33,23 @@ public class PersonWithCriteriaPredicate implements Predicate<Person> {
             checkArgument(isValidRange(range), MESSAGE_CONSTRAINTS);
         }
         this.ranges = ranges;
+        this.tags = new HashSet<>();
+    }
+
+    /**
+     * Constructs a {@code PersonWithCriteriaPredicate} with the given list of ranges and set of tags.
+     *
+     * @param ranges a list of {@code Range<?>} objects that define the criteria for filtering a person.
+     * @param tags a set of {@code Tags} to be filtered.
+     */
+    public PersonWithCriteriaPredicate(List<Range<?>> ranges, Set<Tag> tags) {
+        requireNonNull(ranges);
+        requireNonNull(tags);
+        for (Range<?> range : ranges) {
+            checkArgument(isValidRange(range), MESSAGE_CONSTRAINTS);
+        }
+        this.ranges = ranges;
+        this.tags = tags;
     }
 
     /**
@@ -45,10 +65,15 @@ public class PersonWithCriteriaPredicate implements Predicate<Person> {
                 || (range.lowerBound instanceof LocalDate && range.upperBound instanceof LocalDate);
     }
 
+    /**
+     * Checks if the age and appointment date of a person is within a given range
+     * and tags contains a given tag.
+     */
     @Override
     public boolean test(Person person) {
         return ranges.stream()
-                .allMatch(range -> isWithinRange(range, person));
+                .allMatch(range -> isWithinRange(range, person))
+                && tags.stream().allMatch(tag -> withTag(tag, person));
     }
 
     /**
@@ -73,6 +98,14 @@ public class PersonWithCriteriaPredicate implements Predicate<Person> {
         } else {
             throw new IllegalArgumentException("Unsupported type: T must be either Integer or LocalDate");
         }
+    }
+
+    /**
+     * Checks if the person's tag list contains a specific tag.
+     */
+    private boolean withTag(Tag tag, Person person) {
+        Set<Tag> tags = person.getTags();
+        return tags.contains(tag);
     }
 
     @Override

@@ -8,7 +8,7 @@
     "age" : "24",
     "sex" : "Female",
     "appointments": ["11/11/2025 1200"],
-    "tags" : [ "friends" ],
+    "tags" : [ "Obesity", "Diet Plan" ],
     "note": {
       "medication": [ ],
       "appointments": [ ],
@@ -23,7 +23,7 @@
     "age" : "37",
     "sex" : "Male",
     "appointments": ["01/01/2026 1200"],
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "diabetes", "stroke" ],
     "note": {
       "medication": [ ],
       "appointments": [ ],
@@ -37,7 +37,7 @@
     "address" : "wall street",
     "age" : "29",
     "sex" : "Female",
-    "tags" : [ ],
+    "tags" : [ "Insomnia" ],
     "note": {
       "medication": [ ],
       "appointments": [ ],
@@ -51,7 +51,7 @@
     "address" : "10th street",
     "age" : "40",
     "sex" : "Male",
-    "tags" : [ "friends" ],
+    "tags" : [ "diabetes" ],
     "note": {
       "medication": [ ],
       "appointments": [ ],
@@ -79,7 +79,7 @@
     "address" : "little tokyo",
     "age" : "70",
     "sex" : "Female",
-    "tags" : [ ],
+    "tags" : [ "Surgery"],
     "note": {
       "medication": [ ],
       "appointments": [ ],

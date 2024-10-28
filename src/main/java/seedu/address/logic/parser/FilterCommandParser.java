@@ -3,23 +3,30 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Range;
 import seedu.address.model.person.PersonWithCriteriaPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-
+    public static final String INCORRECT_AGE = "Age should be an integer";
+    public static final String INCORRECT_DATE_FORMAT = "Appointment date should be form dd/MM/yyyy";
+    public static final String INCORRECT_RANGE = "Please provide range in format: Lower bound - Upper bound";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     @Override
     public FilterCommand parse(String args) throws ParseException {
@@ -30,11 +37,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_AGE, PREFIX_APPOINTMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_AGE, PREFIX_APPOINTMENT, PREFIX_TAG);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AGE, PREFIX_APPOINTMENT);
 
-        if (isPrefixPresent(argMultimap, PREFIX_APPOINTMENT) || isPrefixPresent(argMultimap, PREFIX_AGE)) {
+        if (isPrefixPresent(argMultimap, PREFIX_APPOINTMENT)
+                || isPrefixPresent(argMultimap, PREFIX_AGE)
+                || isPrefixPresent(argMultimap, PREFIX_TAG)) {
             ArrayList<Range<?>> ranges = new ArrayList<>();
 
             if (isPrefixPresent(argMultimap, PREFIX_AGE)) {
@@ -42,6 +51,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             }
             if (isPrefixPresent(argMultimap, PREFIX_APPOINTMENT)) {
                 ranges.add(parseAppointmentRange(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
+            }
+            if (isPrefixPresent(argMultimap, PREFIX_TAG)) {
+                List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
+                Set<Tag> parsedTags = ParserUtil.parseTags(tags);
+                PersonWithCriteriaPredicate criteria = new PersonWithCriteriaPredicate(ranges, parsedTags);
+                return new FilterCommand(criteria);
             }
             PersonWithCriteriaPredicate criteria = new PersonWithCriteriaPredicate(ranges);
             return new FilterCommand(criteria);
@@ -62,15 +77,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String[] splittedRange = trimmedRange.split("-");
 
         if (splittedRange.length != 2) {
-            throw new ParseException("Incorrect range format: Please provide your appointment dates range as "
-                   + "dd/MM/yyyy - dd/MM/yyyy");
+            throw new ParseException(String.format(INCORRECT_RANGE));
         }
         try {
             LocalDate lower = LocalDate.parse(splittedRange[0].trim(), FORMATTER);
             LocalDate upper = LocalDate.parse(splittedRange[1].trim(), FORMATTER);
             return new Range<LocalDate>(lower, upper);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid Date Format: Please input dates in the format 'dd/MM/yyyy'");
+            throw new ParseException(String.format(INCORRECT_DATE_FORMAT));
         }
     }
 
@@ -85,8 +99,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String[] splittedRange = trimmedRange.split("-");
 
         if (splittedRange.length != 2) {
-            throw new ParseException("Incorrect range format: Please provide your age range as "
-                   + "ageValue - ageValue");
+            throw new ParseException(String.format(INCORRECT_RANGE));
         }
 
         try {
@@ -94,7 +107,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             int upper = Integer.parseInt(splittedRange[1].trim());
             return new Range<Integer>(lower, upper);
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid Age Format: Please provide a valid age value");
+            throw new ParseException(String.format(INCORRECT_AGE));
         }
     }
 
