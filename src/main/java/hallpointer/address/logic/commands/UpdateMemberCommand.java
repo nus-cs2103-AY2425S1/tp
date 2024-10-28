@@ -101,10 +101,9 @@ public class UpdateMemberCommand extends Command {
         Telegram updatedTelegram = updateMemberDescriptor.getTelegram().orElse(memberToUpdate.getTelegram());
         Room updatedRoom = updateMemberDescriptor.getRoom().orElse(memberToUpdate.getRoom());
         Set<Tag> updatedTags = updateMemberDescriptor.getTags().orElse(memberToUpdate.getTags());
-        Point updatedPoints = updateMemberDescriptor.getTotalPoints().orElse(memberToUpdate.getTotalPoints());
         Set<Session> updatedSessions = updateMemberDescriptor.getSessions().orElse(memberToUpdate.getSessions());
 
-        return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags, updatedPoints, updatedSessions);
+        return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags, updatedSessions);
     }
 
     @Override

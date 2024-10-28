@@ -8,6 +8,9 @@ import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEN
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
+import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,9 +39,12 @@ public class TypicalMembers {
     public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withTelegram("meyer_for_lif3")
             .withRoom("4/5/55").build();
     public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withTelegram("FIONAKUNZ")
-            .withRoom("8/10/300").build();
+            .withRoom("8/10/300")
+            .withSessions(new SessionBuilder(ATTENDANCE).build()).build();
     public static final Member GEORGE = new MemberBuilder().withName("George Best").withTelegram("B357650463")
-            .withRoom("90/2/8").build();
+            .withRoom("90/2/8")
+            .withSessions(new SessionBuilder(REHEARSAL).build(),
+                    new SessionBuilder(MEETING).build()).build();
 
     // Manually added
     public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withTelegram("meier__5002")

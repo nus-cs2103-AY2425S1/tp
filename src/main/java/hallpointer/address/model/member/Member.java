@@ -47,15 +47,19 @@ public class Member {
     /**
      * Every field must be present and not null. Overloaded constructor to include totalPoints and sessions.
      */
-    public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Point totalPoints, Set<Session> sessions) {
-        requireAllNonNull(name, telegram, room, tags, totalPoints, sessions);
+    public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Set<Session> sessions) {
+        requireAllNonNull(name, telegram, room, tags, sessions);
 
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
-        this.totalPoints = totalPoints;
         this.sessions.addAll(sessions);
+
+        this.totalPoints = new Point("0");
+        for (Session session : this.sessions) {
+            addPoints(session.getPoints());
+        }
     }
 
     public Name getName() {
@@ -91,7 +95,7 @@ public class Member {
      *
      *  @param points Points to be added to the member.
      */
-    public void addPoints(Point points) {
+    private void addPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = totalPoints.add(points);
     }
@@ -101,22 +105,10 @@ public class Member {
      *
      *  @param points Points to be subtracted from the member.
      */
-    public void subtractPoints(Point points) {
+    private void subtractPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = totalPoints.subtract(points);
     }
-
-    /**
-     *  Adds the given session to the member's list of sessions.
-     *
-     *  @param session Session to be added to the member.
-     */
-    public void addSession(Session session) {
-        requireNonNull(session);
-        this.sessions.add(session);
-        addPoints(session.getPoints());
-    }
-
 
     /**
      *  Returns true if the member has the given session.
@@ -132,6 +124,17 @@ public class Member {
             }
         }
         return false;
+    }
+
+    /**
+     *  Adds the given session to the member's list of sessions.
+     *
+     *  @param session Session to be added to the member.
+     */
+    public void addSession(Session session) {
+        requireNonNull(session);
+        this.sessions.add(session);
+        addPoints(session.getPoints());
     }
 
     /**
