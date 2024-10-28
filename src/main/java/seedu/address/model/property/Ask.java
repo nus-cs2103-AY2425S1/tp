@@ -15,6 +15,7 @@ public class Ask {
     public static final String MESSAGE_CONSTRAINTS =
             "Ask price should be an integer";
     public static final String VALIDATION_REGEX = "\\d+";
+    public static final String REMOVE_ZERO_PADDING_REGEX = "^0+(?!$)";
     private static final Logger logger = LogsCenter.getLogger(Ask.class);
     public final String value;
 
@@ -30,14 +31,23 @@ public class Ask {
         checkArgument(isValidAsk(ask), MESSAGE_CONSTRAINTS);
         assert isValidAsk(ask) != false : "Ask string must be non-negative integer";
         logger.info("Ask object created: " + ask);
-        value = ask;
+        value = ask.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
     }
 
     /**
      * Returns true if a given string is a valid ask.
      */
     public static boolean isValidAsk(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        test = test.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

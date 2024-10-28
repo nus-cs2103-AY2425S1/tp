@@ -2,8 +2,16 @@ package seedu.address.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PADDED_OVERFLOW_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNPADDED_OVERFLOW_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASK_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASK_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LARGEST_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LARGEST_UNPADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SMALLEST_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SMALLEST_UNPADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNPADDED_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -35,6 +43,8 @@ public class AskTest {
         assertFalse(Ask.isValidAsk("00000 ")); // contains space
         assertFalse(Ask.isValidAsk("000 0000")); // contains space delimiter
         assertFalse(Ask.isValidAsk("$1000000")); // contains dollar character
+        assertFalse(Ask.isValidAsk(INVALID_UNPADDED_OVERFLOW_PRICE)); // Integer Overflow
+        assertFalse(Ask.isValidAsk(INVALID_PADDED_OVERFLOW_PRICE)); // Integer Overflow
 
         // valid name
         assertTrue(Ask.isValidAsk("000000")); // alphabets only
@@ -60,5 +70,14 @@ public class AskTest {
 
         // different values -> returns false
         assertFalse(ask.equals(new Ask(VALID_ASK_ADMIRALTY)));
+
+        // padded and non-padded values are the same
+        assertTrue(new Ask(VALID_PADDED_PRICE).equals(new Ask(VALID_UNPADDED_PRICE)));
+
+        // padded and non-padded values are the same at largest number boundry
+        assertTrue(new Ask(VALID_LARGEST_PADDED_PRICE).equals(new Ask(VALID_LARGEST_UNPADDED_PRICE)));
+
+        // padded and non-padded values are the same at smallest number boundry
+        assertTrue(new Ask(VALID_SMALLEST_PADDED_PRICE).equals(new Ask(VALID_SMALLEST_UNPADDED_PRICE)));
     }
 }

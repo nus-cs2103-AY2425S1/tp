@@ -3,10 +3,18 @@ package seedu.address.model.property;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PADDED_OVERFLOW_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNPADDED_OVERFLOW_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASK_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BID_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LARGEST_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LARGEST_UNPADDED_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SMALLEST_PADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SMALLEST_UNPADDED_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNPADDED_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -51,6 +59,8 @@ public class MatchingPriceTest {
         assertFalse(MatchingPrice.isValidMatchingPrice("00000 ")); // contains space
         assertFalse(MatchingPrice.isValidMatchingPrice("000 0000")); // contains space delimiter
         assertFalse(MatchingPrice.isValidMatchingPrice("$1000000")); // contains dollar character
+        assertFalse(MatchingPrice.isValidMatchingPrice(INVALID_UNPADDED_OVERFLOW_PRICE)); // Integer Overflow
+        assertFalse(MatchingPrice.isValidMatchingPrice(INVALID_PADDED_OVERFLOW_PRICE)); // Integer Overflow
 
         // valid name
         assertTrue(MatchingPrice.isValidMatchingPrice("000000")); // alphabets only
@@ -76,5 +86,16 @@ public class MatchingPriceTest {
 
         // different values -> returns false
         assertFalse(matchingPrice.equals(new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY)));
+
+        // padded and non-padded values are the same
+        assertTrue(new MatchingPrice(VALID_PADDED_PRICE).equals(new MatchingPrice(VALID_UNPADDED_PRICE)));
+
+        // padded and non-padded values are the same at largest number boundry
+        assertTrue(new MatchingPrice(VALID_LARGEST_PADDED_PRICE)
+                .equals(new MatchingPrice(VALID_LARGEST_UNPADDED_PRICE)));
+
+        // padded and non-padded values are the same at smallest number boundry
+        assertTrue(new MatchingPrice(VALID_SMALLEST_PADDED_PRICE)
+                .equals(new MatchingPrice(VALID_SMALLEST_UNPADDED_PRICE)));
     }
 }
