@@ -1,4 +1,4 @@
-package tahub.contacts.logic.parser;
+package tahub.contacts.logic.parser.course;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_CODE_DESC;
@@ -10,17 +10,17 @@ import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseSucce
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.DeleteCourseCommand;
+import tahub.contacts.logic.commands.course.CourseDeleteCommand;
 import tahub.contacts.model.course.CourseCode;
 
-public class DeleteCourseCommandParserTest {
+public class CourseDeleteCommandParserTest {
 
-    private final DeleteCourseCommandParser parser = new DeleteCourseCommandParser();
+    private final CourseDeleteCommandParser parser = new CourseDeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCourseCommand() {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        DeleteCourseCommand expectedCommand = new DeleteCourseCommand(courseCode);
+        CourseDeleteCommand expectedCommand = new CourseDeleteCommand(courseCode);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + COURSE_CODE_DESC, expectedCommand);
@@ -36,6 +36,6 @@ public class DeleteCourseCommandParserTest {
     public void parse_missingParts_failure() {
         // no course code
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCourseCommand.MESSAGE_USAGE));
+                CourseDeleteCommand.MESSAGE_USAGE));
     }
 }
