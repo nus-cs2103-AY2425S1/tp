@@ -51,7 +51,7 @@ public class OrderHistory {
             return true;
         }
 
-        if (!(rhs instanceof  OrderHistory)) {
+        if (!(rhs instanceof OrderHistory)) {
             return false;
         }
 
