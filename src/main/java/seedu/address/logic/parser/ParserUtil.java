@@ -183,4 +183,16 @@ public class ParserUtil {
         }
         return interestSet;
     }
+    /**
+     * Parses a {@code String interest} into an {@code Interest}.
+     * @throws ParseException if the given {@code interest} is invalid.
+     */
+    public static Interest parseInterest(String interest) throws ParseException {
+        requireNonNull(interest);
+        String trimmedInterest = interest.trim();
+        if (!Interest.isValidInterest(trimmedInterest)) {
+            throw new ParseException(Interest.MESSAGE_CONSTRAINTS);
+        }
+        return new Interest(trimmedInterest);
+    }
 }
