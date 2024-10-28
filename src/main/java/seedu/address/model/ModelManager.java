@@ -155,7 +155,7 @@ public class ModelManager implements Model {
 
         Predicate<Student> combinedPredicate = predicates.stream()
                 .map(predicate -> (Predicate<Student>) predicate) // Cast each to Predicate<Student>
-                .reduce(Predicate::or) // combine all predicates using OR
+                .reduce(Predicate::and) // combine all predicates using and
                 .orElse(PREDICATE_SHOW_ALL_STUDENTS); // Default to show all if no predicates are given
 
         filteredStudents.setPredicate(combinedPredicate);
