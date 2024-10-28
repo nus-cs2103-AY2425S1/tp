@@ -162,6 +162,12 @@ public class History {
         return this.dateOfCreation.equals(otherHistory.dateOfCreation)
                 && this.history.equals(otherHistory.history);
     }
+    /**
+     * @return if the history object contains entries other than the default creation entry {@code boolean}.
+     */
+    public boolean hasNoEntry() {
+        return this.history.entrySet().stream().flatMap(e -> e.getValue().stream()).count() < 1;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
