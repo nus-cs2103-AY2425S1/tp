@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+/*package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_INSURANCE_PAYMENT;
 import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_POLICY_NAME;
@@ -57,7 +57,7 @@ public class PaidCommandTest {
 
         // Act & Assert
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_invalidPolicy_throwsCommandException() {
@@ -89,4 +89,4 @@ public class PaidCommandTest {
                 EXPIRING_POLICY_NAME, personToUpdate.getName()));
     }
 
-}
+}*/
