@@ -105,7 +105,7 @@ Adds a student to the address book.
 
 <box type="tip" header="#### Tips">
 
-1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
+1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit)
 2. <b>RATE</b> is the tuition fee per hour.
     
 </box>
@@ -217,7 +217,7 @@ Example:
 
 <box type="tip" header="##### Tips">
 
-In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT as your preference.
 
 </box>
 
