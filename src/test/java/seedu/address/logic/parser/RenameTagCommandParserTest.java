@@ -39,12 +39,14 @@ public class RenameTagCommandParserTest {
 
     @Test
     public void parse_emptyNewTagName_throwsParseException() {
-        assertParseFailure(parser, " t/bride's friend t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/bride's friend t/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyExistingTagName_throwsParseException() {
-        assertParseFailure(parser, " t/ t/bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/ t/bride's friend",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test

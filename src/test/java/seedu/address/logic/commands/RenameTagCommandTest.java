@@ -10,12 +10,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TypicalTags;
 
 public class RenameTagCommandTest {
-    private Model model = new ModelManager();
     private static final String NEW_NAME = "new name";
     private static final String TYPICAL_NAME = "bride's friend";
+    private Model model = new ModelManager();
 
     @Test
     public void execute_existingTagToNonExistentNewTag_success() {
