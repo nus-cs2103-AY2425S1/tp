@@ -55,6 +55,7 @@ public class CommandTestUtil {
     public static final String VALID_DATE_1 = "2024-10-16";
     public static final String VALID_DATE_2 = "2027-11-11";
     public static final String VALID_INSURANCE_PAYMENT = "2025-12-12 349.00";
+    public static final String VALID_PAID_INSURANCE_PAYMENT = "2026-12-12 349.00";
     public static final String EXPIRING_INSURANCE_PAYMENT = "2026-12-12 349.00";
     public static final String VALID_INSURANCE_PAYMENT_DATE = "2025-12-12";
     public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
