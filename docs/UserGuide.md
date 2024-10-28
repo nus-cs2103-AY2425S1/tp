@@ -438,6 +438,15 @@ computer?<br>
 
 <br>
 
+**Q**: Can I access DocTrack without internet connection?<br>
+**A**: Yes, DocTrack is a desktop application that can be run without an internet connection.
+
+<br>
+
+**Q**: How do I back up my data?<br>
+**A**: Since the data is saved in the `addressbook.json` and `appointmentbook.json` files in the `data` 
+folder, you can copy these files to another location as a backup.
+
 ---
 
 <br>
