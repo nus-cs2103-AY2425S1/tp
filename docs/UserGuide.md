@@ -197,8 +197,6 @@ For first-time users of the application, it is highly recommended for you to rea
 ### 3.1 Installation
 <a id="installation"></a>
 
-TO BE CHANGED
-
 1. Ensure you have Java `17` or above installed on your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
