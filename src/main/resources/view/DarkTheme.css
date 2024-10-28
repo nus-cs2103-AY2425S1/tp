@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #FEFAE0; /* Used in the default.html file */
 }
 
 .label {
@@ -91,33 +91,41 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-radius: 0.5em;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 10px 0;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 0.5em;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #283618;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #606C38;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+.list-cell:filled:selected:odd {
+    -fx-background-color: #CCD5AE;
+    -fx-background-radius: 0.5em;
 }
 
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+.list-cell:filled:selected:even {
+    -fx-background-color: #CCD5AE;
+    -fx-background-radius: 0.5em;
+}
+
+.list-cell:filled:selected .label {
+    -fx-text-fill: #BC6C25;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #FAEDCD;
 }
 
 .cell_big_label {
@@ -318,14 +326,14 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: transparent #FEFAE0 transparent #FEFAE0;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #FEFAE0 #FEFAE0 #151570 #FEFAE0;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #b1b10c;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -333,7 +341,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #FEFAE0, transparent, #FEFAE0;
     -fx-background-radius: 0;
 }
 
