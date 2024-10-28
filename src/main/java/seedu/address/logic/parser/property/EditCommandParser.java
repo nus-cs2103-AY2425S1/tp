@@ -44,7 +44,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                     EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_BUDGET);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_ASKING_PRICE,
+                PREFIX_TYPE);
 
         EditPropertyDescriptor editPropertyDescriptor = new EditPropertyDescriptor();
 
