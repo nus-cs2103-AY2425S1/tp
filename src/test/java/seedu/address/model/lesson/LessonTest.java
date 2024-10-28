@@ -176,4 +176,14 @@ public class LessonTest {
                 Map.of(student1, false));
         assertNotEquals(lesson1.hashCode(), lesson2.hashCode());
     }
+
+    @Test
+    public void toString_returnsExpectedString() {
+        List<Student> students = List.of(student1);
+        Map<Student, Boolean> attendanceMap = Map.of(student1, true);
+        Lesson lesson = new Lesson(date, time, students, attendanceMap);
+        String expected = String.format("Lesson[date=%s, time=%s, students=%s, attendanceMap=%s]",
+                date, time, students, attendanceMap);
+        assertEquals(lesson.toString(), expected);
+    }
 }

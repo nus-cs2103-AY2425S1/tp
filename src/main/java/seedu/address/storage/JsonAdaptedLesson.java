@@ -154,7 +154,7 @@ class JsonAdaptedLesson {
     private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
         for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceList) {
             if (pair.getKey().equals(jsonStudent)) {
-                return pair.getVal();
+                return pair.getValue();
             }
         }
         return false; // the default attendance is false if data is not found
