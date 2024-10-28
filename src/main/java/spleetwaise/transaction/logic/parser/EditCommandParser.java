@@ -9,6 +9,9 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -56,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Parse descriptors
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_CATEGORY);
+                PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
 
         EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
 
@@ -80,12 +83,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editTransactionDescriptor.setDate(date);
         }
 
-        if (!argMultimap.getAllValues(PREFIX_CATEGORY).isEmpty()) {
-            Set<Category> categoriesSet = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
-            if (!categoriesSet.isEmpty()) {
-                editTransactionDescriptor.setCategories(categoriesSet);
-            }
-        }
+        parseCategoriesForEdit(argMultimap.getAllValues(PREFIX_CATEGORY)).ifPresent(
+                editTransactionDescriptor::setCategories);
 
         // Check if any fields edited
         if (!editTransactionDescriptor.isAnyFieldEdited()) {
@@ -95,5 +94,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editTransactionDescriptor);
 
     }
+
+    /**
+     * Parses {@code Collection<String> categories} into a {@code Set<Category>} if {@code categories} is non-empty. If
+     * {@code categories} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Category>} containing zero categories.
+     */
+    private Optional<Set<Category>> parseCategoriesForEdit(Collection<String> categories) throws ParseException {
+        assert categories != null;
+
+        if (categories.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> categorySet = categories.size() == 1 && categories.contains("") ? Collections.emptySet()
+                : categories;
+        return Optional.of(ParserUtil.parseCategories(categorySet));
+    }
+
 
 }
