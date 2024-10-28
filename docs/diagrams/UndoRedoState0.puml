@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
-skinparam ClassFontColor #000000
-skinparam ClassBorderColor #000000
+skinparam ClassFontColor #123456
+skinparam ClassBorderColor #111111
 skinparam ClassBackgroundColor #FFFFAA
 
 title Initial state

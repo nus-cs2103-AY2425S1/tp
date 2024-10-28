@@ -11,10 +11,10 @@ public interface ReadOnlyUserPrefs {
 
     GuiSettings getGuiSettings();
 
-    Path getAddressBookFilePath();
-
     Path getPropertyBookFilePath();
 
     Path getClientBookFilePath();
+
+    Path getMeetingBookFilePath();
 
 }

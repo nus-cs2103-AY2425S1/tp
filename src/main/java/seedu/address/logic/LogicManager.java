@@ -5,19 +5,19 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.ClientGridParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.client.Client;
-import seedu.address.model.person.Person;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.property.Property;
 import seedu.address.storage.Storage;
 
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final ClientGridParser clientGridParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        clientGridParser = new ClientGridParser();
     }
 
     @Override
@@ -50,13 +50,13 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = clientGridParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
             storage.saveClientBook(model.getClientBook());
             storage.savePropertyBook(model.getPropertyBook());
+            storage.saveMeetingBook(model.getMeetingBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -67,34 +67,25 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
-    }
-
-    @Override
     public ObservableList<Client> getFilteredClientList() {
         return model.getFilteredClientList();
     }
-
-
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return model.getFilteredPropertyList();
     }
-
     @Override
-    public BooleanProperty getIsDisplayClientsProperty() {
-        return model.getIsDisplayClientsProperty();
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return model.getFilteredMeetingList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getClientBookFilePath() {
+        return model.getClientBookFilePath();
+    }
+
+    public ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode() {
+        return model.getReadOnlyDisplayMode();
     }
 
     @Override

@@ -15,22 +15,18 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ClientBook;
 import seedu.address.model.MeetingBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PropertyBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.ClientBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
 import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
@@ -69,11 +65,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         PropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(userPrefs.getPropertyBookFilePath());
         ClientBookStorage clientBookStorage = new JsonClientBookStorage(userPrefs.getClientBookFilePath());
-        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookFilePath());
+        storage = new StorageManager(userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -89,35 +84,22 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using client book : " + storage.getClientBookFilePath());
+        logger.info("Using property book : " + storage.getPropertyBookFilePath());
+        logger.info("Using meeting book : " + storage.getMeetingBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyPropertyBook> propertyBookOptional;
         Optional<ReadOnlyClientBook> clientBookOptional;
         Optional<ReadOnlyMeetingBook> meetingBookOptional;
-        ReadOnlyAddressBook initialData;
         ReadOnlyPropertyBook initialPropertyData;
         ReadOnlyClientBook initialClientData;
         ReadOnlyMeetingBook initialMeetingData;
 
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
-
-        try {
             propertyBookOptional = storage.readPropertyBook();
             if (!propertyBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                logger.info("Creating a new data file " + storage.getPropertyBookFilePath()
+                        + " populated with a sample PropertyBook.");
             }
             initialPropertyData = propertyBookOptional.orElseGet(SampleDataUtil::getSamplePropertyBook);
         } catch (DataLoadingException e) {
@@ -143,18 +125,18 @@ public class MainApp extends Application {
         try {
             meetingBookOptional = storage.readMeetingBook();
             if (!meetingBookOptional.isPresent()) {
-                logger.info("Creating a new meeting data file " + storage.getClientBookFilePath()
-                        + " populated with a sample MettingBook.");
+                logger.info("Creating a new meeting data file " + storage.getMeetingBookFilePath()
+                        + " populated with a sample MeetingBook.");
             }
             initialMeetingData = meetingBookOptional.orElseGet(SampleDataUtil::getSampleMeetingBook);
-            System.out.println(initialClientData);
+            System.out.println(initialMeetingData);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getClientBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty ClientBook.");
+            logger.warning("Data file at " + storage.getMeetingBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty MeetingBook.");
             initialMeetingData = new MeetingBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialPropertyData, initialClientData, initialMeetingData);
+        return new ModelManager(userPrefs, initialPropertyData, initialClientData, initialMeetingData);
     }
 
     private void initLogging(Config config) {

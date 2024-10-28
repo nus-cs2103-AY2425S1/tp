@@ -16,7 +16,7 @@ public class DeleteBuyerCommandParserTest {
     @Test
     public void parse_phoneNumberSpecified_success() {
         // Test for valid phone number
-        String userInput = DeleteBuyerCommand.COMMAND_WORD + " " + PREFIX_PHONE + nonEmptyphoneNumber;
+        String userInput = String.format(" %s%s", PREFIX_PHONE, nonEmptyphoneNumber);
         assertParseSuccess(parser, userInput, new DeleteBuyerCommand(new Phone(nonEmptyphoneNumber)));
     }
 

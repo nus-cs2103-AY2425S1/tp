@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClientBookParser" as ClientBookParser LOGIC_COLOR
+participant ":DeleteBuyerCommandParser" as DeleteBuyerCommandParser LOGIC_COLOR
+participant "d:DeleteBuyerCommand" as DeleteBuyerCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletebuyer p/91234567")
+activate LogicManager
+
+LogicManager -> ClientBookParser : parseCommand("deletebuyer p/91234567")
+activate ClientBookParser
+
+create DeleteBuyerCommandParser
+ClientBookParser -> DeleteBuyerCommandParser
+activate DeleteBuyerCommandParser
+
+DeleteBuyerCommandParser --> ClientBookParser
+deactivate DeleteBuyerCommandParser
+
+ClientBookParser -> DeleteBuyerCommandParser : parse("91234567")
+activate DeleteBuyerCommandParser
+
+create DeleteBuyerCommand
+DeleteBuyerCommandParser -> DeleteBuyerCommand
+activate DeleteBuyerCommand
+
+DeleteBuyerCommand --> DeleteBuyerCommandParser
+deactivate DeleteBuyerCommand
+
+DeleteBuyerCommandParser --> ClientBookParser : d
+deactivate DeleteBuyerCommandParser
+
+ClientBookParser --> LogicManager : d
+deactivate ClientBookParser
+
+LogicManager -> DeleteBuyerCommand : execute(m)
+activate DeleteBuyerCommand
+
+DeleteBuyerCommand -> Model : deleteBuyer(phoneNumber)
+activate Model
+
+Model --> DeleteBuyerCommand
+deactivate Model
+
+create CommandResult
+DeleteBuyerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteBuyerCommand
+deactivate CommandResult
+
+DeleteBuyerCommand --> LogicManager : r
+deactivate DeleteBuyerCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

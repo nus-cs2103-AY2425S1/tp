@@ -9,15 +9,14 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.storage.JsonClientBookStorage;
 import seedu.address.storage.JsonMeetingBookStorage;
@@ -29,14 +28,11 @@ import seedu.address.storage.JsonPropertyBookStorage;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final PropertyBook propertyBook;
     private final ClientBook clientBook;
     private final MeetingBook meetingBook;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Property> filteredProperties;
-    // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Meeting> filteredMeetings;
 
@@ -44,32 +40,71 @@ public class ModelManager implements Model {
     private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
     private Path meetingBookFilePath = Paths.get("data" , "meetingbook.json");
 
-    private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
+    /* To determine type of cards to display */
+    /**
+     * Enum representing the different types of records that can be displayed
+     * in the application's UI. This enum is used to determine which set of
+     * cards (clients, meetings, or properties) should be shown to the user.
+     *
+     * <p>Each value corresponds to a specific type of data:
+     * <ul>
+     *     <li>{@link #CLIENTS} - Displays the list of clients.</li>
+     *     <li>{@link #MEETINGS} - Displays the list of scheduled meetings.</li>
+     *     <li>{@link #PROPERTIES} - Displays the list of properties.</li>
+     * </ul>
+     *
+     * The {@code DisplayMode} enum helps in controlling the UI state and
+     * ensures that only one type of data is shown at any given time.
+     */
+    public enum DisplayMode {
+        /**
+         * Represents the mode for displaying the list of clients.
+         */
+        CLIENTS,
+
+        /**
+         * Represents the mode for displaying the list of meetings.
+         */
+        MEETINGS,
+
+        /**
+         * Represents the mode for displaying the list of properties.
+         */
+        PROPERTIES
+    }
+
+    /**
+     * A wrapper for the display mode of the application.
+     * <p>
+     * The initial display mode is set to CLIENTS to ensure that the client grid
+     * displays both buyers and sellers upon startup, which aligns with the expected
+     * behavior of the application.
+     */
+    private final ReadOnlyObjectWrapper<DisplayMode> displayMode = new ReadOnlyObjectWrapper<>(DisplayMode.CLIENTS);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+    public ModelManager(ReadOnlyUserPrefs userPrefs,
                         ReadOnlyPropertyBook propertyBook, ReadOnlyClientBook clientBook,
                         ReadOnlyMeetingBook meetingBook) {
-        requireAllNonNull(addressBook, userPrefs, propertyBook, clientBook);
+        requireAllNonNull(userPrefs, propertyBook, clientBook);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs "
-                + userPrefs + " and property prefs " + propertyBook + " and client book " + clientBook);
+        logger.fine("Initializing with client book: " + clientBook + " and user prefs "
+                + userPrefs + " and property book " + propertyBook + " and meeting book " + meetingBook);
 
-        this.addressBook = new AddressBook(addressBook);
         this.propertyBook = new PropertyBook(propertyBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.clientBook = new ClientBook(clientBook);
         this.meetingBook = new MeetingBook(meetingBook);
-        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
         this.filteredClients = new FilteredList<>(this.clientBook.getClientList());
         this.filteredProperties = new FilteredList<>(this.propertyBook.getPropertyList());
         this.filteredMeetings = new FilteredList<>(this.meetingBook.getMeetingList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new PropertyBook(), new ClientBook(), new MeetingBook());
+        this(new UserPrefs(), new PropertyBook(), new ClientBook(), new MeetingBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -97,17 +132,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    @Override
     public Path getClientBookFilePath() {
         return userPrefs.getClientBookFilePath();
     }
@@ -115,51 +139,18 @@ public class ModelManager implements Model {
     @Override
     public void setClientBookFilePath(Path clientBookFilePath) {
         requireNonNull(clientBookFilePath);
-        userPrefs.setAddressBookFilePath(clientBookFilePath);
-    }
-
-    //=========== AddressBook ================================================================================
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
-    }
-    //=========== Filtered Person List Accessors =============================================================
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        userPrefs.setClientBookFilePath(clientBookFilePath);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+    public Path getMeetingBookFilePath() {
+        return userPrefs.getMeetingBookFilePath();
+    }
+
+    @Override
+    public void setMeetingBookFilePath(Path meetingBookFilePath) {
+        requireNonNull(meetingBookFilePath);
+        userPrefs.setMeetingBookFilePath(meetingBookFilePath);
     }
 
     //=========== ClientBook ================================================================================
@@ -233,9 +224,10 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return clientBook.equals(otherModelManager.clientBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && propertyBook.equals(otherModelManager.propertyBook)
+                && meetingBook.equals(otherModelManager.meetingBook);
     }
 
     //=========== Property =============================================================
@@ -294,7 +286,10 @@ public class ModelManager implements Model {
     }
 
     //=========== MeetingBook ================================================================================
-
+    @Override
+    public void setMeetingBook(ReadOnlyMeetingBook meetingBook) {
+        this.meetingBook.resetData(meetingBook);
+    }
     @Override
     public ReadOnlyMeetingBook getMeetingBook() {
         return meetingBook;
@@ -311,6 +306,17 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return meetingBook.hasMeeting(meeting);
+    }
+
+    @Override
+    public void addMeeting(Meeting meeting) {
+        meetingBook.addMeeting(meeting);
+        updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+    }
     //=========== Filtered Meeting List Accessors =============================================================
 
     /**
@@ -330,16 +336,26 @@ public class ModelManager implements Model {
 
     //=========== Managing UI  ==================================================================================
     @Override
-    public BooleanProperty getIsDisplayClientsProperty() {
-        return isDisplayClients;
+    public ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode() {
+        return displayMode.getReadOnlyProperty();
     }
+
+    // Update display mode using the wrapper, which remains modifiable internally
     @Override
     public void setDisplayClients() {
-        isDisplayClients.set(true);
+        displayMode.set(DisplayMode.CLIENTS);
+        logger.info("Setting Display Mode to \"CLIENTS\"");
     }
 
     @Override
     public void setDisplayProperties() {
-        isDisplayClients.set(false);
+        displayMode.set(DisplayMode.PROPERTIES);
+        logger.info("Setting Display Mode to \"PROPERTIES\"");
+    }
+
+    @Override
+    public void setDisplayMeetings() {
+        displayMode.set(DisplayMode.MEETINGS);
+        logger.info("Setting Display Mode to \"MEETINGS\"");
     }
 }

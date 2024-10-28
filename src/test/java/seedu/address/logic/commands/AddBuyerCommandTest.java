@@ -14,7 +14,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Buyer;
-import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 
 class AddBuyerCommandTest {
 
@@ -23,7 +25,11 @@ class AddBuyerCommandTest {
 
     @BeforeEach
     void setUp() {
-        buyer = mock(Buyer.class); // Mocking the Buyer object
+        buyer = new Buyer(
+                new Name("John Doe"),
+                new Phone("91234567"), // Valid phone starting with '9'
+                new Email("john.doe@example.com") // Valid email format
+        );
         model = mock(Model.class); // Mocking the Model object
     }
 
@@ -86,7 +92,11 @@ class AddBuyerCommandTest {
     @Test
     void equals_differentBuyer_returnsFalse() {
         // Arrange
-        Buyer differentBuyer = mock(Buyer.class); // Different Buyer instance
+        Buyer differentBuyer = new Buyer(
+                new Name("Jane Smith"),
+                new Phone("81234567"), // Different phone number
+                new Email("jane.smith@example.com") // Different email
+        );
         AddBuyerCommand addBuyerCommand1 = new AddBuyerCommand(buyer);
         AddBuyerCommand addBuyerCommand2 = new AddBuyerCommand(differentBuyer); // Different buyer
 
@@ -97,7 +107,7 @@ class AddBuyerCommandTest {
     @Test
     void equals_differentObject_returnsFalse() {
         // Arrange
-        Client differentClient = mock(Client.class);
+        Buyer differentClient = mock(Buyer.class); // Mocking a different Client object
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
 
         // Act & Assert

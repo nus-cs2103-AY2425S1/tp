@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClientBookParser" as ClientBookParser LOGIC_COLOR
+participant ":AddBuyerCommandParser" as AddBuyerCommandParser LOGIC_COLOR
+participant "a:AddBuyerCommand" as AddBuyerCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addbuyer n/John p/83456789 e/john@gmail.com")
+activate LogicManager
+
+LogicManager -> ClientBookParser : parseCommand("addbuyer n/John p/83456789 e/john@gmail.com")
+activate ClientBookParser
+
+create AddBuyerCommandParser
+ClientBookParser -> AddBuyerCommandParser
+activate AddBuyerCommandParser
+
+AddBuyerCommandParser --> ClientBookParser
+deactivate AddBuyerCommandParser
+
+ClientBookParser -> AddBuyerCommandParser : parse("John", "83456789", "john@gmail.com")
+activate AddBuyerCommandParser
+
+create AddBuyerCommand
+AddBuyerCommandParser -> AddBuyerCommand
+activate AddBuyerCommand
+
+AddBuyerCommand --> AddBuyerCommandParser
+deactivate AddBuyerCommand
+
+AddBuyerCommandParser --> ClientBookParser : a
+deactivate AddBuyerCommandParser
+
+ClientBookParser --> LogicManager : a
+deactivate ClientBookParser
+
+LogicManager -> AddBuyerCommand : execute(m)
+activate AddBuyerCommand
+
+AddBuyerCommand -> Model : addBuyer(name, phoneNumber, email)
+activate Model
+
+Model --> AddBuyerCommand
+deactivate Model
+
+create CommandResult
+AddBuyerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddBuyerCommand
+deactivate CommandResult
+
+AddBuyerCommand --> LogicManager : r
+deactivate AddBuyerCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

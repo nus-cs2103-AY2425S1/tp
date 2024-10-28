@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +21,9 @@ public class ListPropertiesCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+        model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
                 getTypicalClientBook(), getTypicalMeetingBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
+        expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
     }
 
@@ -47,4 +47,35 @@ public class ListPropertiesCommandTest {
     public void keywordPropertiesBuyers() {
         assertEquals("properties", ListPropertiesCommand.KEY_WORD);
     }
+
+    @Test
+    void equals_sameCommand_returnsTrue() {
+        // Arrange
+        ListPropertiesCommand listPropertiesCommand1 = new ListPropertiesCommand();
+        ListPropertiesCommand listPropertiesCommand2 = new ListPropertiesCommand(); // Same command
+
+        // Act & Assert
+        assertEquals(listPropertiesCommand1, listPropertiesCommand2); // Different instances, same command type
+    }
+
+    @Test
+    void equals_differentCommand_returnsFalse() {
+        // Arrange
+        ListPropertiesCommand listPropertiesCommand = new ListPropertiesCommand();
+        ListSellersCommand listSellersCommand = new ListSellersCommand(); // Different subclass of ListCommand
+
+        // Act & Assert
+        assertNotEquals(listPropertiesCommand, listSellersCommand); // Commands should not be equal
+    }
+
+    @Test
+    void equals_differentObject_returnsFalse() {
+        // Arrange
+        ListPropertiesCommand listPropertiesCommand = new ListPropertiesCommand();
+        Object differentObject = new Object(); // Completely different object type
+
+        // Act & Assert
+        assertNotEquals(listPropertiesCommand, differentObject); // Comparing with a different type of object
+    }
+
 }

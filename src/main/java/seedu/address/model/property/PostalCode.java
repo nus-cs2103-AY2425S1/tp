@@ -3,6 +3,10 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * Represents a property postal code in the address book.
  * Guarantees: immutable; postal code is valid as declared in {@link #isValidPostalCode(String)}.
@@ -11,6 +15,7 @@ public class PostalCode {
     public static final String MESSAGE_CONSTRAINTS =
             "Postal Code numbers should only contain positive numbers, and it should be exactly 6 digits long";
     public static final String VALIDATION_REGEX = "\\d{6}";
+    private static final Logger logger = LogsCenter.getLogger(PostalCode.class);
     public final String value;
 
     /**
@@ -19,8 +24,12 @@ public class PostalCode {
      * @param postalCode A valid postal code.
      */
     public PostalCode(String postalCode) {
+        logger.info("Creating PostalCode object: " + postalCode);
         requireNonNull(postalCode);
+        assert postalCode != null : "PostalCode string cannot be null";
         checkArgument(isValidPostalCode(postalCode), MESSAGE_CONSTRAINTS);
+        assert isValidPostalCode(postalCode) != false : "Postal Code string must be 6 digit non-negative integer";
+        logger.info("Postal Code object created: " + postalCode);
         value = postalCode;
     }
 
