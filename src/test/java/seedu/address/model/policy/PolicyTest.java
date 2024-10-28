@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.claim.ClaimList;
+
 public class PolicyTest {
     private final PremiumAmount premiumAmount = new PremiumAmount(200.0);
     private final CoverageAmount coverageAmount = new CoverageAmount(20000.0);
@@ -22,25 +24,25 @@ public class PolicyTest {
     @Test
     public void makePolicy_returnCorrectPolicy() {
         // return LifePolicy
-        Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate);
-        Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate);
+        Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate, null);
+        Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return HealthPolicy
-        expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
-        actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate);
+        expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate, null);
+        actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return EducationPolicy
-        expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
-        actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate);
+        expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate, null);
+        actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
     }
 
     @Test
     public void makePolicy_nullPolicyType_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Policy.makePolicy(
-                null, premiumAmount, coverageAmount, expiryDate));
+                null, premiumAmount, coverageAmount, expiryDate, null));
     }
 
     @Test
@@ -123,7 +125,7 @@ public class PolicyTest {
      */
     private class ConcretePolicy extends Policy {
         public ConcretePolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
-            super(premiumAmount, coverageAmount, expiryDate);
+            super(premiumAmount, coverageAmount, expiryDate, new ClaimList());
         }
 
         @Override
