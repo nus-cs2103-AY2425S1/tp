@@ -27,8 +27,8 @@
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
-        <Label text="Location:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label fx:id="locationA" styleClass="cell_small_label" text="\$locationA"
+        <Label text="Address:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address"
                GridPane.columnIndex="1" GridPane.rowIndex="0" />
       </GridPane>
       <GridPane hgap="4" vgap="10" alignment="CENTER_LEFT" xmlns:fx="http://javafx.com/fxml">
