@@ -11,7 +11,7 @@
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #934b01;
 }
 
 #helpMessageContainer {
