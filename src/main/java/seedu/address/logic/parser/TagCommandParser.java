@@ -19,8 +19,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new TagCommand object
  */
 public class TagCommandParser implements Parser<TagCommand> {
-    public static final int MAX_LENGTH = 50;
-    public static final int MAX_INDEXES = 10;
+    public static final String VALIDATION_REGEX = "\\d+";
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
@@ -40,8 +39,8 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         try {
             List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
-            System.out.println(indexStrings.isEmpty() + indexStrings.toString() + indexStrings.size());
-            if (indexStrings.size() == 1 && indexStrings.get(0).isEmpty()) {
+            boolean isValidIndexes = indexStrings.size() != 1 || !indexStrings.get(0).isEmpty();
+            if (!isValidIndexes) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
             }
             checkIndexLength(indexStrings);
@@ -59,11 +58,12 @@ public class TagCommandParser implements Parser<TagCommand> {
         for (String tagString : tagStrings) {
             tagString = tagString.trim().toLowerCase();
             boolean isEmpty = tagString.isEmpty();
-            boolean isTooLong = tagString.length() > MAX_LENGTH;
+            boolean isTooLong = tagString.length() > Tag.MAX_CHARACTER_LENGTH;
             if (isEmpty) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
             } else if (isTooLong) {
-                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED));
+                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED,
+                        Tag.MAX_CHARACTER_LENGTH));
             }
             tagSet.add(new Tag(tagString));
         }
@@ -72,15 +72,15 @@ public class TagCommandParser implements Parser<TagCommand> {
     }
 
     private void checkIndex(String indexStr) throws ParseException {
-        if (!indexStr.matches("\\d+")) {
+        if (!indexStr.matches(VALIDATION_REGEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagCommand.MESSAGE_USAGE));
         }
     }
 
     private void checkIndexLength(List<String> indexStrings) throws ParseException {
-        if (indexStrings.size() > MAX_INDEXES) {
-            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, MAX_INDEXES));
+        if (indexStrings.size() > Index.MAX_INDEXES) {
+            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
         }
     }
 }
