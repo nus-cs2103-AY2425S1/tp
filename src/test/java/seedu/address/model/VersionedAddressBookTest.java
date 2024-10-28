@@ -37,7 +37,7 @@ public class VersionedAddressBookTest {
     public void undo_withPreviousStates_success() throws CommandException {
         // Add a person and commit
         AddressBook updatedAddressBook = new AddressBook();
-        updatedAddressBook.addPerson(TypicalPersons.ALICE);
+        updatedAddressBook.addPerson(TypicalPersons.TEACHER_ALICE);
         versionedAddressBook.commit(updatedAddressBook, person -> true);
 
         // Undo once and assert that the state is reverted to previous original state

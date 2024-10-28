@@ -8,6 +8,8 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Teacher;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -52,43 +54,74 @@ public class PersonCard extends UiPart<Region> {
     private HBox daysAttendedContainer;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Student} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.person = student;
 
-        if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("student"))) {
-            cardPane.setStyle("-fx-background-color: #5a83a3;"); // Inline style for student
-        } else if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("teacher"))) {
-            cardPane.setStyle("-fx-background-color: #5aa366;"); // Inline style for teacher
-        } else {
-            // Optional: Set default style for other persons without "student" or "teacher" tags
-            cardPane.setStyle("-fx-background-color: #494a46;"); // Default style
-        }
+        cardPane.setStyle("-fx-background-color: #5a83a3;"); // Inline style for student
 
         // Set other UI components
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        String formattedGender = person.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
+        name.setText(student.getName().fullName);
+        String formattedGender = student.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
         gender.setText("👫 " + formattedGender);
-        phone.setText("📱 " + person.getPhone().value);
-        address.setText("📍 " + person.getAddress().value);
-        email.setText("📨 " + person.getEmail().value);
-        String formattedSubjects = String.join(" • ", person.getSubjects().stream()
-                .map(subject -> subject.subjectName)
-                .toArray(String[]::new));
+        phone.setText("📱 " + student.getPhone().value);
+        address.setText("📍 " + student.getAddress().value);
+        email.setText("📨 " + student.getEmail().value);
+        String formattedSubjects = String.join(" • ", student.getSubjects().stream()
+            .map(subject -> subject.subjectName)
+            .toArray(String[]::new));
         subjects.setText("📚 " + formattedSubjects);
-        String formattedClasses = String.join(" • ", person.getClasses().stream()
-                .toArray(String[]::new));
+        String formattedClasses = String.join(" • ", student.getClasses().stream()
+            .toArray(String[]::new));
         classes.setText("🏫 " + formattedClasses);
+
+        DaysAttended days = student.getDaysAttended();
+        daysAttended.setText("📅 Days Attended: " + days);
+        daysAttendedContainer.setVisible(true);
+    }
+
+    /**
+     * Creates a {@code PersonCode} with the given {@code Teacher} and index to display.
+     */
+    public PersonCard(Teacher teacher, int displayedIndex) {
+        super(FXML);
+        this.person = teacher;
+
+        cardPane.setStyle("-fx-background-color: #5aa366;"); // Inline style for teacher
+
+        // Set other UI components
+        id.setText(displayedIndex + ". ");
+        name.setText(teacher.getName().fullName);
+        String formattedGender = teacher.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
+        gender.setText("👫 " + formattedGender);
+        phone.setText("📱 " + teacher.getPhone().value);
+        address.setText("📍 " + teacher.getAddress().value);
+        email.setText("📨 " + teacher.getEmail().value);
+        String formattedSubjects = String.join(" • ", teacher.getSubjects().stream()
+            .map(subject -> subject.subjectName)
+            .toArray(String[]::new));
+        subjects.setText("📚 " + formattedSubjects);
+        String formattedClasses = String.join(" • ", teacher.getClasses().stream()
+            .toArray(String[]::new));
+        classes.setText("🏫 " + formattedClasses);
+
+        daysAttendedContainer.setVisible(false);
+        daysAttendedContainer.setManaged(false);
+    }
+
+    /**
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     */
+    public static PersonCard createPersonCard(Person person, int displayedIndex) throws InvalidPersonTypeException {
         if (person instanceof Student) {
-            DaysAttended days = ((Student) person).getDaysAttended();
-            daysAttended.setText("📅 Days Attended: " + days);
-            daysAttendedContainer.setVisible(true);
+            return new PersonCard((Student) person, displayedIndex);
+        } else if (person instanceof Teacher) {
+            return new PersonCard((Teacher) person, displayedIndex);
         } else {
-            daysAttendedContainer.setVisible(false);
-            daysAttendedContainer.setManaged(false);
+            throw new InvalidPersonTypeException();
         }
     }
 

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.MICHAEL;
+import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -83,8 +83,8 @@ public class AddStudentCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddStudentCommand addCommand = new AddStudentCommand(MICHAEL);
-        String expected = AddStudentCommand.class.getCanonicalName() + "{toAdd=" + MICHAEL + "}";
+        AddStudentCommand addCommand = new AddStudentCommand(STUDENT_BENSON);
+        String expected = AddStudentCommand.class.getCanonicalName() + "{toAdd=" + STUDENT_BENSON + "}";
         assertEquals(expected, addCommand.toString());
     }
 

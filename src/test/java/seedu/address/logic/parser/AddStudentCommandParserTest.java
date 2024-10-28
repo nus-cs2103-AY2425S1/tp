@@ -40,8 +40,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.CHRIS;
-import static seedu.address.testutil.TypicalPersons.MICHAEL;
+import static seedu.address.testutil.TypicalPersons.STUDENT_CHRIS;
+import static seedu.address.testutil.TypicalPersons.STUDENT_MICHAEL;
 
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +63,8 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new StudentBuilder(MICHAEL).withTags(VALID_TAG_FRIEND).withDaysAttended(10).build();
+        Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags(VALID_TAG_FRIEND)
+            .withDaysAttended(10).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
@@ -73,7 +74,7 @@ public class AddStudentCommandParserTest {
                 new AddStudentCommand(expectedStudent));
 
         // multiple tags - all accepted
-        Student expectedStudentMultipleTags = new StudentBuilder(MICHAEL)
+        Student expectedStudentMultipleTags = new StudentBuilder(STUDENT_MICHAEL)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withDaysAttended(10).build();
         assertParseSuccess(parser,
                 NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
@@ -85,7 +86,7 @@ public class AddStudentCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new StudentBuilder(CHRIS).withTags().withDaysAttended(10).build();
+        Student expectedStudent = new StudentBuilder(STUDENT_CHRIS).withTags().withDaysAttended(10).build();
         assertParseSuccess(parser, NAME_DESC_CHRIS + GENDER_DESC_BOB + PHONE_DESC_CHRIS + EMAIL_DESC_CHRIS
             + ADDRESS_DESC_CHRIS + SUBJECT_DESC_CHRIS + CLASSES_DESC_CHRIS
             + ATTENDANCE_DESC_CHRIS, new AddStudentCommand(expectedStudent));

@@ -19,6 +19,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Teacher;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -67,9 +69,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Teacher} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Teacher source) {
         name = source.getName().fullName;
         gender = source.getGender().value;
         phone = source.getPhone().value;
@@ -84,10 +86,40 @@ class JsonAdaptedPerson {
         classes.addAll(source.getClasses().stream()
             .map(String::toString)
             .collect(Collectors.toList()));
-        if (source instanceof Student) {
-            this.daysAttended = ((Student) source).getDaysAttended().getDaysAttended();
+        daysAttended = null;
+    }
+
+    /**
+     * Converts a given {@code Student} into this class for Jackson use.
+     */
+    public JsonAdaptedPerson(Student source) {
+        name = source.getName().fullName;
+        gender = source.getGender().value;
+        phone = source.getPhone().value;
+        email = source.getEmail().value;
+        address = source.getAddress().value;
+        tags.addAll(source.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList()));
+        subjects.addAll(source.getSubjects().stream()
+            .map(JsonAdaptedSubject::new)
+            .collect(Collectors.toList()));
+        classes.addAll(source.getClasses().stream()
+            .map(String::toString)
+            .collect(Collectors.toList()));
+        this.daysAttended = source.getDaysAttended().getDaysAttended();
+    }
+
+    /**
+     * Converts a given {@code Person} into this class for Jackson use.
+     */
+    public static JsonAdaptedPerson createJsonAdaptedPerson(Person source) {
+        if (source instanceof Teacher) {
+            return new JsonAdaptedPerson((Teacher) source);
+        } else if (source instanceof Student) {
+            return new JsonAdaptedPerson((Student) source);
         } else {
-            daysAttended = null;
+            throw new InvalidPersonTypeException();
         }
     }
 
@@ -163,7 +195,7 @@ class JsonAdaptedPerson {
             return new Student(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
                     modelSubjects, modelClasses, modelDaysAttended);
         } else {
-            return new Person(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
+            return new Teacher(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
                     modelSubjects, modelClasses);
         }
     }

@@ -26,7 +26,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoOnce_success() throws CommandException {
-        model.addPerson(TypicalPersons.MICHAEL);
+        model.addPerson(TypicalPersons.TEACHER_GEORGE);
         model.commitAddressBook();
 
         assertNotEquals(model.getAddressBook(), expectedModel.getAddressBook());

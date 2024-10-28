@@ -87,7 +87,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_MICHAEL = "michael@example.com";
     public static final String VALID_ADDRESS_MICHAEL = "311, Clementi Ave 2, #02-25";
     public static final String VALID_SUBJECT_MICHAEL = "Physics";
-    public static final String VALID_CLASSES_MICHAEL = "7A, 7B";
+    public static final String VALID_CLASSES_MICHAEL = "7A";
     public static final String VALID_TAG_HARDWORKING = "hardworking";
     public static final String VALID_TAG_ATHLETE = "athlete";
     public static final String VALID_ATTENDANCE_MICHAEL = "10";
@@ -98,7 +98,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_CHRIS = "chris@example.com";
     public static final String VALID_ADDRESS_CHRIS = "311, Lorong Ave 2, #02-25";
     public static final String VALID_SUBJECT_CHRIS = "Math";
-    public static final String VALID_CLASSES_CHRIS = "7C, 7B";
+    public static final String VALID_CLASSES_CHRIS = "7B";
     public static final String VALID_ATTENDANCE_CHRIS = "10";
 
     // Descriptions for fields for Michael
