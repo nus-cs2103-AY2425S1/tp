@@ -299,7 +299,8 @@ The following sequence diagram shows how the user can get previous command:
 The following activity diagram summarizes what happens when a user interacts with this feature:
 ![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
 
-#### Future Improvements
+#### Future Improvements:
+
 * Implement a feature to clear the command history.
 --------------------------------------------------------------------------------------------------------------------
 

@@ -9,17 +9,22 @@ start
 switch()
 case ([press up button])
     if () then ([currentCommandIndex > 0])
-        :CommandTextHistory gets previous command;
+        :CommandTextHistory
+        gets previous command;
     else ([else])
     endif
 case ([press down button])
-    if () then ([currentCommandIndex < size - 1])
-        :CommandTextHistory gets next command;
+    if () then ([currentCommandIndex
+        < size - 1])
+        :CommandTextHistory
+        gets next command;
     else ([else])
     endif
 case ([enters new command])
-    :CommandTextHistory adds new command;
-    :CommandTextHistory sets currentCommandIndex to current size;
+    :CommandTextHistory
+    adds new command;
+    :CommandTextHistory sets
+    currentCommandIndex to current size;
 endswitch
 stop
 
