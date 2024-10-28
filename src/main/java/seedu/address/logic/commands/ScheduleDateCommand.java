@@ -13,7 +13,7 @@ import seedu.address.model.appointment.AppointmentContainsDatePredicate;
  */
 public class ScheduleDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "schedule_date";
+    public static final String COMMAND_WORD = "scheduledate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all medical appointments for a particular date.\n"
