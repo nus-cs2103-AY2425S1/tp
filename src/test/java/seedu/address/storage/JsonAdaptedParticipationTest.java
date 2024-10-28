@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.MATH;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.participation.Participation;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -24,7 +25,8 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_validParticipationDetails_returnsParticipation() throws Exception {
-        Participation participation = new Participation(BENSON, MATH, new ArrayList<>());
+        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
         assertEquals(jsonAdaptedParticipation.toModelType(model), participation);
@@ -32,7 +34,8 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_missingPerson_throwsIllegalValueException() {
-        Participation participation = new Participation(BENSON, MATH, new ArrayList<>());
+        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(null, MATH);
         String expectedMessage = String.format(
@@ -45,7 +48,8 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_missingTutorial_throwsIllegalValueException() {
-        Participation participation = new Participation(BENSON, MATH, new ArrayList<>());
+        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, null);
         String expectedMessage = String.format(
