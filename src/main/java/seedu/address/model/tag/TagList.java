@@ -54,6 +54,10 @@ public class TagList {
             return false;
         }
 
+        if (tags.contains(new Tag(newTagName))) {
+            return false;
+        }
+
         Tag tagToEdit = tags.get(index);
         tagToEdit.setTagName(newTagName);
         return true;

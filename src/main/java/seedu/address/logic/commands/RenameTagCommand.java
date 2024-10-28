@@ -19,7 +19,8 @@ public class RenameTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " t/Bride's Friend t/Friend";
 
     public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
-    public static final String MESSAGE_NONEXISTENT = "The tag you wish to rename does not exist.\n";
+    public static final String MESSAGE_NONEXISTENT = "The tag you wish to rename does not exist, "
+            + "or the tag you wish to rename it to already exists.\n";
 
     private final Tag existingTag;
     private final String newTagName;
