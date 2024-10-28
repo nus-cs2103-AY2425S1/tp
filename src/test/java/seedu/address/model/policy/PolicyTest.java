@@ -24,17 +24,17 @@ public class PolicyTest {
     @Test
     public void makePolicy_returnCorrectPolicy() {
         // return LifePolicy
-        Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate, null);
         Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return HealthPolicy
-        expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate, null);
         actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
 
         // return EducationPolicy
-        expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate, new ClaimList());
+        expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate, null);
         actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate, null);
         assertEquals(expected, actual);
     }

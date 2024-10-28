@@ -7,8 +7,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.claim.ClaimList;
-
 public class PolicyExpiryDatePredicateTest {
 
     private final LocalDate currentDate = LocalDate.now();
@@ -17,7 +15,7 @@ public class PolicyExpiryDatePredicateTest {
     public void test_policyExpiresWithinDays_returnsTrue() {
         // Policy that expires within the given time frame (e.g., 10 days from now)
         Policy policy = new HealthPolicy(null, null,
-                new ExpiryDate(currentDate.plusDays(5)), new ClaimList());
+                new ExpiryDate(currentDate.plusDays(5)), null);
         PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, 10);
         assertTrue(predicate.test(policy));
     }
@@ -26,7 +24,7 @@ public class PolicyExpiryDatePredicateTest {
     public void test_policyExpiresToday_returnsTrue() {
         // Policy that expires today
         Policy policy = new HealthPolicy(null, null, new ExpiryDate(currentDate),
-                new ClaimList());
+                null);
         PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, 10);
         assertTrue(predicate.test(policy));
     }
@@ -35,7 +33,7 @@ public class PolicyExpiryDatePredicateTest {
     public void test_policyExpiresExactlyAtEndOfDaysFromExpiry_returnsTrue() {
         // Policy that expires exactly at the end of the given time frame (e.g., 10 days from now)
         Policy policy = new HealthPolicy(null, null,
-                new ExpiryDate(currentDate.plusDays(10)), new ClaimList());
+                new ExpiryDate(currentDate.plusDays(10)), null);
         PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, 10);
         assertTrue(predicate.test(policy));
     }
@@ -44,7 +42,7 @@ public class PolicyExpiryDatePredicateTest {
     public void test_policyExpiresAfterDaysFromExpiry_returnsFalse() {
         // Policy that expires after the given time frame (e.g., 15 days from now)
         Policy policy = new HealthPolicy(null, null,
-                new ExpiryDate(currentDate.plusDays(15)), new ClaimList());
+                new ExpiryDate(currentDate.plusDays(15)), null);
         PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, 10);
         assertFalse(predicate.test(policy));
     }
@@ -53,7 +51,7 @@ public class PolicyExpiryDatePredicateTest {
     public void test_policyAlreadyExpired_returnsFalse() {
         // Policy that expired in the past (e.g., 5 days ago)
         Policy policy = new HealthPolicy(null, null,
-                new ExpiryDate(currentDate.minusDays(5)), new ClaimList());
+                new ExpiryDate(currentDate.minusDays(5)), null);
         PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, 10);
         assertFalse(predicate.test(policy));
     }

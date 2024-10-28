@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.claim.ClaimList;
-
 public class EducationPolicyTest {
     private final EducationPolicy education = new EducationPolicy();
     private final PremiumAmount defaultPremiumAmount = education.getPremiumAmount();
@@ -18,17 +16,17 @@ public class EducationPolicyTest {
     public void constructor_nullValues_useDefaultValues() {
         // null premiumAmount
         EducationPolicy nullPremiumAmount = new EducationPolicy(null, defaultCoverageAmount,
-                defaultExpiryDate, new ClaimList());
+                defaultExpiryDate, null);
         assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
         // null coverageAmount
         EducationPolicy nullCoverageAmount = new EducationPolicy(defaultPremiumAmount, null,
-                defaultExpiryDate, new ClaimList());
+                defaultExpiryDate, null);
         assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
         // null expiryDate
         EducationPolicy nullExpiryDate = new EducationPolicy(defaultPremiumAmount, defaultCoverageAmount, null,
-                new ClaimList());
+                null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 
