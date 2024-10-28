@@ -23,9 +23,10 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PATH);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PATH)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PATH) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
         }
+        System.out.println(!argMultimap.getPreamble().isEmpty());
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PATH);
         Path path = ParserUtil.parsePathWithoutCheck(argMultimap.getValue(PREFIX_PATH).get());
         return new ArchiveCommand(path);
