@@ -1,7 +1,9 @@
 package seedu.sellsavvy.model.order;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -55,6 +57,17 @@ public class DateTest {
         assertTrue(Date.isValidCalendarDate("02-02-2002"));
         assertTrue(Date.isValidCalendarDate("01-01-2001")); // First day of 21st century
         assertTrue(Date.isValidCalendarDate("31-12-2100")); // Last day of 21st century
+    }
+
+    @Test
+    public void hasDateElapsed() {
+        // date has elapsed
+        Date date = new Date("02-02-2002");
+        assertEquals(MESSAGE_OUTDATED_WARNING, date.hasDateElapsed());
+
+        // date has not elapsed
+        date = new Date("02-02-2030");
+        assertEquals("", date.hasDateElapsed());
     }
 
     @Test

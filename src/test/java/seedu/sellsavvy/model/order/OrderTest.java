@@ -7,6 +7,7 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 
@@ -41,6 +42,17 @@ public class OrderTest {
         String itemWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBottle = new OrderBuilder(BOTTLE).withItem(itemWithTrailingSpaces).build();
         assertFalse(BOTTLE.isSameOrder(editedBottle));
+    }
+
+    @Test
+    public void hasDateElapsed() {
+        // order date has elapsed
+        Order editedAtlas = new OrderBuilder(ATLAS).withDate("02-02-2002").build();
+        assertEquals(MESSAGE_OUTDATED_WARNING, editedAtlas.hasDateElapsed());
+
+        // order date has not elapsed
+        editedAtlas = new OrderBuilder(ATLAS).withDate("02-02-2030").build();
+        assertEquals("", editedAtlas.hasDateElapsed());
     }
 
     @Test

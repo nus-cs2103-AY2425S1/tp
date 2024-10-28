@@ -39,8 +39,8 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item"
-            + ", verify if this is a mistake\n";
+            + "This customer already has an order for this item, "
+            + "verify if this is a mistake\n";
 
     private final Index index;
     private final Order toAdd;
@@ -72,8 +72,8 @@ public class AddOrderCommand extends Command {
         orderList.add(toAdd);
         personToAddUnder.resetFilteredOrderList();
 
-        return new CommandResult(feedbackToUser + String.format(MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(toAdd)));
+        return new CommandResult(feedbackToUser + toAdd.hasDateElapsed()
+                + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));
     }
 
     @Override

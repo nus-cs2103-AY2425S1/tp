@@ -21,7 +21,7 @@ public class TypicalOrders {
             .withCount("101").withDate("05-05-2025").withStatus(Status.COMPLETED).build();
 
     public static final Order CAMERA = new OrderBuilder().withItem("Camera with spare lens")
-            .withCount("1").withDate("03-03-2025").build();
+            .withCount("1").withDate("03-03-2020").build();
 
     public static final Order DAGGER = new OrderBuilder().withItem("Damascus daggers")
             .withCount("5").withDate("12-12-2025").build();

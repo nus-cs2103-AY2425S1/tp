@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import seedu.sellsavvy.logic.parser.ParserUtil;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
@@ -22,6 +23,9 @@ public class Date {
             + "3. The year \"yyyy\" should be a 4-digit number representing a valid year within the 21st century\n"
             + "4. The day, month and year are separated by a hyphen '-'.";
     public static final String MESSAGE_INVALID_DATE = "Date provided is not a valid calendar date";
+    public static final String MESSAGE_OUTDATED_WARNING = "Note: "
+            + "The date provided has already passed, "
+            + "verify if this is a mistake\n";
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
     private static final String REGEX_YEAR = "(20[0-9]{2}|2100)";
@@ -38,13 +42,6 @@ public class Date {
         checkArgument(isValidDateRegex(date), MESSAGE_CONSTRAINTS);
         checkArgument(isValidCalendarDate(date), MESSAGE_INVALID_DATE);
         value = date;
-    }
-
-    /**
-     * Returns if a given string is a valid date.
-     */
-    public static boolean isValidDate(String test) {
-        return isValidDateRegex(test) && isValidCalendarDate(test);
     }
 
     /**
@@ -67,6 +64,25 @@ public class Date {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns {@code Date} warning if order date has passed.
+     */
+    public String hasDateElapsed() {
+        LocalDate localDate;
+        try {
+            localDate = ParserUtil.parseLocalDate(value);
+        } catch (ParseException e) {
+            // since hasDateElapsed is only called after validation, ParseException should never be thrown.
+            return MESSAGE_INVALID_DATE;
+        }
+
+        LocalDate localDateNow = LocalDate.now(ZoneId.of("Asia/Singapore"));
+        if (localDate.isBefore(localDateNow)) {
+            return MESSAGE_OUTDATED_WARNING;
+        }
+        return "";
     }
 
     @Override

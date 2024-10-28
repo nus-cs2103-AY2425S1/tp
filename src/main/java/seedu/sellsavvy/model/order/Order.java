@@ -61,6 +61,13 @@ public class Order {
     }
 
     /**
+     * Returns {@code Date} warning if order date has passed.
+     */
+    public String hasDateElapsed() {
+        return date.hasDateElapsed();
+    }
+
+    /**
      * Returns true if both orders have the same identity and data fields.
      * This defines a stronger notion of equality between two orders.
      */

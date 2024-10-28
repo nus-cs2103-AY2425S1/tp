@@ -46,8 +46,8 @@ public class EditOrderCommand extends Command {
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item"
-            + ", verify if this is a mistake\n";
+            + "This customer already has an order for this item, "
+            + "verify if this is a mistake\n";
 
     private final Index index;
     private final EditOrderDescriptor editOrderDescriptor;
