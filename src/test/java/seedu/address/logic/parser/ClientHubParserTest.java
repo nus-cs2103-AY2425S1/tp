@@ -30,7 +30,6 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
-import seedu.address.model.person.NameComparator;
 import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -152,11 +151,11 @@ public class ClientHubParserTest {
         String criteria = "n/";
         SortCommand command = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " " + criteria);
-        assertEquals(new SortCommand(new NameComparator()), command);
+        assertEquals(new SortCommand(), command);
 
         SortCommand shortCommand = (SortCommand) parser.parseCommand(
                 SortCommand.SHORT_COMMAND_WORD + " " + criteria);
-        assertEquals(new SortCommand(new NameComparator()), command);
+        assertEquals(new SortCommand(), command);
     }
 
     @Test

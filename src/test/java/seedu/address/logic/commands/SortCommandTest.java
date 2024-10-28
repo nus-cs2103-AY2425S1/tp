@@ -43,7 +43,7 @@ public class SortCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 8);
 
         NameComparator comparator = new NameComparator();
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand();
         expectedModel.updateSortedPersonList(comparator);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -55,8 +55,8 @@ public class SortCommandTest {
     @Test
     public void equals() {
 
-        SortCommand sortFirstCommand = new SortCommand(new NameComparator());
-        SortCommand sortSecondCommand = new SortCommand(new NameComparator());
+        SortCommand sortFirstCommand = new SortCommand();
+        SortCommand sortSecondCommand = new SortCommand();
 
         // same object -> returns true
         assertTrue(sortFirstCommand.equals(sortFirstCommand));
@@ -74,7 +74,7 @@ public class SortCommandTest {
     @Test
     public void toStringMethod() {
         NameComparator comparator = new NameComparator();
-        SortCommand sortCommand = new SortCommand(comparator);
+        SortCommand sortCommand = new SortCommand();
         String expected = SortCommand.class.getCanonicalName() + "{comparator=" + comparator + "}";
         assertEquals(expected, sortCommand.toString());
     }

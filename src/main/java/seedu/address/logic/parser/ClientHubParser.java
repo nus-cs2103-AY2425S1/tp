@@ -87,7 +87,7 @@ public class ClientHubParser {
             return new ListCommand();
 
         case SortCommand.COMMAND_WORD, SortCommand.SHORT_COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            return new SortCommand();
 
         case ViewCommand.COMMAND_WORD, ViewCommand.SHORT_COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
