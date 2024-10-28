@@ -9,7 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 
 /**
- * Represents a card containing information about a student.
+ * A UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -22,8 +22,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label studentId;
     @FXML
     private Label tutorialId;
@@ -32,22 +30,17 @@ public class StudentCard extends UiPart<Region> {
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
-     * @param student The student to display.
-     * @param displayedIndex The index number to display on the card.
-     * @param studentProfile The profile to update when this card is clicked.
      */
     public StudentCard(Student student, int displayedIndex, StudentProfile studentProfile) {
         super(FXML);
         this.student = student;
         this.studentProfile = studentProfile;
-        id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
+        name.setText(displayedIndex + ". " + student.getName().fullName);
         studentId.setText(student.getStudentId().value);
         tutorialId.setText(student.getTutorialId().toString());
-
         updateAttendanceLabels();
 
-        // Add click listener to update the profile
+        // Add click listener to the card
         cardPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleCardClick());
     }
 
@@ -61,7 +54,7 @@ public class StudentCard extends UiPart<Region> {
     }
 
     /**
-     * Updates the profile with the selected student's details.
+     * Handles the click event on the student card and updates the profile view.
      */
     private void handleCardClick() {
         studentProfile.setStudent(student);

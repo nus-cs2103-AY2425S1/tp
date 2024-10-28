@@ -55,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane studentDetailsContainer;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -100,30 +103,35 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        // Create and add the StudentProfile panel
+        // Create and add the StudentProfile panel if it's not null
         studentProfile = new StudentProfile();
-        if (studentProfilePlaceholder != null) {
-            studentProfilePlaceholder.getChildren().add(studentProfile.getRoot());
-        } else {
-            // If studentProfilePlaceholder is null, display the first student if available
-            ObservableList<Student> studentList = logic.getFilteredStudentList();
-            if (!studentList.isEmpty()) {
-                studentProfile.setStudent(studentList.get(0));
-            }
+        if (studentProfile != null && studentProfile.getRoot() != null) {
+            studentDetailsContainer.getChildren().add(studentProfile.getRoot());
         }
 
         // Create and add the StudentListPanel with reference to StudentProfile
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), studentProfile);
-        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        if (studentListPanel != null && studentListPanel.getRoot() != null) {
+            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        }
 
+        // Create and add the ResultDisplay if it's not null
         resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if (resultDisplay != null && resultDisplay.getRoot() != null) {
+            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        }
 
+        // Create and add the StatusBarFooter if it's not null
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        if (statusBarFooter != null && statusBarFooter.getRoot() != null) {
+            statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        }
 
+        // Create and add the CommandBox if it's not null
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        if (commandBox != null && commandBox.getRoot() != null) {
+            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        }
     }
 
     /**
