@@ -1,6 +1,5 @@
 package seedu.address.model.doctor;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -11,10 +10,10 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person} is an instanceof Doctor and contains any of the keywords given.
  */
 public class FindDoctorPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final String name;
 
-    public FindDoctorPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public FindDoctorPredicate(String name) {
+        this.name = name;
     }
 
     @Override
@@ -22,8 +21,7 @@ public class FindDoctorPredicate implements Predicate<Person> {
         if (!(person instanceof Doctor)) {
             return false;
         }
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        return StringUtil.containsNameIgnoreCase(person.getName().fullName, name);
     }
 
     @Override
@@ -37,11 +35,11 @@ public class FindDoctorPredicate implements Predicate<Person> {
         }
 
         FindDoctorPredicate findDoctorPredicate = (FindDoctorPredicate) other;
-        return keywords.equals(findDoctorPredicate.keywords);
+        return name.equals(findDoctorPredicate.name);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("name", name).toString();
     }
 }
