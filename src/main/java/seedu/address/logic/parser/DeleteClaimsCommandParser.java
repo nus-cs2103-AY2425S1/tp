@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import seedu.address.commons.core.index.Index;
@@ -26,17 +25,15 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
      */
     @Override
     public DeleteClaimsCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS,
-                PREFIX_CLAIM_DESC);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
         Index personIndex = parsePersonIndex(argMultimap);
         validatePrefixes(argMultimap);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
 
         PolicyType policyType = parsePolicyType(argMultimap);
-        ClaimStatus claimStatus = parseClaimStatus(argMultimap);
-        String claimDescription = parseClaimDescription(argMultimap);
+        Index claimIndex = parseClaimIndex(argMultimap);
 
-        return new DeleteClaimsCommand(personIndex, policyType, claimStatus, claimDescription);
+        return new DeleteClaimsCommand(personIndex, policyType, claimIndex);
     }
 
     /**
@@ -63,8 +60,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
      */
     private void validatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_POLICY_TYPE).isEmpty()
-                || argMultimap.getValue(PREFIX_CLAIM_STATUS).isEmpty()
-                || argMultimap.getValue(PREFIX_CLAIM_DESC).isEmpty()) {
+                || argMultimap.getValue(PREFIX_CLAIM_INDEX).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
         }
     }
@@ -86,31 +82,18 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
     }
 
     /**
-     * Parses the claim status from the given argument multimap.
+     * Parses the claim index from the given argument multimap.
      *
      * @param argMultimap The argument multimap containing the parsed arguments.
-     * @return The parsed claim status.
-     * @throws ParseException If the claim status is invalid.
+     * @return The parsed claim index.
+     * @throws ParseException If the claim index is not a valid positive integer.
      */
-    private ClaimStatus parseClaimStatus(ArgumentMultimap argMultimap) throws ParseException {
+    private Index parseClaimIndex(ArgumentMultimap argMultimap) throws ParseException {
         try {
-            return ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
+            return ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLAIM_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
-                    pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE), pe);
         }
-    }
-
-    /**
-     * Parses the claim description from the given argument multimap.
-     *
-     * @param argMultimap The argument multimap containing the parsed arguments.
-     * @return The parsed claim description.
-     * @throws ParseException If the claim description is not present.
-     */
-    private String parseClaimDescription(ArgumentMultimap argMultimap) throws ParseException {
-        return argMultimap.getValue(PREFIX_CLAIM_DESC).orElseThrow(() ->
-                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE)));
     }
 
 }

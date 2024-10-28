@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -30,42 +29,41 @@ public class DeleteClaimsCommand extends Command {
     public static final String COMMAND_WORD = "delete-claim";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a claim from the person identified by the index number used in the displayed person list. \n"
+            + ": Deletes a claim from the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_POLICY_TYPE + "POLICY_TYPE " + PREFIX_CLAIM_STATUS + "CLAIM_STATUS "
-            + PREFIX_CLAIM_DESC + "CLAIM_DESCRIPTION\n"
+            + PREFIX_POLICY_TYPE + "POLICY_TYPE "
+            + PREFIX_CLAIM_INDEX + "CLAIM_INDEX(position in the list of claims for the specified policy)\n"
+            + "Note: Use the 'list-claims' command to find the appropriate claim index "
+            + "for the specified policy type.\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health "
-            + PREFIX_CLAIM_STATUS + "PENDING "
-            + PREFIX_CLAIM_DESC + "Hospitalization";
+            + PREFIX_CLAIM_INDEX + "1\n";
 
-    public static final String MESSAGE_DELETE_CLAIM_SUCCESS = "Claim deleted for policy type '%1$s' of person: %2$s\n\n"
-            + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s";
-    public static final String MESSAGE_NO_CLAIM_FOUND = "No claim matching the specified status "
-            + "and description was found.";
+    public static final String MESSAGE_DELETE_CLAIM_SUCCESS = "Claim deleted for policy type"
+            + "'%1$s' of person: %2$s.\n\n"
+            + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s.\n"
+            + "Note: The indexing of remaining claims may have changed due to this deletion.";
+    public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index.";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for person: %2$s";
 
     private final Index personIndex;
     private final PolicyType policyType;
-    private final ClaimStatus claimStatus;
-    private final String claimDescription;
+    private final Index claimIndex;
+
 
     /**
      * Creates a DeleteClaimsCommand to delete the specified claim.
      *
      * @param personIndex The index of the person in the filtered person list.
-     * @param policyType The type of the policy whose claim is to be deleted.
-     * @param claimStatus The status of the claim.
-     * @param claimDescription The description of the claim.
+     * @param policyType  The type of the policy whose claim is to be deleted.
+     * @param claimIndex  The index of the claim to delete.
      */
-    public DeleteClaimsCommand(Index personIndex, PolicyType policyType, ClaimStatus claimStatus,
-                               String claimDescription) {
-        requireAllNonNull(personIndex, policyType, claimStatus, claimDescription);
+    public DeleteClaimsCommand(Index personIndex, PolicyType policyType, Index claimIndex) {
+        requireAllNonNull(personIndex, policyType, claimIndex);
         this.personIndex = personIndex;
         this.policyType = policyType;
-        this.claimStatus = claimStatus;
-        this.claimDescription = claimDescription;
+        this.claimIndex = claimIndex;
     }
 
     /**
@@ -83,12 +81,13 @@ public class DeleteClaimsCommand extends Command {
         Person person = getPersonFromModel(model);
         Policy policy = findPolicyByType(person, policyType);
 
-        deleteClaimFromPolicy(policy);
+        Claim claimToDelete = deleteClaimFromPolicy(policy);
 
         Person updatedPerson = createUpdatedPerson(person);
         updateModel(model, person, updatedPerson);
 
-        String successMessage = formatSuccessMessage(person);
+        String successMessage = formatSuccessMessage(person, claimToDelete.getStatus(),
+                claimToDelete.getClaimDescription());
         return new CommandResult(successMessage);
     }
 
@@ -113,10 +112,15 @@ public class DeleteClaimsCommand extends Command {
      * @param policy The policy from which the claim is to be removed.
      * @throws CommandException If no matching claim is found.
      */
-    private void deleteClaimFromPolicy(Policy policy) throws CommandException {
-        Claim claimToDelete = new Claim(claimStatus, claimDescription);
-        boolean claimRemoved = policy.removeClaim(claimToDelete);
-        if (!claimRemoved) {
+    private Claim deleteClaimFromPolicy(Policy policy) throws CommandException {
+        try {
+            Claim claimToDelete = policy.getClaimList().getList().get(claimIndex.getZeroBased());
+            boolean claimRemoved = policy.removeClaim(claimToDelete);
+            if (!claimRemoved) {
+                throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
+            }
+            return claimToDelete;
+        } catch (IndexOutOfBoundsException e) {
             throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
         }
     }
@@ -139,7 +143,7 @@ public class DeleteClaimsCommand extends Command {
      * @param person The person whose claim was deleted.
      * @return The formatted success message.
      */
-    private String formatSuccessMessage(Person person) {
+    private String formatSuccessMessage(Person person, ClaimStatus claimStatus, String claimDescription) {
         return String.format(MESSAGE_DELETE_CLAIM_SUCCESS, policyType, person.getName(), claimStatus, claimDescription);
     }
 
@@ -174,7 +178,6 @@ public class DeleteClaimsCommand extends Command {
         DeleteClaimsCommand otherCommand = (DeleteClaimsCommand) other;
         return personIndex.equals(otherCommand.personIndex)
                 && policyType.equals(otherCommand.policyType)
-                && claimStatus.equals(otherCommand.claimStatus)
-                && claimDescription.equalsIgnoreCase(otherCommand.claimDescription);
+                && claimIndex.equals(otherCommand.claimIndex);
     }
 }
