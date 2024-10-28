@@ -57,7 +57,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
     }
 
-    private final boolean isAscending(String s) throws ParseException {
+    private boolean isAscending(String s) throws ParseException {
         if (VALID_ASCEND_STRINGS.contains(s)) {
             return true;
         } else if (VALID_DESCEND_STRINGS.contains(s)) {

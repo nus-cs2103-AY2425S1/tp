@@ -196,8 +196,8 @@ Sorts the list of persons being viewed by name or date of last visit in ascendin
 Format: `sort parameter/order`
 
 * Sorts the displayed list of persons according to the specified order.
-* Order can be specified as ascending by leaving the order blank or **a**/**asc**/**ascending**
-* Order can be specified as descending by **d**/**desc**/**descending**
+* Order can be specified as ascending by leaving the order blank or **a**/**asc**/**ascend**/**ascending**
+* Order can be specified as descending by **d**/**desc**/**descend**/**descending**
 
 Examples:
 * `sort n/` sorts by name in ascending order.
