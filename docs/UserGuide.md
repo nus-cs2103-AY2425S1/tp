@@ -36,6 +36,8 @@ management tasks done faster than traditional GUI apps.
    * `add_student n/John Doe p/98765432 e/johnd@example.com ` : Adds a student named
      `John Doe` to the app.
 
+   * `view_student 2 ` : Displays the details of the 2nd student shown in the current list.
+
    * `delete 3` : Deletes the 3rd student shown in the current list.
 
    * `clear` : Deletes all students.
@@ -93,6 +95,20 @@ Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 Examples:
 * `add_student n/John Doe p/98765432 e/johnd@example.com`
 * `add_student n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/likesMath`
+
+### Viewing a student: `view_student`
+
+Displays all the details of a student in the details panel.
+
+Format: `view_student INDEX`
+
+* Displays the details of a student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view_student 2` displays the 2nd student in the list.
+* `find Betsy` followed by `view_student 1` displays the 1st student in the results of the `find` command.
 
 ### Listing all students : `list`
 
@@ -251,6 +267,7 @@ _Details coming soon ..._
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
+**View**          | `view INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
 **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
