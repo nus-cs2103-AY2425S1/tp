@@ -26,8 +26,10 @@ class BatchDeleteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private final Set<Tag> friendsOwesMoneyTag = Set.of(new Tag("friends"), new Tag("owesMoney"));
-    private final PersonContainsTagsPredicate friendsOwesMoneyPredicate = new PersonContainsTagsPredicate(friendsOwesMoneyTag);
-    private final BatchDeleteCommand batchDeleteFriendsOwesMoneyCommand = new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
+    private final PersonContainsTagsPredicate friendsOwesMoneyPredicate =
+            new PersonContainsTagsPredicate(friendsOwesMoneyTag);
+    private final BatchDeleteCommand batchDeleteFriendsOwesMoneyCommand =
+            new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
 
     private final Set<Tag> friendsTag = Set.of(new Tag("friends"));
     private final PersonContainsTagsPredicate friendsPredicate = new PersonContainsTagsPredicate(friendsTag);
@@ -96,7 +98,8 @@ class BatchDeleteCommandTest {
         assertTrue(batchDeleteFriendsOwesMoneyCommand.equals(batchDeleteFriendsOwesMoneyCommand));
 
         // same values -> returns true
-        BatchDeleteCommand batchDeleteCommandV1Copy = new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
+        BatchDeleteCommand batchDeleteCommandV1Copy =
+                new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
         assertTrue(batchDeleteFriendsOwesMoneyCommand.equals(batchDeleteCommandV1Copy));
 
         // different types -> returns false
