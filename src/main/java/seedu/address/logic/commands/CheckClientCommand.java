@@ -46,7 +46,7 @@ public class CheckClientCommand extends Command {
         Person clientToCheck = lastShownList.get(targetIndex.getZeroBased());
 
         if (clientToCheck.getCar() == null) {
-            return new CommandResult(MESSAGE_NO_CAR_TO_CHECK);
+            throw new CommandException(MESSAGE_NO_CAR_TO_CHECK);
         }
 
         clientToCheck.setServicing();

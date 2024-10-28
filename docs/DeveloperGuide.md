@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
-* `ViewClientCommandPasrser#parse()` given the arguments succeeding the `view` command, parse the appropriate index to ViewClientCommand.
+* `ViewClientCommandParser#parse()` given the arguments succeeding the `view` command, parse the appropriate index to ViewClientCommand.
 
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
@@ -169,7 +169,7 @@ Given below is an example usage scenario and how the View Client mechanism behav
 
 Step 1. The user launches the application, all clients will be listed by default. **OR** The user calls a List/ Find command.
 
-Step 2. The user executes `view 1` command to view the first person in the Client list.
+Step 2. The user executes the `view 1` command to view the first person in the Client list.
 
 <box type="info" seamless>
 
@@ -177,7 +177,7 @@ Step 2. The user executes `view 1` command to view the first person in the Clien
 
 </box>
 
-Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view 2` command to view the second person in the Client list.
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes the `view 2` command to view the second person in the Client list.
 
 <box type="info" seamless>
 
@@ -205,7 +205,7 @@ The following activity diagram summarizes what happens when a user executes a `v
 
 **Aspect: How View Client executes:**
 
-* **Alternative 1 (current choice):** Opens a new `MATER - View Client` Window
+* **Alternative 1 (current choice):** Opens a new `MATER - View Client` Window.
   * Pros: Easy to implement, possible to extend the feature to open multiple windows for multiple different clients in the future.
   * Cons: Fussy users may prefer to view client details within one `MATER` Main Window.
 
@@ -407,7 +407,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC5 - View a Client**
+* 2d. The given new value causes a duplicate Client or Car.
+    * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+**Use case: UC5 - Check in/out Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to check in/out a specific Client in the list.
+3.  MATER checks in/out Client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC6 - View a Client**
 
 **MSS**
 
@@ -429,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC6 - Add Car to Client**
+**Use case: UC7 - Add Car to Client**
 
 **MSS**
 
@@ -463,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC7 - Delete Car from Client**
+**Use case: UC8 - Delete Car from Client**
 
 **MSS**
 
@@ -491,36 +518,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC8 - Check in/out Client**
+* 2c. The Client's Car is checked in.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC9 - Filter Clients by keywords**
 
 **MSS**
 
-1.  User <u>list Clients (UC2)</u>.
-2.  User requests to check in/out a specific Client in the list.
-3.  MATER checks in/out Client and displays a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC9 - List Clients which are checked in/out**
-
-**MSS**
-
-1.  User requests to list all Clients which are checked in/out
-2.  MATER shows the list of Clients which are checked in/out and displays a confirmation message.
-
-    Use case ends.
-
-**Use case: UC10 - Filter Clients by keywords**
-
-**MSS**
-
-1.  User requests to filter Clients by keywords
+1.  User requests to filter Clients by keywords.
 2.  MATER shows the list of filtered Clients and displays a confirmation message.
 
     Use case ends.
