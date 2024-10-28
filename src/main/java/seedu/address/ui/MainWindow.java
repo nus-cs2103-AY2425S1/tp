@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -70,6 +71,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox propertyListPane;
+    
+    @FXML
+    private Label modeLabel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -204,6 +208,8 @@ public class MainWindow extends UiPart<Stage> {
         meetUpListPane.setVisible(false);
         buyerListPane.setVisible(true);
         propertyListPane.setVisible(false);
+
+        modeLabel.setText("Viewing: Buyers");
     }
 
     @FXML
@@ -219,6 +225,8 @@ public class MainWindow extends UiPart<Stage> {
         meetUpListPane.setVisible(true);
         buyerListPane.setVisible(false);
         propertyListPane.setVisible(false);
+
+        modeLabel.setText("Viewing: Meet Ups");
     }
 
     @FXML
@@ -229,6 +237,8 @@ public class MainWindow extends UiPart<Stage> {
         meetUpListPane.setVisible(false);
         buyerListPane.setVisible(false);
         propertyListPane.setVisible(true);
+
+        modeLabel.setText("Viewing: Properties");
     }
 
     public BuyerListPanel getBuyerListPanel() {
