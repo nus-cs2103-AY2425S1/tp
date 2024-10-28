@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
@@ -10,8 +11,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
+import static seedu.address.testutil.TypicalAssignments.DEADLINE_C;
+import static seedu.address.testutil.TypicalAssignments.GRADE_90;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
+import static seedu.address.testutil.TypicalAssignments.STATUS_Y;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
@@ -27,10 +31,12 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -247,5 +253,37 @@ public class StudentTest {
         String expectedString = "2024-10-22 [x]\n"
                 + "2024-10-23 [ ]\n";
         assertEquals(expectedString, student.getAttendanceRecordsString());
+    }
+
+    @Test
+    void editAssignment_nonExistentAssignment_returnsNull() {
+        // Attempt to edit an assignment that doesn't exist
+        AssignmentName nonExistentName = new AssignmentName("Nonexistent Homework");
+        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, STATUS_Y, GRADE_90);
+
+        AssignmentQuery result = student.editAssignment(nonExistentName, query);
+
+        // Verify that the method returns null
+        assertNull(result);
+    }
+
+    @Test
+    void editAssignment_existingAssignment_editsAssignment() {
+        // Create AssignmentQuery with new values to edit
+        Assignment oldAssignment = new AssignmentBuilder(MATH_ASSIGNMENT_SUBMITTED).build();
+        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, STATUS_Y, GRADE_90);
+
+        // Perform the edit operation
+        AssignmentQuery oldAssignmentQuery = student.editAssignment(ASSIGNMENT_NAME_A, query);
+
+        // Verify the old assignment details are returned
+        assertEquals(new AssignmentQuery(oldAssignment), oldAssignmentQuery);
+
+        // Verify that the assignment is now updated
+        Assignment updatedAssignment = student.getAssignments().get(0);
+        assertEquals(DEADLINE_C, updatedAssignment.getDeadline());
+        assertEquals(STATUS_Y, updatedAssignment.getSubmissionStatus());
+        assertEquals(STATUS_Y, updatedAssignment.getGradingStatus());
+        assertEquals(GRADE_90, updatedAssignment.getGrade());
     }
 }
