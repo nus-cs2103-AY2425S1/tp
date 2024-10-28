@@ -27,11 +27,11 @@ class JsonAdaptedLesson {
     private final String time;
     private final List<JsonAdaptedStudent> students;
     /**
-     * A list of attendance values implicitly paired with the list of students by index.
-     * Attempting to use the Pair class caused InaccessibleObjectException on GitHub CI.
+     * Note: This is using a custom Pair class, not the one by JavaFX.
+     * Attempting to use JavaFX's Pair class causes InaccessibleObjectException on GitHub CI.
      * Using a Map is not feasible because there is no map key deserializer available.
      */
-    private final List<Pair<JsonAdaptedStudent, Boolean>> attendanceMap;
+    private final List<Pair<JsonAdaptedStudent, Boolean>> attendanceList;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -40,17 +40,17 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
-            @JsonProperty("attendanceMap") List<Pair<JsonAdaptedStudent, Boolean>> attendanceMap) {
+            @JsonProperty("attendanceList") List<Pair<JsonAdaptedStudent, Boolean>> attendanceList) {
         this.date = date;
         this.time = time;
         this.students = new ArrayList<>();
-        this.attendanceMap = new ArrayList<>();
+        this.attendanceList = new ArrayList<>();
         // Null check required because the JsonCreator constructor may be called with null if the fields do not exist
         if (students != null) {
             this.students.addAll(students);
         }
-        if (attendanceMap != null) {
-            this.attendanceMap.addAll(attendanceMap);
+        if (attendanceList != null) {
+            this.attendanceList.addAll(attendanceList);
         }
     }
 
@@ -61,13 +61,13 @@ class JsonAdaptedLesson {
         date = source.getDate().toString();
         time = source.getTime().toString();
         students = new ArrayList<>();
-        attendanceMap = new ArrayList<>();
+        attendanceList = new ArrayList<>();
 
         for (Student student : source.getStudents()) {
             JsonAdaptedStudent jsonAdaptedStudent = new JsonAdaptedStudent(student);
             boolean attendance = source.getAttendance(student);
             students.add(jsonAdaptedStudent);
-            attendanceMap.add(new Pair<>(jsonAdaptedStudent, attendance));
+            attendanceList.add(new Pair<>(jsonAdaptedStudent, attendance));
         }
     }
 
@@ -126,8 +126,10 @@ class JsonAdaptedLesson {
         final Time modelTime = new Time(time);
 
         final List<Student> modelStudents = new ArrayList<>();
-        final HashMap<Student, Boolean> modelAttendanceMap = new HashMap<>();
+        final HashMap<Student, Boolean> modelAttendanceList = new HashMap<>();
 
+        // The loop only checks using students in the students list, thus ignoring any "extra" entries
+        // in the attendanceList.
         for (JsonAdaptedStudent student : students) {
             Student modelStudent = student.toModelType();
             // Check to ensure student data matches an existing student
@@ -136,14 +138,21 @@ class JsonAdaptedLesson {
                         String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent.getName().fullName));
             }
             modelStudents.add(modelStudent);
-            modelAttendanceMap.put(modelStudent, getAttendance(student));
+            modelAttendanceList.put(modelStudent, getAttendance(student));
         }
 
-        return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceMap);
+        return new Lesson(modelDate, modelTime, modelStudents, modelAttendanceList);
     }
 
+    /**
+     * Returns the attendance of this student as stored in the attendanceList.
+     * If this student's entry is not found in the attendanceList, defaults to false.
+     *
+     * @param jsonStudent JsonAdaptedStudent representing the student to search for.
+     * @return Boolean representing the student's attendance for this lesson, or false if no entry is found.
+     */
     private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
-        for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceMap) {
+        for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceList) {
             if (pair.getKey().equals(jsonStudent)) {
                 return pair.getVal();
             }
