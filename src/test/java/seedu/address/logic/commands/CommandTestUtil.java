@@ -71,6 +71,13 @@ public class CommandTestUtil {
     public static final String VALID_UNIT_NUMBER_03_11 = "03-11";
     public static final String VALID_TAG_SPACIOUS = "spacious";
     public static final String VALID_TAG_NEAR_MRT = "near MRT";
+    public static final String VALID_FIELD_NAME = "Name";
+    public static final String VALID_FIELD_NUMPROP = "NumProp";
+    public static final String VALID_ORDER_LOW = "L";
+    public static final String VALID_ORDER_HIGH = "H";
+
+    public static final String INVALID_FIELD = "InvalidField";
+    public static final String INVALID_ORDER = "InvalidOrder";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

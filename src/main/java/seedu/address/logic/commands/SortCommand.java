@@ -82,4 +82,20 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, field, order));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSortCommand = (SortCommand) other;
+        return field.equals(otherSortCommand.field)
+                && order.equals(otherSortCommand.order);
+    }
 }
