@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -25,6 +26,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -45,7 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_REMARK + "Weak at Math";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -138,7 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Set<Tag> tags;
         private List<Assignment> assignmentList = new ArrayList<>();
-        private String remark;
+        private Remark remark;
 
         public EditStudentDescriptor() {}
 
@@ -152,14 +155,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setAssignmentList(toCopy.assignmentList);
-            // SetRemark is not yet called in EditStudentDescriptorBuilder to wait until editing remark is implemented
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, remark);
         }
 
         public void setName(Name name) {
@@ -211,11 +214,11 @@ public class EditCommand extends Command {
             return assignmentList != null ? Optional.of(assignmentList) : Optional.empty();
         }
 
-        public Optional<String> getRemark() {
+        public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
 
-        public void setRemark(String remark) {
+        public void setRemark(Remark remark) {
             this.remark = remark;
         }
 

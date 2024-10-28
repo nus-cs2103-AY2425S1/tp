@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
-    private static final String EMPTY_REMARK = "";
+    private static final Remark EMPTY_REMARK = new Remark("");
 
     // Identity fields
     private final Name name;
@@ -28,8 +28,8 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final String remark;
-    //AssignmentList initially an empty list
+    private final Remark remark;
+    // AssignmentList initially an empty list
     private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
     /**
@@ -47,7 +47,7 @@ public class Student {
     /**
      * Every field except assignmentList must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags, String remark) {
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, email, tags, remark);
         this.name = name;
         this.phone = phone;
@@ -59,7 +59,7 @@ public class Student {
     /**
      * Creates a Student object with an AssignmentList
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList, String remark) {
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList, Remark remark) {
         requireAllNonNull(name, phone, email, tags, remark);
         this.name = name;
         this.phone = phone;
@@ -71,7 +71,7 @@ public class Student {
     /**
      * Copy an existing student object and changing the remark attribute
      */
-    public Student(Student studentToCopy, String remark) {
+    public Student(Student studentToCopy, Remark remark) {
         requireAllNonNull(studentToCopy.getName(), studentToCopy.getPhone(), studentToCopy.getEmail(),
                 studentToCopy.getTags(), remark);
         this.name = studentToCopy.getName();
@@ -93,6 +93,7 @@ public class Student {
     public Email getEmail() {
         return email;
     }
+
     public List<Assignment> getAssignmentList() {
         return assignmentList;
     }
@@ -104,7 +105,7 @@ public class Student {
         return Collections.unmodifiableSet(tags);
     }
 
-    public String getRemark() {
+    public Remark getRemark() {
         return remark;
     }
     /**
