@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,13 +28,7 @@ public class Teacher extends Person {
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes) {
-        super(name, gender, phone, email, address, addTeacherTag(tags), subjects, classes);
-    }
-
-    private static Set<Tag> addTeacherTag(Set<Tag> tags) {
-        Set<Tag> modifiedTags = new HashSet<>(tags);
-        modifiedTags.add(new Tag("teacher"));
-        return modifiedTags;
+        super(name, gender, phone, email, address, tags, subjects, classes);
     }
 
     /**

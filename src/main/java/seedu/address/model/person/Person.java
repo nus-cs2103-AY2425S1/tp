@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,6 +16,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    public static final String TEACHER_TYPE = "teacher";
+    public static final String STUDENT_TYPE = "student";
 
     // Identity fields
     private final Name name;
@@ -70,6 +74,10 @@ public class Person {
 
     public Set<String> getClasses() {
         return this.classes;
+    }
+
+    public DaysAttended getDaysAttended() {
+        return null;
     }
 
     /**
@@ -148,4 +156,42 @@ public class Person {
     public void resetAttendance() {
     }
 
+    /**
+     * Creates a new Person object based on the specified type.
+     *
+     * @param type The type of person to create (e.g., "student" or "teacher").
+     * @param name The name of the person.
+     * @param gender The gender of the person.
+     * @param phone The phone number of the person.
+     * @param email The email address of the person.
+     * @param address The address of the person.
+     * @param tags The set of tags associated with the person.
+     * @param subjects The set of subjects associated with the person.
+     * @param classes The set of classes associated with the person.
+     * @param daysAttended The number of days attended by the person (applicable for students).
+     * @return A new Person object of the specified type.
+     * @throws InvalidPersonTypeException if the specified type is not recognized.
+     */
+    public static Person createPerson(String type, Name name, Gender gender, Phone phone, Email email, Address address,
+                                      Set<Tag> tags, Set<Subject> subjects, Set<String> classes,
+                                      DaysAttended daysAttended) {
+        switch (type) {
+        case STUDENT_TYPE:
+            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+        case TEACHER_TYPE:
+            return new Teacher(name, gender, phone, email, address, tags, subjects, classes);
+        default:
+            throw new InvalidPersonTypeException();
+        }
+    }
+
+    public String getType() {
+        if (this instanceof Student) {
+            return STUDENT_TYPE;
+        } else if (this instanceof Teacher) {
+            return TEACHER_TYPE;
+        } else {
+            throw new InvalidPersonTypeException();
+        }
+    }
 }
