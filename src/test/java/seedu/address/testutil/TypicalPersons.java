@@ -13,11 +13,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import com.sun.javafx.application.ParametersImpl;
 import seedu.address.model.AddressBook;
+import seedu.address.model.participation.Participation;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -61,6 +66,12 @@ public class TypicalPersons {
     public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
     public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();
 
+    public static final Participation ALICE_MATH_12122024 =
+            new Participation(
+                    ALICE,
+                    MATH,
+                    List.of(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT))));
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -76,6 +87,9 @@ public class TypicalPersons {
         for (Tutorial tutorial : getTypicalTutorials()) {
             ab.addTutorial(tutorial);
         }
+        for (Participation participation : getTypicalParticipations()) {
+            ab.addParticipation(participation);
+        }
         return ab;
     }
 
@@ -85,5 +99,9 @@ public class TypicalPersons {
 
     public static List<Tutorial> getTypicalTutorials() {
         return new ArrayList<>(Arrays.asList(MATH, SCIENCE));
+    }
+
+    public static List<Participation> getTypicalParticipations() {
+        return new ArrayList<>(Arrays.asList(ALICE_MATH_12122024));
     }
 }
