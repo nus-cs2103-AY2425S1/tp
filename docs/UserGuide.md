@@ -27,6 +27,9 @@ BA€ is a **desktop app for managing contacts, optimized for use via a  Line In
 
 1. **Open Your Command Terminal** 
    - Navigate to the folder where you saved the `.jar` file using the `cd` command.
+   - For more info on how to use the `cd` command, visit the following links:
+     - For [Windows users](https://www.wikihow.com/Change-Directories-in-Command-Prompt)
+     - For [Mac/Linux users](https://iboysoft.com/wiki/cd-mac-terminal.html)
 1. **Start the App**
    - Enter the following command: `java -jar tp.jar`
    - Within a few seconds, the BA€ Address Book interface should display and should look something like this:
