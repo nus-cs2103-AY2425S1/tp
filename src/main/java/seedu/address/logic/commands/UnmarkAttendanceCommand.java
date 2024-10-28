@@ -22,6 +22,7 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully.";
+    public static final String MESSAGE_NO_STUDENTS = "There is no student to unmark attendance.";
 
     private final Index targetIndex;
 

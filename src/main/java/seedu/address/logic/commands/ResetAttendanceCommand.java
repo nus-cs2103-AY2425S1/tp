@@ -17,6 +17,8 @@ public class ResetAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Attendance reset successfully.";
+    public static final String MESSAGE_NO_STUDENTS = "There is no student to reset attendance.";
+
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);

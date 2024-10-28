@@ -139,4 +139,13 @@ public class Person {
             .toString();
     }
 
+    public void markAttendance(){
+    }
+
+    public void unmarkAttendance() {
+    }
+
+    public void resetAttendance() {
+    }
+
 }
