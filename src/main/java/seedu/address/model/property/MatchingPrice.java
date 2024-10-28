@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class MatchingPrice {
     public static final String MESSAGE_CONSTRAINTS =
-            "Matching price should be an integer";
+            "Matching price must be a non-negative integer with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
     private static final Logger logger = LogsCenter.getLogger(MatchingPrice.class);
     public final String value;

@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Bid {
     public static final String MESSAGE_CONSTRAINTS =
-            "Bid price should be an integer";
+            "Bid price must be a non-negative integer with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
     private static final Logger logger = LogsCenter.getLogger(Bid.class);
     public final String value;

@@ -16,7 +16,8 @@ public class Unit {
     public static final Unit DEFAULT_LANDED_UNIT =
             new Unit("00-00");
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit numbers should only contain numbers delimited by a dash, and it should be minimally 2 digits long";
+            "Unit number should only contain numbers delimited by a dash, "
+            + "and numbers on either side of the dash must be at least 2 characters long";
     public static final String VALIDATION_REGEX =
             "^(?:\\d{2}|1[0-3]\\d|14[0-8])-(?:\\d{2,5}|10\\d{4}|110\\d{3}|1110\\d{2}|11110\\d|111110)$";
     public final String value;
