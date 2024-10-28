@@ -22,9 +22,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.ConsultationBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -143,6 +145,39 @@ public class AddressBookTest {
                 + "{students=" + addressBook.getStudentList()
                 + ", consults=" + addressBook.getConsultList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void setLesson_allValidArguments_success() {
+        Lesson lesson1 = new LessonBuilder().withDate("2024-10-30").withTime("10:00").build();
+        Lesson lesson2 = new LessonBuilder().withDate("2024-11-01").withTime("12:00").build();
+
+        addressBook.addLesson(lesson1);
+        assertTrue(addressBook.hasLesson(lesson1));
+        assertFalse(addressBook.hasLesson(lesson2));
+
+        addressBook.setLesson(lesson1, lesson2);
+        assertFalse(addressBook.hasLesson(lesson1));
+        assertTrue(addressBook.hasLesson(lesson2));
+    }
+
+    @Test
+    public void setLesson_nullArguments_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setLesson(null, null));
+        assertThrows(NullPointerException.class, () -> addressBook.setLesson(null, new LessonBuilder().build()));
+        assertThrows(NullPointerException.class, () -> addressBook.setLesson(new LessonBuilder().build(), null));
+    }
+
+    @Test
+    public void setLesson_lessonNotFound_throwsLessonNotFoundException() {
+        Lesson lesson1 = new LessonBuilder().withDate("2024-10-30").withTime("10:00").build();
+        Lesson lesson2 = new LessonBuilder().withDate("2024-11-01").withTime("12:00").build();
+
+        // Ensure the lesson does not exist in the address book
+        assertFalse(addressBook.hasLesson(lesson1));
+
+        // Attempt to set a lesson that does not exist
+        assertThrows(LessonNotFoundException.class, () -> addressBook.setLesson(lesson1, lesson2));
     }
 
     /**
