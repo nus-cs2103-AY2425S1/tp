@@ -6,44 +6,123 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-    <GridPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-            <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
-            </padding>
+<GridPane fx:id="cardPane"
+          id="cardPane"
+          xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1"
+          styleClass="card-pane"
+          hgap="10"
+          vgap="10">
 
-            <!-- Name and ID -->
-            <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="card_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="name" text="\$first" styleClass="card_big_label" />
-            </HBox>
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
 
-            <!-- Headings for Tags and Lessons -->
-            <Label text="Tags:" styleClass="card_heading" />
-            <FlowPane fx:id="tags" />
+    <columnConstraints>
+        <ColumnConstraints minWidth="100" prefWidth="120"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
 
-            <Label text="Lessons:" styleClass="card_heading" />
-            <FlowPane fx:id="lessons" />
+    <!-- Labels -->
+    <HBox spacing="0.5" alignment="CENTER_LEFT">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE"/>
+            </minWidth>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+    </HBox>
 
-            <!-- Headings for Contact Information -->
-            <Label text="Contact Information:" styleClass="card_heading" />
-            <Label fx:id="phone" styleClass="card_small_label" text="\$phone" />
-            <Label fx:id="telegram" styleClass="card_small_label" text="\$telegram" managed="${telegram.visible}" />
-            <Label fx:id="address" styleClass="card_small_label" text="\$address" managed="${address.visible}" />
-            <Label fx:id="email" styleClass="card_small_label" text="\$email" managed="${email.visible}" />
-            <!-- Headings for Remarks -->
-            <Label text="Remarks:" styleClass="card_heading" />
-            <VBox fx:id="remarks" spacing="5">
-            </VBox>
-        </VBox>
-    </GridPane>
-</HBox>
+    <Label text="Phone Number:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="1"/>
+
+    <Label text="Telegram:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="2"/>
+
+    <Label text="Address:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="3"/>
+
+    <Label text="Email:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="4"/>
+
+    <Label text="Lessons:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="5"
+           GridPane.valignment="TOP"/>
+
+    <Label text="Tags:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="6"
+           GridPane.valignment="TOP"/>
+
+    <Label text="Remarks:"
+           styleClass="label-heading"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="7"
+           GridPane.valignment="TOP"/>
+
+    <Label fx:id="phone"
+           text="\$phone"
+           styleClass="label-value"
+           GridPane.columnIndex="1"
+           GridPane.rowIndex="1"/>
+
+    <Label fx:id="telegram"
+           text="\$telegram"
+           styleClass="label-value"
+           GridPane.columnIndex="1"
+           GridPane.rowIndex="2"/>
+
+    <Label fx:id="address"
+           text="\$address"
+           styleClass="label-value"
+           GridPane.columnIndex="1"
+           GridPane.rowIndex="3"/>
+
+    <Label fx:id="email"
+           text="\$email"
+           styleClass="label-value"
+           GridPane.columnIndex="1"
+           GridPane.rowIndex="4"/>
+
+    <!-- Lessons Section -->
+    <FlowPane fx:id="lessons"
+              styleClass="label-value"
+              GridPane.columnIndex="1"
+              GridPane.rowIndex="5"
+              HBox.hgrow="ALWAYS"
+              vgap="5">
+        <!-- Add lesson nodes dynamically here -->
+    </FlowPane>
+
+    <!-- Tags Section -->
+    <FlowPane fx:id="tags"
+              styleClass="label-value"
+              GridPane.columnIndex="1"
+              GridPane.rowIndex="6"
+              HBox.hgrow="ALWAYS"
+              vgap="5">
+        <!-- Add tag nodes dynamically here -->
+    </FlowPane>
+
+    <!-- Remarks Section -->
+    <FlowPane fx:id="remarks"
+              styleClass="label-value"
+              GridPane.columnIndex="1"
+              GridPane.rowIndex="7"
+              HBox.hgrow="ALWAYS"
+              vgap="5">
+    <!-- Add remark nodes dynamically here -->
+    </FlowPane>
+</GridPane>

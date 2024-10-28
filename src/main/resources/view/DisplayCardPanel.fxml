@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS" fx:id="displayCardContainer">
-</VBox>
+<HBox HBox.hgrow="ALWAYS">
+    <VBox xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1"
+          VBox.vgrow="ALWAYS"
+          fx:id="displayCardContainer">
+    </VBox>
+</HBox>
+

@@ -29,8 +29,11 @@ public class DisplayCardPanel extends UiPart<Region> {
     public DisplayCardPanel(ObjectProperty<Optional<Person>> lastViewedPerson) {
         super(FXML);
         this.lastViewedPerson = lastViewedPerson;
-        lastViewedPerson.addListener((observable, oldPerson, newPerson) -> updateDisplayCard(newPerson));
-
+        lastViewedPerson.addListener((observable, oldValue, newValue) -> {
+            logger.fine("Last viewed person changed to: " + newValue);
+            updateDisplayCard(newValue);
+        });
+        updateDisplayCard(lastViewedPerson.get());
     }
 
     /**

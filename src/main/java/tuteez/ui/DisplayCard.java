@@ -5,10 +5,7 @@ import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import tuteez.model.person.Person;
 
 /**
@@ -21,7 +18,7 @@ public class DisplayCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private HBox cardPane;
+    private GridPane cardPane;
     @FXML
     private Label name;
     @FXML
@@ -39,7 +36,7 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private FlowPane lessons;
     @FXML
-    private VBox remarks;
+    private FlowPane remarks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,12 +50,17 @@ public class DisplayCard extends UiPart<Region> {
             telegram.setText(person.getTelegramUsername().telegramUsername);
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
+            tags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+            remarks.getChildren().clear();
             person.getRemarkList().getRemarks().stream()
                     .sorted(Comparator.comparing(remark -> remark.toString()))
                     .forEach(remark -> remarks.getChildren().add(new Label(remark.toString())));
+
+            lessons.getChildren().clear();
             person.getLessons().stream()
                     .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getDayAndTime())));
         }
