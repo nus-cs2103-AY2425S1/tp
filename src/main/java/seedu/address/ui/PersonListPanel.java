@@ -134,6 +134,11 @@ public class PersonListPanel extends UiPart<Region> {
      * Sets the label to display all tutorials currently available.
      */
     private void setTutorialsLabel() {
+        if (tutorialList.isEmpty()) {
+            this.tutorials.setText("No tutorials yet");
+            return;
+        }
+
         StringBuilder tutorials = new StringBuilder();
         for (int i = 0; i < tutorialList.size(); i++) {
             tutorials.append(tutorialList.get(i).getSubject());
