@@ -9,10 +9,10 @@ import spleetwaise.address.commons.util.AppUtil;
  * {@link #isValidRemark(String)}
  */
 public class Remark {
-    // Regex pattern to validate that the remark contains only [TBC]
-    // TODO: Update the regex pattern to match the requirements of the remark field
-    public static final String VALIDATION_REGEX = "^[\\p{L}\\p{N}\\p{P}\\p{S}\\p{Zs}\\t]*$";
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should only contain alphanumeric characters and spaces";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]*$";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should only contain alphanumeric characters and spaces, "
+            + "and be at most 120 characters long";
+    public static final int MAX_LENGTH = 120;
     public final String value;
 
     /**
@@ -25,10 +25,10 @@ public class Remark {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid remark (allows empty string "").
      */
     public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
     @Override

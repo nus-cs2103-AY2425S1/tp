@@ -58,6 +58,7 @@ public class CommandTestUtil {
 
     // empty string not allowed for addresses
     public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS;
+    public static final String INVALID_REMARK_DESC_FOR_ADD = " " + CliSyntax.PREFIX_REMARK;
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

@@ -10,6 +10,7 @@ import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_ADDRESS
 import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC_FOR_ADD;
 import static spleetwaise.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static spleetwaise.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static spleetwaise.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -35,6 +36,7 @@ import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
@@ -137,6 +139,11 @@ public class AddCommandGuiTest extends TestFxAppRunner {
         /* Case: Invalid address -> failure */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Address.MESSAGE_CONSTRAINTS);
+
+        /* Case: Invalid remark -> failure */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + INVALID_REMARK_DESC_FOR_ADD;
+        assertCommandFailure(command, Remark.MESSAGE_CONSTRAINTS);
 
         /* Case: Invalid tag -> failure */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
