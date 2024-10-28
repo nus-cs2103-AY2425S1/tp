@@ -44,4 +44,18 @@ public class OrderHistory {
     public String toString() {
         return this.time.format(formatter) + ": Ordered " + getOrder();
     }
+
+    @Override
+    public boolean equals(Object rhs) {
+        if (this == rhs) {
+            return true;
+        }
+
+        if (!(rhs instanceof  OrderHistory)) {
+            return false;
+        }
+
+        OrderHistory otherOrderHistory = (OrderHistory) rhs;
+        return this.time.equals(otherOrderHistory.time) && this.order.equals(otherOrderHistory.order);
+    }
 }

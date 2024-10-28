@@ -116,26 +116,6 @@ public class PersonTest {
         assertEquals(p3, list.get(0));
     }
 
-    @Test
-    public void hashCodeTest() {
-        // This hashCode test is not complete, this only test orderFrequency
-
-        /*
-        Order cake = new Order("Cake");
-        Order pizza = new Order("Pizza");
-
-        Person p1 = new PersonBuilder().build();
-        Person p2 = new PersonBuilder().build();
-        Person p3 = new PersonBuilder().build();
-        p1.putOrder(cake);
-        p2.putOrder(pizza);
-        p3.putOrder(cake);
-
-        assertNotEquals(p1.hashCode(), p2.hashCode());
-        assertEquals(p1.hashCode(), p3.hashCode());
-
-         */
-    }
 
     @Test
     public void equals() {
