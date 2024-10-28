@@ -17,8 +17,10 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
         + " appt : Finds all appointments matching the following parameters.\n"
         + "To specify name, use the parameter n/[NAME] where [NAME] is a list of names, non-case-sensitive,"
         + "separated by spaces.\n"
-        + "Parameters: n/[NAME]\n"
-        + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice bob";
+        + "To specify date, use the parameter d/[DATE] where [DATE] is a list of dates, in the format"
+        + "YYYY-MM-DD, separated by spaces. (Note that there is no time stated here.)\n"
+        + "Parameters: [n/[NAME]] [d/[DATE]\n"
+        + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice d/2024-10-20";
 
     /**
      * Creates the command

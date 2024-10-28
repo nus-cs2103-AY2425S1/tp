@@ -157,7 +157,7 @@ public class ParserUtil {
         String trimmerPersonId = personId.trim();
         int parsedPersonId = Integer.parseInt(trimmerPersonId);
         if (parsedPersonId < 0) {
-            throw new ParseException("person Id needs to be a positive intger");
+            throw new ParseException("personId needs to be a non-negative integer");
         }
         return parsedPersonId;
     };

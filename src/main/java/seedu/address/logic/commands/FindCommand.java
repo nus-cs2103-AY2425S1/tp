@@ -17,8 +17,9 @@ public abstract class FindCommand<T> extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Finds all persons or appointments whose names contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " alice bob charlie";
+        + "Parameters: ENTITY_TYPE ENTITY_ARGUMENTS...\n"
+        + "Example: " + COMMAND_WORD + " person n/John\n"
+        + "Example: " + COMMAND_WORD + " appt n/John d/2024-10-20";
 
     protected final Predicate<T> predicate;
 
