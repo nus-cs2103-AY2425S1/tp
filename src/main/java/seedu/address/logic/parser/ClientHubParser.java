@@ -23,7 +23,13 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.reminder.AddReminderCommand;
+import seedu.address.logic.commands.reminder.DeleteReminderCommand;
+import seedu.address.logic.commands.reminder.EditReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.reminder.AddReminderCommandParser;
+import seedu.address.logic.parser.reminder.DeleteReminderCommandParser;
+import seedu.address.logic.parser.reminder.EditReminderCommandParser;
 
 /**
  * Parses user input.
@@ -100,6 +106,15 @@ public class ClientHubParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case DeleteReminderCommand.COMMAND_WORD, DeleteReminderCommand.COMMAND_WORD_SHORT:
+            return new DeleteReminderCommandParser().parse(arguments);
+
+        case AddReminderCommand.COMMAND_WORD:
+            return new AddReminderCommandParser().parse(arguments);
+
+        case EditReminderCommand.COMMAND_WORD:
+            return new EditReminderCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

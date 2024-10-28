@@ -5,6 +5,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Edits a reminder in the address book.
+ */
 public class EditReminderCommand extends Command {
     public static final String COMMAND_WORD = "editReminder";
 
@@ -31,6 +34,13 @@ public class EditReminderCommand extends Command {
         return "EditReminderCommand";
     }
 
+    /**
+     * Executes the command to edit a reminder to the model.
+     *
+     * @param model The {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} indicating the outcome of the command execution.
+     * @throws CommandException If there is an issue during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         return null;

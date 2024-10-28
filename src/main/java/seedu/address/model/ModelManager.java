@@ -14,6 +14,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +27,8 @@ public class ModelManager implements Model {
     private final ObservableList<Person> originalPersons;
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
+    private final ObservableList<Reminder> originalReminders;
+    private final FilteredList<Reminder> filteredReminders;
 
 
     /**
@@ -41,6 +44,9 @@ public class ModelManager implements Model {
         this.originalPersons = this.clientHub.getPersonList();
         this.filteredPersons = new FilteredList<>(originalPersons);
         this.sortedPersons = new SortedList<>(filteredPersons);
+        this.originalReminders = this.clientHub.getReminderList();
+        this.filteredReminders = new FilteredList<>(originalReminders);
+
 
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -103,14 +109,30 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return clientHub.hasReminder(reminder);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         clientHub.removePerson(target);
+    }
+
+    @Override
+    public void deleteReminder(Reminder target) {
+        clientHub.removeReminder(target);
     }
 
     @Override
     public void addPerson(Person person) {
         clientHub.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        clientHub.addReminder(reminder);
     }
 
     @Override
@@ -121,8 +143,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setReminder(Reminder target, Reminder editedReminder) {
+        requireAllNonNull(target, editedReminder);
+
+        clientHub.setReminder(target, editedReminder);
+    }
+
+    @Override
     public int getDisplayPersonsListSize() {
         return this.getDisplayPersons().size();
+    }
+
+    @Override
+    public int getDisplayRemindersListSize() {
+        return this.getDisplayReminders().size();
     }
 
     /**
@@ -132,6 +166,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getDisplayPersons() {
         return sortedPersons;
+    }
+
+    @Override
+    public ObservableList<Reminder> getDisplayReminders() {
+        return filteredReminders;
     }
 
     //=========== Unfiltered Person List Accessors =============================================================
@@ -149,12 +188,28 @@ public class ModelManager implements Model {
         sortedPersons.setComparator(null); // Remove the comparator
     }
 
+    //=========== Unfiltered Reminder List Accessors =============================================================
+
+    @Override
+    public void updateUnfilteredReminderList() {
+        // Reset the filter to show all reminders
+        filteredReminders.setPredicate(PREDICATE_SHOW_ALL_REMINDERS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Reminder List Accessors =============================================================
+
+    @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
     }
 
     //=========== Sorted Person List Accessors =============================================================
@@ -181,7 +236,9 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && originalPersons.equals(otherModelManager.originalPersons)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && sortedPersons.equals(otherModelManager.sortedPersons);
+                && sortedPersons.equals(otherModelManager.sortedPersons)
+                && originalReminders.equals(otherModelManager.originalReminders)
+                && filteredReminders.equals(otherModelManager.filteredReminders);
     }
 
 }

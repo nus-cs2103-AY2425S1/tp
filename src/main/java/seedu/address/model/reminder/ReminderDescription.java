@@ -1,5 +1,9 @@
 package seedu.address.model.reminder;
 
+/**
+ * ReminderDescription class is used to store the description of a reminder.
+ */
+
 public class ReminderDescription {
     private String description;
 
