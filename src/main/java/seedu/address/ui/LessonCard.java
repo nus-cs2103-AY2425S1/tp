@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,8 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
 
-import java.util.Comparator;
-
+/**
+ * A UI component that displays information of a {@code Lesson}.
+ */
 public class LessonCard extends UiPart<Region> {
     private static final String FXML = "LessonListCard.fxml";
 
