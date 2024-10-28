@@ -23,37 +23,40 @@ deactivate UniqueStudentList
 AddressBook --> Model : Whether student exists
 deactivate AddressBook
 
-[<-- Model
-deactivate Model
+group opt[hasStudent is false]
+    [<-- Model
+    deactivate Model
 
-[-> Model : addStudent(student)
-activate Model
+    [-> Model : addStudent(student)
+    activate Model
 
-Model -> AddressBook : addStudent(student)
-activate AddressBook
+    Model -> AddressBook : addStudent(student)
+    activate AddressBook
 
-AddressBook -> UniqueStudentList : add(student)
-activate UniqueStudentList
+    AddressBook -> UniqueStudentList : add(student)
+    activate UniqueStudentList
 
-[<-- Model
-deactivate UniqueStudentList
-deactivate AddressBook
-deactivate Model
+    [<-- Model
+    deactivate UniqueStudentList
+    deactivate AddressBook
+    deactivate Model
 
-[-> Model : getClashingStudents(student)
-activate Model
+    [-> Model : getClashingStudents(student)
+    activate Model
 
-Model -> AddressBook : getClashingStudents(student)
-activate AddressBook
+    Model -> AddressBook : getClashingStudents(student)
+    activate AddressBook
 
-AddressBook -> UniqueStudentList : getClashingStudents(student)
-activate UniqueStudentList
-UniqueStudentList --> AddressBook : List of clashing students
-deactivate UniqueStudentList
+    AddressBook -> UniqueStudentList : getClashingStudents(student)
+    activate UniqueStudentList
+    UniqueStudentList --> AddressBook : List of clashing students
+    deactivate UniqueStudentList
 
-AddressBook --> Model : List of clashing students
-deactivate AddressBook
-[<-- Model
-deactivate Model
+    AddressBook --> Model : List of clashing students
+    deactivate AddressBook
+    [<-- Model
+    deactivate Model
+end
+
 
 @enduml
