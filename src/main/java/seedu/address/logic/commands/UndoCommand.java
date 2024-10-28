@@ -23,7 +23,8 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_UNDO_COMMAND_SUCCESS = "Undo successful:\n%s";
-    public static final String MESSAGE_UNDO_ADD = "%s has been unadded from SocialBook";
+    public static final String MESSAGE_UNDO_COMMAND_NEUTRAL = "No action to undo:\n%s";
+    public static final String MESSAGE_UNDO_ADD = "%s has been removed from SocialBook";
     public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
     public static final String MESSAGE_UNDO_DELETE =
             "%s and their appointments have been added back to SocialBook";
@@ -31,7 +32,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_DELETE_APPOINTMENT =
             "Appointment for %s has been added back to appointments";
     public static final String MESSAGE_UNDO_ADD_APPOINTMENT =
-            "Appointment for %s has been unadded from appointments";
+            "Appointment for %s has been removed from appointments";
     private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -56,34 +57,41 @@ public class UndoCommand extends Command {
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
         String resultMessage = String.format(
                 "No change as command undone (%s) was not an action command", latestCommandWord);
+        boolean isAction = false;
 
         switch (latestCommandWord) {
         case "add":
             AddCommand addCommand = (AddCommand) latestCommand;
+            isAction = true;
             resultMessage = addCommand.undo(model, pastCommands);
             break;
         case "edit":
             EditCommand editCommand = (EditCommand) latestCommand;
+            isAction = true;
             resultMessage = editCommand.undo(model, pastCommands);
             break;
 
         case "delete":
             DeleteCommand dltCommand = (DeleteCommand) latestCommand;
+            isAction = true;
             resultMessage = dltCommand.undo(model, pastCommands);
             break;
 
         case "clear":
             ClearCommand clearCommand = (ClearCommand) latestCommand;
+            isAction = true;
             resultMessage = clearCommand.undo(model, pastCommands);
             break;
 
         case "adda":
             AddAppointmentCommand addAppointmentCommand = (AddAppointmentCommand) latestCommand;
+            isAction = true;
             resultMessage = addAppointmentCommand.undo(model, pastCommands);
             break;
 
         case "deletea":
             DeleteAppointmentCommand deleteAppointmentCommand = (DeleteAppointmentCommand) latestCommand;
+            isAction = true;
             resultMessage = deleteAppointmentCommand.undo(model, pastCommands);
             break;
 
@@ -92,7 +100,12 @@ public class UndoCommand extends Command {
             break;
 
         }
-        return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
+        if (isAction) {
+            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
+        } else {
+            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_NEUTRAL, resultMessage));
+
+        }
     }
 
     public CommandHistory getPastCommands() {
