@@ -329,6 +329,11 @@
     -fx-text-fill: #262626;
 }
 
+#commandTextField:focused {
+    -fx-border-width: 1.5;
+    -fx-border-color: #B3C1C2;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }

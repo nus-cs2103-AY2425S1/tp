@@ -51,8 +51,8 @@
         <Label minWidth="65" prefWidth="65" text="Address" style="-fx-padding: 0 0 0 5; -fx-text-fill: #6C6C6C; -fx-font-size: 12"/>
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
-      <Label fx:id="payment" styleClass="cell_small_label" text="\$payment" />
     </VBox>
-    <VBox fx:id="attendanceContainerPlaceholder" GridPane.columnIndex="1"/>
+    <VBox fx:id="paymentCardPlaceholder" GridPane.columnIndex="1"/>
+    <VBox fx:id="attendanceContainerPlaceholder" GridPane.columnIndex="2"/>
   </GridPane>
 </HBox>

@@ -29,8 +29,6 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
-    private AttendanceContainer attendanceContainer;
-
     @FXML
     private HBox cardPane;
     @FXML
@@ -48,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private VBox paymentCardPlaceholder;
+    @FXML
     private VBox attendanceContainerPlaceholder;
 
     /**
@@ -61,15 +61,15 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        payment.setText(person.getPayment().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         if (tags.getChildren().isEmpty()) {
             tags.setManaged(false);
         }
 
-        attendanceContainer = new AttendanceContainer(participationList);
-        attendanceContainerPlaceholder.getChildren().add(attendanceContainer.getRoot());
+        paymentCardPlaceholder.getChildren().add(new PaymentCard(person.getPayment()).getRoot());
+        attendanceContainerPlaceholder.getChildren().add(new AttendanceContainer(participationList).getRoot());
     }
 }
