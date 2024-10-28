@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.model.person.Student.STUDENT_TYPE;
+import static seedu.address.model.person.Teacher.TEACHER_TYPE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +33,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    private final String type;
     private final String name;
     private final String gender;
     private final String phone;
@@ -45,12 +49,14 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
+    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name,
+                             @JsonProperty("gender") String gender,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
                              @JsonProperty("classes") List<String> classes,
                              @JsonProperty("daysAttended") Integer daysAttended) {
+        this.type = type;
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -72,6 +78,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Teacher} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Teacher source) {
+        type = TEACHER_TYPE;
         name = source.getName().fullName;
         gender = source.getGender().value;
         phone = source.getPhone().value;
@@ -93,6 +100,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Student source) {
+        type = STUDENT_TYPE;
         name = source.getName().fullName;
         gender = source.getGender().value;
         phone = source.getPhone().value;
@@ -114,9 +122,9 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public static JsonAdaptedPerson createJsonAdaptedPerson(Person source) {
-        if (source instanceof Teacher) {
+        if (source.getType().equals(TEACHER_TYPE)) {
             return new JsonAdaptedPerson((Teacher) source);
-        } else if (source instanceof Student) {
+        } else if (source.getType().equals(STUDENT_TYPE)) {
             return new JsonAdaptedPerson((Student) source);
         } else {
             throw new InvalidPersonTypeException();
@@ -186,18 +194,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (daysAttended != null) {
-            if (!DaysAttended.isValidDaysAttended(daysAttended)) {
-                throw new IllegalValueException(DaysAttended.MESSAGE_CONSTRAINTS);
-            }
-
-            final DaysAttended modelDaysAttended = new DaysAttended(daysAttended);
-            return new Student(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelSubjects, modelClasses, modelDaysAttended);
-        } else {
-            return new Teacher(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelSubjects, modelClasses);
+        if (daysAttended == null) {
+            return Person.createPerson(TEACHER_TYPE, modelName, modelGender, modelPhone, modelEmail, modelAddress,
+                modelTags, modelSubjects, modelClasses, null);
         }
+
+        if (!DaysAttended.isValidDaysAttended(daysAttended)) {
+            throw new IllegalValueException(DaysAttended.MESSAGE_CONSTRAINTS);
+        }
+        final DaysAttended modelDaysAttended = new DaysAttended(daysAttended);
+
+        return Person.createPerson(STUDENT_TYPE, modelName, modelGender, modelPhone, modelEmail, modelAddress,
+            modelTags, modelSubjects, modelClasses, modelDaysAttended);
     }
 
 }

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Student.STUDENT_TYPE;
+import static seedu.address.model.person.Teacher.TEACHER_TYPE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -116,9 +119,9 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public static PersonCard createPersonCard(Person person, int displayedIndex) throws InvalidPersonTypeException {
-        if (person instanceof Student) {
+        if (person.getType().equals(STUDENT_TYPE)) {
             return new PersonCard((Student) person, displayedIndex);
-        } else if (person instanceof Teacher) {
+        } else if (person.getType().equals(TEACHER_TYPE)) {
             return new PersonCard((Teacher) person, displayedIndex);
         } else {
             throw new InvalidPersonTypeException();
