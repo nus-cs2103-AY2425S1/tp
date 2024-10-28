@@ -76,8 +76,9 @@ public class ParserUtil {
     public static Optional<Address> parseAddress(Optional<String> address) throws ParseException {
         requireNonNull(address);
 
-        if (address.isEmpty()) {
+        if (address.isEmpty() || address.get().trim().isEmpty()) {
             // if an address prefix was never entered by the user
+            // or an empty string ("") was entered indicating no address
             return Optional.empty();
         }
 
@@ -97,8 +98,9 @@ public class ParserUtil {
     public static Optional<Email> parseEmail(Optional<String> email) throws ParseException {
         requireNonNull(email);
 
-        if (email.isEmpty()) {
+        if (email.isEmpty() || email.get().trim().isEmpty()) {
             // if an email prefix was never entered by the user
+            // or an empty string ("") was entered indicating no email
             return Optional.empty();
         }
         String trimmedEmail = email.get().trim();
@@ -144,8 +146,9 @@ public class ParserUtil {
             throws ParseException {
         requireNonNull(dateOfLastVisit);
 
-        if (dateOfLastVisit.isEmpty()) {
+        if (dateOfLastVisit.isEmpty() || dateOfLastVisit.get().trim().isEmpty()) {
             // if dateOfLastVisit prefix was never entered by the user
+            // or an empty string ("") was entered indicating no date of last visit
             return Optional.empty();
         }
 
@@ -166,8 +169,9 @@ public class ParserUtil {
             throws ParseException {
         requireNonNull(emergencyContact);
 
-        if (emergencyContact.isEmpty()) {
+        if (emergencyContact.isEmpty() || emergencyContact.get().trim().isEmpty()) {
             // if emergencyContact prefix was never entered by the user
+            // or an empty string ("") was entered indicating no emergency contact
             return Optional.empty();
         }
 
