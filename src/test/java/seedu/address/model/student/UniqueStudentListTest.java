@@ -17,9 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.model.student.task.Task;
-import seedu.address.model.student.task.TaskDeadline;
-import seedu.address.model.student.task.TaskDescription;
 import seedu.address.testutil.StudentBuilder;
 
 public class UniqueStudentListTest {
