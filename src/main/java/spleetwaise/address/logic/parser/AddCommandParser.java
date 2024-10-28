@@ -8,6 +8,7 @@ import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -56,7 +57,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
+        // To prevent users from unnecessarily adding PREFIX_REMARK with no input
+        Optional<String> remarkInput = argMultimap.getValue(PREFIX_REMARK);
+        if (remarkInput.isPresent() && remarkInput.get().isBlank()) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        Remark remark = ParserUtil.parseRemark(remarkInput.orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, remark, tagList);
