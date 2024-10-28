@@ -125,7 +125,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // Empty address not allowed
     public static final String INVALID_ASKING_PRICE_DESC = " " + PREFIX_ASKING_PRICE
             + "-1"; // negative integer not allowed for asking price
-    public static final String INVALID_PROPERTY_TYPE_DESC = " " + PREFIX_TYPE + "@@@abc"; // '@' not allowed
+    public static final String INVALID_PROPERTY_TYPE_DESC = " " + PREFIX_TYPE; // Empty property type not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
