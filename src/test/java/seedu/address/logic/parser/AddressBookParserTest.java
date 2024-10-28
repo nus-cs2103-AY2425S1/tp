@@ -247,7 +247,9 @@ public class AddressBookParserTest {
         ImportCommand command = (ImportCommand) parser.parseCommand(
                 ImportCommand.COMMAND_WORD + " " + fileName);
         assertEquals(new ImportCommand(fileName), command);
+    }
 
+    @Test
     public void parseCommand_addLesson() throws Exception {
         Lesson lesson = new LessonBuilder().build();
         AddLessonCommand command = (AddLessonCommand) parser.parseCommand(
