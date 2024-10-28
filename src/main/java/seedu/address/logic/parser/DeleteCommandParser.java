@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
+
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
