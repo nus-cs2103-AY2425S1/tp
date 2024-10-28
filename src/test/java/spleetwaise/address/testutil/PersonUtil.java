@@ -29,7 +29,9 @@ public class PersonUtil {
         sb.append(CliSyntax.PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(CliSyntax.PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(CliSyntax.PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(CliSyntax.PREFIX_REMARK + person.getRemark().value + " ");
+        if (!person.getRemark().value.isBlank()) {
+            sb.append(CliSyntax.PREFIX_REMARK + person.getRemark().value + " ");
+        }
         person.getTags().stream().forEach(
                 s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
         );
@@ -66,6 +68,7 @@ public class PersonUtil {
                 && p1.getPhone().equals(p2.getPhone())
                 && p1.getEmail().equals(p2.getEmail())
                 && p1.getAddress().equals(p2.getAddress())
+                && p1.getRemark().equals(p2.getRemark())
                 && p1.getTags().equals(p2.getTags());
     }
 }
