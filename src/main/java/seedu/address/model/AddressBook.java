@@ -94,6 +94,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Creates and returns a deep clone of this {@code AddressBook}.
+     */
+    public AddressBook copy() {
+        return new AddressBook(this);
+    }
+
     //// util methods
 
     @Override

@@ -43,7 +43,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new HistoricalAddressBook(new AddressBook()), new UserPrefs(), new CommandHistory());
+        this(new HistoricalAddressBook(), new UserPrefs(), new CommandHistory());
     }
 
 
@@ -114,7 +114,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.historicalAddressBook.resetData(addressBook);
+        historicalAddressBook.resetData(addressBook);
     }
 
     @Override
@@ -131,13 +131,11 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         historicalAddressBook.removePerson(target);
-        historicalAddressBook.save();
     }
 
     @Override
     public void addPerson(Person person) {
         historicalAddressBook.addPerson(person);
-        historicalAddressBook.save();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -146,7 +144,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         historicalAddressBook.setPerson(target, editedPerson);
-        historicalAddressBook.save();
     }
 
     //=========== Filtered Person List Accessors =============================================================
