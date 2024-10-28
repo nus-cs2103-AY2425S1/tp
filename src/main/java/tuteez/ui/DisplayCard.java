@@ -53,12 +53,18 @@ public class DisplayCard extends UiPart<Region> {
             telegram.setText(person.getTelegramUsername().telegramUsername);
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
+
+            tags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+            remarks.getChildren().clear();
             person.getRemarkList().getRemarks().stream()
                     .sorted(Comparator.comparing(remark -> remark.toString()))
                     .forEach(remark -> remarks.getChildren().add(new Label(remark.toString())));
+
+            lessons.getChildren().clear();
             person.getLessons().stream()
                     .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getDayAndTime())));
         }
