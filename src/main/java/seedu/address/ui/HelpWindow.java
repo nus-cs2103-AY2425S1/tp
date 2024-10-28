@@ -135,16 +135,21 @@ public class HelpWindow extends UiPart<Stage> {
 
         ObservableList<HelpCommand> data =
                 FXCollections.observableArrayList(new HelpCommand("Add",
-                                "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
+                                "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`"),
                         new HelpCommand("Delete", "`delete INDEX`"),
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
-                                + "[e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
-                        new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME]"
+                                + "[e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME]…​`"),
+                        new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME]"
                                 + " [s/SKILL_LEVEL] [r/ROLE]`"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` \ne.g., "
+                        new HelpCommand("FavGame", "`favgame INDEX g/GAME`"),
+                        new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]…` \ne.g., "
                                 + "`find James Jake`"),
+                        new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]…` \ne.g., "
+                                + "`findtime 1700-1800 2130-2300`"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("List", "`list`"),
+                        new HelpCommand("Undo", "`undo`"),
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("Save", "`save`"),
                         new HelpCommand("Load", "`load`")
