@@ -4,6 +4,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.address.logic.commands.AddCommand;
@@ -253,6 +256,53 @@ public class AutocompleteParser {
         buf.replace(startIndex + 1, endIndex, stringToSlotIn);
         return buf.toString();
     }
+
+    /**
+     * Gets all the file names in the directory "archived".
+     * Will return an empty list if the directory does not exist.
+     * @return An ArrayList with all the name of json file
+     */
+
+    private ArrayList<String> getAllFilesInArchiveDirectory() {
+        File directory = Paths.get("archived").toFile();
+
+        // Check if the directory exists and is indeed a directory
+        if (directory.exists() && directory.isDirectory()) {
+            // Get all files and directories in the specified path
+            return getAllJsonFiles(directory);
+        } else {
+            // Return an empty list if the directory does not exist
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Gets all the json file name from a directory of given Path
+     * @param directory The file path to the directory
+     * @return An array list of all json file name
+     * */
+    private ArrayList<String> getAllJsonFiles(File directory) {
+        File[] files = directory.listFiles();
+        assert (files != null);
+        ArrayList<String> result = new ArrayList<>();
+        for (File file : files) {
+            // add file name if it is a json file
+            if (isJson(file)) {
+                result.add(file.getName());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Checks if the given file is a json file.
+     * @param file the file to check
+     * */
+    private boolean isJson(File file) {
+        return file.isFile() && file.getName().toLowerCase().endsWith(".json");
+    }
+
+
 
     private String getStringWithPrefix(String word, String command) {
         if (word.length() <= 1) {
