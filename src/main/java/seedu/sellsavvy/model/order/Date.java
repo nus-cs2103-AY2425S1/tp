@@ -10,7 +10,8 @@ import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the deliver-by date of a Person's Order in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateRegex(String)}
+ * and {@link #isValidCalendarDate(String)}
  */
 public class Date {
     public static final String DATE_FORMATTER = "dd-MM-uuuu";
@@ -20,6 +21,7 @@ public class Date {
             + "2. The month \"mm\" should be a 2-digit number representing a valid month in the calender year\n"
             + "3. The year \"yyyy\" should be a 4-digit number representing a valid year within the 21st century\n"
             + "4. The day, month and year are separated by a hyphen '-'.";
+    public static final String MESSAGE_INVALID_DATE = "Date provided is not a valid calendar date";
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
     private static final String REGEX_YEAR = "(20[0-9]{2}|2100)";
@@ -33,7 +35,8 @@ public class Date {
      */
     public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateRegex(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCalendarDate(date), MESSAGE_INVALID_DATE);
         value = date;
     }
 
@@ -41,16 +44,29 @@ public class Date {
      * Returns if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
+        return isValidDateRegex(test) && isValidCalendarDate(test);
+    }
+
+    /**
+     * Returns if a given string is of a valid date regex.
+     */
+    public static boolean isValidDateRegex(String test) {
         if (!test.matches(REGEX_DATE)) {
             return false;
-        } else {
-            try {
-                LocalDate localDate = ParserUtil.parseLocalDate(test);
-            } catch (ParseException e) {
-                return false;
-            }
-            return true;
         }
+        return true;
+    }
+
+    /**
+     * Returns if a given string is a valid calendar date.
+     */
+    public static boolean isValidCalendarDate(String test) {
+        try {
+            LocalDate localDate = ParserUtil.parseLocalDate(test);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -20,24 +20,41 @@ public class DateTest {
     }
 
     @Test
-    public void isValidDate() {
+    public void isValidDateRegex() {
         // null date value
-        assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> Date.isValidDateRegex(null));
+
+        // invalid date regex
+        assertFalse(Date.isValidDateRegex("")); // empty string
+        assertFalse(Date.isValidDateRegex(" ")); // spaces only
+        assertFalse(Date.isValidDateRegex("date")); // not a date
+        assertFalse(Date.isValidDateRegex("2-02-2002")); // invalid day format
+        assertFalse(Date.isValidDateRegex("02/02/2002")); // non-hyphen non-numeric characters
+        assertFalse(Date.isValidDateRegex("02-22-2002")); // invalid month
+        assertFalse(Date.isValidDateRegex("02-02-2222")); // not within 21st century
+
+        // valid date regex
+        assertTrue(Date.isValidDateRegex("02-02-2002"));
+        assertTrue(Date.isValidDateRegex("01-01-2001")); // First day of 21st century
+        assertTrue(Date.isValidDateRegex("31-12-2100")); // Last day of 21st century
+
+        // invalid date but valid regex
+        assertTrue(Date.isValidDateRegex("30-02-2002")); // invalid calender date
+    }
+
+    @Test
+    public void isValidCalendarDate() {
+        // null date value
+        assertThrows(NullPointerException.class, () -> Date.isValidCalendarDate(null));
 
         // invalid dates
-        assertFalse(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("date")); // not a date
-        assertFalse(Date.isValidDate("2-02-2002")); // invalid day format
-        assertFalse(Date.isValidDate("02-22-2002")); // invalid month
-        assertFalse(Date.isValidDate("02-02-2222")); // not within 21st century
-        assertFalse(Date.isValidDate("02/02/2002")); // non-hyphen non-numeric characters
-        assertFalse(Date.isValidDate("30-02-2002")); // invalid calender date
+        assertFalse(Date.isValidCalendarDate("02-22-2002")); // invalid month
+        assertFalse(Date.isValidCalendarDate("30-02-2002")); // invalid calender date
 
-        // valid dates
-        assertTrue(Date.isValidDate("02-02-2002"));
-        assertTrue(Date.isValidDate("01-01-2001")); //First day of 21st century
-        assertTrue(Date.isValidDate("31-12-2100")); //Last day of 21st century
+        // Valid dates
+        assertTrue(Date.isValidCalendarDate("02-02-2002"));
+        assertTrue(Date.isValidCalendarDate("01-01-2001")); // First day of 21st century
+        assertTrue(Date.isValidCalendarDate("31-12-2100")); // Last day of 21st century
     }
 
     @Test

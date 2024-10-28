@@ -44,7 +44,7 @@ public class OrderCommandTestUtil {
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "a";
     public static final String INVALID_DATE_NO_HYPHEN = " " + PREFIX_DATE + "02/12/2024";
     public static final String INVALID_DATE_DIGIT = " " + PREFIX_DATE + "2/1/2024";
-    public static final String INVALID_DATE_VALUE = " " + PREFIX_DATE + "32-01-2024";
+    public static final String INVALID_DATE_VALUE = " " + PREFIX_DATE + "30-02-2024";
     public static final String INVALID_COUNT_ZERO = " " + PREFIX_COUNT + "0";
     public static final String INVALID_COUNT_NEGATIVE = " " + PREFIX_COUNT + "-2";
     public static final String INVALID_COUNT_STRING = " " + PREFIX_COUNT + "2 some random string";

@@ -64,8 +64,10 @@ class JsonAdaptedOrder {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date)) {
+        if (!Date.isValidDateRegex(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        } else if (!Date.isValidCalendarDate(date)) {
+            throw new IllegalValueException(Date.MESSAGE_INVALID_DATE);
         }
         final Date modelDate = new Date(date);
 
