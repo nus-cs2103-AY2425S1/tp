@@ -36,7 +36,7 @@ public class LessonTime {
         checkArgument(isValidLessonTime(lessonTime), MESSAGE_CONSTRAINTS);
 
         String[] segments = lessonTime.split("-");
-        this.lessonDay = segments[0];
+        this.lessonDay = segments[0].toUpperCase();
         this.lessonStart = LocalTime.parse(segments[1], timeFormatter);
         this.lessonEnd = LocalTime.parse(segments[2], timeFormatter);
     }
@@ -99,7 +99,7 @@ public class LessonTime {
         }
 
         LessonTime otherLessonTime = (LessonTime) other;
-        return lessonDay.equalsIgnoreCase(otherLessonTime.getLessonDay())
+        return lessonDay.equals(otherLessonTime.getLessonDay())
                 && lessonStart.equals(otherLessonTime.getLessonStart())
                 && lessonEnd.equals(otherLessonTime.getLessonEnd());
     }

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -72,5 +73,20 @@ public class LevelTest {
 
         // different values -> returns false
         assertFalse(level.equals(new Level("S2 EXPRESS")));
+
+        // case-insensitive ->  returns true
+        assertTrue(level.equals(new Level("s1 express")));
+
+        // Ignore multi-spacing ->  returns true
+        assertTrue(level.equals(new Level("s1   express")));
+    }
+
+    @Test
+    public void toStringTest() {
+        Level l = new Level("S1 EXPRESS");
+        Level l2 = new Level("s1 express");
+        String expected = "S1 EXPRESS";
+        assertEquals(l.toString(), expected);
+        assertEquals(l2.toString(), expected);
     }
 }

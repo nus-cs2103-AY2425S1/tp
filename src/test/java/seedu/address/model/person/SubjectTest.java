@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT;
@@ -62,4 +63,19 @@ public class SubjectTest {
         assertFalse(Subject.isValidSubjectsByLevel(new Level("NONE NONE"), SUBJECT_ARRAY));
     }
 
+    @Test
+    public void subject_case_insensitive() {
+        assertTrue(new Subject("MATH").equals(new Subject("math")));
+    }
+
+    @Test
+    public void toStringTest() {
+        Subject s = new Subject("MATH");
+        Subject s2 = new Subject("math");
+        Subject s3 = new Subject("mAtH");
+        String expected = "[MATH]";
+        assertEquals(s.toString(), expected);
+        assertEquals(s2.toString(), expected);
+        assertEquals(s3.toString(), expected);
+    }
 }

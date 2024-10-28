@@ -45,8 +45,7 @@ public class Level {
     public Level(String levelName) {
         requireNonNull(levelName);
         checkArgument(isValidLevelName(levelName), MESSAGE_CONSTRAINTS);
-
-        this.levelName = levelName;
+        this.levelName = String.join(" ", levelName.split("\\s+")).toUpperCase();
 
     }
 
@@ -54,7 +53,7 @@ public class Level {
      * Returns true if a given string is a valid level name.
      */
     public static boolean isValidLevelName(String levelName) {
-        String[] parts = levelName.split(" ");
+        String[] parts = levelName.split("\\s+");
 
         if (parts.length != 2) {
             return false;
@@ -66,8 +65,8 @@ public class Level {
         requireNonNull(year);
         requireNonNull(track);
 
-        if (year.equals("S5")) {
-            return track.equals("NA");
+        if (year.equalsIgnoreCase("S5")) {
+            return track.equalsIgnoreCase("NA");
         }
 
         return isValidYear(year) && isValidTrack(track);
@@ -93,7 +92,7 @@ public class Level {
             return false;
         }
 
-        return levelName.equalsIgnoreCase(otherLevel.levelName);
+        return levelName.equals(otherLevel.levelName);
     }
 
     @Override
