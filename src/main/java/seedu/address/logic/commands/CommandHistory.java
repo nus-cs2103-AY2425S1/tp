@@ -61,7 +61,12 @@ public class CommandHistory extends ArrayList<String> {
      * @return The next command in the command history.
      */
     public static String getNextPointerCommand() {
-        if (COMMAND_HISTORY.isEmpty() || pointer >= COMMAND_HISTORY.size() - 1) {
+        if (COMMAND_HISTORY.isEmpty() || pointer == COMMAND_HISTORY.size()) {
+            return "";
+        }
+
+        if (pointer == COMMAND_HISTORY.size() - 1) {
+            ++pointer;
             return "";
         }
 
