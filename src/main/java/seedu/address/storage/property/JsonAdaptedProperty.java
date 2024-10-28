@@ -47,7 +47,6 @@ public class JsonAdaptedProperty {
         address = source.getAddress().toString();
         askingPrice = source.getAskingPrice().toString();
         propertyType = source.getPropertyType().toString();
-
     }
 
     /**

@@ -13,10 +13,9 @@ import java.util.Locale;
 public class Budget {
 
     public static final String MESSAGE_CONSTRAINTS = "Budget of the buyer (to the nearest SGD). "
-        + "It should be a positive integer more than 0 and can contain commas at the right positions "
-        + "(exactly 3 digits after each comma)"
-        + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). "
-        + "It must not be blank.";
+            + "It should be a positive integer more than 0 and not be blank. \n"
+            + "It can contain commas at the right positions (exactly 3 digits after each comma) \n"
+            + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). ";
 
     /*
      * Budget must be an integer greater than 0.
@@ -39,7 +38,7 @@ public class Budget {
     }
 
     /**
-         * Returns true if a given string is a valid budget.
+     * Returns true if a given string is a valid budget.
      */
     public static boolean isValidBudget(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -55,6 +54,13 @@ public class Budget {
         // Format the number with commas
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         return numberFormat.format(number);
+    }
+
+    /**
+     * Returns pretty formatted String
+     */
+    public String toPrettyString() {
+        return String.format("$%s", value);
     }
 
     @Override

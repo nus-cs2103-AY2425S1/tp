@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_INFO + "INFO "
             + PREFIX_FROM + "YYYY-MM-DD HH:mm "
-            + PREFIX_TO + "YYYY-MM-DD HH:mm \n"
+            + PREFIX_TO + "YYYY-MM-DD HH:mm "
             + "[" + PREFIX_ADDED_BUYER + "BUYER NAME]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Discuss work plans "

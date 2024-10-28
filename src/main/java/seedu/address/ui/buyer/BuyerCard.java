@@ -51,7 +51,7 @@ public class BuyerCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(buyer.getName().toString());
         phone.setText(buyer.getPhone().toString());
-        budget.setText(buyer.getBudget().toString());
+        budget.setText(buyer.getBudget().toPrettyString());
         email.setText(buyer.getEmail().toString());
         buyer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -25,7 +25,7 @@ public class To {
     /**
      * Constructs a {@code MeetUpToType}.
      *
-     * @param str A valid string that can transformed to a date.
+     * @param to A valid string that can transformed to a date.
      */
     public To(String to) {
         requireNonNull(to);
@@ -39,6 +39,21 @@ public class To {
      */
     public static boolean isValidTo(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns pretty formatted LocalDateTime String
+     */
+    public String toPrettyString() {
+        // Define the formatter with the desired pattern
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy (h:mma)");
+
+        // Format the LocalDateTime object
+        String formattedDateTime = value.format(formatter);
+
+        // Convert "AM"/"PM" to lowercase
+        formattedDateTime = formattedDateTime.replace("AM", "am").replace("PM", "pm");
+        return formattedDateTime;
     }
 
     @Override
