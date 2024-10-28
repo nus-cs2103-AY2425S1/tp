@@ -3,6 +3,9 @@ package seedu.address.ui;
 import static java.util.Objects.requireNonNull;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.beans.Observable;
@@ -86,17 +89,22 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
 
         int rowIndex = 2; // Start after the header and separator (which are row 0 and 1)
 
-        for (Event event : eventsList) {
+        List<Event> sortedEventsList = new ArrayList<>(eventsList); // Create a modifiable copy
+        sortedEventsList.sort(Comparator.comparing(Event::getDate)); // Sort the copy by date
+
+        for (Event event : sortedEventsList) {
             if (event.isPersonAttending(person)) {
                 Label eventName = new Label(event.getEventName());
                 eventName.getStyleClass().add("grid-content-name");
+                Label eventLocation = new Label(event.getLocation().toString());
+                eventLocation.getStyleClass().add("grid-content-location");
                 Label eventDate = new Label(event.getDate().format(DATE_FORMATTER));
                 eventDate.getStyleClass().add("grid-content-date");
 
-                //todo location when event class is updated
 
                 eventsAttending.add(eventName, 0, rowIndex);
-                eventsAttending.add(eventDate, 1, rowIndex);
+                eventsAttending.add(eventLocation, 1, rowIndex);
+                eventsAttending.add(eventDate, 2, rowIndex);
 
                 rowIndex++;
             }
@@ -105,7 +113,7 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
         if (rowIndex == 2) {
             Label noEventsLabel = new Label("No upcoming events");
             noEventsLabel.getStyleClass().add("grid-content-name");
-            eventsAttending.add(noEventsLabel, 0, rowIndex, 2, 1);
+            eventsAttending.add(noEventsLabel, 0, rowIndex, 3, 1);
             GridPane.setHalignment(noEventsLabel, HPos.CENTER);
         }
     }
