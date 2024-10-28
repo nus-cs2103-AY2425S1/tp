@@ -9,22 +9,17 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBuyerCommand;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.commands.AddSellerCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.DeletePropertyCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterClientCommand;
 import seedu.address.logic.commands.FilterPropertyCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,13 +27,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ClientGridParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(ClientGridParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -62,21 +57,6 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);

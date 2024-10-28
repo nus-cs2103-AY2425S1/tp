@@ -19,7 +19,7 @@ import seedu.address.model.ReadOnlyPropertyBook;
  */
 public class JsonPropertyBookStorage implements PropertyBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonPropertyBookStorage.class);
 
     private Path filePath;
 

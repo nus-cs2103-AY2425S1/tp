@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -27,13 +26,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ModelManager.DisplayMode;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
 import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
@@ -53,8 +50,6 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonClientBookStorage clientBookStorage =
                 new JsonClientBookStorage(temporaryFolder.resolve("clientbook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
@@ -63,7 +58,7 @@ public class LogicManagerTest {
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertybook.json"));
         JsonMeetingBookStorage meetingBookStorage =
                 new JsonMeetingBookStorage(temporaryFolder.resolve("meetingbook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+        StorageManager storage = new StorageManager(userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
         logic = new LogicManager(model, storage);
     }
@@ -72,12 +67,6 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -90,11 +79,6 @@ public class LogicManagerTest {
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
-    }
-
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
     /**
@@ -137,7 +121,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook(), model.getMeetingBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -166,14 +150,6 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
-            @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
-                    throws IOException {
-                throw e;
-            }
-        };
-
         JsonClientBookStorage clientBookStorage = new JsonClientBookStorage(prefPath) {
             @Override
             public void saveClientBook(ReadOnlyClientBook clientBook, Path filePath)
@@ -199,7 +175,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+        StorageManager storage = new StorageManager(userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
 
         logic = new LogicManager(model, storage);
