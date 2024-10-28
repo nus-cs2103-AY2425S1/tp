@@ -19,3 +19,4 @@ Class CommandException
 ViewCommand -up-|> Command
 Command ..> CommandException: throws >
 ViewCommand .right.> CommandException: throws >
+@enduml
