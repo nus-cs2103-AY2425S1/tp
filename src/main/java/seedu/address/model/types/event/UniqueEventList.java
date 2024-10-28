@@ -11,7 +11,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.types.common.DateTimeUtil;
-import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
 import seedu.address.model.types.event.exceptions.EventNotFoundException;
 
@@ -33,15 +32,9 @@ public class UniqueEventList implements Iterable<Event> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Periodically sorts the events especially when an event becomes completed.
+     * Resorts Events
      */
-    //    public UniqueEventList() {
-    //        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
-    //                javafx.util.Duration.minutes(1));
-    //        eventReSortTimeline.play();
-    //    }
-
-    private void sortEvents() {
+    public void sortEvents() {
         internalList.sort((event1, event2) -> {
             long remainingTime1 = getEventTimeRemaining(event1);
             long remainingTime2 = getEventTimeRemaining(event2);
@@ -85,14 +78,6 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if the list contains an event with the given name.
-     */
-    public boolean containsName(Name name) {
-        requireNonNull(name);
-        return internalList.stream().anyMatch(event -> event.getName().equals(name));
-    }
-
-    /**
      * Adds an event to the list.
      * The event must not already exist in the list.
      */
@@ -123,6 +108,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.set(index, editedEvent);
+        sortEvents();
     }
 
     /**
@@ -139,6 +125,7 @@ public class UniqueEventList implements Iterable<Event> {
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortEvents();
     }
 
     /**
@@ -152,6 +139,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+        sortEvents();
     }
 
     /**
