@@ -157,7 +157,7 @@ public class AddCommandTest {
 
         @Override
         public boolean hasReminder(Reminder reminder) {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
