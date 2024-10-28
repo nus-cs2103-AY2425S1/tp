@@ -8,12 +8,16 @@ participant "ResultDisplay" as RD
 participant "cr:CommandResult" as CR
 participant ":Model" as M
 
+/'
+This diagram shows the normal flow of adding grade to a person's gradeList.
+The flow assumes correct input from user.
+'/
 
-User -> MW: executeCommand("grade ...")
+User -> MW: executeCommand("addGrade ...")
 activate MW
-MW -> LM: execute("grade ...")
+MW -> LM: execute("addGrade ...")
 activate LM
-LM -> ABP: parseCommand("grade ...")
+LM -> ABP: parseCommand("addGrade ...")
 activate ABP
 ABP -> OAGC
 activate OAGC
