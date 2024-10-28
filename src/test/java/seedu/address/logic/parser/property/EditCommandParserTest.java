@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.buyer;
+package seedu.address.logic.parser.property;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.BUDGET_DESC_AMY;
@@ -38,6 +38,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.buyer.EditCommand;
 import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
+import seedu.address.logic.parser.buyer.EditCommandParser;
 import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
@@ -52,7 +53,7 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private seedu.address.logic.parser.buyer.EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

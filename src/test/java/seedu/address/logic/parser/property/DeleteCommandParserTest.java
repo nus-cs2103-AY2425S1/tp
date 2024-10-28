@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.buyer;
+package seedu.address.logic.parser.property;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.buyer.DeleteCommand;
+import seedu.address.logic.parser.buyer.DeleteCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -18,7 +19,7 @@ import seedu.address.logic.commands.buyer.DeleteCommand;
  */
 public class DeleteCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private seedu.address.logic.parser.buyer.DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
