@@ -6,9 +6,10 @@ import java.util.Objects;
  * Represents a Student's owed tuition fee in the address book.
  */
 public class OwedAmount extends Fee {
+    public static final double MAX_VALUE = 9999999.99;
     public static final String MESSAGE_CONSTRAINTS = "Owed "
             + Fee.MESSAGE_CONSTRAINTS
-            + "2. is non-negative number";
+            + "2. is between the range of 0.00 to " + MAX_VALUE;
 
     /**
      * Constructs a {@code OwedAmount}.
@@ -26,8 +27,16 @@ public class OwedAmount extends Fee {
         super("0");
     }
 
+    /**
+     * Returns true if a given string is a valid owed amount.
+     */
     public static boolean isValidOwedAmount(String test) {
-        return Fee.isValidFee(test);
+        if (!Fee.isValidFee(test)) {
+            return false;
+        }
+
+        double owedAmount = Double.parseDouble(test);
+        return owedAmount >= 0 && owedAmount <= MAX_VALUE;
     }
 
     /**

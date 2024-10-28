@@ -32,12 +32,14 @@ public class OwedAmountTest {
         assertFalse(OwedAmount.isValidOwedAmount("1.234")); // more than 2 decimal places
         assertFalse(OwedAmount.isValidOwedAmount("1.2.3")); // more than 1 decimal point
         assertFalse(OwedAmount.isValidOwedAmount("-1.23")); // negative number
+        assertFalse(OwedAmount.isValidOwedAmount("10000000.00")); // more than max value
 
         // valid oweds
         assertTrue(OwedAmount.isValidOwedAmount("1")); // 0 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("1.2")); // 1 decimal place
         assertTrue(OwedAmount.isValidOwedAmount("123.23")); // 2 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("0"));
+        assertTrue(OwedAmount.isValidOwedAmount("9999999.99")); // boundary value
     }
 
     @Test
