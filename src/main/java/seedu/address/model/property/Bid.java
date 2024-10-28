@@ -16,6 +16,7 @@ public class Bid {
             "Bid price should be an integer";
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String REMOVE_ZERO_PADDING_REGEX = "^0+(?!$)";
+    public static final int MAX_PRICE = 999999;
     private static final Logger logger = LogsCenter.getLogger(Bid.class);
     public final String value;
 
@@ -45,6 +46,9 @@ public class Bid {
         try {
             Integer.parseInt(test);
         } catch (NumberFormatException e) {
+            return false;
+        }
+        if (Integer.parseInt(test) > MAX_PRICE) {
             return false;
         }
         return true;

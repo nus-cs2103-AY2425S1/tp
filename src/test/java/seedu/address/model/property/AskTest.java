@@ -2,7 +2,9 @@ package seedu.address.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PADDED_LARGE_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PADDED_OVERFLOW_PRICE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNPADDED_LARGE_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNPADDED_OVERFLOW_PRICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASK_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASK_BEDOK;
@@ -45,6 +47,8 @@ public class AskTest {
         assertFalse(Ask.isValidAsk("$1000000")); // contains dollar character
         assertFalse(Ask.isValidAsk(INVALID_UNPADDED_OVERFLOW_PRICE)); // Integer Overflow
         assertFalse(Ask.isValidAsk(INVALID_PADDED_OVERFLOW_PRICE)); // Integer Overflow
+        assertFalse(Ask.isValidAsk(INVALID_UNPADDED_LARGE_PRICE)); // Large price edge
+        assertFalse(Ask.isValidAsk(INVALID_PADDED_LARGE_PRICE)); // Large price padded edge
 
         // valid name
         assertTrue(Ask.isValidAsk("000000")); // alphabets only
