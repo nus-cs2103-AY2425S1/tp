@@ -144,8 +144,37 @@ Below is a detailed overview of the main sections within this User Guide and wha
 - [Installation](#installation): If you're new to TrackMate or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
 
-- [Getting Started](#getting-started): Designed for beginners, this section provides an introductory overview of TrackMate, covering essential information such as the [Layout](#graphical-user-interface-layout) and [Command format](#command-format).
+# 3. Getting Started
+<a id="getting-started"></a>
 
+### 3.1 Installation
+<a id="installation"></a>
+
+1. Ensure that you have Java `17` installed on your Computer. TrackMate works the best for the version, 
+while there may be other versions that it can function on as well.
+
+
+2. Download the latest `TrackMate.jar` file from the [link](https://github.com/AY2425S1-CS2103T-W08-1/tp/releases) here.
+
+
+3. Move the file to the directory that you have as the home folder 
+that you want to keep your `TrackMate.jar` file in.
+
+
+4. Go to your command terminal by pressing Windows Key + R. A small window should pop up.
+
+
+5. Then type in cmd into the box and press enter. A command terminal should pop up.
+
+
+6. Navigate to the directory that holds the `TrackMate.jar` application by using the [cd command](https://www.ibm.com/docs/en/aix/7.1?topic=directories-changing-another-directory-cd-command).
+
+
+7. After navigating to the directory, enter the `java -jar TrackMate.jar` command to run the application.
+
+8. Wait a few seconds and a GUI should pop up, similar to the one shown below.
+
+![startingGUI.png](images/startingGUI.png)
 
 - [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
 
