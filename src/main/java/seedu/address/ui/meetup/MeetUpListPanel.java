@@ -25,7 +25,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     private ListView<MeetUp> meetUpListView;
 
     /**
-     * Creates a {@code BuyerListPanel} with the given {@code ObservableList}.
+     * Creates a {@code MeetUpListPanel} with the given {@code ObservableList}.
      */
     public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalList) {
         super(FXML);

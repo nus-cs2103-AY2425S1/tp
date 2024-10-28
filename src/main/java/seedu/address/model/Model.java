@@ -89,7 +89,7 @@ public interface Model {
      */
     void updateFilteredBuyerList(Predicate<Buyer> predicate);
 
-    // ============================ MeetUp Model - To be refactored ==========================
+    // ============================ MeetUp Model  ==========================
 
     /**
      * Returns the user prefs' meet up list file path.
@@ -140,7 +140,7 @@ public interface Model {
      */
     boolean hasMeetUp(MeetUp meetUp);
 
-    // ============================ Property Model - To be refactored ==========================
+    // ============================ Property Model  ==========================
 
     /**
      * Returns the user prefs' property list file path.

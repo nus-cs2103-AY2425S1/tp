@@ -7,7 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.property.LocationContainsKeywordsPredicate;
+import seedu.address.model.property.AddressContainsKeywordsPredicate;
 
 /**
  * Finds and lists all properties in property list whose name contains any of the argument keywords.
@@ -20,9 +20,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final LocationContainsKeywordsPredicate predicate;
+    private final AddressContainsKeywordsPredicate predicate;
 
-    public FindCommand(LocationContainsKeywordsPredicate predicate) {
+    public FindCommand(AddressContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

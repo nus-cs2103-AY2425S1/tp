@@ -1,8 +1,8 @@
 package seedu.address.testutil.property;
 
+import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Location;
 import seedu.address.model.property.Phone;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.PropertyType;
@@ -14,13 +14,13 @@ public class PropertyBuilder {
 
     public static final String DEFAULT_LANDLORD_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_LOCATION = "Bishan";
+    public static final String DEFAULT_ADDRESS = "Bishan Rd #01-01";
     public static final String DEFAULT_ASKING_PRICE = "600000";
     public static final String DEFAULT_PROPERTY_TYPE = "HDB";
 
     private LandlordName landlordName;
     private Phone phone;
-    private Location location;
+    private Address address;
     private PropertyType propertyType;
     private AskingPrice askingPrice;
 
@@ -30,7 +30,7 @@ public class PropertyBuilder {
     public PropertyBuilder() {
         landlordName = new LandlordName(DEFAULT_LANDLORD_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        location = new Location(DEFAULT_LOCATION);
+        address = new Address(DEFAULT_ADDRESS);
         propertyType = new PropertyType(DEFAULT_PROPERTY_TYPE);
         askingPrice = new AskingPrice(DEFAULT_ASKING_PRICE);
     }
@@ -41,7 +41,7 @@ public class PropertyBuilder {
     public PropertyBuilder(Property propertyToCopy) {
         landlordName = propertyToCopy.getName();
         phone = propertyToCopy.getPhone();
-        location = propertyToCopy.getLocation();
+        address = propertyToCopy.getAddress();
         askingPrice = propertyToCopy.getAskingPrice();
         propertyType = propertyToCopy.getPropertyType();
     }
@@ -63,10 +63,10 @@ public class PropertyBuilder {
     }
 
     /**
-     * Sets the {@code Location} of the {@code Property} that we are building.
+     * Sets the {@code Address} of the {@code Property} that we are building.
      */
-    public PropertyBuilder withLocation(String location) {
-        this.location = new Location(location);
+    public PropertyBuilder withAddress(String address) {
+        this.address = new Address(address);
         return this;
     }
 
@@ -87,6 +87,6 @@ public class PropertyBuilder {
     }
 
     public Property build() {
-        return new Property(landlordName, phone, location, askingPrice, propertyType);
+        return new Property(landlordName, phone, address, askingPrice, propertyType);
     }
 }

@@ -43,7 +43,7 @@ public class MeetUpCard extends UiPart<Region> {
     /**
      * Creates a {@code MeetUpCode} with the given {@code MeetUp} and index to display.
      */
-    public MeetUpCard(MeetUp meetUp, int displayedIndex, boolean overlap) {
+    public MeetUpCard(MeetUp meetUp, int displayedIndex, boolean doesItOverlap) {
         super(FXML);
         this.meetUp = meetUp;
         id.setText(displayedIndex + ". ");
@@ -55,7 +55,7 @@ public class MeetUpCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(buyer -> buyer.addedBuyerName))
                 .forEach(addedBuyer -> addedBuyers.getChildren().add(new Label(addedBuyer.addedBuyerName)));
 
-        if (overlap) {
+        if (doesItOverlap) {
             from.setStyle("-fx-text-fill: red;");
             to.setStyle("-fx-text-fill: red;");
         } else {

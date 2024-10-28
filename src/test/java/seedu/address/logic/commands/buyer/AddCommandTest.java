@@ -179,7 +179,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        // ============================ MeetUp Model - To be refactored ==========================
+        // ============================ MeetUp Model  ==========================
 
         @Override
         public ReadOnlyMeetUpList getMeetUpList() {
