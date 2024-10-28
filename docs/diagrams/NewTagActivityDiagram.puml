@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Check if command format is valid;
+if () then ([invalid command format])
+:Notify user and specify its usage;
+stop
+else ([valid command format])
+:Extract tag name from command;
+:Check if tag name is valid;
+if () then ([invalid name])
+    :Notify user and specify its usage;
+    stop
+else ([valid name])
+    :Check if the tag has been added before;
+if () then ([added before])
+    :Notify the user that the tag has already been added;
+    stop
+else ([not added before])
+    :Add the specified tag;
+    :Notify the user that the tag has been added;
+    stop
+
+
+@enduml
+@enduml

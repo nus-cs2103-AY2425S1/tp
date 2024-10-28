@@ -16,6 +16,6 @@ Person -up-> "*" Tag
 
 Person *--> Name
 Person *--> Phone
-Person *--> Email
+Person *--> Rsvp
 Person *--> Address
 @enduml
