@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -14,13 +15,23 @@ public class WeddingListPanel extends UiPart<Region> {
     private static final String FXML = "WeddingListPanel.fxml";
 
     @FXML
+    private VBox currentWeddingNameCardContainer;
+
+    @FXML
     private ListView<Wedding> weddingListView;
 
     /**
      * Creates a {@code WeddingListPanel} with the given {@code ObservableList}.
      */
     public WeddingListPanel(ObservableList<Wedding> weddingList) {
-        super(FXML);
+        super(FXML);  // Loads the FXML and initializes FXML fields
+
+        // Set up CurrentWeddingNameCardContainer with dummy wedding name
+        CurrentWeddingNameCard currentWeddingNameCard = new CurrentWeddingNameCard();
+        currentWeddingNameCard.setCurrentWeddingName("John and Jane");  // Dummy name
+        currentWeddingNameCardContainer.getChildren().add(currentWeddingNameCard.getRoot());  // Add the card to the VBox
+
+        // Set up the ListView with weddings
         weddingListView.setItems(weddingList);
         weddingListView.setCellFactory(listView -> new WeddingListViewCell());
     }
