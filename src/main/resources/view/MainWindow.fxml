@@ -39,7 +39,7 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="150" prefHeight="150" maxHeight="150">
+                   minHeight="185" prefHeight="185" maxHeight="185">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
