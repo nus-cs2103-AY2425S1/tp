@@ -115,6 +115,7 @@ public class PersonWithCriteriaPredicateTest {
     @Test
     public void test_personWithTags() {
         List<Range<?>> criteria = new ArrayList<>();
+        criteria.add(new Range<Integer>(0, 100));
         Set<Tag> tags = new HashSet<>();
         // no tag
         PersonWithCriteriaPredicate predicate = new PersonWithCriteriaPredicate(criteria, tags);
