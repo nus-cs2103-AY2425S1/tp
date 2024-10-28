@@ -11,7 +11,7 @@ public class Client {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Client can take any names or index in the address book, and it should not be blank.";
-    public static final String INDEX_VALIDATION_REGEX = "^\\d+$\n";
+    public static final String INDEX_VALIDATION_REGEX = "^\\d+$";
     public static final String NAME_VALIDATION_REGEX = Name.VALIDATION_REGEX;
     private final Person person;
 
