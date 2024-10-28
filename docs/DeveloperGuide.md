@@ -118,8 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 The `Model` component,
 
@@ -132,7 +131,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
 
 </box>
 
@@ -382,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>list students(UC01)</ins>.
+1. User requests to <ins>list students(UC02)</ins>.
 2. User enters command to delete a specific student.
 3. System displays list with specified student deleted from the list.
 
@@ -396,11 +395,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2a1-2a2 are repeated until index entered is correct.
 * Use cases resumes from step 3.
 
+
 * 2b. System detects error in format of entered command.
     * 2b1. System displays error message and does not clear command line.
     * 2b2. User enters new command.
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use cases resumes from step 3.
+
+**Use case: UC05 - Find student entries**
+
+**MSS**
+
+1. User enters command to find students.
+1. System displays list with students with matching details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use case resumes from step 2.
 
 *{More to be added}*
 
