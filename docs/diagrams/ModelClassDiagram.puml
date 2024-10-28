@@ -1,4 +1,5 @@
 @startuml
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -20,6 +21,15 @@ Class Name
 Class Phone
 Class Tag
 
+Class UniqueProductList
+Class Product
+Class ProductName
+Class StockLevel {
+    - stockLevel: int
+    - minStockLevel: int
+    - maxStockLevel: int
+}
+
 Class I #FFFFFF
 }
 
@@ -36,12 +46,17 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueSupplierList
-UniqueSupplierList --> "~* all" Supplier
+UniqueSupplierList -left-> "~* all" Supplier
 Supplier *--> Name
 Supplier *--> Phone
 Supplier *--> Email
 Supplier *--> Address
 Supplier *--> "*" Tag
+
+AddressBook *--> "1" UniqueProductList
+UniqueProductList --> "~*all" Product
+Product *--> ProductName
+Product *--> StockLevel
 
 Supplier -[hidden]up--> I
 UniqueSupplierList -[hidden]right-> I
@@ -51,4 +66,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Supplier
+ModelManager --> "~* filtered" Product
 @enduml
