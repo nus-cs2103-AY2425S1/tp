@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final SortedList<Client> sortedClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
     private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
     private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
@@ -43,6 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getPersonList());
+        sortedClients = new SortedList<>(this.addressBook.getPersonList());
         visibleRentalInformationList = FXCollections.observableArrayList();
     }
 
@@ -148,6 +152,23 @@ public class ModelManager implements Model {
             updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
+    }
+
+    //=========== Sorted Client List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Client> getSortedPersonList() {
+        return sortedClients;
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Client> comparator) {
+        requireNonNull(comparator);
+        sortedClients.setComparator(comparator);
     }
 
     //=========== Visible Rental Information =================================================================

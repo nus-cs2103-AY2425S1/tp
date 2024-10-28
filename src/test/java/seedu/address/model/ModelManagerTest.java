@@ -104,6 +104,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedPersonList().remove(0));
+    }
+
+    @Test
     public void hasRentalInformation_nullClientAndRentalInformation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasRentalInformation(null, null));
         assertThrows(NullPointerException.class, () -> modelManager.hasRentalInformation(ALICE_WITH_RENTAL, null));

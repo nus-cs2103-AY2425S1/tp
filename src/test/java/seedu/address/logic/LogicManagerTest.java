@@ -88,6 +88,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedPersonList().remove(0));
+    }
+
+    @Test
     public void getVisibleRentalInformationList_initialContents_empty() {
         assertEquals(0, logic.getVisibleRentalInformationList().size());
     }
