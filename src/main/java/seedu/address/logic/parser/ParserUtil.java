@@ -18,13 +18,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Appointment;
-import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.TimeParseException;
+import seedu.address.model.tag.BloodType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +38,8 @@ public class ParserUtil {
             + "formats:\ndd/MM/yyyy\n"
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
+
+    public static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
             "dd MMMM yyyy",

@@ -76,7 +76,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText("Phone : " + person.getPhone().value);
         address.setText("Address : " + person.getAddress().value);
         email.setText("Email : " + person.getEmail().value);
-        appointment.setText("Appointment : " + person.getAppointment().dateTime);
+        appointment.setText("Appointment : " + person.getAppointment().dateTime
+                + " to " + person.getAppointment().getEndTime());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
@@ -93,11 +94,11 @@ public class PersonCard extends UiPart<Region> {
                 });
 
         if (person.getAppointment().isToday()) {
-            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #86ff1c;"); // Green
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #80ef80;"); // Green
         } else if (person.getAppointment().hasPassed()) {
-            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ff0500;"); // Red
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ff746c;"); // Red
         } else if (person.getAppointment().hasNotPassed()) {
-            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #f0c44a;"); // Yellow
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #b3ebf2;"); // Blue
         } else {
             appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: white;"); // White
         }

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.tag;
 
 /**
  * Represents the different blood types.
