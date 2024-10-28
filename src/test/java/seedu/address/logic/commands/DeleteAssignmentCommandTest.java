@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.StudentBuilder;
@@ -37,9 +36,7 @@ public class DeleteAssignmentCommandTest {
         HUGH.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
 
         model.addStudent(HUGH);
-        assertCommandSuccess(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null)),
+        assertCommandSuccess(new DeleteAssignmentCommand(HUGH.getName(), MATH_ASSIGNMENT_SUBMITTED.getAssignmentName()),
                 model,
                 String.format(DeleteAssignmentCommand.MESSAGE_SUCCESS,
                         MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
@@ -55,8 +52,7 @@ public class DeleteAssignmentCommandTest {
 
         model.addStudent(hughCopy);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(HUGH.getName(),
-                new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                        null, null));
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName());
         assertCommandSuccess(deleteAssignmentCommand, model,
                 String.format(DeleteAssignmentCommand.MESSAGE_SUCCESS,
                         MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
@@ -75,8 +71,7 @@ public class DeleteAssignmentCommandTest {
 
         model.addStudent(hughCopy);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(hughCopy.getName(),
-                new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                        null, null));
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName());
         assertFalse(deleteAssignmentCommand.undo(model));
         assertTrue(hughCopy.getAssignments().size() == 2); // No change to the assignments list
     }
@@ -90,8 +85,7 @@ public class DeleteAssignmentCommandTest {
 
         model.addStudent(HUGH);
         assertCommandSuccess(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(),
                         new StudentNumber(VALID_STUDENT_NUMBER_HUGH)),
                 model,
                 String.format(DeleteAssignmentCommand.MESSAGE_SUCCESS,
@@ -109,8 +103,7 @@ public class DeleteAssignmentCommandTest {
         model.addStudent(hughCopy2);
 
         assertCommandFailure(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null)),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName()),
                 model,
                 String.format(DeleteAssignmentCommand.MESSAGE_DUPLICATE_STUDENT,
                         "A1234567J, " + HUGH.getStudentNumber()));
@@ -120,8 +113,7 @@ public class DeleteAssignmentCommandTest {
     @Test
     public void execute_deleteAssignmentWithNoStudents_failure() {
         assertCommandFailure(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null)),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName()),
                 model,
                 DeleteAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
 
@@ -135,8 +127,7 @@ public class DeleteAssignmentCommandTest {
         model.addStudent(hughCopy);
 
         assertCommandFailure(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(),
                         new StudentNumber(VALID_STUDENT_NUMBER_DIDDY)),
                 model,
                 DeleteAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
@@ -149,8 +140,7 @@ public class DeleteAssignmentCommandTest {
         model.addStudent(hughCopy);
 
         assertCommandFailure(new DeleteAssignmentCommand(HUGH.getName(),
-                        new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
-                                null, null),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(),
                         new StudentNumber(VALID_STUDENT_NUMBER_HUGH)),
                 model,
                 DeleteAssignmentCommand.MESSAGE_NO_ASSIGNMENT_FOUND);
