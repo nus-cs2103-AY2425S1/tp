@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_DETAIL + "DETAIL]"
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG]...\n"
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG]...\n"
             + "[" + PREFIX_REMOVE_TAG + "TAG_TO_REMOVE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -96,8 +96,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -142,8 +142,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
+     * of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -220,8 +220,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets this object's {@code studyGroupTags} to {@code studyGroupTags} . A defensive
-         * copy of {@code studyGroupTags} is used internally.
+         * Sets this object's {@code studyGroupTags} to {@code studyGroupTags} . A defensive copy of
+         * {@code studyGroupTags} is used internally.
          */
         public void setStudyGroupTags(Set<StudyGroupTag> studyGroupTags) {
             this.studyGroupTags = (studyGroupTags != null) ? new HashSet<>(studyGroupTags) : null;
@@ -229,8 +229,8 @@ public class EditCommand extends Command {
 
         /**
          * Returns an unmodifiable tag set of existing and added tags, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code studyGroupTags} is null.
+         * {@code UnsupportedOperationException} if modification is attempted. Returns {@code Optional#empty()} if
+         * {@code studyGroupTags} is null.
          */
         public Optional<Set<StudyGroupTag>> getStudyGroupTags() {
             return (studyGroupTags != null)
@@ -239,16 +239,16 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets this object's {@code tagsToRemove} to {@code tagsToRemove} . A defensive
-         * copy of {@code studyGroupTags} is used internally.
+         * Sets this object's {@code tagsToRemove} to {@code tagsToRemove} . A defensive copy of {@code studyGroupTags}
+         * is used internally.
          */
         public void setTagsToRemove(Set<StudyGroupTag> studyGroupTags) {
             this.tagsToRemove = (studyGroupTags != null) ? new HashSet<>(studyGroupTags) : null;
         }
+
         /**
-         * Returns an unmodifiable tag set to remove, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code tagsToRemove} is null.
+         * Returns an unmodifiable tag set to remove, which throws {@code UnsupportedOperationException} if modification
+         * is attempted. Returns {@code Optional#empty()} if {@code tagsToRemove} is null.
          */
         public Optional<Set<StudyGroupTag>> getTagsToRemove() {
             return (tagsToRemove != null)
