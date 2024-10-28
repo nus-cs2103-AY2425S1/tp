@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -8,7 +10,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 
 import org.junit.jupiter.api.Test;
 
@@ -58,7 +59,7 @@ public class ScheduleCommandParserTest {
 
     // Invalid date format - missing time
     @Test
-    void parse_invalidDateFormat_missingTime_throwsParseException() {
+    void parseInvalidDateFormatMissingTime_throwsParseException() {
         String invalidDate = "2/12/2024";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
@@ -67,7 +68,7 @@ public class ScheduleCommandParserTest {
 
     // Invalid date format - incorrect delimiter
     @Test
-    void parse_invalidDateFormat_wrongDelimiter_throwsParseException() {
+    void parseInvalidDateFormatWrongDelimiter_throwsParseException() {
         String invalidDate = "2-12-2024 1800";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
@@ -76,26 +77,35 @@ public class ScheduleCommandParserTest {
 
     // Invalid date values - leap year check
     @Test
-    void parse_invalidDateValues_nonLeapYear_throwsParseException() {
-        String invalidDate = "29/2/2023 1800";  // 2023 is not a leap year
+    void parseInvalidDateValuesNonLeapYear_throwsParseException() {
+        String invalidDate = "29/2/2023 1800"; // 2023 is not a leap year
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date: February 29 is only valid in leap years.", thrown.getMessage());
     }
 
     // Invalid date values - month with 30 days
     @Test
-    void parse_invalidDateValues_monthWith30Days_throwsParseException() {
-        String invalidDate = "31/4/2024 1800";  // April has only 30 days
+    void parse_invalidDateValues_throwsParseException() {
+        String invalidDate = "31/4/2024 1800"; // April has only 30 days
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date: APRIL cannot have more than 30 days.", thrown.getMessage());
+
+        String invalidDateTemp = "32/8/2024 1800"; // April has only 30 days
+        ParseException thrownTemp =
+                assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDateTemp));
+        assertEquals("Invalid date or time values! Ensure day, month, hour, and minute ranges are correct.",
+                thrownTemp.getMessage());
     }
+
+
 
     // Invalid time format
     @Test
     void parse_invalidTimeFormat_throwsParseException() {
-        String invalidTime = "2/12/2024 18:00";  // ':' should not be present
+        String invalidTime = "2/12/2024 18:00"; // ':' should not be present
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidTime));
-        assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.", thrown.getMessage());
+        assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
+                thrown.getMessage());
     }
 
     // Multiple date inputs
@@ -105,5 +115,5 @@ public class ScheduleCommandParserTest {
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(multipleDates));
         assertTrue(thrown.getMessage().contains("Invalid command format"));
     }
-    
+
 }
