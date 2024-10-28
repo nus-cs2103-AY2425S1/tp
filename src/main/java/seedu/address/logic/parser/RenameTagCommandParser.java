@@ -11,9 +11,17 @@ import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new RenameTagCommand object.
+ */
 public class RenameTagCommandParser implements Parser<RenameTagCommand> {
     public static final int EXPECTED_ARGUMENT_LENGTH = 2;
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the RenameTagCommand
+     * and returns a RenameTagCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     public RenameTagCommand parse(String args) throws ParseException {
         String lowerCaseArguments = args.toLowerCase();
         ArgumentMultimap tokenisedArguments = ArgumentTokenizer.tokenize(lowerCaseArguments, PREFIX_TAG);

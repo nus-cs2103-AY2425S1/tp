@@ -43,6 +43,10 @@ public class RenameTagCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Edits the renamed {@code Tag} for all persons in the address book
+     * who have the tag.
+     */
     private void editTagInPersons(Model model) {
         List<Person> persons = model.getFullPersonList();
         for (Person person : persons) {
@@ -52,6 +56,9 @@ public class RenameTagCommand extends Command {
         }
     }
 
+    /**
+     * Edits the renamed {@code Tag} for the specified person.
+     */
     private void replacePerson(Model model, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());
         for (Tag tag : newTags) {

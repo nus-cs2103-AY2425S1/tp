@@ -15,7 +15,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagList;
 
 /**
  * Represents the in-memory model of the address book data.

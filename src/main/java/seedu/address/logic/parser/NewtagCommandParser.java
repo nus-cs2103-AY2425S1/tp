@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.tag.Tag.MAX_CHARACTER_LENGTH;
-import static seedu.address.model.tag.Tag.VALIDATION_REGEX;
 import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.ArrayList;

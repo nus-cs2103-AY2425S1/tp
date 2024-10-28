@@ -54,11 +54,11 @@ public class DeleteTagCommandTest {
     @Test
     public void equals() {
         List<Tag> firstTags = new ArrayList<>();
-        firstTags.add(VALID_TAG_BRIDES_FRIEND);
+        firstTags.add(BRIDES_SIDE);
         DeleteTagCommand firstDeleteTagCommand = new DeleteTagCommand(firstTags);
 
         List<Tag> secondTags = new ArrayList<>();
-        secondTags.add(VALID_TAG_BRIDES_FRIEND);
+        secondTags.add(BRIDES_SIDE);
         DeleteTagCommand secondDeleteTagCommand = new DeleteTagCommand(secondTags);
 
         assertTrue(firstDeleteTagCommand.equals(secondDeleteTagCommand));

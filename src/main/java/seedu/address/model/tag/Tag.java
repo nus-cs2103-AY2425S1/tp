@@ -14,7 +14,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "[\\p{Alnum} '()]+";
     public static final int MAX_CHARACTER_LENGTH = 50;
 
-    public String tagName;
+    private String tagName;
 
     /**
      * Constructs a {@code Tag}.
