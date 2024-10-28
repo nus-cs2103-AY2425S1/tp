@@ -36,11 +36,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email,
+    public Person(int id, Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Remark remark,
                   UniqueListingList listings) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.id = ++personCounter;
+        if (id > 0) {
+            this.id = id;
+            if (id > personCounter) {
+                personCounter = id;
+            }
+        } else {
+            this.id = ++personCounter;
+        }
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -67,20 +75,21 @@ public class Person {
     }
 
     /**
-     * A constructor for creating Person objects without a listing
-     * will create an empty UniqueListingList internally
+     * Constructor without an ID parameter, increments counter automatically.
+     */
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Remark remark,
+                  UniqueListingList listings) {
+        this(++personCounter, name, phone, email, address, tags, remark, listings);
+    }
+
+    /**
+     * Constructor for creating Person objects without a listing
+     * creates an empty UniqueListingList internally.
      */
     public Person(Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Remark remark) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.id = ++personCounter;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.remark = remark;
-        this.listings = new UniqueListingList();
+        this(name, phone, email, address, tags, remark, new UniqueListingList());
     }
 
     public int getId() {
