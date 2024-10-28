@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -28,7 +31,7 @@ public class RenameTagCommand extends Command {
         requireAllNonNull(model);
 
         if (!model.renameTag(existingTag, newTagName)) {
-            return new CommandResult(MESSAGE_NONEXISTENT);
+            throw new CommandException(MESSAGE_NONEXISTENT);
         }
 
         model.updateTagList();
@@ -46,6 +49,16 @@ public class RenameTagCommand extends Command {
         }
 
         RenameTagCommand otherCommand = (RenameTagCommand) other;
-        return existingTag.equals(otherCommand.existingTag);
+
+        return existingTag.equals(otherCommand.existingTag)
+                && newTagName.equals(otherCommand.newTagName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("existingTag: ", existingTag)
+                .add("newTagName: ", newTagName)
+                .toString();
     }
 }

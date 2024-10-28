@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
@@ -48,5 +49,19 @@ public class DeleteTagCommandTest {
         String expectedMessage = DeleteTagCommand.MESSAGE_NONEXISTENT;
 
         assertCommandFailure(deleteTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void equals() {
+        List<Tag> firstTags = new ArrayList<>();
+        firstTags.add(VALID_TAG_BRIDES_FRIEND);
+        DeleteTagCommand firstDeleteTagCommand = new DeleteTagCommand(firstTags);
+
+        List<Tag> secondTags = new ArrayList<>();
+        secondTags.add(VALID_TAG_BRIDES_FRIEND);
+        DeleteTagCommand secondDeleteTagCommand = new DeleteTagCommand(secondTags);
+
+        assertTrue(firstDeleteTagCommand.equals(secondDeleteTagCommand));
+
     }
 }

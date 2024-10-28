@@ -39,6 +39,7 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_leadingAndTrailingSpaces_returnsDeleteTagCommand() {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        expectedTag.setTagName("bride's friend");
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, "  t/ bride's friend   ", new DeleteTagCommand(expectedTags));

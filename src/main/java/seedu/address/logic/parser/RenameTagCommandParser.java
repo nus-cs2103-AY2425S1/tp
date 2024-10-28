@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.RenameTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.List;
 
@@ -18,7 +20,13 @@ public class RenameTagCommandParser implements Parser<RenameTagCommand> {
         List<String> arguments = tokenisedArguments.getAllValues(PREFIX_TAG);
 
         if (arguments.size() != EXPECTED_ARGUMENT_LENGTH) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        }
+
+        for (String argument : arguments) {
+            if (!isValidTagName(argument)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            }
         }
 
         Tag existingTag = new Tag(arguments.get(0));
