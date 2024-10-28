@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -18,7 +19,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.beans.Observable;
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.value.WritableObjectValue;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -206,21 +208,28 @@ public class LogicManagerTest {
     @Test
     public void getIsDisplayClientsProperty_returnsObjectPropertyType() {
         // Call the method
-        ObjectProperty<DisplayMode> result = logic.getDisplayMode();
+        Object result = logic.getReadOnlyDisplayMode();
 
         // Assert that the result is an instance of ObjectProperty<DisplayMode>
         assertTrue(
-                result instanceof ObjectProperty<?>,
-                "Expected result to be an instance of ObjectProperty<DisplayMode>"
+                result instanceof ReadOnlyObjectProperty<?>,
+                "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
         );
     }
-
     @Test
     public void getDisplayMode_isObservable() {
         // Call the method
-        ObjectProperty<DisplayMode> result = logic.getDisplayMode();
+        Object result = logic.getReadOnlyDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    }
+    @Test
+    public void getReadOnlyDisplayMode_isImmutable() {
+        // Get the read-only display mode property
+        ReadOnlyObjectProperty<DisplayMode> displayModeProperty = logic.getReadOnlyDisplayMode();
+
+        // Check that the property cannot be cast to a WritableObjectValue
+        assertFalse(displayModeProperty instanceof WritableObjectValue, "Expected display mode to not be writable");
     }
 }

@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -73,7 +73,7 @@ public class ModelManager implements Model {
         PROPERTIES
     }
 
-    private final ObjectProperty<DisplayMode> displayMode = new SimpleObjectProperty<>(DisplayMode.CLIENTS);
+    private final ReadOnlyObjectWrapper<DisplayMode> displayMode = new ReadOnlyObjectWrapper<>(DisplayMode.CLIENTS);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -328,27 +328,27 @@ public class ModelManager implements Model {
     }
 
     //=========== Managing UI  ==================================================================================
-    // TODO: Add defensive programming by only returning a ReadOnly version of the this.displayMode
     @Override
-    public ObjectProperty<DisplayMode> getDisplayMode() {
-        return this.displayMode;
+    public ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode() {
+        return displayMode.getReadOnlyProperty();
     }
 
+    // Update display mode using the wrapper, which remains modifiable internally
     @Override
     public void setDisplayClients() {
-        this.displayMode.set(DisplayMode.CLIENTS);
+        displayMode.set(DisplayMode.CLIENTS);
         logger.info("Setting Display Mode to \"CLIENTS\"");
     }
 
     @Override
     public void setDisplayProperties() {
-        this.displayMode.set(DisplayMode.PROPERTIES);
+        displayMode.set(DisplayMode.PROPERTIES);
         logger.info("Setting Display Mode to \"PROPERTIES\"");
     }
 
     @Override
     public void setDisplayMeetings() {
-        this.displayMode.set(DisplayMode.MEETINGS);
+        displayMode.set(DisplayMode.MEETINGS);
         logger.info("Setting Display Mode to \"MEETINGS\"");
     }
 }

@@ -21,7 +21,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.value.WritableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -273,29 +274,39 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getDisplayMode_returnsObjectPropertyType() {
+    public void getIsDisplayClientsProperty_returnsObjectPropertyType() {
         // Call the method
-        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
+        Object result = modelManager.getReadOnlyDisplayMode();
 
-        // Assert that the result is an instance of ObjectProperty
-        assertTrue(result instanceof ObjectProperty, "Expected result to be an instance of ObjectProperty");
+        // Assert that the result is an instance of ObjectProperty<DisplayMode>
+        assertTrue(
+                result instanceof ReadOnlyObjectProperty<?>,
+                "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
+        );
     }
 
     @Test
     public void getDisplayMode_isObservable() {
         // Call the method
-        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
+        Object result = modelManager.getReadOnlyDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
+    @Test
+    public void getReadOnlyDisplayMode_isImmutable() {
+        // Get the read-only display mode property
+        ReadOnlyObjectProperty<ModelManager.DisplayMode> displayModeProperty = modelManager.getReadOnlyDisplayMode();
 
+        // Check that the property cannot be cast to a WritableObjectValue
+        assertFalse(displayModeProperty instanceof WritableObjectValue, "Expected display mode to not be writable");
+    }
     @Test
     public void setDisplayClients_setsDisplayModeToClients() {
         // Set display mode to CLIENTS
         modelManager.setDisplayClients();
         assertEquals(
-                ModelManager.DisplayMode.CLIENTS, modelManager.getDisplayMode().getValue(),
+                ModelManager.DisplayMode.CLIENTS, modelManager.getReadOnlyDisplayMode().getValue(),
                 "Expected display mode to be CLIENTS"
         );
     }
@@ -305,7 +316,7 @@ public class ModelManagerTest {
         // Set display mode to PROPERTIES
         modelManager.setDisplayProperties();
         assertEquals(
-                ModelManager.DisplayMode.PROPERTIES, modelManager.getDisplayMode().getValue(),
+                ModelManager.DisplayMode.PROPERTIES, modelManager.getReadOnlyDisplayMode().getValue(),
                 "Expected display mode to be PROPERTIES"
         );
     }
@@ -315,7 +326,7 @@ public class ModelManagerTest {
         // Set display mode to MEETINGS
         modelManager.setDisplayMeetings();
         assertEquals(
-                ModelManager.DisplayMode.MEETINGS, modelManager.getDisplayMode().getValue(),
+                ModelManager.DisplayMode.MEETINGS, modelManager.getReadOnlyDisplayMode().getValue(),
                 "Expected display mode to be MEETINGS"
         );
     }
