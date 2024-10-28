@@ -15,16 +15,16 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.LessonTime;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.task.TaskList;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.EmergencyContact;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.task.TaskList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -71,10 +71,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<LessonTime> lessonTimes = ParserUtil.parseLessonTimes(argMultimap.getAllValues(PREFIX_LESSON_TIME));
 
-        Person person = new Person(name, phone, emergencyContact, address, note, subjectList,
+        Student student = new Student(name, phone, emergencyContact, address, note, subjectList,
                 level, taskList, lessonTimes);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
 

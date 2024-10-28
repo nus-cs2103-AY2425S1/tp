@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -24,19 +24,19 @@ public class CommandResult {
     /** UI State should be changed accordingly. */
     private final UiState uiState;
 
-    /** Details of person should be displayed */
-    private final Person personToView;
+    /** Details of student should be displayed */
+    private final Student studentToView;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, UiState uiState,
-                          Person personToView) {
+                          Student studentToView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.uiState = uiState;
-        this.personToView = personToView;
+        this.studentToView = studentToView;
     }
 
     /**
@@ -62,8 +62,8 @@ public class CommandResult {
      * {@code showHelp}, and {@code exit},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, Person personToView) {
-        this(feedbackToUser, false, false, UiState.SPECIFIC_DETAILS, personToView);
+    public CommandResult(String feedbackToUser, Student studentToView) {
+        this(feedbackToUser, false, false, UiState.SPECIFIC_DETAILS, studentToView);
     }
 
     public String getFeedbackToUser() {
@@ -82,8 +82,8 @@ public class CommandResult {
         return uiState;
     }
 
-    public Person getPersonToView() {
-        return personToView;
+    public Student getStudentToView() {
+        return studentToView;
     }
 
     @Override
@@ -102,12 +102,12 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && uiState == otherCommandResult.uiState
-                && personToView == otherCommandResult.personToView;
+                && studentToView == otherCommandResult.studentToView;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, uiState, personToView);
+        return Objects.hash(feedbackToUser, showHelp, exit, uiState, studentToView);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("uiState", uiState)
-                .add("personToView", personToView)
+                .add("studentToView", studentToView)
                 .toString();
     }
 

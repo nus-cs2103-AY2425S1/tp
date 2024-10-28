@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 
 /**
  * Parses input arguments and creates a new {@code NoteCommand} object
@@ -31,8 +31,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name studentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new NoteCommand(personName, new Note(note));
+        return new NoteCommand(studentName, new Note(note));
     }
 }

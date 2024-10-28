@@ -47,7 +47,7 @@
         </StackPane>
 
         <SplitPane fx:id="mainSplitPane" dividerPositions="1" VBox.vgrow="ALWAYS">
-          <StackPane fx:id="personListPanelPlaceholder" minWidth="200" />
+          <StackPane fx:id="studentListPanelPlaceholder" minWidth="200" />
           <StackPane fx:id="detailsDisplayPlaceholder" visible="false" /> <!-- Initially hidden -->
         </SplitPane>
 

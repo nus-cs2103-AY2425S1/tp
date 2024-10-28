@@ -7,9 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * Parses input arguments and creates a new TagCommand object
@@ -27,24 +27,24 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SUBJECT, PREFIX_LEVEL);
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_LEVEL);
 
-        Name personToTag;
+        Name studentToTag;
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
-            personToTag = ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get());
+            studentToTag = ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get());
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        UpdatePersonDescriptor editPersonTags = new UpdatePersonDescriptor();
+        UpdateCommand.UpdateStudentDescriptor editStudentTags = new UpdateCommand.UpdateStudentDescriptor();
 
         if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
-            editPersonTags.setLevel(
+            editStudentTags.setLevel(
                     ParserUtil.parseLevel(
                             argMultiMap.getValue(PREFIX_LEVEL).get()));
 
         }
 
         if (argMultiMap.getValue(PREFIX_SUBJECT).isPresent()) {
-            editPersonTags.setSubjects(
+            editStudentTags.setSubjects(
                     ParserUtil.parseSubjects(
                             argMultiMap.getAllValues(PREFIX_SUBJECT)));
         }
@@ -55,6 +55,6 @@ public class TagCommandParser implements Parser<TagCommand> {
             }
         }
 
-        return new TagCommand(personToTag, editPersonTags);
+        return new TagCommand(studentToTag, editStudentTags);
     }
 }

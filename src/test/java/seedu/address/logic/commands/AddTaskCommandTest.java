@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +15,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.task.Task;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.task.Task;
+import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.ui.Ui.UiState;
 
@@ -40,21 +40,21 @@ public class AddTaskCommandTest {
         assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, validTask));
     }
 
-    // Update using new PersonBuilder
+    // Update using new StudentBuilder
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() {
-        // Get an existing person from the typical address book
-        Person person = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build(); // Deep copy
+        // Get an existing student from the typical address book
+        Student student = new StudentBuilder(model.getAddressBook().getStudentList().get(0)).build(); // Deep copy
 
         Task validTask = new TaskBuilder().build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(person.getName(), validTask);
+        AddTaskCommand addTaskCommand = new AddTaskCommand(student.getName(), validTask);
         String expectedMessage = String.format(AddTaskCommand.MESSAGE_SUCCESS,
-                validTask.getTaskDescription(), person.getName(), validTask.getTaskDeadline());
+                validTask.getTaskDescription(), student.getName(), validTask.getTaskDeadline());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Person updatedPerson = new PersonBuilder(person).build(); // Create a deep copy
-        updatedPerson.getTaskList().add(validTask); // Modify the deep copy
-        expectedModel.setPerson(person, updatedPerson);
+        Student updatedStudent = new StudentBuilder(student).build(); // Create a deep copy
+        updatedStudent.getTaskList().add(validTask); // Modify the deep copy
+        expectedModel.setStudent(student, updatedStudent);
 
         // Checks that initial and expected state of model is correct
         assertEquals(model, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
@@ -65,11 +65,11 @@ public class AddTaskCommandTest {
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        // Get an existing person with the default task
-        Person person = model.getAddressBook().getPersonList().get(1);
+        // Get an existing student with the default task
+        Student student = model.getAddressBook().getStudentList().get(1);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Task validTask = new TaskBuilder().build();
-        Name validName = person.getName();
+        Name validName = student.getName();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
 
         assertThrows(CommandException.class,
@@ -78,14 +78,14 @@ public class AddTaskCommandTest {
 
     @Test
     public void execute_invalidName_throwsCommandException() {
-        // Get an existing person with the default task
+        // Get an existing student with the default task
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Task validTask = new TaskBuilder().build();
         Name validName = new Name("Darren Watkins Junior");
         AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
 
         assertThrows(CommandException.class,
-                AddTaskCommand.MESSAGE_PERSON_NOT_FOUND, () -> addTaskCommand.execute(expectedModel));
+                AddTaskCommand.MESSAGE_STUDENT_NOT_FOUND, () -> addTaskCommand.execute(expectedModel));
     }
 
     @Test

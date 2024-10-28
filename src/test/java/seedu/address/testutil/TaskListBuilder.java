@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import java.util.Arrays;
 
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskList;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskList;
 
 /**
  * A utility class to help with building TaskList objects.

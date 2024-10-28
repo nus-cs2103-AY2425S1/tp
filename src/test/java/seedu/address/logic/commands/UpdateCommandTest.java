@@ -12,10 +12,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Optional;
 
@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -42,25 +42,25 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person updatedPerson = model.getAddressBook().getPersonList().get(0);
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(updatedPerson).build();
-        UpdateCommand updateCommand = new UpdateCommand(updatedPerson.getName(), descriptor);
+        Student updatedStudent = model.getAddressBook().getStudentList().get(0);
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(updatedStudent).build();
+        UpdateCommand updateCommand = new UpdateCommand(updatedStudent.getName(), descriptor);
 
         String expectedMessage =
-                String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson));
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        Optional<Person> personToUpdate = model.getAddressBook()
-                .getPersonList()
+        Optional<Student> studentToUpdate = model.getAddressBook()
+                .getStudentList()
                 .stream()
-                .filter(person -> person.getName().equals(updatedPerson.getName()))
+                .filter(student -> student.getName().equals(updatedStudent.getName()))
                 .findFirst();
 
-        if (personToUpdate.isPresent()) {
-            expectedModel.setPerson(personToUpdate.get(), updatedPerson);
+        if (studentToUpdate.isPresent()) {
+            expectedModel.setStudent(studentToUpdate.get(), updatedStudent);
         } else {
-            throw new IllegalStateException("Person to update not found");
+            throw new IllegalStateException("Student to update not found");
         }
 
         assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
@@ -68,34 +68,36 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person updatedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student updatedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .withSubjects(VALID_SUBJECT_MATH).build();
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        UpdateCommand.UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_S1_EXPRESS).withSubjects(VALID_SUBJECT_MATH).build();
-        UpdateCommand updateCommand = new UpdateCommand(lastPerson.getName(), descriptor);
+        UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
 
         String expectedMessage =
-                String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson));
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, updatedPerson);
+        expectedModel.setStudent(lastStudent, updatedStudent);
 
         assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        Person updatedPerson = model.getFilteredPersonList().get(0);
-        UpdateCommand updateCommand = new UpdateCommand(updatedPerson.getName(), new UpdatePersonDescriptor());
+        Student updatedStudent = model.getFilteredStudentList().get(0);
+        UpdateCommand updateCommand =
+                new UpdateCommand(updatedStudent.getName(), new UpdateCommand.UpdateStudentDescriptor());
 
         String expectedMessage =
-                String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson));
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -104,50 +106,51 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person updatedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        UpdateCommand updateCommand = new UpdateCommand(personInFilteredList.getName(),
-                new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student updatedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
+        UpdateCommand updateCommand = new UpdateCommand(studentInFilteredList.getName(),
+                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS,
-                Messages.format(updatedPerson));
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS,
+                Messages.format(updatedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), updatedPerson);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
 
         assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(firstPerson).build();
-        UpdateCommand updateCommand = new UpdateCommand(model.getFilteredPersonList().get(1).getName(), descriptor);
+    public void execute_duplicateStudentUnfilteredList_failure() {
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        UpdateCommand.UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(firstStudent).build();
+        UpdateCommand updateCommand = new UpdateCommand(model.getFilteredStudentList().get(1).getName(), descriptor);
 
-        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_duplicateStudentFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        // update person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        UpdateCommand updateCommand = new UpdateCommand(model.getFilteredPersonList().get(0).getName(),
-                new UpdatePersonDescriptorBuilder(personInList).build());
+        // update student in filtered list into a duplicate in address book
+        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
+        UpdateCommand updateCommand = new UpdateCommand(model.getFilteredStudentList().get(0).getName(),
+                new UpdateStudentDescriptorBuilder(studentInList).build());
 
-        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidStudentIndexUnfilteredList_failure() {
         Name invalidName = new Name("Skibidi");
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        UpdateCommand.UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
         UpdateCommand updateCommand = new UpdateCommand(invalidName, descriptor);
 
-        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_PERSON_UPDATE);
+        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_STUDENT_UPDATE);
     }
 
     /**
@@ -155,14 +158,14 @@ public class UpdateCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_invalidStudentIndexFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Name invalidName = new Name("Skibidi");
 
         UpdateCommand updateCommand = new UpdateCommand(invalidName,
-                new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_PERSON_UPDATE);
+        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_STUDENT_UPDATE);
     }
 
     @Test
@@ -170,7 +173,7 @@ public class UpdateCommandTest {
         final UpdateCommand standardCommand = new UpdateCommand(new Name(VALID_NAME_AMY), DESC_AMY);
 
         // same values -> returns true
-        UpdatePersonDescriptor copyDescriptor = new UpdatePersonDescriptor(DESC_AMY);
+        UpdateStudentDescriptor copyDescriptor = new UpdateCommand.UpdateStudentDescriptor(DESC_AMY);
         UpdateCommand commandWithSameValues = new UpdateCommand(new Name(VALID_NAME_AMY), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -193,10 +196,10 @@ public class UpdateCommandTest {
     @Test
     public void toStringMethod() {
         Name name = new Name("Test name");
-        UpdatePersonDescriptor updatePersonDescriptor = new UpdatePersonDescriptor();
-        UpdateCommand updateCommand = new UpdateCommand(name, updatePersonDescriptor);
-        String expected = UpdateCommand.class.getCanonicalName() + "{name=" + name + ", updatePersonDescriptor="
-                + updatePersonDescriptor + "}";
+        UpdateStudentDescriptor updateStudentDescriptor = new UpdateCommand.UpdateStudentDescriptor();
+        UpdateCommand updateCommand = new UpdateCommand(name, updateStudentDescriptor);
+        String expected = UpdateCommand.class.getCanonicalName() + "{name=" + name + ", updateStudentDescriptor="
+                + updateStudentDescriptor + "}";
         assertEquals(expected, updateCommand.toString());
     }
 

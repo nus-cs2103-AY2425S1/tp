@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,13 +18,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
-import seedu.address.model.person.task.TaskList;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
+import seedu.address.model.student.task.TaskList;
+import seedu.address.testutil.StudentBuilder;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -36,36 +36,36 @@ public class DeleteTaskCommandTest {
 
     private Model model;
     private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
-    private Person targetPerson;
+    private Student targetStudent;
     @BeforeEach
     public void setUp() {
         // ensure the model has task to delete
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        targetPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person updatedPerson = new PersonBuilder(model.getPersonByName(targetPerson.getName()))
+        targetStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student updatedStudent = new StudentBuilder(model.getStudentByName(targetStudent.getName()))
                 .build();
-        TaskList updatedTaskList = updatedPerson.getTaskList();
+        TaskList updatedTaskList = updatedStudent.getTaskList();
         updatedTaskList.add(testTask);
-        model.setPerson(targetPerson, updatedPerson);
+        model.setStudent(targetStudent, updatedStudent);
 
-        // reinitialise target person after updating the model
-        targetPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        // reinitialise target student after updating the model
+        targetStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
     }
     @Test
     public void execute_validArgument_success() {
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPerson.getName(), INDEX_FIRST_TASK);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetStudent.getName(), INDEX_FIRST_TASK);
 
-        Task targetTask = targetPerson.getTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task targetTask = targetStudent.getTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                targetTask.getTaskDescription(), targetPerson.getName(), targetTask.getTaskDeadline());
+                targetTask.getTaskDescription(), targetStudent.getName(), targetTask.getTaskDeadline());
 
         // Ensure initial and final state of the model is actually different
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Person updatedPerson = new PersonBuilder(expectedModel.getPersonByName(targetPerson.getName()))
+        Student updatedStudent = new StudentBuilder(expectedModel.getStudentByName(targetStudent.getName()))
                 .build();
-        TaskList updatedTaskList = updatedPerson.getTaskList();
+        TaskList updatedTaskList = updatedStudent.getTaskList();
         updatedTaskList.remove(targetTask);
-        expectedModel.setPerson(targetPerson, updatedPerson);
+        expectedModel.setStudent(targetStudent, updatedStudent);
         assertEquals(expectedModel, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
         assertNotEquals(model, expectedModel);
 
@@ -74,9 +74,9 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Person targetPerson = model.getFilteredPersonList().get(0);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPerson.getName(), outOfBoundIndex);
+        Student targetStudent = model.getFilteredStudentList().get(0);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetStudent.getName(), outOfBoundIndex);
 
         assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -86,37 +86,37 @@ public class DeleteTaskCommandTest {
     public void execute_invalidName_throwsCommandException() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(new Name("UNKNOWN NAME"), INDEX_FIRST_TASK);
 
-        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
     }
 
     @Test
     public void equals() {
-        Name person1 = new Name("Ada");
-        Name person2 = new Name("Bob");
+        Name student1 = new Name("Ada");
+        Name student2 = new Name("Bob");
         Index index1 = Index.fromOneBased(1);
         Index index2 = Index.fromOneBased(2);
-        DeleteTaskCommand deleteFirstPersonFirstIndexCommand = new DeleteTaskCommand(person1, index1);
-        DeleteTaskCommand deleteFirstPersonSecondIndexCommand = new DeleteTaskCommand(person1, index2);
-        DeleteTaskCommand deleteSecondPersonFirstIndexCommand = new DeleteTaskCommand(person2, index1);
+        DeleteTaskCommand deleteFirstStudentFirstIndexCommand = new DeleteTaskCommand(student1, index1);
+        DeleteTaskCommand deleteFirstStudentSecondIndexCommand = new DeleteTaskCommand(student1, index2);
+        DeleteTaskCommand deleteSecondStudentFirstIndexCommand = new DeleteTaskCommand(student2, index1);
 
         //same object -> returns true
-        assertTrue(deleteFirstPersonFirstIndexCommand.equals(deleteFirstPersonFirstIndexCommand));
+        assertTrue(deleteFirstStudentFirstIndexCommand.equals(deleteFirstStudentFirstIndexCommand));
 
         //same values -> returns true
-        DeleteTaskCommand deleteFirstPersonFirstIndexCommandCopy = new DeleteTaskCommand(person1, index1);
-        assertTrue(deleteFirstPersonFirstIndexCommand.equals(deleteFirstPersonFirstIndexCommandCopy));
+        DeleteTaskCommand deleteFirstStudentFirstIndexCommandCopy = new DeleteTaskCommand(student1, index1);
+        assertTrue(deleteFirstStudentFirstIndexCommand.equals(deleteFirstStudentFirstIndexCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstPersonFirstIndexCommand.equals(1));
+        assertFalse(deleteFirstStudentFirstIndexCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstPersonFirstIndexCommand.equals(null));
+        assertFalse(deleteFirstStudentFirstIndexCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(deleteFirstPersonFirstIndexCommand.equals(deleteSecondPersonFirstIndexCommand));
+        // different student -> returns false
+        assertFalse(deleteFirstStudentFirstIndexCommand.equals(deleteSecondStudentFirstIndexCommand));
 
         // different index -> returns false
-        assertFalse(deleteFirstPersonFirstIndexCommand.equals(deleteFirstPersonSecondIndexCommand));
+        assertFalse(deleteFirstStudentFirstIndexCommand.equals(deleteFirstStudentSecondIndexCommand));
     }
 
     @Test

@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,27 +23,27 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.LessonTime;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.task.TaskList;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.EmergencyContact;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.task.TaskList;
 import seedu.address.ui.Ui.UiState;
 
 /**
- * Updates the details of an existing person in the address book.
+ * Updates the details of an existing student in the address book.
  */
 public class UpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the person identified "
-            + "by their full name in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the student identified "
+            + "by their full name in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (full name) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -56,76 +56,77 @@ public class UpdateCommand extends Command {
             + "Example: " + COMMAND_WORD + " Cristiano Ronaldo "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Updated Person: %1$s";
+    public static final String MESSAGE_UPDATE_STUDENT_SUCCESS = "Updated Student: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to be updated must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
 
     private final Name name;
-    private final UpdatePersonDescriptor updatePersonDescriptor;
+    private final UpdateStudentDescriptor updateStudentDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to update
-     * @param updatePersonDescriptor details to update the person with
+     * @param name of the student in the filtered student list to update
+     * @param updateStudentDescriptor details to update the student with
      */
-    public UpdateCommand(Name name, UpdatePersonDescriptor updatePersonDescriptor) {
+    public UpdateCommand(Name name, UpdateStudentDescriptor updateStudentDescriptor) {
         requireNonNull(name);
-        requireNonNull(updatePersonDescriptor);
+        requireNonNull(updateStudentDescriptor);
 
         this.name = name;
-        this.updatePersonDescriptor = new UpdatePersonDescriptor(updatePersonDescriptor);
+        this.updateStudentDescriptor = new UpdateStudentDescriptor(updateStudentDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
         if (name.fullName.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_UPDATE);
         }
 
-        Person personToUpdate = lastShownList.stream()
-                .filter(person -> person.getName().equals(name))
+        Student studentToUpdate = lastShownList.stream()
+                .filter(student -> student.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE));
-        Person updatedPerson = createUpdatedPerson(personToUpdate, updatePersonDescriptor);
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_STUDENT_UPDATE));
+        Student updatedStudent = createUpdatedStudent(studentToUpdate, updateStudentDescriptor);
 
-        if (!personToUpdate.isSamePerson(updatedPerson) && model.hasPerson(updatedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!studentToUpdate.isSameStudent(updatedStudent) && model.hasStudent(updatedStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setPerson(personToUpdate, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson)),
+        model.setStudent(studentToUpdate, updatedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return new CommandResult(String.format(MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent)),
                 UiState.DETAILS);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToUpdate}
-     * updated with {@code updatePersonDescriptor}.
+     * Creates and returns a {@code Student} with the details of {@code studentToUpdate}
+     * updated with {@code updateStudentDescriptor}.
      */
-    private static Person createUpdatedPerson(Person personToUpdate, UpdatePersonDescriptor updatePersonDescriptor) {
-        assert personToUpdate != null;
+    private static Student createUpdatedStudent(Student studentToUpdate,
+                                                UpdateStudentDescriptor updateStudentDescriptor) {
+        assert studentToUpdate != null;
 
-        Name updatedName = updatePersonDescriptor.getName().orElse(personToUpdate.getName());
-        Phone updatedPhone = updatePersonDescriptor.getPhone().orElse(personToUpdate.getPhone());
-        EmergencyContact updatedEmergencyContact = updatePersonDescriptor.getEmergencyContact()
-                .orElse(personToUpdate.getEmergencyContact());
-        Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
-        Note updatedNote = updatePersonDescriptor.getNote().orElse(personToUpdate.getNote());
-        Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
-        if (updatedLevel != null && updatePersonDescriptor.getSubjects().isPresent()) {
+        Name updatedName = updateStudentDescriptor.getName().orElse(studentToUpdate.getName());
+        Phone updatedPhone = updateStudentDescriptor.getPhone().orElse(studentToUpdate.getPhone());
+        EmergencyContact updatedEmergencyContact = updateStudentDescriptor.getEmergencyContact()
+                .orElse(studentToUpdate.getEmergencyContact());
+        Address updatedAddress = updateStudentDescriptor.getAddress().orElse(studentToUpdate.getAddress());
+        Note updatedNote = updateStudentDescriptor.getNote().orElse(studentToUpdate.getNote());
+        Level updatedLevel = updateStudentDescriptor.getLevel().orElse(studentToUpdate.getLevel());
+        if (updatedLevel != null && updateStudentDescriptor.getSubjects().isPresent()) {
             checkArgument(
                     Subject.isValidSubjectsByLevel(updatedLevel,
-                            updatePersonDescriptor
+                            updateStudentDescriptor
                                     .getSubjects()
                                     .get()),
                     Subject.MESSAGE_LEVEL_NEEDED);
         }
-        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
-        TaskList updatedTaskList = updatePersonDescriptor.getTaskList().orElse(personToUpdate.getTaskList());
-        Set<LessonTime> updatedLessonTimes = updatePersonDescriptor.getLessonTimes()
-                .orElse(personToUpdate.getLessonTimes());
-        return new Person(updatedName, updatedPhone, updatedEmergencyContact,
+        Set<Subject> updatedSubjects = updateStudentDescriptor.getSubjects().orElse(studentToUpdate.getSubjects());
+        TaskList updatedTaskList = updateStudentDescriptor.getTaskList().orElse(studentToUpdate.getTaskList());
+        Set<LessonTime> updatedLessonTimes = updateStudentDescriptor.getLessonTimes()
+                .orElse(studentToUpdate.getLessonTimes());
+        return new Student(updatedName, updatedPhone, updatedEmergencyContact,
                 updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList, updatedLessonTimes);
     }
 
@@ -142,22 +143,22 @@ public class UpdateCommand extends Command {
 
         UpdateCommand otherUpdateCommand = (UpdateCommand) other;
         return name.equals(otherUpdateCommand.name)
-                && updatePersonDescriptor.equals(otherUpdateCommand.updatePersonDescriptor);
+                && updateStudentDescriptor.equals(otherUpdateCommand.updateStudentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("updatePersonDescriptor", updatePersonDescriptor)
+                .add("updateStudentDescriptor", updateStudentDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to update the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to update the student with. Each non-empty field value will replace the
+     * corresponding field value of the student.
      */
-    public static class UpdatePersonDescriptor {
+    public static class UpdateStudentDescriptor {
         private Name name;
         private Phone phone;
         private EmergencyContact emergencyContact;
@@ -168,13 +169,13 @@ public class UpdateCommand extends Command {
         private TaskList taskList;
         private Set<LessonTime> lessonTimes;
 
-        public UpdatePersonDescriptor() {}
+        public UpdateStudentDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code subjects} is used internally.
          */
-        public UpdatePersonDescriptor(UpdatePersonDescriptor toCopy) {
+        public UpdateStudentDescriptor(UpdateStudentDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmergencyContact(toCopy.emergencyContact);
@@ -291,20 +292,20 @@ public class UpdateCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof UpdatePersonDescriptor)) {
+            if (!(other instanceof UpdateStudentDescriptor)) {
                 return false;
             }
 
-            UpdatePersonDescriptor otherUpdatePersonDescriptor = (UpdatePersonDescriptor) other;
-            return Objects.equals(name, otherUpdatePersonDescriptor.name)
-                    && Objects.equals(phone, otherUpdatePersonDescriptor.phone)
-                    && Objects.equals(emergencyContact, otherUpdatePersonDescriptor.emergencyContact)
-                    && Objects.equals(address, otherUpdatePersonDescriptor.address)
-                    && Objects.equals(note, otherUpdatePersonDescriptor.note)
-                    && Objects.equals(subjects, otherUpdatePersonDescriptor.subjects)
-                    && Objects.equals(level, otherUpdatePersonDescriptor.level)
-                    && Objects.equals(taskList, otherUpdatePersonDescriptor.taskList)
-                    && Objects.equals(lessonTimes, otherUpdatePersonDescriptor.lessonTimes);
+            UpdateStudentDescriptor otherUpdateStudentDescriptor = (UpdateStudentDescriptor) other;
+            return Objects.equals(name, otherUpdateStudentDescriptor.name)
+                    && Objects.equals(phone, otherUpdateStudentDescriptor.phone)
+                    && Objects.equals(emergencyContact, otherUpdateStudentDescriptor.emergencyContact)
+                    && Objects.equals(address, otherUpdateStudentDescriptor.address)
+                    && Objects.equals(note, otherUpdateStudentDescriptor.note)
+                    && Objects.equals(subjects, otherUpdateStudentDescriptor.subjects)
+                    && Objects.equals(level, otherUpdateStudentDescriptor.level)
+                    && Objects.equals(taskList, otherUpdateStudentDescriptor.taskList)
+                    && Objects.equals(lessonTimes, otherUpdateStudentDescriptor.lessonTimes);
         }
 
         @Override

@@ -10,17 +10,17 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.LessonTime;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.EmergencyContact;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

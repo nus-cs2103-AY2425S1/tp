@@ -49,12 +49,12 @@ deactivate AddressBookParser
 LogicManager -> TagCommand : execute()
 activate TagCommand
 
-TagCommand -> Model : setPerson(personToTag, personWithTags)
+TagCommand -> Model : setStudent(studentToTag, studentWithTags)
 activate Model
 Model --> TagCommand
 deactivate Model
 
-TagCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+TagCommand -> Model : updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS)
 activate Model
 Model --> TagCommand
 deactivate Model

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.predicate.TaskListNotEmptyPredicate;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -23,7 +23,7 @@ public class ViewTasksCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(new TaskListNotEmptyPredicate());
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
     }
 
     @Test

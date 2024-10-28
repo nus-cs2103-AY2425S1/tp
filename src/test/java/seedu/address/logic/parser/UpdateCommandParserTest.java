@@ -36,14 +36,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand;
-import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.LessonTime;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Subject;
+import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 
 public class UpdateCommandParserTest {
 
@@ -100,7 +100,7 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY + INVALID_PHONE_DESC
                 + VALID_ADDRESS_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_SUBJECT} alone will reset the Subjects of the {@code Person} being updated,
+        // while parsing {@code PREFIX_SUBJECT} alone will reset the Subjects of the {@code Student} being updated,
         // parsing it together with a valid Subject results in error
         assertParseFailure(parser, VALID_NAME_AMY + SUBJECT_DESC_ENGLISH
                 + SUBJECT_DESC_MATH + SUBJECT_EMPTY, Subject.MESSAGE_CONSTRAINTS);
@@ -110,7 +110,7 @@ public class UpdateCommandParserTest {
                 + SUBJECT_DESC_ENGLISH + SUBJECT_DESC_MATH, Subject.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_LESSON_TIME} alone will reset the
-        // LessonTimes of the {@code Person} being updated,
+        // LessonTimes of the {@code Student} being updated,
         // parsing it together with a valid LessonTime results in error
         assertParseFailure(parser, VALID_NAME_AMY + LESSON_TIME_DESC
                 + LESSONTIME_EMPTY, LessonTime.MESSAGE_CONSTRAINTS);
@@ -127,7 +127,7 @@ public class UpdateCommandParserTest {
         String userInput = VALID_NAME_AMY + PHONE_DESC_BOB + SUBJECT_DESC_MATH
                 + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_ENGLISH + LESSON_TIME_DESC;
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY)
                 .withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).withLessonTimes(VALID_LESSON_TIME).build();
         UpdateCommand expectedCommand = new UpdateCommand(new Name(VALID_NAME_AMY), descriptor);
@@ -140,7 +140,7 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + PHONE_DESC_BOB;
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
@@ -152,37 +152,37 @@ public class UpdateCommandParserTest {
         // name
         Name targetName = new Name(VALID_NAME_BOB);
         String userInput = targetName + NAME_DESC_AMY;
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetName + PHONE_DESC_AMY;
-        descriptor = new UpdatePersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new UpdateStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetName + ADDRESS_DESC_AMY;
-        descriptor = new UpdatePersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        descriptor = new UpdateStudentDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // subjects
         userInput = targetName + SUBJECT_DESC_ENGLISH;
-        descriptor = new UpdatePersonDescriptorBuilder().withSubjects(VALID_SUBJECT_ENGLISH).build();
+        descriptor = new UpdateStudentDescriptorBuilder().withSubjects(VALID_SUBJECT_ENGLISH).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // lesson times
         userInput = targetName + LESSON_TIME_DESC;
-        descriptor = new UpdatePersonDescriptorBuilder().withLessonTimes(VALID_LESSON_TIME).build();
+        descriptor = new UpdateStudentDescriptorBuilder().withLessonTimes(VALID_LESSON_TIME).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // level
         userInput = targetName + LEVEL_DESC_S4_NT;
-        descriptor = new UpdatePersonDescriptorBuilder().withLevel(VALID_LEVEL_S4_NT).build();
+        descriptor = new UpdateStudentDescriptorBuilder().withLevel(VALID_LEVEL_S4_NT).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -224,7 +224,7 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + SUBJECT_EMPTY;
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withSubjects().build();
+        UpdateCommand.UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withSubjects().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -235,7 +235,8 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + LESSONTIME_EMPTY;
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withLessonTimes().build();
+        UpdateCommand.UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withLessonTimes().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

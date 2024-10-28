@@ -30,9 +30,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 
 public class UpdateTaskCommandParserTest {
