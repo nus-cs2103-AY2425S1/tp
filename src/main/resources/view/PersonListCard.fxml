@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,23 +15,44 @@
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+    <VBox minHeight="105" spacing="10" GridPane.columnIndex="0">
+      <HBox spacing="8" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0">
+        <HBox HBox.hgrow="NEVER" alignment="CENTER" minHeight="25" maxHeight="25" minWidth="25" maxWidth="25"
+              style="-fx-background-color: #E7E7E7; -fx-background-radius: 20">
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+        </HBox>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" style="-fx-font-size: 16"/>
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <FlowPane fx:id="tags"/>
+      <HBox alignment="CENTER_LEFT">
+        <HBox HBox.hgrow="NEVER" style="-fx-background-color: #A0BBBD; -fx-padding: 3; -fx-background-radius: 5">
+          <ImageView fitHeight="16" fitWidth="16">
+            <Image url="@/images/phone_icon.png"/>
+          </ImageView>
+        </HBox>
+        <Label fx:id="phone" styleClass="cell_small_label" style="-fx-padding: 0 0 0 7" text="\$phone" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <HBox HBox.hgrow="NEVER" style="-fx-background-color: #A0BBBD; -fx-padding: 3; -fx-background-radius: 5">
+          <ImageView fitHeight="16" fitWidth="16">
+            <Image url="@/images/home_icon.png"/>
+          </ImageView>
+        </HBox>
+        <Label fx:id="address" styleClass="cell_small_label" style="-fx-padding: 0 0 0 7" text="\$address" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <HBox HBox.hgrow="NEVER" style="-fx-background-color: #A0BBBD; -fx-padding: 3; -fx-background-radius: 5">
+          <ImageView fitHeight="16" fitWidth="16">
+            <Image url="@/images/email_icon.png"/>
+          </ImageView>
+        </HBox>
+        <Label fx:id="email" styleClass="cell_small_label" style="-fx-padding: 0 0 0 7" text="\$email"/>
+      </HBox>
       <Label fx:id="payment" styleClass="cell_small_label" text="\$payment" />
     </VBox>
     <VBox fx:id="attendanceContainerPlaceholder" GridPane.columnIndex="1"/>

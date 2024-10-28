@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,11 +17,11 @@ import seedu.address.model.person.Attendance;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a person identified using it's displayed index from the address book.
+ * Marks the attendance of all students in the tutorial.
  */
 public class MarkAttendanceByTutorialCommand extends Command {
 
-    public static final String COMMAND_WORD = "markattendtut";
+    public static final String COMMAND_WORD = "mat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the all the students in the specified tutorial.\n"
@@ -33,18 +33,18 @@ public class MarkAttendanceByTutorialCommand extends Command {
             + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS =
-            "Marked attendance of all students in tutorial: %1$s";
+            "Marked attendance of all students in %1$s tutorial for %2$s";
     public static final String MESSAGE_INVALID_TUTORIAL =
             "Tutorial %1$s does not exist";
 
     private final Tutorial tutorial;
-    private final String attendance;
+    private final Attendance attendance;
 
     /**
      * @param tutorial Tutorial to mark the attendance of all students
      * @param attendance Attendance of the students
      */
-    public MarkAttendanceByTutorialCommand(Tutorial tutorial, String attendance) {
+    public MarkAttendanceByTutorialCommand(Tutorial tutorial, Attendance attendance) {
         requireAllNonNull(tutorial, attendance);
         this.tutorial = tutorial;
         this.attendance = attendance;
@@ -53,23 +53,28 @@ public class MarkAttendanceByTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Tutorial> tutorialList = model.getFilteredTutorialList();
-
-        Tutorial tutorialToMarkAttendance = tutorialList
+        List<Participation> participationList = model.getParticipationList()
                 .stream()
-                .filter(tutorial -> tutorial.isSameTutorial(this.tutorial))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(
-                        String.format(MESSAGE_INVALID_TUTORIAL, tutorial.getSubject())));
+                .filter(participation -> participation.getTutorial().equals(this.tutorial))
+                .toList();
 
-        List<Participation> participationList = tutorialToMarkAttendance.getParticipationList();
-        participationList.forEach(participation ->
-                participation.getAttendanceList()
-                        .add(new Attendance(LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT))));
+        if (participationList.isEmpty()) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL, tutorial.getSubject()));
+        }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        for (Participation currentParticipation : participationList) {
+            List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+            updatedAttendance.add(new Attendance(LocalDate.from(attendance.attendanceDate)));
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS, tutorial));
+            Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
+                    currentParticipation.getTutorial(), updatedAttendance);
+
+            model.setParticipation(currentParticipation, updatedParticipation);
+        }
+
+        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS,
+                tutorial.getSubject(), attendance));
     }
 
     @Override

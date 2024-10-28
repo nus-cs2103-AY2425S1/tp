@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets top="5" right="5" bottom="5" left="5" />
-    </padding>
-    <Label text="Classes"/>
-    <Label fx:id="tutorial" styleClass="cell_small_label" text="\$tutorials" style="-fx-padding: 0 0 5 0"/>
-    <Label text="Attendance"/>
-    <HBox>
-        <Label fx:id="week" styleClass="cell_small_label" text="\$current week"/>
-        <Label styleClass="cell_small_label" text=" | "/>
-        <Label fx:id="dateRange" styleClass="cell_small_label" text="\$date range"/>
+<?import javafx.scene.control.ScrollPane?>
+<VBox prefWidth="250" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER" style="-fx-padding: 0 0 10 0">
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Classes" style="-fx-font-weight: bold; -fx-padding: 0 5 0 0; -fx-font-size: 15"/>
+            <HBox HBox.hgrow="NEVER" style="-fx-background-color: #77C8E7; -fx-padding: 3; -fx-background-radius: 20">
+                <ImageView fitHeight="14" fitWidth="14">
+                    <Image url="@/images/classes_icon.png"/>
+                </ImageView>
+            </HBox>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+            <Label fx:id="week" text="\$current week" style="-fx-font-size: 12"/>
+            <Label text=" • " style="-fx-font-size: 12"/>
+            <Label fx:id="dateRange" text="\$date range" style="-fx-font-size: 12"/>
+        </HBox>
     </HBox>
-    <VBox fx:id="attendanceList" />
+    <ScrollPane styleClass="attendance-pane" fitToWidth="true" maxHeight="200">
+            <VBox fx:id="attendanceList" spacing="8" style="-fx-background-color: white"/>
+    </ScrollPane>
 </VBox>
