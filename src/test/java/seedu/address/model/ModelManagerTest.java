@@ -11,19 +11,16 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class ModelManagerTest {
@@ -98,7 +95,6 @@ public class ModelManagerTest {
 
     @Test
     public void deletePerson_supplierHasGoods_removedGoods() {
-        Goods goods = new GoodsBuilder().build();
         GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
                 .withSupplierName(ALICE.getName())
                 .build();
@@ -120,7 +116,6 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
-        ArrayList<GoodsReceipt> goodsReceiptList = new ArrayList<>();
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, getTypicalGoodsReceipts());
@@ -191,9 +186,9 @@ public class ModelManagerTest {
                 .build();
         modelManager.addPerson(ALICE);
         modelManager.addGoods(goodsReceipt);
-        modelManager.deleteGoods(goodsReceipt.getGoods().getReadableGoodsName());
+        modelManager.deleteGoods(goodsReceipt.getGoods().getGoodsName());
         List<GoodsReceipt> goodsList = modelManager
-                .getFilteredGoods(r -> r.getGoods().getReadableGoodsName().equals("Calbee"));
+                .getFilteredGoods(r -> r.getGoods().getGoodsName().equals("Calbee"));
         assertEquals(goodsList.size(), 0);
     }
 }

@@ -19,7 +19,7 @@ public class CsvConvertersTest {
     @Test
     public void goodsDateConverter_validDate_success() {
         CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
-        String csvDate = "2021-01-01T00:00";
+        String csvDate = "2021-01-01 00:00";
         Date expectedDate = new Date("2021-01-01 00:00");
         Date actualDate = (Date) converter.convert(csvDate);
         assertEquals(expectedDate, actualDate);

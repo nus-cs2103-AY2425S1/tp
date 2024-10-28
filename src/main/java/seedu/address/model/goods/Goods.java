@@ -27,8 +27,8 @@ public class Goods {
         this.category = category;
     }
 
-    public String getReadableGoodsName() {
-        return goodsName.toString();
+    public GoodsName getGoodsName() {
+        return goodsName;
     }
 
     public GoodsCategories getCategory() {
@@ -49,7 +49,7 @@ public class Goods {
      */
     @Override
     public String toString() {
-        return String.format("%s", this.goodsName);
+        return this.goodsName.toString();
     }
 
     /**
