@@ -90,4 +90,16 @@ public class Event {
     public boolean isSameEvent(Event otherEvent) {
         return this.equals(otherEvent);
     }
+
+    /**
+     * Returns true if both events have the same time.
+     */
+    public boolean isOverlap(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null &&
+                this.time.isOverlap(otherEvent.time);
+    }
 }

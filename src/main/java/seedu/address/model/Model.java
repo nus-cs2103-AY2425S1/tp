@@ -88,6 +88,8 @@ public interface Model {
 
     boolean hasEvent(Event event);
 
+    boolean hasEventOverlap(Event event);
+
     void addEvent(Event toAdd);
 
     void removeEvent(Event target);

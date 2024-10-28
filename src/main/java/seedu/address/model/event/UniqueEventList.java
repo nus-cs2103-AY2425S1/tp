@@ -35,6 +35,14 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains an event that clashes with the given argument.
+     */
+    public boolean containsOverlap(Event toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isOverlap);
+    }
+
+    /**
      * Adds an event to the list.
      * The event must not already exist in the list.
      */

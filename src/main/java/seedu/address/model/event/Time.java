@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.person.Name;
 
 /**
@@ -8,6 +10,8 @@ import seedu.address.model.person.Name;
  */
 public class Time {
     private final String eventTime;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
     /**
      * Constructs a {@code Time}.
@@ -16,10 +20,19 @@ public class Time {
      */
     public Time(String eventTime) {
         this.eventTime = eventTime;
+        this.startTime = LocalDateTime.parse("2007-12-03T10:15:30");
+        this.endTime = LocalDateTime.parse("2007-12-03T10:16:30");
     }
 
     public String getTime() {
         return eventTime;
+    }
+
+    public boolean isOverlap(Time other) {
+        if (this.endTime.isBefore(other.startTime) || this.startTime.isAfter(other.endTime)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
