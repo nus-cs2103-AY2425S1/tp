@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,19 +53,16 @@ public class BatchDeleteCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
 
         StringBuilder feedbackToUser = new StringBuilder();
 
-        Person personToDelete;
-        int size = lastShownList.size();
-        for (int i = 0; i < size; i++) {
-            personToDelete = lastShownList.get(0);
+        for (Person person: lastShownList) {
             feedbackToUser.append(String
                     .format(MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
-                            Messages.format(personToDelete))
+                            Messages.format(person))
             );
-            model.deletePerson(personToDelete);
+            model.deletePerson(person);
         }
 
         return new CommandResult(feedbackToUser.toString());
