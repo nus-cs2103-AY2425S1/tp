@@ -39,11 +39,12 @@ public class MarkAppointmentCommandTest {
         modelStub.addPerson(validPatient);
 
         assertThrows(CommandException.class, MESSAGE_MARK_APPOINTMENT_FAIL, () ->
-                new MarkAppointmentCommand(appointmentTime1, validPatient.getId(), validDoctor.getId()).execute(modelStub));
+                new MarkAppointmentCommand(appointmentTime1, validPatient.getId(),
+                        validDoctor.getId()).execute(modelStub));
     }
 
     @Test
-    public void execute_markPatientWithAppointment_Successful() throws Exception {
+    public void execute_markPatientWithAppointment_addSuccessful() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         modelStub.clearList();
 
@@ -53,7 +54,8 @@ public class MarkAppointmentCommandTest {
         modelStub.addPerson(validPatient);
 
         modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
-        MarkAppointmentCommand command = new MarkAppointmentCommand(appointmentTime1, validPatient.getId(), validDoctor.getId());
+        MarkAppointmentCommand command = new MarkAppointmentCommand(appointmentTime1,
+                validPatient.getId(), validDoctor.getId());
         CommandResult result = command.execute(modelStub);
         String expected = MESSAGE_MARK_APPOINTMENT_SUCCESS;
 
@@ -70,7 +72,8 @@ public class MarkAppointmentCommandTest {
         modelStub.addPerson(validDoctor);
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-                new MarkAppointmentCommand(appointmentTime1, validPatient.getId(), validDoctor.getId()).execute(modelStub));
+                new MarkAppointmentCommand(appointmentTime1, validPatient.getId(),
+                        validDoctor.getId()).execute(modelStub));
     }
 
     private class ModelStub implements Model {
