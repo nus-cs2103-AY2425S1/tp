@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
@@ -18,7 +19,7 @@ public class DeleteTutorialCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "T1000", new DeleteTutorialCommand(TUTORIAL1));
+        assertParseSuccess(parser, " " + PREFIX_ID + "T1000", new DeleteTutorialCommand(TUTORIAL1));
     }
 
     @Test
