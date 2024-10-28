@@ -46,11 +46,11 @@ public class TypicalProperties {
             .withAddress("Shinjuku Blk 102 #02-02").withAskingPrice("1200000").withPropertyType("Condominium").build();
 
     // Manually added - Property's details found in {@code CommandTestUtil}
-    public static final Property AMY = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
+    public static final Property ALAN = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
             .withPhone(VALID_PHONE_ALAN)
             .withAskingPrice(VALID_ASKING_PRICE_ALAN).withPropertyType(VALID_PROPERTY_TYPE_ALAN)
             .withAddress(VALID_ADDRESS_ALAN).build();
-    public static final Property BOB = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_BRENDA)
+    public static final Property BRENDA = new PropertyBuilder().withLandlordName(VALID_LANDLORD_NAME_BRENDA)
             .withPhone(VALID_PHONE_BRENDA)
             .withAskingPrice(VALID_ASKING_PRICE_BRENDA).withPropertyType(VALID_PROPERTY_TYPE_BRENDA)
             .withAddress(VALID_ADDRESS_BRENDA).build();
