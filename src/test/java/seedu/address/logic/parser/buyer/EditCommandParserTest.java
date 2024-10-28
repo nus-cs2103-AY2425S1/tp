@@ -28,9 +28,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
@@ -105,7 +105,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_BUYER;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + BUDGET_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
@@ -119,7 +119,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_BUYER;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
@@ -132,7 +132,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_BUYER;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -169,7 +169,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // invalid followed by valid
-        Index targetIndex = INDEX_FIRST_BUYER;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
@@ -197,7 +197,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_BUYER;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withTags().build();
