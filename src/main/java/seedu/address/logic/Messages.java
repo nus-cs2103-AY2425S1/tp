@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_REMARK_PERSON_SUCCESS = "";
     public static final String MESSAGE_BEFORE_DATE_OF_CREATION =
             "%1$s is before the date of creation of this log %2$s!";
+    public static final String MESSAGE_AFTER_TODAY =
+            "%1$s is in the future!";
     public static final String MESSAGE_NO_ENTRY_ON_DATE = "%1$s has no entry!";
     public static final String MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED = "Activity list not initialized!";
     /**

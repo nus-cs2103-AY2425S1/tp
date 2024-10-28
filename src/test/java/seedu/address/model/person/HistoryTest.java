@@ -106,6 +106,14 @@ public class HistoryTest {
     }
 
     @Test
+    public void getActivitiesOnDay_afterToday_throwsDateTimeException() {
+        LocalDate invalidDate = LocalDate.now().plusDays(1); // Date before creation
+
+        // Expect DateTimeException for date before the date of creation
+        assertThrows(DateTimeException.class, () -> history.getActivitiesOnDay(invalidDate));
+    }
+
+    @Test
     public void addActivity_immutableAdd_returnsNewHistoryObject() {
         LocalDate validDate = of(2024, 1, 10);
         String message = "Completed task A";
