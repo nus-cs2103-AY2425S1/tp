@@ -17,7 +17,7 @@ public class Unit {
             new Unit("00-00");
     public static final String MESSAGE_CONSTRAINTS =
             "Unit number should only contain numbers delimited by a dash, "
-            + "and numbers on either side of the dash must be at least 2 characters long";
+            + "and numbers on either side of the dash must be at least 2 characters long with no excess padding";
     public static final String VALIDATION_REGEX =
             "^(?:\\d{2}|1[0-3]\\d|14[0-8])-(?:\\d{2}|[1-9]\\d{2,4}|10\\d{4}|110\\d{3}|1110\\d{2}|11110\\d|111110)$";
             //"^(?:\\d{2}|1[0-3]\\d|14[0-8])-(?:\\d{2,5}|10\\d{4}|110\\d{3}|1110\\d{2}|11110\\d|111110)$";
