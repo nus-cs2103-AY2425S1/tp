@@ -16,6 +16,8 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    private static final boolean SUPPORTS_EMOJIS = isEmojiSupported();
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -50,13 +52,23 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        postalCode.setText(person.getPostalCode().value);
+        name.setText((SUPPORTS_EMOJIS ? "👤 " : "☺ ") + person.getName().fullName);
+        phone.setText((SUPPORTS_EMOJIS ? "📞 " : "☎ ") + person.getPhone().value);
+        address.setText((SUPPORTS_EMOJIS ? "🏠 " : "⌂ ") + person.getAddress().value);
+        email.setText("✉️ " + person.getEmail().value);
+        postalCode.setText((SUPPORTS_EMOJIS ? "📍 " : "➤ ") + person.getPostalCode().value);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label((SUPPORTS_EMOJIS ? "🏷️ " : "⚑ ") + tag.tagName)));
+    }
+
+    /**
+     * Detects if the current OS supports emojis (approximate).
+     * @return true if emojis are likely supported, false otherwise.
+     */
+    private static boolean isEmojiSupported() {
+        String os = System.getProperty("os.name").toLowerCase();
+        return os.contains("win") || os.contains("mac");
     }
 }
