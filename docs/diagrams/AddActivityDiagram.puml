@@ -28,29 +28,48 @@ document {
 }
 </style>
 
+|#pink|Ui|
 start
-:User inputs an add command;
+:Accept user input command;
+|#green|Logic|
+:Execute the input;
+|AddressBookParser|
 :Parse the input;
-if () then ([else])
-  :Create an instance of AddCommand;
-  :AddCommand executes the command;
-  :Create a student to be added;
-  if () then ([else])
-    :Add the student to the address book;
-    :Update the filtered list with all students including the new added one;
-    :Check clashing schedule;
-    if () then ([new schedule clashes])
-      :Show MESSAGE_HAS_CLASHES;
-    else ([else])
-    endif
-    :Show MESSAGE_SUCCESS of AddCommand;
+if () then ([invalid command format])
+    |Ui|
+    :Show MESSAGE_INVALID_COMMAND_FORMAT;
     stop
-  else ([student is already in the address book])
-    :Show MESSAGE_DUPLICATE;
-    stop
-  endif
-else ([invalid format])
-    :Show MESSAGE_USAGE of AddCommand;
+else ([else])
+    |AddCommandParser|
+    :Parse the arguments;
+    if () then ([else])
+        |AddCommand|
+        :Create an AddCommand object;
+        :Execute AddCommand;
+        |Student|
+        :Create a student to be added;
+        |ModelManager|
+        :Check duplicates;
+        if () then ([else])
+            |AddressBook|
+            :Add the student to the address book;
+            |ModelManager|
+            :Update the filtered list with all students
+            including the new added one;
+            :Check clashing schedule;
+            if () then ([new schedule clashes])
+                |Ui|
+                :Show MESSAGE_HAS_CLASHES;
+            else ([else])
+            endif
+            :Show MESSAGE_SUCCESS of AddCommand;
+             stop
+        else ([student is already in the address book])
+            :Show MESSAGE_DUPLICATE;
+        stop
+        endif
+    else ([invalid arg format])
+        :Show MESSAGE_USAGE of AddCommand;
     stop
 endif
 
