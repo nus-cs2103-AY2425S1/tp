@@ -274,24 +274,21 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsObjectPropertyType() {
-        // Call the method
-        Object result = modelManager.getReadOnlyDisplayMode();
-
-        // Assert that the result is an instance of ObjectProperty<DisplayMode>
+    public void getReadOnlyDisplayMode_returnsReadOnlyObjectPropertyType() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of ReadOnlyObjectProperty<DisplayMode>
         assertTrue(
-                result instanceof ReadOnlyObjectProperty<?>,
+                modelManager.getReadOnlyDisplayMode() instanceof ReadOnlyObjectProperty<?>,
                 "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
         );
     }
 
     @Test
-    public void getDisplayMode_isObservable() {
-        // Call the method
-        Object result = modelManager.getReadOnlyDisplayMode();
-
-        // Assert that the result is an instance of Observable
-        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    public void getReadOnlyDisplayMode_isObservable() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of Observable
+        assertTrue(
+                modelManager.getReadOnlyDisplayMode() instanceof Observable,
+                "Expected result to be an instance of Observable"
+        );
     }
     @Test
     public void getReadOnlyDisplayMode_isImmutable() {

@@ -206,23 +206,21 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsObjectPropertyType() {
-        // Call the method
-        Object result = logic.getReadOnlyDisplayMode();
-
-        // Assert that the result is an instance of ObjectProperty<DisplayMode>
+    public void getReadOnlyDisplayMode_returnsReadOnlyObjectPropertyType() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of ReadOnlyObjectProperty<DisplayMode>
         assertTrue(
-                result instanceof ReadOnlyObjectProperty<?>,
+                logic.getReadOnlyDisplayMode() instanceof ReadOnlyObjectProperty<?>,
                 "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
         );
     }
-    @Test
-    public void getDisplayMode_isObservable() {
-        // Call the method
-        Object result = logic.getReadOnlyDisplayMode();
 
-        // Assert that the result is an instance of Observable
-        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    @Test
+    public void getReadOnlyDisplayMode_isObservable() {
+        // Assert that getReadOnlyDisplayMode() returns an instance of Observable
+        assertTrue(
+                logic.getReadOnlyDisplayMode() instanceof Observable,
+                "Expected result to be an instance of Observable"
+        );
     }
     @Test
     public void getReadOnlyDisplayMode_isImmutable() {
