@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
@@ -13,6 +14,10 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.CARL;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,17 +28,22 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.StudentBuilder;
 
 public class AddToLessonCommandTest {
 
     private Model model;
 
+    private final Index validIndex = Index.fromOneBased(1);
     private final Index validLessonIndex1WithAlice = Index.fromOneBased(1);
     private final Index validLessonIndex5 = Index.fromOneBased(5);
     private final ObservableList<Name> allInvalidStudentNames = FXCollections.observableArrayList(
