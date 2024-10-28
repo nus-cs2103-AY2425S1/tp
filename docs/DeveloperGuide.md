@@ -17,6 +17,9 @@ This project is an extension of [_AddressBook-Level3 by se-edu_](https://se-educ
 
 Libraries used include: [_JavaFX_](https://openjfx.io/), [_Jackson_](https://github.com/FasterXML/jackson), [_JUnit5_](https://github.com/junit-team/junit5)
 
+Graphical Interface (GUI) Testing was adapted from [_AddressBook-Level4 by se-edu_](https://se-education.org/addressbook-level4/)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
