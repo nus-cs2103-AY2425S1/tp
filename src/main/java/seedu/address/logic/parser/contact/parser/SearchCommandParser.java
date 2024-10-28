@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.contact.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ParserUtil.parseRole;
@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.commands.contact.commands.SearchCommand;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonIsRolePredicate;
 import seedu.address.model.role.Role;

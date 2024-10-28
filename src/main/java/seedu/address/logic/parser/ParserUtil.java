@@ -191,5 +191,22 @@ public class ParserUtil {
         return new Event(trimmedEvent);
     }
 
+    public static void parseStringOfIndices(Set<Index> indices, String string) throws ParseException {
+        if (string == null) {
+            return; // skip cuz tag is not part of input
+        }
 
+        String[] strings = string.split(",");
+
+        for (String str : strings) {
+            Index index;
+            try {
+                index = ParserUtil.parseIndex(str.trim());
+            } catch (ParseException e) {
+                throw new ParseException("One or more of the contact indices is not a non-zero unsigned integer.");
+            }
+
+            indices.add(index); // duplicates are simply ignored, based on equals method of Index
+        }
+    }
 }

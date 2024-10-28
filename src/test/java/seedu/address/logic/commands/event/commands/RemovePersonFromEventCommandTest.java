@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.event.commands;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
