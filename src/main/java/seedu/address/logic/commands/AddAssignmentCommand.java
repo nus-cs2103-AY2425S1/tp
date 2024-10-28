@@ -62,6 +62,10 @@ public class AddAssignmentCommand extends Command {
         if (studentToAddAssignmentTo.hasAssignment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
+        if (toAdd.getName().length() > AssignmentName.MAXIMUM_NAME_LENGTH) {
+            throw new CommandException(String.format(AssignmentName.MESSAGE_NAME_TOO_LONG,
+                    AssignmentName.MAXIMUM_NAME_LENGTH));
+        }
         Student editedStudent = studentToAddAssignmentTo.addAssignment(toAdd);
         model.setStudent(studentToAddAssignmentTo, editedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
