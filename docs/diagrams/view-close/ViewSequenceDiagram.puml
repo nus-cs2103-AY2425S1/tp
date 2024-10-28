@@ -1,0 +1,93 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant "ui:UI" as UI UI_COLOR
+end box
+
+[-> LogicManager : execute("view 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view 1")
+activate AddressBookParser
+
+create ViewCommandParser
+AddressBookParser -> ViewCommandParser
+activate ViewCommandParser
+
+ViewCommandParser --> AddressBookParser
+deactivate ViewCommandParser
+
+AddressBookParser -> ViewCommandParser: parse("1")
+activate ViewCommandParser
+
+' ViewCommandParser calls the constructor for ViewCommand
+create ViewCommand
+ViewCommandParser -> ViewCommand : new ViewCommand()
+activate ViewCommand
+ViewCommand --> ViewCommandParser : v
+deactivate ViewCommand
+
+
+
+
+
+' ViewCommand interacts with Model to retrieve Person
+
+
+
+' ViewCommand sends result to UI
+
+' ViewCommand creates CommandResult
+
+
+ViewCommandParser --> AddressBookParser : v
+deactivate ViewCommandParser
+ViewCommandParser -[hidden]-> AddressBookParser
+destroy ViewCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+
+
+' ViewCommand returns CommandResult to LogicManager
+LogicManager -> ViewCommand: execute(m)
+activate ViewCommand
+
+
+create CommandResult
+ViewCommand -> CommandResult : new CommandResult("Result Details")
+activate CommandResult
+CommandResult --> ViewCommand : r
+deactivate CommandResult
+
+ViewCommand -> UI : displayPerson(Person)
+activate UI
+UI --> ViewCommand
+deactivate UI
+
+ViewCommand -> Model : getPerson("1")
+activate Model
+Model --> ViewCommand
+deactivate Model
+
+
+ViewCommand --> LogicManager: r
+deactivate ViewCommand
+
+
+@enduml
