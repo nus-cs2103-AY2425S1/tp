@@ -177,16 +177,16 @@ Finds doctors whose names contain any of the given keywords.
 Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only doctors matching all keywords provided will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
 * Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 
 **Examples:**
 * `find-doctor John` returns `John Doe`.
-* `find-doctor alex david` returns `Alex Yeoh`, `David Li`.
+* `find-doctor Alex Yeoh` returns `Alex Yeoh`.
 
 ### Locating patients by name: `find-patient`
 
@@ -195,16 +195,16 @@ Finds patients whose names contain any of the given keywords.
 Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Patients matching all keywords provided will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
 * Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 
 **Examples:**
 * `find-patient John` returns `John Doe`.
-* `find-patient alex david` returns `Alex Yeoh`, `David Li`.
+* `find-patient Alex Yeoh` returns `Alex Yeoh`.
 
 ### Deleting a person : `delete`
 
