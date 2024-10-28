@@ -447,12 +447,23 @@ Displays the detailed information of a student in the list.
 * The index **must be within the range** of the number of people in the list.
 * Additionally, clicking on a student’s entry in the GUI triggers a pop-up window displaying the same detailed information.
 
+Displaying the detailed command window can be done in two ways:
+
+Method 1:
 **Example Usage:**
 *Input: User enters the `info 1` command to display detailed information for the first student.*
 ![Ui](images/infocommandinput.png)
 
 *Output: A window pops up with the detailed information of the student.*
 ![Ui](images/infocommandoutput.png)
+
+Method 2:
+**Example Usage:**
+*Double click on the student’s entry in the GUI to display detailed information in a pop-up window.*
+
+![Ui](images/infocommandoutput2.png)
+
+![Ui](images/infocommandoutput3.png)
 
 ***
 <div style="page-break-after: always;"></div>
@@ -503,7 +514,7 @@ Tips:
 - Use the exit command when you want to close the program quickly through the command box.
 - Both methods achieve the same result, so use whichever is more convenient.
 
-Back to Table of Contents
+[Back to Table of Contents](#table-of-contents)
 
 
 
