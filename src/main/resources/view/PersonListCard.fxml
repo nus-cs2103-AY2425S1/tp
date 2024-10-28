@@ -26,8 +26,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-        <Label fx:id="favoriteStar" text="★" styleClass="favorite_star"
-               visible="false" style="-fx-text-fill: gold; -fx-font-size: 20; -fx-font-weight: bold;" />
+        <HBox spacing="2" alignment="CENTER_LEFT">
+          <Label fx:id="favoriteStar" text="★" styleClass="favorite_star"
+                 visible="false" style="-fx-text-fill: gold; -fx-font-size: 20; -fx-font-weight: bold;" />
+          <Label fx:id="department" text="\$department" styleClass="cell_big_label" style="-fx-padding: 0 0 0 5;"/>
+        </HBox>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
