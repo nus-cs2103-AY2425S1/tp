@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -42,6 +43,9 @@ public class PersonDetailsWindow extends UiPart<Stage> {
 
     @FXML
     private TextField addressField;
+
+    @FXML
+    private Label favoriteLabel;
 
     /**
      * Creates a new {@code PersonDetailsWindow} with the given {@code Stage} and {@code Logic}.
@@ -170,6 +174,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         phoneField.setText(person.getPhone().value);
         emailField.setText(person.getEmail().value);
         addressField.setText(person.getAddress().value);
+        favoriteLabel.setVisible(true);
     }
 
     /**
@@ -198,9 +203,9 @@ public class PersonDetailsWindow extends UiPart<Stage> {
                 return;
             }
 
-            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s",
+            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s f/%s",
                     index + 1, escapeSpecialCharacters(newName), escapeSpecialCharacters(newPhone),
-                    escapeSpecialCharacters(newEmail), escapeSpecialCharacters(newAddress));
+                    escapeSpecialCharacters(newEmail), escapeSpecialCharacters(newAddress), !person.isFavorite());
 
             logic.execute(commandText);
 
