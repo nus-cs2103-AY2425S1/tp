@@ -31,6 +31,14 @@ public class EventDetailView extends UiPart<Region> implements DetailView<Event>
     @FXML
     private VBox attendees;
 
+    /**
+     * Constructs an {@code EventDetailView} to display detailed information
+     * about a {@code Event}, including the event name, date, location, and
+     * event attendees. The view updates automatically when there are changes
+     * in the provided list of {@code Event}s.
+     *
+     * @param eventsList The event list of the EventBook.
+     */
     public EventDetailView(ObservableList<Event> eventsList) {
         super(FXML);
         this.eventsList = eventsList;
