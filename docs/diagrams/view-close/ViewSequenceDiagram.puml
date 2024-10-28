@@ -75,15 +75,17 @@ activate CommandResult
 CommandResult --> ViewCommand : r
 deactivate CommandResult
 
+ViewCommand -> Model : getPerson("1")
+activate Model
+Model --> ViewCommand
+deactivate Model
+
 ViewCommand -> UI : displayPerson(Person)
 activate UI
 UI --> ViewCommand
 deactivate UI
 
-ViewCommand -> Model : getPerson("1")
-activate Model
-Model --> ViewCommand
-deactivate Model
+
 
 
 ViewCommand --> LogicManager: r
