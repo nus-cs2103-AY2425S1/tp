@@ -22,6 +22,9 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ALLERGY = "#";
+    private static final String INVALID_DATE_FORMAT = "12-31-2024 12 00";
+    private static final String INVALID_DATE_VALUE = "29/2/2025 1200";
+
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -136,9 +139,32 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_invalidDate_throwsIllegalValueException() {
+        // Use an invalid date format (e.g., non-leap year 29 February).
+        JsonAdaptedDate invalidDate = new JsonAdaptedDate(INVALID_DATE_VALUE);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidDate);
+        String expectedMessage = "Invalid date: February 29 is only valid in leap years.";
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+
+    @Test
+    public void toModelType_invalidDateFormat_throwsIllegalValueException() {
+        // Use an invalid date format.
+        JsonAdaptedDate invalidDateFormat = new JsonAdaptedDate(INVALID_DATE_FORMAT);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidDateFormat);
+        String expectedMessage = "Invalid date format! Please use 'd/M/yyyy HHmm'. " +
+                "For example, '2/12/2024 1800'.";
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAG, VALID_ALLERGY, null);
+        // Ensure null date throws the correct exception.
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
