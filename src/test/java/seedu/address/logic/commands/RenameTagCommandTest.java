@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.RenameTagCommand.MESSAGE_NONEXISTENT_OR_DUPLICATE;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,12 @@ import seedu.address.testutil.TypicalTags;
 
 public class RenameTagCommandTest {
     private Model model = new ModelManager();
-    private static final String NEW_NAME = "NEW NAME";
+    private static final String NEW_NAME = "new name";
+    private static final String TYPICAL_NAME = "bride's friend";
 
     @Test
-    public void execute_existingTag_success() {
-        Tag existingTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+    public void execute_existingTagToNonExistentNewTag_success() {
+        Tag existingTag = new Tag(TYPICAL_NAME);
         model.addTag(existingTag);
         RenameTagCommand renameTagCommand = new RenameTagCommand(existingTag, NEW_NAME);
 
@@ -30,10 +32,20 @@ public class RenameTagCommandTest {
     }
 
     @Test
-    public void execute_nonExistentTag_failure() {
-        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+    public void execute_nonExistentTagToNonExistentNewTag_failure() {
+        Tag newTag = new Tag(TYPICAL_NAME);
         RenameTagCommand renameTagCommand = new RenameTagCommand(newTag, NEW_NAME);
-        String expectedMessage = RenameTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = MESSAGE_NONEXISTENT_OR_DUPLICATE;
+        assertCommandFailure(renameTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_existingTagToExistingNewTag_failure() {
+        Tag existingTag = new Tag(NEW_NAME);
+        model.addTag(existingTag);
+        Tag newTag = new Tag(TYPICAL_NAME);
+        RenameTagCommand renameTagCommand = new RenameTagCommand(newTag, NEW_NAME);
+        String expectedMessage = MESSAGE_NONEXISTENT_OR_DUPLICATE;
         assertCommandFailure(renameTagCommand, model, expectedMessage);
     }
 }

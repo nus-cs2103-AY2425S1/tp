@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,7 +18,7 @@ public class RenameTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " t/Bride's Friend t/Friend";
 
     public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
-    public static final String MESSAGE_NONEXISTENT = "The tag you wish to rename does not exist, "
+    public static final String MESSAGE_NONEXISTENT_OR_DUPLICATE = "The tag you wish to rename does not exist, "
             + "or the tag you wish to rename it to already exists.\n";
 
     private final Tag existingTag;
@@ -36,7 +35,7 @@ public class RenameTagCommand extends Command {
         requireAllNonNull(model);
 
         if (!model.renameTag(existingTag, newTagName)) {
-            throw new CommandException(MESSAGE_NONEXISTENT);
+            throw new CommandException(MESSAGE_NONEXISTENT_OR_DUPLICATE);
         }
 
         editTagInPersons(model);
@@ -85,8 +84,8 @@ public class RenameTagCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("existingTag: ", existingTag)
-                .add("newTagName: ", newTagName)
+                .add("existingTag", existingTag)
+                .add("newTagName", newTagName)
                 .toString();
     }
 }
