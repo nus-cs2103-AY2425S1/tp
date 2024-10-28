@@ -89,6 +89,11 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Sorts the {@code UniquePersonList} using the {@code Date} and {@code Time} attribute of each {@code Person}, in ascending order.
+     */
+    void sortByDate();
+
+    /**
      * Sorts the {@code UniquePersonList} using the {@code Name} attribute of each {@code Person}, in ascending order.
      */
     void sortByName();

@@ -17,30 +17,32 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD_ASCENDING = "asort";
     public static final String COMMAND_WORD_DESCENDING = "dsort";
 
-    public static final String MESSAGE_FAILURE = "Sort only works in inspect window!";
     public static final String MESSAGE_SUCCESS_MAIN = "Contacts have been sorted by ";
     public static final String MESSAGE_SUCCESS_INSPECT = "Deliveries have been sorted by ";
 
     public static final String MESSAGE_USAGE_ASCENDING_MAIN = COMMAND_WORD_ASCENDING
             + ": Sorts contacts by the specified attribute in ascending order. "
             + "Parameters: "
-            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. email, name, phone, role, id)";
+            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. date (default), email, name, phone, role, id)";
+
     public static final String MESSAGE_USAGE_DESCENDING_MAIN = COMMAND_WORD_DESCENDING
             + ": Sorts contacts by the specified attribute in descending order. "
             + "Parameters: "
-            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. email, name, phone, role, id)";
+            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. date (default), email, name, phone, role, id)";
 
     public static final String MESSAGE_USAGE_ASCENDING_INSPECT = COMMAND_WORD_ASCENDING
             + ": Sorts deliveries by the specified attribute in ascending order. "
             + "Parameters: "
-            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date, eta, id, status)";
+            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)";
+
     public static final String MESSAGE_USAGE_DESCENDING_INSPECT = COMMAND_WORD_DESCENDING
             + ": Sorts deliveries by the specified attribute in descending order. "
             + "Parameters: "
-            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date, eta, id, status)";
+            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)";
 
     public static final String MESSAGE_UNKNOWN_ATTRIBUTE_MAIN = "The contact attribute specified is unknown! "
-            + "Current attributes supported are: email, name, phone, role";
+            + "Current attributes supported are: date (default), email, name, phone, role";
+
     public static final String MESSAGE_UNKNOWN_ATTRIBUTE_INSPECT = "The delivery attribute specified is unknown! "
             + "Current attributes supported are: address, cost, date (default), eta, id, status";
 
@@ -62,6 +64,9 @@ public class SortCommand extends Command {
 
         if (!AddressBookParser.getInspect()) {
             switch (this.attribute) {
+            case "date":
+                model.sortByDate();
+                break;
             case "email":
                 model.sortByEmail();
                 break;

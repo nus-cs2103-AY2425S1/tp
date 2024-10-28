@@ -252,7 +252,8 @@ public class ParserUtil {
     public static String parseContactAttribute(String attribute) throws ParseException {
         requireNonNull(attribute);
         String trimmedAttribute = attribute.trim().toLowerCase(); // Make input case-insensitive.
-        if (trimmedAttribute.equals("email")
+        if (trimmedAttribute.equals("date")
+            || trimmedAttribute.equals("email")
             || trimmedAttribute.equals("name")
             || trimmedAttribute.equals("phone")
             || trimmedAttribute.equals("role")) {

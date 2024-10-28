@@ -168,6 +168,27 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sorts the backing list using the {@code Date} and {@code Time} attribute of each contact, in ascending order.
+     * <p>
+     * If the dates of the compared contacts are the same, {@code Time} attribute of each contact is
+     * used for tie-breaking.
+     */
+    public void sortByDate() {
+        internalList.sort((p1, p2) -> {
+            if (isSameArchiveStatus(p1, p2)) {
+                int dateCompare = p1.getDate().value.compareTo(p2.getDate().value);
+                if (dateCompare == 0) {
+                    return p1.getTime().value.compareTo(p2.getTime().value);
+                } else {
+                    return dateCompare;
+                }
+            } else {
+                return p1.getArchive().value.compareTo(p2.getArchive().value);
+            }
+        });
+    }
+
+    /**
      * Sorts the backing list using the {@code Email} attribute of each {@code Person}, in ascending order.
      */
     public void sortByEmail() {

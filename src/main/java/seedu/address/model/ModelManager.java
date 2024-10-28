@@ -124,6 +124,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortByDate() {
+        addressBook.sortByDate();
+    }
+
+    @Override
     public void sortByName() {
         addressBook.sortByName();
     }

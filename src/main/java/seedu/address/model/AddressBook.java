@@ -92,6 +92,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sorts the address book by date and time, in ascending order.
+     */
+    public void sortByDate() {
+        persons.sortByDate();
+    }
+
+    /**
      * Sorts the address book by name, in ascending order.
      */
     public void sortByName() {
