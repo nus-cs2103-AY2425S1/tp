@@ -170,8 +170,8 @@ The add command is used to add a new student to the address book. The `AddComman
 * All values corresponding to the prefixes that are provided must be non-empty and valid.
 
 If the constraints are not met, the `AddCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
-Otherwise, a new instance of `Person` is created with the values obtained from the user input. 
-A new instance of `AddCommand` is then created with the `Person` instance.
+Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
+A new instance of `AddCommand` is then created with the `Student` instance.
 
 On execution, {to be updated by dan / saha}
 
@@ -179,8 +179,8 @@ On execution, {to be updated by dan / saha}
 
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
-<puml src="diagrams/ParseArgsToGetStudentFieldReferenceFrame.puml" />
-<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<puml src="diagrams/ParseArgsToGetStudentFieldReferenceFrame.puml" alt="ParseArgsToGetStudentFieldReferenceFrame"/>
+<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="AddSequenceDiagram-Logic" />
 
 <box type="info" seamless>
 
