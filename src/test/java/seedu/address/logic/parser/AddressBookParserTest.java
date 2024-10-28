@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.SPACED_PREFIX_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.SPACED_PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONSULT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -115,18 +117,21 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addToConsult() throws Exception {
         // Construct the input arguments for the AddToConsultCommand
-        Index index = Index.fromOneBased(1);
+        String index1 = "1";
+        Index index = Index.fromOneBased(Integer.parseInt(index1));
         String name1 = "John Doe";
         String name2 = "Harry Ng";
 
-        String input = String.format("%s %d n/%s n/%s", AddToConsultCommand.COMMAND_WORD,
-                index.getOneBased(), name1, name2);
+        String input = AddToConsultCommand.COMMAND_WORD + " " + index.getOneBased()
+                        + SPACED_PREFIX_NAME + name1 + SPACED_PREFIX_NAME + name2
+                + SPACED_PREFIX_INDEX + index1;
 
         AddToConsultCommand command = (AddToConsultCommand) parser.parseCommand(input);
 
         // Construct the expected command
         List<Name> expectedNames = List.of(new Name(name1), new Name(name2));
-        AddToConsultCommand expectedCommand = new AddToConsultCommand(index, expectedNames);
+        List<Index> expectedIndices = List.of(index);
+        AddToConsultCommand expectedCommand = new AddToConsultCommand(index, expectedNames, expectedIndices);
 
         // Assert that the parsed command is equal to the expected command
         assertEquals(expectedCommand, command);
