@@ -32,7 +32,8 @@ public class AttendCommand extends Command {
             + PREFIX_TUTORIALID + "T1001 "
             + PREFIX_ATTENDANCEDATE + "2024-02-21";
     public static final String MESSAGE_SUCCESS = "Attendance recorded";
-    public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
+    public static final String MESSAGE_FAILURE = "Tutorial class doesn't exist or student is not in "
+            + "given tutorial class!";
 
     private final StudentId studentId;
     private final TutorialId tutorialId;

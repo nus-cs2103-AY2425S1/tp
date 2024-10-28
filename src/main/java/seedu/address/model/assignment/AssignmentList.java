@@ -108,6 +108,24 @@ public class AssignmentList {
     }
 
     /**
+     * Assigns the old student's assignment status to the new student and sets the old
+     * student's assignment status to false if the old student has completed any assignment.
+     * @param oldStudent The student to be edited.
+     * @param newStudent The edited student with different tutorial id.
+     */
+    public void reassignStudent(Student oldStudent, Student newStudent) {
+        String originalIndex = oldStudent.getStudentId().value;
+        String newIndex = newStudent.getStudentId().value;
+        for (Assignment assignment : assignments) {
+            if (assignment.getStatus(originalIndex)) {
+                assignment.markStatus(originalIndex, false);
+                assignment.markStatus(newIndex, true);
+            }
+        }
+
+    }
+
+    /**
      * Sets the status of assignment of the given student to a specified boolean value.
      * @param assignment The assignment to be marked or unmarked.
      * @param targetStudent The target student that completes or not completes the assignment.

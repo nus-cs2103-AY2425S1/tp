@@ -46,7 +46,7 @@ public class MarkAssignmentCommand extends Command {
 
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex >= lastShownList.size()) {
+        if (targetIndex >= lastShownList.size() || targetIndex < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
         Student targetStudent = lastShownList.get(targetIndex);

@@ -22,6 +22,7 @@ public class Messages {
             "This student ID already exists in the address book: ";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND =
             "The tutorial ID provided doesn't exist! \nTutorial ID: ";
+    public static final String MESSAGE_EXCEED_MAX_LENGTH = "Max input length is 500!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
