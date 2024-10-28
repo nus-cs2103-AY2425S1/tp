@@ -251,8 +251,9 @@ Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CON
 Adds a wedding to PlanPerfect with the specified date. Optionally allows users to pre-assign contacts to the wedding.
 
 * Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
+* Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view
-  * IMPORTANT: If you want to pre-assign contacts, be sure to use `list` to view all contacts BEFORE adding a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
+  * IMPORTANT: If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the addw command to add a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
 
 Examples:
 * `addw n/Arif and Sonali Wedding d/30/04/2025`
