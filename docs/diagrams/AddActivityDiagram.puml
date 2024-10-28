@@ -1,5 +1,32 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
+<style>
+activityDiagram {
+  activity {
+    BackgroundColor #8bc7f0
+    BorderColor #33668E
+    FontColor #000000
+    FontName arial
+  }
+
+  diamond {
+    BackgroundColor yellow
+    LineColor #000000
+    FontColor green
+    FontName arial
+    FontSize 15
+  }
+
+  arrow {
+    FontColor blue
+    FontName arial
+    FontSize 15
+  }
+}
+document {
+   BackgroundColor transparent
+}
+</style>
 
 start
 :User inputs an add command;
