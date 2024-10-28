@@ -6,7 +6,9 @@ import java.util.Objects;
  * Represents a Student's paid tuition fee in the address book.
  */
 public class PaidAmount extends Fee {
-    public static final String MESSAGE_CONSTRAINTS = "PaidAmount " + Fee.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_CONSTRAINTS = "PaidAmount "
+            + Fee.MESSAGE_CONSTRAINTS
+            + "2. is non-negative number";
 
     /**
      * Constructs a {@code PaidAmount}.

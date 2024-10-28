@@ -6,7 +6,9 @@ import java.util.Objects;
  * Represents a Student's owed tuition fee in the address book.
  */
 public class OwedAmount extends Fee {
-    public static final String MESSAGE_CONSTRAINTS = "Owed " + Fee.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_CONSTRAINTS = "Owed "
+            + Fee.MESSAGE_CONSTRAINTS
+            + "2. is non-negative number";
 
     /**
      * Constructs a {@code OwedAmount}.
@@ -25,7 +27,7 @@ public class OwedAmount extends Fee {
     }
 
     public static boolean isValidOwedAmount(String test) {
-        return Fee.isValidFee(test);
+        return Fee.isValidFee(test) && Double.parseDouble(test) >= 0;
     }
 
     /**

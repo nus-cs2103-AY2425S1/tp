@@ -7,7 +7,9 @@ import java.util.Objects;
  */
 public class Rate extends Fee {
 
-    public static final String MESSAGE_CONSTRAINTS = "Rate " + Fee.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_CONSTRAINTS = "Rate "
+            + Fee.MESSAGE_CONSTRAINTS
+            + "2. is strictly positive";
 
     /**
     * Constructs a {@code Rate}.
@@ -19,7 +21,7 @@ public class Rate extends Fee {
     }
 
     public static boolean isValidRate(String test) {
-        return Fee.isValidFee(test);
+        return Fee.isValidFee(test) && Double.parseDouble(test) > 0;
     }
 
     @Override
