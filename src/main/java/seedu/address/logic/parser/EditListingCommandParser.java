@@ -8,14 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.listing.Address;
-import seedu.address.model.listing.Area;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 
 /**
@@ -42,7 +37,8 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         try {
             listingName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditListingCommand.MESSAGE_USAGE), pe);
         }
 
         EditListingDescriptor editListingDescriptor = new EditListingDescriptor();

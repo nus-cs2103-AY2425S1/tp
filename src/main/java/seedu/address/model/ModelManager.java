@@ -226,9 +226,6 @@ public class ModelManager implements Model {
         filteredListings.setPredicate(predicate);
     }
 
-    /**
-     * Returns the listing with the same name as {@code name} exists in the address book.
-     */
     /*@Override
     public Person getListingByName(Name name) {
         requireNonNull(name);
@@ -238,6 +235,21 @@ public class ModelManager implements Model {
                 .findFirst()
                 .orElse(null);
     }*/
+
+    /**
+     * Checks if there are any listings associated with the specified {@code seller}.
+     *
+     * @param seller The seller whose listings are to be checked.
+     * @return {@code true} if there is at least one listing associated with the seller;
+     *         {@code false} otherwise.
+     */
+    @Override
+    public boolean hasListingsForSeller(Person seller) {
+        requireNonNull(seller);
+        return listings.getListingList().stream()
+                .anyMatch(listing -> listing.getSeller().equals(seller));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

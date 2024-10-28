@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -130,6 +129,13 @@ public class EditListingCommand extends Command {
 
         public EditListingDescriptor() {}
 
+        /**
+         * Copy constructor.
+         * Creates an {@code EditListingDescriptor} by copying the details from another descriptor.
+         * Each field is copied from the provided {@code toCopy} descriptor.
+         *
+         * @param toCopy the {@code EditListingDescriptor} to copy from.
+         */
         public EditListingDescriptor(EditListingDescriptor toCopy) {
             setName(toCopy.name);
             setPrice(toCopy.price);

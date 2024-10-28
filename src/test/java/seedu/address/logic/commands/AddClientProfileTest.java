@@ -208,6 +208,16 @@ public class AddClientProfileTest {
         }
 
         @Override
+        public Listing getListingByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasListingsForSeller(Person seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Listing> getFilteredListingList() {
             throw new AssertionError("This method should not be called.");
         }
