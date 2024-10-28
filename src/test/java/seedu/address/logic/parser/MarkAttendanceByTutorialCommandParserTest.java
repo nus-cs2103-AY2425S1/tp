@@ -26,7 +26,16 @@ public class MarkAttendanceByTutorialCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
+        //no arguments specified
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByTutorialCommand.MESSAGE_USAGE));
+
+        //attendance not specified
+        assertParseFailure(parser, "1 tut/Math",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByTutorialCommand.MESSAGE_USAGE));
+
+        //tutorial not specified
+        assertParseFailure(parser, "1 attend/12/12/2024",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByTutorialCommand.MESSAGE_USAGE));
     }
 }

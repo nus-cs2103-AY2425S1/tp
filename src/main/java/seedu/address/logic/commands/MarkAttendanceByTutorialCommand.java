@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
@@ -34,8 +35,8 @@ public class MarkAttendanceByTutorialCommand extends Command {
 
     public static final String MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS =
             "Marked attendance of all students in %1$s tutorial for %2$s";
-    public static final String MESSAGE_INVALID_TUTORIAL =
-            "Tutorial %1$s does not exist";
+    public static final String MESSAGE_EMPTY_TUTORIAL =
+            "No tutorial with name %1$s or no students are enrolled in the tutorial.";
 
     private final Tutorial tutorial;
     private final Attendance attendance;
@@ -53,19 +54,24 @@ public class MarkAttendanceByTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getTutorialList().stream().noneMatch(tutorial -> tutorial.equals(this.tutorial))) {
+            throw new CommandException(String.format(Messages.MESSAGE_TUTORIAL_NOT_FOUND, tutorial.getSubject()));
+        }
+
         List<Participation> participationList = model.getParticipationList()
                 .stream()
-                .filter(participation -> participation.getTutorial().equals(this.tutorial))
+                .filter(participation -> participation.getTutorial().equals(tutorial))
                 .toList();
 
         if (participationList.isEmpty()) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL, tutorial.getSubject()));
+                    String.format(MESSAGE_EMPTY_TUTORIAL, tutorial.getSubject()));
         }
 
         for (Participation currentParticipation : participationList) {
             List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-            updatedAttendance.add(new Attendance(LocalDate.from(attendance.attendanceDate)));
+            LocalDate attendanceDate = LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT);
+            updatedAttendance.add(new Attendance(attendanceDate));
 
             Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                     currentParticipation.getTutorial(), updatedAttendance);
