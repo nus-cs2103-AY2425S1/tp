@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.logging.Logger;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SwitchParserModeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -12,6 +14,8 @@ public class SwitchParserModeCommandParser implements Parser<SwitchParserModeCom
     private static final String BUYER_MODE = "b";
     private static final String MEETUP_MODE = "m";
     private static final String PROPERTY_MODE = "p";
+
+    private static final Logger logger = LogsCenter.getLogger(SwitchParserModeCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the SwitchParserModeCommand
@@ -34,6 +38,7 @@ public class SwitchParserModeCommandParser implements Parser<SwitchParserModeCom
             return new SwitchParserModeCommand(ParserMode.PROPERTY);
 
         default:
+            logger.finer("This argument caused an error: " + argument);
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SwitchParserModeCommand.MESSAGE_USAGE)
             );
