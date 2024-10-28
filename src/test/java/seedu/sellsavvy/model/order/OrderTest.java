@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_OUTDATED;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
@@ -47,11 +49,11 @@ public class OrderTest {
     @Test
     public void hasDateElapsed() {
         // order date has elapsed
-        Order editedAtlas = new OrderBuilder(ATLAS).withDate("02-02-2002").build();
+        Order editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_OUTDATED).build();
         assertEquals(MESSAGE_OUTDATED_WARNING, editedAtlas.hasDateElapsed());
 
         // order date has not elapsed
-        editedAtlas = new OrderBuilder(ATLAS).withDate("02-02-2030").build();
+        editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_ATLAS).build();
         assertEquals("", editedAtlas.hasDateElapsed());
     }
 

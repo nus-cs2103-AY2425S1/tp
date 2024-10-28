@@ -8,8 +8,10 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_OUTDATED;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
@@ -26,6 +28,7 @@ import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDe
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
@@ -105,7 +108,7 @@ public class EditOrderCommandTest {
     }
 
     @Test
-    public void execute_duplicateOrderUnfilteredList_warning() {
+    public void execute_duplicateOrderUnfilteredList_warningGiven() {
         Order firstOrder = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD_PERSON, descriptor);
@@ -116,6 +119,26 @@ public class EditOrderCommandTest {
         Model expectedModel = model.createCopy();
         expectedModel.setOrder(expectedModel.getFilteredOrderList().get(INDEX_THIRD_PERSON.getZeroBased()),
                 expectedModel.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased()));
+
+        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_orderHasElapsed_warningGiven() {
+        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
+        Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
+
+        OrderBuilder orderInList = new OrderBuilder(lastOrder);
+        Order editedOrder = orderInList.withDate(VALID_DATE_OUTDATED).build();
+
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withDate(VALID_DATE_OUTDATED).build();
+        EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_OUTDATED_WARNING
+                + EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder));
+
+        Model expectedModel = model.createCopy();
+        expectedModel.setOrder(expectedModel.getFilteredOrderList().get(indexLastOrder.getZeroBased()), editedOrder);
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }

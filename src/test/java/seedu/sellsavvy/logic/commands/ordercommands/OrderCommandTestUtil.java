@@ -28,8 +28,9 @@ public class OrderCommandTestUtil {
 
     public static final String VALID_COUNT_ATLAS = "5";
     public static final String VALID_COUNT_BOTTLE = "1";
-    public static final String VALID_DATE_ATLAS = "02-12-2024";
+    public static final String VALID_DATE_ATLAS = "02-12-2025";
     public static final String VALID_DATE_BOTTLE = "05-06-2027";
+    public static final String VALID_DATE_OUTDATED = "02-02-2002";
     public static final String VALID_ITEM_ATLAS = "Atlas A";
     public static final String VALID_ITEM_BOTTLE = "Bottle B";
 
