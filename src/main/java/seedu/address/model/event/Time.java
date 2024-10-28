@@ -9,12 +9,13 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Time {
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Please express the time field of your event in the following format "
+                    + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public static final String MESSAGE_CONSTRAINTS =
-            "Please express the time field of your event in the following format "
-        + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
 
     /**
      * Constructs a {@code Time}.
@@ -37,13 +38,13 @@ public class Time {
 
     public String getTime() {
         return "From: " + startTime.format(formatter) + " "
-                + "To: "+ endTime.format(formatter);
+                + "To: " + endTime.format(formatter);
     }
 
     @Override
     public String toString() {
         return "From: " + startTime.format(formatter) + " "
-                + "To: "+ endTime.format(formatter);
+                + "To: " + endTime.format(formatter);
     }
 
     @Override
