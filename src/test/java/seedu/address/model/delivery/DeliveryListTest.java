@@ -124,8 +124,6 @@ public class DeliveryListTest {
         VALID_DELIVERY_LIST_ID_UNSORTED.add(VALID_DELIVERY_1);
         VALID_DELIVERY_LIST_ID_UNSORTED.sortById();
 
-        System.out.println(VALID_DELIVERY_LIST_ID_UNSORTED);
-
         assertArrayEquals(VALID_DELIVERY_LIST_ID_SORTED.asUnmodifiableObservableList().toArray(),
                 VALID_DELIVERY_LIST_ID_UNSORTED.asUnmodifiableObservableList().toArray());
     }
