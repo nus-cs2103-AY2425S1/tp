@@ -25,8 +25,8 @@
       </stylesheets>
 
     <VBox>
-      <HBox spacing="10"       
-        style="-fx-background-color: derive(#1d1d1d, 20%);" 
+      <HBox spacing="10"
+        style="-fx-background-color: derive(#1d1d1d, 20%);"
         HBox.hgrow="ALWAYS">
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
               <Menu mnemonicParsing="false" text="File">
@@ -37,11 +37,11 @@
               </Menu>
           </MenuBar>
           <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label fx:id="modeLabel" text="Viewing: Buyers" 
-                  style="-fx-background-color: derive(#1d1d1d, 20%);  
-                          -fx-text-fill: #ffffff; 
-                          -fx-font-size: 11pt; 
-                          -fx-font-family: 'Segoe UI Semibold'; 
+            <Label fx:id="modeLabel" text="Viewing: Buyers"
+                  style="-fx-background-color: derive(#1d1d1d, 20%);
+                          -fx-text-fill: #ffffff;
+                          -fx-font-size: 11pt;
+                          -fx-font-family: 'Segoe UI Semibold';
                           -fx-opacity: 0.9;"
                   HBox.hgrow="ALWAYS"
                   />
