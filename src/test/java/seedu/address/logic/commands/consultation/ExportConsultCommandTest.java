@@ -55,13 +55,20 @@ public class ExportConsultCommandTest {
         if (Files.exists(dataDir)) {
             Files.walk(dataDir)
                     .sorted((a, b) -> b.compareTo(a))
-                    .forEach(path -> {
-                        try {
-                            Files.delete(path);
-                        } catch (IOException e) {
-                            // Ignore deletion errors during cleanup
-                        }
-                    });
+                    .forEach(ExportConsultCommandTest::ignoreDeletionErrors);
+        }
+    }
+
+    /**
+     * Helper function to delete a file given its path, and to ignore deletion errors in cleanup
+     *
+     * @param path Path representing the file to be deleted
+     */
+    private static void ignoreDeletionErrors(Path path) {
+        try {
+            Files.delete(path);
+        } catch (IOException e) {
+            // Ignore deletion errors during cleanup
         }
     }
 

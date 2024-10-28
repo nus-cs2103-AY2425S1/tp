@@ -17,7 +17,6 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
-//import seedu.address.model.student.Student;
 
 /**
  * Exports the currently displayed list of consultations to a CSV file.
