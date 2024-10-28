@@ -13,7 +13,7 @@ import seedu.address.model.event.Time;
  * Jackson-friendly version of {@link Time}.
  */
 public class JsonAdaptedTime {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Time's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Time field is missing!";
     public final String startTime;
     public final String endTime;
 
@@ -44,9 +44,7 @@ public class JsonAdaptedTime {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         if (startTime == null || endTime == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName())
-            );
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
 
         return new Time(LocalDateTime.parse(startTime, formatter), LocalDateTime.parse(endTime, formatter));

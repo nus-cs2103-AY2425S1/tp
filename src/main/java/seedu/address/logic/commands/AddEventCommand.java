@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -70,11 +72,11 @@ public class AddEventCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person celebrity;
-        List<Person> contacts;
+        Set<Person> contacts;
 
         try {
             celebrity = model.findPerson(this.celebrityName);
-            contacts = contactNames.stream().map(model::findPerson).toList();
+            contacts = new HashSet<>(contactNames.stream().map(model::findPerson).toList());
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
         }
