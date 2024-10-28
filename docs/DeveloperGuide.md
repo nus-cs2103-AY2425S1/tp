@@ -421,13 +421,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 1a1-1a2 are repeated until all details entered are correct.
 * Use cases resumes from step 2.
 
-
-* 1b. System detects error in parameters.
-    * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
-
 *{More to be added}*
 
 ### Non-Functional Requirements
