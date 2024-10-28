@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
-import java.util.Map;
 
 import seedu.address.logic.commands.lesson.AddLessonCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -40,7 +39,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
 
-        Lesson lesson = new Lesson(date, time, List.of(), Map.of());
+        Lesson lesson = new Lesson(date, time, List.of());
 
         return new AddLessonCommand(lesson);
     }

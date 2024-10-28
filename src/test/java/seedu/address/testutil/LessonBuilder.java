@@ -3,9 +3,7 @@ package seedu.address.testutil;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
@@ -22,7 +20,6 @@ public class LessonBuilder {
     private Date date;
     private Time time;
     private final List<Student> students;
-    private final Map<Student, Boolean> attendanceMap;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -31,7 +28,6 @@ public class LessonBuilder {
         date = new Date(DEFAULT_DATE);
         time = new Time(DEFAULT_TIME);
         students = new ArrayList<>();
-        attendanceMap = new HashMap<>();
     }
 
     /**
@@ -41,7 +37,6 @@ public class LessonBuilder {
         date = lessonToCopy.getDate();
         time = lessonToCopy.getTime();
         students = new ArrayList<>(lessonToCopy.getStudents());
-        attendanceMap = new HashMap<>(lessonToCopy.getAttendanceMap());
     }
 
     /**
@@ -66,16 +61,6 @@ public class LessonBuilder {
     public LessonBuilder withStudent(Student student) {
         requireNonNull(student);
         this.students.add(student);
-        this.attendanceMap.put(student, false); // Student must also be added to the attendanceMap
-        return this;
-    }
-
-    /**
-     * Sets the {@code Student}'s attendance in the {@code Lesson} we are building.
-     */
-    public LessonBuilder withAttendance(Student student, boolean attendance) {
-        requireNonNull(student);
-        this.attendanceMap.put(student, attendance);
         return this;
     }
 
@@ -83,6 +68,6 @@ public class LessonBuilder {
      * Builds and returns the Lesson.
      */
     public Lesson build() {
-        return new Lesson(date, time, students, attendanceMap);
+        return new Lesson(date, time, students);
     }
 }

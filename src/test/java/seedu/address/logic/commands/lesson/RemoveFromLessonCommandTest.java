@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,14 +61,12 @@ public class RemoveFromLessonCommandTest {
 
     // Model stub that contains a lesson and can return students by name
     private class ModelStubWithLesson extends ModelStub {
-
-        private final Student student1 = new StudentBuilder().withName("Alex Yeoh").build();
-        private final Student student2 = new StudentBuilder().withName("Harry Ng").build();
         private final Lesson lesson = new Lesson(
                 new seedu.address.model.consultation.Date("2024-10-20"),
                 new seedu.address.model.consultation.Time("14:00"),
-                FXCollections.observableArrayList(student1, student2),
-                Map.of(student1, true, student2, false));
+                FXCollections.observableArrayList(
+                        new StudentBuilder().withName("Alex Yeoh").build(),
+                        new StudentBuilder().withName("Harry Ng").build()));
 
         private ArrayList<Lesson> lessons;
 
