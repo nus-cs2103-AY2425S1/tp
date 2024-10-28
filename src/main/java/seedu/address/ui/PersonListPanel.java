@@ -39,7 +39,6 @@ public class PersonListPanel extends UiPart<Region> {
         this.personList = personList;
         this.personList.addListener((Observable observable) -> {
             // set the visibility PersonDetailView to be false when the personList is empty
-            // otherwise take the first person in the list.
             if (personList.isEmpty()) {
                 personDetailView.getRoot().setVisible(false);
             } else {

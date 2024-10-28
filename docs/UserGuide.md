@@ -28,9 +28,9 @@ LegacyLink is a **desktop app for managing contacts, optimized for use via a  Li
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list -p` : Lists all persons.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add -n John Doe -p 98765432 -e johnd@example.com -rs Father` : Adds a contact named `John Doe` with a relationship of `Father` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -54,7 +54,7 @@ LegacyLink is a **desktop app for managing contacts, optimized for use via a  Li
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -68,33 +68,32 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list -p`
+
+Shows a list of all persons in the address book.
+
+Format: `list -p`
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -r RELATIONSHIP`
+Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present
 </box>
 
 Examples:
-* `add -n John Doe -p 98765432 -e johnd@example.com -r Father`
-* `add -n Betsy Crowe -r Mother -e betsycrowe@example.com`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
+* `add -n John Doe -p 98765432 -e johnd@example.com -rs Father`
+* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-r RELATIONSHIP]…​`
+Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -136,11 +135,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all persons : `clear`
 
-Clears all entries from the address book.
+Clears all persons from the address book.
 
 Format: `clear`
+
+### Listing all events : `list -e`
+
+Shows a list of all events in the event book.
+
+Format: `list -e`
 
 ### Exiting the program : `exit`
 
@@ -187,10 +192,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List Persons**   | `list -p`
+**Add Person**    | `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP` <br> e.g., `add -n James Ho -p 22224444 -e jamesho@example.com -rs Brother`
+**Delete Person** | `delete INDEX`<br> e.g., `delete 3`
+**Edit Person**   | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-rs RELATIONSHIP]`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
+**Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Clear Person**  | `clear`
+**List Events**   | `list -e`
 **Help**   | `help`
+**Exit**   | `exit`

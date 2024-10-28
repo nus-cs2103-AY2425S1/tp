@@ -20,7 +20,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventsCommand;
+import seedu.address.logic.commands.ListPersonsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -69,9 +70,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    public void execute_validListPersonCommand_success() throws Exception {
+        String listPersonCommand = ListPersonsCommand.COMMAND_WORD + " " + ListPersonsCommand.COMMAND_FLAG;
+        assertCommandSuccess(listPersonCommand, ListPersonsCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_validListEventCommand_success() throws Exception {
+        String listEventCommand = ListEventsCommand.COMMAND_WORD + " " + ListEventsCommand.COMMAND_FLAG;
+        assertCommandSuccess(listEventCommand, ListEventsCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test

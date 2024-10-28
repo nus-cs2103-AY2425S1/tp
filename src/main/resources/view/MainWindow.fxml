@@ -43,7 +43,7 @@
                   <Insets left="32.0" right="32.0" />
                </padding>
                 </StackPane>
-            <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
               <tabs>
                 <Tab fx:id="contactsTab" text="Contacts">
                      <content>

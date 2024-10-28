@@ -26,11 +26,12 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" prefWidth="250"/>
       </HBox>
+
       <FlowPane fx:id="relationship" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" prefWidth="250"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" prefWidth="250"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />

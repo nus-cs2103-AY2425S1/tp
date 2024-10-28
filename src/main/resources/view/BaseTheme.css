@@ -446,6 +446,8 @@
     -fx-border-radius: 0;
     -fx-background-radius: 7;
     -fx-font-size: 13;
+    -fx-max-width: 150px;
+    -fx-text-overrun: ellipsis;
 }
 
 .detail-box {
@@ -477,6 +479,8 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Poppins Regular";
     -fx-text-fill: black;
+    -fx-max-width: 275px;
+    -fx-text-overrun: ellipsis;
 }
 
 #personDetailView .detail-grid-header {
