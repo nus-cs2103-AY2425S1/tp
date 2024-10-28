@@ -25,10 +25,26 @@ public class FindAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_success() {
+    public void parse_validNameArgs_success() {
         FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
         assertDoesNotThrow(() -> parser.parse(" appt n/Alex"));
     }
 
+    @Test
+    public void parse_validDateArgs_success() {
+        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
+        assertDoesNotThrow(() -> parser.parse(" appt d/2024-10-20"));
+    }
 
+    @Test
+    public void parse_validMultiArgs_success() {
+        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
+        assertDoesNotThrow(() -> parser.parse(" appt n/Alex d/2024-10-20"));
+    }
+
+    @Test
+    public void parse_validMultiArgsPerPrefix_success() {
+        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
+        assertDoesNotThrow(() -> parser.parse(" appt n/Alex Jon Yes"));
+    }
 }
