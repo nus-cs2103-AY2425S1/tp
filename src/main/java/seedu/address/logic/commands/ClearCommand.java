@@ -41,6 +41,7 @@ public class ClearCommand extends Command {
     public String undo(Model model, CommandHistory pastCommands) {
         model.setAddressBook(this.oldModel.getAddressBook());
         model.setUserPrefs(this.oldModel.getUserPrefs());
+        model.updateFilteredPersonList(person -> true);
         pastCommands.remove();
         return MESSAGE_UNDO_CLEAR;
     }
