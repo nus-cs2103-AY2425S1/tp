@@ -49,10 +49,16 @@ deactivate AddCommandParser
 AddressBookParser --> LogicManager : addCommand
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute()
+LogicManager -> AddCommand : execute(...)
 activate AddCommand
 
-AddCommand -> Model : addStudent(student)
+AddCommand -> Model : add student
+note left of Model
+    Interaction with the
+    Model component is
+    simplified for clarity.
+end note
+
 activate Model
 
 Model --> AddCommand : result
