@@ -70,7 +70,7 @@ public class EditCommand extends Command {
         List<Property> lastShownList = model.getFilteredPropertyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
         }
 
         Property propertyToEdit = lastShownList.get(index.getZeroBased());

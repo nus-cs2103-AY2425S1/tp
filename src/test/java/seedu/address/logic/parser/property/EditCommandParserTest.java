@@ -30,7 +30,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -80,19 +81,19 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1"
-        + INVALID_LANDLORD_NAME_DESC, LandlordName.MESSAGE_CONSTRAINTS); // invalid name
+                + INVALID_LANDLORD_NAME_DESC, LandlordName.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1"
-        + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1"
-        + INVALID_ASKING_PRICE_DESC, AskingPrice.MESSAGE_CONSTRAINTS); // invalid budget
+                + INVALID_ASKING_PRICE_DESC, AskingPrice.MESSAGE_CONSTRAINTS); // invalid budget
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + ADDRESS_DESC_ALAN, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_LANDLORD_NAME_DESC + INVALID_ADDRESS_DESC + VALID_ASKING_PRICE_ALAN
-                        + VALID_PHONE_ALAN, LandlordName.MESSAGE_CONSTRAINTS);
+                + VALID_PHONE_ALAN, LandlordName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class EditCommandParserTest {
                 + ADDRESS_DESC_ALAN + ASKING_PRICE_DESC_ALAN + LANDLORD_NAME_DESC_ALAN;
 
         EditPropertyDescriptor descriptor = new EditPropertyDescriptorBuilder()
-        .withLandlordName(VALID_LANDLORD_NAME_ALAN)
+                .withLandlordName(VALID_LANDLORD_NAME_ALAN)
                 .withPhone(VALID_PHONE_BRENDA)
                 .withAddress(VALID_ADDRESS_ALAN)
                 .withAskingPrice(VALID_ASKING_PRICE_ALAN)
