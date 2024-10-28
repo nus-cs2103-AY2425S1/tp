@@ -118,7 +118,8 @@ public class Person {
      * Returns the predicate of the person's filtered order list.
      */
     public Predicate<? super Order> getOrderPredicate() {
-        return filteredOrders.getPredicate();
+        Predicate<? super Order> predicate = filteredOrders.getPredicate();
+        return (predicate == null) ? PREDICATE_SHOW_ALL_ORDERS : predicate;
     }
 
     /**
