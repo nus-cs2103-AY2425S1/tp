@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label favoriteStar;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,5 +57,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        favoriteStar.setVisible(person.isFavorite());
     }
 }
