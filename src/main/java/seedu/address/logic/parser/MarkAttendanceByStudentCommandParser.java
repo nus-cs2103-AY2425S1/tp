@@ -34,21 +34,14 @@ public class MarkAttendanceByStudentCommandParser implements Parser<MarkAttendan
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE, PREFIX_TUTORIAL);
 
-        if (argMultimap.getValue(PREFIX_ATTENDANCE).isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getValue(PREFIX_TUTORIAL).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_ATTENDANCE).isEmpty() || argMultimap.getValue(PREFIX_TUTORIAL).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
         }
 
         Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
+        Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_TUTORIAL).get());
 
-        String tutorial = argMultimap.getValue(PREFIX_TUTORIAL).get();
-        if (!Tutorial.isValidTutorial(tutorial)) {
-            throw new ParseException(String.format("%s tutorial is not available at the center", tutorial));
-        }
         return new MarkAttendanceByStudentCommand(index, attendance, tutorial);
     }
 }

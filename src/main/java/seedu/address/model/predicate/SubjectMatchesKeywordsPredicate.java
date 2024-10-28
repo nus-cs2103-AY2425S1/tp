@@ -4,13 +4,13 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.participation.Participation;
 
 /**
  * Predicate to test if any of the {@code Person}'s tutorial subjects matches a inputted tutorial subject.
  * This tests for a case-insensitive match between the tutorial subject and the keyword.
  */
-public class SubjectMatchesKeywordsPredicate implements Predicate<Person> {
+public class SubjectMatchesKeywordsPredicate implements Predicate<Participation> {
     private final String keyword;
 
     /**
@@ -23,10 +23,8 @@ public class SubjectMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return person.getParticipation().stream()
-                .anyMatch(eachParticipation ->
-                        StringUtil.areMatchingStringsIgnoreCase(eachParticipation.getTutorialSubject(), this.keyword));
+    public boolean test(Participation participation) {
+        return StringUtil.areMatchingStringsIgnoreCase(participation.getTutorialSubject(), this.keyword);
     }
 
     @Override

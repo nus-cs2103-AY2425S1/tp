@@ -8,6 +8,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,7 +84,7 @@ public class AddressBookParserTest {
                         new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName, true),
                         new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue, false),
                         new StudentHasPaidPredicate(true)
-                        )
+                        ), new ArrayList<>()
         ), command);
     }
 

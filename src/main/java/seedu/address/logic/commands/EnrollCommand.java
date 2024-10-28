@@ -29,8 +29,8 @@ public class EnrollCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "2"
             + PREFIX_TUTORIAL + "physics";
-    public static final String MESSAGE_SUCCESS = "%1$s(student) added to %2$s(tutorial)";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the tutorial";
+    public static final String MESSAGE_SUCCESS = "%1$s(student) enrolled in %2$s(tutorial)";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already in the tutorial";
 
     private final Index index;
     private final String subject;
@@ -69,24 +69,12 @@ public class EnrollCommand extends Command {
 
         Participation p = new Participation(student, tutorial);
 
-        if (tutorial.hasParticipation(p)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-        tutorial.addParticipation(p);
-
-        if (student.hasParticipation(p)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-        student.addParticipation(p);
-
         if (model.hasParticipation(p)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.addParticipation(p);
 
-        model.setPerson(student, student);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), tutorial));
+        model.addParticipation(p);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getFullName(), tutorial.getSubject()));
     }
 
     @Override

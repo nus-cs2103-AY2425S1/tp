@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.participation.Participation;
 
 /**
  * Predicate to test if a {@code Person} has attended a tutorial within a specified date range.
  * It checks if the attendance date of the student's participation in a tutorial
  * falls between (or is equal to) the given start and end dates.
  */
-public class StudentAttendedTutorialPredicate implements Predicate<Person> {
+public class StudentAttendedTutorialPredicate implements Predicate<Participation> {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
@@ -25,17 +25,14 @@ public class StudentAttendedTutorialPredicate implements Predicate<Person> {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
     @Override
-    public boolean test(Person person) {
-        return person.getParticipation().stream()
-                .flatMap(participation -> participation.getAttendanceList().stream()) // Flatten all attendance lists
-                .anyMatch(attendance -> (
+    public boolean test(Participation participation) {
+        return participation.getAttendanceList().stream()
+                        .anyMatch(attendance -> (
                         attendance.attendanceDate.isAfter(startDate) || attendance.attendanceDate.isEqual(startDate))
-                        && (attendance.attendanceDate.isBefore(endDate) || attendance.attendanceDate.isEqual(endDate))
-                );
-    }
+                        && (attendance.attendanceDate.isBefore(endDate) || attendance.attendanceDate.isEqual(endDate)));
 
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

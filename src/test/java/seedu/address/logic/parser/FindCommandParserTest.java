@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class FindCommandParserTest {
                 new FindCommand(Arrays.asList(
                         new FieldContainsKeywordsPredicate<>(Arrays.asList("Alice"), Person::getFullName, true),
                         new FieldContainsKeywordsPredicate<>(Arrays.asList("Bob"), Person::getAddressValue, true)
-                ));
+                ), new ArrayList<>());
         assertParseFailure(parser, "n/Alice n/Bob", "Invalid command format! \n"
                 + "find: Finds persons in the address book matching the given keywords across specified fields. "
                 + "You can search by name, address, attendance, tags, and more.\n"

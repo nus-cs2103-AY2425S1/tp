@@ -12,12 +12,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.predicate.StudentAttendedTutorialPredicate;
@@ -36,74 +37,77 @@ public class PredicateFactory {
      * Fields could include name, phone, email, address, payment, attendance and tags.
      *
      * @param argMultimap The mapping of prefixes to user inputs.
-     * @return A unmodifiable list of predicates used to filter Person objects.
+     * @return FindCommand with a new list of participation predicates and list of person predicates.
      * @throws ParseException If any of the input values cannot be parsed.
      */
-    public static List<Predicate<Person>> createPredicates(ArgumentMultimap argMultimap) throws ParseException {
-        List<Predicate<Person>> predicates = new ArrayList<>();
-        processFieldPredicates(argMultimap, predicates);
-        processPaymentPredicate(argMultimap, predicates);
-        processTagPredicate(argMultimap, predicates);
-        processSubjectPredicate(argMultimap, predicates);
-        processAttendancePredicate(argMultimap, predicates);
-        return Collections.unmodifiableList(predicates);
+    public static FindCommand createPredicates(ArgumentMultimap argMultimap) throws ParseException {
+        List<Predicate<Person>> personPredicates = new ArrayList<>();
+        List<Predicate<Participation>> participationPredicates = new ArrayList<>();
+        processFieldPredicates(argMultimap, personPredicates);
+        processPaymentPredicate(argMultimap, personPredicates);
+        processTagPredicate(argMultimap, personPredicates);
+        processSubjectPredicate(argMultimap, participationPredicates);
+        processAttendancePredicate(argMultimap, participationPredicates);
+        return new FindCommand(personPredicates, participationPredicates);
     }
 
-    private static void processFieldPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processFieldPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> personPredicates)
             throws ParseException {
-        addFieldPredicate(argMultimap, PREFIX_NAME, Person::getFullName, predicates, true);
-        addFieldPredicate(argMultimap, PREFIX_PHONE, Person::getPhoneValue, predicates, false);
-        addFieldPredicate(argMultimap, PREFIX_EMAIL, Person::getEmailValue, predicates, false);
-        addFieldPredicate(argMultimap, PREFIX_ADDRESS, Person::getAddressValue, predicates, true);
+        addFieldPredicate(argMultimap, PREFIX_NAME, Person::getFullName, personPredicates, true);
+        addFieldPredicate(argMultimap, PREFIX_PHONE, Person::getPhoneValue, personPredicates, false);
+        addFieldPredicate(argMultimap, PREFIX_EMAIL, Person::getEmailValue, personPredicates, false);
+        addFieldPredicate(argMultimap, PREFIX_ADDRESS, Person::getAddressValue, personPredicates, true);
     }
 
     private static void addFieldPredicate(
             ArgumentMultimap argMultimap, Prefix prefix,
             Function<Person, String> fieldExtractor,
-            List<Predicate<Person>> predicates, boolean hasMultipleKeywords) throws ParseException {
+            List<Predicate<Person>> personPredicates, boolean hasMultipleKeywords) throws ParseException {
         if (argMultimap.getValue(prefix).isPresent()) {
             String value = argMultimap.getValue(prefix).get();
             String trimmedValue = hasMultipleKeywords
                     ? ParserUtil.parseMultipleWordsFromFindCommand(value)
                     : ParserUtil.parseSingleWordFromFindCommand(value);
-            predicates.add(new FieldContainsKeywordsPredicate<>(Arrays.asList(trimmedValue.split("\\s+")),
+            personPredicates.add(new FieldContainsKeywordsPredicate<>(Arrays.asList(trimmedValue.split("\\s+")),
                     fieldExtractor, hasMultipleKeywords));
         }
     }
 
-    private static void processPaymentPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processPaymentPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> personPredicates)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
             boolean isPaymentUpToDate = ParserUtil.parseBoolean(argMultimap.getValue(PREFIX_PAYMENT).get());
-            predicates.add(new StudentHasPaidPredicate(isPaymentUpToDate));
+            personPredicates.add(new StudentHasPaidPredicate(isPaymentUpToDate));
         }
     }
 
-    private static void processAttendancePredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processAttendancePredicate(ArgumentMultimap argMultimap,
+                                                   List<Predicate<Participation>> participationPredicates)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
             LocalDate[] datesArray = ParserUtil.parseAttendanceDateRange(argMultimap.getValue(PREFIX_ATTENDANCE).get());
-            predicates.add(new StudentAttendedTutorialPredicate(datesArray[0], datesArray[1]));
+            participationPredicates.add(new StudentAttendedTutorialPredicate(datesArray[0], datesArray[1]));
         }
 
     }
 
-    private static void processTagPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processTagPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> personPredicates)
             throws ParseException {
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
             for (String eachTagKeyword : argMultimap.getAllValues(PREFIX_TAG)) {
                 String trimmedTag = ParserUtil.parseSingleWordFromFindCommand(eachTagKeyword);
-                predicates.add(new TagContainsKeywordPredicate(trimmedTag));
+                personPredicates.add(new TagContainsKeywordPredicate(trimmedTag));
             }
         }
     }
 
-    private static void processSubjectPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processSubjectPredicate(ArgumentMultimap argMultimap,
+                                                List<Predicate<Participation>> participationPredicates)
             throws ParseException {
         if (!argMultimap.getAllValues(PREFIX_TUTORIAL).isEmpty()) {
             for (String eachSubjectWords : argMultimap.getAllValues(PREFIX_TUTORIAL)) {
                 String trimmedSubject = ParserUtil.parseMultipleWordsFromFindCommand(eachSubjectWords);
-                predicates.add(new SubjectMatchesKeywordsPredicate(trimmedSubject));
+                participationPredicates.add(new SubjectMatchesKeywordsPredicate(trimmedSubject));
             }
         }
     }

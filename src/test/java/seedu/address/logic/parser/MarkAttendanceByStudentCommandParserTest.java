@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.tutorial.Tutorial;
 
 public class MarkAttendanceByStudentCommandParserTest {
 
@@ -21,7 +22,7 @@ public class MarkAttendanceByStudentCommandParserTest {
         Attendance attendance = new Attendance(LocalDate.parse("12/12/2024",
                 Attendance.VALID_DATE_FORMAT));
         MarkAttendanceByStudentCommand expectedCommand =
-                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, "Math");
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, new Tutorial("Math"));
         assertParseSuccess(parser, "1 attend/12/12/2024 tut/Math", expectedCommand);
     }
 
