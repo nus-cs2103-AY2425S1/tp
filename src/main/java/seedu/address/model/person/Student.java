@@ -38,8 +38,9 @@ public class Student extends Person {
      * Constructs a {@code Student} with the given details.
      */
     public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
-                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags, boolean isPinned) {
-        super(name, phone, email, address, tags, isPinned);
+                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags, boolean isPinned,
+                   boolean isArchived) {
+        super(name, phone, email, address, tags, isPinned, isArchived);
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -101,7 +102,7 @@ public class Student extends Person {
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getEducation(),
                 this.getGrade(), this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getTags(),
-                this.getPinned());
+                this.getPinned(), this.isArchived());
     }
 
     @Override

@@ -40,8 +40,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             @JsonProperty("education") String education, @JsonProperty("grade") String grade,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("isPinned") boolean isPinned) {
-        super(name, phone, email, address, tags, isPinned);
+            @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
+        super(name, phone, email, address, tags, isPinned, isArchived);
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -70,6 +70,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         String address = this.getAddress();
         List<JsonAdaptedTag> tags = this.getTags();
         boolean isPinned = this.getPinned();
+        boolean isArchived = this.isArchived();
 
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
@@ -151,6 +152,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelEducation, modelGrade, modelParentName,
-                modelParentPhone, modelParentEmail, modelTags, isPinned);
+                modelParentPhone, modelParentEmail, modelTags, isPinned, isArchived);
     }
 }

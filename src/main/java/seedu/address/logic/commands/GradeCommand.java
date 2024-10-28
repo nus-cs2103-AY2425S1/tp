@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class GradeCommand extends Command {
                 studentToEdit.getParentPhone(), studentToEdit.getParentEmail(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }

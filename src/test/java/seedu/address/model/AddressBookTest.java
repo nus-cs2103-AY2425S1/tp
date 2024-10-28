@@ -85,11 +85,9 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", archivedPersons=" + addressBook.getArchivedPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
-
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.

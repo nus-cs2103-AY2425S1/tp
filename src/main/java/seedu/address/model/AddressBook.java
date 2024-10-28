@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.ArchivedPersonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -17,7 +16,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final ArchivedPersonList archivedPersons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,7 +26,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        archivedPersons = new ArchivedPersonList();
     }
 
     public AddressBook() {}
@@ -101,33 +98,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortByPin();
     }
 
-    //// archive-related operations
+    // Archive related Methods
 
-    /**
-     * Archives the given person by moving them to the archived list.
-     * The person must exist in the active person list.
-     */
     public void archivePerson(Person person) {
-        requireNonNull(person);
-        persons.archivePerson(person, archivedPersons);
+        persons.archivePerson(person);
     }
 
-    /**
-     * Unarchives the given person by moving them back to the active list.
-     * The person must exist in the archived list.
-     */
     public void unarchivePerson(Person person) {
-        requireNonNull(person);
-        persons.unarchivePerson(person, archivedPersons); // Move from archived list to active list
+        persons.unarchivePerson(person);
     }
-
-    /**
-     * Returns an unmodifiable view of the archived person list.
-     */
-    public ObservableList<Person> getArchivedPersonList() {
-        return archivedPersons.asUnmodifiableObservableList();
-    }
-
 
     //// util methods
 
@@ -135,7 +114,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
-                .add("archivedPersons", archivedPersons)
                 .toString();
     }
 
@@ -156,8 +134,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons)
-                && archivedPersons.equals(otherAddressBook.archivedPersons);
+        return persons.equals(otherAddressBook.persons);
     }
 
     @Override

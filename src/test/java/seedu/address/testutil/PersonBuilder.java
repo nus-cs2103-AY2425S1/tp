@@ -27,6 +27,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private boolean isPinned;
+    private boolean isArchived;
 
 
     /**
@@ -39,6 +40,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         isPinned = false;
+        isArchived = false;
     }
 
     /**
@@ -101,8 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the isArchived of the {@code Person} that we are building.
+     */
+    public PersonBuilder withArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, isPinned);
+        return new Person(name, phone, email, address, tags, isPinned, isArchived);
     }
 
 }
