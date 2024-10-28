@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -21,7 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
@@ -32,7 +34,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -52,6 +53,7 @@ public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_MULTIPLE_GROUPS = MESSAGE_DUPLICATE_FIELDS + PREFIX_GROUP;
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -82,7 +84,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
-    @Disabled
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
@@ -96,9 +97,12 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Group.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Group.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Group.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                MESSAGE_MULTIPLE_GROUPS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                MESSAGE_MULTIPLE_GROUPS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                MESSAGE_MULTIPLE_GROUPS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_MAJOR_AMY
@@ -106,16 +110,15 @@ public class EditCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
     }
 
-    @Disabled
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND
+        String userInput = targetIndex.getOneBased() + STUDENTID_DESC_BOB + YEAR_DESC_AMY
                 + EMAIL_DESC_AMY + MAJOR_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_STUDENTID_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_MAJOR_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withYear(VALID_YEAR_AMY).withTags(VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -133,7 +136,6 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Disabled
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
@@ -201,7 +203,6 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID, PREFIX_NETID, PREFIX_MAJOR));
     }
 
-    @Disabled
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;

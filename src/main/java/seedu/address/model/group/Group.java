@@ -3,32 +3,35 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Group in the address book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidGroupName(String)}
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number] (in lowercase)";
+    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number (>= 0)] (in lowercase)";
     public static final String VALIDATION_REGEX = "^group \\d+$";
-
+    private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
-
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Group}.
      *
-     * @param groupName A valid tag name.
+     * @param groupName A valid group name.
      */
     public Group(String groupName) {
         requireNonNull(groupName);
-        checkArgument(isValidTagName(groupName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
+        logger.info("A group is created: " + this.groupName);
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid group name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
