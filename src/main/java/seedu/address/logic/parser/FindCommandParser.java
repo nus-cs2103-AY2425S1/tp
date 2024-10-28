@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FullNameMatchesPredicate;
+import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.JobCodeTagPredicate;
 import seedu.address.model.person.NameEmailPredicate;
@@ -77,7 +77,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             && argMultimap.getValue(PREFIX_TAG).isEmpty() && argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
             // Name search
             String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            return new FindCommand(new FullNameMatchesPredicate(name));
+            return new FindCommand(new FullNameContainsPredicate(name));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
