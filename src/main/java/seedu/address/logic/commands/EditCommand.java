@@ -29,6 +29,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -146,11 +147,12 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
+        ApptList updatesAppt = (ApptList) patientToEdit.getAppts();
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk,
-                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, null);
+                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatesAppt);
     }
 
     @Override
