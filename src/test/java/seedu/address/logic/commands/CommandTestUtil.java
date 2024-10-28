@@ -64,6 +64,16 @@ public class CommandTestUtil {
     public static final String VALID_ASK_BEDOK = "60000";
     public static final String VALID_MATCHINGPRICE_ADMIRALTY = "30000";
     public static final String VALID_MATCHINGPRICE_BEDOK = "40000";
+    public static final String VALID_PADDED_PRICE = "0040000";
+    public static final String VALID_UNPADDED_PRICE = "40000";
+    public static final String VALID_SMALLEST_PADDED_PRICE = "000000";
+    public static final String VALID_SMALLEST_UNPADDED_PRICE = "0";
+    public static final String VALID_LARGEST_PADDED_PRICE = "00999999";
+    public static final String VALID_LARGEST_UNPADDED_PRICE = "999999";
+    public static final String INVALID_UNPADDED_LARGE_PRICE = "1000000";
+    public static final String INVALID_PADDED_LARGE_PRICE = "01000000";
+    public static final String INVALID_UNPADDED_OVERFLOW_PRICE = "100000000000000000000000000000000000";
+    public static final String INVALID_PADDED_OVERFLOW_PRICE = "000100000000000000000000000000000000000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class PostalCode {
     public static final String MESSAGE_CONSTRAINTS =
-            "Postal Code numbers should only contain positive numbers, and it should be exactly 6 digits long";
+            "Postal Code must be a non-negative integer and contain exactly 6 numeric characters";
     public static final String VALIDATION_REGEX = "\\d{6}";
     private static final Logger logger = LogsCenter.getLogger(PostalCode.class);
     public final String value;
