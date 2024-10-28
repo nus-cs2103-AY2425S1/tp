@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::handleRealTimeHint);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         navBar = new NavBar(this::handleNav);
@@ -251,5 +251,16 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Handles the display of real-time command hints based on current input.
+     *
+     * @param inputText The current input text to generate a hint for.
+     */
+    private void handleRealTimeHint(String inputText) {
+        // Assuming AddressBookParser can parse usage hints based on partial input
+        String hint = logic.getCommandHint(inputText);
+        resultDisplay.setFeedbackToUser(hint);
     }
 }

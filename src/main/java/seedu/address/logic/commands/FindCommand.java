@@ -10,5 +10,5 @@ package seedu.address.logic.commands;
  */
 public abstract class FindCommand extends Command {
     public static final String MESSAGE_USAGE = "Use \"find p\" or \"find e\" to"
-            + "specify person or event name to be searched";
+            + " specify person or event name to be searched.";
 }

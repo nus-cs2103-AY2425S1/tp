@@ -22,8 +22,8 @@ public class LinkPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "link";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Links identified person to an event in the address book."
+    public static final String MESSAGE_USAGE = "Use \"link\" to link identified person to"
+            + " an event in the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EVENT + "EVENT\n"
             + "Example: " + COMMAND_WORD + " 1 "
