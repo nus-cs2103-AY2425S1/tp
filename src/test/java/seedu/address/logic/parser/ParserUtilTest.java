@@ -1,8 +1,15 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -42,6 +49,22 @@ public class ParserUtilTest {
     private static final String VALID_LESSON_TIME = "SUN-11:00-13:30";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    @Test
+    public void arePrefixPresentTest() {
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(PREFIX_NAME, "name");
+        argumentMultimap.put(PREFIX_NOTE, "");
+
+        // All are present
+        assertTrue(arePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_NOTE));
+
+        // some are present
+        assertFalse(arePrefixesPresent(argumentMultimap, PREFIX_NOTE, PREFIX_TASK_INDEX));
+
+        // None are present
+        assertFalse(arePrefixesPresent(argumentMultimap, PREFIX_EMERGENCY_CONTACT, PREFIX_ADDRESS));
+    }
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {

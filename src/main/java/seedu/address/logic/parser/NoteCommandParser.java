@@ -31,6 +31,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        return new NoteCommand(new Name(name), new Note(note));
+        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+
+        return new NoteCommand(personName, new Note(note));
     }
 }
