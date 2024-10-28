@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FullNameMatchesPredicate;
+import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCode;
 import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.Name;
@@ -48,7 +48,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgsName_returnsFindCommand() {
         // Test parsing by name
-        FindCommand expectedCommand = new FindCommand(new FullNameMatchesPredicate("JOHN DOE"));
+        FindCommand expectedCommand = new FindCommand(new FullNameContainsPredicate("JOHN DOE"));
         assertParseSuccess(parser, " n/JOHN DOE", expectedCommand);
         assertParseSuccess(parser, " n/John Doe", expectedCommand);
     }

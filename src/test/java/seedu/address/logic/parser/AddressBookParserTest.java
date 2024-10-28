@@ -21,7 +21,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FullNameMatchesPredicate;
+import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.NameEmailPredicate;
 import seedu.address.model.person.NamePhonePredicate;
@@ -75,7 +75,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().withName("Bobby Coo").build();
         String userInput = PersonUtil.getFindCommandByName(person);
         FindCommand command = (FindCommand) parser.parseCommand(userInput);
-        assertEquals(new FindCommand(new FullNameMatchesPredicate("Bobby Coo")), command);
+        assertEquals(new FindCommand(new FullNameContainsPredicate("Bobby Coo")), command);
     }
 
     @Test
