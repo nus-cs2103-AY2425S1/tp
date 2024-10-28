@@ -5,7 +5,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTags.*;
+import static seedu.address.testutil.TypicalTags.COLLEAGUES;
+import static seedu.address.testutil.TypicalTags.FAMILY;
+import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import java.util.HashSet;
 import java.util.Set;
