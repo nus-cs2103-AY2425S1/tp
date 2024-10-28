@@ -18,7 +18,7 @@ public class JsonAdaptedTime {
     public final String endTime;
 
     /**
-     * Constructs a {@code JsonAdaptedTime} with the given event details.
+     * Constructs a {@code JsonAdaptedTime} with the given time details.
      */
     @JsonCreator
     public JsonAdaptedTime(@JsonProperty("startTime") String startTime,
@@ -38,7 +38,7 @@ public class JsonAdaptedTime {
     /**
      * Converts this Jackson-friendly adapted time object into the model's {@code Time} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted event.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted time.
      */
     public Time toModelType() throws IllegalValueException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
