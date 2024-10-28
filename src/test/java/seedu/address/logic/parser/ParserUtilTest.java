@@ -20,6 +20,7 @@ import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
+import seedu.address.model.student.Subject;
 
 
 
@@ -30,6 +31,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_COST_AMOUNT = "+123.12";
     private static final String INVALID_HOUR = "+0.75";
+    private static final String INVALID_SUBJECT = "Physics!!";
     private static final String INVALID_SCHEDULE = "Monday 1600-1800";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -38,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_COST_AMOUNT = "300.25";
     private static final String VALID_HOUR = "12.5";
+    private static final String VALID_SUBJECT = "Mathematics";
     private static final String VALID_SCHEDULE = "Monday-1600-1800";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -373,4 +376,28 @@ public class ParserUtilTest {
                 List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")));
     }
 
+    @Test
+    public void parseSubject_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSubject(null));
+    }
+
+    @Test
+    public void parseSubject_invalidValue_throwsParseException() {
+        // Invalid subject example: contains special characters or is empty
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(INVALID_SUBJECT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(""));
+    }
+
+    @Test
+    public void parseSubject_validValueWithoutWhitespace_returnsSubject() throws Exception {
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
+        assertEquals(expectedSubject, ParserUtil.parseSubject(VALID_SUBJECT));
+    }
+
+    @Test
+    public void parseSubject_validValueWithWhitespace_returnsTrimmedSubject() throws Exception {
+        String subjectWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE;
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
+        assertEquals(expectedSubject, ParserUtil.parseSubject(subjectWithWhitespace));
+    }
 }
