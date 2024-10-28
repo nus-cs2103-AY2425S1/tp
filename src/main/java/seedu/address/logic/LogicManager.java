@@ -5,7 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -84,8 +84,8 @@ public class LogicManager implements Logic {
         return model.getClientBookFilePath();
     }
 
-    public ObjectProperty<DisplayMode> getDisplayMode() {
-        return model.getDisplayMode();
+    public ReadOnlyObjectProperty<DisplayMode> getReadOnlyDisplayMode() {
+        return model.getReadOnlyDisplayMode();
     }
 
     @Override
