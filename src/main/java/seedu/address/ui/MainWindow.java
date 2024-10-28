@@ -147,6 +147,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the application window.
+     */
     void show() {
         primaryStage.show();
     }
