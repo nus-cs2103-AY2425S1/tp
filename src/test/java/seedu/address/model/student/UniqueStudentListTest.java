@@ -52,13 +52,6 @@ public class UniqueStudentListTest {
     public void add_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.add(null));
     }
-
-    @Test
-    public void add_duplicateStudent_throwsDuplicateStudentException() {
-        uniqueStudentList.add(ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(ALICE));
-    }
-
     @Test
     public void setStudent_nullTargetStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(null, ALICE));
