@@ -89,7 +89,8 @@ public class ClientHubTest {
 
     @Test
     public void toStringMethod() {
-        String expected = ClientHub.class.getCanonicalName() + "{persons=" + clientHub.getPersonList() + ", reminders=" + clientHub.getReminderList() + "}";
+        String expected = ClientHub.class.getCanonicalName() + "{persons="
+                + clientHub.getPersonList() + ", reminders=" + clientHub.getReminderList() + "}";
         assertEquals(expected, clientHub.toString());
     }
 
