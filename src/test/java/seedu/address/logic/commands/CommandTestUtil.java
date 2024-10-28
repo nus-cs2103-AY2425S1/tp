@@ -26,6 +26,8 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.NameContainsKeywordsPredicate;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
+import seedu.address.model.property.AddressContainsKeywordsPredicate;
+import seedu.address.model.property.Property;
 import seedu.address.testutil.buyer.EditBuyerDescriptorBuilder;
 import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
 
@@ -168,6 +170,7 @@ public class CommandTestUtil {
         assertEquals(expectedBuyerList, actualModel.getBuyerList());
         assertEquals(expectedFilteredList, actualModel.getFilteredBuyerList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the buyer at the given {@code targetIndex} in the
      * {@code model}'s buyer list.
@@ -181,6 +184,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredBuyerList().size());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the meetup at the given {@code targetIndex} in the
      * {@code model}'s meetup list.
@@ -195,4 +199,16 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredMeetUpList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the property at the given {@code targetIndex} in the
+     * {@code model}'s property list.
+     */
+    public static void showPropertyAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPropertyList().size());
+
+        Property property = model.getFilteredPropertyList().get(targetIndex.getZeroBased());
+        final String[] splitName = property.getAddress().value.split("\\s+");
+        model.updateFilteredPropertyList(new AddressContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        assertEquals(1, model.getFilteredPropertyList().size());
+    }
 }
