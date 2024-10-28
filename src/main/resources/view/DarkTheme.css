@@ -338,7 +338,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #DDA15E, transparent, #DDA15E;
+    -fx-background-color: transparent, #FAEDCD, transparent, #FAEDCD;
     -fx-background-radius: 0.5em;
     -fx-padding: 10px 10px;
 }
