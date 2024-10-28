@@ -189,6 +189,12 @@ Step 4. The user closes the `MATER - View Client` Window by either pressing the 
 
 The following sequence diagram shows how a `view` operation goes through the `UI` and `Logic` component:
 
+<box type="info" seamless>
+
+**Note:** `ViewClientWindow#fillClientDetails()` pulls data (i.e. Client and Car details) from the `Person` and `Car` model, which was omitted to reduce the sequence diagram's complexity.
+
+</box>
+
 <puml src="diagrams/ViewClientSequenceDiagram.puml" alt="ViewClientSequenceDiagram" />
 
 <box type="info" seamless>
