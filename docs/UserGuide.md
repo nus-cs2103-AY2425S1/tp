@@ -126,13 +126,15 @@ Examples:
 
 ### Editing A Contact : `edit`
 
-You can edit an existing contact's details such as their name, phone number, email etc.
+You can edit an existing contact's details(name, phone number, email, address and job).
 
-Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB] [t/NEW_TAG]`
+Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
 
 <box type="tip" seamless>
 
 **Tip:** You must provide at least one of the optional fields.
+
+**Important:** Tags can only be added or deleted, not edited.
 
 </box>
 
@@ -286,7 +288,7 @@ Action            | Format, Examples
 **Add Wedding**   | `add w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`
 **Clear**         | `clear`
 **Delete**        | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
-**Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
+**Edit**          | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`
 **Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`
 **Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June & James`
 **Filter**          | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`

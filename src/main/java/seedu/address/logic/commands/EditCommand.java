@@ -6,15 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -27,7 +23,6 @@ import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -37,8 +32,8 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String COMMAND_FUNCTION = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.";
+            + "by the name used in the displayed person list.\n"
+            + "Existing values will be overwritten by the input values.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: n/NAME "
@@ -46,8 +41,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "NEW_PHONE] "
             + "[" + PREFIX_EMAIL + "NEW_EMAIL] "
             + "[" + PREFIX_ADDRESS + "NEW_ADDRESS] "
-            + "[" + PREFIX_JOB + "NEW_JOB] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_JOB + "NEW_JOB]\n"
             + "Example: " + COMMAND_WORD + " n/Jonus " + PREFIX_NEW_NAME + "Ernus "
             + PREFIX_PHONE + "81234562 "
             + PREFIX_EMAIL + "notsiriouslyhensum@gmail.com";
@@ -100,8 +94,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, Name newName,
-                                             EditPersonDescriptor editPersonDescriptor) {
+    static Person createEditedPerson(Person personToEdit, Name newName,
+                                     EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = newName != null ? newName : editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -109,9 +103,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Job updatedJob = editPersonDescriptor.getJob().orElse(personToEdit.getJob());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJob, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJob, personToEdit.getTags());
     }
 
     @Override
@@ -150,13 +143,11 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Job job;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -164,14 +155,13 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setJob(toCopy.job);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, job, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, job);
         }
 
         public void setName(Name name) {
@@ -214,23 +204,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(job);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -247,8 +220,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(job, otherEditPersonDescriptor.job)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(job, otherEditPersonDescriptor.job);
         }
 
         @Override
@@ -259,7 +231,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("job", job)
-                    .add("tags", tags)
                     .toString();
         }
     }

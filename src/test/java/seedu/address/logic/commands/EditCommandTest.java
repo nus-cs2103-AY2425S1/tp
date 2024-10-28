@@ -2,12 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING2;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -40,7 +41,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withTags("John Loh & Jean Tan").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         Name currentName = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
         Name newName = editedPerson.getName();
@@ -61,11 +62,10 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_WEDDING2).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_WEDDING2).build();
+                .withPhone(VALID_PHONE_BOB).build();
         Name currentName = lastPerson.getName();
         Name newName = editedPerson.getName();
         EditCommand editCommand = new EditCommand(currentName, newName, descriptor);
@@ -160,6 +160,42 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(new Name("Alice"), new Name("Alice"), DESC_BOB)));
+    }
+
+    @Test
+    public void createEditedPerson_nullPerson_throwsAssertionError() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        assertThrows(AssertionError.class, () ->
+                EditCommand.createEditedPerson(null, new Name(VALID_NAME_BOB), descriptor));
+    }
+
+    @Test
+    public void equals_newNameComparison_success() {
+        EditCommand commandWithNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        EditCommand commandWithSameNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        assertTrue(commandWithNewName.equals(commandWithSameNewName));
+    }
+
+    @Test
+    public void equals_jobComparison_success() {
+        EditPersonDescriptor descriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        EditPersonDescriptor sameDescriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        assertTrue(descriptorWithJob.equals(sameDescriptorWithJob));
+    }
+
+    @Test
+    public void equals_differentNewName_returnsFalse() {
+        EditCommand commandWithNewName = new EditCommand(new Name("Alice"), new Name("Bob"), DESC_AMY);
+        EditCommand commandWithDifferentNewName = new EditCommand(new Name("Alice"), new Name("Charlie"), DESC_AMY);
+        assertFalse(commandWithNewName.equals(commandWithDifferentNewName));
+    }
+
+    @Test
+    public void equals_differentJob_returnsFalse() {
+        EditPersonDescriptor descriptorWithJob = new EditPersonDescriptorBuilder().withJob(VALID_JOB_BOB).build();
+        EditPersonDescriptor differentDescriptorWithJob = new EditPersonDescriptorBuilder()
+                .withJob("Different Job").build();
+        assertFalse(descriptorWithJob.equals(differentDescriptorWithJob));
     }
 
     @Test
