@@ -228,6 +228,7 @@ public class MainWindow extends UiPart<Stage> {
             case FINDSTUDENT:
             case DELETESTUDENT:
             case EXPORTSTUDENT:
+            case IMPORTSTUDENT:
                 handleTab(TAB_STUDENTS_INDEX);
                 break;
             // Consultation Commands
