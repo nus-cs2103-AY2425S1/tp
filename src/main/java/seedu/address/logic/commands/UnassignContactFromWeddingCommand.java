@@ -27,7 +27,7 @@ public class UnassignContactFromWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns contacts from a specific wedding "
-            + "where the wedding and contacts are identified by their index number. \n"
+            + "where the wedding & contacts are identified by their index number.\n"
             + "Parameters: unassign WeddingIndex (must be a positive integer) "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
             + "Example: " + COMMAND_WORD + " 1 "

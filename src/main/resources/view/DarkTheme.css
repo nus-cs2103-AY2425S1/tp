@@ -150,8 +150,11 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11.5pt;
     -fx-text-fill: white;
+    -fx-min-height: 110;
+    -fx-pref-height: 110;
+    -fx-max-height: 110;
 }
 
 .result-display .label {
