@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -19,58 +19,58 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.testutil.StudentBuilder;
 
-public class UndoCommandTest {
-    private CommandStack commandStack;
-    private Model model;
+public class DeleteAllStudentsCommandTest {
 
-    @BeforeEach
-    public void setUp() {
-        commandStack = CommandStack.getInstance();
-        model = new ModelStub();
+    private DeleteAllStudentsCommand command = new DeleteAllStudentsCommand();
+
+    @Test
+    public void execute_deleteSingleStudent_success() {
+        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456L").build();
+
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
+
+        CommandResult commandResult = command.execute(modelStub);
+
+        assertEquals(DeleteAllStudentsCommand.MESSAGE_DELETE_STUDENT_SUCCESS, commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_emptyStack() {
-        commandStack.clear();
-        assertEquals("There are no commands to undo",
-                new UndoCommand().execute(model).getFeedbackToUser());
+    public void execute_deleteMultipleStudents_success() {
+        Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        Student validStudent2 = new StudentBuilder().withName("May Ng Zi Wei").withStudentNumber("A0123456Y").build();
+        Student validStudent3 = new StudentBuilder().withName("Lynn Han").withStudentNumber("A9876543Z").build();
+        Student validStudent4 = new StudentBuilder().withName("Richard").withStudentNumber("A1111111B").build();
+
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+
+        CommandResult commandResult = command.execute(modelStub);
+
+        assertEquals(DeleteAllStudentsCommand.MESSAGE_DELETE_STUDENT_SUCCESS, commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_nonEmptyStack_notUndoableCommand() {
-        Command command = new NotUndoableCommandStub();
-        commandStack.push(command);
-        assertEquals("The previous command is not undoable",
-                new UndoCommand().execute(model).getFeedbackToUser());
+    public void undo() {
+        Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        Student validStudent2 = new StudentBuilder().withName("May Ng Zi Wei").withStudentNumber("A0123456Y").build();
+        Student validStudent3 = new StudentBuilder().withName("Lynn Han").withStudentNumber("A9876543Z").build();
+        Student validStudent4 = new StudentBuilder().withName("Richard").withStudentNumber("A1111111B").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+        command.execute(modelStub);
+        command.undo(modelStub);
+
+        ModelStubWithStudent expectedModelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+        assertEquals(expectedModelStub.getFilteredStudentList(), modelStub.getFilteredStudentList());
     }
 
-    @Test
-    public void execute_nonEmptyStack_undoableCommand() {
-        Command command = new UndoableCommandStub();
-        commandStack.push(command);
-        assertEquals(UndoCommand.MESSAGE_SUCCESS,
-                new UndoCommand().execute(model).getFeedbackToUser());
-    }
-
-    @Test
-    public void equals() {
-        UndoCommand undoCommand = new UndoCommand();
-
-        // same object -> returns true
-        assertEquals(undoCommand, undoCommand);
-
-        // different object -> returns false
-        assertFalse(undoCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(undoCommand.equals(null));
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
+
+        private final ObservableList<Student> studentList = FXCollections.observableArrayList();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -141,6 +141,7 @@ public class UndoCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -173,10 +174,9 @@ public class UndoCommandTest {
 
         @Override
         public ObservableList<Student> getFilteredStudentList() {
-            throw new AssertionError("This method should not be called.");
+            return studentList;
         }
 
-        @Override
         public ObservableList<Student> deleteAllStudents() {
             throw new AssertionError("This method should not be called.");
         }
@@ -207,27 +207,60 @@ public class UndoCommandTest {
         }
     }
 
-    private class NotUndoableCommandStub extends Command {
-        @Override
-        public CommandResult execute(Model model) {
-            return new CommandResult("Not Undoable command executed");
+    /**
+     * A Model stub that contains a single student.
+     */
+    private class ModelStubWithStudent extends ModelStub {
+
+        private final ObservableList<Student> students = FXCollections.observableArrayList();
+
+        ModelStubWithStudent(Student... students) {
+            this.students.addAll(students);
         }
 
         @Override
-        public boolean undo(Model model) {
-            return false;
-        }
-    }
-
-    private class UndoableCommandStub extends Command {
-        @Override
-        public CommandResult execute(Model model) {
-            return new CommandResult("Undoable command executed");
+        public Student getStudentByName(Name name) {
+            requireNonNull(name);
+            return students.stream()
+                    .filter(student -> student.getName().equals(name))
+                    .findFirst()
+                    .orElse(null); // Return null if no student is found with this name
         }
 
         @Override
-        public boolean undo(Model model) {
-            return true;
+        public ObservableList<Student> getFilteredStudentList() {
+            return students;
+        }
+
+        @Override
+        public void addStudent(Student student) {
+            requireNonNull(student);
+            students.add(student);
+        }
+
+        @Override
+        public boolean hasStudent(Student student) {
+            requireNonNull(student);
+            return students.stream().anyMatch(student::isSamePerson);
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
+            requireNonNull(target);
+            students.remove(target);
+            return 1;
+        }
+
+        @Override
+        public ObservableList<Student> deleteAllStudents() {
+            ObservableList<Student> deletedStudents = FXCollections.observableArrayList(students);
+            students.clear();
+            return deletedStudents;
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
+            students.setAll(studentList);
         }
     }
 }

@@ -93,6 +93,19 @@ public class UniqueStudentList implements Iterable<Student> {
         throw new StudentNotFoundException();
     }
 
+    /**
+     * Removes all students from the list and returns a copy of the list.
+     */
+    public ObservableList<Student> removeAll() {
+        ObservableList<Student> studentsToDelete = FXCollections.observableArrayList(internalList);
+        internalList.clear();
+        return studentsToDelete;
+    }
+
+    /**
+     * Replaces the contents of this list with {@code students}.
+     * @param replacement the list of students to replace the current list
+     */
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

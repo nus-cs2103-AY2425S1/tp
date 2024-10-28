@@ -154,6 +154,17 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    @Override
+    public void replaceStudentList(ObservableList<Student> studentList) {
+        addressBook.replaceStudentList(studentList);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public ObservableList<Student> deleteAllStudents() {
+        return addressBook.removeAllStudents();
+    }
+
 
 
     //=========== Filtered Person List Accessors =============================================================
@@ -177,6 +188,7 @@ public class ModelManager implements Model {
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
     }
+
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {

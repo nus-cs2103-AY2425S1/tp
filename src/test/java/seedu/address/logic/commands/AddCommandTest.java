@@ -193,6 +193,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Student> deleteAllStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -214,6 +219,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Student> getAllStudentsByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
             throw new AssertionError("This method should not be called.");
         }
 

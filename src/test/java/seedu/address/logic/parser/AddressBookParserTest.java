@@ -23,6 +23,7 @@ import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAllStudentsCommand;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -121,6 +122,11 @@ public class AddressBookParserTest {
                         parser.parseCommand(DeleteAssignmentCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
                 DeleteAssignmentCommand.COMMAND_WORD + " a/1 n/1") instanceof DeleteAssignmentCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteall() throws Exception {
+        assertTrue(parser.parseCommand("deleteall") instanceof DeleteAllStudentsCommand);
     }
 
     @Test

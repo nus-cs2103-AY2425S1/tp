@@ -154,6 +154,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.remove(key);
     }
 
+    /**
+     * Removes all students from this {@code AddressBook}.
+     *
+     */
+    public ObservableList<Student> removeAllStudents() {
+        return students.removeAll();
+    }
+
+    /**
+     * Replaces the current list of students with the given list.
+     */
+    public void replaceStudentList(ObservableList<Student> studentList) {
+        students.setStudents(studentList);
+    }
+
     //// util methods
 
     @Override
