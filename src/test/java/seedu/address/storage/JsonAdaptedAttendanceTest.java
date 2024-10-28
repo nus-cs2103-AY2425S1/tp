@@ -10,7 +10,7 @@ import seedu.address.model.person.Attendance;
 public class JsonAdaptedAttendanceTest {
 
     @Test
-    public void toModelType_invalidAttendance_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidAttendance_throwsIllegalValueException() {
         JsonAdaptedAttendance jsonAdaptedAttendance = new JsonAdaptedAttendance("1/1");
         String expectedMessage = Attendance.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedAttendance::toModelType);

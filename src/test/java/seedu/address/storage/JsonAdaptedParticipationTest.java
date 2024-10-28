@@ -2,11 +2,13 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedParticipation.MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedParticipation.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.MATH;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -54,6 +56,32 @@ public class JsonAdaptedParticipationTest {
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, null);
         String expectedMessage = String.format(
                 MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT, Tutorial.class.getSimpleName());
+
+        // Using an Anonymous Class to fit the assertThrows method descriptor
+        Executable toModelTypeMethod = () -> jsonAdaptedParticipation.toModelType(model);
+        assertThrows(IllegalValueException.class, expectedMessage, toModelTypeMethod);
+    }
+
+    @Test
+    public void toModelType_nullPerson_throwsIllegalValueException() {
+        JsonAdaptedParticipation jsonAdaptedParticipation =
+                new JsonAdaptedParticipation(null, "Math", new ArrayList<>());
+        AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
+        String expectedMessage = String.format(
+                MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
+
+        // Using an Anonymous Class to fit the assertThrows method descriptor
+        Executable toModelTypeMethod = () -> jsonAdaptedParticipation.toModelType(model);
+        assertThrows(IllegalValueException.class, expectedMessage, toModelTypeMethod);
+    }
+
+    @Test
+    public void toModelType_nullTutorial_throwsIllegalValueException() {
+        JsonAdaptedParticipation jsonAdaptedParticipation =
+                new JsonAdaptedParticipation("Benson", null, new ArrayList<>());
+        AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
+        String expectedMessage = String.format(
+                MISSING_FIELD_MESSAGE_FORMAT, Tutorial.class.getSimpleName());
 
         // Using an Anonymous Class to fit the assertThrows method descriptor
         Executable toModelTypeMethod = () -> jsonAdaptedParticipation.toModelType(model);
