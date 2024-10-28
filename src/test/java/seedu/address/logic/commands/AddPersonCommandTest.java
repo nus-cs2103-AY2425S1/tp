@@ -164,7 +164,7 @@ public class AddPersonCommandTest {
         public boolean hasEventOverlap(Event event) {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public void addEvent(Event toAdd) {
             throw new AssertionError("This method should not be called.");
