@@ -1,11 +1,11 @@
-package seedu.address.logic.commands.buyer;
+package seedu.address.logic.commands.property;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.buyer.TypicalBuyers.ALICE;
+import static seedu.address.testutil.property.TypicalProperties.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.BuyerList;
 import seedu.address.model.Model;
+import seedu.address.model.PropertyList;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyPropertyList;
@@ -28,41 +28,40 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.property.Property;
-import seedu.address.testutil.buyer.BuyerBuilder;
+import seedu.address.testutil.property.PropertyBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullBuyer_throwsNullPointerException() {
+    public void constructor_nullProperty_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_buyerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
-        Buyer validBuyer = new BuyerBuilder().build();
+    public void execute_propertyAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPropertyAdded modelStub = new ModelStubAcceptingPropertyAdded();
+        Property validProperty = new PropertyBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validBuyer).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validProperty).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validBuyer)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validProperty)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validBuyer), modelStub.buyersAdded);
+        assertEquals(Arrays.asList(validProperty), modelStub.propertiesAdded);
     }
 
-    @Test
-    public void execute_duplicateBuyer_throwsCommandException() {
-        Buyer validBuyer = new BuyerBuilder().build();
-        AddCommand addCommand = new AddCommand(validBuyer);
-        ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
+    public void execute_duplicateProperty_throwsCommandException() {
+        Property validProperty = new PropertyBuilder().build();
+        AddCommand addCommand = new AddCommand(validProperty);
+        ModelStub modelStub = new ModelStubWithProperty(validProperty);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_BUYER, () -> addCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_PROPERTY, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Buyer alice = new BuyerBuilder().withName("Alice").build();
-        Buyer bob = new BuyerBuilder().withName("Bob").build();
+        Property alice = new PropertyBuilder().withLandlordName("Alice").build();
+        Property bob = new PropertyBuilder().withLandlordName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -79,7 +78,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different buyer -> returns false
+        // different property -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -91,7 +90,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of its methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -269,45 +268,44 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single buyer.
+     * A Model stub that contains a single property.
      */
-    private class ModelStubWithBuyer extends ModelStub {
-        private final Buyer buyer;
+    private class ModelStubWithProperty extends ModelStub {
+        private final Property property;
 
-        ModelStubWithBuyer(Buyer buyer) {
-            requireNonNull(buyer);
-            this.buyer = buyer;
+        ModelStubWithProperty(Property property) {
+            requireNonNull(property);
+            this.property = property;
         }
 
         @Override
-        public boolean hasBuyer(Buyer buyer) {
-            requireNonNull(buyer);
-            return this.buyer.isSameBuyer(buyer);
+        public boolean hasProperty(Property property) {
+            requireNonNull(property);
+            return this.property.isSameProperty(property);
         }
     }
 
     /**
-     * A Model stub that always accept the buyer being added.
+     * A Model stub that always accepts the property being added.
      */
-    private class ModelStubAcceptingBuyerAdded extends ModelStub {
-        final ArrayList<Buyer> buyersAdded = new ArrayList<>();
+    private class ModelStubAcceptingPropertyAdded extends ModelStub {
+        final ArrayList<Property> propertiesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasBuyer(Buyer buyer) {
-            requireNonNull(buyer);
-            return buyersAdded.stream().anyMatch(buyer::isSameBuyer);
+        public boolean hasProperty(Property property) {
+            requireNonNull(property);
+            return propertiesAdded.stream().anyMatch(property::isSameProperty);
         }
 
         @Override
-        public void addBuyer(Buyer buyer) {
-            requireNonNull(buyer);
-            buyersAdded.add(buyer);
+        public void addProperty(Property property) {
+            requireNonNull(property);
+            propertiesAdded.add(property);
         }
 
         @Override
-        public ReadOnlyBuyerList getBuyerList() {
-            return new BuyerList();
+        public ReadOnlyPropertyList getPropertyList() {
+            return new PropertyList();
         }
     }
-
 }

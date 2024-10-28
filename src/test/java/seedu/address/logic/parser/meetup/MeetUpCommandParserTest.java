@@ -6,7 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,14 +51,14 @@ public class MeetUpCommandParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEETUP.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
         String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments");
         DeleteCommand command = (DeleteCommand) parser.parseCommand(commandWord, arguments);
-        assertEquals(new DeleteCommand(INDEX_FIRST_MEETUP), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -66,14 +66,14 @@ public class MeetUpCommandParserTest {
         MeetUp meetUp = new MeetUpBuilder().build();
         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder(meetUp).build();
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_MEETUP.getOneBased() + " " + MeetUpUtil.getEditMeetUpDescriptorDetails(descriptor));
+                + INDEX_FIRST.getOneBased() + " " + MeetUpUtil.getEditMeetUpDescriptorDetails(descriptor));
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
         String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments");
         EditCommand command = (EditCommand) parser.parseCommand(commandWord, arguments);
-        assertEquals(new EditCommand(INDEX_FIRST_MEETUP, descriptor), command);
+        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test

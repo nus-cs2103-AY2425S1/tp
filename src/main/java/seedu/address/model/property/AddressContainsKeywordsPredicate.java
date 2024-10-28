@@ -7,19 +7,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Property};s {code Location} matches any of the keywords given.
+ * Tests that a {@code Property}'s {code Address} matches any of the keywords given.
  */
-public class LocationContainsKeywordsPredicate implements Predicate<Property> {
+public class AddressContainsKeywordsPredicate implements Predicate<Property> {
     private final List<String> keywords;
 
-    public LocationContainsKeywordsPredicate(List<String> keywords) {
+    public AddressContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Property property) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getLocation().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getAddress().value, keyword));
     }
 
     @Override
@@ -28,11 +28,11 @@ public class LocationContainsKeywordsPredicate implements Predicate<Property> {
             return true;
         }
 
-        if (!(other instanceof LocationContainsKeywordsPredicate)) {
+        if (!(other instanceof AddressContainsKeywordsPredicate)) {
             return false;
         }
 
-        LocationContainsKeywordsPredicate otherPredicate = (LocationContainsKeywordsPredicate) other;
+        AddressContainsKeywordsPredicate otherPredicate = (AddressContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords);
     }
 

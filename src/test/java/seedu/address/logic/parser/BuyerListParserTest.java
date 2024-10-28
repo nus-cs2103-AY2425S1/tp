@@ -5,7 +5,7 @@
 //import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 //import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 //import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 //
 //import java.util.Arrays;
 //import java.util.List;
@@ -26,7 +26,7 @@
 //import seedu.address.model.buyer.Buyer;
 //import seedu.address.model.buyer.NameContainsKeywordsPredicate;
 //import seedu.address.testutil.buyer.BuyerBuilder;
-//import seedu.address.testutil.buyer.BuyerUtil;
+//import seedu.address.testutil.buyer.PropertyUtil;
 //import seedu.address.testutil.buyer.EditBuyerDescriptorBuilder;
 //
 //public class BuyerListParserTest {
@@ -36,7 +36,7 @@
 //    @Test
 //    public void parseCommand_add() throws Exception {
 //        Buyer buyer = new BuyerBuilder().build();
-//        AddCommand command = (AddCommand) parser.parseCommand(BuyerUtil.getAddBuyerCommand(buyer));
+//        AddCommand command = (AddCommand) parser.parseCommand(PropertyUtil.getAddBuyerCommand(buyer));
 //        assertEquals(new AddCommand(buyer), command);
 //    }
 //
@@ -49,8 +49,8 @@
 //    @Test
 //    public void parseCommand_delete() throws Exception {
 //        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-//                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_BUYER.getOneBased());
-//        assertEquals(new DeleteCommand(INDEX_FIRST_BUYER), command);
+//                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+//        assertEquals(new DeleteCommand(INDEX_FIRST), command);
 //    }
 //
 //    @Test
@@ -58,8 +58,8 @@
 //        Buyer buyer = new BuyerBuilder().build();
 //        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(buyer).build();
 //        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-//                + INDEX_FIRST_BUYER.getOneBased() + " " + BuyerUtil.getEditBuyerDescriptorDetails(descriptor));
-//        assertEquals(new EditCommand(INDEX_FIRST_BUYER, descriptor), command);
+//                + INDEX_FIRST.getOneBased() + " " + PropertyUtil.getEditBuyerDescriptorDetails(descriptor));
+//        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
 //    }
 //
 //    @Test
