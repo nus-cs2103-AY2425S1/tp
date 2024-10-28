@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -104,18 +105,22 @@ public class ListClaimsCommand extends Command {
     }
 
     /**
-     * Formats the list of claims into a string for display.
+     * Formats the list of claims into a numbered string representation for display.
+     * Each claim is indexed starting from 1, followed by the claim status and description.
      *
      * @param claims The list of claims to format.
-     * @return A formatted string representation of the claims.
+     * @return A formatted string representation of the claims, where each claim is preceded
+     *         by its 1-based index, followed by its status and description. Each claim is
+     *         separated by a newline.
      */
     private String formatClaims(List<Claim> claims) {
-        return claims.stream()
-                .map(claim -> String.format("Claim Status: %s | Claim Description: %s",
-                        claim.getStatus().toString(), claim.getClaimDescription()))
+        return IntStream.range(0, claims.size())
+                .mapToObj(index -> String.format("%d. Claim Status: %s | Claim Description: %s",
+                        index + 1,
+                        claims.get(index).getStatus().toString(),
+                        claims.get(index).getClaimDescription()))
                 .collect(Collectors.joining("\n"));
     }
-
 
     @Override
     public boolean equals(Object other) {
