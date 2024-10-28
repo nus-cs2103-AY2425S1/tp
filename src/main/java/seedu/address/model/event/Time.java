@@ -28,6 +28,14 @@ public class Time {
         this.endTime = endTime;
     }
 
+    public LocalDateTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return this.endTime;
+    }
+
     public String getTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return "From: " + startTime.format(formatter) + " "
