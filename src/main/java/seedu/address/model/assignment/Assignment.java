@@ -80,19 +80,31 @@ public class Assignment {
         return grade;
     }
 
+    public boolean isSameAssignment(Assignment other) {
+        return assignmentName.equals(other.assignmentName);
+    }
+
+    /**
+     * Edits relevant fields
+     *
+     * @param assignmentQuery fields to edit
+     */
+    public void edit(AssignmentQuery assignmentQuery) {
+        this.deadline = assignmentQuery.queryDeadline.orElse(this.deadline);
+        this.submissionStatus = assignmentQuery.querySubmissionStatus.orElse(this.submissionStatus);
+        this.gradingStatus = assignmentQuery.queryGradingStatus.orElse(this.gradingStatus);
+        this.grade = assignmentQuery.queryGrade.orElse(this.grade);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                 .add("name", assignmentName)
-                 .add("deadline", deadline)
-                 .add("submission status", submissionStatus)
-                 .add("grading status", gradingStatus)
-                 .add("grade", grade)
-                 .toString();
-    }
-
-    public boolean isSameAssignment(Assignment other) {
-        return assignmentName.equals(other.assignmentName);
+                .add("name", assignmentName)
+                .add("deadline", deadline)
+                .add("submission status", submissionStatus)
+                .add("grading status", gradingStatus)
+                .add("grade", grade)
+                .toString();
     }
 
     @Override

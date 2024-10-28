@@ -31,6 +31,17 @@ public class AssignmentBuilder {
     }
 
     /**
+     * Creates a {@code AssignmentBuilder} from an existing assignment.
+     */
+    public AssignmentBuilder(Assignment assignment) {
+        this.name = assignment.getAssignmentName();
+        this.deadline = assignment.getDeadline();
+        this.submissionStatus = assignment.getSubmissionStatus();
+        this.gradingStatus = assignment.getGradingStatus();
+        this.grade = assignment.getGrade();
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Assignment} that we are building.
      *
      * @param name The assignment name to set.

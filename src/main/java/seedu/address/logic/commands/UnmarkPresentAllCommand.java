@@ -6,11 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 
@@ -31,6 +34,7 @@ public class UnmarkPresentAllCommand extends Command {
 
     private final TutorialGroup tutorialGroup;
     private final LocalDate date;
+    private final Map<Student, Attendance> previousAttendances;
 
     /**
      * Creates a UnmarkPresentAllCommand to mark the attendance of all students in the specified {@code TutorialGroup}
@@ -43,6 +47,7 @@ public class UnmarkPresentAllCommand extends Command {
         requireNonNull(date);
         this.tutorialGroup = tutorialGroup;
         this.date = date;
+        this.previousAttendances = new HashMap<>();
     }
 
     @Override
@@ -55,10 +60,36 @@ public class UnmarkPresentAllCommand extends Command {
         }
 
         for (Student student : studentsFromSpecifiedTutorialGroup) {
+
+            previousAttendances.put(student, student.getAttendanceRecord().stream()
+                   .filter(record -> record.getDate().equals(date))
+                   .findFirst()
+                   .map(record -> record.getAttendance())
+                    .orElse(null));
             student.markAttendance(date, "a");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        requireNonNull(model);
+        List<Student> studentsFromSpecifiedTutorialGroup = model.getStudentsByTutorialGroup(tutorialGroup);
+
+        if (studentsFromSpecifiedTutorialGroup.isEmpty()) {
+            return false;
+        }
+
+        for (Student student: studentsFromSpecifiedTutorialGroup) {
+            Attendance previousAttendance = previousAttendances.get(student);
+            if (previousAttendance != null) {
+                student.markAttendance(date, previousAttendance.value);
+            } else {
+                student.undoAttendance(date);
+            }
+        }
+        return true;
     }
 
     @Override

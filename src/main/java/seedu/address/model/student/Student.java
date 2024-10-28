@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
@@ -179,17 +181,35 @@ public class Student extends Person {
     }
 
     /**
-     * Deletes the first assignment matching the given assignment query.
+     * Deletes the assignment matching the given name
+     *
+     * @param assignmentName A valid assignment query.
+     * @return the deleted assignment
+     */
+    public Assignment deleteAssignment(AssignmentName assignmentName) {
+        requireAllNonNull(assignmentName);
+        for (Assignment assignment : assignments) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                assignments.remove(assignment);
+                return assignment;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Edits the assignment matching the given name to the parameters specified
      *
      * @param assignmentQuery A valid assignment query.
      * @return the deleted assignment
      */
-    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) {
-        requireAllNonNull(assignmentQuery);
+    public AssignmentQuery editAssignment(AssignmentName assignmentName, AssignmentQuery assignmentQuery) {
+        requireAllNonNull(assignmentName);
         for (Assignment assignment : assignments) {
-            if (assignmentQuery.match(assignment)) {
-                assignments.remove(assignment);
-                return assignment;
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                AssignmentQuery oldAssignment = new AssignmentQuery(assignment);
+                assignment.edit(assignmentQuery);
+                return oldAssignment;
             }
         }
         return null;
@@ -202,5 +222,27 @@ public class Student extends Person {
      */
     public void addAttendanceRecord(AttendanceRecord ar) {
         attendanceRecords.add(ar);
+    }
+
+    /**
+     * Deletes the last assignment in the list.
+     */
+    public void deleteLastAssignment() {
+        assignments.remove(assignments.size() - 1);
+    }
+
+    /**
+     * Deletes the last attendance record in the list.
+     * @param date The date of the attendance record to be deleted.
+     */
+    public void undoAttendance(LocalDate date) {
+        Iterator<AttendanceRecord> iterator = attendanceRecords.iterator();
+        while (iterator.hasNext()) {
+            AttendanceRecord record = iterator.next();
+            if (record.getDate().equals(date)) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 }

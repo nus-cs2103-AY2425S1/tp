@@ -86,6 +86,7 @@ public class DeleteStudentCommandTest {
         assertThrows(CommandException.class,
                 String.format(DeleteStudentCommand.MESSAGE_DUPLICATE_STUDENT,
                         "A1234567X A0123456Y A9876543Z A1111111B", "John Ng"), () -> command.execute(modelStub));
+
     }
 
     // Ensure deletion by only provided name works when student with correct details exists
@@ -283,6 +284,10 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        public ObservableList<Student> deleteAllStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
@@ -301,6 +306,11 @@ public class DeleteStudentCommandTest {
         @Override
         public ObservableList<Student> getAllStudentsByName(Name name) {
             return FXCollections.observableArrayList();
+        }
+
+        @Override
+        public void replaceStudentList(ObservableList<Student> studentList) {
+            throw new AssertionError("This method should not be called.");
         }
 
     }

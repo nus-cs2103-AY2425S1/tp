@@ -178,6 +178,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void removeAllStudents() {
+        ObservableList<Student> deletedStudents = addressBook.removeAllStudents();
+        assertEquals(0, addressBook.getStudentList().size());
+        assertEquals(1, deletedStudents.size());
+    }
+
+    @Test
+    public void replaceStudentList() {
+        ObservableList<Student> newStudentList = FXCollections.observableArrayList();
+        newStudentList.add(DIDDY);
+        newStudentList.add(HUGH);
+        addressBook.replaceStudentList(newStudentList);
+        assertEquals(newStudentList, addressBook.getStudentList());
+    }
+
+    @Test
     public void toStringMethod() {
         // Empty AddressBook
         AddressBook emptyAddressBook = new AddressBook();
