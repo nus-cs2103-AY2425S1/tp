@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -158,7 +159,6 @@ public class ParserUtil {
 
         try {
             String from = trimmedTime[0].replaceFirst("from: ", "");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             fromDate = LocalDateTime.parse(from, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
@@ -168,7 +168,6 @@ public class ParserUtil {
 
         try {
             String to = trimmedTime[1].replaceFirst("to: ", "");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             toDate = LocalDateTime.parse(to, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
