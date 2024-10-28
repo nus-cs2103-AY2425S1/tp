@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
@@ -144,4 +145,6 @@ public interface Model {
     /** Resorts Events */
     void reSortEvents();
 
+    /** Gets PersonEventAssociationMap */
+    public ObservableMap<Event, ObservableList<Person>> getPersonEventAssociationMap();
 }

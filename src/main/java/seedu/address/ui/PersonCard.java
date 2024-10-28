@@ -41,12 +41,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane eventName;
+    private FlowPane eventNameTag;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, String eventName) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -57,5 +57,13 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (eventName != "No Event") {
+            eventNameTag.getChildren().add(new Label(eventName));
+            eventNameTag.setVisible(true);
+            eventNameTag.setManaged(true);
+        } else {
+            eventNameTag.setVisible(false); // Hides the eventName FlowPane
+            eventNameTag.setManaged(false); // Prevents eventName from occupying space in the layout
+        }
     }
 }

@@ -351,7 +351,7 @@
     -fx-font-size: 11;
 }
 
-#eventName .label {
+#eventNameTag .label {
     -fx-text-fill: white;
     -fx-background-color: #D397F8;
     -fx-padding: 1 3 1 3;

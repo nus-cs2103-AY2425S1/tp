@@ -1,147 +1,126 @@
 package seedu.address.model.types.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.collections.ListChangeListener;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
 import seedu.address.model.types.event.exceptions.EventNotFoundException;
 import seedu.address.model.types.person.Person;
 
-/**
- * Manages the relationship between events and persons.
- */
 public class PersonEventManager {
 
-    private static HashMap<Event, ArrayList<Person>> eventPersonMap;
+    private static ObservableMap<Event, ObservableList<Person>> eventPersonMap;
 
     /**
      * Initialises the eventPersonMap, with events and persons from storage.
      */
     public static void initialiseHashMap() {
         if (eventPersonMap == null) {
-            eventPersonMap = new HashMap<>();
-            //TODO add events and persons from storage
+            eventPersonMap = FXCollections.observableHashMap();
+            // TODO add events and persons from storage
         }
     }
 
     /* ============================== Person Methods ============================== */
 
-    /**
-     * Returns true if the person is linked to the specified event.
-     * @param person
-     * @param event
-     * @return
-     */
     public static boolean isPersonLinkedToEvent(Person person, Event event) {
-        return eventPersonMap.get(event).contains(person);
+        ObservableList<Person> persons = eventPersonMap.get(event);
+        return persons != null && persons.contains(person);
     }
 
-    /**
-     * Adds the person to the specified event.
-     * @param event
-     * @param person
-     * @throws EventNotFoundException
-     */
     public static void addPersonToEvent(Person person, Event event) {
-        eventPersonMap.get(event).add(person);
+        ObservableList<Person> persons = eventPersonMap.get(event);
+        if (persons != null) {
+            persons.add(person);
+        } else {
+            throw new EventNotFoundException();
+        }
     }
 
-    /**
-     * removes the person from the specified event.
-     * @param event
-     * @param person
-     * @throws EventNotFoundException
-     */
     public static void removePersonFromEvent(Person person, Event event) {
-        eventPersonMap.get(event).remove(person);
+        ObservableList<Person> persons = eventPersonMap.get(event);
+        if (persons != null) {
+            persons.remove(person);
+        } else {
+            throw new EventNotFoundException();
+        }
     }
 
-    /**
-     * Removes the person from all events.
-     * @param person
-     */
     public static void removePersonFromAllEvents(Person person) {
-        if (eventPersonMap.keySet() == null) {
-            return;
-        }
-
-        for (Event event : eventPersonMap.keySet()) {
-            ArrayList<Person> linkedPeople = eventPersonMap.get(event);
-            if (linkedPeople != null) {
-                linkedPeople.remove(person);
-            }
-        }
+        eventPersonMap.values().forEach(persons -> persons.remove(person));
     }
 
-    /**
-     * Replaces specified person with the edited person for all events.
-     * @param target
-     * @param editedPerson
-     */
     public static void setPersonForAllEvents(Person target, Person editedPerson) {
-        if (eventPersonMap.keySet() == null) {
-            return;
-        }
-
-        for (Event event : eventPersonMap.keySet()) {
-            ArrayList<Person> linkedPeople = eventPersonMap.get(event);
-
-            if (linkedPeople == null) {
-                continue;
+        eventPersonMap.values().forEach(persons -> {
+            if (persons.contains(target)) {
+                persons.remove(target);
+                persons.add(editedPerson);
             }
-
-            if (eventPersonMap.get(event).contains(target)) {
-                eventPersonMap.get(event).remove(target);
-                eventPersonMap.get(event).add(editedPerson);
-            }
-        }
+        });
     }
 
     /* ============================== Event Methods ============================== */
 
-    /**
-     * Returns true if the event is in the eventPersonMap.
-     * @param event
-     * @return
-     */
     public static boolean hasEvent(Event event) {
         return eventPersonMap.containsKey(event);
     }
 
-    /**
-     * Adds the event to the eventPersonMap.
-     * @param event
-     * @throws DuplicateEventException
-     */
     public static void addEvent(Event event) {
-        eventPersonMap.put(event, new ArrayList<>());
+        if (eventPersonMap.containsKey(event)) {
+            throw new DuplicateEventException();
+        }
+        ObservableList<Person> personsList = FXCollections.observableArrayList();
+        
+        // Add a listener to detect changes in the ObservableList
+        // personsList.addListener((ListChangeListener<Person>) change -> {
+        //     while (change.next()) {
+        //         // This listener ensures that the ObservableList notifies any observers when it changes
+        //         if (change.wasAdded() || change.wasRemoved()) {
+        //             Person dummyPerson = new Person(new Name("zz"), 
+        //                 new Phone("12345678"), 
+        //                 new Email("johnd@example.com"), 
+        //                 new Address("311, Clementi Ave 2, #02-25"), 
+        //                 null);
+        //             PersonEventManager.addressbook.addPerson(dummyPerson);
+        //             PersonEventManager.addressbook.removePerson(dummyPerson);
+        //         }
+        //     }
+        // });
+
+        eventPersonMap.put(event, personsList);
     }
 
-    /**
-     * Removes the event from the eventPersonMap.
-     * @param event
-     * @throws EventNotFoundException
-     */
     public static void removeEvent(Event event) {
         eventPersonMap.remove(event);
     }
 
-    /**
-     * Replaces the target event with the edited event.
-     * @param target
-     * @param editedEvent
-     */
     public static void setEvent(Event target, Event editedEvent) {
-        ArrayList<Person> persons = eventPersonMap.get(target);
-        eventPersonMap.remove(target);
-        eventPersonMap.put(editedEvent, persons);
+        ObservableList<Person> persons = eventPersonMap.get(target);
+        if (persons != null) {
+            eventPersonMap.remove(target);
+            eventPersonMap.put(editedEvent, persons);
+        }
     }
 
     public static Event getEventByName(Event target) {
         return eventPersonMap.keySet().stream()
-                .filter(event -> event.isSameEvent(target))
+                .filter(event -> event.isSameEventName(target))
                 .findFirst()
                 .orElse(null);
+    }
+
+    /**
+     * Returns an unmodifiable view of the eventPersonMap.
+     * 
+     * @return an ObservableMap<Event, ObservableList<Person>> representing the relationship between events and persons.
+     */
+    public static ObservableMap<Event, ObservableList<Person>> getEventPersonMap() {
+        return FXCollections.unmodifiableObservableMap(eventPersonMap);
     }
 }
