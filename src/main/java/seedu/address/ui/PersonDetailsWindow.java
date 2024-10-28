@@ -198,9 +198,9 @@ public class PersonDetailsWindow extends UiPart<Stage> {
                 return;
             }
 
-            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s",
+            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s f/%s",
                     index + 1, escapeSpecialCharacters(newName), escapeSpecialCharacters(newPhone),
-                    escapeSpecialCharacters(newEmail), escapeSpecialCharacters(newAddress));
+                    escapeSpecialCharacters(newEmail), escapeSpecialCharacters(newAddress), !person.isFavorite());
 
             logic.execute(commandText);
 

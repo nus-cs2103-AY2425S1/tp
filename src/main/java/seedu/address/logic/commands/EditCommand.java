@@ -162,6 +162,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setFavorite(toCopy.isFavorite);
             setDepartment(toCopy.department);
         }
 
@@ -169,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, department);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, isFavorite, department);
         }
 
         public void setName(Name name) {
@@ -254,7 +255,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isFavorite, otherEditPersonDescriptor.isFavorite); // Add this line
+                    && Objects.equals(isFavorite, otherEditPersonDescriptor.isFavorite);
         }
 
         @Override
@@ -265,6 +266,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("isFavorite", isFavorite)
                     .toString();
         }
     }
