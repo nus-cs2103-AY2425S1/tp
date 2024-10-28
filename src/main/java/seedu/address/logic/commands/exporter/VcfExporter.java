@@ -1,4 +1,4 @@
-package seedu.address.logic.exporter;
+package seedu.address.logic.commands.exporter;
 
 import java.io.IOException;
 import java.nio.file.Path;

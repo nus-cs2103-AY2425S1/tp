@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.exporter.Exporter;
-import seedu.address.logic.exporter.FileType;
+import seedu.address.logic.commands.exporter.Exporter;
+import seedu.address.logic.commands.exporter.FileType;
 import seedu.address.model.Model;
 
 /**

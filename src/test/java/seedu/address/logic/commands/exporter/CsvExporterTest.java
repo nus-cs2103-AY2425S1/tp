@@ -1,4 +1,4 @@
-package seedu.address.logic.exporter;
+package seedu.address.logic.commands.exporter;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,7 +41,7 @@ public class CsvExporterTest {
     }
 
     private Path getTestFilePath(String fileName) {
-        String path = "/logic/exporter/CsvExporterTest/" + fileName;
+        String path = "/logic/commands/exporter/CsvExporterTest/" + fileName;
         try {
             URL url = CsvExporterTest.class.getResource(path);
             assertNotNull(url, path + " does not exist.");
