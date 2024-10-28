@@ -57,6 +57,18 @@ public class PersonListPanel extends UiPart<Region> {
         personDataReceiver.receivePersonData(person);
     }
 
+    /**
+     * Selects a person in the {@code personListView} at the specified zero-based index.
+     * If the index is valid, the corresponding item will be selected and the view will scroll to it.
+     *
+     * @param index The index of the person to select.
+     */
+    public void selectPersonAtIndex(int index) {
+        if (index >= 0 && index < personListView.getItems().size()) {
+            personListView.getSelectionModel().select(index);
+            personListView.scrollTo(index); // Optional: scroll to selected person
+        }
+    }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.

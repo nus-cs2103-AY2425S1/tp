@@ -237,6 +237,13 @@ public class MainWindowNew extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            String[] feedbackToUser = commandResult.getFeedbackToUser().split(" ");
+            if (feedbackToUser[0].equals("Viewed")) {
+                int index = Integer.parseInt(commandText.split(" ")[1]);
+                System.out.println(index);
+                personListPanel.selectPersonAtIndex(index - 1);
+            }
+
             // Check if the commandText was the summary command and update the overview panel accordingly
             if (commandText.trim().equalsIgnoreCase("summary")) {
                 showSummaryInOverviewPanel();
