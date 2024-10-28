@@ -64,7 +64,10 @@ Action     | Format, Examples
 
 ## Features
 
-<box type="info"><md>**Notes about the command format:**</md><br>
+<box type="info">
+
+##### Notes about the command format
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -91,14 +94,14 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
 
 ### Adding a student: `add`
 
 Adds a student to the address book.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 **Example:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`
@@ -106,27 +109,28 @@ Adds a student to the address book.
 **Output:**
 ![addResult.jpeg](images/addResult.jpeg)
 
-<box type="important" header="##### Constraints">
+<box type="important">
 
-1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
-3. **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
-4. **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-5. **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
-      <i>Example: </i> `12.00`, `0.0` or `7`
-6. **SUBJECT** should only be:
+##### Constraints
+
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
+* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+* **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **RATE**, **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
+      <i>Example: </i> `12.00`, `0.0` or `7`.
+* **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
-`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics`  `GP`
+`English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
 
 </box>
 
-
 <box type="tip" header="##### Tips">
 
-1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit)
-2. <b>RATE</b> is the tuition fee per hour.
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
-</markdown>
+
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit).
+* <b>RATE</b> is the tuition fee per hour.
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
 
 ### Listing all students : `list`
@@ -139,32 +143,36 @@ Format: `list`
 
 Edits an existing student in the address book.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
+**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 **Examples:**
 
-`edit 1 p/87438808 e/alexyeoh100@example.com` </br> Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
+* `edit 1 p/87438808 e/alexyeoh100@example.com` edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
 
-`edit 2 paid/1200.00 owed/0` </br> Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+* `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+
+**Output:**
+
 ![editResult.png](images/editResult.png)
 
 <box type="important" header="##### Constraints">
 
-1. The <md>**INDEX**</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
 
-2. At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided. You may refer to
+[Constraints of Add command](#constraints) for acceptable values of each field.
 
-3. Existing values will be updated to the input values.
+* Existing values will be updated to the input values.
 </box>
 
 <box type="tip" header="##### Tips">
-<markdown>
+
+* You may refer to [`pay`](#receiving-payment-from-a-student--pay), 
+[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+for convenient ways to update the paid amount and owed amount.
+
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
-</markdown>
 </box>
-
-
-
 
 ### Showing income data: `income`
 
