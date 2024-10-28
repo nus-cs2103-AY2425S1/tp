@@ -26,6 +26,9 @@ public class ViewCommand extends Command {
 
     private final Nric nric;
 
+    /**
+     * Creates a ViewCommand to view the patient with the specified {@code Nric}.
+     */
     public ViewCommand(Nric nric) {
         this.nric = nric;
         assert nric != null : "Nric should not be null";
