@@ -61,7 +61,7 @@ public class ListClaimsCommand extends Command {
         Person person = getPersonByIndex(lastShownList, personIndex);
         Policy policy = getPolicyByType(person, policyType);
 
-        List<Claim> claims = policy.getClaimList().getList();
+        List<Claim> claims = policy.getList();
 
         if (claims.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_NO_CLAIMS, policyType, person.getName()));
