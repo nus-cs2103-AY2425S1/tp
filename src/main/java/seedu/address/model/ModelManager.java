@@ -134,12 +134,13 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Sorts the person list by deadline, whether it's filtered or full.
+     * Sorts the person list by deadline/name, whether it's filtered or full, then updates the address book
      */
     @Override
     public void sortByComparator(Comparator<Person> comparator) {
         currentComparator = comparator;
         sortedPersons.setComparator(comparator);
+        addressBook.setPersons(sortedPersons);
     }
 
     @Override
