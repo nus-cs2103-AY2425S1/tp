@@ -155,6 +155,23 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setLesson_setsLessonSuccessfully() {
+        // Arrange
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        modelManager.addLesson(lesson);
+        assertTrue(modelManager.hasLesson(lesson)); // Ensure the lesson was added
+
+        // Act
+        Lesson otherLesson = new LessonBuilder().withDate("2024-11-02").withTime("11:00").build();
+        modelManager.setLesson(lesson, otherLesson);
+
+        // Assert
+        assertFalse(modelManager.hasLesson(lesson)); // Ensure the lesson was edited
+        assertTrue(modelManager.hasLesson(otherLesson)); // Ensure the lesson is edited
+    }
+
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder()
                 .withStudent(ALICE).withStudent(BENSON)
