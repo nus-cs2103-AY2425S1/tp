@@ -103,7 +103,8 @@ Edits an existing elderly in ContactMate.
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
 * Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* The `NRIC` has to be a valid NRIC.
+* Both `NRIC`'s must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly to edit must exist in the person list.
 * At least one of the optional fields must be provided.
 * The existing values will be replaced with the new input values.
 * When editing tags, the existing tags of the elderly will be removed i.e adding of tags is not cumulative.
@@ -143,7 +144,8 @@ Format: `delete INDEX/NRIC`
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* The `NRIC` has to be a valid NRIC
+* `NRIC` must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly to delete must exist in the person list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
@@ -161,7 +163,8 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the person at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* The `NRIC` has to be a valid NRIC.
+* `NRIC` must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly to mark must exist in the person list.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
 
@@ -179,7 +182,8 @@ Format: `history INDEX/NRIC`
 * Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* The `NRIC` has to be a valid NRIC
+* `NRIC` must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly must exist in the person list.
 
 Examples:
 * `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
