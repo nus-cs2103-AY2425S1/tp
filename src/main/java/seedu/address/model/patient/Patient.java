@@ -63,7 +63,6 @@ public class Patient {
         this.note = null;
         this.nokName = null;
         this.nokPhone = null;
-        this.appts = null;
     }
 
     /**

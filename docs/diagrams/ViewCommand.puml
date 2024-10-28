@@ -1,20 +1,22 @@
-@startuml AddFCommand
+@startuml ViewCommand
 hide circle
 skinparam classAttributeIconSize 0
 
 Class "{abstract}\nCommand" as Command {
   +execute(Model): CommandResult
 }
-Class AddFCommand {
+
+Class ViewCommand {
   +COMMAND_WORD: String
-  +MESSAGE_SUCCESS: String
-  +MESSAGE_DUPLICATE_PATIENT: String
-  +toAdd: Patient
+  +MESSAGE_VIEW_SUCCESS: String
+  +MESSAGE_PATIENT_NOT_FOUND: String
+  +nric: Nric
   +execute(Model): CommandResult
 }
+
 Class CommandException
 
-AddFCommand -up-|> Command
+ViewCommand -up-|> Command
 Command ..> CommandException: throws >
-AddFCommand .right.> CommandException: throws >
+ViewCommand .right.> CommandException: throws >
 @enduml
