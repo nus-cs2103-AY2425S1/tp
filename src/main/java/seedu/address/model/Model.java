@@ -119,8 +119,7 @@ public interface Model {
      *
      * @param existingTag The tag to be renamed.
      * @param newTagName The new name of the tag after renaming.
-     * @return true if the tag was successfully renamed,
-     * false if the original tag does not exist.
+     * @return true if the tag was successfully renamed.
      */
     boolean renameTag(Tag existingTag, String newTagName);
 

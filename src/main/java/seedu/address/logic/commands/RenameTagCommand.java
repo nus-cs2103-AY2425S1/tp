@@ -12,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Renames a predefined tag.
+ */
 public class RenameTagCommand extends Command {
     public static final String COMMAND_WORD = "renametag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag.\n"
@@ -24,6 +27,10 @@ public class RenameTagCommand extends Command {
     private final Tag existingTag;
     private final String newTagName;
 
+    /**
+     * @param existingTag The tag to be renamed.
+     * @param newTagName The new name of the tag, after renaming.
+     */
     public RenameTagCommand(Tag existingTag, String newTagName) {
         requireAllNonNull(existingTag);
         this.existingTag = existingTag;
