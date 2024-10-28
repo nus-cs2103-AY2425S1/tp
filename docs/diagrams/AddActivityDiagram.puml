@@ -2,11 +2,15 @@
 'https://plantuml.com/activity-diagram-beta
 <style>
 activityDiagram {
+  FontSize 30
+  Bold true
+
   activity {
-    BackgroundColor #8bc7f0
+    BackgroundColor #ffffff
     BorderColor #33668E
     FontColor #000000
     FontName arial
+    FontSize 25
   }
 
   diamond {
@@ -20,57 +24,73 @@ activityDiagram {
   arrow {
     FontColor blue
     FontName arial
-    FontSize 15
+    FontSize 25
   }
+
+  partition {
+     BackgroundColor #e6f7ff
+     FontColor #003366
+     LineColor #33668E
+     FontName arial                // Sets the font style
+     FontSize 30
+     RoundCorner 10
+     Bold true
+   }
 }
 document {
    BackgroundColor transparent
 }
 </style>
 
-|#pink|Ui|
+|#f5e58c|UiManager|
 start
 :Accept user input command;
-|#green|Logic|
+|#C8C8FA|LogicManager|
 :Execute the input;
-|AddressBookParser|
 :Parse the input;
 if () then ([invalid command format])
-    |Ui|
+    |UiManager|
     :Show MESSAGE_INVALID_COMMAND_FORMAT;
     stop
+    |LogicManager|
 else ([else])
-    |AddCommandParser|
     :Parse the arguments;
-    if () then ([else])
-        |AddCommand|
-        :Create an AddCommand object;
-        :Execute AddCommand;
-        |Student|
-        :Create a student to be added;
-        |ModelManager|
-        :Check duplicates;
-        if () then ([else])
-            |AddressBook|
-            :Add the student to the address book;
-            |ModelManager|
-            :Update the filtered list with all students
-            including the new added one;
-            :Check clashing schedule;
-            if () then ([new schedule clashes])
-                |Ui|
-                :Show MESSAGE_HAS_CLASHES;
-            else ([else])
-            endif
-            :Show MESSAGE_SUCCESS of AddCommand;
-             stop
-        else ([student is already in the address book])
-            :Show MESSAGE_DUPLICATE;
+    if () then ([invalid arg format])
+        |UiManager|
+        :Show MESSAGE_USAGE
+        of AddCommand;
         stop
+    else ([else])
+        |LogicManager|
+        :Create an
+        AddCommand object;
+        :Execute
+        AddCommand;
+        |#F97181|ModelManager|
+        :Create a student to be added;
+        :Check duplicates;
+        if () then ([student's already in the address book])
+            |UiManager|
+            :Show MESSAGE_DUPLICATE;
+            stop
+        else ([else])
+            |ModelManager|
+            :Add the student
+            to the address book;
+            :Update the filtered list
+            with all students including
+            the new added one;
+            :Check clashing schedules;
+            if () then ([else])
+            else ([new schedule
+            clashes])
+                |UiManager|
+                :Show MESSAGE_HAS_CLASHES;
+            endif
+            :Show MESSAGE_SUCCESS
+            of AddCommand;
+            stop
         endif
-    else ([invalid arg format])
-        :Show MESSAGE_USAGE of AddCommand;
-    stop
 endif
 
 @enduml
