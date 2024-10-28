@@ -28,7 +28,6 @@ import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDe
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
-import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
