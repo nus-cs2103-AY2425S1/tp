@@ -37,7 +37,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                         : SortCommand.MESSAGE_USAGE_DESCENDING_MAIN;
 
             }
-             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT);
 
