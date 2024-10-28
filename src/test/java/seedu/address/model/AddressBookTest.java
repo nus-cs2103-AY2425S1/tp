@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConsultations.CONSULT_1;
+import static seedu.address.testutil.TypicalConsultations.CONSULT_2;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
 import java.util.Arrays;
@@ -18,6 +20,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.ConsultationBuilder;
@@ -50,7 +54,7 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withCourses(VALID_COURSE_CS2103T)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents, List.of());
+        AddressBookStub newData = new AddressBookStub(newStudents, List.of(), List.of());
 
         assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
     }
@@ -104,6 +108,29 @@ public class AddressBookTest {
         assertTrue(addressBook.hasConsult(copy));
     }
 
+    @Test
+    public void setConsult_allValidArguments_success() {
+        addressBook.addConsult(CONSULT_1);
+        assertTrue(addressBook.hasConsult(CONSULT_1));
+        assertFalse(addressBook.hasConsult(CONSULT_2));
+        addressBook.setConsult(CONSULT_1, CONSULT_2);
+        assertFalse(addressBook.hasConsult(CONSULT_1));
+        assertTrue(addressBook.hasConsult(CONSULT_2));
+    }
+
+    @Test
+    public void setConsult_nullArgument_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setConsult(null, null));
+        assertThrows(NullPointerException.class, () -> addressBook.setConsult(null, CONSULT_1));
+        assertThrows(NullPointerException.class, () -> addressBook.setConsult(CONSULT_1, null));
+    }
+
+    @Test
+    public void setConsult_consultNotFound_throwsConsultationNotFoundException() {
+        // Ensure consult does not exist in the address book
+        assertFalse(addressBook.hasConsult(CONSULT_1));
+        assertThrows(ConsultationNotFoundException.class, () -> addressBook.setConsult(CONSULT_1, CONSULT_2));
+    }
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
@@ -124,10 +151,12 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<Consultation> consults = FXCollections.observableArrayList();
+        private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students, Collection<Consultation> consults) {
+        AddressBookStub(Collection<Student> students, Collection<Consultation> consults, Collection<Lesson> lessons) {
             this.students.setAll(students);
             this.consults.setAll(consults);
+            this.lessons.setAll(lessons);
         }
 
         @Override
@@ -138,6 +167,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Consultation> getConsultList() {
             return consults;
+        }
+
+        @Override
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
         }
     }
 

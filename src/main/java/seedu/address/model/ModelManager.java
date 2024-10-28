@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
@@ -26,6 +27,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Consultation> filteredConsultations;
+    private final FilteredList<Lesson> filteredLessons;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultList());
+        filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
     }
 
     public ModelManager() {
@@ -154,10 +158,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setConsult(Consultation target, Consultation newConsult) {
+        requireAllNonNull(target, newConsult);
+        addressBook.setConsult(target, newConsult);
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
         return addressBook.hasConsult(consult);
     }
-    //=========== Consultation Methods =============================================================
 
     @Override
     public Optional<Student> findStudentByName(Name name) {
@@ -170,6 +179,36 @@ public class ModelManager implements Model {
     @Override
     public void deleteConsult(Consultation consult) {
         addressBook.removeConsult(consult);
+    }
+
+    // ========== Lesson Commands ==========
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        addressBook.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        addressBook.removeLesson(lesson);
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
     }
 
     @Override

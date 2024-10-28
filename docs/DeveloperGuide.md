@@ -87,9 +87,9 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here is a fuller diagram of how the `Logic` component might interact with adjacent classes:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/FullerLogicClassDiagram.png"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -357,7 +357,6 @@ The system aims to implement several safety features:
 - Validates filename for illegal characters
 - Prevents accidental file overwriting
 - Properly escapes special characters in CSV output
-- 
 2. Force Flag
 The `-f` flag allows overwriting of existing files:
 ```
@@ -667,9 +666,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. TA lists existing consultations
-2. TA selects consultation by index 
+2. TA selects consultation by index
 3. TA specifies students to remove by name
-4. System validates student existence in consultation 
+4. System validates student existence in consultation
 5. System removes specified students from consultation 
 6. Success message shown
 
