@@ -3,16 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.HashMap;
 import java.util.Map;
-import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents an insurance policy in the address book.
@@ -21,28 +20,25 @@ public class Policy {
     public static final String MESSAGE_CONSTRAINTS = "Policy details should be in the format 'policyName startDate "
             + "endDate' paydate amountDue, where dates are in 'yyyy-MM-dd' format.";
 
-    private static final String FULLY_PAID = "Fully Paid";
+    //private static final String FULLY_PAID = "Fully Paid";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//    private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
-//            + "to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})";
-   private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
 
-    // Format the regex pattern with the Fully Paid string
-    //private static String TOSTRINGFORMATTER = "(\\w[\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
-    //private static String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
+    private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
+            + "to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*"
+           + "(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
 
+    private static final String POLICY_NAME = "policyName"; // Policy name
+    private static final String START_DATE = "startDate"; // Start date of the policy
+    private static final String END_DATE = "endDate"; // End date of the policy
+    private static final String PAYMENT_DATE = "paymentDate"; // Date of the payment
+    private static final String PAYMENT_AMOUNT = "paymentAmount"; // Amount of the payment
 
     private final String policyName;
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final Payment payment;
 
-    private static final String POLICYNAME = "policyName";
-    private static final String STARTDATE = "startDate";
-    private static final String ENDDATE = "endDate";
-    private static final String PAYMENT_DATE = "paymentDate";
-    private static final String PAYMENT_AMOUNT = "paymentAmount";
 
     /**
      * Constructs a {@code Policy}.
@@ -71,9 +67,9 @@ public class Policy {
         checkArgument(isValidPolicy(policyDescription), MESSAGE_CONSTRAINTS);
         Map<String, String> policyDetails = extractPolicyDetails(policyDescription);
 
-        this.policyName = policyDetails.get(POLICYNAME);
-        this.startDate = parseDate(policyDetails.get(STARTDATE));
-        this.endDate = parseDate(policyDetails.get(ENDDATE));
+        this.policyName = policyDetails.get(POLICY_NAME);
+        this.startDate = parseDate(policyDetails.get(START_DATE));
+        this.endDate = parseDate(policyDetails.get(END_DATE));
         String paymentAmount = policyDetails.get(PAYMENT_AMOUNT);
         String paymentDate = policyDetails.get(PAYMENT_DATE);
 
@@ -130,9 +126,9 @@ public class Policy {
         if (policyDetails == null) {
             return false;
         }
-        String policyName = policyDetails.get(POLICYNAME);
-        String startDate = policyDetails.get(STARTDATE);
-        String endDate = policyDetails.get(ENDDATE);
+        String policyName = policyDetails.get(POLICY_NAME);
+        String startDate = policyDetails.get(START_DATE);
+        String endDate = policyDetails.get(END_DATE);
         String paymentAmount = policyDetails.get(PAYMENT_AMOUNT);
         String paymentDate = policyDetails.get(PAYMENT_DATE);
         System.out.println(paymentDate + " " + paymentAmount);
@@ -179,9 +175,9 @@ public class Policy {
 
         // If a match is found, extract and add details to the HashMap
         if (matcher.find()) {
-            policyDetails.put(POLICYNAME, matcher.group(1));
-            policyDetails.put(STARTDATE, matcher.group(2));
-            policyDetails.put(ENDDATE, matcher.group(3));
+            policyDetails.put(POLICY_NAME, matcher.group(1));
+            policyDetails.put(START_DATE, matcher.group(2));
+            policyDetails.put(END_DATE, matcher.group(3));
             if (matcher.group(4) != null && matcher.group(5) != null) {
                 // Handle the case when there is an amount due
                 policyDetails.put(PAYMENT_AMOUNT, matcher.group(4));

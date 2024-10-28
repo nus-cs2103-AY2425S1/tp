@@ -25,7 +25,7 @@ public class Payment {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private static final String FULLY_PAID_PAYMENT = BigDecimal.ZERO.toString() + " " + LocalDate.MAX.toString() ;
+    private static final String FULLY_PAID_PAYMENT = BigDecimal.ZERO.toString() + " " + LocalDate.MAX.toString();
 
     public final String value;
     private LocalDate paymentDueDate;
