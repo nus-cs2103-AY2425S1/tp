@@ -1,16 +1,20 @@
+#mainContainer {
+   -fx-background-color: #FFFAFA;
+}
+
 #contactLists {
-    -fx-padding: 0 0 7 0;
-    -fx-border-insets: 0 0 7 0;
-    -fx-background-insets: 0 0 7 0;
+    -fx-padding: 0 10 7 10;
+    -fx-border-insets: 0 10 7 10;
+    -fx-background-insets: 0 10 7 10;
 }
 
 #guestList, #vendorList {
     -fx-background-color: #F0A89F;
     -fx-background-radius: 10;
     -fx-background-insets: 10;
-    -fx-border-color: derive(#800000, 20%);
+    -fx-border-color: #6c4b47;
     -fx-border-insets: 10;
-    -fx-border-width: 1;
+    -fx-border-width: 2.35;
     -fx-border-radius: 10;
 }
 
@@ -39,6 +43,3 @@
     -fx-text-fill: white;
 }
 
-#commandBoxPlaceholder {
-    -fx-background-color: transparent;
-}

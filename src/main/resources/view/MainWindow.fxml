@@ -22,7 +22,7 @@
         <URL value="@ResultDisplay.css" />
       </stylesheets>
 
-      <VBox>
+      <VBox fx:id="mainContainer">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -34,18 +34,18 @@
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
-            <Insets top="10" right="10" bottom="5" left="10" />
+            <Insets top="13" right="20" bottom="5" left="20" />
           </padding>
         </StackPane>
 
         <VBox VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="120" prefHeight="120" maxHeight="120">
           <padding>
-            <Insets top="5" right="10" bottom="10" left="10" />
+            <Insets top="5" right="20" bottom="10" left="20" />
           </padding>
         </VBox>
 
-        <HBox fx:id="contactLists" VBox.vgrow="ALWAYS" styleClass="pane-with-border" spacing="-3">
+        <HBox fx:id="contactLists" VBox.vgrow="ALWAYS" styleClass="pane-with-border" spacing="3">
           <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
             <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
