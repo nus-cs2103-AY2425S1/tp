@@ -61,7 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS_WITH_WARNING = "Edited Person: %1$s\n"
             + "Warning: There is an existing person with the same name, phone number or email.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person (Same NRIC) already exists in the address book.";
 
     private final Index index;
     private final Nric nric;

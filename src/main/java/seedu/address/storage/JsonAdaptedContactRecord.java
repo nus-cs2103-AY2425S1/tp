@@ -47,6 +47,9 @@ public class JsonAdaptedContactRecord {
             throw new IllegalValueException(ContactRecord.MESSAGE_CONSTRAINTS);
         }
         LocalDate date = LocalDate.parse(this.date);
+        if (!ContactRecord.isCurrentOrPastDate(date)) {
+            throw new IllegalValueException(ContactRecord.MESSAGE_CONSTRAINTS_FUTURE_DATE);
+        }
         if (notes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "notes"));
         }

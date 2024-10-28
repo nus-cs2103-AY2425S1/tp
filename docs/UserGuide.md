@@ -179,7 +179,7 @@ Format: `history INDEX/NRIC`
 * Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
-* The NRIC has to be a valid NRIC
+* The `NRIC` has to be a valid NRIC
 
 Examples:
 * `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
@@ -204,6 +204,17 @@ Format: `exit`
 
 ### Navigating the Command History
 You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.
+
+### Duplicate detection
+Duplicate entries (elderly) are entries with the same NRIC (case-insensitive). ContactMate will not allow duplicate entries, and will stop you from adding (`add`) or editing (`edit`) an elderly if it would result in a duplicate entry.
+
+Examples:
+* `edit 1 i/S2208201I` followed by `edit 2 i/s2208201i` will result in an error message, as the NRIC `S2208201I` already exists.
+
+A weaker notion of duplication is that of entries with the same name, phone number or email (all case-insensitive). ContactMate will not prevent you from adding (`add`) or editing (`edit`) an elderly in this case, but will warn you that the entry is a potential duplicate.
+
+Examples:
+* `edit 1 n/John Doe` followed by `edit 2 n/John Doe` will result in a warning message, as the name `John Doe` already exists, but the edit will still be allowed.
 
 ### Saving the data
 

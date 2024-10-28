@@ -168,7 +168,11 @@ public class ParserUtil {
         if (!ContactRecord.isValidContactRecord(trimmedDate)) {
             throw new ParseException(ContactRecord.MESSAGE_CONSTRAINTS);
         }
-        return LocalDate.parse(trimmedDate);
+        LocalDate parsedDate = LocalDate.parse(trimmedDate);
+        if (!ContactRecord.isCurrentOrPastDate(parsedDate)) {
+            throw new ParseException(ContactRecord.MESSAGE_CONSTRAINTS_FUTURE_DATE);
+        }
+        return parsedDate;
     }
 
     /**
