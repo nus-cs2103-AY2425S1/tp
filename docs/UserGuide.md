@@ -251,8 +251,9 @@ Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CON
 Adds a wedding to PlanPerfect with the specified date. Optionally allows users to pre-assign contacts to the wedding.
 
 * Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
+* Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view
-  * IMPORTANT: If you want to pre-assign contacts, be sure to use `list` to view all contacts BEFORE adding a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
+  * IMPORTANT: If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the addw command to add a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
 
 Examples:
 * `addw n/Arif and Sonali Wedding d/30/04/2025`
@@ -294,9 +295,27 @@ Examples:
 
 ### Assign person to wedding : `assign`
 
+Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
+
+* Assigns contacts at the specified index's to the wedding at the specified `WEDDING_INDEX`.
+* The contact index refers to the index number of the contact in the overall `list` view of the wedding planner.
+* The contact index **must be a positive integer** 1, 2, 3, ...
+
+**Strongly Recommended:**
+Type `list` to execute the list command and see the overall contacts list to determine the correct index of the contact you are assigning.
+
 <br><br/>
 
 ### Unassign person from wedding : `unassign`
+
+Format: `unassign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
+
+* Unassigns contacts at the specified index's from the wedding at the specified `WEDDING_INDEX`.
+* The contact index refers to the index number of the contact in the particular wedding you are viewing.
+* The contact index **must be a positive integer** 1, 2, 3, ...
+
+**Caution:**
+You should be in the wedding that you are unassigning the contact from, unassigning contacts from another wedding will bring you to the other wedding's page.
 
 <br><br/>
 
