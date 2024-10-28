@@ -503,3 +503,87 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Using pay command
+
+1. Using pay command while all students are being shown. 
+   
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed. 
+
+    1. Test case: `pay 1 hr/1`<br>
+       Expected: Paid amount for 1st student increases by (1 hr * rate). UGTeach displays a message that 1st student paid (1 hr * rate).
+   
+    1. Test case: `pay 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message asking for positive multiple of 0.5 when inputting hours.
+
+    1. Test case: `pay 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+1. Using pay command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `pay 1 hr/1`<br>
+       Expected: Paid amount for 1st student in **filtered list** increases by (1 hr * rate). UGTeach displays a message that 1st student paid (1 hr * rate).
+
+    1. Test case: `pay 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message asking for positive multiple of 0.5 when inputting hours.
+
+    1. Test case: `pay 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+### Using owe command
+
+1. Using owe command while all students are being shown.
+
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
+
+    1. Test case: `owe 1 hr/1`<br>
+       Expected: Owed amount for 1st student increases by (1 hr * rate). UGTeach displays a message that 1st student owed another (1 hr * rate).
+
+    1. Test case: `owe 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message asking for positive multiple of 0.5 when inputting hours.
+
+    1. Test case: `owe 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+1. Using owe command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `owe 1 hr/1`<br>
+       Expected: Owed amount for 1st student in **filtered list** increases by (1 hr * rate). UGTeach displays a message that 1st student owed another (1 hr * rate).
+
+    1. Test case: `owe 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message asking for positive multiple of 0.5 when inputting hours.
+
+    1. Test case: `owe 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+### Using settle command
+
+1. Using settle command while all students are being shown.
+
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
+
+    1. Test case: `settle 1 amount/10`<br>
+       Expected: For 1st student, Assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
+
+    1. Test case: `settle 1 amount/-10`<br>
+       Expected: No changes. UGTeach displays error message that amount needs to be positive.
+
+    1. Test case: `settle 0 amount/10`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+1. Using settle command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `settle 1 amount/10`<br>
+       Expected: For 1st student in **filtered list**, assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
+
+    1. Test case: `settle 1 amount/-10`<br>
+       Expected: No changes. UGTeach displays error message that amount needs to be positive.
+
+    1. Test case: `settle 0 amount/10`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
