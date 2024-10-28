@@ -85,6 +85,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Student> getFilteredStudentList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -146,11 +151,6 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public void setLesson(Lesson target, Lesson editedLesson) {
         throw new AssertionError("This method should not be called.");
     }
 }

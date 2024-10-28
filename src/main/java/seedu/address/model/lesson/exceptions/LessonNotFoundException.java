@@ -1,10 +1,10 @@
 package seedu.address.model.lesson.exceptions;
 
 /**
- * Signals that the operation is unable to find the specified lesson.
+ * Signals that the specified lesson could not be found in the list.
  */
 public class LessonNotFoundException extends RuntimeException {
     public LessonNotFoundException() {
-        super("Lesson not found in the address book.");
+        super("Lesson not found in the list");
     }
 }
