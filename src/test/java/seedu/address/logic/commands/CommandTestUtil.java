@@ -100,7 +100,7 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_ALAN = " " + PREFIX_PHONE + VALID_PHONE_ALAN;
     public static final String PHONE_DESC_BRENDA = " " + PREFIX_PHONE + VALID_PHONE_BRENDA;
     public static final String ADDRESS_DESC_ALAN = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALAN;
-public static final String ADDRESS_DESC_BRENDA = " " + PREFIX_ADDRESS + VALID_ADDRESS_BRENDA;
+    public static final String ADDRESS_DESC_BRENDA = " " + PREFIX_ADDRESS + VALID_ADDRESS_BRENDA;
     public static final String ASKING_PRICE_DESC_ALAN = " " + PREFIX_ASKING_PRICE + VALID_ASKING_PRICE_ALAN;
     public static final String ASKING_PRICE_DESC_BRENDA = " " + PREFIX_ASKING_PRICE + VALID_ASKING_PRICE_BRENDA;
     public static final String PROPERTY_TYPE_DESC_ALAN = " " + PREFIX_TYPE + VALID_PROPERTY_TYPE_ALAN;
@@ -125,7 +125,7 @@ public static final String ADDRESS_DESC_BRENDA = " " + PREFIX_ADDRESS + VALID_AD
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // Empty address not allowed
     public static final String INVALID_ASKING_PRICE_DESC = " " + PREFIX_ASKING_PRICE
             + "-1"; // negative integer not allowed for asking price
-    public static final String INVALID_PROPERTY_TYPE_DESC = " " + PREFIX_TYPE + "@@@abc"; // '@' not allowed
+    public static final String INVALID_PROPERTY_TYPE_DESC = " " + PREFIX_TYPE; // Empty property type not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

@@ -3,8 +3,8 @@ package seedu.address.storage.property;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.property.TypicalProperties.AMY;
-import static seedu.address.testutil.property.TypicalProperties.BOB;
+import static seedu.address.testutil.property.TypicalProperties.ALAN;
+import static seedu.address.testutil.property.TypicalProperties.BRENDA;
 import static seedu.address.testutil.property.TypicalProperties.CARL;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
@@ -72,14 +72,14 @@ public class JsonPropertyListStorageTest {
         assertEquals(original, new PropertyList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addProperty(BOB);
+        original.addProperty(BRENDA);
         original.removeProperty(CARL);
         jsonPropertyListStorage.savePropertyList(original, filePath);
         readBack = jsonPropertyListStorage.readPropertyList(filePath).get();
         assertEquals(original, new PropertyList(readBack));
 
         // Save and read without specifying file path
-        original.addProperty(AMY);
+        original.addProperty(ALAN);
         jsonPropertyListStorage.savePropertyList(original); // file path not specified
         readBack = jsonPropertyListStorage.readPropertyList().get(); // file path not specified
         assertEquals(original, new PropertyList(readBack));
