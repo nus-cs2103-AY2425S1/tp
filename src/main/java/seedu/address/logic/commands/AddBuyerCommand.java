@@ -34,7 +34,8 @@ public class AddBuyerCommand extends AddClientCommand {
     public static final String MESSAGE_SUCCESS_BUYER = "New buyer added: %1$s";
 
     /** Error message shown when attempting to add a duplicate buyer. */
-    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_BUYER = "A buyer with this phone number "
+            + "already exists in the address book";
 
     /** Logger to log relevant information for debugging purposes. */
     private static final Logger logger = LogsCenter.getLogger(AddBuyerCommand.class);
