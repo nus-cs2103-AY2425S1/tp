@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_ARGUMENT_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.FindPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.FindPatientPredicate;
@@ -26,12 +24,10 @@ public class FindPatientCommandParser implements Parser<FindPatientCommand> {
         }
 
         // Ensure that the input is a string of alphabets separated by spaces
-        if (args.matches("^.*[^a-zA-Z ].*$")) {
+        if (trimmedArgs.matches("^.*[^a-zA-Z ].*$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_ARGUMENT_FORMAT, FindPatientCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindPatientCommand(new FindPatientPredicate(Arrays.asList(nameKeywords)));
+        return new FindPatientCommand(new FindPatientPredicate(trimmedArgs));
     }
 }
