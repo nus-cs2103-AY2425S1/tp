@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.storage.Storage;
 
@@ -77,6 +78,10 @@ public class LogicManager implements Logic {
         return model.getFilteredConsultationList();
     }
 
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return model.getFilteredLessonList();
+    }
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
