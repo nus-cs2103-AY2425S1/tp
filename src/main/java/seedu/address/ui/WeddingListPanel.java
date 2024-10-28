@@ -30,11 +30,9 @@ public class WeddingListPanel extends UiPart<Region> {
     public WeddingListPanel(ObservableList<Wedding> weddingList, ObjectProperty<WeddingName> currentWeddingName) {
         super(FXML);
 
-        StringBinding weddingNameBinding = Bindings.createStringBinding(
-                () -> currentWeddingName.get() == null
+        StringBinding weddingNameBinding = Bindings.createStringBinding(() -> currentWeddingName.get() == null
                         ? "Not viewing any wedding"
-                        : "Viewing: " + currentWeddingName.getValue().toString(), currentWeddingName
-        );
+                        : "Viewing: " + currentWeddingName.getValue().toString(), currentWeddingName);
 
         // Set up then bind the CurrentWeddingNameCard
         CurrentWeddingNameCard currentWeddingNameCard = new CurrentWeddingNameCard();

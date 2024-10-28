@@ -14,9 +14,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
