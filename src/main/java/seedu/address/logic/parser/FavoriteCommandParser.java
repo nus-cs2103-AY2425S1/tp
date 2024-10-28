@@ -7,8 +7,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FavoriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new FavoriteCommand object.
+ */
 public class FavoriteCommandParser implements Parser<FavoriteCommand> {
 
+    /**
+     * Parses the given arguments and returns a FavoriteCommand.
+     *
+     * @param args The input arguments provided by the user.
+     * @return A FavoriteCommand object based on the parsed index.
+     * @throws ParseException If the arguments are in an invalid format or if parsing fails.
+     */
     @Override
     public FavoriteCommand parse(String args) throws ParseException {
         requireNonNull(args);
