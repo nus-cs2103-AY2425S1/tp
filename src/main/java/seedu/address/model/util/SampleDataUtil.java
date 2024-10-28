@@ -18,6 +18,10 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    /**
+     * Returns an array of pre-defined sample restaurants.
+     * @return
+     */
     public static Restaurant[] getSampleRestaurants() {
         return new Restaurant[] {
             new Restaurant(new Name("Swenswen"), new Phone("87438807"), new Email("sowhen@idk.com"),
@@ -32,15 +36,18 @@ public class SampleDataUtil {
             new Restaurant(new Name("Heavens Kitchen"), new Phone("91031282"), new Email("idiotsandwich@gr.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Rating(3),
                 getTagSet("family", "$$$")),
-            new Restaurant(new Name("McDonkey"), new Phone("92492021"), new Email("parapapapa@mc.com"),
+            new Restaurant(new Name("McDonkey"), new Phone("92492021"), new Email("parapapapa@mcdonkey.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Rating(4),
-                getTagSet("classmates")),
-            new Restaurant(new Name("Mookantang"), new Phone("92624417"), new Email("moomoo@kt.com"),
+                getTagSet("classmates", "$")),
+            new Restaurant(new Name("Mookantang"), new Phone("92624417"), new Email("moomoo@moomookt.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Rating(5),
-                getTagSet("colleagues"))
+                getTagSet("colleagues","$$$" ))
         };
     }
 
+    /**
+     * Returns an address book containing the sample data.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Restaurant sampleRestaurant : getSampleRestaurants()) {
