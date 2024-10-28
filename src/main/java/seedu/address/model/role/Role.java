@@ -43,9 +43,9 @@ public class Role {
             return false;
         }
 
-        Role otherTag = (Role) other;
+        Role otherRole = (Role) other;
         return roleName.toLowerCase()
-                .equals(otherTag.roleName.toLowerCase());
+                .equals(otherRole.roleName.toLowerCase());
     }
 
     @Override
