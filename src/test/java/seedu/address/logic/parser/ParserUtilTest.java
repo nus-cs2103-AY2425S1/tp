@@ -243,8 +243,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseDeliveryAttribute_knownAttributeWithGibberishBehindAndWhiteSpaceInFront_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute(WHITESPACE + VALID_DELIVERY_ATTRIBUTE_ADDRESS
-                + WHITESPACE + "gamer" + WHITESPACE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute(WHITESPACE
+                + VALID_DELIVERY_ATTRIBUTE_ADDRESS + WHITESPACE + "gamer" + WHITESPACE));
     }
 
     @Test
