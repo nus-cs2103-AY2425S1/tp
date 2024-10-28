@@ -73,6 +73,13 @@ public class ModelManager implements Model {
         PROPERTIES
     }
 
+    /**
+     * A wrapper for the display mode of the application.
+     * <p>
+     * The initial display mode is set to CLIENTS to ensure that the client grid
+     * displays both buyers and sellers upon startup, which aligns with the expected
+     * behavior of the application.
+     */
     private final ReadOnlyObjectWrapper<DisplayMode> displayMode = new ReadOnlyObjectWrapper<>(DisplayMode.CLIENTS);
 
     /**
