@@ -41,6 +41,16 @@ public class Time {
                 + "To: " + endTime.format(formatter);
     }
 
+    /**
+     * Returns true if a given {@code Time} overlaps with this {@code Time}.
+     */
+    public boolean isOverlap(Time other) {
+        if (this.endTime.isBefore(other.startTime) || this.startTime.isAfter(other.endTime)) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "From: " + startTime.format(formatter) + " "

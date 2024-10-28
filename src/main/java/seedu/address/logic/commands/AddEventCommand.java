@@ -48,7 +48,8 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event  already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
     private final EventName eventName;
     private final Time time;
     private final Venue venue;
@@ -85,6 +86,10 @@ public class AddEventCommand extends AddCommand {
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+        if (model.hasEventOverlap(toAdd)) {
+            throw new CommandException(String.format(MESSAGE_EVENT_OVERLAP, celebrity.getName().fullName));
         }
 
         model.addEvent(toAdd);
