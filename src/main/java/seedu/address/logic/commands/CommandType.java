@@ -16,6 +16,7 @@ public enum CommandType {
     FINDSTUDENT,
     DELETESTUDENT,
     EXPORTSTUDENT,
+    IMPORTSTUDENT,
 
     // Command Type for Consultations TODO
     ADDCONSULT,
@@ -28,5 +29,7 @@ public enum CommandType {
     // Command Type for Lesson
     ADDLESSON,
     DELETELESSON,
-    LISTLESSONS
+    LISTLESSONS,
+    ADDTOLESSON,
+    REMOVEFROMLESSON
 }
