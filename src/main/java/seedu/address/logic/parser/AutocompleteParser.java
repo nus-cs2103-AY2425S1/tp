@@ -295,7 +295,7 @@ public class AutocompleteParser {
     }
 
     /**
-     * checks if the given file is a json file.
+     * Checks if the given file is a json file.
      * @param file the file to check
      * */
     private boolean isJson(File file) {
