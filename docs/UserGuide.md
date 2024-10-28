@@ -230,7 +230,7 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 **Examples:**<br>`settle 1 amount/500.00`
 
 **Output:**
-![settleResult.png](images%2FsettleResult.png)
+![settleResult.jpg](images%2FsettleResult.jpg)
 
 <box type="important" header="#### Constraints">
 
