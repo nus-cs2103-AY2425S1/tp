@@ -33,12 +33,12 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_RSVP + "RSVP] "
             + "[" + PREFIX_RELATION + "RELATION] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_BUDGET + "BUDGET]...\n"
-            + "Note: Only 1 prefix can be specified per command use!\n"
+            + "[" + PREFIX_BUDGET + "BUDGET] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Note: Only 1 type of prefix can be specified per command use!\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Amy";
 
 

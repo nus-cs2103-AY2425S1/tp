@@ -187,11 +187,17 @@ Entering the `list` command returns the following result on your screen:
 
 ### Finding a person : `find`
 
-Finds guests and vendors from the guest list and vendor list respectively that match a given a keyword.
+Finds guests and vendors that match any of the given keyword(s).
 
-* :warning: You may only search for guests/vendors with up to one keyword at a time.
+**Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [company/COMPANY] [b/BUDGET] [t/TAG]...`
 
-**Format:** `find n/Amy`
+:warning: Only one type of prefix should be used for each find command.
+- Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
+- The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
+- The search is case-insensitive for all fields (e.g. `jOhN` will match `John`)
+- The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`
+- Only full words will be matched e.g. `Jo` will not match `John`
+- Guest/Vendor matching **any** of the keywords will be returned (e.g. `John Tan` will return `John Doe` and `Alan Tan`)
 
 Entering the `find` command returns the following result on your screen:
 
@@ -400,7 +406,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 | **Delete Vendor** | `delete_vendor INDEX` <br> e.g., `delete_vendor 1`                                                                                                                                                                     |
 | **Help**          | `help`                                                                                                                                                                                                                 |
 | **List**          | `list`                                                                                                                                                                                                                 |
-| **Find**          | `find PREFIX KEYWORD`<br> e.g., `find n/James`                                                                                                                                                                         |
+| **Find**          | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [company/COMPANY] [b/BUDGET] [t/TAG]...`<br> e.g., `find n/James`                                                                                                                                                                         |
 | **Clear**         | `clear`                                                                                                                                                                                                                |
 | **Stats**         | `stats`                                                                                                                                                                                                                |
 | **Exit**          | `exit`                                                                                                                                                                                                                 |
