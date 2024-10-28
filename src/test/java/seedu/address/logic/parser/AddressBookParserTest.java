@@ -73,7 +73,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_welcome() throws Exception {
-        assertTrue(parser.parseCommand(WelcomeCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(WelcomeCommand.COMMAND_WORD) instanceof WelcomeCommand);
     }
 
     @Test
