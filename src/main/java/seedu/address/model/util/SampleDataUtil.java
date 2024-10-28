@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -47,13 +48,16 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-            new Event(new EventName("Oscars"), new Time("2021-10-01 14:00"),
+            new Event(new EventName("Oscars"), new Time(LocalDateTime.parse("2015-02-20T06:30:00"),
+                    LocalDateTime.parse("2015-02-20T07:30:00")),
                 new Venue("Hollywood"), getSamplePersons()[0],
                 List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
-            new Event(new EventName("Photo Shoot"), new Time("2021-10-02 14:00"),
+            new Event(new EventName("Photo Shoot"), new Time(LocalDateTime.parse("2015-03-20T06:30:00"),
+                    LocalDateTime.parse("2015-03-20T07:30:00")),
                 new Venue("Park"), getSamplePersons()[1],
                 List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
-            new Event(new EventName("Brand Event"), new Time("2021-10-03 14:00"),
+            new Event(new EventName("Brand Event"), new Time(LocalDateTime.parse("2015-04-20T06:30:00"),
+                    LocalDateTime.parse("2015-04-20T07:30:00")),
                 new Venue("Mall"), getSamplePersons()[1],
                 List.of(getSamplePersons()[2], getSamplePersons()[3], getSamplePersons()[4])),
         };

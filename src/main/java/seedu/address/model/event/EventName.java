@@ -34,7 +34,7 @@ public class EventName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof EventName)) {
             return false;
         }
 

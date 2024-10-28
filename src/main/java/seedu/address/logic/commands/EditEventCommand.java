@@ -45,7 +45,7 @@ public class EditEventCommand extends EditCommand {
             + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY]...\n"
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD + " 1 "
-            + PREFIX_EVENT_TIME + "Oct 4th 2022 "
+            + PREFIX_EVENT_TIME + "From: 2024-03-01 13:10, To: 2024-03-01 19:30  "
             + PREFIX_EVENT_VENUE + "Broadway "
             + PREFIX_EVENT_CELEBRITY + "Jack Black "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";

@@ -40,9 +40,9 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_EVENT_NAME + "Oscars "
-            + PREFIX_EVENT_TIME + "Sep 22 2024 1800 to 2200 "
+            + PREFIX_EVENT_TIME + "from: 2024-03-01 12:10, to: 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
+            + PREFIX_EVENT_CELEBRITY + "John Doe "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
