@@ -16,6 +16,7 @@ import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new EditListingCommand object
@@ -32,10 +33,14 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION);
 
-        Index index;
+        Name listingName;
+
+        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
+        }
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            listingName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE), pe);
         }
@@ -62,6 +67,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditListingCommand(index, editListingDescriptor);
+        return new EditListingCommand(listingName, editListingDescriptor);
     }
 }

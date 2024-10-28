@@ -13,7 +13,6 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Address;
@@ -46,20 +45,20 @@ public class EditListingCommand extends Command {
     public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
     public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in the system.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_LISTING_INDEX = "The listing index provided is invalid.";
+    public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
 
-    private final Index index;
+    private final Name listingName;
     private final EditListingDescriptor editListingDescriptor;
 
     /**
-     * @param index of the listing in the filtered listing list to edit
+     * @param listingName of the listing in the filtered listing list to edit
      * @param editListingDescriptor details to edit the listing with
      */
-    public EditListingCommand(Index index, EditListingDescriptor editListingDescriptor) {
-        requireNonNull(index);
+    public EditListingCommand(Name listingName, EditListingDescriptor editListingDescriptor) {
+        requireNonNull(listingName);
         requireNonNull(editListingDescriptor);
 
-        this.index = index;
+        this.listingName = listingName;
         this.editListingDescriptor = new EditListingDescriptor(editListingDescriptor);
     }
 
@@ -68,11 +67,15 @@ public class EditListingCommand extends Command {
         requireNonNull(model);
         List<Listing> lastShownList = model.getFilteredListingList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_LISTING_INDEX);
+        Listing listingToEdit = lastShownList.stream()
+                .filter(listing -> listing.getName().equals(listingName))
+                .findFirst()
+                .orElse(null);
+
+        if (listingToEdit == null) {
+            throw new CommandException(MESSAGE_INVALID_LISTING_NAME);
         }
 
-        Listing listingToEdit = lastShownList.get(index.getZeroBased());
         Listing editedListing = createEditedListing(listingToEdit, editListingDescriptor);
 
         if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
@@ -106,12 +109,11 @@ public class EditListingCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof EditListingCommand)) {
+        if (!(other instanceof EditListingCommand otherEditCommand)) {
             return false;
         }
 
-        EditListingCommand otherEditCommand = (EditListingCommand) other;
-        return index.equals(otherEditCommand.index)
+        return listingName.equals(otherEditCommand.listingName)
                 && editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
     }
 
