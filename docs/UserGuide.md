@@ -108,9 +108,9 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
 * The `BUYER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
-* The `BUYER_EMAIL` should be of the format local-part@domain "
-  + "and adhere to the following constraints: 
-  * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters and must not contain consecutive special characters.
+* The `BUYER_EMAIL` should be of the format local-part@domain and adhere to the following constraints: 
+  * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
+    * The local-part may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
   * The domain name must:
     * end with a domain label at least 2 characters long 
