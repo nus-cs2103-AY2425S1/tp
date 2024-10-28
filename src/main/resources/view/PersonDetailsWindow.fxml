@@ -22,10 +22,6 @@
                            style="-fx-text-fill: white;"/>
                     <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                    <Label fx:id="favoriteLabel" GridPane.rowIndex="0" GridPane.columnIndex="2"
-                           style="-fx-text-fill: gold; -fx-font-size: 20; -fx-font-weight: bold;"
-                           text="★" visible="true"/>
-
                     <Label text="Phone:" GridPane.rowIndex="1" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
                     <TextField fx:id="phoneField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
