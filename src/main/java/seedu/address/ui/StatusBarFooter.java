@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
 /**
- * A ui for the status bar that is displayed at the footer of the application.
+ * A ui for the status bar that is displayed at the footer of the application. Status Footer.
  */
 public class StatusBarFooter extends UiPart<Region> {
 
