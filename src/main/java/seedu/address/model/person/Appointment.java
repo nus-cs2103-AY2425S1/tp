@@ -81,6 +81,7 @@ public class Appointment {
                 && Objects.equals(remarks, appointment.remarks);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
