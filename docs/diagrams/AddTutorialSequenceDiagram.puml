@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTutorialCommandParser" as AddTutorialCommandParser LOGIC_COLOR
+participant "command:AddTutorialCommand" as AddTutorialCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addTut tn/CS2103T id/T1001")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addTut tn/CS2103T id/T1001")
+activate AddressBookParser
+
+create AddTutorialCommandParser
+AddressBookParser -> AddTutorialCommandParser
+activate AddTutorialCommandParser
+
+AddTutorialCommandParser --> AddressBookParser
+deactivate AddTutorialCommandParser
+
+AddressBookParser -> AddTutorialCommandParser : parse("tn/CS2103T id/T1001")
+activate AddTutorialCommandParser
+
+create AddTutorialCommand
+AddTutorialCommandParser -> AddTutorialCommand
+activate AddTutorialCommand
+
+AddTutorialCommand --> AddTutorialCommandParser :
+deactivate AddTutorialCommand
+
+AddTutorialCommandParser --> AddressBookParser : command
+deactivate AddTutorialCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTutorialCommandParser -[hidden]-> AddressBookParser
+destroy AddTutorialCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> AddTutorialCommand : execute(model)
+activate AddTutorialCommand
+
+AddTutorialCommand -> Model : addTutorial("CS2103T", "T1001")
+activate Model
+
+Model --> AddTutorialCommand
+deactivate Model
+
+create CommandResult
+AddTutorialCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTutorialCommand
+deactivate CommandResult
+
+AddTutorialCommand --> LogicManager : commandResult
+deactivate AddTutorialCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
