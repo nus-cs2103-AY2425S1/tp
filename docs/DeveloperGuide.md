@@ -158,7 +158,58 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Tag Feature - Level and Subject Tagging
+This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and 
+subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can 
+manage student profiles more efficiently.
+
+- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
+  tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
+- **Invalid Input**: If an invalid student name, level, or subject is provided, the system displays the constraints and 
+  guidelines for tag parameters.
+- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
+  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
+  duplication.
+
+#### Implementation - Sequence Diagrams
+The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note 
+that while the TagCommandParser lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
+lifeline till the diagram's end.
+
+<puml src="diagrams/TagSequenceDiagram-Logic.puml" alt="TagSequenceDiagram-Logic" />
+
+<puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
+
+#### Design Considerations
+**Parsing Tag Input**
+
+- **Current Implementation (Alternative 1):**
+    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved 
+      maintainability and modularity.
+    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a 
+      consistent approach across commands.
+    - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
+
+- **Alternative 2**:
+    - **Description**: Validation occurs directly within TagCommandParser.
+    - **Pros**: Keeps validation localized within the tag command, reducing dependencies on external classes.
+    - **Cons**: Creates inconsistency across the codebase, making validation logic less reusable and harder to maintain.
+
+**Design of Tag Constraints**
+- **Current Implementation (Alternative 1)**:
+    - Description: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1` and `s1` are 
+      treated as identical, and `math` and `MATH` are treated as identical).
+    - Pros: Enforces a standardized format for tags, ensuring brevity and uniformity.
+    - Cons: Reduces user flexibility in customizing tags.
+
+- **Alternative 2**:
+    - Description: Users can create tags without specific constraints.
+    - Pros: Provides greater flexibility for users to create custom tags. 
+    - Cons: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
+
+***
+
+### \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
@@ -248,13 +299,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
