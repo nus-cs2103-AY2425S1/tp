@@ -90,7 +90,15 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    void sortPersonList(Comparator<Person> comparator);
+    /**
+     * Sorts the list of contacts by specified field and order saved in the address book.
+     */
+    void sortPersonList();
+
+    /**
+     * Sorts the list of contacts by specified field and order in the provided comparator.
+     */
+    void sortPersonListWithComparator(Comparator<Person> comparator);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
