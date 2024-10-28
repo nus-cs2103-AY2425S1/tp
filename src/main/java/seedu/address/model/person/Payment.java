@@ -21,7 +21,11 @@ public class Payment {
      */
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d+(\\.\\d{1,2})?";
 
+
+
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private static final String FULLY_PAID_PAYMENT = BigDecimal.ZERO.toString() + " " + LocalDate.MAX.toString() ;
 
     public final String value;
     private LocalDate paymentDueDate;
@@ -36,16 +40,27 @@ public class Payment {
         requireNonNull(insurancePayment);
         checkArgument(isValidInsurancePayment(insurancePayment), MESSAGE_CONSTRAINTS);
         value = insurancePayment;
-        String[] parts = insurancePayment.trim().split("\\s+");
-        paymentDueDate = LocalDate.parse(parts[0], DATE_FORMATTER);
-        amount = new BigDecimal(parts[1]);
+        if (value.equals(FULLY_PAID_PAYMENT)) {
+            paymentDueDate = LocalDate.MAX;
+            amount = BigDecimal.ZERO;
+        } else {
+            String[] parts = insurancePayment.trim().split("\\s+");
+            paymentDueDate = LocalDate.parse(parts[0], DATE_FORMATTER);
+            amount = new BigDecimal(parts[1]);
+        }
     }
+
+
+
 
     /**
      * Returns true if a given string is a valid insurance payment.
      */
     public static boolean isValidInsurancePayment(String test) {
         requireNonNull(test);
+        if (test.equals(FULLY_PAID_PAYMENT)) {
+            return true;
+        }
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -81,7 +96,7 @@ public class Payment {
     @Override
     public String toString() {
         if (amount.equals(BigDecimal.ZERO) || paymentDueDate.equals(LocalDate.MAX)) {
-            return "Fully paid";
+            return "Fully Paid";
         }
         return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
