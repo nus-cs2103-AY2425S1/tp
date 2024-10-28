@@ -52,6 +52,7 @@ public class EditEventCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
+    public static final String MESSAGE_EVENT_OVERLAP = "This event clashes with another event";
 
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
@@ -95,6 +96,10 @@ public class EditEventCommand extends EditCommand {
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+        if (!eventToEdit.isSameEvent(editedEvent) && model.hasEventOverlap(editedEvent)) {
+            throw new CommandException(MESSAGE_EVENT_OVERLAP);
         }
 
         model.setEvent(eventToEdit, editedEvent);
