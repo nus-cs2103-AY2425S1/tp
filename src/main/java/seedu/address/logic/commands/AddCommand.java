@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE + "AGE "
             + "[" + PREFIX_DETAIL + "DETAIL] "
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG]..."
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG]..."
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

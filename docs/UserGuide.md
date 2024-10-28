@@ -109,7 +109,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by criteria: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -117,7 +117,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -126,20 +125,23 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX [INDEX...]` or `delete INDEX-INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` or range of indices.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* When using ranges, ensure there are **no spaces** around the hyphen (e.g., 1-5 is valid, while 1 - 5 is not).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 1 3 5-7` deletes the 1st, 3rd, and persons from the 5th to the 7th
 
 ### Clearing all entries : `clear`
 
