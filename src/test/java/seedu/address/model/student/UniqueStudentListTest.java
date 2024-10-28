@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 import seedu.address.testutil.StudentBuilder;
 
 public class UniqueStudentListTest {
@@ -171,5 +174,21 @@ public class UniqueStudentListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueStudentList.asUnmodifiableObservableList().toString(), uniqueStudentList.toString());
+    }
+
+    @Test
+    public void equals() {
+        // null -> returns false
+        assertFalse(uniqueStudentList.equals(null));
+
+        // same object -> returns true
+        assertTrue(uniqueStudentList.equals(uniqueStudentList));
+
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList otherList = new UniqueStudentList();
+        otherList.add(ALICE);
+
+        // same values -> returns true
+        assertTrue(uniqueStudentList.equals(otherList));
     }
 }

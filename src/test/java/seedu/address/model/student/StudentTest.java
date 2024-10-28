@@ -3,10 +3,7 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
@@ -82,6 +79,22 @@ public class StudentTest {
 
         // different address -> returns false
         updatedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.equals(updatedAlice));
+
+        // different emergency contact -> returns false
+        updatedAlice = new StudentBuilder(ALICE).withEmergencyContact("98887777").build();
+        assertFalse(ALICE.equals(updatedAlice));
+
+        // different note -> returns false
+        updatedAlice = new StudentBuilder(ALICE).withNote("on skibidi").build();
+        assertFalse(ALICE.equals(updatedAlice));
+
+        // different level -> returns false
+        updatedAlice = new StudentBuilder(ALICE).withLevel(VALID_LEVEL_S4_NT).build();
+        assertFalse(ALICE.equals(updatedAlice));
+
+        // different lesson time -> returns false
+        updatedAlice = new StudentBuilder(ALICE).withLessonTimes(VALID_LESSON_TIME).build();
         assertFalse(ALICE.equals(updatedAlice));
 
         // different subjects -> returns false
