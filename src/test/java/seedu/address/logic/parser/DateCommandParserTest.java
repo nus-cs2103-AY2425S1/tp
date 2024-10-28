@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.time.LocalDateTime;
 
 
 public class DateCommandParserTest {
@@ -29,8 +30,8 @@ public class DateCommandParserTest {
     // Valid date parsing test
     @Test
     public void parseDateTime_validDate_returnsLocalDateTime() throws ParseException {
-        assertEquals(LocalDateTime.of(2024, 2, 29, 18, 0)
-                , parser.parseDateString("29/2/2024 1800"));
+        assertEquals(LocalDateTime.of(2024, 2, 29, 18, 0),
+                parser.parseDateString("29/2/2024 1800"));
     }
 
     // Leap year checks
@@ -49,34 +50,33 @@ public class DateCommandParserTest {
     // Month-end validations
     @Test
     public void parseDateTime_invalid31stApril_throwsParseException() {
-        ParseException thrown = assertThrows(ParseException.class,
-                () -> parser.parseDateString("31/4/2024 1200"));
+        ParseException thrown =
+                assertThrows(ParseException.class, () -> parser.parseDateString("31/4/2024 1200"));
         assertEquals("Invalid date: APRIL cannot have more than 30 days.", thrown.getMessage());
     }
 
     @Test
     public void parseDateTime_invalid31stJune_throwsParseException() {
-        ParseException thrown = assertThrows(ParseException.class,
-                () -> parser.parseDateString("31/6/2024 1200"));
+        ParseException thrown =
+                assertThrows(ParseException.class, () -> parser.parseDateString("31/6/2024 1200"));
         assertEquals("Invalid date: JUNE cannot have more than 30 days.", thrown.getMessage());
     }
 
     // Invalid formats
     @Test
     public void parseDateTime_invalidFormat_throwsParseException() {
-        ParseException thrown = assertThrows(ParseException.class,
-                () -> parser.parseDateString("12-31-2024 1200"));
+        ParseException thrown =
+                assertThrows(ParseException.class, () -> parser.parseDateString("12-31-2024 1200"));
         assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. "
-                        + "For example, '2/12/2024 1800'.",
-                thrown.getMessage());
+                        + "For example, '2/12/2024 1800'.", thrown.getMessage());
     }
 
 
     @Test
     public void parseDateTime_outOfRangeDayMonth_throwsParseException() {
-        ParseException thrown = assertThrows(ParseException.class,
-                () -> parser.parseDateString("32/1/2024 1200"));
-        assertEquals("Invalid date or time values! Ensure day, month, hour, " +
-                "and minute ranges are correct.", thrown.getMessage());
+        ParseException thrown =
+                assertThrows(ParseException.class, () -> parser.parseDateString("32/1/2024 1200"));
+        assertEquals("Invalid date or time values! Ensure day, month, hour, "
+                + "and minute ranges are correct.", thrown.getMessage());
     }
 }

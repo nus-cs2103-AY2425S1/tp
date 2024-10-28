@@ -96,10 +96,10 @@ class JsonAdaptedDate {
      *
      * @return An array of strings representing the day, month, and year, extracted from the {@code dateString}.
      * @throws ParseException if the date format is incorrect or if date/time values are invalid.
-     * <ul>
-     *     <li>If the format is incorrect, an exception message indicates the expected format.</li>
-     *     <li>If the date or time values are out of range, an exception message highlights this.</li>
-     * </ul>
+     *      <ul>
+     *          <li>If the format is incorrect, an exception message indicates the expected format.</li>
+     *          <li>If the date or time values are out of range, an exception message highlights this.</li>
+     *      </ul>
      */
     private String[] getDateParts() throws ParseException {
         if (!dateString.matches(DATE_PATTERN)) {
