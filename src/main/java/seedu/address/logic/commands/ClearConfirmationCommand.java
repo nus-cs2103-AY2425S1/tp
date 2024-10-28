@@ -13,6 +13,6 @@ public class ClearConfirmationCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(CONFIRMATION_MESSAGE, false, false,
-                CommandTabChange.EVENT, CommandDetailChange.SIMPLIFIED);
+                CommandTabChange.NONE, CommandDetailChange.NONE);
     }
 }
