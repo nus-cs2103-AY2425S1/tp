@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,19 +21,16 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " CRITERIA"
-            + ": Sorts the list according to criteria given."
-            + "\n"
-            + "Usage: "
-            + "sort n/ , ";
+            + ": Sorts the list according to criteria given.\n"
+            + "Usage: sort";
 
     private final Comparator<Person> comparator;
 
     /**
      * Creates an SortCommand to sort the current list of contacts.
      */
-    public SortCommand(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        this.comparator = comparator;
+    public SortCommand() {
+        this.comparator = new NameComparator();
     }
 
     @Override
