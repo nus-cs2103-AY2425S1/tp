@@ -63,7 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseAskingPrice(argMultimap.getValue(PREFIX_ASKING_PRICE).get()));
         }
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-            editPropertyDescriptor.setType(
+            editPropertyDescriptor.setPropertyType(
                     ParserUtil.parsePropertyType(argMultimap.getValue(PREFIX_TYPE).get()));
         }
 

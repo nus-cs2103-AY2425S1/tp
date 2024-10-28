@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASKING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
@@ -11,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -18,8 +21,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.meetup.EditCommand;
+import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
+import seedu.address.logic.commands.property.EditCommand.EditPropertyDescriptor;
 import seedu.address.model.BuyerList;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
@@ -30,6 +35,7 @@ import seedu.address.model.property.AddressContainsKeywordsPredicate;
 import seedu.address.model.property.Property;
 import seedu.address.testutil.buyer.EditBuyerDescriptorBuilder;
 import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
+import seedu.address.testutil.property.EditPropertyDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -56,12 +62,16 @@ public class CommandTestUtil {
     public static final String VALID_MEETUP_TO_NETWORKING = "2024-10-12 19:45";
     public static final String VALID_MEETUP_ADDED_PERSON_ALEX = "Alex Yeoh";
     public static final String VALID_MEETUP_ADDED_PERSON_BETTY = "Betty Ho";
-    public static final String VALID_ASKING_PRICE_AMY = "1200000";
-    public static final String VALID_ASKING_PRICE_BOB = "600000";
-    public static final String VALID_PROPERTY_TYPE_AMY = "HDB";
-    public static final String VALID_PROPERTY_TYPE_BOB = "Terrace";
-    public static final String VALID_ADDRESS_AMY = "Clementi Avenue Blk 102 #02-02";
-    public static final String VALID_ADDRESS_BOB = "Bukit Timah Rd #01-01";
+    public static final String VALID_LANDLORD_NAME_ALAN = "Alan Wong";
+    public static final String VALID_LANDLORD_NAME_BRENDA = "Brenda Lee";
+    public static final String VALID_PHONE_ALAN = "11111111";
+    public static final String VALID_PHONE_BRENDA = "22222222";
+    public static final String VALID_ASKING_PRICE_ALAN = "1200000";
+    public static final String VALID_ASKING_PRICE_BRENDA = "600000";
+    public static final String VALID_PROPERTY_TYPE_ALAN = "HDB";
+    public static final String VALID_PROPERTY_TYPE_BRENDA = "Terrace";
+    public static final String VALID_ADDRESS_ALAN = "Clementi Avenue Blk 102 #02-02";
+    public static final String VALID_ADDRESS_BRENDA = "Bukit Timah Rd #01-01";
     public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -87,7 +97,16 @@ public class CommandTestUtil {
     public static final String MEETUP_ADDED_BUYER_DESC_NETWORKING = " " + " " + PREFIX_ADDED_BUYER
             + VALID_MEETUP_ADDED_PERSON_BETTY;
     public static final String MEETUP_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_MEETUP_NAME;
-
+    public static final String LANDLORD_NAME_DESC_ALAN = " " + PREFIX_NAME + VALID_LANDLORD_NAME_ALAN;
+    public static final String LANDLORD_NAME_DESC_BRENDA = " " + PREFIX_NAME + VALID_LANDLORD_NAME_BRENDA;
+    public static final String PHONE_DESC_ALAN = " " + PREFIX_PHONE + VALID_PHONE_ALAN;
+    public static final String PHONE_DESC_BRENDA = " " + PREFIX_PHONE + VALID_PHONE_BRENDA;
+    public static final String ADDRESS_DESC_ALAN = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALAN;
+    public static final String ADDRESS_DESC_BRENDA = " " + PREFIX_ADDRESS + VALID_ADDRESS_BRENDA;
+    public static final String ASKING_PRICE_DESC_ALAN = " " + PREFIX_ASKING_PRICE + VALID_ASKING_PRICE_ALAN;
+    public static final String ASKING_PRICE_DESC_BRENDA = " " + PREFIX_ASKING_PRICE + VALID_ASKING_PRICE_BRENDA;
+    public static final String PROPERTY_TYPE_DESC_ALAN = " " + PREFIX_TYPE + VALID_PROPERTY_TYPE_ALAN;
+    public static final String PROPERTY_TYPE_DESC_BRENDA = " " + PREFIX_TYPE + VALID_PROPERTY_TYPE_BRENDA;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -104,14 +123,20 @@ public class CommandTestUtil {
     public static final String INVALID_MEETUP_ADDED_BUYER_DESC = " " + PREFIX_ADDED_BUYER + "S@m"; // @ not allowed
     public static final String INVALID_TAG_FOR_FIND_MEETUP = "vfnivsd/";
     public static final String INVALID_FIND_MEETUP_DESC = " " + INVALID_TAG_FOR_FIND_MEETUP + VALID_FIND_MEETUP_NAME;
-
+    public static final String INVALID_LANDLORD_NAME_DESC = " " + PREFIX_NAME + "Whitt@cker"; // '@' not allowed
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // Empty address not allowed
+    public static final String INVALID_ASKING_PRICE_DESC = " " + PREFIX_ASKING_PRICE
+            + "-1"; // negative integer not allowed for asking price
+    public static final String INVALID_PROPERTY_TYPE_DESC = " " + PREFIX_TYPE; // Empty property type not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor DESC_AMY;
-    public static final seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor DESC_BOB;
-    public static final EditCommand.EditMeetUpDescriptor DESC_PITCH_MEETUP;
-    public static final EditCommand.EditMeetUpDescriptor DESC_NETWORKING_MEETUP;
+    public static final EditBuyerDescriptor DESC_AMY;
+    public static final EditBuyerDescriptor DESC_BOB;
+    public static final EditMeetUpDescriptor DESC_PITCH_MEETUP;
+    public static final EditMeetUpDescriptor DESC_NETWORKING_MEETUP;
+    public static final EditPropertyDescriptor DESC_ALAN;
+    public static final EditPropertyDescriptor DESC_BRENDA;
 
     static {
         DESC_AMY = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -126,6 +151,12 @@ public class CommandTestUtil {
         DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING).withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING).build();
+        DESC_ALAN = new EditPropertyDescriptorBuilder().withLandlordName(VALID_LANDLORD_NAME_ALAN)
+                .withPhone(VALID_PHONE_ALAN).withAddress(VALID_ADDRESS_ALAN).withAskingPrice(VALID_ASKING_PRICE_ALAN)
+                .withPropertyType(VALID_PROPERTY_TYPE_ALAN).build();
+        DESC_BRENDA = new EditPropertyDescriptorBuilder().withLandlordName(VALID_LANDLORD_NAME_BRENDA)
+                .withPhone(VALID_PHONE_BRENDA).withAddress(VALID_ADDRESS_BRENDA)
+                .withAskingPrice(VALID_ASKING_PRICE_BRENDA).withPropertyType(VALID_PROPERTY_TYPE_BRENDA).build();
     }
 
     /**
