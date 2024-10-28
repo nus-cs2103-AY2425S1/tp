@@ -23,5 +23,10 @@ public enum CommandType {
     DELETECONSULT,
     REMOVEFROMCONSULT,
     ADDTOCONSULT,
-    LISTCONSULT
+    LISTCONSULT,
+
+    // Command Type for Lesson
+    ADDLESSON,
+    DELETELESSON,
+    LISTLESSONS
 }
