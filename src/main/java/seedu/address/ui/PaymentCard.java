@@ -2,23 +2,17 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.IsoFields;
-import java.util.List;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Payment;
 
 /**
- * An UI component that displays information of a {@code Attendance}.
+ * An UI component that displays information of a {@code Payment}.
  */
 public class PaymentCard extends UiPart<Region> {
 
@@ -40,7 +34,7 @@ public class PaymentCard extends UiPart<Region> {
     private ImageView paymentStatusIcon;
 
     /**
-     * Creates a {@code AttendanceCard} of the given tutorial
+     * Creates a {@code PaymentCard} with the given {@code Payment} tp display.
      */
     public PaymentCard(Payment payment) {
         super(FXML);
@@ -49,6 +43,9 @@ public class PaymentCard extends UiPart<Region> {
         setPaymentDetails();
     }
 
+    /**
+     * Sets the label to display the current month.
+     */
     private void setDisplayMonth() {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM ''yy");
@@ -57,6 +54,9 @@ public class PaymentCard extends UiPart<Region> {
         month.setText(displayString);
     }
 
+    /**
+     * Sets the display according to the amount.
+     */
     private void setPaymentDetails() {
         if (payment == 0) {
             fees.setText("$0");
@@ -74,6 +74,9 @@ public class PaymentCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the style to indicate overdue payment.
+     */
     private void setOverduePaymentStyle() {
         paymentStatus.setText("OVERDUE");
         paymentStatus.setStyle("-fx-text-fill: #D16767");
@@ -84,6 +87,9 @@ public class PaymentCard extends UiPart<Region> {
         paymentStatusContainer.setStyle("-fx-background-color: #FFF1F1");
     }
 
+    /**
+     * Sets the style to indicate no overdue payment.
+     */
     private void setNoOverduePaymentStyle() {
         paymentStatus.setText("PAID");
         paymentStatus.setStyle("-fx-text-fill: #339A35");

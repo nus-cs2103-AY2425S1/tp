@@ -57,7 +57,8 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                Platform.runLater(() -> setGraphic(new PersonCard(person, participationMap.get(person), getIndex() + 1).getRoot()));
+                Platform.runLater(() -> setGraphic(new PersonCard(person,
+                        participationMap.get(person), getIndex() + 1).getRoot()));
             }
         }
     }
@@ -89,12 +90,12 @@ public class PersonListPanel extends UiPart<Region> {
      * respectively to update the UI on user input and execution of the command.
      */
     private void addListeners() {
-        // Listener for changes in the personList
+        // Listener to recreate participationMap
         personList.addListener((ListChangeListener<Person>) change -> {
             this.participationMap = createParticipationMap(this.personList, this.participationList);
         });
 
-        // Listener for changes in the participationList
+        // Listener to add or remove participation from current participationMap
         participationList.addListener((ListChangeListener<Participation>) change -> {
             while (change.next()) {
                 for (Participation removedParticipation : change.getRemoved()) {
