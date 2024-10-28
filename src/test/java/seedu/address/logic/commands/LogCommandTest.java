@@ -34,16 +34,16 @@ public class LogCommandTest {
     public void execute_addLogUnfilteredList_success() {
         LocalDate logDate = LocalDate.now();
         String logMessage = VALID_LOG_MESSAGE;
-        LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personToEdit).withHistory(logDate, logMessage).build();
+        LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
 
-        String expectedMessage = String.format(Messages.format(editedPerson));
+        String expectedMessage = String.format(LogCommand.MESSAGE_ADD_HISTORY_SUCCESS, Messages.format(editedPerson));
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-        System.out.println("MODEL:" + model.getAddressBook() + "\n");
-        System.out.println("EXPECTED MODEL:" + expectedModel.getAddressBook());
+
         assertCommandSuccess(logCommand, model, expectedMessage, expectedModel);
     }
 
@@ -54,14 +54,12 @@ public class LogCommandTest {
         LocalDate logDate = LocalDate.now();
         String logMessage = VALID_LOG_MESSAGE;
         LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
-
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withHistory(logDate, logMessage).build();
 
         String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-
         assertCommandSuccess(logCommand, model, expectedMessage, expectedModel);
     }
 

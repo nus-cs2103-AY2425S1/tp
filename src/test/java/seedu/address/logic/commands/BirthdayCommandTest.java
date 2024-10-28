@@ -44,8 +44,6 @@ public class BirthdayCommandTest {
         );
         String expectedMessage = String.format(BirthdayCommand.MESSAGE_ADD_BIRTHDAY_SUCCESS,
                 Messages.format(editedPerson));
-        System.out.println(Messages.format(editedPerson));
-        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
