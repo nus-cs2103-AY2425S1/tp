@@ -29,7 +29,6 @@ public class ModelManager implements Model {
     private final FilteredList<Consultation> filteredConsultations;
     private final FilteredList<Lesson> filteredLessons;
 
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -49,7 +48,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -84,7 +84,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -119,7 +120,8 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Student List Accessors =============================================================
+    // =========== Filtered Student List Accessors
+    // =============================================================
 
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -132,10 +134,12 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
-    //=========== Filtered Consultation List Accessors =============================================================
+    // =========== Filtered Consultation List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Consultation} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Consultation} backed by
+     * the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -228,4 +232,10 @@ public class ModelManager implements Model {
                 && filteredConsultations.equals(otherModelManager.filteredConsultations);
     }
 
+    @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+        addressBook.setLesson(target, editedLesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
 }

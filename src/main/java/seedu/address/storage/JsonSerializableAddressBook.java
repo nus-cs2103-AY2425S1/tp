@@ -32,9 +32,10 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                       @JsonProperty("consults") List<JsonAdaptedConsultation> consults,
-                                       @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
-        // Null checks are required in case an address book has students but no consults or lessons.
+            @JsonProperty("consults") List<JsonAdaptedConsultation> consults,
+            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+        // Null checks are required in case an address book has students but no consults
+        // or lessons.
         if (students != null) {
             this.students.addAll(students);
         }
@@ -49,7 +50,8 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created
+     *               {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).toList());

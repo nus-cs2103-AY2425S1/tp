@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Objects;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Represents a Lesson in the system.
@@ -22,8 +25,8 @@ public class Lesson {
     /**
      * Constructs a {@code Lesson}.
      *
-     * @param date The date of the lesson.
-     * @param time The time of the lesson.
+     * @param date     The date of the lesson.
+     * @param time     The time of the lesson.
      * @param students A list of students attending the lesson.
      *                 This list can be empty but must not be null.
      * @throws NullPointerException if {@code date} or {@code time} is null.
@@ -33,6 +36,21 @@ public class Lesson {
         this.date = date;
         this.time = time;
         this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
+    }
+
+    /**
+     * Constructs a copy of the given lesson.
+     * Creates new instances of date, time, and the student list (not the students)
+     * to
+     * reduce the risk of accidental mutation.
+     *
+     * @param lesson The lesson to copy.
+     */
+    public Lesson(Lesson lesson) {
+        requireNonNull(lesson);
+        this.date = new Date(lesson.getDate().getValue());
+        this.time = new Time(lesson.getTime().getValue());
+        this.students = new ArrayList<>(lesson.getStudents());
     }
 
     /**
@@ -57,7 +75,8 @@ public class Lesson {
      * Returns an immutable list of students attending the lesson.
      *
      * @return A list of students attending the lesson.
-     * @throws UnsupportedOperationException if an attempt is made to modify the returned list.
+     * @throws UnsupportedOperationException if an attempt is made to modify the
+     *                                       returned list.
      */
     public List<Student> getStudents() {
         return Collections.unmodifiableList(students);
@@ -69,6 +88,9 @@ public class Lesson {
      * @param student The student to add.
      */
     public void addStudent(Student student) {
+        if (hasStudent(student)) {
+            throw new DuplicateStudentException();
+        }
         students.add(student);
     }
 
@@ -111,6 +133,17 @@ public class Lesson {
     @Override
     public String toString() {
         return String.format("Lesson[date=%s, time=%s, students=%s]", date, time, students);
+    }
+
+    /**
+     * Returns true if the lesson contains the specified student.
+     *
+     * @param student The student to check for.
+     * @return True if the student is attending the lesson, false otherwise.
+     */
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
     }
 
     /**
