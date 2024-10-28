@@ -163,25 +163,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
+    public void parseRole_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_TAG));
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_2));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Optional<Role> expectedTag = Optional.of(new Role(VALID_TAG_1));
-        assertEquals(expectedTag, ParserUtil.parseRole(VALID_TAG_1));
+    public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
+        Optional<Role> expectedTag = Optional.of(new Role(VALID_ROLE_1));
+        assertEquals(expectedTag, ParserUtil.parseRole(VALID_ROLE_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Optional<Role> expectedTag = Optional.of(new Role(VALID_TAG_1));
+        String tagWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
+        Optional<Role> expectedTag = Optional.of(new Role(VALID_ROLE_1));
         assertEquals(expectedTag, ParserUtil.parseRole(tagWithWhitespace));
     }
 
@@ -191,23 +192,11 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_TAG));
-    }
+    public void parseRole_withValidRole_returnsRole() throws Exception {
+        Optional<Role> actualRole = ParserUtil.parseRole(VALID_ROLE_1);
+        Optional<Role> expectedRole = Optional.of(new Role(VALID_ROLE_1));
 
-    @Test
-    public void parseTags_emptyRole_throwsParseException() throws Exception {
-        String emptyTag = "";
-        Optional<Role> expectedTag = Optional.empty();
-        assertEquals(expectedTag, ParserUtil.parseRole(emptyTag));
-    }
-
-    @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Optional<Role> actualTagSet = ParserUtil.parseRole(VALID_TAG_1);
-        Optional<Role> expectedTagSet = Optional.of(new Role(VALID_TAG_1));
-
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedRole, actualRole);
     }
 
     @Test
