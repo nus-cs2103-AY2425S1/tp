@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 // import java.util.Arrays;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -33,23 +34,22 @@ public class DeleteAppointmentCommandTest {
         assertThrows(NullPointerException.class, () -> new DeleteAppointmentCommand(null));
     }
 
-    //    @Test
-    //    public void execute_appointmentAcceptedByModel_deleteSuccessful() throws Exception {
-    //        ModelStubAcceptingAppointmentDeleted modelStub = new ModelStubAcceptingAppointmentDeleted();
-    //        Appointment validAppointment = new AppointmentBuilder().build();
-    //
-    //        CommandResult commandResult = new DeleteAppointmentCommand(validAppointment).execute(modelStub);
-    //
-    //        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-    //                validAppointment.getPatient().getName().toString(),
-    //                validAppointment.getDoctor().getName().toString(),
-    //                validAppointment.getDate().toString(),
-    //                validAppointment.getTime().toString());
-    //
-    //        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-    //        modelStub.deleteAppointment(validAppointment);
-    //        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsDeleted);
-    //    }
+    @Test
+    public void execute_appointmentAcceptedByModel_deleteSuccessful() throws Exception {
+        ModelStubAcceptingAppointmentDeleted modelStub = new ModelStubAcceptingAppointmentDeleted();
+        Appointment validAppointment = new AppointmentBuilder().build();
+        modelStub.addAppointment(validAppointment);
+        CommandResult commandResult = new DeleteAppointmentCommand(validAppointment).execute(modelStub);
+
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                validAppointment.getPatient().getName().toString(),
+                validAppointment.getDoctor().getName().toString(),
+                validAppointment.getDate().toString(),
+                validAppointment.getTime().toString());
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsDeleted);
+    }
 
     @Test
     public void execute_nonExistingAppointment_throwsCommandException() {
@@ -171,7 +171,6 @@ public class DeleteAppointmentCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -181,7 +180,6 @@ public class DeleteAppointmentCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -207,17 +205,30 @@ public class DeleteAppointmentCommandTest {
      */
     private class ModelStubAcceptingAppointmentDeleted extends ModelStub {
         final ArrayList<Appointment> appointmentsDeleted = new ArrayList<>();
+        final ArrayList<Appointment> appointmentsInModel = new ArrayList<>();
 
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            return appointmentsDeleted.stream().anyMatch(appt -> appt.isSameAppointment(appointment));
+            return appointmentsInModel.stream().anyMatch(appt -> appt.isSameAppointment(appointment));
         }
 
         @Override
         public void deleteAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            appointmentsDeleted.add(appointment);
+            if (appointmentsInModel.stream().anyMatch(appt -> appt.isSameAppointment(appointment))) {
+                appointmentsInModel.removeIf(appt -> appt.isSameAppointment(appointment));
+                appointmentsDeleted.add(appointment);
+            } else {
+                throw new IllegalArgumentException("Appointment not found in model");
+            }
+        }
+
+        @Override
+        public void addAppointment(Appointment appointment) {
+            System.out.println("Attempting to add appointment: " + appointment.getId());
+            requireNonNull(appointment);
+            appointmentsInModel.add(appointment);
         }
 
         @Override
