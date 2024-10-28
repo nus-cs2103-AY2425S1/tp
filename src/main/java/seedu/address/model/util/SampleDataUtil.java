@@ -49,7 +49,7 @@ public class SampleDataUtil {
                 new ClientStatus("active"), new Deadline("20-12-2024")),
             new Person(new Name("Yu Ng"), new Phone("933-8872-9922"), new Email("yung@example.com"),
                 new Address("Blk 25 Yishun Street 21, #03-02"),
-                getTagSet("colleagues"), new ProjectStatus("completed"), new PaymentStatus("unpaid"),
+                getTagSet("colleagues"), new ProjectStatus("completed"), new PaymentStatus("pending"),
                 new ClientStatus("old"), new Deadline("20-12-2023"))
         };
     }
