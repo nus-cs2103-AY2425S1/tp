@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -174,7 +175,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public WeddingName getCurrentWeddingName() {
+        public ObjectProperty<WeddingName> getCurrentWeddingName() {
             throw new AssertionError("This method should not be called.");
         }
 

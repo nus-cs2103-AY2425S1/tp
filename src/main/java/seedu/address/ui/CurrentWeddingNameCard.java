@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -14,10 +15,8 @@ public class CurrentWeddingNameCard extends UiPart<VBox> {
         super(FXML);
     }
 
-    public void setCurrentWeddingName(String name) {
-        if (name == null) {
-            currentWeddingName.setText("Not viewing any wedding");
-        }
-        currentWeddingName.setText("Viewing: " + name);
+    public void bindCurrentWeddingName(ObservableValue<String> weddingName) {
+        currentWeddingName.textProperty().bind(weddingName);
     }
+
 }

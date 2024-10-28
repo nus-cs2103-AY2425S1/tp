@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10">
-    <!-- Container for the current wedding card -->
+    <!-- Container for the current wedding name card -->
     <VBox fx:id="currentWeddingNameCardContainer"/>
     <!-- List of weddings -->
-    <ListView fx:id="weddingListView" />
+    <ListView fx:id="weddingListView" VBox.vgrow="ALWAYS"/>
 </VBox>
