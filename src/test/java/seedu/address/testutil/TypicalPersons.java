@@ -30,21 +30,22 @@ public class TypicalPersons {
             .withRoles("Volunteer - Emcee", "Athlete - FASS - Swimming Men").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563")
-            .withEmail("heinz@example.com")
-            .withRoles("Volunteer - Photographer").build();
+            .withEmail("heinz@example.com").withRoles("friends")
+            .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withRoles("Sponsor - OATSIDE").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withPhone("9482224")
-            .withEmail("werner@example.com").build();
+            .withPhone("94822224")
+            .withEmail("werner@example.com")
+            .withRoles("colleagues").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("9482427")
+            .withPhone("94822427")
             .withEmail("lydia@example.com")
             .withRoles("Committee - Publicity - Project Director").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("9482442")
+            .withPhone("94822442")
             .withEmail("anna@example.com")
             .withRoles("Committee - Sports - Vice Sports Director - BIZ").build();
 
