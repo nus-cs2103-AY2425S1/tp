@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearAllCommand;
+import seedu.address.logic.commands.ClearCancelCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearConfirmationCommand;
 import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
@@ -50,13 +52,41 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
-        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand("Y") instanceof ClearCommand);
 
         try {
             parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
+    }
+
+    @Test
+    public void parseCommand_clearCancelled() throws Exception {
+        String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand("N") instanceof ClearCancelCommand);
+
+        String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearConfirmationCommand);
+        assertTrue(parser.parseCommand("N") instanceof ClearCancelCommand);
+    }
+
+    @Test
+    public void parseCommand_pendingCommand() throws Exception {
+        try {
+            parser.parseCommand("Y");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
+
+        try {
+            parser.parseCommand("N");
         } catch (Exception e) {
             assertTrue(e instanceof ParseException);
         }

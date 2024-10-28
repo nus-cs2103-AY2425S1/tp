@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_CONFIRM_COMMAND = "Please input Y/N to confirm your operation!";
     public static final String MESSAGE_INVALID_TIME = "Incomplete time field! "
             + "Please the follow format: "
             + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
