@@ -31,6 +31,7 @@ import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListClaimsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.ListPoliciesCommand;
@@ -160,6 +161,15 @@ public class AddressBookParserTest {
         ListPoliciesCommand command = (ListPoliciesCommand) parser.parseCommand(
                 ListPoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new ListPoliciesCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_listClaims() throws Exception {
+        ListClaimsCommand expectedCommand = new ListClaimsCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH);
+        String validInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " pt/health";
+
+        Command command = parser.parseCommand(validInput);
+        assertEquals(expectedCommand, command);
     }
 
     @Test
