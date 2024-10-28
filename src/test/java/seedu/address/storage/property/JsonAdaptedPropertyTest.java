@@ -21,7 +21,7 @@ public class JsonAdaptedPropertyTest {
     private static final String INVALID_ASKING_PRICE = "120,0000";
     private static final String INVALID_PROPERTY_TYPE = " apple";
 
-    private static final String VALID_NAME = ALICE.getName().toString();
+    private static final String VALID_NAME = ALICE.getLandlordName().toString();
     private static final String VALID_PHONE = ALICE.getPhone().toString();
     private static final String VALID_ADDRESS = ALICE.getAddress().toString();
     private static final String VALID_ASKING_PRICE = ALICE.getAskingPrice().toString();

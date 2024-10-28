@@ -79,7 +79,7 @@ public class Messages {
      */
     public static String format(Property property) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(property.getName())
+        builder.append(property.getLandlordName())
                 .append("; Phone: ")
                 .append(property.getPhone())
                 .append("; Address: ")

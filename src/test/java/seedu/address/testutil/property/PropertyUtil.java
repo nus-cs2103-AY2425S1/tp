@@ -26,7 +26,7 @@ public class PropertyUtil {
      */
     public static String getPropertyDetails(Property property) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + property.getName().fullName + " ");
+        sb.append(PREFIX_NAME + property.getLandlordName().fullName + " ");
         sb.append(PREFIX_PHONE + property.getPhone().value + " ");
         sb.append(PREFIX_ADDRESS + property.getAddress().value + " ");
         sb.append(PREFIX_ASKING_PRICE + property.getAskingPrice().value + " ");
