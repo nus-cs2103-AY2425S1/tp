@@ -13,40 +13,49 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTAL_CODE_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderHistory;
 import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
+    public static final OrderHistory TYPICAL_ORDER_HISTORY = new OrderHistory(new Order("pizza"),
+            LocalDateTime.parse("2024-10-26T19:59:16.283392"));
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withPostalCode("123000")
-            .withTags("Vegan").build();
+            .withPhone("94351253")
+            .withPostalCode("123000")
+            .withTags("Vegan")
+            .withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withPostalCode("123000")
-            .withTags("Vegetarian", "Gluten Free").build();
+            .withTags("Vegetarian", "Gluten Free").withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street #12-345").withTags("Vegan")
-            .withPostalCode("123456").build();
+            .withPostalCode("123456").withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street #12-345").withPostalCode("123456")
-            .withTags("Gluten Free").build();
+            .withTags("Gluten Free").withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94824422")
             .withEmail("werner@example.com").withAddress("michegan ave #12-345").withTags("Vegetarian")
-            .withPostalCode("123456").build();
+            .withPostalCode("123456").withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824422")
-            .withEmail("lydia@example.com").withAddress("little tokyo #12-345").withPostalCode("123456").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo #12-345").withPostalCode("123456")
+            .withOrderHistory(TYPICAL_ORDER_HISTORY).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
-            .withEmail("anna@example.com").withAddress("4th street #12-345").withPostalCode("123456").build();
+            .withEmail("anna@example.com").withAddress("4th street #12-345").withPostalCode("123456")
+            .withOrderHistory(TYPICAL_ORDER_HISTORY).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84822424")

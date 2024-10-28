@@ -22,6 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -103,8 +104,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         PostalCode updatedPostalCode = editPersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        // To be updated
+        OrderTracker updatedTracker = personToEdit.getOrderTracker();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode, updatedTags, updatedTracker);
 
     }
 
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
         private Address address;
         private PostalCode postalCode;
         private Set<Tag> tags;
+        private OrderTracker tracker;
 
         public EditPersonDescriptor() {}
 
@@ -157,13 +161,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setPostalCode(toCopy.postalCode);
             setTags(toCopy.tags);
+            setTracker(toCopy.tracker);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, postalCode, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, postalCode, tags, tracker);
         }
 
         public void setName(Name name) {
@@ -204,6 +209,19 @@ public class EditCommand extends Command {
 
         public Optional<PostalCode> getPostalCode() {
             return Optional.ofNullable(postalCode);
+        }
+
+        public void setTracker(OrderTracker tracker) {
+            if (tracker != null) {
+                this.tracker = new OrderTracker();
+                this.tracker.add(tracker.get());
+            } else {
+                this.tracker = null;
+            }
+        }
+
+        public Optional<OrderTracker> getTracker() {
+            return Optional.ofNullable(tracker);
         }
 
         /**

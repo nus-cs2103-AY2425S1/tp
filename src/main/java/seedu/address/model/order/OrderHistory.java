@@ -2,6 +2,7 @@ package seedu.address.model.order;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * OrderHistory consist of a past order and the time of order was placed
@@ -43,6 +44,11 @@ public class OrderHistory {
     @Override
     public String toString() {
         return this.time.format(formatter) + ": Ordered " + getOrder();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.order, this.time);
     }
 
     @Override

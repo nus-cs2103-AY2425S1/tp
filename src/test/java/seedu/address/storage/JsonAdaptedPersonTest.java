@@ -35,6 +35,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+    private static final List<JsonAdaptedOrderHistory> VALID_ORDER_HISTORY = BENSON.getOrderTracker().get()
+            .stream().map(JsonAdaptedOrderHistory::new).collect(Collectors.toList());
     private static final Boolean VALID_ARCHIVE_VALUE = false;
 
     @Test

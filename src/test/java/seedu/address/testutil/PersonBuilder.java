@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderHistory;
 import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -55,7 +57,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         postalCode = personToCopy.getPostalCode();
         tags = new HashSet<>(personToCopy.getTags());
-        tracker = personToCopy.getOrderTracker();
+        tracker = new OrderTracker();
+        tracker.add(personToCopy.getOrderTracker().get());
     }
 
     /**
@@ -107,10 +110,19 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code orders} of the {@code Person} that we are building.
+     * Sets the {@code tracker} of the {@code Person} that we are building.
      */
-    public PersonBuilder withOrderTracker(OrderTracker orders) {
-        this.tracker = orders;
+    public PersonBuilder withOrderTracker(OrderTracker tracker) {
+        this.tracker = tracker;
+        return this;
+    }
+
+    /**
+     * Add {@param orderHistory} to the {@code tracker} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOrderHistory(OrderHistory orderHistory) {
+        this.tracker = new OrderTracker();
+        this.tracker.add(orderHistory);
         return this;
     }
 

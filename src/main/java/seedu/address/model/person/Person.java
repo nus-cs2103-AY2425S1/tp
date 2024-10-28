@@ -159,12 +159,7 @@ public class Person implements Comparable<Person> {
      */
     @Override
     public int compareTo(Person rhs) {
-        if (this.getTotalOrderFrequencyCount() < rhs.getTotalOrderFrequencyCount()) {
-            return 1;
-        } else if (this.getTotalOrderFrequencyCount() > rhs.getTotalOrderFrequencyCount()) {
-            return -1;
-        }
-        return 0;
+        return rhs.getTotalOrderFrequencyCount() - this.getTotalOrderFrequencyCount();
     }
 
     /**
@@ -190,7 +185,7 @@ public class Person implements Comparable<Person> {
                 && tags.equals(otherPerson.tags)
                 && postalCode.equals(otherPerson.postalCode)
                 && tracker.equals(otherPerson.tracker)
-                && isArchived == otherPerson.isArchived;
+                && isArchived.equals(otherPerson.isArchived);
     }
 
     @Override
