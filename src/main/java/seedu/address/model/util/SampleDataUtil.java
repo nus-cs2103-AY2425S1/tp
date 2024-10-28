@@ -41,7 +41,7 @@ public class SampleDataUtil {
                 getTagSet("classmates", "$")),
             new Restaurant(new Name("Mookantang"), new Phone("92624417"), new Email("moomoo@moomookt.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Rating(5),
-                getTagSet("colleagues","$$$" ))
+                getTagSet("colleagues", "$$$"))
         };
     }
 
