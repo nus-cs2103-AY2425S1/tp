@@ -203,7 +203,7 @@ lifeline till the diagram's end.
     - **Cons**: Reduces user flexibility in customizing tags.
 
 - **Alternative 2**:
-    - **Descriptio**n: Users can create tags without specific constraints.
+    - **Description**: Users can create tags without specific constraints.
     - **Pros**: Provides greater flexibility for users to create custom tags. 
     - **Cons**: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
 
