@@ -10,6 +10,7 @@ Class ViewCommand {
   +COMMAND_WORD: String
   +MESSAGE_VIEW_SUCCESS: String
   +MESSAGE_PATIENT_NOT_FOUND: String
+  +nric: Nric
   +execute(Model): CommandResult
 }
 
