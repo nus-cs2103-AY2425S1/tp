@@ -12,8 +12,8 @@ import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Property; // Import Property
-import seedu.address.model.person.PropertyList; // Import PropertyList
+import seedu.address.model.person.Property;
+import seedu.address.model.person.PropertyList;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -137,7 +137,7 @@ public class PersonBuilder {
         if (this.history == null) {
             this.history = new History(dateOfCreation.getDateOfCreation());
         }
-        this.history.addActivity(date, activity);
+        this.history = History.addActivity(this.history, date, activity);
         return this;
     }
 
