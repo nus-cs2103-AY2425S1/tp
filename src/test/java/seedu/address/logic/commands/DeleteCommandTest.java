@@ -79,7 +79,7 @@ public class DeleteCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearAddressBookCommand()));
 
         // different name -> returns false
         DeleteCommand commandWithDifferentValues = new DeleteCommand(VALID_NAME_BOB);

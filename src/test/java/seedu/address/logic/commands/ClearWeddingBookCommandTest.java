@@ -6,28 +6,30 @@ import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WeddingBook;
 
-public class ClearCommandTest {
+public class ClearWeddingBookCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyWeddingBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyWeddingBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
-        expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setWeddingBook(new WeddingBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearWeddingBookCommand(), model, ClearWeddingBookCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
 }

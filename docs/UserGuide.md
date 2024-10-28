@@ -89,7 +89,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
+involved in.
 
 </box>
 
@@ -99,7 +100,7 @@ Examples:
 
 ### Listing All Contacts : `list`
 
-You can view all contacts.
+You can view all contacts. Contacts are listed in order that they were added.
 
 Format: `list`
 
@@ -109,11 +110,11 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
-Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
+Format: `add-wedding w/NAME & NAME v/VENUE d/DATE`
 
 <box type="tip" seamless>
 
-**Tip:** Datetime must be a valid date in the format of dd/MM/yyyy
+**Tip:** Date must be a valid date in the format of **dd/MM/yyyy**
 
 </box>
 
@@ -127,7 +128,7 @@ Examples:
 
 You can edit an existing contact's details such as their name, phone number, email etc.
 
-Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
+Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB] [t/NEW_TAG]`
 
 <box type="tip" seamless>
 
@@ -138,7 +139,10 @@ Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 ![edit message](images/editMsg.png)
 
 Examples:
-*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
+*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be 
+`91234567` and `johndoe@example.com` respectively.
+  *  `edit n/James new/Clark e/clarknewemail@example.com j/Florist` Edits the name, email and job to be
+`James`, `clarknewemail@example.com` and `Florist` respectively.
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
@@ -180,35 +184,15 @@ Examples:
 *  `tag-delete n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
 *  `tag-delete n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
-### Locating Contacts by name: `find`
-
-You can quickly lookup contacts by name and view all their details using `find`.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* `find` searches by `NAME`.
-* `KEYWORD` is not case-sensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-![find message](images/findMsg.png)
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
 ### Filtering Contacts by Job: `filter`
 
-If you are looking for contacts with a specific job, you can use `filter` to filter out a list of contacts whose job matches your input.
+If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose name or job matches your input.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]`
+Format: `filter n/KEYWORD` or `filter j/KEYWORD`
 
-* `filter` filters by `job`.
+* `filter` filters by `name` or `job` field.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`
-* The order of the keywords does not matter. e.g. `Photographer Lighting` will match `Lighting Photographer`
-* Only full words will be matched e.g. `photog` will not match `Photographer`
+* Only full words will be matched e.g. `jak` will not match `Jake`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
 * Persons matching all keywords will be returned (i.e. `AND` search).
@@ -217,8 +201,9 @@ Format: `filter KEYWORD [MORE_KEYWORDS]`
 ![filter message](images/filterMsg.png)
 
 Examples:
-* `filter Photographer` returns `John` and `Ernest` whose jobs are photographers
-* `filter caterer` returns `Adam` whose job is a caterer
+* `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers
+* `filter n/caterer` returns `Adam` whose job is a caterer
+* `filter n/John` returns `John` whose name is John
 
 ### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
@@ -229,7 +214,10 @@ You can delete a person from your list of contacts.
 * The contact is deleted if `delete-y` is entered.
 * The contact is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `delete INDEX` followed by `delete-y` or `delete-n`
+Format: `delete n/NAME` followed by `delete-y` or `delete-n`
+
+**IMPORTANT:** `delete n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be 
+affected.
 
 ![delete message](images/deleteMsg.png)
 
@@ -237,11 +225,13 @@ Examples:
 * `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
 * `delete n/John Doe` followed by `delete-n` cancels the delete operation.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear-addressbook` & `clear-weddingbook`
 
-You can delete ALL contacts and ALL weddings from the application.
+You can delete ALL contacts in the address book from the application.
 
-Format: `clear`
+Format: 
+* `clear-addressbook` clears all contacts in address book.
+* `clear-weddingbook` clears all weddings in wedding book.
 
 ![clear message](images/clearMsg.png)
 
@@ -253,7 +243,8 @@ Format: `exit`
 
 ### Saving the data
 
-Knotty Planner data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Knotty Planner data will be saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ### Editing the data file
 
@@ -298,7 +289,6 @@ Action            | Format, Examples
 **Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
 **Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`
 **Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June & James`
-**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter**          | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter soundman dj`
+**Filter**          | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`
 **List**          | `list`
 **Help**          | `help`

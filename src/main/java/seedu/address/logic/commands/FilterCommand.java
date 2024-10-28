@@ -5,26 +5,26 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name or job contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
+            + ": Filters all persons whose names or jobs contain any of "
+            + "the specified keywords (case-insensitive)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: n/KEYWORD or j/KEYWORD\n"
+            + "Example: " + COMMAND_WORD + " n/John OR " + COMMAND_WORD + " j/Photographer";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameOrJobContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FilterCommand(NameOrJobContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -43,12 +43,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FilterCommand otherFilterCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicate.equals(otherFilterCommand.predicate);
     }
 
     @Override
