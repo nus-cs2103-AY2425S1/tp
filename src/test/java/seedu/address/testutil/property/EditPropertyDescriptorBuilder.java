@@ -1,11 +1,12 @@
 package seedu.address.testutil.property;
 
 import seedu.address.logic.commands.property.EditCommand.EditPropertyDescriptor;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
-import seedu.address.model.property.Property;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Location;
 import seedu.address.model.property.Phone;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.PropertyType;
 
 /**
  * A utility class to help with building EditPropertyDescriptor objects.
@@ -29,8 +30,9 @@ public class EditPropertyDescriptorBuilder {
         descriptor = new EditPropertyDescriptor();
         descriptor.setLandlordName(property.getName());
         descriptor.setPhone(property.getPhone());
-        descriptor.setLocation(property.getLocation());
+        descriptor.setAddress(property.getAddress());
         descriptor.setAskingPrice(property.getAskingPrice());
+        descriptor.setPropertyType(property.getPropertyType());
     }
 
     /**
@@ -50,10 +52,10 @@ public class EditPropertyDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Location} of the {@code EditPropertyDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditPropertyDescriptor} that we are building.
      */
-    public EditPropertyDescriptorBuilder withLocation(String location) {
-        descriptor.setLocation(new Location(location));
+    public EditPropertyDescriptorBuilder withAddress(String address) {
+        descriptor.setAddress(new Address(address));
         return this;
     }
 
@@ -62,6 +64,14 @@ public class EditPropertyDescriptorBuilder {
      */
     public EditPropertyDescriptorBuilder withAskingPrice(String askingPrice) {
         descriptor.setAskingPrice(new AskingPrice(askingPrice));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PropertyType} of the {@code EditPropertyDescriptor} that we are building.
+     */
+    public EditPropertyDescriptorBuilder withPropertyType(String propertyType) {
+        descriptor.setPropertyType(new PropertyType(propertyType));
         return this;
     }
 

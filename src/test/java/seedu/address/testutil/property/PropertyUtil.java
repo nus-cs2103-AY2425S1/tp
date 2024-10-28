@@ -1,7 +1,7 @@
 package seedu.address.testutil.property;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASKING_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -28,7 +28,7 @@ public class PropertyUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + property.getName().fullName + " ");
         sb.append(PREFIX_PHONE + property.getPhone().value + " ");
-        sb.append(PREFIX_LOCATION + property.getLocation().value + " ");
+        sb.append(PREFIX_ADDRESS + property.getAddress().value + " ");
         sb.append(PREFIX_ASKING_PRICE + property.getAskingPrice().value + " ");
         return sb.toString();
     }
@@ -40,7 +40,7 @@ public class PropertyUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getLandlordName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getAskingPrice().ifPresent(askingPrice -> sb.append(PREFIX_ASKING_PRICE).append(askingPrice.value)
                 .append(" "));
         return sb.toString();
