@@ -221,7 +221,7 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 * Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 
 **Examples:**
-* `find-doctor John Doe` returns `John Doe`.
+* `find-doctor John` returns `John Doe`.
 * `find-doctor Alex Yeoh` returns `Alex Yeoh`.
 
 ### Locating patients by name: `find-patient`
@@ -239,7 +239,7 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 * Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 
 **Examples:**
-* `find-patient John Doe` returns `John Doe`.
+* `find-patient John` returns `John Doe`.
 * `find-patient Alex Yeoh` returns `Alex Yeoh`.
 
 ### Deleting a person : `delete`
