@@ -101,19 +101,29 @@ public class ImportWindow extends UiPart<Stage> {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
                     String[] data = Pattern.compile(",(?=(?:[^\"]|\"[^\"]*\")*$)").split(line);
-                    String name = data[0].substring(1);
+                    String name = data[0];
                     String number = data[1];
                     String email = data[2];
                     String address = data[3];
                     String allTags = data[4];
                     String tagCommand = tagsArray(allTags);
-                    String command = String.format("add n/%s p/%s e/%s a/%s %s",
-                            name, number, email, address, tagCommand);
+                    String favourite = " ";
+                    if (Boolean.valueOf(data[5])) {
+                        favourite = " /f ";
+                    }
+                    String department = data[6];
+                    String command = String.format("add n/%s p/%s e/%s a/%s %s%sd/%s",
+                            name, number, email, address, tagCommand, favourite, department);
                     System.out.println(command);
                     this.logic.execute(command);
                 }
             } catch (FileNotFoundException | CommandException | ParseException e) {
                 e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Invalid import data, operation cancelled", ButtonType.OK);
+                alert.setHeaderText(null);
+                alert.setTitle("Invalid Import Data");
+                alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION,
