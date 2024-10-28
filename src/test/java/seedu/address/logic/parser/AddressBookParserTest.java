@@ -83,13 +83,13 @@ public class AddressBookParserTest {
         String userInput = AttendCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENTID + "A1001000U "
                 + PREFIX_TUTORIALID + "T1001 "
-                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+                + PREFIX_ATTENDANCEDATE + "2024-02-21";
 
         Command command = parser.parseCommand(userInput);
 
         StudentId expectedStudentId = new StudentId("A1001000U");
         TutorialId expectedTutorialId = TutorialId.of("T1001");
-        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+        Date expectedDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-21");
 
         AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialId, expectedDate);
 
@@ -101,13 +101,13 @@ public class AddressBookParserTest {
         String userInput = UnattendCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENTID + "A1001000U "
                 + PREFIX_TUTORIALID + "T1001 "
-                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+                + PREFIX_ATTENDANCEDATE + "2024-02-21";
 
         Command command = parser.parseCommand(userInput);
 
         StudentId expectedStudentId = new StudentId("A1001000U");
         TutorialId expectedTutorialId = TutorialId.of("T1001");
-        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+        Date expectedDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-21");
 
         UnattendCommand expectedCommand = new UnattendCommand(expectedStudentId, expectedTutorialId, expectedDate);
 

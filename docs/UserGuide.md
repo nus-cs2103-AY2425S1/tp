@@ -390,8 +390,8 @@ Command Details & Constraints:
 * Duplicate assignment titles are not allowed.
 
 Example:
-1. `addAsg n/CS2103T Assignment 2 d/25-10-2024 2359`
-2. `addAsg n/CS2101 CA1 d/23-09-2024 1200`
+1. `addAsg n/CS2103T Assignment 2 d/2024-10-25 2359`
+2. `addAsg n/CS2101 CA1 d/2024-09-23 1200`
 
 
 #### 4.3.2 Delete an assigment: `deleteAsg`
@@ -492,7 +492,7 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `markAtt s/1001 c/1001 d/2024/02/21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+1. `markAtt s/1001 c/1001 d/2024-02-21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
 2. `markAtt s/1001 c/1001` marks the attendance of student 1001 in tutorial class 1001 on today's date.
 
 #### 4.4.2 Unmarking an attendance: `deleteAtt`
@@ -507,7 +507,7 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `deleteAtt s/1001 c/1001 d/2024/02/21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+1. `deleteAtt s/1001 c/1001 d/2024-02-21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
 2. `deleteAtt s/1001 c/1001` deletes the attendance of student 1001 in tutorial class 1001 on today's date.
 
 
@@ -626,8 +626,8 @@ TO BE DONE
 | **Add Assignment**  | `addAsg n/[ASSIGNMENT TITLE] d/[DUE DATE]`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                                                                      |
 | **Delete Assignment**| `deleteAsg [ASSIGNMENT TITLE]`<br> e.g., `deleteAsg Assignment 1`                                                                                                   |
 | **List Assignments**| `listAsg`                                                                                                                                                           |
-| **Mark Attendance** | `markAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024/02/21`                                                            |
-| **Unmark Attendance**| `deletedAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `deleteAtd s/1001 c/1001 d/2024/02/21`                                                      |
+| **Mark Attendance** | `markAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024-02-21`                                                            |
+| **Unmark Attendance**| `deletedAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `deleteAtd s/1001 c/1001 d/2024-02-21`                                                      |
 | **Mark Assignment** | `markAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `markAsg 1 n/Assignment 1`                                                                                         |
 | **Unmark Assignment**| `unmarkAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                                                                     |
 | **Check Assignment**| `checkAsg n/[ASSIGNMENT TITLE]`<br> e.g., `checkAsg n/Assignment 1`                                                                                                 |

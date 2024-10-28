@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,9 +18,9 @@ import seedu.address.model.student.exceptions.StudentNotInTutDateException;
  * A class representing a tutorial date. Each {@code TutDate} object holds a specific {@link Date}
  * and a list of {@link Student} objects who are associated with that date.
  */
-public class TutDate {
+public class TutDate implements Comparator<TutDate> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in correct format (dd/mm/yyyy)!";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in correct format (yyyy-MM-dd)!";
     private final Date date;
     private final Set<StudentId> students;
 
@@ -92,6 +93,11 @@ public class TutDate {
      */
     public boolean isValid() {
         return date != null;
+    }
+
+    @Override
+    public int compare(TutDate o1, TutDate o2) {
+        return o1.date.compareTo(o2.date);
     }
 
     /**

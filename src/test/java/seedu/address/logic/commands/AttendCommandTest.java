@@ -60,8 +60,8 @@ public class AttendCommandTest {
         ModelStubAcceptingAttendanceRecorded modelStub = new ModelStubAcceptingAttendanceRecorded();
         StudentId studentId = new StudentId("A1001000U");
         TutorialId tutorialId = TutorialId.of("T1001");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = sdf.parse("2024/02/21");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse("2024-02-21");
 
         AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
 
@@ -94,8 +94,8 @@ public class AttendCommandTest {
         StudentId studentId2 = new StudentId("A1002000U");
         TutorialId tutorialId1 = TutorialId.of("T1001");
         TutorialId tutorialId2 = TutorialId.of("T1002");
-        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
-        Date date2 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/22");
+        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-21");
+        Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-22");
 
         AttendCommand attendCommand1 = new AttendCommand(studentId1, tutorialId1, date1);
         AttendCommand attendCommand2 = new AttendCommand(studentId1, tutorialId1, date1);
@@ -117,8 +117,8 @@ public class AttendCommandTest {
         // Arrange
         StudentId studentId = new StudentId("A1001000U");
         TutorialId tutorialId = TutorialId.of("T1001");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = sdf.parse("2024/02/21");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse("2024-02-21");
 
         AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
 
