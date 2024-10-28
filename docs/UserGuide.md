@@ -186,7 +186,7 @@ Examples:
 
 ### Filtering Contacts by Job: `filter`
 
-If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose job matches your input.
+If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose name or job matches your input.
 
 Format: `filter n/KEYWORD` or `filter j/KEYWORD`
 
