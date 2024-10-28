@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SwitchParserModeCommand;

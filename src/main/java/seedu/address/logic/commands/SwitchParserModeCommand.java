@@ -7,7 +7,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.ParserMode;
 import seedu.address.logic.parser.exceptions.InvalidParserModeException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**

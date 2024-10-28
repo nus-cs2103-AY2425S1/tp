@@ -65,7 +65,7 @@ public class AbcliParser {
      * Switches the mode of the parser.
      *
      * @param mode mode to switch to
-     * @throws ParseException if the mode doesn't exist
+     * @throws InvalidParserModeException if the mode doesn't exist
      */
     public static void switchMode(ParserMode mode) throws InvalidParserModeException {
         assert buyerCommandParser != null;
