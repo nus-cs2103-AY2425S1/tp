@@ -5,7 +5,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Cancels the deletion of a person from the address book.
+ * Cancels the deletion of a person from the address book or a wedding from the wedding.
  */
 public class DeleteNCommand extends Command {
 
@@ -17,6 +17,8 @@ public class DeleteNCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         // Clear the personToDelete from StaticContext
         StaticContext.setPersonToDelete(null);
+        // Clear the weddingToDelete from StaticContext
+        StaticContext.setWeddingToDelete(null);
         return new CommandResult(MESSAGE_CANCEL_DELETE);
     }
 
