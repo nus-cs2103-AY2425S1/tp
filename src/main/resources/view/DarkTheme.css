@@ -70,6 +70,7 @@
     -fx-text-fill: black;
     -fx-alignment: center-left;
     -fx-opacity: 1;
+    -fx-font-weight: bold;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
@@ -377,6 +378,7 @@
 #prices {
     -fx-hgap: 5;
     -fx-vgap: 3;
+    -fx-padding: 0 0 2 0;
 }
 
 #prices .label {
