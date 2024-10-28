@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Note;
@@ -29,7 +30,11 @@ public class CsvExporter implements Exporter {
     }
 
     @Override
-    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, EmptyAddressBookException {
+        if (addressBook.getPersonList().isEmpty()) {
+            throw new EmptyAddressBookException();
+        }
+
         Path exportPath = getExportPath();
         FileUtil.createIfMissing(exportPath);
 

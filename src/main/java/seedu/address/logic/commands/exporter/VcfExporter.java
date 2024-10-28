@@ -10,6 +10,7 @@ import ezvcard.VCard;
 import ezvcard.property.Address;
 import ezvcard.property.Categories;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -29,7 +30,11 @@ public class VcfExporter implements Exporter {
     }
 
     @Override
-    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, EmptyAddressBookException {
+        if (addressBook.getPersonList().isEmpty()) {
+            throw new EmptyAddressBookException();
+        }
+
         List<VCard> vCards = addressBook.getPersonList()
                 .parallelStream().map(this::convertToVcf).toList();
         String fileContent = Ezvcard.write(vCards).go();

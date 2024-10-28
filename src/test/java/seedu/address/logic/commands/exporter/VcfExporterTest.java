@@ -71,6 +71,7 @@ public class VcfExporterTest {
 
         AddressBook addressBook = new AddressBook();
         assertThrows(EmptyAddressBookException.class, () -> vcfExporter.exportAddressBook(addressBook));
+        assertFalse(FileUtil.isFileExists(exportPath));
     }
 
     @Test

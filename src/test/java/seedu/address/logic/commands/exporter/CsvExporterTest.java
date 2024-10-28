@@ -71,6 +71,7 @@ public class CsvExporterTest {
 
         AddressBook addressBook = new AddressBook();
         assertThrows(EmptyAddressBookException.class, () -> csvExporter.exportAddressBook(addressBook));
+        assertFalse(FileUtil.isFileExists(exportPath));
     }
 
     @Test
