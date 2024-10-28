@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -73,7 +74,8 @@ public class AddToLessonCommandTest {
         private final Lesson lesson = new Lesson(
                 new seedu.address.model.consultation.Date("2024-10-20"),
                 new seedu.address.model.consultation.Time("14:00"),
-                FXCollections.observableArrayList());
+                FXCollections.observableArrayList(),
+                Map.of());
 
         private ArrayList<Lesson> lessons;
 
