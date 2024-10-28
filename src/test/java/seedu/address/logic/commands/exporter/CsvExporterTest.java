@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.UserPrefs;
 
@@ -62,15 +64,13 @@ public class CsvExporterTest {
     }
 
     @Test
-    public void export_empty_createsFileWithHeader() {
+    public void export_empty_throwsEmptyAddressBookException() {
         // Assert that the file does not exist at first
         Path exportPath = csvExporter.getExportPath();
         assertFalse(FileUtil.isFileExists(exportPath));
 
         AddressBook addressBook = new AddressBook();
-        assertDoesNotThrow(() -> csvExporter.exportAddressBook(addressBook));
-
-        assertTrue(FileUtil.isFileExists(exportPath));
+        assertThrows(EmptyAddressBookException.class, () -> csvExporter.exportAddressBook(addressBook));
     }
 
     @Test

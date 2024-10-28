@@ -3,6 +3,7 @@ package seedu.address.logic.commands.exporter;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import seedu.address.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
@@ -12,7 +13,7 @@ public interface Exporter {
     /**
      * Exports the address book
      */
-    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException, EmptyAddressBookException;
 
     /**
      * Returns the path that the addressbook will be exported to
