@@ -128,8 +128,8 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void execute_assignmentNameExceedsLimit_throwsCommandException() throws Exception {
-        String invalidAssignmentName = AssignmentBuilder.
-                DEFAULT_ASSIGNMENT_NAME.repeat(AssignmentName.MAXIMUM_NAME_LENGTH);
+        String invalidAssignmentName = AssignmentBuilder
+            .DEFAULT_ASSIGNMENT_NAME.repeat(AssignmentName.MAXIMUM_NAME_LENGTH);
         assertTrue(invalidAssignmentName.length() > AssignmentName.MAXIMUM_NAME_LENGTH);
 
         AddAssignmentCommand.AssignmentDescriptor toAddDescriptor =
