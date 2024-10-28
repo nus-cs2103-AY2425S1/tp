@@ -9,12 +9,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Panel containing the list of persons.
@@ -25,23 +27,29 @@ public class PersonListPanel extends UiPart<Region> {
 
     private final ObservableList<Person> personList;
     private final ObservableList<Participation> participationList;
+    private final ObservableList<Tutorial> tutorialList;
     private Map<Person, ObservableList<Participation>> participationMap;
 
     @FXML
     private ListView<Person> personListView;
+    @FXML
+    private Label tutorials;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Participation> participationList) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableList<Participation> participationList,
+                           ObservableList<Tutorial> tutorialList) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
         this.personList = personList;
         this.participationList = participationList;
+        this.tutorialList = tutorialList;
         this.participationMap = createParticipationMap(personList, participationList);
 
+        setTutorialsLabel();
         addListeners();
     }
 
@@ -85,9 +93,10 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Adds listeners to ObservableList of persons and ObservableList of participation
+     * Adds listeners to ObservableList of {@code Persons} and ObservableList of {@code participation}
      * to create or modify participationMap on changes to personList and participationList
-     * respectively to update the UI on user input and execution of the command.
+     * respectively to update the UI on user input and execution of the command. Listener is added
+     * to ObservableList of {@code Tutorial} to update UI when tutorials are created or closed.
      */
     private void addListeners() {
         // Listener to recreate participationMap
@@ -114,5 +123,24 @@ public class PersonListPanel extends UiPart<Region> {
                 }
             }
         });
+
+        //Listener to update tutorials Label
+        tutorialList.addListener((ListChangeListener<Tutorial>) change -> {
+            setTutorialsLabel();
+        });
+    }
+
+    /**
+     * Sets the label to display all tutorials currently available.
+     */
+    private void setTutorialsLabel() {
+        StringBuilder tutorials = new StringBuilder();
+        for (int i = 0; i < tutorialList.size(); i++) {
+            tutorials.append(tutorialList.get(i).getSubject());
+            if (i != tutorialList.size() - 1) {
+                tutorials.append(" • ");
+            }
+        }
+        this.tutorials.setText(tutorials.toString());
     }
 }

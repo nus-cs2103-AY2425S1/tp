@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <Label text="Students" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-padding: 8 0 0 15; -fx-text-fill: #262626"/>
+  <HBox alignment="CENTER_LEFT" style="-fx-padding: 10 0 10 15">
+    <Label text="Students" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #262626"/>
+    <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" spacing="7" style="-fx-padding: 0 30 0 0">
+      <Label text="Classes offered" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #262626"/>
+      <HBox HBox.hgrow="NEVER" maxHeight="20" style="-fx-background-color: #77C8E7; -fx-padding: 4; -fx-background-radius: 20">
+        <ImageView fitHeight="16" fitWidth="16">
+          <Image url="@/images/classes_icon.png"/>
+        </ImageView>
+      </HBox>
+      <Label fx:id="tutorials" text="\$tutorials offered" style="-fx-font-size: 15; -fx-text-fill: #262626"/>
+    </HBox>
+  </HBox>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
 </VBox>
