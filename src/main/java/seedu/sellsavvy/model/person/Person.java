@@ -102,7 +102,7 @@ public class Person {
      * Updates the filter of the order list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    public void updateFilteredOrderList(Predicate<Order> predicate) {
+    public void updateFilteredOrderList(Predicate<? super Order> predicate) {
         requireNonNull(predicate);
         filteredOrders.setPredicate(predicate);
     }
@@ -112,6 +112,13 @@ public class Person {
      */
     public void resetFilteredOrderList() {
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    /**
+     * Returns the predicate of the person's filtered order list.
+     */
+    public Predicate<? super Order> getOrderPredicate() {
+        return filteredOrders.getPredicate();
     }
 
     /**
