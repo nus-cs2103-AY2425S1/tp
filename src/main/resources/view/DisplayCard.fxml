@@ -41,7 +41,7 @@
             <Label fx:id="email" styleClass="card_small_label" text="\$email" managed="${email.visible}" />
 
             <!-- Remarks -->
-            <VBox fx:id="remarks" spacing="5">
+            <VBox fx:id="remarks">
             </VBox>
         </VBox>
     </GridPane>

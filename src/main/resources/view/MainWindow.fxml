@@ -38,14 +38,14 @@
         <SplitPane xmlns="http://javafx.com/javafx/17"
                    xmlns:fx="http://javafx.com/fxml/1"
                    VBox.vgrow="ALWAYS"
-                   dividerPositions="0.3">
+                   dividerPositions="0.4">
           <!-- Left: Person List -->
           <StackPane fx:id="personListPanelPlaceholder"
-                     minWidth="200"
-                     maxWidth="200"/>  <!-- Add maxWidth to fix the width -->
+                     minWidth="260"
+                     maxWidth="260"/>
           <!-- Right: Display Card -->
           <StackPane fx:id="displayCardPanelPlaceholder"
-                     minWidth="200"/>
+                     minWidth="800"/>
         </SplitPane>
 
         <!-- Result Display -->
