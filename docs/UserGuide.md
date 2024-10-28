@@ -98,13 +98,15 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn p/PHONE_NUMBER amt/AMOUNT desc/TEST [date/DATE]`
+Format: `addTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
+
 * The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
-* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative 
-amount.
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
+  amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.
+:bulb: **Tip:** A person can have any number of categories (including 0)
 
 Examples:
 
@@ -164,7 +166,7 @@ Examples:
 
 ### Filtering transactions: `filterTxn`
 
-Filter transactions with the specified person identified by their phone number, and/or amount and/or description 
+Filter transactions with the specified person identified by their phone number, and/or amount and/or description
 and/or date.
 
 Format: `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
@@ -173,18 +175,19 @@ Format: `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
 * As more prefixes are provided, the filter becomes more specific.
 * The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
-amount.
+  amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `DESCRIPTION` accepts a string of words.
-  * The description filter is case-insensitive. e.g `hans` will match `Hans`
+    * The description filter is case-insensitive. e.g `hans` will match `Hans`
 
 Examples:<br>
+
 * Given the example transaction book:<br>
-![Given the example transaction book](images/filterTxnExample.png)
+  ![Given the example transaction book](images/filterTxnExample.png)
 * `filterTxn p/87438807` returns all transactions with the person `Alex Yeoh`.<br>
-![result fpr 'filterTxn p/87438807'](images/filterTxnAlexYeohResult.png)
+  ![result fpr 'filterTxn p/87438807'](images/filterTxnAlexYeohResult.png)
 * `filterTxn p/99272758 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`.<br>
-![result for 'filterTxn p/99272758 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
+  ![result for 'filterTxn p/99272758 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
 ### Adding Remarks for a person : `remark`
 
@@ -228,6 +231,28 @@ Format: `clear`
 Clears all entries from the transaction book.
 
 Format: `clearTxn`
+
+### Editing a transaction : `editTxn `
+
+Edits an existing transaction in the transaction book.
+
+Format: `editTxn [INDEX] [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
+
+* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed person
+  list.
+  The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing categories, the existing categories of the person will be removed i.e adding of categories is not
+  cumulative.
+* You can remove all the person’s categories by typing `cat/` without
+  specifying any categories after it.
+
+Examples:
+
+* `editTxn 1 p/91234567 desc/Hello world` Edits the phone number and description of the 1st transaction to be `91234567`
+  and `Hello world` respectively.
+* `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
 ### Exiting the program : `exit`
 
@@ -292,9 +317,10 @@ the data of your previous AddressBook home folder.
 
 ## Command Summary for Transactions
 
-| Action     | Format, Examples                                                                                                                                                                   |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024` |
-| **List**   | `listTxn`                                                                                                                                                                          |
-| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                          |
-| **Clear**  | `clearTxn`                                                                                                                                                                         |
+| Action     | Format, Examples                                                                                                                                                                                |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `addTxn p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024`           |
+| **Edit**   | `editTxn INDEX p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `editTxn 1 p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024` |
+| **List**   | `listTxn`                                                                                                                                                                                       |
+| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                                       |
+| **Clear**  | `clearTxn`                                                                                                                                                                                      |
