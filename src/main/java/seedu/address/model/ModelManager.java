@@ -86,6 +86,16 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
+    public void setEventList(ReadOnlyAddressBook addressBook) {
+        this.addressBook.clearEvents(addressBook);
+    }
+
+    @Override
+    public void setPersonList(ReadOnlyAddressBook addressBook) {
+        this.addressBook.clearPersons(addressBook);
+    }
+
+    @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }

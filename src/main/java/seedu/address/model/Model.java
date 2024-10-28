@@ -48,6 +48,16 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Replaces address book event data with the event data in {@code addressBook}.
+     */
+    void setEventList(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Replaces address book person data with the person data in {@code addressBook}.
+     */
+    void setPersonList(ReadOnlyAddressBook addressBook);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);

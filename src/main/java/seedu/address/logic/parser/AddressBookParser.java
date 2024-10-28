@@ -19,12 +19,14 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.eventcommands.AddEventCommand;
+import seedu.address.logic.commands.eventcommands.ClearEventCommand;
 import seedu.address.logic.commands.eventcommands.DeleteEventCommand;
 import seedu.address.logic.commands.eventcommands.EditEventCommand;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.commands.eventcommands.ScheduleCommand;
 import seedu.address.logic.commands.eventcommands.SearchEventCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
+import seedu.address.logic.commands.personcommands.ClearPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditPersonCommand;
 import seedu.address.logic.commands.personcommands.FindPersonCommand;
@@ -83,7 +85,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(modelType, arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(modelType, arguments);
 
         case FindPersonCommand.COMMAND_WORD:
             return new FindCommandParser().parse(modelType, arguments);
@@ -144,7 +146,7 @@ public class AddressBookParser {
                 return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_USAGE;
             }
         } else if (userInput.startsWith("c")) {
-            return ClearCommand.MESSAGE_USAGE;
+            return getClearHint(userInput);
         } else if (userInput.startsWith("h")) {
             return HelpCommand.MESSAGE_USAGE;
         } else {
@@ -199,6 +201,16 @@ public class AddressBookParser {
             return EditPersonCommand.MESSAGE_USAGE;
         } else {
             return EditCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getClearHint(String userInput) {
+        if (userInput.startsWith("clear e")) {
+            return ClearEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("clear p")) {
+            return ClearPersonCommand.MESSAGE_USAGE;
+        } else {
+            return ClearCommand.MESSAGE_USAGE;
         }
     }
 }
