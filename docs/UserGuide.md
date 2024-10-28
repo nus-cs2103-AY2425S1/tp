@@ -144,21 +144,35 @@ Below is a detailed overview of the main sections within this User Guide and wha
 - [Installation](#installation): If you're new to TrackMate or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
 
-# 3. Getting Started
+- [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
+
+
+- [Command Summary](#command-summary): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+
+
+- [FAQ](#faq): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
+
+
+<box type="info" seamless>
+For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+## 3. Getting Started
 <a id="getting-started"></a>
 
 ### 3.1 Installation
 <a id="installation"></a>
 
-1. Ensure that you have Java `17` installed on your Computer. TrackMate works the best for the version, 
-while there may be other versions that it can function on as well.
+1. Ensure that you have Java `17` installed on your Computer. TrackMate works the best for the version,
+   while there may be other versions that it can function on as well.
 
 
 2. Download the latest `TrackMate.jar` file from the [link](https://github.com/AY2425S1-CS2103T-W08-1/tp/releases) here.
 
 
-3. Move the file to the directory that you have as the home folder 
-that you want to keep your `TrackMate.jar` file in.
+3. Move the file to the directory that you have as the home folder
+   that you want to keep your `TrackMate.jar` file in.
 
 
 4. Go to your command terminal by pressing Windows Key + R. A small window should pop up.
@@ -185,86 +199,35 @@ that you want to keep your `TrackMate.jar` file in.
 * `addTut c/CS2103T id/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
 * `add n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
 * `addAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the da
-date `2024-01-24`.
+  date `2024-01-24`.
 * `clear` : Deletes all contacts.
 * `exit` : Exits the app.
 
-10. Refer to the [Command Section](#commands) below for details of 
-all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
+10. Refer to the [Command Section](#commands) below for details of
+    all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
 
 ### 3.2 Graphical User Interface Layout:
 <a id="graphical-user-interface-layout"></a>
 
 #### 3.2.1 User Interface Overview:
 <a id="user-interface-overview"></a>
-
-## To update UI component picture here: 
+TO BE DONE 
+## To update UI component picture here:
 ![startingGUI.png](images/startingGUI.png)
 
 ### Add UI Components descriptions here
 
-### #### 3.2.2 Additional UI Components:
+#### 3.2.2 Additional UI Components:
+
 <a id="additional-ui-components"></a>
 ![startingGUI.png](images/startingGUI.png)
 
 ### Add additiona UI Components description here
-- [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
-
-
-- [Command Summary](#command-summary): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
-
-
-- [FAQ](#faq): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
-
-
-<box type="info" seamless>
-For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
-</box>
-
---------------------------------------------------------------------------------------------------------------------
-## 3. Getting Started
-<a id="getting-started"></a>
-
-### 3.1 Installation
-<a id="installation"></a>
-
-1. Ensure you have Java `17` or above installed on your Computer.
-
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-  * `list` : Lists all contacts.
-  * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-  * `delete 3` : Deletes the 3rd contact shown in the current list.
-  * `clear` : Deletes all contacts.
-  * `exit` : Exits the app.
-
-6. Refer to the [Features](#features) below for details of each command.
-
-### 3.2 Graphical User Interface Layout:
-<a id="graphical-user-interface-layout"></a>
-
-#### 3.2.1 User Interface Overview:
-<a id="user-interface-overview"></a>
-
-TO BE DONE
-
-#### 3.2.2 Additional UI Components:
-<a id="additional-ui-components"></a>
-
-TO BE DONE
 
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
 
+TO BE DONE 
 TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the
 Commands section, let’s familiarize ourselves with the basic components and format of a command.
 
