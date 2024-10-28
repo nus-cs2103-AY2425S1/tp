@@ -23,8 +23,7 @@ class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
 
     private final String name;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final JsonAdaptedTime time;
     private final String venue;
     private final JsonAdaptedPerson celebrity;
     private final List<JsonAdaptedPerson> contacts = new ArrayList<>();
@@ -34,14 +33,12 @@ class JsonAdaptedEvent {
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name,
-                            @JsonProperty("startTime") LocalDateTime startTime,
-                            @JsonProperty("startTime") LocalDateTime endTime,
+                            @JsonProperty("time") JsonAdaptedTime time,
                             @JsonProperty("venue") String venue,
                             @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
                             @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
         this.name = name;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.time = time;
         this.venue = venue;
         this.celebrity = celebrity;
         this.contacts.addAll(contacts);
@@ -52,8 +49,7 @@ class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().getEventName();
-        startTime = source.getTime().getStartTime();
-        endTime = source.getTime().getEndTime();
+        time = new JsonAdaptedTime(source.getTime());
         venue = source.getVenue().getVenue();
         celebrity = new JsonAdaptedPerson(source.getCelebrity());
         contacts.addAll(source.getContacts().stream()
@@ -79,10 +75,10 @@ class JsonAdaptedEvent {
         }
         final EventName eventName = new EventName(name);
 
-        if (startTime == null || endTime == null) {
+        if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        final Time eventTime = new Time(startTime, endTime);
+        final Time eventTime = time.toModelType();
 
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));

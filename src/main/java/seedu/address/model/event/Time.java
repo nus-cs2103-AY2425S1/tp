@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Time {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final String MESSAGE_CONSTRAINTS =
             "Please express the time field of your event in the following format "
         + "\"t/from: YYYY-MM-DD HH:mm, to: YYYY-MM-DD HH:mm\"";
@@ -28,25 +29,24 @@ public class Time {
         this.endTime = endTime;
     }
 
-    public LocalDateTime getStartTime() {
-        return this.startTime;
+    public String getStartTime() {
+        return this.startTime.format(formatter);
     }
 
-    public LocalDateTime getEndTime() {
-        return this.endTime;
+    public String getEndTime() {
+        return this.endTime.format(formatter);
     }
 
     public String getTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return "From: " + startTime.format(formatter) + " "
                 + "To: "+ endTime.format(formatter);
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return "From: " + startTime.format(formatter) + " "
-                + "To: "+ endTime.format(formatter);    }
+                + "To: "+ endTime.format(formatter);
+    }
 
     @Override
     public boolean equals(Object other) {
