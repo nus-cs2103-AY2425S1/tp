@@ -47,6 +47,14 @@
                     <StackPane fx:id="consultationListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
                   </VBox>
                 </Tab>
+              <Tab text="Lessons">
+                <VBox fx:id="lessonList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                  <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                  </padding>
+                  <StackPane fx:id="lessonListPanelPlaceholder" prefHeight="550.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
+                </VBox>
+              </Tab>
             </TabPane>
 
           <VBox maxHeight="Infinity" minWidth="200" prefWidth="100.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">

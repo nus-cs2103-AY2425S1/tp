@@ -23,33 +23,37 @@ public class JsonAdaptedLessonTest {
     private static final String VALID_TIME = "10:00";
     private static final List<JsonAdaptedStudent> VALID_STUDENTS = Collections.singletonList(
             new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()));
+    private static final List<Boolean> VALID_MAPS = List.of(false);
+    private static final List<Pair<JsonAdaptedStudent, Boolean>> VALID_MAP = Collections.singletonList(new Pair<>(
+            new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false));
+
     private static final String INVALID_DATE = "invalid-date";
     private static final String INVALID_TIME = "invalid-time";
 
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_TIME, VALID_STUDENTS);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_TIME, VALID_STUDENTS, VALID_MAP);
         assertThrows(IllegalValueException.class, () -> lesson.toModelType(new AddressBook()),
                 String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, "Date"));
     }
 
     @Test
     public void toModelType_invalidDateFormat_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(INVALID_DATE, VALID_TIME, VALID_STUDENTS);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(INVALID_DATE, VALID_TIME, VALID_STUDENTS, VALID_MAP);
         assertThrows(IllegalValueException.class, () -> lesson.toModelType(new AddressBook()),
                 Date.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void toModelType_nullTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_DATE, null, VALID_STUDENTS);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_DATE, null, VALID_STUDENTS, VALID_MAP);
         assertThrows(IllegalValueException.class, () -> lesson.toModelType(new AddressBook()),
                 String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, "Time"));
     }
 
     @Test
     public void toModelType_invalidTimeFormat_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_DATE, INVALID_TIME, VALID_STUDENTS);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_DATE, INVALID_TIME, VALID_STUDENTS, VALID_MAP);
         assertThrows(IllegalValueException.class, () -> lesson.toModelType(new AddressBook()),
                 Time.MESSAGE_CONSTRAINTS);
     }
@@ -62,10 +66,12 @@ public class JsonAdaptedLessonTest {
         addressBook.addStudent(student);
 
         JsonAdaptedStudent jsonStudent = new JsonAdaptedStudent(student);
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent));
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(
+                VALID_DATE, VALID_TIME, Arrays.asList(jsonStudent), List.of(new Pair<>(jsonStudent, false)));
 
         Lesson modelLesson = lesson.toModelType(addressBook);
-        Lesson expectedLesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME), Arrays.asList(student));
+        Lesson expectedLesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME),
+                Arrays.asList(student), Collections.singletonMap(student, false));
 
         assertEquals(expectedLesson, modelLesson);
     }
@@ -74,7 +80,8 @@ public class JsonAdaptedLessonTest {
     public void jsonAdaptedLesson_fromLesson_success() {
         // Create a Lesson instance
         Student student = new StudentBuilder().withName("Alice Pauline").build();
-        Lesson lesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME), Arrays.asList(student));
+        Lesson lesson = new Lesson(new Date(VALID_DATE), new Time(VALID_TIME),
+                Arrays.asList(student), Collections.singletonMap(student, false));
 
         // Convert the Lesson to JsonAdaptedLesson
         JsonAdaptedLesson jsonAdaptedLesson = new JsonAdaptedLesson(lesson);
