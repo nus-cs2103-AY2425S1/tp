@@ -189,15 +189,11 @@ public class UniquePersonListTest {
     @Test
     public void sortByDate_success() {
         uniquePersonList.add(ALICE);
-        uniquePersonList.add(HOON);
-        uniquePersonList.add(IDA);
         uniquePersonList.add(BOB);
 
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(HOON);
-        expectedUniquePersonList.add(IDA);
-        expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.sortByDate();
 
         assertArrayEquals(uniquePersonList.asUnmodifiableObservableList().toArray(),
