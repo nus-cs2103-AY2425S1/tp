@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +25,13 @@ import seedu.address.ui.PersonDetails;
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the full information of the person identified "
+            + "by the index number used in the last person listing. "
+            + "View window can be closed by the \"close\" command.\n"
+            + "Parameters: INDEX (must be a positive integer) \n"
+            + "Example: " + COMMAND_WORD + " 1 ";
+
     public static final String NO_WINDOWS_OPEN = "No view windows are currently open.";
     private static Stage currentStage;
     private final Index index;
