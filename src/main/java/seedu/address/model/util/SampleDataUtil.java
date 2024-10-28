@@ -42,13 +42,12 @@ public class SampleDataUtil {
             new Restaurant(new Name("Mookantang"), new Phone("92624417"), new Email("moomoo@moomookt.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Rating(5),
                 getTagSet("thai", "$$$")),
-
             new Restaurant(new Name("Pizza Heart"), new Phone("82242099"), new Email("pizza@pheart.com"),
                 new Address("78 Airport Boulevard, #03-01"), new Rating(5),
                 getTagSet("fastfood", "family", "halal", "$$")),
-            new Restaurant(new Name("EightyFive Tampanies"), new Phone("62454523"), new Email("parapapapa@mcdonkey.com"),
-                new Address("Blk 85 Tampines Street, #01-09"), new Rating(1),
-                getTagSet("western", "halal", "$$$$")),
+            new Restaurant(new Name("EightyFive Tampanies"), new Phone("62454523"),
+                new Email("parapapapa@mcdonkey.com"), new Address("Blk 85 Tampines Street, #01-09"),
+                new Rating(1), getTagSet("western", "halal", "$$$$")),
         };
     }
 
