@@ -1,12 +1,11 @@
 package seedu.address.logic.commands.eventcommands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Clears all events of the address book.
@@ -20,11 +19,24 @@ public class ClearEventCommand extends ClearCommand {
 
     public static final String MESSAGE_SUCCESS = "All events has been cleared!";
 
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear all your events?\n"
+            + "Type \"y\" to confirm or \"n\" to abort.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setEventList(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        if (!isPrompted()) {
+            setPrompted(true);
+            return new CommandResult(MESSAGE_CONFIRMATION);
+        } else if (!isConfirmed()) {
+            setPrompted(false);
+            return new CommandResult(MESSAGE_ABORTED);
+        } else {
+            setPrompted(false);
+            setConfirmed(false);
+            model.setEventList(new AddressBook());
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 }

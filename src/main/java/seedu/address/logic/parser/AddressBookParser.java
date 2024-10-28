@@ -73,6 +73,18 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
+        if (ClearCommand.isPrompted()) {
+            switch (commandWord) {
+            case "y":
+                return new ClearCommandParser().parseClear();
+            case "n":
+                return new ClearCommandParser().parseAbort();
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        }
+
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
