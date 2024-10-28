@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exporter.Exporter;
 import seedu.address.logic.commands.exporter.FileType;
+import seedu.address.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import seedu.address.model.Model;
 
 /**
@@ -23,8 +24,9 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "csv";
 
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
-    public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file"
+    public static final String MESSAGE_FAILED_TO_SAVE = "Unable to export contact list to a %1$s file"
             + ", please ensure that the file is closed before exporting";
+    public static final String MESSAGE_EMPTY_ADDRESS_BOOK = "Address book is empty. Consider adding a person first.";
 
     private final FileType fileType;
 
@@ -46,7 +48,9 @@ public class ExportCommand extends Command {
             Exporter exporter = fileType.export(model.getUserPrefs());
             exporter.exportAddressBook(model.getAddressBook());
         } catch (IOException io) {
-            throw new CommandException(String.format(MESSAGE_FAILURE, fileType));
+            throw new CommandException(String.format(MESSAGE_FAILED_TO_SAVE, fileType));
+        } catch (EmptyAddressBookException eabe) {
+            throw new CommandException(MESSAGE_EMPTY_ADDRESS_BOOK);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));

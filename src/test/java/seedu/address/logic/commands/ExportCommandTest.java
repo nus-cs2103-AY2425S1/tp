@@ -3,10 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_EMPTY_ADDRESS_BOOK;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_VCF;
+import static seedu.address.testutil.TypicalPersons.AMY;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +25,26 @@ public class ExportCommandTest {
 
     @Test
     public void execute_export_success() {
+        model.addPerson(AMY);
+        expectedModel.addPerson(AMY);
+
         CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, FILE_TYPE_CSV),
             false, false);
         assertCommandSuccess(new ExportCommand(FILE_TYPE_CSV), model, expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void equals() {
+    public void execute_emptyAddressBook_throwsCommandException() {
+        model.getFilteredPersonList().clear();
+        expectedModel.getFilteredPersonList().clear();
 
+        CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, FILE_TYPE_CSV),
+                false, false);
+        assertCommandFailure(new ExportCommand(FILE_TYPE_CSV), model, MESSAGE_EMPTY_ADDRESS_BOOK);
+    }
+
+    @Test
+    public void equals() {
         ExportCommand exportFirstCommand = new ExportCommand(FILE_TYPE_CSV);
         ExportCommand exportSecondCommand = new ExportCommand(FILE_TYPE_VCF);
 
