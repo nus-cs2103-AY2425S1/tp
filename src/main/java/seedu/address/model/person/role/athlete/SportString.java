@@ -19,7 +19,6 @@ public class SportString {
      * @param sport A valid sport.
      */
     public SportString(String sport) throws ParseException {
-        requireNonNull(sport);
         this.sport = ParserUtil.parseSport(sport);
     }
 

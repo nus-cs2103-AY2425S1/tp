@@ -28,7 +28,7 @@ public class AddEventCommandTest {
     void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         Model modelStub = new ModelManager();
         Set<Person> participants = new HashSet<>();
-        Event validEvent = new Event(new EventName("IFG"), new SportString("Soccer"), new Venue("Stadium"),
+        Event validEvent = new Event(new EventName("IFG"), new SportString("Chess"), new Venue("Stadium"),
                 participants);
 
         CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);

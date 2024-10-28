@@ -17,7 +17,7 @@
       "name" : "Carl Kurz",
       "phone" : "95352563",
       "email" : "heinz@example.com",
-      "roles" : [ ]
+      "roles" : [ "friends" ]
     },
     {
       "name" : "Daniel Meier",
@@ -27,19 +27,19 @@
     },
     {
       "name" : "Elle Meyer",
-      "phone" : "9482224",
+      "phone" : "94822224",
       "email" : "werner@example.com",
-      "roles" : [ ]
+      "roles" : [ "colleagues "]
     },
     {
       "name" : "Fiona Kunz",
-      "phone" : "9482427",
+      "phone" : "94822427",
       "email" : "lydia@example.com",
       "roles" : [ "Committee - Publicity - Project Director"]
     },
     {
       "name" : "George Best",
-      "phone" : "9482442",
+      "phone" : "94822442",
       "email" : "anna@example.com",
       "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
     }
@@ -58,9 +58,9 @@
         },
         {
           "name" : "Elle Meyer",
-          "phone" : "9482224",
+          "phone" : "94822224",
           "email" : "werner@example.com",
-          "roles" : [ ]
+          "roles" : [ "colleagues" ]
         }
       ]
     },
@@ -73,7 +73,7 @@
           "name" : "Carl Kurz",
           "phone" : "95352563",
           "email" : "heinz@example.com",
-          "roles" : [ ]
+          "roles" : [ "friends "]
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "name" : "Fiona Kunz",
-          "phone" : "9482427",
+          "phone" : "94822427",
           "email" : "lydia@example.com",
           "roles" : [ "Committee - Publicity - Project Director"]
         }
@@ -109,7 +109,7 @@
         },
         {
           "name" : "George Best",
-          "phone" : "9482442",
+          "phone" : "94822442",
           "email" : "anna@example.com",
           "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
         }
