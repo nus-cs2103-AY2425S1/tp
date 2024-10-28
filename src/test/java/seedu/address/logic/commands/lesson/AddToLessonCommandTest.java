@@ -1,122 +1,250 @@
 package seedu.address.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalStudents.CARL;
+import static seedu.address.testutil.TypicalStudents.DANIEL;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.ModelStub;
-import seedu.address.testutil.StudentBuilder;
 
 public class AddToLessonCommandTest {
 
-    private final Index validIndex = Index.fromOneBased(1);
-    private final List<Name> studentNames = List.of(new Name("John Doe"), new Name("Harry Ng"));
-    private final List<Name> duplicateStudentNames = List.of(new Name("John Doe"), new Name("John Doe"));
+    private Model model;
+
+    private final Index validLessonIndex1WithAlice = Index.fromOneBased(1);
+    private final Index validLessonIndex5 = Index.fromOneBased(5);
+    private final ObservableList<Name> allInvalidStudentNames = FXCollections.observableArrayList(
+            new Name(AMY.getName().fullName), new Name(BOB.getName().fullName));
+    private final ObservableList<Name> containsAliceNames = FXCollections.observableArrayList(
+            new Name(ALICE.getName().fullName));
+    private final ObservableList<Name> someInvalidStudentNames = FXCollections.observableArrayList(
+            new Name(CARL.getName().fullName), new Name(BOB.getName().fullName));
+    private final ObservableList<Name> validStudentNames = FXCollections.observableArrayList(
+            new Name(CARL.getName().fullName), new Name(DANIEL.getName().fullName));
+    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(
+            new Name(CARL.getName().fullName), new Name(CARL.getName().fullName));
+    private final ObservableList<Index> validStudentIndicesContainsAlice = FXCollections.observableArrayList(
+            INDEX_FIRST_STUDENT, INDEX_SECOND_STUDENT); // contains Alice and Benson
+    private final ObservableList<Index> validStudentIndicesNoAlice = FXCollections.observableArrayList(
+            INDEX_SECOND_STUDENT); // contains Benson
+    private final ObservableList<Index> duplicateIndices = FXCollections.observableArrayList(
+            INDEX_FIRST_STUDENT, INDEX_FIRST_STUDENT);
+    private ObservableList<Index> allInvalidIndices;
+    private ObservableList<Index> someInvalidIndices;
+
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        allInvalidIndices = FXCollections.observableArrayList(
+                Index.fromOneBased(model.getFilteredStudentList().size() + 1),
+                Index.fromOneBased(model.getFilteredStudentList().size() + 2));
+        someInvalidIndices = FXCollections.observableArrayList(
+                INDEX_FIRST_STUDENT,
+                Index.fromOneBased(model.getFilteredStudentList().size() + 1));
+    }
 
     @Test
-    public void execute_addStudentsToLesson_success() throws Exception {
-        ModelStubWithLesson modelStub = new ModelStubWithLesson();
-        AddToLessonCommand command = new AddToLessonCommand(validIndex, studentNames);
+    public void execute_addStudentsToLessonNamesAndIndices_success() throws Exception {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                validStudentNames, validStudentIndicesContainsAlice);
 
-        CommandResult result = command.execute(modelStub);
-        Lesson lesson = modelStub.getFilteredLessonList().get(0);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        // After execution, the lesson should have the students added
-        assertEquals(2, lesson.getStudents().size());
-        assertEquals("John Doe", lesson.getStudents().get(0).getName().fullName);
-        assertEquals("Harry Ng", lesson.getStudents().get(1).getName().fullName);
+        CommandResult result = command.execute(model);
+
+        Lesson targetLesson = expectedModel.getFilteredLessonList()
+                .get(validLessonIndex5.getZeroBased());
+        Lesson editedLesson = new Lesson(targetLesson);
+
+        editedLesson.addStudent(CARL);
+        editedLesson.addStudent(DANIEL);
+        editedLesson.addStudent(ALICE);
+        editedLesson.addStudent(BENSON);
+        expectedModel.setLesson(targetLesson, editedLesson);
+
+        String expectedMessage = String.format(AddToLessonCommand.MESSAGE_ADD_TO_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredLessonList().get(validLessonIndex5.getZeroBased()),
+                model.getFilteredLessonList().get(validLessonIndex5.getZeroBased()));
+    }
+
+    @Test
+    public void execute_addStudentsToLessonIndicesOnly_success() throws Exception {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                FXCollections.observableArrayList(), validStudentIndicesContainsAlice);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        CommandResult result = command.execute(model);
+
+        Lesson targetLesson = expectedModel.getFilteredLessonList()
+                .get(validLessonIndex5.getZeroBased());
+        Lesson editedLesson = new Lesson(targetLesson);
+
+        editedLesson.addStudent(ALICE);
+        editedLesson.addStudent(BENSON);
+        expectedModel.setLesson(targetLesson, editedLesson);
+
+        String expectedMessage = String.format(AddToLessonCommand.MESSAGE_ADD_TO_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredLessonList().get(validLessonIndex5.getZeroBased()),
+                model.getFilteredLessonList().get(validLessonIndex5.getZeroBased()));
+    }
+
+    @Test
+    public void execute_addStudentsToLessonNamesOnly_success() throws Exception {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                validStudentNames, FXCollections.observableArrayList());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        CommandResult result = command.execute(model);
+
+        Lesson targetLesson = expectedModel.getFilteredLessonList()
+                .get(validLessonIndex5.getZeroBased());
+        Lesson editedLesson = new Lesson(targetLesson);
+
+        editedLesson.addStudent(CARL);
+        editedLesson.addStudent(DANIEL);
+        expectedModel.setLesson(targetLesson, editedLesson);
+
+        String expectedMessage = String.format(AddToLessonCommand.MESSAGE_ADD_TO_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredLessonList().get(validLessonIndex5.getZeroBased()),
+                model.getFilteredLessonList().get(validLessonIndex5.getZeroBased()));
     }
 
     @Test
     public void execute_invalidLessonIndex_throwsCommandException() {
-        ModelStubWithLesson modelStub = new ModelStubWithLesson();
-        Index invalidIndex = Index.fromOneBased(5);
-        AddToLessonCommand command = new AddToLessonCommand(invalidIndex, studentNames);
+        Index invalidLessonIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
+        AddToLessonCommand command = new AddToLessonCommand(invalidLessonIndex,
+                validStudentNames, validStudentIndicesContainsAlice);
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+        assertCommandFailure(command, model, String.format(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX,
+                invalidLessonIndex.getOneBased()));
     }
 
     @Test
-    public void execute_studentNotFound_throwsCommandException() {
-        ModelStubWithLesson modelStub = new ModelStubWithLesson();
-        List<Name> invalidStudentNames = List.of(new Name("Non Existent"));
+    public void execute_allInvalidStudentIndices_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                validStudentNames, allInvalidIndices);
 
-        AddToLessonCommand command = new AddToLessonCommand(validIndex, invalidStudentNames);
+        String formattedOutOfBoundIndices = allInvalidIndices.stream()
+                .map(index -> String.valueOf(index.getOneBased()))
+                .collect(Collectors.joining(", "));
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
+                formattedOutOfBoundIndices));
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        ModelStubWithLesson modelStub = new ModelStubWithLesson();
-        AddToLessonCommand command = new AddToLessonCommand(validIndex, duplicateStudentNames);
+    public void execute_someInvalidStudentIndices_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                validStudentNames, someInvalidIndices);
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub));
+        String formattedOutOfBoundIndices = someInvalidIndices.stream()
+                .filter(index -> index.getZeroBased() >= model.getFilteredStudentList().size())
+                .map(index -> String.valueOf(index.getOneBased()))
+                .collect(Collectors.joining(", "));
+
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
+                formattedOutOfBoundIndices));
     }
 
-    // Model stub that contains a lesson and can return students by name
-    private class ModelStubWithLesson extends ModelStub {
+    @Test
+    public void execute_allInvalidStudentNames_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                allInvalidStudentNames, validStudentIndicesContainsAlice);
 
-        private final Lesson lesson = new Lesson(
-                new seedu.address.model.consultation.Date("2024-10-20"),
-                new seedu.address.model.consultation.Time("14:00"),
-                FXCollections.observableArrayList());
+        String studentNotFoundMessage = String.format(AddToLessonCommand.MESSAGE_STUDENT_NOT_FOUND, AMY.getName());
 
-        private ArrayList<Lesson> lessons;
+        assertCommandFailure(command, model, studentNotFoundMessage);
+    }
 
-        ModelStubWithLesson() {
-            this.lessons = new ArrayList<>();
-            this.lessons.add(lesson);
-        }
+    @Test
+    public void execute_someInvalidStudentNames_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                someInvalidStudentNames, validStudentIndicesContainsAlice);
 
-        @Override
-        public void setLesson(Lesson target, Lesson editedLesson) {
-            int index = this.lessons.indexOf(target);
-            this.lessons.set(index, editedLesson);
-        }
+        String studentNotFoundMessage = String.format(AddToLessonCommand.MESSAGE_STUDENT_NOT_FOUND, BOB.getName());
 
-        @Override
-        public ObservableList<Lesson> getFilteredLessonList() {
-            return FXCollections.observableArrayList(lessons);
-        }
+        assertCommandFailure(command, model, studentNotFoundMessage);
+    }
 
-        @Override
-        public Optional<Student> findStudentByName(Name name) {
-            // Use StudentBuilder to create valid students
-            Student johnDoe = new StudentBuilder()
-                    .withName("John Doe")
-                    .withPhone("91234567")
-                    .withEmail("johndoe@example.com")
-                    .withCourses("CS2103T")
-                    .build();
+    @Test
+    public void execute_duplicateStudentByIndexInCommand_throwsCommandException() {
 
-            Student harryNg = new StudentBuilder()
-                    .withName("Harry Ng")
-                    .withPhone("98765432")
-                    .withEmail("harryng@example.com")
-                    .withCourses("CS2101")
-                    .build();
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                validStudentNames, duplicateIndices);
 
-            if (johnDoe.getName().equals(name)) {
-                return Optional.of(johnDoe);
-            } else if (harryNg.getName().equals(name)) {
-                return Optional.of(harryNg);
-            }
+        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_INDEX,
+                ALICE.getName().fullName,
+                INDEX_FIRST_STUDENT.getOneBased());
 
-            return Optional.empty();
-        }
+        assertCommandFailure(command, model, error);
+    }
+
+    @Test
+    public void execute_duplicateStudentByNameInCommand_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
+                duplicateStudentNames, validStudentIndicesContainsAlice);
+
+        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_NAME,
+                CARL.getName().fullName);
+
+        assertCommandFailure(command, model, error);
+    }
+
+    @Test
+    public void execute_duplicateStudentByIndexAlreadyInLesson_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex1WithAlice,
+                validStudentNames, validStudentIndicesContainsAlice);
+
+        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_INDEX,
+                ALICE.getName().fullName,
+                INDEX_FIRST_STUDENT.getOneBased());
+
+        assertCommandFailure(command, model, error);
+    }
+
+    @Test
+    public void execute_duplicateStudentByNameAlreadyInLesson_throwsCommandException() {
+        AddToLessonCommand command = new AddToLessonCommand(validLessonIndex1WithAlice,
+                containsAliceNames, validStudentIndicesNoAlice);
+
+        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_NAME,
+                ALICE.getName().fullName);
+
+        assertCommandFailure(command, model, error);
     }
 }
