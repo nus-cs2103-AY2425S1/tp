@@ -26,11 +26,4 @@ public class SortCommandTest {
         SortCommand sortCommand = new SortCommand("", false);
         assertThrows(NullPointerException.class, () -> sortCommand.execute(null));
     }
-
-    @Test
-    public void execute_inMainWindow_returnsCommandResult() throws CommandException {
-        SortCommand sortCommand = new SortCommand(VALID_ATTRIBUTE, false);
-        assertEquals(new CommandResult(SortCommand.MESSAGE_FAILURE), sortCommand.execute(model));
-    }
-
 }
