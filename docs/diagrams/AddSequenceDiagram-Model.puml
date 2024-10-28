@@ -22,11 +22,10 @@ deactivate UniqueStudentList
 
 AddressBook --> Model : Whether student exists
 deactivate AddressBook
+[<-- Model
+deactivate Model
 
 group opt[hasStudent is false]
-    [<-- Model
-    deactivate Model
-
     [-> Model : addStudent(student)
     activate Model
 
