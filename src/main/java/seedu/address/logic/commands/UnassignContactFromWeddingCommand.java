@@ -14,7 +14,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
+import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * This UnassignContactFromWeddingCommand class unassigns contacts in the addressbook
@@ -56,6 +58,7 @@ public class UnassignContactFromWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownWeddingList = model.getFilteredWeddingList();
 
+
         if (specificWeddingIndex.getZeroBased() >= lastShownWeddingList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
@@ -93,6 +96,11 @@ public class UnassignContactFromWeddingCommand extends Command {
         model.setWedding(weddingToModify, newWedding);
 
         String unassignedPersonNames = parsePersonListToString(unassignedContacts);
+
+        //new code from view wedding command
+        Wedding targetWedding = lastShownWeddingList.get(specificWeddingIndex.getZeroBased());
+        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
+        model.updateFilteredPersonList(predicate);
 
         return new CommandResult(String.format(MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), unassignedPersonNames));
