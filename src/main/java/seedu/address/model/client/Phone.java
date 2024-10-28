@@ -12,7 +12,8 @@ import java.util.Objects;
 public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'";
+            "Phone numbers should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. "
+                    + "Spaces are not allowed between the 8 numbers.";
     public static final String VALIDATION_REGEX = "^[89]\\d{7}$";
     public final String value;
 

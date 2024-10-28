@@ -7,11 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_AD
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTFOUND_MEETING_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTFOUND_MEETING_TITLE;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertMeetingCommandFailure;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ import seedu.address.model.meeting.MeetingTitle;
  */
 public class DeleteMeetingCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+    private Model model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
             getTypicalClientBook(), getTypicalMeetingBook());
 
     @Test
@@ -48,7 +47,7 @@ public class DeleteMeetingCommandTest {
         String expectedMessage = String.format(DeleteMeetingCommand.MESSAGE_DELETE_MEETING_SUCCESS,
                 Messages.format(meetingToDelete));
 
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(),
                 getTypicalPropertyBook(), getTypicalClientBook(), getTypicalMeetingBook());
         expectedModel.deleteMeeting(meetingToDelete);
 
@@ -60,7 +59,7 @@ public class DeleteMeetingCommandTest {
         MeetingTitle notFoundMeetingTitle = new MeetingTitle(VALID_NOTFOUND_MEETING_TITLE);
         MeetingDate meetingDate = new MeetingDate(VALID_MEETING_DATE_ADMIRALTY);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(notFoundMeetingTitle, meetingDate);
-        assertCommandFailure(deleteMeetingCommand, model,
+        assertMeetingCommandFailure(deleteMeetingCommand, model,
                 String.format("Meeting not found with title: %s and date: %s", notFoundMeetingTitle, meetingDate));
     }
 
@@ -69,7 +68,7 @@ public class DeleteMeetingCommandTest {
         MeetingTitle meetingTitle = new MeetingTitle(VALID_MEETING_TITLE_ADMIRALTY);
         MeetingDate notFoundMeetingDate = new MeetingDate(VALID_NOTFOUND_MEETING_DATE);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(meetingTitle, notFoundMeetingDate);
-        assertCommandFailure(deleteMeetingCommand, model,
+        assertMeetingCommandFailure(deleteMeetingCommand, model,
                 String.format("Meeting not found with title: %s and date: %s", meetingTitle, notFoundMeetingDate));
     }
 
@@ -78,7 +77,7 @@ public class DeleteMeetingCommandTest {
         MeetingTitle notFoundMeetingTitle = new MeetingTitle(VALID_NOTFOUND_MEETING_TITLE);
         MeetingDate notFoundMeetingDate = new MeetingDate(VALID_NOTFOUND_MEETING_DATE);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(notFoundMeetingTitle, notFoundMeetingDate);
-        assertCommandFailure(deleteMeetingCommand, model,
+        assertMeetingCommandFailure(deleteMeetingCommand, model,
                 String.format("Meeting not found with title: %s and date: %s",
                         notFoundMeetingTitle, notFoundMeetingDate));
     }

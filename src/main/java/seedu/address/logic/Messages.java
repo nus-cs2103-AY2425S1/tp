@@ -10,7 +10,6 @@ import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientTypes;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
 /**
@@ -37,23 +36,6 @@ public class Messages {
                         .collect(Collectors.toCollection(LinkedHashSet::new)); // To maintain the sorted order
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
-    }
-
-    /**
-     * Formats the {@code person} for display to the user.
-     */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
     }
 
     /**

@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import seedu.address.model.Model;
 
 /**
@@ -9,6 +11,15 @@ import seedu.address.model.Model;
  */
 public class ListBuyersCommand extends ListCommand {
     public static final String KEY_WORD = "buyers";
+    private static final Logger logger = Logger.getLogger(ListBuyersCommand.class.getName());
+
+    /**
+     * Constructor for ListBuyersCommand.
+     * Logs the creation of the command.
+     */
+    public ListBuyersCommand() {
+        logger.info("ListBuyersCommand object created");
+    }
 
     /**
      * Executes the command to list all buyers in the client list and sets the display to show clients.
@@ -20,9 +31,15 @@ public class ListBuyersCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        logger.info("Executing ListBuyersCommand to list all buyers");
+
         // Logic to list buyers
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_BUYERS_ONLY);
+        logger.info("Filtered client list updated to show buyers only");
+
         model.setDisplayClients();
+        logger.info("Client display set to show buyer list");
+
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
 

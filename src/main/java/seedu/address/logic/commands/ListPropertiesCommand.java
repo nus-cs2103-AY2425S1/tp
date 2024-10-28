@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import seedu.address.model.Model;
 
 /**
@@ -13,6 +15,15 @@ public class ListPropertiesCommand extends ListCommand {
      * The keyword used to trigger the listing of properties in the database.
      */
     public static final String KEY_WORD = "properties";
+    private static final Logger logger = Logger.getLogger(ListPropertiesCommand.class.getName());
+
+    /**
+     * Constructor for ListPropertiesCommand.
+     * Logs the creation of the command.
+     */
+    public ListPropertiesCommand() {
+        logger.info("ListPropertiesCommand object created");
+    }
 
     /**
      * Executes the command to list all properties in the address book.
@@ -24,8 +35,12 @@ public class ListPropertiesCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        logger.info("Executing ListPropertiesCommand to list all properties");
+
         // Logic to display properties
         model.setDisplayProperties();
+        logger.info("Display updated to show all properties");
+
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
 
