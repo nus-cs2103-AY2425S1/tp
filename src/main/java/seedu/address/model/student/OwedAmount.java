@@ -27,7 +27,7 @@ public class OwedAmount extends Fee {
     }
 
     public static boolean isValidOwedAmount(String test) {
-        return Fee.isValidFee(test) && Double.parseDouble(test) >= 0;
+        return Fee.isValidFee(test);
     }
 
     /**

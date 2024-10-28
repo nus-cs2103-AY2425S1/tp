@@ -22,7 +22,7 @@ public class OwedAmountTest {
     }
 
     @Test
-    public void isValidOwed() {
+    public void isValidOwedAmount() {
         // null owed
         assertThrows(NullPointerException.class, () -> OwedAmount.isValidOwedAmount(null));
 
@@ -37,7 +37,7 @@ public class OwedAmountTest {
         assertTrue(OwedAmount.isValidOwedAmount("1")); // 0 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("1.2")); // 1 decimal place
         assertTrue(OwedAmount.isValidOwedAmount("123.23")); // 2 decimal places
-        assertTrue(OwedAmount.isValidOwedAmount("0")); // 3 digits
+        assertTrue(OwedAmount.isValidOwedAmount("0"));
     }
 
     @Test
