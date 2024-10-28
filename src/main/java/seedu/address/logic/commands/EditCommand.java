@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -87,6 +88,26 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        List<Participation> participationsToDelete = model.getParticipationList()
+                .filtered(participation -> participation.getStudent().equals(personToEdit));
+
+        //Make list of participations with updated details
+        List<Participation> participationsToAdd = new ArrayList<Participation>();
+        for (int i = 0; i < participationsToDelete.size(); i++) {
+            participationsToAdd.add(new Participation(editedPerson, participationsToDelete.get(i).getTutorial(),
+                    participationsToDelete.get(i).getAttendanceList()));
+        }
+
+        //Remove participations with corresponding student from participations list
+        for (int i = 0; i < participationsToDelete.size(); i++) {
+            model.deleteParticipation(participationsToDelete.get(i));
+        }
+
+        //Add new participations to participations list
+        for (int i = 0; i < participationsToAdd.size(); i++) {
+            model.addParticipation(participationsToAdd.get(i));
         }
 
         model.setPerson(personToEdit, editedPerson);
