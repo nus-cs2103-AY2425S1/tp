@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -131,8 +133,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isClashingWithExistingLesson(Lesson lesson) {
-        return addressBook.isClashingWithExistingLesson(lesson);
+    public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+        return addressBook.getClashingLessons(lesson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
