@@ -2,8 +2,8 @@
 'https://plantuml.com/activity-diagram-beta
 <style>
 activityDiagram {
-  FontSize 30
-  Bold true
+  FontSize 40
+  FontStyle bold
 
   activity {
     BackgroundColor #ffffff
@@ -22,10 +22,10 @@ activityDiagram {
   }
 
   arrow {
-    FontColor #000000
+    FontColor green
     FontName arial
-    FontSize 25
-    Bold true
+    FontSize 30
+    FontStyle bold
   }
 
   partition {
@@ -70,7 +70,7 @@ else ([else])
         |#F97181|ModelManager|
         :Create a student to be added;
         :Check duplicates;
-        if () then ([student's already in the address book])
+        if () then ([is duplicate])
             |UiManager|
             :Show MESSAGE_DUPLICATE;
             stop
@@ -80,8 +80,7 @@ else ([else])
             to the address book;
             :Update the filtered list;
             :Check clashing schedules;
-            if () then ([new
-schedule clashes])
+            if () then ([have clashes])
                 |UiManager|
                 :Show MESSAGE_HAS_CLASHES;
             else ([else])
