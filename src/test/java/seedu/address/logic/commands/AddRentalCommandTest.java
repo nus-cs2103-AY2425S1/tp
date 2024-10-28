@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalRentalInformation.RENTAL_ONE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -177,6 +178,16 @@ public class AddRentalCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Client> getSortedPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

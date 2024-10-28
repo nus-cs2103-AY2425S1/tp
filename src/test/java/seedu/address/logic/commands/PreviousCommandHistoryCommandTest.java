@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -139,6 +140,16 @@ public class PreviousCommandHistoryCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Client> getSortedPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
