@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
@@ -14,24 +16,25 @@ import seedu.address.model.person.Person;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Interview";
-    public static final String DEFAULT_TIME = "2021-10-01 14:00";
+    public static final LocalDateTime DEFAULT_START_TIME = LocalDateTime.parse("2015-02-20T06:30:00");
+    public static final LocalDateTime DEFAULT_END_TIME = LocalDateTime.parse("2015-02-20T07:30:00");
     public static final String DEFAULT_VENUE = "Esplanade";
 
     private EventName name;
     private Time time;
     private Venue venue;
     private Person celebrity;
-    private List<Person> contacts;
+    private Set<Person> contacts;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
      */
     public EventBuilder() {
         name = new EventName(DEFAULT_NAME);
-        time = new Time(DEFAULT_TIME);
+        time = new Time(DEFAULT_START_TIME, DEFAULT_END_TIME);
         venue = new Venue(DEFAULT_VENUE);
         celebrity = new PersonBuilder().build();
-        contacts = TypicalPersons.getTypicalPersons();
+        contacts = new HashSet<>(TypicalPersons.getTypicalPersons());
     }
 
     /**
@@ -65,8 +68,8 @@ public class EventBuilder {
     /**
      * Sets the {@code Time} of the {@code Event} that we are building.
      */
-    public EventBuilder withTime(String time) {
-        this.time = new Time(time);
+    public EventBuilder withTime(LocalDateTime startTime, LocalDateTime endTime) {
+        this.time = new Time(startTime, endTime);
         return this;
     }
 
@@ -81,7 +84,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Contacts} of the {@code Event} that we are building.
      */
-    public EventBuilder withContacts(List<Person> contacts) {
+    public EventBuilder withContacts(Set<Person> contacts) {
         this.contacts = contacts;
         return this;
     }

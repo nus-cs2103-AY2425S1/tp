@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -40,9 +42,9 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_EVENT_NAME + "Oscars "
-            + PREFIX_EVENT_TIME + "Sep 22 2024 1800 to 2200 "
+            + PREFIX_EVENT_TIME + "from: 2024-03-01 12:10, to: 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
+            + PREFIX_EVENT_CELEBRITY + "John Doe "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
@@ -71,11 +73,11 @@ public class AddEventCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person celebrity;
-        List<Person> contacts;
+        Set<Person> contacts;
 
         try {
             celebrity = model.findPerson(this.celebrityName);
-            contacts = contactNames.stream().map(model::findPerson).toList();
+            contacts = new HashSet<>(contactNames.stream().map(model::findPerson).toList());
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
         }

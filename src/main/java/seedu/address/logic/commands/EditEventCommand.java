@@ -8,10 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -45,9 +46,9 @@ public class EditEventCommand extends EditCommand {
             + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY]...\n"
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD + " 1 "
-            + PREFIX_EVENT_TIME + "Oct 4th 2022 "
+            + PREFIX_EVENT_TIME + "from: 2024-03-01 13:10, to: 2024-03-01 19:30  "
             + PREFIX_EVENT_VENUE + "Broadway "
-            + PREFIX_EVENT_CELEBRITY + "Jack Black "
+            + PREFIX_EVENT_CELEBRITY + "John Doe "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
@@ -84,11 +85,11 @@ public class EditEventCommand extends EditCommand {
 
         if (editEventDescriptor.contactsNames != null) {
             String[] newContacts = editEventDescriptor.contactsNames.trim().split(", ", 0);
-            List<Person> newList = new ArrayList<>();
+            Set<Person> newSet = new HashSet<>();
             for (int i = 0; i < newContacts.length; i++) {
-                newList.add(model.findPerson(newContacts[i]));
+                newSet.add(model.findPerson(newContacts[i]));
             }
-            editEventDescriptor.setContacts(newList);
+            editEventDescriptor.setContacts(newSet);
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
@@ -119,7 +120,7 @@ public class EditEventCommand extends EditCommand {
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
-        List<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
+        Set<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
         return new Event(updatedEventName, updatedTime, updatedVenue, updatedCelebrity, updatedContacts);
     }
@@ -159,7 +160,7 @@ public class EditEventCommand extends EditCommand {
         private String celebrityName;
         private Person celebrity;
         private String contactsNames;
-        private List<Person> contacts;
+        private Set<Person> contacts;
 
         public EditEventDescriptor() {}
 
@@ -225,11 +226,11 @@ public class EditEventCommand extends EditCommand {
             this.contactsNames = contactsNames;
         }
 
-        public void setContacts(List<Person> contacts) {
+        public void setContacts(Set<Person> contacts) {
             this.contacts = contacts;
         }
 
-        public Optional<List<Person>> getContacts() {
+        public Optional<Set<Person>> getContacts() {
             return Optional.ofNullable(contacts);
         }
 

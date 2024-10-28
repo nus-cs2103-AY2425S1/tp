@@ -2,12 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
@@ -24,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -146,9 +151,31 @@ public class ParserUtil {
      */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
-        String trimmedTime = time.trim();
-        //Add validation logic
-        return new Time(trimmedTime);
+
+        String[] trimmedTime = time.trim().split(", ", 2);
+
+        LocalDateTime fromDate;
+        LocalDateTime toDate;
+
+        try {
+            String from = trimmedTime[0].replaceFirst("from: ", "");
+            fromDate = LocalDateTime.parse(from, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        }
+
+        try {
+            String to = trimmedTime[1].replaceFirst("to: ", "");
+            toDate = LocalDateTime.parse(to, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        }
+
+        return new Time(fromDate, toDate);
     }
 
     /**
