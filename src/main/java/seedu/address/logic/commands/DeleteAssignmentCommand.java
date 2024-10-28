@@ -17,7 +17,7 @@ public class DeleteAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the assignment identified by the title used in the displayed assignment list."
             + " Parameters: TITLE\n"
-            + "Example: " + COMMAND_WORD + " CS2100 Assignment";
+            + "Example: " + COMMAND_WORD + " n/CS2100 Assignment";
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted Assignment: %1$s";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "This assignment doesn't exist!";
