@@ -61,9 +61,11 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_AMY = "Clementi";
     public static final String VALID_LOCATION_BOB = "Jurong East";
     public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
+    public static final String VALID_FIND_BUYER_NAME = "Alice Bob";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_FIND_ALICE_BOB = " " + PREFIX_NAME + VALID_FIND_BUYER_NAME;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -87,6 +89,7 @@ public class CommandTestUtil {
     public static final String MEETUP_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_MEETUP_NAME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_BUYER_FIND_DESC = " " + PREFIX_NAME + "Jankos*(("; // '*' and '(' not allowed
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_BUDGET_DESC = " " + PREFIX_BUDGET
