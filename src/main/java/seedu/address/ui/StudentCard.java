@@ -1,13 +1,14 @@
 package seedu.address.ui;
 
-
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 import seedu.address.model.tut.TutDate;
+
 
 /**
  * A UI component that displays information of a {@code Student}.
@@ -15,14 +16,6 @@ import seedu.address.model.tut.TutDate;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
 
     public final Student student;
 
@@ -37,10 +30,10 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label tutorialId;
     @FXML
-    private Label attendance;
+    private FlowPane attendanceFlowPane; // Use FlowPane instead of a single Label
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
@@ -49,20 +42,30 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         studentId.setText(student.getStudentId().value);
         tutorialId.setText(student.getTutorialId().toString());
-        attendance.setText(student.getPresentDates().toString());
+
+        // Populate attendance dates into the FlowPane
+        updateAttendanceLabels();
 
         // Listen for changes in the presentDates property
         student.presentDatesProperty().addListener((observable, oldValue, newValue) -> {
-            updateAttendanceLabel();
+            updateAttendanceLabels();
         });
 
         // Listen for changes in the dates set within presentDates
         student.getPresentDates().getDates().addListener((SetChangeListener<TutDate>) change -> {
-            updateAttendanceLabel();
+            updateAttendanceLabels();
         });
     }
 
-    private void updateAttendanceLabel() {
-        attendance.setText(student.getPresentDates().toString());
+    /**
+     * Updates the FlowPane with the student's attendance dates.
+     */
+    private void updateAttendanceLabels() {
+        attendanceFlowPane.getChildren().clear();
+        for (TutDate date : student.getPresentDates().getDates()) {
+            Label dateLabel = new Label(date.toString());
+            dateLabel.getStyleClass().add("attendance-date-label");
+            attendanceFlowPane.getChildren().add(dateLabel);
+        }
     }
 }
