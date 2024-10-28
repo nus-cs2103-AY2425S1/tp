@@ -35,7 +35,8 @@ public class AssignProductCommand extends Command {
     public static final String MESSAGE_SUPPLIER_NOT_FOUND = "Supplier not found: %1$s";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found: %1$s";
     public static final String MESSAGE_PRODUCT_ALREADY_ASSIGNED = "Product is already assigned to the supplier.";
-
+    public static final String MESSAGE_PRODUCT_ALREADY_ASSIGNED_TO_OTHER =
+            "Product is already assigned to a different supplier: %1$s.";
     private final ProductName productName;
     private final Name supplierName;
 
@@ -66,6 +67,11 @@ public class AssignProductCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, productName)));
 
+        //Check if product is already assigned to another supplier
+        if (!productToAssign.getSupplierName().equals(supplierName)) {
+            throw new CommandException(String.format(MESSAGE_PRODUCT_ALREADY_ASSIGNED_TO_OTHER,
+                    productToAssign.getSupplierName()));
+        }
         // Create a new supplier with the updated product list
         Set<Product> updatedProductList = new HashSet<>(supplierToAssign.getProducts());
         if (updatedProductList.contains(productToAssign)) {

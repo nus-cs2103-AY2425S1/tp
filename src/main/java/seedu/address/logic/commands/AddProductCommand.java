@@ -18,7 +18,7 @@ public class AddProductCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to InvenTrack. ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This product already exists.";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists.";
 
     private final Product toAdd;
 
@@ -35,7 +35,7 @@ public class AddProductCommand extends Command {
         requireNonNull(model);
 
         if (model.hasProduct(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SUPPLIER);
+            throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
         model.addProduct(toAdd);
