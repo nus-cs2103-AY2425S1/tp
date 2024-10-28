@@ -1,6 +1,7 @@
 package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +13,9 @@ import java.util.Objects;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
+
 
 /**
  * Represents a Lesson in the system.
@@ -47,6 +50,22 @@ public class Lesson {
             this.students.add(student);
             this.attendanceMap.put(student, attendanceMap.get(student));
         }
+    }
+
+    /**
+     * Constructs a copy of the given lesson.
+     * Creates new instances of date, time, and the student list (not the students)
+     * to
+     * reduce the risk of accidental mutation.
+     *
+     * @param lesson The lesson to copy.
+     */
+    public Lesson(Lesson lesson) {
+        requireNonNull(lesson);
+        this.date = new Date(lesson.getDate().getValue());
+        this.time = new Time(lesson.getTime().getValue());
+        this.students = new ArrayList<>(lesson.getStudents());
+        this.attendanceMap = new HashMap<>(lesson.getAttendanceMap());
     }
 
     /**
@@ -86,11 +105,25 @@ public class Lesson {
     }
 
     /**
+     * Returns true if the lesson contains the specified student.
+     *
+     * @param student The student to check for.
+     * @return True if the student is attending the lesson, false otherwise.
+     */
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
+    }
+
+    /**
      * Adds a student to the lesson.
      *
      * @param student The student to add.
      */
     public void addStudent(Student student) {
+        if (hasStudent(student)) {
+            throw new DuplicateStudentException();
+        }
         students.add(student);
         this.attendanceMap.put(student, false); // also set default attendance as false
     }
@@ -165,5 +198,4 @@ public class Lesson {
         return String.format("Lesson[date=%s, time=%s, students=%s, attendanceMap=%s]",
                 date, time, students, attendanceMap);
     }
-
 }

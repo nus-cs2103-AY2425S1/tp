@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -26,11 +27,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Lesson> lessons;
 
     /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * The 'unusual' code block below is a non-static initialization block,
+     * sometimes used to avoid duplication
+     * between constructors. See
+     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * Note that non-static init blocks are not recommended to use. There are other
+     * ways to avoid duplication
+     * among constructors.
      */
     {
         students = new UniqueStudentList();
@@ -38,7 +42,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         lessons = FXCollections.observableArrayList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the data in the {@code toBeCopied}
@@ -85,7 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in
+     * the address book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -93,7 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a consult with the same details as the given consult exists in TAHub.
+     * Returns true if a consult with the same details as the given consult exists
+     * in TAHub.
+     *
      * @param consult The consultation to search for.
      * @return True if a consultation is found.
      */
@@ -127,7 +135,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * Replaces the given student {@code target} in the list with
+     * {@code editedStudent}.
      * {@code target} must exist in the address book.
      * The student identity of {@code editedStudent} must not be the same
      * as another existing student in the address book.
@@ -139,7 +148,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given consultation {@code target} in the list with {@code editedConsult}.
+     * Replaces the given consultation {@code target} in the list with
+     * {@code editedConsult}.
      * {@code target} must exist in TAHub.
      */
     public void setConsult(Consultation target, Consultation editedConsult) {
@@ -190,12 +200,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return FXCollections.unmodifiableObservableList(consults);
     }
 
-
     /**
      * Checks if this {@code AddressBook} is equal to another object.
      *
      * @param other The object to compare with.
-     * @return true if both AddressBooks have the same students, consultations, and lessons, false otherwise.
+     * @return true if both AddressBooks have the same students, consultations, and
+     *         lessons, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -269,9 +279,33 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns an unmodifiable view of the lesson list.
      *
-     * @return An unmodifiable {@code ObservableList} containing all lessons in the address book.
+     * @return An unmodifiable {@code ObservableList} containing all lessons in the
+     *         address book.
      */
     public ObservableList<Lesson> getLessonList() {
         return FXCollections.unmodifiableObservableList(lessons);
+    }
+
+    /**
+     * Replaces the given lesson {@code target} in the list with
+     * {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     *
+     * @param target       The lesson to be replaced.
+     * @param editedLesson The new lesson to replace the target.
+     * @throws NullPointerException    if {@code target} or {@code editedLesson} is
+     *                                 null.
+     * @throws LessonNotFoundException if {@code target} could not be found in the
+     *                                 list.
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        int index = lessons.indexOf(target);
+        if (index == -1) {
+            throw new LessonNotFoundException(); // Custom exception to be created if it doesn't exist
+        }
+
+        lessons.set(index, editedLesson);
     }
 }

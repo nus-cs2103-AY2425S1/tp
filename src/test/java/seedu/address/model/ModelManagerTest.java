@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONSULTATIONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalConsultations.CONSULT_1;
+import static seedu.address.testutil.TypicalLessons.LESSON_1;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
@@ -153,10 +155,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setLesson_setsLessonSuccessfully() {
+        // Arrange
+        Lesson lesson = new LessonBuilder().withDate("2024-11-01").withTime("10:00").build();
+        modelManager.addLesson(lesson);
+        assertTrue(modelManager.hasLesson(lesson)); // Ensure the lesson was added
+
+        // Act
+        Lesson otherLesson = new LessonBuilder().withDate("2024-11-02").withTime("11:00").build();
+        modelManager.setLesson(lesson, otherLesson);
+
+        // Assert
+        assertFalse(modelManager.hasLesson(lesson)); // Ensure the lesson was edited
+        assertTrue(modelManager.hasLesson(otherLesson)); // Ensure the lesson is edited
+    }
+
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder()
                 .withStudent(ALICE).withStudent(BENSON)
-                .withConsultation(CONSULT_1).build();
+                .withConsultation(CONSULT_1)
+                .withLesson(LESSON_1).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -185,6 +205,7 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         modelManager.updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
+        modelManager.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
