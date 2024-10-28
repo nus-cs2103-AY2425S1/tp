@@ -158,7 +158,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add a new student
+On execution, the new created `Student` is then be checked if it is a duplicate of any `Student` in the current `AddressBook`, i.e. it has the exactly same `Name` **and** `Phone` with any of the current `Student`s. A `CommandException` will be thrown if it is a duplicate.
+
+Else, the `Schedule` of the new `Student` is checked if it clashes with any current `Schedule`s so that a warning message will be sent together with the successful message afterward.
 
 #### Proposed Implementation
 
