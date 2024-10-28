@@ -3,6 +3,7 @@ package seedu.address.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.claim.Claim;
@@ -27,27 +28,28 @@ public abstract class Policy {
      * @param expiryDate the date of Policy's expiry.
      * @throws NullPointerException if any of the fields is null.
      */
-    public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
-        requireAllNonNull(premiumAmount, coverageAmount, expiryDate);
+    public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate,
+                  ClaimList claims) {
+        requireAllNonNull(premiumAmount, coverageAmount, expiryDate, claims);
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
-        this.claimList = new ClaimList();
+        this.claimList = claims;
     }
 
     /**
      * Return a suitable Policy based on the PolicyType passed.
      */
     public static Policy makePolicy(PolicyType policyType, PremiumAmount premiumAmount, CoverageAmount coverageAmount,
-            ExpiryDate expiryDate) {
+                                    ExpiryDate expiryDate, ClaimList claims) {
         requireNonNull(policyType);
         switch (policyType) {
         case LIFE:
-            return new LifePolicy(premiumAmount, coverageAmount, expiryDate);
+            return new LifePolicy(premiumAmount, coverageAmount, expiryDate, claims);
         case HEALTH:
-            return new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
+            return new HealthPolicy(premiumAmount, coverageAmount, expiryDate, claims);
         case EDUCATION:
-            return new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
+            return new EducationPolicy(premiumAmount, coverageAmount, expiryDate, claims);
         default:
             throw new RuntimeException("Policy type " + policyType + " is not accounted for.");
         }
@@ -173,5 +175,8 @@ public abstract class Policy {
 
     public ClaimList getClaimList() {
         return this.claimList;
+    }
+    public List<Claim> getList() {
+        return this.claimList.getList();
     }
 }

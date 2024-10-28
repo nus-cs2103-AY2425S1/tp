@@ -17,7 +17,8 @@
       "policyType" : "health",
       "premiumAmount" : 300.0,
       "coverageAmount" : 3000.0,
-      "expiryDate" : "12/23/2024"
+      "expiryDate" : "12/23/2024",
+      "claims" : [ ]
     }]
   }, {
     "name" : "Carl Kurz",
