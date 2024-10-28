@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedAppointment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
-    public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a positive integer.";
+    public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a non-negative integer.";
     public static final String PERSON_CHECK_MESSAGE_FORMAT = "Person with person ID exist in address book";
     public static final String DATE_TIME_CONSTRAINTS =
             "Appointment DateTime must be in the format yyyy-MM-dd'T'HH:mm:ss";
@@ -99,7 +99,7 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
-        if (personId <= 0) {
+        if (personId < 0) {
             throw new IllegalValueException(String.format(INTEGER_CHECK_MESSAGE_FORMAT));
         }
         final int modelPersonId = personId;
