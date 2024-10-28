@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,6 +21,9 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     @FXML
+    private StackPane commandTextContainer;
+
+    @FXML
     private TextField commandTextField;
 
     /**
@@ -29,6 +34,11 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setPromptText("Enter your command here!");
+
+        // Ensure that text field always starts unfocused, so users can see the prompt
+        // By requesting focus on its parent
+        Platform.runLater(()->commandTextContainer.requestFocus());
     }
 
     /**
@@ -43,7 +53,8 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            commandTextField.clear();
+            commandTextContainer.requestFocus();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
