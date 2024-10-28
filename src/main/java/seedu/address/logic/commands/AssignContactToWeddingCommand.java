@@ -65,7 +65,6 @@ public class AssignContactToWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
 
-
         Wedding weddingToModify = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
 
         // get a list of all the Persons that the user is trying to assign to the wedding
