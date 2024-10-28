@@ -1,7 +1,9 @@
 package seedu.address.model.wedding;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,7 +16,11 @@ public class NameMatchesWeddingPredicate implements Predicate<Wedding> {
     private final List<String> keywords;
 
     public NameMatchesWeddingPredicate(List<String> names) {
-        this.keywords = names;
+        // Split any multi-word strings into individual words
+        this.keywords = names.stream()
+                .flatMap(name -> Arrays.stream(name.split("\\s+")))
+                .filter(word -> !word.isEmpty())
+                .collect(Collectors.toList());
     }
 
     @Override

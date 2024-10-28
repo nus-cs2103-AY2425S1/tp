@@ -59,7 +59,7 @@ public class ViewwCommand extends Command {
             PersonMatchesWeddingPredicate weddingPredicateToView = viewWithKeyword(model);
 
             if (weddingPredicateToView != null) {
-                // Here you would check if the person has wedding details before displaying
+                model.updateFilteredPersonList(weddingPredicateToView);
                 return new CommandResult(String.format(MESSAGE_VIEW_WEDDING_SUCCESS,
                         Messages.format(weddingPredicateToView.getWedding())));
             } else {
@@ -149,12 +149,5 @@ public class ViewwCommand extends Command {
 
         // All other cases are false
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
     }
 }
