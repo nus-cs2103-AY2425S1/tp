@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
+import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Apartment;
 import seedu.address.model.person.Bto;
@@ -62,6 +63,9 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         Price buyingPrice = ParserUtil.parseBuyingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
+        if (!ParserUtil.isValidNumberOfPropertyTags(argMultimap.getAllValues(PREFIX_TAG))) {
+            throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Property property = getSpecificPropertyObject(housingType, buyingPrice, postalCode, unitNumber, tagList);

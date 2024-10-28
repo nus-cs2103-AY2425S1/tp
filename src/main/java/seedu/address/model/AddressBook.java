@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasSellProperty(Index index, Property property) {
         requireNonNull(property);
         // There's no get method for ObservableList, so we can't get the property at the index
-        //Person specificPerson = persons.get(index.getZeroBased());
+        // Person specificPerson = persons.get(index.getZeroBased());
         return false;
     }
 

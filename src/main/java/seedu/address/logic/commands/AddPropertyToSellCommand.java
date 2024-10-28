@@ -41,6 +41,8 @@ public class AddPropertyToSellCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
             + "in the list of properties to sell";
+    public static final String MESSAGE_PROPERTY_TAG_LIMIT = "The number of tags for a property cannot exceed 3 and "
+            + "the number of characters for each tag cannot exceed 10";
 
     private final Property propertyToSellToBeAdded;
     private final Index personIndex;
@@ -69,7 +71,7 @@ public class AddPropertyToSellCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        if (personToEdit.containsSellProperty(propertyToSellToBeAdded)) {
+        if (personToEdit.containsSellProperty(propertyToSellToBeAdded, lastShownList)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         } else {
             personToEdit.addSellProperty(propertyToSellToBeAdded);

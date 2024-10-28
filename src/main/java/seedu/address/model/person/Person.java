@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -187,8 +188,14 @@ public class Person {
      * @param property Property to check
      * @return boolean
      */
-    public boolean containsSellProperty(Property property) {
-        return sellingProperties.contains(property);
+    public boolean containsSellProperty(Property property, List<Person> lastShownList) {
+        for (Person person : lastShownList) {
+            if (person.getListOfSellingProperties().contains(property)) {
+                return true;
+            }
+        }
+        //return sellingProperties.contains(property);
+        return false;
     }
 
     /**
