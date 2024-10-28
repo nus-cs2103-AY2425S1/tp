@@ -69,7 +69,7 @@ public class Payment {
     public void updatePaymentDueDate(Policy policy) {
         if (policy.isExpiringSoon()) {
             paymentDueDate = LocalDate.MAX;
-            amount = BigDecimal.valueOf(0);
+            amount = BigDecimal.ZERO;
         } else {
             paymentDueDate = paymentDueDate.plusYears(1);
         }
@@ -81,6 +81,9 @@ public class Payment {
 
     @Override
     public String toString() {
+        if (amount.equals(BigDecimal.ZERO) || paymentDueDate.equals(LocalDate.MAX)) {
+            return "Fully paid";
+        }
         return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
 

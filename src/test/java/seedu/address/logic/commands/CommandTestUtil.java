@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
@@ -83,12 +82,11 @@ public class CommandTestUtil {
             + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
             + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
             + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
-    public static final String VALID_EDIT_POLICY_LIFE = " " + PREFIX_POLICY + EDIT_POLICY_LIFE_1;
-    public static final String VALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE
+    public static final String VALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
             + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
             + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
-    public static final String INVALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE
+    public static final String INVALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
             + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
             + PREFIX_PAYMENT_AMOUNT + INVALID_INSURANCE_AMOUNT_DUE;

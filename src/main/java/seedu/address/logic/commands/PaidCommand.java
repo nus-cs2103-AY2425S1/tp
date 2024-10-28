@@ -58,6 +58,7 @@ public class PaidCommand extends Command {
         }
 
         if (policyToUpdate.isExpiringSoon()) {
+            policyToUpdate.updateNextPaymentDate();
             throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyName, personToUpdate.getName()));
         }
 
