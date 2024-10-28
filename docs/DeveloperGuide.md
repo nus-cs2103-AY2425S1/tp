@@ -1,7 +1,7 @@
 ---
     layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+      title: "Developer Guide"
+      pageNav: 3
 ---
 
 # WedLinker Developer Guide
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+WedLinker is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -26,27 +26,37 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
+The ***Architecture Diagram*** given below explains the high-level design of the App, giving a quick overview of main components and how they interact with each other.
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
-
-Given below is a quick overview of main components and how they interact with each other.
-
 **Main components of the architecture**
+The bulk of the app's work is done by the `UI`, `Logic`, `Model`, and `Storage` components.
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* **`Main`**:
+    * Consists of classes 
+<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/Main.java" style="text-decoration: underline;">`Main`</a>
+<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/MainApp.java" style="text-decoration: underline;">`MainApp`</a>
+    * Responsible for app launch and shutdown.
+    * At launch, it initializes the other components in the correct sequence and connects them.
+    * At shutdown, it terminates the components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+* <a href="#ui-component" style="text-decoration: underline;"><strong><code>UI</code></strong></a>:
+    * The interface of the app (WedLinker) that the user primarily interacts with.
+    * Displays relevant information (e.g., wedding details) from `Model`.
+    * Receives commands from user input.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* <a href="#logic-component" style="text-decoration: underline;"><strong><code>Logic</code></strong></a>:
+    * The command executor.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+* <a href="#model-component" style="text-decoration: underline;"><strong><code>Model</code></strong></a>:
+    * Holds the data of the app in memory, which can be altered by commands.
+    * Some data is displayed to the user via the UI.
+
+* <a href="#storage-component" style="text-decoration: underline;"><strong><code>Storage</code></strong></a>:
+    * Reads data from, and writes data to, the locally stored `data/addressbook.json` file.
+
+* <a href="#common-classes" style="text-decoration: underline;"><strong><code>Commons</code></strong></a>:
+    * Represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -56,7 +66,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *API* in an `interface` with the same name as `{Component}`.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -65,92 +75,120 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java" style="text-decoration: underline;"><strong><code>Ui.java</strong></code></a>)
+The `UI` component handles interactions between the user and the app's graphical interface, leveraging JavaFX to define and display various UI elements.
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+1. **Structure**:
+    * The `UI` consists of a `MainWindow` composed of several parts like `CommandBox`, `StatusBarFooter`, `ResultDisplay`, and various `*ListPanel`s.
+    * Each UI part, including `MainWindow`, inherits from the abstract class
+      (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/UiPart.java#L15" style="text-decoration: underline;"><strong><code>UiPart</strong></code></a>),
+   capturing commonalities among visible GUI components.
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+2. **Class Diagram**:
+    * Diagram showing the `UI` structure:
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+      <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+3. **JavaFX and Layout Files**:
+    * The layout of each UI part is defined using `.fxml` files in the
+      <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/resources/view" style="text-decoration: underline;"><strong><code>src/main/resources/view</strong></code></a>,
+    * For example, the structure of
+      <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java" style="text-decoration: underline;"><strong><code>MainWindow</strong></code></a>,
+   is specified in
+      <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/resources/view/MainWindow.fxml" style="text-decoration: underline;"><strong><code>MainWindow.fxml</strong></code></a>,
 
-The `UI` component,
+4. **Responsibilities**:
+    * Executes user commands by interfacing with the `Logic` component.
+    * Listens for updates to `Model` data to refresh the UI with modified information.
+    * Maintains a reference to `Logic`, relying on it for command execution.
+    * Accesses specific `Model` classes to display `Person` objects managed within `Model`.
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
-
-### Logic component
-
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
-
-Here's a (partial) class diagram of the `Logic` component:
-
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
-
-How the `Logic` component works:
-
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<puml src="diagrams/ParserClasses.puml" width="600"/>
-
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
-
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
-
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+### Logic Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java" style="text-decoration: underline;"><strong><code>Logic.java</strong></code></a>)
 
 
-The `Model` component,
+The `Logic` component processes user inputs passed through the UI, utilizing a series of parsers to generate `Command` instances, which are then executed. Here’s an overview:
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+1. **User Input Processing**:
+    * User input is received from the UI and passed to `Logic`.
+    * The input is parsed by `AddressBookParser`, which delegates to the appropriate parser (e.g., `DeleteCommandParser`), creating the relevant `Command` instance.
+    * `LogicManager` executes the `Command`, interacting with the `Model` to make necessary updates (e.g., deleting a person).
+    * Execution results are encapsulated in a `CommandResult` and returned to `Logic`, which relays the outcome back to the UI.
 
-<box type="info" seamless>
+2. **Class Diagram**:
+    * Partial diagram of the `Logic` component:
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+      <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+3. **Sequence Diagram**:
+    * Example interaction in the `Logic` component for `execute("delete 1")` (from user inputting delete 1 on UI):
 
-</box>
+      <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
+      <box type="info" seamless>
+      **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X), but due to a PlantUML limitation, it continues to the end of the diagram.
+      </box>
+
+4. **Parser Classes**:
+    * Other classes in `Logic` handle command parsing:
+
+      <puml src="diagrams/ParserClasses.puml" width="600"/>
+
+    * Parsing flow:
+        * `AddressBookParser` identifies the specific command parser needed (e.g., `AddCommandParser`, `DeleteCommandParser`).
+        * Each `XYZCommandParser` (e.g., `AddCommandParser`) implements the `Parser` interface, allowing for consistent handling and testing.
+        * The parser processes the user command, creating the relevant `Command` object (e.g., `AddCommand`), which `AddressBookParser` returns to `Logic`.
+
+### Model Component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/model/Model.java" style="text-decoration: underline;"><strong><code>Model.java</strong></code></a>)
 
 
-### Storage component
+The `Model` component handles the data and state management for the app, storing all entities and providing an interface for accessing and updating them.
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+1. **Structure**:
+    * The `Model` stores various types of data:
+        * `Person` objects within a `UniquePersonList`.
+        * `Wedding` objects within a `UniqueWeddingList`.
+        * `Task` objects within a `UniqueTaskList`.
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+2. **Class Diagram**:
+    * Diagram of the `Model` structure:
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+      <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+3. **Responsibilities**:
+    * **Data Storage**:
+        * Maintains address book data, including lists of `Person`, `Wedding`, and `Task` objects.
+    * **Filtered Views**:
+        * Provides filtered lists of `Person`, `Wedding`, and `Task` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
+    * **User Preferences**:
+        * Stores user preferences in a `UserPref` object, which is accessible externally as `ReadOnlyUserPref`.
+    * **Independence**:
+        * The `Model` does not rely on other components, as it represents the app’s core data entities, which should be logically self-contained.
+
+
+### Storage component (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java" style="text-decoration: underline;"><strong><code>Storage.java</strong></code></a>)
+
+1. **Functionality**:
+    * Supports saving and loading both address book data and user preferences as JSON files.
+    * Reads JSON data into corresponding in-memory objects for the app's use.
+
+2. **Inheritance**:
+    * Inherits from `AddressBookStorage` and `UserPrefStorage`, allowing it to be used interchangeably with either interface, depending on the functionality needed.
+
+3. **Dependencies**:
+    * Depends on classes within the `Model` component, as `Storage` is tasked with saving and retrieving `Model`-related objects.
+
+4. **Class Diagram**:
+    * Diagram illustrating `Storage` structure:
+
+      <puml src="diagrams/StorageClassDiagram.puml" width="600" />
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the 
+<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/commons" style="text-decoration: underline;"><strong><code>seedu.address.commons</strong></code></a>
+package.
+
+Notable classes include `StringUtil` and `ToStringBuilder` which help to perform operations like checking whether a string
+includes non-zero unsigned integer, or whether there is a partial match for a word. These can be found in `seedu.address.commons.util`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -400,7 +438,7 @@ Those without any stars are user stories that were considered but will not be im
 
 
 * 2a. The system detects an error in the entered data.
-    * 2a1. The system displays an error message 
+    * 2a1. The system displays an error message
 
       Use case resumes at step 1.
 
