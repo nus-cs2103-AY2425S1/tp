@@ -34,13 +34,15 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withClientTypes("Investment").build();
+            .withClientTypes("Investment", "Savings").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withClientTypes("Investment").build();
+            .withClientTypes("Investment", "Healthcare").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withClientTypes("B").build();
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
+            .withClientTypes("B").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -50,11 +52,16 @@ public class TypicalPersons {
     public static final Person ALICEY = new PersonBuilder().withName("Alice Potter").withPhone("9992442")
             .withEmail("APotter@example.com").withAddress("china").build();
 
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Person HARRY = new PersonBuilder().withName("Harry Potter").withPhone("9992442")
+            .withEmail("harry@example.com")
+            .withAddress("china")
+            .withClientTypes("Insurance Plan").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

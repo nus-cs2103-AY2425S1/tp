@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_NO_PERSON_FOUND_FOR_VIEW;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithNewList;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -11,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalClientHub;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -56,17 +57,16 @@ public class FindClientTypeCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPhoneFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        ClientTypeContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_zeroKeywords_noClientFound() {
+        String expectedMessage = String.format(MESSAGE_NO_PERSON_FOUND_FOR_VIEW);
+        String userInput = "  ";
+        ClientTypeContainsKeywordsPredicate predicate = preparePredicate(userInput);
         FindClientTypeCommand command = new FindClientTypeCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getDisplayPersons());
+        assertCommandFailureWithNewList(command, userInput, model, expectedMessage);
     }
 
     @Test
-    public void execute_singleKeyword_multiplePersonsFound() {
+    public void execute_singleKeyword_multipleClientsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ClientTypeContainsKeywordsPredicate predicate = preparePredicate("Investment");
         FindClientTypeCommand command = new FindClientTypeCommand(predicate);
@@ -74,6 +74,48 @@ public class FindClientTypeCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getDisplayPersons());
     }
+
+    @Test
+    public void execute_caseInsensitiveKeyword_multipleClientsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        ClientTypeContainsKeywordsPredicate predicate = preparePredicate("inVeStMeNt");
+        FindClientTypeCommand command = new FindClientTypeCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getDisplayPersons());
+    }
+
+    @Test
+    public void execute_multipleMatchingKeywords_singleClientFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        ClientTypeContainsKeywordsPredicate predicate = preparePredicate("Investment Healthcare");
+        FindClientTypeCommand command = new FindClientTypeCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getDisplayPersons());
+    }
+
+    @Test
+    public void execute_secondWordMatch_returnsCorrectClient() {
+        // Should match person with client type "Investment Plan" when searching just "Plan"
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        ClientTypeContainsKeywordsPredicate predicate = preparePredicate("Savings");
+        FindClientTypeCommand command = new FindClientTypeCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getDisplayPersons());
+    }
+
+    //    @Test
+    //    public void execute_multipleKeywordsMatchingSingleClientType_singleClientFound() {
+    //        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+    //        ClientTypeContainsKeywordsPredicate predicate = preparePredicate("Insurance Plan");
+    //        FindClientTypeCommand command = new FindClientTypeCommand(predicate);
+    //        expectedModel.updateFilteredPersonList(predicate);
+    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    //        assertEquals(Arrays.asList(HARRY), model.getDisplayPersons());
+    //    }
+
 
     @Test
     public void toStringMethod() {
@@ -87,6 +129,7 @@ public class FindClientTypeCommandTest {
      * Parses {@code userInput} into a {@code ClientTypeContainsKeywordsPredicate}.
      */
     private ClientTypeContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new ClientTypeContainsKeywordsPredicate(List.of(userInput));
+        String[] keywords = userInput.split("\\s+");
+        return new ClientTypeContainsKeywordsPredicate(List.of(keywords));
     }
 }

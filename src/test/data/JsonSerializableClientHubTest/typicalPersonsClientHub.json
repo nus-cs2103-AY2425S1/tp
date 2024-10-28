@@ -12,14 +12,14 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "clientTypes" : [ "Investment" ],
+    "clientTypes" : [ "Investment", "Savings" ],
     "description" : "Likes to eat a lot"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "clientTypes" : [ "Investment" ],
+    "clientTypes" : [ "Investment", "Healthcare" ],
     "description" : "Likes to eat a lot"
   }, {
     "name" : "Daniel Meier",
