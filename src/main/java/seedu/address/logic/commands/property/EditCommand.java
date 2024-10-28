@@ -88,7 +88,8 @@ public class EditCommand extends Command {
                                                  EditPropertyDescriptor editPropertyDescriptor) {
         assert propertyToEdit != null;
 
-        LandlordName updatedLandlordName = editPropertyDescriptor.getLandlordName().orElse(propertyToEdit.getLandlordName());
+        LandlordName updatedLandlordName = editPropertyDescriptor.getLandlordName()
+                .orElse(propertyToEdit.getLandlordName());
         Phone updatedPhone = editPropertyDescriptor.getPhone().orElse(propertyToEdit.getPhone());
         Address updatedAddress = editPropertyDescriptor.getAddress().orElse(propertyToEdit.getAddress());
         AskingPrice updatedAskingPrice = editPropertyDescriptor.getAskingPrice()

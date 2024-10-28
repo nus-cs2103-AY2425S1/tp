@@ -17,15 +17,16 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.property.PropertyBuilder;
 
 public class PropertyTest {
-    
+
     @Test
     public void isSameProperty() {
+
         // same object -> returns true
         assertTrue(ALICE.isSameProperty(ALICE));
-        
+
         // null -> returns false
         assertFalse(ALICE.isSameProperty(null));
-        
+
         // same address, all other attributes different -> returns true
         Property editedAlice = new PropertyBuilder(ALICE).withLandlordName(VALID_LANDLORD_NAME_ALAN)
                 .withPhone(VALID_PHONE_ALAN).withAskingPrice(VALID_ASKING_PRICE_ALAN)
@@ -39,7 +40,7 @@ public class PropertyTest {
         // address differs in case, all other attributes same -> returns false
         Property editedBrenda = new PropertyBuilder(BRENDA).withAddress(VALID_ADDRESS_BRENDA.toLowerCase()).build();
         assertFalse(BRENDA.isSameProperty(editedBrenda));
-        
+
         // address has trailing spaces, all other attributes same -> returns false
         String addressWithTrailingSpaces = VALID_ADDRESS_BRENDA + " ";
         editedBrenda = new PropertyBuilder(BRENDA).withAddress(addressWithTrailingSpaces).build();
@@ -84,12 +85,12 @@ public class PropertyTest {
         editedAlice = new PropertyBuilder(ALICE).withPropertyType(VALID_PROPERTY_TYPE_BRENDA).build();
         assertFalse(ALICE.equals(editedAlice));
     }
-    
+
     @Test
     public void toStringMethod() {
-        String expected = Property.class.getCanonicalName() + "{name=" + ALICE.getLandlordName() + ", phone=" + ALICE.getPhone()
-                + ", address=" + ALICE.getAddress() + ", askingPrice=" + ALICE.getAskingPrice()
-                + ", propertyType=" + ALICE.getPropertyType() + "}";
+        String expected = Property.class.getCanonicalName() + "{name=" + ALICE.getLandlordName()
+                + ", phone=" + ALICE.getPhone() + ", address=" + ALICE.getAddress()
+                + ", askingPrice=" + ALICE.getAskingPrice() + ", propertyType=" + ALICE.getPropertyType() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
