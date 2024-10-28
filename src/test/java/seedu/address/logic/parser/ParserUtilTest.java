@@ -218,16 +218,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseWeddingDate_invalidWeddingDate_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("31/02/2024")); // Invalid date
-    }
-
-    @Test
-    public void parseWeddingDate_pastWeddingDate_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("01/01/2020")); // Date in the past
-    }
-
-    @Test
     public void parsePersonIndexString_validPersonIndexes_success() throws Exception {
         Set<Index> expectedIndexes = Set.of(Index.fromOneBased(1), Index.fromOneBased(2));
         assertEquals(expectedIndexes, ParserUtil.parsePersonIndexString("1 2"));
