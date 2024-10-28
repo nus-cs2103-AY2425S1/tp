@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     public static final String TEACHER_TYPE = "teacher";
     public static final String STUDENT_TYPE = "student";
