@@ -401,6 +401,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 2b1-2b2 are repeated until all details entered are correct.
 * Use cases resumes from step 3.
 
+**Use case: UC07 - Settle outstanding fees for student**
+
+**MSS**
+
+1. User requests to <ins>list students(UC02)</ins>.
+2. User enters command to settle outstanding fees for the specified student.
+3. System updates the total tuition fee paid and total tuition fee owed by the student.
+4. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters command with new index.
+* Steps 2a1-2a2 are repeated until index entered is correct.
+* Use case resumes from step 3. 
+
+* 2b. System detects error in entered command.
+    * 2b1. System displays error message and does not clear command line.
+    * 2b2. User enters new command.
+* Steps 2b1-2b2 are repeated until all details entered are correct.
+* Use case resumes from step 3.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
