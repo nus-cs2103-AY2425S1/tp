@@ -42,7 +42,6 @@ In this comprehensive user guide, we will take you to experience a full journey 
   - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
   - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
   - [4.1.4 Listing students: `listStu`](#listing-students-listStu)
-  - [4.1.5 Find Students by Name: `find`](#find-students-find)
 - [4.2 Tutorial Data Related Commands](#tutorial-data-commands)
   - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
   - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
@@ -315,10 +314,24 @@ section for detailed information
 ### 4.1 Student Data Commands:
 <a id="student-data-commands"></a>
 
-#### 4.1.1 Adding a student: `add`
+#### 4.1.1 Adding a student: `addStu`
 <a id="adding-a-student-add"></a>
 
 > Adds a student to the TrackMate application.
+
+**Format:** `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]`
+
+Command detail & constraints:
+
+- This command registers a new student in the system with essential details like name and student ID, and optionally assigns them to a tutorial.
+- The field **Format:** `[c/TUTORIAL_ID]`is optional to add. If not provided, the student will not be assigned to any tutorial upon addition.
+- Each student must have a unique student ID within the system.
+- Duplicate name with different student ID is allowed
+
+**Examples:**
+
+- `addStu n/Samson s/A1234567X c/T1001` : Adds a student named "Samson" with the student ID "A1234567X" and assigns them to tutorial ID "T1001".
+- `addStu n/Alice s/A1234567C` : Adds a student named "Alice" with the student ID "A1234567C" without assigning a tutorial ID.
 
 #### 4.1.2 Edit existing student detail: `edit`
 <a id="editing-a-student-edit"></a>
@@ -327,19 +340,17 @@ section for detailed information
 
 **Format:** `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]`
 
+Command detail & constraints
+
+- This command allows you to specify new values for a student's name, student ID, and/or tutorial ID, ensuring that each student's information is up to date and accurately reflects any changes in their academic or tutorial assignments.
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
 **Examples:**
 
-- `edit 1 n/Samson Chew s/A1234567M`  
-  Edits the name and student ID of the 1st student to be "Samson Chew" and "A1234567M" respectively.
-
-- `edit 2 c/1002`  
-  Edits the tutorial ID of the 2nd student to be "1002".
-
-This command allows you to specify new values for a student's name, student ID, and/or tutorial ID, ensuring that each student's information is up to date and accurately reflects any changes in their academic or tutorial assignments.
+- `edit 1 n/Samson Chew s/A1234567M` : Edits the name and student ID of the 1st student to be "Samson Chew" and "A1234567M" respectively.
+- `edit 2 c/1002`  : Edits the tutorial ID of the 2nd student to be "1002".
 
 #### 4.1.3 Delete a student: `deleteStu`
 <a id="deleting-a-student-deleteStu"></a>
@@ -359,11 +370,6 @@ Example:
 
 #### 4.1.4 Listing students: `listStu`
 <a id="listing-students-listStu"></a>
-
-> TO BE DONE
-
-#### 4.1.5 Find Students by Name: `find`
-<a id="find-students-find"></a>
 
 > TO BE DONE
 
@@ -636,11 +642,10 @@ TO BE DONE
 
 | Action            | Format, Examples                                                                                                                                                    |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add Student**    | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]…​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001` |
 | **Clear**          | `clear`                                                                                                                                                             |
 | **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                                                                                           |
-| **Edit Student**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find Student**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                          |
+| **Edit Student**    | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]…​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`                                        |
 | **List Students**   | `listStu`                                                                                                                                                           |
 | **Add Tutorial**    | `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`<br> e.g., `addTut tn/CS1010 id/1011`                                                                                   |
 | **List Tutorials**  | `listTut`                                                                                                                                                           |
