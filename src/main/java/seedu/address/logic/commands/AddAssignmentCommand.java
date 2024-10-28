@@ -58,7 +58,7 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
         Student studentToAddAssignmentTo = lastShownList.get(index.getZeroBased());
-        Assignment toAdd = createAssignment(studentToAddAssignmentTo, toAddDescriptor);
+        Assignment toAdd = createAssignment(toAddDescriptor);
         if (studentToAddAssignmentTo.hasAssignment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
@@ -91,12 +91,9 @@ public class AddAssignmentCommand extends Command {
                 .add("toAddDescriptor", toAddDescriptor)
                 .toString();
     }
-    private static Assignment createAssignment(Student studentToAddAssignmentTo,
-                                               AssignmentDescriptor assignmentDescriptor) {
-        assert studentToAddAssignmentTo != null;
+    private static Assignment createAssignment(AssignmentDescriptor assignmentDescriptor) {
         assert assignmentDescriptor != null;
-        return new Assignment(studentToAddAssignmentTo, assignmentDescriptor.assignmentName,
-                assignmentDescriptor.maxScore);
+        return new Assignment(assignmentDescriptor.assignmentName, assignmentDescriptor.maxScore);
     }
     /**
      * Stores the details to create the Assignment. Each non-empty field value will be used to

@@ -7,7 +7,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.exceptions.ScoreExceedsMaxScoreException;
-import seedu.address.model.student.Student;
 
 /**
  * Represents an Assignment in the address book.
@@ -26,15 +25,12 @@ public class Assignment {
     private final int maxScore;
     private int score = 0;
     private boolean hasSubmitted = false;
-    private Student student;
 
     /**
      * Every field must be present and not null.
      */
-    public Assignment(Student student, AssignmentName name, int maxScore) {
-        requireNonNull(student);
+    public Assignment(AssignmentName name, int maxScore) {
         requireNonNull(name);
-        this.student = student;
         this.assignmentName = name;
         checkArgument(isValidScore(maxScore), MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
@@ -76,13 +72,11 @@ public class Assignment {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return student.equals(otherAssignment.student)
-                && assignmentName.equals(otherAssignment.assignmentName)
+        return assignmentName.equals(otherAssignment.assignmentName)
                && MIN_SCORE == otherAssignment.MIN_SCORE
                && maxScore == otherAssignment.maxScore
                && score == otherAssignment.score
-               && hasSubmitted == otherAssignment.hasSubmitted
-               && student.equals(otherAssignment.student);
+               && hasSubmitted == otherAssignment.hasSubmitted;
     }
 
     @Override
@@ -94,9 +88,7 @@ public class Assignment {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("student", student)
                 .add("assignmentName", assignmentName)
-                .add("studentName", this.student == null ? "Not Assigned" : student.getName())
                 .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
                 .add("score", score)
@@ -114,9 +106,6 @@ public class Assignment {
     }
     public boolean getHasSubmitted() {
         return this.hasSubmitted;
-    }
-    public Student getStudent() {
-        return this.student;
     }
 
     public void setScore(int score) {
