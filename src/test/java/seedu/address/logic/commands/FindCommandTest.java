@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -44,21 +45,23 @@ public class FindCommandTest {
     @Test
     public void equals() {
 
-        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate));
-        FindCommand findSecondCommand = new FindCommand(List.of(secondNamePredicate));
-        FindCommand findCaseInsensitiveCommand = new FindCommand(List.of(thirdNamePredicate));
-        FindCommand findThirdCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate));
-        FindCommand findForthCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate));
-        FindCommand findFifthCommand = new FindCommand(List.of(firstTagPredicate));
-        FindCommand findSixthCommand = new FindCommand(List.of(secondTagPredicate));
-        FindCommand findSeventhCommand = new FindCommand(List.of(secondTagPredicate));
-        FindCommand emptyFindCommand = new FindCommand(Collections.emptyList());
+        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate), new ArrayList<>());
+        FindCommand findSecondCommand = new FindCommand(List.of(secondNamePredicate), new ArrayList<>());
+        FindCommand findCaseInsensitiveCommand = new FindCommand(List.of(thirdNamePredicate), new ArrayList<>());
+        FindCommand findThirdCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate),
+                new ArrayList<>());
+        FindCommand findForthCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate),
+                new ArrayList<>());
+        FindCommand findFifthCommand = new FindCommand(List.of(firstTagPredicate), new ArrayList<>());
+        FindCommand findSixthCommand = new FindCommand(List.of(secondTagPredicate), new ArrayList<>());
+        FindCommand findSeventhCommand = new FindCommand(List.of(secondTagPredicate), new ArrayList<>());
+        FindCommand emptyFindCommand = new FindCommand(Collections.emptyList(), new ArrayList<>());
 
         // same object -> returns true
         assertEquals(findFirstCommand, findFirstCommand);
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(List.of(firstNamePredicate));
+        FindCommand findFirstCommandCopy = new FindCommand(List.of(firstNamePredicate), new ArrayList<>());
         assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // different types -> returns false
@@ -92,8 +95,9 @@ public class FindCommandTest {
     @Test
     public void equals_differentNumberOfPredicates_returnsFalse() {
         // One predicate vs two predicates
-        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate));
-        FindCommand findSecondCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate));
+        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate), new ArrayList<>());
+        FindCommand findSecondCommand = new FindCommand(List.of(firstNamePredicate, thirdAddressPredicate),
+                new ArrayList<>());
 
         assertNotEquals(findFirstCommand, findSecondCommand);
     }
@@ -101,8 +105,8 @@ public class FindCommandTest {
     @Test
     public void equals_differentFieldsDifferentValues_returnsFalse() {
         // First command searches by name, second command searches by address
-        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate));
-        FindCommand findByAddressCommand = new FindCommand(List.of(thirdAddressPredicate));
+        FindCommand findFirstCommand = new FindCommand(List.of(firstNamePredicate), new ArrayList<>());
+        FindCommand findByAddressCommand = new FindCommand(List.of(thirdAddressPredicate), new ArrayList<>());
 
         assertNotEquals(findFirstCommand, findByAddressCommand);
     }
@@ -124,7 +128,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         FieldContainsKeywordsPredicate<Person> predicate =
                 new FieldContainsKeywordsPredicate<>(Arrays.asList("Kurz", "Elle", "Kunz"), Person::getFullName, true);
-        FindCommand command = new FindCommand(List.of(predicate));
+        FindCommand command = new FindCommand(List.of(predicate), new ArrayList<>());
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -134,8 +138,9 @@ public class FindCommandTest {
     public void toStringMethod() {
         FieldContainsKeywordsPredicate<Person> predicate =
                 new FieldContainsKeywordsPredicate<>(Collections.singletonList("keyword"), Person::getFullName, true);
-        FindCommand findCommand = new FindCommand(List.of(predicate));
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + "[" + predicate + "]" + "}";
+        FindCommand findCommand = new FindCommand(List.of(predicate), new ArrayList<>());
+        String expected = FindCommand.class.getCanonicalName() + "{person predicates=" + "[" + predicate + "]" + ", "
+                + "participation predicates=" + "[" + "]" + "}";
         assertEquals(expected, findCommand.toString());
     }
 }
