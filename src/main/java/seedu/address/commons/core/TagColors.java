@@ -1,5 +1,7 @@
 package seedu.address.commons.core;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -27,5 +29,12 @@ public class TagColors implements Serializable {
 
     public int getColorsLength() {
         return this.colors.length;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Colors", colors)
+                .toString();
     }
 }
