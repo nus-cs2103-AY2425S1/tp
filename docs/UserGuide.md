@@ -32,6 +32,7 @@ For any additional information or queries, you can refer to the [FAQ](#faq) sect
 ### Glossary
 As you read the user guide, you might encounter some unfamiliar technical terms. The table below provides the definitions for the key terms we will be using throughout the guide.
 
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Term      | Definition                                                                                                                                                                         |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Command   | An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.                                     |
@@ -116,11 +117,11 @@ If your Java version is **not 17**, you may refer to the [FAQ section](#faq) for
 1. Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian).
 2. Navigate to the directory where the `.jar` file is located. For example:
 > ```
->     `cd Downloads`
+> cd Downloads
 > ```
 3. Run the application by typing:
 > ```
->   `java -jar medibase3.jar`
+> java -jar medibase3.jar
 > ```
 
 You should be greeted by the UI, which you will see in the next section.
@@ -159,7 +160,8 @@ Here’s a breakdown of the parts:
 
 #### Example:
 >```
->add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+> add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 
+> e/johnd@example.com a/311, Clementi Ave 2, #02-25
 >```
 
 - **Command:** `add`
@@ -179,7 +181,8 @@ Here’s a basic tutorial on how to start using the application:
 2. **Add a New Patient:**
    - To add a new patient, use the following command:
    >```
-   > add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
+   > add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 
+   > e/johnd@example.com a/311, Clementi Ave 2, #02-25 
    >```
 
    - This will add a patient named John Doe to the system.
@@ -188,7 +191,7 @@ Here’s a basic tutorial on how to start using the application:
 3. **Edit Patient Information:**
    - If there’s a typo or information changes, use the `edit` command:
    >```
-   >  edit S1234567A p/91234567 e/johndoe@example.com
+   > edit S1234567A p/91234567 e/johndoe@example.com
    >```
      
    - This will change the phone number and email of the patient with NRIC S1234567A
@@ -197,7 +200,7 @@ Here’s a basic tutorial on how to start using the application:
 4. **Find a Patient by NRIC:**
    - To find a patient by NRIC, type:
    >```
-   >  findNric T0123456A
+   > findNric T0123456A
    >```
      
    - This will show the patient with the NRIC `T0123456A`.
@@ -206,7 +209,7 @@ Here’s a basic tutorial on how to start using the application:
 5. **Delete a Patient:**
    - To remove a patient who is no longer visiting the clinic/hospital, type:
    >```
-   >  delete T0123456A
+   > delete T0123456A
    >```
    
      
@@ -216,7 +219,7 @@ Here’s a basic tutorial on how to start using the application:
 6. **Clear All Entries:**
    - To remove all patient and appointment data from the system, type:
    >```
-   >  clear
+   > clear
    >```
 
 
@@ -716,7 +719,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 #### **Q**: How to install Java 17
  - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
 
-##### For Windows:
+##### For Windows
 
 1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
@@ -732,7 +735,7 @@ You should see something like:
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
-##### For macOS:
+##### For macOS
 
 1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
 > ```
@@ -752,6 +755,7 @@ This means that your machine is running Java version 17.0.12, which means that J
 > ```
 > java -version
 > ```
+
 You should see something like this:
 
 ![javaVersionMacOS.png](images/javaVersionMacOS.png)
@@ -759,7 +763,7 @@ You should see something like this:
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
-##### For Ubuntu/Debian:
+##### For Ubuntu/Debian
 
 1. Open **Terminal**.
 2. Install Java 17 by typing:
@@ -770,6 +774,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 > ```
 > java -version
 > ```
+
 You should see something like this:
 
 ![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
