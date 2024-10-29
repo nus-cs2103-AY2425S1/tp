@@ -18,8 +18,8 @@ public class JsonSerializableAddressBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_STUDENTS_FILE = TEST_DATA_FOLDER.resolve("typicalStudentsAddressBook.json");
-    private static final Path TYPICAL_CONSULTS_FILE = TEST_DATA_FOLDER
-            .resolve("typicalStudentsAndConsultationsAddressBook.json");
+    private static final Path TYPICAL_ADDRESS_BOOK_FILE = TEST_DATA_FOLDER
+            .resolve("typicalAddressBook.json");
     private static final Path INVALID_STUDENT_FILE = TEST_DATA_FOLDER.resolve("invalidStudentAddressBook.json");
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentAddressBook.json");
 
@@ -49,15 +49,15 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_typicalConsultsFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONSULTS_FILE,
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_ADDRESS_BOOK_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalAddressBook = getTypicalAddressBook();
 
         // Check that the AddressBooks are equal, including students, consultations, and
         // lessons
-        assertEquals(addressBookFromFile.getStudentList(), typicalAddressBook.getStudentList());
-        assertEquals(addressBookFromFile.getConsultList(), typicalAddressBook.getConsultList());
-        assertEquals(addressBookFromFile.getLessonList(), typicalAddressBook.getLessonList());
+        assertEquals(typicalAddressBook.getStudentList(), addressBookFromFile.getStudentList());
+        assertEquals(typicalAddressBook.getConsultList(), addressBookFromFile.getConsultList());
+        assertEquals(typicalAddressBook.getLessonList(), addressBookFromFile.getLessonList());
     }
 }

@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -90,6 +89,6 @@ public class JsonAdaptedLessonTest {
                         false, 0)));
 
         // Verify the converted values
-        assertTrue(jsonAdaptedLesson.equals(expected));
+        assertEquals(jsonAdaptedLesson, expected);
     }
 }

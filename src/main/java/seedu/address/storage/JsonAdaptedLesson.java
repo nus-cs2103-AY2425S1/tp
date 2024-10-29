@@ -32,13 +32,16 @@ class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("date") String date,
             @JsonProperty("time") String time,
-            @JsonProperty("students") List<JsonAdaptedStudentLessonInfo> studentLessonInfoList) {
+            @JsonProperty("studentLessonInfoList") List<JsonAdaptedStudentLessonInfo> studentLessonInfoList) {
         this.date = date;
         this.time = time;
         this.studentLessonInfoList = new ArrayList<>();
         // require null check because JSON can use null if it is not present in file
         if (studentLessonInfoList != null) {
-            this.studentLessonInfoList.addAll(studentLessonInfoList);
+            List<JsonAdaptedStudentLessonInfo> nonNullStudentInfos = studentLessonInfoList.stream()
+                    .filter(JsonAdaptedStudentLessonInfo::isNonNull)
+                    .toList();
+            this.studentLessonInfoList.addAll(nonNullStudentInfos);
         }
     }
 
@@ -104,7 +107,7 @@ class JsonAdaptedLesson {
 
         JsonAdaptedLesson otherLesson = (JsonAdaptedLesson) other;
         return date.equals(otherLesson.date)
-                && time.equals(otherLesson.time);
-                //&& studentLessonInfoList.equals(otherLesson.studentLessonInfoList);
+                && time.equals(otherLesson.time)
+                && studentLessonInfoList.equals(otherLesson.studentLessonInfoList);
     }
 }

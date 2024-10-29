@@ -69,4 +69,14 @@ class JsonAdaptedStudentLessonInfo {
                 && attendance == otherInfo.attendance
                 && participationScore == otherInfo.participationScore;
     }
+
+    /**
+     * Returns true if the student field is not null.
+     * Required because sometimes the constructor is called with student = null when reading
+     * from JSON if the file is corrupted, and there is no "default" value to give it
+     * (in contrast to a List for example).
+     */
+    public boolean isNonNull() {
+        return this.student != null;
+    }
 }

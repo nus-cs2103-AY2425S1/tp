@@ -107,4 +107,21 @@ class JsonAdaptedStudent {
         return new Student(modelName, modelPhone, modelEmail, modelCourses);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof JsonAdaptedStudent)) {
+            return false;
+        }
+
+        JsonAdaptedStudent otherStudent = (JsonAdaptedStudent) other;
+        return name.equals(otherStudent.name)
+                && phone.equals(otherStudent.phone)
+                && email.equals(otherStudent.email)
+                && courses.equals(otherStudent.courses);
+    }
+
 }
