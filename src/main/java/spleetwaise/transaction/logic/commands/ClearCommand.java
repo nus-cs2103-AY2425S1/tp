@@ -13,7 +13,6 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clearTxn";
     public static final String MESSAGE_SUCCESS = "Transaction book has been cleared!";
 
-
     @Override
     public CommandResult execute() {
         CommonModel model = CommonModel.getInstance();
