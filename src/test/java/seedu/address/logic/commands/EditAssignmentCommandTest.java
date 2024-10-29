@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ class EditAssignmentCommandTest {
         ArrayList<Assignment> assignments = new ArrayList<Assignment>();
         Assignment assignment = new AssignmentBuilder().build();
         assignments.add(assignment);
-        Student validStudent = new StudentBuilder().withAssignments(assignments).build();
+        Student validStudent = new StudentBuilder().withAssignments(assignments).buildWithAssignment();
         model.addStudent(validStudent);
     }
 
@@ -46,19 +45,22 @@ class EditAssignmentCommandTest {
         Assignment originalAssignment = studentToEdit.getAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
 
         // Initialize and execute the command
-        EditAssignmentCommand command = new EditAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
+        EditAssignmentCommand command = new EditAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
         CommandResult result = command.execute(model);
 
         // Verify the score was updated and the success message is correct
         assertEquals(VALID_SCORE, originalAssignment.getScore());
         assertEquals(String.format(EditAssignmentCommand.MESSAGE_EDIT_SUCCESS,
-                originalAssignment.getName(), studentToEdit.getName().fullName, VALID_SCORE), result.getFeedbackToUser());
+                originalAssignment.getName(), studentToEdit.getName().fullName, VALID_SCORE),
+                result.getFeedbackToUser());
     }
 
     @Test
     void execute_invalidStudentIndex_throwsCommandException() {
         // Initialize a command with an out-of-bounds student index
-        EditAssignmentCommand command = new EditAssignmentCommand(Index.fromZeroBased(1), INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
+        EditAssignmentCommand command = new EditAssignmentCommand(Index.fromZeroBased(1),
+                INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
 
         // Expect a CommandException due to invalid student index
         CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
@@ -72,7 +74,8 @@ class EditAssignmentCommandTest {
         studentToEdit.setAssignmentList(new ArrayList<>()); // clear assignments for this test
 
         // Initialize a command with an out-of-bounds assignment index
-        EditAssignmentCommand command = new EditAssignmentCommand(INDEX_FIRST_STUDENT, Index.fromZeroBased(1), VALID_SCORE);
+        EditAssignmentCommand command = new EditAssignmentCommand(INDEX_FIRST_STUDENT,
+                Index.fromZeroBased(1), VALID_SCORE);
 
         // Expect a CommandException due to invalid assignment index
         CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
@@ -81,10 +84,12 @@ class EditAssignmentCommandTest {
 
     @Test
     void equals() {
-        final EditAssignmentCommand standardCommand = new EditAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
+        final EditAssignmentCommand standardCommand = new EditAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
 
         // Same values should return true
-        EditAssignmentCommand commandWithSameValues = new EditAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
+        EditAssignmentCommand commandWithSameValues = new EditAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT, VALID_SCORE);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // Same object should return true
@@ -97,12 +102,15 @@ class EditAssignmentCommandTest {
         assertTrue(!standardCommand.equals(new Object()));
 
         // Different student index should return false
-        assertTrue(!standardCommand.equals(new EditAssignmentCommand(Index.fromZeroBased(2), INDEX_FIRST_ASSIGNMENT, VALID_SCORE)));
+        assertTrue(!standardCommand.equals(new EditAssignmentCommand(Index.fromZeroBased(2),
+                INDEX_FIRST_ASSIGNMENT, VALID_SCORE)));
 
         // Different assignment index should return false
-        assertTrue(!standardCommand.equals(new EditAssignmentCommand(INDEX_FIRST_STUDENT, Index.fromZeroBased(2), VALID_SCORE)));
+        assertTrue(!standardCommand.equals(new EditAssignmentCommand(INDEX_FIRST_STUDENT,
+                Index.fromZeroBased(2), VALID_SCORE)));
 
         // Different score should return false
-        assertTrue(!standardCommand.equals(new EditAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT, 90)));
+        assertTrue(!standardCommand.equals(new EditAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT,
+                90)));
     }
 }
