@@ -531,7 +531,7 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
 ---
 
-### **Use case: UCSH01 - Edit details for a contact**
+### **Use case: UCSH01 — Edit details for a Contact**
 
 **MSS**
 
@@ -573,9 +573,11 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
       Use case resumes at step 1.
 
+### **Use case: UCSH02 — Edit details for a Wedding**
+Similar to [<ins>(USCH01)](#use-case-ucsh01edit-details-for-a-contact) except editing for wedding.
 
 
-### **Use case: UCSH02 - Clear all contacts from the system**
+### **Use case: UCSH03 — Clear all contacts**
 
 **Guarantees:**
 * No persons will be left in the system.
@@ -587,7 +589,7 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
    Use case ends.
 
-### **Use case: UCSH03 - Receive a prompt when deleting a contact**
+### **Use case: UCSH04 — Receive a prompt when deleting a contact**
 
 **MSS**
 
@@ -621,7 +623,7 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
 
 
-### **Use case: UCSH04 - Receive a prompt when clearing the system**
+### **Use case: UCSH05 — Receive a prompt when clearing the system**
 
 **MSS**
 
@@ -640,9 +642,39 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
       Use case ends.
 
+### **Use case: UCSH06 — See sample contacts in the system before starting to modify it**
+
+Preconditions: User has not added or edited contacts previously.
+
+**MSS**
+
+1.  User opens the application.
+2.  System shows a list of sample contacts.
+
+    Use case ends.
+
+### **Use case: UCSH07 — Reload sample contacts in the system**
+
+**MSS**
+
+1.  User requests to reload sample contacts into the system.
+2.  System deletes all current persons in the system and shows a list of sample contacts.
+
+    Use case ends.
 
 
-### **Use case: UCSH05 - Assign dietary requirement to contact**
+
+### **Use case: UCSH08 — See a list of all possible commands**
+
+**MSS**
+
+1.  User requests to see a list of all possible commands they can use in the system.
+2.  System shows a list of commands with their corresponding input format.
+
+    Use case ends.
+
+### **Use case: UCSH09 — Assign dietary requirement to contact**
+
 
 **MSS**
 
@@ -665,7 +697,9 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
 
 
-### **Use case: UCSH06 Sort - contacts in alphabetical order**
+
+### **Use case: UCSH10 — Sort contacts in alphabetical order**
+
 
 **MSS**
 
@@ -682,7 +716,9 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
 
 
-### **Use case: UCSH07 - Add additional information for a person**
+
+### **Use case: UCSH11 — Add additional information for a person**
+
 
 **MSS**
 
@@ -712,41 +748,7 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 
       Use case resumes at step 1.
 
-
-### **Use case: UCSH08 - See sample contacts in the system before starting to modify it**
-
-Preconditions: User has not added or edited contacts previously.
-
-**MSS**
-
-1.  User opens the application.
-2.  System shows a list of sample contacts.
-
-    Use case ends.
-
-
-
-### **Use case: UCSH09 - Reload sample contacts in the system**
-
-**MSS**
-
-1.  User requests to reload sample contacts into the system.
-2.  System deletes all current persons in the system and shows a list of sample contacts.
-
-    Use case ends.
-
-
-
-### **Use case: UCSH10 - See a list of all possible commands**
-
-**MSS**
-
-1.  User requests to see a list of all possible commands they can use in the system.
-2.  System shows a list of commands with their corresponding input format.
-
-    Use case ends.
-
-
+---
 
 ### Non-Functional Requirements
 
@@ -816,18 +818,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the [jar file](https://github.com/AY2425S1-CS2103T-F15-4/tp/releases) and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Open terminal and change into the directory where the jar file is stored.
+
+    3. Enter `java -jar WedLinker.jar` into the terminal to run the WedLinker application.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by enter `java -jar WedLinker.jar` into the terminal again.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -844,12 +847,13 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Upon booting up WedLinker and the contact/address/task list is not as per expected, open the `docs` folder where `WedLinker.jar` is stored.
+   
+    2. Within the folder, open `AddressBook.json` and identify any mistakes with stored data.<br>
+       The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
-2. _{ more test cases …​ }_
+    3. If the data is beyond repair, delete the entire `docs` folder and the `AddressBook.json` file to start afresh.
