@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 import java.util.Collection;
@@ -210,7 +211,7 @@ public class ParserUtil {
         } else if (allergyStr.length() > 30) {
             throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!allergyStr.matches(Allergy.VALIDATION_REGEX)) {
-            throw new ParseException("Invalid allergy format.");
+            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         }
         return new Allergy(allergyStr);
     }
@@ -263,7 +264,7 @@ public class ParserUtil {
         } else if (medConStr.length() > 30) {
             throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!medConStr.matches(MedCon.VALIDATION_REGEX)) {
-            throw new ParseException("Invalid medical condition format.");
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         }
         return new MedCon(medConStr);
     }
