@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +18,6 @@ import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.Appt;
-import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -201,36 +201,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String healthService} into a {@code HealthService}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code healthService} is invalid.
-     */
-    public static HealthService parseHealthService(String healthService) throws ParseException {
-        requireNonNull(healthService);
-        String trimmedHealthService = healthService.trim();
-        if (!HealthService.isValidHealthserviceName(trimmedHealthService)) {
-            throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
-        }
-        return new HealthService(trimmedHealthService);
-    }
-
-    /**
-     * Parses {@code Collection<String> healthServices} into a {@code Set<HealthService>}.
-     */
-    public static Set<HealthService> parseHealthServices(Collection<String> healthServices) throws ParseException {
-        requireNonNull(healthServices);
-        final Set<HealthService> healthServiceSet = new HashSet<>();
-        for (String healthService : healthServices) {
-            healthServiceSet.add(parseHealthService(healthService));
-        }
-        return healthServiceSet;
-    }
-
-    /**
      * Parses a {@code String allergy} into a {@code Allergy}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
      * @throws ParseException if the given {@code allergy} is invalid.
      */
     public static Allergy parseAllergies(String allergy) throws ParseException {
@@ -355,23 +326,69 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into an {@code Appt}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code date} is invalid.
+     * Parses a {@code String dateTime} into a {@code dateTime}.
+     * @param dateTime
+     * @return LocalDateTime
+     * @throws ParseException
      */
-    public static Appt parseSingleAppt(LocalDateTime dateTime) {
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
-        return new Appt(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        if (!Appt.isValidDateTime(LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME))) {
+            throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+        }
+        return LocalDateTime.parse(trimmedDateTime.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     /**
-     * Parses {@code Collection<String> dates} into a {@code ApptList}.
+     * Parses a {@code String healthService} into a {@code HealthService}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code healthService} is invalid.
      */
-    public static ApptList parseAppts(Collection<String> dates) throws ParseException {
+    public static HealthService parseHealthService(String healthService) throws ParseException {
+        requireNonNull(healthService);
+        String trimmedHealthService = healthService.trim();
+        if (!HealthService.isValidHealthserviceName(trimmedHealthService)) {
+            throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
+        }
+        return new HealthService(trimmedHealthService);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static Appt parseSingleAppt(String dateTimeString, String healthServiceName) throws ParseException {
+        requireAllNonNull(dateTimeString, healthServiceName);
+        LocalDateTime dateTime = parseDateTime(dateTimeString);
+        HealthService healthService = parseHealthService(healthServiceName);
+        return new Appt(dateTime, healthService);
+    }
+
+    /*
+    public static ApptList parseAppts(Collection<String> dates, Collection<HealthService> healthServices)
+        throws ParseException {
         requireNonNull(dates);
         final ApptList apptList = new ApptList();
+        int i = 0;
         for (String date : dates) {
+            String trimmedDate = date.trim();
+            if (!Appt.isValidAppt(trimmedDate)) {
+                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+            }
+            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            apptList.addAppt(parseSingleAppt(trimmedDateTime, healthServices.toArray(new HealthService[0])[i]));
+            i++;
+        }
+        return apptList;
+    }
+    */
+}
+
+/*
+for (String date : dates) {
             String trimmedDate = date.trim();
             if (!Appt.isValidAppt(trimmedDate)) {
                 throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
@@ -381,4 +398,4 @@ public class ParserUtil {
         }
         return apptList;
     }
-}
+ */

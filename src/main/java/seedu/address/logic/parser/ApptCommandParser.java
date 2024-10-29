@@ -3,15 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
 
 /**
@@ -29,29 +28,23 @@ public class ApptCommandParser implements Parser<ApptCommand> {
      */
     public ApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_NRIC);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME,
+            PREFIX_HEALTHSERVICE, PREFIX_NRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_NRIC)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ApptCommand.MESSAGE_USAGE));
         }
 
-        LocalDateTime dateTime;
-        try {
-            String datetime = argMultimap.getValue(PREFIX_DATETIME).get();
-            dateTime = LocalDateTime.parse(datetime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ApptCommand.MESSAGE_USAGE), e);
-        } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ApptCommand.MESSAGE_USAGE), e);
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC);
+        String dateTime = argMultimap.getValue(PREFIX_DATETIME).get();
+        String healthService = argMultimap.getValue(PREFIX_HEALTHSERVICE).get();
 
+        Appt appt = ParserUtil.parseSingleAppt(dateTime, healthService);
         Nric nric = new Nric(argMultimap.getValue(PREFIX_NRIC).get());
 
-        return new ApptCommand(dateTime, nric);
+        return new ApptCommand(appt, nric);
     }
 
     /**

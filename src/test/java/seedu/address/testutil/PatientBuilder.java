@@ -99,7 +99,7 @@ public class PatientBuilder {
         nokName = patientToCopy.getNokName();
         nokPhone = patientToCopy.getNokPhone();
         for (Appt appt: patientToCopy.getAppts()) {
-            appts.addAppt(new Appt(appt.getDateTime()));
+            appts.addAppt(new Appt(appt.getDateTime(), appt.getHealthService()));
         }
     }
 

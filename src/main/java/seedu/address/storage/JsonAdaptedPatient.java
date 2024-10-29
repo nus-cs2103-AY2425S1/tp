@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.Appt;
@@ -32,6 +34,7 @@ import seedu.address.model.patient.Sex;
 class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
+    private static final Logger logger = Logger.getLogger(JsonAdaptedPatient.class.getName());
 
     private final String name;
     private final String nric;
@@ -48,7 +51,6 @@ class JsonAdaptedPatient {
     private final String nokName;
     private final String nokPhone;
     private final List<JsonAdaptedAppt> appts = new ArrayList<>();
-
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -212,10 +214,20 @@ class JsonAdaptedPatient {
                     Appt.class.getSimpleName()));
         }
         final ApptList modelAppts = new ApptList();
-        if (appts != null) {
-            for (JsonAdaptedAppt appt : appts) {
-                modelAppts.addAppt(appt.toModelType());
+
+        for (JsonAdaptedAppt appt : appts) {
+            if (appt.getHealthServiceName() == null) {
+                logger.severe("HealthServiceName is null for appointment: " + appt);
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        HealthService.class.getSimpleName()));
             }
+
+            if (!HealthService.isValidHealthserviceName(appt.getHealthServiceName())) {
+                logger.severe("Invalid health service name for appointment: " + appt);
+                throw new IllegalValueException("Invalid health service name");
+            }
+
+            modelAppts.addAppt(appt.toModelType());
         }
 
         final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
