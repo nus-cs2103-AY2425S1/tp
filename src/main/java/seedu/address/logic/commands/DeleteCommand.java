@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.controller.ConfirmationController;
+import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.ui.ConfirmationWindow;
 
 
 /**
@@ -34,7 +35,7 @@ public class DeleteCommand extends Command {
             + "This action is IRREVERSIBLE.";
     private final Name targetName;
     private final Index targetIndex;
-    private Boolean isConfirmed;
+    private final ConfirmationController confirmationController;
 
     /**
      * @param targetName of the person to be deleted in the list
@@ -42,6 +43,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Name targetName) {
         this.targetName = targetName;
         this.targetIndex = null;
+        this.confirmationController = new ConfirmationWindowController();
     }
 
     /**
@@ -50,28 +52,29 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
+        this.confirmationController = new ConfirmationWindowController();
     }
 
     /**
      * This constructor should only be used for testing purposes to skip confirmation window.
      * @param targetName of the person to be deleted in the list
-     * @param isConfirmed skips confirmation window and provides the result for confirm deletion.
+     * @param confirmationController provides the result for confirm deletion.
      */
-    public DeleteCommand(Name targetName, boolean isConfirmed) {
+    public DeleteCommand(Name targetName, ConfirmationController confirmationController) {
         this.targetName = targetName;
-        this.isConfirmed = isConfirmed;
         this.targetIndex = null;
+        this.confirmationController = confirmationController;
     }
 
     /**
      * This constructor should only be used for testing purposes to skip confirmation window.
      * @param targetIndex of the index of the person to be deleted in the list
-     * @param isConfirmed skips confirmation window and provides the result for confirm deletion.
+     * @param confirmationController provides the result for confirm deletion.
      */
-    public DeleteCommand(Index targetIndex, boolean isConfirmed) {
+    public DeleteCommand(Index targetIndex, ConfirmationController confirmationController) {
         this.targetIndex = targetIndex;
-        this.isConfirmed = isConfirmed;
         this.targetName = null;
+        this.confirmationController = confirmationController;
     }
 
     @Override
@@ -79,12 +82,21 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         Person personToDelete = findPersonToDelete(lastShownList);
+        boolean isConfirmed = isDeletionConfirmed(personToDelete);
+        return processDeleteAction(model, personToDelete, isConfirmed);
+    }
 
-        if (isConfirmed != null) {
-            return processDeleteAction(model, personToDelete, isConfirmed);
-        }
-
-        return processDeleteAction(model, personToDelete, confirmDeletion(personToDelete));
+    /**
+     * Checks if the deletion action is confirmed by the user.
+     *
+     * @param personToDelete The person to be deleted.
+     * @return true if the user confirms deletion, false otherwise.
+     */
+    private boolean isDeletionConfirmed(Person personToDelete) {
+        return confirmationController.isConfirmed(
+                "Confirm Delete",
+                String.format(MESSAGE_CONFIRMATION, personToDelete.getName())
+        );
     }
 
     /**
@@ -92,12 +104,12 @@ public class DeleteCommand extends Command {
      *
      * @param model The current model.
      * @param personToDelete The person to delete.
-     * @param confirmed The confirmation status.
+     * @param isConfirmed The confirmation status.
      * @return CommandResult based on the confirmation.
      */
-    private CommandResult processDeleteAction(Model model, Person personToDelete, boolean confirmed) {
+    private CommandResult processDeleteAction(Model model, Person personToDelete, boolean isConfirmed) {
         requireNonNull(model);
-        if (confirmed) {
+        if (isConfirmed) {
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
         }
@@ -150,20 +162,6 @@ public class DeleteCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
         return lastShownList.get(targetIndex.getZeroBased());
-    }
-
-    /**
-     * Shows a confirmation dialog to the user and returns whether the deletion was confirmed.
-     *
-     * @param personToDelete The person to be deleted.
-     * @return true if the deletion is confirmed; false otherwise.
-     */
-    private boolean confirmDeletion(Person personToDelete) {
-        ConfirmationWindow confirmationWindow = ConfirmationWindow.getInstance();
-        return confirmationWindow.showAlertDialogAndWait(
-                "Confirm Delete",
-                String.format(MESSAGE_CONFIRMATION, personToDelete.getName())
-        );
     }
 
     @Override

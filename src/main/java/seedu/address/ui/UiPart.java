@@ -19,6 +19,9 @@ public abstract class UiPart<T> {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
+    /**
+     * Constructs a UiPart without dependency on FXML file or root object.
+     */
     public UiPart() {}
 
     /**

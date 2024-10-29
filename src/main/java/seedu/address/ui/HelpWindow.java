@@ -121,6 +121,18 @@ public class HelpWindow extends UiPart<Stage> {
      * Initializes the command summary table and wraps the text in the cells.
      */
     private void initializeCommandSummary() {
+        initializeCommandSummaryList();
+        setUpColumns();
+        setupCells();
+
+        commandSummaryTable.setItems(commandSummaryList);
+        commandSummaryTable.setSelectionModel(null);
+    }
+
+    /**
+     * Initializes the command summary list with predefined commands.
+     */
+    private void initializeCommandSummaryList() {
         commandSummaryList.addAll(
                 new CommandSummary("Add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX "
                         + "ap/APPOINTMENT t/TAG\ne.g., add n/Evie Sage p/88888888 e/eviesage@example.com "
@@ -134,24 +146,32 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Help", "help"),
                 new CommandSummary("List", "list"),
                 new CommandSummary("Note", "note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
-                                           + "e.g., note John Doe m/10mg Ibuprofen"),
+                        + "e.g., note John Doe m/10mg Ibuprofen"),
                 new CommandSummary("Sort", "sort \ne.g., sort"),
                 new CommandSummary("Star", "star INDEX / star NAME\ne.g., star 3, star Alex Yeoh"),
                 new CommandSummary("Unstar", "unstar INDEX / unstar NAME\ne.g., unstar 3, unstar Alex Yeoh")
         );
+    }
 
-
+    /**
+     * Sets up the columns of the command summary table.
+     */
+    private void setUpColumns() {
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
 
         // Ensure the table fills the available space for both headers and columns
         commandSummaryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Set proportional width for columns (affects both headers and columns)
+        // Set width for columns
         actionColumn.setMaxWidth(1f * Integer.MAX_VALUE * 15); // 15% of available width for action column
         formatColumn.setMaxWidth(1f * Integer.MAX_VALUE * 85); // 85% of available width for format column
+    }
 
-        // Make format and examples selectable to copy
+    /**
+     * Sets up the cells for the format column to allow copying of text.
+     */
+    private void setupCells() {
         formatColumn.setCellFactory(tc -> new TableCell<>() {
             private final TextArea textArea = new TextArea();
 
@@ -163,17 +183,13 @@ public class HelpWindow extends UiPart<Stage> {
                     setGraphic(null);
                 } else {
                     textArea.setText(item);
-                    textArea.setWrapText(true); // Enable text wrapping
-                    textArea.setEditable(false); // Prevent users from editing text
-                    textArea.setPrefHeight(80); // Adjust height to content
-                    textArea.setStyle("-fx-background-color: transparent; -fx-padding: 5;"); // Transparent background
+                    textArea.setWrapText(true);
+                    textArea.setEditable(false);
+                    textArea.setPrefHeight(80);
+                    textArea.setStyle("-fx-background-color: transparent; -fx-padding: 5;");
                     setGraphic(textArea);
                 }
             }
         });
-
-        // Set items into the table
-        commandSummaryTable.setItems(commandSummaryList);
-        commandSummaryTable.setSelectionModel(null);
     }
 }
