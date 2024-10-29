@@ -7,6 +7,8 @@ import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 
+import java.util.List;
+
 /**
  * Deletes a listing identified by its name.
  */
@@ -32,14 +34,15 @@ public class DeleteListingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        List<Listing> lastShownList = model.getFilteredListingList();
         Listing listingToDelete = model.getListingByName(targetName);
 
-        if (listingToDelete == null) {
+        if (lastShownList.contains(listingToDelete)) {
+            model.deleteListing(listingToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_LISTING_SUCCESS, listingToDelete.getName()));
+        } else {
             throw new CommandException(MESSAGE_LISTING_NOT_FOUND);
         }
-
-        model.deleteListing(listingToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_LISTING_SUCCESS, listingToDelete.getName()));
     }
 
     @Override
