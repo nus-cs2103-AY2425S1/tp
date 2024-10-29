@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
@@ -54,54 +53,24 @@ public class BackupManager {
     }
 
     /**
-     * Triggers a backup operation, ensuring that no duplicate backups are created in a short time.
+     * Triggers a backup with a specified action description.
+     * This captures the pre-modification state of the address book.
+     *
+     * @param filePath    The file path of the address book.
+     * @param description A description for the backup file (e.g., "delete John Doe").
+     * @throws IOException if an error occurs during backup creation.
      */
-    public void triggerBackup(Path filePath) throws IOException {
+    public void triggerBackup(Path filePath, String description) throws IOException {
         synchronized (backupLock) {
-            long currentTime = System.currentTimeMillis();
-
-            // Ensure no duplicate backups are created within MIN_BACKUP_INTERVAL_MS
-            if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
-                logger.info("Backup skipped due to debounce mechanism.");
-                return;
-            }
-
-            // Set the last backup time and proceed with the backup
-            lastBackupTime = currentTime;
-            saveBackup(filePath);
-        }
-    }
-
-    /**
-     * Saves a backup of the provided file to the backup directory.
-     */
-    public void saveBackup(Path filePath) throws IOException {
-        synchronized (backupLock) {
-            long currentTime = System.currentTimeMillis();
-
-            if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
-                logger.info("Backup skipped due to debounce.");
-                return;
-            }
-
-            lastBackupTime = currentTime;
-
             if (!Files.exists(filePath)) {
                 throw new IOException("The file to back up does not exist: " + filePath);
             }
 
-            String content = Files.readString(filePath, StandardCharsets.UTF_8);
-
-            // Ensure content ends with a newline
-            if (!content.endsWith(System.lineSeparator())) {
-                content += System.lineSeparator();
-            }
-
             String timestamp = LocalDateTime.now().format(FORMATTER);
-            String backupFileName = String.format("clinicbuddy-backup-%s.json", timestamp);
+            String backupFileName = String.format("%s_%s.json", description, timestamp);
             Path backupPath = backupDirectory.resolve(backupFileName);
 
-            Files.writeString(backupPath, content, StandardCharsets.UTF_8);
+            Files.copy(filePath, backupPath);
             logger.info("Backup created: " + backupPath);
 
             cleanOldBackups(MAX_BACKUPS);
@@ -111,9 +80,8 @@ public class BackupManager {
     /**
      * Deletes old backups, keeping only the latest `maxBackups` files.
      *
-     * @param maxBackups The maximum number of backups to retain. Must be at least 1.
-     * @throws IllegalArgumentException if `maxBackups` is less than 1.
-     * @throws IOException If an I/O error occurs while accessing the backup directory.
+     * @param maxBackups The maximum number of backups to retain.
+     * @throws IOException If there is an error accessing the backup directory.
      */
     public void cleanOldBackups(int maxBackups) throws IOException {
         if (maxBackups < 1) {
@@ -125,7 +93,7 @@ public class BackupManager {
                     .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
                     .toList();
 
-            // If the number of backups exceeds the limit, delete only the oldest ones
+            // Delete only the oldest files if we exceed the maxBackups limit
             if (backupFiles.size() > maxBackups) {
                 for (int i = maxBackups; i < backupFiles.size(); i++) {
                     deleteBackup(backupFiles.get(i));

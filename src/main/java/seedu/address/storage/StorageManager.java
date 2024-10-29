@@ -79,7 +79,6 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Saving AddressBook to: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
-        backupManager.saveBackup(filePath); // Save backup after each AddressBook save.
     }
 
     // =================== Backup and Restore Methods ===================

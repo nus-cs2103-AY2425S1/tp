@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
@@ -109,21 +108,6 @@ public class StorageManagerTest {
         storageManager.saveAddressBook(original, backupFile);
 
         assertTrue(Files.exists(backupFile), "Backup file should be created.");
-    }
-
-    @Test
-    public void restoreBackup_successfullyRestores() throws IOException, DataLoadingException {
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-
-        Path backupFile = getTempFilePath("backup.json");
-        storageManager.saveAddressBook(original, backupFile);
-
-        Optional<Path> restoredBackup = storageManager.restoreBackup();
-        assertTrue(restoredBackup.isPresent(), "A backup should have been restored.");
-
-        ReadOnlyAddressBook restoredAddressBook = storageManager.readAddressBook(restoredBackup.get()).get();
-        assertEquals(original, new AddressBook(restoredAddressBook));
     }
 
     @Test

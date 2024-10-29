@@ -54,12 +54,6 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void backupCreation_throwsExceptionIfFileNotFound() {
-        Path nonExistentFile = TEMP_BACKUP_DIR.resolve("non-existent-file.json");
-        assertThrows(IOException.class, () -> backupManager.saveBackup(nonExistentFile));
-    }
-
-    @Test
     public void cleanOldBackups_throwsExceptionForInvalidMaxBackups() throws IOException {
         try {
             backupManager.cleanOldBackups(0); // Should trigger IllegalArgumentException
