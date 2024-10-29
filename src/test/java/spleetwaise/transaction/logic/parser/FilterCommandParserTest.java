@@ -12,6 +12,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.commands.FilterCommand;
+import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -40,32 +41,43 @@ public class FilterCommandParserTest {
     @Test
     public void parse_personField_success() {
         String userInput = " p/94351253";
-        assertParseSuccess(parser, userInput, new FilterCommand(testPerson, null, null, null));
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, null, null, null);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
     public void parse_amountField_success() {
         String userInput = " amt/9999999999.99";
-        assertParseSuccess(parser, userInput, new FilterCommand(null, testAmount, null, null));
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, testAmount, null, null);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
     public void parse_descriptionField_success() {
         String userInput = " desc/Sean owes me a lot for a landed property in Sentosa";
-        assertParseSuccess(parser, userInput, new FilterCommand(null, null, testDescription, null));
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, testDescription, null);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
     public void parse_dateField_success() {
         String userInput = " date/10102024";
-        assertParseSuccess(parser, userInput, new FilterCommand(null, null, null, testDate));
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, testDate);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
     public void parse_allFields_success() {
         String userInput = " p/94351253 amt/9999999999.99  "
                 + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024";
-        assertParseSuccess(parser, userInput, new FilterCommand(testPerson, testAmount, testDescription, testDate));
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, testAmount,
+                testDescription, testDate);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
