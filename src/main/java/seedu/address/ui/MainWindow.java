@@ -115,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList(), logic.getCurrentWeddingName());
         weddingListPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getTagColorMap());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

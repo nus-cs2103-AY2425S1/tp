@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableMap;
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.TagColors;
@@ -181,7 +182,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public WeddingName getCurrentWeddingName() {
+        public ObjectProperty<WeddingName> getCurrentWeddingName() {
             throw new AssertionError("This method should not be called.");
         }
 
