@@ -60,8 +60,8 @@ public class JsonReminderAddressBookStorageTest {
 
     @Test
     public void readReminderAddressBook_invalidAndValidReminderAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class,
-                     () -> readReminderAddressBook("invalidAndValidReminderAddressBook.json"));
+        assertThrows(DataLoadingException.class, () ->
+                     readReminderAddressBook("invalidAndValidReminderAddressBook.json"));
     }
 
     @Test
