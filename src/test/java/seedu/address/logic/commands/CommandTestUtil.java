@@ -3,10 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -38,8 +41,17 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String VALID_DATE_AMYWEDDING = "2020-10-10";
+    public static final String VALID_NAME_ALICEWEDDING = "Alice's Wedding";
+    public static final String VALID_NAME_AMYWEDDING = "Amy's Wedding";
+    public static final String VALID_NAME_BOBWEDDING = "Bob's Wedding";
+    public static final String VALID_CLIENT_INDEX_ALICEWEDDING = "1";
+    public static final String VALID_CLIENT_NAME_ALICEWEDDING = "Alice";
+    public static final String VALID_CLIENT_AMYWEDDING = "2";
+    public static final String VALID_CLIENT_BOBWEDDING = "3";
+    public static final String VALID_DATE_ALICEWEDDING = "2024-12-12";
+    public static final String VALID_DATE_AMYWEDDING = "2025-12-25";
     public static final String VALID_DATE_BOBWEDDING = "2020-11-11";
+    public static final String VALID_VENUE_ALICEWEDDING = "Marina Bay Sands";
     public static final String VALID_VENUE_AMYWEDDING = "Amy's Wedding Venue";
     public static final String VALID_VENUE_BOBWEDDING = "Bob's Wedding Venue";
 
@@ -53,6 +65,19 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_ROLE + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_ROLE + VALID_TAG_HUSBAND;
+    public static final String NAME_DESC_ALICEWEDDING = " " + PREFIX_NAME + VALID_NAME_ALICEWEDDING;
+    public static final String NAME_DESC_AMYWEDDING = " " + PREFIX_NAME + VALID_NAME_AMYWEDDING;
+    public static final String NAME_DESC_BOBWEDDING = " " + PREFIX_NAME + VALID_NAME_BOBWEDDING;
+    public static final String CLIENT_INDEX_DESC_ALICEWEDDING = " " + PREFIX_CLIENT + VALID_CLIENT_INDEX_ALICEWEDDING;
+    public static final String CLIENT_NAME_DESC_ALICEWEDDING = " " + PREFIX_CLIENT + VALID_CLIENT_NAME_ALICEWEDDING;
+    public static final String CLIENT_DESC_AMYWEDDING = " " + PREFIX_CLIENT + VALID_CLIENT_AMYWEDDING;
+    public static final String CLIENT_DESC_BOBWEDDING = " " + PREFIX_CLIENT + VALID_CLIENT_BOBWEDDING;
+    public static final String DATE_DESC_ALICEWEDDING = " " + PREFIX_DATE + VALID_DATE_ALICEWEDDING;
+    public static final String DATE_DESC_AMYWEDDING = " " + PREFIX_DATE + VALID_DATE_AMYWEDDING;
+    public static final String DATE_DESC_BOBWEDDING = " " + PREFIX_DATE + VALID_DATE_BOBWEDDING;
+    public static final String VENUE_DESC_ALICEWEDDING = " " + PREFIX_VENUE + VALID_VENUE_ALICEWEDDING;
+    public static final String VENUE_DESC_AMYWEDDING = " " + PREFIX_VENUE + VALID_VENUE_AMYWEDDING;
+    public static final String VENUE_DESC_BOBWEDDING = " " + PREFIX_VENUE + VALID_VENUE_BOBWEDDING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

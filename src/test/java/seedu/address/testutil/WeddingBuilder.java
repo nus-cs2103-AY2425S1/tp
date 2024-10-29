@@ -60,7 +60,11 @@ public class WeddingBuilder {
      * Sets the {@code Date} of the {@code Wedding} that we are building.
      */
     public WeddingBuilder withDate(String date) {
-        this.date = new Date(date);
+        if (date == null) {
+            this.date = null;
+        } else {
+            this.date = new Date(date);
+        }
         return this;
     }
 
@@ -68,7 +72,11 @@ public class WeddingBuilder {
      * Sets the {@code Venue} of the {@code Wedding} that we are building.
      */
     public WeddingBuilder withVenue(String venue) {
-        this.venue = new Venue(venue);
+        if (venue == null) {
+            this.venue = null;
+        } else {
+            this.venue = new Venue(venue);
+        }
         return this;
     }
 

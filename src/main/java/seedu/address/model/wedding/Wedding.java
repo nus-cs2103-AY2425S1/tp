@@ -94,8 +94,9 @@ public class Wedding {
 
         Wedding otherWedding = (Wedding) other;
         return name.equals(otherWedding.name)
-               && date.equals(otherWedding.date)
-               && venue.equals(otherWedding.venue);
+               && ((client == null && otherWedding.client == null) || client.equals(otherWedding.client))
+               && ((date == null && otherWedding.date == null) || date.equals(otherWedding.date))
+               && ((venue == null && otherWedding.venue == null) || venue.equals(otherWedding.venue));
     }
 
     @Override
