@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAID_AMOUNT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_BOB;
@@ -20,15 +21,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
-
-    /* seems like it is for tag
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
-    }
-    */
-
     @Test
     public void isSameStudent() {
         // same object -> returns true
@@ -40,13 +32,15 @@ public class StudentTest {
         // same name and phone, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
-                .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
+                .withSubject(VALID_SUBJECT_BOB).withPaidAmount(VALID_PAID_AMOUNT_BOB)
+                .withOwedAmount(VALID_OWED_AMOUNT_BOB).withRate(VALID_RATE_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // same name, all other attributes different -> returns false
         editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
-                .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
+                .withSubject(VALID_SUBJECT_BOB).withPaidAmount(VALID_PAID_AMOUNT_BOB)
+                .withOwedAmount(VALID_OWED_AMOUNT_BOB).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -111,6 +105,10 @@ public class StudentTest {
 
         // different owedAmount -> returns false
         editedAlice = new StudentBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different paidAmount -> returns false
+        editedAlice = new StudentBuilder(ALICE).withPaidAmount(VALID_PAID_AMOUNT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
     }

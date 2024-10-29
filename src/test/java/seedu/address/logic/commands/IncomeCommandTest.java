@@ -25,7 +25,6 @@ public class IncomeCommandTest {
         model.addStudent(validStudent);
         CommandResult commandResult = new IncomeCommand().execute(model);
 
-
         assertEquals(commandResult.getFeedbackToUser(), Messages.getIncomeMessage(validStudent.getPaidAmountValue(),
                 validStudent.getOwedAmountValue()));
 
