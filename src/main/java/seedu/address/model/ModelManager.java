@@ -141,6 +141,13 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+    
+    @Override
+    public void favouritePerson(Person target) {
+        requireAllNonNull(target);
+        
+        addressBook.favouritePerson(target);
+    }
 
     //=========== ScheduleList ================================================================================
     @Override
