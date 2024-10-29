@@ -8,8 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -57,7 +55,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns the index of the first archived person in the list.
      */
-    public int getFirstArchivedIndex() {
+    private int getFirstArchivedIndex() {
         for (int i = 0; i < internalList.size(); i++) {
             Person person = internalList.get(i);
             if (person.isArchived()) {
@@ -76,7 +74,12 @@ public class UniquePersonList implements Iterable<Person> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(getFirstArchivedIndex(), toAdd);
+
+        if (toAdd.isArchived()) {
+            internalList.add(toAdd);
+        } else {
+            internalList.add(getFirstArchivedIndex(), toAdd);
+        }
     }
 
     /**
