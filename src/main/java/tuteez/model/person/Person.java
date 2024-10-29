@@ -113,7 +113,7 @@ public class Person {
                 clashedLessons.add(lesson);
             }
         }
-        return  clashedLessons;
+        return clashedLessons;
     }
 
     /**

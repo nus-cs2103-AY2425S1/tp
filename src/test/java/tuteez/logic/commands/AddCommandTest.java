@@ -10,6 +10,10 @@ import static tuteez.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -58,9 +62,11 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicateLesson_throwsCommandException() throws CommandException {
+    public void execute_clashingWithAnotherStudentLesson_throwsCommandException() throws CommandException {
         Person alice = new PersonBuilder().withName("Alice").withLessons("friday 1800-2000").build();
+        Person bob = new PersonBuilder().withName("bob").withLessons("friday 1730-1830").build();
         ModelStub modelStub = new ModelStubPersonAcceptedButClashingLesson();
+        modelStub.addPerson(bob);
         AddCommand addAliceCommand = new AddCommand(alice);
         assertThrows(CommandException.class, () -> addAliceCommand.execute(modelStub));
     }
@@ -167,8 +173,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isClashingWithExistingLesson(Lesson lesson) {
-            return true;
+        public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+            return Map.of();
         }
 
         @Override
@@ -240,15 +246,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isClashingWithExistingLesson(Lesson lesson) {
-            return false;
+        public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+            return Collections.emptyMap();
         }
     }
 
     private class ModelStubPersonAcceptedButClashingLesson extends ModelStubAcceptingPersonAdded {
+
         @Override
-        public boolean isClashingWithExistingLesson(Lesson lesson) {
-            return true;
+        public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+            Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
+            Iterator<Person> students = personsAdded.iterator();
+            while (students.hasNext()) {
+                Person stu = students.next();
+                ArrayList<Lesson> clashedLessons = stu.getLessonsThatClash(lesson);
+                if (!clashedLessons.isEmpty()) {
+                    clashingLessonMap.put(stu, clashedLessons);
+                }
+            }
+            return clashingLessonMap;
         }
+
+
     }
 }

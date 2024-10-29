@@ -41,7 +41,6 @@ public class LessonTest {
         Lesson l3 = new Lesson("Thursday 1200-1300");
         Lesson l4 = new Lesson("Thursday 1100-1400");
 
-
         Lesson l5 = new Lesson("Wednesday 1100-1200");
         Lesson l6 = new Lesson("Wednesday 1100-1200");
 

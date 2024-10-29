@@ -1,7 +1,6 @@
 package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.commands.AddCommand.MESSAGE_CLASHING_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -65,6 +64,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot is clashes with the following lessons: \n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

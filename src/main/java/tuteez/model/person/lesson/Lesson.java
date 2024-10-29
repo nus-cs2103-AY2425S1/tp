@@ -2,7 +2,6 @@ package tuteez.model.person.lesson;
 import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
-import tuteez.model.person.Person;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
