@@ -87,23 +87,30 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         ReadOnlyPredefinedAssignmentsData predefinedAssignments;
         try {
-            readAssignmentOptional = storage.readAssignment();
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            if (!readAssignmentOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAssignmentFilePath()
-                        + " populated with a sample assignment file.");
-            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            predefinedAssignments = readAssignmentOptional
-                    .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            e.printStackTrace();
+        }
+
+        try {
+            readAssignmentOptional = storage.readAssignment();
+            if (!readAssignmentOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAssignmentFilePath()
+                        + " populated with a sample assignment file.");
+            }
+            predefinedAssignments = readAssignmentOptional
+                    .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty predefined assignments data.");
             predefinedAssignments = new PredefinedAssignmentsData();
         }
 

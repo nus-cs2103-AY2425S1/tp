@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +31,7 @@ public class Person {
 
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
-    private Assignment assignment;
+    private final Map<String, Assignment> assignment = new HashMap<>();
     private Set<Integer> weeksPresent;
 
     /**
@@ -67,8 +69,8 @@ public class Person {
             Telegram telegram,
             Set<Tag> tags,
             Github github,
-            Assignment assignment) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+            Map<String, Assignment> assignment) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github, assignment);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
@@ -76,7 +78,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.assignment = assignment;
+        this.assignment.putAll(assignment);
         this.weeksPresent = new HashSet<>();
     }
 
@@ -89,7 +91,6 @@ public class Person {
      * @param email the email of the person.
      * @param telegram the telegram ID of the person.
      * @param github the github username of the person.
-     * @param assignment the assignment of the person.
      * @param weeksPresent the weeks present.
      * @param tags the tags for that person.
      */
@@ -99,7 +100,7 @@ public class Person {
                   Email email,
                   Telegram telegram,
                   Github github,
-                  Assignment assignment,
+                  Map<String, Assignment> assignment,
                   Set<Integer> weeksPresent,
                   Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, telegram, tags, github);
@@ -110,7 +111,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.assignment = assignment;
+        this.assignment.putAll(assignment);
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
@@ -136,12 +137,8 @@ public class Person {
         return telegram;
     }
 
-    public Assignment getAssignment() {
+    public Map<String, Assignment> getAssignment() {
         return assignment;
-    }
-
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
     }
 
     /**

@@ -17,12 +17,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -48,11 +51,15 @@ public class CommandTestUtil {
     public static final String VALID_GITHUB_AMY = "Amy";
     public static final String VALID_ASSIGNMENT_ONE = "Ex01";
     public static final Float VALID_SCORE = 10f;
+    public static final Assignment VALID_ASSIGNMENT = new Assignment(VALID_ASSIGNMENT_ONE, VALID_SCORE);
+    public static final Map<String, Assignment>
+            VALID_ASSIGNMENT_MAP = new HashMap<>(Map.of(VALID_ASSIGNMENT_ONE, VALID_ASSIGNMENT));
     public static final String VALID_ORDER_ASC = "asc";
     public static final String VALID_ORDER_DESC = "desc";
     public static final String VALID_FIELD_NAME = "name";
     public static final String VALID_FIELD_GITHUB = "github";
     public static final String VALID_FIELD_TELEGRAM = "telegram";
+
 
     public static final String VALID_FIELD_IMPORT_CSV =
         "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";

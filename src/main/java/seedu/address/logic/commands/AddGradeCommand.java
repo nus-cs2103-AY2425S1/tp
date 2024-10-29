@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -71,8 +72,9 @@ public class AddGradeCommand extends Command {
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
         Github github = person.getGithub();
-        Assignment assignment =
-                new Assignment(assignmentName, score);
+
+        Map<String, Assignment> assignment = person.getAssignment();
+        assignment.put(assignmentName, new Assignment(assignmentName, score));
 
         return new Person(name, phone, email, address, telegram, tags, github, assignment);
     }
@@ -93,11 +95,8 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
-        Person person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(p -> p.getName().equalIgnoreCase(personName))
-                        .toList()
-                        .get(0);
+        Person person = model.getPerson(personName).orElseThrow();
+
         model.setPerson(person, createGradeToAddToPerson(person, model.getAssignmentName(assignmentName), score));
         return new CommandResult(""); // placeholder string to be added
     }

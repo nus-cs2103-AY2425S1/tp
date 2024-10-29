@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.assignment.Assignment;
@@ -28,6 +30,8 @@ public class PersonBuilder {
     public static final String DEFAULT_GITHUB = "Amy";
     public static final String DEFAULT_ASSIGNMENT_NAME = "ex01";
     public static final Float DEFAULT_ASSIGNMENT_SCORE = 0f;
+    public static final Assignment DEFAULT_ASSIGNMENT =
+            new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
 
     private Name name;
     private Phone phone;
@@ -36,7 +40,7 @@ public class PersonBuilder {
     private Telegram telegram;
     private Set<Tag> tags;
     private Github github;
-    private Assignment assignment;
+    private Map<String, Assignment> assignment;
     private Set<Integer> attendance;
 
 
@@ -52,7 +56,8 @@ public class PersonBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         github = new Github(DEFAULT_GITHUB);
-        assignment = new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
+        assignment = new HashMap<>();
+        assignment.put(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT);
         this.attendance = new HashSet<>();
     }
 
@@ -132,7 +137,8 @@ public class PersonBuilder {
      * Sets the {@code Assignment} of the {@code Person} that we are building.
      */
     public PersonBuilder witAssignment(String assignment, Float score) {
-        this.assignment = new Assignment(assignment, score);
+        this.assignment = new HashMap<>();
+        this.assignment.put(assignment, new Assignment(assignment, score));
         return this;
     }
     /**
