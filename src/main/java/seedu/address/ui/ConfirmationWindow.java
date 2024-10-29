@@ -12,41 +12,48 @@ import seedu.address.commons.core.LogsCenter;
  * Confirmation Window Ui to obtain users' confirmation.
  */
 public class ConfirmationWindow extends UiPart<Stage> {
-    // Singleton instance
-    private static ConfirmationWindow theConfirmationWindow = null;
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final String title;
+    private final String contentText;
+    private Optional<ButtonType> userResponse = Optional.empty();
 
-    private ConfirmationWindow() {
+    /**
+     * Constructs a confirmation window.
+     * @param title Title of the confirmation window.
+     * @param contentText Content of the confirmation window.
+     */
+    public ConfirmationWindow(String title, String contentText) {
+        super();
+        this.title = title;
+        this.contentText = contentText;
     }
 
     /**
-     * Returns the singleton instance of the Confirmation class.
-     *
-     * @return the single instance of Confirmation
+     * Shows a confirmation alert dialog with the specified title and content text
+     * and stores the user's response.
      */
-    public static ConfirmationWindow getInstance() {
-        if (theConfirmationWindow == null) {
-            theConfirmationWindow = new ConfirmationWindow();
-        }
-        return theConfirmationWindow;
-    }
-
-    /**
-     * Displays a confirmation alert dialog and waits for the user's response.
-     *
-     * @param title Title of the alert dialog
-     * @param contentText Content text to display in the alert dialog
-     * @return true if the user clicks OK; false otherwise
-     */
-    public boolean showAlertDialogAndWait(String title, String contentText) {
+    public void show() {
         logger.info("Showing confirmation window..");
-        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(contentText);
 
-        // Show dialog and wait for user response
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.OK;
+        alert.getDialogPane()
+                .setStyle("-fx-background-color: #e0f7fa; -fx-font-size: 14px;");
+        alert.getDialogPane().lookupButton(ButtonType.OK)
+                .setStyle("-fx-background-color: #005b96; -fx-text-fill: #ffffff;");
+        alert.getDialogPane().lookupButton(ButtonType.CANCEL)
+                .setStyle("-fx-background-color: #99DDF8; -fx-text-fill: #000000;");
+
+        userResponse = alert.showAndWait();
+    }
+
+    /**
+     * Returns true if the user clicked OK; false otherwise.
+     */
+    public boolean isConfirmed() {
+        return userResponse.isPresent() && userResponse.get() == ButtonType.OK;
     }
 }

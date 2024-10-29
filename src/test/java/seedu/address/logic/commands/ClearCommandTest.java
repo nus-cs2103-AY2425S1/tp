@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.controller.ConfirmationBypassController;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -16,16 +17,21 @@ public class ClearCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
 
-        assertCommandSuccess(new ClearCommand(true), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(confirmationBypassController), model,
+                ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_emptyAddressBook_cancelled() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
+        confirmationBypassController.setConfirmationResult(false);
 
-        assertCommandSuccess(new ClearCommand(false), model, ClearCommand.MESSAGE_CLEAR_CANCELLED, expectedModel);
+        assertCommandSuccess(new ClearCommand(confirmationBypassController), model,
+                ClearCommand.MESSAGE_CLEAR_CANCELLED, expectedModel);
     }
 
     @Test
@@ -33,16 +39,21 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
 
-        assertCommandSuccess(new ClearCommand(true), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(confirmationBypassController), model,
+                ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_cancelled() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
+        confirmationBypassController.setConfirmationResult(false);
 
-        assertCommandSuccess(new ClearCommand(false), model, ClearCommand.MESSAGE_CLEAR_CANCELLED, expectedModel);
+        assertCommandSuccess(new ClearCommand(confirmationBypassController), model,
+                ClearCommand.MESSAGE_CLEAR_CANCELLED, expectedModel);
     }
 
 }
