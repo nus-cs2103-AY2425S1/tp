@@ -173,8 +173,4 @@ public class Lesson implements Comparable<Lesson> {
         }
         return this.startDateTime.compareTo(lesson.startDateTime);
     }
-
-    public void setStudent(Person editedPerson) {
-        this.student = editedPerson;
-    }
 }

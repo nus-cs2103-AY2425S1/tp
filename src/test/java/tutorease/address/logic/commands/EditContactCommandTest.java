@@ -22,6 +22,7 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.TutorEase;
@@ -29,6 +30,7 @@ import tutorease.address.model.UserPrefs;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.EditPersonDescriptorBuilder;
+import tutorease.address.testutil.GuardianBuilder;
 import tutorease.address.testutil.LessonBuilder;
 import tutorease.address.testutil.StudentBuilder;
 
@@ -195,19 +197,31 @@ public class EditContactCommandTest {
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
+
     @Test
     public void execute_updateContact_updateLessons() throws ParseException {
         Person person = new StudentBuilder().build();
         Person editedPerson = new StudentBuilder().withName("EditedName").withAddress("EditedAddress").build();
 
         Model tempModel = new ModelManager(new TutorEase(), new UserPrefs(),
-                getTypicalLessons());
+                new LessonSchedule());
         tempModel.addPerson(person);
         Lesson lesson = new LessonBuilder().withName(person).build();
         tempModel.addLesson(lesson);
         tempModel.setPerson(person, editedPerson);
 
         assertEquals(tempModel.getLesson(0).getStudent(), editedPerson);
+    }
+
+    @Test
+    public void execute_updateContact_guardian() {
+        Person person = new GuardianBuilder().build();
+        Person editedPerson = new GuardianBuilder().withName("EditedName").withAddress("EditedAddress").build();
+        Model tempModel = new ModelManager(new TutorEase(), new UserPrefs(),
+                new LessonSchedule());
+        tempModel.addPerson(person);
+        tempModel.setPerson(person, editedPerson);
+        assertEquals(tempModel.getLessonScheduleSize(), 0);
     }
 
 }
