@@ -1,7 +1,6 @@
 package tuteez.logic.commands;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
