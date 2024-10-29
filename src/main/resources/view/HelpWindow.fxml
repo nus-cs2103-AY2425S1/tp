@@ -41,7 +41,7 @@
 
           <HBox alignment="CENTER">
             <padding>
-              <Insets bottom="5" left="10" right="10" top="5" />
+              <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
             <children>
               <TableView fx:id="commandSummaryTable" prefHeight="950.0" prefWidth="1000.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">

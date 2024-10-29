@@ -163,10 +163,10 @@ public class HelpWindow extends UiPart<Stage> {
                     setGraphic(null);
                 } else {
                     textArea.setText(item);
-                    textArea.setWrapText(true); // Enable text wrapping
-                    textArea.setEditable(false); // Prevent users from editing text
-                    textArea.setPrefHeight(80); // Adjust height to content
-                    textArea.setStyle("-fx-background-color: transparent; -fx-padding: 5;"); // Transparent background
+                    textArea.setWrapText(true);
+                    textArea.setEditable(false);
+                    textArea.setPrefHeight(90);
+                    textArea.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-font-size: 16;");
                     setGraphic(textArea);
                 }
             }
