@@ -76,7 +76,7 @@ public class OweCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * updated with {@code newOwedAmount}
      */
-    private static Student createEditedStudent(Student studentToEdit, double hour) {
+    private static Student createEditedStudent(Student studentToEdit, double hour) throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = studentToEdit.getName();
@@ -98,14 +98,17 @@ public class OweCommand extends Command {
     /**
      * Updates the owed amount of the student based on the hours the student owed.
      */
-    private static OwedAmount updateOwedAmount(Student student, double hour) {
+    private static OwedAmount updateOwedAmount(Student student, double hour) throws CommandException {
         assert student != null && hour % 0.5 == 0;
         double updatedOwedAmount = student.getOwedAmount().value + calculateOwed(student, hour);
         return new OwedAmount(String.format("%.2f", updatedOwedAmount));
     }
 
-    private static double calculateOwed(Student student, double hour) {
+    private static double calculateOwed(Student student, double hour) throws CommandException {
         double owedAmount = student.getRate().value * hour;
+        if (owedAmount > OwedAmount.MAX_VALUE) {
+            throw new CommandException(Messages.MESSAGE_OVERFLOW);
+        }
         return BigDecimal.valueOf(owedAmount)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
