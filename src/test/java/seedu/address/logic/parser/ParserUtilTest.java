@@ -12,7 +12,7 @@ import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Rachel!";
     private static final String INVALID_ID = "P54S12";
     /*
     private static final String INVALID_PHONE = "+651234";
