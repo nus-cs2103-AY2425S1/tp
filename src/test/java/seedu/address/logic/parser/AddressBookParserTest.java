@@ -299,10 +299,27 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteTask() throws Exception {
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST), command);
+
+        // Test using delete task keyword
+        DeleteTaskCommand keywordCommand = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST), keywordCommand);
+    }
+
+    @Test
     public void parseCommand_assignVendor() throws Exception {
         AssignVendorCommand command = (AssignVendorCommand) parser.parseCommand(
                 AssignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new AssignVendorCommand(INDEX_FIRST), command);
+
+        // Test using assign vendor keyword
+        AssignVendorCommand keywordCommand = (AssignVendorCommand) parser.parseCommand(
+                AssignVendorCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new AssignVendorCommand(INDEX_FIRST), keywordCommand);
     }
 
     @Test
@@ -310,6 +327,11 @@ public class AddressBookParserTest {
         UnassignVendorCommand command = (UnassignVendorCommand) parser.parseCommand(
                 UnassignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new UnassignVendorCommand(INDEX_FIRST), command);
+
+        // Test using unassign vendor keyword
+        UnassignVendorCommand keywordCommand = (UnassignVendorCommand) parser.parseCommand(
+                UnassignVendorCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new UnassignVendorCommand(INDEX_FIRST), keywordCommand);
     }
 
     @Test
@@ -318,6 +340,11 @@ public class AddressBookParserTest {
         String userInput = AddVendorCommand.COMMAND_WORD + " n/Alison Longwood";
         AddVendorCommand command = (AddVendorCommand) parser.parseCommand(userInput);
         assertEquals(new AddVendorCommand(vendor), command);
+
+        // Test using add vendor keyword
+        String userKeywordInput = AddVendorCommand.COMMAND_KEYWORD + " n/Alison Longwood";
+        AddVendorCommand keywordCommand = (AddVendorCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(new AddVendorCommand(vendor), keywordCommand);
     }
 
     @Test
@@ -338,18 +365,6 @@ public class AddressBookParserTest {
                 + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
         CreateTaskCommand keywordCommand = (CreateTaskCommand) parser.parseCommand(userKeywordInput);
         assertEquals(expectedCommand, keywordCommand);
-    }
-
-    @Test
-    public void parseCommand_deleteTask() throws Exception {
-        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
-                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteTaskCommand(INDEX_FIRST), command);
-
-        // Test using delete task keyword
-        DeleteTaskCommand keywordCommand = (DeleteTaskCommand) parser.parseCommand(
-                DeleteTaskCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteTaskCommand(INDEX_FIRST), keywordCommand);
     }
 
 
