@@ -23,8 +23,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
-    public static final String MESSAGE_INVALID_CENTS = "The claim amount can only contain up to 2 digits of cents.";
-    public static final String MESSAGE_TOO_MANY_DECIMALS = "Too many decimal points in claim amount!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -161,8 +159,10 @@ public class ParserUtil {
         requireNonNull(claimAmount);
         String[] claimAmountString = claimAmount.trim().split("\\.");
 
-        if (claimAmountString.length != 2) {
-            throw new ParseException(MESSAGE_TOO_MANY_DECIMALS);
+        if (claimAmountString.length > 2) {
+            throw new ParseException(Claim.MESSAGE_TOO_MANY_DECIMALS);
+        } else if (claimAmountString.length == 1) {
+            throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
         }
 
         int claimAmountInt;
@@ -172,8 +172,8 @@ public class ParserUtil {
             int claimAmountDollars = Integer.parseInt(claimAmountString[0].trim());
 
             String claimAmountCentsString = claimAmountString[1].trim();
-            if (claimAmountCentsString.length() > 2) {
-                throw new ParseException(MESSAGE_INVALID_CENTS);
+            if (claimAmountCentsString.length() != 2) {
+                throw new ParseException(Claim.MESSAGE_INVALID_CENTS);
             }
             int claimAmountCents = Integer.parseInt(claimAmountCentsString);
 
