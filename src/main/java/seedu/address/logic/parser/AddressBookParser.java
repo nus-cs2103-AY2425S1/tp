@@ -20,6 +20,9 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
+import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
+import seedu.address.logic.commands.searchmode.InitSearchModeCommand;
+import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -86,11 +89,47 @@ public class AddressBookParser {
         case AddEventCommand.COMMAND_WORD:
             return new NewEventCommandParser().parse(arguments);
 
+        case InitSearchModeCommand.COMMAND_WORD:
+            return new InitSearchModeCommand();
+
+
         case RemovePersonFromEventCommand.COMMAND_WORD:
             return new RemovePersonFromEventParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     * Parses user input into command for execution in search mode.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public Command parseSearchCommand(String userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            logger.warning("This user input caused a ParseException: " + userInput);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // log messages such as the one below.
+        // Lower level log messages are used sparingly to minimize noise in the code.
+        logger.fine("Using SearchCommandParser to parse user input: " + userInput);
+        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        switch (commandWord) {
+        case ExitSearchModeCommand.COMMAND_WORD:
+            return new ExitSearchModeCommand();
+        case SearchModeSearchCommand.COMMAND_WORD:
+            return new SearchModeSearchCommandParser().parse(arguments);
+        default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
