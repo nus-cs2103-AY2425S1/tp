@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTEREST_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTEREST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -102,7 +103,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different interests -> returns false
-        editedAlice = new PersonBuilder(ALICE).withInterests(VALID_INTEREST_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withInterests(VALID_INTEREST_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
