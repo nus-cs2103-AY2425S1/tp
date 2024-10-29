@@ -117,20 +117,23 @@ public class DeleteRemarkCommandTest {
     }
 
     @Test
-    public void execute_deleteRemark_updatesLastViewedPerson() throws Exception {
-        Person personToUpdate = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        RemarkList updatedRemarkList = new RemarkList(Arrays.asList(new Remark("First Remark"), new Remark("Second Remark")));
-        Person personWithRemarks = new PersonBuilder(personToUpdate).withRemarks(updatedRemarkList).build();
-        model.setPerson(personToUpdate, personWithRemarks);
+    public void execute_deleteRemark_updatesLastViewedPerson() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDeleteRemark = new PersonBuilder(originalPerson).withRemarks(VALID_REMARKLIST).build();
 
-        DeleteRemarkCommand deleteRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON, Index.fromZeroBased(0));
+        model.setPerson(originalPerson, personToDeleteRemark);
 
-        RemarkList expectedRemarkList = new RemarkList(Arrays.asList(new Remark("Second Remark")));
-        Person expectedPerson = new PersonBuilder(personToUpdate).withRemarks(expectedRemarkList).build();
+        DeleteRemarkCommand deleteRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK);
 
-        deleteRemarkCommand.execute(model);
+        Person expectedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        assertTrue(model.getLastViewedPerson().get().isPresent(), "Expected lastViewedPerson to be set");
+        String expectedMessage = String.format("Deleted remark at index %1$s from Person %2$s", 1, 1);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToDeleteRemark, expectedPerson);
+
+        assertCommandSuccess(deleteRemarkCommand, model, expectedMessage, expectedModel);
+
+        assertTrue(model.getLastViewedPerson().get().isPresent(), "Expected lastViewedPerson to be present");
         assertTrue(model.getLastViewedPerson().get().get().equals(expectedPerson),
                 "Expected lastViewedPerson to match the person with the updated remark list");
     }
