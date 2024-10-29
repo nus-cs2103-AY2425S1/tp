@@ -7,8 +7,29 @@ PROperty is a **desktop app for property agents managing contacts and their prop
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Adding a person: `add`](#adding-a-person-add)
+    * [Listing all persons : `list`](#listing-all-persons--list)
+    * [Editing a person : `edit`](#editing-a-person--edit)
+    * [Locating persons by name: `find`](#locating-persons-by-name-find)
+    * [Locating persons by tag: `findtag`](#locating-persons-by-tag-findtag)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Quick reference help: `help`](#quick-reference-help-help)
+    * [Managing Remarks : `remark`](#managing-remarks--remark)
+    * [Showing property listings of a person : `show`](#showing-property-listings-of-a-person--show)
+    * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
+    * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
