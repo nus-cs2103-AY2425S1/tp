@@ -29,8 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Policy;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.List;
-
 public class PaidCommandTest {
 
     private Model model;
