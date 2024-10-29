@@ -2,6 +2,7 @@ package seedu.ddd.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import seedu.ddd.model.event.common.Event;
 
 /**
@@ -20,6 +21,15 @@ public class EventCard extends DisplayedCard {
     private Label description;
 
     @FXML
+    private Label date;
+
+    @FXML
+    private FlowPane clients;
+
+    @FXML
+    private FlowPane vendors;
+
+    @FXML
     private Label id;
 
     /**
@@ -29,9 +39,14 @@ public class EventCard extends DisplayedCard {
         super(FXML);
         this.event = event;
 
-        name.setText(String.format("%s. %s", displayedIndex, "Dummy Name"));
+        name.setText(String.format("%s. %s", displayedIndex, event.getName().fullName));
         id.setText(String.format("Event: #%d", event.getEventId().eventId));
 
         description.setText(event.getDescription().description);
+        date.setText(String.format("📅  Date: %s", event.getDate().date));
+        event.getClients().stream()
+                .forEach(client -> clients.getChildren().add(new Label(client.getName().fullName)));
+        event.getVendors().stream()
+                .forEach(vendor -> vendors.getChildren().add(new Label(vendor.getName().fullName)));
     }
 }

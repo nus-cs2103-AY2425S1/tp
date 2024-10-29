@@ -1,3 +1,5 @@
+/* common styles */
+
 .card-pane {
     /* -fx-background-color: transparent; */
     -fx-background-color: #f2f2f2;
@@ -34,6 +36,19 @@
     -fx-border-color: null;
 }
 
+.card-details-container {
+    -fx-padding: 0 8 0 0;
+}
+
+.card-details {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12pt;
+    -fx-padding: 8 4 8 4;
+    -fx-text-fill: #111111;
+}
+
+/* contact styles */
+
 .client-id {
     -fx-background-color: #b0f2bb;
     -fx-background-insets: 0 12 0 12;
@@ -56,17 +71,6 @@
     -fx-text-fill: #111111;
 }
 
-.card-details-container {
-    -fx-padding: 0 8 0 0;
-}
-
-.card-details {
-    -fx-font-family: "Tahoma";
-    -fx-font-size: 12pt;
-    -fx-padding: 4 4 4 4;
-    -fx-text-fill: #111111;
-}
-
 .card-tags {
     -fx-padding: 8 0 0 0;
 }
@@ -83,13 +87,54 @@
     -fx-text-fill: #111111;
 }
 
+/* event styles */
+
 .event-id {
-    -fx-background-color: #857df3;
+    -fx-background-color: #c7aaec;
     -fx-background-insets: 0 12 0 12;
     -fx-background-radius: 8;
     -fx-border-insets: 0 12 0 12;
     -fx-border-radius: 8;
     -fx-font-size: 12pt;
     -fx-padding: 4 24 4 24;
+    -fx-text-fill: #111111;
+}
+
+.card-description {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 14pt;
+    -fx-padding: 4 4 12 4;
+    -fx-text-fill: #111111;
+}
+
+.card-clients {
+    -fx-padding: 0 0 0 0;
+}
+
+.card-clients > .label {
+    -fx-background-color: #b0f2bb;
+    -fx-background-insets: 4;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 8;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12pt;
+    -fx-padding: 8 16 8 16;
+    -fx-text-fill: #111111;
+}
+
+.card-vendors {
+    -fx-padding: 0 0 0 0;
+}
+
+.card-vendors > .label {
+    -fx-background-color: #88adf3;
+    -fx-background-insets: 4;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 8;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12pt;
+    -fx-padding: 8 16 8 16;
     -fx-text-fill: #111111;
 }
