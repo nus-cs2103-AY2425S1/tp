@@ -31,7 +31,7 @@ The user guide contains formatting to highlight important info. The standards us
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding an employee: `add`](#adding-an-employee-add)
-  - [Listing all employees : `list`](#listing-all-employees--list)
+  - [Listing all employees : `listemployees`](#listing-all-employees--list)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
   - [Filtering employees by skills: `filter`](#filtering-employees-by-skills-filter)
   - [Locating employees by name: `find`](#locating-employees-by-name-find)
@@ -81,7 +81,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 ### Some commands to get started:
 
-- `list` : Lists all contacts.
+- `listemployees` : Lists all employees.
 
 - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -129,7 +129,7 @@ Refer to the [Features](#features) below for details of each command.
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `listemployees`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -173,11 +173,11 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `list`
+### Listing all employees : `listemployees`
 
 Shows a list of all employees in the address book.
 
-Format: `list`
+Format: `listemployees`
 
 Expected output:
 
@@ -511,7 +511,7 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 | **Edit Employee**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
 | **Filter Employees**        | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
 | **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Employees**          | `list`                                                                                                                                                                                                                   |
+| **List Employees**          | `listemployees`                                                                                                                                                                                                                   |
 | **- Project Commands -**    |                                                                                                                                                                                                                          |
 | **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/E0276 pn/Project Alpha`                                                                                                                            |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
