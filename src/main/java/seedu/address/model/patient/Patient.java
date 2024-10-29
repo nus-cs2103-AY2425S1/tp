@@ -146,6 +146,10 @@ public class Patient {
         return address;
     }
 
+    public ApptList getAppointments() {
+        return appts;
+    }
+
     /**
      * Adds an appointment to the patient's list of appointments.
      * The appointments will be sorted by date and time.
