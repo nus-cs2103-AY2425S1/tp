@@ -53,14 +53,14 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        Command contactCommand;
         if (model.getSearchMode()) {
-            Command searchCommand = addressBookParser.parseSearchCommand(commandText);
-            commandResult = searchCommand.execute(model, eventManager);
+            contactCommand = addressBookParser.parseSearchCommand(commandText);
+
         } else {
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model, eventManager);
+            contactCommand = addressBookParser.parseCommand(commandText);
+
         }
-        Command contactCommand = addressBookParser.parseCommand(commandText);
         commandResult = contactCommand.execute(model, eventManager);
 
         try {
