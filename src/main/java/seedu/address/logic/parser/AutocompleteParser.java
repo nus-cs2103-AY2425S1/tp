@@ -247,7 +247,7 @@ public class AutocompleteParser {
         HashMap<String, String> suggestionList = new HashMap<>();
         for (String command : commands) {
             // If full command has already been typed out, do not show suggestions.
-            if (command.equals(userInput)) {
+            if (command.equals(wordUnderCaret)) {
                 return new HashMap<>();
             }
             if (command.startsWith(wordUnderCaret)) {
