@@ -83,7 +83,7 @@ Before running MediBase3, ensure that **Java 17** is installed on your system.
 
 Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian) and type:
 > ```
->    java -version
+> java -version
 > ```  
 
 If you are using Windows, you should see something like:
@@ -155,8 +155,9 @@ Here’s a breakdown of the parts:
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
 
 #### Example:
-
-    `add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+>```
+>add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+>```
 
 - **Command:** `add`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
@@ -168,42 +169,42 @@ Here’s a basic tutorial on how to start using the application:
 
 1. **View the Help Guide:**
    - Once MediBase3 is running, you can type the following command to view the help window:
-   ```
-     help
-   ```
+   >```
+   > help
+   >```
      
 2. **Add a New Patient:**
    - To add a new patient, use the following command:
-   ```
-     add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
-   ```
+   >```
+   > add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
+   >```
 
    - This will add a patient named John Doe to the system.
 
 
 3. **Edit Patient Information:**
    - If there’s a typo or information changes, use the `edit` command:
-   ```
-     edit S1234567A p/91234567 e/johndoe@example.com
-   ```
+   >```
+   >  edit S1234567A p/91234567 e/johndoe@example.com
+   >```
      
    - This will change the phone number and email of the patient with NRIC S1234567A
 
 
 4. **Find a Patient by NRIC:**
    - To find a patient by NRIC, type:
-   ```
-     findNric T0123456A
-   ```
+   >```
+   >  findNric T0123456A
+   >```
      
    - This will show the patient with the NRIC `T0123456A`.
 
 
 5. **Delete a Patient:**
    - To remove a patient who is no longer visiting the clinic/hospital, type:
-   ```
-     delete T0123456A
-   ```
+   >```
+   >  delete T0123456A
+   >```
    
      
    - This deletes the patient with the NRIC `T0123456A`.
@@ -211,9 +212,9 @@ Here’s a basic tutorial on how to start using the application:
 
 6. **Clear All Entries:**
    - To remove all patient and appointment data from the system, type:
-   ```
-     clear
-   ```
+   >```
+   >  clear
+   >```
 
 
 You’re now ready to start using MediBase3.  
@@ -712,14 +713,14 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 #### **Q**: How to install Java 17
  - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
 
-#### For Windows:
+##### For Windows:
 
 1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
 3. Run the installer and follow the setup instructions.
 4. Verify the installation by opening **Command Prompt** and typing:
 > ```
->    java -version
+> java -version
 > ```  
 
 You should see something like:
@@ -728,25 +729,25 @@ You should see something like:
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
-#### For macOS:
+##### For macOS:
 
 1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
 > ```
->     /bin/bash -c "$(curl -fsSL \
->     https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+> /bin/bash -c "$(curl -fsSL \
+> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 > ```
 2. Install Java 17 by typing:
 > ```
->    brew install openjdk@17
+> brew install openjdk@17
 > ```
 3. Link the installed JDK:
 > ```
->    sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk \
->    /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+> sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk \
+> /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 > ```
 4. Verify the installation by typing:
 > ```
->    java -version
+> java -version
 > ```
 You should see something like this:
 
@@ -755,16 +756,16 @@ You should see something like this:
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
-#### For Ubuntu/Debian:
+##### For Ubuntu/Debian:
 
 1. Open **Terminal**.
 2. Install Java 17 by typing:
 > ```
->    sudo apt install openjdk-17-jdk
+> sudo apt install openjdk-17-jdk
 > ```
 3. Verify the installation by typing:
 > ```
->    java -version
+> java -version
 > ```
 You should see something like this:
 
