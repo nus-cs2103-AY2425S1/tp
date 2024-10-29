@@ -64,7 +64,8 @@ public class CommandResultTest {
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit()
-                + ", findPerson=" + commandResult.isFindPerson() + "}";
+                + ", findPerson=" + commandResult.isFindPerson()
+                + ", findAppointment=" + commandResult.isFindAppointment() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

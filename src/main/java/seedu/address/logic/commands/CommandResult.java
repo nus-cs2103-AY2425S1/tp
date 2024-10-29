@@ -48,6 +48,9 @@ public class CommandResult {
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
+    public boolean isFindAppointment() {
+        return findAppointment;
+    }
     public boolean isFindPerson() {
         return findPerson;
     }
@@ -90,6 +93,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("findPerson", findPerson)
+                .add("findAppointment", findAppointment)
                 .toString();
     }
 
