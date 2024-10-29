@@ -1,13 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICHAEL;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_MICHAEL;
-import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_MICHAEL;
@@ -20,13 +16,10 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -40,7 +33,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.STUDENT_CHRIS;
 import static seedu.address.testutil.TypicalPersons.STUDENT_MICHAEL;
 
 import org.junit.jupiter.api.Test;
@@ -86,10 +78,10 @@ public class AddStudentCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new StudentBuilder(STUDENT_CHRIS).withTags().withDaysAttended(10).build();
-        assertParseSuccess(parser, NAME_DESC_CHRIS + GENDER_DESC_BOB + PHONE_DESC_CHRIS + EMAIL_DESC_CHRIS
-            + ADDRESS_DESC_CHRIS + SUBJECT_DESC_CHRIS + CLASSES_DESC_CHRIS
-            + ATTENDANCE_DESC_CHRIS, new AddStudentCommand(expectedStudent));
+        Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().withDaysAttended(10).build();
+        assertParseSuccess(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+            + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
+            + ATTENDANCE_DESC_MICHAEL, new AddStudentCommand(expectedStudent));
     }
 
     @Test

@@ -94,6 +94,7 @@ public class CommandTestUtil {
 
     // Constants for Chris
     public static final String VALID_NAME_CHRIS = "Chris Lim";
+    public static final String VALID_GENDER_CHRIS = "male";
     public static final String VALID_PHONE_CHRIS = "98192727";
     public static final String VALID_EMAIL_CHRIS = "chris@example.com";
     public static final String VALID_ADDRESS_CHRIS = "311, Lorong Ave 2, #02-25";

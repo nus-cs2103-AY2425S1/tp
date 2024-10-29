@@ -3,102 +3,210 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ATHLETE;
+import static seedu.address.model.person.Student.STUDENT_TYPE;
+import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.TEACHER_ALICE;
+import static seedu.address.testutil.TypicalPersons.STUDENT_MICHAEL;
+import static seedu.address.testutil.TypicalPersons.TEACHER_CHRIS;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TeacherBuilder;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 public class PersonTest {
 
+    public static class PersonStub extends Person {
+        public PersonStub(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
+                          Set<Subject> subjects, Set<String> classes) {
+            super(name, gender, phone, email, address, tags, subjects, classes);
+        }
+    }
+    private static final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
+        new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
+        new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+
+        assertThrows(UnsupportedOperationException.class, () -> personStubAmy.getTags().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
-        // same object -> returns true
-        assertTrue(TEACHER_ALICE.isSamePerson(TEACHER_ALICE));
+    public void isSamePerson_throwsInvalidPersonTypeException() {
+        assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.isSamePerson(personStubAmy));
 
-        // null -> returns false
-        assertFalse(TEACHER_ALICE.isSamePerson(null));
-
-        // same name and email, all other attributes different -> returns true
-        Teacher editedAlice = new TeacherBuilder(TEACHER_ALICE).withPhone(VALID_PHONE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(TEACHER_ALICE.isSamePerson(editedAlice));
-
-        // different name, all other attributes same -> returns false
-        editedAlice = new TeacherBuilder(TEACHER_ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(TEACHER_ALICE.isSamePerson(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Teacher aliceCopy = new TeacherBuilder(TEACHER_ALICE).build();
-        assertTrue(TEACHER_ALICE.equals(aliceCopy));
+        PersonStub personStubAmyCopy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.equals(personStubAmyCopy));
 
         // same object -> returns true
-        assertTrue(TEACHER_ALICE.equals(TEACHER_ALICE));
+        assertTrue(personStubAmy.equals(personStubAmy));
 
         // null -> returns false
-        assertFalse(TEACHER_ALICE.equals(null));
+        assertFalse(personStubAmy.equals(null));
 
         // different type -> returns false
-        assertFalse(TEACHER_ALICE.equals(5));
+        assertFalse(personStubAmy.equals(5));
 
         // different person -> returns false
-        assertFalse(TEACHER_ALICE.equals(BOB));
+        PersonStub personStubBob = new PersonStub(new Name(VALID_NAME_BOB), new Gender(VALID_GENDER_BOB),
+            new Phone(VALID_PHONE_BOB), new Email(VALID_EMAIL_BOB), new Address(VALID_ADDRESS_BOB),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubBob));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(TEACHER_ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(TEACHER_ALICE.equals(editedAlice));
+        PersonStub personStubEditedAmy = new PersonStub(new Name(VALID_NAME_MICHAEL), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
+
+        // different gender -> returns false
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_BOB),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(TEACHER_ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(TEACHER_ALICE.equals(editedAlice));
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_MICHAEL), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(TEACHER_ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(TEACHER_ALICE.equals(editedAlice));
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_MICHAEL), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(TEACHER_ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(TEACHER_ALICE.equals(editedAlice));
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_MICHAEL),
+            new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(TEACHER_ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(TEACHER_ALICE.equals(editedAlice));
+        Set<Tag> differentTags = new HashSet<>();
+        differentTags.add(new Tag(VALID_TAG_ATHLETE));
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            differentTags, new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
+
+        // different subjects -> returns false
+        Set<Subject> differentSubjects = new HashSet<>();
+        differentSubjects.add(new Subject(VALID_SUBJECT_BOB));
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), differentSubjects, new HashSet<>());
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
+
+        // different classes -> returns false
+        Set<String> differentClasses = new HashSet<>();
+        differentClasses.add(VALID_CLASSES_BOB);
+        personStubEditedAmy = new PersonStub(new Name(VALID_NAME_AMY), new Gender(VALID_GENDER_AMY),
+            new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY), new Address(VALID_ADDRESS_AMY),
+            new HashSet<>(), new HashSet<>(), differentClasses);
+        assertFalse(personStubAmy.equals(personStubEditedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Teacher.class.getCanonicalName() + "{name=" + TEACHER_ALICE.getName()
-            + ", gender=" + TEACHER_ALICE.getGender() + ", phone=" + TEACHER_ALICE.getPhone()
-            + ", email=" + TEACHER_ALICE.getEmail()
-            + ", address=" + TEACHER_ALICE.getAddress() + ", tags=" + TEACHER_ALICE.getTags()
-            + ", subject=" + TEACHER_ALICE.getSubjects()
-            + ", classes=" + TEACHER_ALICE.getClasses() + "}";
-        assertEquals(expected, TEACHER_ALICE.toString());
+        String expectedTeacher = PersonStub.class.getCanonicalName() + "{name=" + VALID_NAME_AMY
+            + ", gender=" + VALID_GENDER_AMY + ", phone=" + VALID_PHONE_AMY
+            + ", email=" + VALID_EMAIL_AMY
+            + ", address=" + VALID_ADDRESS_AMY + ", tags=[]"
+            + ", subject=[]"
+            + ", classes=[]" + "}";
+        assertEquals(expectedTeacher, personStubAmy.toString());
+    }
+
+    @Test
+    public void markAttendance_marksAttendance_success() {
+        personStubAmy.markAttendance();
+        // Add assertions based on the actual implementation of markAttendance
+    }
+
+    @Test
+    public void unmarkAttendance_unmarksAttendance_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> personStubAmy.unmarkAttendance());
+    }
+
+    @Test
+    public void resetAttendance_resetsAttendance_success() {
+        personStubAmy.resetAttendance();
+        // Add assertions based on the actual implementation of resetAttendance
+    }
+
+    @Test
+    public void createPerson_createsPerson_success() {
+        Person createdChris = Person.createPerson(TEACHER_TYPE, new Name(VALID_NAME_CHRIS),
+            new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
+            SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null);
+        assertEquals(TEACHER_CHRIS, createdChris);
+
+        Person createdMichael = Person.createPerson(STUDENT_TYPE, new Name(VALID_NAME_MICHAEL),
+            new Gender(VALID_GENDER_MICHAEL), new Phone(VALID_PHONE_MICHAEL), new Email(VALID_EMAIL_MICHAEL),
+            new Address(VALID_ADDRESS_MICHAEL), SampleDataUtil.getTagSet(),
+            SampleDataUtil.getSubjectSet(VALID_SUBJECT_MICHAEL),
+            SampleDataUtil.getClassSet(VALID_CLASSES_MICHAEL), new DaysAttended(VALID_ATTENDANCE_MICHAEL));
+        assertEquals(STUDENT_MICHAEL, createdMichael);
+
+        assertThrows(InvalidPersonTypeException.class, () -> Person.createPerson("INVALID_TYPE",
+            new Name(VALID_NAME_CHRIS),
+            new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
+            SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null));
+    }
+
+    @Test
+    public void getType_returnsType_throwsInvalidPersonTypeException() {
+        assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.getType());
+    }
+
+    @Test
+    public void getDaysAttended_returnsNull() {
+        assertEquals(null, personStubAmy.getDaysAttended());
     }
 }

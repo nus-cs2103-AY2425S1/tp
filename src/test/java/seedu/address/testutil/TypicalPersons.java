@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_CHRIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICHAEL;
@@ -38,7 +40,7 @@ import seedu.address.model.person.Teacher;
 public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
+    public static final Person PERSON_BOB = new PersonBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSubject(VALID_SUBJECT_BOB).withClasses(VALID_CLASSES_BOB)
             .build();
@@ -74,12 +76,12 @@ public class TypicalPersons {
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253")
         .withTags("friends").withSubjects("Mathematics").withClasses("7A").build();
-    public static final Student STUDENT_CHRIS = new StudentBuilder().withName(VALID_NAME_CHRIS)
-        .withGender(VALID_GENDER_BOB)
+    public static final Teacher TEACHER_CHRIS = new TeacherBuilder().withName(VALID_NAME_CHRIS)
+        .withGender(VALID_GENDER_CHRIS)
         .withPhone(VALID_PHONE_CHRIS).withEmail(VALID_EMAIL_CHRIS).withAddress(VALID_ADDRESS_CHRIS)
-        .withSubjects(VALID_SUBJECT_CHRIS).withClasses(VALID_CLASSES_CHRIS).build();
+        .withSubject(VALID_SUBJECT_CHRIS).withClasses(VALID_CLASSES_CHRIS).build();
     public static final Student STUDENT_MICHAEL = new StudentBuilder().withName(VALID_NAME_MICHAEL)
-        .withGender(VALID_GENDER_BOB).withAddress(VALID_ADDRESS_MICHAEL).withPhone(VALID_PHONE_MICHAEL)
+        .withGender(VALID_GENDER_MICHAEL).withAddress(VALID_ADDRESS_MICHAEL).withPhone(VALID_PHONE_MICHAEL)
         .withEmail(VALID_EMAIL_MICHAEL).withSubjects(VALID_SUBJECT_MICHAEL).withClasses(VALID_CLASSES_MICHAEL)
         .withDaysAttended(VALID_ATTENDANCE_MICHAEL).build();
 

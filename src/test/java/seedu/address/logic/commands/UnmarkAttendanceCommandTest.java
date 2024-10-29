@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ import seedu.address.testutil.TeacherBuilder;
 
 public class UnmarkAttendanceCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager();
 
     @Test
     public void execute_validIndex_success() throws Exception {
@@ -81,5 +80,15 @@ public class UnmarkAttendanceCommandTest {
         assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand)); // different index
         assertFalse(unmarkFirstCommand.equals(null)); // null comparison
         assertFalse(unmarkFirstCommand.equals("string")); // different types
+    }
+
+    @Test
+    public void toString_validIndex_correctStringRepresentation() {
+        Index index = Index.fromOneBased(1);
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(index);
+        String expectedString = UnmarkAttendanceCommand.class.getCanonicalName() + "{targetIndex="
+            + Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}}";
+
+        assertEquals(expectedString, command.toString());
     }
 }
