@@ -1,0 +1,37 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+' Abstract command class
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+
+' AddPastryCommand class with attributes and method
+Class AddPastryCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +MESSAGE_ADD_PASTRY_SUCCESS: String
+  +MESSAGE_DUPLICATE_PASTRY: String
+  +execute(Model): CommandResult
+}
+
+' RemovePastryCommand class with attributes and method
+Class RemovePastryCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +MESSAGE_REMOVE_PASTRY_SUCCESS: String
+  +MESSAGE_PASTRY_NOT_FOUND: String
+  +execute(Model): CommandResult
+}
+
+' CommandException class
+Class CommandException
+
+' Relationships
+AddPastryCommand -up-|> Command
+RemovePastryCommand -up-|> Command
+Command ..> CommandException: throws >
+AddPastryCommand .right.> CommandException: throws >
+RemovePastryCommand .right.> CommandException: throws >
+@enduml
