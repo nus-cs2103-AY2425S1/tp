@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LIST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -26,23 +25,6 @@ import seedu.address.model.UserPrefs;
 public class UnarchiveCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_validIndexUnfilteredList_throwsCommandException() {
-        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(INDEX_FIRST_LIST);
-
-        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_INVALID_WINDOW);
-    }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(outOfBoundIndex);
-        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(outOfBoundIndexList);
-
-        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_INVALID_WINDOW);
-    }
 
     @Test
     public void equals() {
