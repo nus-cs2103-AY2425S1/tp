@@ -24,7 +24,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavorite;
     private final Department department;
-    public final Leave leave;
+    private final Leave leave;
 
 
 
