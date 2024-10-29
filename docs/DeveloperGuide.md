@@ -599,12 +599,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with missing/corrupted data files
 
-   1. Edit the `data/addressbook.json` file to have a person with an empty NRIC `""`.
+   1. Edit the `data/contactmate.json` file to have a person with an empty NRIC `""`.
    2. Launch the app.<br>
        Expected: The app should show an empty list and upon closing the app, the data file should be overwritten with an empty list.
 
 3. Loading sample data
 
-   1. Delete the `data/addressbook.json` file.
+   1. Delete the `data/contactmate.json` file.
    2. Launch the app.<br>
        Expected: The app should show a list of sample persons.
