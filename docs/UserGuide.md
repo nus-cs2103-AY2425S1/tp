@@ -30,7 +30,7 @@ Greatest Offline Addressbook for Teaching Students (GOATS) is a **desktop app fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 edu/Primary pn/Jane Doe pp/91234567 pe/janed@example.com t/friends t/owesMoney` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -41,6 +41,26 @@ Greatest Offline Addressbook for Teaching Students (GOATS) is a **desktop app fo
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action           | Format, Examples
+-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS  edu/EDUCATION [pn/PARENT NAME] [pp/PARENT PHONE] [pe/PARENT EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 edu/Primary pn/Jane Doe pp/91234567 pe/janed@example.com t/friend t/colleague`
+**Grade**        | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
+**Clear**        | `clear`
+**Delete**       | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [edu/EDUCATION] [pn/PARENT NAME] [pp/PARENT PHONE] [pe/PARENT EMAIL][t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTag**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
+**List**         | `list`
+**Help**         | `help`
+**Pin**          | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`
+**Unpin**        | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`
+**Archive**      | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`
+**Unarchive**    | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`
+**List Archive** | `listarchive`
+**List Students**| `liststudents`
 
 ## Features
 
@@ -264,23 +284,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action           | Format, Examples
------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Grade**        | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
-**Clear**        | `clear`
-**Delete**       | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`
-**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTag**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
-**List**         | `list`
-**Help**         | `help`
-**Pin**          | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`
-**Unpin**        | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`
-**Archive**      | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`
-**Unarchive**    | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`
-**List Archive** | `listarchive`
-**List Students**| `liststudents`
