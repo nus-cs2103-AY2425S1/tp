@@ -67,6 +67,7 @@ public class StudentDetailsPanel extends UiPart<Region> {
             Label titleLabel = new Label(assignment.getName());
             titleLabel.getStyleClass().add("assignment-name");
             Label scoreLabel = new Label("Score: " + assignment.getScore() + "/" + assignment.getMaxScore());
+            scoreLabel.getStyleClass().add("assignment-score");
             Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
             if (assignment.getHasSubmitted()) {
                 statusLabel.getStyleClass().add("assignment-status-submitted");
