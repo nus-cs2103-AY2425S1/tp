@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.*;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_UNEQUAL_NOTES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
