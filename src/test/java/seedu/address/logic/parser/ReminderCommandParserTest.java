@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -16,14 +15,8 @@ public class ReminderCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no name specified
-        assertParseFailure(parser, " r/" + VALID_REMINDER_TIME, MESSAGE_INVALID_NAME_DISPLAYED);
-
         // no reminder specified
         assertParseFailure(parser, VALID_NAME, MESSAGE_INVALID_REMINDER_FORMAT);
-
-        // no name and no date and no reminder specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_NAME_DISPLAYED);
     }
 
     @Test

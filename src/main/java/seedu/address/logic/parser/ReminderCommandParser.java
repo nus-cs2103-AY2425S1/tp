@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.*;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new {@code ReminderCommand} object
@@ -25,32 +24,24 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
     @Override
     public ReminderCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
-        if (!arePrefixesPresent(argMultimap, PREFIX_REMINDER)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE));
+        // Show usage if no arguments are provided or if only whitespace is provided
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ReminderCommand.MESSAGE_USAGE));
         }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
         String name = argMultimap.getPreamble();
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
-        // Check for missing name, date, or reminder
-        if (name.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED);
-        }
+        // Check for missing reminder
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
+        // Check for multiple prefixes
         if (argMultimap.getAllValues(PREFIX_REMINDER).size() > 1) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
         return new ReminderCommand(name, reminderTime);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
