@@ -93,12 +93,13 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      */
     private void setTextAddCommand() {
         header.setText("Add Command: Adds a new patient record into the database system.");
+        description.setText("All fields are compulsory.");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX(M/F) | DATE OF BIRTH(YYYY-MM-DD) | PHONE NO.");
         usageHeader.setText("Command Usage:");
         usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
         exampleHeader.setText("Example:");
-        example.setText("add n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test");
+        example.setText("add n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/91234567");
     }
 
     /**
