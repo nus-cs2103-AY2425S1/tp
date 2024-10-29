@@ -197,6 +197,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Edit person feature
 
@@ -204,6 +205,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Delete person feature
 
@@ -211,6 +213,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Find person feature
 
@@ -218,6 +221,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### List person feature
 
@@ -225,6 +229,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Clear person feature
 
@@ -232,6 +237,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Add appointment feature
 
@@ -239,6 +245,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Edit appointment feature
 
@@ -246,6 +253,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Delete appointment feature
 
@@ -253,6 +261,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Find appointment feature
 
@@ -260,6 +269,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### List appointment feature
 
@@ -267,6 +277,7 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
 
 ### Clear appointment feature
 
@@ -279,17 +290,70 @@ The activity diagram shows the general sequence of steps when a user interacts w
 ## Implementation of general features
 
 ### Exit feature
-
 #### Implementation
+When a user types an `exit` command, the DocTrack application will exit.
+
+The sequence diagram shows how an `exit` command is executed:
+<puml src="diagrams/ExitSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types the `exit` command in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `exit` command.
+
+**Step 3.** The `AddressBookParser` creates an `ExitCommand` object, which is returned to the `LogicManager`.
+
+**Step 4.** The `LogicManager` calls the `ExitCommand::execute` method, which creates a new `CommandResult` object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
 
 #### Design considerations
 
+**Aspect: How to handle unsaved data on exit:**
+
+* **Alternative 1 (current choice):** Automatically save all changes on exit.
+  * Pros: Simplifies the exit process for the user. Ensures no data is lost.
+  * Cons: May be slow if there are many changes to save.
+
+
+* **Alternative 2:** Prompt the user to save changes before exiting.
+    * Pros: Gives the user more control over the saving process.
+    * Cons: May be annoying for users who do not want an additional step to save changes.
+  
+<br>
 
 ### Help feature
-
 #### Implementation
 
+When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
+
+The sequence diagram shows how a `help` command is executed:
+
+<puml src="diagrams/HelpSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types the `help` command in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `help` command.
+
+**Step 3.** The `AddressBookParser` creates a `HelpCommand` object, which is returned to the `LogicManager`.
+
+**Step 4.** The `LogicManager` calls the `HelpCommand::execute` method, which creates a new 
+`CommandResult` object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
+
 #### Design considerations
+
+**Aspect: How to display help information:**
+
+* **Alternative 1 (current choice):** Display help information in a new window.
+  * Pros: Keeps the main application window uncluttered.
+  * Cons: Requires managing an additional window.
+
+* **Alternative 2:** Display help information in a modal dialog.
+  * Pros: Simpler to implement.
+  * Cons: Can clutter the main application window and interrupt the user's workflow.
 
 ---
 
@@ -309,15 +373,15 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Step 1.** The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+**Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -327,7 +391,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**Step 4.** The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -361,11 +425,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Step 6.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -390,13 +454,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
