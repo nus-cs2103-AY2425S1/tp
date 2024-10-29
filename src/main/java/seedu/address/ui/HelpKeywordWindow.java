@@ -91,7 +91,7 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     private void setTextAddCommand() {
         header.setText("Add Command: Adds a new patient record into the database system.");
         parametersHeader.setText("Parameters:");
-        parameters.setText("NAME | NRIC | SEX(M/F) | DATE OF BIRTH(YYYY-MM-DD) | HEALTH SERVICE");
+        parameters.setText("NAME | NRIC | SEX(M/F) | DATE OF BIRTH(YYYY-MM-DD) | PHONE NO.");
         usageHeader.setText("Command Usage:");
         usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] h/[HEALTH SERVICE]");
         exampleHeader.setText("Example:");
