@@ -7,15 +7,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmailPredicate;
 import seedu.address.model.person.FullNameContainsPredicate;
 import seedu.address.model.person.JobCodePredicate;
-import seedu.address.model.person.JobCodeTagPredicate;
-import seedu.address.model.person.NameEmailPredicate;
-import seedu.address.model.person.NamePhonePredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PhonePredicate;
 import seedu.address.model.person.TagPredicate;
 
 
@@ -39,49 +42,46 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_PHONE).isPresent()
-            && argMultimap.getValue(PREFIX_EMAIL).isEmpty() && argMultimap.getValue(PREFIX_TAG).isEmpty()
-            && argMultimap.getValue(PREFIX_JOBCODE).isEmpty()) {
-            // Name and Phone search
-            String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            String phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value;
-            return new FindCommand(new NamePhonePredicate(name, phone));
-        } else if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_EMAIL).isPresent()
-            && argMultimap.getValue(PREFIX_PHONE).isEmpty() && argMultimap.getValue(PREFIX_TAG).isEmpty()
-            && argMultimap.getValue(PREFIX_JOBCODE).isEmpty()) {
-            // Name and Email search
-            String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            String email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value;
-            return new FindCommand(new NameEmailPredicate(name, email));
-        } else if (argMultimap.getValue(PREFIX_JOBCODE).isPresent() && argMultimap.getValue(PREFIX_TAG).isPresent()
-                && argMultimap.getValue(PREFIX_PHONE).isEmpty() && argMultimap.getValue(PREFIX_NAME).isEmpty()
-                && argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            // Job Code and Tag search
-            String jobCode = ParserUtil.parseJobCode(argMultimap.getValue(PREFIX_JOBCODE).get()).value;
-            String tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()).tagCode;
-            return new FindCommand(new JobCodeTagPredicate(jobCode, tag));
-        } else if (argMultimap.getValue(PREFIX_JOBCODE).isPresent()
-            && argMultimap.getValue(PREFIX_PHONE).isEmpty() && argMultimap.getValue(PREFIX_TAG).isEmpty()
-            && argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            // Job Code search
-            String jobCode = ParserUtil.parseJobCode(argMultimap.getValue(PREFIX_JOBCODE).get()).value;
-            return new FindCommand(new JobCodePredicate(jobCode));
-        } else if (argMultimap.getValue(PREFIX_TAG).isPresent()
-            && argMultimap.getValue(PREFIX_PHONE).isEmpty() && argMultimap.getValue(PREFIX_JOBCODE).isEmpty()
-            && argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            // Tag search
-            String tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()).tagCode;
-            return new FindCommand(new TagPredicate(Arrays.asList(tag)));
-        } else if (argMultimap.getValue(PREFIX_NAME).isPresent()
-            && argMultimap.getValue(PREFIX_PHONE).isEmpty() && argMultimap.getValue(PREFIX_JOBCODE).isEmpty()
-            && argMultimap.getValue(PREFIX_TAG).isEmpty() && argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            // Name search
-            String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            return new FindCommand(new FullNameContainsPredicate(name));
-        } else {
+        // Step 1: Collect predicates based on provided inputs.
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        argMultimap.getValue(PREFIX_NAME).ifPresent(name -> {
+            String parsedName = ParserUtil.parseFind(name);
+            predicates.add(new FullNameContainsPredicate(parsedName));
+        });
+
+        argMultimap.getValue(PREFIX_PHONE).ifPresent(phone -> {
+            String parsedPhone = ParserUtil.parseFind(phone);
+            predicates.add(new PhonePredicate(parsedPhone));
+        });
+
+        argMultimap.getValue(PREFIX_EMAIL).ifPresent(email -> {
+            String parsedEmail = ParserUtil.parseFind(email);
+            predicates.add(new EmailPredicate(parsedEmail));
+        });
+
+        argMultimap.getValue(PREFIX_TAG).ifPresent(tag -> {
+            String parsedTag = ParserUtil.parseFind(tag);
+            predicates.add(new TagPredicate(Collections.singletonList(parsedTag)));
+        });
+
+        argMultimap.getValue(PREFIX_JOBCODE).ifPresent(jobCode -> {
+            String parsedJobCode = ParserUtil.parseFind(jobCode);
+            predicates.add(new JobCodePredicate(parsedJobCode));
+        });
+
+        // Step 2: Check if it's empty
+        if (predicates.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-    }
 
+        // Step 3: Combine all predicates using Predicate.and()
+        Predicate<Person> combinedPredicate = predicates.stream()
+                .reduce(Predicate::and)
+                .orElse(person -> true); // Default to match all if no predicates
+
+        // Step 4: Return the new FindCommand with the combined predicate
+        return new FindCommand(combinedPredicate);
+    }
 }
