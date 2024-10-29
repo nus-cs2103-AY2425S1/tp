@@ -18,10 +18,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -78,7 +78,7 @@ public class TypicalContactFields {
     public static final Phone DEFAULT_CLIENT_PHONE = new Phone(VALID_CLIENT_PHONE);
     public static final Email DEFAULT_CLIENT_EMAIL = new Email(VALID_CLIENT_EMAIL);
     public static final Address DEFAULT_CLIENT_ADDRESS = new Address(VALID_CLIENT_ADDRESS);
-    public static final ContactId DEFAULT_CLIENT_ID = new ContactId(VALID_CLIENT_ID);
+    public static final Id DEFAULT_CLIENT_ID = new Id(VALID_CLIENT_ID);
     public static final Set<Tag> DEFAULT_CLIENT_TAGS = Stream.of(VALID_TAG_1)
             .map(Tag::new)
             .collect(Collectors.toSet());
@@ -89,7 +89,7 @@ public class TypicalContactFields {
     public static final Email DEFAULT_VENDOR_EMAIL = new Email(VALID_VENDOR_EMAIL);
     public static final Address DEFAULT_VENDOR_ADDRESS = new Address(VALID_VENDOR_ADDRESS);
     public static final Service DEFAULT_VENDOR_SERVICE = new Service(VALID_VENDOR_SERVICE_1);
-    public static final ContactId DEFAULT_VENDOR_ID = new ContactId(VALID_VENDOR_ID);
+    public static final Id DEFAULT_VENDOR_ID = new Id(VALID_VENDOR_ID);
     public static final Set<Tag> DEFAULT_VENDOR_TAGS = Stream.of(VALID_TAG_1, VALID_TAG_2)
             .map(Tag::new)
             .collect(Collectors.toSet());

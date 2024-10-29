@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 
@@ -28,7 +28,7 @@ class JsonAdaptedClient extends JsonAdaptedContact {
         @JsonProperty("address") String address,
         @JsonProperty("tags") List<JsonAdaptedTag> tags,
         @JsonProperty("id") int id,
-        @JsonProperty("eventIds") List<JsonAdaptedEventId> eventIds
+        @JsonProperty("eventIds") List<JsonAdaptedId> eventIds
     ) {
         super(name, phone, email, address, tags, id, eventIds);
     }
@@ -47,7 +47,7 @@ class JsonAdaptedClient extends JsonAdaptedContact {
         Email email,
         Address address,
         Set<Tag> tags,
-        ContactId contactId
+        Id contactId
     ) throws IllegalValueException {
         return new Client(name, phone, email, address, tags, contactId);
     }

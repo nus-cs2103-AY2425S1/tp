@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 
@@ -90,7 +90,7 @@ public class EditContactDescriptorBuilder {
      * Sets the {@code Id} of the {@code EditContactDescriptor} that we are building.
      */
     public EditContactDescriptorBuilder withId(int id) {
-        descriptor.setId(new ContactId(id));
+        descriptor.setId(new Id(id));
         return this;
     }
 
@@ -98,7 +98,7 @@ public class EditContactDescriptorBuilder {
      * Sets the {@code Id} of the {@code EditContactDescriptor} that we are building.
      */
     public EditContactDescriptorBuilder withId(String id) {
-        descriptor.setId(new ContactId(id));
+        descriptor.setId(new Id(id));
         return this;
     }
 

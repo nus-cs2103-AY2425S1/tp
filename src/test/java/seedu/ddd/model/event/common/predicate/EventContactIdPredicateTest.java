@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.event.common.EventId;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.testutil.event.EventBuilder;
 
 public class EventContactIdPredicateTest {
     @Test
     public void equals() {
-        EventId firstId = new EventId(1);
-        EventId secondId = new EventId(2);
+        Id firstId = new Id(1);
+        Id secondId = new Id(2);
 
         EventIdPredicate firstPredicate = new EventIdPredicate(firstId);
         EventIdPredicate secondPredicate = new EventIdPredicate(secondId);
@@ -37,31 +37,31 @@ public class EventContactIdPredicateTest {
 
     @Test
     public void test_contactContainsId_returnsTrue() {
-        EventIdPredicate predicate = new EventIdPredicate(new EventId(1));
+        EventIdPredicate predicate = new EventIdPredicate(new Id(1));
         assertTrue(predicate.test(new EventBuilder().withEventId(1).build()));
 
-        predicate = new EventIdPredicate(new EventId(4));
+        predicate = new EventIdPredicate(new Id(4));
         assertTrue(predicate.test(new EventBuilder().withEventId(4).build()));
 
-        predicate = new EventIdPredicate(new EventId(100));
+        predicate = new EventIdPredicate(new Id(100));
         assertTrue(predicate.test(new EventBuilder().withEventId(100).build()));
 
-        predicate = new EventIdPredicate(new EventId(1000));
+        predicate = new EventIdPredicate(new Id(1000));
         assertTrue(predicate.test(new EventBuilder().withEventId(1000).build()));
     }
 
     @Test
     public void test_contactDoesNotContainsId_returnsFalse() {
-        EventIdPredicate predicate = new EventIdPredicate(new EventId(1));
+        EventIdPredicate predicate = new EventIdPredicate(new Id(1));
         assertFalse(predicate.test(new EventBuilder().withEventId(2).build()));
 
-        predicate = new EventIdPredicate(new EventId(3));
+        predicate = new EventIdPredicate(new Id(3));
         assertFalse(predicate.test(new EventBuilder().withEventId(2).build()));
     }
 
     @Test
     public void toStringMethod() {
-        EventId id = new EventId(1);
+        Id id = new Id(1);
         EventIdPredicate predicate = new EventIdPredicate(id);
 
         String expected = EventIdPredicate.class.getCanonicalName() + "{eventId=" + id + "}";

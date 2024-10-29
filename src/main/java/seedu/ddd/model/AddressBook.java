@@ -7,8 +7,8 @@ import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.UniqueContactList;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.UniqueEventList;
@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a client with the same id as {@code id} exists in the address book.
      */
-    public boolean hasClientId(ContactId contactId) {
+    public boolean hasClientId(Id contactId) {
         requireNonNull(contactId);
         return contacts.containsClientId(contactId);
     }
@@ -96,7 +96,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a vendor with the same id as {@code id} exists in the address book.
      */
-    public boolean hasVendorId(ContactId contactId) {
+    public boolean hasVendorId(Id contactId) {
         requireNonNull(contactId);
         return contacts.containsVendorId(contactId);
     }
@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a contact to the address book.
      * If contact has not been created or does not exist, a null object will be returned.
      */
-    public Contact getContact(ContactId contactId) {
+    public Contact getContact(Id contactId) {
         return contacts.get(contactId);
     }
 

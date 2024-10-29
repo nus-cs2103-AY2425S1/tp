@@ -3,17 +3,17 @@ package seedu.ddd.model.event.common.predicate;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 
 /**
  * Tests that a {@Code Event} 's {@code Id} matches the ID.
  */
 public class EventIdPredicate implements Predicate<Event> {
-    private final EventId eventId;
+    private final Id eventId;
 
-    public EventIdPredicate(EventId eventId) {
+    public EventIdPredicate(Id eventId) {
         this.eventId = eventId;
     }
 

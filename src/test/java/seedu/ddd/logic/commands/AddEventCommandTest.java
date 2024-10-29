@@ -35,8 +35,8 @@ import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.contact.ClientBuilder;
@@ -258,12 +258,12 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(ContactId contactId) {
+        public boolean hasClientId(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasVendorId(ContactId contactId) {
+        public boolean hasVendorId(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -283,7 +283,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public Contact getContact(ContactId contactId) {
+        public Contact getContact(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -352,20 +352,20 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(ContactId contactId) {
+        public boolean hasClientId(Id contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VALID_CLIENT_ID));
+            return contactId.equals(new Id(VALID_CLIENT_ID));
         }
 
         @Override
-        public boolean hasVendorId(ContactId contactId) {
+        public boolean hasVendorId(Id contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VALID_VENDOR_ID));
+            return contactId.equals(new Id(VALID_VENDOR_ID));
         }
 
         @Override
-        public Contact getContact(ContactId contactId) {
-            if (contactId.equals(new ContactId(VALID_CLIENT_ID))) {
+        public Contact getContact(Id contactId) {
+            if (contactId.equals(new Id(VALID_CLIENT_ID))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();
@@ -397,20 +397,20 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean hasClientId(ContactId contactId) {
+        public boolean hasClientId(Id contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VALID_CLIENT_ID));
+            return contactId.equals(new Id(VALID_CLIENT_ID));
         }
 
         @Override
-        public boolean hasVendorId(ContactId contactId) {
+        public boolean hasVendorId(Id contactId) {
             requireNonNull(contactId);
-            return contactId.equals(new ContactId(VALID_VENDOR_ID));
+            return contactId.equals(new Id(VALID_VENDOR_ID));
         }
 
         @Override
-        public Contact getContact(ContactId contactId) {
-            if (contactId.equals(new ContactId(VALID_CLIENT_ID))) {
+        public Contact getContact(Id contactId) {
+            if (contactId.equals(new Id(VALID_CLIENT_ID))) {
                 return new ClientBuilder().build();
             }
             return new VendorBuilder().build();

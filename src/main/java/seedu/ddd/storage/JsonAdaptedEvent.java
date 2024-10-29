@@ -7,12 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
@@ -22,8 +21,8 @@ class JsonAdaptedEvent {
     private final String date;
     private final int eventId;
 
-    private final List<JsonAdaptedContactId> clientIds;
-    private final List<JsonAdaptedContactId> vendorIds;
+    private final List<JsonAdaptedId> clientIds;
+    private final List<JsonAdaptedId> vendorIds;
 
     /**
      * Constructs a {@code JsonAdapted} with the given event details.
@@ -33,8 +32,8 @@ class JsonAdaptedEvent {
         @JsonProperty("name") String name,
         @JsonProperty("description") String description,
         @JsonProperty("date") String date,
-        @JsonProperty("clientIds") List<JsonAdaptedContactId> clientIds,
-        @JsonProperty("vendorIds") List<JsonAdaptedContactId> vendorIds,
+        @JsonProperty("clientIds") List<JsonAdaptedId> clientIds,
+        @JsonProperty("vendorIds") List<JsonAdaptedId> vendorIds,
         @JsonProperty("eventId") int eventId
     ) {
         this.name = name;
@@ -55,13 +54,13 @@ class JsonAdaptedEvent {
 
         clientIds = new ArrayList<>();
         clientIds.addAll(source.getClientIds().stream()
-                .map(JsonAdaptedContactId::new)
+                .map(JsonAdaptedId::new)
                 .toList());
         vendorIds = new ArrayList<>();
         vendorIds.addAll(source.getVendorIds().stream()
-                .map(JsonAdaptedContactId::new)
+                .map(JsonAdaptedId::new)
                 .toList());
-        eventId = source.getEventId().eventId;
+        eventId = source.getEventId().id;
     }
 
     /**
@@ -97,10 +96,10 @@ class JsonAdaptedEvent {
         }
         final Date modelDate = new Date(date);
 
-        if (!EventId.isValidEventId(eventId)) {
-            throw new IllegalValueException(EventId.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidId(eventId)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        final EventId modelEventId = new EventId(eventId);
+        final Id modelEventId = new Id(eventId);
 
         return new Event(modelName, modelDescription, modelDate, modelEventId);
     }
@@ -109,9 +108,9 @@ class JsonAdaptedEvent {
      * Retrieves the clientIds of the event
      * @throws IllegalValueException if there were any data constraints violated in the adapted contactId.
      */
-    public List<ContactId> getClientIds() throws IllegalValueException {
-        final List<ContactId> personClientIds = new ArrayList<>();
-        for (JsonAdaptedContactId clientId : clientIds) {
+    public List<Id> getClientIds() throws IllegalValueException {
+        final List<Id> personClientIds = new ArrayList<>();
+        for (JsonAdaptedId clientId : clientIds) {
             personClientIds.add(clientId.toModelType());
         }
         return personClientIds;
@@ -121,9 +120,9 @@ class JsonAdaptedEvent {
      * Retrieves the clientIds of the event
      * @throws IllegalValueException if there were any data constraints violated in the adapted contactId.
      */
-    public List<ContactId> getVendorIds() throws IllegalValueException {
-        final List<ContactId> personVendorIds = new ArrayList<>();
-        for (JsonAdaptedContactId vendorId : vendorIds) {
+    public List<Id> getVendorIds() throws IllegalValueException {
+        final List<Id> personVendorIds = new ArrayList<>();
+        for (JsonAdaptedId vendorId : vendorIds) {
             personVendorIds.add(vendorId.toModelType());
         }
         return personVendorIds;

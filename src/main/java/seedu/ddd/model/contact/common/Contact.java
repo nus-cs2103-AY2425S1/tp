@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 /**
  * Represents a Contact in the address book.
@@ -21,7 +21,7 @@ import seedu.ddd.model.event.common.EventId;
 public abstract class Contact implements Displayable {
 
     // Identity fields
-    private final ContactId contactId;
+    private final Id contactId;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -34,7 +34,7 @@ public abstract class Contact implements Displayable {
     /**
      * Every field must be present and not null.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ContactId contactId) {
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id contactId) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
 
         this.name = name;
@@ -73,7 +73,7 @@ public abstract class Contact implements Displayable {
         return Collections.unmodifiableSet(tags);
     }
 
-    public ContactId getId() {
+    public Id getId() {
         return contactId;
     }
 
@@ -81,7 +81,7 @@ public abstract class Contact implements Displayable {
      * Returns an immutable {@code EventId} set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<EventId> getEventIds() {
+    public Set<Id> getEventIds() {
         return Collections.unmodifiableSet(events.stream().map(Event::getEventId).collect(Collectors.toSet()));
     }
 

@@ -3,16 +3,16 @@ package seedu.ddd.model.contact.common.predicate;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 
 /**
  * Tests that a {@code Contact}'s {@code Id} matches the given id.
  */
 public class ContactIdPredicate implements Predicate<Contact> {
-    private final ContactId contactId;
+    private final Id contactId;
 
-    public ContactIdPredicate(ContactId contactId) {
+    public ContactIdPredicate(Id contactId) {
         this.contactId = contactId;
     }
     @Override

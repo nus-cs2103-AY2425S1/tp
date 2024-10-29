@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
@@ -43,7 +44,7 @@ public class UniqueContactList implements Iterable<Contact> {
     /**
      * Returns true if the list contains a client with the id as the given argument.
      */
-    public boolean containsClientId(ContactId contactIdToCheck) {
+    public boolean containsClientId(Id contactIdToCheck) {
         requireNonNull(contactIdToCheck);
         return internalList.stream()
                 .filter(contact -> contact instanceof Client)
@@ -54,7 +55,7 @@ public class UniqueContactList implements Iterable<Contact> {
     /**
      * Returns true if the list contains a vendor with the id as the given argument.
      */
-    public boolean containsVendorId(ContactId contactIdToCheck) {
+    public boolean containsVendorId(Id contactIdToCheck) {
         requireNonNull(contactIdToCheck);
         return internalList.stream()
                 .filter(contact -> contact instanceof Vendor)
@@ -66,7 +67,7 @@ public class UniqueContactList implements Iterable<Contact> {
      * Gets a contact from the list.
      * If contact has not been created or does not exist, a null object will be returned.
      */
-    public Contact get(ContactId contactId) {
+    public Contact get(Id contactId) {
         requireNonNull(contactId);
         return internalList.stream().filter(contact -> contactId.equals(contact.getId())).findFirst().orElse(null);
     }

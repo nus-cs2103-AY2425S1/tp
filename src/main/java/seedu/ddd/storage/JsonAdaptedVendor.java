@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -31,7 +31,7 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
         @JsonProperty("service") String service,
         @JsonProperty("tags") List<JsonAdaptedTag> tags,
         @JsonProperty("id") int id,
-        @JsonProperty("eventIds") List<JsonAdaptedEventId> eventIds
+        @JsonProperty("eventIds") List<JsonAdaptedId> eventIds
     ) {
         super(name, phone, email, address, tags, id, eventIds);
         this.service = service;
@@ -47,7 +47,7 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
 
     @Override
     public Vendor createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-            ContactId contactId) throws IllegalValueException {
+            Id contactId) throws IllegalValueException {
         if (service == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Service.class.getSimpleName()));
         }

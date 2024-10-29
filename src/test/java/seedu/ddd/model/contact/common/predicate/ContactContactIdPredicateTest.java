@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.common.ContactId;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.testutil.contact.ClientBuilder;
 
 public class ContactContactIdPredicateTest {
 
     @Test
     public void equals() {
-        ContactId firstContactId = new ContactId(1);
-        ContactId secondContactId = new ContactId(2);
+        Id firstContactId = new Id(1);
+        Id secondContactId = new Id(2);
 
         ContactIdPredicate firstPredicate = new ContactIdPredicate(firstContactId);
         ContactIdPredicate secondPredicate = new ContactIdPredicate(secondContactId);
@@ -38,31 +38,31 @@ public class ContactContactIdPredicateTest {
 
     @Test
     public void test_contactContainsId_returnsTrue() {
-        ContactIdPredicate predicate = new ContactIdPredicate(new ContactId(1));
+        ContactIdPredicate predicate = new ContactIdPredicate(new Id(1));
         assertTrue(predicate.test(new ClientBuilder().withId(1).build()));
 
-        predicate = new ContactIdPredicate(new ContactId(4));
+        predicate = new ContactIdPredicate(new Id(4));
         assertTrue(predicate.test(new ClientBuilder().withId(4).build()));
 
-        predicate = new ContactIdPredicate(new ContactId(100));
+        predicate = new ContactIdPredicate(new Id(100));
         assertTrue(predicate.test(new ClientBuilder().withId(100).build()));
 
-        predicate = new ContactIdPredicate(new ContactId(1000));
+        predicate = new ContactIdPredicate(new Id(1000));
         assertTrue(predicate.test(new ClientBuilder().withId(1000).build()));
     }
 
     @Test
     public void test_contactDoesNotContainsId_returnsFalse() {
-        ContactIdPredicate predicate = new ContactIdPredicate(new ContactId(1));
+        ContactIdPredicate predicate = new ContactIdPredicate(new Id(1));
         assertFalse(predicate.test(new ClientBuilder().withId(2).build()));
 
-        predicate = new ContactIdPredicate(new ContactId(3));
+        predicate = new ContactIdPredicate(new Id(3));
         assertFalse(predicate.test(new ClientBuilder().withId(2).build()));
     }
 
     @Test
     public void toStringMethod() {
-        ContactId contactId = new ContactId(1);
+        Id contactId = new Id(1);
         ContactIdPredicate predicate = new ContactIdPredicate(contactId);
 
         String expected = ContactIdPredicate.class.getCanonicalName() + "{id=" + contactId + "}";

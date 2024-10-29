@@ -51,7 +51,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_FIRST_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         Contact editedContact = (Contact) new ClientBuilder()
-                .withId(targeContact.getId().contactId)
+                .withId(targeContact.getId().id)
                 .build();
 
         EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
@@ -69,7 +69,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_FIRST_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         Client editedContact = (Client) new ClientBuilder()
-                .withId(targeContact.getId().contactId)
+                .withId(targeContact.getId().id)
                 .build();
 
         EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
@@ -87,7 +87,7 @@ public class EditCommandTest {
         Index targetIndex = INDEX_SECOND_CONTACT;
         Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         Vendor editedContact = (Vendor) new VendorBuilder()
-                .withId(targeContact.getId().contactId)
+                .withId(targeContact.getId().id)
                 .build();
 
         EditVendorDescriptor editContactDescriptor = new EditVendorDescriptorBuilder(editedContact).build();
@@ -199,7 +199,7 @@ public class EditCommandTest {
                 .withName(VALID_CLIENT_NAME)
                 .withPhone(VALID_CLIENT_PHONE)
                 .withTags(VALID_TAG_1)
-                .withId(targetContact.getId().contactId)
+                .withId(targetContact.getId().id)
                 .build();
         EditCommand editCommand = new EditCommand(null, descriptor);
 

@@ -13,10 +13,10 @@ import java.util.Set;
 import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
@@ -32,7 +32,7 @@ public class Event implements Displayable {
     private final Name name;
     private final Description description;
     private final Date date;
-    private final EventId eventId;
+    private final Id eventId;
 
     // References
     private final List<Client> clients;
@@ -50,7 +50,7 @@ public class Event implements Displayable {
         Date date,
         List<Client> clients,
         List<Vendor> vendors,
-        EventId eventId
+        Id eventId
     ) {
         requireAllNonNull(name, description, date, clients, vendors, eventId);
         AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
@@ -69,7 +69,7 @@ public class Event implements Displayable {
      *
      * Alternative constructor that defers the loading of clients and vendors.
      */
-    public Event(Name name, Description description, Date date, EventId eventId) {
+    public Event(Name name, Description description, Date date, Id eventId) {
         requireAllNonNull(name, description, date, eventId);
 
         this.name = name;
@@ -170,7 +170,7 @@ public class Event implements Displayable {
      * Returns the list of client ids.
      * @return A {@code List} of {@code ContactId}.
      */
-    public List<ContactId> getClientIds() {
+    public List<Id> getClientIds() {
         return clients.stream().map(Contact::getId).toList();
     }
 
@@ -178,14 +178,14 @@ public class Event implements Displayable {
      * Returns the list of vendor ids.
      * @return A {@code List} of {@code ContactId}.
      */
-    public List<ContactId> getVendorIds() {
+    public List<Id> getVendorIds() {
         return vendors.stream().map(Contact::getId).toList();
     }
 
     /**
      * Returns the unique event ID.
      */
-    public EventId getEventId() {
+    public Id getEventId() {
         return this.eventId;
     }
 
