@@ -62,6 +62,17 @@ public class Person {
     }
 
     /**
+     * Returns a string representation of the tags.
+     */
+    public String getTagsString() {
+        if (tags.isEmpty()) {
+            return "";
+        }
+        String firstTag = tags.stream().findFirst().map(t -> t.tagName).orElse("");
+        return "(" + firstTag + ") ";
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
