@@ -185,4 +185,33 @@ public class DeleteCommandTest {
                 deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
     }
 
+    @Test
+    public void execute_validStudentIdAndModule_success() {
+        Person personWithModule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId studentIdToDelete = personWithModule.getStudentId();
+        Module moduleToDelete = personWithModule.getModules().get(0); // Assuming this person has at least one module
+
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete, moduleToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs());
+        expectedModel.deleteModule(personWithModule, moduleToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validModuleDeletionAndCheckModuleList() {
+        Person personWithModules = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId studentIdToDelete = personWithModules.getStudentId();
+        Module moduleToDelete = personWithModules.getModules().get(0);
+
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete, moduleToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, model);
+
+        Person updatedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(updatedPerson.getModules().contains(moduleToDelete)); // Check the updated person
+    }
 }
