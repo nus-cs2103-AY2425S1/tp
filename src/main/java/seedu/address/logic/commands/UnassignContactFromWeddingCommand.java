@@ -28,10 +28,10 @@ public class UnassignContactFromWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns contacts from a specific wedding "
-            + "where the wedding & contacts are identified by their index number.\n"
-            + "Parameters: unassign WeddingIndex (must be a positive integer) "
+            + "where the contacts are identified by their index number.\n"
+            + "Parameters: unassign "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_CONTACT + "1 2 3";
 
     public static final String MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS =
@@ -49,7 +49,6 @@ public class UnassignContactFromWeddingCommand extends Command {
      * @param unassignedPersonIndexList
      */
     public UnassignContactFromWeddingCommand(Set<Index> unassignedPersonIndexList) {
-        //this.specificWeddingIndex = specificWeddingIndex;
         this.unassignedPersonIndexList = unassignedPersonIndexList;
     }
 
@@ -60,7 +59,7 @@ public class UnassignContactFromWeddingCommand extends Command {
 
         ObjectProperty<WeddingName> specific_wedding_name = model.getCurrentWeddingName();
 
-        if (specific_wedding_name == null) {
+        if (specific_wedding_name.get() == null) {
             throw new CommandException("You need to be viewing a wedding to unassign contacts.");
         }
 
@@ -84,7 +83,6 @@ public class UnassignContactFromWeddingCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             } else {
                 Person personToRemove = lastShownList.get(i.getZeroBased());
-                System.out.println(personToRemove.getId().toString());
                 unassignedContacts.add(personToRemove);
             }
         }

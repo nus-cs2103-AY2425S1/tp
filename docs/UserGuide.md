@@ -298,24 +298,24 @@ Examples:
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
 * Assigns contacts at the specified index's to the wedding at the specified `WEDDING_INDEX`.
-* The contact index refers to the index number of the contact in the overall `list` view of the wedding planner.
+* The contact index refers to the index number of the contact in the list you currently see in the wedding planner.
 * The contact index **must be a positive integer** 1, 2, 3, ...
 
-**Strongly Recommended:**
-Type `list` to execute the list command and see the overall contacts list to determine the correct index of the contact you are assigning.
+Examples:
+* `assign 1 c/2` assigns the contact at index 2 of the current contacts list you see to wedding 1.
 
 <br><br/>
 
 ### Unassign person from wedding : `unassign`
 
-Format: `unassign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
+Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
-* Unassigns contacts at the specified index's from the wedding at the specified `WEDDING_INDEX`.
+* Unassigns contacts at the specified index's from the wedding the user is currently viewing.
 * The contact index refers to the index number of the contact in the particular wedding you are viewing.
 * The contact index **must be a positive integer** 1, 2, 3, ...
 
-**Caution:**
-You should be in the wedding that you are unassigning the contact from, unassigning contacts from another wedding will bring you to the other wedding's page.
+Examples: 
+* `unassign c/1` unassigns the contact at index 1 from the wedding you are currently viewing.
 
 <br><br/>
 
