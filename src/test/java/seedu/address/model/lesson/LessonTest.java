@@ -115,6 +115,41 @@ public class LessonTest {
     }
 
     @Test
+    public void getParticipation_studentExists_success() {
+        int participation = 3;
+        Lesson lesson = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, participation)));
+        assertEquals(lesson.getParticipation(student1), participation);
+    }
+
+    @Test
+    public void getParticipation_studentDoesNotExist_throwsStudentNotFoundException() {
+        int participation = 3;
+        Lesson lesson = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, participation)));
+        assertFalse(lesson.getStudents().contains(student2));
+        assertThrows(StudentNotFoundException.class, () -> lesson.getAttendance(student2));
+    }
+
+    @Test
+    public void setParticipation_studentExists_success() {
+        Lesson lesson = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, 0)));
+        int newParticipation = 2;
+        lesson.setParticipation(student1, newParticipation);
+        assertEquals(lesson.getParticipation(student1), newParticipation);
+    }
+
+    @Test
+    public void setParticipation_studentDoesNotExist_throwsStudentNotFoundException() {
+        Lesson lesson = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, 0)));
+        int newParticipation = 2;
+        assertFalse(lesson.getStudents().contains(student2));
+        assertThrows(StudentNotFoundException.class, () -> lesson.setParticipation(student2, newParticipation));
+    }
+
+    @Test
     public void equals_sameAttributes_returnsTrue() {
         Lesson lesson1 = new Lesson(date, time, List.of(
                 new StudentLessonInfo(student1, true, 1),
