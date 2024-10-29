@@ -27,26 +27,6 @@ public class Lesson {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-    private final Day lessonDay;
-    private final LocalTime startTime;
-    private final LocalTime endTime;
-
-
-    /**
-     * Constructs a {@code Lesson}.
-     *
-     * @param lesson A valid lesson string containing day and time range.
-     */
-    public Lesson(String lesson) {
-        requireNonNull(lesson);
-        checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
-        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
-        String[] timeArr = lessonDayTimeArr[1].split("-");
-        this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
-        this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
-        this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
-    }
-
     /**
      * Maps various string representations of days (e.g., "monday", "mon") to their corresponding Day enum values.
      * All keys are stored in lowercase.
@@ -67,6 +47,25 @@ public class Lesson {
         DAY_NAME_MAP.put("sat", Day.SATURDAY);
         DAY_NAME_MAP.put("sunday", Day.SUNDAY);
         DAY_NAME_MAP.put("sun", Day.SUNDAY);
+    }
+    private final Day lessonDay;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
+
+
+    /**
+     * Constructs a {@code Lesson}.
+     *
+     * @param lesson A valid lesson string containing day and time range.
+     */
+    public Lesson(String lesson) {
+        requireNonNull(lesson);
+        checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
+        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
+        String[] timeArr = lessonDayTimeArr[1].split("-");
+        this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
+        this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
+        this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
     }
 
     /**
