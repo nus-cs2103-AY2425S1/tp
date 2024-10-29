@@ -9,7 +9,7 @@ import seedu.address.model.patient.Patient;
 
 
 /**
- * Represents a FilteredAppointment object that has
+ * Represents a filteredappointment object that has
  */
 public class FilteredAppointment {
 
