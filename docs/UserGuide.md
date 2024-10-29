@@ -3,8 +3,9 @@ layout: page
 title: MediBase3 User Guide
 ---
 
-MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! <br>
-<br>
+MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
+
+
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
@@ -40,7 +41,7 @@ As you read the user guide, you might encounter some unfamiliar technical terms.
 | GUI       | Graphical User Interface (GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.                         |
 | JAR       | Java ARchive (JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                |
 | JSON      | JavaScript Object Notation (JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.                  |
-| Panel     | Region in the GUI that displays a particular item.                                                     <br/>                                                                       |
+| Panel     | Region in the GUI that displays a particular item.                                                                                                                            |
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 | Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
@@ -488,7 +489,7 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 Example:
-* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.<br>
+* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -513,7 +514,7 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 Example:
-* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.<br>
+* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -709,7 +710,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 ## FAQ
 
 #### **Q**: How do I transfer my data to another Computer?
- - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.<br>
+ - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.
 
 #### **Q**: How do we open the command terminal?
  - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.
