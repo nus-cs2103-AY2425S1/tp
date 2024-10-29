@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.storage.BackupManager;
@@ -129,7 +129,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        triggerBackup("delete", target);
+        triggerBackup("delete_" + target.getName().fullName, target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
     }
@@ -148,15 +148,12 @@ public class ModelManager implements Model {
         calendar.setAppointment(target, editedPerson);
     }
 
-    protected void triggerBackup(String action, Person target) {
-        if ("delete".equals(action)) {
-            try {
-                String backupName = action + "_" + target.getName();
-                backupManager.triggerBackup(storage.getAddressBookFilePath(), backupName);
-                logger.info("Backup triggered for deletion: " + backupName);
-            } catch (IOException e) {
-                logger.warning("Backup failed for deletion: " + e.getMessage());
-            }
+    private void triggerBackup(String actionDescription, Person target) {
+        try {
+            int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
+            logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
+        } catch (IOException e) {
+            logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
         }
     }
 
@@ -175,40 +172,46 @@ public class ModelManager implements Model {
 
     // ============ Backup and Restore Methods ===========================================================
 
-    /**
-     * Cleans up old backups, retaining only the latest `maxBackups`.
-     *
-     * @param maxBackups The number of backups to retain.
-     * @throws IOException If there is an error during cleanup.
-     */
-    public void cleanOldBackups(int maxBackups) throws IOException {
-        if (storage != null) {
-            logger.info("Cleaning old backups, keeping the latest " + maxBackups + " backups.");
-            storage.cleanOldBackups(maxBackups);
-        } else {
-            throw new IOException("Storage is not initialized!");
-        }
-    }
-
     @Override
-    public void backupData(String fileName) throws CommandException {
+    public int backupData(String actionDescription) throws CommandException {
         if (storage == null) {
-            throw new CommandException("Failed to create manual backup: Storage is not initialized!");
+            throw new CommandException("Failed to create backup: Storage is not initialized!");
         }
 
-        if (fileName == null || fileName.isBlank()) {
-            // Use timestamp if no filename provided
-            fileName = "manual-backup_"
-                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
+        if (actionDescription == null || actionDescription.isBlank()) {
+            // Use default description if none provided
+            actionDescription = "manual_backup";
         }
 
         try {
-            backupManager.triggerBackup(storage.getAddressBookFilePath(), fileName);
-            logger.info("Manual backup created: " + fileName);
+            int backupIndex = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
+            logger.info("Manual backup created at index " + backupIndex + ": " + actionDescription);
+            return backupIndex;
         } catch (IOException e) {
             logger.warning("Manual backup failed: " + e.getMessage());
             throw new CommandException("Failed to create manual backup: " + e.getMessage());
         }
+    }
+
+    @Override
+    public Path restoreBackup(int index) throws IOException, DataLoadingException {
+        if (storage == null) {
+            throw new IOException("Storage is not initialized!");
+        }
+
+        Path backupPath = backupManager.restoreBackupByIndex(index);
+        if (backupPath == null || !Files.exists(backupPath)) {
+            throw new IOException("Backup file not found at index " + index);
+        }
+
+        // Read the backup data
+        ReadOnlyAddressBook backupData = storage.readAddressBook(backupPath)
+                .orElseThrow(() -> new DataLoadingException(new Exception("Backup file is invalid")));
+
+        // Set the model's address book to the backup data
+        setAddressBook(backupData);
+
+        return backupPath;
     }
 
     // ============ Equality and Storage Access Methods ==================================================
