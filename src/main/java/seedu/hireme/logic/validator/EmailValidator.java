@@ -21,7 +21,7 @@ public class EmailValidator extends Validator<String> {
      * Returns an instance of {@code EmailValidator}.
      * Ensures only one instance of {@code EmailValidator} is created.
      *
-     * @return the instance of {@code EmailValidator}.
+     * @return EmailValidator the instance of {@code EmailValidator}.
      */
     public static EmailValidator of() {
         if (instance == null) {

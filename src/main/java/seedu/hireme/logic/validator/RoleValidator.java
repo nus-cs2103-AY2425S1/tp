@@ -12,7 +12,7 @@ public class RoleValidator extends Validator<String> {
      * Returns an instance of {@code RoleValidator}.
      * Ensures only one instance of {@code RoleValidator} is created.
      *
-     * @return the instance of {@code RoleValidator}.
+     * @return RoleValidator the instance of {@code RoleValidator}.
      */
     public static RoleValidator of() {
         if (instance == null) {

@@ -93,4 +93,23 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * @param value The value of the data.
+     * @param total The total sum.
+     * @return String The proportion of this data value in the overall sum as a 2 decimal place percentage string
+     *     if the data provided if valid. Otherwise, an empty string is returned.
+     */
+    public static String getPercentageString(double value, double total) {
+        if (value < 0 || total <= 0) {
+            return "";
+        }
+
+        double proportion = (value / total) * 100;
+        if (proportion > 100) {
+            return "";
+        }
+
+        return String.format("%.2f%%", proportion);
+    }
 }
