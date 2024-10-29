@@ -3,13 +3,14 @@ package tutorease.address.model.lesson;
 import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import tutorease.address.model.person.Person;
+import tutorease.address.model.person.Student;
 
 /**
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson implements Comparable<Lesson> {
-    private final Person student;
+    private Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
@@ -172,5 +173,9 @@ public class Lesson implements Comparable<Lesson> {
             return this.endDateTime.compareTo(lesson.endDateTime);
         }
         return this.startDateTime.compareTo(lesson.startDateTime);
+    }
+
+    public void setStudent(Person editedPerson) {
+        this.student = editedPerson;
     }
 }

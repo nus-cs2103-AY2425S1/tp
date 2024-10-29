@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
+import tutorease.address.model.person.Student;
 
 /**
  * The API of the Model component.
@@ -140,4 +141,6 @@ public interface Model {
      * @param student The student whose lessons we are deleting
      */
     void deleteStudentLesson(Person student);
+
+    void updatePersonInLessons(Person target, Person editedPerson);
 }
