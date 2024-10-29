@@ -27,7 +27,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280">
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -158,103 +158,241 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+> Please note that certain aspects, such as UML classes, may have been simplified to fit within the diagram's constraints and maintain readability.
 
-#### Proposed Implementation
+### Add feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Users can seamlessly add tutorials, students and assignments into the TrackMate application. On top of that, users can also add student's tutorial
+attendance to maintain student's accurate attendance record.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+### Feature's Architecture Design 
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+1. **Centralized Parsing with AddCommandParser** :
+The parsing logic is centralized in AddCommandParser to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+* **Benefit**: This structure simplifies the command classes, making them more focused on executing logic rather than parsing input.
+* **Challenge**: It requires careful handling of the parsing rules to ensure correctness since the parser is a crucial layer between user input and the system’s execution.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+2. **Avoiding Duplicates with Tutorial and Student Validation**:
+We ensure that duplicate students or non-existent tutorials are caught early in ModelManager. This provides immediate feedback and prevents inconsistent states in the data model.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+* **Benefit**: Validation at the model level ensures the integrity of the data.
+* **Challenge**: This requires checks across multiple classes (such as TutorialList and Student) to ensure consistency without impacting performance.
 
 
-<box type="info" seamless>
+#### Add Student
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below 
+shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
-</box>
+[//]: # (<puml src="diagrams/AddCommandActivityDiagram.puml" width="280" />)
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Add Tutorial
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+Similar to adding student, the system requires parameters such as Tutorial Name and Tutorial ID. The sequence diagram below demonstrates the interaction
+among various classes to add a new Tutorial into the TrackMate Application.
 
-<box type="info" seamless>
+[//]: # (<puml src="diagrams/AddTutCommandSequenceDiagram.puml" width="280" />)
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+#### Add Attendance
 
-</box>
+The AttendCommand is responsible for marking the attendance of a student for a specific tutorial session in the TrackMate Application. This command interacts 
+with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
+interact with other classes. 
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="280" />
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+#### Add Assignment
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorials. The activity diagram below will
+demonstrate what the users need to do to add assignment for students. 
 
-<box type="info" seamless>
+<puml src="diagrams/CreateAssignmentActivityDiagram.puml" width="280" />
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Implementation - Design Considerations:
 
-</box>
+**Alternative 1 (Current Implementation)**:
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Description**: The current implementation uses a dedicated ParserUtil class to handle input parsing and data validation. This ensures that common validation logic (e.g., parsing names, student IDs, tutorial IDs or dates) is reusable across different components.
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+**Pros**:
+* Code Modularity and Maintainability: By isolating validation logic from other components, we promote modularity, making updates and modifications easier.
+* Consistency: Validation logic is standardized across different commands (e.g., AddCommand), ensuring that rules are applied uniformly.
+* Ease of Testing: Having all parsing logic in one place makes it easier to unit test and debug issues related to input validation.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Cons**:
+* Additional Abstraction Layer: This approach introduces an extra layer between the raw input and command execution, which may increase the complexity of the system.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+**Alternative 2**: Inline Validation in Domain Classes
 
-The following activity diagram summarizes what happens when a user executes a new command:
+**Description**: An alternative design is to incorporate validation logic directly within each relevant class (e.g., Student, TutorialId, Name) to enforce constraints close to where the data is used.
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+**Pros**:
+* Context-Specific Validation: Each class can enforce rules that are specific to its context, ensuring validation aligns with the class's intended behavior.
+* Simplifies Parsing Layer: Reduces the complexity of the parser classes, making them more lightweight.
 
-#### Design considerations:
+**Cons**:
+* Code Duplication: If similar validation logic (like checking valid names or student IDs) is required across multiple classes, this can lead to code duplication and inconsistency.
+* Higher Maintenance Overhead: Changes to validation rules would need to be reflected across multiple classes, increasing the risk of inconsistent logic.
 
-**Aspect: How undo & redo executes:**
+We chose Alternative 1 due to the modularity, maintainability, and consistency it provides. By centralizing the validation logic in ParserUtil, we ensure
+it aligns with the modular nature of our design, where commands and models interact through a well-defined interface. It also simplifies the commands by offloading validation and parsing responsibilities,
+promoting cleaner, more maintainable code.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+### Edit feature
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The TrackMate application empowers users to update the details of existing students easily. With the Edit feature, users can modify a student's name, student ID, or assigned tutorial
+ID. This functionality ensures that student records remain accurate and up-to-date within the application, reflecting any changes in student information or tutorial assignments.
 
-_{more aspects and alternatives to be added}_
+### Feature's Architecture Design
 
-### \[Proposed\] Data archiving
+**Use of EditStudentDescriptor**: The EditStudentDescriptor is a static inner class within EditCommand that stores the details of the fields to edit. It allows for optional
+fields, meaning users can choose to update any combination of the student's attributes without affecting others.
 
-_{Explain here how the data archiving feature will be implemented}_
+* **Benefit**: This descriptor pattern provides a clean and flexible way to handle optional edits. It encapsulates changes,
+making it straightforward to create a new Student object with updated values. It also promotes code reuse and maintainability by
+isolating the edit details from the command execution logic.
 
+* **Challenge**: Managing optional values and ensuring that the descriptor accurately represents the intended changes without introducing
+errors requires careful implementation. Ensuring that at least one field is edited and providing appropriate error messages when none are
+requires precise checks.
+
+**Validation Checks in EditCommand**: Before applying edits, several validation checks are performed such that we can ensure that the edited student does not duplicate an 
+existing student in the address book unless it's the same student. Besides, it also validates that the new student ID, if changed, does not
+already exist in the system.
+
+* **Benefit**: These checks maintain data integrity, preventing inconsistent states and ensuring the uniqueness of critical identifiers like student IDs.
+
+* **Challenge**: These validations must be efficient to avoid performance degradation. They also need to be comprehensive to prevent any edge cases where data integrity could be compromised.
+
+### Edit Student
+To maintain accurate and up-to-date student records, the Edit feature allows users to modify existing student information. The sequence diagram below shows
+how it involves specifying the student's index in the displayed list and providing any new values for the student's attributes.
+
+<puml src="diagrams/EditSequenceDiagram.puml" width="280" />
+
+#### Implementation - Design Considerations
+
+**Alternative 1 (Current Implementation)**:
+
+**Description**:
+
+The current implementation employs an EditStudentDescriptor to encapsulate the fields to be edited. The EditCommandParser handles the parsing of user input,
+populating this descriptor with provided values. The EditCommand then uses this descriptor to create a new Student object with the updated values, replacing
+the old one in the model.
+
+**Pros**:
+* Modularity: Separates parsing, validation, and execution logic, enhancing code maintainability.
+* Flexibility: Handles optional fields gracefully, allowing users to edit any combination of a student's attributes.
+* Immutability: Maintains the immutability of Student objects by creating new instances rather than modifying existing ones.
+* Reusability: The EditStudentDescriptor can be reused for other commands requiring similar functionality.
+
+**Cons**:
+* Complexity: Introduces additional classes and layers of abstraction, which can increase the learning curve for new developers.
+
+**Alternative 2: Inline Editing with Mutable Student Objects**
+
+**Description**:
+
+An alternative design could involve making the Student class mutable, allowing direct modification of its fields. The EditCommand would
+modify the fields of the existing Student object directly without creating a new instance.
+
+**Pros**:
+* Simplicity: Reduces the number of classes and abstractions, potentially making the codebase easier to understand.
+* Performance: May be more efficient as it avoids creating new objects.
+
+**Cons**:
+* Data Integrity Risks: Mutable objects can lead to unintended side effects, making the system more prone to bugs.
+* Loss of Immutability Benefits: Immutable objects are easier to reason about, especially in concurrent contexts.
+* Inconsistency with Design Patterns: Deviates from the application's existing design principles, potentially causing confusion.
+
+**Decision**:
+
+We chose Alternative 1 due to its alignment with the application's overall design philosophy of using immutable data objects. This approach
+promotes safer code by avoiding side effects, making it easier to maintain and less error-prone. Although it introduces additional classes,
+the benefits of modularity, maintainability, and data integrity outweigh the added complexity. It also adheres to the Single Responsibility Principle,
+keeping parsing, data encapsulation, and execution concerns separate.
+
+### Delete Feature
+
+The TrackMate application allows users to remove students, tutorials, assignments, and attendance records efficiently. The Delete feature ensures
+that outdated or incorrect records can be cleaned up, maintaining the integrity and relevance of the data within the application.
+
+### Feature's Architecture Design
+
+1. **Centralized Parsing with DeleteCommandParser**: The parsing logic for delete commands is centralized in their respective parser classes (e.g., DeleteCommandParser, DeleteTutorialCommandParser, etc.). Each parser is responsible for interpreting
+the user's input, extracting necessary identifiers (like student index, tutorial ID, assignment title), and creating the appropriate delete command object.
+* Benefit: Centralizing parsing logic in dedicated parser classes promotes modularity and reusability. It ensures consistent input handling and reduces redundancy across different delete commands.
+* Challenge: Each parser must handle specific validation rules and error messages, requiring careful implementation to provide meaningful feedback to the user.
+
+2. **Model Updates and Data Consistency**: The model (ModelManager) handles the actual deletion of entities:
+
+Students: Deleting a student removes them from the address book, unassigns them from tutorials, and updates assignments and attendance records.
+
+Tutorials: Deleting a tutorial removes it from the tutorial list and unassigns all associated students.
+
+Assignments: Deleting an assignment removes it from the assignment list.
+
+Attendance Records: Deleting attendance marks the student as absent for that date and tutorial.
+* Benefit: Centralizing deletion logic in the model ensures consistent updates across the application and maintains data integrity.
+* Challenge: Ensuring that all related entities are correctly updated without introducing bugs requires thorough testing and careful implementation.
+
+#### Delete Student
+To remove a student from the application, the user specifies the student's index in the displayed student list. The system ensures
+that the index is valid and then proceeds to delete the student, updating all related records. Below is the sequence diagram regarding deleting student. 
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="280" />
+
+#### Delete Tutorial
+To delete a tutorial, the user provides the tutorial ID. The system verifies the existence of the tutorial and then removes it, updating any students assigned to it.
+The sequence diagram of deleting tuorial is similar to deleting student.
+
+#### Delete Assignment 
+To delete an assignment, the user specifies the assignment title. The system ensures that the assignment exists before deleting it from the model. The
+activity diagram below illustrates what the series of actions the user should do to delete assignment.
+
+<puml src="diagrams/DeleteAssignmentActivityDiagram.puml" width="280" />
+
+#### Delete Attendance
+To delete a student's attendance record for a specific date and tutorial, the user provides the student ID, tutorial ID, and date. The diagram is
+also similar to adding attendance, thus is not given. 
+
+#### Implementation - Design Considerations:
+Alternative 1 (Current Implementation):
+
+**Description**:
+
+The current implementation utilizes specific delete commands for different entities (DeleteCommand for students, DeleteTutorialCommand for tutorials, etc.). Each command class handles the deletion logic pertinent to its entity type. Parsing and validation are handled in dedicated parser classes, and the model updates are performed through methods in ModelManager.
+
+**Pros**:
+* Modularity: Separation of concerns is maintained, with each command and parser responsible for a specific entity.
+* Clarity: Code is organized, making it easier to understand and maintain.
+* Reusability: Common validation and parsing logic can be reused across different delete commands.
+
+**Cons**:
+* Code Duplication: Similar validation logic may exist across different delete commands and parsers.
+* Scalability: Adding new delete commands for additional entities requires creating new command and parser classes.
+
+**Alternative 2: Unified Delete Command with Type Specification**
+
+*Description*:
+
+An alternative design is to implement a single DeleteCommand that can handle deletion of different entity types based on additional arguments specifying the type (e.g., student, tutorial, assignment).
+
+**Pros**:
+* Reduced Class Count: Fewer command and parser classes simplify the codebase.
+* Single Entry Point: Easier for users to remember a single delete command.
+
+**Cons**:
+* Complex Parsing Logic: The parser must handle multiple entity types and validation rules, increasing complexity.
+* Reduced Clarity: Mixing deletion logic for different entities in one command can make the code harder to maintain.
+* Error-Prone: Higher risk of bugs due to the increased complexity in parsing and execution logic.
+
+**Decision**:
+
+We chose Alternative 1 because it promotes modularity, clarity, and maintainability. By having separate commands and parsers for each
+entity type, we can encapsulate the specific logic and validation required for each. This separation makes the codebase more organized and easier to extend or
+modify. Although there is some code duplication, the benefits of clarity and reduced complexity outweigh the drawbacks.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -489,40 +627,115 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Prerequisites: Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Test case: Double-click the jar file
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Prerequisites: Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Test case: Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student
+
+1. Adding a student with all required details
+    1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
+   
+    2. Test case: `addStu n/John Doe id/A1234567X t/T1001`<br> 
+       Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
+
+2. Adding a student with missing compulsory fields
+
+    1. Test case: `addStu n/John Doe t/T1001`<br>
+       Expected: Error message indicating that the student ID is missing.
+
+    2. Test case: `addStu id/A1234567X t/T1001`<br>
+       Expected: Error message indicating that the student's name is missing.
+
+3. Adding a student with invalid data
+
+    1. Test case: `addStu n/John Doe id/INVALID_ID t/T1001`<br>
+       Expected: Error message indicating that the student ID format is invalid.
+
+    2. Test case: `addStu n/John Doe id/A1234567X t/INVALID_TUT`<br>
+       Expected: Error message indicating that the tutorial ID does not exist.
+
+### Editing a student
+
+1. Editing a student's details
+
+    1. Prerequisites: At least one student exists in the list. For example, a student at index 1.
+
+    2. Test case: `edit 1 n/Jane Smith id/A7654321X t/T2001`<br>
+       Expected: Student at index 1 is updated with the new name "Jane Smith", student ID "A7654321X", and assigned to tutorial "T2001". Confirmation message is displayed with the updated details.
+
+2. Editing a student with some fields missing
+
+    1. Test case: `edit 1 n/Jane Smith`<br>
+       Expected: Only the name of the student at index 1 is updated to "Jane Smith". Other details remain unchanged.
+
+3. Editing a student with invalid index
+
+    1. Test case: `edit 0 n/Jane Smith`<br>
+       Expected: Error message indicating that the student index provided is invalid.
+
+    2. Test case: `edit 999 n/Jane Smith` (assuming there are fewer than 999 students)<br>
+       Expected: Error message indicating that the student index provided is invalid.
 
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`<br>
+     Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Marking attendance
+
+1. Marking a student's attendance for a tutorial session
+
+    1. Prerequisites: Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
+
+    2. Test case: `markAtt id/A1234567X t/T1001 d/2023-10-21`<br>
+       Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
+
+2. Marking attendance for a student not in the tutorial
+
+    1. Test case: `markAtt id/A1234567X t/T2001 d/2023-10-21`<br>
+       Expected: Error message indicating that the student is not enrolled in tutorial "T2001".
+
+3. Marking attendance with invalid date format
+
+    1. Test case: `markAtt id/A1234567X t/T1001 d/21-10-2023`<br>
+       Expected: Error message indicating that the date format is invalid. Correct format should be "YYYY-MM-DD".
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Simulate a missing data file:
+        * Close the application.
+        * Navigate to the data directory where the application stores its data files.
+        * Delete the data file (e.g., addressbook.json). 
+    2. Re-launch the application.<br>
+       Expected: The application starts with an empty data set. A new data file is created automatically.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+    1. Simulate a corrupted data file:
+        * Close the application.
+        * Open the data file (e.g., addressbook.json) with a text editor. 
+        * Introduce invalid JSON syntax (e.g., delete a closing brace or add random text).
+        * Save the file.
+    2. Re-launch the application.<br>
+       Expected: The application detects the corrupted data file and displays an error message in the terminal. It will then start with an empty data set.
