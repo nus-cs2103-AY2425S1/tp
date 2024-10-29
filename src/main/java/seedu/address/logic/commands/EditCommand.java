@@ -84,12 +84,13 @@ public class EditCommand extends Command {
            + PREFIX_COST + "$300 "
            + PREFIX_STATUS + "not delivered "
            + PREFIX_TAG + "delivery was fast";
+
     public static final String DELIVERY_EXAMPLE = COMMAND_WORD + " 1 "
-              + PREFIX_ITEMS + "TV "
-              + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
-              + PREFIX_COST + "$300 "
-              + PREFIX_STATUS + "not delivered "
-              + PREFIX_TAG + "delivery was fast";
+           + PREFIX_ITEMS + "TV "
+           + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
+           + PREFIX_COST + "$300 "
+           + PREFIX_STATUS + "not delivered "
+           + PREFIX_TAG + "delivery was fast";
 
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
