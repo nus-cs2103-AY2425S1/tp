@@ -192,6 +192,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeLastViewedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person findPersonByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
