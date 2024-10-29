@@ -92,7 +92,7 @@ public class Person {
      * @return publicAddresses
      */
     public PublicAddressesComposition getPublicAddressesComposition() {
-        return publicAddressesComposition;
+        return publicAddressesComposition.copy();
     }
 
     /**
@@ -120,10 +120,10 @@ public class Person {
 
     private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
         return addresses.stream()
-                .map(addr -> addr.label.equals(newAddress.label)
-                        ? newAddress
-                        : addr)
-                .collect(Collectors.toSet());
+            .map(addr -> addr.label.equals(newAddress.label)
+                ? newAddress
+                : addr)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -144,7 +144,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -163,11 +163,11 @@ public class Person {
         }
 
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && publicAddressesComposition.equals(otherPerson.publicAddressesComposition)
-                && tags.equals(otherPerson.tags);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && publicAddressesComposition.equals(otherPerson.publicAddressesComposition)
+            && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -179,13 +179,13 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("publicAddresses", publicAddressesComposition)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("publicAddresses", publicAddressesComposition)
+            .add("tags", tags)
+            .toString();
     }
 
 }

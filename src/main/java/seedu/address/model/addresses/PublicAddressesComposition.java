@@ -30,7 +30,7 @@ public class PublicAddressesComposition {
      */
     public PublicAddressesComposition(Map<Network, Set<PublicAddress>> publicAddresses) {
         this.publicAddresses = publicAddresses.entrySet().stream()
-                .collect(HashMap::new, (m, e) -> m.put(e.getKey(), new HashSet<>(e.getValue())), HashMap::putAll);
+            .collect(HashMap::new, (m, e) -> m.put(e.getKey(), new HashSet<>(e.getValue())), HashMap::putAll);
     }
 
     /**
@@ -47,7 +47,7 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Sets the public addresses for the specified network.
+     * Sets the public addresses for the specified network and replaces the existing set of public addresses.
      *
      * @param network         The network to set the public addresses for.
      * @param publicAddresses The set of public addresses to be set.
@@ -87,11 +87,7 @@ public class PublicAddressesComposition {
     public void addPublicAddressesToNetwork(Network network, Set<PublicAddress> addresses) {
         assert network != null;
         assert addresses != null;
-        if (addresses.isEmpty()) {
-            this.publicAddresses.remove(network);
-            return;
-        }
-        this.publicAddresses.put(network, new HashSet<>(addresses));
+        this.publicAddresses.computeIfAbsent(network, k -> new HashSet<>()).addAll(addresses);
     }
 
     /**
@@ -103,8 +99,8 @@ public class PublicAddressesComposition {
     public Boolean hasPublicAddress(String publicAddressString) {
         assert publicAddressString != null;
         return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
+            .flatMap(Set::stream)
+            .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
     }
 
     /**
@@ -115,10 +111,12 @@ public class PublicAddressesComposition {
      * @return True if a public address with the specified label exists for the given network, false otherwise.
      */
     public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
-        return publicAddresses
-                .getOrDefault(network, Collections.emptySet())
-                .stream()
-                .anyMatch(addr -> addr.label.equals(label));
+        return publicAddresses.entrySet().stream()
+            .filter(entry -> entry.getKey().equals(network))
+            .flatMap(entry -> entry.getValue().stream())
+            .anyMatch(publicAddress -> publicAddress.getLabel().equals(label));
+
+
     }
 
     /**
@@ -129,14 +127,14 @@ public class PublicAddressesComposition {
      */
     public PublicAddressesComposition filterByPublicAddress(String publicAddressString) {
         Map<Network, Set<PublicAddress>> filteredPublicAddresses = publicAddresses.entrySet().stream()
-                .map(entry -> {
-                    Set<PublicAddress> filteredAddresses = entry.getValue().stream()
-                            .filter(pa -> pa.isPublicAddressStringEquals(publicAddressString))
-                            .collect(Collectors.toSet());
-                    return new AbstractMap.SimpleEntry<>(entry.getKey(), filteredAddresses);
-                })
-                .filter(entry -> !entry.getValue().isEmpty())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            .map(entry -> {
+                Set<PublicAddress> filteredAddresses = entry.getValue().stream()
+                    .filter(pa -> pa.isPublicAddressStringEquals(publicAddressString))
+                    .collect(Collectors.toSet());
+                return new AbstractMap.SimpleEntry<>(entry.getKey(), filteredAddresses);
+            })
+            .filter(entry -> !entry.getValue().isEmpty())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         return new PublicAddressesComposition(filteredPublicAddresses);
     }
 
@@ -148,15 +146,15 @@ public class PublicAddressesComposition {
      */
     public PublicAddressesComposition add(PublicAddress newPublicAddress) {
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
-                .map(entry -> {
-                    Set<PublicAddress> updatedAddresses = entry.getValue().stream()
-                            .map(addr -> addr.label.equals(newPublicAddress.label)
-                                    ? newPublicAddress
-                                    : addr)
-                            .collect(Collectors.toSet());
-                    return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
-                })
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            .map(entry -> {
+                Set<PublicAddress> updatedAddresses = entry.getValue().stream()
+                    .map(addr -> addr.label.equals(newPublicAddress.label)
+                        ? newPublicAddress
+                        : addr)
+                    .collect(Collectors.toSet());
+                return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
+            })
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
@@ -176,9 +174,9 @@ public class PublicAddressesComposition {
      */
     public String toStringIndented() {
         return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
-                + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
-                        + publicAddress.getPublicAddressString())
-                .reduce((a, b) -> a + "\n" + b).orElse("")).reduce((a, b) -> a + "\n" + b).orElse("");
+            + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
+                + publicAddress.getPublicAddressString())
+            .reduce((a, b) -> a + "\n" + b).orElse("")).reduce((a, b) -> a + "\n" + b).orElse("");
     }
 
     /**
@@ -214,18 +212,18 @@ public class PublicAddressesComposition {
      * @param publicAddress The public address to check.
      * @return True if the public address string exists, false otherwise.
      */
-    public Boolean isPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
+    public Boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
         return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
+            .flatMap(Set::stream)
+            .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
     }
 
     /**
-     * Returns the first public address in the composition.
+     * Returns any public address in the composition, this public address is randomly selected.
      *
-     * @return The first public address, or null if the composition is empty.
+     * @return a any public address, or null if the composition is empty.
      */
-    public PublicAddress getFirstPublicAddress() {
+    public PublicAddress getAnyPublicAddress() {
         // publicAddresses map should not be null
         assert publicAddresses != null;
         // map should not be empty
@@ -234,24 +232,24 @@ public class PublicAddressesComposition {
         // each set should not be empty
         assert !publicAddresses.values().stream().anyMatch(Set::isEmpty);
 
-        // flatten map to get first public address
+        // flatten map to get any public address
         PublicAddress publicAddress =
-                publicAddresses.values().stream().flatMap(Set::stream).findFirst().orElse(null);
-        // get first public address
+            publicAddresses.values().stream().flatMap(Set::stream).findFirst().orElse(null);
+        // get any public address
         return publicAddress;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof PublicAddressesComposition
-                && publicAddresses.equals(((PublicAddressesComposition) other).publicAddresses));
+            || (other instanceof PublicAddressesComposition
+            && publicAddresses.equals(((PublicAddressesComposition) other).publicAddresses));
     }
 
     @Override
     public String toString() {
         return "PublicAddressesComposition{"
-                + publicAddresses
-                + '}';
+            + publicAddresses
+            + '}';
     }
 }

@@ -25,15 +25,15 @@ public class DeletePublicAddressCommand extends Command {
     public static final String COMMAND_WORD = "deletepa"; // short for delete address
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-                                                   + ": Deletes the person's "
-                                                   + "public address identified by the index number "
-                                                   + "used in the displayed person list and their crypto network.\n"
-                                                   + "Parameters: INDEX (must be a positive integer)\n"
-                                                   + PREFIX_PUBLIC_ADDRESS + "NETWORK\n"
-                                                   + "[" + PREFIX_PUBLIC_ADDRESS + "LABEL]\n"
-                                                   + "Example: " + COMMAND_WORD + " 1 "
-                                                   + PREFIX_PUBLIC_ADDRESS + "BTC"
-                                                   + PREFIX_PUBLIC_ADDRESS_LABEL + "default";
+        + ": Deletes the person's "
+        + "public address identified by the index number "
+        + "used in the displayed person list and their crypto network.\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + PREFIX_PUBLIC_ADDRESS + "NETWORK\n"
+        + "[" + PREFIX_PUBLIC_ADDRESS + "LABEL]\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PUBLIC_ADDRESS + "BTC"
+        + PREFIX_PUBLIC_ADDRESS_LABEL + "default";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Public Address: %1$s";
 
@@ -76,10 +76,10 @@ public class DeletePublicAddressCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person person = lastShownList.get(targetIndex.getZeroBased());
 
         // Select from address and delete the specific ones
-        Set<PublicAddress> addresses = personToDelete.getPublicAddressesByNetwork(targetAddressnetwork);
+        Set<PublicAddress> addresses = person.getPublicAddressesByNetwork(targetAddressnetwork);
         Set<PublicAddress> newAddresses = new HashSet<PublicAddress>();
         if (!targetLabel.isEmpty()) {
             addresses.forEach(
@@ -90,10 +90,10 @@ public class DeletePublicAddressCommand extends Command {
                 }
             );
         }
-        personToDelete.addPublicAddressToNetwork(targetAddressnetwork, new HashSet<PublicAddress>(newAddresses));
+        person.addPublicAddressToNetwork(targetAddressnetwork, new HashSet<PublicAddress>(newAddresses));
 
         return new CommandResult(String.format(
-            MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getPublicAddressesComposition()));
+            MESSAGE_DELETE_PERSON_SUCCESS, person.getPublicAddressesComposition()));
     }
 
     @Override
@@ -113,9 +113,9 @@ public class DeletePublicAddressCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                   .add("targetIndex", targetIndex)
-                   .add("targetAddressnetwork", targetAddressnetwork)
-                   .add("targetLabel", targetLabel)
-                   .toString();
+            .add("targetIndex", targetIndex)
+            .add("targetAddressnetwork", targetAddressnetwork)
+            .add("targetLabel", targetLabel)
+            .toString();
     }
 }
