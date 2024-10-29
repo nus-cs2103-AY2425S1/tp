@@ -68,7 +68,7 @@ public class UnmarkOrderCommandTest {
     }
 
     @Test
-    public void execute_orderAlreadyUnmarked_warningGiven() {
+    public void execute_orderAlreadyUnmarked_throwsCommandException() {
         Index targetIndex = INDEX_FIRST_ORDER;
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(targetIndex);
 
