@@ -212,6 +212,12 @@ Examples:
 * `find Betsy` followed by `unpin 1` unpins the 1st person in the results of the `find` command.
 * `list` followed by `unpin 2 3 4 5` unpins the 2nd, 3rd, 4th and 5th people in the address book.
 
+### Listing students : `liststudents`
+
+Lists all students in the address book.
+
+Format: `liststudents`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -261,14 +267,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Grade**  | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTag**| `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
-**List**   | `list`
-**Help**   | `help`
+Action           | Format, Examples
+-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Grade**        | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
+**Clear**        | `clear`
+**Delete**       | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTag**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
+**List**         | `list`
+**Help**         | `help`
+**Pin**          | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`
+**Unpin**        | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`
+**Archive**      | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`
+**Unarchive**    | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`
+**List Archive** | `listarchive`
+**List Students**| `liststudents`
