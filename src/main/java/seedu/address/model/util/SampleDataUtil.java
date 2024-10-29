@@ -8,7 +8,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReminderAddressBook;
 import seedu.address.model.ReminderAddressBook;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Organisation;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,12 +65,12 @@ public class SampleDataUtil {
 
     public static Reminder[] getSampleReminders() {
         return new Reminder[] {
-                new Reminder("10-10-2022", "breakfast", getSamplePersons()[0].getName()),
-                new Reminder("11-10-2022", "lunch", getSamplePersons()[1].getName()),
-                new Reminder("12-10-2022", "dinner", getSamplePersons()[2].getName()),
-                new Reminder("13-10-2022", "meeting", getSamplePersons()[3].getName()),
-                new Reminder("14-10-2022", "gym", getSamplePersons()[4].getName()),
-                new Reminder("15-10-2022", "meeting", getSamplePersons()[5].getName())
+            new Reminder("10-10-2022", "breakfast", getSamplePersons()[0].getName()),
+            new Reminder("11-10-2022", "lunch", getSamplePersons()[1].getName()),
+            new Reminder("12-10-2022", "dinner", getSamplePersons()[2].getName()),
+            new Reminder("13-10-2022", "meeting", getSamplePersons()[3].getName()),
+            new Reminder("14-10-2022", "gym", getSamplePersons()[4].getName()),
+            new Reminder("15-10-2022", "meeting", getSamplePersons()[5].getName())
         };
     }
 
