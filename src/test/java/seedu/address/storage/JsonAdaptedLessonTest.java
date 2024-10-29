@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class JsonAdaptedLessonTest {
             new StudentBuilder().withName("Alice Pauline").build());
     private static final List<JsonAdaptedStudentLessonInfo> VALID_STUDENT_INFO = List.of(
             new JsonAdaptedStudentLessonInfo(VALID_STUDENT, true, 1));
-
     private static final String INVALID_DATE = "invalid-date";
     private static final String INVALID_TIME = "invalid-time";
 
