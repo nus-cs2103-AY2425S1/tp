@@ -5,6 +5,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PriorityLevel;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
 /**
  * Changes the priority level of an existing person in the address book.
  */
@@ -54,6 +57,8 @@ public class PriorityCommand extends Command {
                     personToEdit.getTags(),
                     new PriorityLevel(isReset ? 3 : priorityLevel));
 
+            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.setPerson(personToEdit, editedPerson);
             model.updateTasksForPerson(personToEdit, editedPerson);
             return new CommandResult(String.format("Priority level %d successfully set for %s",
