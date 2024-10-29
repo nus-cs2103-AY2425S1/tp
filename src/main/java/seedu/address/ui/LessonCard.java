@@ -17,7 +17,7 @@ public class LessonCard extends UiPart<Region> {
 
     public final Lesson lesson;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label id;
@@ -39,6 +39,23 @@ public class LessonCard extends UiPart<Region> {
         time.setText(lesson.getTime().toString());
         lesson.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
-                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
+                .forEach(student -> {
+                    if (student.getName().fullName == "Sky Lim") {
+                        lesson.setAttendance(student, true);
+                    }
+                    System.out.println(student.toString() + lesson.getAttendance(student));
+
+                    Label studentLabel = new Label(student.getName().fullName);
+                    boolean hasAttendance = lesson.getAttendance(student);
+
+                    // Set Student Background Colour based on Attendance
+                    if (hasAttendance) {
+                        studentLabel.setStyle("-fx-background-color: #275918"); // Green If Attendance
+                    } else {
+                        studentLabel.setStyle("-fx-background-color: #CF4748"); // Red If No Attendance
+                    }
+
+                    students.getChildren().add(studentLabel);
+                });
     }
 }
