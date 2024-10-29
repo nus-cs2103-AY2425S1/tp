@@ -3,40 +3,60 @@ package seedu.address.commons.util;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
- * A class for representing dates.
+ * Helper functions for handling dates.
  */
 public class DateUtil {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "The given date is invalid and does not exist "
+            + "in the calendar.";
+    private static final String DATE_VALIDATION_FORMAT = "uuuu-MM-dd";
+    private static final String DATE_FORMAT_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_VALIDATION_FORMAT)
+            .withResolverStyle(ResolverStyle.STRICT);
+    private static final Logger logger = LogsCenter.getLogger(DateUtil.class);
 
     /**
-     * Returns if a given string is a valid date.
-     *
-     * @param date The date to be checked.
+     * Returns if a given string is a valid date in the correct format.
      */
     public static boolean isValidDate(String date) {
-        try {
-            LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
-            return true;
-        } catch (DateTimeException e) {
-            return false;
-        }
+        return parseDate(date).isPresent();
     }
 
     /**
-     * Returns if a given string is a date that is after today.
-     *
-     * @param date The date to be checked.
-     * @return true if the date is after today, false otherwise.
+     * Returns if a given string is a valid date in the correct format and is after today.
      */
-    public static boolean isAfterToday(String date) {
-        if (!isValidDate(date)) {
-            return false;
-        }
-        LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
-        return parsedDate.isAfter(LocalDate.now());
+    public static boolean isDateAfterToday(String date) {
+        LocalDate today = LocalDate.now();
+        return parseDate(date)
+                .map(parsedDate -> parsedDate.isAfter(today))
+                .orElse(false);
     }
+
+    /**
+     * Returns if a given string is in the correct date format.
+     */
+    public static boolean isCorrectDateFormat(String date) {
+        return date.matches(DATE_FORMAT_PATTERN);
+    }
+
+    private static Optional<LocalDate> parseDate(String date) {
+        try {
+            LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
+            logger.fine("Parsed date: " + parsedDate);
+            return Optional.of(parsedDate);
+        } catch (DateTimeException e) {
+            System.out.println(e.getMessage());
+            logger.warning("Unable to parse date: " + date);
+            return Optional.empty();
+        }
+    }
+
 }

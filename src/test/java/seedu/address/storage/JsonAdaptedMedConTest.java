@@ -54,8 +54,9 @@ public class JsonAdaptedMedConTest {
     public void constructor_medConObject_createsValidJsonAdaptedMedCon() {
         MedCon medCon = new MedCon(VALID_MEDCON);
         JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(medCon);
-        assertEquals(VALID_MEDCON, jsonAdaptedMedCon.getmedConName());
+        assertEquals(VALID_MEDCON.toUpperCase(), jsonAdaptedMedCon.getmedConName());
     }
+
 
     @Test
     public void getmedConName_validMedCon_returnsCorrectValue() {

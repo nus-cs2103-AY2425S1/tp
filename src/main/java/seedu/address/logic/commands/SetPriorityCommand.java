@@ -15,12 +15,12 @@ import seedu.address.model.person.Priority;
 /**
  * Command to assign or update the priority of a patient in the address book.
  */
-public class PriorityCommand extends Command {
+public class SetPriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "setPriority";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns/updates "
-            + "a priority of a patient in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets "
+            + "priority to an existing patient in MediBase3.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
             + "!/Priority\n"
@@ -35,12 +35,12 @@ public class PriorityCommand extends Command {
     private final Nric nric;
 
     /**
-     * Creates a PriorityCommand to assign or update a person's priority.
+     * Creates a SetPriorityCommand to assign or update a person's priority.
      *
      * @param nric    The NRIC of the person whose priority is to be updated.
      * @param priority The priority to be assigned to the person.
      */
-    public PriorityCommand(Nric nric, Priority priority) {
+    public SetPriorityCommand(Nric nric, Priority priority) {
         requireAllNonNull(nric, priority);
 
         this.priority = priority;
@@ -90,7 +90,7 @@ public class PriorityCommand extends Command {
     }
 
     /**
-     * Checks if two PriorityCommand objects are equal.
+     * Checks if two SetPriorityCommand objects are equal.
      *
      * @param other The object to compare with.
      * @return True if both objects are the same or have the same NRIC and priority; false otherwise.
@@ -101,11 +101,11 @@ public class PriorityCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof PriorityCommand)) {
+        if (!(other instanceof SetPriorityCommand)) {
             return false;
         }
 
-        PriorityCommand p = (PriorityCommand) other;
+        SetPriorityCommand p = (SetPriorityCommand) other;
         return nric.equals(p.nric)
                 && priority.equals(p.priority);
     }

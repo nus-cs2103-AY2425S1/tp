@@ -122,12 +122,19 @@ public class ParserUtil {
     public static DateOfBirth parseDateOfBirth(String dob) throws ParseException {
         requireNonNull(dob);
         String trimmedDob = dob.trim();
-        if (!DateUtil.isValidDate(trimmedDob)) {
+
+        if (!DateUtil.isCorrectDateFormat(trimmedDob)) {
             throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_WRONG_FORMAT);
         }
+
+        if (!DateUtil.isValidDate(trimmedDob)) {
+            throw new ParseException(DateUtil.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
+        }
+
         if (!DateOfBirth.isValidDateOfBirth(trimmedDob)) {
             throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_FUTURE_DATE);
         }
+
         return new DateOfBirth(trimmedDob);
     }
 

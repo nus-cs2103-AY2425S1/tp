@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.DateUtil.isAfterToday;
+import static seedu.address.commons.util.DateUtil.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST;
+import static seedu.address.commons.util.DateUtil.isCorrectDateFormat;
+import static seedu.address.commons.util.DateUtil.isDateAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
 /**
@@ -10,10 +12,11 @@ import static seedu.address.commons.util.DateUtil.isValidDate;
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
 public class DateOfBirth {
-    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should be a valid date and "
-            + "not after today's date";
-    public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be a valid date "
-            + "in the format of yyyy-MM-dd";
+    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should not be after today's date.";
+    public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be in the format of yyyy-MM-dd"
+            + " and should not be blank.";
+
+
     public final String value;
 
     /**
@@ -23,20 +26,18 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dob) {
         requireNonNull(dob);
-        checkArgument(isValidDate(dob), MESSAGE_CONSTRAINTS_WRONG_FORMAT);
+        checkArgument(isCorrectDateFormat(dob), MESSAGE_CONSTRAINTS_WRONG_FORMAT);
+        checkArgument(isValidDate(dob), MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
         checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS_FUTURE_DATE);
         this.value = dob;
     }
 
     /**
      * Returns if a given string is a valid date of birth.
-     *
-     * @param dob The date of birth to be checked.
      */
     public static boolean isValidDateOfBirth(String dob) {
-        return !(isAfterToday(dob));
+        return !(isDateAfterToday(dob));
     }
-
     @Override
     public String toString() {
         return this.value;
