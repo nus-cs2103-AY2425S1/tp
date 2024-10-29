@@ -1,5 +1,6 @@
 package seedu.address.model.meetup;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -65,5 +66,19 @@ public class ToTest {
 
         // different values -> returns false
         assertFalse(to.equals(new To("2024-10-15 13:30")));
+    }
+
+    @Test
+    public void toPrettyString() {
+        To to = new To("2024-06-25 14:30");
+        String expectedString = "25 Jun 2024 (2:30pm)";
+        assertEquals(to.toPrettyString(), expectedString);
+    }
+
+    @Test
+    public void toStringMethod() {
+        To to = new To("2024-06-25 14:30");
+        String expectedString = "2024-06-25 14:30";
+        assertEquals(to.toString(), expectedString);
     }
 }
