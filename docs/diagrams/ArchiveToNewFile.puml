@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After Command "archive pa/archiveFile2"
+
+package data as DataPkg {
+    class State1 as "<u>ab0:AddressBook</u>"
+}
+
+package archive as ArchivePkg {
+    class State2 as "<u>archiveFile1:AddressBook</u>"
+    class State3 as "<u>archiveFile2:AddressBook</u>"
+}
+
+
+class Pointer1 as "The data here is cleared" #FFFFFF
+Pointer1 -up-> State1
+
+class Pointer2 as "Containing data of original ab0" #FFFFFF
+Pointer2 -up-> State3
+
+@end

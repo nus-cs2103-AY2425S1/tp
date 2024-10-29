@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Initial State
+
+package data as DataPkg {
+    class State1 as "<u>ab0:AddressBook</u>"
+}
+
+package archive as ArchivePkg {
+    class State2 as "<u>archiveFile1:AddressBook</u>"
+}
+
+class Pointer as "Current Working AddressBook" #FFFFFF
+Pointer -up-> State1
+@end
