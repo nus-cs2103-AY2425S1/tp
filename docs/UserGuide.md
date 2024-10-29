@@ -120,17 +120,30 @@ Adds a person to EduTuTu.
 
 `add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1`
 
-<div style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> User enters the `add` command.</p>
-    <img src="images/add_input.png" alt="Add Command Input" style="width: 100%;" />
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+
+  <!-- Text Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <p><b>Input:</b> User enters the `add` command.</p>
+    </div>
+    <div style="width: 45%;">
+      <p><b>Output:</b> The UI updates to show the added person.</p>
+    </div>
   </div>
 
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Output:</b> The UI updates to show the added person.</p>
-    <img src="images/add_output.png" alt="Add Command Output" style="width: 100%;" />
+  <!-- Image Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <img src="images/add_output.png" alt="Add Command Input" style="width: 100%;" />
+    </div>
+    <div style="width: 45%;">
+      <img src="images/add_input.png" alt="Add Command Output" style="width: 100%;" />
+    </div>
   </div>
+
 </div>
+
 
 **Tips:**
 - Use the `add` command to add a new person with their name, phone number, email, address, fees, and class ID.
@@ -155,17 +168,30 @@ Deletes the specified person from the address book.
 
 **Example Usage:** `delete 3`
 
-<div style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> User enters the `delete 3` command to remove the 3rd person in the displayed list.</p>
-    <img src="images/delete_input.png" alt="Delete Command Input" style="width: 100%;" />
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+
+  <!-- Text Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <p><b>Input:</b> User enters the `delete 3` command to remove the 3rd person in the displayed list.</p>
+    </div>
+    <div style="width: 45%;">
+      <p><b>Output:</b> The UI updates to reflect the deletion of the person.</p>
+    </div>
   </div>
 
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Output:</b> The UI updates to reflect the deletion of the person.</p>
-    <img src="images/delete_output.png" alt="Delete Command Output" style="width: 100%;" />
+  <!-- Image Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <img src="images/delete_input.png" alt="Delete Command Input" style="width: 100%;" />
+    </div>
+    <div style="width: 45%;">
+      <img src="images/delete_output.png" alt="Delete Command Output" style="width: 100%;" />
+    </div>
   </div>
+
 </div>
+
 
 **Tips:**
 - Use the `delete` command to remove outdated or incorrect entries from the address book.
@@ -192,16 +218,28 @@ Updates the payment status of a student to completed.
 
 **Example Usage:**
 
-<div style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> User enters the `markpaid 1 m/2024-10` command to mark the first student as paid for October 2024.</p>
-    <img src="images/markpaid_input.png" alt="MarkPaid Command Input" style="width: 100%;" />
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+
+  <!-- Text Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <p><b>Input:</b> User enters the `markpaid 1 m/2024-10` command to mark the first student as paid for October 2024.</p>
+    </div>
+    <div style="width: 45%;">
+      <p><b>Output:</b> The UI updates to show the payment status of the student.</p>
+    </div>
   </div>
 
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Output:</b> The UI updates to show the payment status of the student.</p>
-    <img src="images/markpaid_output.png" alt="MarkPaid Command Output" style="width: 100%;" />
+  <!-- Image Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <img src="images/markpaid_input.png" alt="MarkPaid Command Input" style="width: 100%;" />
+    </div>
+    <div style="width: 45%;">
+      <img src="images/markpaid_output.png" alt="MarkPaid Command Output" style="width: 100%;" />
+    </div>
   </div>
+
 </div>
 
 [Back to Table of Contents](#table-of-contents)
@@ -223,16 +261,28 @@ Edits an existing person in the address book.
 
 **Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
 
-<div style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> User enters the `edit` command to change the phone number and email address of the 1st person.</p>
-    <img src="images/edit_input.png" alt="Edit Command Input" style="width: 100%;" />
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+
+  <!-- Text Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <p><b>Input:</b> User enters the `edit` command to change the phone number and email address of the 1st person.</p>
+    </div>
+    <div style="width: 45%;">
+      <p><b>Output:</b> The UI updates to show the edited details.</p>
+    </div>
   </div>
 
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Output:</b> The UI updates to show the edited details.</p>
-    <img src="images/edit_output.png" alt="Edit Command Output" style="width: 100%;" />
+  <!-- Image Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <img src="images/edit_input.png" alt="Edit Command Input" style="width: 100%;" />
+    </div>
+    <div style="width: 45%;">
+      <img src="images/edit_output.png" alt="Edit Command Output" style="width: 100%;" />
+    </div>
   </div>
+
 </div>
 
 **Tips:**
@@ -256,15 +306,21 @@ After entering the `list` command, all persons stored in the address book will b
 **Example Usage:**
 
 <div style="display: flex; align-items: center; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%;">
     <p><b>Input:</b> User enters the `list` command.</p>
     <img src="images/list_input.png" alt="Command Input Example" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%;">
     <p><b>Output:</b> The UI updates to show all persons.</p>
     <img src="images/list_output.png" alt="Command Output Example" style="width: 100%;" />
   </div>
+
 </div>
+
 
 **Tips:**
 - Use the `list` command whenever you want to view all entries in your address book.
@@ -297,14 +353,19 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 **Example Usage:** `find n/Kim`
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Input:</b> User enters the `find` command to search for persons whose names contain the keyword `Kim`.</p>
-    <img src="images/find_input.png" alt="find input example" style="width: 100%;" />
+    <img src="images/find_input.png" alt="Find input example" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> The UI updates to show persons matching the search keyword.</p>
-    <img src="images/find_output.png" alt="find output example" style="width: 100%;" />
+    <img src="images/find_output.png" alt="Find output example" style="width: 100%;" />
   </div>
+
 </div>
 
 **Tips:**
@@ -329,14 +390,19 @@ Upon entering the command, all entries will be cleared from EduTuTu. A message
 **Example Usage:** `clear`
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Input:</b> User enters the `clear` command to remove all entries.</p>
-    <img src="images/clear_input.png" alt="clear input example" style="width: 100%;" />
+    <img src="images/clear_input.png" alt="Clear input example" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> The UI updates to show that all entries have been cleared.</p>
-    <img src="images/clear_output.png" alt="clear output example" style="width: 100%;" />
+    <img src="images/clear_output.png" alt="Clear output example" style="width: 100%;" />
   </div>
+
 </div>
 
 **Tips:**
@@ -395,14 +461,19 @@ For example, given the following data set with 4 students:
 - 1 student in class 3
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Input:</b> User enters the `pie` command.</p>
-    <img src="images/piecommand.png" alt="pie command input" style="width: 100%;" />
+    <img src="images/piecommand.png" alt="Pie command input" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> A pie chart is displayed, showing the distribution of students in each class.</p>
-    <img src="images/piechart.png" alt="pie chart output" style="width: 100%;" />
+    <img src="images/piechart.png" alt="Pie chart output" style="width: 100%;" />
   </div>
+
 </div>
 
 **Tips:**
@@ -425,14 +496,19 @@ Displays a bar chart showing the number of students who made payments for each m
 * If no payments were made in a given month, the value for that month will be zero.
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Input:</b> User enters the `bar` command.</p>
-    <img src="images/barcommandinput.png" alt="bar command input" style="width: 100%;" />
+    <img src="images/barcommandinput.png" alt="Bar command input" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
-    <p><b>Output:</b> Bar chart displays.</p>
-    <img src="images/barcommand.png" alt="bar chart output" style="width: 100%;" />
+    <p><b>Output:</b> A bar chart displays.</p>
+    <img src="images/barcommand.png" alt="Bar chart output" style="width: 100%;" />
   </div>
+
 </div>
 
 **Tips:**
@@ -481,28 +557,39 @@ Displaying the detailed command window can be done in two ways:
 #### Method 1:
 **Example Usage:**
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Input:</b> User enters the `info 1` command to display detailed information for the first student.</p>
     <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%;" />
   </div>
+
 </div>
 
 #### Method 2:
 **Example Usage:**
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+
+  <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
     <img src="images/infocommandoutput2.png" alt="Info Command Input 2" style="width: 100%;" />
   </div>
+
+  <!-- Output Section -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
+
 </div>
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -541,16 +628,21 @@ Exiting the program can be done in two ways:
 
 #### Method 1:
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
+
+  <!-- Step 1 -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p>1. Click the File button at the top right corner of the window.</p>
     <img src="images/exitcommand.png" alt="Exit Command Step 1" style="width: 100%;" />
   </div>
 
+  <!-- Step 2 -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p>2. Click on the Exit button.</p>
     <img src="images/exitcommand2.png" alt="Exit Command Step 2" style="width: 100%;" />
   </div>
+
 </div>
+
 
 3. The program will close.
 
