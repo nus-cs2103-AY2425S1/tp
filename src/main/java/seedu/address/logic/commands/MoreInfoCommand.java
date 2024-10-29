@@ -73,4 +73,18 @@ public class MoreInfoCommand extends Command {
         moreInfoWindow.show();
         return new CommandResult(SHOWING_MORE_INFO_MESSAGE);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MoreInfoCommand otherMoreInfoCommand)) {
+            return false;
+        }
+
+        return targetName.equals(otherMoreInfoCommand.targetName);
+    }
 }
