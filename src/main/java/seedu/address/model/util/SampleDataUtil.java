@@ -75,8 +75,7 @@ public class SampleDataUtil {
                         "As a software engineer, you will work on a specific project critical to Google’s needs with "
                         + "opportunities to switch teams and projects as you and our fast-paced business grow and "
                         + "evolve. "),
-                getRequirements("Go", "Kubernetes", "Docker", "5YOE"),
-                new HashSet<>()
+                getRequirements("Go", "Kubernetes", "Docker", "5YOE")
         ), new Job(
                 new Name("Software Engineering Manager II, YouTube"),
                 new JobCompany("YouTube"),
@@ -84,15 +83,13 @@ public class SampleDataUtil {
                 new JobDescription(
                         "As a Software Engineering Manager you manage your project goals, contribute to product "
                         + "strategy and help develop your team. "),
-                getRequirements("Leadership", "AGILE", "SDLC", "CICD"),
-                new HashSet<>()
+                getRequirements("Leadership", "AGILE", "SDLC", "CICD")
         ), new Job(
                 new Name("Test Job"),
                 new JobCompany("Test Company"),
                 new JobSalary("300"),
                 new JobDescription(null),
-                getRequirements("TestRequirements"),
-                new HashSet<>()
+                getRequirements("TestRequirements")
         )};
     }
 
