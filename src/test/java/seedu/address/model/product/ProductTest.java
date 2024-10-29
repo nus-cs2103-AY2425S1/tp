@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.product.exceptions.DuplicateProductException;
@@ -17,9 +19,9 @@ public class ProductTest {
         ProductName productName2 = new ProductName("Product B");
 
         StockLevel stockLevel = new StockLevel(0, 0, 80);
-        Product product1 = new Product(productName1, stockLevel);
-        Product product2 = new Product(productName2, stockLevel);
-        Product product3 = new Product(productName1, stockLevel);
+        Product product1 = new Product(productName1, stockLevel, new HashSet<>());
+        Product product2 = new Product(productName2, stockLevel, new HashSet<>());
+        Product product3 = new Product(productName1, stockLevel, new HashSet<>());
 
         // same object -> returns true
         assertTrue(product1.isSameProduct(product1));
@@ -40,9 +42,9 @@ public class ProductTest {
         ProductName productName2 = new ProductName("Product B");
 
         StockLevel stockLevel = new StockLevel(0, 0, 80);
-        Product product1 = new Product(productName1, stockLevel);
-        Product product2 = new Product(productName2, stockLevel);
-        Product product3 = new Product(productName1, stockLevel);
+        Product product1 = new Product(productName1, stockLevel, new HashSet<>());
+        Product product2 = new Product(productName2, stockLevel, new HashSet<>());
+        Product product3 = new Product(productName1, stockLevel, new HashSet<>());
 
         // same values -> returns true
         assertTrue(product1.equals(product3));
@@ -66,9 +68,9 @@ public class ProductTest {
         ProductName productName2 = new ProductName("Product B");
 
         StockLevel stockLevel = new StockLevel(0, 0, 80);
-        Product product1 = new Product(productName1, stockLevel);
-        Product product2 = new Product(productName2, stockLevel);
-        Product product3 = new Product(productName1, stockLevel);
+        Product product1 = new Product(productName1, stockLevel, new HashSet<>());
+        Product product2 = new Product(productName2, stockLevel, new HashSet<>());
+        Product product3 = new Product(productName1, stockLevel, new HashSet<>());
 
         // same values -> returns same hashcode
         assertTrue(product1.hashCode() == product3.hashCode());
@@ -93,7 +95,7 @@ public class ProductTest {
         UniqueProductList uniqueProductList = new UniqueProductList();
         ProductName productName1 = new ProductName("Product A");
         StockLevel stockLevel = new StockLevel(0, 0, 80);
-        Product product1 = new Product(productName1, stockLevel);
+        Product product1 = new Product(productName1, stockLevel, new HashSet<>());
         // add product
         uniqueProductList.add(product1);
         assertTrue(uniqueProductList.contains(product1));
