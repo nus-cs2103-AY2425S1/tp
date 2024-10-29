@@ -172,7 +172,7 @@ public class ParserUtil {
             int claimAmountDollars = Integer.parseInt(claimAmountString[0].trim());
 
             String claimAmountCentsString = claimAmountString[1].trim();
-            if (claimAmountCentsString.length() > 2) {
+            if (claimAmountCentsString.length() != 2) {
                 throw new ParseException(Claim.MESSAGE_INVALID_CENTS);
             }
             int claimAmountCents = Integer.parseInt(claimAmountCentsString);

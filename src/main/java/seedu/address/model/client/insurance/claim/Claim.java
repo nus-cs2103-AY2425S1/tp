@@ -10,9 +10,10 @@ public class Claim {
     public static final String INVALID_CLAIM_ID = "Invalid Claim ID, must follow: "
             + "Letter + 4 digits only.";
 
-    public static final String NEGATIVE_CLAIM_AMOUNT = "Claim Amount cannot be negative";
+    public static final String NEGATIVE_CLAIM_AMOUNT = "Claim Amount cannot be negative.";
     public static final String INVALID_CLAIM_AMOUNT = "Claim about must be in dollars and cents eg. 151.00";
-    public static final String MESSAGE_INVALID_CENTS = "The claim amount can only contain up to 2 digits of cents.";
+    public static final String MESSAGE_INVALID_CENTS = "The claim amount must contain at least and "
+            + "only equal to 2 digits of cents eg. 151.00";
     public static final String MESSAGE_TOO_MANY_DECIMALS = "Too many decimal points in claim amount!";
 
     private final String claimId;
