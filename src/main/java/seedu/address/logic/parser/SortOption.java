@@ -20,58 +20,28 @@ import seedu.address.model.person.comparators.RoleComparator;
  * Contains valid sorting options for the sort command.
  */
 public enum SortOption {
-    NAME("name") {
+    NAME("name", Role.PERSON) {
         @Override
         public Comparator<Person> getComparator() {
             return new NameComparator();
         }
     },
-    HOURS("hours") {
+    HOURS("hours", Role.VOLUNTEER) {
         @Override
         public Comparator<Person> getComparator() {
             return new RoleComparator<>(Volunteer.class);
         }
-
-        @Override
-        public String getRoleAsString() {
-            return Role.VOLUNTEER.toLowerCase();
-        }
-
-        @Override
-        public Class<? extends Person> getRelatedClass() {
-            return Volunteer.class;
-        }
     },
-    DONATION("donations") {
+    DONATION("donations", Role.DONOR) {
         @Override
         public Comparator<Person> getComparator() {
             return new RoleComparator<>(Donor.class);
         }
-
-        @Override
-        public String getRoleAsString() {
-            return Role.DONOR.toLowerCase();
-        }
-
-        @Override
-        public Class<? extends Person> getRelatedClass() {
-            return Donor.class;
-        }
     },
-    PARTNERSHIP_END_DATE("end_date") {
+    PARTNERSHIP_END_DATE("end_date", Role.PARTNER) {
         @Override
         public Comparator<Person> getComparator() {
             return new RoleComparator<>(Partner.class);
-        }
-
-        @Override
-        public String getRoleAsString() {
-            return Role.PARTNER.toLowerCase();
-        }
-
-        @Override
-        public Class<? extends Person> getRelatedClass() {
-            return Partner.class;
         }
     };
     // Add more sorting options here if needed
@@ -83,31 +53,30 @@ public enum SortOption {
 
     private final String value;
     private final Role role;
-    private final Class<? extends Person> relatedClass;
 
     /**
      * Constructs a {@code SortOption}.
      *
      * @param value A valid sort option.
+     * @param role A valid Role associated to the sort option
      */
-    SortOption(String value) {
+    SortOption(String value, Role role) {
         this.value = value;
-        role = Role.PERSON;
-        relatedClass = Person.class;
+        this.role = role;
     }
 
     /*
-     * Returns the role associated to the enum as a string
+     * Returns the Role associated to the sort option as a string
      */
     public String getRoleAsString() {
-        return role.toLowerCase();
+        return role.toLowerCaseString();
     }
 
     /*
-     * Returns the class related to the enum
+     * Returns the class related to the sort option
      */
     public Class<? extends Person> getRelatedClass() {
-        return relatedClass;
+        return role.getRelatedClass();
     }
 
     /**

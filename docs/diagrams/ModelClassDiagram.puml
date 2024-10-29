@@ -21,6 +21,12 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Volunteer
+Class Donor
+Class Partner
+Class Hours
+Class DonatedAmount
+Class Date
 
 Class I #FFFFFF
 }
@@ -50,6 +56,12 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Volunteer -left-|> Person
+Donor -left-|> Person
+Partner -left-|> Person
+Volunteer *-->Hours
+Donor *--> DonatedAmount
+Partner *--> Date
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
