@@ -499,7 +499,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. It is preferred to follow the order of the test cases as they are written as some test cases may depend on the state of the app after the previous test case.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -511,17 +511,28 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file. <br>
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person without a tag
+   1. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
+      Expected: A new person is added to the list. The details of the person are shown in the list.
+
+2. Adding a person with a tag
+   1. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
+      Expected: A new person is added to the list. The details of the person are shown in the list and the "wheelchairBound" tag is shown.
+
+3. Adding a person with a duplicate NRIC
+   1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
+      Expected: No new person is added. Error message is shown in the status bar.
 
 ### Deleting a person
 
@@ -538,12 +549,62 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a person
+1. Finding a person by name
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `find Alice`<br>
+       Expected: Persons with the name Alice are shown in the list. Other persons are hidden.
 
-### Saving data
+2. Finding a person by NRIC
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `find S6516486H`<br>
+        Expected: The person with the NRIC S6516486H is shown in the list. Other persons are hidden.
 
-1. Dealing with missing/corrupted data files
+### Marking a person as called
+1. Mark a person as called by index
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `mark 1`<br>
+    Expected: The person at index 1 is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
+2. Mark a person as called by NRIC
+    1. Test case: `mark S1486256J o/My test note`<br>
+       Expected: The person with NRIC S1486256J is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Call history of a person
+1. Viewing call history of a person by index
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `history 2`<br>
+      Expected: The list is updated to show the call history of the person at index 2.
+2. Viewing call history of a person by NRIC
+   1. Test case: `history S1486256J`<br>
+      Expected: The list is updated to show the call history of the person with NRIC S1486256J. One of which contains the note "My test note".
 
-1. _{ more test cases …​ }_
+### Navigating through command history
+1. Navigating to previous command
+   1. Test case: Press the `UP` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` again will show the previous command in the command history. (`history S1486256J` if followed in order)
+
+2. Navigating to next command
+   1. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history 1` followed by `history S1486256J` in the status bar.
+
+### Data management
+
+1. Data is saved after shutdown
+
+   1. Clear data with the `clear` command.
+   2. Add a new person. Refer to the [Adding a person](#adding-a-person) section.
+   3. Close the app.
+   4. Re-launch the app.<br>
+       Expected: The newly added person is still present.
+
+2. Dealing with missing/corrupted data files
+
+   1. Edit the `data/addressbook.json` file to have a person with an empty NRIC `""`.
+   2. Launch the app.<br>
+       Expected: The app should show an empty list and upon closing the app, the data file should be overwritten with an empty list.
+
+3. Loading sample data
+
+   1. Delete the `data/addressbook.json` file.
+   2. Launch the app.<br>
+       Expected: The app should show a list of sample persons.
