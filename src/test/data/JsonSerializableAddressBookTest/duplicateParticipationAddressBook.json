@@ -6,13 +6,18 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "payment" : "200",
-    "attendance": "10/10/2024",
     "tags" : [ "friends" ]
-  }],
-  "tutorials" : [ {
-    "subject" : "math"
-  }, {
-    "subject" : "math"
   } ],
-  "participations" : []
+  "tutorials" : [  {
+    "subject" : "Math"
+  } ],
+  "participations" : [ {
+    "student" : "Alice Pauline",
+    "tutorial" : "Math",
+    "attendances" : []
+  },  {
+    "student" : "Alice Pauline",
+    "tutorial" : "Math",
+    "attendances" : []
+  }]
 }

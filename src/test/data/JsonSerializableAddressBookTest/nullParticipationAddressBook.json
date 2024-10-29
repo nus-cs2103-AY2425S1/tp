@@ -54,10 +54,5 @@
     "subject" : "Math"
   }, {
     "subject" : "Science"
-  } ],
-  "participations" : [ {
-    "student" : "Alice Pauline",
-    "tutorial" : "Math",
-    "attendances" : []
-  }]
+  } ]
 }
