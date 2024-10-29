@@ -25,6 +25,10 @@
                 </HBox>
 
                 <HBox alignment="TOP_LEFT">
+                    <Label fx:id="description" wrapText="true"/>
+                </HBox>
+
+                <HBox alignment="TOP_LEFT">
                     <Label fx:id="parametersHeader" wrapText="true"/>
                 </HBox>
 

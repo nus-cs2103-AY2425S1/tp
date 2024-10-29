@@ -23,6 +23,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     private Label header;
 
     @FXML
+    private Label description;
+
+    @FXML
     private Label parametersHeader;
 
     @FXML
@@ -93,7 +96,7 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX(M/F) | DATE OF BIRTH(YYYY-MM-DD) | PHONE NO.");
         usageHeader.setText("Command Usage:");
-        usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] h/[HEALTH SERVICE]");
+        usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
         exampleHeader.setText("Example:");
         example.setText("add n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test");
     }
@@ -179,22 +182,20 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      * Shows the help window.
      *
      * @throws IllegalStateException
-     *                               <ul>
-     *                               <li>
-     *                               if this method is called on a thread other than
-     *                               the JavaFX Application Thread.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called during animation or
-     *                               layout processing.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called on the primary stage.
-     *                               </li>
-     *                               <li>
-     *                               if {@code dialogStage} is already showing.
-     *                               </li>
-     *                               </ul>
+     *     <ul>
+     *         <li>
+     *             if this method is called on a thread other than the JavaFX Application Thread.
+     *         </li>
+     *         <li>
+     *             if this method is called during animation or layout processing.
+     *         </li>
+     *         <li>
+     *             if this method is called on the primary stage.
+     *         </li>
+     *         <li>
+     *             if {@code dialogStage} is already showing.
+     *         </li>
+     *     </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
