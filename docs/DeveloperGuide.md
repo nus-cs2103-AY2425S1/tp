@@ -387,16 +387,16 @@ Use case ends.
 
 ---
  
-**Use case:** UC7 - Update Patient’s Priority
+**Use case:** UC7 - Set Patient’s Priority
 
 **MSS:**
-1. User requests MB3 to update a selected patient’s priority.
-2. MB3 updates the patient’s priority and displays a success message.  
+1. User requests MB3 to set a selected patient’s priority.
+2. MB3 sets the patient’s priority and displays a success message.  
    Use case ends.
 
 **Extensions:**
-* 1a. MB3 detects an error when updating the patient’s priority.  
-  * 1a1. MB3 does not update the patient’s priority and shows an error message.  
+* 1a. MB3 detects an error when setting the patient’s priority.  
+  * 1a1. MB3 does not set the patient’s priority and shows an error message.  
 Use case ends.
 
 ---
