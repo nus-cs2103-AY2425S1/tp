@@ -35,6 +35,9 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
+        if (argMultimap.getAllValues(PREFIX_REMINDER).size() > 1) {
+            throw new ParseException(ReminderCommand.MESSAGE_INVALID_REMINDER_TIME);
+        }
 
         return new ReminderCommand(name, reminderTime);
     }
