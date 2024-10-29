@@ -6,7 +6,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 /**
