@@ -25,7 +25,7 @@ public class ListCommand extends Command {
 
     public static final String INVALID_MULTIPLE_ARGUMENTS_MESSAGE =
             String.format("%s should not have multiple arguments (%s and %s) at the same time",
-                    COMMAND_WORD, PREFIX_LIST_ARCHIVE,PREFIX_LIST_ALL);
+                    COMMAND_WORD, PREFIX_LIST_ARCHIVE, PREFIX_LIST_ALL);
 
     public static final String INVALID_NON_EMPTY_ARGUMENT_VALUE_MESSAGE_FORMAT =
             "%s should not have a value right after it";

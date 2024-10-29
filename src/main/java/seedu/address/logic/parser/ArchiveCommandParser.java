@@ -12,11 +12,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
+    private final boolean isArchive;
+
+    public ArchiveCommandParser(boolean isArchive) {
+        this.isArchive = isArchive;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@link ArchiveCommand}
      * and returns an ArchiveCommand object for execution
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public ArchiveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args);
@@ -28,7 +35,7 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
         }
 
-        return new ArchiveCommand(index);
+        return new ArchiveCommand(index, isArchive);
     }
 
 }
