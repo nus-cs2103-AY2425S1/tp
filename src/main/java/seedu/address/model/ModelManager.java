@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
-        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences(), userPrefs.getTagColors());
         currentWeddingName = null;
     }
 
