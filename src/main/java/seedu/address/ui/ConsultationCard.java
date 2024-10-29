@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -37,6 +38,22 @@ public class ConsultationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(consultation.getDate().toString() + ", ");
         time.setText(consultation.getTime().toString());
+
+        // Combine date and time for comparison with current date and time
+        LocalDateTime consultationDateTime = LocalDateTime.of(
+                consultation.getDate().getLocalDateValue(),
+                consultation.getTime().getLocalTimeValue());
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // Set Background to Red if Consultation Date & Time have passed
+        if (consultationDateTime.isBefore(currentDateTime)) {
+            if (displayedIndex % 2 == 0) {
+                cardPane.setStyle("-fx-background-color: #B03434;"); // Light Red
+            } else {
+                cardPane.setStyle("-fx-background-color: #7D1515;"); // Dark Red
+            }
+        }
+
         consultation.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
