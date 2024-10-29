@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddInterestCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -28,20 +29,25 @@ public class AddInterestCommandParserTest {
     public void parseInvalidArgs_missingIndex_throwsParseException() {
         // Test input with missing index
         assertParseFailure(parser, " i/Hiking", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddInterestCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
         // Invalid index provided
         assertParseFailure(parser, "in/a i/Swimming",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterestCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_noInterestsProvided_throwsParseException() {
         // Missing interests in the command
         assertParseFailure(parser, "in/1 i/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterestCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+    @Test
+    public void parse_duplicateInterests_throwsParseException() {
+        String expectedMessage = String.format(AddInterestCommand.MESSAGE_DUPLICATE_INTERESTS, "Reading");
+        assertParseFailure(parser, "addi in/1 i/Reading i/reading", expectedMessage);
     }
 }

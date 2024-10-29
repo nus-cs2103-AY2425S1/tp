@@ -17,12 +17,17 @@ import seedu.address.model.person.Interest;
  * Parses input arguments and creates a new AddInterestCommand object.
  */
 public class AddInterestCommandParser implements Parser<AddInterestCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddInterestCommand
      * and returns an AddInterestCommand object for execution.
+     * This method tokenizes the input arguments, checks for the required index, and validates that there is
+     * at least one interest provided. It normalizes the format of each interest (capitalizing the first letter)
+     * and verifies that there are no duplicate interests within the command (case-insensitive).
      *
-     * @throws ParseException if the user input does not conform to the expected format
+     * @param args User input arguments in the format expected by the AddInterestCommand.
+     * @return An AddInterestCommand object configured with the specified index and interests.
+     * @throws ParseException if the user input does not conform to the expected format, if the index is missing or
+     *                        invalid, or if there are duplicate interests within the input.
      */
     public AddInterestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_INTEREST);
@@ -45,13 +50,30 @@ public class AddInterestCommandParser implements Parser<AddInterestCommand> {
         }
 
         Set<Interest> interests = new HashSet<>();
+        Set<String> normalizedInterests = new HashSet<>(); // to check for duplicates within command
+
         for (String interestStr : interestStrings) {
-            Interest interest = ParserUtil.parseInterest(interestStr);
-            if (!interests.add(interest)) {
-                throw new ParseException(AddInterestCommand.MESSAGE_DUPLICATE_INTERESTS);
+            // Normalize the interest to have only the first letter capitalized
+            String normalizedInterestStr = capitalizeFirstLetter(interestStr);
+
+            if (!normalizedInterests.add(normalizedInterestStr)) {
+                // If interest is already in normalizedInterests, throw a duplicate within command error
+                throw new ParseException(String.format(AddInterestCommand.MESSAGE_DUPLICATE_INTERESTS,
+                        normalizedInterestStr));
             }
+
+            Interest interest = ParserUtil.parseInterest(normalizedInterestStr);
+            interests.add(interest);
         }
 
         return new AddInterestCommand(index, interests);
     }
+
+    private String capitalizeFirstLetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
 }
+
