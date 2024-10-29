@@ -48,13 +48,14 @@ public class JsonReminderAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class,
-                     () -> readReminderAddressBook("notJsonFormatReminderAddressBook.json"));
+        assertThrows(DataLoadingException.class, () ->
+                     readReminderAddressBook("notJsonFormatReminderAddressBook.json"));
     }
 
     @Test
     public void readReminderAddressBook_invalidReminderAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readReminderAddressBook("invalidReminderAddressBook.json"));
+        assertThrows(DataLoadingException.class, () ->
+                     readReminderAddressBook("invalidReminderAddressBook.json"));
     }
 
     @Test
