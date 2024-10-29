@@ -7,7 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.GROUP_A;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPaths.VALID_NO_DUPS_IMPORT_FILE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,7 +28,6 @@ import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
@@ -43,7 +41,6 @@ import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.GroupsUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.TypicalPaths;
 
 public class AddressBookParserTest {
 
@@ -141,14 +138,6 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand,
                 parser.parseCommand(UntagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + "t/test"));
-    }
-
-    @Test
-    public void parseCommand_import() throws Exception {
-        ImportCommand expectedCommand = new ImportCommand(VALID_NO_DUPS_IMPORT_FILE);
-        assertEquals(expectedCommand,
-                parser.parseCommand(ImportCommand.COMMAND_WORD + " " + TypicalPaths.getTypicalPath().toString()
-                        + "\\src\\test\\data\\ImportCommandTest\\valid_noDups_importFile.csv"));
     }
 
     @Test

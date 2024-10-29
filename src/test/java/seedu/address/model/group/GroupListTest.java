@@ -2,6 +2,7 @@ package seedu.address.model.group;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.GROUP_A;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.TypicalGroups.GROUP_B;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -167,4 +169,65 @@ public class GroupListTest {
     public void toStringMethod() {
         assertEquals(groupList.asUnmodifiableObservableList().toString(), groupList.toString());
     }
+
+    @Test
+    public void iterator_emptyList_returnsEmptyIterator() {
+        assertFalse(groupList.iterator().hasNext());
+    }
+
+    @Test
+    public void iterator_nonEmptyList_returnsIterator() {
+        groupList.add(GROUP_A);
+        Iterator<Group> iterator = groupList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(GROUP_A, iterator.next());
+    }
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(groupList.equals(groupList));
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        assertFalse(groupList.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(groupList.equals("Not a GroupList"));
+    }
+
+    @Test
+    public void equals_differentGroupLists_returnsFalse() {
+        GroupList otherGroupList = new GroupList();
+        otherGroupList.add(GROUP_B);
+        assertFalse(groupList.equals(otherGroupList));
+    }
+
+    @Test
+    public void equals_sameGroupLists_returnsTrue() {
+        GroupList otherGroupList = new GroupList();
+        groupList.add(GROUP_A);
+        otherGroupList.add(GROUP_A);
+        assertTrue(groupList.equals(otherGroupList));
+    }
+
+    @Test
+    public void hashCode_sameGroupLists_returnsSameHashCode() {
+        GroupList otherGroupList = new GroupList();
+        groupList.add(GROUP_A);
+        otherGroupList.add(GROUP_A);
+        assertEquals(groupList.hashCode(), otherGroupList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentGroupLists_returnsDifferentHashCode() {
+        GroupList otherGroupList = new GroupList();
+        groupList.add(GROUP_A);
+        otherGroupList.add(GROUP_B);
+        assertNotEquals(groupList.hashCode(), otherGroupList.hashCode());
+    }
+
+
+
 }

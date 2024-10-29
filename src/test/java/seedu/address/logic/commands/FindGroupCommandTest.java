@@ -84,7 +84,42 @@ public class FindGroupCommandTest {
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
 
     }
+    @Test
+    public void equals_nonNullGroupPredicate_returnsCorrectComparison() {
+        GroupContainsKeywordsPredicate firstGroupPredicate =
+                new GroupContainsKeywordsPredicate(Collections.singletonList("keyword"));
+        GroupContainsKeywordsPredicate secondGroupPredicate =
+                new GroupContainsKeywordsPredicate(Collections.singletonList("differentKeyword"));
 
+        FindGroupCommand commandWithFirstPredicate = new FindGroupCommand(firstGroupPredicate);
+        FindGroupCommand commandWithSecondPredicate = new FindGroupCommand(secondGroupPredicate);
+
+        // Same predicate, should return true
+        assertTrue(commandWithFirstPredicate.equals(new FindGroupCommand(firstGroupPredicate)));
+
+        // Different predicate, should return false
+        assertFalse(commandWithFirstPredicate.equals(commandWithSecondPredicate));
+    }
+
+    @Test
+    public void execute_nonNullGroupPredicate_updatesFilteredGroupList() {
+        // Set up the predicate and command
+        GroupContainsKeywordsPredicate predicate = prepareGroupPredicate("gooners");
+        FindGroupCommand command = new FindGroupCommand(predicate);
+
+        // Add a group to both models
+        model.addGroup(GOONERS);
+        expectedModel.addGroup(GOONERS);
+
+        // Expected message after filtering
+        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW,
+                expectedModel.getFilteredGroupList().size());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+
+        // Verify that the command executes successfully
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(expectedModel.getFilteredGroupList(), model.getFilteredGroupList());
+    }
 
     @Test
     public void toStringMethod() {
