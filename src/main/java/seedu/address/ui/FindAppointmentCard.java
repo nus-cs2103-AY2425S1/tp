@@ -15,7 +15,7 @@ import java.util.Comparator;
  */
 public class FindAppointmentCard extends UiPart<Region> {
 
-    private static final String FXML = "FindPersonCard.fxml";
+    private static final String FXML = "FindAppointmentCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

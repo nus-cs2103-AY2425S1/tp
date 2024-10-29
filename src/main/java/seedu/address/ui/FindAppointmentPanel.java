@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Panel containing the list of persons.
  */
 public class FindAppointmentPanel extends UiPart<Region> {
-    private static final String FXML = "FindPersonList.fxml";
+    private static final String FXML = "FindAppointmentList.fxml";
     private final Logger logger = LogsCenter.getLogger(FindAppointmentPanel.class);
 
     @FXML
