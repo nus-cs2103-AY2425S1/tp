@@ -23,15 +23,15 @@ public class UnEnrollCommand extends Command {
 
     public static final String COMMAND_WORD = "unenroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student to a tutorial"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student to a tutorial\n"
             + "Parameters: "
             + "INDEX (Must be a positive integer) "
-            + PREFIX_TUTORIAL + "TUTORIAL "
+            + PREFIX_TUTORIAL + "TUTORIAL \n"
             + "Example: " + COMMAND_WORD + " "
-            + "2"
+            + "2 "
             + PREFIX_TUTORIAL + "physics";
     public static final String MESSAGE_SUCCESS = "%1$s(student) no longer enrolled in %2$s(tutorial)";
-    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "This person are not in this tutorial currently";
+    public static final String MESSAGE_NO_SUCH_PARTICIPATION = "This person is not enrolled in this tutorial";
 
     private final Index index;
     private final String subject;
