@@ -103,14 +103,13 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different owedAmount -> returns false
-        editedAlice = new StudentBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different paidAmount -> returns false
         editedAlice = new StudentBuilder(ALICE).withPaidAmount(VALID_PAID_AMOUNT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different owedAmount -> returns false
+        editedAlice = new StudentBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
