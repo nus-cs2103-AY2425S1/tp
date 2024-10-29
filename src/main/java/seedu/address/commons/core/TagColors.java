@@ -1,8 +1,8 @@
 package seedu.address.commons.core;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.io.Serializable;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Immutable wrapper that tracks the available colors Tags can take in the GUI
