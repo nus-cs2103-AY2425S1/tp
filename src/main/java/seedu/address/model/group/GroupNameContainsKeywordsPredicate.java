@@ -24,7 +24,7 @@ public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
             .anyMatch(keyword -> {
                 GroupName groupName = group.getGroupName();
                 String groupNameString = groupName.getGroupName().toLowerCase();
-                return FuzzySearch.ratio(groupNameString, keyword.toLowerCase()) > MATCH_RATIO;
+                return FuzzySearch.tokenSortPartialRatio(groupNameString, keyword.toLowerCase()) > MATCH_RATIO;
             });
     }
 

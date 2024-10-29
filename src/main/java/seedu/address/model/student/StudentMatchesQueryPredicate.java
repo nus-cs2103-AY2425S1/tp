@@ -20,12 +20,12 @@ public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
-        return FuzzySearch.ratio(student.getStudentNumber().toString().toLowerCase(), keyword) > MATCH_RATIO
-            || FuzzySearch.ratio(student.getName().toString().toLowerCase(), keyword) > MATCH_RATIO
-            || FuzzySearch.ratio(student.getEmail().toString().toLowerCase(), keyword) > MATCH_RATIO
-            || FuzzySearch.ratio(student.getGroupName().toString().toLowerCase(), keyword) > MATCH_RATIO
+        return FuzzySearch.tokenSortPartialRatio(student.getStudentNumber().toString().toLowerCase(), keyword) > MATCH_RATIO
+            || FuzzySearch.tokenSortPartialRatio(student.getName().toString().toLowerCase(), keyword) > MATCH_RATIO
+            || FuzzySearch.tokenSortPartialRatio(student.getEmail().toString().toLowerCase(), keyword) > MATCH_RATIO
+            || FuzzySearch.tokenSortPartialRatio(student.getGroupName().toString().toLowerCase(), keyword) > MATCH_RATIO
             || student.getTags().stream().anyMatch(tag ->
-            FuzzySearch.ratio(tag.toString().toLowerCase(), keyword) > MATCH_RATIO);
+            FuzzySearch.tokenSortPartialRatio(tag.toString().toLowerCase(), keyword) > MATCH_RATIO);
     }
 
     @Override
