@@ -71,7 +71,6 @@ administrators.
 <div style="page-break-after: always;"></div>
 
 ## 2. Command Instructions
-
 ### Command Format Guidelines
 
 * ` `: Commands format is indicated in the shaded boxes.
@@ -108,7 +107,7 @@ Shows a message explaining how to access the help page.
 
 ### 2.2 Adding a Person: `add`
 
-Adds a person to EduTuTu.
+Adds a person to EduTuTu with their name, phone number, email, address, fees, and class ID.
 
 **Command Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
 
@@ -124,9 +123,7 @@ Adds a person to EduTuTu.
 ![Ui](images/add_output.png)
 
 **Tips:**
-- Use the `add` command to add a new person with their name, phone number, email, address, fees, and class ID.
 - Tags can be added to classify or group persons for easier management.
-- The `add` command is helpful when setting up new contacts in EduTuTu.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -149,12 +146,6 @@ Deletes the specified person from the address book.
 ![Ui](images/delete_input.png)
 *Output: The UI updates to reflect the deletion of the person.*  
 ![Ui](images/delete_output.png)
-
-
-**Tips:**
-- Use the `delete` command to remove outdated or incorrect entries from the address book.
-- Make sure to confirm the index number before deleting to avoid removing the wrong person.
-- The `delete` command is especially useful when cleaning up your list of contacts.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -203,11 +194,6 @@ Edits an existing person in the address book.
 *Output: The UI updates to show the edited details.*  
 ![Ui](images/edit_output.png)
 
-**Tips:**
-- Use the `edit` command to update a person’s details when changes occur.
-- Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
-- The `edit` command is particularly useful for keeping contact information up to date.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -229,7 +215,6 @@ After entering the `list` command, all persons stored in the address book will b
 ![Command Output Example](images/list_output.png)  
 
 **Tips:**
-- Use the `list` command whenever you want to view all entries in your address book.
 - The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
 
 [Back to Table of Contents](#table-of-contents)
@@ -262,10 +247,6 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 *Output: The UI updates to show persons matching the search keyword.*  
 ![find image](images/find_output.png)
 
-**Tips:**
-- Use the `find` command to quickly locate persons based on their names or class IDs.
-- The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -288,7 +269,6 @@ Upon entering the command, all entries will be cleared from EduTuTu. A message
 ![Ui](images/clear_output.png)
 
 **Tips:**
-- Use the `clear` command when you want to start fresh with an empty address book.
 - Be careful when using this command, as it permanently deletes all current entries.
 - Consider exporting your data before using the `clear` command if you need a backup.
 
@@ -321,7 +301,6 @@ The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redocommandinput.png)
 
 **Tips:**
-- Use the `undo` command immediately after making a change you wish to revert. This is helpful if you've added, deleted, or modified an entry by mistake.
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
 - Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive backups, consider exporting your data regularly.
 - Both `undo` and `redo` can be accessed through the toolbar in the GUI for quick navigation.
@@ -348,7 +327,6 @@ For example, given the following data set with 4 students:
 ![Ui](images/piechart.png)
 
 **Tips:**
-- Use the `pie` command to get a quick overview of class sizes, which is particularly useful for planning and class allocation.
 - Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
 
 [Back to Table of Contents](#table-of-contents)
@@ -371,7 +349,6 @@ Command Format: `bar`
 
 **Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
-- This feature can help tuition center administrators manage cash flow and forecast future payment periods.
 - Ensure that all payment records are updated for accurate chart visualisation.
 
 [Back to Table of Contents](#table-of-contents)
@@ -388,10 +365,6 @@ Allows users to quickly access previously entered commands using the up and down
 * Press the **up arrow key** to cycle back through previously entered commands.
 * Press the **down arrow key** to move forward through the command history.
 * This feature is useful for repeating recent commands without needing to retype them.
-
-**Tips:**
-- Use the arrow keys to quickly correct or modify a recent command.
-- This feature can save time when you need to execute similar commands repeatedly.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -470,11 +443,6 @@ Method 2:
    ![Ui](images/exitcommandinput.png)
 
 2. The program will close.
-
-**Tips:**
-
-- Use the exit command when you want to close the program quickly through the command box.
-- Both methods achieve the same result, so use whichever is more convenient.
 
 [Back to Table of Contents](#table-of-contents)
 
