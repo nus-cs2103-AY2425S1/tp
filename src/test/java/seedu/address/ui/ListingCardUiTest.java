@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -67,6 +68,24 @@ public class ListingCardUiTest extends ApplicationTest {
     }
 
     @Test
+    void listingCard_uiComponentsAreVisible() {
+        assertNotNull(listingCard.getName());
+        assertNotNull(listingCard.getPrice());
+        assertNotNull(listingCard.getArea());
+        assertNotNull(listingCard.getRegion());
+        assertNotNull(listingCard.getAddress());
+        assertNotNull(listingCard.getSeller());
+
+        assertTrue(listingCard.getName().isVisible());
+        assertTrue(listingCard.getPrice().isVisible());
+        assertTrue(listingCard.getArea().isVisible());
+        assertTrue(listingCard.getRegion().isVisible());
+        assertTrue(listingCard.getAddress().isVisible());
+        assertTrue(listingCard.getSeller().isVisible());
+    }
+
+
+    @Test
     void listingCard_displayCorrectDetails() {
         // Assert that the listing object is not null
         assertNotNull(listingCard.listing);
@@ -80,6 +99,81 @@ public class ListingCardUiTest extends ApplicationTest {
         assertEquals("123 Main St", listingCard.getAddress().getText());
         assertEquals("John Seller", listingCard.getSeller().getText());
     }
+
+    @Test
+    void listingCard_handlesDifferentIndexes() {
+        // Test ListingCard with various indexes
+        ListingCard listingCardIndex5 = new ListingCard(sampleListing, 5);
+        assertEquals("5. ", listingCardIndex5.getId().getText());
+
+        ListingCard listingCardIndex10 = new ListingCard(sampleListing, 10);
+        assertEquals("10. ", listingCardIndex10.getId().getText());
+    }
+
+    @Test
+    void listingCard_displaysZeroPrice() {
+        Listing listingZeroPrice = new Listing(
+                new Name("Zero Price Listing"),
+                new Address("456 Main St"),
+                new Price("0", BigDecimal.ZERO),
+                new Area(100),
+                Region.NORTH,
+                sampleSeller,
+                null
+        );
+
+        ListingCard listingCardZeroPrice = new ListingCard(listingZeroPrice, 1);
+        assertEquals("$0", listingCardZeroPrice.getPrice().getText());
+    }
+
+    @Test
+    void listingCard_displaysDecimalPrice() {
+        Listing listingDecimalPrice = new Listing(
+                new Name("Decimal Price Listing"),
+                new Address("789 Main St"),
+                new Price("150000.50", new BigDecimal("150000.50")),
+                new Area(200),
+                Region.SOUTH,
+                sampleSeller,
+                null
+        );
+
+        ListingCard listingCardDecimalPrice = new ListingCard(listingDecimalPrice, 1);
+        assertEquals("$150000.50", listingCardDecimalPrice.getPrice().getText());
+    }
+
+    @Test
+    void listingCard_displaysCorrectArea() {
+        Listing listingLargeArea = new Listing(
+                new Name("Large Area Listing"),
+                new Address("123 Large St"),
+                new Price("750000", new BigDecimal(750000)),
+                new Area(500),
+                Region.EAST,
+                sampleSeller,
+                null
+        );
+
+        ListingCard listingCardLargeArea = new ListingCard(listingLargeArea, 1);
+        assertEquals("500 m²", listingCardLargeArea.getArea().getText());
+    }
+
+    @Test
+    void listingCard_displaysCorrectRegion() {
+        Listing listingDifferentRegion = new Listing(
+                new Name("Region Listing"),
+                new Address("789 Region St"),
+                new Price("600000", new BigDecimal(600000)),
+                new Area(150),
+                Region.WEST,
+                sampleSeller,
+                null
+        );
+
+        ListingCard listingCardDifferentRegion = new ListingCard(listingDifferentRegion, 1);
+        assertEquals("WEST", listingCardDifferentRegion.getRegion().getText());
+    }
+
 
     /**
      * Helper method to create a sample Listing object for testing.
