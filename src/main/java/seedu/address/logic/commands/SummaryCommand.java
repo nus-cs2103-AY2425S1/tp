@@ -10,6 +10,8 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Transaction;
 
@@ -43,8 +45,13 @@ public class SummaryCommand extends Command {
         this.endMonth = end;
     }
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getIsViewTransactions()) {
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, COMMAND_WORD));
+        }
+
         LocalDate startDate = startMonth.atDay(1);
         LocalDate endDate = endMonth.atEndOfMonth();
 

@@ -111,6 +111,16 @@ public class AddTransactionCommandTest {
         assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        Transaction transactionToAdd = new Transaction("buy raw materials", -100,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "addt");
+        assertCommandFailure(addTransactionCommand, model, expectedMessage);
+    }
+
 
     @Test
     public void equals() {

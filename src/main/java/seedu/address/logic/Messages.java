@@ -28,6 +28,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format!\nMonth format: yyyy-MM";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
             + "Start date must be before or equal to end date";
+    public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!";
+    public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

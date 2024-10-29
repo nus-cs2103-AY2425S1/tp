@@ -43,6 +43,11 @@ public class FindTransactionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getIsViewTransactions()) {
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
         if (personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -50,7 +55,6 @@ public class FindTransactionCommand extends Command {
         Person targetPerson = lastShownList.get(personIndex.getZeroBased());
         List<Transaction> targetTransactions = targetPerson.getTransactions();
         model.updateFilteredPersonList(new IsSelectedPredicate(model, personIndex));
-        model.setViewTransactions(true);
         model.updateTransactionList(targetTransactions);
         model.updateTransactionListPredicate(predicate);
         return new CommandResult(
