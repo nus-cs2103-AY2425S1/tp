@@ -18,11 +18,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Subject;
-import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Subject;
+import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 
 public class TagCommandParserTest {
 
@@ -35,7 +35,7 @@ public class TagCommandParserTest {
 
         String userInput = NAME_DESC_BOB + SUBJECT_DESC_MATH + LEVEL_DESC_S1_EXPRESS;
 
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder()
                 .withSubjects(VALID_SUBJECT_MATH)
                 .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .build();
@@ -49,7 +49,7 @@ public class TagCommandParserTest {
     public void parse_onlySubjectPresent_success() {
 
         String userInput = NAME_DESC_BOB + SUBJECT_DESC_MATH;
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder()
                 .withSubjects(VALID_SUBJECT_MATH)
                 .build();
 
@@ -61,7 +61,7 @@ public class TagCommandParserTest {
     public void parse_onlyLevelPresent_success() {
 
         String userInput = NAME_DESC_BOB + LEVEL_DESC_S1_EXPRESS;
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder()
                 .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .build();
 
@@ -73,7 +73,7 @@ public class TagCommandParserTest {
     public void parse_multipleSubjects_success() {
 
         String userInput = NAME_DESC_BOB + SUBJECT_DESC_MATH + SUBJECT_DESC_ENGLISH;
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder()
                 .withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH)
                 .build();
 

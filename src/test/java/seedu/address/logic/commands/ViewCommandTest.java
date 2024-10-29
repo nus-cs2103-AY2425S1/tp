@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
@@ -33,17 +33,17 @@ public class ViewCommandTest {
     @Test
     public void execute_showsSameList() {
         CommandResult expectedCommandResult = new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS,
-                model.getAddressBook().getPersonList().get(0).getName()),
-                model.getAddressBook().getPersonList().get(0));
-        assertCommandSuccess(new ViewCommand(model.getAddressBook().getPersonList().get(0).getName()),
+                model.getAddressBook().getStudentList().get(0).getName()),
+                model.getAddressBook().getStudentList().get(0));
+        assertCommandSuccess(new ViewCommand(model.getAddressBook().getStudentList().get(0).getName()),
                 model, expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonName_failure() {
+    public void execute_invalidStudentName_failure() {
         Name invalidName = new Name("FancyPants");
         ViewCommand viewCommand = new ViewCommand(invalidName);
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
     }
 
     @Test
@@ -64,8 +64,7 @@ public class ViewCommandTest {
         // null -> returns false
         assertFalse(viewAmyCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(viewAmyCommand.equals(viewBobCommand));
     }
-
 }

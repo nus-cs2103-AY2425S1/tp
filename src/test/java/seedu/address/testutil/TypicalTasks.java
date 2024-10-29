@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.task.Task;
+import seedu.address.model.student.task.Task;
 
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.

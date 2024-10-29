@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 
 /**
  * A utility class to help with building Task objects

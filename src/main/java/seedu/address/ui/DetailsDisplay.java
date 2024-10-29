@@ -7,10 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * A UI component that displays details of a specific {@code Person}.
+ * A UI component that displays details of a specific {@code Student}.
  */
 public class DetailsDisplay extends UiPart<Region> {
 
@@ -24,7 +24,7 @@ public class DetailsDisplay extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -48,22 +48,22 @@ public class DetailsDisplay extends UiPart<Region> {
     private FlowPane lessonTimes;
 
     /**
-     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
-    public DetailsDisplay(Person person) {
+    public DetailsDisplay(Student student) {
         super(FXML);
-        this.person = person;
-        name.setText(person.getName().fullName);
-        phone.setText("Phone number: " + person.getPhone().value);
-        emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
-        address.setText("Address: " + person.getAddress().value);
-        note.setText(person.getNote().value);
-        person.getSubjects().stream()
+        this.student = student;
+        name.setText(student.getName().fullName);
+        phone.setText("Phone number: " + student.getPhone().value);
+        emergencyContact.setText("Emergency Contact: " + student.getEmergencyContact().value);
+        address.setText("Address: " + student.getAddress().value);
+        note.setText(student.getNote().value);
+        student.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
-                        .add(new Label(person.getLevel().levelName + " " + subject.subjectName)));
-        tasks.setText(person.getTaskList().toDescription());
-        person.getLessonTimes().forEach(lessonTime ->
+                        .add(new Label(student.getLevel().levelName + " " + subject.subjectName)));
+        tasks.setText(student.getTaskList().toDescription());
+        student.getLessonTimes().forEach(lessonTime ->
                 lessonTimes.getChildren().add(new Label(lessonTime.toString())));
     }
 }

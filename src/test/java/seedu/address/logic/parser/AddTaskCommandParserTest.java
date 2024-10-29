@@ -22,10 +22,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddTaskCommand;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 import seedu.address.testutil.TaskBuilder;
 
 public class AddTaskCommandParserTest {

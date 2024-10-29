@@ -12,8 +12,8 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueStudentList
+Class Student
 Class Address
 Class EmergencyContact
 Class LessonTime
@@ -43,24 +43,24 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> "1"Name
-Person *--> "1"Phone
-Person *--> "1"EmergencyContact
-Person *--> "1"Address
-Person *--> "1"Note
-Person *--> "1   "Level
-Person *--> "*" Subject
-Person *--> "*" LessonTime
-Person *-right-> "1"TaskList
+AddressBook *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
+Student *--> "1"Name
+Student *--> "1"Phone
+Student *--> "1"EmergencyContact
+Student *--> "1"Address
+Student *--> "1"Note
+Student *--> "1   "Level
+Student *--> "*" Subject
+Student *--> "*" LessonTime
+Student *-right-> "1"TaskList
 
 TaskList "1     "-right-> "*" Task
 Task *-right-> "1"TaskDescription
 Task *-up-> "1"TaskDeadline
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Student -[hidden]up--> I
+UniqueStudentList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> EmergencyContact
@@ -70,8 +70,8 @@ Note -[hidden]right-> Level
 Level -[hidden]right-> Subject
 Subject -[hidden]right-> LessonTime
 
-Person -[hidden]right-> J
+Student -[hidden]right-> J
 TaskList -[hidden]down-> J
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Student
 @enduml

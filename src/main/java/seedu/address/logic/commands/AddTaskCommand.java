@@ -10,21 +10,21 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.LessonTime;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskList;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.EmergencyContact;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskList;
 import seedu.address.ui.Ui.UiState;
 
 /**
- * Adds a task to a person in the address book.
+ * Adds a task to a student in the address book.
  */
 public class AddTaskCommand extends Command {
 
@@ -37,14 +37,14 @@ public class AddTaskCommand extends Command {
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE (YYYY-MM-DD)";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s for Student %2$s by %3$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "This student does not exist in the address book.";
     public static final String MESSAGE_DUPLICATE_TASK = "Task already exists in the student's task list!";
 
     private final Name name;
     private final Task taskToAdd;
 
     /**
-     * Creates an AddTaskCommand to add the specified {@code Task} to a {@code Person}.
+     * Creates an AddTaskCommand to add the specified {@code Task} to a {@code Student}.
      */
     public AddTaskCommand(Name name, Task task) {
         requireNonNull(name);
@@ -57,41 +57,41 @@ public class AddTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person targetPerson = model.getPersonByName(name);
-        if (targetPerson == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        Student targetStudent = model.getStudentByName(name);
+        if (targetStudent == null) {
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 
-        if (targetPerson.getTaskList().contains(taskToAdd)) {
+        if (targetStudent.getTaskList().contains(taskToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        Person updatedPerson = createUpdatedPerson(targetPerson, taskToAdd);
+        Student updatedStudent = createUpdatedStudent(targetStudent, taskToAdd);
 
-        model.setPerson(targetPerson, updatedPerson);
+        model.setStudent(targetStudent, updatedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()),
+                taskToAdd.getTaskDescription(), targetStudent.getName(), taskToAdd.getTaskDeadline()),
                 UiState.DETAILS);
     }
 
     /**
-     * Creates a new Copy of {@code targetPerson} that contains {@code taskToAdd}
-     * @param targetPerson the {@code Person} to be updated
-     * @param taskToAdd the {@code Task} to be added into the targetPerson
+     * Creates a new Copy of {@code targetStudent} that contains {@code taskToAdd}
+     * @param targetStudent the {@code Student} to be updated
+     * @param taskToAdd the {@code Task} to be added into the targetStudent
      * @return
      */
-    private static Person createUpdatedPerson(Person targetPerson, Task taskToAdd) {
-        Name name = targetPerson.getName();
-        Phone phone = targetPerson.getPhone();
-        EmergencyContact emergencyContact = targetPerson.getEmergencyContact();
-        Address address = targetPerson.getAddress();
-        Note note = targetPerson.getNote();
-        Set<Subject> subjects = targetPerson.getSubjects();
-        Level level = targetPerson.getLevel();
-        TaskList taskList = targetPerson.getTaskList().copy();
+    private static Student createUpdatedStudent(Student targetStudent, Task taskToAdd) {
+        Name name = targetStudent.getName();
+        Phone phone = targetStudent.getPhone();
+        EmergencyContact emergencyContact = targetStudent.getEmergencyContact();
+        Address address = targetStudent.getAddress();
+        Note note = targetStudent.getNote();
+        Set<Subject> subjects = targetStudent.getSubjects();
+        Level level = targetStudent.getLevel();
+        TaskList taskList = targetStudent.getTaskList().copy();
         taskList.add(taskToAdd);
-        Set<LessonTime> lessonTimes = targetPerson.getLessonTimes();
-        return new Person(name, phone, emergencyContact,
+        Set<LessonTime> lessonTimes = targetStudent.getLessonTimes();
+        return new Student(name, phone, emergencyContact,
                 address, note, subjects, level, taskList, lessonTimes);
     }
 

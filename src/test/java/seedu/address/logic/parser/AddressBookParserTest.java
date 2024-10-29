@@ -15,9 +15,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTIO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,20 +36,20 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.UpdateCommand;
-import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.predicate.NameContainsKeywordsPredicate;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
+import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 
 public class AddressBookParserTest {
@@ -58,9 +58,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        assertEquals(new AddCommand(student), command);
     }
 
     @Test
@@ -81,24 +81,24 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_deleteTask() throws Exception {
         DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
                 DeleteTaskCommand.COMMAND_WORD + " " + NAME_DESC_AMY + TASK_INDEX_DESC);
-        assertEquals(new DeleteTaskCommand(new Name(VALID_NAME_AMY), INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteTaskCommand(new Name(VALID_NAME_AMY), INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_update() throws Exception {
-        Person person = new PersonBuilder().build();
-        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(student).build();
         UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
-                + person.getName() + " " + PersonUtil.getUpdatePersonDescriptorDetails(descriptor));
-        assertEquals(new UpdateCommand(person.getName(), descriptor), command);
+                + student.getName() + " " + StudentUtil.getUpdateStudentDescriptorDetails(descriptor));
+        assertEquals(new UpdateCommand(student.getName(), descriptor), command);
     }
 
     @Test
