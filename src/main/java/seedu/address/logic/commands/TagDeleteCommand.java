@@ -24,13 +24,13 @@ public class TagDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-del";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Deletes the specified tag from the person identified "
+            + ": Deletes the specified wedding tag from the person identified "
             + "by their name.\n"
             + "Also deletes them as participant from the wedding given by specified tag.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
-            + "n/NAME & NAME t/[TAG]\n"
+            + "n/NAME & NAME t/[WEDDINGTAG]\n"
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "
             + "t/ Jane Lim & Tom Koh";
 

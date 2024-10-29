@@ -24,28 +24,28 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
+3. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/gui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete n/John Doe` followed by `delete-y` : Deletes the contact named John Doe in the contacts list.
+   * `del n/John Doe` followed by `y` : Deletes the contact named John Doe in the contacts list.
 
-   * `clear` : Deletes all contacts.
+   * `clear-ab` : Deletes all contacts in addressbook.
 
    * `exit` : Exits Knotty Planner.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,6 +57,8 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `Jonus Ho & Izzat Syazani`, `stacy & sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -85,14 +87,14 @@ You can add a person to the list of contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
-![add message](images/addMsg.png)
-
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in.
 
 </box>
+
+![add message](images/addMsg.png)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
@@ -110,7 +112,7 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
-Format: `add-wedding w/NAME & NAME v/VENUE d/DATE`
+Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
 <box type="tip" seamless>
 
@@ -121,8 +123,8 @@ Format: `add-wedding w/NAME & NAME v/VENUE d/DATE`
 ![add wedding message](images/addWeddingMsg.png)
 
 Examples:
-* `add-wedding w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
-* `add-wedding w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
+* `add-wed w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
+* `add-wed w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
 ### Editing A Contact : `edit`
 
@@ -155,6 +157,8 @@ Format: `tag-add n/NAME t/TAG...`
 
 <box type="tip" seamless>
 
+**IMPORTANT:** The wedding must be added into the wedding book to successfully tag a person to a wedding
+
 **Tip #1:** The name of the tag must match the wedding that you want to add the contact to.
 
 **Tip #2:** You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
@@ -183,8 +187,8 @@ Format: `tag-delete n/NAME t/TAG...`
 ![tag-delete message](images/tagdeleteMsg.png)
 
 Examples:
-*  `tag-delete n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
-*  `tag-delete n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
+*  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
+*  `tag-del n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
 ### Filtering Contacts by Job: `filter`
 
@@ -207,33 +211,33 @@ Examples:
 * `filter n/caterer` returns `Adam` whose job is a caterer
 * `filter n/John` returns `John` whose name is John
 
-### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
+### Deleting A Contact : `del` followed by `y` or `n`
 
 You can delete a person from your list of contacts.
 
 * Deletes the person with the specified `NAME` from the address book.
 * The contact's details are shown for confirmation.
-* The contact is deleted if `delete-y` is entered.
-* The contact is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
+* The contact is deleted if `y` is entered.
+* The contact is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `delete n/NAME` followed by `delete-y` or `delete-n`
+Format: `del n/NAME` followed by `y` or `n`
 
-**IMPORTANT:** `delete n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be 
+**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be 
 affected.
 
 ![delete message](images/deleteMsg.png)
 
 Examples:
-* `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
-* `delete n/John Doe` followed by `delete-n` cancels the delete operation.
+* `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
+* `del n/John Doe` followed by `n` cancels the delete operation.
 
-### Clearing all entries : `clear-addressbook` & `clear-weddingbook`
+### Clearing all entries : `clear-ab` & `clear-wb`
 
 You can delete ALL contacts in the address book from the application.
 
 Format: 
-* `clear-addressbook` clears all contacts in address book.
-* `clear-weddingbook` clears all weddings in wedding book.
+* `clear-ab` clears all contacts in address book.
+* `clear-wb` clears all weddings in wedding book.
 
 ![clear message](images/clearMsg.png)
 
@@ -258,7 +262,8 @@ There is no need to save manually.
 **<span style="color: red;">Caution:</span>**
 * If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+
+* </box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -282,15 +287,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action            | Format, Examples
-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June`
-**Add Wedding**   | `add w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`
-**Clear**         | `clear`
-**Delete**        | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
-**Edit**          | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`
-**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`
-**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June & James`
-**Filter**          | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`
-**List**          | `list`
-**Help**          | `help`
+| Action             | Format, Examples                                                                                                                                                                             |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
+| **Add Wedding**    | `add-wed w/NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                                 |
+| **Clear**          | `clear-ab` for addressbook or `clear-wb` for weddingbook                                                                                                                                     |
+| **Delete**         | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
+| **Edit**           | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
+| **Adding Tags**    | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
+| **Deleting Tags**  | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |
+| **Filter**         | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                                |
+| **List**           | `list`                                                                                                                                                                                       |
+| **List Weddings**  | `list-wed`                                                                                                                                                                                   |
+| **Help**           | `help`                                                                                                                                                                                       |
