@@ -14,11 +14,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableMap;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.TagColors;
 import seedu.address.logic.Messages;
