@@ -117,6 +117,13 @@ public class Lesson {
                 .anyMatch(studentLessonInfo -> studentLessonInfo.isForStudent(student));
     }
 
+    /**
+     * Helper method to get the StudentLessonInfo wrapper object for the given student.
+     *
+     * @param student The student to find with.
+     * @return The StudentLessonInfo object associated with the given student.
+     * @throws StudentNotFoundException if the student is not in this lesson.
+     */
     private StudentLessonInfo getStudentLessonInfo(Student student) throws StudentNotFoundException {
         return studentLessonInfoList.stream()
                 .filter(studentLessonInfo -> studentLessonInfo.isForStudent(student))
@@ -169,6 +176,32 @@ public class Lesson {
      */
     public boolean getAttendance(Student student) throws StudentNotFoundException {
         return getStudentLessonInfo(student).getAttendance();
+    }
+
+    /**
+     * Sets the participation of the student to the specified value.
+     *
+     * @param student The student to mark.
+     * @param participationScore Number representing the student's participation.
+     * @throws StudentNotFoundException if the student is not in the lesson.
+     */
+    public void setParticipation(Student student, int participationScore) throws StudentNotFoundException {
+        requireNonNull(student);
+        StudentLessonInfo oldEntry = getStudentLessonInfo(student);
+        studentLessonInfoList.remove(oldEntry);
+        StudentLessonInfo newEntry = oldEntry.setParticipationScore(participationScore);
+        studentLessonInfoList.add(newEntry);
+    }
+
+    /**
+     * Returns the number representing the student's participation for this lesson.
+     *
+     * @param student The student to check.
+     * @return Number representing the student's participation.
+     * @throws StudentNotFoundException if the student is not in the lesson.
+     */
+    public int getParticipation(Student student) throws StudentNotFoundException {
+        return getStudentLessonInfo(student).getParticipationScore();
     }
 
     /**
