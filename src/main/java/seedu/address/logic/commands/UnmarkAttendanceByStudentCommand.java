@@ -31,8 +31,8 @@ public class UnmarkAttendanceByStudentCommand extends Command {
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]"
             + "[" + PREFIX_TUTORIAL + "TUTORIAL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024"
-            + PREFIX_TUTORIAL + "Math";
+            + PREFIX_ATTENDANCE + " 20/10/2024 "
+            + PREFIX_TUTORIAL + " Math";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS =
             "Unmarked attendance of %1$s student for %2$s tutorial on %3$s";
