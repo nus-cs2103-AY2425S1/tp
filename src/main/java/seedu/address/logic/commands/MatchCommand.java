@@ -68,9 +68,7 @@ public class MatchCommand extends Command {
         JobSalary salary = job.getSalary();
         JobDescription description = job.getDescription();
         Set<Tag> requirements = job.getRequirements();
-        Set<String> matches = job.getMatches();
-        matches.add(contactIdentifier);
-        return new Job(name, company, salary, description, requirements, matches);
+        return new Job(name, company, salary, description, requirements);
     }
 
     @Override
@@ -93,13 +91,11 @@ public class MatchCommand extends Command {
         assert contactToMatch != null;
         assert jobToMatch != null;
 
-        final String contactIdentifier = contactToMatch.getIdentifier();
         final String jobIdentifier = jobToMatch.getIdentifier();
 
         boolean hasContactMatchedJob = contactToMatch.hasMatched(jobIdentifier);
-        boolean hasJobMatchedContact = jobToMatch.hasMatched(contactIdentifier);
 
-        if (hasContactMatchedJob && hasJobMatchedContact) {
+        if (hasContactMatchedJob) {
             throw new CommandException(MESSAGE_ALREADY_MATCHED);
         }
 
@@ -107,17 +103,16 @@ public class MatchCommand extends Command {
             throw new CommandException(MESSAGE_HAS_OTHER_MATCHES);
         }
 
-        // The bi-direction association should always be maintained
-        // Assert when there is a unidirectional association
-        assert hasContactMatchedJob == hasJobMatchedContact;
-
         Person matchedContact = matchContactToJob(contactToMatch, jobIdentifier);
-        Job matchedJob = matchJobToContact(jobToMatch, contactIdentifier);
+
+        // TODO SEE IF I CAN REMOVE THIS
+//        final String contactIdentifier = contactToMatch.getIdentifier();
+//        Job matchedJob = matchJobToContact(jobToMatch, contactIdentifier);
 
         model.setPerson(contactToMatch, matchedContact);
-        model.setJob(jobToMatch, matchedJob);
+
         return new CommandResult(
-                String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(matchedJob)));
+                String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(jobToMatch)));
     }
 
     @Override
