@@ -2,6 +2,8 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,6 +23,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -168,9 +172,37 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    /**
+     * Checks which person in addressBook requires a renewal in their policy
+     * If they do, the person's frequency is updated to 0 and hasPaid is set to false
+     */
+    private void checkFrequency() {
+        LocalDate today = LocalDate.now();
+        int date = today.getDayOfMonth();
+        Month currentMonth = today.getMonth();
+        String checkMonth = currentMonth.name().toLowerCase();
+
+        for (Person person : model.getAddressBook().getPersonList()) {
+            Frequency frequency = person.getFrequency();
+            Frequency.Months[] months = frequency.months;
+            int len = months.length;
+            for (int i = 0; i < len; i++) {
+                String month = months[i].name().toLowerCase();
+                if (month.equals(checkMonth) && date == 1) {
+                    Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                            person.getAddress(), person.getBirthday(), person.getTags(), false,
+                            new Frequency("0"));
+                    model.setPerson(person, updatedPerson);
+                    break;
+                }
+            }
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
+        checkFrequency();
         ui.start(primaryStage);
     }
 
