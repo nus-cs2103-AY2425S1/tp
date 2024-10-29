@@ -47,8 +47,9 @@ administrators.
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edututu.jar` command to run the application.<br>
+
    A [GUI](#gui-graphical-user-interface) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/real_ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -68,10 +69,8 @@ administrators.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ## 2. Command Instructions
-
 ### Command Format Guidelines
 
 * ` `: Commands format is indicated in the shaded boxes.
@@ -93,7 +92,6 @@ administrators.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.1 Viewing Help: `help`
 
@@ -105,7 +103,6 @@ Shows a message explaining how to access the help page.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.2 Adding a Person: `add`
 
@@ -134,26 +131,24 @@ Adds a person to [EduTuTu](#edututu).
   <!-- Image Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <img src="images/add_output.png" alt="Add Command Input" style="width: 100%;" />
+      <img src="images/add_input.png" alt="Add Command Input" style="width: 100%;" />
     </div>
     <div style="width: 45%;">
-      <img src="images/add_input.png" alt="Add Command Output" style="width: 100%;" />
+      <img src="images/add_output.png" alt="Add Command Output" style="width: 100%;" />
     </div>
   </div>
 
 </div>
 
-
 **Tips:**
+
 - Use the `add` command to add a new person with their name, phone number, email, address, fees, and [class id](#class-id).
 - [Tag](#tag) can be added to classify or group persons for easier management.
 - The `add` command is helpful when setting up new contacts in [EduTuTu](#edututu).
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.3 Deleting a Person: `delete`
 
@@ -191,17 +186,9 @@ Deletes the specified person from the address book.
 
 </div>
 
-
-**Tips:**
-- Use the `delete` command to remove outdated or incorrect entries from the address book.
-- Make sure to confirm the [index](#index) number before deleting to avoid removing the wrong person.
-- The `delete` command is especially useful when cleaning up your list of contacts.
-
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.4 Marking a Payment Date: `markpaid`
 
@@ -244,7 +231,6 @@ Updates the [payment status](#payment-status) of a student to completed.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.5 Editing a Person: `edit`
 
@@ -284,15 +270,9 @@ Edits an existing person in the address book.
 
 </div>
 
-**Tips:**
-- Use the `edit` command to update a person’s details when changes occur.
-- Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
-- The `edit` command is particularly useful for keeping contact information up to date.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.6 Listing All Persons: `list`
 
@@ -320,16 +300,12 @@ After entering the `list` command, all persons stored in the address book will b
 
 </div>
 
-
 **Tips:**
-- Use the `list` command whenever you want to view all entries in your address book.
 - The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.7 Finding A Person: `find`
 
@@ -367,15 +343,9 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 </div>
 
-**Tips:**
-- Use the `find` command to quickly locate persons based on their names or [class IDs](#class-id).
-- The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
-
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.8 Clearing All Entries: `clear`
 
@@ -405,14 +375,12 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 </div>
 
 **Tips:**
-- Use the `clear` command when you want to start fresh with an empty address book.
 - Be careful when using this command, as it permanently deletes all current entries.
 - Consider exporting your data before using the `clear` command if you need a [backup](#backup).
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.9 Undo/Redo Commands: `undo` and `redo`
 
@@ -430,15 +398,14 @@ The `undo` and `redo` commands allow you to reverse or reapply the most recent c
 
 **Example Usage:**
 *Input: User enters the `undo` command to reverse the last change.*
-![Ui](images/undoCommandinput.png)
+![Ui](images/undo_input.png)
 *Output: The UI updates to reflect the reversal of the most recent change.*
-![Ui](images/undocommandoutput.png)
+![Ui](images/undo_output.png)
 *Input: User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
-![Ui](images/redocommandinput.png)
+![Ui](images/redo.png)
 
 **Tips:**
-- Use the `undo` command immediately after making a change you wish to revert. This is helpful if you've added, deleted, or modified an entry by mistake.
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
 - Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive [backups](#backup), consider exporting your data regularly.
 - Both `undo` and `redo` can be accessed through the toolbar in the [GUI](#gui-graphical-user-interface) for quick navigation.
@@ -446,7 +413,6 @@ The UI updates to reflect the reapplication of the previously undone change*
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.10 Displaying Pie Chart of Class Distribution: `pie`
 
@@ -476,13 +442,11 @@ For example, given the following data set with 4 students:
 </div>
 
 **Tips:**
-- Use the `pie` command to get a quick overview of class sizes, which is particularly useful for planning and class allocation.
-- Make sure the data is up-to-date before using the `pie` command for accurate visualization.
+- Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.11 Displaying Bar Chart: `bar`
 
@@ -511,15 +475,12 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 </div>
 
 **Tips:**
-- Use the `bar` command to monitor payment trends and identify any seasonal patterns.
-- This feature can help tuition center administrators manage cash flow and forecast future payment periods.
-- Ensure that all payment records are updated for accurate chart visualization.
+- Use the bar command to monitor payment trends and identify any seasonal patterns.
+- Ensure that all payment records are updated for accurate chart visualisation.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.12 Viewing Command History: `Arrow Keys`
 
@@ -531,14 +492,9 @@ Allows users to quickly access previously entered commands using the up and down
 * Press the **down arrow key** to move forward through the [command history](#command-history).
 * This feature is useful for repeating recent commands without needing to retype them.
 
-**Tips:**
-- Use the arrow keys to quickly correct or modify a recent command.
-- This feature can save time when you need to execute similar commands repeatedly.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.13 View Student Details: `info`
 
@@ -589,11 +545,9 @@ Displaying the detailed command window can be done in two ways:
 
 </div>
 
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.14 Editing the Data File
 
@@ -606,7 +560,6 @@ Displaying the detailed command window can be done in two ways:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.15 Saving the Data
 
@@ -615,7 +568,6 @@ Displaying the detailed command window can be done in two ways:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.16 Exiting the Program: `exit`
 
@@ -642,7 +594,6 @@ Exiting the program can be done in two ways:
 
 </div>
 
-
 3. The program will close.
 
 Method 2:
@@ -651,15 +602,9 @@ Method 2:
 
 2. The program will close.
 
-**Tips:**
-
-- Use the [exit](#exit) command when you want to close the program quickly through the command box.
-- Both methods achieve the same result, so use whichever is more convenient.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 # 3. FAQ
 
@@ -736,7 +681,6 @@ Method 2:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ## Known issues
 
