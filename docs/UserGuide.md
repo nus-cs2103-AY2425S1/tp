@@ -106,7 +106,7 @@ Here are some **key points** to keep in mind when using commands:
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
 - Format of `DATE_TIME` is `YYYY:MM:DD hh:mm:ss`. <br>
-  _**Example:** `29/03/2025 10:30:00`._
+  _**Example:** `2024-12-01 09:30:00`._
 
 - Format of `DATE` is `YYYY-MM-DD`. <br>
   _**Example:** `2024-12-01`._
