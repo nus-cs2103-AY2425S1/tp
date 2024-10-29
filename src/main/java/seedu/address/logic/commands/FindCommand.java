@@ -15,10 +15,10 @@ public abstract class FindCommand<T> extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Finds all persons or appointments whose names contain any of "
+        + ": Finds all entities whose names contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " alice bob charlie";
+        + "Parameters: ENTITY_TYPE (person/appt) KEYWORD [MORE_KEYWORDS]...\n"
+        + "Example: " + COMMAND_WORD + "person alice bob charlie";
 
     protected final Predicate<T> predicate;
 

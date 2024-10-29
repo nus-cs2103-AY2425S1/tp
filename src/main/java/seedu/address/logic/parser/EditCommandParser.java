@@ -45,13 +45,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         String trimmedArgs = args.trim();
         String[] splitArgs = trimmedArgs.split("\\s+");
 
-        if (splitArgs.length < 2) {
+        if (splitArgs.length < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         String entityType = splitArgs[0];
-        String indexString = splitArgs[1];
-        Index index = ParserUtil.parseIndex(indexString);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -60,6 +58,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
+
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE));
+            }
+            String personIndexString = splitArgs[1];
+            Index personIndex = ParserUtil.parseIndex(personIndexString);
+
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -84,9 +89,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (!editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
-            return new EditPersonCommand(index, editPersonDescriptor);
+            return new EditPersonCommand(personIndex, editPersonDescriptor);
 
         case APPOINTMENT_ENTITY_STRING:
+
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAppointmentCommand.MESSAGE_USAGE));
+            }
+            String apptIndexString = splitArgs[1];
+            Index apptIndex = ParserUtil.parseIndex(apptIndexString);
+
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE,
                     PREFIX_MEDICINE, PREFIX_SICKNESS);
 
@@ -116,7 +128,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (!editAppointmentDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
-            return new EditAppointmentCommand(index, editAppointmentDescriptor);
+            return new EditAppointmentCommand(apptIndex, editAppointmentDescriptor);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }

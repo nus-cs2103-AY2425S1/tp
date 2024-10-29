@@ -28,20 +28,10 @@ public abstract class EditCommand extends Command {
             "This appointment already exists in the appointment book.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of an entity (person or appointment) identified "
-            + "by the index number used in the displayed person list. "
+            + ": Edits the details of an entity identified "
+            + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "ENTITY_TYPE "
-            + "INDEX "
-            + "ENTITY_ARGUMENTS...\n"
-            + "Example: " + COMMAND_WORD + " " + "person" + " " + "1"
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters: ENTITY_TYPE (person/appt) INDEX (must be a positive integer) [DATA_FIELDS]...\n"
             + "Example: " + COMMAND_WORD + " person 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

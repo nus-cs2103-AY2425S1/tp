@@ -20,8 +20,8 @@ public abstract class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds an entity to address or appointment book. \n"
             + "Parameters: "
-            + "ENTITY_TYPE (person or appt) "
-            + "prefix/DATA_FIELDS... \n"
+            + "ENTITY_TYPE (person/appt) "
+            + "DATA_FIELDS [MORE_DATA_FIELDS]... \n"
             + "Example: " + COMMAND_WORD + " person "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

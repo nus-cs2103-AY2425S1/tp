@@ -10,7 +10,11 @@ import seedu.address.model.Model;
 public abstract class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = "list person OR list appt";
+    public static final String MESSAGE_USAGE = COMMAND_WORD 
+            + ": Lists all entities of a given type \n"
+            + "Parameters: ENTITY_TYPE (person/appt) \n"
+            + "Example: list person"
+            + "Example: list appt";
 
     @Override
     public CommandResult execute(Model model) {

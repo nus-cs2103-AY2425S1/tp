@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.time.LocalDateTime;
@@ -29,6 +31,14 @@ public class EditAppointmentCommand extends EditCommand {
             "This appointment already exists in the appointment book.";
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "This person ID does not belong to anyone in the address book";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " appt"
+            + ": Edits the details of an appointment identified "
+            + "by the index number used in the displayed appointment list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) [DATA_FIELDS]...\n"
+            + "Example: " + COMMAND_WORD + " appt 1 "
+            + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
+            + PREFIX_MEDICINE + "Panadol";
 
     /**
      * Creates an EditPersonCommand to add the specified {@code Person}

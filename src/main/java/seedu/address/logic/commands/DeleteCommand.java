@@ -17,7 +17,7 @@ public abstract class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the entity identified by the index number used in the displayed list.\n"
             + "Parameters: "
-            + "ENTITY_TYPE (person or appt) "
+            + "ENTITY_TYPE (person/appt) "
             + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + "person" + " " + "1";
 
