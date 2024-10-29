@@ -75,26 +75,9 @@ public class PersonCard extends UiPart<Region> {
         Tooltip paymentTooltip = new Tooltip();
         paymentTooltip.setShowDelay(Duration.seconds(0.01));
 
-        switch (payStatus) {
-        case "pending":
-            paymentStatus.getStyleClass().add("payment_status_pending");
-            paymentTooltip.setText("pending");
-            break;
-        case "late":
-            paymentStatus.getStyleClass().add("payment_status_late");
-            paymentTooltip.setText("late");
-            break;
-        case "paid":
-            paymentStatus.getStyleClass().add("payment_status_paid");
-            paymentTooltip.setText("paid");
-            break;
-        case "partial":
-            paymentStatus.getStyleClass().add("payment_status_partial");
-            paymentTooltip.setText("partial");
-            break;
-        default:
-            break;
-        }
+        paymentStatus.getStyleClass().add(String.format("payment_status_%s", payStatus));
+        paymentTooltip.setText(String.format("Payment Status: %s", payStatus));
+
         Tooltip.install(paymentStatus, paymentTooltip);
     }
 }
