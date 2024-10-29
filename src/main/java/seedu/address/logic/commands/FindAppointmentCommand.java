@@ -23,7 +23,7 @@ public class FindAppointmentCommand extends Command {
             + "[" + PREFIX_START_DATE + "START_DATE] "
             + "[" + PREFIX_START_TIME + "START_TIME] "
             + "[" + PREFIX_END_DATE + "END_DATE]"
-            + "[" + PREFIX_END_TIME + "END_TIME] "
+            + "[" + PREFIX_END_TIME + "END_TIME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_START_DATE + "01/01/2025 "
             + PREFIX_START_TIME  + "12:00 "
