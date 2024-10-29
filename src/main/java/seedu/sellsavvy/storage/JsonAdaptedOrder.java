@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**
@@ -17,7 +17,7 @@ class JsonAdaptedOrder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Order's %s field is missing!";
 
-    private final String count;
+    private final String quantity;
     private final String date;
     private final String item;
     private final String status;
@@ -25,15 +25,15 @@ class JsonAdaptedOrder {
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      * @param item represents the item to be delivered in the order.
-     * @param count represents the item quantity requested in the order.
+     * @param quantity represents the item quantity requested in the order.
      * @param date represents the delivery date of the order.
      */
     @JsonCreator
-    public JsonAdaptedOrder(@JsonProperty("item") String item, @JsonProperty("count") String count,
+    public JsonAdaptedOrder(@JsonProperty("item") String item, @JsonProperty("quantity") String quantity,
                              @JsonProperty("date") String date, @JsonProperty("status") String status) {
         this.date = date;
         this.item = item;
-        this.count = count;
+        this.quantity = quantity;
         this.status = status;
     }
 
@@ -43,7 +43,7 @@ class JsonAdaptedOrder {
     public JsonAdaptedOrder(Order source) {
         item = source.getItem().fullDescription;
         date = source.getDate().value;
-        count = source.getCount().value;
+        quantity = source.getQuantity().value;
         status = source.getStatus().toString();
     }
 
@@ -72,20 +72,21 @@ class JsonAdaptedOrder {
         }
         final Date modelDate = new Date(date);
 
-        if (count == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Count.class.getSimpleName()));
+        if (quantity == null) {
+            throw new
+                    IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
         }
-        if (!Count.isValidCount(count)) {
-            throw new IllegalValueException(Count.MESSAGE_CONSTRAINTS);
+        if (!Quantity.isValidQuantity(quantity)) {
+            throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        final Count modelCount = new Count(count);
+        final Quantity modelQuantity = new Quantity(quantity);
 
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
         final Status modelStatus = Status.fromString(status);
 
-        return new Order(modelItem, modelCount, modelDate, modelStatus);
+        return new Order(modelItem, modelQuantity, modelDate, modelStatus);
     }
 
 }

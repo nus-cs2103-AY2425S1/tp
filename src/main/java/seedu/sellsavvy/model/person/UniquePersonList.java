@@ -9,11 +9,11 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
@@ -204,8 +204,8 @@ public class UniquePersonList implements Iterable<Person> {
     private Order copyOrder(Order order) {
         Item item = new Item(order.getItem().toString());
         Date date = new Date(order.getDate().toString());
-        Count count = new Count(order.getCount().toString());
+        Quantity quantity = new Quantity(order.getQuantity().toString());
         Status status = order.getStatus();
-        return new Order(item, count, date, status);
+        return new Order(item, quantity, date, status);
     }
 }

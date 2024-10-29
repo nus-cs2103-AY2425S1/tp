@@ -43,7 +43,7 @@ public class OrderCard extends UiPart<Region> {
         super(FXML);
         this.order = order;
         heading.setText(String.format(ORDER_HEADING_FORMAT, displayedIndex,
-                order.getItem().fullDescription, order.getCount().value));
+                order.getItem().fullDescription, order.getQuantity().value));
         date.setText(String.format(DELIVER_BY_FORMAT, order.getDate().value));
         setStatus(order.getStatus());
     }

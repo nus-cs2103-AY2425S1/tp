@@ -61,7 +61,7 @@ public class Messages {
                 .append("Delivery by: ")
                 .append(order.getDate())
                 .append("; Quantity: ")
-                .append(order.getCount());
+                .append(order.getQuantity());
         return builder.toString();
     }
 }

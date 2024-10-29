@@ -2,9 +2,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 
 import java.util.List;
@@ -19,11 +19,11 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
 /**
@@ -39,7 +39,7 @@ public class EditOrderCommand extends Command {
             + "Parameters: ORDER_INDEX (must be a positive integer) "
             + "[" + PREFIX_ITEM + "ITEM] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_COUNT + "QUANTITY] "
+            + "[" + PREFIX_QUANTITY + "QUANTITY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "LED light bulb "
             + PREFIX_DATE + "20-12-2024 ";
@@ -103,7 +103,7 @@ public class EditOrderCommand extends Command {
         assert orderToEdit != null;
 
         Item updatedItem = editOrderDescriptor.getItem().orElse(orderToEdit.getItem());
-        Count updatedQuantity = editOrderDescriptor.getQuantity().orElse(orderToEdit.getCount());
+        Quantity updatedQuantity = editOrderDescriptor.getQuantity().orElse(orderToEdit.getQuantity());
         Date updatedDate = editOrderDescriptor.getDate().orElse(orderToEdit.getDate());
         Status status = orderToEdit.getStatus(); // status cannot be updated
 
@@ -142,7 +142,7 @@ public class EditOrderCommand extends Command {
     public static class EditOrderDescriptor {
         private Item item;
         private Date date;
-        private Count quantity;
+        private Quantity quantity;
 
         public EditOrderDescriptor() {
         }
@@ -171,11 +171,11 @@ public class EditOrderCommand extends Command {
             return Optional.ofNullable(item);
         }
 
-        public void setQuantity(Count quantity) {
+        public void setQuantity(Quantity quantity) {
             this.quantity = quantity;
         }
 
-        public Optional<Count> getQuantity() {
+        public Optional<Quantity> getQuantity() {
             return Optional.ofNullable(quantity);
         }
 
