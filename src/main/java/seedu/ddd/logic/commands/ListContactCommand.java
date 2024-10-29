@@ -1,5 +1,7 @@
 package seedu.ddd.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
@@ -13,14 +15,20 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.function.Predicate;
+
+import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.Model;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.common.Event;
+
+
 /**
  * Lists all contacts in the address book to the user.
  */
-public interface ListCommand {
+public class ListContactCommand extends Command implements ListCommand {
 
     public static final String COMMAND_WORD = "list";
-
-    public static final String FLAG_PARSE_ERROR = "to list client contacts, vendor contacts, or events respectively.";
 
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": lists contacts with optional filters";
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " [{"
@@ -49,4 +57,43 @@ public interface ListCommand {
             + CLIENT_EXAMPLE_USAGE + "\n"
             + VENDOR_EXAMPLE_USAGE + "\n"
             + EVENT_EXAMPLE_USAGE + "\n";
+
+    public static final String MESSAGE_SUCCESS = "Listed all contacts";
+
+    private static final Predicate<Event> CLEAR_EVENTS = any -> false;
+
+    private final Predicate<Contact> predicate;
+
+    public ListContactCommand(Predicate<Contact> predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        model.updateFilteredEventList(CLEAR_EVENTS);
+        model.updateFilteredContactList(predicate);
+        return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                model.getFilteredContactList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof ListContactCommand)) {
+            return false;
+        }
+        ListContactCommand otherListContactCommand = (ListContactCommand) other;
+        return predicate.equals(otherListContactCommand.predicate);
+    }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
+    }
 }
+

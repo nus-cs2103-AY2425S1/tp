@@ -13,7 +13,7 @@ import seedu.ddd.model.event.common.Event;
 /**
  * Lists all events in the address book to the user.
  */
-public class ListEventCommand extends ListCommand {
+public class ListEventCommand extends Command implements ListCommand {
 
     public static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
 
@@ -28,8 +28,6 @@ public class ListEventCommand extends ListCommand {
      * @param predicate comparing two events.
      */
     public ListEventCommand(Predicate<Event> predicate) {
-        //I will never input a Predicate<Contact> if I have a ListEventCommand.
-        super(null);
         this.predicate = predicate;
     }
 

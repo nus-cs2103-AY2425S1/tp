@@ -93,7 +93,26 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+
+            if (commandFlag == null) {
+                return new ListContactCommandParser().parse(arguments);
+            }
+
+            switch(commandFlag) {
+
+            case CLIENT:
+                return new ListClientCommandParser().parse(arguments);
+
+            case VENDOR:
+                return new ListVendorCommandParser().parse(arguments);
+
+            case EVENT:
+                return new ListEventCommandParser().parse(arguments);
+
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
