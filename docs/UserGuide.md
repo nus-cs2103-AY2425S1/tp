@@ -32,6 +32,7 @@ For any additional information or queries, you can refer to the [FAQ](#faq) sect
 ### Glossary
 As you read the user guide, you might encounter some unfamiliar technical terms. The table below provides the definitions for the key terms we will be using throughout the guide.
 
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Term      | Definition                                                                                                                                                                         |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Command   | An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.                                     |
@@ -42,6 +43,7 @@ As you read the user guide, you might encounter some unfamiliar technical terms.
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 | Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
+
 ### Text Formatting Conventions
 We will be using different text formatting styles to help you better understand the content of the user guide.
 
