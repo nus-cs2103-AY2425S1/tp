@@ -1,6 +1,5 @@
 package seedu.address.model.types.common;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import seedu.address.model.types.event.Event;

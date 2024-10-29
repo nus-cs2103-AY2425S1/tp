@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.types.common.LinkedPersonsEntry;
 import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
@@ -116,9 +117,15 @@ public class AddressBookTest {
         }
 
         @Override
+        public ObservableList<LinkedPersonsEntry> getLinkedPersonsEntryList() {
+            return FXCollections.observableArrayList();
+        }
+
+        @Override
         public PersonEventManager getPersonEventManager() {
             return new PersonEventManager();
         }
+
     }
 
 }

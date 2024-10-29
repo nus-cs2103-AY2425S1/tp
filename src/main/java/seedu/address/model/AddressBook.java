@@ -3,9 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -219,6 +217,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public PersonEventManager getPersonEventManager() {
         return personEventManager;
+    }
+
+    @Override
+    public ArrayList<LinkedPersonsEntry> getLinkedPersonsEntryList() {
+        return personEventManager.getLinkedPersonsEntryList();
     }
 
     @Override

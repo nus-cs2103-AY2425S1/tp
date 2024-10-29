@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.types.common.LinkedPersonsEntry;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -45,6 +46,9 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        linkedPersonsEntries.addAll(source.getLinkedPersonsEntryList().stream()
+                .map(JsonAdaptedLinkedPersonsEntry::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +72,11 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
+        }
+
+        for (JsonAdaptedLinkedPersonsEntry jsonAdaptedLinkedPersonsEntry : linkedPersonsEntries) {
+            LinkedPersonsEntry linkedPersonsEntry = jsonAdaptedLinkedPersonsEntry.toModelType();
+            addressBook.addLinkedPersonsEntry(linkedPersonsEntry);
         }
         return addressBook;
     }

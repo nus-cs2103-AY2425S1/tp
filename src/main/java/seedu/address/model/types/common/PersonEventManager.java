@@ -2,7 +2,7 @@ package seedu.address.model.types.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
@@ -147,7 +147,13 @@ public class PersonEventManager {
         eventPersonMap.put(linkedPersonsEntry.getEvent(), linkedPersonsEntry.getPersons());
     }
 
-    public HashMap<Event, ArrayList<Person>> getEventPersonMap() {
-        return eventPersonMap;
+    public ArrayList<LinkedPersonsEntry> getLinkedPersonsEntryList() {
+        ArrayList<LinkedPersonsEntry> linkedPersonsEntries = new ArrayList<>();
+        for (Map.Entry<Event, ArrayList<Person>> entry : eventPersonMap.entrySet()) {
+            Event event = entry.getKey();
+            ArrayList<Person> persons = entry.getValue();
+            linkedPersonsEntries.add(new LinkedPersonsEntry(event, persons));
+        }
+        return linkedPersonsEntries;
     }
 }

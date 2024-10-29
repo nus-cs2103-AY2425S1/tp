@@ -50,6 +50,18 @@ public class LinkPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastShownEventList = model.getFilteredEventList();
+        Event eventToLink2;
+
+        if (lastShownEventList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_EVENTS);
+        }
+
+        for (Event e : lastShownEventList) {
+            if (e.getName().equals(event.getName())) {
+                eventToLink2 = e;
+            }
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
