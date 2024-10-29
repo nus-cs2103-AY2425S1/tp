@@ -101,6 +101,12 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 </box>
 
+Several commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to handle these commands:
+
+Here is a class diagram showing the classes related to the `AbstractEditCommand`:
+
+<puml src="diagrams/AbstractEditCommandClassDiagram.puml" width="550"/>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
