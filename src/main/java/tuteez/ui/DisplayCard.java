@@ -10,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import tuteez.model.person.Person;
+import tuteez.model.person.TelegramUsername;
 
 /**
  * A UI component that displays all detailed information of a {@code Person}.
@@ -50,24 +51,38 @@ public class DisplayCard extends UiPart<Region> {
         if (lastViewedPerson.isPresent()) {
             name.setText(person.getName().fullName);
             phone.setText(person.getPhone().value);
-            telegram.setText("@" + person.getTelegramUsername().telegramUsername);
+            setTelegramUsernameText(person);
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
-            displayTags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> displayTags.getChildren().add(new Label(tag.tagName)));
-
-            displayRemarks.getChildren().clear();
             IntStream.range(0, person.getRemarkList().getRemarks().size())
                     .forEach(i -> {
                         String remark = person.getRemarkList().getRemarks().get(i).toString();
-                        displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark)); // Add numbering
+                        displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
                     });
-
-            displayLessons.getChildren().clear();
             person.getLessons().stream()
                     .forEach(lesson -> displayLessons.getChildren().add(new Label(lesson.getDayAndTime())));
+        }
+    }
+
+    /**
+     * Sets the Telegram username text for the provided person.
+     *
+     * This method checks if the provided person has a valid, non-empty Telegram username.
+     * If a username is available, it updates the display text with the username prefixed by "@" and
+     * makes the Telegram field visible. If no valid username is found, the Telegram field is hidden.
+     *
+     * @param person the Person object whose Telegram username is to be displayed
+     */
+    private void setTelegramUsernameText(Person person) {
+        TelegramUsername username = person.getTelegramUsername();
+        if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
+            telegram.setText("@" + username.telegramUsername);
+            telegram.setVisible(true);
+        } else {
+            telegram.setVisible(false);
         }
     }
 }
