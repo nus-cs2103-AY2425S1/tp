@@ -2,6 +2,7 @@ package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENTS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -32,8 +33,8 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
      */
     public AddEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS, FLAG_EVENT);
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESC, PREFIX_DATE, PREFIX_CLIENTS, PREFIX_VENDORS)
                 || !argMultimap.getPreamble().isEmpty())) {

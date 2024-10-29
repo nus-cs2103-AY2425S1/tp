@@ -35,7 +35,7 @@ import seedu.ddd.model.event.common.EventId;
 /**
  * Adds an event to DDD.
  */
-public class AddEventCommand extends Command {
+public class AddEventCommand extends Command implements AddCommand {
 
     public static final String COMMAND_WORD = "event";
 

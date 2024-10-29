@@ -1,7 +1,13 @@
 package seedu.ddd.logic.parser;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_FLAGS;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ddd.logic.commands.AddCommand.FLAG_PARSE_ERROR;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.ParserUtil.parseFlags;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -9,7 +15,6 @@ import java.util.regex.Pattern;
 
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.DeleteCommand;
@@ -51,10 +56,32 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        ArgumentMultimap flagMultimap = ArgumentTokenizer.tokenize(arguments, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+        CommandFlag commandFlag = parseFlags(flagMultimap);
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+
+            if (commandFlag == null) {
+                throw new ParseException(String.format(MESSAGE_INVALID_FLAGS, FLAG_PARSE_ERROR));
+            }
+
+            switch(commandFlag) {
+
+            case CLIENT:
+                return new AddClientCommandParser().parse(arguments);
+
+            case VENDOR:
+                return new AddVendorCommandParser().parse(arguments);
+
+            case EVENT:
+                return new AddEventCommandParser().parse(arguments);
+
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -68,9 +95,6 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventCommandParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -82,5 +106,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

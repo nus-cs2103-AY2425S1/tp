@@ -6,7 +6,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.ddd.logic.commands.AddCommand;
+import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.model.contact.client.Client;
 
 /**
@@ -18,7 +18,7 @@ public class ClientUtil {
      * Returns an add command string for adding the {@code client}.
      */
     public static String getAddContactCommand(Client client) {
-        return AddCommand.COMMAND_WORD + " client " + getClientDetails(client);
+        return AddContactCommand.COMMAND_WORD + " client " + getClientDetails(client);
     }
 
     /**

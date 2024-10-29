@@ -1,5 +1,7 @@
 package seedu.ddd.logic.parser;
 
+import static seedu.ddd.logic.parser.CliSyntax.ALL_PREFIXES;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +27,18 @@ public class ArgumentTokenizer {
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     */
+    public static ArgumentMultimap tokenizeAll(String argsString) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, ALL_PREFIXES);
         return extractArguments(argsString, positions);
     }
 

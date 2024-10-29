@@ -1,6 +1,12 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.CommandFlag.CLIENT;
+import static seedu.ddd.logic.parser.CommandFlag.EVENT;
+import static seedu.ddd.logic.parser.CommandFlag.VENDOR;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -197,5 +203,24 @@ public class ParserUtil {
             contactIdSet.add(parseId(id));
         }
         return contactIdSet;
+    }
+
+    /**
+     * Parses {@code ArgumentMultimap argMultimap} for flag(s), into a {@code CommandFlag}.
+     */
+    public static CommandFlag parseFlags(ArgumentMultimap argMultimap) throws ParseException {
+
+        // Check if exactly one flag is present
+        argMultimap.verifyNoExclusivePrefixesFor(FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+
+        if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
+            return CLIENT;
+        } else if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
+            return VENDOR;
+        } else if (argMultimap.getValue(FLAG_EVENT).isPresent()) {
+            return EVENT;
+        } else {
+            return null;
+        }
     }
 }
