@@ -5,7 +5,8 @@ package seedu.ddd.model.contact.exceptions;
  * (Contacts are considered duplicates if they have the same identity).
  */
 public class DuplicateContactException extends RuntimeException {
+    public static final String DUPLICATE_CONTACT_MESSAGE = "Operation would result in duplicate contacts";
     public DuplicateContactException() {
-        super("Operation would result in duplicate contacts");
+        super(DUPLICATE_CONTACT_MESSAGE);
     }
 }
