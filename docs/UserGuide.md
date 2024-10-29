@@ -1,15 +1,15 @@
 ---
 layout: page
-title: User Guide
+title: AgentConnect User Guide
 ---
-
-# AgentConnect User Guide
 
 Welcome to the **AgentConnect User Guide**!
 
-AgentConnect is a desktop application designed to help you manage your contacts efficiently. It's especially useful for insurance agents or anyone who needs to keep track of clients, appointments, and policies. AgentConnect combines the speed of typing commands with the ease of a visual interface, making it both powerful and user-friendly.
+AgentConnect is a desktop application designed to help you manage your client's contacts efficiently. It's especially useful for insurance agents who needs to keep track of clients, appointments, and policies. 
 
-Whether you prefer clicking buttons or typing commands, AgentConnect will help you manage your contacts faster than traditional apps.
+AgentConnect combines the speed of typing commands with the ease of a visual interface, making it both powerful and user-friendly.
+
+AgentConnect will help you manage your contacts faster than traditional apps.
 
 ---
 
@@ -21,12 +21,15 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
     - [Adding a Client](#adding-a-client)
     - [Assigning a Policy](#assigning-a-policy)
     - [Listing All Clients](#listing-all-clients)
-    - [Editing a Client](#editing-a-client)
-    - [Finding Clients by Name](#finding-clients-by-name)
-    - [Search for Appointment](#searching-appointment-by-date)
-    - [Search for Birthday](#searching-birthday-by-date)
-    - [Sorting Client List](#sorting-client-data)
-    - [Deleting a Client](#deleting-a-client)
+    - [Editing a Client Details](#editing-a-client)
+    - [Locating Clients by Name](#finding-clients-by-name)
+    - [Searching Appointments](#searching-appointment-by-date)
+    - [Searching Birthdays](#searching-birthday-by-date)
+    - [Searching Policy](#searching-policy-by-policy-name)
+    - [Sorting Clients](#sorting-client-data)
+    - [Deleting a client or policy](#deleting-a-client)
+    - [Undo a command](#undo work)
+    - [Redo a command](#redo work)
     - [Clearing All Entries](#clearing-all-entries)
     - [Exiting the Program](#exiting-the-program)
     - [Saving Your Data](#saving-your-data)
@@ -38,33 +41,32 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
 
 ## Quick start
 
-
-1. **Ensure Java is Installed**
+1. **Ensure Java is Installed:**
    Make sure you have **Java 17 or above** installed on your computer. If you're not sure, you can download it from [here](https://www.oracle.com/java/technologies/downloads/).
 
-2. **Download AgentConnect**
+2. **Download AgentConnect:**
    Get the latest version of AgentConnect from [this link](https://github.com/se-edu/addressbook-level3/releases). Look for a file named `AgentConnect.jar`.
 
-3. **Place the File**
+3. **Place the File:**
    Move the `AgentConnect.jar` file to a folder where you want to store the application and its data.
 
-4. **Run the Application**
-    - **Option 1: Double-Click**
+4. **Run the Application:**
+    - **Option 1: Double-Click:**
       Simply double-click the `AgentConnect.jar` file to start the application.
-    - **Option 2: Use Command Prompt**
+    - **Option 2: Use Command Prompt:**
       Open the Command Prompt (Windows) or Terminal (Mac/Linux), navigate to the folder containing the `AgentConnect.jar` file, and type:
       ```
       java -jar AgentConnect.jar
       ```
       Then press **Enter**.
 
-6. **Try It Out**
-    - **Enter a Command**
+5. **Try It Out:**
+    - **Enter a Command:**
       Type a command into the command box at the bottom and press **Enter**. For example, type `help` to see the help message.
-    - **Explore**
+    - **Explore:**
       Feel free to experiment with different commands.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -73,11 +75,11 @@ AgentConnect offers a range of features to help you manage your clients effectiv
 
 ### Understanding Command Format
 
-- **Words in UPPER_CASE** are placeholders for information you need to provide.
-  Example: In `add n/NAME`, replace `NAME` with the client's name.
+- **Angle brackets <>** are placeholders for information you need to provide.
+  Example: In `add n/<NAME>`, replace `NAME` with the client's name.
 
 - **Square brackets [ ]** indicate optional items.
-  Example: `n/NAME [t/TAG]` means the `t/TAG` part is optional.
+  Example: `n/<NAME> [t/TAG]` means the `t/TAG` part is optional.
 
 - **Ellipsis ...** means you can include the item multiple times or not at all.
   Example: `[t/TAG]...` allows for multiple tags or none.
@@ -103,14 +105,15 @@ Format: `help`
 
 ---
 
-### Adding a person: `add`
+### Adding a client : `add`
 
 Adds a client to the address book.
 
-Format: `add n/<name> p/<phone number> e/<email address> addr/<address> b/<birthday >appt/<appointment and time>`
+Format: `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<ADDRESS> b/<BIRTHDAY >appt/<APPOINTMENT TIME>`
 
-- Birthday should be in `yyyy-mm-dd`
-- Appointment should be in `yyyy-mm-dd HH:mm`
+- **Parameters**:
+  - Birthday should be in `yyyy-mm-dd`
+  - Appointment should be in `yyyy-mm-dd HH:mm`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
@@ -118,21 +121,21 @@ Examples:
 
 ---
 
-### Adding a person: `assign`
+### Assigning a policy : `assign`
 
-Assign policies to a client
+Assign policies to a client.
 
-Format: `assign <Index> pon/<Policy Name> /pos<Policy start date> /poe <Policy end date> /paydate <Insurance due date> /amt <Amount Due>`
-
-- Policy start date and end date refers to the duration of coverage
-- Policy start date and Policy end date should be in `yyyy-mm-dd`
-- Pay date should be in `yyyy-mm-dd` format
-- Amount Due only can be Big Decimal format
+Format: `assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
+- **Parameters**:
+  - Policy start date and end date refers to the duration of coverage
+  - Policy start date and Policy end date should be in `yyyy-mm-dd`
+  - Pay date should be in `yyyy-mm-dd` format
+  - Amount Due can only be Big Decimal format
 
 
 Examples:
 * `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
-* This command assigns the Policy object to the person listed at index 1 with the following information
+* This command assigns the Policy object to the client listed at index 1 with the following information:
   * Policy Name: PolicyOne
   * Policy start date: 2022-12-12
   * Policy end date: 2023-12-12
@@ -143,52 +146,64 @@ Examples:
 
 ---
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all clients in the address book.
 
 Format: `list`
 
 ---
 
-### Editing a person : `edit`
+### Editing a client details : `edit`
 
-Edits an existing person in the address book.
+Edits an existing client in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* When editing birthday and policy, the date format should be `yyyy-mm-dd`
-* When editing appointment, the date and time format should be `yyyy-mm-dd hh:mm` in 24-hour notation
-* When editing policy, all fields of policy must be included
+- **Parameters**:
+
+  * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+  * At least one of the optional fields must be provided.
+  * Existing values will be updated to the input values.
+  * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+  * You can remove all the client’s tags by typing `t/` without
+      specifying any tags after it.
+  * When editing birthday and policy, the date format should be `yyyy-mm-dd`
+  * When editing appointment, the date and time format should be `yyyy-mm-dd hh:mm` in 24-hour notation
+  * When editing policy, all fields of policy must be included
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200` Edits the 1st policy of
-     the 3rd person to be `Health Insurance` which valid from `2024-10-19` to `2025-10-19` which pay date on `2024-11-19`
-     and amount of `200`
-   ![result for 'edit first index client'](images/editUI.png)
+- **Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.**:
+  ```
+  edit 1 p/91234567 e/johndoe@example.com
+  ```
+  ![result for 'edit first index client'](images/editUI.png)
 
+- **Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.**:
+  ```
+  edit 2 n/Betsy Crower t/
+  ```
+
+- **Edits the 1st policy of the 3rd client to be `Health Insurance` which valid from `2024-10-19` to `2025-10-19` which pay date on `2024-11-19`
+  and amount of `200`**:
+  ```
+  edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200
+  ```
 ---
 
-### Locating persons by name: `find`
+### Locating clients by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find <KEYWORD> [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- **Parameters**:
+  * The search is case-insensitive. e.g `hans` will match `Hans`
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+  * Only the name is searched.
+  * Only full words will be matched e.g. `Han` will not match `Hans`
+  * Clients matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -197,129 +212,172 @@ Examples:
 
 ---
 
-### Searching Appointments : `search a/`
+### Searching appointments : `search a/`
 
 Find clients with appointments on a specific date or within a date range.
 
-- **How to Use**:
-
+Format: `search a/ <DATETIME>` | `search a/ <DATETIME> to  <DATETIME>`
 - **Parameters**:
-- `DATETIME`: A specific date and time in `YYYY-MM-DD HH:mm` format.
+  - `DATETIME`: A specific date and time in `YYYY-MM-DD HH:mm` format.
 
-- **What It Does**:
-- **Single Datetime Search**: Lists all clients with appointments on the specified date and time.
+- **Usage**:
+  - **Single Datetime Search**: Lists all clients with appointments on the specified date and time.
+  - **Range Datetime Search**: List all clients with appointments that is within the given date and time range.
 
-- **Examples**:
-- **Search by Specific Datetime**:
-  ```
-  search a/ 2024-12-12 23:00
-  ```
-  *Finds all clients with appointments on December 12, 2024, 11PM.*
+Examples:
+  - **Search by Specific Datetime**:
+    ```
+    search a/ 2024-12-12 23:00
+    ```
+    *Finds all clients with appointments on December 12, 2024, 11PM.*
 
-  ![Search Appointment by Date](images/searchapptUI.png)
+    ![Search Appointment by Date](images/searchapptUI.png)
+  - **Search by Range Datetime**:
+    ```
+    search a/ 2024-12-12 23:00 to 2024-12-31 23:00
+    ```
+    *Finds all clients with appointments from December 12, 2024, 11PM to December 31, 2024, 11PM.*
+
+    ![Search Appointment by Range Date](images/searchapptrangeUI.png)
 
 ---
 
-### Searching Birthdays : `search b/`
+### Searching birthdays : `search b/`
 
 Find clients who have birthdays on a specific date or within a date range.
 
-- **How to Use**:
+Format: `search b/ <DATE>` | `search a/ <DATE> to <DATE>`
 
 - **Parameters**:
-- `DATE`: A specific date in `YYYY-MM-DD` format.
+  - `DATE`: A specific date in `YYYY-MM-DD` format.
 
-- **What It Does**:
-- **Single Date Search**: Lists all clients whose birthdays fall on the specified date.
+- **Usage**:
+  - **Single Date Search**: Lists all clients whose birthdays fall on the specified date.
+  - **Range Date Search**: Lists all clients whose birthdays that is within the given date range.
 
-- **Examples**:
-- **Search by Specific Date**:
-  ```
-  search b/ 1990-01-01
-  ```
-  *Finds all clients with a birthday on January 1, 1990.*
+Examples:
+  - **Search by Specific Date**:
+    ```
+    search b/ 1990-01-01
+    ```
+    *Finds all clients with a birthday on January 1, 1990.*
 
-  ![Search Birthday by Date](images/searchbirthdayUI.png)
+    ![Search Birthday by Date](images/searchbirthdayUI.png)
+  - **Search by Range Date**:
+    ```
+    search b/ 1990-01-01 to 1992-01-01
+    ```
+    *Finds all clients with a birthdays between January 1, 1990, to January 1, 1992.*
+    ![Search Birthday by Range Date](images/searchbirthdayrangeUI.png)
+
 
 ---
 
-### Sorting Clients : `sort`
+### Searching policy : `search p/`
+
+Find clients who have currently owns a certain policy.
+
+Format: `search p/ <POLICY_NAME>`
+
+- **Parameters**:
+  - `POLICY_NAME`: A specific policy name.
+
+- **Usage**:
+  - **Single Policy Search**: Lists all clients who own the policy .
+
+Examples:
+  - **Search by Specific Policy**:
+    ```
+    search p/ Policy One
+    search p/ PolicyOne
+    ```
+    *Finds all clients who own the policy named "PolicyOne".*
+
+    ![Search Policy by Policy Name](images/searchpolicyUI.png)
+
+---
+
+### Sorting clients : `sort`
 
 Organize your client list based on different criteria for easier management and viewing.
 
-- **How to Use**:
+Format: `sort <CRITERIA> <ORDER>`
 
 - **Parameters**:
-- `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
-    - `name`: Sort by client's name (A-Z).
-    - `birthday`: Sort by client's birthday (earliest to latest).
-    - `appointment`: Sort by upcoming appointment dates (soonest to latest).
+  - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
+      - `name`: Sort by client's name (A-Z).
+      - `birthday`: Sort by client's birthday (earliest to latest).
+      - `appointment`: Sort by upcoming appointment dates (soonest to latest).
+  - `ORDER`: The direction of sort. Available order includes:
+    - `asc`: Sort in ascending order
+    - `dsc`: Sort in descending order
 
-- **What It Does**:
-- **Name Sorting**: Orders the client list alphabetically by name.
-- **Birthday Sorting**: Orders the client list by birthday dates.
-- **Appointment Sorting**: Orders the client list by the dates of upcoming appointments.
-- **Policy Sorting**: Orders the client list based on policy details.
+- **Usage**:
+  - **Name Sorting**: Orders the client list alphabetically by name.
+  - **Birthday Sorting**: Orders the client list by birthday dates.
+  - **Appointment Sorting**: Orders the client list by the dates of upcoming appointments.
+  - **Policy Sorting**: Orders the client list based on policy details.
 
-- **Examples**:
-- **Sort by Name**:
-  ```
-  sort name asc/dsc
-  ```
-  *Sorts the client list alphabetically by each client's name.*
+Examples:
+  - **Sort by Name in Ascending Order**:
+    ```
+    sort name asc
+    ```
+    *Sorts the client list alphabetically by each client's name.*
 
-  ![Sort by Name](images/sortnameUI.png)
+    ![Sort by Name](images/sortnameUI.png)
 
-- **Sort by Birthday**:
-  ```
-  sort birthday asc/dsc
-  ```
-  *Sorts the client list from the earliest to the latest birthday.*
+  - **Sort by Birthday**:
+    ```
+    sort birthday dsc
+    ```
+    *Sorts the client list from the earliest to the latest birthday.*
 
-  ![Sort by Birthday](images/sortUI.png)
+    ![Sort by Birthday](images/sortUI.png)
 
-- **Sort by Appointment**:
-  ```
-  sort appointment_date asc/dsc
-  ```
-  *Sorts the client list based on the soonest upcoming appointments.*
+  - **Sort by Appointment**:
+    ```
+    sort appointment_date asc
+    ```
+    *Sorts the client list based on the earliest upcoming appointments.*
 
-  ![Sort by Appointment](images/sortapptUI.png)
+    ![Sort by Appointment](images/sortapptUI.png)
 
 ---
 
-### Deleting a person or policy: `delete`
-#### Person:
+### Deleting a client or policy : `delete`
+#### Client:
 Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` to confirm deletion.
 
-Format: `delete INDEX` or `delete NAME`
-
-* Deletes the client at the specified `INDEX` or the specific `NAME`.
-* The index and name refers to the index number or name shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The name of the person is case-sensitive and must be an exact match.
+Format: `delete <INDEX>` or `delete <NAME>`
+- **Parameters**:
+  * Deletes the client at the specified `INDEX` or the specific `NAME`.
+  * The index and name refers to the index number or name shown in the displayed client list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+  * The name of the client is case-sensitive and must be an exact match.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete Betsy Crowe` deletes the person named `Betsy Crowe` from the list of the address book.
+* `list` followed by `delete 2` deletes the 2nd client in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+* `delete Betsy Crowe` deletes the client named `Betsy Crowe` from the list of the address book.
   ![result for 'delete david li'](images/deleteUI.png)
 
 #### Policy:
 
-Deletes the specified policy from the specified person using INDEX of the person and policy.
+Deletes the specified policy from the specified client using INDEX of the client and policy.
 
-Format: `delete INDEX po/POLICY_INDEX`
+Format: `delete <INDEX> po/<POLICY_INDEX>`
 
-* Deletes the policy at the specified `POLICY_INDEX` of the person at the specified `INDEX`.
+* Deletes the policy at the specified `POLICY_INDEX` of the client at the specified `INDEX`.
 
 Examples:
+
 * `delete 1 po/1` deletes the 1st policy of the 1st person in the address book.
 * `delete 2 po/1` deletes the 1st policy of the 2nd person in the address book.
   ![result for 'delete policy from first client'](images/deletepolicyUI.png)
 ---
 ### Undo a command : `undo`
-Undo the last delete. Works for add, edit, delete person and clear commands.
+Undo the last delete. Works for add, edit, delete client and clear commands.
 
 Format: `undo` 
 
@@ -327,14 +385,14 @@ Format: `undo`
 * Does not work for assign and deletion of policies.
 
 Examples:
-* `delete 1` followed by `undo` will restore back the deleted person at index 1.
-* `clear` followed by `undo` will restore back all the deleted persons.
-![delete a person](images/DeletePersonUndoUI.png)
+* `delete 1` followed by `undo` will restore back the deleted client at index 1.
+* `clear` followed by `undo` will restore back all the deleted clients.
 ![result for 'undo'](images/undoUI.png)
+
 
 ---
 ### Redo a command : `redo`
-Redo the last undo. Works for add, edit, delete person and clear commands.
+Redo the last undo. Works for add, edit, delete client and clear commands.
 
 Format: `redo`
 
@@ -342,7 +400,7 @@ Format: `redo`
 * Does not work for assign and deletion of policies.
 
 Examples:
-* `delete 1` followed by `undo` followed by `redo` will delete the person at index 1 again.
+* `delete 1` followed by `undo` followed by `redo` will delete the client at index 1 again.
 * `clear` followed by `undo` followed by `redo` will clear all the entries again.
 ![redo a deletion](images/RedoUI.png)
 
@@ -433,17 +491,20 @@ _Details coming soon ..._
 
 ## Command Summary
 
-| Action                 | Command Format                                                                                                                                                                                                                 |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a Client**       | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS b/BIRTHDAY appt/APPOINTMENT`<br>Example: `add n/John Doe p/91234567 e/john@example.com addr/123 Street b/1990-01-01 appt/2024-12-12 14:00`                                     |
-| **Assign a Policy**    | `assign INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAYMENT_DUE_DATE amt/AMOUNT_DUE`<br>Example: `assign 1 pon/Health Insurance pos/2022-01-01 poe/2023-01-01 paydate/2022-12-01 amt/300.00`                     |
-| **List Clients**       | `list`                                                                                                                                                                                                                         |
-| **Edit a Client**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAYMENT_DUE_DATE amt/AMOUNT_DUE]`<br>Example: `edit 2 p/98765432` |
-| **Find Clients**       | `find KEYWORD [MORE_KEYWORDS]`<br>Example: `find Alice`                                                                                                                                                                        |
-| **Search Appointment** | `search a/ [DATETIME]`<br>Example: `search a/ 2024-10-10 23:00`                                                                                                                                                                |
-| **Search Birthday**    | `search b/ [DATE]`<br>Example: `search b/ 2000-03-15`                                                                                                                                                                          |
-| **Sort Client Data**   | `sort KEYWORD [ORDER]`<br>Example: `sort birthday asc`                                                                                                                                                                         |
-| **Delete a Client**    | `delete INDEX` or `delete NAME`<br>Example: `delete 3` or `delete John Doe`                                                                                                                                                    |
-| **Clear All Entries**  | `clear`                                                                                                                                                                                                                        |
-| **Exit Application**   | `exit`                                                                                                                                                                                                                         |
-| **View Help**          | `help`                                                                                                                                                                                                                         |
+| Action                         | Command Format                                                                                                                                                                                                                 |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add a Client**               | `add n/<NAME> p/<PHONE_NUMBER> e/<EMAIL> addr/<ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT>`<br>Example: `add n/John Doe p/91234567 e/john@example.com addr/123 Street b/1990-01-01 appt/2024-12-12 14:00`                         |
+| **Assign a Policy**            | `assign INDEX pon/<POLICY_NAME> pos/<START_DATE> poe/<END_DATE> paydate/<PAYMENT_DUE_DATE> amt/<AMOUNT_DUE>`<br>Example: `assign 1 pon/Health Insurance pos/2022-01-01 poe/2023-01-01 paydate/2022-12-01 amt/300.00`           |
+| **List Clients**               | `list`                                                                                                                                                                                                                         |
+| **Edit a Client**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAYMENT_DUE_DATE amt/AMOUNT_DUE]`<br>Example: `edit 2 p/98765432` |
+| **Find Clients**               | `find <KEYWORD> [MORE_KEYWORDS]`<br>Example: `find Alice`                                                                                                                                                                      |
+| **Search Appointment**         | `search a/ <DATETIME>`<br>Example: `search a/ 2024-10-10 23:00`                                                                                                                                                                |
+| **Search Birthday**            | `search b/ <DATE>`<br>Example: `search b/ 2000-03-15`                                                                                                                                                                          |
+| **Search Policy**              | `search p/ <POLICY_NAME>`<br>Example: `search p/ sample Policy`                                                                                                                                                                |
+| **Sort Client Data**           | `sort <CRITERIA> <ORDER>`<br>Example: `sort birthday asc`                                                                                                                                                                      |
+| **Delete a Client**            | `delete <INDEX>` or `delete <NAME>`<br>Example: `delete 3` or `delete John Doe`                                                                                                                                                |
+| **Undo the last deleted work** | `undo`                                                                                                                                                                                                                         |
+| **Redo the last undo work**    | `redo`                                                                                                                                                                                                                         |
+| **Clear All Entries**          | `clear`                                                                                                                                                                                                                        |
+| **Exit Application**           | `exit`                                                                                                                                                                                                                         |
+| **View Help**                  | `help`                                                                                                                                                                                                                         |
