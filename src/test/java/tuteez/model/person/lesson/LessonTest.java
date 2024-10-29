@@ -3,6 +3,7 @@ package tuteez.model.person.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tuteez.model.person.lesson.Lesson.isValidLesson;
 import static tuteez.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
@@ -49,6 +50,48 @@ public class LessonTest {
         assertTrue(Lesson.isClashingWithOtherLesson(l2, l1));
         assertTrue(Lesson.isClashingWithOtherLesson(l3, l4));
         assertTrue(Lesson.isClashingWithOtherLesson(l5, l6));
+    }
+
+    @Test
+    public void isValidLesson_acceptsMultipleSpacesBetweenDayAndTime() {
+        String lessonWithOneSpace = "monday 1200-1400";
+        String lessonWithTwoSpaces = "monday  1200-1400";
+
+        assertTrue(isValidLesson(lessonWithOneSpace));
+        assertTrue(isValidLesson(lessonWithTwoSpaces));
+    }
+
+    @Test
+    public void constructor_lessonStringWithMultipleSpaces_parsesSuccessfully() {
+        String lessonWithTwoSpaces = "monday  1200-1400";
+        String lessonWithManySpaces = "monday    1200-1400";
+        String lessonWithTabAndSpaces = "monday \t  1200-1400";
+
+        Lesson lessonTwo = new Lesson(lessonWithTwoSpaces);
+        Lesson lessonMany = new Lesson(lessonWithManySpaces);
+        Lesson lessonTab = new Lesson(lessonWithTabAndSpaces);
+
+        assertEquals(Day.MONDAY, lessonTwo.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonTwo.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithTwoSpaces));
+
+        assertEquals(Day.MONDAY, lessonMany.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonMany.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithManySpaces));
+
+        assertEquals(Day.MONDAY, lessonTab.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonTab.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithTabAndSpaces));
+    }
+
+    @Test
+    public void constructor_acceptsShortcutDayNames() {
+        String lessonWithShortCut = "mon 1200-1400";
+        Lesson l1 = new Lesson("monday 1200-1400");
+        Lesson l2 = new Lesson(lessonWithShortCut);
+
+        assertTrue(isValidLesson(lessonWithShortCut));
+        assertEquals(l1, l2);
     }
 
     @Test
