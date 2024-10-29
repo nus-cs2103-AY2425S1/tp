@@ -25,7 +25,6 @@ import seedu.address.logic.commands.property.FindCommand;
 import seedu.address.logic.commands.property.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.property.AddressContainsKeywordsPredicate;
-import seedu.address.model.property.LandlordName;
 import seedu.address.model.property.LandlordNameContainsKeywordsPredicate;
 import seedu.address.model.property.Property;
 import seedu.address.testutil.property.EditPropertyDescriptorBuilder;
