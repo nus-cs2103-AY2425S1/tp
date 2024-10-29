@@ -2,15 +2,12 @@ package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.ApptSorter;
 
 /**
  * Represents a Patient in the address book.
@@ -33,11 +30,11 @@ public class Patient {
     private Set<Allergy> allergies = new HashSet<>();
     private BloodType bloodType;
     private HealthRisk healthRisk;
-    private HealthRecord healthRecord;
+    private ExistingCondition existingCondition;
     private Note note;
     private Name nokName;
     private Phone nokPhone;
-    private List<Appt> appts = new ArrayList<>();
+    private ApptList appts = new ApptList();
 
     /**
      * Name, Nric, Sex, Birthdate and healthservice must be present and not null
@@ -62,11 +59,10 @@ public class Patient {
         this.allergies.clear();
         this.bloodType = null;
         this.healthRisk = null;
-        this.healthRecord = null;
+        this.existingCondition = null;
         this.note = null;
         this.nokName = null;
         this.nokPhone = null;
-        this.appts.clear();
     }
 
     /**
@@ -75,7 +71,7 @@ public class Patient {
      */
     public Patient(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
                    Email email, Address address, Set<Allergy> allergies, BloodType bloodType, HealthRisk healthRisk,
-                   HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
+                   ExistingCondition existingCondition, Note note, Name nokName, Phone nokPhone, ApptList appts) {
         requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
@@ -87,7 +83,7 @@ public class Patient {
         this.allergies = allergies;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
-        this.healthRecord = healthRecord;
+        this.existingCondition = existingCondition;
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
@@ -142,12 +138,16 @@ public class Patient {
         return note;
     }
 
-    public HealthRecord getHealthRecord() {
-        return healthRecord;
+    public ExistingCondition getExistingCondition() {
+        return existingCondition;
     }
 
     public Address getAddress() {
         return address;
+    }
+
+    public ApptList getAppointments() {
+        return appts;
     }
 
     /**
@@ -157,8 +157,7 @@ public class Patient {
      * @param appt
      */
     public void addAppt(Appt appt) {
-        appts.add(appt);
-        ApptSorter.sortAppointments(appts);
+        appts.addAppt(appt);
     }
 
     /**
@@ -168,7 +167,7 @@ public class Patient {
      * @return List of appointments.
      */
     public List<Appt> getAppts() {
-        return Collections.unmodifiableList(appts);
+        return appts.getAppts();
     }
 
     /**
@@ -178,11 +177,7 @@ public class Patient {
      * @return String representation of the appointments.
      */
     public String getApptsString() {
-        StringBuilder sb = new StringBuilder();
-        for (Appt appt : appts) {
-            sb.append(appt.toString()).append("\n");
-        }
-        return sb.toString();
+        return appts.toString();
     }
 
     /**
@@ -191,7 +186,7 @@ public class Patient {
      * @param appt
      */
     public void deleteAppt(Appt appt) {
-        appts.remove(appt);
+        appts.deleteAppt(appt);
     }
 
     /**

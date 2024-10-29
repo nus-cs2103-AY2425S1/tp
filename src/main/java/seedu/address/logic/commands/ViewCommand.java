@@ -26,8 +26,12 @@ public class ViewCommand extends Command {
 
     private final Nric nric;
 
+    /**
+     * Creates a ViewCommand to view the patient with the specified {@code Nric}.
+     */
     public ViewCommand(Nric nric) {
         this.nric = nric;
+        assert nric != null : "Nric should not be null";
     }
 
     @Override
@@ -45,6 +49,7 @@ public class ViewCommand extends Command {
         }
 
         Patient patient = optionalPatient.get();
+        assert patient != null : "Patient should not be null after being found";
 
         return new CommandResult(generateSuccessMessage(patient), null, false, patient,
                 true, false);
@@ -66,6 +71,7 @@ public class ViewCommand extends Command {
     }
 
     private String generateSuccessMessage(Patient patient) {
+        assert patient != null : "Patient should not be null when generating success message";
         return String.format(MESSAGE_VIEW_SUCCESS, patient.getName());
     }
 

@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 
+import seedu.address.logic.commands.ApptCommand;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
 /**
- * Represents a Patient's appointment date in the address book.
+ * Represents a Patient's appointment date and health service in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Appt {
@@ -34,41 +36,103 @@ public class Appt {
     };
 
     private final LocalDateTime dateTime;
+    private final HealthService healthService;
 
     /**
      * Constructs a {@code Appt}.
      *
      * @param dateTime A valid appointment date.
+     * @param healthService A valid health service.
      */
-    public Appt(LocalDateTime dateTime) {
+    public Appt(LocalDateTime dateTime, HealthService healthService) {
         requireNonNull(dateTime);
+        requireNonNull(healthService);
         this.dateTime = dateTime;
+        this.healthService = healthService;
     }
 
+    /**
+     * Returns the date and time of the appointment.
+     * @return LocalDateTime
+     */
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Appt // instanceof handles nulls
-                        && dateTime.equals(((Appt) other).dateTime)); // state check
+    /**
+     * Returns the health service of the appointment.
+     */
+    public HealthService getHealthService() {
+        return healthService;
     }
 
+    /**
+     * Returns the name of the health service of the appointment.
+     * @return String
+     */
+    public String getHealthServiceName() {
+        return healthService.toString();
+    }
+
+    /**
+     * Returns true if both appointments have the same date and time.
+     * This defines a stronger notion of equality between two appointments.
+     * @param other appointment
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ApptCommand)) {
+            return false;
+        }
+
+        Appt e = (Appt) other;
+        return dateTime.isEqual(e.dateTime)
+                && healthService.equals(e.healthService);
+    }
+
+    /**
+     * Returns the hashcode of the appointment's date and time.
+     */
     @Override
     public int hashCode() {
         return dateTime.hashCode();
     }
 
-    public static boolean isValidAppt(String trimmedDate) {
-        return true;
+    /**
+     * Returns a string representation of the appointment
+     * @param trimmedDate
+     * @return
+     */
+    public static boolean isValidDateTime(LocalDateTime trimmedDate) {
+        try {
+            LocalDateTime.parse(trimmedDate.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
+    /**
+     * Returns true if appointment date is the same as date
+     * @param date
+     * @return
+     */
     public boolean isOn(LocalDate date) {
         return dateTime.toLocalDate().isEqual(date);
     }
 
+    /**
+     * Returns true if appointment date is after date
+     * @param date
+     * @return
+     */
     public boolean isAfter(LocalDate date) {
         return dateTime.toLocalDate().isAfter(date);
     }
@@ -77,22 +141,42 @@ public class Appt {
      * returns true if appointment date is the same as date or after date
      */
     public boolean isAfterOrOn(LocalDate date) {
-        LocalDate curr = dateTime.toLocalDate();
         return isAfter(date) || isOn(date);
     }
 
+    /**
+     * Returns true if appointment date is before date
+     * @param date
+     * @return
+     */
     public boolean isBefore(LocalDate date) {
         return dateTime.toLocalDate().isBefore(date);
     }
 
+    /**
+     * Returns true if appointment date is the same as date or before date
+     * @param date
+     * @return
+     */
     public boolean isBeforeOrOn(LocalDate date) {
         return isBefore(date) || isOn(date);
     }
 
+    /**
+     * Returns true if appointment date is between start and end date
+     * @param start
+     * @param end
+     * @return
+     */
     public boolean isBetweenDates(LocalDate start, LocalDate end) {
         return isAfterOrOn(start) && isBeforeOrOn(end);
     }
 
+    /**
+     * Returns true if appointment has the same health service
+     * @param service
+     * @return
+     */
     public boolean isSameService(HealthService service) {
         return true;
     }
@@ -108,8 +192,13 @@ public class Appt {
         return isBetweenDates(startDate, endDate) && isSameService(service);
     }
 
+    /**
+     * Returns a string representation of the appointment
+     * in the form of a date and time.
+     * @return String
+     */
     @Override
     public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + " " + healthService;
     }
 }

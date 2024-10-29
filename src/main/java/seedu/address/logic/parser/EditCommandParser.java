@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -18,15 +17,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
 
 /**
@@ -43,9 +36,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
-                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE,
-                        PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_HEALTHRECORD,
-                        PREFIX_APPOINTMENT, PREFIX_NOTE);
+                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
+                        PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
 
         Nric nric;
 
@@ -56,8 +48,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
-                PREFIX_ALLERGY, PREFIX_HEALTHRISK, PREFIX_HEALTHRECORD, PREFIX_APPOINTMENT, PREFIX_NOTE);
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_ALLERGY,
+                PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -99,41 +91,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setHealthRisk(ParserUtil.parseHealthRisk(
                     argMultimap.getValue(PREFIX_HEALTHRISK).get()));
         }
-        if (argMultimap.getValue(PREFIX_HEALTHRECORD).isPresent()) {
-            editPatientDescriptor.setHealthRecord(ParserUtil.parseHealthRecord(
-                    argMultimap.getValue(PREFIX_HEALTHRECORD).get()));
+        if (argMultimap.getValue(PREFIX_EXISTINGCONDITION).isPresent()) {
+            editPatientDescriptor.setExistingCondition(ParserUtil.parseExistingCondition(
+                    argMultimap.getValue(PREFIX_EXISTINGCONDITION).get()));
         }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPatientDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
-
-        parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).ifPresent(editPatientDescriptor::setAppts);
-        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            editPatientDescriptor.setAppts(parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).get());
-        }
-
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
         return new EditCommand(nric, editPatientDescriptor);
     }
-
-    /**
-     * Parses {@code Collection<String> dateTime} into a {@code List<Appt>} if {@code dateTime} is non-empty.
-     * If {@code dateTime} contain only one element which is an empty string, it will be parsed into a
-     * {@code List<Appt>} containing zero appointments.
-     */
-    public Optional<List<Appt>> parseApptsForEdit(Collection<String> dateTime) throws ParseException {
-        assert dateTime != null;
-
-        if (dateTime.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> datesList = dateTime.size() == 1 && dateTime.contains("")
-                ? Collections.emptyList() : dateTime;
-        return Optional.of(ParserUtil.parseAppts(datesList));
-    }
-
 
 }

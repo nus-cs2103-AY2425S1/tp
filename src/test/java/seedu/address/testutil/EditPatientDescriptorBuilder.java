@@ -1,20 +1,12 @@
 package seedu.address.testutil;
 
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -55,8 +47,7 @@ public class EditPatientDescriptorBuilder {
         descriptor.setNokPhone(patient.getNokPhone());
         //descriptor.setAllergy(patient.getAllergies/());
         descriptor.setHealthRisk(patient.getHealthRisk());
-        descriptor.setHealthRecord(patient.getHealthRecord());
-        descriptor.setAppts(patient.getAppts());
+        descriptor.setExistingCondition(patient.getExistingCondition());
         descriptor.setNote(patient.getNote());
     }
 
@@ -161,23 +152,10 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code healthRecord} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code existingCondition} of the {@code EditPatientDescriptor} that we are building.
      */
-    public EditPatientDescriptorBuilder withHealthRecord(String healthRecord) {
-        descriptor.setHealthRecord(new HealthRecord(healthRecord));
-        return this;
-    }
-
-    /**
-     * Parses the {@code Appts} into a {@code List<Appt>}
-     * and set it to the {@code EditPatientDescriptor}
-     * that we are building.
-     */
-    public EditPatientDescriptorBuilder withAppts(String... appts) {
-        List<Appt> appointmentSet = Stream.of(appts)
-                .map(apptString -> LocalDateTime.parse(apptString, DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .map(Appt::new).collect(Collectors.toList());
-        descriptor.setAppts(appointmentSet);
+    public EditPatientDescriptorBuilder withExistingCondition(String existingCondition) {
+        descriptor.setExistingCondition(new ExistingCondition(existingCondition));
         return this;
     }
 

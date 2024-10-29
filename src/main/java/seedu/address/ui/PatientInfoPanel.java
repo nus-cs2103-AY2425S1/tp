@@ -69,7 +69,7 @@ public class PatientInfoPanel extends UiPart<Region> {
     private Label healthRisk;
 
     @FXML
-    private Label healthRecord;
+    private Label existingCondition;
 
     @FXML
     private Label nokName;
@@ -118,9 +118,9 @@ public class PatientInfoPanel extends UiPart<Region> {
         healthRisk.setText("Health Risk: " + (patient.getHealthRisk() == null
                 ? ""
                 : patient.getHealthRisk().toString()));
-        healthRecord.setText("Health Record: " + (patient.getHealthRecord() == null
+        existingCondition.setText("Health Record: " + (patient.getExistingCondition() == null
                 ? ""
-                : patient.getHealthRecord().toString()));
+                : patient.getExistingCondition().toString()));
         nokName.setText("Next of Kin Name: "
                 + (patient.getNokName() == null ? "" : patient.getNokName().toString()));
         nokPhone.setText("Next of Kin Phone Number: " + (patient.getNokPhone() == null

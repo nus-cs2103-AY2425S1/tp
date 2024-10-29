@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
 import seedu.address.model.patient.Appt;
+import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
-import seedu.address.model.patient.HealthRecord;
+import seedu.address.model.patient.ExistingCondition;
 import seedu.address.model.patient.HealthRisk;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Note;
@@ -31,6 +34,7 @@ import seedu.address.model.patient.Sex;
 class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
+    private static final Logger logger = Logger.getLogger(JsonAdaptedPatient.class.getName());
 
     private final String name;
     private final String nric;
@@ -42,12 +46,11 @@ class JsonAdaptedPatient {
     private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final String bloodType;
     private final String healthRisk;
-    private final String healthRecord;
+    private final String existingCondition;
     private final String note;
     private final String nokName;
     private final String nokPhone;
     private final List<JsonAdaptedAppt> appts = new ArrayList<>();
-
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -58,7 +61,7 @@ class JsonAdaptedPatient {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("allergy") List<JsonAdaptedAllergy> allergies,
             @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
-            @JsonProperty("healthRecord") String healthRecord, @JsonProperty("note") String note,
+            @JsonProperty("existingCondition") String existingCondition, @JsonProperty("note") String note,
             @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone,
             @JsonProperty("appts") List<JsonAdaptedAppt> appts) {
         this.name = name;
@@ -73,7 +76,7 @@ class JsonAdaptedPatient {
         this.address = address;
         this.bloodType = bloodType;
         this.healthRisk = healthRisk;
-        this.healthRecord = healthRecord;
+        this.existingCondition = existingCondition;
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
@@ -98,7 +101,7 @@ class JsonAdaptedPatient {
                 .collect(Collectors.toList()));
         bloodType = source.getBloodType() == null ? "" : source.getBloodType().value;
         healthRisk = source.getHealthRisk() == null ? "" : source.getHealthRisk().value;
-        healthRecord = source.getHealthRecord() == null ? "" : source.getHealthRecord().value;
+        existingCondition = source.getExistingCondition() == null ? "" : source.getExistingCondition().value;
         note = source.getNote() == null ? "" : source.getNote().value;
         nokName = source.getNokName() == null ? "" : source.getNokName().fullName;
         nokPhone = source.getNokPhone() == null ? "" : source.getNokPhone().value;
@@ -181,11 +184,12 @@ class JsonAdaptedPatient {
         }
         final HealthRisk modelHealthRisk = healthRisk.isEmpty() ? null : new HealthRisk(healthRisk);
 
-        if (healthRecord == null) {
+        if (existingCondition == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    HealthRecord.class.getSimpleName()));
+                    ExistingCondition.class.getSimpleName()));
         }
-        final HealthRecord modelHealthRecord = healthRecord.isEmpty() ? null : new HealthRecord(healthRecord);
+        final ExistingCondition modelExistingCondition =
+                existingCondition.isEmpty() ? null : new ExistingCondition(existingCondition);
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -209,17 +213,27 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appt.class.getSimpleName()));
         }
-        final List<Appt> modelAppts = new ArrayList<>();
-        if (appts != null) {
-            for (JsonAdaptedAppt appt : appts) {
-                modelAppts.add(appt.toModelType());
+        final ApptList modelAppts = new ApptList();
+
+        for (JsonAdaptedAppt appt : appts) {
+            if (appt.getHealthServiceName() == null) {
+                logger.severe("HealthServiceName is null for appointment: " + appt);
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        HealthService.class.getSimpleName()));
             }
+
+            if (!HealthService.isValidHealthserviceName(appt.getHealthServiceName())) {
+                logger.severe("Invalid health service name for appointment: " + appt);
+                throw new IllegalValueException("Invalid health service name");
+            }
+
+            modelAppts.addAppt(appt.toModelType());
         }
 
         final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
 
         return new Patient(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
-                modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
+                modelAddress, modelAllergies, modelBloodType, modelHealthRisk, modelExistingCondition, modelNote,
                 modelNokName, modelNokPhone, modelAppts);
     }
 
