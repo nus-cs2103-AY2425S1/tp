@@ -23,6 +23,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_INPUT = "Please enter an existing client name!";
     public static final String MISSING_CLIENT_NAME = "Please enter a client name!";
     public static final String MESSAGE_SUGGESTION = "Did you mean \"%s\"?";
+    public static final String MESSAGE_TODAY_APPOINTMENTS = "You have %1$d appointment(s) today!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
