@@ -15,6 +15,15 @@ public class Pair <K, V> implements Serializable {
     private final V value;
 
     /**
+     * Fulfils the role of a dummy constructor for JSON file reading compatibility.
+     * I don't know why this is needed. DO NOT USE IN CODE.
+     */
+    public Pair() {
+        this.key = null;
+        this.value = null;
+    }
+
+    /**
      * Creates a new Pair instance with the given key and value.
      *
      * @param key The key.

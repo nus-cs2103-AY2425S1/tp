@@ -151,8 +151,10 @@ class JsonAdaptedLesson {
      * @param jsonStudent JsonAdaptedStudent representing the student to search for.
      * @return Boolean representing the student's attendance for this lesson, or false if no entry is found.
      */
-    private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
+    protected boolean getAttendance(JsonAdaptedStudent jsonStudent) {
         for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceList) {
+            // A (faster) alternative is to only check using the student's name, but issues could arise if there
+            // happen to be multiple students with the same name in the JSON file.
             if (pair.getKey().equals(jsonStudent)) {
                 return pair.getValue();
             }

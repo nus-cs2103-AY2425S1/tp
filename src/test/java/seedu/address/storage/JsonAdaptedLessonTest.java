@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,7 +24,6 @@ public class JsonAdaptedLessonTest {
     private static final String VALID_TIME = "10:00";
     private static final List<JsonAdaptedStudent> VALID_STUDENTS = Collections.singletonList(
             new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()));
-    private static final List<Boolean> VALID_MAPS = List.of(false);
     private static final List<Pair<JsonAdaptedStudent, Boolean>> VALID_MAP = Collections.singletonList(new Pair<>(
             new JsonAdaptedStudent(new StudentBuilder().withName("Alice Pauline").build()), false));
 
@@ -91,5 +91,15 @@ public class JsonAdaptedLessonTest {
         assertEquals(VALID_TIME, jsonAdaptedLesson.getTime());
         assertEquals(1, jsonAdaptedLesson.getStudents().size());
         assertEquals(student.getName().fullName, jsonAdaptedLesson.getStudents().get(0).getName());
+    }
+
+    @Test
+    public void getAttendance_attendanceIsTrue_returnsTrue() {
+        JsonAdaptedStudent jsonStudent = new JsonAdaptedStudent(new StudentBuilder().withName("Benson").build());
+        JsonAdaptedLesson jsonAdaptedLesson = new JsonAdaptedLesson(VALID_DATE, VALID_TIME,
+                List.of(jsonStudent),
+                List.of(new Pair<>(
+                        new JsonAdaptedStudent(new StudentBuilder().withName("Benson").build()), true)));
+        assertTrue(() -> jsonAdaptedLesson.getAttendance(jsonStudent));
     }
 }
