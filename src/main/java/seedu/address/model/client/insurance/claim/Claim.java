@@ -11,8 +11,8 @@ public class Claim {
             + "Letter + 4 digits only.";
 
     public static final String NEGATIVE_CLAIM_AMOUNT = "Claim Amount cannot be negative.";
-    public static final String INVALID_CLAIM_AMOUNT = "Claim about must be in dollars and cents eg. 151.00";
-    public static final String MESSAGE_INVALID_CENTS = "The claim amount must contain at least and "
+    public static final String INVALID_CLAIM_AMOUNT = "Claim Amount must be in dollars and cents eg. 151.00";
+    public static final String MESSAGE_INVALID_CENTS = "The Claim Amount must contain at least and "
             + "only equal to 2 digits of cents eg. 151.00";
     public static final String MESSAGE_TOO_MANY_DECIMALS = "Too many decimal points in claim amount!";
 
