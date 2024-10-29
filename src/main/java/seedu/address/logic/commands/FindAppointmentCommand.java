@@ -31,6 +31,9 @@ public class FindAppointmentCommand extends Command {
             + PREFIX_END_DATE + "02/01/2025 "
             + PREFIX_END_TIME + "13:00";
 
+    public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
+
+    public static final String MESSAGE_INVALID_TIME = "Invalid time. Please use the HH:MM format";
     private final ContainsKeywordsPredicate predicate;
 
     public FindAppointmentCommand(ContainsKeywordsPredicate predicate) {

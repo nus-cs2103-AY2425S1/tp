@@ -177,8 +177,8 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Rendering Find UI");
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);
-//        findAppointmentPanelPlaceholder.setVisible(false);
-//        findAppointmentPanelPlaceholder.setManaged(false);
+        findAppointmentPanelPlaceholder.setVisible(false);
+        findAppointmentPanelPlaceholder.setManaged(false);
 
         FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
         findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
@@ -213,8 +213,8 @@ public class MainWindow extends UiPart<Stage> {
         if (isFindNricCommand) {
             findPersonPanelPlaceholder.setVisible(false);
             findPersonPanelPlaceholder.setManaged(false);
-//            findAppointmentPanelPlaceholder.setVisible(false);
-//            findAppointmentPanelPlaceholder.setManaged(false);
+            findAppointmentPanelPlaceholder.setVisible(false);
+            findAppointmentPanelPlaceholder.setManaged(false);
             personListPanelPlaceholder.setVisible(true);
             personListPanelPlaceholder.setManaged(true);
             isFindNricCommand = false;
