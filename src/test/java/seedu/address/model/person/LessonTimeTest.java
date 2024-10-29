@@ -51,6 +51,9 @@ public class LessonTimeTest {
         // same values -> returns true
         assertTrue(lt.equals(new LessonTime("SUN-11:00-13:30")));
 
+        // case-insensitive -> return true
+        assertTrue(lt.equals(new LessonTime("sun-11:00-13:30")));
+
         // same object -> returns true
         assertTrue(lt.equals(lt));
 
@@ -91,10 +94,14 @@ public class LessonTimeTest {
         assertFalse(lt.canMerge(new LessonTime("SUN-14:00-15:30")));
     }
 
+
+
     @Test
     public void toStringTest() {
         LessonTime lt = new LessonTime("SUN-11:00-13:30");
+        LessonTime lt2 = new LessonTime("sun-11:00-13:30");
         String expected = "SUN-11:00-13:30";
         assertEquals(expected, lt.toString());
+        assertEquals(expected, lt2.toString());
     }
 }

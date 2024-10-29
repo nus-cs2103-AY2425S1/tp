@@ -54,12 +54,14 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        String thisValue = String.join(" ", value.trim().split("\\s+"));
+        String otherValue = String.join(" ", otherAddress.value.trim().split("\\s+"));
+        return thisValue.equalsIgnoreCase(otherValue);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return String.join(" ", value.split("\\s+")).toLowerCase().hashCode();
     }
 
 }

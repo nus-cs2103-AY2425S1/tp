@@ -77,7 +77,7 @@ public class Subject {
     public Subject(String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
-        this.subjectName = subjectName;
+        this.subjectName = subjectName.toUpperCase();
     }
 
     /**
@@ -102,7 +102,7 @@ public class Subject {
      */
     public static boolean isValidSubjectName(String subjectName) {
         requireNonNull(subjectName);
-        return inEnum(subjectName.toUpperCase(), Subjects.class);
+        return inEnum(subjectName, Subjects.class);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Subject {
         }
         EnumSet<Subjects> validSubjects = validSubjectsByLevel.get(level);
         for (Subject s: subjects) {
-            if (!validSubjects.contains(Subjects.valueOf(s.subjectName.toUpperCase()))) {
+            if (!validSubjects.contains(Subjects.valueOf(s.subjectName))) {
                 messageValidSubjectsByLevel = String.format("%s %s: %s",
                         MESSAGE_VALID_SUBJECTS_BASE, level, validSubjects);
                 return false;
