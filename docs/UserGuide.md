@@ -112,7 +112,7 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -123,13 +123,33 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Remark a person : `remark`
+### Adding history to a person : `log`
+
+Edits an existing person in the address book.
+
+Format: `log INDEX [d/DATE] l/LOG`
+
+* Adds a new history entry to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
+* Date is optional, and must be no earlier than the date of creation of the person, and not in the future, if to be included.
+* If date is not included the date of the history entry to be added will be today, system time, by default.
+* Date format must be in `yyyy-mm-dd`.
+
+Examples:
+* `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
+  ![result for 'log 1 d/2024-08-08 l/meet up'](images/wxy2003-xy.png)
+  ![result for 'view 1'](images/wxy2003-xy.png)
+
+* `log 2 l/had lunch together` add a log entry to the 2nd person in the address book, `had lunch together` on today.
+  ![result for 'log 2 l/had lunch together'](images/wxy2003-xy.png)
+  ![result for 'view 2'](images/wxy2003-xy.png)
+
+### Remarking a person : `remark`
 
 Add or edit remark to an existing person in the address book.
 
 Format: `remark INDEX r/REMARK`
 
-* Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 
 Examples:
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
@@ -172,7 +192,7 @@ Format: `favourite`
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
-  ![result for 'find alex david'](images/wxy2003-xy.png)
+  ![result for 'favourite'](images/wxy2003-xy.png)
 
 ### Deleting a person : `delete`
 
