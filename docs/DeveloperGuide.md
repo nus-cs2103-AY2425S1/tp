@@ -301,40 +301,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [Back to Table of Contents](#table-of-contents)
 ### Use cases
 
-(For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Medibase3` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case:** UC1 - Add Patient
 
 **MSS:**
-1. User keys in the patient details.
-2. MB3 adds the patient and displays a success message.  
-   Use case ends.
+1. User requests to add patient details.
+2. User provides the patient details.
+3. MB3 adds the patient and displays a success message.
+
+    Use case ends.
 
 **Extensions:**
-1a. MB3 detects an error when adding patient data.  
-1a1. MB3 does not add patient data and shows an error message.  
-Use case ends.
+
+* 2a. The patient already exists in MediBase3.
+    * 2a1. MediBase3 informs the user of the error.<br>
+    Use case ends
+
+
+* 2b. The user provides patient details that is not in the expected format.
+    * 2b1. MB3 informs the user of the expected format.<br>
+    Use case resume at step 2.
 
 ---
 
 **Use case:** UC2 - Edit Patient
 
 **MSS:**
-1. User requests MB3 to edit the patient data.
-2. MB3 updates the patient data and displays a success message.  
+1. User requests MediBase3 to edit the patient data.
+2. User provides the new patient data.
+3. MediBase3 updates the patient data and displays a success message.  
    Use case ends.
 
 **Extensions:**
-* 1a. MB3 detects an error when editing patient data.
-  * 1a1. MB3 does not update patient data and shows an error message.  
-    Use case ends.
+* 3a. User updates a non-existing patient.
+    * 3a1. MediBase3 shows an error message.<br>
+    Use case resumes at step 2.
+
+
+* 3b. User provides a field that is not in the expected format.
+    * 3b1. MediBase3 informs the user that the field is not in the expected format.<br>
+    * MediBase3 provides the expected format for the field.<br>
+    Use case resumes at step 2.
+
+
+* 3c. User provides multiple instances of the same field for the patient.
+    * 3b1. MediBase3 informs the user that multiple fields are present.<br>
+    Use case resumes at step 2.
 
 ---
 
 **Use case:** UC3 - Find Patient by Name
 
 **MSS:**
-1. User keys in the patient name.
+1. User requests to find a patient
 2. MB3 prints the selected patient information and displays a success message.  
    Use case ends.
 
