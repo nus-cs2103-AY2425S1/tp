@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " alice bob charlie";
+            + PREFIX_NAME + "alice bob charlie";
 
     public static final String MESSAGE_SUCCESS = "Find success: %1$s";
     public static final String MESSAGE_INVALID_NAME = "The provided name is of an invalid format!";
