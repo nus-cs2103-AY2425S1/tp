@@ -215,7 +215,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpCards.add(helpCommandCard);
 
         CommandHelpCard inspectCommandCard = new CommandHelpCard(
-            InspectCommand.COMMAND_WORD, InspectCommand.MESSAGE_USAGE, "inspect"
+            InspectCommand.COMMAND_WORD, InspectCommand.MESSAGE_USAGE, "inspect 1"
         );
         helpCards.add(inspectCommandCard);
 
