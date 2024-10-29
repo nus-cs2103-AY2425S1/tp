@@ -1,7 +1,5 @@
 package seedu.address.ui.card;
 
-import java.awt.*;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -63,6 +61,9 @@ public class EventCard extends UiPart<Region> {
                 .forEach(contact -> contactsBox.getChildren().add(contactCard(contact)));
     }
 
+    /**
+     * Creates a HBox for each contact in the event.
+     */
     public HBox contactCard(Person contact) {
         HBox contactCard = new HBox();
         contactCard.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
