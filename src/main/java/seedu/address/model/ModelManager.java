@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.storage.BackupManager;
 import seedu.address.storage.Storage;
@@ -145,40 +148,15 @@ public class ModelManager implements Model {
         calendar.setAppointment(target, editedPerson);
     }
 
-    /*@Override
-    public void backupData(String filePath) throws IOException {
-        synchronized (backupManager) {
-            logger.info("Starting manual backup.");
-
-            if (storage == null) {
-                throw new IOException("Storage is not initialized!");
-            }
-
-            // Clean up previous manual backup to ensure only one manual backup exists
-            backupManager.cleanOldBackups(1); // This only affects manual backups
-
-            // Use a fixed filename for manual backups
-            if (filePath == null) {
-                filePath = "backups/clinicbuddy-manual-backup.json"; // Fixed name for manual backup
-            }
-
-            logger.info("Manual backup triggered to path: " + filePath);
-
-            // Save the AddressBook to the manual backup file
-            storage.saveAddressBook(getAddressBook(), Paths.get(filePath));
-
-            logger.info("Manual backup completed.");
-        }
-    }*/
-
-    // Automatically trigger backup after operations
     protected void triggerBackup(String action, Person target) {
-        try {
-            String backupName = action + " " + target.getName();
-            backupManager.triggerBackup(storage.getAddressBookFilePath(), backupName);
-            logger.info("Backup triggered: " + backupName);
-        } catch (IOException e) {
-            logger.warning("Backup failed: " + e.getMessage());
+        if ("delete".equals(action)) {
+            try {
+                String backupName = action + "_" + target.getName();
+                backupManager.triggerBackup(storage.getAddressBookFilePath(), backupName);
+                logger.info("Backup triggered for deletion: " + backupName);
+            } catch (IOException e) {
+                logger.warning("Backup failed for deletion: " + e.getMessage());
+            }
         }
     }
 
@@ -209,6 +187,27 @@ public class ModelManager implements Model {
             storage.cleanOldBackups(maxBackups);
         } else {
             throw new IOException("Storage is not initialized!");
+        }
+    }
+
+    @Override
+    public void backupData(String fileName) throws CommandException {
+        if (storage == null) {
+            throw new CommandException("Failed to create manual backup: Storage is not initialized!");
+        }
+
+        if (fileName == null || fileName.isBlank()) {
+            // Use timestamp if no filename provided
+            fileName = "manual-backup_"
+                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
+        }
+
+        try {
+            backupManager.triggerBackup(storage.getAddressBookFilePath(), fileName);
+            logger.info("Manual backup created: " + fileName);
+        } catch (IOException e) {
+            logger.warning("Manual backup failed: " + e.getMessage());
+            throw new CommandException("Failed to create manual backup: " + e.getMessage());
         }
     }
 
