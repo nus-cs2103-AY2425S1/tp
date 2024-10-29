@@ -72,6 +72,14 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    /**
+     * Executes a default command when the application starts.
+     */
+    public void executeDefaultCommand() throws CommandException, ParseException {
+        String defaultCommand = "welcome";
+        executeCommand(defaultCommand);
+    }
+
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
@@ -147,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the application window.
+     */
     void show() {
         primaryStage.show();
     }
