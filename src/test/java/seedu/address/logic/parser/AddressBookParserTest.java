@@ -230,6 +230,7 @@ public class AddressBookParserTest {
     public void parseCommand_listWeddings() throws Exception {
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD) instanceof ListWeddingsCommand);
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD + " 3") instanceof ListWeddingsCommand);
+        // Test using list weddings keyword
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_KEYWORD + " 3") instanceof ListWeddingsCommand);
     }
 
@@ -237,6 +238,7 @@ public class AddressBookParserTest {
     public void parseCommand_listTask() throws Exception {
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD) instanceof ListTasksCommand);
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD + " 3") instanceof ListTasksCommand);
+        // Test using list tasks keyword
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_KEYWORD + " 3") instanceof ListTasksCommand);
     }
 
