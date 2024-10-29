@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -18,6 +19,14 @@ import seedu.address.model.person.Schedule;
  */
 public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "reminder";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add reminders for appointments. "
+            + "Parameters: "
+            + "NAME "
+            + PREFIX_REMINDER + "REMINDER_TIME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "John Doe "
+            + PREFIX_REMINDER + "1 day";
 
     public static final String MESSAGE_SUCCESS = "Reminder set successfully for: %s. "
             + "You will be reminded %s before.";
