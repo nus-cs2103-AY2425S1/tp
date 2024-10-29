@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -57,7 +58,7 @@ public class UnassignContactFromWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownWeddingList = model.getFilteredWeddingList();
 
-        WeddingName specific_wedding_name = model.getCurrentWeddingName();
+        ObjectProperty<WeddingName> specific_wedding_name = model.getCurrentWeddingName();
 
         if (specific_wedding_name == null) {
             throw new CommandException("You need to be viewing a wedding to unassign contacts.");
@@ -67,7 +68,7 @@ public class UnassignContactFromWeddingCommand extends Command {
         Wedding weddingToModify = new Wedding(null, null);
         List<PersonId> existingPersonsInWedding = new ArrayList<>();
         for (Wedding w : lastShownWeddingList) {
-            if (w.getWeddingName().equals(specific_wedding_name)) {
+            if (w.getWeddingName().equals(specific_wedding_name.get())) {
                 weddingToModify = w;
                 existingPersonsInWedding = w.getAssignees();
             }
@@ -83,6 +84,7 @@ public class UnassignContactFromWeddingCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             } else {
                 Person personToRemove = lastShownList.get(i.getZeroBased());
+                System.out.println(personToRemove.getId().toString());
                 unassignedContacts.add(personToRemove);
             }
         }
@@ -102,8 +104,8 @@ public class UnassignContactFromWeddingCommand extends Command {
 
         String unassignedPersonNames = parsePersonListToString(unassignedContacts);
 
-
         PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(newWedding);
+
         model.updateFilteredPersonList(predicate);
 
         return new CommandResult(String.format(MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS,
