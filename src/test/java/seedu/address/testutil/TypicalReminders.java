@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
-import seedu.address.model.ReminderAddressBook;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Reminder;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.ReminderAddressBook;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Reminder;
 
 /**
  * A utility class containing a list of {@code Reminder} objects to be used in tests.

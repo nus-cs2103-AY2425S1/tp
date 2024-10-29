@@ -7,13 +7,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
 import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.exceptions.DuplicateReminderException;
-import seedu.address.model.person.exceptions.ReminderNotFoundException;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.exceptions.DuplicateReminderException;
+import seedu.address.model.person.exceptions.ReminderNotFoundException;
 
 public class UniqueReminderListTest {
 
