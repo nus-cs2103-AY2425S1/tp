@@ -16,7 +16,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     public static final String MESSAGE_EMPTY_REMARK =
-            "Remark cannot be empty. Please provide type out the remark.";
+            "Remark cannot be empty. Please provide a remark.";
     public static final String MESSAGE_MISSING_PERSON_INDEX =
             "Person index is required but missing. Please provide the index of the person as displayed in the list.";
     public static final String MESSAGE_INVALID_PERSON_INDEX_FORMAT =
