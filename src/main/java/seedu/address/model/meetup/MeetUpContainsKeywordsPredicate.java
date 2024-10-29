@@ -10,13 +10,13 @@ import seedu.address.commons.util.ToStringBuilder;
 
 
 /**
- * Tests that a {@code Meetup}'s {@code dateTime} range contains the given date.
+ * Tests that a {@code Meetup}'s {@code Name} range contains the keywords.
  */
 public class MeetUpContainsKeywordsPredicate implements Predicate<MeetUp> {
     private final List<String> keywords;
 
     /**
-     * Date must be present and not null.
+     * Meetup name must be present and not null.
      */
     public MeetUpContainsKeywordsPredicate(List<String> keywords) {
         requireNonNull(keywords);
@@ -26,7 +26,7 @@ public class MeetUpContainsKeywordsPredicate implements Predicate<MeetUp> {
     @Override
     public boolean test(MeetUp meetUp) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meetUp.getName().meetUpFullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meetUp.getName().toString(), keyword));
     }
 
     @Override

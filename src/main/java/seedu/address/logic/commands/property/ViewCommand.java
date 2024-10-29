@@ -2,6 +2,7 @@ package seedu.address.logic.commands.property;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROPERTIES;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -19,7 +20,7 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
+        model.updateFilteredPropertyList(PREDICATE_SHOW_ALL_PROPERTIES);
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
     }
 }
