@@ -19,19 +19,19 @@ import seedu.address.model.wedding.Wedding;
  */
 public class TypicalWeddings {
 
-    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Adam Wedding")
+    public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice's Wedding")
             .withVenue("Marina Bay Sands").withDate("2024-12-12").withClient(ALICE).build();
 
-    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy Jack Wedding")
+    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy's Wedding")
             .withDate("2025-12-25").withClient(AMY).build();
 
-    public static final Wedding ELLE_WEDDING = new WeddingBuilder().withName("Elle George Wedding")
+    public static final Wedding ELLE_WEDDING = new WeddingBuilder().withName("Elle's Wedding")
             .withClient(ELLE).build();
 
-    public static final Wedding GEORGE_WEDDING = new WeddingBuilder().withName("George Jane Wedding")
+    public static final Wedding GEORGE_WEDDING = new WeddingBuilder().withName("George's Wedding")
             .withVenue("Sentosa").withDate("2025-01-01").withClient(GEORGE).build();
 
-    public static final Wedding JOHN_WEDDING = new WeddingBuilder().withName("John Jane Wedding")
+    public static final Wedding JOHN_WEDDING = new WeddingBuilder().withName("John's Wedding")
             .withVenue("Fullerton").withClient(JOHN).build();
 
     private TypicalWeddings() {} // prevents instantiation
