@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        historyCommandListPanel = new HistoryCommandListPanel(FXCollections.observableArrayList());
+        historyCommandListPanel = new HistoryCommandListPanel(logic.getHistoryCommandList());
         historyCommandListPanelPlaceholder.getChildren().add(historyCommandListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
