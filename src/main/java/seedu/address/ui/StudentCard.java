@@ -50,9 +50,12 @@ public class StudentCard extends UiPart<Region> {
             if (newValue) {
                 updateCardColorBasedOnAssignment();
             } else {
-                cardPane.getStyleClass().removeAll("student-card-done", "student-card-not-done");
-                attendanceFlowPane.getStyleClass().removeAll("student-card-done", "student-card-not-done");
-                attendanceBox.getStyleClass().removeAll("student-card-done", "student-card-not-done");
+                cardPane.getStyleClass()
+                        .removeAll("student-card-done", "student-card-not-done");
+                attendanceFlowPane.getStyleClass()
+                        .removeAll("attendanceFlowPane-done", "attendanceFlowPane-not-done");
+                attendanceBox.getStyleClass()
+                        .removeAll("attendanceFlowPane-done", "attendanceFlowPane-not-done");
             }
         });
 
@@ -74,14 +77,13 @@ public class StudentCard extends UiPart<Region> {
         attendanceFlowPane.getStyleClass().removeAll("attendance-data-label");
         if (isCompleted) {
             cardPane.getStyleClass().add("student-card-done");
-            attendanceFlowPane.getStyleClass().add("student-card-done");
-            attendanceBox.getStyleClass().add("student-card-done");
+            attendanceFlowPane.getStyleClass().add("attendanceFlowPane-done");
+            attendanceBox.getStyleClass().add("attendanceFlowPane-done");
         } else {
             cardPane.getStyleClass().add("student-card-not-done");
-            attendanceFlowPane.getStyleClass().add("student-card-not-done");
-            attendanceBox.getStyleClass().add("student-card-not-done");
+            attendanceFlowPane.getStyleClass().add("attendanceFlowPane-not-done");
+            attendanceBox.getStyleClass().add("attendanceFlowPane-not-done");
         }
-        cardPane.applyCss();
     }
 
     /**
