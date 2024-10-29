@@ -7,16 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import seedu.address.model.person.Attendance;
-import seedu.address.model.person.Person;
-import seedu.address.model.tutorial.Tutorial;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 class ParticipationTest {
     private Person student = ALICE;
