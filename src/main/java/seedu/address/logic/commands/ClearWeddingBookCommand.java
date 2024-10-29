@@ -10,7 +10,7 @@ import seedu.address.model.WeddingBook;
  */
 public class ClearWeddingBookCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear-weddingbook";
+    public static final String COMMAND_WORD = "clear-wb";
     public static final String COMMAND_FUNCTION = ": Clears the entire wedding book";
     public static final String MESSAGE_SUCCESS = "Wedding book has been cleared!";
 

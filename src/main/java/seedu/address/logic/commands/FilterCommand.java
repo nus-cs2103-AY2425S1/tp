@@ -16,10 +16,10 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Filters all persons whose names or jobs contain any of "
-            + "the specified keywords (case-insensitive)\n";
+            + "the specified keywords (case-insensitive)";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: n/KEYWORD or j/KEYWORD\n"
+            + "\nParameters: n/KEYWORD or j/KEYWORD\n"
             + "Example: " + COMMAND_WORD + " n/John OR " + COMMAND_WORD + " j/Photographer";
 
     private final NameOrJobContainsKeywordsPredicate predicate;
