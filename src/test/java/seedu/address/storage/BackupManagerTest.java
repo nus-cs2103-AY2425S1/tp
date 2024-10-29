@@ -97,4 +97,17 @@ public class BackupManagerTest {
                 "The returned FileTime should be close to the current system time.");
     }
 
+    @Test
+    public void triggerBackup_createsBackupFileWithCorrectFormat() throws IOException {
+        // Use triggerBackup to create a backup with a specific description.
+        String description = "delete ALICE";
+        backupManager.triggerBackup(TEMP_FILE, description);
+
+        // Verify the backup file is created in the directory with the correct format.
+        boolean backupFileExists = Files.list(TEMP_BACKUP_DIR).anyMatch(path ->
+                path.getFileName().toString().contains(description) &&
+                        path.getFileName().toString().endsWith(".json"));
+        assertTrue(backupFileExists, "The backup file should exist and be named with the correct format.");
+    }
+
 }

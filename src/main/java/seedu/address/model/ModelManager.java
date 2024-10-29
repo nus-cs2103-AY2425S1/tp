@@ -172,7 +172,7 @@ public class ModelManager implements Model {
     }*/
 
     // Automatically trigger backup after operations
-    private void triggerBackup(String action, Person target) {
+    protected void triggerBackup(String action, Person target) {
         try {
             String backupName = action + " " + target.getName();
             backupManager.triggerBackup(storage.getAddressBookFilePath(), backupName);
