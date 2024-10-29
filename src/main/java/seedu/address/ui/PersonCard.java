@@ -71,6 +71,6 @@ public class PersonCard extends UiPart<Region> {
     private void setTagColor(Node tag) {
         Label label = (Label) tag;
         String tagName = label.getText();
-        tag.setStyle(String.format("-fx-background-color: %s", tagColorMap.get(tagName)));
+        tag.setStyle(String.format("-fx-text-fill: #383838; -fx-background-color: %s", tagColorMap.get(tagName)));
     }
 }
