@@ -16,6 +16,11 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+run {
+    enableAssertions = true
+}
+
+
 checkstyle {
     toolVersion = '10.2'
 }
@@ -32,7 +37,7 @@ task coverage(type: JacocoReport) {
     executionData.from files(jacocoTestReport.executionData)
     afterEvaluate {
         classDirectories.from files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*.jar'])
+            fileTree(dir: it, exclude: ['**/*.jar', 'seedu/address/ui/ContactDisplay.class'])
         })
     }
     reports {

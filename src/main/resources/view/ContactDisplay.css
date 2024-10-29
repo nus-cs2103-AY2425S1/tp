@@ -1,39 +1,73 @@
 /* ContactDisplay.css */
 
 #scrollPane {
+    -fx-background: #B5D4F5;
+    width: 100%;
+}
+
+#scrollPane .viewport {
     -fx-background-color: #B5D4F5;
 }
 
-.name-label {
-    -fx-font-weight: bold;
+.vbox {
+    -fx-padding: 20;
+    -fx-background-color: #B5D4F5;
+    -fx-border-color: #B5D4F5;
+    -fx-font-family: 'Garamond';
+    -fx-spacing: 20;
+    width: 100%;
+}
+
+#contactHeader #contactBody {
+    -fx-padding: 20;
+    -fx-background-color: #B5D4F5;
+    -fx-border-color: #B5D4F5;
+    -fx-font-family: 'Garamond';
+    -fx-spacing: 20;
+}
+
+.label {
+    -fx-font-family: 'Garamond';
     -fx-font-size: 16px;
-    -fx-font-family: 'Garamond';
+    -fx-text-fill: #333;
 }
 
-.category-label {
-    -fx-font-size: 14px;
-    -fx-font-family: 'Garamond';
+#helpLabel {
+    -fx-font-family: monospace;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
 }
 
-.phone-label {
-    -fx-font-size: 14px;
-    -fx-font-family: 'Garamond';
+#nameLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }
 
-.email-label {
-    -fx-font-size: 14px;
-    -fx-font-family: 'Garamond';
+#categoryLabel {
+    -fx-text-fill: white;
+    -fx-background-color: #EF7C00;
+    -fx-padding: 5px 10px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
-.address-label {
-    -fx-font-size: 14px;
+#tags {
+    -fx-background-color: #e9b279;
+    -fx-padding: 5px 10px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
     -fx-font-family: 'Garamond';
+    -fx-alignment: center;
 }
 
 #tags .label {
     -fx-background-color: #EF7C00;
-    -fx-padding: 5px;
-    -fx-hgap: 5px;
-    -fx-vgap: 5px;
+    -fx-padding: 5px 10px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
     -fx-font-family: 'Garamond';
+    -fx-alignment: center;
 }

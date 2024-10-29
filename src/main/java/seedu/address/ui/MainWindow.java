@@ -204,6 +204,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.getPersonToDisplay() != null) {
+                contactDisplay.updateContactDetails(commandResult.getPersonToDisplay());
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

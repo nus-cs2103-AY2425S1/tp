@@ -8,6 +8,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Company;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,28 +21,33 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_CATEGORY = "student";
+    public static final String DEFAULT_STUDENTID = "A1234567X";
+    public static final String DEFAULT_INDUSTRY = "Technology";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private String category;
+    private StudentId studentID;
+    private Industry industry;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private String category;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        category = DEFAULT_CATEGORY;
+        studentID = new StudentId(DEFAULT_STUDENTID);
+        industry = new Industry(DEFAULT_INDUSTRY);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        category = "student"; // default to student
     }
 
     /**
@@ -50,6 +59,16 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+
+        if (personToCopy instanceof Student) {
+            studentID = ((Student) personToCopy).getStudentId();
+            category = "student";
+        } else if (personToCopy instanceof Company) {
+            industry = ((Company) personToCopy).getIndustry();
+            category = "company";
+        } else {
+            category = "person";
+        }
     }
 
     /**
@@ -65,6 +84,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withCategory(String category) {
         this.category = category;
+        return this;
+    }
+
+    /**
+     * Sets the {@code StudentID} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withStudentID(String studentID) {
+        this.studentID = new StudentId(studentID);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Industry} of the {@code Company} that we are building.
+     */
+    public PersonBuilder withIndustry(String industry) {
+        this.industry = new Industry(industry);
         return this;
     }
 
@@ -100,8 +135,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds and returns a {@code Person} based on the current settings.
+     */
     public Person build() {
-        return null;
+        if ("student".equalsIgnoreCase(category)) {
+            return new Student(name, studentID, phone, email, address, tags);
+        } else if ("company".equalsIgnoreCase(category)) {
+            return new Company(name, industry, phone, email, address, tags);
+        } else {
+            // Default to student if no specific category is specified
+            return new Student(name, studentID, phone, email, address, tags);
+        }
     }
-
 }

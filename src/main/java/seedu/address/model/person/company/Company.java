@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,9 +40,18 @@ public class Company extends Person {
      * Return the industry of company
      * @return industry
      */
-
+    @Override
     public Industry getIndustry() {
         return industry;
+    }
+
+    /**
+     * Return null as company does not have student id
+     * @return null
+     */
+    @Override
+    public StudentId getStudentId() {
+        return null;
     }
 
     @Override
@@ -63,5 +73,6 @@ public class Company extends Person {
     public String getCategoryDisplayName() {
         return "Company";
     }
+
 }
 

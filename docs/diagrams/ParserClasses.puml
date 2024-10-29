@@ -4,12 +4,15 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-Class "{abstract}\nCommand" as Command
+Class AddressBookParser
 Class XYZCommand
+Class CommandResult
+Class "{abstract}\nCommand" as Command
+
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
+
 Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
@@ -21,10 +24,12 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: <<create>>
+AddressBookParser .down.> XYZCommandParser: creates >
+AddressBookParser ..> Command : returns >
+Command <|.. XYZCommand
+XYZCommand ..> CommandResult : returns >
 
-XYZCommandParser ..> XYZCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
+XYZCommandParser ..> XYZCommand : creates >
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
@@ -34,5 +39,4 @@ CliSyntax ..> Prefix
 XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
-XYZCommand -up-|> Command
 @enduml

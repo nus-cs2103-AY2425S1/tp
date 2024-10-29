@@ -18,7 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -75,7 +75,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
 
         if (source instanceof Student) {
-            studentID = ((Student) source).getStudentID().value;
+            studentID = ((Student) source).getStudentId().value;
             industry = null; // Not applicable for Student
         } else if (source instanceof Company) {
             studentID = null; // Not applicable for Company
@@ -134,13 +134,13 @@ class JsonAdaptedPerson {
         if ("Student".equalsIgnoreCase(category)) {
             if (studentID == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        StudentID.class.getSimpleName()));
+                        StudentId.class.getSimpleName()));
             }
-            if (!StudentID.isValidID(studentID)) {
-                throw new IllegalValueException(StudentID.MESSAGE_CONSTRAINTS);
+            if (!StudentId.isValidId(studentID)) {
+                throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
             }
-            final StudentID modelStudentID = new StudentID(studentID);
-            return new Student(modelName, modelStudentID, modelPhone, modelEmail, modelAddress, modelTags);
+            final StudentId modelStudentId = new StudentId(studentID);
+            return new Student(modelName, modelStudentId, modelPhone, modelEmail, modelAddress, modelTags);
         } else if ("Company".equalsIgnoreCase(category)) {
             if (industry == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
