@@ -158,10 +158,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public long checkClashes(Student student) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public List<Student> getClashingStudents(Student student) {
@@ -234,12 +230,6 @@ public class AddCommandTest {
             requireNonNull(student);
             studentsAdded.add(student);
             System.out.println("added");
-        }
-
-        @Override
-        public long checkClashes(Student student) {
-            requireNonNull(student);
-            return studentsAdded.stream().filter(student::isClash).count();
         }
 
         @Override
