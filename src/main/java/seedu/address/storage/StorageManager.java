@@ -26,6 +26,7 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        logger.info("StorageManager initialized with AddressBook and UserPrefs storage");
     }
 
     // ================ UserPrefs methods ==============================
