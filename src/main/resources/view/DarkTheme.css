@@ -141,9 +141,11 @@
 
 .cell_patient_flag_label {
     -fx-background-color: #f75c5c;
-    -fx-padding: 0 2 0 2;
-    -fx-margin: 0 5 0 0;
+    -fx-label-padding: 0;
     -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #f75c5c;
+    -fx-background-radius: 5;
 }
 
 .stack-pane {
