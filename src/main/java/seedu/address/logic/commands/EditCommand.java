@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVORITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Leave;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -48,12 +50,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_FAVORITE + "] "
-            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]\n"
+            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT] "
+            + "[" + PREFIX_LEAVE + "LEAVE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_FAVORITE + "f/"
-            + PREFIX_DEPARTMENT + "HR";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_FAVORITE + "f/ "
+            + PREFIX_DEPARTMENT + "HR "
+            + PREFIX_LEAVE + "12";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -109,8 +113,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         boolean isFavorite = editPersonDescriptor.getFavorite().orElse(personToEdit.isFavorite());
         Department department = editPersonDescriptor.getDepartment().orElse(personToEdit.getDepartment());
+        Leave leave = editPersonDescriptor.getLeave().orElse(personToEdit.getLeave());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, isFavorite, department);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                isFavorite, department, leave);
     }
 
     @Override
@@ -149,6 +155,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Boolean isFavorite;
         private Department department;
+        private Leave leave;
 
         public EditPersonDescriptor() {}
 
@@ -164,6 +171,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setFavorite(toCopy.isFavorite);
             setDepartment(toCopy.department);
+            setLeave(toCopy.leave);
         }
 
         /**
@@ -220,6 +228,13 @@ public class EditCommand extends Command {
         public Optional<Department> getDepartment() {
             return Optional.ofNullable(department);
         }
+        public void setLeave(Leave leave) {
+            this.leave = leave;
+        }
+
+        public Optional<Leave> getLeave() {
+            return Optional.ofNullable(leave);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -255,7 +270,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isFavorite, otherEditPersonDescriptor.isFavorite);
+                    && Objects.equals(isFavorite, otherEditPersonDescriptor.isFavorite)
+                    && Objects.equals(leave, otherEditPersonDescriptor.leave);
         }
 
         @Override
@@ -267,6 +283,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .add("isFavorite", isFavorite)
+                    .add("Leave", leave)
                     .toString();
         }
     }
