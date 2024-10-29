@@ -46,6 +46,9 @@ public class ClientWindow extends UiPart<Stage> implements Initializable {
     private Label clientCondition;
 
     @FXML
+    private Label clientReminder;
+
+    @FXML
     private ImageView clientImage;
 
     @FXML
@@ -110,6 +113,11 @@ public class ClientWindow extends UiPart<Stage> implements Initializable {
             clientCondition.setText("-");
         } else {
             clientCondition.setText(client.getTags().toString());
+        }
+        if (client.getReminder().toString().isEmpty()) {
+            clientReminder.setText("No Reminder Set");
+        } else {
+            clientReminder.setText(client.getReminder().toString());
         }
         // convert use Set<Schedule> into a List<Schedule>
         ArrayList<Schedule> scheduleArrayList = new ArrayList<>(client.getSchedules());
