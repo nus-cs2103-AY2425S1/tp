@@ -73,7 +73,7 @@ public class UnmarkAttendanceByStudentCommandTest {
         assertTrue(unmarkAttendanceFirstCommand.equals(unmarkAttendanceFirstCommandCopy));
 
         // different types -> returns false
-       assertFalse(unmarkAttendanceFirstCommand.equals(1));
+        assertFalse(unmarkAttendanceFirstCommand.equals(1));
 
         // null -> returns false
         assertFalse(unmarkAttendanceFirstCommand.equals(null));
