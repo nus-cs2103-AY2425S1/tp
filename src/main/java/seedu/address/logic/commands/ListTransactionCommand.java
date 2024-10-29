@@ -45,7 +45,6 @@ public class ListTransactionCommand extends Command {
 
         Person selected = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
-        //model.setViewTransactions(true);
         model.updateTransactionList(selected.getTransactions());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
     }
