@@ -61,7 +61,7 @@ public class Address {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return String.join(" ", value.split("\\s+")).toLowerCase().hashCode();
     }
 
 }

@@ -37,7 +37,7 @@ public class SubjectTest {
     }
 
     @Test
-    public void isValidSubjectName_SubjectName_success() {
+    public void isValidSubjectName_validSubjectName_success() {
         assertTrue(Subject.isValidSubjectName("MATH"));
         assertTrue(Subject.isValidSubjectName("mATh"));
         assertTrue(Subject.isValidSubjectName("math"));

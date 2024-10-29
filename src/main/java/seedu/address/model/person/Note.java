@@ -32,14 +32,14 @@ public class Note {
             return true;
         } else if (other instanceof Note) {
             Note otherNote = (Note) other;
-            String thisValue = String.join(" ", value.trim().split("\\s+"));
-            String otherValue = String.join(" ", otherNote.value.trim().split("\\s+"));
+            String thisValue = String.join(" ", value.split("\\s+"));
+            String otherValue = String.join(" ", otherNote.value.split("\\s+"));
             return thisValue.equalsIgnoreCase(otherValue);
         }
         return false;
     }
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return String.join(" ", value.split("\\s+")).toLowerCase().hashCode();
     }
 }
