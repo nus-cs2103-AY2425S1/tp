@@ -135,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
-     * {@code vendor} and {@code event} must exist in the respective lists.
+     * {@code vendor} and {@code event} must exist in the address book.
      */
     public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Assigns the given {@code vendor} in the list to {@code event}.
-     * {@code vendor} and {@code event} must exist in their respective lists.
+     * {@code vendor} and {@code event} must exist in the address book.
      */
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
