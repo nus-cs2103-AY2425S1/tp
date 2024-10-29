@@ -8,7 +8,6 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * Configures and manages loggers and handlers, including their logging level
@@ -75,11 +74,11 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a logger named 'ab3', containing a {@code ConsoleHandler} and a {@code FileHandler}.
+     * Creates a logger named 'careconnect', containing a {@code ConsoleHandler} and a {@code FileHandler}.
      * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
      */
     private static void setBaseLogger() {
-        baseLogger = Logger.getLogger("ab3");
+        baseLogger = Logger.getLogger("careconnect");
         baseLogger.setUseParentHandlers(false);
         removeHandlers(baseLogger);
 
@@ -88,13 +87,14 @@ public class LogsCenter {
 
         // add a ConsoleHandler to log to the console
         ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new LogFormatter());
         consoleHandler.setLevel(Level.ALL);
         baseLogger.addHandler(consoleHandler);
 
         // add a FileHandler to log to a file
         try {
             FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
-            fileHandler.setFormatter(new SimpleFormatter());
+            fileHandler.setFormatter(new LogFormatter());
             fileHandler.setLevel(Level.ALL);
             baseLogger.addHandler(fileHandler);
         } catch (IOException e) {
