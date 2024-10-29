@@ -13,7 +13,7 @@ public abstract class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD 
             + ": Lists all entities of a given type \n"
             + "Parameters: ENTITY_TYPE (person/appt) \n"
-            + "Example: list person"
+            + "Example: list person \n"
             + "Example: list appt";
 
     @Override
