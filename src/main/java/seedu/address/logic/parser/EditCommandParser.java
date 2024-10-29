@@ -60,7 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         case PERSON_ENTITY_STRING:
 
             if (splitArgs.length < 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE));
             }
             String personIndexString = splitArgs[1];
             Index personIndex = ParserUtil.parseIndex(personIndexString);
@@ -94,7 +95,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         case APPOINTMENT_ENTITY_STRING:
 
             if (splitArgs.length < 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAppointmentCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAppointmentCommand.MESSAGE_USAGE));
             }
             String apptIndexString = splitArgs[1];
             Index apptIndex = ParserUtil.parseIndex(apptIndexString);

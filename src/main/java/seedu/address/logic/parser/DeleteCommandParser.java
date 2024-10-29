@@ -34,7 +34,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         case PERSON_ENTITY_STRING:
 
             if (splitArgs.length < 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
             }
             String personIndexString = splitArgs[1];
 
@@ -48,13 +49,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         case APPOINTMENT_ENTITY_STRING:
 
             if (splitArgs.length < 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
             }
             String apptIndexString = splitArgs[1];
 
             try {
                 if (splitArgs.length < 2) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
                 }
                 Index index = ParserUtil.parseIndex(apptIndexString);
                 return new DeleteAppointmentCommand(index);
