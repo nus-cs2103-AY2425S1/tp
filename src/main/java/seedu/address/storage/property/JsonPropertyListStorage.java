@@ -74,7 +74,7 @@ public class JsonPropertyListStorage implements PropertyListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        logger.info("saving property list");
+        logger.info("Saving property list");
         JsonUtil.saveJsonFile(new JsonSerializablePropertyList(propertyList), filePath);
     }
 
