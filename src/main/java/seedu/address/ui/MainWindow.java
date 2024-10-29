@@ -125,6 +125,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         personVBox.getChildren().addAll(personLabel, personListPanel.getRoot());
         appointmentVBox.getChildren().addAll(appointmentLabel, appointmentListPanel.getRoot());
 
@@ -166,17 +167,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void showPersonListPanel() {
-        hbox.getChildren().clear();
         hbox.getChildren().add(personVBox);
-        hbox.getChildren().add(appointmentVBox);
         statusbarPlaceholder.getChildren().clear();
         StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
     }
 
     private void showAppointmentListPanel() {
-        hbox.getChildren().clear();
-        hbox.getChildren().add(personVBox);
         hbox.getChildren().add(appointmentVBox);
         statusbarPlaceholder.getChildren().clear();
         StatusBarFooter appointmentBookFooter = new StatusBarFooter(logic.getAppointmentBookFilePath());
