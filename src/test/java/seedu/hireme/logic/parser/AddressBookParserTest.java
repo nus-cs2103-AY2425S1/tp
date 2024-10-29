@@ -92,7 +92,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_insights() throws Exception {
+    public void parseCommand_chart() throws Exception {
         assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD) instanceof ChartCommand);
         assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD + " 3") instanceof ChartCommand);
     }

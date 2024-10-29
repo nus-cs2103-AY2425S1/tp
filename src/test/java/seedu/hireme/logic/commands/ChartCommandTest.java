@@ -17,7 +17,7 @@ public class ChartCommandTest {
             new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_insights_success() {
+    public void execute_chart_success() {
         CommandResult expectedCommandResult =
                 new CommandResult(SHOWING_CHART_MESSAGE, false, false, true, model.getChartData());
         assertCommandSuccess(new ChartCommand(), model, expectedCommandResult, expectedModel);

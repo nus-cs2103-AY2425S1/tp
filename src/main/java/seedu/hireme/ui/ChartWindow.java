@@ -16,27 +16,27 @@ import seedu.hireme.commons.util.StringUtil;
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * Controller for am insights page
+ * Controller for am chart page
  */
-public class InsightsWindow extends UiPart<Stage> {
-    private static final Logger logger = LogsCenter.getLogger(InsightsWindow.class);
-    private static final String FXML = "InsightsWindow.fxml";
+public class ChartWindow extends UiPart<Stage> {
+    private static final Logger logger = LogsCenter.getLogger(ChartWindow.class);
+    private static final String FXML = "ChartWindow.fxml";
     @FXML
     private PieChart pieChart;
 
     /**
-     * Creates a new InsightsWindow.
+     * Creates a new ChartWindow.
      *
      * @param root Stage to use as the root of the InsightsWindow.
      */
-    public InsightsWindow(Stage root) {
+    public ChartWindow(Stage root) {
         super(FXML, root);
     }
 
     /**
      * Creates a new InsightsWindow.
      */
-    public InsightsWindow() {
+    public ChartWindow() {
         this(new Stage());
     }
 
@@ -59,7 +59,7 @@ public class InsightsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show(Map<Status, Integer> insights) {
-        logger.fine("Showing insights page about the application.");
+        logger.fine("Showing chart page about the application.");
 
         update(insights);
 
@@ -68,7 +68,7 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the pie chart with new insights data
+     * Updates the pie chart with new chart data
      */
     public void update(Map<Status, Integer> insights) {
         List<PieChart.Data> data = new ArrayList<>();
@@ -82,7 +82,7 @@ public class InsightsWindow extends UiPart<Stage> {
         }
 
         pieChart.setData(FXCollections.observableArrayList(data));
-        pieChart.setTitle("Internship Application Insights");
+        pieChart.setTitle("Internship Application Chart");
         pieChart.setClockwise(true);
         pieChart.setLabelsVisible(true);
         pieChart.setStartAngle(360);
@@ -108,14 +108,14 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the insights window is currently being shown.
+     * Returns true if the chart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the insights window.
+     * Hides the chart window.
      */
     public void hide() {
         pieChart.getData().clear();
@@ -123,7 +123,7 @@ public class InsightsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the insights window.
+     * Focuses on the chart window.
      */
     public void focus() {
         getRoot().requestFocus();
