@@ -9,14 +9,19 @@ import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.UniqueCompanyList;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.UniqueJobList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.skill.Skill;
 
 /**
  * Wraps all data at the address-book level
@@ -180,14 +185,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
-        if (key.isMatchPresent()) {
-            String personIdentifier = key.getIdentifier();
-            for (Job job : jobs) {
-                // The personIdentifier is guaranteed to be unique and its reference is kept by at most 1 job. Due to
-                // the guarantee provided by removeMatch, I do not have to check if the person is working at that job.
-                job.removeMatch(personIdentifier);
-            }
-        }
         persons.remove(key);
     }
 
@@ -196,11 +193,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeJob(Job key) {
-        Set<String> matches = key.getMatches();
+        String jobIdentifier = key.getIdentifier();
         for (Person person: persons) {
-            String personIdentifier = person.getIdentifier();
-            if (matches.contains(personIdentifier)) {
-                person.removeMatch();
+            if (person.getMatch().filter(match -> match.equals(jobIdentifier)).isPresent()) {
+                Name name = person.getName();
+                Phone phone = person.getPhone();
+                Email email = person.getEmail();
+                Role role = person.getRole();
+                Set<Skill> skills = person.getSkills();
+                Person edittedPerson = new Person(name, phone, email, role, skills);
+                persons.setPerson(person, edittedPerson);
             }
         }
         jobs.remove(key);
