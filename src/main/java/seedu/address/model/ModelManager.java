@@ -123,19 +123,16 @@ public class ModelManager implements Model {
     @Override
     public void markAttendance() {
         addressBook.markAttendance();
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void unmarkAttendance(Person personToUnmark) {
         addressBook.unmarkAttendance(personToUnmark);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void resetAttendance() {
         addressBook.resetAttendance();
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
