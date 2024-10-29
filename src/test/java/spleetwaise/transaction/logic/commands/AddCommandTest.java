@@ -113,23 +113,36 @@ public class AddCommandTest {
 
     @Test
     public void equals_diffTransaction_returnsFalse() {
-        AddCommand cmd1 = new AddCommand(testIndex, testAmount, testDescription, testDate, testCategories);
-        Index newIndex1 = Index.fromOneBased(2);
-        AddCommand cmd2 = new AddCommand(newIndex1, testAmount, testDescription, testDate, testCategories);
-        AddCommand cmd3 = new AddCommand(testIndex, testAmount, testDescription, testDate,
+        AddCommand cmdBase = new AddCommand(testIndex, testAmount, testDescription, testDate, testCategories);
+
+        Index newIndex = Index.fromOneBased(2);
+        AddCommand cmdOther = new AddCommand(newIndex, testAmount, testDescription, testDate, testCategories);
+        assertNotEquals(cmdBase, cmdOther);
+
+        Amount newAmount = new Amount("12.3");
+        cmdOther = new AddCommand(testIndex, newAmount, testDescription, testDate, testCategories);
+        assertNotEquals(cmdBase, cmdOther);
+
+        Description newDesc = new Description("different description");
+        cmdOther = new AddCommand(testIndex, testAmount, newDesc, testDate, testCategories);
+        assertNotEquals(cmdBase, cmdOther);
+
+        Date newDate = new Date("01022024");
+        cmdOther = new AddCommand(testIndex, testAmount, testDescription, newDate, testCategories);
+        assertNotEquals(cmdBase, cmdOther);
+
+        cmdOther = new AddCommand(testIndex, testAmount, testDescription, testDate,
                 new HashSet<>(List.of(new Category("EXTRA")))
         );
-
-        assertNotEquals(cmd1, cmd2);
-        assertNotEquals(cmd1, cmd3);
-        assertNotEquals(cmd2, cmd3);
+        assertNotEquals(cmdBase, cmdOther);
     }
 
     @Test
     public void equals_null_returnsFalse() {
-        AddCommand cmd1 = new AddCommand(testIndex, testAmount, testDescription, testDate, testCategories);
+        AddCommand cmd = new AddCommand(testIndex, testAmount, testDescription, testDate, testCategories);
 
-        assertNotEquals(null, cmd1);
+        assertNotEquals(cmd, null);
+        assertNotEquals(null, cmd);
     }
 
     @Test
