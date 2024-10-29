@@ -1,6 +1,8 @@
 package tuteez.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -86,7 +88,7 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    boolean isClashingWithExistingLesson(Lesson lesson);
+    Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

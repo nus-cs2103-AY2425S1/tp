@@ -52,7 +52,6 @@ public class Lesson {
     private final LocalTime startTime;
     private final LocalTime endTime;
 
-
     /**
      * Constructs a {@code Lesson}.
      *
