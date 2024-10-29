@@ -63,6 +63,8 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_EMAIL,
                 PREFIX_EXISTINGCONDITION, PREFIX_HEALTHRISK, PREFIX_NOKNAME, PREFIX_NOKPHONE,
                 PREFIX_NOTE, PREFIX_PHONE);
+
+        //Parse out each field to add to patient
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
@@ -82,6 +84,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 argMultimap.getAllValues(PREFIX_ALLERGY));
         ApptList appts = new ApptList();
 
+        //Create the new patient object
         Patient patient = new Patient(name, nric, birthDate, sex, phone, email, address, allergies,
                 bloodType, healthRIsk, existingCondition, note, nokName, nokPhone, appts);
 
