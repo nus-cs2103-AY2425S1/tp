@@ -12,6 +12,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Game
 Person *--> "*" Tag
 Person *--> "*" PreferredTime
+
+Game *--> Username
+Game *--> SkillLevel
+Game *--> Role
 @enduml
