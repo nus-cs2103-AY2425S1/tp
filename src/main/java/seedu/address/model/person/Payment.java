@@ -32,7 +32,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment overdue: $" + overdueAmount;
+        return "Current payment overdue: $" + overdueAmount;
     }
 
     @Override

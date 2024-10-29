@@ -48,8 +48,8 @@ public class PaymentTest {
         Payment positivePayment = new Payment("123");
         Payment zeroPayment = new Payment("0");
 
-        assertEquals("Payment overdue: $123", positivePayment.toString());
-        assertEquals("Payment overdue: $0", zeroPayment.toString());
+        assertEquals("Current payment overdue: $123", positivePayment.toString());
+        assertEquals("Current payment overdue: $0", zeroPayment.toString());
     }
 
     @Test

@@ -22,12 +22,12 @@ public class EnrollCommand extends Command {
 
     public static final String COMMAND_WORD = "enroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a student to a tutorial"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a student to a tutorial\n"
             + "Parameters: "
             + "INDEX (Must be a positive integer) "
-            + PREFIX_TUTORIAL + "TUTORIAL "
+            + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " "
-            + "2"
+            + "2 "
             + PREFIX_TUTORIAL + "physics";
     public static final String MESSAGE_SUCCESS = "%1$s(student) enrolled in %2$s(tutorial)";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person is already in the tutorial";
@@ -43,7 +43,7 @@ public class EnrollCommand extends Command {
         requireNonNull(index);
         requireNonNull(subject);
         this.index = index;
-        this.subject = subject;
+        this.subject = subject.toLowerCase();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EnrollCommand extends Command {
         List<Tutorial> lastShownTutorialList = model.getFilteredTutorialList();
 
         Optional<Tutorial> optionalTutorial = lastShownTutorialList.stream()
-                .filter(tut -> tut.getSubject().equals(subject))
+                .filter(tut -> tut.getSubject().toLowerCase().equals(subject))
                 .findFirst();
         if (optionalTutorial.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT);
@@ -72,7 +72,6 @@ public class EnrollCommand extends Command {
         if (model.hasParticipation(p)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.addParticipation(p);
         return new CommandResult(String.format(MESSAGE_SUCCESS, student.getFullName(), tutorial.getSubject()));
     }

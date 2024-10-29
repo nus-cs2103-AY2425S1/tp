@@ -4,13 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the amount of fees that a student has paid.
+ * Different from payment class as this represents the action of student making the payment
  * Guarantees: immutable;
  */
 public class Fees {
 
-    public static final String MESSAGE_CONSTRAINTS = "Fees must be an positive integer amount \n"
-            + "Leading zeros are allowed but not recommended"
-            + "The value zero is allowed, but what's the point?";
+    public static final String MESSAGE_CONSTRAINTS = "Payment made must be an positive integer amount";
     public static final String VALIDATION_REGEX = "^[0-9]\\d*|0$\n";
     public final String value;
 

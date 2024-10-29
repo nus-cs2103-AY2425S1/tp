@@ -13,10 +13,12 @@ import seedu.address.model.tutorial.Tutorial;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command\nCheck out our user guide for available "
+            + "commands:)";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT = "The tutorial subject provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The student's index provided is invalid, "
+            + "please check the index against the list below";
+    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT = "The tutorial name provided is invalid\n";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
