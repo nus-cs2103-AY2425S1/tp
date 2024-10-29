@@ -9,6 +9,10 @@ import java.math.BigDecimal;
  * The price is stored both as a formatted string (e.g., "5 mil", "600k") and as a raw {@code BigDecimal} value.
  */
 public class Price {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Price should only contain numbers, and it should be at least 4 digits long";
+    private static final String VALIDATION_REGEX = "\\d{4,}";
+
     private final String formattedValue;
     private final BigDecimal rawValue;
 
@@ -27,6 +31,13 @@ public class Price {
         requireNonNull(formattedValue);
         this.formattedValue = formattedValue;
         this.rawValue = rawValue;
+    }
+
+    /**
+     * Returns true if a given string is a valid price.
+     */
+    public static boolean isValidPrice(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     public BigDecimal getRawValue() {

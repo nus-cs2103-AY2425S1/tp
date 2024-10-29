@@ -5,6 +5,10 @@ package seedu.address.model.listing;
  * The size is stored as an integer value representing the area in square meters (m²).
  */
 public class Area {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Area should only contain numbers, and it should be at least 2 digits long";
+    private static final String VALIDATION_REGEX = "\\d{2,}";
+
     private final Integer squareMeters;
 
     /**
@@ -18,6 +22,13 @@ public class Area {
 
     public int getArea() {
         return this.squareMeters;
+    }
+
+    /**
+     * Returns true if a given string is a valid area.
+     */
+    public static boolean isValidArea(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

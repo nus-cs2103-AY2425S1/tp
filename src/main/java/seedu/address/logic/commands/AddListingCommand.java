@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
@@ -13,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,6 +24,7 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -51,6 +55,7 @@ public class AddListingCommand extends Command {
             + PREFIX_BUYER + "Wen Xuan ";
 
     public static final String MESSAGE_SUCCESS = "New listing added: %1$s";
+    public static final String MESSAGE_NOT_SELLER = "The seller specified is not a seller";
     public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in EZSTATE";
     private final Name listingName;
     private final Price price;
@@ -67,6 +72,7 @@ public class AddListingCommand extends Command {
      */
     public AddListingCommand(Name listingName, Price price, Area area, Address address, Region region,
                                 Name seller, Set<Name> buyers) {
+        requireAllNonNull(listingName, price, area, address, region, seller);
         this.listingName = listingName;
         this.price = price;
         this.area = area;
@@ -76,6 +82,7 @@ public class AddListingCommand extends Command {
         this.buyers = buyers;
     }
 
+    // needs SLAP
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -83,22 +90,61 @@ public class AddListingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person seller = model.getPersonByName(this.seller);
+
         if (!lastShownList.contains(seller)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
         }
+
+        if (seller instanceof Buyer) {
+            throw new CommandException(MESSAGE_NOT_SELLER);
+        }
+
         Set<Person> personBuyers = new HashSet<>();
-        for (Name b: buyers) {
-            Person buyer = model.getPersonByName(b);
-            if (!lastShownList.contains(buyer)) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+
+        if (!isNull(buyers)) {
+            for (Name b : buyers) {
+                Person buyer = model.getPersonByName(b);
+                if (!lastShownList.contains(buyer)) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+                }
+
+                personBuyers.add(buyer);
             }
-            personBuyers.add(buyer);
         }
 
         Listing toAdd = new Listing(listingName, address, price, area, region, seller, personBuyers);
+
+        if (model.hasListing(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LISTING);
+        }
+
         model.addListing(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddListingCommand otherCommand)) {
+            return false;
+        }
+
+        return this.listingName.equals(otherCommand.listingName) && this.price.equals(otherCommand.price)
+            && this.area.equals(otherCommand.area) && this.address.equals(otherCommand.address)
+            && this.region.equals(otherCommand.region) && this.seller.equals(otherCommand.seller)
+            && this.buyers.equals(otherCommand.buyers);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", this.listingName)
+                .add("address", this.address)
+                .add("seller", this.seller)
+                .toString();
+    }
 }
