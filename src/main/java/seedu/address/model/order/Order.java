@@ -12,7 +12,7 @@ public class Order {
     /**
      * Order name should contain alphanumeric character only
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9\\s]*$";
 
     private final String name;
 
