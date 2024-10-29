@@ -1,19 +1,64 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+#scrollPane {
+    -fx-min-width: 600px;
+}
+
+#overallContainer {
+    -fx-alignment: center;
+    -fx-background-color: lightgrey;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-text-fill: black;
+}
+
+#helpMessage {
+    -fx-text-fill: black;
+    -fx-font-size: 13;
+}
+
+#copyButton {
+    -fx-background-color: #f0f0f0;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #c8e6fa;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #c8e6fa;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-max-width: 600px;
+    -fx-background-color: #5afaba;
+}
+
+.commandHelpCardsContainer {
+    -fx-alignment: center;
+}
+
+.clickable-box {
+    -fx-max-width: 500px;
+    -fx-alignment: center;
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.clickable-box:focused {
+    -fx-border-color: #4a90e2; /* Highlight color when focused */
+    -fx-background-color: #c8e6fa;
+}
+
+.title-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.explanation-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666;
 }
