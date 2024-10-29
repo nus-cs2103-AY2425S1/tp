@@ -14,7 +14,7 @@ public class AbsentReason {
             "Absent reason should only contain alphanumeric characters and spaces, "
                     + "and it can be blank to delete attendance";
 
-    public static final String VALIDATION_REGEX = "[A-Za-z ]*";
+    public static final String VALIDATION_REGEX = "[A-Za-z0-9 ]*";
     public final String absentReason;
 
     /**
