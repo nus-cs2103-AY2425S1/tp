@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="ClientHub" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
@@ -51,13 +52,33 @@
           </padding>
         </StackPane>
 
-        <!-- A vertical container (grows downwards) containing person list panel-->
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+<!--        &lt;!&ndash; A vertical container (grows downwards) containing person list panel&ndash;&gt;-->
+<!--        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="200" VBox.vgrow="ALWAYS">-->
+<!--          <padding>-->
+<!--            <Insets top="10" right="10" bottom="10" left="10" />-->
+<!--          </padding>-->
+<!--          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>-->
+<!--        </VBox>-->
+
+        <!-- New HBox to contain both PersonListPanel and ReminderListPanel -->
+        <HBox VBox.vgrow="ALWAYS">
+          <!-- Person List Panel (75% width) -->
+          <VBox fx:id="personList" styleClass="pane-with-border" HBox.hgrow="ALWAYS" prefWidth="75">
+            <padding>
+              <Insets top="10" right="5" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+          <!-- Reminder List Panel (25% width) -->
+          <VBox fx:id="reminderList" styleClass="pane-with-border" HBox.hgrow="NEVER" prefWidth="320">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="5" />
+            </padding>
+            <StackPane fx:id="reminderListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+        </HBox>
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

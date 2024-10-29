@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ViewPersonWindow viewPersonWindow;
+    private ReminderListPanel reminderListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -51,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane reminderListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,15 +117,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // initialise person list panel
         personListPanel = new PersonListPanel(logic.getPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        // initialise result display
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        // initialise reminder list panel
+        reminderListPanel = new ReminderListPanel();
+        reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
+        // initialise status bar
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getClientHubFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        // initialise command box
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
