@@ -38,6 +38,9 @@ public class ConsultationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(consultation.getDate().toString() + ", ");
         time.setText(consultation.getTime().toString());
+        consultation.getStudents().stream()
+                .sorted(Comparator.comparing(student -> student.getName().fullName))
+                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
 
         // Combine date and time for comparison with current date and time
         LocalDateTime consultationDateTime = LocalDateTime.of(
@@ -45,17 +48,17 @@ public class ConsultationCard extends UiPart<Region> {
                 consultation.getTime().getLocalTimeValue());
         LocalDateTime currentDateTime = LocalDateTime.now();
 
-        // Set Background to Red if Consultation Date & Time have passed
+        // Apply the appropriate CSS class based on the consultation time
         if (consultationDateTime.isBefore(currentDateTime)) {
             if (displayedIndex % 2 == 0) {
-                cardPane.setStyle("-fx-background-color: #B03434;"); // Light Red
+                cardPane.getStyleClass().add("consultation-card-past-even");
             } else {
-                cardPane.setStyle("-fx-background-color: #7D1515;"); // Dark Red
+                cardPane.getStyleClass().add("consultation-card-past-odd");
             }
+            id.getStyleClass().add("consultation-card-strikethrough");
+            date.getStyleClass().add("consultation-card-strikethrough");
+            time.getStyleClass().add("consultation-card-strikethrough");
+            students.getStyleClass().add("consultation-card-strikethrough");
         }
-
-        consultation.getStudents().stream()
-                .sorted(Comparator.comparing(student -> student.getName().fullName))
-                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
     }
 }

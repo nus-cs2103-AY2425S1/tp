@@ -40,11 +40,6 @@ public class LessonCard extends UiPart<Region> {
         lesson.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(student -> {
-                    if (student.getName().fullName == "Sky Lim") {
-                        lesson.setAttendance(student, true);
-                    }
-                    System.out.println(student.toString() + lesson.getAttendance(student));
-
                     Label studentLabel = new Label(student.getName().fullName);
                     boolean hasAttendance = lesson.getAttendance(student);
 
