@@ -36,9 +36,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("role") String role,
-            @JsonProperty("skills") List<JsonAdaptedSkill> skills,
-            @JsonProperty("match") String match) {
+                             @JsonProperty("email") String email, @JsonProperty("role") String role,
+                             @JsonProperty("skills") List<JsonAdaptedSkill> skills,
+                             @JsonProperty("match") String match) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,7 +60,8 @@ class JsonAdaptedPerson {
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
-        match = source.getMatch();
+        // During the reconstruction toModelType, have to perform a String.isEmpty() check here
+        match = source.getMatch().orElse("");
     }
 
     /**
@@ -108,9 +109,15 @@ class JsonAdaptedPerson {
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
-        final String modelMatch = match;
-
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills, modelMatch);
+        // TODO - Discuss if we should have an overloaded Person method taking in (Person person, String match)
+        //  which does a check within for an empty string. This can help us to reduce code in AddressBook, match and
+        //  unmatch command and other stuff.
+        if (match.isEmpty()) {
+            return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills);
+        } else {
+            final String modelMatch = match;
+            return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills, modelMatch);
+        }
     }
 
 }
