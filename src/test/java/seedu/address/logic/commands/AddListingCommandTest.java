@@ -280,6 +280,16 @@ public class AddListingCommandTest {
         }
 
         @Override
+        public boolean hasListingsForSeller(Person seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Listing getListingByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyListings getListings() {
             throw new AssertionError("This method should not be called.");
         }

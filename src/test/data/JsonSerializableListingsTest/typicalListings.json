@@ -12,8 +12,9 @@
         "phone": "94351253",
         "email": "alice@example.com",
         "property": "Pasir Ris",
+        "remark": "",
         "appointment": {
-          "date": { "value": "01/01/2024" },
+          "date": { "value": "01-01-24" },
           "from": { "value": "0800" },
           "to": { "value": "0900" }
         },
@@ -26,8 +27,9 @@
           "phone": "87652533",
           "email": "cornelia@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -39,8 +41,9 @@
           "phone": "9482442",
           "email": "anna@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -60,8 +63,9 @@
         "phone": "98765432",
         "email": "benson@example.com",
         "property": "Tampines",
+        "remark": "",
         "appointment": {
-          "date": { "value": "14/12/2020" },
+          "date": { "value": "14-12-20" },
           "from": { "value": "1000" },
           "to": { "value": "2330" }
         },
@@ -74,8 +78,9 @@
           "phone": "87652533",
           "email": "cornelia@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -87,8 +92,9 @@
           "phone": "9482224",
           "email": "elle@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -108,8 +114,9 @@
         "phone": "94351253",
         "email": "alice@example.com",
         "property": "Pasir Ris",
+        "remark": "",
         "appointment": {
-          "date": { "value": "01/01/2024" },
+          "date": { "value": "01-01-24" },
           "from": { "value": "0800" },
           "to": { "value": "0900" }
         },
@@ -122,8 +129,9 @@
           "phone": "9482224",
           "email": "elle@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -143,8 +151,9 @@
         "phone": "98765432",
         "email": "benson@example.com",
         "property": "Tampines",
+        "remark": "",
         "appointment": {
-          "date": { "value": "14/12/2020" },
+          "date": { "value": "14-12-20" },
           "from": { "value": "1000" },
           "to": { "value": "2330" }
         },
@@ -157,8 +166,9 @@
           "phone": "9482442",
           "email": "anna@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -170,8 +180,9 @@
           "phone": "9482427",
           "email": "fiona@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -191,8 +202,9 @@
         "phone": "98765432",
         "email": "benson@example.com",
         "property": "Tampines",
+        "remark": "",
         "appointment": {
-          "date": { "value": "14/12/2020" },
+          "date": { "value": "14-12-20" },
           "from": { "value": "1000" },
           "to": { "value": "2330" }
         },
@@ -205,8 +217,9 @@
           "phone": "9482427",
           "email": "fiona@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -226,8 +239,9 @@
         "phone": "95352563",
         "email": "carl@example.com",
         "property": "Orchard Road",
+        "remark": "",
         "appointment": {
-          "date": { "value": "01/01/2024" },
+          "date": { "value": "01-01-24" },
           "from": { "value": "0800" },
           "to": { "value": "0900" }
         },
@@ -240,8 +254,9 @@
           "phone": "9482427",
           "email": "fiona@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -253,8 +268,9 @@
           "phone": "9482224",
           "email": "elle@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -274,8 +290,9 @@
         "phone": "95352563",
         "email": "carl@example.com",
         "property": "Orchard Road",
+        "remark": "",
         "appointment": {
-          "date": { "value": "01/01/2024" },
+          "date": { "value": "01-01-24" },
           "from": { "value": "0800" },
           "to": { "value": "0900" }
         },
@@ -288,8 +305,9 @@
           "phone": "9482442",
           "email": "anna@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },
@@ -301,8 +319,9 @@
           "phone": "87652533",
           "email": "cornelia@example.com",
           "property": "",
+          "remark": "",
           "appointment": {
-            "date": { "value": "01/01/2024" },
+            "date": { "value": "01-01-24" },
             "from": { "value": "0800" },
             "to": { "value": "0900" }
           },

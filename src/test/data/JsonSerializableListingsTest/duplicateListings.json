@@ -11,16 +11,17 @@
         "email" : "seans@example.com",
         "appointment" : {
           "date" : {
-            "value" : ""
+            "value" : "EMPTY_DATE"
           },
           "from" : {
-            "value" : ""
+            "value" : "EMPTY_FROM"
           },
           "to" : {
-            "value" : ""
+            "value" : "EMPTY_TO"
           }
         },
         "property" : "",
+        "remark": "",
         "tags" : [ "friends" ],
         "role" : "seller"
       },
@@ -38,16 +39,17 @@
         "email" : "seans@example.com",
         "appointment" : {
           "date" : {
-            "value" : ""
+            "value" : "EMPTY_DATE"
           },
           "from" : {
-            "value" : ""
+            "value" : "EMPTY_FROM"
           },
           "to" : {
-            "value" : ""
+            "value" : "EMPTY_TO"
           }
         },
         "property" : "",
+        "remark": "",
         "tags" : [ "friends" ],
         "role" : "seller"
       },
