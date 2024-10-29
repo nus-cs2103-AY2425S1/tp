@@ -114,6 +114,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Listing all archived persons : `listarchive`
+
+Shows a list of all archived persons in the address book.
+
+Format: `list`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -212,6 +218,36 @@ Examples:
 * `find Betsy` followed by `unpin 1` unpins the 1st person in the results of the `find` command.
 * `list` followed by `unpin 2 3 4 5` unpins the 2nd, 3rd, 4th and 5th people in the address book.
 
+### Archive a person : `archive`
+
+Archives the specified people in the addressbook, hiding them from the main list.
+
+Format: `archive INDEX [MORE_INDICES]`
+
+* Archives the person at the specified `INDICES`.
+* The indices refer to the index numbers shown in the displayed person list.
+* The indices **must be positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `archive 2` archives the 2nd person in the address book.
+* `find Betsy` followed by `archive 1` archives the 1st person in the results of the `find` command.
+* `list` followed by `archive 2 3 4 5` archives the 2nd, 3rd, 4th and 5th people in the address book.
+
+### Unarchive a person : `Unarchive`
+
+Unarchives the specified people in the addressbook, hiding them from the main list.
+
+Format: `unarchive INDEX [MORE_INDICES]`
+
+* Unarchives the person at the specified `INDICES`.
+* The indices refer to the index numbers shown in the displayed person list.
+* The indices **must be positive integer** 1, 2, 3, …​
+
+Examples:
+* `listarchive` followed by `unarchive 2` unarchives the 2nd person in the address book archives.
+* `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st person in the results of the `find` command.
+* `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th people in the address book.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -239,9 +275,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
