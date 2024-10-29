@@ -61,6 +61,8 @@ public enum SortOption {
      * @param role A valid Role associated to the sort option
      */
     SortOption(String value, Role role) {
+        requireNonNull(value);
+        requireNonNull(role);
         this.value = value;
         this.role = role;
     }
