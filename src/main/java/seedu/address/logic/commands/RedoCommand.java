@@ -9,11 +9,10 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
-    // TODO FILL IN
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": TODO FILL IN";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the previously undone command"
+            + " and restores EduConnect to its updated state";
 
-    // TODO FILL IN
-    public static final String MESSAGE_SUCCESS = "!";
+    public static final String MESSAGE_SUCCESS = "Redid the previous command!";
 
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
