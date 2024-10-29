@@ -24,6 +24,11 @@ public class EmailSearchCriteria implements SearchCriteria {
     }
 
     @Override
+    public String toString() {
+        return "EmailSearchCriteria{emails=" + emails + "}";
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;

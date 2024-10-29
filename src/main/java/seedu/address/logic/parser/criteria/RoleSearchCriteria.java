@@ -24,7 +24,7 @@ public class RoleSearchCriteria implements SearchCriteria {
 
     @Override
     public String toString() {
-        return "RoleCriteria{ages=" + roles + "}";
+        return "RoleSearchCriteria{roles=" + roles + "}";
     }
 
     @Override
