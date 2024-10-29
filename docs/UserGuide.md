@@ -114,6 +114,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Listing students : `liststudents`
+
+Lists all students in the address book.
+
+Format: `liststudents`
+
 ### Listing all archived persons : `listarchive`
 
 Shows a list of all archived persons in the address book.
@@ -295,14 +301,20 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Grade**  | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTag**| `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
-**List**   | `list`
-**Help**   | `help`
+Action           | Format, Examples
+-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Grade**        | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
+**Clear**        | `clear`
+**Delete**       | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTag**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
+**List**         | `list`
+**Help**         | `help`
+**Pin**          | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`
+**Unpin**        | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`
+**Archive**      | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`
+**Unarchive**    | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`
+**List Archive** | `listarchive`
+**List Students**| `liststudents`
