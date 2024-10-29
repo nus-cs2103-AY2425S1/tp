@@ -108,9 +108,9 @@ public class AddressBookParser {
 
             case EVENT:
                 return new ListEventCommandParser().parse(arguments);
-
+            // Will never reach this case as my commandFlag can only be of those three above.
             default:
-                logger.finer("This user input caused a ParseException: " + userInput);
+                assert false : "Unexpected commandFlag: " + commandFlag;
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
