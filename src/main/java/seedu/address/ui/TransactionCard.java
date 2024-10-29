@@ -44,7 +44,7 @@ public class TransactionCard extends UiPart<Region> {
         super(FXML);
         this.transaction = transaction;
         id.setText(displayedIndex + ". ");
-        description.setText("Description: " + transaction.getDescription());
+        description.setText(transaction.getDescription());
         if (transaction.getAmount() < 0) {
             amount.setText("Amount: -$" + transaction.getAmount() * -1);
         } else {

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -16,18 +17,24 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ListTransactionCommandTest {
-    private Model model;
-    private Model expectedModel;
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
     @Test
     public void execute_listAllTransactions_success() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListTransactionCommand(INDEX_FIRST_PERSON), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
                         Messages.format(expectedModel.getFilteredPersonList().get(0))),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        ListTransactionCommand command = new ListTransactionCommand(INDEX_FIRST_PERSON);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "listt");
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
