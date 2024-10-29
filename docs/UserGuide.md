@@ -326,9 +326,9 @@ _Details coming soon ..._
 | **List All Contacts**  | `list`                                                                                                                                                                   |
 | **Help**               | `help`                                                                                                                                                                   |
 | **Sort Contacts**      | `sort asc/desc`<br> e.g., `sort asc`                                                                                                                                     |
-| **Log Interaction**    | `log <ContactID> [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                          |
-| **Add/Edit Remark**    | `remark <index> r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                             |
-| **View Contact**       | `view <ContactID>`<br> e.g., `view 123`                                                                                                                                  |
-| **Favourite Contact**  | `favourite <ContactID>`<br> e.g., `favourite 123`                                                                                                                        |
-| **Add/Edit Birthday**  | `birthday <index> b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                    |
-| **Birthday Reminder**  | `birthday <ContactID> d/DATE`<br> e.g., `birthday 123 d/1990-05-15`                                                                                                      |
+| **Log Interaction**    | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
+| **Add/Edit Remark**    | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
+| **View Contact**       | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
+| **Favourite Contact**  | `favourite [INDEX]`<br> e.g., `favourite 123` or `favourite`                                                                                                             |
+| **Add/Edit Birthday**  | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
+| **Birthday Reminder**  | `birthday INDEX d/DATE`<br> e.g., `birthday 123 d/1990-05-15`                                                                                                            |
