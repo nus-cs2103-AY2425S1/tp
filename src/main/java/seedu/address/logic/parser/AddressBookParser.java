@@ -24,6 +24,9 @@ import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.vendor.AddVendorCommand;
+import seedu.address.logic.commands.vendor.AssignVendorCommand;
+import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
@@ -31,6 +34,9 @@ import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.vendor.AddVendorCommandParser;
+import seedu.address.logic.parser.vendor.AssignVendorCommandParser;
+import seedu.address.logic.parser.vendor.UnassignVendorCommandParser;
 import seedu.address.logic.parser.wedding.AssignWeddingCommandParser;
 import seedu.address.logic.parser.wedding.CreateWeddingCommandParser;
 import seedu.address.logic.parser.wedding.DeleteWeddingCommandParser;
@@ -101,6 +107,12 @@ public class AddressBookParser {
                 -> new ListTasksCommand();
         case DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.COMMAND_KEYWORD
                 -> new DeleteTaskCommandParser().parse(arguments);
+        case AssignVendorCommand.COMMAND_WORD, AssignVendorCommand.COMMAND_KEYWORD
+                -> new AssignVendorCommandParser().parse(arguments);
+        case AddVendorCommand.COMMAND_WORD, AddVendorCommand.COMMAND_KEYWORD
+                -> new AddVendorCommandParser().parse(arguments);
+        case UnassignVendorCommand.COMMAND_WORD, UnassignVendorCommand.COMMAND_KEYWORD
+                -> new UnassignVendorCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

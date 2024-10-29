@@ -81,6 +81,34 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
 
+    protected String getName() {
+        return name;
+    }
+
+    protected String getPhone() {
+        return phone;
+    }
+
+    protected String getEmail() {
+        return email;
+    }
+
+    protected String getAddress() {
+        return address;
+    }
+
+    protected List<JsonAdaptedTag> getTags() {
+        return tags;
+    }
+
+    protected List<JsonAdaptedWedding> getWeddings() {
+        return weddings;
+    }
+
+    protected List<JsonAdaptedTask> getTasks() {
+        return tasks;
+    }
+
     /**
      * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
      */

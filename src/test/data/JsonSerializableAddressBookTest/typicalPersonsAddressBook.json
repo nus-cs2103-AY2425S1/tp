@@ -74,6 +74,7 @@
     "address" : "4th street",
     "tags" : [ ]
   } ],
+  "vendors": [],
   "tags": ["florist"],
   "weddings": [{
     "weddingName": "Wedding 2",

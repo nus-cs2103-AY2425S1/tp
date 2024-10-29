@@ -102,6 +102,46 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasVendor_nullVendor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasVendor(null));
+    }
+
+    @Test
+    public void hasVendor_vendorNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasVendor(ALICE));
+    }
+
+    @Test
+    public void hasVendor_vendorInAddressBook_returnsTrue() {
+        modelManager.assignVendor(ALICE);
+        assertTrue(modelManager.hasVendor(ALICE));
+    }
+
+    @Test
+    public void assignVendor_nullVendor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.assignVendor(null));
+    }
+
+    @Test
+    public void assignVendor_validVendor_vendorAdded() {
+        modelManager.assignVendor(ALICE);
+        assertTrue(modelManager.hasVendor(ALICE));
+    }
+
+    @Test
+    public void unassignVendor_nullVendor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.unassignVendor(null));
+    }
+
+    @Test
+    public void unassignVendor_vendorPresent_vendorRemoved() {
+        modelManager.assignVendor(ALICE);
+        modelManager.unassignVendor(ALICE);
+        assertFalse(modelManager.hasVendor(ALICE));
+    }
+
+
+    @Test
     public void hasTag_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasTag(null));
     }

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.vendor;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -10,18 +10,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a vendor to the address book.
  */
-public class AddCommand extends Command {
+public class AddVendorCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add-vendor";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
+    public static final String COMMAND_KEYWORD = "addv";
+
+    // to add task field prefix and example at the end
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds the person identified by the index number used in the last person listing "
+            + "as a vendor.\n"
             + "Parameters (optional parameters in square brackets): "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -39,15 +46,17 @@ public class AddCommand extends Command {
             + PREFIX_WEDDING + "Wedding March 20th 2027 "
             + PREFIX_WEDDING + "Amy's Wedding";
 
+
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "This person already exists as a vendor in the address book";
+
 
     private final Person toAdd;
-
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddVendorCommand to add the specified {@code Person} as a vendor
      */
-    public AddCommand(Person person) {
+    public AddVendorCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -61,6 +70,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.assignVendor(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -71,12 +81,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddVendorCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddVendorCommand otherAddVendorCommand = (AddVendorCommand) other;
+        return toAdd.equals(otherAddVendorCommand.toAdd);
     }
 
     @Override
@@ -85,4 +95,6 @@ public class AddCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
+
+
 }

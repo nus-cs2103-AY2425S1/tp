@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Vendor> filteredVendors;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Wedding> filteredWeddings;
 
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
@@ -106,6 +109,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (addressBook.hasVendor(target)) {
+            addressBook.removeVendor(target);
+        }
     }
 
     @Override
@@ -119,6 +125,25 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public boolean hasVendor(Person person) {
+        requireNonNull(person);
+        return addressBook.hasVendor(person);
+    }
+
+    @Override
+    public void assignVendor(Person person) {
+        requireNonNull(person);
+        addressBook.addVendor(person);
+    }
+
+    @Override
+    public void unassignVendor(Person person) {
+        requireNonNull(person);
+        addressBook.removeVendor(person);
+    }
+
 
     @Override
     public void addTag(Tag tag) {
@@ -197,6 +222,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Vendor> getFilteredVendorList() {
+        return filteredVendors;
     }
 
     @Override
