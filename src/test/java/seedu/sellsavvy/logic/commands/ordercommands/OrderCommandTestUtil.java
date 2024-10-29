@@ -40,7 +40,7 @@ public class OrderCommandTestUtil {
     public static final String ITEM_DESC_ATLAS = " " + PREFIX_ITEM + VALID_ITEM_ATLAS;
     public static final String ITEM_DESC_BOTTLE = " " + PREFIX_ITEM + VALID_ITEM_BOTTLE;
 
-    public static final String INVALID_ITEM_DESC = " " + PREFIX_ITEM + "Atlas&";
+    public static final String INVALID_ITEM_DESC = " " + PREFIX_ITEM + " ";
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "a";
     public static final String INVALID_DATE_NO_HYPHEN = " " + PREFIX_DATE + "02/12/2024";
     public static final String INVALID_DATE_DIGIT = " " + PREFIX_DATE + "2/1/2024";

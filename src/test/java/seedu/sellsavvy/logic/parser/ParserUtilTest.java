@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_ITEM = "World M@p";
+    private static final String INVALID_ITEM = "   ";
     private static final String INVALID_QUANTITY = "0";
     private static final String INVALID_DATE = "12-12-12";
 
