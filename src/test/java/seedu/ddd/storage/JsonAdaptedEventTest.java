@@ -16,15 +16,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.common.Description;
-import seedu.ddd.model.event.common.EventId;
 
 public class JsonAdaptedEventTest {
 
-    private static final List<JsonAdaptedContactId> VALID_JSON_CLIENT_CONTACT_IDS =
-            List.of(new JsonAdaptedContactId(DEFAULT_CLIENT_ID));
-    private static final List<JsonAdaptedContactId> VALID_JSON_VENDOR_CONTACT_IDS =
-            List.of(new JsonAdaptedContactId(DEFAULT_VENDOR_ID));
+    private static final List<JsonAdaptedId> VALID_JSON_CLIENT_CONTACT_IDS =
+            List.of(new JsonAdaptedId(DEFAULT_CLIENT_ID));
+    private static final List<JsonAdaptedId> VALID_JSON_VENDOR_CONTACT_IDS =
+            List.of(new JsonAdaptedId(DEFAULT_VENDOR_ID));
 
     // @Test
     // public void toModelType_validEventDetails_returnsEvent() throws Exception {
@@ -77,7 +77,7 @@ public class JsonAdaptedEventTest {
             VALID_JSON_VENDOR_CONTACT_IDS,
             Integer.parseInt(INVALID_EVENT_ID)
         );
-        String expectedMessage = EventId.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 

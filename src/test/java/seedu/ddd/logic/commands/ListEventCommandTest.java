@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.event.common.EventId;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.common.predicate.DescriptionContainsKeywordsPredicate;
 import seedu.ddd.model.event.common.predicate.EventIdPredicate;
 
@@ -47,8 +47,8 @@ public class ListEventCommandTest {
     @Test
     public void executeFilterListById() {
         expectedModel.updateFilteredContactList(ListEventCommand.CLEAR_CONTACTS);
-        expectedModel.updateFilteredEventList(new EventIdPredicate(new EventId(1)));
-        assertCommandSuccess(new ListEventCommand(new EventIdPredicate(new EventId(1))),
+        expectedModel.updateFilteredEventList(new EventIdPredicate(new Id(1)));
+        assertCommandSuccess(new ListEventCommand(new EventIdPredicate(new Id(1))),
                 model, String.format(MESSAGE_EVENTS_LISTED_OVERVIEW,
                         expectedModel.getFilteredEventListSize()), expectedModel);
     }
@@ -105,7 +105,7 @@ public class ListEventCommandTest {
     public void toStringMethod() {
         DescriptionContainsKeywordsPredicate predicateOne =
                 new DescriptionContainsKeywordsPredicate(Arrays.asList("keyword"));
-        EventIdPredicate predicateTwo = new EventIdPredicate(new EventId(1));
+        EventIdPredicate predicateTwo = new EventIdPredicate(new Id(1));
 
         ListEventCommand listEventCommandOne = new ListEventCommand(predicateOne);
         ListEventCommand listEventCommandTwo = new ListEventCommand(predicateTwo);

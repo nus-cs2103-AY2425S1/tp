@@ -4,24 +4,24 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
-import seedu.ddd.model.event.common.EventId;
+import seedu.ddd.model.common.Id;
 
-class JsonAdaptedEventId {
+class JsonAdaptedId {
     private final int eventId;
 
     /**
      * Constructs a {@code JsonAdaptedEventId} with the given {@code eventId}.
      */
     @JsonCreator
-    public JsonAdaptedEventId(int eventId) {
+    public JsonAdaptedId(int eventId) {
         this.eventId = eventId;
     }
 
     /**
      * Converts a given {@code EventId} into this class for Jackson use.
      */
-    public JsonAdaptedEventId(EventId source) {
-        eventId = source.eventId;
+    public JsonAdaptedId(Id source) {
+        eventId = source.id;
     }
 
     @JsonValue
@@ -34,10 +34,10 @@ class JsonAdaptedEventId {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public EventId toModelType() throws IllegalValueException {
-        if (!EventId.isValidEventId(eventId)) {
-            throw new IllegalValueException(EventId.MESSAGE_CONSTRAINTS);
+    public Id toModelType() throws IllegalValueException {
+        if (!Id.isValidId(eventId)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new EventId(eventId);
+        return new Id(eventId);
     }
 }

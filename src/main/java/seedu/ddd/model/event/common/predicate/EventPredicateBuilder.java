@@ -11,8 +11,8 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 /**
  * Builds a chain of predicates to the List event command depending on the PREFIX present in argMultimap.
@@ -61,7 +61,7 @@ public class EventPredicateBuilder {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
             }
-            EventId eventId = new EventId(trimmedArgs);
+            Id eventId = new Id(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
         }
         return combinedPredicate;

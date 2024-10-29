@@ -5,11 +5,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.event.common.Event;
@@ -30,7 +30,7 @@ public class Client extends Contact {
      * @param tags    A set of tags associated with the client.
      * @param contactId      A valid id.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ContactId contactId) {
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id contactId) {
         super(name, phone, email, address, tags, contactId);
     }
 
@@ -70,7 +70,7 @@ public class Client extends Contact {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(),
-                this.getAddress(), this.getTags());
+                this.getAddress(), this.getTags(), this.getId());
     }
 
     @Override

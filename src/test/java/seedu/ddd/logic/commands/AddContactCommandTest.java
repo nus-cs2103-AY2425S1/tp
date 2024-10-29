@@ -23,8 +23,8 @@ import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.contact.ClientBuilder;
 import seedu.ddd.testutil.contact.VendorBuilder;
@@ -171,12 +171,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasClientId(ContactId contactId) {
+        public boolean hasClientId(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasVendorId(ContactId contactId) {
+        public boolean hasVendorId(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public Contact getContact(ContactId contactId) {
+        public Contact getContact(Id contactId) {
             throw new AssertionError("This method should not be called.");
         }
 

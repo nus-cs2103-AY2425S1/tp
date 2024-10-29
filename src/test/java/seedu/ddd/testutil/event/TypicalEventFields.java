@@ -15,13 +15,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
-import seedu.ddd.model.event.common.EventId;
+
 /**
  *  A utility class containing a list of {@code Event} field strings and objects to be used in tests.
  */
@@ -41,18 +41,18 @@ public class TypicalEventFields {
     public static final Name DEFAULT_EVENT_NAME = new Name(VALID_EVENT_NAME);
     public static final Description DEFAULT_EVENT_DESCRIPTION = new Description(VALID_EVENT_DESCRIPTION_1);
     public static final Date DEFAULT_EVENT_DATE = new Date(VALID_EVENT_DATE);
-    public static final EventId DEFAULT_EVENT_ID = new EventId(VALID_EVENT_ID);
+    public static final Id DEFAULT_EVENT_ID = new Id(VALID_EVENT_ID);
 
     public static final List<Client> DEFAULT_EVENT_CLIENT_LIST = List.of(VALID_CLIENT);
     public static final List<Vendor> DEFAULT_EVENT_VENDOR_LIST = List.of(VALID_VENDOR);
     public static final Set<Client> DEFAULT_EVENT_CLIENT_SET = new HashSet<>(DEFAULT_EVENT_CLIENT_LIST);
     public static final Set<Client> DEFAULT_EVENT_VENDOR_SET = new HashSet<>(DEFAULT_EVENT_CLIENT_LIST);
 
-    public static final Set<ContactId> DEFAULT_EVENT_CLIENT_CONTACT_ID_SET = Stream.of(VALID_CLIENT_ID)
-            .map(ContactId::new)
+    public static final Set<Id> DEFAULT_EVENT_CLIENT_CONTACT_ID_SET = Stream.of(VALID_CLIENT_ID)
+            .map(Id::new)
             .collect(Collectors.toSet());
-    public static final Set<ContactId> DEFAULT_EVENT_VENDOR_CONTACT_ID_SET = Stream.of(VALID_VENDOR_ID)
-            .map(ContactId::new)
+    public static final Set<Id> DEFAULT_EVENT_VENDOR_CONTACT_ID_SET = Stream.of(VALID_VENDOR_ID)
+            .map(Id::new)
             .collect(Collectors.toSet());
 
 }

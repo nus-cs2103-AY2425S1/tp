@@ -22,12 +22,12 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.exceptions.DuplicateContactException;
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
 
             contactToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            ContactId targetContactId = editContactDescriptor.getId().get();
+            Id targetContactId = editContactDescriptor.getId().get();
             assert targetContactId != null;
 
             for (Contact contact : model.getFilteredContactList()) {
@@ -208,7 +208,7 @@ public class EditCommand extends Command {
         protected Email email;
         protected Address address;
         protected Set<Tag> tags;
-        protected ContactId contactId;
+        protected Id contactId;
 
         public EditContactDescriptor() {}
 
@@ -281,11 +281,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public final void setId(ContactId contactId) {
+        public final void setId(Id contactId) {
             this.contactId = contactId;
         }
 
-        public final Optional<ContactId> getId() {
+        public final Optional<Id> getId() {
             return Optional.ofNullable(contactId);
         }
 

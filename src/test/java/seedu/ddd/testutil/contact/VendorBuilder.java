@@ -12,10 +12,10 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_VENDOR_TAG
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -33,7 +33,7 @@ public class VendorBuilder {
     private Address address;
     private Service service;
     private Set<Tag> tags;
-    private ContactId contactId;
+    private Id contactId;
 
     /**
      * Initializes the VendorBuilder with the data of {@code contactToCopy}.
@@ -45,7 +45,7 @@ public class VendorBuilder {
         address = new Address(vendorToCopy.getAddress().value);
         service = new Service(vendorToCopy.getService().value);
         tags = new HashSet<>(vendorToCopy.getTags());
-        contactId = new ContactId(vendorToCopy.getId().contactId);
+        contactId = new Id(vendorToCopy.getId().id);
     }
 
     /**
@@ -113,7 +113,7 @@ public class VendorBuilder {
      * Sets the {@code ID} of the {@code Vendor} that we are building.
      */
     public VendorBuilder withId(int id) {
-        this.contactId = new ContactId(id);
+        this.contactId = new Id(id);
         return this;
     }
 
@@ -121,7 +121,7 @@ public class VendorBuilder {
      * Sets the {@code ID} of the {@code Vendor} that we are building.
      */
     public VendorBuilder withId(String id) {
-        this.contactId = new ContactId(id);
+        this.contactId = new Id(id);
         return this;
     }
 

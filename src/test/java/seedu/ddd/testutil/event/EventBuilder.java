@@ -11,13 +11,13 @@ import static seedu.ddd.testutil.event.TypicalEventFields.DEFAULT_EVENT_VENDOR_L
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 /**
  * A utility class to help with building Event objects.
@@ -29,7 +29,7 @@ public class EventBuilder {
     private Date date;
     private List<Client> clients;
     private List<Vendor> vendors;
-    private EventId eventId;
+    private Id eventId;
 
     /**
      * Initializes the EventBuilder with the data of {@code eventToCopy}.
@@ -40,7 +40,7 @@ public class EventBuilder {
         date = new Date(eventToCopy.getDate().toString());
         clients = new ArrayList<>(eventToCopy.getClients());
         vendors = new ArrayList<>(eventToCopy.getVendors());
-        eventId = new EventId(eventToCopy.getEventId().eventId);
+        eventId = new Id(eventToCopy.getEventId().id);
     }
 
     /**
@@ -83,7 +83,7 @@ public class EventBuilder {
      * Sets the {@code EventId} of the {@code Event} that we are building.
      */
     public EventBuilder withEventId(int eventId) {
-        this.eventId = new EventId(eventId);
+        this.eventId = new Id(eventId);
         return this;
     }
 

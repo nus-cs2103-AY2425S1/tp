@@ -19,9 +19,9 @@ import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.ParserUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 
@@ -105,7 +105,7 @@ public class ContactPredicateBuilder {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
-            ContactId contactId = new ContactId(Integer.parseInt(trimmedArgs));
+            Id contactId = new Id(Integer.parseInt(trimmedArgs));
             combinedPredicate = combinedPredicate.and(new ContactIdPredicate(contactId));
         }
         return combinedPredicate;

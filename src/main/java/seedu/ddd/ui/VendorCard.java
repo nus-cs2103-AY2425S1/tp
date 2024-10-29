@@ -45,7 +45,7 @@ public class VendorCard extends DisplayedCard {
         this.vendor = vendor;
 
         name.setText(String.format("%s. %s", displayedIndex, vendor.getName().fullName));
-        id.setText(String.format("Vendor: #%d", vendor.getId().contactId));
+        id.setText(String.format("Vendor: #%d", vendor.getId().id));
 
         phone.setText(String.format("📞  Phone Number: %s", vendor.getPhone()));
         email.setText(String.format("📫  Email: %s", vendor.getEmail()));
