@@ -6,7 +6,7 @@
 
 # LogiLink User Guide
 
-LogiLink is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LogiLink can get your contact management tasks done faster than traditional GUI apps.
+LogiLink allows you to manage your contacts on your desktop with keyboard commands. If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
@@ -20,6 +20,9 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
   * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
   * [Clearing all entries: `clear`](#clearing-all-entries--clear)
   * [Exiting the program: `exit`](#exiting-the-program--exit)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 <page-nav-print />
 
@@ -27,13 +30,14 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - If you do not, you can download the Java `17` installer from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for LogiLink.
+1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar addressbook.jar` to run LogiLink.<br>
+   - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -41,7 +45,7 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01` : Adds a contact named `John Doe` to LogiLink.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contacts list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -62,7 +66,7 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
   - Main window: the default window you see when opening LogiLink.<br> 
   - Inspect window: the window you see when inspecting a contact.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
