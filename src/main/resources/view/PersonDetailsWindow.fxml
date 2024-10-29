@@ -2,6 +2,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
@@ -33,6 +34,19 @@
                     <Label text="Address:" GridPane.rowIndex="3" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
                     <TextField fx:id="addressField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Department:" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                           style="-fx-text-fill: white;"/>
+                    <TextField fx:id="departmentField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Leave:" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                           style="-fx-text-fill: white;"/>
+                    <TextField fx:id="leaveField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                    <Label text="Favorite:" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                           style="-fx-text-fill: white;"/>
+                    <CheckBox fx:id="favoriteCheckBox" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
                 </children>
                 <padding>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
