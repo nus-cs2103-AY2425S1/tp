@@ -11,14 +11,13 @@ import static seedu.ddd.testutil.contact.TypicalContactFields.DEFAULT_CLIENT_TAG
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.util.SampleDataUtil;
 
 /**
@@ -31,8 +30,8 @@ public class ClientBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private ContactId contactId;
-    private Set<EventId> eventIds;
+    private Id contactId;
+    private Set<Id> eventIds;
 
     /**
      * Initializes the ClientBuilder with the data of {@code clientToCopy}.
@@ -43,7 +42,7 @@ public class ClientBuilder {
         email = new Email(clientToCopy.getEmail().value);
         address = new Address(clientToCopy.getAddress().value);
         tags = new HashSet<>(clientToCopy.getTags());
-        contactId = new ContactId(clientToCopy.getId().contactId);
+        contactId = new Id(clientToCopy.getId().id);
     }
 
     /**
@@ -103,7 +102,7 @@ public class ClientBuilder {
      * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
     public ClientBuilder withId(int id) {
-        this.contactId = new ContactId(id);
+        this.contactId = new Id(id);
         return this;
     }
 
@@ -111,7 +110,7 @@ public class ClientBuilder {
      * Sets the {@code ContactId} of the {@code Client} that we are building.
      */
     public ClientBuilder withId(String id) {
-        this.contactId = new ContactId(id);
+        this.contactId = new Id(id);
         return this;
     }
 

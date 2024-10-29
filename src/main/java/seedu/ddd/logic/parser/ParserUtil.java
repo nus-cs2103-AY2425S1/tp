@@ -15,10 +15,10 @@ import java.util.Set;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -185,20 +185,20 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code id} is invalid.
      */
-    public static ContactId parseId(String id) throws ParseException {
+    public static Id parseId(String id) throws ParseException {
         requireNonNull(id);
-        if (!ContactId.isValidContactId(id)) {
-            throw new ParseException(ContactId.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidId(id)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new ContactId(id);
+        return new Id(id);
     }
 
     /**
      * Parses {@code Collection<String> clientIds} into a {@code Set<Id>}.
      */
-    public static Set<ContactId> parseIds(Collection<String> ids) throws ParseException {
+    public static Set<Id> parseIds(Collection<String> ids) throws ParseException {
         requireNonNull(ids);
-        final Set<ContactId> contactIdSet = new HashSet<>();
+        final Set<Id> contactIdSet = new HashSet<>();
         for (String id : ids) {
             contactIdSet.add(parseId(id));
         }

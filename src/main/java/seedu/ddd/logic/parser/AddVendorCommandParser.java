@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -57,7 +57,7 @@ public class AddVendorCommandParser implements Parser<AddContactCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Service service = ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        ContactId contactId = new ContactId(AddressBook.getNextContactId());
+        Id contactId = new Id(AddressBook.getNextContactId());
 
         Vendor vendor = new Vendor(name, phone, email, address, service, tagList, contactId);
 

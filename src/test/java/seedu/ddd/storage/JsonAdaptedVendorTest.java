@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -40,7 +40,7 @@ public class JsonAdaptedVendorTest {
             .stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedEventId> EMPTY_EVENT_IDS = new ArrayList<>();
+    private static final List<JsonAdaptedId> EMPTY_EVENT_IDS = new ArrayList<>();
 
     @Test
     public void toModelType_validVendorDetails_returnsVendor() throws Exception {
@@ -237,7 +237,7 @@ public class JsonAdaptedVendorTest {
             Integer.parseInt(INVALID_VENDOR_ID),
             EMPTY_EVENT_IDS
         );
-        String expectedMessage = ContactId.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, vendor::toModelType);
     }
 

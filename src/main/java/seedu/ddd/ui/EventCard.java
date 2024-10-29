@@ -40,7 +40,7 @@ public class EventCard extends DisplayedCard {
         this.event = event;
 
         name.setText(String.format("%s. %s", displayedIndex, event.getName().fullName));
-        id.setText(String.format("Event: #%d", event.getEventId().eventId));
+        id.setText(String.format("Event: #%d", event.getEventId().id));
 
         description.setText(event.getDescription().description);
         date.setText(String.format("📅  Date: %s", event.getDate().date));

@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + COMMAND_USAGE + "\n"
             + EXAMPLE_USAGE;
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
     private final Index targetIndex;
 
@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
 
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteContact(contactToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(contactToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
     }
 
     @Override

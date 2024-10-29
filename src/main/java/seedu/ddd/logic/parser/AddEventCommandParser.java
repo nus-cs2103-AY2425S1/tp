@@ -15,11 +15,10 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
-import seedu.ddd.model.event.common.EventId;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -46,9 +45,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESC).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Set<ContactId> clientContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_CLIENTS));
-        Set<ContactId> vendorContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_VENDORS));
-        EventId eventId = new EventId(AddressBook.getNextEventId());
+        Set<Id> clientContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_CLIENTS));
+        Set<Id> vendorContactIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_VENDORS));
+        Id eventId = new Id(AddressBook.getNextEventId());
 
         return new AddEventCommand(name, description, date, clientContactIds, vendorContactIds, eventId);
     }

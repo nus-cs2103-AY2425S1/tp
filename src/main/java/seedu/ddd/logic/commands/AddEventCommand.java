@@ -23,14 +23,13 @@ import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
-import seedu.ddd.model.event.common.EventId;
 
 /**
  * Adds an event to DDD.
@@ -65,9 +64,9 @@ public class AddEventCommand extends Command implements AddCommand {
     private final Name name;
     private final Description description;
     private final Date date;
-    private final EventId eventId;
-    private final Set<ContactId> clientContactIds;
-    private final Set<ContactId> vendorContactIds;
+    private final Id eventId;
+    private final Set<Id> clientContactIds;
+    private final Set<Id> vendorContactIds;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
@@ -76,9 +75,9 @@ public class AddEventCommand extends Command implements AddCommand {
         Name name,
         Description description,
         Date date,
-        Set<ContactId> clientContactIds,
-        Set<ContactId> vendorContactIds,
-        EventId eventId
+        Set<Id> clientContactIds,
+        Set<Id> vendorContactIds,
+        Id eventId
     ) {
         requireAllNonNull(name, description, date, clientContactIds, vendorContactIds, eventId);
 
@@ -94,8 +93,8 @@ public class AddEventCommand extends Command implements AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Set<ContactId> invalidClientContactIds = clientIdsNotInModel(model, clientContactIds);
-        Set<ContactId> invalidVendorContactIds = vendorIdsNotInModel(model, vendorContactIds);
+        Set<Id> invalidClientContactIds = clientIdsNotInModel(model, clientContactIds);
+        Set<Id> invalidVendorContactIds = vendorIdsNotInModel(model, vendorContactIds);
 
         if (!invalidClientContactIds.isEmpty() && !invalidVendorContactIds.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CONTACT_IDS,
@@ -120,11 +119,11 @@ public class AddEventCommand extends Command implements AddCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToAdd)));
     }
 
-    private Set<ContactId> clientIdsNotInModel(Model model, Set<ContactId> contactIds) {
+    private Set<Id> clientIdsNotInModel(Model model, Set<Id> contactIds) {
         return contactIds.stream().filter(id -> !model.hasClientId(id)).collect(Collectors.toSet());
     }
 
-    private Set<ContactId> vendorIdsNotInModel(Model model, Set<ContactId> contactIds) {
+    private Set<Id> vendorIdsNotInModel(Model model, Set<Id> contactIds) {
         return contactIds.stream().filter(id -> !model.hasVendorId(id)).collect(Collectors.toSet());
     }
 

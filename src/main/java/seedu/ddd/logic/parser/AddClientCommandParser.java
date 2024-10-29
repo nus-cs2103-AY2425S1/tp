@@ -17,11 +17,11 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
 
@@ -54,7 +54,7 @@ public class AddClientCommandParser implements Parser<AddContactCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        ContactId id = new ContactId(AddressBook.getNextContactId());
+        Id id = new Id(AddressBook.getNextContactId());
 
         Client contact = new Client(name, phone, email, address, tagList, id);;
 

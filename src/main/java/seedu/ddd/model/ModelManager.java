@@ -13,8 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Event;
 
 /**
@@ -117,19 +117,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasClientId(ContactId contactId) {
+    public boolean hasClientId(Id contactId) {
         requireNonNull(contactId);
         return addressBook.hasClientId(contactId);
     }
 
     @Override
-    public boolean hasVendorId(ContactId contactId) {
+    public boolean hasVendorId(Id contactId) {
         requireNonNull(contactId);
         return addressBook.hasVendorId(contactId);
     }
 
     @Override
-    public Contact getContact(ContactId contactId) {
+    public Contact getContact(Id contactId) {
         requireNonNull(contactId);
         return addressBook.getContact(contactId);
     }
