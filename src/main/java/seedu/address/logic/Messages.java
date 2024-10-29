@@ -27,7 +27,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_HAS_CLASHES = "\nYou have %d other students with clashing schedule:\n%s";
     public static final String MESSAGE_REMINDER = "Reminder(s) for %s:\n";
-    public static final String MESSAGE_OVERFLOW = "Your request exceeds the "
+    public static final String MESSAGE_LIMIT = "Your request exceeds the "
             + "maximum allowable for this application."
             + "\nMaximum Rate: $" + String.format("%.2f", Rate.MAX_VALUE)
             + "\nMaximum Paid Amount: $" + String.format("%.2f", PaidAmount.MAX_VALUE)

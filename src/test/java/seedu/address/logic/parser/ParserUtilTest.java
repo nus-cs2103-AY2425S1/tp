@@ -246,6 +246,12 @@ public class ParserUtilTest {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(hourWithWhitespace));
     }
+    
+    @Test
+    public void parseHour_overflow_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHour(Double.toString(Double.MAX_VALUE + 1)));
+    }
+    
 
     @Test
     public void parseSchedule_null_throwsNullPointerException() {

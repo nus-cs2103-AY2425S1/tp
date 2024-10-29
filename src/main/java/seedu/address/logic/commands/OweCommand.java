@@ -106,8 +106,8 @@ public class OweCommand extends Command {
 
     private static double calculateOwed(Student student, double hour) throws CommandException {
         double owedAmount = student.getRate().value * hour;
-        if (owedAmount > OwedAmount.MAX_VALUE) {
-            throw new CommandException(Messages.MESSAGE_OVERFLOW);
+        if (!OwedAmount.isValidOwedAmount(owedAmount)) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
         }
         return BigDecimal.valueOf(owedAmount)
                 .setScale(2, RoundingMode.HALF_UP)

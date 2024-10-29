@@ -38,6 +38,13 @@ public class OwedAmount extends Fee {
         double owedAmount = Double.parseDouble(test);
         return owedAmount >= 0 && owedAmount <= MAX_VALUE;
     }
+    
+    /**
+     * Returns true if a given value is a valid owed amount.
+     */
+    public static boolean isValidOwedAmount(double test) {
+        return test >= 0 && test <= MAX_VALUE;
+    }
 
     /**
      * Returns a new {@code OwedAmount} with the increased value by adding the specified amount
