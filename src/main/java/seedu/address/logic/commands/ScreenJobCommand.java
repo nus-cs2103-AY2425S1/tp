@@ -38,7 +38,8 @@ public class ScreenJobCommand extends ScreenCommand {
 
         Job jobToScreen = jobList.get(targetIndex.getZeroBased());
 
-        Predicate<Person> filterCriteria = roleMatchesJobPredicate(jobToScreen);
+        Predicate<Person> filterCriteria = roleMatchesJobPredicate(jobToScreen)
+                .and(person -> !person.isMatchPresent());
 
         // Filter persons by checking if their role is present in the job requirements (case-insensitive)
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
