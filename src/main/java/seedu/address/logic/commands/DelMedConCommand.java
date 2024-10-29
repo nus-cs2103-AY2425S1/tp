@@ -32,7 +32,7 @@ public class DelMedConCommand extends Command {
             + PREFIX_MEDCON + "Diabetes "
             + PREFIX_MEDCON + "Hypertension";
 
-    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Nric: %2$s";
+    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition(s): %1$s from Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_MEDCON_NOT_FOUND = "Condition not found: %1$s";
 

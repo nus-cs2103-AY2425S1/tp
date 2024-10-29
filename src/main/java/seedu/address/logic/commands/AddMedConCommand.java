@@ -32,7 +32,7 @@ public class AddMedConCommand extends Command {
             + PREFIX_MEDCON + "Diabetes "
             + PREFIX_MEDCON + "Hypertension";
 
-    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition: %1$s to Nric: %2$s";
+    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition(s): %1$s to Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_DUPLICATE_MEDCON = "Condition already assigned: %1$s";
 
