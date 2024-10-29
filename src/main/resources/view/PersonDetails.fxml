@@ -36,23 +36,23 @@
                     <Insets top="5" right="5" bottom="5" left="15" />
                 </padding>
                 <VBox>
-                    <Label fx:id="studentIdHeader" text="Student ID" styleClass="label_header" visible="false"/>
+                    <Label fx:id="studentIdHeader" text="Student ID" styleClass="field-header" visible="false"/>
                     <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
                 </VBox>
                 <VBox>
-                    <Label fx:id="contactHeader" text="Contact Number" styleClass="label_heading" visible="false"/>
+                    <Label fx:id="contactHeader" text="Contact Number" styleClass="field-header" visible="false" minWidth="500"/>
                     <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
                 </VBox>
                 <VBox>
-                    <Label fx:id="addressHeader" text="Address" styleClass="label_header" visible="false"/>
+                    <Label fx:id="addressHeader" text="Address" styleClass="field-header" visible="false"/>
                     <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
                 </VBox>
                 <VBox>
-                    <Label fx:id="emailHeader" text="Email Address" styleClass="label_header" visible="false"/>
+                    <Label fx:id="emailHeader" text="Email Address" styleClass="field-header" visible="false"/>
                     <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
                 </VBox>
                 <VBox>
-                    <Label fx:id="moduleHeader" text="Modules" styleClass="label_header" visible="false"/>
+                    <Label fx:id="moduleHeader" text="Modules" styleClass="field-header" visible="false"/>
                     <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
                 </VBox>
             </VBox>
