@@ -172,10 +172,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void lockSplitPaneDivider() {
-        splitPane.setDividerPositions(0.5); // Set initial position
-        splitPane.getDividers().get(0).positionProperty().addListener((obs, oldPos, newPos) -> {
-            splitPane.setDividerPositions(0.5); // Reset to desired position to prevent movement
-        });
+        splitPane.lookupAll(".split-pane-divider").stream()
+                .forEach(div -> div.setMouseTransparent(true) );
     }
 
     /**

@@ -39,46 +39,6 @@
     -fx-max-height: 0;
 }
 
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
-
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #fdf5f5;
-}
 
 .split-pane {
     -fx-background-color: #fdf5f5;
@@ -86,7 +46,6 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 5 0 0 5; /* top right bottom left */
     -fx-background-color: #fdf5f5
 }
 
@@ -152,9 +111,9 @@
      -fx-background-color: #fdf5f5;
 }
 
-.split-pane *.split-pane-divider {
-    -fx-padding: 0; /* Makes the divider look smaller */
-    -fx-background-color: transparent; /* Makes the divider transparent */
+.split-pane .split-pane-divider {
+    -fx-background-color: #888888;
+    -fx-padding: 1; /* Makes the divider look smaller */
     -fx-cursor: default;
 }
 
@@ -395,7 +354,7 @@
 
 #remarks .label {
     -fx-font-family: "Raleway";
-        -fx-font-style: italic;
+    -fx-font-style: italic;
     -fx-font-size: 12px;
     -fx-text-fill: derive(#e8def8, -50%);
     -fx-background-color: #fdf5f5;
@@ -405,3 +364,105 @@
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
 }
+
+#displayLessons {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-margin-top: 10px;
+
+}
+#displayLessons .label{
+    -fx-font-size: 24px;
+    -fx-background-color: #88c1d0;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+#displayTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-margin-top: 10px;
+    -fx-padding: 5 0 5 0;
+}
+
+#displayTags .label {
+    -fx-background-color: #bc9feb;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 24;
+}
+
+.display-scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.student-information {
+    -fx-background-color: white;
+}
+
+.divider {
+    -fx-background-color: #DDDDDD;
+    -fx-min-width: 100%;
+}
+
+.title-container {
+    -fx-padding: 16px;
+    -fx-background-color: white;
+    -fx-border-width: 1;
+    -fx-border-color: #e8def8;
+    -fx-border-radius: 5 5 0 0;
+}
+
+.title-label {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.section-container {
+    -fx-padding: 16px;
+    -fx-background-color: white;
+    -fx-border-width: 1;
+    -fx-border-color: #e8def8;
+}
+
+.section-heading {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.label-heading {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.content-label {
+    -fx-text-fill: #555555;
+    -fx-font-size: 24px;
+    -fx-opacity: 0.9;
+}
+
+.content-flow-pane {
+    -fx-padding: 8px 0 0 0;
+}
+
+.content-flow-pane .label {
+    -fx-padding: 6px 12px;
+    -fx-text-fill: black;
+}
+
+.remarks-container {
+    -fx-spacing: 8;
+    -fx-padding: 10;
+}
+
+/* Style for each remark label with numbering */
+.remarks-container .label {
+    -fx-font-size: 24px;
+    -fx-padding: 5 10;
+}
+
