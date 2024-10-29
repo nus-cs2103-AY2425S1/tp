@@ -53,7 +53,7 @@ public class Email {
 
     @Override
     public String toString() {
-        return value;
+        return value.toLowerCase();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override
