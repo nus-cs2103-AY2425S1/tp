@@ -93,7 +93,8 @@ public class AddressBookParser {
         case UntagCommand.COMMAND_WORD -> new UntagCommandParser().parse(arguments);
         case AssignWeddingCommand.COMMAND_WORD, AssignWeddingCommand.COMMAND_KEYWORD
                 -> new AssignWeddingCommandParser().parse(arguments);
-        case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
+        case UnassignWeddingCommand.COMMAND_WORD, UnassignWeddingCommand.COMMAND_KEYWORD
+                -> new UnassignWeddingCommandParser().parse(arguments);
         case CreateTaskCommand.COMMAND_WORD, CreateTaskCommand.COMMAND_KEYWORD
                 -> new CreateTaskCommandParser().parse(arguments);
         case ListTasksCommand.COMMAND_WORD, ListTasksCommand.COMMAND_KEYWORD
