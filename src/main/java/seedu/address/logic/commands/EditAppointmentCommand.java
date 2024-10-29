@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.time.LocalDateTime;
@@ -35,7 +38,12 @@ public class EditAppointmentCommand extends EditCommand {
             + ": Edits the details of an appointment identified "
             + "by the index number used in the displayed appointment list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [DATA_FIELDS]...\n"
+            + "Parameters: INDEX (must be a positive integer)"
+            + "[" + PREFIX_PERSON_ID + "PERSON_ID] "
+            + "[" + PREFIX_APPOINTMENT_TYPE + "APPOINTMENT_TYPE] "
+            + "[" + PREFIX_DATETIME + "DATE_TIME] "
+            + "[" + PREFIX_SICKNESS + "SICKNESS] "
+            + "[" + PREFIX_MEDICINE + "MEDICINE] \n"
             + "Example: " + COMMAND_WORD + " appt 1 "
             + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
             + PREFIX_MEDICINE + "Panadol";
