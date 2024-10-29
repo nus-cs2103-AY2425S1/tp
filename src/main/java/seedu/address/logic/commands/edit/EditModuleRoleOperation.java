@@ -50,7 +50,7 @@ public abstract class EditModuleRoleOperation {
      * @param moduleRoleMapAfter The module role map after the change.
      * @return A description of the change in module roles.
      */
-    public static String getModuleCodeChangeDescription(
+    public static String getModuleCodeChangesDescription(
             ModuleRoleMap moduleRoleMapBefore, ModuleRoleMap moduleRoleMapAfter) {
 
         StringBuilder stringBuilderAdded = new StringBuilder();
