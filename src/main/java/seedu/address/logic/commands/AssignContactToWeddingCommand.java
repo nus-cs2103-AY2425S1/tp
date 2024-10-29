@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.ParserUtil.parsePersonListToString;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +71,6 @@ public class AssignContactToWeddingCommand extends Command {
         // get a list of all the Persons that the user is trying to assign to the wedding
         ArrayList<Person> newContactsAssignedToWedding = new ArrayList<>();
 
-        // new line added so that the user is essentially in 'list' mode before assigning people to wedding
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Index i : assignedPersonIndexList) {
