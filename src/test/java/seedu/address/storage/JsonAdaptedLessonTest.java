@@ -94,7 +94,7 @@ public class JsonAdaptedLessonTest {
     }
 
     @Test
-    public void getAttendance_attendanceIsTrue_returns_True() {
+    public void getAttendance_attendanceIsTrue_returnsTrue() {
         JsonAdaptedStudent jsonStudent = new JsonAdaptedStudent(new StudentBuilder().withName("Benson").build());
         JsonAdaptedLesson jsonAdaptedLesson = new JsonAdaptedLesson(VALID_DATE, VALID_TIME,
                 List.of(jsonStudent),
