@@ -12,10 +12,11 @@ import java.util.Set;
 public class ActiveTags {
     private final HashMap<Tag, Integer> tagMap; // Maps Tags to their respective number of occurrences
     private final ObservableMap<String, String> tagColorMap; // Maps Tag names to their respective colors
-    private final String[] colors = {"#a5494f", "#ad7e48", "#a7a15a", "#48864d", "#4a57ba", "#5f388b"};
+    private final String[] tagColors;
 
-    public ActiveTags(HashMap<Tag, Integer> tagMap) {
+    public ActiveTags(HashMap<Tag, Integer> tagMap, String[] tagColors) {
         this.tagMap = tagMap;
+        this.tagColors = tagColors;
         this.tagColorMap = FXCollections.observableHashMap();
 
         for (Tag t:tagMap.keySet()) {
@@ -60,7 +61,7 @@ public class ActiveTags {
     private void assignTagColor(Tag t) {
         String tagName = t.tagName;
         if (!tagColorMap.containsKey(tagName)) {
-            String assigned = colors[tagColorMap.size() % colors.length]; // If more tags than colors, loops around
+            String assigned = tagColors[tagColorMap.size() % tagColors.length]; // If more tags than colors, loops around
             tagColorMap.put(tagName, assigned);
         }
     }
