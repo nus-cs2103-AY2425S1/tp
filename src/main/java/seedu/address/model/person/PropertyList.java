@@ -83,6 +83,10 @@ public class PropertyList {
         return new ArrayList<>(properties); // Return a copy of the properties list to avoid modification
     }
 
+    public boolean isEmpty() {
+        return this.properties.isEmpty();
+    }
+
     /**
      * Retrieves a property by its index.
      *

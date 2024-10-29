@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="670.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
+<VBox prefHeight="800.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
     <Label alignment="TOP_LEFT" text="Name:" />
     <Label fx:id="nameLabel" prefHeight="37.0" prefWidth="499.0" />
@@ -48,14 +48,14 @@
             <Label fx:id="remarkLabel" wrapText="true" />
         </content>
     </ScrollPane>
-    <Label text="Properties:" />
-    <ScrollPane fitToWidth="true" maxHeight="75.0">
+    <Label fx:id="propertyListLabel" text="Properties:" />
+    <ScrollPane fx:id="propertyListScrollPane" fitToWidth="true" minHeight="75.0" maxHeight="400.0" styleClass="hidden-scrollbar">
         <content>
-            <VBox fx:id="propertyList" prefHeight="75.0" />
+            <VBox fx:id="propertyList" spacing="10.0"/>
         </content>
     </ScrollPane>
-    <Label text="History:" />
-    <ScrollPane fitToWidth="true" maxHeight="400.0">
+    <Label fx:id="historyLabel" text="History:" />
+    <ScrollPane fx:id="historyScrollPane" fitToWidth="true" maxHeight="400.0" styleClass="hidden-scrollbar">
         <content>
             <VBox fx:id="history" prefWidth="419.0" spacing="10.0">
             </VBox>
