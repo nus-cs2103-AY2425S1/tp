@@ -17,6 +17,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;
+import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -74,6 +75,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         assert person != null || amount != null || description != null || date != null;
 
-        return new FilterCommand(person, amount, description, date);
+        FilterCommandPredicate filterPredicate = new FilterCommandPredicate(person, amount, description, date);
+
+        return new FilterCommand(filterPredicate);
     }
 }
