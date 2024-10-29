@@ -33,8 +33,6 @@
       <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" managed="${telegram.visible}" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" managed ="${address.visible}" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" managed ="${email.visible}" />
-      <VBox fx:id="remarks" spacing="5">
-      </VBox>
     </VBox>
   </GridPane>
 </HBox>
