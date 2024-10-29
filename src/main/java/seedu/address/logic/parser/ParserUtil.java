@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Leave;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -136,5 +137,20 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Department(trimmedDepartment);
+    }
+
+    /**
+     * Parses a {@code String leave} into a {@code Leave}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code leave} is invalid.
+     */
+    public static Leave parseLeave(String leave) throws ParseException {
+        requireNonNull(leave);
+        String trimmedLeave = leave.trim();
+        if (!Leave.isValidLeave(trimmedLeave)) {
+            throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
+        }
+        return new Leave(trimmedLeave);
     }
 }

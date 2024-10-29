@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVORITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -43,6 +44,7 @@ public class PersonUtil {
             sb.append(PREFIX_FAVORITE + " ");
         }
         sb.append(PREFIX_DEPARTMENT + person.getDepartment().department + " ");
+        sb.append(PREFIX_LEAVE + person.getLeave().value + " ");
         return sb.toString();
     }
 

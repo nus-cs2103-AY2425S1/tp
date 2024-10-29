@@ -26,14 +26,15 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="department" text="\$department" styleClass="cell_big_label" style="-fx-padding: 0 0 0 5;"/>
         <Label fx:id="favoriteStar" text="★" styleClass="favorite_star"
                visible="false" style="-fx-text-fill: gold; -fx-font-size: 20; -fx-font-weight: bold;" />
-        <Label fx:id="department" text="\$department" styleClass="cell_big_label" style="-fx-padding: 0 0 0 5;"/>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="leave" styleClass="cell_small_label" text="\$leave" />
     </VBox>
   </GridPane>
 </HBox>
