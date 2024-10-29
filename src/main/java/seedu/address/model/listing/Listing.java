@@ -29,8 +29,8 @@ public class Listing {
      * @param price    Price of the listing.
      * @param area     Area of the listing in square meters.
      * @param region   Region of the listing, represented by a {@code Region} enum.
-     * @param seller   Seller of the listing, represented by a {@code Seller}.
-     * @param buyers   Buyers of the listing, represented by a {@code Buyer}.
+     * @param seller   Seller of the listing, represented by a {@code Person}.
+     * @param buyers   Buyers of the listing, represented by a {@code Person}.
      */
     public Listing(Name name, Address address, Price price,
                    Area area, Region region, Person seller, Set<Person> buyers) {
