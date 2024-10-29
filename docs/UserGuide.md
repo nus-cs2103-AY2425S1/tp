@@ -35,13 +35,15 @@ As you read the user guide, you might encounter some unfamiliar technical terms.
 | Term      | Definition                                                                                                                                                                         |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Command   | An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.                                     |
-| CLI       | Command Line Interface(CLI) is a type of text-based interface that is used to interact with software via commands.                                                                 |
-| GUI       | Graphical User Interface(GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.                          |
-| JAR       | Java ARchive(JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                 |
-| JSON      | JavaScript Object Notation(JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.                   |
+| CLI       | Command Line Interface (CLI) is a type of text-based interface that is used to interact with software via commands.                                                                |
+| GUI       | Graphical User Interface (GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.                         |
+| JAR       | Java ARchive (JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                |
+| JSON      | JavaScript Object Notation (JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.                  |
+| Panel     | Region in the GUI that displays a particular item.                                                     <br/>                                                                       |
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 | Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
+
 ### Text Formatting Conventions
 We will be using different text formatting styles to help you better understand the content of the user guide.
 
@@ -125,7 +127,8 @@ You should be greeted by the UI, which you will see in the next section.
 
 ### Overview of the GUI
 
-Once MediBase3 is running, you will see the main interface. Here’s an overview of the key parts:
+Once MediBase3 is running, you will see the main interface. The interface is segmented into different **panel**s, as 
+seen in the image below. Here’s an overview of the key panels:
 
 - **Command Box:** Where you can type and enter commands.
 - **Result Display:** Shows the result of the command you entered.
