@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.testutil.PersonBuilder;
@@ -155,7 +154,8 @@ public class ReminderManagerTest {
                 .build();
         personList.addAll(personDueToday, person2, person3);
 
-        assertEquals("John, Alice and Charlie have deadlines due today.", reminderManager.currentReminderProperty().get());
+        assertEquals("John, Alice and Charlie have deadlines due today.", reminderManager
+                .currentReminderProperty().get());
     }
 
     @Test
