@@ -27,7 +27,7 @@ class PutOrderCommandTest {
         String name = "cake";
         model.addOrder(new Order(name));
         expectedModel.addOrder(new Order(name));
-        assertCommandSuccess(new PutOrderCommand(new Order(name), TypicalPersons.ALICE.getName()), model,
+        assertCommandSuccess(new PutOrderCommand(name, TypicalPersons.ALICE.getName()), model,
                 PutOrderCommand.MESSAGE_SUCCESS, expectedModel);
         // temp solution
         TypicalPersons.ALICE.clearOrder();
@@ -37,14 +37,14 @@ class PutOrderCommandTest {
     void execute_orderDoesNotExist_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         String name = "cake";
-        assertThrows(CommandException.class, () -> new PutOrderCommand(new Order(name),
+        assertThrows(CommandException.class, () -> new PutOrderCommand(name,
                 TypicalPersons.ALICE.getName()).execute(model));
     }
 
     @Test
     void equalsMethod() {
-        Order order1 = new Order("cake");
-        Order order2 = new Order("pizza");
+        String order1 = "cake";
+        String order2 = "pizza";
         PutOrderCommand o1 = new PutOrderCommand(order1, TypicalPersons.ALICE.getName());
         PutOrderCommand o2 = new PutOrderCommand(order1, TypicalPersons.ALICE.getName());
         PutOrderCommand o3 = new PutOrderCommand(order2, TypicalPersons.ALICE.getName());

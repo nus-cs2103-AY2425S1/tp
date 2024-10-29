@@ -27,7 +27,7 @@ class PutOrderCommandParserTest {
     @Test
     void parse_validInput_success() {
         PutOrderCommandParser p = new PutOrderCommandParser();
-        Order order = new Order("cake");
+        String order = "cake";
         Name name = new Name("Alex");
         try {
             assertEquals(new PutOrderCommand(order, name), p.parse("cake n/ Alex"));

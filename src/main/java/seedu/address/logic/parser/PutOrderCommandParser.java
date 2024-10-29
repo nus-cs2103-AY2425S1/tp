@@ -33,7 +33,7 @@ public class PutOrderCommandParser implements Parser<PutOrderCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Order order = new Order(argMultimap.getPreamble());
+        String order = argMultimap.getPreamble();
 
         return new PutOrderCommand(order, name);
     }

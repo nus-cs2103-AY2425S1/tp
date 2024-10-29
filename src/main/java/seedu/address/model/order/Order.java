@@ -6,8 +6,28 @@ package seedu.address.model.order;
 public class Order {
     private final String name;
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Order name must only contain \n"
+                    + "1. Alphanumeric characters or \n"
+                    + "2. spaces (not as the first character)";
+
+    /**
+     * Order name should contain alphanumeric character only
+     */
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+$";
+
     public Order(String name) {
+        if (!isValidName(name)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         this.name = name.toLowerCase();
+    }
+
+    /**
+     * Returns true if a given string is a valid order name.
+     */
+    public static boolean isValidName(String name) {
+        return name.matches(VALIDATION_REGEX) && !name.isEmpty();
     }
 
     @Override

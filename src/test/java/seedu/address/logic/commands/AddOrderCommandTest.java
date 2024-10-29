@@ -40,7 +40,7 @@ class AddOrderCommandTest {
     @Test
     void equalsMethod() {
         AddOrderCommand o1 = new AddOrderCommand("cake");
-        AddOrderCommand o2 = new AddOrderCommand("cAke");
+        AddOrderCommand o2 = new AddOrderCommand("cake");
         AddOrderCommand o3 = new AddOrderCommand("test");
         assertEquals(o1, o1);
         assertNotEquals(o1, null);

@@ -36,7 +36,7 @@ class ShowOrderHistoryCommandTest {
 
         String name = "cake";
         model.addOrder(new Order(name));
-        PutOrderCommand command = new PutOrderCommand(new Order(name), TypicalPersons.ALICE.getName());
+        PutOrderCommand command = new PutOrderCommand(name, TypicalPersons.ALICE.getName());
         try {
             command.execute(model);
             assertCommandSuccess(new ShowOrderHistoryCommand(TypicalPersons.ALICE.getName()), model,

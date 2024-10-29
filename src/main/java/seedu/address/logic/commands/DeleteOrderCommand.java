@@ -21,18 +21,23 @@ public class DeleteOrderCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Order deleted: %1$s";
     public static final String MESSAGE_ABSENT_ORDER = "This order does not exists in the address book";
 
-    private final Order toDelete;
+    private final String toDelete;
 
     public DeleteOrderCommand(String name) {
-        this.toDelete = new Order(name.trim().toLowerCase());
+        this.toDelete = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasOrder(toDelete)) {
-            model.removeOrder(toDelete);
+        if (!Order.isValidName(toDelete)) {
+            throw new CommandException(Order.MESSAGE_CONSTRAINTS);
+        }
+        Order order = new Order(toDelete);
+
+        if (model.hasOrder(order)) {
+            model.removeOrder(order);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
         }
 

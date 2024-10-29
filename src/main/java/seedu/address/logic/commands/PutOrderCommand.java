@@ -26,14 +26,14 @@ public class PutOrderCommand extends Command {
     public static final String MESSAGE_ORDER_NOT_FOUND = "Order does not exist: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist: %1$s";
 
-    private final Order order;
+    private final String order;
     private final Name name;
 
     /**
      * @param order to add
      * @param name of the customer to add the order
      */
-    public PutOrderCommand(Order order, Name name) {
+    public PutOrderCommand(String order, Name name) {
         this.order = order;
         this.name = name;
     }
@@ -42,8 +42,13 @@ public class PutOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasOrder(this.order)) {
-            throw new CommandException(String.format(MESSAGE_ORDER_NOT_FOUND, this.order.toString()));
+        if (!Order.isValidName(this.order)) {
+            throw new CommandException(Order.MESSAGE_CONSTRAINTS);
+        }
+        Order order = new Order(this.order);
+
+        if (!model.hasOrder(order)) {
+            throw new CommandException(String.format(MESSAGE_ORDER_NOT_FOUND, order.toString()));
         }
 
         Person p = model.findPersonByName(this.name);
@@ -52,7 +57,7 @@ public class PutOrderCommand extends Command {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, this.name.toString()));
         }
 
-        p.putOrder(this.order);
+        p.putOrder(order);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
