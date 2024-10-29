@@ -110,4 +110,5 @@ public class ProductTest {
         // remove non-existent product -> throws exception
         assertThrows(ProductNotFoundException.class, () -> uniqueProductList.remove(product1));
     }
+
 }

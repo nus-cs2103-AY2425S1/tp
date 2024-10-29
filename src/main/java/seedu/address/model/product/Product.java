@@ -117,11 +117,6 @@ public class Product {
         return stockLevel;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags.clear();
-        this.tags.addAll(tags);
-    }
-
     /**
      * Returns true if both products have the same name.
      * This defines a weaker notion of equality between two products.
