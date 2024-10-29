@@ -11,8 +11,8 @@ public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Patient ID can contain alphanumeric characters, dashes, slashes, hashes and parentheses.\n"
-            + "It must have at least 1 alphanumeric character and has a character limit of 20.";
-    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9/#()-]{1,20}$";
+            + "It must have at least 1 alphanumeric character and has a character limit of 36.";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9/#()-]{1,36}$";
     public final String value;
 
     /**
