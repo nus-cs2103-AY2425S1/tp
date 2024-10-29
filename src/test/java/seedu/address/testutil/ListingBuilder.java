@@ -12,7 +12,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Listing objects.
@@ -179,7 +178,7 @@ public class ListingBuilder {
      * @return The current {@code ListingBuilder} object.
      */
     public ListingBuilder withBuyers(Person ... buyers) {
-        this.buyers = new HashSet<Person>(List.of(SampleDataUtil.getSamplePersons()));
+        this.buyers = new HashSet<Person>(List.of(buyers));
         return this;
     }
 

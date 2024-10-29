@@ -2,9 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -25,8 +31,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    public static final String VALID_NAME_PASIR_RIS = "Pasir Ris Condo";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -54,6 +58,23 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String VALID_NAME_PASIR_RIS = "Pasir Ris Condo";
+    public static final String VALID_ADDRESS_PASIR_RIS = "123 Pasir Ris Drive 3";
+    public static final int VALID_AREA_PASIR_RIS = 75;
+    public static final String VALID_PRICE_PASIR_RIS = "700000";
+    public static final String VALID_REGION_PASIR_RIS = "East";
+    public static final String VALID_SELLER_PASIR_RIS = VALID_NAME_AMY;
+    public static final String VALID_FIRST_BUYER_PASIR_RIS = VALID_NAME_BOB;
+    public static final String VALID_SECOND_BUYER_PASIR_RIS = "John Ong";
+    public static final String NAME_DESC_PASIR_RIS = " " + PREFIX_NAME + VALID_NAME_PASIR_RIS;
+    public static final String ADDRESS_DESC_PASIR_RIS = " " + PREFIX_ADDRESS + VALID_ADDRESS_PASIR_RIS;
+    public static final String AREA_DESC_PASIR_RIS = " " + PREFIX_AREA + VALID_AREA_PASIR_RIS;
+    public static final String PRICE_DESC_PASIR_RIS = " " + PREFIX_PRICE + VALID_PRICE_PASIR_RIS;
+    public static final String REGION_DESC_PASIR_RIS = " " + PREFIX_REGION + VALID_REGION_PASIR_RIS;
+    public static final String SELLER_DESC_PASIR_RIS = " " + PREFIX_SELLER + VALID_SELLER_PASIR_RIS;
+    public static final String BUYER_DESC_PASIR_RIS = " " + PREFIX_BUYER + VALID_FIRST_BUYER_PASIR_RIS
+            + " " + PREFIX_BUYER + VALID_SECOND_BUYER_PASIR_RIS;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
