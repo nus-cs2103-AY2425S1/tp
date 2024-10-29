@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new ViewWeddingCommand object.
@@ -33,6 +33,6 @@ public class ViewWeddingCommandParser implements Parser<ViewWeddingCommand> {
 
         List<String> weddingNameKeywordList = Arrays.stream(weddingNameKeywords).collect(Collectors.toList());
 
-        return new ViewWeddingCommand(new NameOrJobContainsKeywordsPredicate(weddingNameKeywordList));
+        return new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeywordList));
     }
 }

@@ -195,13 +195,17 @@ public class MainWindow extends UiPart<Stage> {
 
             // allows for the corresponding person or wedding list to be shown
             listPanelPlaceholder.getChildren().clear();
-            if (commandText.startsWith("list-wedding")) {
+
+            if (commandText.startsWith("list-wed")) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+            } else if (commandText.startsWith("view-wed")) {
+                // to fill
             } else {
                 personListPanel = new PersonListPanel(logic.getFilteredPersonList());
                 listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             }
+
 
             return commandResult;
         } catch (CommandException | ParseException e) {

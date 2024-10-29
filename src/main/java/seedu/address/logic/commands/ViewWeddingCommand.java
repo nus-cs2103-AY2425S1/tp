@@ -1,29 +1,28 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
-import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * TO be updated
  */
 public class ViewWeddingCommand extends Command {
-    public static final String COMMAND_WORD = "view-wedding";
+    public static final String COMMAND_WORD = "view-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Shows all persons involved in the weddings of "
             + "the specified keywords (case-insensitive)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: KEYWORD"
-            + "Example: " + COMMAND_WORD + " Jonus & Izzatr";
+            + "Example: " + COMMAND_WORD + " Jonus & Izzat";
 
-    private final WeddingNameContainsKeywordsPredicate predicate;
+    private final TagContainsKeywordsPredicate predicate;
 
-    public ViewWeddingCommand(WeddingNameContainsKeywordsPredicate predicate) {
+    public ViewWeddingCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -32,7 +31,7 @@ public class ViewWeddingCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
@@ -42,7 +41,7 @@ public class ViewWeddingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.ViewWeddingCommand otherViewWeddingCommand)) {
+        if (!(other instanceof ViewWeddingCommand otherViewWeddingCommand)) {
             return false;
         }
 
