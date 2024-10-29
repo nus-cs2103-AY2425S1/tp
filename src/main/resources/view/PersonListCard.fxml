@@ -18,7 +18,7 @@
     <Insets bottom="50.0" />
   </HBox.margin>
 
-  <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">
+  <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="false">
     <columnConstraints>
       <ColumnConstraints minWidth="40" />
       <ColumnConstraints minWidth="200" maxWidth="200"/>
@@ -49,9 +49,9 @@
         <Insets top="10" right="15" bottom="10" left="15" />
       </padding>
       <VBox alignment="CENTER_LEFT" minHeight="105">
-        <GridPane VBox.vgrow="ALWAYS" vgap="20">
-          <Label fx:id="name" text="\$first" styleClass="name_label" GridPane.rowIndex="1" wrapText="true" GridPane.halignment="CENTER"/>
-          <Label fx:id="clientStatus" styleClass="cell_small_label" GridPane.rowIndex="2" />
+        <GridPane VBox.vgrow="ALWAYS" vgap="80" gridLinesVisible="false">
+          <Label fx:id="name" text="\$first" styleClass="name_label" GridPane.rowIndex="0" wrapText="true" GridPane.halignment="CENTER"/>
+          <Label fx:id="clientStatus" styleClass="cell_small_label" GridPane.rowIndex="1" />
         </GridPane>
       </VBox>
     </HBox>
@@ -133,82 +133,6 @@
         </GridPane>
       </VBox>
     </HBox>
-
-<!--&lt;!&ndash;    Index, Payment Status, Name and Client Status VBox&ndash;&gt;-->
-<!--    <HBox minHeight="105" GridPane.columnIndex="0">-->
-<!--      <padding>-->
-<!--        <Insets top="10" right="15" bottom="10" left="15" />-->
-<!--      </padding>-->
-<!--      <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">-->
-<!--        <VBox minHeight="105" GridPane.columnIndex="0">-->
-<!--          <Label fx:id="id" styleClass="cell_big_label" />-->
-<!--        </VBox>-->
-<!--        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1">-->
-<!--          <GridPane VBox.vgrow="ALWAYS" vgap="20">-->
-<!--            <Label fx:id="name" text="\$first" styleClass="name_label" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>-->
-<!--            <Label fx:id="clientStatus" styleClass="cell_small_label" GridPane.rowIndex="2" />-->
-<!--          </GridPane>-->
-<!--        </VBox>-->
-<!--        <VBox minHeight="105" GridPane.columnIndex="2" alignment="TOP_RIGHT">-->
-<!--          <padding>-->
-<!--            <Insets right="15" bottom="10" left="15" />-->
-<!--          </padding>-->
-<!--          <Label fx:id="paymentStatus" />-->
-<!--        </VBox>-->
-<!--        <Rectangle width="2" height="85" fill="black" GridPane.columnIndex="3"/>-->
-<!--      </GridPane>-->
-<!--    </HBox>-->
-
-<!--&lt;!&ndash;    Project Status, Phone, Email, Address, and Tags Vbox&ndash;&gt;-->
-<!--    <HBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="2">-->
-<!--      <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">-->
-<!--        <VBox alignment="CENTER" minHeight="105">-->
-<!--          <padding>-->
-<!--            <Insets top="10" right="5" bottom="10" />-->
-<!--          </padding>-->
-
-<!--          <GridPane VBox.vgrow="ALWAYS">-->
-<!--            <Label fx:id="projectStatus" styleClass="cell_small_label" GridPane.rowIndex="0" />-->
-<!--            <HBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="1">-->
-<!--              <padding>-->
-<!--                <Insets top="5" right="5" bottom="5" left="0" />-->
-<!--              </padding>-->
-<!--              <GridPane HBox.hgrow="ALWAYS">-->
-<!--                <VBox spacing="10" alignment="CENTER_LEFT" styleClass="person_info_box" GridPane.columnIndex="0" >-->
-<!--                  <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">-->
-<!--                    <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.rowIndex="0" />-->
-<!--                    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.rowIndex="1" />-->
-<!--                    <Label fx:id="address" styleClass="cell_small_label" text="\$address" GridPane.rowIndex="2" />-->
-<!--                  </GridPane>-->
-<!--                </VBox>-->
-<!--    &lt;!&ndash;            <VBox spacing="10" GridPane.columnIndex="1" />&ndash;&gt;-->
-<!--              </GridPane>-->
-<!--            </HBox>-->
-<!--            <FlowPane fx:id="tags" GridPane.rowIndex="2" />-->
-<!--          </GridPane>-->
-<!--        </VBox>-->
-<!--      </GridPane>-->
-<!--    </HBox>-->
-
-<!--    <HBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="3">-->
-<!--      <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">-->
-<!--        <Rectangle width="2" height="85" fill="black" />-->
-<!--      </GridPane>-->
-<!--    </HBox>-->
-
-<!--&lt;!&ndash;    Deadline VBox&ndash;&gt;-->
-<!--    <HBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="4">-->
-<!--      <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">-->
-<!--        <VBox alignment="CENTER_LEFT" minHeight="105">-->
-<!--          <padding>-->
-<!--            <Insets top="10" right="5" bottom="10" left="15" />-->
-<!--          </padding>-->
-<!--          <GridPane VBox.vgrow="ALWAYS">-->
-<!--              <Label fx:id="deadline" styleClass="cell_small_label" GridPane.rowIndex="0" />-->
-<!--          </GridPane>-->
-<!--        </VBox>-->
-<!--      </GridPane>-->
-<!--    </HBox>-->
 
   </GridPane>
 

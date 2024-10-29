@@ -65,7 +65,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         projectStatus.setText("Project status: " + person.getProjectStatus().toString());
-        clientStatus.setText("Client Status: " + person.getClientStatus().toString());
+        clientStatus.setText(person.getClientStatus().toString().toUpperCase());
         deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
