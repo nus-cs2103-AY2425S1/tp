@@ -47,6 +47,7 @@ public class ViewStatusCommandTest {
         assertEquals(amyJob, command.job);
     }
 
+    // Valid Input (Candidate exists in database with Pending Status)
     @Test
     public void execute_viewSuccessPending() {
         // tests the viewing of status for the first person in TypicalAddressBook
@@ -58,16 +59,7 @@ public class ViewStatusCommandTest {
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_viewFailurePending() {
-        // amy doesn't exist in the typical address book
-        ViewStatusCommand viewStatusCommand = new ViewStatusCommand(amyName, amyJob);
-        String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_FAILURE, amyName, amyJob);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
-    }
-
+    // Valid Input (Candidate exists in database with Hired Status)
     @Test
     public void execute_viewSuccessHired() {
         Person hiredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 2);
@@ -80,6 +72,7 @@ public class ViewStatusCommandTest {
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
     }
 
+    // Valid Input (Candidate exists in database with Rejected Status)
     @Test
     public void execute_viewSuccessRejected() {
         Person rejectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 3);
@@ -93,6 +86,7 @@ public class ViewStatusCommandTest {
         //TODO: Mark hiredPerson or rejectedPerson before assertCommandSuccess.
     }
 
+    // Valid Input (Candidate exists in database with Pending Status and multiple tags)
     @Test
     public void execute_viewStatusWithMultipleTags_success() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
@@ -116,6 +110,17 @@ public class ViewStatusCommandTest {
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
     }
 
+    // Invalid Input (Candidate does not exist in database)
+    @Test
+    public void execute_viewFailurePending() {
+        ViewStatusCommand viewStatusCommand = new ViewStatusCommand(amyName, amyJob);
+        String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_FAILURE, amyName, amyJob);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
+    }
+
+    // Invalid Input (Specified job in input does not match candidate's job in database)
     @Test
     public void execute_viewStatusWithDifferentJob_failure() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
@@ -139,6 +144,7 @@ public class ViewStatusCommandTest {
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
     }
 
+    // Invalid Input (Specified name in input does not match any candidate's name in database)
     @Test
     public void execute_viewStatusPersonNotFound_failure() {
         ViewStatusCommand viewStatusCommand = new ViewStatusCommand(

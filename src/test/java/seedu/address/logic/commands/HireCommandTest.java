@@ -26,6 +26,7 @@ public class HireCommandTest {
 
     private Model model = new ModelManager();
 
+    // Valid Input (Changes a candidate's status to Hired)
     @Test
     public void execute_personAcceptedByModel_hireSuccessful() throws Exception {
         Person validPerson = new Person(
@@ -50,6 +51,7 @@ public class HireCommandTest {
         assertFalse(validPersonHired.getTags().contains(Person.TAG_REJECTED));
     }
 
+    // Invalid Input (Candidate's status is already Hired when executing hire Command)
     @Test
     public void execute_personAlreadyHired_throwsCommandException() {
         Person validPerson = new Person(
@@ -69,6 +71,7 @@ public class HireCommandTest {
                 "Error: Candidate Amy Bee is already marked as hired.");
     }
 
+    // Invalid Input (Candidate does not exist in the database)
     @Test
     public void execute_personNotFound_throwsPersonNotFoundException() {
         Person nonExistentPerson = new Person(
@@ -86,6 +89,7 @@ public class HireCommandTest {
         assertThrows(CommandException.class, () -> hireCommand.execute(model));
     }
 
+    // Invalid Input (Specified job in input does not match candidate's job in database)
     @Test
     public void execute_personWithDifferentJob_throwsPersonNotFoundException() {
         Person validPerson = new Person(
@@ -104,6 +108,7 @@ public class HireCommandTest {
         assertThrows(CommandException.class, () -> hireCommand.execute(model));
     }
 
+    // Valid Input (Change an existing candidate's status to Hired and the candidate has multiple tags)
     @Test
     public void execute_personWithMultipleTags_hireSuccessful() throws Exception {
         Person validPerson = new Person(
@@ -129,6 +134,7 @@ public class HireCommandTest {
         assertTrue(validPersonHired.getTags().contains(new Tag("interviewed")));
     }
 
+    // Tests if the test message matches the exception message being thrown
     @Test
     public void execute_jobNotFound_throwsJobNotFoundException() {
         Person validPerson = new Person(
