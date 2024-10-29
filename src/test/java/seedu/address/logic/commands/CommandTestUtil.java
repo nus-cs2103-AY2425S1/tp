@@ -226,8 +226,9 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel, boolean showHelp, boolean exit,
-            boolean findPerson) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, showHelp, exit, findPerson);
+            boolean findPerson, boolean findAppointment) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, showHelp, exit,
+                findPerson, findAppointment);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
