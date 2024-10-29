@@ -53,7 +53,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_nonExistentTag_failure() {
-        Tag nonExistentTag = BRIDES_SIDE;
+        Tag nonExistentTag = new Tag("nonExistentTag");
         List<Tag> nonExistentTags = new ArrayList<>();
         nonExistentTags.add(nonExistentTag);
 
