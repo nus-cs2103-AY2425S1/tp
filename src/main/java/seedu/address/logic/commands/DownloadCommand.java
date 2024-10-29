@@ -50,7 +50,6 @@ public class DownloadCommand extends Command {
         requireNonNull(model);
         ObservableList<Person> addressBookJson = model.getFilteredPersonListFromAddressBook(this.tagList);
         String addressBookCsv = CsvUtil.convertObservableListToCsv(addressBookJson);
-        System.out.println(addressBookJson);
         StorageManager.saveCsvToFile(addressBookCsv);
         return new CommandResult(MESSAGE_SUCCESS);
     }
