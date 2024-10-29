@@ -122,7 +122,7 @@ public class UniqueListingList implements Iterable<Listing> {
      */
     private boolean listingsAreUnique(List<Listing> listings) {
         for (int i = 0; i < listings.size() - 1; i++) {
-            for (int j = 1; j < listings.size(); j++) {
+            for (int j = i + 1; j < listings.size(); j++) {
                 if (listings.get(i).isSameListing(listings.get(j))) {
                     return false;
                 }
