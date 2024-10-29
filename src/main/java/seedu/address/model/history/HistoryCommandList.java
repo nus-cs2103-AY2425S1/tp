@@ -2,6 +2,7 @@ package seedu.address.model.history;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 import javafx.collections.FXCollections;

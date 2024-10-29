@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -7,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
 import seedu.address.model.history.HistoryCommand;
 
 /**
@@ -25,6 +25,7 @@ public class HistoryCommandListPanel extends UiPart<Region> {
      */
     public HistoryCommandListPanel(ObservableList<HistoryCommand> commandList) {
         super(FXML);
+        commandList.sort(Comparator.comparingInt(HistoryCommand::getIndex).reversed());
         historyCommandListView.setItems(commandList);
         historyCommandListView.setCellFactory(listView -> new HistoryCommandListViewCell());
     }
@@ -41,7 +42,7 @@ public class HistoryCommandListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new HistoryCommandCard(command, getIndex() + 1).getRoot());
+                setGraphic(new HistoryCommandCard(command, command.getIndex() + 1).getRoot());
             }
         }
     }

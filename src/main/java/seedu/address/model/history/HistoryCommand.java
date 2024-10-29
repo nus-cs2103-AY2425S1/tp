@@ -8,15 +8,16 @@ import seedu.address.logic.commands.Command;
 public class HistoryCommand {
     private final Command command;
     private final String input;
-    private static int pointer = 0;
-    private HistoryCommand(Command command, String input, int pointer) {
+    private static int value = 0;
+    private int index;
+    private HistoryCommand(Command command, String input, int index) {
         this.command = command;
         this.input = input;
-        this.pointer = pointer;
+        this.index = index;
     }
 
     public static HistoryCommand of(Command command, String input) {
-        return new HistoryCommand(command, input, pointer++);
+        return new HistoryCommand(command, input, value++);
     }
 
     /**
@@ -24,5 +25,12 @@ public class HistoryCommand {
      */
     public String getOriginalCommandText() {
         return this.input;
+    }
+
+    /**
+     * Returns the index for the past command.
+     */
+    public int getIndex() {
+        return index;
     }
 }
