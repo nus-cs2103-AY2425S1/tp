@@ -55,21 +55,21 @@ public class EditPublicAddressCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    //    @Test
-    //    public void execute_nonExistentLabel_throwsCommandException() {
-    //        model.addPerson(JOE);
-    //        Index index = Index.fromOneBased(model.getFilteredPersonList().size());
-    //
-    //        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC,
-    //            VALID_PUBLIC_ADDRESS_1,
-    //            "nonExistentLabel");
-    //
-    //        Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
-    //        String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_NON_MATCHING_LABEL,
-    //            Network.BTC, personToEdit.getName());
-    //
-    //        assertCommandFailure(editCommand, model, expectedMessage);
-    //    }
+    @Test
+    public void execute_nonExistentLabel_throwsCommandException() {
+        model.addPerson(JOE);
+        Index index = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC,
+            VALID_PUBLIC_ADDRESS_1,
+            "nonExistentLabel");
+
+        Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
+        String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_NON_MATCHING_LABEL,
+            Network.BTC, personToEdit.getName());
+
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
 
     @Test
     public void equals() {

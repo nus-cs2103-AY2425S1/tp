@@ -29,6 +29,10 @@ public class PublicAddressesComposition {
      * @param publicAddresses A map of networks to sets of public addresses.
      */
     public PublicAddressesComposition(Map<Network, Set<PublicAddress>> publicAddresses) {
+        //assert that for each network there is no empty set of public addresses;
+        assert publicAddresses != null;
+        assert !publicAddresses.values().stream().anyMatch(Set::isEmpty);
+
         this.publicAddresses = publicAddresses.entrySet().stream()
             .collect(HashMap::new, (m, e) -> m.put(e.getKey(), new HashSet<>(e.getValue())), HashMap::putAll);
     }
@@ -145,6 +149,7 @@ public class PublicAddressesComposition {
      * @return A new PublicAddressesComposition with the updated public addresses.
      */
     public PublicAddressesComposition add(PublicAddress newPublicAddress) {
+        assert newPublicAddress != null;
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
                 Set<PublicAddress> updatedAddresses = entry.getValue().stream()
