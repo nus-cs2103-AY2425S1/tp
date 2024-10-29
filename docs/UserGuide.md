@@ -9,6 +9,18 @@
 LogiLink is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LogiLink can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help: `help`](#viewing-help--help)
+  * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
+  * [Listing all contacts: `list`](#listing-all-contacts--list)
+  * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
+  * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
+  * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
+  * [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  * [Exiting the program: `exit`](#exiting-the-program--exit)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +28,7 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for LogiLink.
 
@@ -69,17 +81,17 @@ LogiLink is a **desktop app for managing contacts, optimized for use via a  Line
 </box>
 
 ### Viewing help : `help`
-
+#### <mark>When in the main or inspect window<br>
 Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
 
 Format: `help`
 
+![help message](images/helpMessage.png)
 
-### Adding a contact: `add`
+### Adding a contact or delivery: `add`
+#### <mark>When in the main window<br>
 
-Adds a contact to the address book.
+Adds a contact to the contacts list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​`
 
@@ -93,14 +105,14 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all contacts : `list`
-
-Shows a list of all contacts in the address book.
+#### <mark>When in the main window<br>
+Shows a list of all contacts added to the contacts list.
 
 Format: `list`
 
-### Editing a contact : `edit`
-
-Edits an existing contact in the address book.
+### Editing a contact or delivery: `edit`
+#### <mark>When in the main window<br>
+Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
@@ -115,8 +127,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Locating contacts by name: `find`
-
+### Locating contacts or deliveries by name: `find`
+#### <mark>When in the main window<br>
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -133,9 +145,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a contact : `delete`
-
-Deletes the specified contact from the address book.
+### Deleting a contact or delivery : `delete`
+#### <mark>When in the main window<br>
+Deletes the specified contact from the contacts list.
 
 Format: `delete [INDEXES]...` 
 
@@ -144,13 +156,13 @@ Format: `delete [INDEXES]...`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the address book.
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Inspecting a contact : `inspect`
 
-Inspects a specified contact from the address book to see their delivery list.
-
+Inspects a specified contact from the contacts list to see their delivery list.
+#### <mark>When in the main window<br>
 Format: `inspect [INDEX]`
 
 * Inspects the contact at the specified `INDEX`.
@@ -158,33 +170,33 @@ Format: `inspect [INDEX]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `inspect 1` inspects the 1st contact in the address book.
+* `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
 ### Clearing all entries : `clear`
-
-Clears all entries from the address book.
+#### <mark>When in the main or inspect window<br>
+Clears all entries from the contacts list.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
-
+#### <mark>When in the main or inspect window<br>
 Exits the program.
 
 Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+LogiLink data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, LogiLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -196,7 +208,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LogiLink home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -213,7 +225,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Inspect**| `inspect INDEX`<br> e.g., `inspect 2`
