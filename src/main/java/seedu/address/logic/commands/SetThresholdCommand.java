@@ -16,7 +16,6 @@ import seedu.address.model.product.ProductName;
 import seedu.address.model.product.StockLevel;
 import seedu.address.model.product.exceptions.InvalidMaxStockLevelException;
 import seedu.address.model.product.exceptions.InvalidMinStockLevelException;
-import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
 
 /**
  * Sets the minimum and/or maximum stock levels (thresholds) of a product.
