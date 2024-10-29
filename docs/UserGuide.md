@@ -156,6 +156,7 @@ Format: `order ORDER`
 * Add an order name `ORDER`
 * `ORDER` must be in lowercase
 * If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+* `ORDER` can only contains alphanumeric character and whitespace
 
 Examples:
 * `order cake` add an order called "cake" to NomNomNotifier
@@ -169,6 +170,7 @@ Format: `deleteOrder ORDER`
 * Delete an order name `ORDER`
 * `ORDER` must be in lowercase
 * If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+* `ORDER` can only contains alphanumeric character and whitespace
 
 Examples:
 * `deleteOrder cake` delete an order called "cake" from NomNomNotifier
@@ -188,6 +190,7 @@ Format: `put ORDER [n/NAME]`
 * Add an order history a customer named `NAME`
 * `ORDER` must be in lowercase
 * If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+* `ORDER` can only contains alphanumeric character and whitespace
 * The time recorded by the order history is the time of running the command `put`
 
 Examples:
