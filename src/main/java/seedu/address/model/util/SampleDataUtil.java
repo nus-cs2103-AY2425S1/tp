@@ -23,7 +23,7 @@ public class SampleDataUtil {
             new Restaurant(new Name("Swenswen"), new Phone("87438807"), new Email("sowhen@idk.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Rating(null),
                 getTagSet("friends", "$$")),
-            new Restaurant(new Name("Hai shang lao"), new Phone("99272758"), new Email("ilovexjp@ccpno1.com"),
+            new Restaurant(new Name("Hai Shang Lao"), new Phone("99272758"), new Email("ilovexjp@ccpno1.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Rating(1),
                 getTagSet("colleagues", "friends", "$$$$")),
             new Restaurant(new Name("Mala Hideaway"), new Phone("93210283"), new Email("buyaola@buyaoma.com"),
