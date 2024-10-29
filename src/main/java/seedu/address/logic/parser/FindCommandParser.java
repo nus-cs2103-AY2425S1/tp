@@ -14,6 +14,13 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.criteria.EmailSearchCriteria;
+import seedu.address.logic.parser.criteria.NameSearchCriteria;
+import seedu.address.logic.parser.criteria.NricSearchCriteria;
+import seedu.address.logic.parser.criteria.PhoneSearchCriteria;
+import seedu.address.logic.parser.criteria.RoleSearchCriteria;
+import seedu.address.logic.parser.criteria.SearchCriteria;
+import seedu.address.logic.parser.criteria.TagSearchCriteria;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Email;

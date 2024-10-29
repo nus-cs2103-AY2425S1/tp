@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.criteria;
 
 import java.util.List;
 import java.util.Set;

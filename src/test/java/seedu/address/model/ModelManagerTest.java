@@ -17,7 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.NameSearchCriteria;
+import seedu.address.logic.parser.criteria.NameSearchCriteria;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Person;

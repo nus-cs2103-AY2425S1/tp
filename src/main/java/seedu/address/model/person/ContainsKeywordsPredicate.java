@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.SearchCriteria;
+import seedu.address.logic.parser.criteria.SearchCriteria;
 
 /**
  * Tests that a {@code Person}'s {@code Name, Nric, Role or Tag} matches any of the keywords given.

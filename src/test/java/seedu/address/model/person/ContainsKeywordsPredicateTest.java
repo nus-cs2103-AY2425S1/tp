@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.NameSearchCriteria;
-import seedu.address.logic.parser.NricSearchCriteria;
-import seedu.address.logic.parser.RoleSearchCriteria;
-import seedu.address.logic.parser.TagSearchCriteria;
+import seedu.address.logic.parser.criteria.NameSearchCriteria;
+import seedu.address.logic.parser.criteria.NricSearchCriteria;
+import seedu.address.logic.parser.criteria.RoleSearchCriteria;
+import seedu.address.logic.parser.criteria.TagSearchCriteria;
 import seedu.address.testutil.PersonBuilder;
 
 public class ContainsKeywordsPredicateTest {
