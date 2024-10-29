@@ -30,6 +30,9 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("X Æ A-12")); // contains unsupported ligature
+        assertFalse(Name.isValidName("刘关张")); // contains chinese characters
+        assertFalse(Name.isValidName("عبد العزيز")); // contains arabic characters
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -37,6 +40,15 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+
+        // new valid test cases based on the updated regex to allow more legal names
+        assertTrue(Name.isValidName("O'Connor")); // name with apostrophe
+        assertTrue(Name.isValidName("Jean-Luc")); // name with hyphen
+        assertTrue(Name.isValidName("J.P. Morgan")); // name with periods
+        assertTrue(Name.isValidName("John s/o Tan")); // name with slash
+        assertTrue(Name.isValidName("Anne-Marie & Sons")); // name with ampersand and hyphen
+        assertTrue(Name.isValidName("John \"Johnny\" Doe")); // name with quotes
+        assertTrue(Name.isValidName("Richard (Rick) Roe")); // name with parentheses
     }
 
     @Test
