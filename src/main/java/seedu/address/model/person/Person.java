@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private Optional<String> match;
+    private final Optional<String> match;
 
     /**
      * Every parameter must be present and not null.
@@ -51,7 +51,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = Optional.ofNullable(match);
+        this.match = Optional.of(match);
     }
 
     public Name getName() {
@@ -82,8 +82,8 @@ public class Person {
      * Returns a {@code String} representing a single association between {@code Job} and {@code Person} if it exists,
      * null otherwise.
      */
-    public String getMatch() {
-        return match.orElse(null);
+    public Optional<String> getMatch() {
+        return match;
     }
 
     /**
@@ -100,20 +100,6 @@ public class Person {
      */
     public boolean hasMatched(String jobIdentifier) {
         return match.map(s -> s.equals(jobIdentifier)).orElse(false);
-    }
-
-    /**
-     * Returns the phone number as a string, which uniquely identifies the Person object.
-     */
-    public String getIdentifier() {
-        return phone.toString();
-    }
-
-    /**
-     * Removes the association between the Person object and its matched Job.
-     */
-    public void removeMatch() {
-        match = Optional.empty();
     }
 
     /**

@@ -19,7 +19,6 @@ public class Job {
     private final JobSalary salary;
     private final JobDescription description;
     private final Set<Tag> requirements = new HashSet<>();
-    private final Set<String> matches = new HashSet<>();
 
     /**
      * TODO: Implement data validation
@@ -27,16 +26,14 @@ public class Job {
      * Every field has no validation for now.
      */
     public Job(Name name, JobCompany company, JobSalary salary,
-            JobDescription description, Set<Tag> requirements, Set<String> matches) {
+            JobDescription description, Set<Tag> requirements) {
         requireAllNonNull(name, company, salary, description);
         requireAllNonNull(requirements);
-        requireAllNonNull(matches);
         this.name = name;
         this.company = company;
         this.salary = salary;
         this.description = description;
         this.requirements.addAll(requirements);
-        this.matches.addAll(matches);
     }
 
     public Name getName() {
@@ -75,32 +72,10 @@ public class Job {
     }
 
     /**
-     * Returns a {@code HashSet} representing associations between {@code Job} and {@code Person}, which can be empty.
-     */
-    public Set<String> getMatches() {
-        return matches;
-    }
-
-    /**
-     * Returns true if the given identifier is in matches.
-     */
-    public boolean hasMatched(String identifier) {
-        return this.matches.contains(identifier);
-    }
-
-    /**
      * Returns a string that identify the Job object.
      */
     public String getIdentifier() {
         return company.toString() + "::" + name;
-    }
-
-    /**
-     * Removes the association of a single person from the Job object.
-     * Guaranteed to not throw an exception so long as the input is a {@code String} or {@code null}.
-     */
-    public void removeMatch(String identifier) {
-        matches.remove(identifier);
     }
 
     /**
@@ -120,8 +95,7 @@ public class Job {
         Job otherJob = (Job) other;
         return name.equals(otherJob.name)
                 && company.equals(otherJob.company) && salary.equals(otherJob.salary)
-                && requirements.equals(otherJob.requirements) && description.equals(otherJob.description)
-                && matches.equals(otherJob.matches);
+                && requirements.equals(otherJob.requirements) && description.equals(otherJob.description);
     }
 
     @Override
