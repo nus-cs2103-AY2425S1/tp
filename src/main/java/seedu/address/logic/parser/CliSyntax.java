@@ -15,6 +15,10 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_EVENT_INDEX = new Prefix("ei/");
     public static final Prefix PREFIX_PERSON_INDEX = new Prefix("pi/");
+    public static final Prefix PREFIX_ATTENDEE = new Prefix("a/");
+    public static final Prefix PREFIX_VOLUNTEER = new Prefix("vo/");
+    public static final Prefix PREFIX_SPONSOR = new Prefix("s/");
+    public static final Prefix PREFIX_VENDOR = new Prefix("ve/");
 
 
 }
