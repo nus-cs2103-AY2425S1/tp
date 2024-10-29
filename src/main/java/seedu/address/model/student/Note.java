@@ -27,12 +27,20 @@ public class Note {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Note // instanceof handles nulls
-                && value.equals(((Note) other).value)); // state check
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        } else if (other instanceof Note) {
+            Note otherNote = (Note) other;
+            String thisValue = String.join(" ", value.split("\\s+"));
+            String otherValue = String.join(" ", otherNote.value.split("\\s+"));
+            return thisValue.equalsIgnoreCase(otherValue);
+        }
+        return false;
     }
+
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return String.join(" ", value.split("\\s+")).toLowerCase().hashCode();
     }
 }

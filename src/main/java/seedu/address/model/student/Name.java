@@ -3,6 +3,10 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Represents a Student's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -28,7 +32,10 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        Stream<String> streamOfWords = Arrays.stream(name.split("\\s+"));
+        fullName = streamOfWords.map(words -> Character.toUpperCase(words.charAt(0))
+                        + words.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     /**
