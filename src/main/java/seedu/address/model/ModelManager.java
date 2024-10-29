@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    public static boolean displayNote = false;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -113,6 +114,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void viewNote(Person person) {
+        requireNonNull(person);
+        displayNote = true;
+        updateFilteredPersonList(person);
+        displayNote = false;
+    }
+
+    @Override
     public boolean hasName(Name name) {
         requireNonNull(name);
         return addressBook.hasName(name);
@@ -142,6 +151,19 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    public void updateFilteredPersonList(Person targetPerson) {
+        requireNonNull(targetPerson);
+        Predicate<Person> predicate = new Predicate<>() {
+            @Override
+            public boolean test(Person person) {
+                return person.equals(targetPerson);
+            }
+        };
+        filteredPersons.setPredicate(predicate);
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
