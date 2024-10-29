@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -70,8 +72,18 @@ public class Schedule {
      */
     public static void isValidDateTime(String dateTime) throws ParseException {
         try {
-            LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        } catch (DateTimeParseException e) {
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDate parsedDate = localDateTime.toLocalDate();
+            String[] dateParts = dateTime.split(" ")[0].split("-");
+            int year = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+            int day = Integer.parseInt(dateParts[2]);
+
+            if (parsedDate.getYear() != year || parsedDate.getMonthValue() != month
+                    || parsedDate.getDayOfMonth() != day) {
+                throw new ParseException(MESSAGE_INVALID_DATE);
+            }
+        } catch (DateTimeParseException | NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
     }

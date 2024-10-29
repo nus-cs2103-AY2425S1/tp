@@ -65,6 +65,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        logger.info("Initializing MainWindow...");
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -72,6 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        logger.info("MainWindow initialized");
     }
 
     public Stage getPrimaryStage() {
@@ -174,6 +176,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        logger.info("Closing application...");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);

@@ -35,11 +35,14 @@ your contact management tasks done faster than traditional GUI apps.
    
    * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
 
-   * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
+   * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for John Doe.
 
    * `appointment-list` : Lists all upcoming scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
+
+   * `reminder-delete John Doe` : Deletes the reminder set for John Doe.
+
    * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for John Doe on October 14, 2024, at 12pm as paid.
 
    * `clear` : Deletes all contacts.
@@ -60,10 +63,10 @@ your contact management tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/anklesprain` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/anklesprain`, `t/anklesprain t/acltear` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -95,7 +98,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/acltear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/anklesprain`
 
 ### Scheduling an appointment: `schedule`
 
@@ -128,16 +131,31 @@ Examples:
 * `reminder John Doe r/10 days`
 * `reminder Betsy Crowe r/3 hours`
 
-### Deleting an appointment: `appointment-delete`
+### Deleting a reminder: `reminder-delete`
 
-Deletes a scheduled appointment for a client in the address book.
+Deletes a reminder for a client in the address book.
 
-Format: `appointment-delete NAME`
+Format: `reminder-delete NAME`
 
-* The given date name must be the name of an existing client.
+* You can only delete a reminder for a person who has at least one scheduled appointment.
+* The given name must be the name of an existing client.
+* You can only delete a reminder if the reminder has been set.
 
 Examples:
-* `appointment-delete John Doe`
+* `reminder-delete John Doe`
+
+### Deleting an appointment: `appointment-delete`
+
+Deletes a specified appointment for a client in the address book.
+
+Format: `appointment-delete NAME d/DATE_AND_TIME`
+
+* The given name must be the name of an existing client.
+* The given date and time must be in the format yyyy-MM-dd HHmm.
+* The appointment given must be an existing appointment for the client.
+
+Examples:
+* `appointment-delete John Doe d/2024-11-24 1200`
 
 ### Viewing upcoming appointments: `appointment-list`
 
@@ -302,13 +320,14 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/anklesprain t/acltear`
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Schedule** | `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
-**Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
+**Appointment Delete** | `appointment-delete NAME d/DATE_AND_TIME`<br> e.g., `appointment-delete John Doe d/2024-10-20 1100`
 **Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
+**Reminder Delete** | `reminder-delete NAME`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
 **Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
