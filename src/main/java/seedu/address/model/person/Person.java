@@ -24,14 +24,16 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavorite;
     private final Department department;
+    public final Leave leave;
+
 
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  boolean isFavorite, Department department) {
-        requireAllNonNull(name, phone, email, address, tags, department);
+                  boolean isFavorite, Department department, Leave leave) {
+        requireAllNonNull(name, phone, email, address, tags, department, leave);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +41,7 @@ public class Person {
         this.tags.addAll(tags);
         this.isFavorite = isFavorite;
         this.department = department;
+        this.leave = leave;
     }
 
     public Name getName() {
@@ -59,6 +62,10 @@ public class Person {
 
     public Department getDepartment() {
         return department;
+    }
+
+    public Leave getLeave() {
+        return leave;
     }
 
     /**
@@ -107,14 +114,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && department.equals(otherPerson.department);
+                && department.equals(otherPerson.department)
+                && leave.equals(otherPerson.leave);
     }
 
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, isFavorite, department);
+        return Objects.hash(name, phone, email, address, tags, isFavorite, department, leave);
     }
 
     @Override
@@ -127,6 +135,7 @@ public class Person {
                 .add("tags", tags)
                 .add("favorite", isFavorite)
                 .add("department", department)
+                .add("leave", leave)
                 .toString();
     }
 
