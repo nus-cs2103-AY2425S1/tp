@@ -105,8 +105,8 @@ public class BackupManagerTest {
 
         // Verify the backup file is created in the directory with the correct format.
         boolean backupFileExists = Files.list(TEMP_BACKUP_DIR).anyMatch(path ->
-                path.getFileName().toString().contains(description) &&
-                        path.getFileName().toString().endsWith(".json"));
+                path.getFileName().toString().contains(description)
+                        && path.getFileName().toString().endsWith(".json"));
         assertTrue(backupFileExists, "The backup file should exist and be named with the correct format.");
     }
 
