@@ -74,14 +74,10 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         if (ClearCommand.isPrompted()) {
-            switch (commandWord) {
-            case "y":
+            if (commandWord.equalsIgnoreCase("y") || commandWord.equalsIgnoreCase("yes")) {
                 return new ClearCommandParser().parseClear();
-            case "n":
+            } else {
                 return new ClearCommandParser().parseAbort();
-            default:
-                logger.finer("This user input caused a ParseException: " + userInput);
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         }
 

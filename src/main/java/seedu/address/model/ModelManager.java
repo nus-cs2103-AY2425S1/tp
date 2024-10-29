@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
@@ -25,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
+    private boolean clearCommandPrompted = ClearCommand.isPrompted();
+    private boolean clearCommandConfirmed = ClearCommand.isConfirmed();
 
 
     /**
@@ -228,7 +231,9 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredEvents.equals(otherModelManager.filteredEvents);
+                && filteredEvents.equals(otherModelManager.filteredEvents)
+                && clearCommandPrompted == otherModelManager.clearCommandPrompted
+                && clearCommandConfirmed == otherModelManager.clearCommandConfirmed;
     }
 
 }
