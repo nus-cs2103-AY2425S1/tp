@@ -157,6 +157,55 @@ Exits the program.
 
 Format: `exit`
 
+### Person Details Window
+
+The **Person Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
+
+- **Keyboard Shortcut:**
+    - Select a person from the **Person List**.
+    - Press the `Enter` key to open the **Person Details Window**.
+
+![Person Details Window](images/persondetailswindow.png)
+
+- **Name:** Editable text field displaying the employee's full name.
+- **Phone:** Editable text field for the employee's contact number.
+- **Email:** Editable text field for the employee's email address.
+- **Address:** Editable text field for the employee's residential or mailing address.
+- **Department:** Editable text field indicating the employee's department within the organization.
+- **Leave:** Editable text field showing the remaining leave days available to the employee.
+- **Favorite:** Checkbox to mark the employee as a favorite for quick access.
+
+**Editing Information**
+
+- **Modify Fields:**
+    - Press `Enter` on keyboard on any text field (e.g., **Name**, **Phone**) to edit the information.
+    - For the **Favorite** checkbox, press `space` bar to toggle the favorite status.
+  
+- **Navigate Between Fields:**
+    - **Tab Key / Down Arrow (`↓`):** Move to the next field.
+    - **Shift + Tab Key / Up Arrow (`↑`):** Move to the previous field.
+
+- **Save Changes:**
+    - Press the `Enter` key to save all modifications.
+    - The window will close, and changes will reflect in the **Person List**.
+
+- **Cancel Changes:**
+    - Press the `Esc` key to discard all changes and close the window without saving.
+
+**Validation and Error Handling**
+
+- **Mandatory Fields:**
+    - All fields are required. Ensure no field is left empty before saving.
+
+- **Format Requirements:**
+    - **Phone:** Must be a valid phone number format.
+    - **Email:** Must follow standard email formatting (e.g., `example@domain.com`).
+
+- **Error Messages:**
+    - If invalid data is entered, an error dialog will appear prompting correction.
+    - Follow the on-screen instructions to rectify any issues.
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
