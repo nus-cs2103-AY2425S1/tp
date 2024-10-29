@@ -182,6 +182,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles the view for 'findapp' command by displaying a comprehensive view of all the appointments.
+     */
+    private void handleFindAppointment() {
+        logger.info("Rendering Find Appointment UI");
+        personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
+        FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
+        findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
+        findPersonPanelPlaceholder.setVisible(true);
+        findPersonPanelPlaceholder.setManaged(true);
+        isFindNricCommand = true;
+    }
+
+    /**
      * Resets the view back to the original PersonListPanel.
      */
     private void resetToOriginal() {
@@ -212,7 +226,9 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isFindPerson()) {
                 handleFindPerson();
-            } else {
+            } else if (commandResult.isFindAppointment()) {
+                handleFindAppointment();
+            }else {
                 resetToOriginal();
             }
 
