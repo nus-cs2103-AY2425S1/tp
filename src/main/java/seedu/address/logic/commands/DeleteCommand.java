@@ -48,6 +48,9 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Removes a specified person from all events they are attending in the model's event list.
+     */
     private void removePersonFromEvent(Model model, Person personToRemove) {
         ObservableList<Event> eventsList = model.getEventList();
         for (Event event : eventsList) {
