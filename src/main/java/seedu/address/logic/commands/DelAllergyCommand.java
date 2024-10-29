@@ -32,7 +32,7 @@ public class DelAllergyCommand extends Command {
             + PREFIX_ALLERGY + "Pollen "
             + PREFIX_ALLERGY + "Peanut";
 
-    public static final String MESSAGE_DELETE_ALLERGY_SUCCESS = "Removed allergy: %1$s from Nric: %2$s";
+    public static final String MESSAGE_DELETE_ALLERGY_SUCCESS = "Removed allergy/allergies: %1$s from Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_ALLERGY_NOT_FOUND = "Allergy not found: %1$s";
 
