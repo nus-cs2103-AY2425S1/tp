@@ -106,13 +106,19 @@ class JsonAdaptedInternship {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
 
+        Status status;
+        try {
+            status = Status.valueOf(statusString);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
 
         Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
-        Status status = Status.valueOf(statusString);
+
 
         return new InternshipApplication(company, date, role, status);
     }
