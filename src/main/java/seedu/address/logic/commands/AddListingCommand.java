@@ -101,4 +101,23 @@ public class AddListingCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddListingCommand)) {
+            return false;
+        }
+
+        AddListingCommand otherCommand = (AddListingCommand) other;
+        return listingName.equals(otherCommand.listingName)
+                && price.equals(otherCommand.price)
+                && area.equals(otherCommand.area)
+                && address.equals(otherCommand.address)
+                && region.equals(otherCommand.region)
+                && seller.equals(otherCommand.seller)
+                && buyers.equals(otherCommand.buyers);
+    }
 }
