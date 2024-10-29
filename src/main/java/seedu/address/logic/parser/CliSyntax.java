@@ -13,4 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_TELEGRAM = new Prefix("t/");
 
+    public static final Prefix PREFIX_EVENT_INDEX = new Prefix("ei/");
+    public static final Prefix PREFIX_PERSON_INDEX = new Prefix("pi/");
+
+
 }
