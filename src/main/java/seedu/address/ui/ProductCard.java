@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.StockLevel;
+
 
 /**
  * An UI component that displays information of a {@code Product}.
@@ -29,6 +32,8 @@ public class ProductCard extends UiPart<Region> {
     private Label minStockLevel;
     @FXML
     private Label maxStockLevel;
+    @FXML
+    private Label tags; // New label for displaying tags
 
     /**
      * Creates a {@code ProductCard} with the given {@code Product} and index to display.
@@ -42,12 +47,16 @@ public class ProductCard extends UiPart<Region> {
 
         // Retrieve StockLevel object
         StockLevel stock = product.getStockLevel();
-
         stockLevel.setText("Stock Level: " + stock.getStockLevel());
         minStockLevel.setText("Min Stock Level: " + stock.getMinStockLevel());
         maxStockLevel.setText("Max Stock Level: " + stock.getMaxStockLevel());
 
         supplierName.setText("Supplier: " + (product.isAssigned() ? product.getSupplierName().toString() : "None"));
+
+        // Display tags
+        tags.setText("Tags: " + product.getTags().stream()
+                          .map(tag -> tag.toString())
+                          .collect(Collectors.joining(", ")));
     }
 
     @Override
