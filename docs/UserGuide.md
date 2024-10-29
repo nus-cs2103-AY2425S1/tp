@@ -73,75 +73,34 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 ## Quick Start
 
-In this section, lets learn how to set up MediBase3 on your computer.
+In this section, let's learn how to set up MediBase3 on your computer.
 
 ### Installing MediBase3
 
-#### Step 1: Install JDK 17
+#### Step 1: Check if you have Java 17 installed on your system.
 
 Before running MediBase3, ensure that **Java 17** is installed on your system.
 
-#### For Windows:
+Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian) and type:
+> ```
+>    java -version
+> ```  
 
-1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
-3. Run the installer and follow the setup instructions.
-4. Verify the installation by opening **Command Prompt** and typing:
-
-   `java -version`
-   
-You should see something like:
+If you are using Windows, you should see something like:
 
 ![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
-#### For macOS:
-
-1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
-   `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-2. Install Java 17 by typing:
-   `brew install openjdk@17`
-3. Link the installed JDK:
-   `sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk`
-4. Verify the installation by typing:
-   `java -version`
-You should see something like this:
+if you are using macOS, Ubuntu or Debian, you should see something like this:
 
 ![javaVersionMacOS.png](images/javaVersionMacOS.png)
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
-#### For Ubuntu/Debian:
+If your Java version is **not 17**, you may refer to the [FAQ section](#faq) for instructions on installing Java 17. 
 
-1. Open **Terminal**.
-2. Install Java 17 by typing:
-   `sudo apt install openjdk-17-jdk`
-3. Verify the installation by typing:
-   `java -version`
-   You should see something like this:
-
-![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
-
-This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
-
-{: .alert .alert-info}
->:information_source: **Note**
->Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
-
-{: .alert .alert-info}
-> :information_source: **Note**
-> For users of other operating systems, as long as you have the following installed, you can use MediBase3:
-> - Java/OpenJDK 17
-> - JavaFX/OpenJFX 17
-
-{: .alert .alert-info}
->:information_source: **Note**
->For Linux users with Wayland compositors, ensure you install **OpenJFX 21** for better compatibility.
-
-
----
 
 #### Step 2: Download the MediBase3 JAR File
 
@@ -152,11 +111,15 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 ### Launching MediBase3
 
-1. Open **Command Prompt** (Windows) or **Terminal** (macOS).
+1. Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian).
 2. Navigate to the directory where the `.jar` file is located. For example:
-    `cd Downloads`
+> ```
+>     `cd Downloads`
+> ```
 3. Run the application by typing:
-   `java -jar medibase3.jar`
+> ```
+>   `java -jar medibase3.jar`
+> ```
 
 You should be greeted by the UI, which you will see in the next section.
 
@@ -205,50 +168,58 @@ Here’s a basic tutorial on how to start using the application:
 
 1. **View the Help Guide:**
    - Once MediBase3 is running, you can type the following command to view the help window:
-   
-     `help`
+   ```
+     help
+   ```
      
 2. **Add a New Patient:**
    - To add a new patient, use the following command:
-   
-     `add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 `
+   ```
+     add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
+   ```
 
    - This will add a patient named John Doe to the system.
 
 
 3. **Edit Patient Information:**
    - If there’s a typo or information changes, use the `edit` command:
-   
-     `edit S1234567A p/91234567 e/johndoe@example.com`
+   ```
+     edit S1234567A p/91234567 e/johndoe@example.com
+   ```
      
    - This will change the phone number and email of the patient with NRIC S1234567A
 
 
 4. **Find a Patient by NRIC:**
    - To find a patient by NRIC, type:
-   
-     `findNric T0123456A`
+   ```
+     findNric T0123456A
+   ```
      
    - This will show the patient with the NRIC `T0123456A`.
 
 
 5. **Delete a Patient:**
    - To remove a patient who is no longer visiting the clinic/hospital, type:
+   ```
+     delete T0123456A
+   ```
    
-     `delete T0123456A`
      
    - This deletes the patient with the NRIC `T0123456A`.
 
 
 6. **Clear All Entries:**
    - To remove all patient and appointment data from the system, type:
-   
-     `clear`
+   ```
+     clear
+   ```
 
-Now you’re ready to use MediBase3!
-For a comprehensive list of features and how to use them, [click here!](#features).
 
-If you have any more common questions, [click here!](#faq).
+You’re now ready to start using MediBase3.  
+For a detailed list of features and instructions, see the [Features](#features) section.  
+For additional assistance or common questions, please refer to our [FAQ](#faq) section.
+
 
 [Back to Table of Contents](#table-of-contents)
 ## Features
@@ -741,8 +712,81 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 #### **Q**: How to install Java 17
  - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
 
-#### **Q**: How to know if you have Java 17
- - **A**: Open your command terminal and enter `java --version`. The first line should display `java` followed by the `version number`.
+#### For Windows:
+
+1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
+3. Run the installer and follow the setup instructions.
+4. Verify the installation by opening **Command Prompt** and typing:
+> ```
+>    java -version
+> ```  
+
+You should see something like:
+
+![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+
+This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
+
+#### For macOS:
+
+1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
+> ```
+>     /bin/bash -c "$(curl -fsSL \
+>     https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+> ```
+2. Install Java 17 by typing:
+> ```
+>    brew install openjdk@17
+> ```
+3. Link the installed JDK:
+> ```
+>    sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk \
+>    /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+> ```
+4. Verify the installation by typing:
+> ```
+>    java -version
+> ```
+You should see something like this:
+
+![javaVersionMacOS.png](images/javaVersionMacOS.png)
+
+This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
+
+
+#### For Ubuntu/Debian:
+
+1. Open **Terminal**.
+2. Install Java 17 by typing:
+> ```
+>    sudo apt install openjdk-17-jdk
+> ```
+3. Verify the installation by typing:
+> ```
+>    java -version
+> ```
+You should see something like this:
+
+![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
+
+This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
+
+{: .alert .alert-info}
+>:information_source: **Note**
+>Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
+
+{: .alert .alert-info}
+> :information_source: **Note**
+> For users of other operating systems, as long as you have the following installed, you can use MediBase3:
+> - Java/OpenJDK 17
+> - JavaFX/OpenJFX 17
+
+{: .alert .alert-info}
+>:information_source: **Note**
+>Linux users with Wayland compositors should install OpenJFX 21 for compatibility.
+
+[Return to Quick Start](#Quick-Start)
 
 #### **Q**: Is there a limit to the number of patients/appointments we can add?
  - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
