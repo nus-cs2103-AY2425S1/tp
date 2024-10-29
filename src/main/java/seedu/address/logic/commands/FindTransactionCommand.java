@@ -55,7 +55,7 @@ public class FindTransactionCommand extends Command {
         Person targetPerson = lastShownList.get(personIndex.getZeroBased());
         List<Transaction> targetTransactions = targetPerson.getTransactions();
         model.updateFilteredPersonList(new IsSelectedPredicate(model, personIndex));
-        model.setViewTransactions(true);
+        //model.setViewTransactions(true);
         model.updateTransactionList(targetTransactions);
         model.updateTransactionListPredicate(predicate);
         return new CommandResult(
