@@ -21,6 +21,7 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 
@@ -66,21 +67,22 @@ public class EditOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Order> lastShownList = model.getFilteredOrderList();
+        List<Order> lastShownOrderList = model.getFilteredOrderList();
 
-        if (lastShownList == null) {
+        if (lastShownOrderList == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownOrderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
-        Order orderToEdit = lastShownList.get(index.getZeroBased());
+        Order orderToEdit = lastShownOrderList.get(index.getZeroBased());
         Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
+        OrderList orderList = model.getSelectedOrderList();
         String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
-                && model.getSelectedPerson2().getOrderList().contains(editedOrder) // TODO refactor this to follow LoD
+                && orderList.contains(editedOrder)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
 

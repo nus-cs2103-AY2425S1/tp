@@ -111,24 +111,30 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getSelectedPerson_innerContent_isNullInitially() {
-        assertNotNull(modelManager.getSelectedPerson());
+    public void getSelectedPersonProperty_innerContent_isNullInitially() {
+        assertNotNull(modelManager.getSelectedPersonProperty());
         //ensures that when first initiated no person's order will be displayed
-        assertNull(modelManager.getSelectedPerson().get());
-        assertNull(modelManager.getSelectedPerson2());
+        assertNull(modelManager.getSelectedPersonProperty().get());
+        assertNull(modelManager.getSelectedPerson());
         assertNull(modelManager.getFilteredOrderList());
+        assertNull(modelManager.getSelectedOrderList());
     }
 
     @Test
     public void updateSelectedPerson_updateSuccessfully() {
+        // Update to a person
         modelManager.updateSelectedPerson(ALICE);
-        assertEquals(modelManager.getSelectedPerson().get(), ALICE);
-        assertEquals(modelManager.getSelectedPerson2(), ALICE);
+        assertEquals(modelManager.getSelectedPersonProperty().get(), ALICE);
+        assertEquals(modelManager.getSelectedPerson(), ALICE);
         assertEquals(modelManager.getFilteredOrderList(), ALICE.getFilteredOrderList());
+        assertEquals(modelManager.getSelectedOrderList(), ALICE.getOrderList());
+
+        // Update back to null
         modelManager.updateSelectedPerson(null);
-        assertNull(modelManager.getSelectedPerson().get());
-        assertNull(modelManager.getSelectedPerson2());
+        assertNull(modelManager.getSelectedPersonProperty().get());
+        assertNull(modelManager.getSelectedPerson());
         assertNull(modelManager.getFilteredOrderList());
+        assertNull(modelManager.getSelectedOrderList());
     }
 
     @Test
