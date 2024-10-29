@@ -147,6 +147,64 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding an order: `order`
+
+Add an order to NomNomNotifier
+
+Format: `order ORDER`
+
+* Add an order name `ORDER`
+* `ORDER` must be in lowercase
+* If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+
+Examples:
+* `order cake` add an order called "cake" to NomNomNotifier
+
+### Deleting an order: `deleteOrder`
+
+Delete an order from NomNomNotifier
+
+Format: `deleteOrder ORDER`
+
+* Delete an order name `ORDER`
+* `ORDER` must be in lowercase
+* If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+
+Examples:
+* `deleteOrder cake` delete an order called "cake" from NomNomNotifier
+
+### Listing all orders: `listOrder`
+
+Shows a list of all orders in NomNomNotifier.
+
+Format: `listOrder`
+
+### Adding an order history to a customer: `put`
+
+Add an order history to a customer 
+
+Format: `put ORDER [n/NAME]`
+
+* Add an order history a customer named `NAME`
+* `ORDER` must be in lowercase
+* If `ORDER` contains uppercase character, it will be converted to lowercase character automatically
+* The time recorded by the order history is the time of running the command `put`
+
+Examples:
+* `put pizza n/ Alex Yeoh` add an order called "pizza" to a customer named "Alex Yeoh"
+
+### Listing all order histories of a customer: `history`
+
+List all order histories of a customer, including the time of the order 
+
+Format: `history NAME`
+
+* List order histories of a customer named `NAME`
+
+Examples: 
+* `history Alex Yeoh`
+![history command](images/historyCommandExample.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
