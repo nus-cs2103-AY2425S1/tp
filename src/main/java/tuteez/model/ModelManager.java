@@ -167,6 +167,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeLastViewedPerson() {
+        lastViewedPerson.set(Optional.empty());
+        logger.info("Last viewed person removed");
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

@@ -61,6 +61,15 @@ public class DeleteCommand extends Command {
             personToDelete = getPersonToDeleteByName(model, targetName);
         }
 
+        if (model.getLastViewedPerson().get().isPresent()) {
+            if (personToDelete.equals(model.getLastViewedPerson().get().get())) {
+                model.removeLastViewedPerson();
+                String logMessageForPerson =
+                        String.format("Student on display is deleted, Student: %s", personToDelete);
+                logger.info(logMessageForPerson);
+            }
+        }
+
         logger.info("Student deleted - " + personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
