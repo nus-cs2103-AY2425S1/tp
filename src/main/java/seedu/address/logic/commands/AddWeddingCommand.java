@@ -16,12 +16,12 @@ import seedu.address.model.wedding.Wedding;
  */
 public class AddWeddingCommand extends Command {
 
-    public static final String COMMAND_WORD = "add-wedding";
+    public static final String COMMAND_WORD = "add-wed";
 
     public static final String COMMAND_FUNCTION = COMMAND_WORD + ": Adds a wedding to the address book. ";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_WEDDING_NAME + "NAME & NAME "
             + PREFIX_VENUE + "VENUE "
             + PREFIX_DATE + "DATE\n"

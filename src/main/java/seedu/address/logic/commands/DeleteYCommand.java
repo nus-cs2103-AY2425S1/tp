@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteYCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-y";
+    public static final String COMMAND_WORD = "y";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
 

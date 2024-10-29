@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ClearAddressBookCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear-addressbook";
+    public static final String COMMAND_WORD = "clear-ab";
     public static final String COMMAND_FUNCTION = ": Clears the entire address book";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
