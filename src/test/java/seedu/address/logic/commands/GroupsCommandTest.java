@@ -27,7 +27,8 @@ public class GroupsCommandTest {
 
     @Test
     public void execute_groupsWhileEmpty_showsEmptyGroups() {
-        assertCommandSuccess(new GroupsCommand(), model, "[]\n" + GroupsCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_SUCCESS, false, true, false);
+        assertCommandSuccess(new GroupsCommand(), model, expectedResult, expectedModel);
     }
     // TODO MORE TESTS
 }

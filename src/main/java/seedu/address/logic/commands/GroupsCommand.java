@@ -12,11 +12,9 @@ public class GroupsCommand extends Command {
     public static final String COMMAND_WORD = "groups";
 
     public static final String MESSAGE_SUCCESS = "Listed all groups";
-
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(model.groupsString() + "\n" + MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, true, false);
     }
 }

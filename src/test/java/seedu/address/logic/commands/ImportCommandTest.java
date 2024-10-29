@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPaths.DUPLICATE_IMPORT_FILE;
+import static seedu.address.testutil.TypicalPaths.INVALID_IMPORT_FILE;
+import static seedu.address.testutil.TypicalPaths.VALID_MISSING_DATA_IMPORT_FILE;
+import static seedu.address.testutil.TypicalPaths.VALID_NO_DUPS_IMPORT_FILE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -12,27 +16,22 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TypicalPaths;
 
 public class ImportCommandTest {
     private Model model;
 
     @Test
     public void executeImportSuccessfulNoDefects() throws Exception {
-        Path projectPath = Path.of(System.getProperty("user.dir"));
-
-        Path validPath = projectPath.resolve("src").resolve("test").resolve("data")
-            .resolve("ImportCommandTest").resolve("valid_noDups_importFile.csv");
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        CommandResult commandResult = new ImportCommand(validPath).execute(model);
-
+        CommandResult commandResult = new ImportCommand(VALID_NO_DUPS_IMPORT_FILE).execute(model);
         assertEquals(ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
     }
 
     @Test
     public void executeImportSuccessfulMissingData() throws Exception {
-        Path missingDataPath = Path.of("src/test/data/ImportCommandTest/valid_missing_data.csv");
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        CommandResult commandResult = new ImportCommand(missingDataPath).execute(model);
+        CommandResult commandResult = new ImportCommand(VALID_MISSING_DATA_IMPORT_FILE).execute(model);
 
         assertEquals(ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
@@ -40,8 +39,7 @@ public class ImportCommandTest {
 
     @Test
     public void executeFileNotFoundFailure() {
-        Path invalidPath = Path.of("src/test/data/ImportCommandTest/adf.csv");
-        ImportCommand importCommand = new ImportCommand(invalidPath);
+        ImportCommand importCommand = new ImportCommand(TypicalPaths.getTypicalPath().resolve("adf.csv"));
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertThrows(CommandException.class,
             ImportCommand.MESSAGE_FILE_NOT_FOUND, () -> importCommand.execute(model));
@@ -49,8 +47,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_parse_error() {
-        Path invalidPath = Path.of("src/test/data/ImportCommandTest/invalid.csv");
-        ImportCommand importCommand = new ImportCommand(invalidPath);
+        ImportCommand importCommand = new ImportCommand(INVALID_IMPORT_FILE);
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertThrows(CommandException.class,
             ImportCommand.MESSAGE_FILE_CORRUPTED, () -> importCommand.execute(model));
@@ -58,10 +55,9 @@ public class ImportCommandTest {
 
     @Test
     public void execute_duplicatePersons_noAdditions() {
-        Path duplicatePath = Path.of("src/test/data/ImportCommandTest/dups.csv");
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         int addressBookBeforeTestSize = model.getAddressBook().getPersonList().size();
-        ImportCommand importCommand = new ImportCommand(duplicatePath);
+        ImportCommand importCommand = new ImportCommand(DUPLICATE_IMPORT_FILE);
         int addressBookAfterTestSize = model.getAddressBook().getPersonList().size();
         assertEquals(addressBookBeforeTestSize, addressBookAfterTestSize);
         assertThrows(CommandException.class,
@@ -80,9 +76,8 @@ public class ImportCommandTest {
 
     @Test
     public void execute_toString() {
-        Path validPath = Path.of("src/test/data/ImportCommandTest/valid_noDups_importFile.csv");
-        ImportCommand importCommand = new ImportCommand(validPath);
-        assertEquals(ImportCommand.class.getCanonicalName() + "{filepath: =" + validPath + "}",
+        ImportCommand importCommand = new ImportCommand(VALID_NO_DUPS_IMPORT_FILE);
+        assertEquals(ImportCommand.class.getCanonicalName() + "{filepath: =" + VALID_NO_DUPS_IMPORT_FILE + "}",
             importCommand.toString());
     }
 }

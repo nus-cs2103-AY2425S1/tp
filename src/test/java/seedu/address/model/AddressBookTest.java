@@ -3,11 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -19,8 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -47,8 +48,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withClass(VALID_CLASS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withClass(VALID_CLASS_BOB).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -74,8 +74,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withClass(VALID_CLASS_AMY).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withClass(VALID_CLASS_BOB).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
@@ -84,10 +83,46 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    // Additional test cases to cover equals and hashCode methods
+
     @Test
-    public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+    public void equals() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+        AddressBook differentAddressBook = new AddressBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        assertTrue(addressBook.equals(new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build()));
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different type -> returns false
+        assertFalse(addressBook.equals(5));
+
+        // different addressBook -> returns false
+        assertFalse(addressBook.equals(differentAddressBook));
+    }
+
+    @Test
+    public void hashCode_sameAttributes_sameHashCode() {
+        AddressBook addressBook1 = new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+        AddressBook addressBook2 = new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+
+        // Ensure that two objects with the same attributes have the same hashCode
+        assertEquals(addressBook1.hashCode(), addressBook2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentAttributes_differentHashCode() {
+        AddressBook addressBook1 = new AddressBookBuilder().withPerson(ALICE).build();
+        AddressBook addressBook2 = new AddressBookBuilder().withPerson(BOB).build();
+
+        // Ensure that two objects with different attributes have different hashCodes
+        assertFalse(addressBook1.hashCode() == addressBook2.hashCode());
     }
 
     /**
@@ -95,6 +130,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Group> groups = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -104,6 +140,10 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-    }
 
+        @Override
+        public ObservableList<Group> getGroupList() {
+            return groups;
+        }
+    }
 }

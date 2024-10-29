@@ -2,15 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -23,60 +18,18 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie \n"
-            + "OR\n"
-            + "Example: " + COMMAND_WORD + "/group gooners";
-
+            + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
-    private final GroupContainsKeywordsPredicate groupPredicate;
-
-
-    /**
-     * Constructs a {@code FindCommand} for searching persons by name.
-     * The command will filter the address book to find all persons whose names contain any of the
-     * keywords specified in the given {@code NameContainsKeywordsPredicate}.
-     *
-     * @param predicate The {@code NameContainsKeywordsPredicate} that defines the search criteria based on name.
-     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.groupPredicate = null;
-    }
-
-    /**
-     * Constructs a {@code FindCommand} for searching persons by group.
-     * The command will filter the address book to find all persons who belong to groups
-     * whose names contain any of the keywords specified in the given {@code GroupContainsKeywordsPredicate}.
-     *
-     * @param groupPredicate The {@code GroupContainsKeywordsPredicate}
-     *      that defines the search criteria based on group membership.
-     */
-
-    public FindCommand(GroupContainsKeywordsPredicate groupPredicate) {
-        this.predicate = null;
-        this.groupPredicate = groupPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        if (predicate != null) {
-            model.updateFilteredPersonList(predicate);
-        } else if (groupPredicate != null) {
-
-            // Case for group-based search
-            // Use updateFilteredGroupList to get the list of matching groups
-            List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
-
-            // Now filter the persons based on whether they are in any of the matching groups
-            model.updateFilteredPersonList(person -> matchingGroups.stream()
-                    .flatMap(group -> group.getMembers().stream())
-                    .anyMatch(member -> member.isSamePerson(person)));
-        }
-
+        model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -92,17 +45,8 @@ public class FindCommand extends Command {
             return false;
         }
 
-        FindCommand otherCommand = (FindCommand) other;
-        // Check for both predicate and groupPredicate
-        if (this.predicate != null) {
-            return this.predicate.equals(otherCommand.predicate);
-        }
-
-        if (this.groupPredicate != null) {
-            return this.groupPredicate.equals(otherCommand.groupPredicate);
-        }
-
-        return false;
+        FindCommand otherFindCommand = (FindCommand) other;
+        return predicate.equals(otherFindCommand.predicate);
     }
 
     @Override

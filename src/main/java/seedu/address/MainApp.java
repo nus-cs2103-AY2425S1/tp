@@ -147,6 +147,7 @@ public class MainApp extends Application {
 
         UserPrefs initializedPrefs;
         try {
+
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             if (!prefsOptional.isPresent()) {
                 logger.info("Creating new preference file " + prefsFilePath);

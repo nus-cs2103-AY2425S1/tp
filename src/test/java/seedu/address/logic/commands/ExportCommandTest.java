@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPaths.EXPORT_FILE_PATH;
+import static seedu.address.testutil.TypicalPaths.TYPICAL_PERSONS_ADDRESS_BOOK;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -24,28 +26,21 @@ import seedu.address.model.UserPrefs;
 public class ExportCommandTest {
 
     private static final Path projectRootPath = Paths.get(System.getProperty("user.dir"));
-
-    private final Path exportFilePath =
-        projectRootPath.resolve("src").resolve("test").resolve("data").resolve("JsonExportTest")
-                                                                        .resolve("exported_data.csv");
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_exportCommand_successfulExport() throws CommandException {
         try {
-            Path importPath = projectRootPath.resolve("src").resolve("test").resolve("data")
-                                .resolve("JsonExportTest").resolve("typicalPersonsAddressBook.json");
             ExportCommand exportCommand = new ExportCommand();
 
             // Execute the export command
-            CommandResult commandResult = exportCommand.execute(model, importPath , exportFilePath);
+            CommandResult commandResult = exportCommand.execute(model, TYPICAL_PERSONS_ADDRESS_BOOK , EXPORT_FILE_PATH);
             // Verify the export is successful
             assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS),
                     commandResult.getFeedbackToUser());
 
             // Verify the exported file exists
-            Path exportedFilePath = Paths.get(exportFilePath.toString());
+            Path exportedFilePath = Paths.get(EXPORT_FILE_PATH.toString());
             assertTrue(Files.exists(exportedFilePath));
 
             Files.deleteIfExists(exportedFilePath);
@@ -61,10 +56,10 @@ public class ExportCommandTest {
             Path importPath = projectRootPath.resolve("src").resolve("test").resolve("data")
                                 .resolve("JsonExportTest").resolve("typicalPersonsAddressBook.json");
             ExportCommand exportCommand = new ExportCommand();
-            CommandResult commandResult = exportCommand.execute(model, importPath , exportFilePath);
+            CommandResult commandResult = exportCommand.execute(model, importPath , EXPORT_FILE_PATH);
             assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS),
                     commandResult.getFeedbackToUser());
-            List<String> lines = Files.readAllLines(exportFilePath);
+            List<String> lines = Files.readAllLines(EXPORT_FILE_PATH);
             final String[] header = {"Name", "Class", "Phone number", "Tags"};
             final String[] alice = {"Alice Pauline", "4A", "94351253", "friends"};
             final String[] benson = {"Benson Meier", "6B", "98765432", "owesMoney friends"};
@@ -79,7 +74,7 @@ public class ExportCommandTest {
                 }
             }
             // Clean up the exported file
-            Files.deleteIfExists(exportFilePath);
+            Files.deleteIfExists(EXPORT_FILE_PATH);
         } catch (IOException e) {
             // Handle any IO exception
             e.printStackTrace();
