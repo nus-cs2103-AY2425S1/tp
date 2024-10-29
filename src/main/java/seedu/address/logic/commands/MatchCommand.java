@@ -12,15 +12,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
-import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
-import seedu.address.model.tag.Tag;
 
 /**
  * Matches the {@code Person} with the {@code Job} at the respective indexes.
