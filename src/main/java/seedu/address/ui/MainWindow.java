@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private boolean isFindNricCommand = false;
+    private boolean isFindAppointmentCommand = false;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -47,6 +48,8 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
     @FXML
     private StackPane findPersonPanelPlaceholder;
+    @FXML
+    private StackPane findAppointmentPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -174,11 +177,33 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Rendering Find UI");
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);
+//        findAppointmentPanelPlaceholder.setVisible(false);
+//        findAppointmentPanelPlaceholder.setManaged(false);
+
         FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
         findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
         findPersonPanelPlaceholder.setVisible(true);
         findPersonPanelPlaceholder.setManaged(true);
         isFindNricCommand = true;
+        isFindAppointmentCommand = false;
+    }
+
+    /**
+     * Handles the view for 'findapp' command by displaying a comprehensive view of all the appointments.
+     */
+    private void handleFindAppointment() {
+        logger.info("Rendering Find Appointment UI");
+        personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
+        findPersonPanelPlaceholder.setVisible(false);
+        findPersonPanelPlaceholder.setManaged(false);
+
+        FindAppointmentPanel findAppointmentPanel = new FindAppointmentPanel(logic.getFilteredPersonList());
+        findAppointmentPanelPlaceholder.getChildren().add(findAppointmentPanel.getRoot());
+        findAppointmentPanelPlaceholder.setVisible(true);
+        findAppointmentPanelPlaceholder.setManaged(true);
+        isFindNricCommand = false;
+        isFindAppointmentCommand = true;
     }
 
     /**
@@ -188,9 +213,12 @@ public class MainWindow extends UiPart<Stage> {
         if (isFindNricCommand) {
             findPersonPanelPlaceholder.setVisible(false);
             findPersonPanelPlaceholder.setManaged(false);
+//            findAppointmentPanelPlaceholder.setVisible(false);
+//            findAppointmentPanelPlaceholder.setManaged(false);
             personListPanelPlaceholder.setVisible(true);
             personListPanelPlaceholder.setManaged(true);
             isFindNricCommand = false;
+            isFindAppointmentCommand = false;
         }
         logger.info("Rendering default UI");
     }
@@ -212,6 +240,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isFindPerson()) {
                 handleFindPerson();
+            } else if (commandResult.isFindAppointment()) {
+                handleFindAppointment();
             } else {
                 resetToOriginal();
             }
