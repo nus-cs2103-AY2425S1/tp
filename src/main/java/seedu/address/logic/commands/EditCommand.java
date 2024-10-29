@@ -64,6 +64,9 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String PERSON_EXAMPLE = COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String INSPECT_MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the delivery identified "
            + "by the index number used in the displayed delivery list. "
@@ -81,6 +84,14 @@ public class EditCommand extends Command {
            + PREFIX_COST + "$300 "
            + PREFIX_STATUS + "not delivered "
            + PREFIX_TAG + "delivery was fast";
+
+    public static final String DELIVERY_EXAMPLE = COMMAND_WORD + " 1 "
+           + PREFIX_ITEMS + "TV "
+           + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
+           + PREFIX_COST + "$300 "
+           + PREFIX_STATUS + "not delivered "
+           + PREFIX_TAG + "delivery was fast";
+
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
