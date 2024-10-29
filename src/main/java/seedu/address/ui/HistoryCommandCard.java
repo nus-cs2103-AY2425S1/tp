@@ -12,7 +12,7 @@ import seedu.address.logic.commands.Command;
  */
 public class HistoryCommandCard extends UiPart<Region> {
 
-    private static final String FXML = "HistoryCommandCard.fxml";
+    private static final String FXML = "HistoryCommandListCard.fxml";
 
     public final Command command;
 
