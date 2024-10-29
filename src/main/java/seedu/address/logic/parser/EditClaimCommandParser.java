@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -16,30 +17,37 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
 
     public EditClaimCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
+                ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
-        if (!(argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent())
-                || argMultimap.getPreamble().isEmpty()) {
+        // Ensure person index is in the preamble and required fields are present
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()
+                || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
         }
 
+        // Parse the person index from the preamble
         Index personIndex;
-        Index claimIndex;
         try {
-            String[] indices = argMultimap.getPreamble().split("\\s+");
-            if (indices.length < 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
-            }
-            personIndex = ParserUtil.parseIndex(indices[0]);
-            claimIndex = ParserUtil.parseIndex(indices[1]);
+            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE), ive);
         }
 
-        PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
-        EditClaimDescriptor editClaimDescriptor = new EditClaimDescriptor();
+        // Parse required claim index from `c/`
+        Index claimIndex;
+        try {
+            claimIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLAIM_INDEX).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE), ive);
+        }
 
+        // Parse policy type
+        PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
+
+        // Create EditClaimDescriptor to hold optional fields
+        EditClaimDescriptor editClaimDescriptor = new EditClaimDescriptor();
         if (argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()) {
             editClaimDescriptor.setStatus(ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get()));
         }
@@ -54,7 +62,4 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
 
         return new EditClaimCommand(personIndex, policyType, claimIndex, editClaimDescriptor);
     }
-
-
-
 }

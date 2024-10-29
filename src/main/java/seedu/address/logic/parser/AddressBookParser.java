@@ -16,6 +16,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
+import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case ListClaimsCommand.COMMAND_WORD:
             return new ListClaimsCommandParser().parse(arguments);
+
+        case EditClaimCommand.COMMAND_WORD:
+            return new EditClaimCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
