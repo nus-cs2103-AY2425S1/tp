@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -73,6 +74,10 @@ public class LogicManager implements Logic {
 
     public void setClearPendingStatus(boolean isPending) {
         this.pendingClear = isPending;
+    }
+
+    public Map<String, String> getColorTagMap() {
+        return model.getColorTagMap();
     }
 
     @Override
