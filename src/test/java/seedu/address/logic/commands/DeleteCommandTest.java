@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,7 +32,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand.ConfirmationHandler mockHandler = person -> true;
+        ConfirmationHandler mockHandler = person -> true;
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, mockHandler);
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -53,7 +54,7 @@ public class DeleteCommandTest {
     public void execute_userDeniedUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        DeleteCommand.ConfirmationHandler mockHandler = person -> false;
+        ConfirmationHandler mockHandler = person -> false;
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, mockHandler);
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -64,7 +65,7 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand.ConfirmationHandler mockHandler = person -> true;
+        ConfirmationHandler mockHandler = person -> true;
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, mockHandler);
 

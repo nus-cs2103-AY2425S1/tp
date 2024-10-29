@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,7 +30,7 @@ public class DeleteCommand extends Command {
     private ConfirmationHandler confirmationHandler;
 
     /**
-     * Default constructor for a DeleteCommand object
+     * Default constructor for a {@code DeleteCommand} object
      * @param targetIndex
      */
     public DeleteCommand(Index targetIndex) {
@@ -38,7 +39,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Constructor for a DeleteCommand object for unit tests
+     * Constructor for a {@code DeleteCommand} object for unit tests
      * @param targetIndex
      * @param confirmationHandler
      */
@@ -89,12 +90,6 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
-    /**
-     * Functional interface for testing purposes
-     */
-    public interface ConfirmationHandler {
-        boolean confirm(Person personToDelete);
-    }
 
     /**
      * Nested class for testing purposes
@@ -102,12 +97,12 @@ public class DeleteCommand extends Command {
     public static class DefaultConfirmationHandler implements ConfirmationHandler {
         /**
          * Bypasses UI popup for testing purposes
-         * @param personToDelete The person to be deleted
+         * @param person The person to be deleted
          * @return Whether the deletion proceeds or not
          */
-        public boolean confirm(Person personToDelete) {
+        public boolean confirm(Person person) {
             ConfirmDeleteWindow confirmDeleteWindow = new ConfirmDeleteWindow();
-            confirmDeleteWindow.show(personToDelete);
+            confirmDeleteWindow.show(person);
             return confirmDeleteWindow.isConfirmed();
         }
     }
