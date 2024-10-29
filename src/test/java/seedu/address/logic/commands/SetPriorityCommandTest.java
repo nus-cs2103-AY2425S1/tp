@@ -22,7 +22,7 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 
-public class PriorityCommandTest {
+public class SetPriorityCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
@@ -32,14 +32,14 @@ public class PriorityCommandTest {
         Priority firstPriority = new Priority(VALID_PRIORITY_AMY);
         Priority secondPriority = new Priority(VALID_PRIORITY_BOB);
 
-        PriorityCommand firstPriorityCommand = new PriorityCommand(firstNric, firstPriority);
-        PriorityCommand secondPriorityCommand = new PriorityCommand(secondNric, secondPriority);
+        SetPriorityCommand firstPriorityCommand = new SetPriorityCommand(firstNric, firstPriority);
+        SetPriorityCommand secondPriorityCommand = new SetPriorityCommand(secondNric, secondPriority);
 
         // same object -> returns true
         assertTrue(firstPriorityCommand.equals(firstPriorityCommand));
 
         // same value -> returns true
-        PriorityCommand firstPriorityCommandCopy = new PriorityCommand(firstNric, firstPriority);
+        SetPriorityCommand firstPriorityCommandCopy = new SetPriorityCommand(firstNric, firstPriority);
         assertTrue(firstPriorityCommand.equals(firstPriorityCommandCopy));
 
         // different types -> returns false
@@ -57,7 +57,7 @@ public class PriorityCommandTest {
         // ensures CommandException is thrown when provided with Nric that is not in addressbook
         Nric nric = new Nric("T1111111F");
         Priority priority = new Priority("HIGH");
-        PriorityCommand command = new PriorityCommand(nric, priority);
+        SetPriorityCommand command = new SetPriorityCommand(nric, priority);
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -71,7 +71,7 @@ public class PriorityCommandTest {
         Priority highPriority = new Priority("HIGH");
 
         // change priority from default "NONE" to "LOW"
-        CommandResult firstCommandResult = new PriorityCommand(aliceNric, lowPriority).execute(model);
+        CommandResult firstCommandResult = new SetPriorityCommand(aliceNric, lowPriority).execute(model);
         Person lowPriorityAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
 
@@ -79,7 +79,7 @@ public class PriorityCommandTest {
         assertEquals(lowPriority, lowPriorityAlice.getPriority());
 
         // change priority from "LOW to MEDIUM"
-        CommandResult secondCommandResult = new PriorityCommand(aliceNric, mediumPriority).execute(model);
+        CommandResult secondCommandResult = new SetPriorityCommand(aliceNric, mediumPriority).execute(model);
         Person mediumPriorityAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
 
@@ -87,7 +87,7 @@ public class PriorityCommandTest {
         assertEquals(mediumPriority, mediumPriorityAlice.getPriority());
 
         // change priority from "MEDIUM" to "HIGH"
-        CommandResult thirdCommandResult = new PriorityCommand(aliceNric, highPriority).execute(model);
+        CommandResult thirdCommandResult = new SetPriorityCommand(aliceNric, highPriority).execute(model);
         Person highPriorityAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
 
@@ -95,7 +95,7 @@ public class PriorityCommandTest {
         assertEquals(highPriority, highPriorityAlice.getPriority());
 
         // change priority from "HIGH" to "HIGH"
-        CommandResult fourthCommandResult = new PriorityCommand(aliceNric, highPriority).execute(model);
+        CommandResult fourthCommandResult = new SetPriorityCommand(aliceNric, highPriority).execute(model);
         Person secondHighPriorityAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
 
@@ -103,7 +103,7 @@ public class PriorityCommandTest {
         assertEquals(highPriority, highPriorityAlice.getPriority());
 
         // change priority from "HIGH" to "NONE"
-        CommandResult fifthCommandResult = new PriorityCommand(aliceNric, noPriority).execute(model);
+        CommandResult fifthCommandResult = new SetPriorityCommand(aliceNric, noPriority).execute(model);
         Person noPriorityAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
 

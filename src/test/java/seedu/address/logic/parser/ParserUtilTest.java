@@ -31,7 +31,8 @@ public class ParserUtilTest {
     private static final String INVALID_NRIC = "S123456";
     private static final String INVALID_GENDER = "x";
     private static final String INVALID_DATE_OF_BIRTH_FORMAT = "2020/12/12";
-    private static final String INVALID_DATE_OF_BIRTH_VALUE = LocalDate.now().plusDays(2)
+    private static final String INVALID_DATE_OF_BIRTH_VALUE = "2023-02-29";
+    private static final String INVALID_DATE_OF_BIRTH_FUTURE = LocalDate.now().plusDays(2)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -190,6 +191,11 @@ public class ParserUtilTest {
     @Test
     public void parseDateOfBirth_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATE_OF_BIRTH_FORMAT));
+    }
+
+    @Test
+    public void parseDateOfBirth_invalidFutureDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATE_OF_BIRTH_FUTURE));
     }
 
     @Test
