@@ -1,9 +1,7 @@
 package seedu.sellsavvy.model.order;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -30,10 +28,13 @@ public class DateTest {
         assertFalse(Date.isValidDateRegex("")); // empty string
         assertFalse(Date.isValidDateRegex(" ")); // spaces only
         assertFalse(Date.isValidDateRegex("date")); // not a date
-        assertFalse(Date.isValidDateRegex("2-02-2002")); // invalid day format
+        assertFalse(Date.isValidDateRegex("2-02-2002")); // single digit day
+        assertFalse(Date.isValidDateRegex("02-2-2002")); // single digit month
+        assertFalse(Date.isValidDateRegex("02-02-2")); // single digit year
         assertFalse(Date.isValidDateRegex("02/02/2002")); // non-hyphen non-numeric characters
         assertFalse(Date.isValidDateRegex("02-22-2002")); // invalid month
-        assertFalse(Date.isValidDateRegex("02-02-2222")); // not within 21st century
+        assertFalse(Date.isValidDateRegex("31-12-2000")); // last day of 20th century
+        assertFalse(Date.isValidDateRegex("01-01-2101")); // first day of 22nd century
 
         // valid date regex
         assertTrue(Date.isValidDateRegex("02-02-2002"));
@@ -63,11 +64,11 @@ public class DateTest {
     public void hasDateElapsed() {
         // date has elapsed
         Date date = new Date("02-02-2002");
-        assertEquals(MESSAGE_OUTDATED_WARNING, date.hasDateElapsed());
+        assertTrue(date.hasDateElapsed());
 
         // date has not elapsed
         date = new Date("02-02-2030");
-        assertEquals("", date.hasDateElapsed());
+        assertFalse(date.hasDateElapsed());
     }
 
     @Test

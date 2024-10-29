@@ -50,11 +50,11 @@ public class OrderTest {
     public void hasDateElapsed() {
         // order date has elapsed
         Order editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_OUTDATED).build();
-        assertEquals(MESSAGE_OUTDATED_WARNING, editedAtlas.hasDateElapsed());
+        assertTrue(editedAtlas.hasDateElapsed());
 
         // order date has not elapsed
         editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_ATLAS).build();
-        assertEquals("", editedAtlas.hasDateElapsed());
+        assertFalse(editedAtlas.hasDateElapsed());
     }
 
     @Test

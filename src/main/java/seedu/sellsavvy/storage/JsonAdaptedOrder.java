@@ -66,7 +66,8 @@ class JsonAdaptedOrder {
         }
         if (!Date.isValidDateRegex(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
-        } else if (!Date.isValidCalendarDate(date)) {
+        }
+        if (!Date.isValidCalendarDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_INVALID_DATE);
         }
         final Date modelDate = new Date(date);

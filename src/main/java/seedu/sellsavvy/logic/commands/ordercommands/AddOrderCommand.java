@@ -5,6 +5,7 @@ import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 
 import java.util.List;
 
@@ -68,11 +69,16 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_ORDER_WARNING : "";
+        String feedbackToUser = orderList.contains(toAdd)
+                ? MESSAGE_DUPLICATE_ORDER_WARNING
+                : "";
+        feedbackToUser += toAdd.hasDateElapsed()
+                ? MESSAGE_OUTDATED_WARNING
+                : "";
         orderList.add(toAdd);
         personToAddUnder.resetFilteredOrderList();
 
-        return new CommandResult(feedbackToUser + toAdd.hasDateElapsed()
+        return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));
     }
 

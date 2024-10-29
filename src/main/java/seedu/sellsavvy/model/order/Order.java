@@ -61,9 +61,9 @@ public class Order {
     }
 
     /**
-     * Returns {@code Date} warning if order date has passed.
+     * Returns if order date has passed.
      */
-    public String hasDateElapsed() {
+    public boolean hasDateElapsed() {
         return date.hasDateElapsed();
     }
 

@@ -5,6 +5,7 @@ import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 
 import java.util.List;
 import java.util.Objects;
@@ -85,9 +86,12 @@ public class EditOrderCommand extends Command {
                 && orderList.contains(editedOrder)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
+        feedbackToUser += editedOrder.hasDateElapsed()
+                ? MESSAGE_OUTDATED_WARNING
+                : "";
 
         model.setOrder(orderToEdit, editedOrder);
-        return new CommandResult(feedbackToUser + editedOrder.hasDateElapsed()
+        return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }
 

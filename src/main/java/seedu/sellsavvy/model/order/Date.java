@@ -28,7 +28,7 @@ public class Date {
             + "verify if this is a mistake\n";
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
-    private static final String REGEX_YEAR = "(20[0-9]{2}|2100)";
+    private static final String REGEX_YEAR = "(20(0[1-9]|[1-9][0-9])|2100)";
     public static final String REGEX_DATE = "^" + REGEX_DAY + "-" + REGEX_MONTH + "-" + REGEX_YEAR + "$";
     public final String value;
 
@@ -67,22 +67,19 @@ public class Date {
     }
 
     /**
-     * Returns {@code Date} warning if order date has passed.
+     * Returns if the {@code Date} has passed.
      */
-    public String hasDateElapsed() {
+    public boolean hasDateElapsed() {
         LocalDate localDate;
         try {
             localDate = ParserUtil.parseLocalDate(value);
         } catch (ParseException e) {
             // since hasDateElapsed is only called after validation, ParseException should never be thrown.
-            return MESSAGE_INVALID_DATE;
+            return false;
         }
 
         LocalDate localDateNow = LocalDate.now(ZoneId.of("Asia/Singapore"));
-        if (localDate.isBefore(localDateNow)) {
-            return MESSAGE_OUTDATED_WARNING;
-        }
-        return "";
+        return localDate.isBefore(localDateNow);
     }
 
     @Override
