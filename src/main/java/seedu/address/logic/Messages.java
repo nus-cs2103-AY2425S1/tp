@@ -52,8 +52,15 @@ public class Messages {
                 .append(person.getRemark())
                 .append("; Birthday: ")
                 .append(person.getBirthday().toString())
+                .append("; Remark: ")
+                .append(person.getRemark())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; DateOfCreation: ")
+                .append(person.getDateOfCreation().toString())
+                .append("; History: ").append(person.getHistory());
+        builder.append("; PropertyList: ")
+                .append(person.getPropertyList().toString());
         return builder.toString();
     }
 
