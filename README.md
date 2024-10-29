@@ -18,7 +18,7 @@ RealConnect simplifies contact management for real estate professionals by allow
 - **Alphabetical sorting** of contacts by name for easier navigation.
 - A **single-page view** displaying the full contact details.
 - **Duplicate contact detection** with error notifications to avoid redundancies.
-- Mark contacts as **favorites** to prioritize key clients.
+- Mark contacts as **favourites** to prioritize key clients.
 - A **confirmation prompt** before deleting any contacts, ensuring accidental deletions are avoided.
 - **Success notifications** for actions like adding, editing, and deleting contacts.
 - **Field validation** (phone number, email, etc.) during contact creation and editing to maintain accurate client data.

@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | be reminded of important events                              | minimize chance of missing these important events                                              |
 | `* *`    | salesperson                                | system to check the validity of a phone number               | avoid entering incorrect or incomplete data                                                    |
 | `* *`    | salesperson                                | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
-| `* *`    | salesperson                                | mark certain contacts as favorites                           | easily access the most important clients at the top of the list                                |
+| `* *`    | salesperson                                | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
 | `* *`    | salesperson                                | store incomplete information                                 | later update it with more details or correct outdated information                              |
 | `* *`    | user with many persons in the address book | sort persons by name                                         | locate a person easily                                                                         |
 | `* *`    | salesperson                                | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
@@ -600,7 +600,7 @@ I see now! You want to modify the **use case** to match the **Find feature** you
 
 ---
 
-Continuing from the previous use cases, I will now cover the **Single Page View for Full Contact Details**, **Favorite Functionality**, and **Reminder Notifications for Contact’s Birthday**.
+Continuing from the previous use cases, I will now cover the **Single Page View for Full Contact Details**, **Favourite Functionality**, and **Reminder Notifications for Contact’s Birthday**.
 
 ---
 
@@ -651,16 +651,16 @@ Continuing from the previous use cases, I will now cover the **Single Page View 
 
 ---
 
-### Use Case: **UC07 - Mark Contact as Favorite**
+### Use Case: **UC07 - Mark Contact as Favourite**
 **Actor**: Salesperson  
 **Precondition**: The contact exists in the contact list.  
-**Guarantees**: The contact is marked as a favorite, and the Salesperson can easily access it from the favorite list.
+**Guarantees**: The contact is marked as a favourite, and the Salesperson can easily access it from the favourite list.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `favorite` command with a valid `ContactID`.
+1. The Salesperson issues the `favourite` command with a valid `ContactID`.
 2. The system validates the `ContactID`.
-3. The system marks the contact as a favorite.
-4. The system displays a success message: "Contact `<Name>` marked as a favorite."
+3. The system marks the contact as a favourite.
+4. The system displays a success message: "Contact `<Name>` marked as a favourite."
 
    **Use case ends.**
 
@@ -672,29 +672,29 @@ Continuing from the previous use cases, I will now cover the **Single Page View 
     - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
     - **Use case resumes from Step 2.**
 
-- **3a.** The contact is already marked as a favorite.
-    - **3a1.** The system displays a message: "Contact is already marked as a favorite."
+- **3a.** The contact is already marked as a favourite.
+    - **3a1.** The system displays a message: "Contact is already marked as a favourite."
     - **Use case ends.**
 
 ---
 
 #### Including Related Use Cases:
-- **UC06 - View Full Contact Details**: This use case may be referenced if the Salesperson wants to mark a contact as favorite after reviewing its full details.
-- **UC08 - View Favorite Contacts**: This use case allows the Salesperson to view all the favorite contacts in a dedicated section.
+- **UC06 - View Full Contact Details**: This use case may be referenced if the Salesperson wants to mark a contact as favourite after reviewing its full details.
+- **UC08 - View Favourite Contacts**: This use case allows the Salesperson to view all the favourite contacts in a dedicated section.
 
 ---
 
 #### Variations:
-- **1a.** The Salesperson marks a new contact as favorite.
+- **1a.** The Salesperson marks a new contact as favourite.
     - **Use case proceeds normally from Step 2.**
 
-- **1b.** The Salesperson marks an existing contact that was not previously marked as favorite.
+- **1b.** The Salesperson marks an existing contact that was not previously marked as favourite.
     - **Use case proceeds normally from Step 2.**
 
 ---
 
 #### Postconditions:
-- The contact is marked as a favorite, and it will appear at the top of the contact list or in a separate "Favorites" section for easier access.
+- The contact is marked as a favourite, and it will appear at the top of the contact list or in a separate "Favourites" section for easier access.
 
 ---
 
@@ -1025,7 +1025,7 @@ I will now cover use cases related to the **Help Command**, **Delete Contact**, 
 
 * **CLI (Command Line Interface)**: A user interface where commands are typed, offering a faster alternative to graphical interface interactions.
 
-* **Favorite**: A contact marked as important for easy access.
+* **Favourite**: A contact marked as important for easy access.
 
 --------------------------------------------------------------------------------------------------------------------
 
