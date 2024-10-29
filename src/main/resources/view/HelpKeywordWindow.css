@@ -15,6 +15,11 @@
     -fx-text-fill: white;
 }
 
+#description {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
 #parameters, #usage, #example {
     -fx-text-fill: white;
 }
