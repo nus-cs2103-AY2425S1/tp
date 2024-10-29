@@ -214,11 +214,13 @@ public class EditContactCommandTest {
     }
 
     @Test
-    public void execute_updateContact_guardian() {
+    public void execute_updateContact_guardian() throws ParseException {
         Person person = new GuardianBuilder().build();
         Person editedPerson = new GuardianBuilder().withName("EditedName").withAddress("EditedAddress").build();
         Model tempModel = new ModelManager(new TutorEase(), new UserPrefs(),
                 new LessonSchedule());
+        Lesson lesson = new LessonBuilder().build();
+        tempModel.addLesson(lesson);
         tempModel.addPerson(person);
         tempModel.setPerson(person, editedPerson);
         assertEquals(tempModel.getLessonScheduleSize(), 0);
