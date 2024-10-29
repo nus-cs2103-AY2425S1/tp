@@ -37,4 +37,23 @@ public class ClearCommand extends Command {
             return new CommandResult(MESSAGE_EVENTS_SUCCESS);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ClearCommand)) {
+            return false;
+        }
+
+        ClearCommand otherCommand = (ClearCommand) other;
+        return isPersonBook == otherCommand.isPersonBook;
+    }
+
+    @Override
+    public int hashCode() {
+        return Boolean.hashCode(isPersonBook);
+    }
 }
