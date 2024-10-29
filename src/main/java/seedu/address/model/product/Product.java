@@ -99,21 +99,28 @@ public class Product {
     }
 
     /**
-     * Returns the current stock level of the product.
+     * Sets the maximum stock level of the product.
      */
     public void setMaxStockLevel(int maxStockLevel) {
         stockLevel.setMaxStockLevel(maxStockLevel);
     }
 
+    /**
+     * Returns the maximum stock level object of the product.
+     */
     public int getMaxStockLevel() {
         return stockLevel.getMaxStockLevel();
     }
 
+    /**
+     * Sets the current stock level of the product.
+     */
     public void setStockLevel(int currentStockLevel) {
         stockLevel.setStockLevel(currentStockLevel);
     }
+
     /**
-     * Returns the stock level object of the product.
+     * Returns the current stock level object of the product.
      */
     public StockLevel getStockLevel() {
         return stockLevel;
