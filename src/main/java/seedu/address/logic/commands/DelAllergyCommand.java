@@ -26,7 +26,7 @@ public class DelAllergyCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes allergy from patient in MediBase3. \n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
+            + PREFIX_ALLERGY + "ALLERGY...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S1234567A "
             + PREFIX_ALLERGY + "Pollen "
