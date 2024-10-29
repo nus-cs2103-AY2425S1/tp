@@ -21,11 +21,8 @@ public class ScheduleCommandParserTest {
     private static final String VALID_NAME = "John Doe";
     private static final String VALID_DATE = "2024-10-04 1400";
     private static final String INVALID_DATE = "invalid_date";
-<<<<<<< HEAD
     private static final String VALID_NOTE = "first appointment";
-=======
     private static final String NON_EXISTENT_DATE = "2024-02-30 1200";
->>>>>>> origin
 
     private ScheduleCommandParser parser = new ScheduleCommandParser();
     @Test
