@@ -9,11 +9,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.predicate.LevelContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.SubjectContainsKeywordsPredicate;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.predicate.LevelContainsKeywordsPredicate;
+import seedu.address.model.student.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.student.predicate.SubjectContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

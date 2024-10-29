@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.parseName;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * Parses input arguments and creates a new {@code ViewCommand} object
@@ -29,8 +29,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
-        Name personName = parseName(name);
+        Name studentName = parseName(name);
 
-        return new ViewCommand(personName);
+        return new ViewCommand(studentName);
     }
 }

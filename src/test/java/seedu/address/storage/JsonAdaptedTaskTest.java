@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalTasks.MARKING_TASK;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 
 public class JsonAdaptedTaskTest {
     private static final String INVALID_TASK_DESCRIPTION = " ";

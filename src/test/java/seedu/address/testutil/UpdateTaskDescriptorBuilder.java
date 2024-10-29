@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
 
 /**
  * A utility class to help build {@code UpdateTaskDescriptor} objects for testing.

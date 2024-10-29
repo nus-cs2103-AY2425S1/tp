@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +41,7 @@ public class CommandResultTest {
         // different uiState value -> returns false
         assertFalse(commandResult1.equals(new CommandResult("feedback", UiState.TASKS)));
 
-        // different personToView value -> returns false
+        // different studentToView value -> returns false
         CommandResult commandResult2 = new CommandResult("feedback", BOB);
         assertFalse(commandResult2.equals(new CommandResult("feedback", AMY)));
     }
@@ -69,7 +69,7 @@ public class CommandResultTest {
         assertNotEquals(commandResult1.hashCode(),
                 new CommandResult("feedback", UiState.TASKS).hashCode());
 
-        // different personToView value -> returns different hashcode
+        // different studentToView value -> returns different hashcode
         CommandResult commandResult2 = new CommandResult("feedback", BOB);
         assertNotEquals(commandResult2.hashCode(),
                 new CommandResult("feedback", AMY).hashCode());
@@ -81,7 +81,7 @@ public class CommandResultTest {
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + ", uiState=" + commandResult.getUiState()
-                + ", personToView=" + commandResult.getPersonToView() + "}";
+                + ", studentToView=" + commandResult.getStudentToView() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

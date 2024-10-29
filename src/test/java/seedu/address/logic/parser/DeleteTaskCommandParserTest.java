@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteTaskCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

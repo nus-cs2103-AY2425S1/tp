@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.task.Task;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.task.Task;
 
 /**
  * Parses input arguments and creates a new AddTaskCommand object.
@@ -32,11 +32,11 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         //Parse arguments
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_DEADLINE);
-        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name studentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get(),
                 argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
 
-        return new AddTaskCommand(personName, task);
+        return new AddTaskCommand(studentName, task);
     }
 
 }

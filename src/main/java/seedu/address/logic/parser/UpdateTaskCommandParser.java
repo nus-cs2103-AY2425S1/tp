@@ -15,7 +15,7 @@ import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * Parses input arguments and creates a new UpdateCommand object

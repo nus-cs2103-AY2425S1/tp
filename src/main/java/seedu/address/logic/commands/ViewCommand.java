@@ -8,8 +8,8 @@ import java.util.List;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 
 /**
  * Views the details of an existing student in the address book.
@@ -21,12 +21,12 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the details of the student identified.\n"
             + "Parameters: " + PREFIX_NAME + "NAME";
 
-    public static final String MESSAGE_VIEW_SUCCESS = "Displayed details of Person: %1$s";
+    public static final String MESSAGE_VIEW_SUCCESS = "Displayed details of Student: %1$s";
 
     public final Name name;
 
     /**
-     * @param name of the person in the filtered person list to view details
+     * @param name of the student in the filtered student list to view details
      */
     public ViewCommand(Name name) {
         requireAllNonNull(name);
@@ -35,21 +35,21 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> allStudents = model.getAddressBook().getPersonList();
-        Person personToView = null;
+        List<Student> allStudents = model.getAddressBook().getStudentList();
+        Student studentToView = null;
 
-        for (Person person : allStudents) {
-            if (person.getName().equals(name)) {
-                personToView = person;
+        for (Student student : allStudents) {
+            if (student.getName().equals(name)) {
+                studentToView = student;
             }
         }
 
-        if (personToView == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        if (studentToView == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
         }
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, name),
-                personToView);
+                studentToView);
     }
 
     @Override

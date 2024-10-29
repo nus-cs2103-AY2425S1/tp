@@ -5,12 +5,12 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.NoteCommand;
-import seedu.address.model.person.Note;
+import seedu.address.model.student.Note;
 
 public class NoteCommandParserTest {
     private NoteCommandParser parser = new NoteCommandParser();

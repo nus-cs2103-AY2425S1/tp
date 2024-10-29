@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,12 +17,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
-import seedu.address.model.person.task.TaskList;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.task.Task;
+import seedu.address.model.student.task.TaskDeadline;
+import seedu.address.model.student.task.TaskDescription;
+import seedu.address.model.student.task.TaskList;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -52,7 +52,7 @@ public class UpdateTaskCommand extends Command {
     private final UpdateTaskDescriptor updateTaskDescriptor;
 
     /**
-     * @param name of the student in the filtered person list to update
+     * @param name of the student in the filtered student list to update
      * @param taskIndex index of the task in the student's task list
      * @param updateTaskDescriptor details to update the task with
      */
@@ -68,29 +68,29 @@ public class UpdateTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (name.toString().isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_UPDATE);
         }
 
-        Person personToUpdate = lastShownList.stream()
-                .filter(person -> person.getName().equals(name))
+        Student studentToUpdate = lastShownList.stream()
+                .filter(student -> student.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE));
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_STUDENT_UPDATE));
 
-        TaskList taskList = personToUpdate.getTaskList();
+        TaskList taskList = studentToUpdate.getTaskList();
         if (taskIndex.getZeroBased() >= taskList.asUnmodifiableObservableList().size()
                 || taskIndex.getOneBased() < 0) {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND,
-                    taskIndex.getOneBased(), personToUpdate.getName()));
+                    taskIndex.getOneBased(), studentToUpdate.getName()));
         }
 
-        Person updatedPerson = createUpdatedPerson(personToUpdate, taskIndex, updateTaskDescriptor);
-        Task originalTask = personToUpdate.getTaskList().get(taskIndex.getZeroBased());
+        Student updatedStudent = createUpdatedStudent(studentToUpdate, taskIndex, updateTaskDescriptor);
+        Task originalTask = studentToUpdate.getTaskList().get(taskIndex.getZeroBased());
 
-        model.setPerson(personToUpdate, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToUpdate, updatedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         TaskDescription updatedTaskDescription = updateTaskDescriptor.getTaskDescription()
                 .orElse(originalTask.getTaskDescription());
@@ -98,30 +98,30 @@ public class UpdateTaskCommand extends Command {
                 .orElse(originalTask.getTaskDeadline());
 
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, updatedTaskDescription,
-                updatedPerson.getName(), updatedTaskDeadline), UiState.DETAILS);
+                updatedStudent.getName(), updatedTaskDeadline), UiState.DETAILS);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToUpdate}
+     * Creates and returns a {@code Student} with the details of {@code studentToUpdate}
      * updated with {@code updateTaskDescriptor} at the specified task index.
      */
-    private static Person createUpdatedPerson(Person personToUpdate, Index taskIndex,
-                                              UpdateTaskDescriptor updateTaskDescriptor) {
-        assert personToUpdate != null;
+    private static Student createUpdatedStudent(Student studentToUpdate, Index taskIndex,
+                                                UpdateTaskDescriptor updateTaskDescriptor) {
+        assert studentToUpdate != null;
 
-        Task originalTask = personToUpdate.getTaskList().get(taskIndex.getZeroBased());
+        Task originalTask = studentToUpdate.getTaskList().get(taskIndex.getZeroBased());
         TaskDescription updatedTaskDescription = updateTaskDescriptor.getTaskDescription()
                 .orElse(originalTask.getTaskDescription());
         TaskDeadline updatedTaskDeadline = updateTaskDescriptor.getTaskDeadline()
                 .orElse(originalTask.getTaskDeadline());
         Task updatedTask = new Task(updatedTaskDescription, updatedTaskDeadline);
-        TaskList updatedTaskList = personToUpdate.getTaskList().updateTask(taskIndex, updatedTask);
+        TaskList updatedTaskList = studentToUpdate.getTaskList().updateTask(taskIndex, updatedTask);
 
-        return new Person(
-                personToUpdate.getName(), personToUpdate.getPhone(), personToUpdate.getEmergencyContact(),
-                personToUpdate.getAddress(), personToUpdate.getNote(),
-                personToUpdate.getSubjects(), personToUpdate.getLevel(), updatedTaskList,
-                personToUpdate.getLessonTimes());
+        return new Student(
+                studentToUpdate.getName(), studentToUpdate.getPhone(), studentToUpdate.getEmergencyContact(),
+                studentToUpdate.getAddress(), studentToUpdate.getNote(),
+                studentToUpdate.getSubjects(), studentToUpdate.getLevel(), updatedTaskList,
+                studentToUpdate.getLessonTimes());
     }
 
     @Override
