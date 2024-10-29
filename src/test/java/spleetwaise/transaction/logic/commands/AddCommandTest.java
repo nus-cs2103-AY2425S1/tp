@@ -109,6 +109,8 @@ public class AddCommandTest {
 
         assertEquals(cmd1, cmd1);
         assertEquals(cmd1, cmd2);
+        assertEquals(cmd1.toString(), cmd1.toString());
+        assertEquals(cmd2.toString(), cmd2.toString());
     }
 
     @Test
