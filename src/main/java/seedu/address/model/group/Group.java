@@ -122,6 +122,12 @@ public class Group {
         addTask(editedTask);
     }
 
+    public void setTaskStatus() {
+        for (Task t: tasks) {
+            t.setStatus();
+        }
+     }
+
     /**
      * Deletes {@code student} from {@code Group}.
      *

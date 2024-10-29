@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +14,7 @@ public class Task {
     //
     private final TaskName name;
     private final Deadline deadline;
-    private final Status status;
+    private Status status;
     private int groupsWithTask = 1;
 
     /**
@@ -61,6 +63,14 @@ public class Task {
 
     public int getGroupsWithTask() {
         return groupsWithTask;
+    }
+
+    public void setStatus() {
+        ZoneId zid = ZoneId.of("Asia/Singapore");
+        LocalDateTime currentTime = LocalDateTime.now(zid);
+        if (deadline.time.compareTo(currentTime) < 0 && this.status == Status.PENDING) {
+            this.status = Status.OVERDUE;
+        }
     }
 
     /**

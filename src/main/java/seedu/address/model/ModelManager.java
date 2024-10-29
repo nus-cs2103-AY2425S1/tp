@@ -372,4 +372,9 @@ public class ModelManager implements Model {
     public void decreaseGroupWithTask(Task task) {
         addressBook.decrementTask(task);
     }
+
+    @Override
+    public void setStatus() {
+        addressBook.setStatus();
+    }
 }

@@ -26,4 +26,8 @@ public abstract class Command {
     public abstract VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model)
             throws CommandException;
 
+    public void updateTaskStatus(Model model) {
+        model.setStatus();
+    }
+
 }

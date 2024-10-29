@@ -269,4 +269,9 @@ public interface Model {
      * Decrements the number of groups with {@code task} by 1.
      */
     void decreaseGroupWithTask(Task task);
+
+    /**
+     * Updates the status of each task in each group based on the current time.
+     */
+    void setStatus();
 }

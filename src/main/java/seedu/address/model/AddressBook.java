@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -73,6 +74,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
+    }
+
+    public void setStatus() {
+        for (Group g: groups) {
+            g.setTaskStatus();
+        }
     }
 
     /**
