@@ -15,7 +15,6 @@ public class AssignmentBuilder {
     public static final int DEFAULT_SCORE = 0;
     public static final boolean DEFAULT_SUBMISSION_STATUS = false;
 
-    private Student student;
     private AssignmentName assignmentName;
     private int maxScore;
     private int score;
@@ -25,7 +24,6 @@ public class AssignmentBuilder {
      * Creates an AssignmentBuilder with default values for the Assignment.
      */
     public AssignmentBuilder() {
-        student = DEFAULT_STUDENT;
         assignmentName = new AssignmentName(DEFAULT_ASSIGNMENT_NAME);
         maxScore = DEFAULT_MAX_SCORE;
         score = DEFAULT_SCORE;
@@ -38,19 +36,10 @@ public class AssignmentBuilder {
      * @param assignmentToCopy the Assignment to copy values from
      */
     public AssignmentBuilder(Assignment assignmentToCopy) {
-        student = assignmentToCopy.getStudent();
         assignmentName = new AssignmentName(assignmentToCopy.getName());
         maxScore = assignmentToCopy.getMaxScore();
         score = assignmentToCopy.getScore();
         hasSubmitted = assignmentToCopy.getHasSubmitted();
-    }
-
-    /**
-     * Sets the {@code student} of the {@code Assignment} that we are building.
-     */
-    public AssignmentBuilder withStudent(Student student) {
-        this.student = student;
-        return this;
     }
 
     /**
@@ -89,7 +78,7 @@ public class AssignmentBuilder {
      * Builds and returns an {@code Assignment}.
      */
     public Assignment build() {
-        Assignment assignment = new Assignment(student, assignmentName, maxScore);
+        Assignment assignment = new Assignment(assignmentName, maxScore);
         assignment.setScore(this.score);
         assignment.setHasSubmitted(this.hasSubmitted);
         return assignment;

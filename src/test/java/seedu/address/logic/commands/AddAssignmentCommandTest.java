@@ -44,7 +44,7 @@ public class AddAssignmentCommandTest {
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST_STUDENT,
                 toAddDescriptor);
         Student studentToAddAssignmentTo = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Assignment expectedAssignment = new AssignmentBuilder().withStudent(studentToAddAssignmentTo).build();
+        Assignment expectedAssignment = new AssignmentBuilder().build();
         Student studentWithAssignment = studentToAddAssignmentTo.addAssignment(expectedAssignment);
 
         String expectedMessage = String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
@@ -78,7 +78,7 @@ public class AddAssignmentCommandTest {
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST_STUDENT,
                 toAddDescriptor);
         Student studentToAddAssignmentTo = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Assignment expectedAssignment = new AssignmentBuilder().withStudent(studentToAddAssignmentTo).build();
+        Assignment expectedAssignment = new AssignmentBuilder().build();
         Student studentWithAssignment = studentToAddAssignmentTo.addAssignment(expectedAssignment);
 
         String expectedMessage = String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
