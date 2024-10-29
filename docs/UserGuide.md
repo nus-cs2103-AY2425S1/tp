@@ -315,7 +315,8 @@ Format: `delete INDEX po/POLICY_INDEX`
 
 Examples:
 * `delete 1 po/1` deletes the 1st policy of the 1st person in the address book.
-
+* `delete 2 po/1` deletes the 1st policy of the 2nd person in the address book.
+  ![result for 'delete policy from first client'](images/deletepolicyUI.png)
 ---
 ### Undo a command : `undo`
 Undo the last delete. Works for add, edit, delete person and clear commands.
@@ -328,6 +329,8 @@ Format: `undo`
 Examples:
 * `delete 1` followed by `undo` will restore back the deleted person at index 1.
 * `clear` followed by `undo` will restore back all the deleted persons.
+![delete a person](images/DeletePersonUndoUI.png)
+![result for 'undo'](images/undoUI.png)
 
 ---
 ### Redo a command : `redo`
@@ -341,6 +344,7 @@ Format: `redo`
 Examples:
 * `delete 1` followed by `undo` followed by `redo` will delete the person at index 1 again.
 * `clear` followed by `undo` followed by `redo` will clear all the entries again.
+![redo a deletion](images/RedoUI.png)
 
 ---
 
