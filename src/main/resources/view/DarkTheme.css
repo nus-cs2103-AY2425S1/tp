@@ -116,7 +116,6 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-radius: 1em;
     -fx-background-color: #FEFAE0;
 }
 

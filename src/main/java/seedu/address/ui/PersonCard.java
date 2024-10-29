@@ -55,12 +55,12 @@ public class PersonCard extends UiPart<Region> {
         name.setText((SUPPORTS_EMOJIS ? "👤 " : "☺ ") + person.getName().fullName);
         phone.setText((SUPPORTS_EMOJIS ? "📞 " : "☎ ") + person.getPhone().value);
         address.setText((SUPPORTS_EMOJIS ? "🏠 " : "⌂ ") + person.getAddress().value);
-        email.setText("✉️ " + person.getEmail().value);
+        email.setText("✉ " + person.getEmail().value);
         postalCode.setText((SUPPORTS_EMOJIS ? "📍 " : "➤ ") + person.getPostalCode().value);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label((SUPPORTS_EMOJIS ? "🏷️ " : "⚑ ") + tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label((SUPPORTS_EMOJIS ? "🏷 " : "⚑ ") + tag.tagName)));
     }
 
     /**
