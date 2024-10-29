@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -98,8 +99,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // edit for model
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // edit person for eventManager
+        // eventManager.editAllPersons(personToEdit, editedPerson);
+        // eventManager.updateFilteredEventList(PREDICATE...);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -118,9 +123,10 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getTelegramUsername());
 
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
+        UUID uuid = personToEdit.getUniqueId();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                 updatedTeleUsername, updatedRoles);
+                 updatedTeleUsername, updatedRoles, uuid);
 
     }
 
