@@ -1,10 +1,7 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -14,6 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -41,12 +39,12 @@ public class EditStudentCommand extends Command {
         + ": Edits the student identified by the student number used.\n"
         + "Fields including group and student number should not be modified.\n"
         + "Parameters: "
-        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
+        + PREFIX_INDEX + "INDEX (must be an integer) "
         + "[" + PREFIX_STUDENT_NAME + "NAME] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_TAG + "TAG]... \n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STUDENT_NUMBER + "A0123456P "
+        + PREFIX_INDEX + "1 "
         + PREFIX_STUDENT_NAME + "John Doe "
         + PREFIX_EMAIL + "johnd@u.nus.edu "
         + PREFIX_TAG + "good at UI ";
@@ -57,19 +55,20 @@ public class EditStudentCommand extends Command {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The given student number is not found in the address book.";
     public static final String MESSAGE_INVALID_FIELD_GROUP_NAME =
         "Group assignment should not be changed via edit student function.";
+    public static final String MESSAGE_INVALID_FIELD_STUDENT_NUMBER = "Student number should not be changed.";
 
-    private final StudentNumber studentNumber;
+    private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param studentNumber              of the student in the filtered student list to edit
+     * @param index             of the student in the filtered student list to edit
      * @param editPersonDescriptor details to edit the student with
      */
-    public EditStudentCommand(StudentNumber studentNumber, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(studentNumber);
+    public EditStudentCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
-        this.studentNumber = studentNumber;
+        this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -78,18 +77,11 @@ public class EditStudentCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredPersonList();
 
-        Student studentToEdit = null;
-        boolean hasFoundTargetStudent = false;
-        for (Student student : lastShownList) {
-            if (student.getStudentNumber().equals(studentNumber)) {
-                studentToEdit = student;
-                hasFoundTargetStudent = true;
-                break;
-            }
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
-        if (!hasFoundTargetStudent) {
-            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
-        }
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
@@ -132,14 +124,14 @@ public class EditStudentCommand extends Command {
         }
 
         EditStudentCommand otherEditStudentCommand = (EditStudentCommand) other;
-        return studentNumber.equals(otherEditStudentCommand.studentNumber)
+        return index.equals(otherEditStudentCommand.index)
             && editPersonDescriptor.equals(otherEditStudentCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("studentNumber", studentNumber)
+            .add("index", index)
             .add("editPersonDescriptor", editPersonDescriptor)
             .toString();
     }
