@@ -77,7 +77,7 @@ In this section, let's learn how to set up MediBase3 on your computer.
 
 ### Installing MediBase3
 
-#### Step 1: Check if you have Java 17 installed your system.
+#### Step 1: Check if you have Java 17 installed on your system.
 
 Before running MediBase3, ensure that **Java 17** is installed on your system.
 
