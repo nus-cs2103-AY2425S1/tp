@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -80,5 +81,31 @@ public class UnmarkAttendanceByStudentCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS,
                 studentToUnmarkAttendance.getName(), tutorial.getSubject(), attendance));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instanceof handles null
+        if (!(other instanceof UnmarkAttendanceByStudentCommand)) {
+            return false;
+        }
+
+        UnmarkAttendanceByStudentCommand otherUnmarkAttendanceCommand = (UnmarkAttendanceByStudentCommand) other;
+        return targetIndex.equals(otherUnmarkAttendanceCommand.targetIndex)
+                && attendance.equals(otherUnmarkAttendanceCommand.attendance)
+                && tutorial.equals(otherUnmarkAttendanceCommand.tutorial);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .add("attendance", attendance)
+                .add("tutorial", tutorial)
+                .toString();
     }
 }
