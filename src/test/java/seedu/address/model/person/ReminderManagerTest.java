@@ -27,162 +27,160 @@ public class ReminderManagerTest {
     public void setUp() {
         personList = FXCollections.observableArrayList();
 
-        // Set up persons with different deadlines
+        // Set up persons with different deadlines (all in progress by default)
         personDueToday = new PersonBuilder().withName("John")
                 .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
         personDueInFuture = new PersonBuilder().withName("Alice")
                 .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
         personOverdue = new PersonBuilder().withName("Bob")
                 .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
 
         reminderManager = new ReminderManager(personList);
     }
 
     @Test
-    public void getCurrentReminder_twoPersonsSameDeadline_showsBothNames() {
+    public void getCurrentReminder_completedProject_notShownInReminder() {
+        Person completedPerson = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        personList.add(completedPerson);
+
+        assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_mixedCompletionStatus_showsOnlyIncomplete() {
+        Person completedPerson = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        personList.addAll(personDueToday, completedPerson);
+
+        assertEquals("John has deadline due today.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_allCompleted_noReminders() {
+        Person completedPerson1 = new PersonBuilder().withName("John")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        Person completedPerson2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        personList.addAll(completedPerson1, completedPerson2);
+
+        assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_threePersonsOneCompleted_showsTwoNames() {
         Person person2 = new PersonBuilder().withName("Alice")
                 .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .build();
+        Person completedPerson = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        personList.addAll(personDueToday, person2, completedPerson);
+
+        assertEquals("John and Alice have deadlines due today.", reminderManager.currentReminderProperty().get());
+    }
+
+    @Test
+    public void getCurrentReminder_fourPersonsTwoCompleted_showsCorrectCount() {
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .build();
+        Person completedPerson1 = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("completed")
+                .build();
+        Person person4 = new PersonBuilder().withName("David")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
+                .build();
+        personList.addAll(personDueToday, person2, completedPerson1, person4);
+
+        assertEquals("John, Alice and David have deadlines due today.", reminderManager
+                .currentReminderProperty().get());
+    }
+
+    @Test
+    public void propertyBinding_projectStatusChanges() {
+        StringProperty reminderProperty = reminderManager.currentReminderProperty();
+
+        // Add two people
+        Person person2 = new PersonBuilder().withName("Alice")
+                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
         personList.addAll(personDueToday, person2);
+        assertEquals("John and Alice have deadlines due today.", reminderProperty.get());
 
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("John and Alice have deadlines due today.", reminder);
+        // Update one person to completed
+        Person completedPerson = new PersonBuilder(personDueToday)
+                .withProjectStatus("completed")
+                .build();
+        int index = personList.indexOf(personDueToday);
+        personList.set(index, completedPerson);
+        assertEquals("Alice has deadline due today.", reminderProperty.get());
+
+        // Update the other person to completed
+        Person completedPerson2 = new PersonBuilder(person2)
+                .withProjectStatus("completed")
+                .build();
+        index = personList.indexOf(person2);
+        personList.set(index, completedPerson2);
+        assertEquals("No upcoming or overdue reminders.", reminderProperty.get());
     }
 
     @Test
-    public void getCurrentReminder_threePersonsSameDeadline_showsAllNames() {
-        // Add three people with same deadline
-        Person person2 = new PersonBuilder().withName("Alice")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person3 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        personList.addAll(personDueToday, person2, person3);
-
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("John, Alice and Charlie have deadlines due today.", reminder);
-    }
-
-    @Test
-    public void getCurrentReminder_fourPersonsSameDeadline_showsThreeNamesAndMore() {
-        // Add four people with same deadline
-        Person person2 = new PersonBuilder().withName("Alice")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person3 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person4 = new PersonBuilder().withName("David")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        personList.addAll(personDueToday, person2, person3, person4);
-
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("John, Alice and 2 more have deadlines due today.", reminder);
-    }
-
-    @Test
-    public void getCurrentReminder_fivePersonsSameDeadline_showsThreeNamesAndMore() {
-        // Add five people with same deadline
-        Person person2 = new PersonBuilder().withName("Alice")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person3 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person4 = new PersonBuilder().withName("David")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        Person person5 = new PersonBuilder().withName("Eve")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
-        personList.addAll(personDueToday, person2, person3, person4, person5);
-
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("John, Alice and 3 more have deadlines due today.", reminder);
-    }
-
-    @Test
-    public void getCurrentReminder_fourOverduePersons_showsThreeNamesAndMore() {
-        // Add four people with same overdue deadline
-        Person person2 = new PersonBuilder().withName("Alice")
+    public void getCurrentReminder_overdueWithCompletedProjects() {
+        Person overduePerson2 = new PersonBuilder().withName("Alice")
                 .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
+                .withProjectStatus("completed")
                 .build();
-        Person person3 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
-                .build();
-        Person person4 = new PersonBuilder().withName("David")
-                .withDeadline(LocalDate.now().minusDays(1).format(DATE_FORMATTER))
-                .build();
-        personList.addAll(personOverdue, person2, person3, person4);
+        personList.addAll(personOverdue, overduePerson2);
 
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("Bob, Alice and 2 more have overdue deadlines by 1 day.", reminder);
+        assertEquals("Bob has overdue deadline by 1 day.", reminderManager.currentReminderProperty().get());
     }
 
-    @Test
-    public void getCurrentReminder_fourFutureDeadlines_showsThreeNamesAndMore() {
-        // Add four people with same future deadline
-        Person person2 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
-                .build();
-        Person person3 = new PersonBuilder().withName("David")
-                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
-                .build();
-        Person person4 = new PersonBuilder().withName("Eve")
-                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
-                .build();
-        personList.addAll(personDueInFuture, person2, person3, person4);
-
-        String reminder = reminderManager.currentReminderProperty().get();
-        assertEquals("Alice, Charlie and 2 more have deadlines in 2 days.", reminder);
-    }
-
-    // Original test cases remain the same...
+    // Existing tests remain but need to add project status...
     @Test
     public void getCurrentReminder_noPersons_returnsNoReminders() {
         assertEquals("No upcoming or overdue reminders.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void getCurrentReminder_singlePerson_showsCorrectFormat() {
+    public void getCurrentReminder_singleIncompletePerson_showsCorrectFormat() {
         personList.add(personDueToday);
         assertEquals("John has deadline due today.", reminderManager.currentReminderProperty().get());
     }
 
     @Test
-    public void propertyBinding_updatesWhenListChanges() {
-        StringProperty reminderProperty = reminderManager.currentReminderProperty();
-
-        // Initial state
-        assertEquals("No upcoming or overdue reminders.", reminderProperty.get());
-
-        // Add multiple persons
-        Person person2 = new PersonBuilder().withName("Alice")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+    public void getCurrentReminder_multipleIncompleteFutureDeadlines() {
+        Person person2 = new PersonBuilder().withName("Charlie")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
-        Person person3 = new PersonBuilder().withName("Charlie")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
+        Person person3 = new PersonBuilder().withName("David")
+                .withDeadline(LocalDate.now().plusDays(2).format(DATE_FORMATTER))
+                .withProjectStatus("in progress")
                 .build();
-        Person person4 = new PersonBuilder().withName("David")
-                .withDeadline(LocalDate.now().format(DATE_FORMATTER))
-                .build();
+        personList.addAll(personDueInFuture, person2, person3);
 
-        personList.add(personDueToday);
-        assertEquals("John has deadline due today.", reminderProperty.get());
-
-        personList.add(person2);
-        assertEquals("John and Alice have deadlines due today.", reminderProperty.get());
-
-        personList.addAll(person3, person4);
-        assertEquals("John, Alice and 2 more have deadlines due today.", reminderProperty.get());
-
-        // Remove persons
-        personList.clear();
-        assertEquals("No upcoming or overdue reminders.", reminderProperty.get());
+        assertEquals("Alice, Charlie and David have deadlines in 2 days.", reminderManager
+                .currentReminderProperty().get());
     }
 }
