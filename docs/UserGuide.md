@@ -132,21 +132,19 @@ Adds a person to EduTuTu with their name, phone number, email, address, fees, an
   <!-- Image Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <img src="images/add_output.png" alt="Add Command Input" style="width: 100%;" />
+      <img src="images/add_input.png" alt="Add Command Input" style="width: 100%;" />
     </div>
     <div style="width: 45%;">
-      <img src="images/add_input.png" alt="Add Command Output" style="width: 100%;" />
+      <img src="images/add_output.png" alt="Add Command Output" style="width: 100%;" />
     </div>
   </div>
 
 </div>
 
-
 **Tips:**
 - Tags can be added to classify or group persons for easier management.
 
 [Back to Table of Contents](#table-of-contents)
-
 
 ***
 <div style="page-break-after: always;"></div>
@@ -305,12 +303,10 @@ After entering the `list` command, all persons stored in the address book will b
 
 </div>
 
-
 **Tips:**
 - The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
 
 [Back to Table of Contents](#table-of-contents)
-
 
 ***
 <div style="page-break-after: always;"></div>
@@ -352,7 +348,6 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 </div>
 
 [Back to Table of Contents](#table-of-contents)
-
 
 ***
 <div style="page-break-after: always;"></div>
@@ -409,12 +404,12 @@ The `undo` and `redo` commands allow you to reverse or reapply the most recent c
 
 **Example Usage:**
 *Input: User enters the `undo` command to reverse the last change.*
-![Ui](images/undoCommandinput.png)
+![Ui](images/undo_input.png)
 *Output: The UI updates to reflect the reversal of the most recent change.*
-![Ui](images/undocommandoutput.png)
+![Ui](images/undo_output.png)
 *Input: User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
-![Ui](images/redocommandinput.png)
+![Ui](images/redo.png)
 
 **Tips:**
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
@@ -561,7 +556,6 @@ Displaying the detailed command window can be done in two ways:
 
 </div>
 
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -613,7 +607,6 @@ Exiting the program can be done in two ways:
   </div>
 
 </div>
-
 
 3. The program will close.
 
