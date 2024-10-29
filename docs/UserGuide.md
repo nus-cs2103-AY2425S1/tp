@@ -104,7 +104,7 @@ Format: `addTxn p/PHONE_NUMBER amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]..
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `CATEOGORY` accepts any non-empty string.
+* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces.
 
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.
 :bulb: **Tip:** A person can have any number of categories (including 0)
