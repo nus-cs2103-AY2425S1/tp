@@ -1,6 +1,8 @@
 /* light blue color: #99DDF8 */
 /* dark blue color: #005b96 */
 /* lighter blue color: #e0f7fa */
+/* picton blue color: #5FA8D3 */
+/* columbia blue color: #CAE9FF */
 
 .background {
     -fx-background-color: #f0f0f0; /* Light background */
@@ -73,7 +75,7 @@
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: derive(#99DDF8, 30%); /* Light highlight */
+    -fx-background-color: #CAE9FF; /* Light highlight */
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -133,7 +135,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #99DDF8; /* Primary blue */
+    -fx-background-color: #CAE9FF;
     -fx-background-radius: 20px;
 }
 
@@ -229,6 +231,16 @@
     -fx-background-color: white;
 }
 
+.menu:hover {
+    -fx-background-color: #5FA8D3;
+    -fx-text-fill: black;
+}
+
+.menu-item:hover {
+    -fx-background-color: #5FA8D3;
+    -fx-text-fill: black;
+}
+
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #cccccc;
@@ -241,11 +253,11 @@
 }
 
 .button:hover {
-    -fx-background-color: derive(#99DDF8, -10%); /* Slightly darker on hover */
+    -fx-background-color: #5FA8D3;
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: derive(#99DDF8, -20%); /* Even darker on press */
+    -fx-background-color: derive(#5FA8D3, -20%); /* Even darker on press */
     -fx-text-fill: black;
 }
 
@@ -269,7 +281,7 @@
 }
 
 .button:default:hover {
-    -fx-background-color: derive(#99DDF8, -10%); /* Lighten on hover */
+    -fx-background-color: derive(#5FA8D3, -10%); /* Lighten on hover */
 }
 
 .dialog-pane {
