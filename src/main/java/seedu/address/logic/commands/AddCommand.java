@@ -72,14 +72,13 @@ public class AddCommand extends Command {
 
         model.addStudent(toAdd);
 
-        long clashes = model.checkClashes(toAdd);
         List<Student> clashingStudents = model.getClashingStudents(toAdd);
-        if (clashes == 0) {
+        if (clashingStudents.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-                    + Messages.getWarningMessageForClashes(clashes, clashingStudents)
+                    + Messages.getWarningMessageForClashes(clashingStudents.size(), clashingStudents)
             );
         }
 
