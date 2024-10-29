@@ -15,7 +15,7 @@ UniqueRestaurantList -right-> Restaurant
 
 Restaurant -up-> "*" Tag
 
-
+Price -left-|> Tag
 
 
 
