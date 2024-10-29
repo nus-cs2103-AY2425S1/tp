@@ -150,6 +150,14 @@ public class LessonTest {
     }
 
     @Test
+    public void equals_isNotLesson_returnsFalse() {
+        Lesson lesson1 = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, 1),
+                new StudentLessonInfo(student2, false, 0)));
+        assertNotEquals(lesson1, "abc123");
+    }
+
+    @Test
     public void equals_sameAttributes_returnsTrue() {
         Lesson lesson1 = new Lesson(date, time, List.of(
                 new StudentLessonInfo(student1, true, 1),
