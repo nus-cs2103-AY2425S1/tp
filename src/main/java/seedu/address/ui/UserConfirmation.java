@@ -1,8 +1,13 @@
 package seedu.address.ui;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+
 import java.util.Optional;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+/**
+ * Represents a dialog box that shows a confirmation message to the user.
+ */
 public class UserConfirmation {
 
     /**
@@ -19,4 +24,5 @@ public class UserConfirmation {
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;
     }
+
 }

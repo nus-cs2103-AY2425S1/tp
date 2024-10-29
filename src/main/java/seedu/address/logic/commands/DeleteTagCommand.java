@@ -29,12 +29,13 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tag(s) deleted: ";
     public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
     public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n";
-    private String TAG_TO_DELETE;
     public static final String MESSAGE_CONFIRMATION = "The following tags are tagged on some guests:\n"
             + "%s\n"
             + "Deleting the tags will remove them from the guests.\n"
             + "Are you sure you want to delete? Click 'OK' to confirm.";
     private final List<Tag> tags;
+
+    private String tagToDelete;
 
     /**
      * @param tags The tag object to be added.
@@ -64,7 +65,7 @@ public class DeleteTagCommand extends Command {
                     .map(Tag::toString)
                     .collect(Collectors.joining(", "));
 
-            TAG_TO_DELETE = tagsInUseString;
+            tagToDelete = tagsInUseString;
             String confirmationMessage = String.format(MESSAGE_CONFIRMATION, tagsInUseString);
             boolean isConfirmed = UserConfirmation.getConfirmation(confirmationMessage);
 
