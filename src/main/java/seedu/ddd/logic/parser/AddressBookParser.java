@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ddd.commons.core.LogsCenter;
+import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.Command;
@@ -61,7 +62,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddContactCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
 
             if (commandFlag == null) {
                 throw new ParseException(String.format(MESSAGE_INVALID_FLAGS, FLAG_PARSE_ERROR));
