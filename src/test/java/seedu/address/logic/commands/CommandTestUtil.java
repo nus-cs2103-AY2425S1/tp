@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -96,10 +98,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final UpdateCommand.UpdateStudentDescriptor DESC_AMY;
-    public static final UpdateCommand.UpdateStudentDescriptor DESC_BOB;
-    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_AMY;
-    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_BOB;
+    public static final UpdateStudentDescriptor DESC_AMY;
+    public static final UpdateStudentDescriptor DESC_BOB;
+    public static final UpdateTaskDescriptor DESC_TASK_AMY;
+    public static final UpdateTaskDescriptor DESC_TASK_BOB;
 
     static {
         DESC_AMY = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -169,5 +171,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
-
 }

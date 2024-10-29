@@ -26,7 +26,6 @@ import seedu.address.ui.Ui.UiState;
  * Contains integration tests (interaction with the Model) and unit tests for AddTaskCommand.
  */
 public class AddTaskCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

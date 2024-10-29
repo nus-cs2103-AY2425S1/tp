@@ -12,7 +12,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.Ui.UiState;
 
 public class ClearCommandTest {
-
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
@@ -31,5 +30,4 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, UiState.DETAILS,
                 expectedModel);
     }
-
 }

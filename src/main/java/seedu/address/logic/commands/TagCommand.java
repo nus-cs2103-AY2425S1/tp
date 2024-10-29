@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -48,7 +49,7 @@ public class TagCommand extends Command {
 
 
     public final Name nameToTag;
-    public final UpdateCommand.UpdateStudentDescriptor tagsToAdd;
+    public final UpdateStudentDescriptor tagsToAdd;
 
     /**
      * @param nameToTag name of the student in the address book to tag

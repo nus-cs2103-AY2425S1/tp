@@ -50,7 +50,7 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /** Returns the address book */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -92,5 +92,4 @@ public interface Model {
      * If no such student exists, returns null.
      */
     Student getStudentByName(Name name);
-
 }

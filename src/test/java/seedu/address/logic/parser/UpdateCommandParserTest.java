@@ -140,8 +140,7 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + PHONE_DESC_BOB;
 
-        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -224,7 +223,7 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + SUBJECT_EMPTY;
 
-        UpdateCommand.UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withSubjects().build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withSubjects().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -235,8 +234,7 @@ public class UpdateCommandParserTest {
         Name targetName = new Name(VALID_NAME_AMY);
         String userInput = targetName + LESSONTIME_EMPTY;
 
-        UpdateCommand.UpdateStudentDescriptor descriptor =
-                new UpdateStudentDescriptorBuilder().withLessonTimes().build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLessonTimes().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

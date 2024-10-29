@@ -67,5 +67,4 @@ public class ViewCommandTest {
         // different student -> returns false
         assertFalse(viewAmyCommand.equals(viewBobCommand));
     }
-
 }

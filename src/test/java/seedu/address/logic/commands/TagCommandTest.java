@@ -45,7 +45,7 @@ public class TagCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student taggedStudent = model.getAddressBook().getStudentList().get(0);
-        UpdateCommand.UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(taggedStudent).build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(taggedStudent).build();
 
         TagCommand tagCommand = new TagCommand(taggedStudent.getName(), descriptor);
 
@@ -131,7 +131,7 @@ public class TagCommandTest {
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Name invalidName = new Name("Skibidi");
-        UpdateCommand.UpdateStudentDescriptor descriptor =
+        UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
         TagCommand tagCommand = new TagCommand(invalidName, descriptor);
 
@@ -142,7 +142,7 @@ public class TagCommandTest {
     public void equals() {
         TagCommand tagCommand = new TagCommand(new Name(VALID_NAME_BOB), DESC_BOB);
 
-        UpdateCommand.UpdateStudentDescriptor copyDescriptor = new UpdateStudentDescriptor(DESC_BOB);
+        UpdateStudentDescriptor copyDescriptor = new UpdateStudentDescriptor(DESC_BOB);
         TagCommand tagCommandWithSameValues = new TagCommand(new Name(VALID_NAME_BOB), copyDescriptor);
         assertEquals(tagCommand, tagCommandWithSameValues);
 

@@ -37,6 +37,7 @@ public class DeleteTaskCommandTest {
     private Model model;
     private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
     private Student targetStudent;
+
     @BeforeEach
     public void setUp() {
         // ensure the model has task to delete
@@ -51,6 +52,7 @@ public class DeleteTaskCommandTest {
         // reinitialise target student after updating the model
         targetStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
     }
+
     @Test
     public void execute_validArgument_success() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetStudent.getName(), INDEX_FIRST_TASK);
@@ -80,7 +82,6 @@ public class DeleteTaskCommandTest {
 
         assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
-
 
     @Test
     public void execute_invalidName_throwsCommandException() {

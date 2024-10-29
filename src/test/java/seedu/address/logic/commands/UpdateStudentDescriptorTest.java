@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 
 public class UpdateStudentDescriptorTest {
@@ -20,8 +21,8 @@ public class UpdateStudentDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        UpdateCommand.UpdateStudentDescriptor descriptorWithSameValues =
-                new UpdateCommand.UpdateStudentDescriptor(DESC_AMY);
+        UpdateStudentDescriptor descriptorWithSameValues =
+                new UpdateStudentDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +38,7 @@ public class UpdateStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        UpdateCommand.UpdateStudentDescriptor updatedAmy =
+        UpdateStudentDescriptor updatedAmy =
                 new UpdateStudentDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
 
@@ -59,8 +60,8 @@ public class UpdateStudentDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        UpdateCommand.UpdateStudentDescriptor updateStudentDescriptor = new UpdateCommand.UpdateStudentDescriptor();
-        String expected = UpdateCommand.UpdateStudentDescriptor.class.getCanonicalName() + "{name="
+        UpdateStudentDescriptor updateStudentDescriptor = new UpdateStudentDescriptor();
+        String expected = UpdateStudentDescriptor.class.getCanonicalName() + "{name="
                 + updateStudentDescriptor.getName().orElse(null) + ", phone="
                 + updateStudentDescriptor.getPhone().orElse(null) + ", emergencyContact="
                 + updateStudentDescriptor.getEmergencyContact().orElse(null) + ", address="

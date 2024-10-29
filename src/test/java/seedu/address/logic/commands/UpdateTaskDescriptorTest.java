@@ -14,7 +14,6 @@ import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
 import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 
 public class UpdateTaskDescriptorTest {
-
     @Test
     public void equals() {
         // same values -> returns true

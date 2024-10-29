@@ -218,5 +218,4 @@ public class UpdateTaskCommandTest {
                 + updateTaskDescriptor + "}";
         assertEquals(expected, updateTaskCommand.toString());
     }
-
 }

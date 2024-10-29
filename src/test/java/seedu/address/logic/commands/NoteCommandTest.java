@@ -28,7 +28,6 @@ import seedu.address.ui.Ui.UiState;
  * Contains integration tests (interaction with the Model) and unit tests for NoteCommand.
  */
 public class NoteCommandTest {
-
     private static final String NOTE_STUB = "Some note";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

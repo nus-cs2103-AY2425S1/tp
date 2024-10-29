@@ -19,7 +19,6 @@ import seedu.address.ui.Ui.UiState;
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
-
     private Model model;
 
     @BeforeEach
@@ -46,5 +45,4 @@ public class AddCommandIntegrationTest {
         assertCommandFailure(new AddCommand(studentInList), model,
                 AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
-
 }

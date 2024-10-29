@@ -25,7 +25,6 @@ import seedu.address.ui.Ui.UiState;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

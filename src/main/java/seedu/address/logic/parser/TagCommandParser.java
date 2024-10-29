@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
 
@@ -34,7 +34,7 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        UpdateCommand.UpdateStudentDescriptor editStudentTags = new UpdateCommand.UpdateStudentDescriptor();
+        UpdateStudentDescriptor editStudentTags = new UpdateStudentDescriptor();
 
         if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
             editStudentTags.setLevel(

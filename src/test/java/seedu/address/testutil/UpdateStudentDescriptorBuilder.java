@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.EmergencyContact;
 import seedu.address.model.student.LessonTime;
@@ -20,21 +20,21 @@ import seedu.address.model.student.Subject;
  */
 public class UpdateStudentDescriptorBuilder {
 
-    private UpdateCommand.UpdateStudentDescriptor descriptor;
+    private UpdateStudentDescriptor descriptor;
 
     public UpdateStudentDescriptorBuilder() {
-        descriptor = new UpdateCommand.UpdateStudentDescriptor();
+        descriptor = new UpdateStudentDescriptor();
     }
 
-    public UpdateStudentDescriptorBuilder(UpdateCommand.UpdateStudentDescriptor descriptor) {
-        this.descriptor = new UpdateCommand.UpdateStudentDescriptor(descriptor);
+    public UpdateStudentDescriptorBuilder(UpdateStudentDescriptor descriptor) {
+        this.descriptor = new UpdateStudentDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code UpdateStudentDescriptor} with fields containing {@code student}'s details
      */
     public UpdateStudentDescriptorBuilder(Student student) {
-        descriptor = new UpdateCommand.UpdateStudentDescriptor();
+        descriptor = new UpdateStudentDescriptor();
         descriptor.setName(student.getName());
         descriptor.setPhone(student.getPhone());
         descriptor.setEmergencyContact(student.getEmergencyContact());
@@ -113,7 +113,7 @@ public class UpdateStudentDescriptorBuilder {
         return this;
     }
 
-    public UpdateCommand.UpdateStudentDescriptor build() {
+    public UpdateStudentDescriptor build() {
         return descriptor;
     }
 }

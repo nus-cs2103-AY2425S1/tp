@@ -76,8 +76,7 @@ public class UpdateCommandTest {
                 .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .withSubjects(VALID_SUBJECT_MATH).build();
 
-        UpdateCommand.UpdateStudentDescriptor descriptor =
-                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_S1_EXPRESS).withSubjects(VALID_SUBJECT_MATH).build();
         UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
 
@@ -94,7 +93,7 @@ public class UpdateCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         Student updatedStudent = model.getFilteredStudentList().get(0);
         UpdateCommand updateCommand =
-                new UpdateCommand(updatedStudent.getName(), new UpdateCommand.UpdateStudentDescriptor());
+                new UpdateCommand(updatedStudent.getName(), new UpdateStudentDescriptor());
 
         String expectedMessage =
                 String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
@@ -125,7 +124,7 @@ public class UpdateCommandTest {
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        UpdateCommand.UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(firstStudent).build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(firstStudent).build();
         UpdateCommand updateCommand = new UpdateCommand(model.getFilteredStudentList().get(1).getName(), descriptor);
 
         assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_STUDENT);
@@ -146,8 +145,7 @@ public class UpdateCommandTest {
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Name invalidName = new Name("Skibidi");
-        UpdateCommand.UpdateStudentDescriptor descriptor =
-                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
         UpdateCommand updateCommand = new UpdateCommand(invalidName, descriptor);
 
         assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_STUDENT_UPDATE);
@@ -173,7 +171,7 @@ public class UpdateCommandTest {
         final UpdateCommand standardCommand = new UpdateCommand(new Name(VALID_NAME_AMY), DESC_AMY);
 
         // same values -> returns true
-        UpdateStudentDescriptor copyDescriptor = new UpdateCommand.UpdateStudentDescriptor(DESC_AMY);
+        UpdateStudentDescriptor copyDescriptor = new UpdateStudentDescriptor(DESC_AMY);
         UpdateCommand commandWithSameValues = new UpdateCommand(new Name(VALID_NAME_AMY), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -196,7 +194,7 @@ public class UpdateCommandTest {
     @Test
     public void toStringMethod() {
         Name name = new Name("Test name");
-        UpdateStudentDescriptor updateStudentDescriptor = new UpdateCommand.UpdateStudentDescriptor();
+        UpdateStudentDescriptor updateStudentDescriptor = new UpdateStudentDescriptor();
         UpdateCommand updateCommand = new UpdateCommand(name, updateStudentDescriptor);
         String expected = UpdateCommand.class.getCanonicalName() + "{name=" + name + ", updateStudentDescriptor="
                 + updateStudentDescriptor + "}";
