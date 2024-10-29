@@ -65,6 +65,7 @@ public class LevelTest {
         assertTrue(Level.isValidLevelName("S4  EXPRESS"));
     }
 
+
     @Test
     public void equals() {
         Level level = new Level("S1 EXPRESS");

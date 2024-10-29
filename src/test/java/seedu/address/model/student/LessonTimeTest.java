@@ -94,6 +94,8 @@ public class LessonTimeTest {
         assertFalse(lt.canMerge(new LessonTime("SUN-14:00-15:30")));
     }
 
+
+
     @Test
     public void toStringTest() {
         LessonTime lt = new LessonTime("SUN-11:00-13:30");
