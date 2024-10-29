@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ADD_TASK_SUCCESS;
@@ -12,13 +12,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.task.Task;
 
-public class AssignTaskCommand extends Command{
+public class AssignTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-task";
 
@@ -29,6 +31,7 @@ public class AssignTaskCommand extends Command{
             + "TASK_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "1";
 
+    public static final String MESSAGE_DUPLICATE_TASK = "Task '%s' is already assigned to %s";
     private final Index personIndex;
     private final Set<Index> taskIndexes;
 
@@ -69,34 +72,39 @@ public class AssignTaskCommand extends Command{
         }
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
-        if (personToEdit instanceof Vendor) {
+
+        boolean isVendor = false;
+        for (Vendor vendor : model.getFilteredVendorList()) {
+            if (personToEdit.getName().equals(vendor.getName())) {
+                isVendor = true;
+                break;
+            }
+        }
+        if (!isVendor) {
             throw new CommandException(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK);
         }
 
-        Set<Task> taskToAdd = new HashSet<>();
-        Set<Task> editedTasks = personToEdit.getTasks();
+        Set<Task> tasksToAdd = new HashSet<>();
+        Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
         for (Index taskIndex : taskIndexes) {
             if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
                 throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
+
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
-            taskToAdd.add(newTask);
-            editedTasks.add(newTask);
+            if (updatedTasks.contains(newTask)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK,
+                        newTask.toString(), personToEdit.getName().toString()));
+            }
+            tasksToAdd.add(newTask);
+            updatedTasks.add(newTask);
         }
 
-        Person editedPerson = new Person(
-                personToEdit.getName(),
-                personToEdit.getPhone(),
-                personToEdit.getEmail(),
-                personToEdit.getAddress(),
-                personToEdit.getTags(),
-                personToEdit.getWeddings(),
-                editedTasks
-        );
+        Person editedPerson = PersonTaskEditorUtil.createEditedPersonWithUpdatedTasks(personToEdit, updatedTasks);
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, taskToAdd));
+        return new CommandResult(generateSuccessMessage(editedPerson, tasksToAdd));
     }
 
     @Override

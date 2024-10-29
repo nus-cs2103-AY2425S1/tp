@@ -19,7 +19,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
 
     public static final String MESSAGE_INVALID_TASK_TYPE = "Unknown task type: %1$s. "
@@ -40,6 +39,13 @@ public class Messages {
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
     public static final String MESSAGE_TAG_NOT_FOUND_IN_CONTACT = "Some tags were not found in the person's tag list.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
+    public static final String MESSAGE_ADD_TASK_SUCCESS = "Added task(s) %1$s to %2$s.";
+    public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
+    public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) were not found in the person's task list.";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
+
+    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "The index specified does not refer "
+            + "to a Vendor, tasks can only be assigned to vendors.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "

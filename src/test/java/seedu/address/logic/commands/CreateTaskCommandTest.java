@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.task.Task;
@@ -77,7 +78,7 @@ public class CreateTaskCommandTest {
 
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedString = "seedu.address.logic.commands.CreateTaskCommand{taskToAdd=[[T][ ] Buy groceries]}";
+        String expectedString = "seedu.address.logic.commands.task.CreateTaskCommand{taskToAdd=[[T][ ] Buy groceries]}";
         assertEquals(expectedString, command.toString());
     }
 
