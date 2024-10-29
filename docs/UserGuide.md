@@ -246,6 +246,30 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Importing data from CSV file `import`
+
+Imports contacts based on CSV file
+
+Format:`import path/CSV FILE PATH`
+
+* File path can be relative or absolute
+
+Examples:
+* `import path/data/tutorial12.csv` will import the contacts found from the comma separated file (tutorial12.csv from relative path given)
+
+### Exporting data into CSV file `export`
+
+Imports contacts based on CSV file
+
+Format:`export path/DESIRED FILE DESTINATION`
+
+* File path can be relative or absolute
+
+Examples:
+* `Export path/data/tutorial12.csv` will export the contacts in the Address book as a csv file (tutorial12.csv at the relative path given)
+
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -266,6 +290,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -289,18 +314,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                          |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool`   |
-| **Clear**  | `clear`                                                                                                                                                                                                                                   |
-| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                                |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                |
-| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                     |
-| **List**   | `list`                                                                                                                                                                                                                                    |
-| **Help**   | `help`                                                                                                                                                                                                                                    |
-| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                               |
-| **GitHub** | `github n/NAME`                                                                                                                                                                                                                           |
-| **Mark**   | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                               |
-| **Unmark** | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                           |
-| **Sort**   | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
+| **Clear**  | `clear`                                                                                                                                                                                                                                 |
+| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
+| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
+| **List**   | `list`                                                                                                                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                                                                  |
+| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
+| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
+| **Mark**   | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
+| **Unmark** | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
+| **Sort**   | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                |
+| **Import** | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                                                                    |
+| **Export** | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                                                                          |
