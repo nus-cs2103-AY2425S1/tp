@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -23,6 +25,8 @@ import seedu.address.logic.commands.property.FindCommand;
 import seedu.address.logic.commands.property.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.property.AddressContainsKeywordsPredicate;
+import seedu.address.model.property.LandlordName;
+import seedu.address.model.property.LandlordNameContainsKeywordsPredicate;
 import seedu.address.model.property.Property;
 import seedu.address.testutil.property.EditPropertyDescriptorBuilder;
 import seedu.address.testutil.property.PropertyBuilder;
@@ -76,9 +80,23 @@ public class PropertyCommandParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findByLandlordName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " "
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " " + PREFIX_NAME
+                + keywords.stream().collect(Collectors.joining(" ")));
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+        String commandWord = matcher.group("commandWord");
+        String arguments = matcher.group("arguments");
+        FindCommand command = (FindCommand) parser.parseCommand(commandWord, arguments);
+        assertEquals(new FindCommand(new LandlordNameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findByAddress() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS
                 + keywords.stream().collect(Collectors.joining(" ")));
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
