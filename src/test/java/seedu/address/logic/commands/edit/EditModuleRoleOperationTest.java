@@ -37,12 +37,12 @@ public class EditModuleRoleOperationTest {
     }
 
     @Test
-    public void getModuleCodeChangeDescription_noChange_success() {
+    public void getModuleCodeChangesDescription_noChange_success() {
         ModuleRoleMap moduleRoleMapBefore = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2101")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR}
         );
-        String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
+        String actualDescription = EditModuleRoleOperation.getModuleCodeChangesDescription(
                 moduleRoleMapBefore, moduleRoleMapBefore
         );
         String expectedDescription = "";
@@ -50,7 +50,7 @@ public class EditModuleRoleOperationTest {
     }
 
     @Test
-    public void getModuleCodeChangeDescription_addedOnly_success() {
+    public void getModuleCodeChangesDescription_addedOnly_success() {
         ModuleRoleMap moduleRoleMapBefore = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2101")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR}
@@ -59,7 +59,7 @@ public class EditModuleRoleOperationTest {
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2101"), new ModuleCode("CS2102")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR, RoleType.PROFESSOR}
         );
-        String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
+        String actualDescription = EditModuleRoleOperation.getModuleCodeChangesDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
         String expectedDescription = "Module role(s) added: "
@@ -68,7 +68,7 @@ public class EditModuleRoleOperationTest {
     }
 
     @Test
-    public void getModuleCodeChangeDescription_deletedOnly_success() {
+    public void getModuleCodeChangesDescription_deletedOnly_success() {
         ModuleRoleMap moduleRoleMapBefore = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2101")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR}
@@ -77,7 +77,7 @@ public class EditModuleRoleOperationTest {
                 new ModuleCode[]{new ModuleCode("CS2103T")},
                 new RoleType[]{RoleType.STUDENT}
         );
-        String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
+        String actualDescription = EditModuleRoleOperation.getModuleCodeChangesDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
         String expectedDescription = "Module role(s) deleted: "
@@ -86,7 +86,7 @@ public class EditModuleRoleOperationTest {
     }
 
     @Test
-    public void getModuleCodeChangeDescription_addedAndDeleted_success() {
+    public void getModuleCodeChangesDescription_addedAndDeleted_success() {
         ModuleRoleMap moduleRoleMapBefore = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2101")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR}
@@ -95,7 +95,7 @@ public class EditModuleRoleOperationTest {
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("CS2102")},
                 new RoleType[]{RoleType.STUDENT, RoleType.PROFESSOR}
         );
-        String actualDescription = EditModuleRoleOperation.getModuleCodeChangeDescription(
+        String actualDescription = EditModuleRoleOperation.getModuleCodeChangesDescription(
                 moduleRoleMapBefore, moduleRoleMapAfter
         );
         String expectedDescription = "Module role(s) added: "
