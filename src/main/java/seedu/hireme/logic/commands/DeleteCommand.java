@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
         model.deleteItem(internshipApplicationToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete)), false,
-                false, false, model.getInsights());
+                false, false, model.getChartData());
     }
 
     @Override

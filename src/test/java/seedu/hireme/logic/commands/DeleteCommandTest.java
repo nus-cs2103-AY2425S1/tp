@@ -40,7 +40,7 @@ public class DeleteCommandTest {
         expectedModel.deleteItem(internshipApplicationToDelete);
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
-                false, false, expectedModel.getInsights());
+                false, false, expectedModel.getChartData());
 
         assertCommandSuccess(deleteCommand, model, expectedCommandResult, expectedModel);
     }
@@ -69,7 +69,7 @@ public class DeleteCommandTest {
         showNoInternshipApplication(expectedModel);
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
-                false, false, expectedModel.getInsights());
+                false, false, expectedModel.getChartData());
 
         assertCommandSuccess(deleteCommand, model, expectedCommandResult, expectedModel);
     }

@@ -200,10 +200,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isInsights()) {
-                handleOpenInsights(commandResult.getInsights());
-            } else if (commandResult.getInsights() != null) {
-                insightsWindow.update(commandResult.getInsights());
+            if (commandResult.isChart()) {
+                handleOpenInsights(commandResult.getChartData());
+            } else if (commandResult.getChartData() != null) {
+                insightsWindow.update(commandResult.getChartData());
             }
 
             if (commandResult.isExit()) {

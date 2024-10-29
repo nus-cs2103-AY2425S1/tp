@@ -12,13 +12,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.commands.ChartCommand;
 import seedu.hireme.logic.commands.ClearCommand;
 import seedu.hireme.logic.commands.DeleteCommand;
 import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
-import seedu.hireme.logic.commands.InsightsCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.commands.StatusCommand;
@@ -93,8 +93,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_insights() throws Exception {
-        assertTrue(parser.parseCommand(InsightsCommand.COMMAND_WORD) instanceof InsightsCommand);
-        assertTrue(parser.parseCommand(InsightsCommand.COMMAND_WORD + " 3") instanceof InsightsCommand);
+        assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD) instanceof ChartCommand);
+        assertTrue(parser.parseCommand(ChartCommand.COMMAND_WORD + " 3") instanceof ChartCommand);
     }
 
     @Test

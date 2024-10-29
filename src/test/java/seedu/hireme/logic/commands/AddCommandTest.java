@@ -207,7 +207,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public java.util.Map<Status, Integer> getInsights() {
+        public java.util.Map<Status, Integer> getChartData() {
             return Map.ofEntries();
         }
 

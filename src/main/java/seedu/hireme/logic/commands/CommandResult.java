@@ -20,20 +20,20 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    private final boolean isInsights;
+    private final boolean isChart;
 
-    private final Map<Status, Integer> insights;
+    private final Map<Status, Integer> chartData;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean isInsights, Map<Status, Integer> insights) {
+                         boolean isChart, Map<Status, Integer> chartData) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.isInsights = isInsights;
-        this.insights = insights;
+        this.isChart = isChart;
+        this.chartData = chartData;
     }
 
     /**
@@ -56,11 +56,11 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
-    public boolean isInsights() {
-        return isInsights;
+    public boolean isChart() {
+        return isChart;
     }
-    public Map<Status, Integer> getInsights() {
-        return insights;
+    public Map<Status, Integer> getChartData() {
+        return chartData;
     }
 
     @Override
@@ -75,12 +75,12 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        boolean isInsightsEqual = Objects.equals(insights, otherCommandResult.insights);
+        boolean isInsightsEqual = Objects.equals(chartData, otherCommandResult.chartData);
 
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && isInsights == otherCommandResult.isInsights
+                && isChart == otherCommandResult.isChart
                 && isInsightsEqual;
     }
 
@@ -95,7 +95,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("insights", insights)
+                .add("chart", isChart)
+                .add("chartData", chartData)
                 .toString();
     }
 

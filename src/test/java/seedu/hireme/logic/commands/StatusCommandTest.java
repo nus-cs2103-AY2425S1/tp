@@ -50,7 +50,7 @@ public class StatusCommandTest {
         expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
-                false, false, expectedModel.getInsights());
+                false, false, expectedModel.getChartData());
 
         assertCommandSuccess(statusCommand, clonedModel, expectedCommandResult, expectedModel);
     }
