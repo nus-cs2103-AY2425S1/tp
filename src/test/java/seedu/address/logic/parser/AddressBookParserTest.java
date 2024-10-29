@@ -7,10 +7,12 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.GROUP_A;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPaths.VALID_NO_DUPS_IMPORT_FILE;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -27,16 +29,21 @@ import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.GroupsUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalPaths;
 
 public class AddressBookParserTest {
 
@@ -116,6 +123,33 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
+    @Test
+    public void parseCommand_tag() throws Exception {
+        Tag tag = new Tag("test");
+        Set<Tag> tags = Set.of(tag);
+        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
+        assertEquals(expectedCommand,
+                parser.parseCommand(TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + "t/test"));
+    }
+
+    @Test
+    public void parseCommand_untag() throws Exception {
+        Tag tag = new Tag("test");
+        Set<Tag> tags = Set.of(tag);
+        UntagCommand expectedCommand = new UntagCommand(INDEX_FIRST_PERSON, tags);
+        assertEquals(expectedCommand,
+                parser.parseCommand(UntagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + "t/test"));
+    }
+
+    @Test
+    public void parseCommand_import() throws Exception {
+        ImportCommand expectedCommand = new ImportCommand(VALID_NO_DUPS_IMPORT_FILE);
+        assertEquals(expectedCommand,
+                parser.parseCommand(ImportCommand.COMMAND_WORD + " " + TypicalPaths.getTypicalPath().toString()
+                        + "\\src\\test\\data\\ImportCommandTest\\valid_noDups_importFile.csv"));
+    }
 
     @Test
     public void parseCommand_list() throws Exception {
@@ -133,4 +167,6 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+
 }
