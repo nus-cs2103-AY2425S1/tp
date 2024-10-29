@@ -369,7 +369,7 @@ Command Format: `bar`
 * If no payments were made in a given month, the value for that month will be zero.
 
 *Input: User enters the bar command.*  
-![Ui](images/bar.png)
+![Ui](images/barcommand.png)
 
 **Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
@@ -417,6 +417,7 @@ Method 1:
 **Example Usage:**
 *Input: User enters the `info 1` command to display detailed information for the first student.*
 ![Ui](images/infocommandinput.png)
+
 *Output: A window pops up with the detailed information of the student.*
 ![Ui](images/infocommandoutput.png)
 
