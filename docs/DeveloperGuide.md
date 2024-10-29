@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# DocTrack Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,12 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- Initial project template (code and documentation):
+    - [AB3](https://github.com/se-edu/addressbook-level3)
+- Third-party libraries:
+    - [JUnit](https://junit.org/junit5/)
+    - [JavaFX](https://openjfx.io/)
+    - [Jackson](https://github.com/FasterXML/jackson)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +55,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -157,7 +162,7 @@ The `Storage` component,
   * data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
   * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
-  * data is saved in `JsonAppointmnetBookStorage` which inherits from interface `AppointmentBookStorage`.
+  * data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
   * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
 * User Preference data:
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
@@ -169,9 +174,126 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Flow**
 
-This section describes some noteworthy details on how certain features are implemented.
+The activity diagram shows the general sequence of steps when a user interacts with DocTrack.
+
+<puml src="diagrams/OverallFlowActivityDiagram.puml" width="700"></puml>
+
+1. The user types a command in the `CommandBox`.
+2. The `AddressBookParser` parses the command.
+3. If the command is a known command and is in a valid format, a parser creates the corresponding 
+   `Command` object. Else, an error is displayed. 
+4. The `Command` object is executed.
+5. The `UI` displays the result of the command execution to the user.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Implementation of main features**
+
+### Add person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Edit person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Delete person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Find person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### List person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Clear person feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Add appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Edit appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Delete appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Find appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### List appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Clear appointment feature
+
+#### Implementation
+
+#### Design considerations
+
+---
+
+## Implementation of general features
+
+### Exit feature
+
+#### Implementation
+
+#### Design considerations
+
+
+### Help feature
+
+#### Implementation
+
+#### Design considerations
+
+---
+
+## Proposed features
 
 ### \[Proposed\] Undo/redo feature
 
@@ -247,9 +369,14 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+Steps 1 to 6 will similarly be implemented for the `Appointment` data. The `VersionedAppointmentBook` will 
+be initialized with the initial appointment book state, and the `currentStatePointer` pointing to that 
+single appointment book state. The `commit`, `undo`, and `redo` operations for `VersionedAppointmentBook` 
+will be implemented in the same way as the `VersionedAddressBook`.
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="550" />
 
 #### Design considerations:
 
@@ -280,6 +407,20 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Data storage and files**
+- The data of the patients and appointments is stored in the `data` folder.
+  - Patient data is stored in `data/addressbook.json`.
+  - Appointment data is stored in `data/appointmentbook.json`.
+
+<box type="warning" seamless>
+
+**Note:**
+For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
+is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -607,6 +748,8 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -624,6 +767,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Editing a person
+
+### Finding a person
+
+### Adding an appointment
+
+### Deleting an appointment
+
+### Editing an appointment
+
+### Finding an appointment
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -631,3 +786,20 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned enhancements**
+Team size: 5
+
+1.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+We highly recommend adding an appendix named Appendix: Effort that evaluators can use to estimate the total project effort.
+- Keep it brief (~1 page)
+- Explain the difficulty level, challenges faced, effort required, and achievements of the project. 
+- If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java. 
+- Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.

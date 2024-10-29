@@ -2,10 +2,18 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -33,9 +41,11 @@ public class JsonSerializableAppointmentBookTest {
             TEST_DATA_FOLDER.resolve("invalidAppointmentAppointmentBook.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE =
             TEST_DATA_FOLDER.resolve("duplicateAppointmentAppointmentBook.json");
-    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
+    private static final ArrayList<PersonDescriptor> typicalPersons = new ArrayList<>(
+            Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(typicalPersons);
 
-    // todo: fix
+    // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
     @Disabled("For next iteration")
     @Test
     void toModelType_typicalAppointmentsFile_success() throws Exception {
@@ -54,7 +64,7 @@ public class JsonSerializableAppointmentBookTest {
     }
 
 
-    // todo: fix
+    // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
     @Disabled("For next iteration")
     @Test
     void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
@@ -80,7 +90,7 @@ public class JsonSerializableAppointmentBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<PersonDescriptor> persons) {
-            this.persons.setAll(persons.stream().map(p -> new Person(0, p)).toList());
+            this.persons.setAll(persons.stream().map(p -> new Person(getNextPersonId(), p)).toList());
         }
 
         @Override

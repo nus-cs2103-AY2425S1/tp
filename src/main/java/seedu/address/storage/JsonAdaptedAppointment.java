@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedAppointment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
-    public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a positive integer.";
+    public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a non-negative integer.";
     public static final String PERSON_CHECK_MESSAGE_FORMAT = "Person with person ID exist in address book";
     public static final String DATE_TIME_CONSTRAINTS =
             "Appointment DateTime must be in the format yyyy-MM-dd'T'HH:mm:ss";
@@ -58,8 +58,8 @@ public class JsonAdaptedAppointment {
         appointmentType = source.getAppointmentType().value;
         appointmentDateTime = source.getAppointmentDateTime().toString();
         personId = source.getPerson().getPersonId();
-        sickness = source.getSickness().value;
-        medicine = source.getMedicine().value;
+        sickness = String.valueOf(source.getSickness());
+        medicine = String.valueOf(source.getMedicine());
     }
 
     /**
@@ -99,6 +99,9 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
+        if (personId < 0) {
+            throw new IllegalValueException(String.format(INTEGER_CHECK_MESSAGE_FORMAT));
+        }
         final int modelPersonId = personId;
 
         final Optional<Person> modelPersonOptional = addressBook.findPerson(modelPersonId);
@@ -107,21 +110,13 @@ public class JsonAdaptedAppointment {
         }
         Person modelPerson = modelPersonOptional.get();
 
-        if (sickness == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Sickness.class.getSimpleName()));
-        }
         if (!Sickness.isValidSickness(sickness)) {
             throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
         }
         final Sickness modelSickness = new Sickness(sickness);
 
-        if (medicine == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Medicine.class.getSimpleName()));
-        }
         if (!Medicine.isValidMedicine(medicine)) {
-            throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Medicine.MESSAGE_CONSTRAINTS);
         }
         final Medicine modelMedicine = new Medicine(medicine);
 

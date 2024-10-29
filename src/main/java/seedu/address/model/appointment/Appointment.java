@@ -86,6 +86,7 @@ public class Appointment {
         return person;
     }
 
+
     public int getPersonId() {
         return person.getPersonId();
     }
@@ -113,6 +114,10 @@ public class Appointment {
     public boolean isSameAppointment(Appointment otherAppointment) {
         return appointmentDescriptor.isSameAppointment(otherAppointment.appointmentDescriptor)
                 && person.isSamePerson(otherAppointment.person);
+    }
+
+    public boolean isSameAppointment(AppointmentDescriptor otherAppointment) {
+        return appointmentDescriptor.isSameAppointment(otherAppointment);
     }
 
     /**
@@ -150,5 +155,4 @@ public class Appointment {
                 .add("sickness", getSickness())
                 .toString();
     }
-
 }

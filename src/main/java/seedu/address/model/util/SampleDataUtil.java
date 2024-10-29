@@ -60,23 +60,18 @@ public class SampleDataUtil {
     public static AppointmentDescriptor[] getSampleAppointments() {
         return new AppointmentDescriptor[]{
             new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 20, 9, 30), new Sickness("Flu"),
-                    new Medicine("Antiviral")),
+                    10, 20, 9, 30), new Sickness("Flu"), new Medicine("Antiviral")),
             new AppointmentDescriptor(new AppointmentType("Follow-up"), LocalDateTime.of(2024,
-                    10, 22, 14, 0), new Sickness("Diabetes"),
-                    new Medicine("Insulin")),
+                    10, 22, 14, 0), new Sickness("Diabetes"), new Medicine("Insulin")),
             new AppointmentDescriptor(new AppointmentType("Emergency"), LocalDateTime.of(2024,
-                    10, 23, 18, 45), new Sickness("Asthma"),
-                    new Medicine("Inhaler")),
+                    10, 23, 18, 45), new Sickness("Asthma"), new Medicine("Inhaler")),
             new AppointmentDescriptor(new AppointmentType("Check-up"), LocalDateTime.of(2024,
                     10, 25, 11, 15), new Sickness("Hypertension"),
                     new Medicine("Beta-blocker")),
             new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 28, 16, 30), new Sickness("Migraine"),
-                    new Medicine("Pain reliever")),
+                    10, 28, 16, 30), new Sickness("Migraine"), new Medicine("Pain reliever")),
             new AppointmentDescriptor(new AppointmentType("Vaccination"), LocalDateTime.of(2024,
-                    11, 1, 10, 0), new Sickness("Preventative Care"),
-                    new Medicine("Vaccine"))
+                    11, 1, 10, 0), new Sickness("Preventative Care"), new Medicine("Vaccine"))
         };
     }
 

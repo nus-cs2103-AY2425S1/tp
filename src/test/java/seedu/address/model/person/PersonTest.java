@@ -33,7 +33,6 @@ public class PersonTest {
         assertTrue(ALICE.isSamePerson(ALICE));
 
         // null -> returns false
-        // todo: check if this makes sense
         assertFalse(ALICE.isSamePerson((PersonDescriptor) null));
 
         // same name, all other attributes different -> returns true
