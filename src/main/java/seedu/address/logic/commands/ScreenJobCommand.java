@@ -47,7 +47,7 @@ public class ScreenJobCommand extends ScreenCommand {
 
 
         if (matchingPersons.isEmpty()) {
-            model.updateFilteredPersonList(unused -> true);
+            model.updateFilteredPersonList(unused -> false);
             return new CommandResult("0 candidates found");
         }
 
