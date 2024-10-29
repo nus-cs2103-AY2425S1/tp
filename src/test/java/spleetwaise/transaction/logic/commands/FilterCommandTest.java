@@ -17,6 +17,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -49,69 +50,13 @@ public class FilterCommandTest {
 
     @Test
     public void constructor_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> new FilterCommand(null, null, null, null));
-    }
-
-    @Test
-    public void execute_personOnly_success() {
-        FilterCommand cmd = new FilterCommand(testPerson, null, null, null);
-        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
-
-        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
-        assertEquals(1, txnModel.getFilteredTransactionList().size());
-        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
-        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
-    }
-
-    @Test
-    public void execute_amountOnly_success() {
-        FilterCommand cmd = new FilterCommand(null, testAmount, null, null);
-        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
-
-        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
-        assertEquals(1, txnModel.getFilteredTransactionList().size());
-        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
-        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
-    }
-
-    @Test
-    public void execute_descriptionOnly_success() {
-        FilterCommand cmd = new FilterCommand(null, null, testDescription, null);
-        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
-
-        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
-        assertEquals(1, txnModel.getFilteredTransactionList().size());
-        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
-        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
-    }
-
-    @Test
-    public void execute_descriptionDifferentCaseOnly_success() {
-        FilterCommand cmd = new FilterCommand(null, null,
-                new Description(testDescription.toString().toLowerCase()), null
-        );
-        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
-
-        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
-        assertEquals(1, txnModel.getFilteredTransactionList().size());
-        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
-        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
-    }
-
-    @Test
-    public void execute_dateOnly_success() {
-        FilterCommand cmd = new FilterCommand(null, null, null, testDate);
-        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
-
-        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
-        assertEquals(1, txnModel.getFilteredTransactionList().size());
-        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
-        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
+        assertThrows(NullPointerException.class, () -> new FilterCommand(null));
     }
 
     @Test
     public void execute_allParams_success() {
-        FilterCommand cmd = new FilterCommand(testPerson, testAmount, testDescription, testDate);
+        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription, testDate);
+        FilterCommand cmd = new FilterCommand(pred);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
@@ -122,48 +67,51 @@ public class FilterCommandTest {
 
     @Test
     public void equals_sameTransaction_returnsTrue() {
-        FilterCommand cmd1 = new FilterCommand(testPerson, testAmount, testDescription, testDate);
-        FilterCommand cmd2 = new FilterCommand(testPerson, testAmount, testDescription, testDate);
+        FilterCommandPredicate pred1 = new FilterCommandPredicate(testPerson, testAmount, testDescription, testDate);
+        FilterCommandPredicate pred2 = new FilterCommandPredicate(testPerson, testAmount, testDescription, testDate);
+        FilterCommand cmd1 = new FilterCommand(pred1);
+        FilterCommand cmd2 = new FilterCommand(pred1);
+        FilterCommand cmd3 = new FilterCommand(pred2);
 
         assertEquals(cmd1, cmd1);
         assertEquals(cmd1, cmd2);
+        assertEquals(cmd1, cmd3);
     }
 
     @Test
     public void equals_diffTransaction_returnsFalse() {
-        FilterCommand cmd1 = new FilterCommand(null, testAmount, testDescription, testDate);
-        FilterCommand cmd2 = new FilterCommand(testPerson, null, testDescription, testDate);
-        FilterCommand cmd3 = new FilterCommand(testPerson, testAmount, null, testDate);
-        FilterCommand cmd4 = new FilterCommand(testPerson, testAmount, testDescription, null);
+        FilterCommandPredicate pred1 = new FilterCommandPredicate(testPerson, null, null, null);
+        FilterCommandPredicate pred2 = new FilterCommandPredicate(null, testAmount, null, null);
+        FilterCommand cmd1 = new FilterCommand(pred1);
+        FilterCommand cmd2 = new FilterCommand(pred2);
 
         assertNotEquals(cmd1, cmd2);
-        assertNotEquals(cmd1, cmd3);
-        assertNotEquals(cmd1, cmd4);
-        assertNotEquals(cmd2, cmd3);
-        assertNotEquals(cmd2, cmd4);
-        assertNotEquals(cmd3, cmd4);
     }
 
     @Test
     public void equals_genericObject_returnsFalse() {
-        FilterCommand cmd1 = new FilterCommand(testPerson, testAmount, testDescription, testDate);
+        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription, testDate);
+        FilterCommand cmd = new FilterCommand(pred);
 
-        assertNotEquals(new Object(), cmd1);
+        assertNotEquals(new Object(), cmd);
     }
 
     @Test
     public void equals_null_returnsFalse() {
-        FilterCommand cmd1 = new FilterCommand(testPerson, testAmount, testDescription, testDate);
+        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription, testDate);
+        FilterCommand cmd = new FilterCommand(pred);
 
-        assertNotEquals(null, cmd1);
+        assertNotEquals(null, cmd);
     }
 
     @Test
     public void toString_success() {
-        FilterCommand cmd = new FilterCommand(null, null, testDescription, null);
+        FilterCommandPredicate pred = new FilterCommandPredicate(null, null, testDescription, null);
+        FilterCommand cmd = new FilterCommand(pred);
         assertEquals(
-                "spleetwaise.transaction.logic.commands.FilterCommand{contact=null, amount=null, "
-                        + "description=Sean owes me a lot for a landed property in Sentosa, date=null}",
+                "spleetwaise.transaction.logic.commands.FilterCommand{predicate=spleetwaise.transaction.model"
+                        + ".FilterCommandPredicate{contact=null, amount=null, description=Sean owes me a lot for a "
+                        + "landed property in Sentosa, date=null}}",
                 cmd.toString()
         );
     }

@@ -54,7 +54,6 @@ public class AddCommand extends Command {
     private final Description description;
     private final Date date;
     private final Set<Category> categories;
-    private Transaction transactionToAdd = null;
 
     /**
      * Creates an AddCommand to add the specified {@code Transaction}.
@@ -91,7 +90,7 @@ public class AddCommand extends Command {
 
         Person personForTransaction = lastShownList.get(targetIndex.getZeroBased());
 
-        transactionToAdd = new Transaction(personForTransaction, amount, description, date, categories);
+        Transaction transactionToAdd = new Transaction(personForTransaction, amount, description, date, categories);
 
         if (model.hasTransaction(transactionToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TXN);
