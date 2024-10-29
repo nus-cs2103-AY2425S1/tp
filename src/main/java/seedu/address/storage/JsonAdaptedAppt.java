@@ -17,8 +17,13 @@ public class JsonAdaptedAppt {
     private final String dateTime;
     private final String healthService;
 
+    /**
+     * Constructs a {@code JsonAdaptedAppt} with the given appointment details.
+     * @param dateTime
+     * @param healthService
+     */
     @JsonCreator
-    public JsonAdaptedAppt(@JsonProperty("dateTime") String dateTime, 
+    public JsonAdaptedAppt(@JsonProperty("dateTime") String dateTime,
         @JsonProperty("healthService") String healthService) {
         this.dateTime = dateTime;
         this.healthService = healthService;
@@ -47,12 +52,6 @@ public class JsonAdaptedAppt {
      * @throws IllegalValueException
      */
     public Appt toModelType() throws IllegalValueException {
-        if (!Appt.isValidAppt(dateTime)) {
-            throw new IllegalValueException(Appt.MESSAGE_CONSTRAINTS);
-        }
-        if (!HealthService.isValidHealthserviceName(healthService) || healthService == null) {
-            throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
-        }
         return new Appt(LocalDateTime.parse(dateTime), new HealthService(healthService));
     }
 }

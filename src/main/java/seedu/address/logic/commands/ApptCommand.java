@@ -3,13 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
@@ -30,8 +28,7 @@ public class ApptCommand extends Command {
         + "Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC \n"
         + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 h/Blood Test i/S1234567A";
 
-    private final LocalDateTime dateTime;
-    private final HealthService healthService;
+    private final Appt appt;
     private final Nric nric;
 
     /**
@@ -39,10 +36,9 @@ public class ApptCommand extends Command {
      * @param healthService of the appointment
      * @param nric of the patient
      */
-    public ApptCommand(LocalDateTime dateTime, HealthService healthService, Nric nric) {
-        requireAllNonNull(dateTime, healthService, nric);
-        this.dateTime = dateTime;
-        this.healthService = healthService;
+    public ApptCommand(Appt appt, Nric nric) {
+        requireAllNonNull(appt, nric);
+        this.appt = appt;
         this.nric = nric;
     }
 
@@ -70,14 +66,14 @@ public class ApptCommand extends Command {
 
         // Check for duplicate appointments
         boolean hasDuplicate = patient.getAppts().stream()
-            .anyMatch(appt -> appt.getDateTime().toLocalDate().equals(dateTime.toLocalDate()));
+            .anyMatch(appt -> appt.equals(this.appt));
 
         if (hasDuplicate) {
             throw new CommandException(MESSAGE_DUPLICATE_APPT);
         }
 
         // Add the appointment to the patient's list of appointments
-        patient.addAppt(new Appt(dateTime, healthService));
+        patient.addAppt(this.appt);
 
         return new CommandResult(generateSuccessMessage(patient));
     }
@@ -100,8 +96,8 @@ public class ApptCommand extends Command {
         }
 
         ApptCommand e = (ApptCommand) other;
-        return nric.equals(e.nric)
-                && dateTime.equals(e.dateTime);
+        return appt.equals(e.appt)
+                && nric.equals(e.nric);
     }
 
     /**

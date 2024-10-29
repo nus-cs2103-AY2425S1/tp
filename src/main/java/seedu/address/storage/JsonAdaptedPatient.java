@@ -34,6 +34,7 @@ import seedu.address.model.patient.Sex;
 class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
+    private static final Logger logger = Logger.getLogger(JsonAdaptedPatient.class.getName());
 
     private final String name;
     private final String nric;
@@ -50,7 +51,6 @@ class JsonAdaptedPatient {
     private final String nokName;
     private final String nokPhone;
     private final List<JsonAdaptedAppt> appts = new ArrayList<>();
-    private static final Logger logger = Logger.getLogger(JsonAdaptedPatient.class.getName());
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.

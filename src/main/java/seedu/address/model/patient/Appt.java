@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 
+import seedu.address.logic.commands.ApptCommand;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
@@ -79,9 +81,18 @@ public class Appt {
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Appt // instanceof handles nulls
-                        && dateTime.equals(((Appt) other).dateTime)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ApptCommand)) {
+            return false;
+        }
+
+        Appt e = (Appt) other;
+        return dateTime.isEqual(e.dateTime)
+                && healthService.equals(e.healthService);
     }
 
     /**
@@ -97,8 +108,15 @@ public class Appt {
      * @param trimmedDate
      * @return
      */
-    public static boolean isValidAppt(String trimmedDate) {
-        return true;
+    public static boolean isValidDateTime(LocalDateTime trimmedDate) {
+        try {
+            LocalDateTime.parse(trimmedDate.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
