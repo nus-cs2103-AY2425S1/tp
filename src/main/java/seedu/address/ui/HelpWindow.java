@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.AppUtil.getImage;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -15,15 +18,18 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w09-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide for more details:\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final String COMMAND_SUMMARY = "/images/command_summary.png";
 
     @FXML
     private Button copyButton;
 
+    @FXML
+    private ImageView commandSummary;
     @FXML
     private Label helpMessage;
 
@@ -35,6 +41,8 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        commandSummary.setImage(getImage(COMMAND_SUMMARY));
+        commandSummary.setFitHeight(650);
     }
 
     /**
