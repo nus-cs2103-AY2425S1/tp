@@ -4,8 +4,8 @@ title: EduTuTu User Guide
 ---
 
 **EduTUTU** is a desktop application designed to streamline contact management for tuition centers, making it easier to 
-organise and access student information. Optimised for use through a Command Line Interface (CLI) while incorporating 
-the convenience of a Graphical User Interface (GUI), EduTUTU allows you to manage student details with speed and 
+organise and access student information. Optimised for use through a [Command Line Interface (CLI)](#cli-command-line-interface) while incorporating 
+the convenience of a [Graphical User Interface (GUI)](#gui-graphical-user-interface), EduTUTU allows you to manage student details with speed and 
 efficiency. Whether you’re handling student registrations, updating records, or searching for students, EduTUTU helps 
 you complete these tasks more quickly than traditional applications, making it an ideal solution for tuition center 
 administrators.
@@ -47,7 +47,7 @@ administrators.
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edututu.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [GUI](#gui-graphical-user-interface) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -61,7 +61,7 @@ administrators.
 
    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `exit` : [Exits](#exit) the app.
 
 1. Refer to the features below for details of each command.
 
@@ -74,8 +74,8 @@ administrators.
 
 ### Command Format Guidelines
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the [parameters](#parameter) to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a [parameters](#parameter) which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -83,10 +83,10 @@ administrators.
 * Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* [Parameters](#parameter) can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous [parameters](#parameter) for commands that do not take in [parameters](#parameter) (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -98,7 +98,7 @@ administrators.
 
 ### 2.1 Viewing Help: `help`
 
-**Command Format:** `help`
+**[Command Format](#command-format):** `help`
 
 Shows a message explaining how to access the help page.
 
@@ -110,9 +110,9 @@ Shows a message explaining how to access the help page.
 
 ### 2.2 Adding a Person: `add`
 
-Adds a person to EduTuTu.
+Adds a person to [EduTuTu](#edututu).
 
-**Command Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
+**[Command Format](#command-format):** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
 
 > **Remark:** A person can have any number of tags (including 0).
 
@@ -146,9 +146,9 @@ Adds a person to EduTuTu.
 
 
 **Tips:**
-- Use the `add` command to add a new person with their name, phone number, email, address, fees, and class ID.
-- Tags can be added to classify or group persons for easier management.
-- The `add` command is helpful when setting up new contacts in EduTuTu.
+- Use the `add` command to add a new person with their name, phone number, email, address, fees, and [class id](#class-id).
+- [Tag](#tag) can be added to classify or group persons for easier management.
+- The `add` command is helpful when setting up new contacts in [EduTuTu](#edututu).
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -160,11 +160,11 @@ Adds a person to EduTuTu.
 
 Deletes the specified person from the address book.
 
-**Command Format:** `delete INDEX`
+**[Command Format](#command-format):** `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The [index](#index) refers to the index number shown in the displayed person list.
+* The [index](#index) **must be a positive integer** 1, 2, 3, …​
 
 **Example Usage:** `delete 3`
 
@@ -195,7 +195,7 @@ Deletes the specified person from the address book.
 
 **Tips:**
 - Use the `delete` command to remove outdated or incorrect entries from the address book.
-- Make sure to confirm the index number before deleting to avoid removing the wrong person.
+- Make sure to confirm the [index](#index) number before deleting to avoid removing the wrong person.
 - The `delete` command is especially useful when cleaning up your list of contacts.
 
 [Back to Table of Contents](#table-of-contents)
@@ -206,14 +206,14 @@ Deletes the specified person from the address book.
 
 ### 2.4 Marking a Payment Date: `markpaid`
 
-Updates the payment status of a student to completed.
+Updates the [payment status](#payment-status) of a student to completed.
 
-**Format:** `markpaid INDEX m/YEAR-MONTH`
+**[Command Format](#command-format):** `markpaid INDEX m/YEAR-MONTH`
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `YEAR-MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
-* The index **must be within the range** of the number of people in the list.
+* The [index](#index) **must be within the range** of the number of people in the list.
 * The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
 
 **Example Usage:**
@@ -251,13 +251,13 @@ Updates the payment status of a student to completed.
 
 Edits an existing person in the address book.
 
-**Command Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
+**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list. The [index](#index) **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
+* You can remove all the person’s [tags](#tags) by typing `t/` without specifying any [tags](#tags) after it.
 
 **Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
 
@@ -297,9 +297,9 @@ Edits an existing person in the address book.
 
 ### 2.6 Listing All Persons: `list`
 
-The `list` command displays a list of all persons currently stored in EduTuTu.
+The `list` command displays a list of all persons currently stored in [EduTuTu](#edututu).
 
-**Command Format:** `list`
+**[Command Format](#command-format):** `list`
 
 After entering the `list` command, all persons stored in the address book will be displayed in the UI.
 
@@ -334,12 +334,12 @@ After entering the `list` command, all persons stored in the address book will b
 
 ### 2.7 Finding A Person: `find`
 
-The `find` command allows you to list persons by their names, class IDs, or payment status (paid/unpaid).
+The `find` command allows you to list persons by their names, [Class IDs](#class-id), or [payment status](#payment-status) (paid/unpaid).
 
-**Command Format:**
+**[Command Format](#command-format):**
 - **By Name:** `find n/NAME [MORE_NAMES]`
-- **By Class ID:** `find c/CLASSID [MORE_CLASSIDS]`
-- **By Name and Class ID:** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
+- **By [Class ID](#class-id):** `find c/CLASSID [MORE_CLASSIDS]`
+- **By Name and [Class ID](#class-id):** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
 - **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
 - **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
@@ -347,7 +347,7 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
 * Only the name is searched when using `n/` format.
 * Partially matched words will be matched, e.g., `Han` will match `Hans`.
-* find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and class IDs containing `KEYWORD2`.
+* find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and [class IDs](#class-id) containing `KEYWORD2`.
 * For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
 
 **Example Usage:** `find n/Kim`
@@ -369,7 +369,7 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 </div>
 
 **Tips:**
-- Use the `find` command to quickly locate persons based on their names or class IDs.
+- Use the `find` command to quickly locate persons based on their names or [class IDs](#class-id).
 - The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
 
 [Back to Table of Contents](#table-of-contents)
@@ -380,11 +380,11 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 
 ### 2.8 Clearing All Entries: `clear`
 
-Clears all entries from the address book.
+[Clears](#clear) all entries from the address book.
 
-**Command Format:** `clear`
+**[Command Format](#command-format):** `clear`
 
-Upon entering the command, all entries will be cleared from EduTuTu. A message  
+Upon entering the command, all entries will be cleared from [EduTuTu](#edututu). A message  
 "Address book has been cleared!" will be displayed in the command box.
 
 **Example Usage:** `clear`
@@ -408,7 +408,7 @@ Upon entering the command, all entries will be cleared from EduTuTu. A message
 **Tips:**
 - Use the `clear` command when you want to start fresh with an empty address book.
 - Be careful when using this command, as it permanently deletes all current entries.
-- Consider exporting your data before using the `clear` command if you need a backup.
+- Consider exporting your data before using the `clear` command if you need a [backup](#backup).
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -417,7 +417,7 @@ Upon entering the command, all entries will be cleared from EduTuTu. A message
 
 ### 2.9 Undo/Redo Commands: `undo` and `redo`
 
-**Command Format:** `undo` and `redo`
+**[Command Format](#command-format):** `undo` and `redo`
 
 The `undo` and `redo` commands allow you to reverse or reapply the most recent changes made to the address book.
 
@@ -427,7 +427,7 @@ The `undo` and `redo` commands allow you to reverse or reapply the most recent c
 
 * The `undo` command can be used to revert the last command that modified the address book.
 * The `redo` command can be used only if an `undo` was performed previously.
-* Both commands are also accessible through the GUI toolbar, where clicking `Undo` or `Redo` will perform the respective action.
+* Both commands are also accessible through the [GUI](#gui-graphical-user-interface) toolbar, where clicking `Undo` or `Redo` will perform the respective action.
 
 **Example Usage:**
 *Input: User enters the `undo` command to reverse the last change.*
@@ -441,8 +441,8 @@ The UI updates to reflect the reapplication of the previously undone change*
 **Tips:**
 - Use the `undo` command immediately after making a change you wish to revert. This is helpful if you've added, deleted, or modified an entry by mistake.
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
-- Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive backups, consider exporting your data regularly.
-- Both `undo` and `redo` can be accessed through the toolbar in the GUI for quick navigation.
+- Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive [backups](#backup), consider exporting your data regularly.
+- Both `undo` and `redo` can be accessed through the toolbar in the [GUI](#gui-graphical-user-interface) for quick navigation.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -453,7 +453,7 @@ The UI updates to reflect the reapplication of the previously undone change*
 
 Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
 
-**Command Format:** `pie`
+**[Command Format](#command-format):** `pie`
 
 For example, given the following data set with 4 students:
 - 1 student in class 1
@@ -487,9 +487,9 @@ For example, given the following data set with 4 students:
 
 ### 2.11 Displaying Bar Chart: `bar`
 
-Displays a bar chart showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
+Displays a [bar chart](#bar-chart) showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
 
-**Command Format:** `bar`
+**[Command Format](#command-format):** `bar`
 
 * The x-axis represents the months (e.g., 2024-01, 2024-02, etc.).
 * The y-axis shows the number of students who made their payments during each month.
@@ -526,10 +526,10 @@ Displays a bar chart showing the number of students who made payments for each m
 
 Allows users to quickly access previously entered commands using the up and down arrow keys.
 
-**Command Format:** *No specific command required.*
+**[Command Format](#command-format):** *No specific command required.*
 
 * Press the **up arrow key** to cycle back through previously entered commands.
-* Press the **down arrow key** to move forward through the command history.
+* Press the **down arrow key** to move forward through the [command history](#command-history).
 * This feature is useful for repeating recent commands without needing to retype them.
 
 **Tips:**
@@ -545,12 +545,12 @@ Allows users to quickly access previously entered commands using the up and down
 
 Displays the detailed information of a student in the list.
 
-**Command Format:** `info`
+**[Command Format](#command-format):** `info`
 
 * Shows the detailed information of the person at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed person list.
-* The index **must be within the range** of the number of people in the list.
-* Additionally, clicking on a student’s entry in the GUI triggers a pop-up window displaying the same detailed information.
+* The [index](#index) **must be within the range** of the number of people in the list.
+* Additionally, clicking on a student’s entry in the [GUI](#gui-graphical-user-interface) triggers a pop-up window displaying the same detailed information.
 
 Displaying the detailed command window can be done in two ways:
 
@@ -598,7 +598,7 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.14 Editing the Data File
 
-EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing this data file.
+[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing this data file.
 
 > **Caution:**
 > - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
@@ -611,7 +611,7 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 
 ### 2.15 Saving the Data
 
-EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+[EduTuTu](#edututu) data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -620,9 +620,9 @@ EduTuTu data are saved in the hard disk automatically after any command that cha
 
 ### 2.16 Exiting the Program: `exit`
 
-**Command Format:** `exit`
+**[Command Format](#command-format):** `exit`
 
-Exits the program.
+[Exits](#exit)the program.
 
 Exiting the program can be done in two ways:
 
@@ -647,14 +647,14 @@ Exiting the program can be done in two ways:
 3. The program will close.
 
 Method 2:
-1. Type the command exit in the command box and press Enter.
+1. Type the command [exit](#exit) in the command box and press Enter.
    ![Ui](images/exitcommandinput.png)
 
 2. The program will close.
 
 **Tips:**
 
-- Use the exit command when you want to close the program quickly through the command box.
+- Use the [exit](#exit) command when you want to close the program quickly through the command box.
 - Both methods achieve the same result, so use whichever is more convenient.
 
 [Back to Table of Contents](#table-of-contents)
@@ -674,40 +674,55 @@ Method 2:
 
 # 4. Glossary
 
+<a id="edututu"></a>
 - **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
 
+<a id="cli-command-line-interface"></a>
 - **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
 
+<a id="gui-graphical-user-interface"></a>
 - **GUI (Graphical User Interface)**: A user-friendly interface with graphical elements like buttons, icons, and windows, allowing users to interact with the application more visually.
 
+<a id="command-format"></a>
 - **Command Format**: The specific way a command should be typed to work properly in EduTuTu. Following the exact format is essential for the command to be understood by the application.
 
+<a id="index"></a>
 - **Index**: A unique number assigned to each person entry in EduTuTu, used to identify and select entries for actions like editing or deleting.
 
+<a id="tag"></a>
 - **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
 
+<a id="class-id"></a>
 - **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
 
+<a id="pie-chart"></a>
 - **Pie Chart**: A circular chart divided into slices that shows the proportion of students in each class. It provides a visual overview of class distributions.
 
+<a id="bar-chart"></a>
 - **Bar Chart**: A chart with rectangular bars representing data (e.g., monthly payments) on the x-axis and values on the y-axis, helpful for viewing trends over time.
 
-- **Undo/Redo**: Commands that let users revert (undo) the last action or reapply (redo) a previous action. Useful for correcting mistakes.
-
+<a id="command-history"></a>
 - **Command History**: A feature that stores a log of previously entered commands. Users can navigate this history using arrow keys to quickly repeat recent commands.
 
+<a id="json-file"></a>
 - **JSON File**: A text file format for storing data in an organised way, readable by humans and computers. EduTuTu saves all data in a JSON file for easy access and editing.
 
+<a id="payment-status"></a>
 - **Payment Status**: Indicates whether a student’s monthly payment is complete or pending. EduTuTu includes commands to mark payments as completed.
 
+<a id="parameter"></a>
 - **Parameter**: A value or setting provided by the user within a command to specify details like a name or phone number. Parameters help customise commands to suit specific actions.
 
+<a id="backup"></a>
 - **Backup**: A saved copy of data, which can be restored if the original data is lost or corrupted. It’s advisable to back up the JSON data file before editing it directly.
 
+<a id="clear"></a>
 - **Clear**: A command used to remove all entries from the address book, resetting the data.
 
+<a id="exit"></a>
 - **Exit**: A command that closes the EduTuTu application safely.
 
+<a id="storage-file"></a>
 - **Storage File**: The file where EduTuTu data is automatically saved. No manual saving is needed, as data is updated after every command.
 
 [Back to Table of Contents](#table-of-contents)
