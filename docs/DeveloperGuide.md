@@ -531,6 +531,16 @@ student]() to search for student details.
 
    1. Expected: The new student is successfully added with a warning message.
 
+1. Adding a new student with wrong prefixes
+
+   1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
+
+   2. Prefixes are not case-insensitive; therefore, an error message will be shown.
+
+### Editing an existing student
+
+
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
