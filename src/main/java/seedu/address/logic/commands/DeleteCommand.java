@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,7 +44,17 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        removePersonFromEvent(model, personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private void removePersonFromEvent(Model model, Person personToRemove) {
+        ObservableList<Event> eventsList = model.getEventList();
+        for (Event event : eventsList) {
+            if (event.isPersonAttending(personToRemove)) {
+                event.removeAttendee(personToRemove);
+            }
+        }
     }
 
     @Override
