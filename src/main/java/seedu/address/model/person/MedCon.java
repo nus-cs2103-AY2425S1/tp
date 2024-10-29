@@ -23,7 +23,7 @@ public class MedCon implements Comparable<MedCon> {
         requireNonNull(medConName);
         checkArgument(!medConName.isEmpty(), MESSAGE_EMPTY_FIELD);
         checkArgument(isValidMedConName(medConName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
-        this.medConName = medConName;
+        this.medConName = medConName.toUpperCase();
     }
 
     /**
