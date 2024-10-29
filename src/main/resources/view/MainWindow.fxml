@@ -13,7 +13,7 @@
 
 <?import javafx.scene.layout.Region?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Tuteez" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Tuteez" minWidth="700" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -43,11 +43,11 @@
                    styleClass="pane-with-border">
           <!-- Left: Person List -->
           <StackPane fx:id="personListPanelPlaceholder"
-                     minWidth="200"
-                     maxWidth="450"/>
+                     minWidth="300"
+                     maxWidth="300"/>
           <!-- Right: Display Card -->
           <StackPane fx:id="displayCardPanelPlaceholder"
-                     minWidth="250"/>
+                     minWidth="400"/>
         </SplitPane>
 
         <!-- Result Display -->
