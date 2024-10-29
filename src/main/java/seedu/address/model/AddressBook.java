@@ -1,12 +1,18 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.types.common.LinkedPersonsEntry;
+import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.event.UniqueEventList;
 import seedu.address.model.types.person.Person;
@@ -22,12 +28,15 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEventList events;
 
+    private PersonEventManager personEventManager;
+
     /**
      * Creates an AddressBook
      */
     public AddressBook() {
         persons = new UniquePersonList();
         events = new UniqueEventList();
+        personEventManager = new PersonEventManager();
     }
 
     /**
@@ -57,6 +66,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person-event manager with {@code personEventManager}.
+     * {@code personEventManager} must not contain duplicate events.
+     */
+    public void setPersonEventManager(PersonEventManager personEventManager) {
+        this.personEventManager = personEventManager;
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -64,6 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setEvents(newData.getEventList());
+        setPersonEventManager(newData.getPersonEventManager());
     }
 
     //// person-level operations
@@ -93,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        personEventManager.setPersonForAllEvents(target, editedPerson);
     }
 
     /**
@@ -101,6 +120,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        personEventManager.removePersonFromAllEvents(key);
+    }
+
+    /**
+     * Returns true if a person is linked to an event.
+     */
+    public boolean isPersonLinkedToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        return personEventManager.isPersonLinkedToEvent(person, event);
+    }
+
+    /**
+     * Links a person to an event.
+     */
+    public void linkPersonToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        personEventManager.addPersonToEvent(person, event);
     }
 
     //// event-level operations
@@ -119,6 +155,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event e) {
         events.add(e);
+        personEventManager.addEvent(e);
     }
 
     /**
@@ -130,6 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
+        personEventManager.setEvent(target, editedEvent);
     }
 
     /**
@@ -138,6 +176,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeEvent(Event key) {
         events.remove(key);
+        personEventManager.removeEvent(key);
+    }
+
+    public Event getEventByName(Event event) {
+        requireNonNull(event);
+        return personEventManager.getEventByName(event);
     }
 
     /** Resorts Events */
@@ -145,6 +189,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.sortEvents();
     };
 
+    /**
+     * Adds a linked persons entry to the personEventManager.
+     */
+    public void addLinkedPersonsEntry(LinkedPersonsEntry linkedPersonsEntry) {
+        personEventManager.addLinkedPersonsEntry(linkedPersonsEntry);
+    }
 
     //// util methods
 
@@ -164,6 +214,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public PersonEventManager getPersonEventManager() {
+        return personEventManager;
     }
 
     @Override

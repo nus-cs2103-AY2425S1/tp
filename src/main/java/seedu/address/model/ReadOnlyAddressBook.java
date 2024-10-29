@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -21,4 +22,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Event> getEventList();
 
+    /**
+     * Returns the PersonEventManager.
+     */
+    PersonEventManager getPersonEventManager();
 }

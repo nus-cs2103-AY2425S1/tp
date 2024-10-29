@@ -2,6 +2,7 @@ package seedu.address.model.types.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
@@ -13,16 +14,10 @@ import seedu.address.model.types.person.Person;
  */
 public class PersonEventManager {
 
-    private static HashMap<Event, ArrayList<Person>> eventPersonMap;
+    private HashMap<Event, ArrayList<Person>> eventPersonMap;
 
-    /**
-     * Initialises the eventPersonMap, with events and persons from storage.
-     */
-    public static void initialiseHashMap() {
-        if (eventPersonMap == null) {
-            eventPersonMap = new HashMap<>();
-            //TODO add events and persons from storage
-        }
+    public PersonEventManager() {
+        eventPersonMap = new HashMap<>();
     }
 
     /* ============================== Person Methods ============================== */
@@ -33,7 +28,7 @@ public class PersonEventManager {
      * @param event
      * @return
      */
-    public static boolean isPersonLinkedToEvent(Person person, Event event) {
+    public boolean isPersonLinkedToEvent(Person person, Event event) {
         return eventPersonMap.get(event).contains(person);
     }
 
@@ -43,7 +38,7 @@ public class PersonEventManager {
      * @param person
      * @throws EventNotFoundException
      */
-    public static void addPersonToEvent(Person person, Event event) {
+    public void addPersonToEvent(Person person, Event event) {
         eventPersonMap.get(event).add(person);
     }
 
@@ -53,7 +48,7 @@ public class PersonEventManager {
      * @param person
      * @throws EventNotFoundException
      */
-    public static void removePersonFromEvent(Person person, Event event) {
+    public void removePersonFromEvent(Person person, Event event) {
         eventPersonMap.get(event).remove(person);
     }
 
@@ -61,7 +56,7 @@ public class PersonEventManager {
      * Removes the person from all events.
      * @param person
      */
-    public static void removePersonFromAllEvents(Person person) {
+    public void removePersonFromAllEvents(Person person) {
         if (eventPersonMap.keySet() == null) {
             return;
         }
@@ -79,7 +74,7 @@ public class PersonEventManager {
      * @param target
      * @param editedPerson
      */
-    public static void setPersonForAllEvents(Person target, Person editedPerson) {
+    public void setPersonForAllEvents(Person target, Person editedPerson) {
         if (eventPersonMap.keySet() == null) {
             return;
         }
@@ -105,7 +100,7 @@ public class PersonEventManager {
      * @param event
      * @return
      */
-    public static boolean hasEvent(Event event) {
+    public boolean hasEvent(Event event) {
         return eventPersonMap.containsKey(event);
     }
 
@@ -114,7 +109,7 @@ public class PersonEventManager {
      * @param event
      * @throws DuplicateEventException
      */
-    public static void addEvent(Event event) {
+    public void addEvent(Event event) {
         eventPersonMap.put(event, new ArrayList<>());
     }
 
@@ -123,7 +118,7 @@ public class PersonEventManager {
      * @param event
      * @throws EventNotFoundException
      */
-    public static void removeEvent(Event event) {
+    public void removeEvent(Event event) {
         eventPersonMap.remove(event);
     }
 
@@ -132,16 +127,27 @@ public class PersonEventManager {
      * @param target
      * @param editedEvent
      */
-    public static void setEvent(Event target, Event editedEvent) {
+    public void setEvent(Event target, Event editedEvent) {
         ArrayList<Person> persons = eventPersonMap.get(target);
         eventPersonMap.remove(target);
         eventPersonMap.put(editedEvent, persons);
     }
 
-    public static Event getEventByName(Event target) {
+    public Event getEventByName(Event target) {
         return eventPersonMap.keySet().stream()
                 .filter(event -> event.isSameEvent(target))
                 .findFirst()
                 .orElse(null);
+    }
+
+    /**
+     * adds a linked persons entry to the eventPersonMap.
+     */
+    public void addLinkedPersonsEntry(LinkedPersonsEntry linkedPersonsEntry) {
+        eventPersonMap.put(linkedPersonsEntry.getEvent(), linkedPersonsEntry.getPersons());
+    }
+
+    public HashMap<Event, ArrayList<Person>> getEventPersonMap() {
+        return eventPersonMap;
     }
 }
