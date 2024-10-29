@@ -5,48 +5,38 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s arguments matches all the requirements
+ * Tests that input parameters matches all the requirements of a particular Person
  */
 public class ArgumentPredicate implements Predicate<Person> {
-    private final Person toFind;
+    private final Map<String, Object> inputParameters;
 
     /**
      * Constructs an {@code ArgumentPredicate}
      *
-     * @param person The person with parameters to find
+     * @param parameterMap A map with parameters inputted by user
      */
-    public ArgumentPredicate(Person person) {
-        requireNonNull(person);
-        toFind = person;
+    public ArgumentPredicate(Map<String, Object> parameterMap) {
+        requireNonNull(parameterMap);
+        inputParameters = parameterMap;
     }
 
-    private void addIfPresent(Supplier<String> fieldSupplier, Predicate<Person> predicate,
+    private void addIfPresent(String key, Predicate<Person> predicate,
                               Person person, List<Boolean> validParameters) {
-        assert fieldSupplier != null : "Field supplier should not be null";
+        assert key != null : "Key should not be null";
         assert predicate != null : "Predicate should not be null";
         assert person != null : "Person should not be null";
         assert validParameters != null : "Valid parameters list should not be null";
-        if (!fieldSupplier.get().isEmpty()) {
-            validParameters.add(predicate.test(person));
-        }
-    }
-
-    private void addIfDeadlinePresent(Supplier<String> fieldSupplier, Predicate<Person> predicate,
-                                      Person person, List<Boolean> validParameters) {
-        assert fieldSupplier != null : "Field supplier should not be null";
-        assert predicate != null : "Predicate should not be null";
-        assert person != null : "Person should not be null";
-        assert validParameters != null : "Valid parameters list should not be null";
-        if (!fieldSupplier.get().equals(LocalDate.MIN.format(Deadline.OUTPUT_FORMATTER))) {
+        if (inputParameters.containsKey(key)) {
             validParameters.add(predicate.test(person));
         }
     }
@@ -64,35 +54,36 @@ public class ArgumentPredicate implements Predicate<Person> {
 
     private List<Boolean> getValidParameters(Person person) {
         List<Boolean> validParameters = new ArrayList<>();
-        addIfPresent(() -> toFind.getName().toString(), p -> {
-            String[] nameKeywords = toFind.getName().toString().split("\\s+");
+        addIfPresent("name", p -> {
+            String[] nameKeywords = inputParameters.get("name").toString().split("\\s+");
             NameContainsKeywordsPredicate namePredicate =
                     new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
             return namePredicate.test(p);
         }, person, validParameters);
 
-        addIfPresent(() -> toFind.getPhone().toString(), p -> toFind.getPhone().equals(p.getPhone()),
+        addIfPresent("phone", p -> inputParameters.get("phone").equals(p.getPhone()),
                 person, validParameters);
 
-        addIfPresent(() -> toFind.getEmail().toString(), p -> toFind.getEmail().equals(p.getEmail()),
+        addIfPresent("email", p -> inputParameters.get("email").equals(p.getEmail()),
                 person, validParameters);
 
-        addIfPresent(() -> toFind.getAddress().toString(), p -> toFind.getAddress().equals(p.getAddress()),
+        addIfPresent("address", p -> inputParameters.get("address").equals(p.getAddress()),
                 person, validParameters);
 
-        addIfPresent(() -> toFind.getProjectStatus().toString(), p -> toFind.getProjectStatus()
+        addIfPresent("project status", p -> inputParameters.get("project status")
                 .equals(p.getProjectStatus()), person, validParameters);
 
-        addIfPresent(() -> toFind.getPaymentStatus().toString(), p -> toFind.getPaymentStatus()
+        addIfPresent("payment status", p -> inputParameters.get("payment status")
                     .equals(p.getPaymentStatus()), person, validParameters);
 
-        addIfPresent(() -> toFind.getClientStatus().toString(), p -> toFind.getClientStatus()
+        addIfPresent("client status", p -> inputParameters.get("client status")
                     .equals(p.getClientStatus()), person, validParameters);
 
-        addIfDeadlinePresent(() -> toFind.getDeadline().toString(), p -> toFind.getDeadline()
+        addIfPresent("deadline", p -> inputParameters.get("deadline")
                 .equals(p.getDeadline()), person, validParameters);
 
-        addIfTagPresent(toFind.getTags(), p -> toFind.getTags().stream()
+        Set<Tag> tags = (Set<Tag>) inputParameters.get("tags");
+        addIfTagPresent(tags, p -> tags.stream()
                 .anyMatch(p.getTags()::contains), person, validParameters);
 
         return validParameters;
@@ -116,11 +107,11 @@ public class ArgumentPredicate implements Predicate<Person> {
         }
 
         ArgumentPredicate argumentPredicate = (ArgumentPredicate) other;
-        return toFind.equals(argumentPredicate.toFind);
+        return inputParameters.equals(argumentPredicate.inputParameters);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("person", toFind).toString();
+        return new ToStringBuilder(this).add("parameters", inputParameters).toString();
     }
 }
