@@ -3,13 +3,19 @@
   title: "Developer Guide"
   pageNav: 3
 ---
+<br>
 
+![](images/doctrack.png)
 # DocTrack Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Acknowledgements**
 
@@ -20,13 +26,21 @@
     - [JavaFX](https://openjfx.io/)
     - [Jackson](https://github.com/FasterXML/jackson)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Design**
 
@@ -70,6 +84,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -86,6 +102,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` or `Appointment` object residing in the `Model`.
+
+<br>
 
 ### Logic component
 
@@ -120,6 +138,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -148,6 +168,7 @@ The `Model` component,
 
 </box>
 
+<br>
 
 ### Storage component
 
@@ -168,11 +189,17 @@ The `Storage` component,
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Flow**
 
@@ -187,7 +214,11 @@ The activity diagram shows the general sequence of steps when a user interacts w
 4. The `Command` object is executed.
 5. The `UI` displays the result of the command execution to the user.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Implementation of main features**
 
@@ -285,7 +316,11 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Design considerations
 
+<br>
+
 ---
+
+<br>
 
 ## Implementation of general features
 
@@ -355,7 +390,11 @@ The sequence diagram shows how a `help` command is executed:
   * Pros: Simpler to implement.
   * Cons: Can clutter the main application window and interrupt the user's workflow.
 
+<br>
+
 ---
+
+<br>
 
 ## Proposed features
 
@@ -455,7 +494,11 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -465,7 +508,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Data storage and files**
 - The data of the patients and appointments is stored in the `data` folder.
@@ -479,9 +526,15 @@ For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
+<br>
+
 ## **Appendix: Requirements**
+
+<br>
 
 ### Product scope
 
@@ -490,6 +543,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 **Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
 
+<br>
 
 ### User stories
 
@@ -535,6 +589,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | doctor               | receive reminders on upcoming appointments         | prepare for them                                                     |
 | `*`      | doctor               | retrieve specific treatment information            | treat them appropriately                                             |
 | `*`      | doctor               | generate an automated document for a patient       | give it to them as reference                                         |
+
+<br>
 
 ### Use cases
 
@@ -749,6 +805,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+<br>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -768,6 +826,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 14. Data file must remain usable and intact even with invalid input from the application
 15. Errors must trigger clear, user-friendly messages
 
+<br>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -775,7 +835,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -787,6 +851,8 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
+<br>
 
 ### Launch and shutdown
 
@@ -844,14 +910,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Planned enhancements**
 Team size: 5
 
 1.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
 
 ## **Appendix: Effort**
 
@@ -860,3 +934,5 @@ We highly recommend adding an appendix named Appendix: Effort that evaluators ca
 - Explain the difficulty level, challenges faced, effort required, and achievements of the project. 
 - If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java. 
 - Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+
+<br>
