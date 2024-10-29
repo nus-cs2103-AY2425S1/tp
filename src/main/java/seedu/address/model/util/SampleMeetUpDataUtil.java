@@ -10,7 +10,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 /**
@@ -19,9 +19,9 @@ import seedu.address.model.meetup.To;
 public class SampleMeetUpDataUtil {
     public static MeetUp[] getSampleMeetUps() {
         return new MeetUp[] {
-            new MeetUp(new Name("Sales Meeting"), new Info("Pitch products to potential clients"),
+            new MeetUp(new Subject("Sales Meeting"), new Info("Pitch products to potential clients"),
                     new From("2024-09-15 12:00"), new To("2024-09-15 14:00"), getAddedBuyerSet("Alex Yeoh")),
-            new MeetUp(new Name("Closing Meeting"), new Info("Contract negotiation and closing"),
+            new MeetUp(new Subject("Closing Meeting"), new Info("Contract negotiation and closing"),
                     new From("2024-09-16 12:00"), new To("2024-09-16 14:00"), getAddedBuyerSet("David Li")),
         };
     }

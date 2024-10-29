@@ -27,7 +27,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 
@@ -102,13 +102,13 @@ public class EditCommand extends Command {
                                              EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
-        Name updatedName = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
+        Subject updatedSubject = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
         Info updatedInfo = editMeetUpDescriptor.getInfo().orElse(meetUpToEdit.getInfo());
         From updatedFrom = editMeetUpDescriptor.getFrom().orElse(meetUpToEdit.getFrom());
         To updatedTo = editMeetUpDescriptor.getTo().orElse(meetUpToEdit.getTo());
         Set<AddedBuyer> updatedAddedBuyers = editMeetUpDescriptor.getAddedBuyers()
                 .orElse(meetUpToEdit.getAddedBuyers());
-        return new MeetUp(updatedName, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
+        return new MeetUp(updatedSubject, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
      * corresponding field value of the meet-up.
      */
     public static class EditMeetUpDescriptor {
-        private Name name;
+        private Subject name;
         private Info info;
         private From from;
         private To to;
@@ -169,11 +169,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, info, from, to);
         }
 
-        public void setName(Name name) {
+        public void setName(Subject name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<Subject> getName() {
             return Optional.ofNullable(name);
         }
 

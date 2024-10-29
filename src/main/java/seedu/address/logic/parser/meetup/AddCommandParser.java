@@ -21,7 +21,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 /**
@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
-        Name name = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        Subject name = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
         Info info = ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
         From from = ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get());

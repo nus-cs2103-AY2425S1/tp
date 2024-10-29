@@ -15,7 +15,7 @@ import seedu.address.model.buyer.Phone;
 import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
@@ -136,13 +136,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code meetUpName} is invalid.
      */
-    public static Name parseMeetUpName(String meetUpName) throws ParseException {
+    public static Subject parseMeetUpName(String meetUpName) throws ParseException {
         requireNonNull(meetUpName);
         String trimmedName = meetUpName.trim();
-        if (!Name.isValidMeetUpName(trimmedName)) {
-            throw new ParseException(seedu.address.model.meetup.Name.MESSAGE_CONSTRAINTS);
+        if (!Subject.isValidMeetUpName(trimmedName)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Subject(trimmedName);
     }
 
     /**

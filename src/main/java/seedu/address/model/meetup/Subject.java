@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Buyer's name in the meetup list.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetUpName(String)}
  */
-public class Name {
+public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -25,7 +25,7 @@ public class Name {
      *
      * @param meetUpName A valid meetup name.
      */
-    public Name(String meetUpName) {
+    public Subject(String meetUpName) {
         requireNonNull(meetUpName);
         checkArgument(isValidMeetUpName(meetUpName), MESSAGE_CONSTRAINTS);
         meetUpFullName = meetUpName;
@@ -57,11 +57,11 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Subject)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+        Subject otherName = (Subject) other;
         return meetUpFullName.equals(otherName.meetUpFullName);
     }
 

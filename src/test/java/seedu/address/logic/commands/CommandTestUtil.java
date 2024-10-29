@@ -74,6 +74,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BRENDA = "Bukit Timah Rd #01-01";
     public static final String VALID_FIND_MEETUP_NAME = "Alice Bob";
     public static final String VALID_FIND_BUYER_NAME = "Alice Bob";
+    public static final String VALID_FIND_ADDRESS_NAME = "Jurong Clementi";
+    public static final String VALID_FIND_LANDLORD_NAME = "Jerald James";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -86,6 +88,8 @@ public class CommandTestUtil {
     public static final String BUDGET_DESC_BOB = " " + PREFIX_BUDGET + VALID_BUDGET_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ADDRESS_FIND_DESC = " " + PREFIX_ADDRESS + VALID_FIND_ADDRESS_NAME;
+    public static final String LANDLORD_FIND_DESC = " " + PREFIX_NAME + VALID_FIND_LANDLORD_NAME;
     public static final String MEETUP_NAME_DESC_PITCH = " " + PREFIX_NAME + VALID_MEETUP_NAME_PITCH;
     public static final String MEETUP_NAME_DESC_NETWORKING = " " + PREFIX_NAME + VALID_MEETUP_NAME_NETWORKING;
     public static final String MEETUP_INFO_DESC_PITCH = " " + PREFIX_INFO + VALID_MEETUP_INFO_PITCH;
@@ -118,6 +122,9 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_MEETUP_NAME_DESC = " " + PREFIX_NAME // '!', '%' not allowed in names
             + "Sales Pitch!%";
+    public static final String INVALID_FIND_LANDLORD_DESC = " " + PREFIX_NAME + "James^"; // '^' not allowed in names
+    public static final String INVALID_FIND_PROPERTY_DESC = " " + PREFIX_ADDRESS + "Jurong Clementi "
+            + PREFIX_NAME + "Ron"; // multiple tags not allowed
     public static final String INVALID_MEETUP_FROM_DESC = " " + PREFIX_FROM + "01/02/2025 1800"; // Not proper format
     public static final String INVALID_MEETUP_TO_DESC = " " + PREFIX_TO + "01/05/2025 1940"; // Not proper format
     public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date

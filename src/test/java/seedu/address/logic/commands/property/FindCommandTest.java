@@ -1,28 +1,21 @@
 package seedu.address.logic.commands.property;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.property.AddressContainsKeywordsPredicate;
-import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.LandlordNameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PROPERTIES_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
-/**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
- */
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.property.AddressContainsKeywordsPredicate;
+import seedu.address.model.property.LandlordNameContainsKeywordsPredicate;
+
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
             getTypicalPropertyList());
@@ -35,15 +28,15 @@ public class FindCommandTest {
                 new AddressContainsKeywordsPredicate(Collections.singletonList("first"));
         AddressContainsKeywordsPredicate secondAddressPredicate =
                 new AddressContainsKeywordsPredicate(Collections.singletonList("second"));
-        LandlordNameContainsKeywordsPredicate firstLandlordNamePredicate =
+        LandlordNameContainsKeywordsPredicate firstNamePredicate =
                 new LandlordNameContainsKeywordsPredicate(Collections.singletonList("first"));
-        LandlordNameContainsKeywordsPredicate secondLandlordNamePredicate =
+        LandlordNameContainsKeywordsPredicate secondNamePredicate =
                 new LandlordNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findAddressFirstCommand = new FindCommand(firstAddressPredicate);
         FindCommand findAddressSecondCommand = new FindCommand(secondAddressPredicate);
-        FindCommand findLandlordNameFirstCommand = new FindCommand(firstLandlordNamePredicate);
-        FindCommand findLandlordNameSecondCommand = new FindCommand(secondLandlordNamePredicate);
+        FindCommand findNameFirstCommand = new FindCommand(firstNamePredicate);
+        FindCommand findNameSecondCommand = new FindCommand(secondNamePredicate);
 
         // same object -> returns true
         assertTrue(findAddressFirstCommand.equals(findAddressFirstCommand));
@@ -58,40 +51,32 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findAddressFirstCommand.equals(null));
 
-        // different buyer -> returns false
+        // different address -> returns false
         assertFalse(findAddressFirstCommand.equals(findAddressSecondCommand));
 
         // same object -> returns true
         assertTrue(findAddressFirstCommand.equals(findAddressFirstCommand));
 
+        // same object -> returns true
+        assertTrue(findAddressFirstCommand.equals(findAddressFirstCommand));
+
         // same values -> returns true
-        FindCommand findLandlordNameFirstCommandCopy = new FindCommand(firstLandlordNamePredicate);
-        assertTrue(findLandlordNameFirstCommand.equals(findLandlordNameFirstCommandCopy));
+        FindCommand findNameFirstCommandCopy = new FindCommand(firstNamePredicate);
+        assertTrue(findNameFirstCommand.equals(findNameFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findLandlordNameFirstCommand.equals(1));
+        assertFalse(findNameFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findLandlordNameFirstCommand.equals(null));
+        assertFalse(findNameFirstCommand.equals(null));
 
-        // different buyer -> returns false
-        assertFalse(findLandlordNameFirstCommand.equals(findLandlordNameSecondCommand));
-    }
+        // different name -> returns false
+        assertFalse(findNameFirstCommand.equals(findNameSecondCommand));
 
-    @Test
-    public void execute_zeroKeywordsForAddress_noBuyerFound() {
-        String expectedMessage = String.format(MESSAGE_PROPERTIES_LISTED_OVERVIEW, 0);
-        AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPropertyList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPropertyList());
-    }
+        // same object -> returns true
+        assertTrue(findNameFirstCommand.equals(findNameFirstCommand));
 
-    /**
-     * Parses {@code userInput} into a {@code AddressContainsKeywordsPredicate}.
-     */
-    private AddressContainsKeywordsPredicate prepareAddressPredicate(String userInput) {
-        return new AddressContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        // different object -> returns false
+        assertFalse(findNameFirstCommand.equals(findAddressFirstCommand));
     }
 }

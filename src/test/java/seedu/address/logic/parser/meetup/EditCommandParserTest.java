@@ -37,7 +37,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.model.meetup.From;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
 
@@ -79,7 +79,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_MEETUP_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_MEETUP_NAME_DESC, Subject.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC, From.MESSAGE_CONSTRAINTS); // invalid from
         assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC_TWO, From.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_MEETUP_TO_DESC, To.MESSAGE_CONSTRAINTS); // invalid to
@@ -88,7 +88,7 @@ public class EditCommandParserTest {
         // invalid name followed by valid info, from and to
         assertParseFailure(parser, "1" + INVALID_MEETUP_NAME_DESC
                 + VALID_MEETUP_INFO_PITCH + VALID_MEETUP_FROM_PITCH
-                + VALID_MEETUP_TO_PITCH, Name.MESSAGE_CONSTRAINTS);
+                + VALID_MEETUP_TO_PITCH, Subject.MESSAGE_CONSTRAINTS);
     }
 
     @Test

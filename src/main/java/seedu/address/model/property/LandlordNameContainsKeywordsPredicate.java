@@ -3,8 +3,6 @@ package seedu.address.model.property;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,14 +16,13 @@ public class LandlordNameContainsKeywordsPredicate implements Predicate<Property
      * Landlord name must be present and not null.
      */
     public LandlordNameContainsKeywordsPredicate(List<String> keywords) {
-        requireNonNull(keywords);
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Property property) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getName().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getName().fullName, keyword));
     }
 
     @Override

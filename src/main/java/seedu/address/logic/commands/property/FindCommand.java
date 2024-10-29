@@ -34,13 +34,13 @@ public class FindCommand extends Command {
     private boolean isAddress;
 
     public FindCommand(AddressContainsKeywordsPredicate predicate) {
-        this.addressPredicate = requireNonNull(predicate);
+        this.addressPredicate = predicate;
         this.landlordPredicate = null;
         this.isAddress = true;
     }
 
     public FindCommand(LandlordNameContainsKeywordsPredicate predicate) {
-        this.landlordPredicate = requireNonNull(predicate);
+        this.landlordPredicate = predicate;
         this.addressPredicate = null;
         this.isAddress = false;
     }

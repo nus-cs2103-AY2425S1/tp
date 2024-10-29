@@ -26,7 +26,7 @@ public class MeetUpContainsKeywordsPredicate implements Predicate<MeetUp> {
     @Override
     public boolean test(MeetUp meetUp) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meetUp.getName().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meetUp.getName().meetUpFullName, keyword));
     }
 
     @Override

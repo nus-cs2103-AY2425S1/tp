@@ -15,7 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class MeetUp {
 
     // Identity fields
-    private final Name name;
+    private final Subject name;
     private final Info info;
     private final From from;
     private final To to;
@@ -24,7 +24,7 @@ public class MeetUp {
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(Name name, Info info, From from, To to, Set<AddedBuyer> addedBuyers) {
+    public MeetUp(Subject name, Info info, From from, To to, Set<AddedBuyer> addedBuyers) {
         requireAllNonNull(name, info, from, to, addedBuyers);
         this.name = name;
         this.info = info;
@@ -88,7 +88,7 @@ public class MeetUp {
                 .toString();
     }
 
-    public Name getName() {
+    public Subject getName() {
         return this.name;
     }
 
