@@ -62,9 +62,7 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
             throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
         Property property = getSpecificPropertyObject(housingType, sellingPrice, postalCode, unitNumber, tagList);
-
         return new AddPropertyToSellCommand(index, property);
     }
 
