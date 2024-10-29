@@ -248,22 +248,22 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePrice_validValueWithoutWhitespace_returnsPrice() {
+    public void parsePrice_validValueWithoutWhitespace_returnsPrice() throws Exception {
         Price result = ParserUtil.parsePrice(VALID_PRICE);
         Price expected = new Price(VALID_PRICE, new BigDecimal(VALID_PRICE));
         assertEquals(expected, result);
     }
 
     @Test
-    public void parsePrice_validValueWithWhitespace_returnsTrimmedPrice() {
+    public void parsePrice_validValueWithWhitespace_returnsTrimmedPrice() throws Exception {
         Price result = ParserUtil.parsePrice(" " + VALID_PRICE + " ");
         Price expected = new Price(VALID_PRICE, new BigDecimal(VALID_PRICE));
         assertEquals(expected, result);
     }
 
     @Test
-    void parsePrice_invalidPrice_throwsNumberFormatException() {
-        assertThrows(NumberFormatException.class, () -> ParserUtil.parsePrice(INVALID_PRICE));
+    void parsePrice_invalidPrice_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_PRICE));
     }
 
     @Test
@@ -272,22 +272,22 @@ public class ParserUtilTest {
     }
 
     @Test
-    void parseArea_validValueWithoutWhitespace_returnsArea() {
+    void parseArea_validValueWithoutWhitespace_returnsArea() throws Exception {
         Area result = ParserUtil.parseArea(VALID_AREA);
         Area expected = new Area(Integer.parseInt(VALID_AREA));
         assertEquals(expected, result);
     }
 
     @Test
-    void parseArea_validValueWithWhitespace_returnsTrimmedArea() {
+    void parseArea_validValueWithWhitespace_returnsTrimmedArea() throws Exception {
         Area result = ParserUtil.parseArea(" " + VALID_AREA + " ");
         Area expected = new Area(Integer.parseInt(VALID_AREA));
         assertEquals(result, expected);
     }
 
     @Test
-    void parseArea_invalidArea_throwsNumberFormatException() {
-        assertThrows(NumberFormatException.class, () -> ParserUtil.parseArea(INVALID_AREA));
+    void parseArea_invalidArea_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseArea(INVALID_AREA));
     }
 
     @Test

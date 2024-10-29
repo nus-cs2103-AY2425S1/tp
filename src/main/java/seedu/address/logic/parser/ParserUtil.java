@@ -142,9 +142,12 @@ public class ParserUtil {
      * Parses {@code String price} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Price parsePrice(String price) {
+    public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
         String priceTrimmed = price.trim();
+        if (!Price.isValidPrice(priceTrimmed)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
         BigDecimal decimalPrice = new BigDecimal(priceTrimmed);
         return new Price(priceTrimmed, decimalPrice);
     }
@@ -153,9 +156,12 @@ public class ParserUtil {
      * Parses {@code String area} into a {@code Area}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Area parseArea(String area) {
+    public static Area parseArea(String area) throws ParseException {
         requireNonNull(area);
         String areaTrimmed = area.trim();
+        if (!Area.isValidArea(areaTrimmed)) {
+            throw new ParseException(Area.MESSAGE_CONSTRAINTS);
+        }
         int intArea = Integer.parseInt(areaTrimmed);
         return new Area(intArea);
     }
