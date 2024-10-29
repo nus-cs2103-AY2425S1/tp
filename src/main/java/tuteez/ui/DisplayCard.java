@@ -2,14 +2,17 @@ package tuteez.ui;
 
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import tuteez.model.person.Person;
 
 /**
- * An UI component that displays all detailed information of a {@code Person}.
+ * A UI component that displays all detailed information of a {@code Person}.
  */
 public class DisplayCard extends UiPart<Region> {
 
@@ -18,7 +21,7 @@ public class DisplayCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private GridPane cardPane;
+    private VBox cardPane;
     @FXML
     private Label name;
     @FXML
@@ -32,11 +35,11 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane displayTags;
     @FXML
-    private FlowPane lessons;
+    private FlowPane displayLessons;
     @FXML
-    private FlowPane remarks;
+    private VBox displayRemarks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,22 +50,24 @@ public class DisplayCard extends UiPart<Region> {
         if (lastViewedPerson.isPresent()) {
             name.setText(person.getName().fullName);
             phone.setText(person.getPhone().value);
-            telegram.setText(person.getTelegramUsername().telegramUsername);
+            telegram.setText("@" + person.getTelegramUsername().telegramUsername);
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
-            tags.getChildren().clear();
+            displayTags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .forEach(tag -> displayTags.getChildren().add(new Label(tag.tagName)));
 
-            remarks.getChildren().clear();
-            person.getRemarkList().getRemarks().stream()
-                    .sorted(Comparator.comparing(remark -> remark.toString()))
-                    .forEach(remark -> remarks.getChildren().add(new Label(remark.toString())));
+            displayRemarks.getChildren().clear();
+            IntStream.range(0, person.getRemarkList().getRemarks().size())
+                    .forEach(i -> {
+                        String remark = person.getRemarkList().getRemarks().get(i).toString();
+                        displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark)); // Add numbering
+                    });
 
-            lessons.getChildren().clear();
+            displayLessons.getChildren().clear();
             person.getLessons().stream()
-                    .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getDayAndTime())));
+                    .forEach(lesson -> displayLessons.getChildren().add(new Label(lesson.getDayAndTime())));
         }
     }
 }

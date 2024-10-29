@@ -1,128 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
+
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.ColumnConstraints?>
+<ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" styleClass="display-scroll-pane">
+    <VBox fx:id="cardPane" styleClass="student-information">
+        <!-- Title Section -->
+        <VBox styleClass="title-container" alignment="CENTER">
+            <Label text="Student Information" styleClass="title-label" wrapText="true"/>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
+        <!-- Name Section -->
+        <VBox styleClass="section-container" spacing="8">
+            <Label text="Name:" styleClass="label-heading"/>
+            <Label fx:id="name" styleClass="content-label" wrapText="true"/>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
+        <!-- Contact Information Section -->
+        <VBox styleClass="section-container" spacing="16">
+            <Label text="Contact Information" styleClass="section-heading" wrapText="true"/>
 
-<GridPane fx:id="cardPane"
-          id="cardPane"
-          xmlns="http://javafx.com/javafx/17"
-          xmlns:fx="http://javafx.com/fxml/1"
-          styleClass="card-pane"
-          hgap="10"
-          vgap="10">
+            <VBox spacing="8">
+                <Label text="Phone Number:" styleClass="label-heading"/>
+                <Label fx:id="phone" styleClass="content-label" wrapText="true"/>
+            </VBox>
 
-    <padding>
-        <Insets top="15" right="15" bottom="15" left="15"/>
-    </padding>
+            <VBox spacing="8">
+                <Label text="Telegram:" styleClass="label-heading"/>
+                <Label fx:id="telegram" styleClass="content-label" wrapText="true"/>
+            </VBox>
 
-    <columnConstraints>
-        <ColumnConstraints minWidth="100" prefWidth="120"/>
-        <ColumnConstraints hgrow="ALWAYS"/>
-    </columnConstraints>
+            <VBox spacing="8">
+                <Label text="Address:" styleClass="label-heading"/>
+                <Label fx:id="address" styleClass="content-label" wrapText="true"/>
+            </VBox>
 
-    <!-- Labels -->
-    <HBox spacing="0.5" alignment="CENTER_LEFT">
-            <minWidth>
-                <!-- Ensures that the label text is never truncated -->
-                <Region fx:constant="USE_PREF_SIZE"/>
-            </minWidth>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
-    </HBox>
+            <VBox spacing="8">
+                <Label text="Email:" styleClass="label-heading"/>
+                <Label fx:id="email" styleClass="content-label" wrapText="true"/>
+            </VBox>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
 
-    <Label text="Phone Number:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="1"/>
+        <!-- Lessons Section -->
+        <VBox styleClass="section-container" spacing="8">
+            <Label text="Lessons" styleClass="section-heading"/>
+            <FlowPane fx:id="displayLessons" styleClass="content-flow-pane"
+                      hgap="10" vgap="10"/>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
 
-    <Label text="Telegram:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="2"/>
+        <!-- Tags Section -->
+        <VBox styleClass="section-container" spacing="8">
+            <Label text="Tags" styleClass="section-heading"/>
+            <FlowPane fx:id="displayTags" styleClass="content-flow-pane"
+                      hgap="10" vgap="10"/>
+        </VBox>
+        <!-- Divider -->
+        <HBox styleClass="divider"/>
 
-    <Label text="Address:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="3"/>
-
-    <Label text="Email:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="4"/>
-
-    <Label text="Lessons:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="5"
-           GridPane.valignment="TOP"/>
-
-    <Label text="Tags:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="6"
-           GridPane.valignment="TOP"/>
-
-    <Label text="Remarks:"
-           styleClass="label-heading"
-           GridPane.columnIndex="0"
-           GridPane.rowIndex="7"
-           GridPane.valignment="TOP"/>
-
-    <Label fx:id="phone"
-           text="\$phone"
-           styleClass="label-value"
-           GridPane.columnIndex="1"
-           GridPane.rowIndex="1"/>
-
-    <Label fx:id="telegram"
-           text="\$telegram"
-           styleClass="label-value"
-           GridPane.columnIndex="1"
-           GridPane.rowIndex="2"/>
-
-    <Label fx:id="address"
-           text="\$address"
-           styleClass="label-value"
-           GridPane.columnIndex="1"
-           GridPane.rowIndex="3"/>
-
-    <Label fx:id="email"
-           text="\$email"
-           styleClass="label-value"
-           GridPane.columnIndex="1"
-           GridPane.rowIndex="4"/>
-
-    <!-- Lessons Section -->
-    <FlowPane fx:id="lessons"
-              styleClass="label-value"
-              GridPane.columnIndex="1"
-              GridPane.rowIndex="5"
-              HBox.hgrow="ALWAYS"
-              vgap="5">
-        <!-- Add lesson nodes dynamically here -->
-    </FlowPane>
-
-    <!-- Tags Section -->
-    <FlowPane fx:id="tags"
-              styleClass="label-value"
-              GridPane.columnIndex="1"
-              GridPane.rowIndex="6"
-              HBox.hgrow="ALWAYS"
-              vgap="5">
-        <!-- Add tag nodes dynamically here -->
-    </FlowPane>
-
-    <!-- Remarks Section -->
-    <FlowPane fx:id="remarks"
-              styleClass="label-value"
-              GridPane.columnIndex="1"
-              GridPane.rowIndex="7"
-              HBox.hgrow="ALWAYS"
-              vgap="5">
-    <!-- Add remark nodes dynamically here -->
-    </FlowPane>
-</GridPane>
+        <!-- Remarks Section -->
+        <VBox styleClass="section-container" spacing="8">
+            <Label text="Remarks" styleClass="section-heading"/>
+            <VBox fx:id="displayRemarks" styleClass="remarks-container" spacing="10"/>
+        </VBox>
+    </VBox>
+</ScrollPane>
