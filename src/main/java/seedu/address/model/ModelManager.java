@@ -126,7 +126,7 @@ public class ModelManager implements Model {
     @Override
     public void setReminderAddressBookFilePath(Path reminderAddressBookFilePath) {
         requireNonNull(reminderAddressBookFilePath);
-        userPrefs.setAddressBookFilePath(reminderAddressBookFilePath);
+        userPrefs.setReminderAddressBookFilePath(reminderAddressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -192,6 +192,12 @@ public class ModelManager implements Model {
         reminderAddressBook.addReminder(reminder);
     }
 
+    @Override
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return reminderAddressBook.hasReminder(reminder);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -239,7 +245,9 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && reminderAddressBook.equals(otherModelManager.reminderAddressBook)
+                && filteredReminders.equals(otherModelManager.filteredReminders);
     }
 
 }

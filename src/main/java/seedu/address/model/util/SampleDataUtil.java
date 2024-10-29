@@ -6,18 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.LastSeen;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Organisation;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
+import seedu.address.model.ReadOnlyReminderAddressBook;
+import seedu.address.model.ReminderAddressBook;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AddressBook} and {@code ReminderAddressBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -60,4 +55,22 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Reminder[] getSampleReminders() {
+        return new Reminder[] {
+                new Reminder("10-10-2022", "breakfast", getSamplePersons()[0].getName()),
+                new Reminder("11-10-2022", "lunch", getSamplePersons()[1].getName()),
+                new Reminder("12-10-2022", "dinner", getSamplePersons()[2].getName()),
+                new Reminder("13-10-2022", "meeting", getSamplePersons()[3].getName()),
+                new Reminder("14-10-2022", "gym", getSamplePersons()[4].getName()),
+                new Reminder("15-10-2022", "meeting", getSamplePersons()[5].getName())
+        };
+    }
+
+    public static ReadOnlyReminderAddressBook getSampleReminderAddressBook() {
+        ReminderAddressBook sampleRab = new ReminderAddressBook();
+        for (Reminder sampleReminder : getSampleReminders()) {
+            sampleRab.addReminder(sampleReminder);
+        }
+        return sampleRab;
+    }
 }

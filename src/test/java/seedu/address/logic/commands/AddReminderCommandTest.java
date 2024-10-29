@@ -179,6 +179,11 @@ public class AddReminderCommandTest {
         }
 
         @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void addReminderToBook(Reminder reminder) {
             return;
         }

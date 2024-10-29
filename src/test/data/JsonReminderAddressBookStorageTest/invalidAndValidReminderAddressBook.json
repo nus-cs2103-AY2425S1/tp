@@ -1,0 +1,11 @@
+{
+  "reminders" : [ {
+    "person" : "John Doe",
+    "date" : "21-11-2024",
+    "description" : "Meet up for lunch"
+  }, {
+    "person" : "Person with invalid date field",
+    "date" : "40-40-2024",
+    "description" : "Meet up for dinner"
+  } ]
+}
