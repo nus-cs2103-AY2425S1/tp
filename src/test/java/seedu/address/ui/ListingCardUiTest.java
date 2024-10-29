@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -17,8 +15,6 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.model.appointment.Appointment;
