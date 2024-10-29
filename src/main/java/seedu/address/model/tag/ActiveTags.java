@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import seedu.address.commons.core.TagColors;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -14,9 +15,9 @@ public class ActiveTags {
     private final ObservableMap<String, String> tagColorMap; // Maps Tag names to their respective colors
     private final String[] tagColors;
 
-    public ActiveTags(HashMap<Tag, Integer> tagMap, String[] tagColors) {
+    public ActiveTags(HashMap<Tag, Integer> tagMap, TagColors tagColors) {
         this.tagMap = tagMap;
-        this.tagColors = tagColors;
+        this.tagColors = tagColors.getTagColors();
         this.tagColorMap = FXCollections.observableHashMap();
 
         for (Tag t:tagMap.keySet()) {

@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.TagColors;
 
 /**
  * Unmodifiable view of user prefs.
@@ -13,6 +14,6 @@ public interface ReadOnlyUserPrefs {
 
     Path getAddressBookFilePath();
 
-    String[] getTagColors();
+    TagColors getTagColors();
 
 }

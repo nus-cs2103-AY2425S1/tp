@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.TagColors;
 
 /**
  * Represents User's preferences.
@@ -15,7 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private String[] tagColors = {};
+    private TagColors tagColors = new TagColors();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -37,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setTagColors(newUserPrefs.getTagColors());
     }
 
     public GuiSettings getGuiSettings() {
@@ -57,7 +59,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public String[] getTagColors() {
+    public void setTagColors(TagColors tagColors) {
+        requireNonNull(tagColors);
+        this.tagColors = tagColors;
+    }
+
+    public TagColors getTagColors() {
         return tagColors;
     }
 
