@@ -1,7 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import seedu.address.model.tag.Tag;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,7 +24,7 @@ class JsonAdaptedProduct {
 
     private final String name;
     private final String supplierName; // This is empty if the product has no supplier
-    private final int stockLevel;
+    private final int curStock;
     private final int minStockLevel;
     private final int maxStockLevel;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -33,12 +36,13 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(
             @JsonProperty("name") String name,
             @JsonProperty("supplierName") String supplierName,
-            @JsonProperty("stockLevel") int stockLevel,
+            @JsonProperty("curStock") int curStock,
             @JsonProperty("minStockLevel") int minStockLevel,
-            @JsonProperty("maxStockLevel") int maxStockLevel) {
+            @JsonProperty("maxStockLevel") int maxStockLevel,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.supplierName = supplierName;
-        this.stockLevel = stockLevel;
+        this.curStock = curStock;
         this.minStockLevel = minStockLevel;
         this.maxStockLevel = maxStockLevel;
         if (tags != null) {
@@ -53,9 +57,12 @@ class JsonAdaptedProduct {
         name = source.getName().fullName;
         supplierName = source.getSupplierName() != null ? source.getSupplierName().fullName : "";
         StockLevel stock = source.getStockLevel();
-        stockLevel = stock.getStockLevel();
+        curStock = stock.getStockLevel();
         minStockLevel = stock.getMinStockLevel();
         maxStockLevel = stock.getMaxStockLevel();
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(java.util.stream.Collectors.toList()));
     }
 
     /**
@@ -75,15 +82,19 @@ class JsonAdaptedProduct {
         final ProductName modelName = new ProductName(name);
 
         // Validate stock levels
-        StockLevel stockLevelObj;
+        StockLevel stockLevel;
         try {
-            stockLevelObj = new StockLevel(stockLevel, minStockLevel, maxStockLevel);
+            stockLevel = new StockLevel(curStock, minStockLevel, maxStockLevel);
         } catch (Exception e) {
             throw new IllegalValueException(e.getMessage());
         }
 
-        // Create the Product object
-        Product product = new Product(modelName, stockLevelObj);
+        final List<Tag> productTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            productTags.add(tag.toModelType());
+        }
+
+        Product product = new Product(modelName, stockLevel, new HashSet<>(productTags));
 
         // Set supplier name if present
         if (supplierName != null && !supplierName.isEmpty()) {

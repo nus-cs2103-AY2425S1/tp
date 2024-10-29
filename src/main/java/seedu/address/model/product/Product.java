@@ -31,15 +31,6 @@ public class Product {
     }
 
     /**
-     * Constructs a {@code Product} with the specified name and stock levels.
-     */
-    public Product(ProductName name, StockLevel stockLevel) {
-        requireAllNonNull(name, stockLevel);
-        this.name = name;
-        this.stockLevel = stockLevel;
-    }
-
-    /**
      * Constructs a {@code Product} with the specified name, stock levels, and tags.
      */
     public Product(ProductName name, StockLevel stockLevel, Set<Tag> tags) {
@@ -124,6 +115,11 @@ public class Product {
      */
     public StockLevel getStockLevel() {
         return stockLevel;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 
     /**
