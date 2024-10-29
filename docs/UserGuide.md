@@ -55,6 +55,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/yeoh d/Friday`
+**Income** | `income`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
@@ -176,9 +177,18 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Showing income data: `income`
 
-Shows the total amount of tuition fee you have received from the students and the amount that hasn't been paid.
+Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
 
-Format: `income`
+**Format:** `income`
+
+**Examples**
+* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
+* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
+students whose name contains Alex
+
+**Output**
+![result for `income` when all entries listed](images/incomeResult.png)
+
 
 ### Finding students' information: `find`
 
