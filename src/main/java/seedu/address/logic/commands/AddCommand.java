@@ -49,6 +49,14 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
+    public static final String ADD_PERSON_EXAMPLE = COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
+
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD + ": Adds a delivery to the inspected person. "
             + "Parameters: "
             + PREFIX_ITEMS + "ITEM... "
@@ -66,6 +74,16 @@ public class AddCommand extends Command {
             + PREFIX_STATUS + "not delivered "
             + PREFIX_TAG + "Difficult address to deliver "
             + PREFIX_TAG + "Best before Wednesday";
+
+    public static final String ADD_DELIVERY_EXAMPLE = COMMAND_WORD + " "
+             + PREFIX_ITEMS + "Monitor "
+             + PREFIX_ITEMS + "Mouse "
+             + PREFIX_ETA + "2020-02-02 "
+             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
+             + PREFIX_COST + "$100 "
+             + PREFIX_STATUS + "not delivered "
+             + PREFIX_TAG + "Difficult address to deliver "
+             + PREFIX_TAG + "Best before Wednesday";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";
