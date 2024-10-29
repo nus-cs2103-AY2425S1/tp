@@ -4,8 +4,6 @@ package seedu.address.model.order;
  * Order represent an order ordered by a customer, each order is uniquely identified as its order name
  */
 public class Order {
-    private final String name;
-
     public static final String MESSAGE_CONSTRAINTS =
             "Order name must only contain \n"
                     + "1. Alphanumeric characters or \n"
@@ -16,6 +14,12 @@ public class Order {
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+$";
 
+    private final String name;
+
+    /**
+     * Create a new order
+     * @param name of order
+     */
     public Order(String name) {
         if (!isValidName(name)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
