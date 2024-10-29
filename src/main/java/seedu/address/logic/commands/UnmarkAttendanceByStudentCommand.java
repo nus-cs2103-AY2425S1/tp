@@ -62,7 +62,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
         Person studentToUnmarkAttendance = lastShownList.get(targetIndex.getZeroBased());
         Participation currentParticipation = model.getParticipationList().stream()
                 .filter(participation -> participation.getStudent().equals(studentToUnmarkAttendance)
-                && participation.getTutorial().equals(this.tutorial)).findFirst()
+                        && participation.getTutorial().equals(this.tutorial)).findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
