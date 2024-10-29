@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.logging.Logger;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -14,7 +16,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIsRolePredicate;
@@ -26,6 +27,7 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
  * Parses input arguments and creates a new SearchModeSearchCommand object
  */
 public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCommand> {
+    private static final Logger logger = Logger.getLogger(SearchModeSearchCommandParser.class.getName());
     @Override
     public SearchModeSearchCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -79,12 +81,15 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
             String roles = argMultimap.getValue(PREFIX_ROLE).get();
             // map each word in String roles to a Role object
+
             List<Role> roleList = Arrays.stream(roles.split("\\s+"))
                     .filter(RoleHandler::isValidRoleName) // Filter valid roles
                     .map(role -> {
                         try {
+                            logger.info(String.format("Role: %s", role));
                             return RoleHandler.getRole(role);
                         } catch (InvalidRoleException e) {
+                            logger.warning(String.format("Invalid role, should not occur with filter: %s", role));
                             throw new RuntimeException("Invalid role: " + role, e);
                         }
                     })

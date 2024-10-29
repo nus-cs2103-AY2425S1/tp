@@ -112,6 +112,7 @@ public class AddressBookParser {
     public Command parseSearchCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
+            logger.warning("This user input caused a ParseException: " + userInput);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
@@ -127,7 +128,7 @@ public class AddressBookParser {
         case ExitSearchModeCommand.COMMAND_WORD:
             return new ExitSearchModeCommand();
         case SearchModeSearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+            return new SearchModeSearchCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

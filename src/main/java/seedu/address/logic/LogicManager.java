@@ -55,6 +55,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command contactCommand;
         if (model.getSearchMode()) {
+            logger.info("Searchmode command detected");
             contactCommand = addressBookParser.parseSearchCommand(commandText);
 
         } else {
