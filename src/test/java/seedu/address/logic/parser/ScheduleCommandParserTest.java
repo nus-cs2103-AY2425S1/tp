@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_UNEQUAL_NOTES;
@@ -62,7 +63,14 @@ public class ScheduleCommandParserTest {
     }
 
     @Test
-    public void parse_moreDatesThanNotes() {
+    public void parse_noNotesPresent_failure() {
+        String userInput = VALID_NAME + " d/" + VALID_DATE;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_moreDatesThanNotes_failure() {
         String userInput = VALID_NAME + " d/" + VALID_DATE + " note/" + VALID_NOTE + " d/" + VALID_DATE_TWO;
         assertParseFailure(parser, userInput, MESSAGE_UNEQUAL_NOTES);
     }
