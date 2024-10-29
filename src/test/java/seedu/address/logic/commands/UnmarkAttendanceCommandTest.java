@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -14,14 +15,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.Teacher;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TeacherBuilder;
 
 public class UnmarkAttendanceCommandTest {
 
@@ -58,14 +58,14 @@ public class UnmarkAttendanceCommandTest {
     @Test
     public void execute_nonStudentPerson_throwsCommandException() {
         // Arrange: Create a non-student person and add to the model
-        Person nonStudentPerson = new PersonBuilder().build();
+        Teacher nonStudentPerson = new TeacherBuilder().withName(VALID_NAME_MICHAEL).build();
         model.addPerson(nonStudentPerson);
         Index indexNonStudent = Index.fromZeroBased(
                 model.getFilteredPersonList().size() - 1);
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(indexNonStudent);
 
         // Act & Assert
-        assertThrows(CommandException.class, () -> command.executeCommand(model),
+        assertThrows(UnsupportedOperationException.class, () -> command.executeCommand(model),
                 Messages.MESSAGE_INVALID_STUDENT_INDEX);
     }
 

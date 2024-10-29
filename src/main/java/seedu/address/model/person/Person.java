@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 
@@ -151,6 +152,7 @@ public abstract class Person {
     }
 
     public void unmarkAttendance() {
+        throw new UnsupportedOperationException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
     }
 
     public void resetAttendance() {

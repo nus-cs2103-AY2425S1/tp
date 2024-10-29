@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_MICHAEL;
@@ -79,7 +80,8 @@ public class TypicalPersons {
         .withSubjects(VALID_SUBJECT_CHRIS).withClasses(VALID_CLASSES_CHRIS).build();
     public static final Student STUDENT_MICHAEL = new StudentBuilder().withName(VALID_NAME_MICHAEL)
         .withGender(VALID_GENDER_BOB).withAddress(VALID_ADDRESS_MICHAEL).withPhone(VALID_PHONE_MICHAEL)
-        .withEmail(VALID_EMAIL_MICHAEL).withSubjects(VALID_SUBJECT_MICHAEL).withClasses(VALID_CLASSES_MICHAEL).build();
+        .withEmail(VALID_EMAIL_MICHAEL).withSubjects(VALID_SUBJECT_MICHAEL).withClasses(VALID_CLASSES_MICHAEL)
+        .withDaysAttended(VALID_ATTENDANCE_MICHAEL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
  */
 public class MarkAttendanceCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_markAttendance_success() {

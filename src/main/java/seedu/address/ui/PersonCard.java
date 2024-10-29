@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
@@ -82,7 +81,6 @@ public class PersonCard extends UiPart<Region> {
             .toArray(String[]::new));
         classes.setText("🏫 " + formattedClasses);
 
-        DaysAttended days = student.getDaysAttended();
         daysAttended.textProperty().bind(
             Bindings.format("📅 Days Attended: %d", student.daysAttendedProperty())
         );

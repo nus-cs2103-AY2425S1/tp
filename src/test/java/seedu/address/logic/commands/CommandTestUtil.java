@@ -90,7 +90,7 @@ public class CommandTestUtil {
     public static final String VALID_CLASSES_MICHAEL = "7A";
     public static final String VALID_TAG_HARDWORKING = "hardworking";
     public static final String VALID_TAG_ATHLETE = "athlete";
-    public static final String VALID_ATTENDANCE_MICHAEL = "10";
+    public static final int VALID_ATTENDANCE_MICHAEL = 10;
 
     // Constants for Chris
     public static final String VALID_NAME_CHRIS = "Chris Lim";
