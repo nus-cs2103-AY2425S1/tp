@@ -4,11 +4,18 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -25,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private Label personLabel = new Label("Persons");
+    private Label appointmentLabel = new Label("Appointments");
 
     private final Stage primaryStage;
     private final Logic logic;
@@ -34,6 +43,9 @@ public class MainWindow extends UiPart<Stage> {
     private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
+    private HBox hbox = new HBox();
+    private VBox personVBox = new VBox();
+    private VBox appointmentVBox = new VBox();
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -113,10 +125,38 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personVBox.getChildren().addAll(personLabel, personListPanel.getRoot());
+        appointmentVBox.getChildren().addAll(appointmentLabel, appointmentListPanel.getRoot());
+
+
+        hbox.setSpacing(16);
+        hbox.setPadding(new Insets(15, 12, 15, 12));
+        hbox.setAlignment(Pos.CENTER);
+        HBox.setHgrow(personVBox, Priority.ALWAYS);
+        HBox.setHgrow(appointmentVBox, Priority.ALWAYS);
+
+        listPanelPlaceholder.getChildren().add(hbox);
+        hbox.setMinWidth(listPanelPlaceholder.getWidth());
+
+
+        personLabel.setStyle("-fx-font-weight: bold;");
+        appointmentLabel.setStyle("-fx-font-weight: bold;");
+        personLabel.setStyle("-fx-text-fill: #3c3c3c; -fx-font-weight: bold;");
+        appointmentLabel.setStyle("-fx-text-fill: #3c3c3c; -fx-font-weight: bold;");
+        hbox.setStyle("-fx-background-color: #f2e1b3;");
+        commandBoxPlaceholder.setStyle("-fx-min-height: 65px");
+
+        personVBox.setSpacing(5);
+        appointmentVBox.setSpacing(5);
+
+        personVBox.setMaxWidth(Double.MAX_VALUE);
+        personVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        appointmentVBox.setMaxWidth(Double.MAX_VALUE);
+        appointmentVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.getRoot().setStyle("-fx-background-color: #f2e1b3;");
 
         StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
@@ -126,16 +166,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void showPersonListPanel() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        hbox.getChildren().clear();
+        hbox.getChildren().add(personVBox);
+        hbox.getChildren().add(appointmentVBox);
         statusbarPlaceholder.getChildren().clear();
         StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
     }
 
     private void showAppointmentListPanel() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+        hbox.getChildren().clear();
+        hbox.getChildren().add(personVBox);
+        hbox.getChildren().add(appointmentVBox);
         statusbarPlaceholder.getChildren().clear();
         StatusBarFooter appointmentBookFooter = new StatusBarFooter(logic.getAppointmentBookFilePath());
         statusbarPlaceholder.getChildren().add(appointmentBookFooter.getRoot());
