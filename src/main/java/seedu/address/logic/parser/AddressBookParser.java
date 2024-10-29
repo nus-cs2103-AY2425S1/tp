@@ -38,6 +38,7 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private final ListingParser listingParser = new ListingParser();
 
     /**
      * Parses user input into command for execution.
@@ -59,6 +60,10 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+
+        if (isListingCommand(commandWord)) {
+            return listingParser.parseCommand(userInput);
+        }
 
         switch (commandWord) {
 
@@ -98,9 +103,6 @@ public class AddressBookParser {
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
 
-        case AddListingCommand.COMMAND_WORD:
-            return new AddListingCommandParser().parse(arguments);
-
         case ShowListingsCommand.COMMAND_WORD:
             return new ShowListingsCommand();
 
@@ -114,6 +116,22 @@ public class AddressBookParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+    /**
+     * Checks if a command is a listing-related command.
+     *
+     * @param commandWord the command word to check
+     * @return true if the command is related to listings, false otherwise
+     */
+    private boolean isListingCommand(String commandWord) {
+        return commandWord.equals(AddListingCommand.COMMAND_WORD)
+                || commandWord.equals("editListing")
+                || commandWord.equals("addBuyersToListing")
+                || commandWord.equals("deleteListing")
+                || commandWord.equals("clearListings")
+                || commandWord.equals("findListings")
+                || commandWord.equals("listListings")
+                || commandWord.equals("removeBuyersFromListing");
     }
 
 }

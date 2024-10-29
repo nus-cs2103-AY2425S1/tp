@@ -14,6 +14,8 @@ public class ShowListingsCommand extends Command {
     public static final String COMMAND_WORD = "showlistings";
     public static final String MESSAGE_SUCCESS = "Here are your listings!";
     public static final String MESSAGE_NO_LISTINGS_IN_LIST = "You have no listings available.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all listings in the system.\n"
+            + "Example: " + COMMAND_WORD;
 
     /**
      * Executes the command and displays all listings to the user.

@@ -25,6 +25,8 @@ public class DeleteClientProfileCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
             + "with the number: %2$s " + "and email: %3$s!";
+    public static final String MESSAGE_HAS_ACTIVE_LISTINGS = "Cannot delete seller %1$s because they"
+            + " have active listings.";
     private final Name targetName;
 
     public DeleteClientProfileCommand(Name targetName) {
@@ -45,6 +47,10 @@ public class DeleteClientProfileCommand extends Command {
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
             }
+        }
+
+        if (model.hasListingsForSeller(personToDelete)) {
+            throw new CommandException(String.format(MESSAGE_HAS_ACTIVE_LISTINGS, personToDelete.getName()));
         }
 
         model.deletePerson(personToDelete);
