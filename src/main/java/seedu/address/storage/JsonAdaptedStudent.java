@@ -107,4 +107,17 @@ class JsonAdaptedStudent {
         return new Student(modelName, modelPhone, modelEmail, modelCourses);
     }
 
+    /**
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudent(JsonAdaptedStudent otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
+    }
+
 }

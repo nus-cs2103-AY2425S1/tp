@@ -153,7 +153,7 @@ class JsonAdaptedLesson {
      */
     private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
         for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceList) {
-            if (pair.getKey().equals(jsonStudent)) {
+            if (pair.getKey().isSameStudent(jsonStudent)) {
                 return pair.getValue();
             }
         }
