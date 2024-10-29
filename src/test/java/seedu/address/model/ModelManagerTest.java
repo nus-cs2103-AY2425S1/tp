@@ -15,7 +15,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.CourseContainsKeywordsPredicate;
 import seedu.address.model.person.Module;
+import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EduContactsBuilder;
 
@@ -167,9 +169,19 @@ public class ModelManagerTest {
         // different eduContacts -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentEduContacts, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredList (NameContainsKeywordsPredicate) -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(eduContacts, userPrefs)));
+
+        // different filteredList (ModuleContainsKeywordsPredicate) -> returns false
+        String moduleKeyword = "CS1010";
+        modelManager.updateFilteredPersonList(new ModuleContainsKeywordsPredicate(moduleKeyword));
+        assertFalse(modelManager.equals(new ModelManager(eduContacts, userPrefs)));
+
+        // different filteredList (CourseContainsKeywordsPredicate) -> return false
+        String courseKeyword = "Computer Science";
+        modelManager.updateFilteredPersonList(new CourseContainsKeywordsPredicate(Arrays.asList(courseKeyword)));
         assertFalse(modelManager.equals(new ModelManager(eduContacts, userPrefs)));
 
         // different personToDisplay -> returns false

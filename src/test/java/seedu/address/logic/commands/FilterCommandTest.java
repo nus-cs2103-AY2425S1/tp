@@ -67,6 +67,29 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_zeroKeywords_noPersonFound_courseFilter() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        CourseContainsKeywordsPredicate predicate =
+                new CourseContainsKeywordsPredicate(Collections.singletonList(" "));
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroKeywords_noPersonFound_moduleFilter() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ModuleContainsKeywordsPredicate predicate =
+                new ModuleContainsKeywordsPredicate("  ");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
@@ -78,7 +101,8 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod_namePredicate() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName()
                 + "{namePredicate="
@@ -90,7 +114,8 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod_modulePredicate() {
-        ModuleContainsKeywordsPredicate modulePredicate = new ModuleContainsKeywordsPredicate("CS2103T");
+        ModuleContainsKeywordsPredicate modulePredicate =
+                new ModuleContainsKeywordsPredicate("CS2103T");
         FilterCommand filterCommand = new FilterCommand(modulePredicate);
         String expected = FilterCommand.class.getCanonicalName()
                 + "{namePredicate=null, modulePredicate="
