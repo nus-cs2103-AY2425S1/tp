@@ -29,22 +29,22 @@
     "tags" : [ "friends" ],
     "orderList" : [ {
       "item" : "Abacus",
-      "count" : "2",
+      "quantity" : "2",
       "date" : "10-10-2025",
       "status": "Pending"
     }, {
       "item" : "Blocks",
-      "count" : "101",
+      "quantity" : "101",
       "date" : "05-05-2025",
       "status": "Completed"
     }, {
       "item" : "Camera with spare lens",
-      "count" : "1",
+      "quantity" : "1",
       "date" : "03-03-2025",
       "status": "Pending"
     }, {
       "item" : "Damascus daggers",
-      "count" : "5",
+      "quantity" : "5",
       "date" : "12-12-2025",
       "status": "Pending"
     } ]
@@ -63,7 +63,7 @@
     "tags" : [ ],
     "orderList" : [ {
       "item" : "Abacus",
-      "count" : "2",
+      "quantity" : "2",
       "date" : "10-10-2025",
       "status": "Pending"
     } ]
@@ -75,7 +75,7 @@
     "tags" : [ ],
     "orderList" : [ {
       "item" : "Abacus",
-      "count" : "2",
+      "quantity" : "2",
       "date" : "10-10-2025",
       "status": "Pending"
     } ]

@@ -126,10 +126,10 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidOrderList_throwsIllegalValueException() {
         List<JsonAdaptedOrder> invalidOrderList = new ArrayList<>(VALID_ORDER_LIST);
         final String item = BLOCKS.getItem().toString();
-        final String count = "0";
+        final String quantity = "0";
         final String date = BLOCKS.getDate().toString();
         final String status = BLOCKS.getStatus().toString();
-        invalidOrderList.add(new JsonAdaptedOrder(item, count, date, status));
+        invalidOrderList.add(new JsonAdaptedOrder(item, quantity, date, status));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_TAGS, invalidOrderList);
