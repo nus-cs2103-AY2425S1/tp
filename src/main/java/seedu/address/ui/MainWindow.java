@@ -24,7 +24,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -32,6 +31,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private StudentProfile studentProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +45,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane studentListPanelPlaceholder;
 
     @FXML
+    private StackPane studentProfilePlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane studentDetailsContainer;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -83,21 +89,6 @@ public class MainWindow extends UiPart<Stage> {
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -110,17 +101,35 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        // Create and add the StudentProfile panel if it's not null
+        studentProfile = new StudentProfile();
+        if (studentProfile != null && studentProfile.getRoot() != null) {
+            studentDetailsContainer.getChildren().add(studentProfile.getRoot());
+        }
 
+        // Create and add the StudentListPanel with reference to StudentProfile
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), studentProfile);
+        if (studentListPanel != null && studentListPanel.getRoot() != null) {
+            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        }
+
+        // Create and add the ResultDisplay if it's not null
         resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if (resultDisplay != null && resultDisplay.getRoot() != null) {
+            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        }
 
+        // Create and add the StatusBarFooter if it's not null
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        if (statusBarFooter != null && statusBarFooter.getRoot() != null) {
+            statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        }
 
+        // Create and add the CommandBox if it's not null
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        if (commandBox != null && commandBox.getRoot() != null) {
+            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        }
     }
 
     /**

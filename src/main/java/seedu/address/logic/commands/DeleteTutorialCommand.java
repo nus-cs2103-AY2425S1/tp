@@ -8,17 +8,16 @@ import seedu.address.model.Model;
 import seedu.address.model.tut.Tutorial;
 
 /**
- * Deletes a tutorial class identified using it's tutorial id from the tutorial class list.
+ * Deletes a tutorial class identified using its tutorial id from the tutorial class list.
  */
 public class DeleteTutorialCommand extends Command {
-
 
     public static final String COMMAND_WORD = "deleteTut";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tutorial identified by the tutorial ID used in the displayed tutorial list."
             + " Parameters: TUTORIAL ID\n"
-            + "Example: " + COMMAND_WORD + " T1001";
+            + "Example: " + COMMAND_WORD + " id/T1001";
 
     public static final String MESSAGE_DELETE_TUTORIAL_SUCCESS = "Deleted Tutorial: %1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "This tutorial class doesn't exist!";

@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -17,18 +17,20 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+
+      <!-- Student Information -->
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="id" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="studentId" text="\$studentId" styleClass="cell_small_label"/>
-      <Label fx:id="tutorialId" text="\$tutorialId" styleClass="cell_small_label"/>
-      <Label fx:id="attendance" text="\$attendance" styleClass="cell_small_label"/>
+      <Label fx:id="studentId" styleClass="cell_small_label" text="Student Id: "/>
+      <Label fx:id="tutorialId" styleClass="cell_small_label" text="Tutorial Id: "/>
+
+      <!-- Attendance Section with Wrapper Box -->
+      <VBox spacing="5" alignment="TOP_LEFT" styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Attendance: "/>
+        <FlowPane fx:id="attendanceFlowPane" hgap="5" vgap="5" prefWrapLength="250"/>
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>

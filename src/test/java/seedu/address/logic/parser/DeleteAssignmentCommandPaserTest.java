@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
@@ -15,7 +16,7 @@ public class DeleteAssignmentCommandPaserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "Assignment 1", new DeleteAssignmentCommand(ASSIGNMENT1));
+        assertParseSuccess(parser, " " + PREFIX_NAME + "Assignment 1", new DeleteAssignmentCommand(ASSIGNMENT1));
     }
 
     @Test
