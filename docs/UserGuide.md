@@ -98,6 +98,9 @@ A person can have any number of tags (including 0)
 **Examples:**
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+- `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`
+- `add n/Ben Johnson p/87654321 a/456 Clementi Avenue, #02-15 t/client r/Prefers suburban areas b/1985-05-23`
+- `add n/Clara Lim p/99887766 a/789 Punggol Way, #07-05 e/clara.lim@example.com t/lead t/premium`
 
 ---
 
@@ -136,30 +139,33 @@ Edits an existing person in the address book.
 **Command Format:**  
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+- Edits the person at the specified `INDEX`. The index is the number next to the person's name in the displayed list and must be a positive integer (e.g., 1, 2, 3, …).
+- At least one optional field must be included for the edit to proceed.
+- Any provided values will replace the person’s existing values.
+- Editing tags will replace the current tags with the new ones; tags are not added cumulatively.
+- To remove all tags from a person, use `t/` without adding any tags after it.
+- Note that history and property cannot be edited
 
 **Examples:**
 -  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 -  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+-  `edit 3 a/456 Clementi Road #02-15 r/Looking for a new property` Edits the address of the 3rd person to `456 Clementi Road #02-15` and adds a remark indicating they are `Looking for a new property`.
+-  `edit 4 n/James Lee b/1989-07-20 t/friend t/premium` Edits the name of the 4th person to `James Lee`, sets their birthday to `1989-07-20`, and updates their tags to `friend` and `premium`.
+-  `edit 5 p/98765432 t/` Edits the phone number of the 5th person to `98765432` and removes all existing tags.
 
 ### **Locating Persons by Name**
 
 Finds persons whose names contain any of the given keywords.
 
 **Command Format:**
-`find KEYWORD [MORE_KEYWORDS]`
+`find KEYWORD [ADDITIONAL_KEYWORDS]`
 
 - The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- The order of the keywords does not matter. For example, `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Only **full words** will be matched e.g. `Han` will not match `Hans`
+- Persons matching at least one keyword will be returned (i.e., an `OR` search).
+  For example, `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples:**
 - `find John` returns `john` and `John Doe`
@@ -210,18 +216,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-### **Log Interaction History**
+### **Favourite Contacts**
 
-Records an interaction or communication with a specific contact, such as calls, meetings, or messages.
+Marks a contact as a favourite for quick access or displays all favourite contacts.
 
 **Command Format:**  
-`log <ContactID> [d/<Date>] l/<Interaction Details>`
+`favourite <ContactID>` or `favourite`
 
-- `d/` Date of the interaction (optional)
-- `l/` Details of the interaction
+- When `ContactID` is provided, it marks that contact as a favourite.
+- If `ContactID` is absent, all favourite contacts are moved to the front of the list for easy access.
 
-**Example:**
-- `log 123 d/2024-09-16 l/Discussed property updates`
+**Examples:**
+- `favourite 123` marks the contact with ID `123` as a favourite.
+- `favourite` brings all favourite contacts to the top of the list.
 
 ---
 
@@ -256,17 +263,17 @@ Displays detailed information of a specific contact on a single page.
 
 ---
 
-### **Favorite Contacts**
+### **Favourite Contacts**
 
-Marks a contact as a favorite for quick access.
+Marks a contact as a favourite for quick access.
 
 **Command Format:**  
-`favorite <ContactID>`
+`favourite <ContactID>`
 
-- Marks the contact with the specified `ContactID` as a favorite.
+- Marks the contact with the specified `ContactID` as a favourite.
 
 **Example:**
-- `favorite 123`
+- `favourite 123`
 
 ---
 
@@ -322,6 +329,6 @@ _Details coming soon ..._
 | **Log Interaction**    | `log <ContactID> [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                          |
 | **Add/Edit Remark**    | `remark <index> r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                             |
 | **View Contact**       | `view <ContactID>`<br> e.g., `view 123`                                                                                                                                  |
-| **Favorite Contact**   | `favorite <ContactID>`<br> e.g., `favorite 123`                                                                                                                          |
+| **Favourite Contact**  | `favourite <ContactID>`<br> e.g., `favourite 123`                                                                                                                        |
 | **Add/Edit Birthday**  | `birthday <index> b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                    |
 | **Birthday Reminder**  | `birthday <ContactID> d/DATE`<br> e.g., `birthday 123 d/1990-05-15`                                                                                                      |
