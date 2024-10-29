@@ -11,6 +11,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    public static final String ASCENDING = "ascending";
+    public static final String DESCENDING = "descending";
+
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -38,9 +41,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         boolean isAscending;
-        if (order.equalsIgnoreCase("ascending")) {
+        if (order.equals(ASCENDING)) {
             isAscending = true;
-        } else if (order.equals("descending")) {
+        } else if (order.equals(DESCENDING)) {
             isAscending = false;
         } else {
             logger.fine("These args caused a parse command(for SortCommandParser): " + args);
