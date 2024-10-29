@@ -43,6 +43,11 @@ public class UnmarkAttendanceByStudentCommand extends Command {
     private final Attendance attendance;
     private final Tutorial tutorial;
 
+    /**
+     * @param targetIndex Index of the person in the filtered person list to mark
+     * @param attendance Attendance of the person specified by index
+     * @param tutorial Tutorial the student attended
+     */
     public UnmarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, Tutorial tutorial) {
         requireAllNonNull(targetIndex, attendance, tutorial);
         this.targetIndex = targetIndex;
