@@ -133,10 +133,13 @@
 }
 
 .cell_doctor_flag_label {
-    -fx-background-color: #89cffa;
-    -fx-padding: 0 2 0 2;
-    -fx-margin: 0 5 0 0;
+    -fx-background-color: #6395ee;
+    -fx-label-padding: 0;
     -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #6395ee;
+    -fx-background-radius: 5;
+    -fx-label-padding: 0 2 0 2;
 }
 
 .cell_patient_flag_label {
@@ -146,6 +149,7 @@
     -fx-border-width: 1;
     -fx-border-color: #f75c5c;
     -fx-background-radius: 5;
+    -fx-label-padding: 0 2 0 2;
 }
 
 .stack-pane {
