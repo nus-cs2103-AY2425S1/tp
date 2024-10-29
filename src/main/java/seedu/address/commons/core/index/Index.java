@@ -66,4 +66,8 @@ public class Index {
     public String toString() {
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
     }
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(zeroBasedIndex); // Ensures hashCode matches equals() for `value`
+    }
 }

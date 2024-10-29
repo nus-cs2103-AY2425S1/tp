@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.event.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
@@ -18,11 +17,16 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
 
+/**
+ * Adds contacts to an event in to the address book.
+ */
 public class AddPersonToEventCommand extends Command {
     public static final String COMMAND_WORD = "event-add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/ [Event Index] [a/e/ve/vo]/ [Contact Index]: " +
-            "Adds contacts to an event in the address book. e.g. event-add ei/1 a/1,2,3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/EVENT INDEX [a/ or s/ or ve/ or vo/] CONTACT "
+            + "INDEX \nAdds contacts to an event in the address book. \nNote: At least one of the following prefixes "
+            + "is required—`a/`, `e/`, `ve/`, or `vo/`—each followed by one or more contact index/indices \ne.g. "
+            + "event-add ei/1 a/1,2,3";
 
     public static final String MESSAGE_SUCCESS = "Contacts added to %2$s successfully: \n%1$s";
 
@@ -32,6 +36,23 @@ public class AddPersonToEventCommand extends Command {
     private final Set<Index> vendors;
     private final Set<Index> sponsors;
 
+    /**
+     * Constructs an {@code AddPersonToEventCommand} to add specified persons
+     * to an event identified by the given event index.
+     *
+     * @param eventIndex The index of the event to which persons will be added.
+     *                   This cannot be null.
+     * @param attendees A set of indices representing the attendees to be added
+     *                  to the event. This cannot be null.
+     * @param volunteers A set of indices representing the volunteers to be added
+     *                   to the event. This cannot be null.
+     * @param vendors A set of indices representing the vendors to be added
+     *                to the event. This cannot be null.
+     * @param sponsors A set of indices representing the sponsors to be added
+     *                 to the event. This cannot be null.
+     *
+     * @throws NullPointerException if any of the parameters are null.
+     */
     public AddPersonToEventCommand(Index eventIndex, Set<Index> attendees, Set<Index> volunteers, Set<Index> vendors,
                                    Set<Index> sponsors) {
         requireAllNonNull(eventIndex, attendees, volunteers, vendors, sponsors);
@@ -67,12 +88,10 @@ public class AddPersonToEventCommand extends Command {
             addContactsToEvent(vendors, lastShownList, event, "vendor", sb);
             addContactsToEvent(sponsors, lastShownList, event, "sponsor", sb);
         } catch (IllegalValueException e) {
-            throw new CommandException("One or more person(s) to be added does not have the role that you are " +
-                    "adding him or her to. For example, to add a person as an attendee of Event X, make sure he or she " +
-                    "has the attendee role.");
+            throw new CommandException(e.getMessage());
         }
 
-        sb.delete(sb.length() - 2, sb.length());
+        sb.delete(sb.length() - 1, sb.length());
         return new CommandResult(String.format(MESSAGE_SUCCESS, sb, event.getName()));
     }
 
@@ -119,6 +138,9 @@ public class AddPersonToEventCommand extends Command {
             throws IllegalValueException {
         assert role != null;
         assert !role.isEmpty();
+        if (indices.isEmpty()) {
+            return;
+        }
         addRoleToMsg(indices, role, sb);
         for (Index index : indices) {
             Person person = persons.get(index.getZeroBased());
@@ -127,14 +149,13 @@ public class AddPersonToEventCommand extends Command {
         }
         sb.delete(sb.length() - 2, sb.length());
         sb.append("\n");
+
     }
 
     private static void addRoleToMsg(Set<Index> indices, String role, StringBuilder sb) {
-        if (!indices.isEmpty()) {
-            //format role
-            sb.append(role.substring(0, 1).toUpperCase())
-                    .append(role.substring(1))
-                    .append("(s): ");
-        }
+        //format role
+        sb.append(role.substring(0, 1).toUpperCase())
+                .append(role.substring(1))
+                .append("(s): ");
     }
 }

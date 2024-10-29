@@ -191,6 +191,19 @@ public class ParserUtil {
         return new Event(trimmedEvent);
     }
 
+    /**
+     * Parses a string of comma-separated indices and adds them to the provided set.
+     * Each index is trimmed of whitespace and validated to ensure it is a non-zero unsigned integer.
+     *
+     * @param indices The set to which the parsed indices will be added.
+     *                It should not be null.
+     * @param string The string containing comma-separated indices.
+     *               If null, no action is taken.
+     *
+     * @throws ParseException If the string is not null and one or more indices
+     *                        are invalid (not a non-zero unsigned integer) or
+     *                        if there are duplicate indices in the string.
+     */
     public static void parseStringOfIndices(Set<Index> indices, String string) throws ParseException {
         if (string == null) {
             return; // skip cuz tag is not part of input
@@ -206,7 +219,10 @@ public class ParserUtil {
                 throw new ParseException("One or more of the contact indices is not a non-zero unsigned integer.");
             }
 
-            indices.add(index); // duplicates are simply ignored, based on equals method of Index
+            if (indices.contains(index)) {
+                throw new ParseException("There cannot be duplicate indices for the same role e.g. a/1,1");
+            }
+            indices.add(index);
         }
     }
 }

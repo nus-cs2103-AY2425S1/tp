@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
@@ -278,5 +279,63 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> {
             ParserUtil.parseEvent(null);
         });
+    }
+
+    @Test
+    public void parseStringOfIndices_null_doesNothing() throws ParseException {
+        HashSet<Index> indices = new HashSet<>();
+        ParserUtil.parseStringOfIndices(indices, null);
+        assertEquals(indices, new HashSet<Index>());
+    }
+
+    @Test
+    public void parseStringOfIndices_invalidIndex_throwsParseException() throws ParseException {
+        HashSet<Index> indices = new HashSet<>();
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "baby"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "10.5, 2, tree"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, ""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "1, "));
+    }
+
+    @Test
+    public void parseStringOfIndices_inputWithWhiteSpace_parsedSuccessfully() throws ParseException {
+        HashSet<Index> indices = new HashSet<>();
+        HashSet<Index> expectedIndices = new HashSet<>();
+
+        expectedIndices.add(Index.fromOneBased(1));
+        expectedIndices.add(Index.fromZeroBased(2));
+        expectedIndices.add(Index.fromZeroBased(1));
+        expectedIndices.add(Index.fromZeroBased(3));
+        expectedIndices.add(Index.fromZeroBased(4));
+        expectedIndices.add(Index.fromZeroBased(6));
+        expectedIndices.add(Index.fromZeroBased(8));
+
+        ParserUtil.parseStringOfIndices(indices, "  1,  3  ");
+        ParserUtil.parseStringOfIndices(indices, "2,  4  ,5,7  ,  9");
+
+        assertEquals(indices, expectedIndices);
+    }
+
+    @Test
+    public void parseStringOfIndices_inputWithoutWhiteSpace_parsedSuccessfully() throws ParseException {
+        HashSet<Index> indices = new HashSet<>();
+        HashSet<Index> expectedIndices = new HashSet<>();
+
+        expectedIndices.add(Index.fromOneBased(1));
+        expectedIndices.add(Index.fromZeroBased(2));
+
+        ParserUtil.parseStringOfIndices(indices, "1,3");
+
+        assertEquals(indices, expectedIndices);
+    }
+
+    @Test
+    public void parseStringOfIndices_duplicateIndices_throwsParseException() {
+        HashSet<Index> indices = new HashSet<>();
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseStringOfIndices(indices, "1,1"));
     }
 }
