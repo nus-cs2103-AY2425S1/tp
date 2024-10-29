@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -11,6 +12,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
@@ -25,6 +27,7 @@ public class ExportCommand extends FileAccessCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Exports the current contacts to a json file with its "
         + "name being the current time and date. ";
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy-hhmmssa");
 
     @Override
     public CommandResult execute(Model model) {
@@ -41,15 +44,19 @@ public class ExportCommand extends FileAccessCommand {
         requireNotExecuted();
         requireNonNull(model);
         isExecuted = true;
+
         LocalDateTime now = LocalDateTime.now();
-        Path exportFileLocation = Paths.get("./" + now.toString());
+        Path exportFileLocation = Paths.get("./data/" + now.format(formatter) + ".json");
+
         try {
+            FileUtil.createIfMissing(exportFileLocation);
             storage.saveAddressBook(model.getAddressBook(), exportFileLocation);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
