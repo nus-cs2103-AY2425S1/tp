@@ -2,6 +2,8 @@ package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -73,7 +75,9 @@ public class PresentDates {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("[ ");
-        for (TutDate date : dates) {
+        List<TutDate> tutDates = new ArrayList<>(dates);
+        tutDates.sort((a, b) -> a.compare(a, b));
+        for (TutDate date : tutDates) {
             s.append(date.toString()).append(' ');
         }
         s.append(']');
