@@ -25,9 +25,9 @@ public class DeleteCommand extends Command {
             + "Parameters: "
             + "ID\n"
             + "or: "
-            + "ID MODULE_KEYWORD"
+            + "ID MODULE_KEYWORD\n"
             + "Example: " + COMMAND_WORD + " "
-            + "12345678"
+            + "12345678\n"
             + "or: " + COMMAND_WORD + " "
             + "12345678 m/CS2103T";
 
