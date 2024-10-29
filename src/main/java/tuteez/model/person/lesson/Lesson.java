@@ -5,7 +5,10 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -37,13 +40,17 @@ public class Lesson {
     public Lesson(String lesson) {
         requireNonNull(lesson);
         checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
-        String[] lessonDayTimeArr = lesson.split(" ");
+        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
         String[] timeArr = lessonDayTimeArr[1].split("-");
         this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
         this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
         this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
     }
 
+    /**
+     * Maps various string representations of days (e.g., "monday", "mon") to their corresponding Day enum values.
+     * All keys are stored in lowercase.
+     */
     private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
     static {
         DAY_NAME_MAP.put("monday", Day.MONDAY);
@@ -111,7 +118,7 @@ public class Lesson {
      *          false otherwise.
      */
     public static boolean isValidLesson(String lesson) {
-        String[] parts = lesson.split(" ", 2);
+        String[] parts = lesson.split("\\s+", 2);
         if (parts.length != 2) {
             return false;
         }

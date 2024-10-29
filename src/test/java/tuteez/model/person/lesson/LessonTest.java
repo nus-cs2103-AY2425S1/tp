@@ -53,6 +53,38 @@ public class LessonTest {
     }
 
     @Test
+    public void isValidLesson_acceptsMultipleSpacesBetweenDayAndTime() {
+        String lessonWithOneSpace = "monday 1200-1400";
+        String lessonWithTwoSpaces = "monday  1200-1400";
+
+        assertTrue(isValidLesson(lessonWithOneSpace));
+        assertTrue(isValidLesson(lessonWithTwoSpaces));
+    }
+
+    @Test
+    public void constructor_lessonStringWithMultipleSpaces_parsesSuccessfully() {
+        String lessonWithTwoSpaces = "monday  1200-1400";
+        String lessonWithManySpaces = "monday    1200-1400";
+        String lessonWithTabAndSpaces = "monday \t  1200-1400";
+
+        Lesson lessonTwo = new Lesson(lessonWithTwoSpaces);
+        Lesson lessonMany = new Lesson(lessonWithManySpaces);
+        Lesson lessonTab = new Lesson(lessonWithTabAndSpaces);
+
+        assertEquals(Day.MONDAY, lessonTwo.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonTwo.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithTwoSpaces));
+
+        assertEquals(Day.MONDAY, lessonMany.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonMany.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithManySpaces));
+
+        assertEquals(Day.MONDAY, lessonTab.getLessonDay());
+        assertEquals("MONDAY 1200-1400", lessonTab.getDayAndTime());
+        assertTrue(isValidLesson(lessonWithTabAndSpaces));
+    }
+
+    @Test
     public void constructor_acceptsShortcutDayNames() {
         String lessonWithShortCut = "mon 1200-1400";
         Lesson l1 = new Lesson("monday 1200-1400");
