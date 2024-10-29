@@ -2,14 +2,17 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
@@ -24,6 +27,8 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
@@ -66,7 +71,9 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addStudent(student);
+            logger.info("Added student " + student.getName() + " to address book");
         }
+
 
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
@@ -74,6 +81,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
             addressBook.addGroup(group);
+            logger.info("Added group " + group.getGroupName() + " to address book");
         }
 
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
@@ -82,6 +90,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
             addressBook.addTask(task);
+            logger.info("Added task " + task.getTaskName() + " to address book");
         }
         return addressBook;
     }

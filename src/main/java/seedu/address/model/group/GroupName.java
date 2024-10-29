@@ -62,7 +62,7 @@ public class GroupName {
         }
 
         seedu.address.model.group.GroupName otherName = (seedu.address.model.group.GroupName) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
