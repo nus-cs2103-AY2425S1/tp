@@ -6,8 +6,10 @@ import seedu.address.model.person.Person;
 
 /**
  * A generic comparator that prioritizes a specific role type.
- * Instances of the role type are placed before non-role types, and are sorted by the specified criterion.
- * Non-role types retain their original order.
+ * Instances of the specified role type are placed before non-role types.
+ * Role types are sorted first by the specified criterion; if they have equal attributes, they retain
+ * their default (insertion) order.
+ * Non-role types retain their default (insertion) order.
  *
  * @param <T> The type of person that should be prioritized (e.g., Donor, Volunteer).
  */
