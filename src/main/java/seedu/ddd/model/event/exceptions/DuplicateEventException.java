@@ -5,7 +5,8 @@ package seedu.ddd.model.event.exceptions;
  * (Events are considered duplicates if they have the same identity).
  */
 public class DuplicateEventException extends RuntimeException {
+    public static final String DUPLICATE_EVENT_MESSAGE = "Operation would result in duplicate events";
     public DuplicateEventException() {
-        super("Operation would result in duplicate events");
+        super(DUPLICATE_EVENT_MESSAGE);
     }
 }

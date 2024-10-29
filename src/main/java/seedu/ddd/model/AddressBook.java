@@ -110,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a contact to the address book.
+     * Fetches a contact from the address book.
      * If contact has not been created or does not exist, a null object will be returned.
      */
     public Contact getContact(Id contactId) {
@@ -131,6 +131,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event event) {
         events.add(event);
+        List<Contact> eventContacts = event.getContacts();
+        for (Contact contact: eventContacts) {
+            contacts.get(contact.getId()).addEvent(event);
+        }
     }
 
     /**
@@ -170,6 +174,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeEvent(Event targetEvent) {
         events.remove(targetEvent);
+        List<Contact> eventContacts = targetEvent.getContacts();
+        for (Contact contact: eventContacts) {
+            contacts.get(contact.getId()).removeEvent(targetEvent);
+        }
     }
 
     //// util methods

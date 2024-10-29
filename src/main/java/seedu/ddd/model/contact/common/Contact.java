@@ -13,6 +13,7 @@ import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
 import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.exceptions.EventNotFoundException;
 
 /**
  * Represents a Contact in the address book.
@@ -98,6 +99,16 @@ public abstract class Contact implements Displayable {
      */
     public void addEvent(Event event) {
         events.add(event);
+    };
+
+    /**
+     * Adds an {@code Event} related to the {@code Contact}
+     */
+    public void removeEvent(Event event) throws EventNotFoundException {
+        if (!events.contains(event)) {
+            throw new EventNotFoundException();
+        }
+        events.remove(event);
     };
 
     /**
