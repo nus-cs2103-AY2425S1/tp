@@ -63,4 +63,19 @@ public class FilterCommand extends Command {
         model.setFilteredAppts(filteredAppts);
         return new CommandResult(MESSAGE_SUCCESS, "appts");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return dateFilter.equals(otherFilterCommand.dateFilter);
+    }
 }

@@ -20,6 +20,8 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
 
+import static seedu.address.logic.parser.ParserUtil.parseSingleAppt;
+
 /**
  * A utility class to help with building Patient objects.
  */

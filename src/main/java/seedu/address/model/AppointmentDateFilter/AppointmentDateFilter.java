@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.healthservice.HealthService;
 
 /**
@@ -84,6 +85,32 @@ public class AppointmentDateFilter {
 
     public HealthService getHealthService() {
         return healthService;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AppointmentDateFilter)) {
+            return false;
+        }
+
+        AppointmentDateFilter otherFilter = (AppointmentDateFilter) other;
+        if (startDate == null && otherFilter.startDate == null && healthService == null
+                && otherFilter.healthService == null) {
+            return endDate.isEqual(otherFilter.endDate);
+        } else if ((startDate != null && otherFilter.startDate == null)
+                || (startDate == null && otherFilter.startDate != null)) {
+            return false;
+        } else if ((healthService != null && otherFilter.healthService == null)
+                || (healthService == null && otherFilter.healthService != null)) {
+            return false;
+        }
+        return startDate.isEqual(otherFilter.startDate) && endDate.isEqual(otherFilter.endDate)
+                && healthService.equals(otherFilter.healthService);
     }
 
 }
