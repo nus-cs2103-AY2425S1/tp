@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 

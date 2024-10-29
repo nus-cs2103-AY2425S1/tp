@@ -15,6 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.ModelStub;
@@ -63,8 +65,8 @@ public class RemoveFromConsultCommandTest {
     // Model stub that contains a consultation and can return students by name
     private class ModelStubWithConsultation extends ModelStub {
         private final Consultation consultation = new Consultation(
-                new seedu.address.model.consultation.Date("2024-10-20"),
-                new seedu.address.model.consultation.Time("14:00"),
+                new Date("2024-10-20"),
+                new Time("14:00"),
                 FXCollections.observableArrayList(
                         new StudentBuilder().withName("Alex Yeoh").build(),
                         new StudentBuilder().withName("Harry Ng").build()));

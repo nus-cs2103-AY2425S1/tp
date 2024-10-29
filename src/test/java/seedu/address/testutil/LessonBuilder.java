@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 

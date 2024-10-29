@@ -14,6 +14,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -66,8 +68,8 @@ public class RemoveFromLessonCommandTest {
         private final Student student1 = new StudentBuilder().withName("Alex Yeoh").build();
         private final Student student2 = new StudentBuilder().withName("Harry Ng").build();
         private final Lesson lesson = new Lesson(
-                new seedu.address.model.consultation.Date("2024-10-20"),
-                new seedu.address.model.consultation.Time("14:00"),
+                new Date("2024-10-20"),
+                new Time("14:00"),
                 FXCollections.observableArrayList(student1, student2),
                 Map.of(student1, true, student2, false));
 
