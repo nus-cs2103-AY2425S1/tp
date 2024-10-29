@@ -176,7 +176,7 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `schedule Alice Tan d/2024-10-29 1200 note/Second Appointment`.
-2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
+2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached.
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
 ### View Client Feature
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Physiotherapist requests to schedule a new appointment for a client. 
+1. Physiotherapist requests to schedule a new appointment for a client.
 2. PhysioPal creates appointment for client with the appointment details provided.
 3. PhysioPal confirms creation of appointment and displays a success message.
 
@@ -545,9 +545,9 @@ testers are expected to do more *exploratory* testing.
 1. Scheduling an appointment for a client while all clients are being shown.
 
     1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-   
+
     1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named John Doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
-   
+
     1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
     1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.

@@ -32,7 +32,7 @@ your contact management tasks done faster than traditional GUI apps.
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete John Doe` : Deletes the contact named `John Doe` in the current list.
-   
+
    * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
 
    * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for John Doe.
