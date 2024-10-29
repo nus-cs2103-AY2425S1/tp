@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getStressTestAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -17,10 +21,13 @@ import seedu.address.model.UserPrefs;
 
 public class AutocompleteParserTest {
     private static final int PARSER_TIME_LIMIT = 300; // in milliseconds
+
+    @TempDir
+    public Path temporaryFolder;
     private Model model;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
@@ -213,6 +220,42 @@ public class AutocompleteParserTest {
 
         assertEquals(suggestions, expectedSuggestions);
     }
+    // Test file paths
+    @Test
+    public void parseCommand_existingFilePath_returnsFilePathSuggestion() throws IOException {
+        // Add test file
+        Path archiveTestFile = temporaryFolder.resolve("archiveTest.json");
+        Files.createFile(archiveTestFile);
+
+        AutocompleteParser autocompleteParser = new AutocompleteParser(temporaryFolder.toString());
+        String userInput = "archive pa/";
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertTrue(suggestions.containsKey("archiveTest.json"));
+    }
+
+    @Test
+    public void parseCommand_nonExistingFilePath_returnsNoFilePathSuggestion() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser(temporaryFolder.toString());
+        String userInput = "archive pa/";
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertTrue(suggestions.isEmpty());
+    }
+
+    @Test
+    public void parseCommand_nonExistingDirectory_returnsNoFilePathSuggestion() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser("X@!9393049118!!");
+        String userInput = "archive pa/";
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertTrue(suggestions.isEmpty());
+    }
+
+
 
     // Test caret positions
     @Test
