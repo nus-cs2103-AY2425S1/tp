@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_MICHAEL;
@@ -11,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
+import static seedu.address.testutil.TypicalPersons.STUDENT_MICHAEL;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -71,6 +72,18 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_storageThrowsIoException_throwsCommandException() {
+        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void execute_storageThrowsAdException_throwsCommandException() {
+        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -158,8 +171,8 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
                 + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
-                + CLASSES_DESC_MICHAEL;
-        Student expectedStudent = new StudentBuilder(STUDENT_BENSON).withTags().build();
+                + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL;
+        Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);

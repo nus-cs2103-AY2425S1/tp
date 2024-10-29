@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Represents a Person's days attended in the address book.
@@ -10,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class DaysAttended {
 
     public static final String MESSAGE_CONSTRAINTS = "Days attended should be a non-negative integer";
-    private int daysAttended;
+    private final IntegerProperty daysAttended;
 
     /**
      * Constructs a {@code daysAttended}.
@@ -18,13 +20,12 @@ public class DaysAttended {
      * @param daysAttended A valid days attended.
      */
     public DaysAttended(int daysAttended) {
-        requireNonNull(daysAttended);
         checkArgument(isValidDaysAttended(daysAttended), MESSAGE_CONSTRAINTS);
-        this.daysAttended = daysAttended;
+        this.daysAttended = new SimpleIntegerProperty(daysAttended);
     }
 
     public int getDaysAttended() {
-        return daysAttended;
+        return daysAttended.get();
     }
 
     /**
@@ -32,7 +33,7 @@ public class DaysAttended {
      */
     @Override
     public String toString() {
-        return Integer.toString(daysAttended);
+        return Integer.toString(daysAttended.get());
     }
 
     /**
@@ -56,7 +57,7 @@ public class DaysAttended {
         }
 
         DaysAttended otherDaysAttended = (DaysAttended) other;
-        return daysAttended == otherDaysAttended.daysAttended;
+        return getDaysAttended() == otherDaysAttended.getDaysAttended();
     }
 
     /**
@@ -64,22 +65,22 @@ public class DaysAttended {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(daysAttended);
+        return Integer.hashCode(daysAttended.get());
     }
 
     /**
      * Increments the days attended by 1.
      */
     public void increment() {
-        this.daysAttended++;
+        daysAttended.set(getDaysAttended() + 1);
     }
 
     /**
      * Decrements the days attended by 1.
      */
     public void decrement() {
-        if (this.daysAttended > 0) {
-            this.daysAttended--;
+        if (getDaysAttended() > 0) {
+            daysAttended.set(getDaysAttended() - 1);
         }
     }
 
@@ -87,6 +88,13 @@ public class DaysAttended {
      * Resets the days attended to 0.
      */
     public void reset() {
-        this.daysAttended = 0;
+        daysAttended.set(0);
+    }
+
+    /**
+     * Returns the property of the days attended.
+     */
+    public IntegerProperty daysAttendedProperty() {
+        return daysAttended;
     }
 }

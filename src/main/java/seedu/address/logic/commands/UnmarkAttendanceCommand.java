@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Unmarks the attendance of a particular student.
@@ -40,8 +41,12 @@ public class UnmarkAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        model.unmarkAttendance(personToUnmark);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (personToUnmark instanceof Student) {
+            model.unmarkAttendance(personToUnmark);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+        }
     }
 
     @Override

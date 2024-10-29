@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static seedu.address.model.person.Student.STUDENT_TYPE;
 import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -82,8 +83,11 @@ public class PersonCard extends UiPart<Region> {
         classes.setText("🏫 " + formattedClasses);
 
         DaysAttended days = student.getDaysAttended();
-        daysAttended.setText("📅 Days Attended: " + days);
+        daysAttended.textProperty().bind(
+            Bindings.format("📅 Days Attended: %d", student.daysAttendedProperty())
+        );
         daysAttendedContainer.setVisible(true);
+        daysAttendedContainer.setManaged(true);
     }
 
     /**

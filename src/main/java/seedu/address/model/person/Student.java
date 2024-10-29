@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.IntegerProperty;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +36,10 @@ public class Student extends Person {
     @Override
     public DaysAttended getDaysAttended() {
         return daysAttended;
+    }
+
+    public IntegerProperty daysAttendedProperty() {
+        return daysAttended.daysAttendedProperty();
     }
     @Override
     public String toString() {
