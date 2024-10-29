@@ -144,7 +144,7 @@ Edits an existing person in the address book.
 - Any provided values will replace the person’s existing values.
 - Editing tags will replace the current tags with the new ones; tags are not added cumulatively.
 - To remove all tags from a person, use `t/` without adding any tags after it.
-- Note that history and property cannot be edited
+- Note that history and property **cannot be edited**
 
 **Examples:**
 -  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
