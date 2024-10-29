@@ -8,17 +8,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.eventcommands.AddEventCommand;
+import seedu.address.logic.commands.eventcommands.ClearEventCommand;
+import seedu.address.logic.commands.eventcommands.DeleteEventCommand;
+import seedu.address.logic.commands.eventcommands.EditEventCommand;
+import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.commands.eventcommands.ScheduleCommand;
+import seedu.address.logic.commands.eventcommands.SearchEventCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
+import seedu.address.logic.commands.personcommands.ClearPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditPersonCommand;
-import seedu.address.logic.commands.personcommands.ExitCommand;
 import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.LinkPersonCommand;
-import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.commands.personcommands.SearchPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -61,6 +73,14 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
+        if (ClearCommand.isPrompted()) {
+            if (commandWord.equalsIgnoreCase("y") || commandWord.equalsIgnoreCase("yes")) {
+                return new ClearCommandParser().parseClear();
+            } else {
+                return new ClearCommandParser().parseAbort();
+            }
+        }
+
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
@@ -73,7 +93,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(modelType, arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(modelType, arguments);
 
         case FindPersonCommand.COMMAND_WORD:
             return new FindCommandParser().parse(modelType, arguments);
@@ -102,4 +122,103 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Provides usage hints based on the partial command entered.
+     *
+     * @param userInput The partially entered user input.
+     * @return Usage information as a hint for the user.
+     */
+    public String getHint(String userInput) {
+        if (userInput.startsWith("a")) {
+            return getAddHint(userInput);
+        } else if (userInput.startsWith("d")) {
+            return getDeleteHint(userInput);
+        } else if (userInput.startsWith("e")) {
+            return getEditHint(userInput);
+        } else if (userInput.startsWith("f")) {
+            return getFindHint(userInput);
+        } else if (userInput.startsWith("s")) {
+            if (userInput.startsWith("se")) {
+                return getSearchHint(userInput);
+            } else if (userInput.startsWith("sc")) {
+                return ScheduleCommand.MESSAGE_USAGE;
+            } else {
+                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_USAGE;
+            }
+        } else if (userInput.startsWith("l")) {
+            if (userInput.startsWith("lis")) {
+                return ListCommand.MESSAGE_USAGE;
+            } else if (userInput.startsWith("lin")) {
+                return LinkPersonCommand.MESSAGE_USAGE;
+            } else {
+                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_USAGE;
+            }
+        } else if (userInput.startsWith("c")) {
+            return getClearHint(userInput);
+        } else if (userInput.startsWith("h")) {
+            return HelpCommand.MESSAGE_USAGE;
+        } else {
+            return "";
+        }
+    }
+
+    private String getAddHint(String userInput) {
+        if (userInput.startsWith("add e")) {
+            return AddEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("add p")) {
+            return AddPersonCommand.MESSAGE_USAGE;
+        } else {
+            return AddCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getDeleteHint(String userInput) {
+        if (userInput.startsWith("delete e")) {
+            return DeleteEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("delete p")) {
+            return DeletePersonCommand.MESSAGE_USAGE;
+        } else {
+            return DeleteCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getFindHint(String userInput) {
+        if (userInput.startsWith("find e")) {
+            return FindEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("find p")) {
+            return FindPersonCommand.MESSAGE_USAGE;
+        } else {
+            return FindCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getSearchHint(String userInput) {
+        if (userInput.startsWith("search e")) {
+            return SearchEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("search p")) {
+            return SearchPersonCommand.MESSAGE_USAGE;
+        } else {
+            return SearchCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getEditHint(String userInput) {
+        if (userInput.startsWith("edit e")) {
+            return EditEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("edit p")) {
+            return EditPersonCommand.MESSAGE_USAGE;
+        } else {
+            return EditCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getClearHint(String userInput) {
+        if (userInput.startsWith("clear e")) {
+            return ClearEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("clear p")) {
+            return ClearPersonCommand.MESSAGE_USAGE;
+        } else {
+            return ClearCommand.MESSAGE_USAGE;
+        }
+    }
 }

@@ -149,7 +149,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -383,7 +383,6 @@
     -fx-background-color: derive(#424d5f, 30%);
     -fx-text-fill: #ffffff;
 }
-
 
 .nav-bar .button.active {
     -fx-border-color: white;

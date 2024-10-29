@@ -20,9 +20,8 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Input an integer to find all events that happen in "
-            + "the next/past N days or input a date to find events on that date\n"
-            + "The events are displayed as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = "Use \"schedule\" and input an integer to find all events happening in "
+            + "the next N days or input a date to find all events on that date.\n"
             + "Parameters: NUM_OF_DAYS or YYYY-MM-DD\n"
             + "Example: " + COMMAND_WORD + " 5 or " + COMMAND_WORD + " 2024-01-01";
 
