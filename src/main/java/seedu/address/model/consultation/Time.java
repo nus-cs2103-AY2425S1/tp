@@ -55,6 +55,20 @@ public class Time {
         }
     }
 
+    /**
+     * Compares this time to another time based on the time of day.
+     *
+     * @param otherTime The other time to compare to.
+     * @return A negative integer, zero, or a positive integer if this time is before, equal to,
+     *         or after the specified time.
+     */
+    public int compareTo(Time otherTime) {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime thisLocalTime = LocalTime.parse(this.value, timeFormatter);
+        LocalTime otherLocalTime = LocalTime.parse(otherTime.value, timeFormatter);
+        return thisLocalTime.compareTo(otherLocalTime);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

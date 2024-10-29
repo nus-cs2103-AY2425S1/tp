@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,10 @@ public class RemoveFromConsultCommandTest {
         CommandResult result = command.execute(modelStub);
 
         Consultation consultation = modelStub.getFilteredConsultationList().get(0);
-        String expectedMessage = String.format(RemoveFromConsultCommand
-            .MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultation);
+        // Use consultation's date and time to format the success message
+        String expectedMessage = String.format(RemoveFromConsultCommand.MESSAGE_REMOVE_FROM_CONSULT_SUCCESS,
+            consultation.getDate().getValue(), consultation.getTime().getValue());
+
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
@@ -66,9 +69,22 @@ public class RemoveFromConsultCommandTest {
                         new StudentBuilder().withName("Alex Yeoh").build(),
                         new StudentBuilder().withName("Harry Ng").build()));
 
+        private ArrayList<Consultation> consults;
+
+        ModelStubWithConsultation() {
+            this.consults = new ArrayList<>();
+            this.consults.add(consultation);
+        }
+
+        @Override
+        public void setConsult(Consultation target, Consultation editedConsult) {
+            int index = this.consults.indexOf(target);
+            this.consults.set(index, editedConsult);
+        }
+
         @Override
         public ObservableList<Consultation> getFilteredConsultationList() {
-            return FXCollections.observableArrayList(consultation);
+            return FXCollections.observableArrayList(consults);
         }
 
         @Override

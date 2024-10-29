@@ -16,10 +16,19 @@ public enum CommandType {
     FINDSTUDENT,
     DELETESTUDENT,
     EXPORTSTUDENT,
+    IMPORTSTUDENT,
 
     // Command Type for Consultations TODO
     ADDCONSULT,
     DELETECONSULT,
     REMOVEFROMCONSULT,
-    ADDTOCONSULT
+    ADDTOCONSULT,
+    LISTCONSULT,
+
+    // Command Type for Lesson
+    ADDLESSON,
+    DELETELESSON,
+    LISTLESSONS,
+    ADDTOLESSON,
+    REMOVEFROMLESSON
 }
