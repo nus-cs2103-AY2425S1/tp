@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.TreeSet;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.filteredappointment.FilteredAppointment;
+import seedu.address.model.Model;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Patient;
 

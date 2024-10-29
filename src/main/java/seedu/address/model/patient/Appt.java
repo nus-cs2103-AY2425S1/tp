@@ -178,7 +178,10 @@ public class Appt {
      * @return
      */
     public boolean isSameService(HealthService service) {
-        return true;
+        if (service == null) {
+            return true;
+        }
+        return healthService.equals(service);
     }
 
     /**

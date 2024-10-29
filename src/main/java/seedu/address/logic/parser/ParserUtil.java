@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.appointmentdatefilter.AppointmentDateFilter.isValidStartAndEndDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -171,6 +172,17 @@ public class ParserUtil {
             throw new ParseException(AppointmentDateFilter.ONE_DATE_MESSAGE_CONSTRAINTS);
         }
         return AppointmentDateFilter.parseDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate} and checks if startDate is before endDate
+     */
+    public static LocalDate parseDateAndCheck(String startDateString, LocalDate endDate) throws ParseException {
+        LocalDate startDate = parseDate(startDateString);
+        if (!isValidStartAndEndDate(startDate, endDate)) {
+            throw new ParseException(AppointmentDateFilter.TWO_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return startDate;
     }
 
     /**
