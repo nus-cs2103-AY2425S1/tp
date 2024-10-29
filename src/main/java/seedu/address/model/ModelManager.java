@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(x -> true);
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     public ModelManager() {
@@ -159,11 +159,9 @@ public class ModelManager implements Model {
 
     @Override
     public void redoAddressBook() throws CommandException {
-        /*
         ReadOnlyAddressBook nextAddressBook = addressBook.redo();
         setAddressBook(nextAddressBook);
         filteredPersons.setPredicate(addressBook.getCurrentPredicate());
-         */
     }
 
     //=========== Filtered Person List Accessors =============================================================

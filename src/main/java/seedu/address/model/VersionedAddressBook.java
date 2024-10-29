@@ -79,7 +79,6 @@ public class VersionedAddressBook extends AddressBook {
      * @return Next state of the address book.
      * @throws CommandException If there is no next state to redo to.
      */
-    /*
     public ReadOnlyAddressBook redo() throws CommandException {
         if (currentStatePointer >= addressBookStateList.size() - 1) {
             throw new CommandException(MESSAGE_REDO_FAIL);
@@ -88,7 +87,6 @@ public class VersionedAddressBook extends AddressBook {
         currentStatePointer++;
         return addressBookStateList.get(currentStatePointer);
     }
-    */
 
     private void removeStatesAfterCurrentPointer() {
         addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
