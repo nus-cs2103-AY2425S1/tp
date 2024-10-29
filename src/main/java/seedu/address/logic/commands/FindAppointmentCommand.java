@@ -6,12 +6,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
  */
 public class FindAppointmentCommand extends Command {
 
@@ -20,10 +21,10 @@ public class FindAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments based on the specified criteria "
             + "and displays them as a list.\n"
             + "Parameters: " + PREFIX_START_DATE + "START_DATE "
-            +PREFIX_START_TIME + "START_TIME\N"
+            +PREFIX_START_TIME + "START_TIME\n"
             + "[" + PREFIX_END_DATE + "END_DATE]\n"
             + "[" + PREFIX_END_TIME + "END_TIME]\n"
-            + "Example: " + COMMAND_WORD + " sdate/01/01/2025 stime/12:00 edate/02/01/2025 etime/13:00";
+            + "Example: " + COMMAND_WORD + " sdate/01/01/2025 start/12:00 edate/02/01/2025 end/13:00";
 
     private final ContainsKeywordsPredicate predicate;
 
