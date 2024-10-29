@@ -3,13 +3,13 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,6 +154,30 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Schedule Feature
+
+#### Overview
+The `schedule` command helps to set up appointments for a client, including any relevant notes.
+
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `schedule` command.
+
+![ScheduleSequenceDiagram](images/ScheduleSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `schedule John Doe d/2024-10-28 1200 note/First Appointment` to schedule a new appointment for a client named John Doe.
+2. The `ScheduleCommandParser` object calls its `parse` method to interpret the user input.
+3. A `ScheduleCommand` object is created.
+4. The `ScheduleCommandParser` object returns the `ScheduleCommand` object.
+5. The `LogicManager` object calls the `execute` method of `ScheduleCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a new appointment with the specified details.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their appointments.
+8. The `execute` method returns a `CommandResult` which contains data indicating the completion of the `ScheduleCommand`.
+
+#### Example Usage
+1. User inputs the command `schedule Alice Tan d/2024-10-29 1200 note/Second Appointment`.
+2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
+3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
 ### \[Proposed\] Undo/redo feature
 
@@ -320,32 +344,98 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Physiotherapist requests to schedule a new appointment for client
-2.  PhysioPal creates appointment for client
+1. Physiotherapist requests to schedule a new appointment for a client. 
+2. PhysioPal creates appointment for client with the appointment details provided.
+3. PhysioPal confirms creation of appointment and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Client do not exist.
+* 1a. PhysioPal detects an empty input for name.
 
-    * 1a1. PhysioPal requests for correct data.
+    * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
       Use case resumes from step 2.
 
 
-* 2a. The list is empty.
+* 1b. PhysioPal detects an invalid name.
 
-  Use case ends.
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      Use case resumes from step 2.
 
 
-* 3a. The given date and time is invalid or already contains an appointment.
+* 1c. PhysioPal detects an empty input for date and time.
 
-    * 3a1. PhysioPal requests for correct data.
-    * 3a2. Physiotherapist enters new data.
-    * Steps 3a1-3a2 are repeated until the data entered are correct.
-      Use case resumes from step 4.
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+* 1d. PhysioPal detects an invalid date and time or the given date and time already contains an appointment.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+* 1e. PhysioPal detects an empty input for note.
+
+    * 1e1. PhysioPal displays error message.
+    * 1e2. Physiotherapist enters new data.
+    * Steps 1e1-1e2 are repeated until a valid note is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+**Use case: UC03 - Deleting an appointment**
+
+**Preconditions: Client has more than one appointment.**
+
+**MSS**
+
+1. Physiotherapist requests to delete an appointment for a client.
+2. PhysioPal deletes the corresponding appointment for client.
+3. PhysioPal confirms deletion of appointment and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+* 1c. PhysioPal detects an empty input for date and time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
+      Use case resumes from step 2.
+
+
+* 1d. PhysioPal detects that the client does not have an appointment on given date and time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
@@ -395,15 +485,27 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Scheduling an appointment
+
+1. Scheduling an appointment for a client while all clients are being shown.
+
+    1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+   
+    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named John Doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
+   
+    1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
+
+    1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
 
 ### Saving data
 
