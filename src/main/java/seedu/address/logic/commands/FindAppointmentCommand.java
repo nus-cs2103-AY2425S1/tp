@@ -19,11 +19,16 @@ public class FindAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments based on the specified criteria "
             + "and displays them as a list.\n"
-            + "Parameters: " + PREFIX_START_DATE + "START_DATE "
-            +PREFIX_START_TIME + "START_TIME\N"
-            + "[" + PREFIX_END_DATE + "END_DATE]\n"
-            + "[" + PREFIX_END_TIME + "END_TIME]\n"
-            + "Example: " + COMMAND_WORD + " sdate/01/01/2025 stime/12:00 edate/02/01/2025 etime/13:00";
+            + "Parameters: "
+            + "[" + PREFIX_START_DATE + "START_DATE] "
+            + "[" + PREFIX_START_TIME + "START_TIME] "
+            + "[" + PREFIX_END_DATE + "END_DATE]"
+            + "[" + PREFIX_END_TIME + "END_TIME] "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_START_DATE + "01/01/2025 "
+            + PREFIX_START_TIME  + "12:00 "
+            + PREFIX_END_DATE + "02/01/2025 "
+            + PREFIX_END_TIME + "13:00";
 
     private final ContainsKeywordsPredicate predicate;
 
