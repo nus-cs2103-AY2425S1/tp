@@ -19,7 +19,7 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
-import tuteez.model.person.NameContainsKeywordsPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 

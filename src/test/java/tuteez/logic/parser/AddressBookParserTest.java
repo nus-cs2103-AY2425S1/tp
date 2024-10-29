@@ -27,7 +27,7 @@ import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
 import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
-import tuteez.model.person.NameContainsKeywordsPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
 import tuteez.model.remark.Remark;
 import tuteez.testutil.EditPersonDescriptorBuilder;
