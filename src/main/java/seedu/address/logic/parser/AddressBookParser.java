@@ -92,7 +92,7 @@ public class AddressBookParser {
             return new UndoCommand(LogicManager.getPastCommands());
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();

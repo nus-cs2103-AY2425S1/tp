@@ -166,11 +166,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateSortingOrder(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
