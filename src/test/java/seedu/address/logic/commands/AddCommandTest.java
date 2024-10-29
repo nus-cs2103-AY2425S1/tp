@@ -180,6 +180,22 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+
+        @Override
+        public void setSearchMode(boolean searchMode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getSearchMode() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getLastPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

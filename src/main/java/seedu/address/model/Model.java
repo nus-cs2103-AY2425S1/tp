@@ -120,4 +120,5 @@ public interface Model {
      * Returns the last predicate used to filter the person list.
      */
     Predicate<Person> getLastPredicate();
+
 }

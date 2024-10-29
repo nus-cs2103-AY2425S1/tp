@@ -38,8 +38,10 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         // return the search command with the predicate
         // original predicate just show all
         Predicate<Person> predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
 
         }
+        return new SearchModeSearchCommand(predicate);
     }
 }

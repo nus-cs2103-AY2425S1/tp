@@ -22,7 +22,8 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Person> {
         // check if field contains keyword
         return keywords.stream()
                 .anyMatch(
-                        keyword -> StringUtil.containsWordIgnoreCase(fieldValue.toString(), keyword));
+                        keyword -> (fieldValue.toString().toLowerCase().contains(keyword.toLowerCase())
+                                || StringUtil.containsWordIgnoreCase(fieldValue.toString(), keyword)));
     }
 
     @Override
