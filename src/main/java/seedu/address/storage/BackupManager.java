@@ -114,11 +114,8 @@ public class BackupManager {
                     .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
                     .toList();
 
-            // Return the second-most recent backup if it exists
-            if (backupFiles.size() > 1) {
-                return Optional.of(backupFiles.get(1)); // Return the second-most recent backup
-            } else if (!backupFiles.isEmpty()) {
-                return Optional.of(backupFiles.get(0)); // Return the most recent if there's only one backup
+            if (!backupFiles.isEmpty()) {
+                return Optional.of(backupFiles.get(0)); // Return the most recent backup
             } else {
                 return Optional.empty(); // No backups available
             }
