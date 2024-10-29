@@ -153,7 +153,9 @@ class JsonAdaptedLesson {
      */
     private boolean getAttendance(JsonAdaptedStudent jsonStudent) {
         for (Pair<JsonAdaptedStudent, Boolean> pair : attendanceList) {
-            if (pair.getKey().isSameStudent(jsonStudent)) {
+            // A (faster) alternative is to only check using the student's name, but issues could arise if there
+            // happen to be multiple students with the same name in the JSON file.
+            if (pair.getKey().equals(jsonStudent)) {
                 return pair.getValue();
             }
         }
