@@ -74,21 +74,19 @@ administrators.
 
 ### Command Format Guidelines
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
+* ` `: Commands format is indicated in the shaded boxes.
+* `[ ]`: Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+* `…​`: Items with `…​` after them can be used multiple times including zero times.
+* `UPPER_CASE`: Words in `UPPER_CASE` are the parameters to be supplied by the user.
+* `INDEX`: Refers to the index number shown in the displayed person list.
+* `YEAR-MONTH`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* `KEYWORD`: Refers to the search term used to find persons.
+* `MORE_KEYWORDS`: Refers to additional search terms used to find persons.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
+* `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
+* The commands help, list, exit, and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 [Back to Table of Contents](#table-of-contents)
@@ -573,7 +571,16 @@ Method 2:
 # 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduTuTu home folder.
+
+**Q**: How do I save my data?<br> 
+**A**: EduTuTu automatically saves any changes. No manual saving is needed.
+
+**Q**: Can I see a bar chart of monthly payment records?<br> 
+**A**: Yes, use the bar command to see the payment trends for each month.
+
+**Q**: What if I forget to add the fees when creating a student entry?<br> 
+**A**: You can update the fee amount later using the edit command, like edit 1 f/500 to set fees to 500 for the first student.
 
 [Back to Table of Contents](#table-of-contents)
 
