@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
     private double windowWidth;
     private double windowHeight;
     private double windowX;
@@ -128,6 +129,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        this.commandBox = commandBox;
     }
 
     /**
@@ -148,7 +150,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
-            helpWindow.show();
+            helpWindow.show(false, commandBox);
         } else {
             helpWindow.focus();
         }
@@ -180,6 +182,8 @@ public class MainWindow extends UiPart<Stage> {
         inspectWindow.fillInnerParts();
         inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
         AddressBookParser.setInspect(true);
+
+        helpWindow.close();
     }
 
     /**
@@ -213,6 +217,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public ResultDisplay getResultDisplay() {
         return resultDisplay;
+    }
+
+    public CommandBox getCommandBox() {
+        return commandBox;
     }
 
     /**
