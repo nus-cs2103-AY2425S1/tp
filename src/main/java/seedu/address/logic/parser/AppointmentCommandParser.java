@@ -41,10 +41,12 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_FROM, PREFIX_TO)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
-        String date = argMultimap.getValue(PREFIX_DATE).orElse("");
-        String from = argMultimap.getValue(PREFIX_FROM).orElse("");
-        String to = argMultimap.getValue(PREFIX_TO).orElse("");
-        return new AppointmentCommand(index, new Appointment(new Date(date), new From(from), new To(to)));
+
+
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        From from = ParserUtil.parseFrom(argMultimap.getValue(PREFIX_FROM).get());
+        To to = ParserUtil.parseTo(argMultimap.getValue(PREFIX_TO).get());
+        return new AppointmentCommand(index, new Appointment(date, from, to));
     }
 
     /**

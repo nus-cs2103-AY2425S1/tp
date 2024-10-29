@@ -11,9 +11,6 @@ import seedu.address.model.Listings;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
@@ -34,7 +31,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Property EMPTY_PROPERTY = new Property("");
-    public static final Appointment EMPTY_APPOINTMENT = new Appointment(new Date(""), new From(""), new To(""));
+    public static final Appointment EMPTY_APPOINTMENT = Appointment.EMPTY_APPOINTMENT;
 
     public static Person[] getSamplePersons() {
         return new Person[] {

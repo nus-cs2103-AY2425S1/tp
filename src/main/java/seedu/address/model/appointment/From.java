@@ -1,6 +1,13 @@
 package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 
 /**
  * Represents the start time of an appointment in the address book.
@@ -8,7 +15,12 @@ import static java.util.Objects.requireNonNull;
  * This value cannot be null.
  */
 public class From {
-    public final String value;
+    public static final From EMPTY_FROM = new From(LocalTime.MIN);
+    public static final String MESSAGE_CONSTRAINTS =
+            "Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.";
+    private static final String VALIDATION_REGEX = "\\d{4}|\\d{2}:\\d{2}";
+
+    public final LocalTime value;
 
     /**
      * Constructs a {@code From} object with the specified start time value.
@@ -18,7 +30,34 @@ public class From {
      */
     public From(String value) {
         requireNonNull(value);
+        checkArgument(isValidTime(value), MESSAGE_CONSTRAINTS);
+        this.value = parseTime(value);
+    }
+
+    private From(LocalTime value) {
         this.value = value;
+    }
+
+    /**
+     * Checks if the time string is in the valid format.
+     */
+    public static boolean isValidTime(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Parses the time string into a LocalTime.
+     */
+    private LocalTime parseTime(String time) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            if (time.matches("\\d{4}")) {
+                time = time.substring(0, 2) + ":" + time.substring(2);
+            }
+            return LocalTime.parse(time, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
     }
 
     @Override
@@ -30,7 +69,7 @@ public class From {
 
     @Override
     public String toString() {
-        return value;
+        return value.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override

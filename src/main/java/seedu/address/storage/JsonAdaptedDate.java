@@ -12,6 +12,7 @@ import seedu.address.model.appointment.Date;
  * Jackson-friendly version of {@link Date}.
  */
 public class JsonAdaptedDate {
+    private static final String EMPTY_DATE_PLACEHOLDER = "EMPTY_DATE";
 
     private final String value;
 
@@ -27,9 +28,8 @@ public class JsonAdaptedDate {
      * Converts a given {@code Date} into this class for Jackson use.
      */
     public JsonAdaptedDate(Date source) {
-        this.value = source.toString();
+        this.value = (source == Date.EMPTY_DATE) ? EMPTY_DATE_PLACEHOLDER : source.toString();
     }
-
 
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Date} object.
@@ -40,6 +40,9 @@ public class JsonAdaptedDate {
     public Date toModelType() throws IllegalValueException {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        if (value.equals(EMPTY_DATE_PLACEHOLDER)) {
+            return Date.EMPTY_DATE;
         }
         return new Date(value);
     }

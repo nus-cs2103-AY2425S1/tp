@@ -2,12 +2,18 @@ package seedu.address.model.appointment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 /**
  * Represents an appointment in the address book.
  * An {@code Appointment} consists of a {@code Date}, start time ({@code From}), and end time ({@code To}).
  * All fields must be non-null.
  */
 public class Appointment {
+
+    public static final Appointment EMPTY_APPOINTMENT = new Appointment(Date.EMPTY_DATE, From.EMPTY_FROM,
+            To.EMPTY_TO);
+
     private final Date date;
     private final From from;
     private final To to;
@@ -56,16 +62,16 @@ public class Appointment {
                  && to.equals(a.to);
     }
 
-    public boolean isEmpty() {
-        return date.value.isEmpty() && from.value.isEmpty() && to.value.isEmpty();
-    }
     @Override
     public String toString() {
-        return String.format("Date: %s (From: %s To: %s)", date.value, from.value, to.value);
+        if (this.equals(Appointment.EMPTY_APPOINTMENT)) {
+            return "-";
+        }
+        return String.format("Date: %s (From: %s To: %s)", date, from, to);
     }
 
     @Override
     public int hashCode() {
-        return from.hashCode();
+        return Objects.hash(date, from, to);
     }
 }

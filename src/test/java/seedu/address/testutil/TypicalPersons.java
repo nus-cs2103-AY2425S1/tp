@@ -24,10 +24,10 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253").withEmail("alice@example.com").withProperty("Pasir Ris")
-            .withAppointment("01/01/2024", "0800", "0900").withTags("friends").buildBuyer();
+            .withAppointment("01-01-24", "0800", "0900").withTags("friends").buildBuyer();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("benson@example.com").withPhone("98765432").withProperty("Tampines")
-            .withAppointment("14/12/2020", "1000", "2330").withTags("owesMoney", "friends").buildSeller();
+            .withAppointment("14-12-20", "1000", "2330").withTags("owesMoney", "friends").buildSeller();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("carl@example.com").withProperty("Orchard Road").buildBuyer();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
