@@ -6,7 +6,8 @@
 
 # WedLinker User Guide
 
-WedLinker is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+WedLinker is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). </br>
+If you can type fast, WedLinker can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,17 +16,21 @@ WedLinker is a **desktop app for managing contacts, optimized for use via a  Lin
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have `Java 17` or above installed in your Computer. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
+   1. Download `Java 17` from the official website: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+   2. Select the installation package based on your Operating System. For Apple users select macOS, for Windows users select Windows.
+   3. Follow the instruction guide to install Java on your device. For more information use this guide: https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest version of WedLinker from [here](https://github.com/AY2425S1-CS2103T-F15-4/tp/releases/). Select `WedLinker.jar` to begin the download.
+![release.png](images/release.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your WedLinker.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open WedLinker by double clicking the program file, `WedLinker.jar`.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -38,12 +43,11 @@ WedLinker is a **desktop app for managing contacts, optimized for use via a  Lin
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
-## General Features
 
 <box type="info" seamless>
 
@@ -58,6 +62,15 @@ WedLinker is a **desktop app for managing contacts, optimized for use via a  Lin
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
+  * n/ Name
+  * a/ Address
+  * p/ Phone Number
+  * e/ Email
+  * t/ Tag
+  * w/ Wedding
+  * tk/ Task
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -65,30 +78,31 @@ WedLinker is a **desktop app for managing contacts, optimized for use via a  Lin
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
+
+## General Features
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
-//Reminder to update the link of help
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 ### Listing all Persons : `list`
 
-Shows a list of all saved [Persons](#adding-a-person-add) in the WedLinker.
+Shows a list of all saved [Persons](#person-features) in the WedLinker.
 
 Format: `list`
 
 ### Listing all Weddings : `list-weddings`
 
-Shows a list of all [Weddings](#adding-a-wedding--create-wedding) in the WedLinker.
+Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
 ### Listing all Tasks : `list-tasks`
 
-Shows a list of all [Tasks](#creating-a-task--create-task) in the WedLinker
+Shows a list of all [Tasks](#task-features) in the WedLinker
 
 ### Locating contacts by any field, similar to a search function: `find`
 
@@ -100,21 +114,14 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 * The search will return partial matches and full matches
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 
-Examples of Prefixes:
-* n/ Name
-* a/ Address
-* p/ Phone Number
-* e/ Email
-* t/ Tag
-* w/ Wedding
-* tk/ Task
-
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find t/Friends` returns all Contacts tagged with Friends
-* `find w/Amy's Wedding` returns all Contacts involved with Amy's Wedding
+![result for 'find n/alex david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with Friends <br>
+![result for `find t/friends](images/findCommandTag.png)
+* `find w/Amy's Wedding` returns all Contacts involved with Amy's Wedding <br>
+![result for 'find w/Casey'](images/findCommandWedding.png)
 
 ### Clearing all entries : `clear`
 
@@ -130,17 +137,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+WedLinker data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+WedLinker data are saved automatically as a JSON file `[JAR file location]/data/WedLinker.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, WedLinker will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the WedLinker to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ## Person Features
@@ -157,8 +164,8 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/ABC Photo Studio p/1234567 t/Photographer`
 
 ### Editing a person : `edit`
 
@@ -186,9 +193,9 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Tag Features
+## Tag Features
 
 ### Adding a tag : `create-tag`
 
@@ -233,7 +240,7 @@ Format: `delete-tag t/TAGNAME [f/]`
 * The `Tag` cannot be assigned to any contacts.
 * If the `Tag` is in used, you can use `f/` to force the deletion of the `Tag` and unassign this tag from all contacts.
 
-### Wedding Features
+## Wedding Features
 
 ### Adding a Wedding : `create-wedding`
 
@@ -287,7 +294,7 @@ Format: `delete-wedding w/WEDDINGNAME [f/]`
 * The no contacts should be assigned to the `Wedding` before it is deleted.
 * If there are still contacts assigned, you can use `f/` to force the deletion of the `Wedding` and unassign all contacts.
 
-### Task Features
+## Task Features
 
 ### Creating a Task : `create-task`
 
@@ -301,7 +308,6 @@ Deletes a `Task` from WedLinker
 
 Format: `delete-task INDEX`
 
-
 ### Assigning a Task to a contact : `assign-task` **(WIP)**
 
 ### Unassigning a Task from a contact : `unassign-task` **(WIP)**
@@ -311,7 +317,7 @@ Format: `delete-task INDEX`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WedLinker home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
