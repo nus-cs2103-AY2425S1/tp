@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,6 +16,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSONS_INDEX = "One or more contact indexes are invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_SCHEDULE_LISTED_OVERVIEW = "%1$s to %2$s schedule listed!";
 
@@ -49,9 +51,31 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Tags: ")
+                .append("; favourite: ")
+                .append(person.getFavourite());
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
+    /**
+     * @param people
+     * @return a String Format of all the Person Objects in the people list
+     */
+    public static String format(List<Person> people) {
+        final StringBuilder builder = new StringBuilder();
+        for (Person person: people) {
+            builder.append(person.getName())
+                    .append("; Phone: ")
+                    .append(person.getPhone())
+                    .append("; Email: ")
+                    .append(person.getEmail())
+                    .append("; Address: ")
+                    .append(person.getAddress())
+                    .append("; Tags: ")
+                    .append("; favourite: ")
+                    .append(person.getFavourite());
+            person.getTags().forEach(builder::append);
+        }
+        return builder.toString();
+    }
 }
