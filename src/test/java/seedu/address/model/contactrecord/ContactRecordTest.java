@@ -29,10 +29,21 @@ public class ContactRecordTest {
         assertFalse(ContactRecord.isValidContactRecord("2020-01-32"));
         assertFalse(ContactRecord.isValidContactRecord(""));
         assertFalse(ContactRecord.isValidContactRecord("2020-01-01 12:00"));
-        assertFalse(ContactRecord.isValidContactRecord(LocalDate.now().plusDays(1).toString()));
 
         // valid date in contact record
         assertTrue(ContactRecord.isValidContactRecord("2020-01-01"));
+    }
+
+    @Test
+    public void isCurrentOrPastDate() {
+        // future date
+        assertFalse(ContactRecord.isCurrentOrPastDate(LocalDate.now().plusDays(1)));
+
+        // current date
+        assertTrue(ContactRecord.isCurrentOrPastDate(LocalDate.now()));
+
+        // past date
+        assertTrue(ContactRecord.isCurrentOrPastDate(LocalDate.now().minusDays(1)));
     }
 
     @Test
