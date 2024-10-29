@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +31,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
+    private final String information;  // New field for customer-specific information
+
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -40,12 +44,14 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark,
+                             @JsonProperty("information") String information,  // Added this field
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.information = information;
         if (tagged != null) {
             tagged.addAll(tags);
         }
@@ -60,6 +66,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
+        information = source instanceof Customer ? ((Customer) source).getInformation().value : null;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -114,6 +121,9 @@ class JsonAdaptedPerson {
         }
 
         final Remark modelRemark = new Remark(remark);
+        final Information modelInformation = information != null && !information.trim().isEmpty()
+                ? new Information(information)
+                : new Information("No additional information"); // Default information if blank
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

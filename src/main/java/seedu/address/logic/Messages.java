@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +34,7 @@ public class Messages {
 
     /**
      * Formats the {@code person} for display to the user.
+     * If the person is a {@code Customer}, it also appends the Information field.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -42,10 +44,17 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
-    }
+                .append(person.getAddress());
 
+                // If the person is a Customer, add the information field
+                if (person instanceof Customer) {
+                    Customer customer = (Customer) person;
+                    builder.append("; Information: ")
+                            .append(customer.getInformation());
+                }
+
+                builder.append("; Tags: ");
+                person.getTags().forEach(builder::append);
+                return builder.toString();
+    }
 }
