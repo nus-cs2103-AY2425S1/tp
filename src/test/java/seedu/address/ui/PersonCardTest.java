@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,8 @@ public class PersonCardTest {
 
     @BeforeAll
     public static void initToolkit() {
+        boolean isCi = "true".equals(System.getenv("CI"));
+        Assumptions.assumeFalse(isCi, "Skipping JavaFX initialization in CI environment");
         Platform.startup(() -> {});
     }
 
