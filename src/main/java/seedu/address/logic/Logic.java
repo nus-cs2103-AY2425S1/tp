@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.util.Map;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;

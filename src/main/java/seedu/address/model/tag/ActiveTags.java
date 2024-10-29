@@ -1,11 +1,12 @@
 package seedu.address.model.tag;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import seedu.address.commons.core.TagColors;
 
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * A class to handle the tracking of currently used Tags in the AddressBook
@@ -15,6 +16,11 @@ public class ActiveTags {
     private final ObservableMap<String, String> tagColorMap; // Maps Tag names to their respective colors
     private final String[] tagColors;
 
+    /**
+     * Initialize tagMap and tagColors
+     * @param tagMap
+     * @param tagColors
+     */
     public ActiveTags(HashMap<Tag, Integer> tagMap, TagColors tagColors) {
         this.tagMap = tagMap;
         this.tagColors = tagColors.getTagColors();
@@ -62,7 +68,7 @@ public class ActiveTags {
     private void assignTagColor(Tag t) {
         String tagName = t.tagName;
         if (!tagColorMap.containsKey(tagName)) {
-            String assigned = tagColors[tagColorMap.size() % tagColors.length]; // If more tags than colors, loops around
+            String assigned = tagColors[tagColorMap.size() % tagColors.length]; // If more tags than colors, loops back
             tagColorMap.put(tagName, assigned);
         }
     }
