@@ -124,13 +124,12 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         internalList.setAll(lessons);
     }
-
     /**
      * Checks if the index is valid.
      *
      * @param index The index to check.
      * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
-     * list), false otherwise.
+     *         list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
@@ -191,11 +190,20 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public void updatePersonInLessons(Person target, Person editedPerson) {
         if (target.isStudent() && editedPerson.isStudent()) {
-            for (Lesson lesson : internalList) {
-                if (lesson.getStudent().equals(target)) {
-                    lesson.setStudent(editedPerson);
-                }
+            assert target instanceof Student && editedPerson instanceof Student;
+            for (int i = 0; i < internalList.size(); i++) {
+                updatePersonInLesson(target, editedPerson, i);
             }
+        }
+    }
+
+    private void updatePersonInLesson(Person target, Person editedPerson, int i) {
+        assert target.isStudent() && editedPerson.isStudent();
+        Lesson lesson = internalList.get(i);
+        if (lesson.getStudent().equals(target)) {
+            Lesson updatedLesson = new Lesson(editedPerson, lesson.getFee(),
+                    lesson.getStartDateTime(), lesson.getEndDateTime());
+            internalList.set(i, updatedLesson);
         }
     }
 }

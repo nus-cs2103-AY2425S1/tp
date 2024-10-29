@@ -3,7 +3,6 @@ package tutorease.address.model.lesson;
 import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import tutorease.address.model.person.Person;
-import tutorease.address.model.person.Student;
 
 /**
  * Represents a Lesson in the address book.

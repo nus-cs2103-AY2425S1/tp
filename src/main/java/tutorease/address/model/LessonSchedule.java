@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.UniqueLessonList;
 import tutorease.address.model.person.Person;
-import tutorease.address.model.person.Student;
 
 /**
  * Wraps all data at the lesson-schedule level

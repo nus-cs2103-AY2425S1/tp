@@ -13,7 +13,6 @@ import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
-import tutorease.address.model.person.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -116,6 +115,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         tutorEase.setPerson(target, editedPerson);
+        lessonSchedule.updatePersonInLessons(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -212,9 +212,5 @@ public class ModelManager implements Model {
                 currentIndex++;
             }
         }
-    }
-    @Override
-    public void updatePersonInLessons(Person target, Person editedPerson) {
-        lessonSchedule.updatePersonInLessons(target, editedPerson);
     }
 }
