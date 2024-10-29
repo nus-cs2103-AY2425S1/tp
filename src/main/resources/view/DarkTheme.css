@@ -419,16 +419,13 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
+    -fx-text-fill: -text-dark;
 }
 
 .assignment-name {
     -fx-text-fill: -text-dark;
     -fx-font-weight: bold;
     -fx-font-size: 15;
-}
-
-.assignment-score {
-    -fx-text-fill: -text-dark;
 }
 
 .assignment-status-submitted {
