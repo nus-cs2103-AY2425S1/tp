@@ -64,7 +64,8 @@ public class FavoriteCommand extends Command {
                 personToFavorite.getAddress(),
                 personToFavorite.getTags(),
                 true,
-                personToFavorite.getDepartment()
+                personToFavorite.getDepartment(),
+                personToFavorite.getLeave()
         );
 
         model.setPerson(personToFavorite, favoritedPerson);
