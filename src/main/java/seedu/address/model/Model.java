@@ -17,6 +17,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = Person::isArchived;
+    Predicate<Person> PREDICATE_SHOW_CURRENT_PERSONS = PREDICATE_SHOW_ARCHIVED_PERSONS.negate();
     Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
@@ -97,12 +99,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Updates the main filter of the filtered person list to filter by the given {@code masterPredicate}
-     * @throws NullPointerException if {@code masterPredicate} is null.
-     */
-    void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate);
-
-    /**
      * Updates the order of the person list according to the given parameter.
      *
      * @param comparator Specifies new comparison criteria to order person list by.
@@ -143,31 +139,4 @@ public interface Model {
      * Returns a list of appointments that conflict with the given appointment.
      */
     List<Appointment> getConflictingAppointments(Appointment appointment);
-
-    /**
-     * Represents the main predicates for filteredPersonList.
-     * Each enum value is also a {@link Predicate}.
-     * <p>
-     * There are 2 cases for filteredPersonList:
-     * <ol>
-     *     <li>filteredPersonList shows only current (i.e. unarchived) persons</li>
-     *     <li>filteredPersonList shows only archived persons</li>
-     * </ol>
-     * </p>
-     */
-    enum FilteredPersonListMasterPredicate implements Predicate<Person> {
-        SHOW_ONLY_CURRENT_PERSONS(person -> !person.isArchived()),
-        SHOW_ONLY_ARCHIVED_PERSONS(Person::isArchived);
-
-        private final Predicate<Person> predicate;
-
-        FilteredPersonListMasterPredicate(Predicate<Person> predicate) {
-            this.predicate = predicate;
-        }
-
-        @Override
-        public boolean test(Person person) {
-            return predicate.test(person);
-        }
-    }
 }

@@ -28,8 +28,6 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredPersonListMasterPredicate filteredPersonListMasterPredicate =
-            FilteredPersonListMasterPredicate.SHOW_ONLY_CURRENT_PERSONS;
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
 
@@ -49,7 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(filteredPersonListMasterPredicate);
+        filteredPersons.setPredicate(PREDICATE_SHOW_CURRENT_PERSONS);
 
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
@@ -187,14 +185,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(filteredPersonListMasterPredicate.and(predicate));
-    }
-
-    @Override
-    public void updateFilteredPersonList(FilteredPersonListMasterPredicate masterPredicate) {
-        requireNonNull(masterPredicate);
-        filteredPersonListMasterPredicate = masterPredicate;
-        filteredPersons.setPredicate(filteredPersonListMasterPredicate);
+        filteredPersons.setPredicate(predicate);
     }
 
     @Override
