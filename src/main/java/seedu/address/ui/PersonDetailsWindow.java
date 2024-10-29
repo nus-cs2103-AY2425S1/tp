@@ -3,8 +3,10 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -43,6 +45,12 @@ public class PersonDetailsWindow extends UiPart<Stage> {
     @FXML
     private TextField addressField;
 
+    @FXML
+    private TextField departmentField;
+
+    @FXML
+    private CheckBox favoriteCheckBox;
+
     /**
      * Creates a new {@code PersonDetailsWindow} with the given {@code Stage} and {@code Logic}.
      *
@@ -74,20 +82,22 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         addKeyHandlers(phoneField);
         addKeyHandlers(emailField);
         addKeyHandlers(addressField);
+        addKeyHandlers(departmentField);
+        addKeyHandlers(favoriteCheckBox);
     }
 
     /**
      * Adds keyboard event handlers to a specific {@code TextField}.
      *
-     * @param textField The TextField to which the handlers are added.
+     * @param node The TextField or Checkbox to which the handlers are added.
      */
-    private void addKeyHandlers(TextField textField) {
-        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+    private void addKeyHandlers(Node node) {
+        node.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.DOWN) {
-                moveFocusToNext(textField);
+                moveFocusToNext(node);
                 event.consume();
             } else if (event.getCode() == KeyCode.UP) {
-                moveFocusToPrevious(textField);
+                moveFocusToPrevious(node);
                 event.consume();
             } else if (event.getCode() == KeyCode.ESCAPE) {
                 handleCancel();
@@ -95,17 +105,21 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             } else if (event.getCode() == KeyCode.ENTER) {
                 handleSave();
                 event.consume();
+            } else if (event.getCode() == KeyCode.SPACE && node == favoriteCheckBox) {
+                favoriteCheckBox.setSelected(!favoriteCheckBox.isSelected());
+                event.consume();
             }
         });
     }
+
+
 
     /**
      * Moves focus to the next {@code TextField} in the form.
      *
      * @param current The current TextField.
      */
-    private void moveFocusToNext(TextField current) {
-        assert current != null : "Current TextField must not be null";
+    private void moveFocusToNext(Node current) {
         if (current == nameField) {
             phoneField.requestFocus();
         } else if (current == phoneField) {
@@ -113,6 +127,10 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         } else if (current == emailField) {
             addressField.requestFocus();
         } else if (current == addressField) {
+            departmentField.requestFocus();
+        } else if (current == departmentField) {
+            favoriteCheckBox.requestFocus();
+        } else if (current == favoriteCheckBox) {
             nameField.requestFocus();
         }
     }
@@ -122,15 +140,19 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      *
      * @param current The current TextField.
      */
-    private void moveFocusToPrevious(TextField current) {
-        if (current == addressField) {
+    private void moveFocusToPrevious(Node current) {
+        if (current == favoriteCheckBox) {
+            departmentField.requestFocus();
+        } else if (current == departmentField) {
+            addressField.requestFocus();
+        } else if (current == addressField) {
             emailField.requestFocus();
         } else if (current == emailField) {
             phoneField.requestFocus();
         } else if (current == phoneField) {
             nameField.requestFocus();
         } else if (current == nameField) {
-            addressField.requestFocus();
+            favoriteCheckBox.requestFocus();
         }
     }
 
@@ -170,6 +192,8 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         phoneField.setText(person.getPhone().value);
         emailField.setText(person.getEmail().value);
         addressField.setText(person.getAddress().value);
+        departmentField.setText(person.getDepartment().department);
+        favoriteCheckBox.setSelected(person.isFavorite());
     }
 
     /**
@@ -183,8 +207,11 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             String newPhone = phoneField.getText().trim();
             String newEmail = emailField.getText().trim();
             String newAddress = addressField.getText().trim();
+            String newDepartment = departmentField.getText().trim();
+            boolean newIsFavorite = favoriteCheckBox.isSelected();
 
-            if (newName.isEmpty() || newPhone.isEmpty() || newEmail.isEmpty() || newAddress.isEmpty()) {
+            if (newName.isEmpty() || newPhone.isEmpty() || newEmail.isEmpty()
+                    || newAddress.isEmpty() || newDepartment.isEmpty()) {
                 showErrorAlert("Invalid Input", "All fields are required.", "Please fill in all fields.");
                 return;
             }
@@ -198,9 +225,14 @@ public class PersonDetailsWindow extends UiPart<Stage> {
                 return;
             }
 
-            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s f/%s",
-                    index + 1, escapeSpecialCharacters(newName), escapeSpecialCharacters(newPhone),
-                    escapeSpecialCharacters(newEmail), escapeSpecialCharacters(newAddress), !person.isFavorite());
+            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s d/%s f/%s",
+                    index + 1,
+                    escapeSpecialCharacters(newName),
+                    escapeSpecialCharacters(newPhone),
+                    escapeSpecialCharacters(newEmail),
+                    escapeSpecialCharacters(newAddress),
+                    escapeSpecialCharacters(newDepartment),
+                    newIsFavorite);
 
             logic.execute(commandText);
 
@@ -211,6 +243,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             showErrorAlert("Error", "Failed to save changes.", e.getMessage());
         }
     }
+
 
     /**
      * Handles the cancel action triggered by pressing the ESC key.
