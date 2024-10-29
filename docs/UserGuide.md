@@ -35,8 +35,6 @@ administrators.
 3. [FAQ](#3-faq)
 4. [Glossary](#4-glossary)
 
-
-
 ***
 <div style="page-break-after: always;"></div>
 
@@ -170,6 +168,7 @@ Deletes the specified person from the address book.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.4 Marking a Payment Date: `markpaid`
 
@@ -183,7 +182,6 @@ Updates the payment status of a student to completed.
 * The index **must be within the range** of the number of people in the list.
 * The year must be within the range of 1900 to 2100, and the month must be within the valid 1-12 range.
 
-
 **Example Usage:**
 *Input: User enters the `markpaid 1 m/2024-10` mark the first student as paid for October 2024.*
 ![Ui](images/markpaidcommandinput.png)
@@ -191,10 +189,10 @@ Updates the payment status of a student to completed.
 *Output: The UI updates to show the payment status of the student.*
 ![Ui](images/markpaidafter.png)
 
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.5 Editing a Person: `edit`
 
@@ -227,6 +225,7 @@ Edits an existing person in the address book.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.6 Listing All Persons: `list`
 
@@ -238,13 +237,11 @@ After entering the `list` command, all persons stored in the address book will b
 
 **Example Usage:**
 
-
 *Input: User enters the `list` command.*
 ![Command Input Example](images/listcommandinput.png)
 
 *Output: The UI updates to show all persons.*
 ![Command Output Example](images/listcommand.png)  
-
 
 **Tips:**
 
@@ -254,6 +251,7 @@ After entering the `list` command, all persons stored in the address book will b
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.7 Finding A Person: `find`
 
@@ -266,7 +264,6 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 - **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
 - **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
-
 * The search is case-insensitive. e.g., `kim` will match `Kim`.
 * The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
 * Only the name is searched when using `n/` format.
@@ -274,26 +271,21 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 * find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and class IDs containing `KEYWORD2`.
 * For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
 
-
-**Example Usage:**
-
-`find n/Kim`
+**Example Usage:** `find n/Kim`
 
 *Input: User enters the `find` command to search for persons whose names contain the keyword `Kim`.*  
 ![find image](images/findBefore.png)
-
 *Output: The UI updates to show persons matching the search keyword.*  
 ![find image](images/findAfter.png)
 
 **Tips:**
-
 - Use the `find` command to quickly locate persons based on their names or class IDs.
 - The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
-
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.8 Clearing All Entries: `clear`
 
@@ -304,18 +296,14 @@ Clears all entries from the address book.
 Upon entering the command, all entries will be cleared from Edututu. A message  
 "Address book has been cleared!" will be displayed in the command box.
 
-**Example Usage:**
-
-`clear`
+**Example Usage:** `clear`
 
 *Input: User enters the `clear` command to remove all entries.*  
 ![Ui](images/clearinput.png)
-
 *Output: The UI updates to show that all entries have been cleared.*
 ![Ui](images/ClearCommand.png)
 
 **Tips:**
-
 - Use the `clear` command when you want to start fresh with an empty address book.
 - Be careful when using this command, as it permanently deletes all current entries.
 - Consider exporting your data before using the `clear` command if you need a backup.
@@ -323,6 +311,7 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.9 Undo/Redo Commands: `undo` and `redo`
 
@@ -341,24 +330,17 @@ The `undo` and `redo` commands allow you to reverse or reapply the most recent c
 **Example Usage:**
 *Input: User enters the `undo` command to reverse the last change.*
 ![Ui](images/undoCommandinput.png)
-
 *Output: The UI updates to reflect the reversal of the most recent change.*
 ![Ui](images/undocommandoutput.png)
-
 *Input: User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redocommandinput.png)
 
 **Tips:**
-
 - Use the `undo` command immediately after making a change you wish to revert. This is helpful if you've added, deleted, or modified an entry by mistake.
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
 - Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive backups, consider exporting your data regularly.
 - Both `undo` and `redo` can be accessed through the toolbar in the GUI for quick navigation.
-
-
-
-
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -378,12 +360,10 @@ For example, given the following data set with 4 students:
 
 *Input: User enters the `pie` command.*  
 ![Ui](images/piecommand.png)
-
 *Output: A pie chart is displayed, showing the distribution of students in each class.*  
 ![Ui](images/piechart.png)
 
 **Tips:**
-
 - Use the `pie` command to get a quick overview of class sizes, which is particularly useful for planning and class allocation.
 - Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
 
@@ -405,8 +385,7 @@ Command Format: `bar`
 *Input: User enters the bar command.*  
 ![Ui](images/bar.png)
 
-Tips:
-
+**Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
 - This feature can help tuition center administrators manage cash flow and forecast future payment periods.
 - Ensure that all payment records are updated for accurate chart visualisation.
@@ -414,6 +393,7 @@ Tips:
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.12 Viewing Command History: `Arrow Keys`
 
@@ -425,9 +405,7 @@ Allows users to quickly access previously entered commands using the up and down
 * Press the **down arrow key** to move forward through the command history.
 * This feature is useful for repeating recent commands without needing to retype them.
 
-
 **Tips:**
-
 - Use the arrow keys to quickly correct or modify a recent command.
 - This feature can save time when you need to execute similar commands repeatedly.
 
@@ -453,7 +431,6 @@ Method 1:
 **Example Usage:**
 *Input: User enters the `info 1` command to display detailed information for the first student.*
 ![Ui](images/infocommandinput.png)
-
 *Output: A window pops up with the detailed information of the student.*
 ![Ui](images/infocommandoutput.png)
 
@@ -462,7 +439,6 @@ Method 2:
 *Double click on the student’s entry in the GUI to display detailed information in a pop-up window.*
 
 ![Ui](images/infocommandoutput2.png)
-
 ![Ui](images/infocommandoutput3.png)
 
 ***
@@ -479,6 +455,7 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.15 Saving the Data
 
@@ -487,6 +464,7 @@ EduTuTu data are saved in the hard disk automatically after any command that cha
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.16 Exiting the Program: `exit`
 
@@ -506,27 +484,17 @@ Method 2:
 1. Type the command exit in the command box and press Enter.
    ![Ui](images/exitcommandinput.png)
 
-
 2. The program will close.
 
-Tips:
+**Tips:**
 
 - Use the exit command when you want to close the program quickly through the command box.
 - Both methods achieve the same result, so use whichever is more convenient.
 
 [Back to Table of Contents](#table-of-contents)
 
-
-
-
 ***
 <div style="page-break-after: always;"></div>
-
-
-
-
-<div style="page-break-after: always;"></div>
-
 
 # 3. FAQ
 
@@ -536,7 +504,6 @@ Tips:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-
 <div style="page-break-after: always;"></div>
 
 # 4. Glossary
@@ -580,6 +547,7 @@ Tips:
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
