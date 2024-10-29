@@ -30,11 +30,11 @@ import seedu.address.model.policy.PremiumAmount;
 public class TypicalPersons {
     public static final ExpiryDate DEFAULT_EXPIRY_DATE = new ExpiryDate("12/23/2024");
     public static final LifePolicy DEFAULT_LIFE_POLICY = new LifePolicy(new PremiumAmount(400.0),
-            new CoverageAmount(4000.0), DEFAULT_EXPIRY_DATE);
+            new CoverageAmount(4000.0), DEFAULT_EXPIRY_DATE, null);
     public static final HealthPolicy DEFAULT_HEALTH_POLICY = new HealthPolicy(new PremiumAmount(300.0),
-            new CoverageAmount(3000.0), DEFAULT_EXPIRY_DATE);
+            new CoverageAmount(3000.0), DEFAULT_EXPIRY_DATE, null);
     public static final EducationPolicy DEFAULT_EDUCATION_POLICY = new EducationPolicy(new PremiumAmount(200.0),
-            new CoverageAmount(2000.0), DEFAULT_EXPIRY_DATE);
+            new CoverageAmount(2000.0), DEFAULT_EXPIRY_DATE, null);
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")

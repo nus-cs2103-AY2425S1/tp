@@ -44,7 +44,7 @@ public class AddPolicyCommandParserTest {
                 + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount + " "
                 + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
         Policy expectedPolicy = new LifePolicy(null, new CoverageAmount(coverageAmount),
-                new ExpiryDate(expiryDate));
+                new ExpiryDate(expiryDate), null);
         AddPolicyCommand expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -53,7 +53,7 @@ public class AddPolicyCommandParserTest {
                 + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
                 + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
         expectedPolicy = new LifePolicy(new PremiumAmount(premiumAmount), null,
-                new ExpiryDate(expiryDate));
+                new ExpiryDate(expiryDate), null);
         expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -62,7 +62,7 @@ public class AddPolicyCommandParserTest {
                 + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
                 + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount;
         expectedPolicy = new LifePolicy(new PremiumAmount(premiumAmount), new CoverageAmount(coverageAmount),
-                null);
+                null, null);
         expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

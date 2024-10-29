@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLAIM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteClaimsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -29,8 +31,10 @@ import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListClaimsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
+import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -114,8 +118,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPolicy() throws Exception {
-        // This is hardcoded for now.
-        // Will change in future commits.
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
                 AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " pt/life");
@@ -124,8 +126,6 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_editPolicy() throws Exception {
-        // This is hardcoded for now.
-        // Will change in future commits.
         EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(
                 EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life" + " pa/200");
@@ -135,8 +135,6 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {
-        // This is hardcoded for now.
-        // Will change in future commits.
         DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
                 DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
@@ -147,40 +145,54 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listExpiringPolicies() throws Exception {
-        // test valid usage of the command with no arguments (should default to 30 days)
-        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
-                instanceof ListExpiringPoliciesCommand);
+        // default usage (30 days)
+        ListExpiringPoliciesCommand commandDefault = (ListExpiringPoliciesCommand)
+                parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD);
+        assertEquals(new ListExpiringPoliciesCommand(30), commandDefault);
 
-        // test valid usage of the command with days argument (eg. "listExpiringPolicies 60")
-        ListExpiringPoliciesCommand commandWithDays = (ListExpiringPoliciesCommand) parser.parseCommand(
-                ListExpiringPoliciesCommand.COMMAND_WORD + " 60");
-        assertTrue(commandWithDays instanceof ListExpiringPoliciesCommand);
-        assertEquals(60, commandWithDays.getDaysFromExpiry());
-
-        // test invalid usage where extra invalid arguments are provided (eg., "listExpiringPolicies extraArgument")
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
-
-        // test invalid usage where days argument is not an integer (eg. "listExpiringPolicies abc")
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " abc"));
-        // test invalid usage where days argument is a negative integer (eg. "listExpiringPolicies -5")
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
+        // custom days (e.g., 60)
+        ListExpiringPoliciesCommand commandWithDays = (ListExpiringPoliciesCommand)
+                parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " 60");
+        assertEquals(new ListExpiringPoliciesCommand(60), commandWithDays);
     }
 
+    @Test
+    public void parseCommand_listPolicies() throws Exception {
+        ListPoliciesCommand command = (ListPoliciesCommand) parser.parseCommand(
+                ListPoliciesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ListPoliciesCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_listClaims() throws Exception {
+        ListClaimsCommand expectedCommand = new ListClaimsCommand(INDEX_FIRST_PERSON, PolicyType.HEALTH);
+        String validInput = ListClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " pt/health";
+
+        Command command = parser.parseCommand(validInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteClaim() throws Exception {
+        String userInput = DeleteClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " pt/health c/1";
+
+        DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
+                INDEX_FIRST_PERSON, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
+
+        DeleteClaimsCommand actualCommand = (DeleteClaimsCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, actualCommand);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand"));
     }
 }
