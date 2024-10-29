@@ -29,6 +29,14 @@ public enum Region {
         }
     }
 
+    /**
+     * Checks if the provided string represents a valid region in the {@code Region} enum.
+     * The check is case-insensitive and trims any leading or trailing whitespace.
+     *
+     * @param region The string representation of the region to validate.
+     * @return {@code true} if the input string is a valid region; {@code false} otherwise.
+     * @throws IllegalValueException if the provided string is {@code null} or empty.
+     */
     public static boolean isValidRegion(String region) {
         if (region == null || region.trim().isEmpty()) {
             return false;
