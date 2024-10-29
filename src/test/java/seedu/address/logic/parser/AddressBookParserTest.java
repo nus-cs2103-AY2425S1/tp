@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.ExportConsultCommand;
 import seedu.address.logic.commands.consultation.ImportConsultCommand;
 import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
@@ -41,8 +42,8 @@ import seedu.address.logic.commands.lesson.ListLessonsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.Name;
@@ -243,6 +244,27 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_import() throws Exception {
+        String fileName = "import.csv";
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ImportCommand(fileName), command);
+    }
+
+    @Test
+    public void parseCommand_exportConsult() throws Exception {
+        String fileName = "consultations";
+        ExportConsultCommand command = (ExportConsultCommand) parser.parseCommand(
+                ExportConsultCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ExportConsultCommand(fileName, false), command);
+
+        // Test with force flag
+        ExportConsultCommand forceCommand = (ExportConsultCommand) parser.parseCommand(
+                ExportConsultCommand.COMMAND_WORD + " -f " + fileName);
+        assertEquals(new ExportConsultCommand(fileName, true), forceCommand);
+    }
+
+    @Test
     public void parseCommand_importConsult() throws Exception {
         String filePath = "consultations.csv";
         ImportConsultCommand command = (ImportConsultCommand) parser.parseCommand(
@@ -254,14 +276,6 @@ public class AddressBookParserTest {
         ImportConsultCommand homeCommand = (ImportConsultCommand) parser.parseCommand(
                 ImportConsultCommand.COMMAND_WORD + " " + homeFilePath);
         assertEquals(new ImportConsultCommand(homeFilePath), homeCommand);
-    }
-
-    @Test
-    public void parseCommand_import() throws Exception {
-        String fileName = "import.csv";
-        ImportCommand command = (ImportCommand) parser.parseCommand(
-                ImportCommand.COMMAND_WORD + " " + fileName);
-        assertEquals(new ImportCommand(fileName), command);
     }
 
     @Test

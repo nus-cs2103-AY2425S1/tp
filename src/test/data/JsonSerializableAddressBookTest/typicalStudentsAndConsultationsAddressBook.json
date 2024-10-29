@@ -169,14 +169,7 @@
     {
       "date": "2024-11-09",
       "time": "16:00",
-      "students": [
-        {
-          "name": "Carl Kurz",
-          "phone": "95352563",
-          "email": "heinz@example.com",
-          "courses": []
-        }
-      ]
+      "students": []
     }
   ]
 }
