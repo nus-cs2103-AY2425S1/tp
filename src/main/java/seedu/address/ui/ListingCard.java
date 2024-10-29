@@ -8,6 +8,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 import seedu.address.model.listing.Listing;
 
+import java.util.HashMap;
+
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -72,6 +74,10 @@ public class ListingCard extends UiPart<Region> {
 
     private void initializeRegion() {
         region.setText(listing.getRegion().toString());
+
+        String existingStyle = region.getStyle();
+        String newBackgroundColor = "-fx-background-color: " + listing.getRegion().getColor() + ";";
+        region.setStyle(existingStyle + newBackgroundColor);
     }
 
     private void initializeAddress() {

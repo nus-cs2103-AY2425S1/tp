@@ -218,7 +218,7 @@
 }
 
 .price_label {
-    -fx-background-color: green;
+    -fx-background-color: magenta;
     -fx-text-fill: white;
     -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
     -fx-padding: 1 10;  /* Space inside the label */
@@ -226,7 +226,7 @@
 }
 
 .area_label {
-    -fx-background-color: orange;
+    -fx-background-color: teal;
     -fx-text-fill: white;
     -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
     -fx-padding: 1 10;  /* Space inside the label */
