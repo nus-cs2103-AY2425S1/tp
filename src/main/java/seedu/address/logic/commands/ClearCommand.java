@@ -11,8 +11,8 @@ public abstract class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the entity (person or appointment) identified by the user. \n"
-            + "Parameters: ENTITY_TYPE \n "
+            + ": Deletes all entities of a certain type. \n"
+            + "Parameters: ENTITY_TYPE (person or appt)\n "
             + "Example: " + COMMAND_WORD + "appt \n";
     @Override
     public CommandResult execute(Model model) {

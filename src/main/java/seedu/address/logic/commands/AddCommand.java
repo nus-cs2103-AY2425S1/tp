@@ -18,9 +18,9 @@ public abstract class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds an entity (person or appointment) to DocTrack. \n"
+            + ": Adds an entity to address or appointment book. \n"
             + "Parameters: "
-            + "ENTITY_TYPE "
+            + "ENTITY_TYPE (person or appt) "
             + "prefix/DATA_FIELDS... \n"
             + "Example: " + COMMAND_WORD + " person "
             + PREFIX_NAME + "John Doe "
