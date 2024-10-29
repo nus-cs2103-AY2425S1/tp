@@ -22,9 +22,14 @@ public class ReminderCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Reminder set successfully for: %s. "
             + "You will be reminded %s before.";
     public static final String MESSAGE_INVALID_REMINDER_TIME = "Invalid reminder time: "
-            + "Please enter a valid time expression (e.g '1 day', '2 hours').";
+            + "Days must be between 1-7 and Hours must be between 1-23";
+    public static final String MESSAGE_SINGULAR_FORMAT_ERROR = "Error: "
+            + "should not have 's' for '1 day' or '1 hour'.";
+    public static final String MESSAGE_PLURAL_FORMAT_ERROR = "Error: "
+            + "should have 's' for multiple days or hours.";
     public static final String MESSAGE_INVALID_NAME = "Person not found";
-    public static final String MESSAGE_INVALID_APPOINTMENT = "Appointment not found";
+    public static final String MESSAGE_INVALID_APPOINTMENT = "Appointment not found.\n"
+            + "Please schedule an appointment first.";
     public static final String MESSAGE_REMINDER_EXISTS = "This reminder already exists";
     private String name;
     private String reminderTime;
@@ -97,8 +102,16 @@ public class ReminderCommand extends Command {
      * @param reminderTime The reminder time to validate
      * @return True if the reminder time format is valid, false otherwise
      */
-    private boolean isValidReminderTime(String reminderTime) {
-        return reminderTime.matches("\\d+\\s(day|hour)(s)?");
+    private boolean isValidReminderTime(String reminderTime) throws CommandException {
+        if (reminderTime.matches("1\\s(days|hours)")) {
+            throw new CommandException(MESSAGE_SINGULAR_FORMAT_ERROR);
+        }
+        if (reminderTime.matches("[2-7]\\s(day)")
+                || reminderTime.matches("([2-9]|1[0-9]|2[0-3])\\s(hour)")) {
+            throw new CommandException(MESSAGE_PLURAL_FORMAT_ERROR);
+        }
+        return reminderTime.matches("[1-7]\\sday(s)?")
+                || reminderTime.matches("([1-9]|1[0-9]|2[0-3])\\shour(s)?");
     }
 
     @Override
