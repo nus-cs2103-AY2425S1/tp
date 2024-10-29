@@ -50,7 +50,11 @@ public class ConsultationCard extends UiPart<Region> {
 
         // Apply the appropriate CSS class based on the consultation time
         if (consultationDateTime.isBefore(currentDateTime)) {
-            cardPane.getStyleClass().add("consultation-card-past");
+            if (displayedIndex % 2 == 0) {
+                cardPane.getStyleClass().add("consultation-card-past-even");
+            } else {
+                cardPane.getStyleClass().add("consultation-card-past-odd");
+            }
             id.getStyleClass().add("consultation-card-strikethrough");
             date.getStyleClass().add("consultation-card-strikethrough");
             time.getStyleClass().add("consultation-card-strikethrough");
