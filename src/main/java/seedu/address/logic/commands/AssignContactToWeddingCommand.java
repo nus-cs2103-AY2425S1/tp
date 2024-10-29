@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 
 /**
@@ -105,8 +106,10 @@ public class AssignContactToWeddingCommand extends Command {
 
         //new code from view wedding command
         Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
+        WeddingName targetWeddingName = targetWedding.getWeddingName();
         PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
         model.updateFilteredPersonList(predicate);
+        model.setCurrentWeddingName(targetWeddingName);
 
         return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), assignedPersonNames));

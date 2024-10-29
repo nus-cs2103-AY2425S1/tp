@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"  alignment="CENTER" spacing="10"
+      VBox.vgrow="ALWAYS"  style="-fx-padding: 15; -fx-border-width: 1; -fx-border-radius: 5;">
+    <Label fx:id="currentWeddingName" wrapText="true" styleClass="heading"
+           style="-fx-text-fill: white; -fx-font-weight: bold;" textAlignment="CENTER" alignment="CENTER"/>
+</VBox>
+
