@@ -57,7 +57,7 @@ public class DeleteTagCommand extends Command {
             }
         }
 
-        //Check if tags is in use
+        // Check if tags is in use
         Set<Tag> tagsInUse = getTagsInUse(model);
 
         if (!tagsInUse.isEmpty()) {
@@ -93,13 +93,17 @@ public class DeleteTagCommand extends Command {
         List<Person> persons = model.getFullPersonList();
         for (Person person : persons) {
             Set<Tag> personTags = person.getTags();
-            for (Tag tag : tags) {
-                if (personTags.contains(tag)) {
-                    tagsInUse.add(tag);
-                }
-            }
+            addPersonTags(tagsInUse, personTags);
         }
         return tagsInUse;
+    }
+
+    private void addPersonTags(Set<Tag> tagsInUse, Set<Tag> personTags) {
+        for (Tag tag : tags) {
+            if (personTags.contains(tag)) {
+                tagsInUse.add(tag);
+            }
+        }
     }
 
     /**
