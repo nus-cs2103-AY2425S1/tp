@@ -28,6 +28,13 @@ public class Tag {
     }
 
     /**
+     * Returns the tag type, used for differentiating various tag types.
+     */
+    public String getTagType() {
+        return "tag";
+    }
+
+    /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {

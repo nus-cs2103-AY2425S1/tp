@@ -24,6 +24,14 @@ public class PersonTag extends Tag {
     }
 
     /**
+     * Returns the tag type, used for differentiating various tag types.
+     */
+    @Override
+    public String getTagType() {
+        return "person";
+    }
+
+    /**
      * Format state as text for viewing.
      */
     @Override
