@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.ExportConsultCommand;
 import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.commands.lesson.AddLessonCommand;
@@ -239,6 +240,19 @@ public class AddressBookParserTest {
         ExportCommand command = (ExportCommand) parser.parseCommand(
                 ExportCommand.COMMAND_WORD + " " + fileName);
         assertEquals(new ExportCommand(fileName, false), command);
+    }
+
+    @Test
+    public void parseCommand_exportConsult() throws Exception {
+        String fileName = "consultations";
+        ExportConsultCommand command = (ExportConsultCommand) parser.parseCommand(
+                ExportConsultCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ExportConsultCommand(fileName, false), command);
+
+        // Test with force flag
+        ExportConsultCommand forceCommand = (ExportConsultCommand) parser.parseCommand(
+                ExportConsultCommand.COMMAND_WORD + " -f " + fileName);
+        assertEquals(new ExportConsultCommand(fileName, true), forceCommand);
     }
 
     @Test
