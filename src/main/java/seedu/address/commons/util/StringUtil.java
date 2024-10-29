@@ -62,7 +62,7 @@ public class StringUtil {
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         Predicate<String> containsKeywordIgnoringCase =
-                namePart -> namePart.toUpperCase().contains(preppedWord.toUpperCase());
+                stringPart -> stringPart.toUpperCase().contains(preppedWord.toUpperCase());
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(containsKeywordIgnoringCase);
