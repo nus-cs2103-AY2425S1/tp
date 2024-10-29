@@ -45,7 +45,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
-    
+
 
     /**
      * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
