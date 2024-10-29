@@ -19,7 +19,7 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
         + "separated by spaces.\n"
         + "To specify date, use the parameter d/[DATE] where [DATE] is a list of dates, in the format"
         + "YYYY-MM-DD, separated by spaces. (Note that there is no time stated here.)\n"
-        + "Parameters: [n/[NAME]] [d/[DATE]\n"
+        + "Parameters: [n/[NAME]] [d/[DATE]]\n"
         + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice d/2024-10-20";
 
     /**
