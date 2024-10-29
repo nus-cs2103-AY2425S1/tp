@@ -8,7 +8,8 @@
       "role": "Teacher",
       "skills": [
         "architecture"
-      ]
+      ],
+      "match": ""
     },
     {
       "name": "Benson Meier",
@@ -18,14 +19,16 @@
       "skills": [
         "Blender",
         "AfterEffects"
-      ]
+      ],
+      "match": ""
     },
     {
       "name": "Carl Kurz",
       "phone": "95352563",
       "email": "heinz@example.com",
       "role": "Banker",
-      "skills": []
+      "skills": [],
+      "match": ""
     },
     {
       "name": "Daniel Meier",
@@ -34,28 +37,32 @@
       "role": "Cook",
       "skills": [
         "Western"
-      ]
+      ],
+      "match": ""
     },
     {
       "name": "Elle Meyer",
       "phone": "9482224",
       "email": "werner@example.com",
       "role": "Logistics Supervisor",
-      "skills": []
+      "skills": [],
+      "match": ""
     },
     {
       "name": "Fiona Kunz",
       "phone": "9482427",
       "email": "lydia@example.com",
       "role": "Botanist",
-      "skills": []
+      "skills": [],
+      "match": ""
     },
     {
       "name": "George Best",
       "phone": "9482442",
       "email": "anna@example.com",
       "role": "QA",
-      "skills": []
+      "skills": [],
+      "match": ""
     }
   ],
   "jobs": [],
