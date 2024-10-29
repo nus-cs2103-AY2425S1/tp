@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public enum Region {
     NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, CENTRAL;
 
+    public static final String MESSAGE_CONSTRAINTS = "Region should be a direction (NSEW, etc)";
     private static final HashMap<Region, String> hm = new HashMap<>();
 
     // Static initializer to assign colors to each region
@@ -24,8 +25,6 @@ public enum Region {
         hm.put(SOUTHWEST, "orange");
         hm.put(CENTRAL, "orange");
     }
-
-    public static final String MESSAGE_CONSTRAINTS = "Region should be a direction (NSEW, etc)";
 
     /**
      * Converts a string input to the corresponding Region enum.
