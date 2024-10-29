@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -18,7 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.criteria.NameSearchCriteria;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -123,10 +122,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
-        Arrays.stream(keywords).forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
-        modelManager.updateFilteredPersonList(new ContainsKeywordsPredicate(mapForKeywords));
+        String[] keywords = ALICE.getName().fullName.split("\\s+");;
+        modelManager.updateFilteredPersonList(new ContainsKeywordsPredicate(
+                List.of(new NameSearchCriteria(Arrays.asList(keywords)))));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
