@@ -535,11 +535,32 @@ student]() to search for student details.
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Prefixes are not case-insensitive; therefore, an error message will be shown.
+   2. Prefixes are not case-insensitive; therefore, an error message will be shown in result display.
 
 ### Editing an existing student
 
+1. Editing a student while all students are being shown
 
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   
+   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their Owed Amount and Phone Number.
+   
+   1. Other incorrect edit commands to try: `edit`, `edit 0`, `edit x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+1. Editing a student in a filtered list
+
+   1. Prerequisites: Filter the students using `find` command.<br>Test case: `find n/irfan alex d/thursday friday`.
+
+   1. Test case: `edit 1 n/Jonathan e/jonjon4343@canadian.com`
+   
+   1. Expected: The first student in the list's name and email will be updated. The list shows all students instead of the previous filtered list.
+
+1. Editing a student with invalid values
+
+   1. You can test the command using unacceptable values, e.g., `r/0`, `paid/100.000`, `n/   ` .
+   
+   1. Expected: Corresponding error messages will be displayed.
 
 ### Deleting a student
 
