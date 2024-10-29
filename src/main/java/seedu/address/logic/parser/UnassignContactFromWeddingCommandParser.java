@@ -25,7 +25,8 @@ public class UnassignContactFromWeddingCommandParser implements Parser<UnassignC
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_CONTACT);
 
         if (!multimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "You cannot include an index in the unassign command."));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "You cannot include an index in the unassign command."));
         }
 
         //Reformatting error message for duplicate c/ instances
