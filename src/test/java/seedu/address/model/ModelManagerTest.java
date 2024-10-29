@@ -10,9 +10,12 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
@@ -21,6 +24,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Person;
+import seedu.address.storage.BackupManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -312,6 +317,53 @@ public class ModelManagerTest {
         ModelManager modelManagerWithStorage = new ModelManager(new AddressBook(), new UserPrefs(), storage);
         assertDoesNotThrow(() -> modelManagerWithStorage.cleanOldBackups(5),
                 "Cleaning old backups with valid storage should not throw any exception.");
+    }
+
+    /**
+     * Tests that the triggerBackup method handles IOException gracefully when backup fails.
+     */
+    @Test
+    public void triggerBackup_backupFails_logsWarning() throws Exception {
+        // Set up the modelManager with valid storage
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        UserPrefs userPrefs = new UserPrefs();
+        AddressBook addressBook = new AddressBook();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs, storage);
+
+        // Use reflection to set the backupManager to a mock that throws IOException
+        BackupManager mockBackupManager = new BackupManager(Paths.get("backups")) {
+            @Override
+            public void triggerBackup(Path sourceFilePath, String backupName) throws IOException {
+                throw new IOException("Simulated IO Exception");
+            }
+        };
+
+        // Inject the mockBackupManager into modelManager using reflection
+        Field backupManagerField = ModelManager.class.getDeclaredField("backupManager");
+        backupManagerField.setAccessible(true);
+        backupManagerField.set(modelManager, mockBackupManager);
+
+        // Add a person to trigger a backup on deletion
+        Person person = new PersonBuilder().withName("Test Person").build();
+        modelManager.addPerson(person);
+
+        // Delete the person, which will trigger the backup and the simulated IOException
+        assertDoesNotThrow(() -> modelManager.deletePerson(person),
+                "Deleting person should not throw an exception even if backup fails.");
+
+        // No backup file should be created due to the simulated IOException
+        Path backupDir = Paths.get("backups");
+        if (Files.exists(backupDir)) {
+            try (Stream<Path> paths = Files.walk(backupDir)) {
+                List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+                assertTrue(backupFiles.isEmpty(), "No backup files should exist due to simulated exception.");
+            }
+        }
     }
 
 }
