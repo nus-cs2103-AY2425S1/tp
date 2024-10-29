@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -146,7 +149,7 @@ public class ModelManagerTest {
     public void hasAppointment_appointmentInCalendar_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasAppointment(new PersonBuilder(BOB).withAppointment(ALICE.getAppointment().dateTime)
-                                                                                .build()));
+                .build()));
     }
 
     @Test
@@ -315,16 +318,100 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void triggerBackup_validStorage_executesSuccessfully() throws IOException {
-        // Initialize with valid storage
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+    public void triggerBackup_backupSucceeds_createsBackupFile() throws Exception {
+        // Set up the storage with a valid address book file path
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        ModelManager modelManagerWithStorage = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        // Initialize ModelManager with storage and userPrefs
+        ModelManager modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
 
-        // Trigger backup and check that no exception is thrown
-        assertDoesNotThrow(() -> modelManagerWithStorage.triggerBackup());
+        // Add a person to the address book
+        Person person = new PersonBuilder().withName("Test Person").build();
+        modelManager.addPerson(person);
+
+        // **Save the address book to ensure the file exists**
+        storage.saveAddressBook(modelManager.getAddressBook());
+
+        // Delete the person to trigger the backup
+        modelManager.deletePerson(person);
+
+        // Verify that the backup directory exists
+        Path backupDir = Paths.get("backups");
+        assertTrue(Files.exists(backupDir), "Backup directory should exist.");
+
+        // Verify that at least one backup file exists
+        try (Stream<Path> paths = Files.walk(backupDir)) {
+            List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+            assertFalse(backupFiles.isEmpty(), "Backup files should exist.");
+        }
+    }
+
+    @Test
+    public void backupData_validFileName_backupSuccessful() throws Exception {
+        // Set up the storage with a valid address book file path
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        // Initialize ModelManager with storage and userPrefs
+        ModelManager modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        // Save the address book to ensure the file exists
+        storage.saveAddressBook(modelManager.getAddressBook());
+
+        // Call backupData
+        String backupFileName = "testBackup";
+        assertDoesNotThrow(() -> modelManager.backupData(backupFileName));
+
+        // Verify that the backup directory exists
+        Path backupDir = Paths.get("backups");
+        assertTrue(Files.exists(backupDir), "Backup directory should exist.");
+
+        // Verify that at least one backup file exists with the specified name
+        try (Stream<Path> paths = Files.walk(backupDir)) {
+            List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+            boolean backupFileExists = backupFiles.stream()
+                    .anyMatch(path -> path.getFileName().toString().contains(backupFileName));
+            assertTrue(backupFileExists, "Backup file with specified name should exist.");
+        }
+    }
+
+    @Test
+    public void backupData_nullFileName_backupSuccessful() throws Exception {
+        // Set up the storage with a valid address book file path
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        // Initialize ModelManager with storage and userPrefs
+        ModelManager modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        // Save the address book to ensure the file exists
+        storage.saveAddressBook(modelManager.getAddressBook());
+
+        // Call backupData with null file name
+        assertDoesNotThrow(() -> modelManager.backupData(null));
+
+        // Verify that the backup directory exists
+        Path backupDir = Paths.get("backups");
+        assertTrue(Files.exists(backupDir), "Backup directory should exist.");
+
+        // Verify that at least one backup file exists (with generated timestamped name)
+        try (Stream<Path> paths = Files.walk(backupDir)) {
+            List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+            assertFalse(backupFiles.isEmpty(), "Backup files should exist.");
+        }
     }
 
 }

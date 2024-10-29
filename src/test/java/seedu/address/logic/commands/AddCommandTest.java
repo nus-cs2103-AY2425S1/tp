@@ -185,9 +185,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /*@Override
-        public void backupData(String filePath) throws IOException {
-        }*/
+        @Override
+        public void backupData(String fileName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public Storage getStorage() {

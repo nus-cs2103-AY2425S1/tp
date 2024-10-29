@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -96,13 +97,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    ///**
-    //* Backs up the data to the specified file path.
-    //*
-    //* @param filePath The file path where the backup data will be saved. Must not be null.
-    //* @throws IOException if an error occurs during saving the data.
-    //*/
-    //void backupData(String filePath) throws IOException;
+    /**
+     * Backup current patient record by the file name specified by user.
+     */
+    void backupData(String fileName) throws CommandException;
 
     /**
      * Returns the Storage object associated with the model.
