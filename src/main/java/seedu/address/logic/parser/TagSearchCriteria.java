@@ -19,7 +19,7 @@ public class TagSearchCriteria implements SearchCriteria {
     }
     @Override
     public boolean test(Person person) {
-        return tags.stream().anyMatch(tag -> person.hasTag(tag));
+        return tags.stream().anyMatch(person::hasTag);
     }
 
     @Override
