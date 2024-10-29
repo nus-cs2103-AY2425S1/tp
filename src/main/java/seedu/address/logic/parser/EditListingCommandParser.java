@@ -4,14 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
@@ -32,7 +28,7 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
-                        PREFIX_SELLER, PREFIX_BUYER);
+                        PREFIX_SELLER);
 
         Name listingName;
 
@@ -68,15 +64,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             Name sellerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SELLER).get());
             editListingDescriptor.setSellerName(sellerName);
         }
-
-        Set<Name> buyerNames = new HashSet<>();
-        for (String buyerName : argMultimap.getAllValues(PREFIX_BUYER)) {
-            buyerNames.add(ParserUtil.parseName(buyerName));
-        }
-        if (!buyerNames.isEmpty()) {
-            editListingDescriptor.setBuyerNames(buyerNames);
-        }
-
 
         if (!editListingDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);

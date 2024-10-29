@@ -7,12 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +21,7 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Edits the details of an existing listing in the system.
@@ -33,9 +31,9 @@ public class EditListingCommand extends Command {
     public static final String COMMAND_WORD = "editListing";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the listing identified "
-            + "by the index number used in the displayed listing list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "by the listing name. Buyers cannot be edited using this command. "
+            + "Use addBuyersToListing or removeBuyersFromListing to manage buyers.\n"
+            + "Parameters: n/LISTING_NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PRICE + "PRICE] "
             + "[" + PREFIX_AREA + "AREA] "
@@ -81,23 +79,19 @@ public class EditListingCommand extends Command {
 
         Optional<Person> seller = editListingDescriptor.getSellerName()
                 .flatMap(name -> Optional.ofNullable(model.getPersonByName(name)));
-        if (seller.isEmpty() && editListingDescriptor.getSellerName().isPresent()) {
+        if (seller.isPresent()) {
+            if (!(seller.get() instanceof Seller)) {
+                throw new CommandException("The specified person is not a seller.");
+            }
+        } else if (editListingDescriptor.getSellerName().isPresent()) {
             throw new CommandException("Seller not found in the system.");
         }
 
-        Set<Person> buyers = new HashSet<>();
-        if (editListingDescriptor.getBuyerNames().isPresent()) {
-            for (Name buyerName : editListingDescriptor.getBuyerNames().get()) {
-                Optional<Person> buyer = Optional.ofNullable(model.getPersonByName(buyerName));
-                buyer.ifPresent(buyers::add);
-            }
-        }
 
         Listing editedListing = createEditedListing(
                 listingToEdit,
                 editListingDescriptor,
-                seller.orElse(listingToEdit.getSeller()),
-                buyers.isEmpty() ? listingToEdit.getBuyers() : buyers
+                seller.orElse(listingToEdit.getSeller())
         );
 
         if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
@@ -113,7 +107,7 @@ public class EditListingCommand extends Command {
      * edited with {@code editListingDescriptor}.
      */
     private static Listing createEditedListing(Listing listingToEdit, EditListingDescriptor editListingDescriptor,
-                                               Person seller, Set<Person> buyers) {
+                                               Person seller) {
         assert listingToEdit != null;
 
         Name updatedName = editListingDescriptor.getName().orElse(listingToEdit.getName());
@@ -122,10 +116,9 @@ public class EditListingCommand extends Command {
         Address updatedAddress = editListingDescriptor.getAddress().orElse(listingToEdit.getAddress());
         Region updatedRegion = editListingDescriptor.getRegion().orElse(listingToEdit.getRegion());
         Person updatedSeller = (seller != null) ? seller : listingToEdit.getSeller();
-        Set<Person> updatedBuyers = !buyers.isEmpty() ? buyers : listingToEdit.getBuyers();
 
         return new Listing(updatedName, updatedAddress, updatedPrice, updatedArea, updatedRegion,
-                updatedSeller, updatedBuyers);
+                updatedSeller, listingToEdit.getBuyers());
     }
 
     @Override
@@ -153,7 +146,6 @@ public class EditListingCommand extends Command {
         private Address address;
         private Region region;
         private Name sellerName;
-        private Set<Name> buyerNames;
 
         public EditListingDescriptor() {}
 
@@ -171,7 +163,6 @@ public class EditListingCommand extends Command {
             setAddress(toCopy.address);
             setRegion(toCopy.region);
             setSellerName(toCopy.sellerName);
-            setBuyerNames(toCopy.buyerNames);
         }
 
         public boolean isAnyFieldEdited() {
@@ -225,15 +216,6 @@ public class EditListingCommand extends Command {
             return Optional.ofNullable(sellerName);
         }
 
-        public void setBuyerNames(Set<Name> buyerNames) {
-            this.buyerNames = (buyerNames != null) ? new HashSet<>(buyerNames) : null;
-        }
-
-        // Getter for buyer names
-        public Optional<Set<Name>> getBuyerNames() {
-            return (buyerNames != null) ? Optional.of(Collections.unmodifiableSet(buyerNames)) : Optional.empty();
-        }
-
 
         @Override
         public boolean equals(Object other) {
@@ -251,8 +233,7 @@ public class EditListingCommand extends Command {
                     && Objects.equals(area, otherDescriptor.area)
                     && Objects.equals(address, otherDescriptor.address)
                     && Objects.equals(region, otherDescriptor.region)
-                    && Objects.equals(sellerName, otherDescriptor.sellerName)
-                    && Objects.equals(buyerNames, otherDescriptor.buyerNames);
+                    && Objects.equals(sellerName, otherDescriptor.sellerName);
         }
     }
 }

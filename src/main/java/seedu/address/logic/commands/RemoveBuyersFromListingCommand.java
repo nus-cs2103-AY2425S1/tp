@@ -14,35 +14,36 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Adds buyers to an existing listing in the system.
+ * Removes buyers from an existing listing in the system.
  */
-public class AddBuyersToListingCommand extends Command {
+public class RemoveBuyersFromListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "addBuyersToListing";
+    public static final String COMMAND_WORD = "removeBuyersFromListing";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds buyers to the listing identified by its name. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes buyers from the listing identified by its "
+            + "name. "
             + "Parameters: LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " Warton House buyer/Alice buyer/Bob";
 
-    public static final String MESSAGE_ADD_BUYERS_SUCCESS = "Buyers added to listing: %1$s";
+    public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
-    public static final String MESSAGE_DUPLICATE_BUYERS = "Some buyers are already associated with this listing.";
+    public static final String MESSAGE_BUYER_NOT_FOUND = "Some buyers are not associated with this listing.";
 
     private final Name listingName;
-    private final Set<Name> buyersToAdd;
+    private final Set<Name> buyersToRemove;
 
     /**
-     * Constructs an {@code AddBuyersToListingCommand}.
+     * Constructs a {@code RemoveBuyersFromListingCommand}.
      *
-     * @param listingName The name of the listing to which buyers will be added.
-     * @param buyersToAdd The names of the buyers to add to the listing.
+     * @param listingName The name of the listing from which buyers will be removed.
+     * @param buyersToRemove The names of the buyers to remove from the listing.
      */
-    public AddBuyersToListingCommand(Name listingName, Set<Name> buyersToAdd) {
+    public RemoveBuyersFromListingCommand(Name listingName, Set<Name> buyersToRemove) {
         requireNonNull(listingName);
-        requireNonNull(buyersToAdd);
+        requireNonNull(buyersToRemove);
 
         this.listingName = listingName;
-        this.buyersToAdd = new HashSet<>(buyersToAdd);
+        this.buyersToRemove = new HashSet<>(buyersToRemove);
     }
 
     @Override
@@ -55,32 +56,31 @@ public class AddBuyersToListingCommand extends Command {
         }
 
         Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
-        Set<Person> newBuyers = new HashSet<>();
+        Set<Person> buyersToRemoveSet = new HashSet<>();
 
-        for (Name buyerName : buyersToAdd) {
+        for (Name buyerName : buyersToRemove) {
             Optional<Person> buyer = Optional.ofNullable(model.getPersonByName(buyerName));
 
             if (buyer.isEmpty()) {
                 throw new CommandException("The specified buyer " + buyerName + " does not exist in the client list.");
             }
 
-            // Check if the person is actually an instance of Buyer
-            if (!(buyer.get() instanceof Buyer)) {
-                throw new CommandException("The specified person " + buyerName + " is not a buyer.");
+            // Check if the person is actually an instance of Buyer and is in the existing buyers
+            if (!(buyer.get() instanceof Buyer) || !existingBuyers.contains(buyer.get())) {
+                throw new CommandException("The specified person " + buyerName + " is not a buyer or is not associated "
+                        + "with this listing.");
             }
 
-            // Add the buyer to newBuyers set only if not already in existingBuyers
-            if (!existingBuyers.contains(buyer.get())) {
-                newBuyers.add(buyer.get());
-            }
+            buyersToRemoveSet.add(buyer.get());
         }
 
-        if (newBuyers.isEmpty()) {
-            throw new CommandException(MESSAGE_DUPLICATE_BUYERS);
+        if (buyersToRemoveSet.isEmpty()) {
+            throw new CommandException(MESSAGE_BUYER_NOT_FOUND);
         }
 
-        existingBuyers.addAll(newBuyers);
+        existingBuyers.removeAll(buyersToRemoveSet);
 
+        // Create an updated listing with the modified buyers set
         Listing updatedListing = new Listing(
                 listingToEdit.getName(),
                 listingToEdit.getAddress(),
@@ -92,7 +92,7 @@ public class AddBuyersToListingCommand extends Command {
         );
 
         model.setListing(listingToEdit, updatedListing);
-        return new CommandResult(String.format(MESSAGE_ADD_BUYERS_SUCCESS, updatedListing));
+        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, updatedListing));
     }
 
     @Override
@@ -101,12 +101,12 @@ public class AddBuyersToListingCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddBuyersToListingCommand)) {
+        if (!(other instanceof RemoveBuyersFromListingCommand)) {
             return false;
         }
 
-        AddBuyersToListingCommand otherCommand = (AddBuyersToListingCommand) other;
+        RemoveBuyersFromListingCommand otherCommand = (RemoveBuyersFromListingCommand) other;
         return listingName.equals(otherCommand.listingName)
-                && buyersToAdd.equals(otherCommand.buyersToAdd);
+                && buyersToRemove.equals(otherCommand.buyersToRemove);
     }
 }

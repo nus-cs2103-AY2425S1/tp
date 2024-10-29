@@ -126,7 +126,8 @@ public class AddressBookParser {
                 || commandWord.equals("deleteListing")
                 || commandWord.equals("clearListings")
                 || commandWord.equals("findListings")
-                || commandWord.equals("listListings");
+                || commandWord.equals("listListings")
+                || commandWord.equals("removeBuyersFromListing");
     }
 
 }

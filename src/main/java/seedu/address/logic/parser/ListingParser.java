@@ -15,6 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteListingCommand;
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.FindListingCommand;
+import seedu.address.logic.commands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.commands.ShowListingsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -66,6 +67,9 @@ public class ListingParser {
 
         case AddBuyersToListingCommand.COMMAND_WORD:
             return new AddBuyersToListingCommandParser().parse(arguments);
+
+        case RemoveBuyersFromListingCommand.COMMAND_WORD:
+            return new RemoveBuyersFromListingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
