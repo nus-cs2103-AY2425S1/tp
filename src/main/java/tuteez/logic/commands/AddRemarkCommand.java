@@ -41,6 +41,9 @@ public class AddRemarkCommand extends RemarkCommand {
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
+        // Update the last viewed person in the model after updating remarks
+        model.updateLastViewedPerson(updatedPerson);
+
         return new CommandResult(String.format("Added remark to Person %1$s: %2$s",
                 personIndex.getOneBased(), remarkToAdd.toString()));
     }

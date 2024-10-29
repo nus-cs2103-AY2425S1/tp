@@ -117,6 +117,28 @@ public class DeleteRemarkCommandTest {
     }
 
     @Test
+    public void execute_deleteRemark_updatesLastViewedPerson() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDeleteRemark = new PersonBuilder(originalPerson).withRemarks(VALID_REMARKLIST).build();
+
+        model.setPerson(originalPerson, personToDeleteRemark);
+
+        DeleteRemarkCommand deleteRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK);
+
+        Person expectedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
+
+        String expectedMessage = String.format("Deleted remark at index %1$s from Person %2$s", 1, 1);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToDeleteRemark, expectedPerson);
+
+        assertCommandSuccess(deleteRemarkCommand, model, expectedMessage, expectedModel);
+
+        assertTrue(model.getLastViewedPerson().get().isPresent(), "Expected lastViewedPerson to be present");
+        assertTrue(model.getLastViewedPerson().get().get().equals(expectedPerson),
+                "Expected lastViewedPerson to match the person with the updated remark list");
+    }
+
+    @Test
     public void equals() {
         DeleteRemarkCommand deleteFirstRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON,
                 Index.fromOneBased(1));
