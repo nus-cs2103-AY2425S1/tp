@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 import java.util.Collection;
