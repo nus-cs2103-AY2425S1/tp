@@ -3,10 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
@@ -31,65 +30,46 @@ public class EditAppointmentParser implements Parser<EditAppointmentCommand> {
      */
     public EditAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIND_NRIC,
-                PREFIX_FIND_DATE,
-                PREFIX_FIND_START_TIME,
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NRIC,
                 PREFIX_DATE,
                 PREFIX_START_TIME,
-                PREFIX_END_TIME);
-        if (!argumentMultimap.getValue(PREFIX_FIND_NRIC).isPresent()) {
-            System.out.println("Find NRIC not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_FIND_DATE).isPresent()) {
-            System.out.println("Find date not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_FIND_START_TIME).isPresent()) {
-            System.out.println("Find start time not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            System.out.println("NRIC not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_DATE).isPresent()) {
-            System.out.println("Date not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_START_TIME).isPresent()) {
-            System.out.println("Start time not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_END_TIME).isPresent()) {
-            System.out.println("End time not found");
-        }
+                PREFIX_NEW_DATE,
+                PREFIX_NEW_START_TIME,
+                PREFIX_NEW_END_TIME);
 
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME)) {
-            System.out.println("Prefixes not found");
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC,
+                PREFIX_DATE,
+                PREFIX_START_TIME,
+                PREFIX_NEW_DATE,
+                PREFIX_NEW_START_TIME,
+                PREFIX_NEW_END_TIME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAppointmentCommand.MESSAGE_USAGE));
         }
 
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIND_NRIC,
-                PREFIX_FIND_DATE,
-                PREFIX_FIND_START_TIME,
+        argumentMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_NRIC,
                 PREFIX_DATE,
                 PREFIX_START_TIME,
-                PREFIX_END_TIME);
-        Nric findNric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_FIND_NRIC).get());
-        LocalDate findDate = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_FIND_DATE).get());
-        LocalTime findStartTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_FIND_START_TIME).get());
-        Nric nric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_NRIC).get());
-        LocalDate date = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_DATE).get());
-        LocalTime startTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_START_TIME).get());
-        LocalTime endTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_END_TIME).get());
+                PREFIX_NEW_DATE,
+                PREFIX_NEW_START_TIME,
+                PREFIX_NEW_END_TIME);
+        Nric originalNric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_NRIC).get());
+        LocalDate originalDate = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_DATE).get());
+        LocalTime originalStartTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_START_TIME).get());
+        LocalDate newDate = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_NEW_DATE).get());
+        LocalTime newStartTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_START_TIME).get());
+        LocalTime newEndTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_NEW_END_TIME).get());
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
 
-        editAppointmentDescriptor.setNric(nric);
-        editAppointmentDescriptor.setStartTime(LocalDateTime.of(date, startTime));
-        editAppointmentDescriptor.setEndTime(LocalDateTime.of(date, endTime));
+        editAppointmentDescriptor.setStartTime(LocalDateTime.of(newDate, newStartTime));
+        editAppointmentDescriptor.setEndTime(LocalDateTime.of(newDate, newEndTime));
 
-        LocalDateTime findStartDateTime = LocalDateTime.of(findDate, findStartTime);
+        LocalDateTime originalStartDateTime = LocalDateTime.of(originalDate, originalStartTime);
 
-        return new EditAppointmentCommand(findNric, findStartDateTime, editAppointmentDescriptor);
+        return new EditAppointmentCommand(originalNric, originalStartDateTime, editAppointmentDescriptor);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

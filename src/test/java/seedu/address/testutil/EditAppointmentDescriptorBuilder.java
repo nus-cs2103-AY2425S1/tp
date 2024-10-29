@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Nric;
 
 /**
  * A utility class to help with building EditAppointmentDescriptor objects.
@@ -34,7 +33,6 @@ public class EditAppointmentDescriptorBuilder {
     public EditAppointmentDescriptorBuilder(Appointment appointment) {
         descriptor = new EditAppointmentDescriptor();
         descriptor.setName(appointment.getName());
-        descriptor.setNric(appointment.getNric());
         descriptor.setStartTime(appointment.getStartTime());
         descriptor.setEndTime(appointment.getEndTime());
     }
@@ -44,14 +42,6 @@ public class EditAppointmentDescriptorBuilder {
      */
     public EditAppointmentDescriptorBuilder withName(String name) {
         descriptor.setName(name);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Nric} of the {@code EditAppointmentDescriptor} that we are building.
-     */
-    public EditAppointmentDescriptorBuilder withNric(String nric) {
-        descriptor.setNric(new Nric(nric));
         return this;
     }
 
