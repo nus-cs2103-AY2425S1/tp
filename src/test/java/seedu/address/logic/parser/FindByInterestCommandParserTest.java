@@ -32,7 +32,8 @@ public class FindByInterestCommandParserTest {
 
         // Test with multiple keywords
         expectedCommand =
-                new FindByInterestCommand(new InterestContainsKeywordsPredicate(Arrays.asList("Reading", "Writing"))); // Separate keywords
+                new FindByInterestCommand(new InterestContainsKeywordsPredicate(Arrays.asList("Reading", "Writing")));
+        // Separate keywords
         assertParseSuccess(parser, "i/Reading Writing", expectedCommand);
     }
 
@@ -47,8 +48,8 @@ public class FindByInterestCommandParserTest {
     public void parse_multipleSpaces_returnsTrimmedFindByInterestCommand() {
         // Test input with multiple spaces
         FindByInterestCommand expectedCommand =
-                new FindByInterestCommand(new InterestContainsKeywordsPredicate
-                        (Collections.singletonList("Photography")));
+                new FindByInterestCommand(new InterestContainsKeywordsPredicate(
+                        Collections.singletonList("Photography")));
         assertParseSuccess(parser, " i/   Photography   ", expectedCommand);
     }
 }
