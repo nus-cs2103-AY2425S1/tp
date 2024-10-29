@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.controller.ConfirmationBypassController;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,7 +32,7 @@ public class DeleteCommandTest {
     public void execute_validIndex_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index targetIndex = INDEX_FIRST_PERSON;
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, true);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, new ConfirmationBypassController());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName());
 
@@ -45,7 +46,9 @@ public class DeleteCommandTest {
     public void execute_validIndex_cancelled() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index targetIndex = INDEX_FIRST_PERSON;
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, false);
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
+        confirmationBypassController.setConfirmationResult(false);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, confirmationBypassController);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_CANCELLED, personToDelete.getName());
 
@@ -68,7 +71,7 @@ public class DeleteCommandTest {
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Name targetName = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName, true);
+        DeleteCommand deleteCommand = new DeleteCommand(targetName, new ConfirmationBypassController());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetName);
 
@@ -84,7 +87,9 @@ public class DeleteCommandTest {
     public void execute_validName_cancelled() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Name targetName = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName, false);
+        ConfirmationBypassController confirmationBypassController = new ConfirmationBypassController();
+        confirmationBypassController.setConfirmationResult(false);
+        DeleteCommand deleteCommand = new DeleteCommand(targetName, confirmationBypassController);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_CANCELLED, targetName);
 
