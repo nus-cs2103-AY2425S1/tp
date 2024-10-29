@@ -85,7 +85,7 @@ public class ArchiveCommand extends Command {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         DeliveryList deliveryList = inspectedPerson.getDeliveryList();
-        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
+        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList, true);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
 
@@ -106,7 +106,7 @@ public class ArchiveCommand extends Command {
     private CommandResult handlePersonArchive(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        validateIndexes(lastShownList.size(), indexList);
+        validateIndexes(lastShownList.size(), indexList, false);
 
         List<Person> personToArchiveList = archivePerson(model, lastShownList);
 
@@ -124,11 +124,15 @@ public class ArchiveCommand extends Command {
      * @param indexList The list of indexes to be validated.
      * @throws CommandException if any index is out of bounds or if duplicates are found.
      */
-    private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
+    private void validateIndexes(int listSize, List<Index> indexList, boolean isDelivery) throws CommandException {
         boolean hasDuplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
             if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                if (isDelivery) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                } else {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
             }
         }
     }

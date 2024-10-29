@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LIST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,9 +18,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -28,20 +34,22 @@ public class ArchiveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_throwsCommandException() {
-        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_LIST);
+    public void execute_validMultipleIndexUnfilteredList_success() {
+        Person personToArchive1 = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Person personToArchive2 = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_SECOND_LIST);
+        List<Person> personToArchiveList = new ArrayList<>();
+        personToArchiveList.add(personToArchive1);
+        personToArchiveList.add(personToArchive2);
 
-        assertCommandFailure(archiveCommand, model, ArchiveCommand.MESSAGE_INVALID_WINDOW);
-    }
+        String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVED_PERSON_SUCCESS,
+                Messages.formatPersonList(personToArchiveList));
 
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(outOfBoundIndex);
-        ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundIndexList);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToArchive1);
+        expectedModel.deletePerson(personToArchive2);
 
-        assertCommandFailure(archiveCommand, model, ArchiveCommand.MESSAGE_INVALID_WINDOW);
+        assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
