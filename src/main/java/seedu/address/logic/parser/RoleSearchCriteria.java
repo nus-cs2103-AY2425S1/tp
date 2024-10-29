@@ -15,7 +15,7 @@ public class RoleSearchCriteria implements SearchCriteria {
     private final Set<Role> roles;
 
     public RoleSearchCriteria(List<String> roles) {
-        this.roles = roles.stream().map(Role::valueOf).collect(Collectors.toSet());
+        this.roles = roles.stream().map(role -> Role.valueOf(role.toUpperCase())).collect(Collectors.toSet());
     }
     @Override
     public boolean test(Person person) {
