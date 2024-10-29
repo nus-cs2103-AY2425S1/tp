@@ -1,22 +1,19 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
+import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.DuplicateReminderException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.ReminderNotFoundException;
-import seedu.address.testutil.PersonBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
-import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 public class UniqueReminderListTest {
 
@@ -99,7 +96,8 @@ public class UniqueReminderListTest {
     @Test
     public void setReminders_listWithDuplicateReminders_throwsDuplicateReminderException() {
         List<Reminder> listWithDuplicateReminders = Arrays.asList(MEETINGJASON, MEETINGJASON);
-        assertThrows(DuplicateReminderException.class, () -> uniqueReminderList.setReminders(listWithDuplicateReminders));
+        assertThrows(DuplicateReminderException.class, () -> uniqueReminderList
+                                                             .setReminders(listWithDuplicateReminders));
     }
 
     @Test

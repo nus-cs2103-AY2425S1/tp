@@ -1,5 +1,13 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalReminders.BREAKFASTLEON;
+import static seedu.address.testutil.TypicalReminders.GYMTRISTAN;
+import static seedu.address.testutil.TypicalReminders.MEETINGJASON;
+import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
@@ -9,11 +17,6 @@ import seedu.address.model.ReminderAddressBook;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalReminders.*;
 
 public class JsonReminderAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonReminderAddressBookStorageTest");
@@ -27,7 +30,8 @@ public class JsonReminderAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyReminderAddressBook> readReminderAddressBook(String filePath) throws Exception {
-        return new JsonReminderAddressBookStorage(Paths.get(filePath)).readReminderAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonReminderAddressBookStorage(Paths.get(filePath))
+                   .readReminderAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -43,7 +47,8 @@ public class JsonReminderAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readReminderAddressBook("notJsonFormatReminderAddressBook.json"));
+        assertThrows(DataLoadingException.class,
+                     () -> readReminderAddressBook("notJsonFormatReminderAddressBook.json"));
     }
 
     @Test
@@ -53,7 +58,8 @@ public class JsonReminderAddressBookStorageTest {
 
     @Test
     public void readReminderAddressBook_invalidAndValidReminderAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readReminderAddressBook("invalidAndValidReminderAddressBook.json"));
+        assertThrows(DataLoadingException.class,
+                     () -> readReminderAddressBook("invalidAndValidReminderAddressBook.json"));
     }
 
     @Test
