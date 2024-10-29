@@ -123,7 +123,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -260,34 +260,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user**: Private School teachers, administrators.
+**Target user**: Secondary School Tuition teachers.
 
-**Value proposition**: Simplifies contact management by providing an all-in-one user-friendly interface for teachers/staff in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
+**Value proposition**: Simplifies contact management by providing an all-in-one user-friendly interface for teachers in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
 
-**Target user profile 1**: Independent Private School Teachers
+**Target user profile 1**: Independent Secondary School Tuition Teachers
 
-* private school teachers, often working independently, managing their classes and responsibilities on their own.
-* private school teachers who manage multiple classes of different levels
+* secondary school teachers, often working independently, managing their classes and responsibilities on their own.
+* secondary school teachers who manage multiple classes of different levels
 * have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
 * have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
 * have a need to edit data regarding students and parents/guardians in case of updates
 
-**Target user profile 2**: Private School Teachers working under administrations
+**Target user profile 2**: Secondary School Tuition Teachers working under administrations
 
-* private school teachers who work alongside or under the supervision of education administrators or managers.
-* private school teachers who manage multiple classes across various subjects
+* secondary school tuition teachers who work alongside or under the supervision of education administrators or managers.
+* secondary school tuition teachers who manage multiple classes across various subjects
 * have a need to track and organise details of students (e.g. phone numbers, emails, addresses)
 * Parent/Guardian contacts are overseen by institution admin staff
 * have a need to efficiently access information regarding students for communication during various situations (e.g. emergencies, administrative tasks, class schedules)
 * have a need to edit data regarding students in case of updates
-
-**Target user profile 3**: Private Education Institution Managers
-
-* Managing the overall administration of the institution
-* have a need to track and organise details of students, parents/guardians, teachers and vendors (e.g. phone numbers, emails, addresses)
-* have a need to efficiently access information regarding students, parents/guardians, teachers and vendors for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
-* have a need to edit data regarding students, parents/guardians, teachers and vendors in case of updates in contact information
-
 
 ### User stories
 
@@ -404,9 +396,10 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 #### Use case: UC6 - Sort
 **MSS**
-1. User enters sort command.
-2. Cher displays all contacts in list in alphabetical order by name.<br>
-   Use case ends.
+1. User enters sort contact command with the predicate name.
+2. Cher shows list of contacts sorted alphabetically by name.
+3. Cher shows success message that list has been sorted by name.<br>
+Use case ends
 
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
