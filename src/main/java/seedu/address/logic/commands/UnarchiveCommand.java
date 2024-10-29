@@ -15,7 +15,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
@@ -25,8 +24,7 @@ import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.DeliveryAction;
 import seedu.address.ui.InspectWindow;
@@ -45,11 +43,8 @@ public class UnarchiveCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Unarchived Delivery for %1$s: %2$s";
-
-    public static final String MESSAGE_INVALID_WINDOW = "Cannot unarchive contact. "
-            + "Navigate to inspection window to archive deliveries";
-
+    public static final String MESSAGE_UNARCHIVED_DELIVERY_SUCCESS = "Unarchived Delivery for %1$s: %2$s";
+    public static final String MESSAGE_UNARCHIVED_PERSON_SUCCESS = "Unarchived Person: %1$s";
     private final List<Index> indexList;
 
     public UnarchiveCommand(List<Index> indexList) {
@@ -64,7 +59,7 @@ public class UnarchiveCommand extends Command {
         if (AddressBookParser.getInspect()) {
             return handleDeliveryUnarchive(model);
         } else {
-            throw new CommandException(MESSAGE_INVALID_WINDOW);
+            return handlePersonUnarchive(model);
         }
     }
 
@@ -79,32 +74,36 @@ public class UnarchiveCommand extends Command {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         DeliveryList deliveryList = inspectedPerson.getDeliveryList();
-        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
+        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList, true);
 
         List<Delivery> deliveryToArchiveList = unarchiveDeliveries(inspectedPerson, deliveryList);
         Collections.reverse(deliveryToArchiveList);
 
         return new CommandResult(String.format(
-                MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
+                MESSAGE_UNARCHIVED_DELIVERY_SUCCESS,
                 inspectedPerson.getName(),
                 Messages.formatDeliveryList(deliveryToArchiveList)),
                 DeliveryAction.UNARCHIVE);
     }
 
     /**
-     * Validates the indexes in the indexList to ensure none are out of bounds or duplicates.
+     * Handles the unarchiving of person from the inspected person's delivery list based on the indexList.
      *
-     * @param listSize The size of the list from which items are to be deleted.
-     * @param indexList The list of indexes to be validated.
-     * @throws CommandException if any index is out of bounds or if duplicates are found.
+     * @param model The model containing the inspected person.
+     * @return A CommandResult containing a success message with details of the unarchived person.
+     * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
-        boolean hasDuplicate = hasDuplicates(indexList);
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-            }
-        }
+    private CommandResult handlePersonUnarchive(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        validateIndexes(lastShownList.size(), indexList, false);
+
+        List<Person> personToUnarchiveList = unarchivePerson(model, lastShownList);
+
+        return new CommandResult(String.format(
+                MESSAGE_UNARCHIVED_PERSON_SUCCESS,
+                Messages.formatPersonList(personToUnarchiveList),
+                DeliveryAction.UNARCHIVE));
     }
 
     /**
@@ -124,7 +123,32 @@ public class UnarchiveCommand extends Command {
             }
             deliveryToUnarchiveList.add(unarchivedDelivery);
         }
+        Collections.reverse(deliveryToUnarchiveList);
         return deliveryToUnarchiveList;
+    }
+
+    /**
+     * Unarchives persons from the model based on the provided indexList.
+     *
+     * @param model The model containing the filtered person list.
+     * @param lastShownList The list of persons to delete from.
+     * @return A list of persons that were deleted.
+     */
+    private List<Person> unarchivePerson(Model model, List<Person> lastShownList) {
+        List<Person> personToUnarchiveList = new ArrayList<>();
+
+        for (Index targetIndex : indexList) {
+            Person personToUnarchive = lastShownList.get(targetIndex.getZeroBased());
+            Person unarchivedPerson = createUnarchivedPerson(personToUnarchive);
+
+            if (personToUnarchive.isArchived()) {
+                model.deletePerson(personToUnarchive);
+                model.addPerson(unarchivedPerson);
+            }
+            personToUnarchiveList.add(unarchivedPerson);
+        }
+
+        return personToUnarchiveList;
     }
 
     /**
@@ -143,9 +167,28 @@ public class UnarchiveCommand extends Command {
         Status status = toUnarchive.getStatus();
         Set<Tag> tags = toUnarchive.getTags();
 
-        Archive updatedArchive = new Archive(false);
+        seedu.address.model.delivery.Archive updatedArchive = new seedu.address.model.delivery.Archive(false);
 
         return new Delivery(deliveryId, items, address, cost, date, time, eta, status, tags, updatedArchive);
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code toUnarchive}
+     * with {@code archive} set to false.
+     */
+    private static Person createUnarchivedPerson(Person toUnarchive) {
+        assert toUnarchive != null;
+
+        Name name = toUnarchive.getName();
+        Phone phone = toUnarchive.getPhone();
+        Email email = toUnarchive.getEmail();
+        Role role = toUnarchive.getRole();
+        Address address = toUnarchive.getAddress();
+        Set<Tag> tags = toUnarchive.getTags();
+
+        seedu.address.model.person.Archive updatedArchive = new seedu.address.model.person.Archive(false);
+
+        return new Person(name, phone, email, role, address, tags, updatedArchive);
     }
 
     /**
@@ -162,6 +205,26 @@ public class UnarchiveCommand extends Command {
             }
         }
         return false; // no duplicates found
+    }
+
+    /**
+     * Validates the indexes in the indexList to ensure none are out of bounds or duplicates.
+     *
+     * @param listSize The size of the list from which items are to be deleted.
+     * @param indexList The list of indexes to be validated.
+     * @throws CommandException if any index is out of bounds or if duplicates are found.
+     */
+    private void validateIndexes(int listSize, List<Index> indexList, boolean isDelivery) throws CommandException {
+        boolean hasDuplicate = hasDuplicates(indexList);
+        for (Index targetIndex : indexList) {
+            if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
+                if (isDelivery) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                } else {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
+            }
+        }
     }
 
     /**
