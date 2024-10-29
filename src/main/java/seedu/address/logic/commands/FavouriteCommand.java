@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -50,6 +49,10 @@ public class FavouriteCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personsList)));
     }
+    /**
+     * @param personToEdit
+     * @return a new Person Object with Favourite Attribute changed to true
+     */
     public static Person createFavouritePerson(Person personToEdit) {
         assert personToEdit != null;
         return personToEdit.setFavouritePerson();
@@ -59,12 +62,10 @@ public class FavouriteCommand extends Command {
         if (other == this) {
             return true;
         }
-        
         //instanceof handles nulls
         if (!(other instanceof FavouriteCommand)) {
             return false;
         }
-        
         FavouriteCommand otherFavouriteCommand = (FavouriteCommand) other;
         return contactIndexes.equals(otherFavouriteCommand.contactIndexes);
     }

@@ -57,7 +57,10 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-    
+    /**
+     * @param people
+     * @return a String Format of all the Person Objects in the people list
+     */
     public static String format(List<Person> people) {
         final StringBuilder builder = new StringBuilder();
         for (Person person: people) {
