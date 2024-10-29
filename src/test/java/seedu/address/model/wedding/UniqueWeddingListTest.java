@@ -1,14 +1,5 @@
 package seedu.address.model.wedding;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
-import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
-import seedu.address.testutil.WeddingBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,6 +13,17 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalWeddings.ALICE_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
+import seedu.address.testutil.WeddingBuilder;
+
 
 public class UniqueWeddingListTest {
     private final UniqueWeddingList uniqueWeddingList = new UniqueWeddingList();
