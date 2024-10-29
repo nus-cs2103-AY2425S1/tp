@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -8,9 +11,16 @@ import java.util.Set;
  */
 public class ActiveTags {
     private final HashMap<Tag, Integer> tagMap; // Maps Tags to their respective number of occurrences
+    private final ObservableMap<String, String> tagColorMap; // Maps Tag names to their respective colors
+    private final String[] colors = {"#a5494f", "#ad7e48", "#a7a15a", "#48864d", "#4a57ba", "#5f388b"};
 
     public ActiveTags(HashMap<Tag, Integer> tagMap) {
         this.tagMap = tagMap;
+        this.tagColorMap = FXCollections.observableHashMap();
+
+        for (Tag t:tagMap.keySet()) {
+            assignTagColor(t);
+        }
     }
 
     /**
@@ -25,6 +35,7 @@ public class ActiveTags {
             } else {
                 // Add new entry if Tag does not exist in HashMap
                 tagMap.put(t, 1);
+                assignTagColor(t);
             }
         }
     }
@@ -39,15 +50,31 @@ public class ActiveTags {
             if (i == 1) {
                 // Delete entry if Tag has no more occurrences
                 tagMap.remove(t);
+                unassignTagColor(t);
             } else {
                 tagMap.replace(t, --i);
             }
         }
     }
 
+    private void assignTagColor(Tag t) {
+        String tagName = t.tagName;
+        if (!tagColorMap.containsKey(tagName)) {
+            String assigned = colors[tagColorMap.size() % colors.length]; // If more tags than colors, loops around
+            tagColorMap.put(tagName, assigned);
+        }
+    }
+
+    private void unassignTagColor(Tag t) {
+        String tagName = t.tagName;
+        tagColorMap.remove(tagName);
+    }
+
     public HashMap<Tag, Integer> getMap() {
         return this.tagMap;
     }
 
-
+    public ObservableMap<String, String> getTagColorMap() {
+        return this.tagColorMap;
+    }
 }
