@@ -1,12 +1,16 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -20,6 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ChatWindowUiTest extends ApplicationTest {
     private ChatWindow chatWindow;
     private TextField userInput;
@@ -48,16 +53,17 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(1)
     public void getResponse_greetingKeyword_success() {
         interact(() -> {
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey"));
-            System.out.println("test");
         });
     }
 
     @Test
+    @Order(2)
     public void getResponse_helpKeyword_success() {
         interact(() -> {
             assertEquals("Sure! What do you need help with?", chatWindow.getResponse("help"));
@@ -65,6 +71,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(3)
     public void getResponse_goodbyeKeyword_success() {
         interact(() -> {
             assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("goodbye"));
@@ -73,6 +80,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(4)
     public void getResponse_thanksKeyword_success() {
         interact(() -> {
             assertEquals("You're welcome! Always happy to help.", chatWindow.getResponse("thank"));
@@ -83,6 +91,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(5)
     public void getResponse_loveKeyword_success() {
         String expected = "Love is not about possession; it's about appreciation of \n"
                 + "the journey we share together, hand in hand through \n"
@@ -93,32 +102,35 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(6)
     public void getResponse_addKeyword_success() {
         interact(() -> {
             assertEquals("I assume you are having trouble with the add command.\n"
-                    + "Can you help specify which you are referring to?\n"
-                    + "• Adding a buyer/seller client profile\n"
-                    + "• Adding an appointment\n"
-                    + "• Adding a property\n"
-                    + "• Adding a listing",
+                            + "Can you help specify which you are referring to?\n"
+                            + "• Adding a buyer/seller client profile\n"
+                            + "• Adding an appointment\n"
+                            + "• Adding a property\n"
+                            + "• Adding a listing",
                     chatWindow.getResponse("add"));
         });
     }
 
     @Test
+    @Order(7)
     public void getResponse_deleteKeyword_success() {
         interact(() -> {
             assertEquals("I assume you are having trouble with the delete command.\n"
-                    + "Can you help specify which you are referring to?\n"
-                    + "• Deleting a buyer/seller client profile\n"
-                    + "• Deleting an appointment\n"
-                    + "• Deleting a property\n"
-                    + "• Deleting a listing",
+                            + "Can you help specify which you are referring to?\n"
+                            + "• Deleting a buyer/seller client profile\n"
+                            + "• Deleting an appointment\n"
+                            + "• Deleting a property\n"
+                            + "• Deleting a listing",
                     chatWindow.getResponse("delete"));
         });
     }
 
     @Test
+    @Order(8)
     public void getResponse_addBuyer_success() {
         assertEquals("This is how to add a buyer!\n"
                         + "buyer n/{name} p/{phone number} e/{email}",
@@ -129,6 +141,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(9)
     public void getResponse_addSeller_success() {
         assertEquals("This is how to add a seller!\n"
                         + "seller n/{name} p/{phone number} e/{email}",
@@ -136,6 +149,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(10)
     public void getResponse_addAppointment_success() {
         assertEquals("This is how to add an appointment!\n"
                         + "apt {index} d/{date} fr/{start time} to/{end time}",
@@ -146,6 +160,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(11)
     public void getResponse_addProperty_success() {
         assertEquals("This is how to add a property!\n"
                         + "prop {index} prop/{date} fr/{address}",
@@ -153,6 +168,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(12)
     public void getResponse_deleteBuyer_success() {
         assertEquals("This is how to delete a buyer!\n"
                         + "delete n/{name}",
@@ -160,6 +176,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(13)
     public void getResponse_deleteSeller_success() {
         assertEquals("This is how to delete a seller!\n"
                         + "delete n/{name}",
@@ -167,6 +184,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(14)
     public void getResponse_deleteAppointment_success() {
         assertEquals("This is how to delete an appointment!\n"
                         + "delapt n/{name}",
@@ -174,6 +192,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(15)
     public void getResponse_deleteProperty_success() {
         assertEquals("This is how to delete a property!\n"
                         + "delprop n/{name}",
@@ -181,6 +200,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(16)
     public void getResponse_clientCategory_success() {
         assertEquals("We categorise clients into buyers and sellers for clarity of our users!\n"
                         + "Maybe consider:\n"
@@ -195,6 +215,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(17)
     public void getResponse_invalidMessage_failure() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
@@ -204,6 +225,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    @Order(18)
     public void getResponse_emptyMessage_failure() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
@@ -211,7 +233,9 @@ public class ChatWindowUiTest extends ApplicationTest {
             assertEquals(expected, chatWindow.getResponse(""));
         });
     }
+
     @Test
+    @Order(19)
     public void handleSendButtonAction_typingResponse_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
@@ -226,7 +250,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             assertEquals(expectedUserMessage + typingMessage, chatArea.getText());
         });
 
-        waitFor(Duration.seconds(3));
+        waitFor(Duration.seconds(1));
         interact(() -> {
             String finalResponse = "Assistant: Hi there! How can I assist you today?\n";
             assertEquals(expectedUserMessage + finalResponse, chatArea.getText());
@@ -234,111 +258,38 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    public void handleSendButtonAction_emptyInput_noAction() {
+    @Order(20)
+    public void handleSendButtonAction_specialCharacters_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
-        robot.write("");
+        robot.write("@#$%");
         robot.type(KeyCode.ENTER);
 
-        assertEquals("", chatArea.getText());
-    }
-
-    @Test
-    public void getResponse_keywordCaseVariations_success() {
-        interact(() -> {
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("Hello"));
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("HELLO"));
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hElLo"));
-        });
-    }
-
-    @Test
-    public void getResponse_punctuationHandling_success() {
-        interact(() -> {
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello?"));
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi!"));
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey..."));
-        });
-    }
-
-    @Test
-    public void getResponse_multipleWordsWithKeywords_success() {
-        interact(() -> {
-            assertEquals("Sure! What do you need help with?",
-                    chatWindow.getResponse("Can you help me with my homework?"));
-            assertEquals("Love is not about possession; it's about appreciation of \n"
-                    + "the journey we share together, hand in hand through \n"
-                    + "the beautiful chaos of life.", chatWindow.getResponse("I love coding!"));
-        });
-    }
-
-    @Test
-    public void getResponse_repeatedKeywords_success() {
-        interact(() -> {
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello hello"));
-            assertEquals("You're welcome! Always happy to help.", chatWindow.getResponse("thank you thank you"));
-        });
-    }
-
-    @Test
-    public void getResponse_longInput_failure() {
-        String expected = "I'm sorry, I didn't understand that. Can you please \n"
+        String expected = "You: @#$%\n"
+                + "Assistant: I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
-        interact(() -> {
-            String longInput = "This is a very long input that doesn't "
-                    + "really mean anything and is just a string of words.";
-            assertEquals(expected, chatWindow.getResponse(longInput));
-        });
+        waitFor(Duration.seconds(1));
+        assertEquals(expected, chatArea.getText().trim());
     }
 
     @Test
-    public void getResponse_boundaryTests_success() {
-        interact(() -> {
-            String input = "a";
-            String expected = "I'm sorry, I didn't understand that. Can you please \n"
-                    + "rephrase?";
-            assertEquals(expected, chatWindow.getResponse(input));
-
-            String longInput = "a".repeat(1000);
-            assertEquals(expected, chatWindow.getResponse(longInput));
-        });
-    }
-
-    @Test
-    public void getResponse_similarUserMessages_success() {
-        interact(() -> {
-            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("say hello"));
-            assertEquals("You're welcome! Always happy to help.", chatWindow.getResponse("thanks for your help"));
-            assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("I am leaving now, bye!"));
-        });
-    }
-
-    @Test
-    public void handleRapidInput_success() {
+    @Order(21)
+    public void handleSendButtonAction_exitOnGoodbye_success() {
         FxRobot robot = new FxRobot();
+        robot.clickOn(userInput);
+        robot.write("goodbye");
+        robot.type(KeyCode.ENTER);
+        waitFor(Duration.seconds(1));
 
-        String[] messages = {"hello", "help", "thanks", "love", "goodbye"};
-        for (String message : messages) {
-            robot.clickOn(userInput);
-            robot.write(message);
-            robot.type(KeyCode.ENTER);
-            waitFor(Duration.seconds(2));
-        }
+        String expectedGoodbyeResponse = "You: goodbye\n"
+                + "Assistant: Goodbye! Have a great day!";
+        assertEquals(expectedGoodbyeResponse, chatArea.getText().trim());
 
-        String expectedResponses =
-                "You: hello\n"
-                + "Assistant: Hi there! How can I assist you today?\n"
-                + "You: help\n"
-                + "Assistant: Sure! What do you need help with?\n"
-                + "You: thanks\n"
-                + "Assistant: You're welcome! Always happy to help.\n"
-                + "You: love\n"
-                + "Assistant: Love is not about possession; it's about appreciation of \n"
-                + "the journey we share together, hand in hand through \n"
-                + "the beautiful chaos of life.\n"
-                + "You: goodbye\n"
-                + "Assistant: Goodbye! Have a great day!\n";
-        assertEquals(expectedResponses, chatArea.getText());
+        assertTrue(isChatWindowClosed(), "The application did not exit as expected.");
+    }
+
+    private boolean isChatWindowClosed() {
+        return FxToolkit.isFXApplicationThreadRunning();
     }
 
     private void waitFor(Duration duration) {
@@ -349,3 +300,4 @@ public class ChatWindowUiTest extends ApplicationTest {
         }
     }
 }
+

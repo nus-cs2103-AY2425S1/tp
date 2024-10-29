@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Capture the commit message
+commit_msg=$(cat "$1")
+
+# Extract the subject (first line) and body (lines after the first)
+subject=$(echo "$commit_msg" | head -n1)
+body=$(echo "$commit_msg" | sed -n '2,$p')
+
+# Check for subject length (hard limit: 72 characters)
+if [ ${#subject} -gt 72 ]; then
+  echo "Error: Subject line exceeds 72 characters." >&2
+  exit 1
+fi
+
+# Simplified imperative mood check - catch obvious past tense and continuous forms
+first_word=$(echo "$subject" | awk '{print $1}')
+if echo "$first_word" | grep -Eq 'ed$|ing$'; then
+  echo "Error: Commit message must use imperative mood (e.g., 'Fix bug' instead of 'Fixed/Fixing bug')" >&2
+  exit 1
+fi
+
+# Ensure the subject is capitalized and does not end with a period
+if ! echo "$subject" | grep -Eq "^[A-Z]" || echo "$subject" | grep -Eq "\.$"; then
+  echo "Error: Subject line should be capitalized and not end with a period." >&2
+  exit 1
+fi
+
+# Enforce rules for the commit body if it exists
+if [ -n "$body" ]; then
+  # Ensure the subject is separated from the body by a blank line
+  if [ "$(echo "$commit_msg" | sed -n '2p')" != "" ]; then
+    echo "Error: There should be a blank line between the subject and the body." >&2
+    exit 1
+  fi
+
+  # Check that each line of the body is wrapped at 72 characters
+  if echo "$body" | grep -Eq "^.{73,}"; then
+    echo "Error: The commit message body should be wrapped at 72 characters." >&2
+    exit 1
+  fi
+
+fi
+
+# If everything passes, allow the commit
+exit 0

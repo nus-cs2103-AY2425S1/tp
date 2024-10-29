@@ -37,6 +37,36 @@ public class StatusBarFooter extends UiPart<Region> {
      * This method is triggered by an action event, typically from a button click. It
      * loads the chat window FXML layout, creates a new stage for the chat window,
      * and displays it with a specified title and size. If an error occurs while loading
+     * the FXML file, the exception is caught and logged to the standard error output.
+     * </p>
+     *
+     * <p>
+     * This method does not throw any exceptions. Instead, it handles any {@code IOException}
+     * internally and prints the stack trace if an error occurs during FXML loading.
+     * </p>
+     */
+    @FXML
+    public static void handleChatButtonAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(StatusBarFooter.class.getResource("/view/ChatWindow.fxml"));
+            Parent chatRoot = loader.load();
+            ChatWindow chatController = loader.getController();
+            Stage chatStage = new Stage();
+            chatStage.setTitle("Chat with us!");
+            chatStage.setScene(new Scene(chatRoot, 450, 400));
+            chatStage.setOnShown(event -> chatController.focusInputField());
+            chatStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Handles the action when the chat button is clicked.
+     * <p>
+     * This method is triggered by an action event, typically from a button click. It
+     * loads the chat window FXML layout, creates a new stage for the chat window,
+     * and displays it with a specified title and size. If an error occurs while loading
      * the FXML file, the exception is caught and printed to the standard error output.
      * </p>
      *
@@ -45,15 +75,6 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     @FXML
     public void handleChatButtonAction(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ChatWindow.fxml"));
-            Parent chatRoot = loader.load();
-            Stage chatStage = new Stage();
-            chatStage.setTitle("Chat with us!");
-            chatStage.setScene(new Scene(chatRoot, 450, 400));
-            chatStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        handleChatButtonAction();
     }
 }

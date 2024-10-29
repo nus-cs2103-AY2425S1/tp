@@ -27,9 +27,9 @@ public class TypicalPersons {
             .withAppointment("01/01/2024", "0800", "0900").withTags("friends").buildBuyer();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("benson@example.com").withPhone("98765432").withProperty("Tampines")
-            .withAppointment("14/12/2020", "1000", "2330").withTags("owesMoney", "friends").buildBuyer();
+            .withAppointment("14/12/2020", "1000", "2330").withTags("owesMoney", "friends").buildSeller();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("carl@example.com").withProperty("Orchard Road").buildSeller();
+            .withEmail("carl@example.com").withProperty("Orchard Road").buildBuyer();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").buildSeller();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")

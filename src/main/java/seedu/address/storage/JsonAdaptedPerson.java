@@ -11,9 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,10 +30,8 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final JsonAdaptedAppointment appointment;
     private final String property;
-    private final String date;
-    private final String from;
-    private final String to;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String role;
 
@@ -45,16 +40,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-             @JsonProperty("date") String date, @JsonProperty("email") String email,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("appointment") JsonAdaptedAppointment appointment,
+                             @JsonProperty("property") String property,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("from") String from, @JsonProperty("to") String to,
-                            @JsonProperty("property") String property, @JsonProperty("role") String role) {
+                             @JsonProperty("role") String role) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.date = date;
-        this.from = from;
-        this.to = to;
+        this.appointment = appointment;
         this.property = property;
         this.role = role;
         if (tags != null) {
@@ -69,10 +63,8 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        appointment = new JsonAdaptedAppointment(source.getAppointment());
         property = source.getProperty().toString();
-        date = source.getAppointment().getDate().value;
-        from = source.getAppointment().getFrom().value;
-        to = source.getAppointment().getTo().value;
         role = source instanceof Buyer ? "buyer" : "seller";
         tags.addAll(source.getTags().stream()
                   .map(JsonAdaptedTag::new)
@@ -114,19 +106,11 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
         }
-
-        if (from == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, From.class.getSimpleName()));
-        }
-
-        if (to == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, To.class.getSimpleName()));
-        }
-
-        final Appointment modelAppointment = new Appointment(new Date(date), new From(from), new To(to));
+        final Appointment modelAppointment = appointment.toModelType();
 
         if (property == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -141,4 +125,5 @@ class JsonAdaptedPerson {
             return new Seller(modelName, modelPhone, modelEmail, modelTags, modelAppointment, modelProperty);
         }
     }
+
 }
