@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SettleCommand;
+import seedu.address.model.student.SettleAmount;
 
 public class SettleCommandParserTest {
 
@@ -55,7 +56,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        double amount = 100.0; // Example amount
+        SettleAmount amount = new SettleAmount("100.0"); // Example amount
         String userInput = INDEX_SECOND_STUDENT.getOneBased() + " " + PREFIX_AMOUNT + amount;
 
         SettleCommand expectedCommand = new SettleCommand(INDEX_SECOND_STUDENT, amount);

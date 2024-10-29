@@ -43,32 +43,32 @@ public class OwedAmount extends Fee {
      * Returns a new {@code OwedAmount} with the increased value by adding the specified amount
      * to the current owed amount.
      *
-     * @param value The amount to be added to the current owed amount.
+     * @param amount The amount to be added to the current owed amount.
      * @return A new {@code OwedAmount} object with the updated owed amount.
      */
-    public OwedAmount increaseValue(double value) {
-        return new OwedAmount(Double.toString(super.value + value));
+    public OwedAmount increaseValue(SettleAmount amount) {
+        return new OwedAmount(Double.toString(super.value + amount.value));
     }
 
     /**
      * Returns a new {@code OwedAmount} with the decreased value by subtracting the specified amount
      * from the current owed amount.
      *
-     * @param value The amount to be subtracted from the current owed amount.
+     * @param amount The amount to be subtracted from the current owed amount.
      * @return A new {@code OwedAmount} object with the updated owed amount.
      */
-    public OwedAmount decreaseValue(double value) {
-        return new OwedAmount(Double.toString(super.value - value));
+    public OwedAmount decreaseValue(SettleAmount amount) {
+        return new OwedAmount(Double.toString(super.value - amount.value));
     }
 
     /**
      * Compares the specified value with the current owed amount.
      *
-     * @param value The value to compare against the current owed amount.
+     * @param amount The value to compare against the current owed amount.
      * @return {@code true} if the specified value is greater than the current owed amount, {@code false} otherwise.
      */
-    public boolean isGreater(double value) {
-        return value > super.value;
+    public boolean isGreater(SettleAmount amount) {
+        return amount.value > super.value;
     }
 
     @Override

@@ -22,6 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 
 
@@ -30,7 +31,7 @@ public class SettleCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        double amountToSettle = 50.0;
+        SettleAmount amountToSettle = new SettleAmount("50.00");
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());

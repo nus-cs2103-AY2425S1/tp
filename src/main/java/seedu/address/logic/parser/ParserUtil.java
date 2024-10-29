@@ -10,16 +10,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Days;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.PaidAmount;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Rate;
-import seedu.address.model.student.Schedule;
-import seedu.address.model.student.Subject;
+import seedu.address.model.student.*;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -202,13 +193,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the {@code amount} is invalid.
      */
-    public static double parseAmount(String amount) throws ParseException {
+    public static SettleAmount parseAmount(String amount) throws ParseException {
         String trimmedAmount = amount.trim();
-        double amountDouble = Double.parseDouble(trimmedAmount);
-        if (amountDouble <= 0) {
-            throw new ParseException("Amount has to positive");
+        if (!SettleAmount.isValidSettleAmount(trimmedAmount)) {
+            throw new ParseException(SettleAmount.MESSAGE_CONSTRAINTS);
         }
-        return amountDouble;
+        return new SettleAmount(trimmedAmount);
     }
 
     /**

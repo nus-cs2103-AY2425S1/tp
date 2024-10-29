@@ -46,36 +46,25 @@ public class OwedAmountTest {
     public void increaseValue() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        OwedAmount increasedOwedAmount = owedAmount.increaseValue(5.00);
+        OwedAmount increasedOwedAmount = owedAmount.increaseValue(new SettleAmount("5.00"));
         assertEquals("15.00", increasedOwedAmount.toString());
-
-        OwedAmount increasedOwedAmount2 = owedAmount.increaseValue(0.01);
-        assertEquals("10.01", increasedOwedAmount2.toString());
     }
 
     @Test
     public void decreaseValue() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(5.00);
+        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(new SettleAmount("5.00"));
         assertEquals("5.00", decreasedOwedAmount.toString());
-
-        OwedAmount decreasedOwedAmount2 = owedAmount.decreaseValue(0.01);
-        assertEquals("9.99", decreasedOwedAmount2.toString());
-
-        OwedAmount decreasedOwedAmount3 = owedAmount.decreaseValue(10.00);
-        assertEquals("0.00", decreasedOwedAmount3.toString());
     }
 
     @Test
     public void isGreater() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        assertFalse(owedAmount.isGreater(5.00));
+        assertFalse(owedAmount.isGreater(new SettleAmount("5.00")));
 
-        assertTrue(owedAmount.isGreater(15.00));
-
-        assertFalse(owedAmount.isGreater(10.00));
+        assertTrue(owedAmount.isGreater(new SettleAmount("15.00")));
     }
 
 

@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 
 
@@ -33,15 +34,15 @@ public class SettleCommand extends Command {
     public static final String MESSAGE_INVALID_AMOUNT = "Entered amount is more than amount owed";
 
     private final Index index;
-    private final double amount;
+    private final SettleAmount amount;
 
     /**
      * @param index The index of the student in the filtered student list.
      * @param amount The amount to settle for the student.
      */
-    public SettleCommand(Index index, double amount) {
+    public SettleCommand(Index index, SettleAmount amount) {
         requireNonNull(index);
-        assert amount > 0 : "assertion failed: amount must be positive";
+        assert amount.value > 0 : "assertion failed: amount must be positive";
 
         this.index = index;
         this.amount = amount;
@@ -90,11 +91,11 @@ public class SettleCommand extends Command {
                 );
     }
 
-    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, double amountPaid) {
+    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, SettleAmount amountPaid) {
         return paidAmount.updateValue(amountPaid);
     }
 
-    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) throws CommandException {
+    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, SettleAmount amountPaid) throws CommandException {
         if (owedAmount.isGreater(amountPaid)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
