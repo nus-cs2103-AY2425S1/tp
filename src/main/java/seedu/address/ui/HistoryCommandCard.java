@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.Command;
+import seedu.address.model.history.HistoryCommand;
 
 /**
  * A UI component that displays information of a {@code Command}.
@@ -14,7 +15,7 @@ public class HistoryCommandCard extends UiPart<Region> {
 
     private static final String FXML = "HistoryCommandListCard.fxml";
 
-    public final Command command;
+    public final HistoryCommand command;
 
     @FXML
     private HBox cardPane;
@@ -30,11 +31,11 @@ public class HistoryCommandCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public HistoryCommandCard(Command command, int displayedIndex) {
+    public HistoryCommandCard(HistoryCommand command, int displayedIndex) {
         super(FXML);
         this.command = command;
         assert command != null : "command being added to history should not be null";
         id.setText(displayedIndex + ". ");
-        commandDetails.setText(command.toString());
+        commandDetails.setText(command.getOriginalCommandText());
     }
 }

@@ -15,10 +15,14 @@ import seedu.address.logic.commands.edit.EditCommand;
 /**
  * A list of history commands.
  */
-public class HistoryCommandList implements Iterable<Command> {
-    private final ObservableList<Command> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Command> internalUnmodifiableList =
+public class HistoryCommandList implements Iterable<HistoryCommand> {
+    private final ObservableList<HistoryCommand> internalList = FXCollections.observableArrayList();
+    private final ObservableList<HistoryCommand> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private static String originalCommandText;
+
+    public HistoryCommandList() {
+    }
 
     /**
      * Adds a history command to the list.
@@ -26,23 +30,25 @@ public class HistoryCommandList implements Iterable<Command> {
      */
     public void add(Command toAdd) {
         requireNonNull(toAdd);
+        assert originalCommandText != null : "The original command text should not be null";
         assert toAdd instanceof AddCommand
                 || toAdd instanceof ClearCommand
                 || toAdd instanceof DeleteCommand
                 || toAdd instanceof EditCommand : "History command is not changing the person list";
 
-        internalList.add(toAdd);
+        internalList.add(HistoryCommand.of(toAdd, originalCommandText));
     }
 
-    /**
-     * Returns the backing history command list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Command> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+    public static void setCommandHistoryText(String input) {
+        originalCommandText = input;
+    }
+
+    public ObservableList<HistoryCommand> getHistoryCommands() {
+        return this.internalList;
     }
 
     @Override
-    public Iterator<Command> iterator() {
+    public Iterator<HistoryCommand> iterator() {
         return internalList.iterator();
     }
 

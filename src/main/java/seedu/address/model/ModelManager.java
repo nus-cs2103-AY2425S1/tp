@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.history.HistoryCommandList;
 import seedu.address.model.person.Person;
 
@@ -26,7 +26,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Command> historyCommands;
+    private final HistoryCommandList historyCommandlist;
+    private final ObservableList<HistoryCommand> historyCommands;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +40,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        historyCommands = FXCollections.observableArrayList(); // Initialize with an empty ObservableList
+        historyCommandlist = new HistoryCommandList();
+        historyCommands = historyCommandlist.getHistoryCommands(); // Initialize with an empty ObservableList
     }
 
     public ModelManager() {
@@ -158,15 +160,23 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Command> getHistoryCommandList() {
+    public ObservableList<HistoryCommand> getHistoryCommandList() {
         return historyCommands;
     }
 
     /**
-     *
+     * Stores the original command text.
+     */
+    @Override
+    public void setCommandHistoryText(String input) {
+        historyCommandlist.setCommandHistoryText(input);
+    }
+
+    /**
+     * Adds command to the history command list.
      */
     @Override
     public void addHistoryCommand(Command toAdd) {
-        historyCommands.add(toAdd);
+        historyCommandlist.add(toAdd);
     }
 }

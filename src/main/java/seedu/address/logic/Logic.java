@@ -4,11 +4,11 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,7 +37,12 @@ public interface Logic {
     /**
      * Returns an unmodifiable view of the history commands
      */
-    ObservableList<Command> getHistoryCommandList();
+    ObservableList<HistoryCommand> getHistoryCommandList();
+
+    /**
+     * Store the original command text from user.
+     */
+    void setCommandHistoryText(String input);
 
     /**
      * Returns the user prefs' address book file path.
