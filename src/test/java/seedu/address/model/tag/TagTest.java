@@ -37,7 +37,11 @@ public class TagTest {
         assertTrue(Tag.isValidTagName("123")); // numbers only
         assertTrue(Tag.isValidTagName("web3")); // alphanumeric
         assertTrue(Tag.isValidTagName(
-                "softwareInTestSeniorEngineerForWeb3andSaasDevelopment")); // long tag
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelop")); // 49 characters
+        assertTrue(Tag.isValidTagName(
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelope")); // 50 characters
+        assertFalse(Tag.isValidTagName(
+                "softwareInTestSeniorEngineerForWeb3andSaasDeveloper")); // 51 characters
     }
 
     @Test

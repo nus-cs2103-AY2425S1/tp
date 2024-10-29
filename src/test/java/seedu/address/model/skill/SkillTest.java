@@ -37,7 +37,11 @@ public class SkillTest {
         assertTrue(Skill.isValidSkill("123")); // numbers only
         assertTrue(Skill.isValidSkill("web3")); // alphanumeric
         assertTrue(Skill.isValidSkill(
-                "softwareInTestSeniorEngineerForWeb3andSaasDevelopment")); // long skill
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelop")); // 49 characters
+        assertTrue(Skill.isValidSkill(
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelope")); // 50 characters
+        assertFalse(Skill.isValidSkill(
+                "softwareInTestSeniorEngineerForWeb3andSaasDeveloper")); // 51 characters
     }
 
     @Test
