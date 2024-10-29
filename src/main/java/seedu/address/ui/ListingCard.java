@@ -8,8 +8,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 import seedu.address.model.listing.Listing;
 
-import java.util.HashMap;
-
 /**
  * An UI component that displays information of a {@code Person}.
  */
