@@ -25,13 +25,13 @@ public class StatusValidator extends Validator<String> {
     }
 
     private static boolean isValid(String status) {
-        for (Status s : Status.values()) {
-            if (status.equalsIgnoreCase(s.getValue())) {
-                return true;
-            }
+        try {
+            Status.valueOf(status);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
 
-        return false;
+        return true;
     }
     @Override
     public boolean validate(String input) {

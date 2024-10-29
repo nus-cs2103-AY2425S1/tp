@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.hireme.model.internshipapplication.Status;
 
 public class CommandResultTest {
     @Test
@@ -35,10 +39,19 @@ public class CommandResultTest {
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
+        Map<Status, Integer> chartData = Map.ofEntries(Map.entry(Status.PENDING, 1),
+                Map.entry(Status.ACCEPTED, 1),
+                Map.entry(Status.REJECTED, 1));
+
+        CommandResult commandResultWithChartData = new CommandResult("feedback", false, false, true,
+                Map.ofEntries(Map.entry(Status.PENDING, 1),
+                Map.entry(Status.ACCEPTED, 1),
+                Map.entry(Status.REJECTED, 1)));
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, null)));
+        assertTrue(commandResultWithChartData.equals(new CommandResult("feedback", false, false, true, chartData)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -57,6 +70,12 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, null)));
+
+        // different isChart value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, null)));
+
+        // different chartData value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, chartData)));
     }
 
     @Test
