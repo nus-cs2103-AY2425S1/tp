@@ -504,17 +504,17 @@ Use case ends.
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The programme should be able to startup within 3s (minimum startup time)
-5.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
-6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
-
+4.  The application should be able to start up within 3s.
+5.  The application should be able to respond to user commands within 1s.
+6.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
+7.  The user interface should be easy for users to navigate and understand.
+8.  The application should be able to function without an internet connection.
+9.  Data should be stored securely
 
 [Back to Table of Contents](#table-of-contents)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-  **Patient Contact**:  
-  Refers to the personal and medical information of an individual being treated, including name, NRIC, phone number, and medical details.
 
 * **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
@@ -522,20 +522,11 @@ Use case ends.
 
 * **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
 
-* **Priority Level**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+* **Priority**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
 
 * **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 
-* **Contact List**: A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
-
-* **Doctor**: A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
-
-* **Appointment Date and Time**: The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
-
-* **Medical History**: A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
-
-* **Search by Condition**: A feature that allows users to filter and display patients based on specific medical conditions.
-
+* **Patient List**: A list of patients and their details displayed in the right hand side of the application.
 
 [Back to Table of Contents](#table-of-contents)
 ## **Appendix: Instructions for manual testing**
@@ -563,36 +554,57 @@ Given below are instructions to test the app manually.
    
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a patient
 
-[Back to Table of Contents](#table-of-contents)
-### Deleting a person
+Adding a patient while all patients are being shown
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the patient list. 
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
+       
+      Expected: A new patient with the details provided will be added to the patient list. A success message is shown with the added patient's details.
+    
+   3. Test case: `add n/John Doe i/S1234567A`
 
-   1. Test case: `delete 1`
-   
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: No patient is added to the patient list. An error message is shown with details of the error.
 
-   1. Test case: `delete 0`
-   
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
+   4. Other incorrect add commands to try: `add`, `add S1234567A`
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Deleting a patient
 
-[Back to Table of Contents](#table-of-contents)
-### Saving data
+Deleting a patient while all patients are being shown
 
-1. Dealing with missing/corrupted data files
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   2. Test case: `delete S1234567A`
    
+      Expected: Patient with the NRIC `S1234567A` will be deleted and removed from the patient list. A success message is shown with the deleted patient's details.
+
+   3. Test case: `delete S1234567`
+   
+      Expected: No patient is deleted from the patient list. An error message is shown with details of the error.
+
+   4. Other incorrect delete commands to try: `delete`, `delete x`(where x is an `NRIC` that does not exist in the patient list)
+      Expected: Similar to previous.
+
+### Finding a patient by their medical condition
+
+Finding a patient by providing keyword(s) from their medical condition
+
+   1. Prerequisites:
+         1. Add a patient with the medical condition `diabetes` using the addMedCon command.
+         2. List all patients using the `list` command. Multiple patients in the list.
+
+   2. Test case: `findMedCon diabetes`
+   
+      Expected: Patient(s) with the medical condition containing the keyword `diabetes` will be shown. A success message is shown with the patient(s) details.
+
+   3. Test case: `findMedCon`
+   
+      Expected: No patient is found. An error message is shown with details of the error.
+
+   4. Other incorrect find commands to try: `findMedCon x` (where x is a keyword that does not exist in any patient's medical condition)
+      Expected: Similar to previous.
 
 [Back to Table of Contents](#table-of-contents)
