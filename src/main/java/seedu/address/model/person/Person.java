@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,9 +14,12 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.delivery.Archive;
+import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.DeliveryList;
+import seedu.address.model.delivery.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +42,11 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
 
+    private final Date date; // Date and time are used for sorting purposes only.
+    private final Time time;
+
+    private final Archive archive = new Archive(false); // Change this when implementing.
+
     /**
      * Every field must be present and not null.
      */
@@ -48,6 +58,8 @@ public class Person {
         this.role = role;
         this.address = address;
         this.tags.addAll(tags);
+        this.date = new Date(LocalDate.now().toString());
+        this.time = new Time(LocalTime.now().toString());
     }
 
     public Name getName() {
@@ -72,6 +84,22 @@ public class Person {
 
     public Worker getWorker() {
         return worker;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public Archive getArchive() {
+        return archive;
+    }
+
+    public boolean isArchived() {
+        return archive.isArchived();
     }
 
     /**
