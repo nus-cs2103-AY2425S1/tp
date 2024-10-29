@@ -4,9 +4,7 @@ import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
 import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
@@ -75,7 +73,7 @@ public class DeleteNotesCommand extends Command {
         Note noteToRemove = notesToEdit.get(noteIndex.getZeroBased());
         notesToEdit.remove(noteToRemove);
 
-        Set<Note> updatedNotes = new LinkedHashSet<>(notesToEdit);
+        ArrayList<Note> updatedNotes = new ArrayList<>(notesToEdit);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
