@@ -57,6 +57,7 @@ public class SearchCommandTest {
 
         // different person -> returns false
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
+
     }
 
     @Test

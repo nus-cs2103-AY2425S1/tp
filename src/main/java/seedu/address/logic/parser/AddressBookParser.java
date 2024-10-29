@@ -21,6 +21,7 @@ import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.InitSearchModeCommand;
+import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -120,10 +121,12 @@ public class AddressBookParser {
         logger.fine("Using SearchCommandParser to parse user input: " + userInput);
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
         switch (commandWord) {
-            case ExitSearchModeCommand.COMMAND_WORD:
-                return new ExitSearchModeCommand();
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        case ExitSearchModeCommand.COMMAND_WORD:
+            return new ExitSearchModeCommand();
+        case SearchModeSearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

@@ -1,21 +1,14 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.role.Attendee;
-import seedu.address.model.role.Role;
-import seedu.address.model.role.Sponsor;
-import seedu.address.model.role.Vendor;
-import seedu.address.model.role.Volunteer;
 import seedu.address.testutil.PersonBuilder;
 
 public class FieldContainsKeywordsPredicateTest {
@@ -25,7 +18,7 @@ public class FieldContainsKeywordsPredicateTest {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TELEGRAM_USERNAME = "amybee";
 
-    Person testPerson = new PersonBuilder().withRoles("attendee").build();
+    private static Person testPerson = new PersonBuilder().withRoles("attendee").build();
 
     @Test
     public void test_name() {
@@ -84,5 +77,15 @@ public class FieldContainsKeywordsPredicateTest {
         FieldContainsKeywordsPredicate<TelegramUsername> predicate = new
                 FieldContainsKeywordsPredicate<>(keywords, Person::getTelegramUsername);
         assertTrue(predicate.test(testPerson));
+    }
+
+    @Test
+    public void equals_differentObject() {
+        List<String> keywords = Collections.singletonList("Amy");
+        FieldContainsKeywordsPredicate<Name> predicate = new
+                FieldContainsKeywordsPredicate<>(keywords, Person::getName);
+        FieldContainsKeywordsPredicate<Name> predicate2 = new
+                FieldContainsKeywordsPredicate<>(keywords, Person::getName);
+        assertEquals(predicate, predicate2);
     }
 }

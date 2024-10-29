@@ -1,12 +1,16 @@
 package seedu.address.logic.commands.searchmode;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventManager;
 
-import static java.util.Objects.requireNonNull;
 
+/**
+ * Enters search mode.
+ */
 public class InitSearchModeCommand extends Command {
     public static final String COMMAND_WORD = "searchmode";
 
