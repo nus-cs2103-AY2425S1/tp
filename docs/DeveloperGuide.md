@@ -179,6 +179,32 @@ The sequence diagram below models the interactions between the different compone
 2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached. 
 3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
 
+### View Client Feature
+
+#### Overview
+The `view` command enables users to access and display detailed information for a specific client in the address book.
+
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `view` command.
+
+![ViewClientSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### Details
+1. The user executes the command `view John Doe` to display the details of a client named John Doe.
+2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
+3. The `AddressBookParser` then creates a `ViewClientCommandParser` object to handle parsing.
+4. The `ViewClientCommandParser` object calls its `parse` method to extract the client name, and the `ClientUtil` utility class is used to confirm the full name "John Doe."
+5. The `ViewClientCommandParser` creates a `ViewClientCommand` object.
+6. The `ViewClientCommandParser` returns the `ViewClientCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
+7. The `LogicManager` object invokes the `execute` method of `ViewClientCommand`.
+8. The `execute` method calls `getFilteredPersonList` on the `Model` to retrieve the details of the specified client.
+9. The `execute` method creates a `CommandResult` object containing the client’s information.
+10. The `CommandResult` object is returned to `LogicManager`, which then displays the client’s information to the user.
+
+#### Example Usage
+1. User inputs the command `view Alice Tan`.
+2. The system displays the details of "Alice Tan," including name, contact information, address, condition, and any scheduled appointments.
+3. This information is shown in a pop-up or a designated UI section for easy access by the user.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

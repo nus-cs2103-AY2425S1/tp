@@ -214,6 +214,7 @@ The name must match the full name exactly.
 
 **Examples:**
 * `view John Doe`
+* ![result for 'view John Doe'](images/viewJohnDoe.png)
 * `view Betsy Crowe`
 
 ### Editing a person : `edit`
