@@ -212,14 +212,14 @@ Examples:
 
 Sorts the client list in ascending order by the specified field.
 
-Format: sort `FIELD` `ORDER`
+Format: sort `FIELD ORDER`
 
 * `FIELD` can be either `deadline` or `name`
 * `ORDER` can be either `ascending` or `descending`
 
 Examples:
-* `sort name` sorts the client list alphabetically by name.
-* `sort deadline` sorts the client list by project deadline (earlier dates first).
+* `sort name ascending` sorts the client list alphabetically by name in ascending order.
+* `sort deadline descending` sorts the client list by project deadline (later dates first).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Addressbook saves you the hassle of sorting the list every time you open the app, so everytime you do a sort, it will save the addressbook
