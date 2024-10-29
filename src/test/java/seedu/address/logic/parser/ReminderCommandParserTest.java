@@ -43,4 +43,11 @@ public class ReminderCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_multipleReminderPrefixes_failure() {
+        String userInput = VALID_NAME + "r/" + VALID_REMINDER_TIME + "r/3 days";
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_REMINDER_FORMAT);
+    }
 }
