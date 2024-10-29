@@ -117,8 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        ReminderManager reminderManager = new ReminderManager(logic.getFilteredPersonList());
-        StatusBarFooter statusBarFooter = new StatusBarFooter(reminderManager);
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getReminderManager());  // Updated line
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
