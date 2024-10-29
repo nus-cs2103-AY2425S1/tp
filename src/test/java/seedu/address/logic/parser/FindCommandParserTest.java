@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,18 +22,19 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                "Please enter at least one keyword!\n" + FindCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         List<String> userInput = Arrays.asList("Alice", "Bob");
-        ArgumentMultimap mapForUserInput = new ArgumentMultimap();
-        mapForUserInput.put(new Prefix(""), "");
-        userInput.stream().forEach(input -> mapForUserInput.put(PREFIX_NAME, input));
+        // ArgumentMultimap mapForUserInput = new ArgumentMultimap();
+        // mapForUserInput.put(new Prefix(""), "");
+        // userInput.stream().forEach(input -> mapForUserInput.put(PREFIX_NAME, input));
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new ContainsKeywordsPredicate(mapForUserInput));
+                new FindCommand(new ContainsKeywordsPredicate(List.of(new NameSearchCriteria(userInput))));
         assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -44,7 +44,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_inValidArgs_throwsParseException() {
         assertParseFailure(parser, " 1 n/Alex",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                "Please do not enter anything before the keywords!\n"
+                + "Please remove this from your input: 1");
     }
 
     @Test

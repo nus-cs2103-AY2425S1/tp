@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -12,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,10 +83,13 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" n/")));
-        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        /* ArgumentMultimap mapForKeywords = new ArgumentMultimap();
         keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
-        mapForKeywords.put(new Prefix(""), "");
-        assertEquals(new FindCommand(new ContainsKeywordsPredicate(mapForKeywords)), command);
+        mapForKeywords.put(new Prefix(""), "");*/
+        List<SearchCriteria> searchCriteria = new ArrayList<>();
+        searchCriteria.add(new NameSearchCriteria(keywords));
+        FindCommand expectedCommand = new FindCommand(new ContainsKeywordsPredicate(searchCriteria));
+        assertEquals(expectedCommand, command);
     }
 
     @Test

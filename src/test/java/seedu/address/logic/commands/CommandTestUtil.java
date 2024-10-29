@@ -28,7 +28,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.NameSearchCriteria;
+import seedu.address.logic.parser.SearchCriteria;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
@@ -257,9 +258,9 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        ArgumentMultimap mapWithSplitName = new ArgumentMultimap();
-        mapWithSplitName.put(PREFIX_NAME, splitName[0]);
-        model.updateFilteredPersonList(new ContainsKeywordsPredicate(mapWithSplitName));
+        List<SearchCriteria> searchCriteria = new ArrayList<>();
+        searchCriteria.add(new NameSearchCriteria(List.of(splitName[0])));
+        model.updateFilteredPersonList(new ContainsKeywordsPredicate(searchCriteria));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -278,9 +279,9 @@ public class CommandTestUtil {
         }
         assertNotEquals(null, person);
         final String[] splitName = person.getName().fullName.split("\\s+");
-        ArgumentMultimap mapWithSplitName = new ArgumentMultimap();
-        mapWithSplitName.put(PREFIX_NAME, splitName[0]);
-        model.updateFilteredPersonList(new ContainsKeywordsPredicate(mapWithSplitName));
+        List<SearchCriteria> searchCriteria = new ArrayList<>();
+        searchCriteria.add(new NameSearchCriteria(List.of(splitName[0])));
+        model.updateFilteredPersonList(new ContainsKeywordsPredicate(searchCriteria));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
