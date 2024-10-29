@@ -19,11 +19,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
@@ -37,7 +40,6 @@ public class EditPersonCommandParserTest {
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private final EditCommandParser parser = new EditCommandParser();
-
 
     @Test
     public void parse_invalidPreamble_failure() {
@@ -53,6 +55,22 @@ public class EditPersonCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, PERSON_ENTITY_STRING + "1 i/ string", EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void parse_nullPersonIndex_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE);
+
+        // null person index
+        assertParseFailure(parser, PERSON_ENTITY_STRING, expectedMessage);
+    }
+
+    @Test
+    public void parse_nullAppointmentIndex_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAppointmentCommand.MESSAGE_USAGE);
+
+        // null appointment index
+        assertParseFailure(parser, APPOINTMENT_ENTITY_STRING, expectedMessage);
     }
 
     @Test
