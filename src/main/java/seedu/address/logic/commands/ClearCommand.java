@@ -13,7 +13,7 @@ public abstract class ClearCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all entities of a certain type. \n"
             + "Parameters: ENTITY_TYPE (person/appt)\n "
-            + "Example: " + COMMAND_WORD + "appt \n";
+            + "Example: " + COMMAND_WORD + " appt \n";
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
