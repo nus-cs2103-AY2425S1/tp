@@ -81,7 +81,7 @@ administrators.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -98,12 +98,11 @@ administrators.
 
 ### 2.1 Viewing Help: `help`
 
-Command Format: `help`
+**Command Format:** `help`
 
 Shows a message explaining how to access the help page.
 
 ![help message](images/help.png)
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -111,7 +110,7 @@ Shows a message explaining how to access the help page.
 
 ### 2.2 Adding a Person: `add`
 
-Adds a person to Edututu.
+Adds a person to EduTuTu.
 
 **Command Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
 
@@ -122,13 +121,11 @@ Adds a person to Edututu.
 `add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1`
 
 *Input: User enters the `add` command.*  
-![Ui](images/addcommandinput.png)
-
+![Ui](images/add_input.png)
 *Output: The UI updates to show the added person.*  
-![Ui](images/afteraddcommand.png)
+![Ui](images/add_output.png)
 
 **Tips:**
-
 - Use the `add` command to add a new person with their name, phone number, email, address, fees, and class ID.
 - Tags can be added to classify or group persons for easier management.
 - The `add` command is helpful when setting up new contacts in EduTuTu.
@@ -148,19 +145,15 @@ Deletes the specified person from the address book.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-**Example Usage:**
-
-`delete 3`
+**Example Usage:** `delete 3`
 
 *Input: User enters the `delete 3` command to remove the 3rd person in the displayed list.*  
-![Ui](images/deletecommandinput.png)
-
+![Ui](images/delete_input.png)
 *Output: The UI updates to reflect the deletion of the person.*  
-![Ui](images/deletecommandafter.png)
+![Ui](images/delete_output.png)
 
 
 **Tips:**
-
 - Use the `delete` command to remove outdated or incorrect entries from the address book.
 - Make sure to confirm the index number before deleting to avoid removing the wrong person.
 - The `delete` command is especially useful when cleaning up your list of contacts.
@@ -184,10 +177,9 @@ Updates the payment status of a student to completed.
 
 **Example Usage:**
 *Input: User enters the `markpaid 1 m/2024-10` mark the first student as paid for October 2024.*
-![Ui](images/markpaidcommandinput.png)
-
+![Ui](images/markpaid_input.png)
 *Output: The UI updates to show the payment status of the student.*
-![Ui](images/markpaidafter.png)
+![Ui](images/markpaid_output.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -206,18 +198,14 @@ Edits an existing person in the address book.
 * When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-**Example Usage:**
-
-`edit 1 p/91088511 e/wongwaihin7@gmail.com`
+**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
 
 *Input: User enters the `edit` command to change the phone number and email address of the 1st person.*  
-![Ui](images/editcommandinput.png)
-
+![Ui](images/edit_input.png)
 *Output: The UI updates to show the edited details.*  
-![Ui](images/aftereditcommand.png)
+![Ui](images/edit_output.png)
 
 **Tips:**
-
 - Use the `edit` command to update a person’s details when changes occur.
 - Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
 - The `edit` command is particularly useful for keeping contact information up to date.
@@ -238,13 +226,11 @@ After entering the `list` command, all persons stored in the address book will b
 **Example Usage:**
 
 *Input: User enters the `list` command.*
-![Command Input Example](images/listcommandinput.png)
-
+![Command Input Example](images/list_input.png)
 *Output: The UI updates to show all persons.*
-![Command Output Example](images/listcommand.png)  
+![Command Output Example](images/list_output.png)  
 
 **Tips:**
-
 - Use the `list` command whenever you want to view all entries in your address book.
 - The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
 
@@ -258,9 +244,9 @@ After entering the `list` command, all persons stored in the address book will b
 The `find` command allows you to list persons by their names, class IDs, or payment status (paid/unpaid).
 
 **Command Format:**
-- **By Name:** `find n/KEYWORD [MORE_KEYWORDS]`
-- **By Class ID:** `find c/KEYWORD [MORE_KEYWORDS]`
-- **By Name and Class ID:** `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD2 [MORE_KEYWORDS2]`
+- **By Name:** `find n/NAME [MORE_NAMES]`
+- **By Class ID:** `find c/CLASSID [MORE_CLASSIDS]`
+- **By Name and Class ID:** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
 - **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
 - **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
 
@@ -274,9 +260,9 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 **Example Usage:** `find n/Kim`
 
 *Input: User enters the `find` command to search for persons whose names contain the keyword `Kim`.*  
-![find image](images/findBefore.png)
+![find image](images/find_input.png)
 *Output: The UI updates to show persons matching the search keyword.*  
-![find image](images/findAfter.png)
+![find image](images/find_output.png)
 
 **Tips:**
 - Use the `find` command to quickly locate persons based on their names or class IDs.
@@ -293,15 +279,15 @@ Clears all entries from the address book.
 
 **Command Format:** `clear`
 
-Upon entering the command, all entries will be cleared from Edututu. A message  
+Upon entering the command, all entries will be cleared from EduTuTu. A message  
 "Address book has been cleared!" will be displayed in the command box.
 
 **Example Usage:** `clear`
 
 *Input: User enters the `clear` command to remove all entries.*  
-![Ui](images/clearinput.png)
+![Ui](images/clear_input.png)
 *Output: The UI updates to show that all entries have been cleared.*
-![Ui](images/ClearCommand.png)
+![Ui](images/clear_output.png)
 
 **Tips:**
 - Use the `clear` command when you want to start fresh with an empty address book.
@@ -412,7 +398,7 @@ Allows users to quickly access previously entered commands using the up and down
 [Back to Table of Contents](#table-of-contents)
 
 ***
-
+<div style="page-break-after: always;"></div>
 
 ### 2.13 View Student Details: `info`
 
