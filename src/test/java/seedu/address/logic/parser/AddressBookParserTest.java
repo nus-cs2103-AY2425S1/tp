@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -109,4 +110,18 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommandBackupNoArgs() throws Exception {
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD);
+        assertEquals(new BackupCommand(null), command);
+    }
+
+    @Test
+    public void parseCommandBackupWithFileName() throws Exception {
+        String fileName = "myBackup";
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new BackupCommand(fileName), command);
+    }
+
 }

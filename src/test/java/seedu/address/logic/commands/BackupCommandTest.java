@@ -1,199 +1,107 @@
-//package seedu.address.logic.commands;
-//
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-//
-//import java.io.IOException;
-//import java.nio.file.Files;
-//import java.nio.file.Path;
-//import java.util.Optional;
-//import java.util.stream.Stream;
-//
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.io.TempDir;
-//
-//import seedu.address.model.Model;
-//import seedu.address.model.ModelManager;
-//import seedu.address.model.ReadOnlyAddressBook;
-//import seedu.address.model.ReadOnlyUserPrefs;
-//import seedu.address.model.UserPrefs;
-//import seedu.address.storage.JsonAddressBookStorage;
-//import seedu.address.storage.JsonUserPrefsStorage;
-//import seedu.address.storage.Storage;
-//import seedu.address.storage.StorageManager;
-//
-///**
-// * Contains integration tests (interaction with the Model) and unit tests for {@code BackupCommand}.
-// */
-//public class BackupCommandTest {
-//
-//    @TempDir
-//    public Path temporaryFolder;
-//    private Model model;
-//    private Model expectedModel;
-//
-//    @BeforeEach
-//    public void setUp() throws IOException {
-//        JsonAddressBookStorage addressBookStorage =
-//                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-//        JsonUserPrefsStorage userPrefsStorage =
-//                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-//        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-//
-//        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storage);
-//
-//        JsonAddressBookStorage addressBookExpectedStorage =
-//                new JsonAddressBookStorage(temporaryFolder.resolve("addressBookExpected.json"));
-//        JsonUserPrefsStorage userPrefsExpectedStorage =
-//                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefsExpected.json"));
-//        StorageManager expectedStorage = new StorageManager(addressBookExpectedStorage, userPrefsExpectedStorage);
-//
-//        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), expectedStorage);
-//
-//        // Reset the static variable before each test
-//        BackupCommand.lastManualBackupTime = 0;
-//    }
-//
-//    @AfterEach
-//    public void tearDown() throws IOException {
-//        // Clean up any backup files created during the test
-//        Path backupDir = Path.of("backups");
-//        if (Files.exists(backupDir)) {
-//            try (Stream<Path> backups = Files.list(backupDir)) {
-//                backups.forEach(path -> {
-//                    try {
-//                        Files.deleteIfExists(path);
-//                    } catch (IOException e) {
-//                        // Log the error if deletion fails
-//                        System.err.println("Failed to delete backup file: " + path);
-//                    }
-//                });
-//            }
-//        }
-//    }
-//
-//
-//    @Test
-//    public void executeBackupCommand_ioException_throwsCommandException() throws IOException {
-//        Storage storageStub = createStorageStubForIoException();
-//        Model modelWithFailingStorage = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storageStub);
-//
-//        BackupCommand backupCommand = new BackupCommand();
-//
-//        assertCommandFailure(backupCommand, modelWithFailingStorage, String.format(
-//                BackupCommand.MESSAGE_FAILURE, "Simulated IOException"));
-//    }
-//
-//    private Storage createStorageStubForIoException() {
-//        return new Storage() {
-//            @Override
-//            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-//                throw new IOException("Simulated IOException");
-//            }
-//
-//            @Override
-//            public void saveAddressBook(ReadOnlyAddressBook addressBook) {
-//                // No-op
-//            }
-//
-//            @Override
-//            public Optional<UserPrefs> readUserPrefs() {
-//                return Optional.empty();
-//            }
-//
-//            @Override
-//            public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) {
-//                // No-op
-//            }
-//
-//            @Override
-//            public Path getAddressBookFilePath() {
-//                return null;
-//            }
-//
-//            @Override
-//            public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) {
-//                return Optional.empty();
-//            }
-//
-//            @Override
-//            public Optional<ReadOnlyAddressBook> readAddressBook() {
-//                return Optional.empty();
-//            }
-//
-//            @Override
-//            public Path getUserPrefsFilePath() {
-//                return null;
-//            }
-//
-//            @Override
-//            public Optional<Path> restoreBackup() {
-//                return Optional.empty();
-//            }
-//
-//            @Override
-//            public void cleanOldBackups(int maxBackups) {
-//                // No-op
-//            }
-//        };
-//    }
-//
-//    @Test
-//    public void executeBackupCommand_success() throws Exception {
-//        BackupCommand backupCommand = new BackupCommand();
-//
-//        // Execute the command
-//        String timestampPattern = "\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3}";
-//        String expectedMessagePattern = String.format(
-//                "Backup successful at backups/clinicbuddy-backup-%s.json", timestampPattern
-//        );
-//
-//        // Use regex to match the actual message
-//        CommandResult result = backupCommand.execute(model);
-//        assertTrue(result.getFeedbackToUser().matches(expectedMessagePattern),
-//                "Backup message should match the expected pattern.");
-//
-//        // Verify that the backup file was created
-//        try (Stream<Path> backups = Files.list(Path.of("backups"))) {
-//            boolean backupExists = backups.anyMatch(path ->
-//                    path.getFileName().toString().matches("clinicbuddy-backup-" + timestampPattern + "\\.json")
-//            );
-//            assertTrue(backupExists, "Backup file should have been created with the correct format.");
-//        }
-//    }
-//
-//    @Test
-//    public void executeBackupCommand_storageThrowsIoException_throwsCommandException() throws Exception {
-//        // Create a storage stub that simulates an IOException
-//        Storage storageStub = createStorageStubForIoException();
-//        Model modelWithFailingStorage = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storageStub);
-//
-//        BackupCommand backupCommand = new BackupCommand();
-//
-//        assertCommandFailure(backupCommand, modelWithFailingStorage,
-//                String.format(BackupCommand.MESSAGE_FAILURE, "Simulated IOException"));
-//    }
-//
-//    @Test
-//    public void executeBackupCommand_validBackup_createsBackup() throws Exception {
-//        BackupCommand backupCommand = new BackupCommand();
-//
-//        // Execute the command
-//        CommandResult result = backupCommand.execute(model);
-//        assertTrue(result.getFeedbackToUser().contains("Backup successful"),
-//                "Backup message should contain success indication.");
-//
-//        // Verify that the backup file was created
-//        try (Stream<Path> backups = Files.list(Path.of("backups"))) {
-//            boolean backupExists = backups.anyMatch(path ->
-//                    path.getFileName().toString().matches(
-//                            "clinicbuddy-backup-\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3}\\.json")
-//            );
-//            assertTrue(backupExists, "Backup file should have been created with the correct format.");
-//        }
-//    }
-//
-//}
+package seedu.address.logic.commands;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
+
+public class BackupCommandTest {
+
+    @TempDir
+    public Path temporaryFolder;
+
+    @Test
+    public void execute_backupSuccessful() throws Exception {
+        // Set up the storage and model
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        Path userPrefsFilePath = temporaryFolder.resolve("userPrefs.json");
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        Model model = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        // Save the address book to ensure the file exists
+        storage.saveAddressBook(model.getAddressBook());
+
+        // Create BackupCommand with file name
+        String fileName = "testBackup";
+        BackupCommand backupCommand = new BackupCommand(fileName);
+
+        // Execute the command
+        CommandResult result = backupCommand.execute(model);
+
+        // Check that the command result is as expected
+        assertEquals(new CommandResult(BackupCommand.MESSAGE_SUCCESS), result);
+
+        // Verify that the backup file exists
+        Path backupDir = Paths.get("backups");
+        assertTrue(Files.exists(backupDir), "Backup directory should exist.");
+
+        try (Stream<Path> paths = Files.walk(backupDir)) {
+            List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+            boolean backupFileExists = backupFiles.stream()
+                    .anyMatch(path -> path.getFileName().toString().contains(fileName));
+            assertTrue(backupFileExists, "Backup file with specified name should exist.");
+        }
+    }
+
+    @Test
+    public void execute_backupFails_throwsCommandException() throws Exception {
+        // Initialize ModelManager without storage
+        Model model = new ModelManager(new AddressBook(), new UserPrefs(), null);
+
+        // Create BackupCommand
+        String fileName = "testBackup";
+        BackupCommand backupCommand = new BackupCommand(fileName);
+
+        // Expect CommandException when storage is not initialized
+        CommandException exception = assertThrows(CommandException.class, () -> backupCommand.execute(model));
+        assertEquals("Failed to create manual backup: Storage is not initialized!", exception.getMessage());
+    }
+
+    @Test
+    public void equals() {
+        BackupCommand backupCommand1 = new BackupCommand("backup1");
+        BackupCommand backupCommand2 = new BackupCommand("backup2");
+        BackupCommand backupCommandNull1 = new BackupCommand(null);
+        BackupCommand backupCommandNull2 = new BackupCommand(null);
+
+        // Same object
+        assertEquals(backupCommand1, backupCommand1);
+
+        // Different objects, same fileName
+        BackupCommand backupCommand1Copy = new BackupCommand("backup1");
+        assertEquals(backupCommand1, backupCommand1Copy);
+
+        // Different fileName
+        assertTrue(!backupCommand1.equals(backupCommand2));
+
+        // Null fileName
+        assertEquals(backupCommandNull1, backupCommandNull2);
+
+        // Different types
+        assertTrue(!backupCommand1.equals(null));
+        assertTrue(!backupCommand1.equals("some string"));
+    }
+}
