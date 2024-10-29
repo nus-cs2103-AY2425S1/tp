@@ -68,8 +68,7 @@ public class Person {
         if (tags.isEmpty()) {
             return "";
         }
-        String firstTag = tags.stream().findFirst().map(t -> t.tagName).orElse("");
-        return "(" + firstTag + ") ";
+        return tags.stream().findFirst().map(t -> t.tagName).orElse("");
     }
 
     /**
