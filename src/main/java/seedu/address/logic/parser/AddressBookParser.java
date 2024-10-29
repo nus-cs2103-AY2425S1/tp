@@ -122,6 +122,7 @@ public class AddressBookParser {
     private boolean isListingCommand(String commandWord) {
         return commandWord.equals(AddListingCommand.COMMAND_WORD)
                 || commandWord.equals("editListing")
+                || commandWord.equals("addBuyersToListing")
                 || commandWord.equals("deleteListing")
                 || commandWord.equals("clearListings")
                 || commandWord.equals("findListings")

@@ -8,13 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddBuyersToListingCommand;
 import seedu.address.logic.commands.AddListingCommand;
 import seedu.address.logic.commands.ClearListingCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteListingCommand;
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.FindListingCommand;
-import seedu.address.logic.commands.ListListingsCommand;
+import seedu.address.logic.commands.ShowListingsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -35,7 +36,7 @@ public class ListingParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListListingsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowListingsCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -60,8 +61,11 @@ public class ListingParser {
         case FindListingCommand.COMMAND_WORD:
             return new FindListingsCommandParser().parse(arguments);
 
-        case ListListingsCommand.COMMAND_WORD:
-            return new ListListingsCommand();
+        case ShowListingsCommand.COMMAND_WORD:
+            return new ShowListingsCommand();
+
+        case AddBuyersToListingCommand.COMMAND_WORD:
+            return new AddBuyersToListingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

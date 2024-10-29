@@ -25,7 +25,7 @@ public class DeleteClientProfileCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
             + "with the number: %2$s " + "and email: %3$s!";
-    public static final String MESSAGE_HAS_ACTIVE_LISTINGS = "Cannot delete client %1$s because they"
+    public static final String MESSAGE_HAS_ACTIVE_LISTINGS = "Cannot delete seller %1$s because they"
             + " have active listings.";
     private final Name targetName;
 
