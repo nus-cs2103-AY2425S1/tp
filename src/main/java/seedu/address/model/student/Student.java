@@ -6,9 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;

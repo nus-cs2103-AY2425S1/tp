@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.CheckAssignmentCommand;
 import seedu.address.model.student.Student;
 
@@ -28,6 +29,8 @@ public class StudentCard extends UiPart<Region> {
     private Label tutorialId;
     @FXML
     private FlowPane attendanceFlowPane;
+    @FXML
+    private VBox attendanceBox;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -40,11 +43,16 @@ public class StudentCard extends UiPart<Region> {
         studentId.setText(student.getStudentId().value);
         tutorialId.setText(student.getTutorialId().toString());
         updateAttendanceLabels();
+        if (CheckAssignmentCommand.isCheckingAssignment()) {
+            updateCardColorBasedOnAssignment();
+        }
         CheckAssignmentCommand.isCheckingAssignmentProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 updateCardColorBasedOnAssignment();
             } else {
                 cardPane.getStyleClass().removeAll("student-card-done", "student-card-not-done");
+                attendanceFlowPane.getStyleClass().removeAll("student-card-done", "student-card-not-done");
+                attendanceBox.getStyleClass().removeAll("student-card-done", "student-card-not-done");
             }
         });
 
@@ -67,9 +75,11 @@ public class StudentCard extends UiPart<Region> {
         if (isCompleted) {
             cardPane.getStyleClass().add("student-card-done");
             attendanceFlowPane.getStyleClass().add("student-card-done");
+            attendanceBox.getStyleClass().add("student-card-done");
         } else {
             cardPane.getStyleClass().add("student-card-not-done");
             attendanceFlowPane.getStyleClass().add("student-card-not-done");
+            attendanceBox.getStyleClass().add("student-card-not-done");
         }
         cardPane.applyCss();
     }
