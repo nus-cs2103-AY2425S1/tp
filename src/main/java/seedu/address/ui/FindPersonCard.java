@@ -31,27 +31,17 @@ public class FindPersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label nric;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
-    @FXML
-    private Label nric;
-    @FXML
-    private FlowPane roles;
     @FXML
     private FlowPane tags;
     @FXML
     private FlowPane caregivers;
     @FXML
-    private FlowPane patients;
-    @FXML
     private VBox appointments;
-    @FXML
-    private VBox notes;
 
 
     /**
@@ -60,30 +50,15 @@ public class FindPersonCard extends UiPart<Region> {
     public FindPersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
         nric.setText(person.getNric().value);
+        phone.setText(person.getPhone().value);
+        email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getCaregivers().stream()
                 .forEach(caregiver -> caregivers.getChildren().add(new Label(caregiver.toString())));
-        person.getPatients().stream()
-                .forEach(patient -> patients.getChildren().add(new Label(patient.toString())));
-        person.getRoles().stream()
-                .sorted(Comparator.comparing(role -> role.name()))
-                .forEach(role -> roles.getChildren().add(new Label(role.name())));
-        person.getNotes().stream()
-                .forEach(note -> {
-                    Label noteLabel = new Label("- " + note.getContent());
-                    noteLabel.setWrapText(true);
-                    noteLabel.setMaxWidth(500);
-                    noteLabel.getStyleClass().add("noteLabel");
-                    notes.getChildren().add(noteLabel);
-                });
         person.getAppointments().stream()
                 .sorted(Comparator.comparing(appointment -> appointment.getStartTime()))
                 .forEach(appointment -> {
