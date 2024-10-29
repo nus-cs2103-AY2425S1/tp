@@ -182,16 +182,7 @@
     {
       "date": "2024-11-09",
       "time": "16:00",
-      "studentLessonInfoList" : [ {
-        "student" : {
-          "name": "Carl Kurz",
-          "phone": "95352563",
-          "email": "heinz@example.com",
-          "courses": []
-        },
-        "attendance" : false,
-        "participationScore" : 0
-      } ]
+      "studentLessonInfoList" : []
     }
   ]
 }
