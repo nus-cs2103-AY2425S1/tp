@@ -212,16 +212,18 @@ Examples:
 
 Sorts the client list in ascending order by the specified field.
 
-Format: sort `FIELD`
+Format: sort `FIELD` `ORDER`
 
-* `FIELD` can be either `deadline` or `name`.
-* `FIELD` values are case-sensitive; for example, sort name is valid, but sort NAME will result in an error.
-* Sorting by `name` arranges clients in alphabetical order.
-* Sorting by `deadline` arranges clients in ascending order based on their project deadlines, with earlier dates appearing first and later dates at the back.
+* `FIELD` can be either `deadline` or `name`
+* `ORDER` can be either `ascending` or `descending`
 
 Examples:
 * `sort name` sorts the client list alphabetically by name.
 * `sort deadline` sorts the client list by project deadline (earlier dates first).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Addressbook saves you the hassle of sorting the list every time you open the app, so everytime you do a sort, it will save the addressbook
+</div>
 
 ### Clearing All Entries : `clear`
 
@@ -277,6 +279,6 @@ Action | Format, Examples
 **Delete** | `delete [n/NAME] [id/ID]`<br> e.g., `delete n/John Doe` or `delete id/4`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g., `find n/James Jake ps/completed py/paid`
-**Sort** | `sort FIELD` <br> e.g., `sort name` or `sort deadline`
+**Sort** | `sort FIELD ORDER` <br> e.g., `sort name ascending` or `sort deadline descending`
 **List** | `list`
 **Help** | `help`
