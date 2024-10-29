@@ -16,8 +16,8 @@ import seedu.address.model.person.CallFrequency;
 public class ContactRecord implements Comparable<ContactRecord> {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format of " + DATE_FORMAT + " and should not be in the future.";
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
+            "Dates should be valid, and in the format of " + DATE_FORMAT;
+    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Dates should not be in the future";
     public final LocalDate value;
     private final String notes;
 
@@ -38,18 +38,21 @@ public class ContactRecord implements Comparable<ContactRecord> {
      */
     public static boolean isValidContactRecord(String testDate) {
         try {
-            if (!testDate.matches(VALIDATION_REGEX)) {
-                return false;
-            }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-            LocalDate date = LocalDate.parse(testDate, formatter);
-            if (date.isAfter(LocalDate.now())) {
-                return false;
-            }
+            LocalDate.parse(testDate, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if the given date is a current or past date.
+     *
+     * @param date The date to check.
+     */
+    public static boolean isCurrentOrPastDate(LocalDate date) {
+        return date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now());
     }
 
     /**

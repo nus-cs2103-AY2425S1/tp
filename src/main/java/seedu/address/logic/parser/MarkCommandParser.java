@@ -29,8 +29,9 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
         String preamble = argMultimap.getPreamble();
         String notes = argMultimap.getValue(PREFIX_NOTES).orElse("");
-        ContactRecord contactRecord;
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTES, PREFIX_DATE);
+
+        ContactRecord contactRecord;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             contactRecord = new ContactRecord(date, notes);

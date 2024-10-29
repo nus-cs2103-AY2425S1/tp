@@ -25,29 +25,58 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="nric" styleClass="cell_big_label" text="\$nric" />
-        <Label styleClass="cell_big_label" text=" - " />
+        <Label fx:id="nric" styleClass="cell_big_label" text="\$nric">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="tags" />
       <HBox>
-        <Label styleClass="cell_small_label" text="Phone Number: " />
+        <Label styleClass="cell_small_label" text="Phone Number: ">
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
       <HBox>
-        <Label styleClass="cell_small_label" text="Next Contact Date: " />
+        <Label styleClass="cell_small_label" text="Next Contact Date: ">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="nextContactDate" styleClass="cell_small_label" text="\$nextContactDate" />
       </HBox>
       <HBox>
-        <Label styleClass="cell_small_label" text="Address: " />
+        <Label styleClass="cell_small_label" text="Address: ">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
       <HBox>
-        <Label styleClass="cell_small_label" text="Email: " />
+        <Label styleClass="cell_small_label" text="Email: ">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       </HBox>
       <HBox>
-        <Label styleClass="cell_small_label" text="Call Frequency (Days): " />
+        <Label styleClass="cell_small_label" text="Call Frequency (Days): ">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
         <Label fx:id="callFrequency" styleClass="cell_small_label" text="\$callFrequency" />
       </HBox>
     </VBox>
