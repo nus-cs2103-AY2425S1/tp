@@ -15,8 +15,12 @@ import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * Adds a task to a group.
@@ -39,6 +43,8 @@ public class AddTaskToGroupCommand extends Command {
         + PREFIX_GROUP_NAME + "Team 1";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s to %2$s";
+
+    public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";
 
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
@@ -82,6 +88,12 @@ public class AddTaskToGroupCommand extends Command {
         model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroupTask();
+        ZoneId zid = ZoneId.of("Asia/Singapore");
+        LocalDateTime currentTime = LocalDateTime.now(zid);
+        if (deadline.time.compareTo(currentTime) < 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + "\n" + MESSAGE_OVERDUE_WARNING,
+                    task.getTaskName().toString(), group.getGroupName().fullName), LIST_GROUP_TASK_MARKER);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
             group.getGroupName().fullName), LIST_GROUP_TASK_MARKER);
     }
