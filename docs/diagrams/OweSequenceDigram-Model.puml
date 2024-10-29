@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":OweCommand" as OweCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
+participant ":FilteredList" as FilteredList MODEL_COLOR
+
+
+activate OweCommand
+
+OweCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> OweCommand : filtered student list
+deactivate Model
+
+opt index is in the range of filtered list
+    OweCommand -> Model : setStudent(targetStudent, editedStudent)
+    activate Model
+    Model -> AddressBook : setStudent(targetStudent, editedStudent)
+    activate AddressBook
+    AddressBook -> UniqueStudentList : setStudent(targetStudent, editedStudent)
+    activate UniqueStudentList
+    deactivate UniqueStudentList
+    deactivate AddressBook
+    deactivate Model
+
+    OweCommand -> Model : updateFilteredStudentList(predicate)
+    activate Model
+    Model -> FilteredList: setPredicate(predicate)
+    activate FilteredList
+    deactivate FilteredList
+    deactivate Model
+end
+
+deactivate OweCommand
+@enduml
