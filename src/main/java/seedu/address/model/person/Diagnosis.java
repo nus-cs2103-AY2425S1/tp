@@ -9,10 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Diagnosis {
     public static final String MESSAGE_CONSTRAINTS =
-            "DIAGNOSIS can only contain alphabets and the following special characters -> .()/- "
-                    + "(e.g., - A. fib (Atrial Fibrillation).\n"
-                    + "It can be an empty string at the point of initialisation, as diagnosis may not be done yet.\n";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9\\s.()/-]*|^$";
+            "Diagnosis must contain at least 1 alphabetic character, and has a limit of 100 characters.\n"
+            + "It cannot be empty.";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,100}$";
     public final String value;
 
     /**
