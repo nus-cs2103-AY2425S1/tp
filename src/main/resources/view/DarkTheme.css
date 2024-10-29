@@ -419,3 +419,11 @@
     -fx-border-color: #5a5a5a; /* Medium grey border for a subtle highlight */
     -fx-font-size: 12px;
 }
+
+.student-card-done {
+    -fx-background-color: #ccffcc !important; /* Light green when student completed assignment */
+}
+
+.student-card-not-done {
+    -fx-background-color: #ffcccc !important; /* Light red when the assignment is not done */
+}

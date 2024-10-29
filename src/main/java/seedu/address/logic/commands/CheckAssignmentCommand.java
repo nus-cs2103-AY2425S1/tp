@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
@@ -20,6 +22,7 @@ public class CheckAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Assignment 1 ";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "There is no matching assignment with the given name!";
+    private static BooleanProperty isCheckingAssignment = new SimpleBooleanProperty(false);
 
     private Assignment assignment;
 
@@ -40,11 +43,34 @@ public class CheckAssignmentCommand extends Command {
 
         try {
             String assignmentStatus = model.checkAssignment(assignment);
+            setCheckingAssignment(true);
             return new CommandResult(SUCCESS_MESSAGE
                     + "\n" + assignmentStatus);
         } catch (AssignmentNotFoundException e) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
+    }
+
+    /**
+     * Returns the boolean property indicating whether the assignment is currently being checked.
+     */
+    public static BooleanProperty isCheckingAssignmentProperty() {
+        return isCheckingAssignment;
+    }
+
+    /**
+     * Returns a boolean representing whether the system is checking assignment currently.
+     */
+    public static boolean isCheckingAssignment() {
+        return isCheckingAssignment.get();
+    }
+
+    /**
+     * Sets the isCheckingAssignment boolean to the desired input.
+     * @param isCheckingAssignment New boolean value to be set.
+     */
+    public static void setCheckingAssignment(boolean isCheckingAssignment) {
+        CheckAssignmentCommand.isCheckingAssignmentProperty().set(isCheckingAssignment);
     }
 
     @Override

@@ -98,8 +98,10 @@ public class AssignmentList {
         for (Student student : studentList) {
             if (targetAssignment.getStatus(student.getStudentId().value)) {
                 completedList.append(student.getName()).append(", ");
+                student.setHasCompletedAssignment(true);
             } else {
                 uncompletedList.append(student.getName()).append(", ");
+                student.setHasCompletedAssignment(false);
             }
         }
         String completedString = completedList.substring(0, Math.max(30, completedList.length() - 2));

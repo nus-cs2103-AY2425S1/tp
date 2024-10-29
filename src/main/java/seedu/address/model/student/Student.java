@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -26,6 +28,7 @@ public class Student {
     private final TutorialId tutorialId;
     private final Set<Tag> tags = new HashSet<>();
     private final ObjectProperty<PresentDates> presentDates;
+    private boolean hasCompletedAssignment = false;
 
     /**
      * Every field must be present and not null.
@@ -87,6 +90,14 @@ public class Student {
 
         return otherStudentId != null
                 && otherStudentId.equals(getStudentId());
+    }
+
+    public boolean hasCompletedAssignment() {
+        return hasCompletedAssignment;
+    }
+
+    public void setHasCompletedAssignment(boolean hasCompletedAssignment) {
+        this.hasCompletedAssignment = hasCompletedAssignment;
     }
 
     /**
