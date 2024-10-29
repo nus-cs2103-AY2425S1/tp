@@ -29,13 +29,13 @@ public class TagAddCommand extends Command {
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Adds a tag to the person identified "
             + "by their name.\n"
-            + "Also adds them as a participant in wedding given by specified tag.\n";
+            + "Also adds them as a participant in wedding given by specified tag.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui "
-            + PREFIX_TAG + "Jane and Tom 230412";
+            + PREFIX_TAG + "Jane Lim & Tom Koh";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag(s) '%1$s' to Contact: '%2$s'." + "\n"
             + "Contact: '%3$s' has been added to Wedding(s): '%4$s'.";

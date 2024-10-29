@@ -9,7 +9,7 @@ import seedu.address.model.Model;
  */
 public class DeleteNCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-n";
+    public static final String COMMAND_WORD = "n";
 
     public static final String MESSAGE_CANCEL_DELETE = "Deletion operation cancelled.";
 
