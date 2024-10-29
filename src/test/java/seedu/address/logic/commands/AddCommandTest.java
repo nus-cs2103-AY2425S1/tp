@@ -18,7 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.TagColors;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -140,6 +142,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableMap<String, String> getTagColorMap() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -171,7 +178,7 @@ public class AddCommandTest {
 
         @Override
         public ActiveTags getActiveTags() {
-            return new ActiveTags(new HashMap<>());
+            return new ActiveTags(new HashMap<>(), new TagColors());
         }
 
         @Override

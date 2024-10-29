@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -50,6 +51,8 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    ObservableMap<String, String> getTagColorMap();
 
     /**
      * Set the user prefs' GUI settings.

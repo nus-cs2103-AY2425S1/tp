@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -75,6 +76,10 @@ public class LogicManager implements Logic {
 
     public void setClearPendingStatus(boolean isPending) {
         this.pendingClear = isPending;
+    }
+
+    public ObservableMap<String, String> getTagColorMap() {
+        return model.getTagColorMap();
     }
 
     @Override

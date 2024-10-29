@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
@@ -48,6 +49,8 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    ObservableMap<String, String> getTagColorMap();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

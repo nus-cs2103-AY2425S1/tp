@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -45,7 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
-        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences(), userPrefs.getTagColors());
         currentWeddingName = new SimpleObjectProperty<>();
     }
 
@@ -86,6 +87,11 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public ObservableMap<String, String> getTagColorMap() {
+        return activeTags.getTagColorMap();
     }
 
     //=========== AddressBook ================================================================================
