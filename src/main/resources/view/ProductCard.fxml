@@ -34,7 +34,6 @@
       
       <!-- New FlowPane for tags -->
       <FlowPane fx:id="tags" hgap="5" vgap="5" styleClass="tag_flow_pane" />
-      
     </VBox>
   </GridPane>
 </HBox>

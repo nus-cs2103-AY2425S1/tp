@@ -7,7 +7,6 @@ import java.util.Objects;
 import seedu.address.model.product.exceptions.InvalidMaxStockLevelException;
 import seedu.address.model.product.exceptions.InvalidMinStockLevelException;
 import seedu.address.model.product.exceptions.InvalidStockLevelException;
-import seedu.address.model.product.exceptions.StockLevelOutOfBoundsException;
 
 /**
  * Represents the stock levels of a product.
@@ -29,26 +28,21 @@ public class StockLevel {
     public StockLevel(int stockLevel, int minStockLevel, int maxStockLevel) {
         requireAllNonNull(stockLevel, minStockLevel, maxStockLevel);
         validateMinAndMaxStockLevels(minStockLevel, maxStockLevel);
-        validateStockLevel(stockLevel, minStockLevel, maxStockLevel);
+        validateStockLevel(stockLevel);
         this.stockLevel = stockLevel;
         this.minStockLevel = minStockLevel;
         this.maxStockLevel = maxStockLevel;
     }
 
-    private void validateStockLevel(int stockLevel, int minStockLevel, int maxStockLevel) {
+    private void validateStockLevel(int stockLevel) {
         if (stockLevel < 0) {
             throw new InvalidStockLevelException("Stock level cannot be negative.");
-        }
-        if (stockLevel < minStockLevel || stockLevel > maxStockLevel) {
-            throw new StockLevelOutOfBoundsException(
-                    String.format("Stock level must be between min (%d) and max (%d) stock levels.",
-                            minStockLevel, maxStockLevel));
         }
     }
 
     private void validateMinAndMaxStockLevels(int minStockLevel, int maxStockLevel) {
-        if (minStockLevel < 0) {
-            throw new InvalidMinStockLevelException("Minimum stock level cannot be negative.");
+        if (minStockLevel < 0 | maxStockLevel < 0) {
+            throw new InvalidMinStockLevelException("Minimum and Maximum stock levels cannot be negative.");
         }
         if (maxStockLevel < minStockLevel) {
             throw new InvalidMaxStockLevelException(
@@ -69,19 +63,19 @@ public class StockLevel {
     }
 
     public void setStockLevel(int stockLevel) {
-        validateStockLevel(stockLevel, this.minStockLevel, this.maxStockLevel);
+        validateStockLevel(stockLevel);
         this.stockLevel = stockLevel;
     }
 
     public void setMinStockLevel(int minStockLevel) {
         validateMinAndMaxStockLevels(minStockLevel, this.maxStockLevel);
-        validateStockLevel(this.stockLevel, minStockLevel, this.maxStockLevel);
+        validateStockLevel(this.stockLevel);
         this.minStockLevel = minStockLevel;
     }
 
     public void setMaxStockLevel(int maxStockLevel) {
         validateMinAndMaxStockLevels(this.minStockLevel, maxStockLevel);
-        validateStockLevel(this.stockLevel, this.minStockLevel, maxStockLevel);
+        validateStockLevel(this.stockLevel);
         this.maxStockLevel = maxStockLevel;
     }
 
