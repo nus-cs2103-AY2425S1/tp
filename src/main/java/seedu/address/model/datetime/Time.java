@@ -1,4 +1,4 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +27,16 @@ public class Time {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         this.value = time;
+    }
+
+    /**
+     * Returns the LocalTime of String value.
+     *
+     * @return LocalTime of the time.
+     */
+    public LocalTime getLocalTimeValue() {
+        assert !value.isEmpty();
+        return LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**

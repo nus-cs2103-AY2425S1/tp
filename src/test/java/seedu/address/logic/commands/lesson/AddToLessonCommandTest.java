@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.CARL;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 
@@ -186,6 +189,11 @@ public class AddToLessonCommandTest {
         AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
                 allInvalidStudentNames, validStudentIndicesContainsAlice);
 
+        Lesson lesson = new Lesson(
+                new Date("2024-10-20"),
+                new Time("14:00"),
+                FXCollections.observableArrayList(),
+                Map.of());
         String studentNotFoundMessage = String.format(AddToLessonCommand.MESSAGE_STUDENT_NOT_FOUND, AMY.getName());
 
         assertCommandFailure(command, model, studentNotFoundMessage);

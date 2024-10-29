@@ -1,4 +1,4 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +36,16 @@ public class Date {
      */
     public String getValue() {
         return value;
+    }
+
+    /**
+     * Returns the LocalDate of String value.
+     *
+     * @return LocalDate of the date.
+     */
+    public LocalDate getLocalDateValue() {
+        assert !value.isEmpty();
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
