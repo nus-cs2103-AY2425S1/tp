@@ -19,7 +19,7 @@ public class InsightsCommandTest {
     @Test
     public void execute_insights_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(SHOWING_INSIGHTS_MESSAGE, false, false, model.getInsights());
+                new CommandResult(SHOWING_INSIGHTS_MESSAGE, false, false, true, model.getInsights());
         assertCommandSuccess(new InsightsCommand(), model, expectedCommandResult, expectedModel);
     }
 }

@@ -155,10 +155,11 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the insights window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleInsights(Map<Status, Integer> insights) {
+    public void handleOpenInsights(Map<Status, Integer> insights) {
         if (!insightsWindow.isShowing()) {
             insightsWindow.show(insights);
         } else {
+            insightsWindow.update(insights);
             insightsWindow.focus();
         }
     }
@@ -197,8 +198,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isInsights()) {
+                handleOpenInsights(commandResult.getInsights());
             } else if (commandResult.getInsights() != null) {
-                handleInsights(commandResult.getInsights());
+                insightsWindow.update(commandResult.getInsights());
             }
 
             if (commandResult.isExit()) {

@@ -11,23 +11,23 @@ import org.junit.jupiter.api.Test;
 public class CommandResultTest {
     @Test
     public void nullFeedbackToUser_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CommandResult(null, false, false, null));
+        assertThrows(NullPointerException.class, () -> new CommandResult(null, false, false, false, null));
     }
 
     @Test
     public void isShowHelp() {
-        CommandResult showHelpCommandResult = new CommandResult("feedback", true, false, null);
+        CommandResult showHelpCommandResult = new CommandResult("feedback", true, false, false, null);
         CommandResult notShowHelpCommandResult = new CommandResult("feedback",
-                                                            false, false, null);
+                                                            false, false, false, null);
         assertTrue(showHelpCommandResult.isShowHelp());
         assertFalse(notShowHelpCommandResult.isShowHelp());
     }
 
     @Test
     public void isExit() {
-        CommandResult exitCommandResult = new CommandResult("feedback", false, true, null);
+        CommandResult exitCommandResult = new CommandResult("feedback", false, true, false, null);
         CommandResult notExitCommandResult = new CommandResult("feedback",
-                false, false, null);
+                false, false, false, null);
         assertTrue(exitCommandResult.isExit());
         assertFalse(notExitCommandResult.isExit());
     }
@@ -38,7 +38,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, null)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, null)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -53,10 +53,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, null)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, null)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, null)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, null)));
     }
 
     @Test
@@ -71,11 +71,11 @@ public class CommandResultTest {
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                        new CommandResult("feedback", true, false, null).hashCode());
+                        new CommandResult("feedback", true, false, false, null).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                        new CommandResult("feedback", false, true, null).hashCode());
+                        new CommandResult("feedback", false, true, false, null).hashCode());
     }
 
     @Test

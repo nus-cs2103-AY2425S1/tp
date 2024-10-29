@@ -2,6 +2,7 @@ package seedu.hireme.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
@@ -79,8 +80,12 @@ public class StatusCommand extends Command {
         updatedInternshipApplication.setStatus(newStatus);
         model.setItem(internshipApplicationToUpdate, updatedInternshipApplication);
         model.updateFilteredList(prevPredicate);
+
+        Map<Status, Integer> insightsMap = model.getInsights();
+
         return new CommandResult(String.format(MESSAGE_STATUS_CHANGE_SUCCESS,
-                Messages.format(internshipApplicationToUpdate), newStatus.getValue()));
+                Messages.format(internshipApplicationToUpdate), newStatus.getValue()), false,
+                false, false, insightsMap);
     }
 
     /**

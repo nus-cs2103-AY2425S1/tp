@@ -19,6 +19,6 @@ public class InsightsCommand extends Command {
         requireNonNull(model);
 
         Map<Status, Integer> insightsMap = model.getInsights();
-        return new CommandResult(SHOWING_INSIGHTS_MESSAGE, false, false, insightsMap);
+        return new CommandResult(SHOWING_INSIGHTS_MESSAGE, false, false, true, insightsMap);
     }
 }

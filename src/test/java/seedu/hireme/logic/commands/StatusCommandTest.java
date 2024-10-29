@@ -36,6 +36,8 @@ public class StatusCommandTest {
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), Status.ACCEPTED.getValue());
 
+        Status previousStatus = internshipApplicationToUpdate.getStatus();
+
         ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
 
         InternshipApplication updatedApplication = new InternshipApplication(
@@ -47,7 +49,10 @@ public class StatusCommandTest {
 
         expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
 
-        assertCommandSuccess(statusCommand, clonedModel, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
+                false, false, expectedModel.getInsights());
+
+        assertCommandSuccess(statusCommand, clonedModel, expectedCommandResult, expectedModel);
     }
 
     @Test

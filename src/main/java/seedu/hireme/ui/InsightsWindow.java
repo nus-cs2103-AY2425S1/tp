@@ -60,6 +60,17 @@ public class InsightsWindow extends UiPart<Stage> {
      */
     public void show(Map<Status, Integer> insights) {
         logger.fine("Showing insights page about the application.");
+
+        update(insights);
+
+        getRoot().show();
+        getRoot().centerOnScreen();
+    }
+
+    /**
+     * Updates the pie chart with new insights data
+     */
+    public void update(Map<Status, Integer> insights) {
         List<PieChart.Data> data = new ArrayList<>();
         List<Map.Entry<Status, Integer>> sortedList = new ArrayList<>(insights.entrySet());
         sortedList.sort(Map.Entry.comparingByKey());
@@ -80,13 +91,11 @@ public class InsightsWindow extends UiPart<Stage> {
 
         final double totalApplications = total;
         data.forEach(dataSegment -> {
-                String stringToBeBound = StringUtil.getPercentageString(dataSegment.getPieValue(), totalApplications);
+                String stringToBeBound = StringUtil.getPercentageString(dataSegment.getPieValue(),
+                        totalApplications);
                 bindPieChartDataSegment(dataSegment, stringToBeBound);
             }
         );
-
-        getRoot().show();
-        getRoot().centerOnScreen();
     }
 
     /**
