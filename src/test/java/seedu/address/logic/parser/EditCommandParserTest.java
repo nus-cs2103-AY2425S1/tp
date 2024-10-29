@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFLASTVISIT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_CONTACT_DELETION;
 import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATEOFLASTVISIT_DESC;
@@ -41,13 +45,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
@@ -199,6 +204,21 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY)
                 .build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_optionalFieldDeletion_success() {
+        //One test case to cover all valid deletions
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + ADDRESS_DELETION
+                + EMAIL_DELETION + DATEOFLASTVISIT_DELETION + EMERGENCY_CONTACT_DELETION;
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setAddress(Optional.empty());
+        descriptor.setEmail(Optional.empty());
+        descriptor.setDateOfLastVisit(Optional.empty());
+        descriptor.setEmergencyContact(Optional.empty());
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

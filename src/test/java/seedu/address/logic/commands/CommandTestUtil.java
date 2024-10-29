@@ -64,6 +64,11 @@ public class CommandTestUtil {
     public static final String DATEOFLASTVISIT_DESC_BOB = " " + PREFIX_DATEOFLASTVISIT
             + VALID_DATEOFLASTVISIT_BOB;
 
+    public static final String ADDRESS_DELETION = " " + PREFIX_ADDRESS;
+    public static final String EMAIL_DELETION = " " + PREFIX_EMAIL;
+    public static final String EMERGENCY_CONTACT_DELETION = " " + PREFIX_EMERGENCY_CONTACT;
+    public static final String DATEOFLASTVISIT_DELETION = " " + PREFIX_DATEOFLASTVISIT;
+
     // whitespace-only names are invalid
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "     ";
     // 'a' not allowed in phones, emergency contacts
