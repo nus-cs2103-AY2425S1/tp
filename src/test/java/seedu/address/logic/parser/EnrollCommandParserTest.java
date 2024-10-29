@@ -1,16 +1,16 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EnrollCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EnrollCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 public class EnrollCommandParserTest {
 
     private EnrollCommandParser parser;
