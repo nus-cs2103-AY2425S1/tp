@@ -10,10 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "PATIENT_ID must be alphanumeric and have a specific format "
-                    + "(e.g., 'P' followed by a five-digit number) - Pxxxxx.\n"
-                    + "It should not include special characters or spaces (e.g., 'P123 45' would be invalid).\n";
-    public static final String VALIDATION_REGEX = "^P\\d{5}$";
+            "Patient ID can contain alphanumeric characters, dashes, slashes, hashes and parentheses.\n"
+            + "It must have at least 1 alphanumeric character and has a character limit of 20.";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9/#()-]{1,20}$";
     public final String value;
 
     /**

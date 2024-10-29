@@ -23,7 +23,7 @@ import seedu.address.model.person.Ward;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_ID = "P12D45";
+    private static final String INVALID_ID = "P12^45";
     private static final String INVALID_WARD = "D 4";
     private static final String INVALID_DIAGNOSIS = "$<>";
     private static final String INVALID_MEDICATION = "@##";
