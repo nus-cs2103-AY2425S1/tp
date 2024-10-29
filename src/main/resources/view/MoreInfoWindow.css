@@ -95,3 +95,8 @@
     -fx-background-color: #FFA000;
 }
 
+.label-section-title {
+    -fx-text-fill: #FFD700;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
