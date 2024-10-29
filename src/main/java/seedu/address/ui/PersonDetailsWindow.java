@@ -51,6 +51,10 @@ public class PersonDetailsWindow extends UiPart<Stage> {
     @FXML
     private CheckBox favoriteCheckBox;
 
+    @FXML
+    private TextField leaveField;
+
+
     /**
      * Creates a new {@code PersonDetailsWindow} with the given {@code Stage} and {@code Logic}.
      *
@@ -83,6 +87,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         addKeyHandlers(emailField);
         addKeyHandlers(addressField);
         addKeyHandlers(departmentField);
+        addKeyHandlers(leaveField);
         addKeyHandlers(favoriteCheckBox);
     }
 
@@ -129,6 +134,8 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         } else if (current == addressField) {
             departmentField.requestFocus();
         } else if (current == departmentField) {
+            leaveField.requestFocus();
+        } else if (current == leaveField) {
             favoriteCheckBox.requestFocus();
         } else if (current == favoriteCheckBox) {
             nameField.requestFocus();
@@ -142,6 +149,8 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      */
     private void moveFocusToPrevious(Node current) {
         if (current == favoriteCheckBox) {
+            leaveField.requestFocus();
+        } else if (current == leaveField) {
             departmentField.requestFocus();
         } else if (current == departmentField) {
             addressField.requestFocus();
@@ -155,6 +164,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             favoriteCheckBox.requestFocus();
         }
     }
+
 
     /**
      * Displays the person details window with the information of the specified {@code Person}.
@@ -193,7 +203,9 @@ public class PersonDetailsWindow extends UiPart<Stage> {
         emailField.setText(person.getEmail().value);
         addressField.setText(person.getAddress().value);
         departmentField.setText(person.getDepartment().department);
+        leaveField.setText(person.getLeave().value);
         favoriteCheckBox.setSelected(person.isFavorite());
+
     }
 
     /**
@@ -208,10 +220,11 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             String newEmail = emailField.getText().trim();
             String newAddress = addressField.getText().trim();
             String newDepartment = departmentField.getText().trim();
+            String newLeave = leaveField.getText().trim();
             boolean newIsFavorite = favoriteCheckBox.isSelected();
 
             if (newName.isEmpty() || newPhone.isEmpty() || newEmail.isEmpty()
-                    || newAddress.isEmpty() || newDepartment.isEmpty()) {
+                    || newAddress.isEmpty() || newDepartment.isEmpty() || newLeave.isEmpty()) {
                 showErrorAlert("Invalid Input", "All fields are required.", "Please fill in all fields.");
                 return;
             }
@@ -225,13 +238,14 @@ public class PersonDetailsWindow extends UiPart<Stage> {
                 return;
             }
 
-            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s d/%s f/%s",
+            String commandText = String.format("edit %d n/%s p/%s e/%s a/%s d/%s l/%s f/%s",
                     index + 1,
                     escapeSpecialCharacters(newName),
                     escapeSpecialCharacters(newPhone),
                     escapeSpecialCharacters(newEmail),
                     escapeSpecialCharacters(newAddress),
                     escapeSpecialCharacters(newDepartment),
+                    escapeSpecialCharacters(newLeave),
                     newIsFavorite);
 
             logic.execute(commandText);
@@ -243,6 +257,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
             showErrorAlert("Error", "Failed to save changes.", e.getMessage());
         }
     }
+
 
 
     /**
