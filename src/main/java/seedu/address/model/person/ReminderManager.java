@@ -15,14 +15,14 @@ import javafx.collections.ObservableList;
 
 /**
  * Manages reminders for upcoming and overdue deadlines of persons in the address book.
- * Only shows reminders for incomplete projects.
+ * Only shows reminders for incomplete projects and active clients.
  */
 public class ReminderManager {
     private static final String MESSAGE_NO_REMINDERS = "No upcoming or overdue reminders.";
     private static final String MESSAGE_DEADLINE_IN = " have deadlines in ";
-    private static final String MESSAGE_DEADLINE_OVERDUE = " have overdue deadlines by ";
+    private static final String MESSAGE_DEADLINE_OVERDUE = " have overdue deadlines";
     private static final String MESSAGE_SINGLE_DEADLINE_IN = " has deadline in ";
-    private static final String MESSAGE_SINGLE_DEADLINE_OVERDUE = " has overdue deadline by ";
+    private static final String MESSAGE_SINGLE_DEADLINE_OVERDUE = " has overdue deadline";
     private static final String DAY_SINGULAR = "1 day";
     private static final String DAY_PLURAL = " days";
     private static final String DUE_TODAY = " have deadlines due today.";
@@ -32,6 +32,7 @@ public class ReminderManager {
     private static final String COMMA = ", ";
     private static final String MORE_SUFFIX = " and %d more";
     private static final int MAX_NAMES_TO_SHOW = 3;
+    private static final String ACTIVE_STATUS = "active";
 
     private ObservableList<Person> persons;
     private final StringProperty currentReminder = new SimpleStringProperty();
@@ -68,34 +69,43 @@ public class ReminderManager {
     }
 
     private String formatNames(List<Person> persons) {
-        // Filter out completed projects
-        List<Person> incompletePeople = persons.stream()
-                .filter(person -> !person.getProjectStatus().isComplete)
+        // Filter out completed projects and non-active clients
+        List<Person> eligiblePeople = persons.stream()
+                .filter(person -> !person.getProjectStatus().isComplete
+                        && person.getClientStatus().toString().equals(ACTIVE_STATUS))
                 .collect(Collectors.toList());
 
-        if (incompletePeople.isEmpty()) {
+        if (eligiblePeople.isEmpty()) {
             return "";
         }
 
-        if (incompletePeople.size() == 1) {
-            return incompletePeople.get(0).getName().toString();
+        if (eligiblePeople.size() == 1) {
+            return eligiblePeople.get(0).getName().toString();
         }
 
         StringBuilder names = new StringBuilder();
-        int namesToShow = Math.min(incompletePeople.size(), MAX_NAMES_TO_SHOW);
+        int namesToShow = Math.min(eligiblePeople.size(), MAX_NAMES_TO_SHOW);
 
         for (int i = 0; i < namesToShow; i++) {
             if (i > 0) {
-                if (i == namesToShow - 1 && incompletePeople.size() > MAX_NAMES_TO_SHOW) {
-                    names.append(String.format(MORE_SUFFIX, incompletePeople.size() - MAX_NAMES_TO_SHOW + 1));
-                    break;
-                } else if (i == namesToShow - 1) {
-                    names.append(AND);
-                } else {
+                // Add comma between names except before the last name
+                if (i < namesToShow - 1) {
                     names.append(COMMA);
+                } else {
+                    // For the last name, add "and" if it's not followed by "X more"
+                    if (eligiblePeople.size() <= MAX_NAMES_TO_SHOW) {
+                        names.append(AND);
+                    } else {
+                        names.append(COMMA);
+                    }
                 }
             }
-            names.append(incompletePeople.get(i).getName());
+            names.append(eligiblePeople.get(i).getName());
+        }
+
+        // Add "and X more" if there are additional people
+        if (eligiblePeople.size() > MAX_NAMES_TO_SHOW) {
+            names.append(String.format(MORE_SUFFIX, eligiblePeople.size() - MAX_NAMES_TO_SHOW));
         }
 
         return names.toString();
@@ -105,43 +115,33 @@ public class ReminderManager {
         LocalDate now = LocalDate.now();
         List<String> reminders = new ArrayList<>();
 
-        // Group persons by their deadline dates (only incomplete projects)
-        Map<LocalDate, List<Person>> deadlineGroups = new LinkedHashMap<>();
-
-        // Handle overdue deadlines
+        // Collect all overdue persons (only active clients)
+        List<Person> overduePersons = new ArrayList<>();
         for (Person person : persons) {
-            if (!person.getProjectStatus().isComplete) { // Only include incomplete projects
-                Deadline deadline = person.getDeadline();
-                if (deadline.isOverdue()) {
-                    deadlineGroups.computeIfAbsent(deadline.value, k -> new ArrayList<>()).add(person);
-                }
+            if (!person.getProjectStatus().isComplete
+                    && person.getClientStatus().toString().equals(ACTIVE_STATUS)
+                    && person.getDeadline().isOverdue()) {
+                overduePersons.add(person);
             }
         }
 
-        if (!deadlineGroups.isEmpty()) {
-            LocalDate mostOverdueDate = deadlineGroups.keySet().stream()
-                    .min(LocalDate::compareTo)
-                    .orElse(null);
-
-            if (mostOverdueDate != null) {
-                List<Person> overduePersons = deadlineGroups.get(mostOverdueDate);
-                String names = formatNames(overduePersons);
-                if (!names.isEmpty()) {
-                    long daysOverdue = ChronoUnit.DAYS.between(mostOverdueDate, now);
-                    String dayMessage = daysOverdue == 1 ? DAY_SINGULAR : daysOverdue + DAY_PLURAL;
-
-                    reminders.add(names
-                            + (overduePersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_OVERDUE : MESSAGE_DEADLINE_OVERDUE)
-                            + dayMessage + PERIOD);
-                    return reminders;
-                }
+        // If there are overdue projects, show them first
+        if (!overduePersons.isEmpty()) {
+            String names = formatNames(overduePersons);
+            if (!names.isEmpty()) {
+                reminders.add(names
+                        + (overduePersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_OVERDUE
+                        : MESSAGE_DEADLINE_OVERDUE)
+                        + PERIOD);
+                return reminders;
             }
         }
 
         // Handle upcoming deadlines if no overdue ones
-        deadlineGroups.clear();
+        Map<LocalDate, List<Person>> deadlineGroups = new LinkedHashMap<>();
         for (Person person : persons) {
-            if (!person.getProjectStatus().isComplete) { // Only include incomplete projects
+            if (!person.getProjectStatus().isComplete
+                    && person.getClientStatus().toString().equals(ACTIVE_STATUS)) {
                 Deadline deadline = person.getDeadline();
                 if (!deadline.isOverdue()) {
                     deadlineGroups.computeIfAbsent(deadline.value, k -> new ArrayList<>()).add(person);
