@@ -21,8 +21,25 @@ public class Buyer extends Person {
      * @param appointment The appointment associated with the buyer.
      * @param property The property associated with the buyer.
      */
-    public Buyer(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
+    public Buyer(Name name, Phone phone, Email email, Set<Tag> tags,
+                 Appointment appointment, Property property) {
         super(name, phone, email, tags, appointment, property);
+    }
+
+    /**
+     * Creates a Buyer with the specified details.
+     *
+     * @param name The name of the buyer.
+     * @param phone The phone number of the buyer.
+     * @param email The email address of the buyer.
+     * @param tags The tags associated with the buyer.
+     * @param appointment The appointment associated with the buyer.
+     * @param property The property associated with the buyer.
+     * @param remark The remark associated with the buyer.
+     */
+    public Buyer(Name name, Phone phone, Email email, Set<Tag> tags,
+                 Appointment appointment, Property property, String remark) {
+        super(name, phone, email, tags, appointment, property, remark);
     }
 
     @Override
