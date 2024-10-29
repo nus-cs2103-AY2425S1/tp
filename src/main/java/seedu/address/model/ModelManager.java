@@ -38,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons.setPredicate(x -> true);
     }
 
     public ModelManager() {
@@ -87,7 +88,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-        public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
 
