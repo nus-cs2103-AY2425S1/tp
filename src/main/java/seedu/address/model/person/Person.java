@@ -136,6 +136,9 @@ public class Person {
     public boolean hasPhone(Phone phone) {
         return this.phone.equals(phone);
     }
+    public boolean hasEmail(Email email) {
+        return this.email.equals(email);
+    }
 
     public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);

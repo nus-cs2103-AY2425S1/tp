@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
@@ -35,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         List<SearchCriteria> criteria = new ArrayList<>();
         ArgumentMultimap keywords = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_ROLE, PREFIX_TAG);
+                args, PREFIX_NAME, PREFIX_NRIC, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_TAG);
         // Needs to be less than 2 because the argument tokenized will always produce
         // a key-value pair between Prefix("") and the preamble (the values before the first valid prefix)
         if (keywords.getPrefixes().size() < 2) {
@@ -63,9 +65,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (keywords.getValue(PREFIX_TAG).isPresent()) {
             criteria.add(new TagSearchCriteria(keywords.getAllValues(PREFIX_TAG)));
         }
-
         if (keywords.getValue(PREFIX_PHONE).isPresent()) {
             criteria.add(new PhoneSearchCriteria(keywords.getAllValues(PREFIX_PHONE)));
+        }
+        if (keywords.getValue(PREFIX_EMAIL).isPresent()) {
+            criteria.add(new EmailSearchCriteria(keywords.getAllValues(PREFIX_EMAIL)));
         }
 
         if (criteria.isEmpty()) {
@@ -87,11 +91,21 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> roles = keywords.getAllValues(PREFIX_ROLE);
         List<String> tags = keywords.getAllValues(PREFIX_TAG);
         List<String> phones = keywords.getAllValues(PREFIX_PHONE);
+        List<String> emails = keywords.getAllValues(PREFIX_EMAIL);
         checkNames(names);
         checkNrics(nrics);
         checkRoles(roles);
         checkTags(tags);
         checkPhones(phones);
+        checkEmails(emails);
+    }
+
+    private void checkEmails(List<String> emails) throws ParseException {
+        boolean isAllValid = emails.stream().allMatch(Email::isValidEmail);
+        if (!isAllValid) {
+            throw new ParseException("You have entered an invalid Email Address!\n"
+                    + Email.MESSAGE_CONSTRAINTS);
+        }
     }
 
     private void checkPhones(List<String> phones) throws ParseException {
