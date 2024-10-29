@@ -57,7 +57,9 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);
+        String normalizedName = fullName.trim().replaceAll("\\s+", " ");
+        String otherNormalizedName = otherName.fullName.trim().replaceAll("\\s+", " ");
+        return normalizedName.equalsIgnoreCase(otherNormalizedName);
     }
 
     @Override
