@@ -214,7 +214,7 @@ Filters the clients that starts with the prefix provided.
 Format: `filterclient n/NAME`
 
 * Filters the client with the specified prefix `NAME`.
-* words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+* The `NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
 
 Examples:
 * `filterclient n/A` filters the clients that starts with the prefix `A`.
@@ -246,14 +246,13 @@ Examples:
 
 Adds a specified meeting to the meeting book of ClientGrid.
 
-Format: `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`
+Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE_NUMBER sp/SELLER_PHONE_NUMBER t/TYPE c/POSTALCODE`
 
 * Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
 * The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
-* `BUYER` refers to a buyer name. There must be an existing buyer in the client book that has a name that contains `BUYER`. `BUYER` is not case-sensitive. For example, `b/alice` is valid if there is a buyer of name `Alice Pauline` in the client book.
-* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
-* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
+* `bp/BUYER_PHONE_NUMBER` refers to a buyer's phone number. There must be an existing buyer in the client book that has a phone number that is equal to the `BUYER_PHONE_NUMBER`. The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
+* `sp/SELLER_PHONE_NUMBER` refers to a seller's phone number. There must be an existing seller in the client book that has a phone number that is equal to the `SELLER_PHONE_NUMBER`. The `SELLER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
 * `TYPE` refers to a property type. It must be either `CONDO`, `HDB`, or `LANDED`. `TYPE` is case-insensitive.
 * `POSTALCODE` refers to a postal code. The postal code must belong to some property to the property book.
 
