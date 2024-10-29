@@ -116,20 +116,28 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (hasTagPrefix) {
-            String tagInput = argMultimap.getValue(PREFIX_TAG).get().trim();
-            if (tagInput.isEmpty()) {
-                throw new ParseException(TAG_CANNOT_BE_EMPTY);
+            List<String> tagKeywords = new ArrayList<>();
+            for (String tag : argMultimap.getAllValues(PREFIX_TAG)) {
+                String tagInput = tag.trim();
+                if (tagInput.isEmpty()) {
+                    throw new ParseException(TAG_CANNOT_BE_EMPTY);
+                }
+                tagKeywords.add(tagInput);
             }
-            List<String> tagKeywords = Arrays.asList(tagInput.split("\\s+"));
+
+
             return new FindTagCommand(new TagContainsKeywordsPredicate(tagKeywords));
         }
 
         if (hasWeddingPrefix) {
-            String weddingInput = argMultimap.getValue(PREFIX_WEDDING).get().trim();
-            if (weddingInput.isEmpty()) {
-                throw new ParseException(WEDDING_CANNOT_BE_EMPTY);
+            List<String> weddingKeywords = new ArrayList<>();
+            for (String wedding : argMultimap.getAllValues(PREFIX_WEDDING)) {
+                String weddingInput = wedding.trim();
+                if (weddingInput.isEmpty()) {
+                    throw new ParseException(WEDDING_CANNOT_BE_EMPTY);
+                }
+                weddingKeywords.add(weddingInput);
             }
-            List<String> weddingKeywords = Arrays.asList(weddingInput.split("\\s+"));
             return new FindWeddingCommand(new WeddingContainsKeywordsPredicate(weddingKeywords));
         }
 
