@@ -12,5 +12,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("desc/");
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("cat/");
-    public static final Prefix PREFIX_PERSONINDEX = new Prefix("per/");
 }

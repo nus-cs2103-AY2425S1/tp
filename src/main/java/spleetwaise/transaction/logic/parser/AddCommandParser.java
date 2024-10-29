@@ -6,7 +6,6 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_PERSONINDEX;
 import static spleetwaise.transaction.model.transaction.Date.getNowDate;
 
 import java.util.Set;
@@ -48,14 +47,20 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_PERSONINDEX, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_CATEGORY);
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSONINDEX, PREFIX_AMOUNT, PREFIX_DESCRIPTION)
-                || !argMultimap.getPreamble().isEmpty()) {
+                        args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_CATEGORY);
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), e);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSONINDEX, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSONINDEX).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(getNowDate()));

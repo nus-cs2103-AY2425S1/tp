@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
@@ -21,6 +22,9 @@ import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 
 public class AddCommandParserTest {
+
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
     private static final Index testIndex = Index.fromOneBased(1);
     private static final Amount testAmount = new Amount("1.23");
@@ -33,7 +37,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         String userInput =
-                " per/1 amt/1.23 desc/description " + PREFIX_CATEGORY + "FOOD";
+                " 1 amt/1.23 desc/description " + PREFIX_CATEGORY + "FOOD";
         assertParseSuccess(parser, userInput, new AddCommand(testIndex, testAmount, testDescription,
                 testDate, testCategories
         ));
@@ -42,7 +46,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_withOptionalDateField_success() {
         String userInput =
-                " per/1 amt/1.23 desc/description " + PREFIX_DATE + getNowDate() + " " + PREFIX_CATEGORY + "FOOD";
+                " 1 amt/1.23 desc/description " + PREFIX_DATE + getNowDate() + " " + PREFIX_CATEGORY + "FOOD";
         assertParseSuccess(parser, userInput, new AddCommand(testIndex, testAmount, testDescription,
                 testDate, testCategories
         ));
@@ -50,40 +54,34 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidIndex_exceptionThrown() {
-        String userInput1 = " per/0 amt/1.23 desc/description date/01012024";
-        assertParseFailure(parser, userInput1, ParserUtil.MESSAGE_INVALID_INDEX);
+        String userInput1 = " 0 amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_FORMAT);
 
-        String userInput2 = " per/-1 amt/1.23 desc/description date/01012024";
-        assertParseFailure(parser, userInput2, ParserUtil.MESSAGE_INVALID_INDEX);
-    }
-
-    @Test
-    public void parse_nonExistentPhone_exceptionThrown() {
-        String userInput = " p/99999999 amt/1.23 desc/description date/01012024";
-        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
+        String userInput2 = " -1 amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidAmount_exceptionThrown() {
-        String userInput = " per/1 amt/1.234 desc/description date/01012024";
+        String userInput = " 1 amt/1.234 desc/description date/01012024";
         assertParseFailure(parser, userInput, Amount.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidDescription_exceptionThrown() {
-        String userInput = " per/1 amt/1.23 desc/ date/01012024";
+        String userInput = " 1 amt/1.23 desc/ date/01012024";
         assertParseFailure(parser, userInput, Description.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidDate_exceptionThrown() {
-        String userInput = " per/1 amt/1.23 desc/test date/2024";
+        String userInput = " 1 amt/1.23 desc/test date/2024";
         assertParseFailure(parser, userInput, Date.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_missingParam_exceptionThrown() {
-        String userInput = " per/1 desc/test";
+        String userInput = " 1 desc/test";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

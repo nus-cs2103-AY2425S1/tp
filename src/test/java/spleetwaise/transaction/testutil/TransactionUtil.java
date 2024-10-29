@@ -14,6 +14,6 @@ public class TransactionUtil {
      */
     public static String getAddCommand() {
         // Using TypicalPerson.ALICE contact details
-        return AddCommand.COMMAND_WORD + " per/1 amt/12.3 desc/Test";
+        return AddCommand.COMMAND_WORD + " 1 amt/12.3 desc/Test";
     }
 }
