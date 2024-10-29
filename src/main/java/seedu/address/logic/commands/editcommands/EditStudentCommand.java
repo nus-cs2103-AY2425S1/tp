@@ -39,7 +39,7 @@ public class EditStudentCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the student identified by the student number used.\n"
+        + ": Edits the student identified by the index.\n"
         + "Fields including group and student number should not be modified.\n"
         + "Parameters: "
         + PREFIX_INDEX + "INDEX (must be an integer) "
