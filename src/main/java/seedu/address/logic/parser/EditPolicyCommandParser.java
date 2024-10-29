@@ -15,7 +15,7 @@ import seedu.address.model.policy.PolicyType;
 
 
 /**
- * Parses input arguments and creates a new UpdatePolicyCommand object.
+ * Parses input arguments and creates a new EditPolicyCommand object.
  */
 public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
 
