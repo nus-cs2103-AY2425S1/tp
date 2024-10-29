@@ -51,6 +51,6 @@ public class JobCard extends UiPart<Region> {
         job.getRequirements().stream()
                 .sorted(Comparator.comparing(requirement -> requirement.tagName))
                 .forEach(requirement -> requirements.getChildren().add(new Label(requirement.tagName)));
-        matches.setText("Employee count - " + job.getMatches().size());
+        matches.setText("Employee count - PLACEHOLDER");
     }
 }
