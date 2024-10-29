@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -192,7 +193,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Event getEventByName(Event event) {
+        public Event getEventByName(Name name) {
             return null;
         }
 

@@ -10,6 +10,7 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.types.common.LinkedPersonsEntry;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.event.UniqueEventList;
@@ -177,9 +178,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         personEventManager.removeEvent(key);
     }
 
-    public Event getEventByName(Event event) {
-        requireNonNull(event);
-        return personEventManager.getEventByName(event);
+    /**
+     * Returns the event with the specified name.
+     */
+    public Event getEventByName(Name name) {
+        requireNonNull(name);
+        for (Event e : events) {
+            if (e.getName().equals(name)) {
+                return e;
+            }
+        }
+        return null;
     }
 
     /** Resorts Events */
@@ -219,7 +228,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return personEventManager;
     }
 
-    @Override
+    /**
+     * Returns the list of linked persons entries.
+     */
     public ArrayList<LinkedPersonsEntry> getLinkedPersonsEntryList() {
         return personEventManager.getLinkedPersonsEntryList();
     }

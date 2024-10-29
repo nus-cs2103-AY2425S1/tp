@@ -117,11 +117,6 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<LinkedPersonsEntry> getLinkedPersonsEntryList() {
-            return FXCollections.observableArrayList();
-        }
-
-        @Override
         public PersonEventManager getPersonEventManager() {
             return new PersonEventManager();
         }

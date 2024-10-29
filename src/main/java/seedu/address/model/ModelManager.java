@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -173,9 +174,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Event getEventByName(Event event) {
-        requireNonNull(event);
-        return addressBook.getEventByName(event);
+    public Event getEventByName(Name name) {
+        requireNonNull(name);
+        return addressBook.getEventByName(name);
     }
 
     //=========== Filtered Event List Accessors =============================================================

@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -34,12 +35,12 @@ public class LinkPersonCommand extends Command {
     public static final String MESSAGE_EVENT_NOT_FOUND = "This event does not exist in the address book";
 
     private final Index index;
-    private final Event event;
+    private final Name event;
 
     /**
      * Creates a LinkPersonCommand to link the specified {@code Person} with the specified {@code Event}
      */
-    public LinkPersonCommand(Index index, Event event) {
+    public LinkPersonCommand(Index index, Name event) {
         requireNonNull(index);
         requireNonNull(event);
         this.index = index;
@@ -50,18 +51,6 @@ public class LinkPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Event> lastShownEventList = model.getFilteredEventList();
-        Event eventToLink2;
-
-        if (lastShownEventList.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_NO_EVENTS);
-        }
-
-        for (Event e : lastShownEventList) {
-            if (e.getName().equals(event.getName())) {
-                eventToLink2 = e;
-            }
-        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -78,9 +67,33 @@ public class LinkPersonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        personToLink = copyPerson(personToLink);
+        eventToLink = copyEvent(eventToLink);
+
         model.linkPersonToEvent(personToLink, eventToLink);
 
         return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, Messages.format(eventToLink)));
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code person}
+     */
+    public Person copyPerson(Person person) {
+        return new Person(person.getName(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getAddress(),
+                person.getTags());
+    }
+
+    /**
+     * Creates and returns a {@code Event} with the details of {@code event}
+     */
+    public Event copyEvent(Event event) {
+        return new Event(event.getName(),
+                event.getLocation(),
+                event.getStartTime(),
+                event.getTags());
     }
 
     @Override
