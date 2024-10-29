@@ -498,6 +498,39 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a new student
+
+**Note:** You are encouraged to follow the test cases in order to see the expected results
+
+1. Adding a new student with all parameters specified
+
+   1. Simply type `add` into the command box and click `Enter`.
+
+   1. Copy the example shown together with the error message in the result display area.
+
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Sunday-1000-1200 
+   s/Biology r/120 paid/6000 owed/3000`.
+
+1. Adding a new student with only compulsory parameters specified, order changed and case-insensitive command words
+
+   1. Test case: `aDD n/A Lucky Tester t/Sunday-1000-1200 s/Biology r/500 p/87903288 e/ilovecs2103t@nus.edu.sg a/COM2`.
+   
+   1. Expected: The student is successfully added.
+
+1. Adding a duplicated student
+
+   1. Test case: `add n/a lucky Tester p/87903288 e/suchANiceApp@meta.sg a/COM1 B1 r/10 paid/0 owed/0 t/Tuesday-1500-1600
+   s/Physics`.
+
+   1. Expected: An error message shown: `This student already exists in the address book`. You can then refer [Finding a
+student]() to search for student details.
+
+1. Adding a new student with a clashing schedule
+
+   1. Test case: `add n/software Developer p/65894545 e/coderwithoutbug@gmail.com a/Jurong West Condo r/100 t/Sunday-1130-1330 s/PE`
+
+   1. Expected: The new student is successfully added with a warning message.
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
