@@ -64,7 +64,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_CLASHING_LESSON = "This time slot is clashes with the following lessons: \n";
+    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons: \n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -120,14 +120,14 @@ public class EditCommand extends Command {
                         + "| Conflict: Clashes with another student's lesson",
                         editedPerson.getName(), editedPerson.getLessons().toString());
                 logger.info(logMessage);
-                StringBuilder sb = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
+                StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
                 resultMap.keySet().forEach(student -> {
-                    sb.append(student.getName()).append(": ");
+                    clashMsg.append(student.getName()).append(": ");
 
-                    resultMap.get(student).forEach(ls -> sb.append(ls.getDayAndTime()).append(" "));
-                    sb.append("\n");
+                    resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
+                    clashMsg.append("\n");
                 });
-                throw new CommandException(sb.toString());
+                throw new CommandException(clashMsg.toString());
             }
         }
 

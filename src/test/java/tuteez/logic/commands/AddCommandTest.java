@@ -267,6 +267,5 @@ public class AddCommandTest {
             return clashingLessonMap;
         }
 
-
     }
 }
