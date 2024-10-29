@@ -1,7 +1,6 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_FLAGS;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
@@ -207,24 +206,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code ArgumentMultimap argMultimap} into a {@code Set<Id>}.
+     * Parses {@code ArgumentMultimap argMultimap} for flag(s), into a {@code CommandFlag}.
      */
     public static CommandFlag parseFlags(ArgumentMultimap argMultimap) throws ParseException {
-        boolean isClientPresent = argMultimap.getValue(FLAG_CLIENT).isPresent();
-        boolean isVendorPresent = argMultimap.getValue(FLAG_VENDOR).isPresent();
-        boolean isEventPresent = argMultimap.getValue(FLAG_EVENT).isPresent();
 
         // Check if exactly one flag is present
-        if ((isClientPresent && isVendorPresent) || (isClientPresent && isEventPresent) || (
-                isVendorPresent && isEventPresent)) {
-            throw new ParseException(MESSAGE_MULTIPLE_FLAGS);
-        }
+        argMultimap.verifyNoExclusivePrefixesFor(FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
 
-        if (isClientPresent) {
+        if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
             return CLIENT;
-        } else if (isVendorPresent) {
+        } else if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
             return VENDOR;
-        } else if (isEventPresent) {
+        } else if (argMultimap.getValue(FLAG_EVENT).isPresent()) {
             return EVENT;
         } else {
             return null;

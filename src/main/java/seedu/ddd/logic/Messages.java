@@ -17,8 +17,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n\n%1$s";
-    public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c or -v or -e %1$s";
-    public static final String MESSAGE_MULTIPLE_FLAGS = "Multiple flags specified. Use -c OR -v OR -e %1$s";
+    public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c OR -v OR -e %1$s";
+    public static final String MESSAGE_MULTIPLE_FLAGS = "Multiple flags specified. Use one of -c OR -v OR -e %1$s";
     public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";

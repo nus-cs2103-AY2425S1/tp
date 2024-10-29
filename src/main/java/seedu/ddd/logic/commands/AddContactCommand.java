@@ -22,9 +22,7 @@ import seedu.ddd.model.contact.vendor.Vendor;
 /**
  * Adds a contact to the address book.
  */
-public class AddContactCommand extends Command {
-
-    public static final String COMMAND_WORD = "add";
+public class AddContactCommand extends Command implements AddCommand {
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds a contact.";
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " {"
             + FLAG_CLIENT + "| "
@@ -71,7 +69,7 @@ public class AddContactCommand extends Command {
     private final Contact toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Contact}
+     * Creates an AddContactCommand to add the specified {@code Contact}
      */
     public AddContactCommand(Contact contact) {
         requireNonNull(contact);

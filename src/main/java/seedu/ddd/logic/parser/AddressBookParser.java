@@ -1,7 +1,13 @@
 package seedu.ddd.logic.parser;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_FLAGS;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ddd.logic.commands.AddCommand.FLAG_PARSE_ERROR;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.ParserUtil.parseFlags;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -50,11 +56,32 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        ArgumentMultimap flagMultimap = ArgumentTokenizer.tokenize(arguments, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+        CommandFlag commandFlag = parseFlags(flagMultimap);
+
         switch (commandWord) {
 
-        // I wish to change this to another one but i don't know where to store the constant
         case AddContactCommand.COMMAND_WORD:
-            return new AddCommandFlagParser().parse(arguments);
+
+            if (commandFlag == null) {
+                throw new ParseException(String.format(MESSAGE_INVALID_FLAGS, FLAG_PARSE_ERROR));
+            }
+
+            switch(commandFlag) {
+
+            case CLIENT:
+                return new AddClientCommandParser().parse(arguments);
+
+            case VENDOR:
+                return new AddVendorCommandParser().parse(arguments);
+
+            case EVENT:
+                return new AddEventCommandParser().parse(arguments);
+
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -79,5 +106,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

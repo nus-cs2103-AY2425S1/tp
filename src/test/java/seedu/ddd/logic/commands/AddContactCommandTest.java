@@ -66,7 +66,8 @@ public class AddContactCommandTest {
         AddContactCommand addContactCommand = new AddContactCommand(validClient);
         ModelStub modelStub = new ModelStubWithContact(validClient);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_CONTACT, () -> addContactCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddContactCommand.MESSAGE_DUPLICATE_CONTACT, () -> addContactCommand.execute(modelStub));
     }
 
     @Test
@@ -75,7 +76,8 @@ public class AddContactCommandTest {
         AddContactCommand addContactCommand = new AddContactCommand(validVendor);
         ModelStub modelStub = new ModelStubWithContact(validVendor);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_CONTACT, () -> addContactCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddContactCommand.MESSAGE_DUPLICATE_CONTACT, () -> addContactCommand.execute(modelStub));
     }
 
     @Test
