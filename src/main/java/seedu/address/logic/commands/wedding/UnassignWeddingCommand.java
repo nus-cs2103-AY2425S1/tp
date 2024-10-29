@@ -24,6 +24,8 @@ import seedu.address.model.wedding.Wedding;
 public class UnassignWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign-wedding";
 
+    public static final String COMMAND_KEYWORD = "uw";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple weddings from the person identified "
             + "by the index number used in the last person listing.\n"

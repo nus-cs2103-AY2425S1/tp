@@ -18,6 +18,8 @@ public class CreateWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "create-wedding";
 
+    public static final String COMMAND_KEYWORD = "cw";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a wedding in the address book. "
             + "Wedding names are case sensitive.\n"
             + "Parameters: "

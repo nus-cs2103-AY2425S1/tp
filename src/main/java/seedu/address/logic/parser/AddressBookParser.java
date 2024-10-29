@@ -76,21 +76,30 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD -> new ClearCommand();
         case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD -> new ListCommand();
-        case ListWeddingsCommand.COMMAND_WORD -> new ListWeddingsCommand();
+        case ListWeddingsCommand.COMMAND_WORD, ListWeddingsCommand.COMMAND_KEYWORD -> new ListWeddingsCommand();
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
-        case CreateTagCommand.COMMAND_WORD -> new CreateTagCommandParser().parse(arguments);
-        case DeleteTagCommand.COMMAND_WORD -> new DeleteTagCommandParser().parse(arguments);
-        case EditWeddingCommand.COMMAND_WORD -> new EditWeddingCommandParser().parse(arguments);
-        case CreateWeddingCommand.COMMAND_WORD -> new CreateWeddingCommandParser().parse(arguments);
-        case DeleteWeddingCommand.COMMAND_WORD -> new DeleteWeddingCommandParser().parse(arguments);
+        case CreateTagCommand.COMMAND_WORD, CreateTagCommand.COMMAND_KEYWORD
+                -> new CreateTagCommandParser().parse(arguments);
+        case DeleteTagCommand.COMMAND_WORD, DeleteTagCommand.COMMAND_KEYWORD
+                -> new DeleteTagCommandParser().parse(arguments);
+        case EditWeddingCommand.COMMAND_WORD, EditWeddingCommand.COMMAND_KEYWORD
+                -> new EditWeddingCommandParser().parse(arguments);
+        case CreateWeddingCommand.COMMAND_WORD, CreateWeddingCommand.COMMAND_KEYWORD
+                -> new CreateWeddingCommandParser().parse(arguments);
+        case DeleteWeddingCommand.COMMAND_WORD, DeleteWeddingCommand.COMMAND_KEYWORD
+                -> new DeleteWeddingCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD -> new TagCommandParser().parse(arguments);
         case UntagCommand.COMMAND_WORD -> new UntagCommandParser().parse(arguments);
-        case AssignWeddingCommand.COMMAND_WORD -> new AssignWeddingCommandParser().parse(arguments);
+        case AssignWeddingCommand.COMMAND_WORD, AssignWeddingCommand.COMMAND_KEYWORD
+                -> new AssignWeddingCommandParser().parse(arguments);
         case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
-        case CreateTaskCommand.COMMAND_WORD -> new CreateTaskCommandParser().parse(arguments);
-        case ListTasksCommand.COMMAND_WORD -> new ListTasksCommand();
-        case DeleteTaskCommand.COMMAND_WORD -> new DeleteTaskCommandParser().parse(arguments);
+        case CreateTaskCommand.COMMAND_WORD, CreateTaskCommand.COMMAND_KEYWORD
+                -> new CreateTaskCommandParser().parse(arguments);
+        case ListTasksCommand.COMMAND_WORD, ListTasksCommand.COMMAND_KEYWORD
+                -> new ListTasksCommand();
+        case DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.COMMAND_KEYWORD
+                -> new DeleteTaskCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
