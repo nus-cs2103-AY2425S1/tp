@@ -201,7 +201,7 @@ public class Event {
     }
 
     /**
-     * Removes a person from the event with the specified role.
+     * Removes a person from the event with the specified role that is known.
      * @param person Person to be removed.
      * @param role Role of the person.
      * @throws IllegalArgumentException If the person does not have the specified role.
@@ -232,6 +232,30 @@ public class Event {
 
         roleSet.remove(person);
 
+    }
+
+    /**
+     * Removes person from all roles if they are present in that role
+     * @param personToRemove Person that will be removed
+     */
+    public void removePerson(Person personToRemove) {
+        requireNonNull(personToRemove);
+        // check each set and see it contains the person to remove
+        if (attendees.contains(personToRemove)) {
+            attendees.remove(personToRemove);
+        }
+
+        if (vendors.contains(personToRemove)) {
+            vendors.remove(personToRemove);
+        }
+
+        if (sponsors.contains(personToRemove)) {
+            sponsors.remove(personToRemove);
+        }
+
+        if (volunteers.contains(personToRemove)) {
+            volunteers.remove(personToRemove);
+        }
     }
     @Override
     public boolean equals(Object other) { // equality of 2 events defined only by the event name
