@@ -33,7 +33,11 @@
                             <Insets top="5" right="5" bottom="3" left="5" />
                         </padding>
                     </HBox>
-                    <Separator />
+                    <Separator>
+                        <style>
+                            -fx-background-color: #1d1b1a;
+                        </style>
+                    </Separator>
                     <FlowPane fx:id="detailsTags" >
                         <padding>
                             <Insets top="10" bottom="8" left="5"/>
@@ -42,6 +46,9 @@
 
                     <HBox alignment="CENTER_LEFT">
                         <VBox alignment="CENTER_LEFT" spacing="10" minWidth="70">
+                            <padding>
+                                <Insets left="8" />
+                            </padding>
                             <Label text="Phone:" styleClass="details_field_headers" />
                             <Label text="Email:" styleClass="details_field_headers" />
                             <Label text="Remark:" styleClass="details_field_headers" />
