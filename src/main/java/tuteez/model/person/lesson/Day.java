@@ -18,15 +18,15 @@ public enum Day {
      */
     public static Day convertDayToEnum(String dayInStr) {
         return switch (dayInStr) {
-            case "monday", "mon" -> MONDAY;
-            case "tuesday", "tue" -> TUESDAY;
-            case "wednesday", "wed" -> WEDNESDAY;
-            case "thursday", "thu" -> THURSDAY;
-            case "friday", "fri" -> FRIDAY;
-            case "saturday", "sat" -> SATURDAY;
-            case "sunday", "sun" -> SUNDAY;
-            // Default case should not occur because input is validated before calling the method.
-            default -> throw new IllegalArgumentException("Invalid day string: " + dayInStr);
+        case "monday", "mon" -> MONDAY;
+        case "tuesday", "tue" -> TUESDAY;
+        case "wednesday", "wed" -> WEDNESDAY;
+        case "thursday", "thu" -> THURSDAY;
+        case "friday", "fri" -> FRIDAY;
+        case "saturday", "sat" -> SATURDAY;
+        case "sunday", "sun" -> SUNDAY;
+        // Default case should not occur because input is validated before calling the method.
+        default -> throw new IllegalArgumentException("Invalid day string: " + dayInStr);
         };
     }
 
