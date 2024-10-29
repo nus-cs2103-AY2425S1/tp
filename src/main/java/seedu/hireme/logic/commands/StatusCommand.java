@@ -1,6 +1,8 @@
 package seedu.hireme.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.hireme.logic.Messages.MESSAGE_INDEX_CONSTRAINT;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.function.Predicate;
 
@@ -30,11 +32,11 @@ public class StatusCommand extends Command {
      * Message to display for command usage instructions.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD_ACCEPT
-            + " / " + COMMAND_WORD_PENDING + " / " + COMMAND_WORD_REJECT
+            + " or " + COMMAND_WORD_PENDING + " or " + COMMAND_WORD_REJECT
             + ": Changes the status of the internship application identified by "
             + "the index number used in the displayed list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD_ACCEPT + " 1";
+            + "Parameters: INDEX (" + MESSAGE_INDEX_CONSTRAINT + ")\n"
+            + "Example: " + COMMAND_WORD_ACCEPT + " 5" + "    (if total number of applications is <= 5)";
 
     /**
      * Message to display upon successful status update.
@@ -71,7 +73,7 @@ public class StatusCommand extends Command {
                 ? Model.PREDICATE_SHOW_ALL : lastShownList.getPredicate();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         InternshipApplication internshipApplicationToUpdate = lastShownList.get(targetIndex.getZeroBased());

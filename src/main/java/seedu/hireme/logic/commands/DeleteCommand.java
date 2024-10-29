@@ -1,6 +1,8 @@
 package seedu.hireme.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.hireme.logic.Messages.MESSAGE_INDEX_CONSTRAINT;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the internship application identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (" + MESSAGE_INDEX_CONSTRAINT + ")\n"
+            + "Example: " + COMMAND_WORD + " 5" + "    (if total number of applications is <= 5)";
 
     public static final String MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS = "Deleted internship application: %1$s";
 
@@ -37,7 +39,7 @@ public class DeleteCommand extends Command {
         List<InternshipApplication> lastShownList = model.getFilteredList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         InternshipApplication internshipApplicationToDelete = lastShownList.get(targetIndex.getZeroBased());
