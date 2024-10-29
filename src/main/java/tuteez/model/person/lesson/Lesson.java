@@ -5,9 +5,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 
 
 /**
@@ -46,6 +44,24 @@ public class Lesson {
         this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
     }
 
+    private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
+    static {
+        DAY_NAME_MAP.put("monday", Day.MONDAY);
+        DAY_NAME_MAP.put("mon", Day.MONDAY);
+        DAY_NAME_MAP.put("tuesday", Day.TUESDAY);
+        DAY_NAME_MAP.put("tue", Day.TUESDAY);
+        DAY_NAME_MAP.put("wednesday", Day.WEDNESDAY);
+        DAY_NAME_MAP.put("wed", Day.WEDNESDAY);
+        DAY_NAME_MAP.put("thursday", Day.THURSDAY);
+        DAY_NAME_MAP.put("thu", Day.THURSDAY);
+        DAY_NAME_MAP.put("friday", Day.FRIDAY);
+        DAY_NAME_MAP.put("fri", Day.FRIDAY);
+        DAY_NAME_MAP.put("saturday", Day.SATURDAY);
+        DAY_NAME_MAP.put("sat", Day.SATURDAY);
+        DAY_NAME_MAP.put("sunday", Day.SUNDAY);
+        DAY_NAME_MAP.put("sun", Day.SUNDAY);
+    }
+
     /**
      * Validates if the day provided is valid (i.e., part of the defined Days enum).
      *
@@ -53,8 +69,7 @@ public class Lesson {
      * @return true if the day is valid.
      */
     private static boolean isValidDay(String day) {
-        return Arrays.stream(Day.values())
-                .anyMatch(d -> d.name().equalsIgnoreCase(day));
+        return DAY_NAME_MAP.containsKey(day.toLowerCase());
     }
 
     /**
@@ -146,7 +161,7 @@ public class Lesson {
      *
      * @param other The object to compare for equality.
      * @return {@code true} if the other object is a {@code Lesson} and has the same
-     *         start and end times as this lesson, {@code false} otherwise.
+     *         say, start and end times as this lesson, {@code false} otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -159,7 +174,9 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.startTime.equals(this.startTime) && otherLesson.endTime.equals(this.endTime);
+        return otherLesson.lessonDay.equals(this.lessonDay)
+                && otherLesson.startTime.equals(this.startTime)
+                && otherLesson.endTime.equals(this.endTime);
     }
 
     @Override

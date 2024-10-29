@@ -3,6 +3,7 @@ package tuteez.model.person.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tuteez.model.person.lesson.Lesson.isValidLesson;
 import static tuteez.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
@@ -49,6 +50,16 @@ public class LessonTest {
         assertTrue(Lesson.isClashingWithOtherLesson(l2, l1));
         assertTrue(Lesson.isClashingWithOtherLesson(l3, l4));
         assertTrue(Lesson.isClashingWithOtherLesson(l5, l6));
+    }
+
+    @Test
+    public void constructor_acceptsShortcutDayNames() {
+        String lessonWithShortCut = "mon 1200-1400";
+        Lesson l1 = new Lesson("monday 1200-1400");
+        Lesson l2 = new Lesson(lessonWithShortCut);
+
+        assertTrue(isValidLesson(lessonWithShortCut));
+        assertEquals(l1, l2);
     }
 
     @Test
