@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
@@ -27,6 +26,9 @@ public class ClearCommand extends Command {
     protected static boolean isPrompted;
     protected static boolean isConfirmed;
 
+    /**
+     * Creates a ClearCommand and initialises the prompt and confirmation status to false.
+     */
     public ClearCommand() {
         isPrompted = false;
         isConfirmed = false;
