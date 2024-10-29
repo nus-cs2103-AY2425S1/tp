@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import java.util.logging.Logger;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -10,8 +9,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
@@ -75,7 +79,7 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
             Predicate<Person> telegramPred = new FieldContainsKeywordsPredicate<>(
                     Collections.singletonList(telegram),
                     Person::getTelegramUsername);
-           predicates.add(telegramPred);
+            predicates.add(telegramPred);
         }
         //role have to use separate predicate
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
