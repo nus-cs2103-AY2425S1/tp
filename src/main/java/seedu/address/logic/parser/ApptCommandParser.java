@@ -39,9 +39,9 @@ public class ApptCommandParser implements Parser<ApptCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC);
         String dateTime = argMultimap.getValue(PREFIX_DATETIME).get();
-        String healthServie = argMultimap.getValue(PREFIX_HEALTHSERVICE).get();
+        String healthService = argMultimap.getValue(PREFIX_HEALTHSERVICE).get();
 
-        Appt appt = ParserUtil.parseSingleAppt(dateTime, healthServie);
+        Appt appt = ParserUtil.parseSingleAppt(dateTime, healthService);
         Nric nric = new Nric(argMultimap.getValue(PREFIX_NRIC).get());
 
         return new ApptCommand(appt, nric);
