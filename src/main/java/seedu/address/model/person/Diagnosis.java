@@ -9,11 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Diagnosis {
     public static final String MESSAGE_CONSTRAINTS =
-            "DIAGNOSIS can only contain alphabets and the following special characters -> ,.()/- "
+            "DIAGNOSIS can only contain alphabets and the following special characters -> .()/- "
                     + "(e.g., - A. fib (Atrial Fibrillation).\n"
                     + "It can be an empty string at the point of initialisation, as diagnosis may not be done yet.\n";
-    public static final String VALIDATION_MESSAGE = "Diagnosis must be between 1 and 100 characters long and can include alphanumeric characters, spaces, periods, parentheses, commas, dashes, and slashes. An empty string is also allowed.";
-    public static final String VALIDATION_REGEX = "^(?:[A-Za-z0-9\\s.()/,-]{1,100}|)$";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9\\s.()/-]*|^$";
     public final String value;
 
     /**
