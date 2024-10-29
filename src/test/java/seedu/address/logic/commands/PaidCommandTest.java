@@ -1,4 +1,3 @@
-/*
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_INSURANCE_PAYMENT;
@@ -16,6 +15,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Policy;
 import seedu.address.testutil.PersonBuilder;
-import java.util.List;
+
 public class PaidCommandTest {
 
     private Model model;
@@ -91,4 +92,3 @@ public class PaidCommandTest {
     }
 
 }
-*/

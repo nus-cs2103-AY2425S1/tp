@@ -65,6 +65,11 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withAppointment(VALID_APPOINTMENT_BOB).withBirthday(VALID_BIRTHDAY_BOB)
             .build();
+    public static final Person BENSON_WITH_POLICY = new PersonBuilder().withName("Benson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withBirthday("1990-10-10")
+            .withTags("owesMoney", "friends").withPolicies("health insurance", "life insurance").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
