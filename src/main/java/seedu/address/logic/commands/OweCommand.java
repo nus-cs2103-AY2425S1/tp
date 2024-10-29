@@ -101,7 +101,7 @@ public class OweCommand extends Command {
     private static OwedAmount updateOwedAmount(Student student, double hour) {
         assert student != null && hour % 0.5 == 0;
         double updatedOwedAmount = student.getOwedAmount().value + calculateOwed(student, hour);
-        return new OwedAmount(Double.toString(updatedOwedAmount));
+        return new OwedAmount(String.format("%.2f", updatedOwedAmount));
     }
 
     private static double calculateOwed(Student student, double hour) {
