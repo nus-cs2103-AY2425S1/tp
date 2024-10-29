@@ -63,15 +63,17 @@ public class AutoSuggestionTextField extends TextField {
         suggestionPopup.getScene().setRoot(suggestionList);
         suggestionPopup.setAutoHide(true); // Auto hide when clicking outside
 
+
         // Listen for text changes
         textProperty().addListener((obs, oldText, newText) -> {
-            if (newText != null && !newText.isEmpty()) {
-                showSuggestions(newText.split("\\s+")[0]);
-                double height = calculateListViewHeight(textFlowItems);
-                double width = calculateListViewWidth(textFlowItems);
-                suggestionList.setPrefHeight(height);
-                suggestionList.setMaxHeight(height);
-                suggestionList.setPrefWidth(width);
+            if (!newText.isEmpty()) {
+                String[] text = newText.split("\\s+");
+                String command = text[0];
+                boolean hasParams = false;
+                if (text.length > 1 || newText.contains(" ")) {
+                    hasParams = true;
+                }
+                showSuggestions(command, hasParams);
             } else {
                 suggestionPopup.hide();
             }
@@ -174,12 +176,11 @@ public class AutoSuggestionTextField extends TextField {
         if (selectedTextFlow != null) {
             if (selectedTextFlow instanceof CommandTextFlow) {
                 CommandTextFlow commandFlow = (CommandTextFlow) selectedTextFlow;
-                // Use the getCommandText() method to get just the command
                 setText(commandFlow.getCommandText());
                 this.positionCaret(commandFlow.getCommandText().length());
-                if (suggestionPopup.isShowing()) {
-                    suggestionPopup.hide();
-                }
+                //if (suggestionPopup.isShowing()) {
+                //    suggestionPopup.hide();
+                //}
             }
         }
     }
@@ -190,20 +191,27 @@ public class AutoSuggestionTextField extends TextField {
      *
      * @param input The current input text from the TextField.
      */
-    private void showSuggestions(String input) {
+    private void showSuggestions(String input, boolean hasParams) {
         textFlowItems = FXCollections.observableArrayList(
                 // Filter suggestions based on the input
                 popUpFilter(commandSet, input).stream()
                         .map(s -> new CommandTextFlow(s, input))
                         .toList());
+        if (input.toLowerCase().equals("edit") && hasParams) {
+            textFlowItems.remove(1);
+        }
         suggestionList.setItems(textFlowItems);
-
         if (suggestionList.getItems().isEmpty()) {
             suggestionPopup.hide();
         }
         // Calculate the position of the popup
         Point2D location = localToScreen(0, getHeight());
         suggestionPopup.show(this, location.getX(), location.getY());
+        double height = calculateListViewHeight(textFlowItems);
+        double width = calculateListViewWidth(textFlowItems);
+        suggestionList.setPrefHeight(height);
+        suggestionList.setMaxHeight(height);
+        suggestionList.setPrefWidth(width);
     }
 
     /**
