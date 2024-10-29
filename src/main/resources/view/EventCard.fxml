@@ -21,9 +21,19 @@
       </HBox>
       <Separator styleClass="card-pane-divider" />
 
+      <Label fx:id="description" styleClass="card-description" text="\$description" />
       <VBox styleClass="card-details-container">
-        <Label fx:id="description" styleClass="card-details" text="\$description" />
+        <Label fx:id="date" styleClass="card-details" text="\$date" />
       </VBox>
+
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="card-details" text="👨  Clients:" />
+        <FlowPane fx:id="clients" styleClass="card-clients" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="card-details" text="👨  Vendors:" />
+        <FlowPane fx:id="vendors" styleClass="card-vendors" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>
