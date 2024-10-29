@@ -12,15 +12,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
-import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
-import seedu.address.model.tag.Tag;
 
 /**
  * Unmatches a contact from their job.
@@ -30,7 +26,7 @@ public class UnmatchCommand extends Command {
     public static final int JOB_INDEX_POS = 1;
     public static final String COMMAND_WORD = "unmatch";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Unmatch a contact to a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
+            COMMAND_WORD + ": Unmatch a contact from a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
                     + COMMAND_WORD + " 2 1";
 
     public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
@@ -76,14 +72,12 @@ public class UnmatchCommand extends Command {
 
         // Proceed with unmatching the contact from the job
         Person unmatchedContact = unmatchContactFromJob(contactToUnmatch);
-        Job unmatchedJob = unmatchJobFromContact(jobToUnmatch, contactToUnmatch.getIdentifier());
 
         // Update the model with the unmatched contact and job
         model.setPerson(contactToUnmatch, unmatchedContact);
-        model.setJob(jobToUnmatch, unmatchedJob);
 
         return new CommandResult(
-                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact), Messages.format(unmatchedJob))
+                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact), Messages.format(jobToUnmatch))
         );
     }
 
@@ -100,20 +94,6 @@ public class UnmatchCommand extends Command {
     }
 
     /**
-     * Removes the contact from the job's match list.
-     */
-    private static Job unmatchJobFromContact(Job job, String contactIdentifier) {
-        Name name = job.getName();
-        JobCompany company = job.getCompany();
-        JobSalary salary = job.getSalary();
-        JobDescription description = job.getDescription();
-        Set<Tag> requirements = job.getRequirements();
-        Set<String> matches = job.getMatches();
-        matches.remove(contactIdentifier);
-        return new Job(name, company, salary, description, requirements, matches);
-    }
-
-    /**
      * Validates that the contact and job are matched to each other and that both
      * entities have relevant matches.
      */
@@ -124,14 +104,9 @@ public class UnmatchCommand extends Command {
         }
 
         boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
-        boolean hasJobMatchedContact = jobToUnmatch.hasMatched(contactToUnmatch.getIdentifier());
-
-        // Assert to ensure that both entities are symmetrically matched (this should never happen in the system)
-        assert hasContactMatchedJob == hasJobMatchedContact
-              : "Mismatched state: Contact and job matching is asymmetric";
 
         // Check and ensure the contact and job are matched to each other before unmatching
-        if (!(hasContactMatchedJob && hasJobMatchedContact)) {
+        if (!(hasContactMatchedJob)) {
             throw new CommandException(MESSAGE_CONTACT_NOT_MATCHED);
         }
     }

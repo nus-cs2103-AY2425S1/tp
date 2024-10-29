@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -56,7 +55,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
         JobDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> requirements = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REQUIREMENTS));
 
-        Job job = new Job(name, company, salary, description, requirements, new HashSet<>());
+        Job job = new Job(name, company, salary, description, requirements);
 
         return new AddJobCommand(job);
     }
