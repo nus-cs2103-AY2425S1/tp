@@ -42,6 +42,8 @@ import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.EditWeddingCommand;
+import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -279,6 +281,24 @@ public class AddressBookParserTest {
         String userKeywordInput = UnassignWeddingCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased()
                 + " w/Wedding 19 w/Joe's Wedding";
         UnassignWeddingCommand keywordCommand = (UnassignWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
+    }
+
+    @Test
+    public void parseCommand_editWedding() throws Exception {
+        String newWeddingParameter = " w/New Wedding Name";
+        String userInput = EditWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + newWeddingParameter;
+        EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
+        editWeddingDescriptor.setWeddingName(new WeddingName("New Wedding Name"));
+        EditWeddingCommand expectedCommand = new EditWeddingCommand(INDEX_FIRST, editWeddingDescriptor);
+
+        EditWeddingCommand command = (EditWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+
+        // Test using edit wedding keyword
+        String userKeywordInput = EditWeddingCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased()
+                + newWeddingParameter;
+        EditWeddingCommand keywordCommand = (EditWeddingCommand) parser.parseCommand(userKeywordInput);
         assertEquals(expectedCommand, keywordCommand);
     }
 
