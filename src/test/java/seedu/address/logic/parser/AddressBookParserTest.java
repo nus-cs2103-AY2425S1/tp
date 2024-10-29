@@ -35,6 +35,7 @@ import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
+    private static final String VALID_ATTRIBUTE = "date";
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
@@ -108,12 +109,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_ascendingSort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD_ASCENDING) instanceof SortCommand);
+        String userInput = SortCommand.COMMAND_WORD_ASCENDING + " " + CliSyntax.PREFIX_SORT + " " + VALID_ATTRIBUTE;
+        assertTrue(parser.parseCommand(userInput) instanceof SortCommand);
     }
 
     @Test
     public void parseCommand_descendingSort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD_DESCENDING) instanceof SortCommand);
+        String userInput = SortCommand.COMMAND_WORD_DESCENDING + " " + CliSyntax.PREFIX_SORT + " " + VALID_ATTRIBUTE;
+        assertTrue(parser.parseCommand(userInput) instanceof SortCommand);
     }
 
     @Test

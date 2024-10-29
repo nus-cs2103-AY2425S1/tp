@@ -17,20 +17,34 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD_ASCENDING = "asort";
     public static final String COMMAND_WORD_DESCENDING = "dsort";
 
-    public static final String MESSAGE_FAILURE = "Sort only works in inspect window!";
-    public static final String MESSAGE_SUCCESS = "Deliveries have been sorted by ";
+    public static final String MESSAGE_SUCCESS_MAIN = "Contacts have been sorted by ";
+    public static final String MESSAGE_SUCCESS_INSPECT = "Deliveries have been sorted by ";
 
-    public static final String MESSAGE_USAGE_ASCENDING = COMMAND_WORD_ASCENDING
+    public static final String MESSAGE_USAGE_ASCENDING_MAIN = COMMAND_WORD_ASCENDING
+            + ": Sorts contacts by the specified attribute in ascending order. "
+            + "Parameters: "
+            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. date (default), email, name, phone, role, id)";
+
+    public static final String MESSAGE_USAGE_DESCENDING_MAIN = COMMAND_WORD_DESCENDING
+            + ": Sorts contacts by the specified attribute in descending order. "
+            + "Parameters: "
+            + PREFIX_SORT + " CONTACT_ATTRIBUTE (e.g. date (default), email, name, phone, role, id)";
+
+    public static final String MESSAGE_USAGE_ASCENDING_INSPECT = COMMAND_WORD_ASCENDING
             + ": Sorts deliveries by the specified attribute in ascending order. "
             + "Parameters: "
-            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date, eta, id, status)";
-    public static final String MESSAGE_USAGE_DESCENDING = COMMAND_WORD_DESCENDING
+            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)";
+
+    public static final String MESSAGE_USAGE_DESCENDING_INSPECT = COMMAND_WORD_DESCENDING
             + ": Sorts deliveries by the specified attribute in descending order. "
             + "Parameters: "
-            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date, eta, id, status)";
+            + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date (default), eta, id, status)";
 
-    public static final String MESSAGE_UNKNOWN_ATTRIBUTE = "The delivery attribute specified is unknown! "
-            + "Current attributes supported are: address, cost, date, eta, id, status";
+    public static final String MESSAGE_UNKNOWN_ATTRIBUTE_MAIN = "The contact attribute specified is unknown! "
+            + "Current attributes supported are: date (default), email, name, phone, role";
+
+    public static final String MESSAGE_UNKNOWN_ATTRIBUTE_INSPECT = "The delivery attribute specified is unknown! "
+            + "Current attributes supported are: address, cost, date (default), eta, id, status";
 
     private final String attribute;
     private final boolean isAscending;
@@ -49,7 +63,33 @@ public class SortCommand extends Command {
         requireNonNull(model);
 
         if (!AddressBookParser.getInspect()) {
-            return new CommandResult(MESSAGE_FAILURE);
+            switch (this.attribute) {
+            case "date":
+                model.sortByDate();
+                break;
+            case "email":
+                model.sortByEmail();
+                break;
+            case "name":
+                model.sortByName();
+                break;
+            case "phone":
+                model.sortByPhone();
+                break;
+            case "role":
+                model.sortByRole();
+                break;
+            default:
+                // This should never happen since we have already parsed the attribute.
+                throw new CommandException(MESSAGE_UNKNOWN_ATTRIBUTE_MAIN);
+            }
+
+            if (!isAscending) {
+                model.reversePersonList();
+            }
+
+            return new CommandResult(MESSAGE_SUCCESS_MAIN + (this.isAscending ? "ascending " : "descending ")
+                    + this.attribute);
         } else {
             Person inspectedPerson = InspectWindow.getInspectedPerson();
             DeliveryList deliveryList = inspectedPerson.getDeliveryList();
@@ -74,14 +114,14 @@ public class SortCommand extends Command {
                 break;
             default:
                 // This should never happen since we have already parsed the attribute.
-                throw new CommandException(MESSAGE_UNKNOWN_ATTRIBUTE);
+                throw new CommandException(MESSAGE_UNKNOWN_ATTRIBUTE_INSPECT);
             }
 
             if (!isAscending) {
                 deliveryList.reverseDeliveryList();
             }
 
-            return new CommandResult(MESSAGE_SUCCESS + (this.isAscending ? "ascending " : "descending ")
+            return new CommandResult(MESSAGE_SUCCESS_INSPECT + (this.isAscending ? "ascending " : "descending ")
                     + this.attribute);
         }
     }
