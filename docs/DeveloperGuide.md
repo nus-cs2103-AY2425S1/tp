@@ -751,6 +751,38 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+### Adding an appointment
+
+1. Adding an appointment for a doctor and patient
+
+    1. Prerequisites: Ensure at least one doctor and one patient are added to the system.
+
+    1. Test case: `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`  
+       Expected: Appointment is successfully added for the doctor and patient. Confirmation message shows details of the appointment.
+
+    1. Test case: `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100` (Duplicate appointment)  
+       Expected: Error message indicating the appointment already exists at the same date and time for the doctor and patient.
+
+2. Adding an appointment with an invalid date or time 
+   1. Test case: `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/`  
+      Expected: Error message indicating command format is wrong. No appointment is added.
+
+### Deleting an appointment
+
+1. Deleting an appointment that exists
+
+    1. Prerequisites: Add an appointment for a doctor and patient using the `add-appt` command or appointment already exists.
+
+    1. Test case: `delete-appt UNIQUE_ID`  
+       Expected: Appointment is successfully deleted. Confirmation message shows details of the deleted appointment.
+
+    1. Test case: `delete-appt UNIQUE_ID` (Appointment already deleted)  
+       Expected: Error message indicating the appointment does not exist.
+
+2. Deleting an appointment with an invalid id
+
+    1. Test case: `delete-appt UNIQUE_ID`  
+       Expected: Error message indicating an invalid id. No appointment is deleted.
 
 1. _{ more test cases …​ }_
 
