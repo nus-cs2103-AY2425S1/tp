@@ -17,7 +17,12 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book sorted in alphabetical order";
     public static final String HELP_SORT_COMMAND = "Sort Command\n"
             + "- Format: sort\n"
-            + "- Example: sort";
+            + "- Example: sort\n"
+            + "Using the sort command will arrange all persons in the address book in alphabetical order by name. "
+            + "The list will remain in this sorted order even after restarting the application. "
+            + "To view the list in its original order (by the sequence in which persons were added), "
+            + "use the list command.";
+
 
 
     @Override
