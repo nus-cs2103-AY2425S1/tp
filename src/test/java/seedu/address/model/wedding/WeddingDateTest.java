@@ -1,2 +1,5 @@
-package seedu.address.model.wedding;public class WeddingDateTest {
+package seedu.address.model.wedding;
+
+public class WeddingDateTest {
+
 }
