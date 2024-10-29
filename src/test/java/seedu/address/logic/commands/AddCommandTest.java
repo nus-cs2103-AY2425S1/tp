@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.TagColors;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -176,7 +177,7 @@ public class AddCommandTest {
 
         @Override
         public ActiveTags getActiveTags() {
-            return new ActiveTags(new HashMap<>(), new String[]{});
+            return new ActiveTags(new HashMap<>(), new TagColors());
         }
 
         @Override
