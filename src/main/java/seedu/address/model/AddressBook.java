@@ -126,12 +126,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts the list of contacts by specified field and order.
+     * Sorts the list of contacts by specified field and order with pinned contacts first.
      */
     public void sortPersonList() {
+        List<Person> pinnedPersons = persons.filtered(Person::isPinned);
+        List<Person> unpinnedPersons = persons.filtered(person -> !person.isPinned());
+
         if (sortComparator != null) {
-            persons.sort(sortComparator);
+            pinnedPersons.sort(sortComparator);
+            unpinnedPersons.sort(sortComparator);
         }
+
+        persons.setPersons(pinnedPersons);
+        persons.addAll(unpinnedPersons);
     }
 
     /**
