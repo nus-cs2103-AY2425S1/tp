@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public class PersonComparator {
     public static final String NAME = "name";
-    public static final String DATE_OF_LAST_VISIT = "dateoflastvisit";
+    public static final String DATE_OF_LAST_VISIT = "date of last visit";
     public static final String EARLIEST_VALID_DATE = "01-01-0001";
     public static final String LATEST_VALID_DATE = "31-12-9999";
     private static final String SORT_EXCEPTION = "The specified parameter is invalid.";

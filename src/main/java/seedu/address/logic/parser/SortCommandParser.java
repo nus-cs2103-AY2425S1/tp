@@ -9,15 +9,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonComparator;
+
 
 /**
  * Parses input arguments and creates a new SortCommand Object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
     private static final Prefix[] INVALID_PREFIXES = {PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TAG};
+    private static final Set<String> VALID_ASCEND_STRINGS = Set.of("", "a", "asc", "ascend", "ascending");
+    private static final Set<String> VALID_DESCEND_STRINGS = Set.of("d", "desc", "descend", "descending");
 
     /**
      * Checks if the given {@code String} of arguments is valid
@@ -52,13 +57,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
     }
 
-    private final boolean isAscending(String s) throws ParseException {
-        if (s.isEmpty()) {
+    private boolean isAscending(String s) throws ParseException {
+        if (VALID_ASCEND_STRINGS.contains(s)) {
             return true;
-        }
-        if (s.equals("asc") || s.equals("ascending")) {
-            return true;
-        } else if (s.equals("desc") || s.equals("descending")) {
+        } else if (VALID_DESCEND_STRINGS.contains(s)) {
             return false;
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
