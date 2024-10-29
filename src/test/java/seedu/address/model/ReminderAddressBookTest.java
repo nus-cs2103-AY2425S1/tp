@@ -86,6 +86,13 @@ public class ReminderAddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> reminderAddressBook.getReminderList().remove(0));
     }
 
+    @Test
+    public void toStringMethod() {
+        String expected = ReminderAddressBook.class.getCanonicalName()
+                          + "{reminders=" + reminderAddressBook.getReminderList() + "}";
+        assertEquals(expected, reminderAddressBook.toString());
+    }
+
     /**
      * A stub ReadOnlyReminderAddressBook whose reminders list can violate interface constraints.
      */

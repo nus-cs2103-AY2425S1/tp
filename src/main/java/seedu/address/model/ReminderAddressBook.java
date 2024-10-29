@@ -86,7 +86,7 @@ public class ReminderAddressBook implements ReadOnlyReminderAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("reminder", reminderList)
+                .add("reminders", reminderList)
                 .toString();
     }
 
