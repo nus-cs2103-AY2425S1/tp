@@ -41,6 +41,16 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommandForAddress =
                 new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
         assertParseSuccess(parser, " a/Wall Street_Michigan", expectedFindCommandForAddress);
+
+        // name contains 'n/' prefix
+        FindCommand expectedFindCommandNameContainsPrefix =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("n/Alice", "Bobn/")));
+        assertParseSuccess(parser, " n/n/Alice Bobn/", expectedFindCommandNameContainsPrefix);
+
+        // address contains 'a/' prefix
+        FindCommand expectedFindCommandAddressContainsPrefix =
+                new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Walla/ Street")));
+        assertParseSuccess(parser, " a/Walla/ Street", expectedFindCommandAddressContainsPrefix);
     }
 
 }
