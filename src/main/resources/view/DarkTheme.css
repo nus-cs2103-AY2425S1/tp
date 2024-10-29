@@ -420,3 +420,18 @@
 .consultation-card-strikethrough .text {
     -fx-strikethrough: true;
 }
+
+#students .label.lesson-card-has-attendance {
+    -fx-background-color: #275918;
+}
+
+#students .label.lesson-card-no-attendance {
+    -fx-background-color: #CF4748;
+}
+
+#students .label.participation-score {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-padding: 2 4;
+    -fx-effect: none;
+}
