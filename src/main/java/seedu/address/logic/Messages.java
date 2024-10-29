@@ -24,6 +24,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_HAS_CLASHES = "\nYou have %d other students with clashing schedule:\n%s";
     public static final String MESSAGE_REMINDER = "Reminder(s) for %s:\n";
+    public static final String MESSAGE_LIMIT = "The input/output exceeds the max allowable limit of 9,999,999.99";
 
 
     /**

@@ -80,7 +80,7 @@ public class PayCommand extends Command {
      * Creates and returns a {@code Student} with the paid attribute of {@code studentToEdit}
      * updated with {@code amountPaid}.
      */
-    private static Student createEditedStudent(Student studentToEdit, double amountPaid) {
+    private static Student createEditedStudent(Student studentToEdit, double amountPaid) throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = studentToEdit.getName();
@@ -102,16 +102,22 @@ public class PayCommand extends Command {
     /**
      * Updates the paid amount of the student based on the hours the student paid.
      */
-    private static PaidAmount updatePaidAmount(Student student, double amountPaid) {
+    private static PaidAmount updatePaidAmount(Student student, double amountPaid) throws CommandException {
         assert student != null && amountPaid > 0;
         double updatedPaid = student.getPaidAmount().value + amountPaid;
-        String amount = Double.toString(updatedPaid);
+        if (!PaidAmount.isValidPaidAmount(updatedPaid)) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
+        }
+        String amount = String.format("%.2f", updatedPaid);
 
         return new PaidAmount(amount);
     }
 
-    private static double calculatePaid(Student student, double hour) {
+    private static double calculatePaid(Student student, double hour) throws CommandException {
         double paid = student.getRate().value * hour;
+        if (!PaidAmount.isValidPaidAmount(paid)) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
+        }
         return BigDecimal.valueOf(paid)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();

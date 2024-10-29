@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Days;
@@ -28,6 +29,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOUR = "Number of hours should be a positive multiple of 0.5";
+    public static final String MESSAGE_OVERFLOW = "Number of hours exceeds max limit of the machine";
 
     private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
     /**
@@ -222,6 +224,9 @@ public class ParserUtil {
         String trimmedHour = hour.trim();
         if (!StringUtil.isPositiveMultipleOfHalfHour(trimmedHour)) {
             throw new ParseException(MESSAGE_INVALID_HOUR);
+        }
+        if (Double.parseDouble(trimmedHour) >= Double.MAX_VALUE) {
+            throw new ParseException(MESSAGE_OVERFLOW);
         }
         return Double.parseDouble(trimmedHour);
     }
