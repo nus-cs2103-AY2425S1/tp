@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.SplitPane?>
-<SplitPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" orientation="HORIZONTAL">
+<SplitPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" orientation="HORIZONTAL" styleClass="pane-with-border">
     <VBox>
         <ListView fx:id="logListView" VBox.vgrow="ALWAYS" />
     </VBox>

@@ -194,6 +194,7 @@ public class MainWindow extends UiPart<Stage> {
         centralDisplay.handleLog(personIndex);
     }
 
+
     public PersonListPanel getPersonListPanel() {
         return centralDisplay.getPersonListPanel();
     }
@@ -219,8 +220,9 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isList()) {
                 handleShowSessionLogs(commandResult.getPersonIndex());
+            } else {
+                centralDisplay.showPersonListPanel();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
