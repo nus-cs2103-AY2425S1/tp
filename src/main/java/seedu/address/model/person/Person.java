@@ -9,9 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +41,7 @@ public abstract class Person {
 
     }
 
+    /*
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
@@ -51,13 +49,14 @@ public abstract class Person {
      *
      * @param name The {@code Name} of the person. Must not be {@code null}.
      */
+    /*
     public Person(Name name) {
         this.name = name;
         this.phone = null;
         this.email = null;
         this.property = new Property("");
         this.appointment = new Appointment(new Date(""), new From(""), new To(""));
-    }
+    }*/
 
     public Name getName() {
         return name;
@@ -98,6 +97,10 @@ public abstract class Person {
 
         // Case-insensitive name comparison
         return otherPerson.getName().fullName.equalsIgnoreCase(this.getName().fullName);
+    }
+
+    public boolean hasAppointment() {
+        return !appointment.equals(Appointment.EMPTY_APPOINTMENT);
     }
 
     /**

@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_PROPERTY = "123 Geylang Lor 21";
-    public static final String DEFAULT_DATE = "01/01/2024";
+    public static final String DEFAULT_DATE = "01-01-24";
     public static final String DEFAULT_FROM = "0800";
     public static final String DEFAULT_TO = "0900";
 

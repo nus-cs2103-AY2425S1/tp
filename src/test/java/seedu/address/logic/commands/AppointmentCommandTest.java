@@ -32,7 +32,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AppointmentCommandTest {
 
-    private static final String VALID_DATE = "20/12/2024";
+    private static final String VALID_DATE = "20-12-24";
     private static final String VALID_FROM = "0800";
     private static final String VALID_TO = "1000";
 

@@ -13,6 +13,7 @@ import seedu.address.model.appointment.From;
  */
 public class JsonAdaptedFrom {
 
+    private static final String EMPTY_FROM_PLACEHOLDER = "EMPTY_FROM";
     private final String value;
 
     /**
@@ -27,9 +28,8 @@ public class JsonAdaptedFrom {
      * Converts a given {@code From} into this class for Jackson use.
      */
     public JsonAdaptedFrom(From source) {
-        this.value = source.toString();
+        this.value = (source == From.EMPTY_FROM) ? EMPTY_FROM_PLACEHOLDER : source.toString();
     }
-
 
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code From} object.
@@ -40,6 +40,9 @@ public class JsonAdaptedFrom {
     public From toModelType() throws IllegalValueException {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, From.class.getSimpleName()));
+        }
+        if (value.equals(EMPTY_FROM_PLACEHOLDER)) {
+            return From.EMPTY_FROM;
         }
         return new From(value);
     }
