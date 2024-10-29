@@ -46,9 +46,9 @@ public class InternshipApplicationCard extends UiPart<Region> {
         this.internshipApplication = internshipApplication;
         id.setText(displayedIndex + ". ");
         name.setText(internshipApplication.getCompany().getName().getValue());
-        email.setText(internshipApplication.getCompany().getEmail().getValue());
-        role.setText(internshipApplication.getRole().getValue());
-        date.setText(internshipApplication.getDateOfApplication().getValue().toString());
+        email.setText("Email: " + internshipApplication.getCompany().getEmail().getValue());
+        role.setText("Role: " + internshipApplication.getRole().getValue());
+        date.setText("Date of Application: " + internshipApplication.getDateOfApplication().getValue().toString());
 
         String statusValue = internshipApplication.getStatus().getValue().toUpperCase();
         status.setText(statusValue);
