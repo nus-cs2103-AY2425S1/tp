@@ -1,10 +1,12 @@
 package seedu.address.model.property;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Property}'s {@code landlordName} range contains the keywords.
@@ -16,6 +18,7 @@ public class LandlordNameContainsKeywordsPredicate implements Predicate<Property
      * Landlord name must be present and not null.
      */
     public LandlordNameContainsKeywordsPredicate(List<String> keywords) {
+        requireNonNull(keywords);
         this.keywords = keywords;
     }
 

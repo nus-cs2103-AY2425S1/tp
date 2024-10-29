@@ -33,12 +33,20 @@ public class FindCommand extends Command {
     private final LandlordNameContainsKeywordsPredicate landlordPredicate;
     private boolean isAddress;
 
+    /**
+     * Creates a find command {@code FindCommand}with a predicate of {@code AddressContainsKeywordsPredicate}
+     * @param predicate a predicate that checks if address matches the keywords provided.
+     */
     public FindCommand(AddressContainsKeywordsPredicate predicate) {
         this.addressPredicate = predicate;
         this.landlordPredicate = null;
         this.isAddress = true;
     }
 
+    /**
+     * Creates a find command {@code FindCommand}with a predicate of {@code LandlordNameContainsKeywordsPredicate}
+     * @param predicate a predicate that checks if landlord name matches the keywords provided.
+     */
     public FindCommand(LandlordNameContainsKeywordsPredicate predicate) {
         this.landlordPredicate = predicate;
         this.addressPredicate = null;

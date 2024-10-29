@@ -13,8 +13,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.buyer.NameContainsKeywordsPredicate;
 import seedu.address.model.buyer.Name;
+import seedu.address.model.buyer.NameContainsKeywordsPredicate;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
