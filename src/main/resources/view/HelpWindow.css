@@ -26,19 +26,19 @@
 
 .table-view .column-header-background .label {
     -fx-padding: 2 2 2 2;
-    -fx-text-fill: #005b96;
+    -fx-text-fill: black;
     -fx-font-size: 20;
 }
 
 .table-cell {
     -fx-alignment: CENTER;
     -fx-wrap-text: true;
-    -fx-text-fill: #005b96;
+    -fx-text-fill: #0B2545;
     -fx-font-size: 18;
 }
 
 .table-row-cell:odd {
-    -fx-background-color: #e0f7fa;
+    -fx-background-color: #CAE9FF;
 }
 
 .table-row-cell:hover {
@@ -46,6 +46,6 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #99DDF8;
+    -fx-background-color: #62B6CB;
     -fx-background-insets: 3;
 }
