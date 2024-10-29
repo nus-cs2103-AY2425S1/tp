@@ -264,7 +264,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSchedule_validValueWithourWhitespace_returnsSchedule() throws Exception {
+    public void parseSchedule_validValueWithoutWhitespace_returnsSchedule() throws Exception {
         Schedule expectedSchedule = ParserUtil.parseSchedule(VALID_SCHEDULE);
         assertEquals(expectedSchedule, ParserUtil.parseSchedule(VALID_SCHEDULE));
     }
