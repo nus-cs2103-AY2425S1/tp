@@ -394,7 +394,7 @@ Those without any stars are user stories that were considered but will not be im
 >
 > Use Cases beginning with 'UCSH' cover non-core Wedlinker functionalities.
 ---
-### **Use case: UC01 - List all Contacts**
+### **Use case: UC01 — List all Contacts**
 
 **MSS**
 
@@ -403,13 +403,19 @@ Those without any stars are user stories that were considered but will not be im
 
     Use case ends.
 
+### **Use case: UC02 — List all Weddings**
+Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view weddings instead of contacts.
 
+### **Use case: UC03 — List all Tasks**
+Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks instead of contacts.
 
-### **Use case: UC02 - Add a Contact**
+---
+
+### **Use case: UC04 — Create a Contact**
 
 **MSS**
 
-1.  User requests to add contact with the corresponding details.
+1.  User requests to create a contact with the corresponding details.
 2.  The system adds the contact and displays a success message.
 3.  The system shows the new contact in WedLinker.
 
@@ -417,173 +423,25 @@ Those without any stars are user stories that were considered but will not be im
 
 **Extensions**
 
-* 1a. The system detects an error in the entered data.
-    * 1a1. The system displays an error message.
+* 1a. The contact already exists.
+    * 1a1. System does not create a new contact.
+    * 1a2. System informs the user the contact already exists.
 
       Use case ends.
 
-### **Use case: UC03 - Similar to <ins>[UC02](#use-case-uc02---add-a-contact)</ins> except Add Wedding**
+### **Use case: UC05 — Create a Wedding**
+Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a wedding to WedLinker instead of a Contact
 
-**MSS**
+### **Use case: UC06 — Create a Task**
+Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a task to WedLinker instead of a Contact
 
-1.  User requests to add wedding with the corresponding details.
-2.  The system adds the wedding and displays a success message.
-3.  The system shows the new wedding in WedLinker.
+### **Use case: UC08 — Create a Tag**
+Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a tag to WedLinker instead of a Contact
 
-    Use case ends.
-
-**Extensions**
-
-* 1a. The system detects an error in the entered data.
-    * 1a1. The system displays an error message.
-
-      Use case ends.
-
-### **Use case: UC04 - Similar to <ins>[UC02](#use-case-uc02---add-a-contact)</ins> except Add Task**
-
-**MSS**
-
-1.  User requests to add task with the corresponding details.
-2.  The system adds the task and displays a success message.
-3.  The system shows the new task in WedLinker.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The system detects an error in the entered data.
-    * 1a1. The system displays an error message.
-
-      Use case ends.
 
 ---
 
-### **Use case: UC05 - Add Phone Number to Contact**
-
-**Guarantees:**
-* No duplicate phone numbers will be stored in two different contacts.
-
-**MSS**
-
-1. User <ins>lists all contacts UC01</ins>.
-2. User requests to add phone number for a contact with the corresponding details.
-3. The system adds the phone number to the contact and displays a success message.
-4. The system displays the updated contact information in the address book.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The system detects an error in the entered data.
-    * 2a1. The system displays an error message
-
-      Use case resumes at step 1.
-
-
-### **Use case: UC04 - Similar to <ins>UC03</ins> except add Address** 
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add address for a contact with the corresponding details.
-3. The system adds the address to the contact and displays a success message.
-4. The system displays the updated contact information in the address book.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The system detects an error in the entered data.
-    * 2a1. The system displays an error message.
-
-      Use case resumes at step 1.
-
-
-
-
-### **Use case: UC05 - Similar to <ins>UC03</ins> except add Email**
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add email address for a contact with the corresponding details.
-3. The system adds the email address to the contact and displays a success message.
-4. The system displays the updated contact information in the address book.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The system detects an error in the entered data.
-    * 2a1. The system displays an error message.
-
-      Use case resumes at step 1.
-
----
-
-### **Use case: UC06 - Search for Contacts by Name**
-
-**MSS**
-
-1.  User searches for the contact by name.
-2.  System shows a list of contacts containing the name.
-
-    Use case ends.
-
-
-
-### **Use case: UC07 - Similar to <ins>UC06</ins> except by Tag**
-
-**MSS**
-
-1. User filters for contacts with a specified tag.
-2. System only shows a list of contact with the specified tag.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
----
-
-### **Use case: UC08 - Create Tag**
-
-**MSS**
-
-1. User requests to create a tag.
-2. System displays the successful creation of tag.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The tag already exists.
-    * 1a1. System does not create a new tag.
-    * 1a2. System informs the user the tag already exists.
-
-      Use case ends.
-
-
-
-### **Use case: UC09 - Tagging a contact with a specified tag**
+### **Use case: UC09 — Add Tag to Contact**
 
 **MSS**
 
@@ -612,9 +470,80 @@ Those without any stars are user stories that were considered but will not be im
 
       Use case resumes at step 1.
 
+### **Use case: UC09 — Add Wedding to Contact**
+Similar to [UC010](#use-case-uc010search-for-contacts-by-name) except add wedding to contact.
 
 
-### **Use case: UC10 - Delete Contact**
+### **Use case: UC07 — Add Phone Number to Contact**
+
+**Guarantees:**
+* No duplicate phone numbers will be stored in two different contacts.
+
+**MSS**
+
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
+2. User requests to add phone number for a contact with the corresponding details.
+3. The system adds the phone number to the contact and displays a success message.
+4. The system displays the updated contact information in the address book.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The system detects an error in the entered data.
+    * 2a1. The system displays an error message
+
+      Use case resumes at step 1.
+
+
+### **Use case: UC08 — Add Address to Contact** 
+Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated addresses are allowed
+
+### **Use case: UC09 — Add Email to Contact**
+Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated email addresses are allowed
+
+---
+
+### **Use case: UC10 — Search for Contacts by Name**
+
+**MSS**
+
+1.  User searches for the contact by name.
+2.  System shows a list of contacts containing the name.
+
+    Use case ends.
+
+### **Use case: UC11 — Search for Contacts by Tag**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by tag.
+
+### **Use case: UC12 — Search for Contacts by Wedding**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by wedding.
+
+### **Use case: UC13 — Search for Contacts by Phone Number**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by phone number.
+
+### **Use case: UC14 — Search for Contacts by Address**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by address.
+
+### **Use case: UC15 — Search for Contacts by Email Address**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by email address.
+
+---
+
+### **Use case: UC16 — Search for Wedding by Wedding Name**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for wedding by wedding name.
+
+### **Use case: UC17 — Search for Task by Task Name**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for task by task name.
+
+---
+
+### **Use case: UC10 — Delete Contact**
 
 **MSS**
 
@@ -637,7 +566,14 @@ Those without any stars are user stories that were considered but will not be im
 
       Use case resumes at step 1.
 
+### **Use case: UC10 — Delete Wedding**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting wedding.
 
+### **Use case: UC10 — Delete Task**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting task.
+
+### **Use case: UC10 — Delete Tag**
+Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting tag.
 
 ### **Use case: UCSH01 - Edit details for a contact**
 
