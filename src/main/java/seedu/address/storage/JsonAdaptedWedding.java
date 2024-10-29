@@ -45,7 +45,11 @@ class JsonAdaptedWedding {
      */
     public JsonAdaptedWedding(Wedding source) {
         name = source.getName().fullName;
-        client = new JsonAdaptedPerson(source.getClient().getPerson());
+        if (source.getClient() == null) {
+            client = null;
+        } else {
+            client = new JsonAdaptedPerson(source.getClient().getPerson());
+        }
         date = source.getDate() == null ? "" : source.getDate().toString();
         venue = source.getVenue() == null ? "" : source.getVenue().toString();
     }

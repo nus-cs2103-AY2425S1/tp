@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -59,7 +58,7 @@ public class ViewwCommand extends Command {
             PersonMatchesWeddingPredicate weddingPredicateToView = viewWithKeyword(model);
 
             if (weddingPredicateToView != null) {
-                // Here you would check if the person has wedding details before displaying
+                model.updateFilteredPersonList(weddingPredicateToView);
                 return new CommandResult(String.format(MESSAGE_VIEW_WEDDING_SUCCESS,
                         Messages.format(weddingPredicateToView.getWedding())));
             } else {
@@ -149,12 +148,5 @@ public class ViewwCommand extends Command {
 
         // All other cases are false
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
     }
 }

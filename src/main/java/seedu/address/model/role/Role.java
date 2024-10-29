@@ -12,6 +12,7 @@ public class Role {
             + "and should not be blank.";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+$";
 
+
     public final String roleName;
 
     /**
@@ -42,9 +43,9 @@ public class Role {
             return false;
         }
 
-        Role otherTag = (Role) other;
+        Role otherRole = (Role) other;
         return roleName.toLowerCase()
-                .equals(otherTag.roleName.toLowerCase());
+                .equals(otherRole.roleName.toLowerCase());
     }
 
     @Override

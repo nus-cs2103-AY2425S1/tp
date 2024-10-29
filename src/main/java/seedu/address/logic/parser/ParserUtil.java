@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -107,9 +108,13 @@ public class ParserUtil {
     public static String parseClient(String client) throws ParseException {
         requireNonNull(client);
         String trimmedClient = client.trim();
-        if (!Client.isValidClientName(trimmedClient) && Client.isValidClientIndex(trimmedClient)) {
-            throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+
+        if (!Client.isValidClientIndex(trimmedClient)) {
+            if (!Client.isValidClientName(trimmedClient)) {
+                throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+            }
         }
+
         return trimmedClient;
     }
 
@@ -120,9 +125,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static Date parseDate(String date) throws ParseException {
-        if (date == null) {
-            return null;
-        }
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
@@ -137,12 +139,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code venue} is invalid.
      */
     public static Venue parseVenue(String venue) throws ParseException {
-        if (venue == null) {
-            return null;
-        }
         String trimmedVenue = venue.trim();
         if (!Venue.isValidVenue(trimmedVenue)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
         }
         return new Venue(trimmedVenue);
     }
@@ -154,12 +153,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Role parseRole(String role) throws ParseException {
+    public static Optional<Role> parseRole(String role) throws ParseException {
+        requireNonNull(role);
         String trimmedRole = role.trim();
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Role(trimmedRole);
+        return Optional.of(new Role(trimmedRole));
     }
 
     /**

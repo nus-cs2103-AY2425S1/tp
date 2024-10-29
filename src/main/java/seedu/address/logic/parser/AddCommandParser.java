@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -44,15 +45,25 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE);
 
         // Parse required fields
-
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        // Tag role = ParserUtil.parseOptionalTag(argMultimap.getValue(PREFIX_TAG).orElse(null));
+
+        // Parse optional role
+        Optional<Role> role = Optional.empty();
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            try {
+                role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+            } catch (ParseException e) {
+                throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+            }
+        }
+
+        // Parse wedding indices
         Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
 
+        // Create the person with the parsed values
         Person person = new Person(name, phone, email, address, role, null);
 
         return new AddCommand(person, weddingIndices);

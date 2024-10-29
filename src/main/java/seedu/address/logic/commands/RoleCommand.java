@@ -6,9 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,6 +24,7 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Tags existing person in the address book.
@@ -33,7 +36,7 @@ public class RoleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": assigns a role to person identified "
             + "by full name. "
             + "Example: " + COMMAND_WORD + PREFIX_NAME
-            + "Alex Yeoh " + PREFIX_ROLE + "food vendor";
+            + " Alex Yeoh " + PREFIX_ROLE + "food vendor";
 
     public static final String MESSAGE_ADD_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
@@ -138,7 +141,7 @@ public class RoleCommand extends Command {
         Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
-        Role updatedRole = personWithRoleDescriptor.getRole().orElse(personToAddRole.getRole());
+        Optional<Role> updatedRole = personWithRoleDescriptor.getRole();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, null);
     }
@@ -176,7 +179,9 @@ public class RoleCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Role role;
+        private Optional<Role> role;
+        private Wedding ownWedding;
+        private Set<Wedding> weddingJobs = new HashSet<>();
 
         public PersonWithRoleDescriptor() {
         }
@@ -230,7 +235,7 @@ public class RoleCommand extends Command {
          * Sets {@code role} to this object's {@code role}.
          * A defensive copy of {@code role} is used internally.
          */
-        public void setRole(Role role) {
+        public void setRole(Optional<Role> role) {
             this.role = role;
         }
 
@@ -240,7 +245,7 @@ public class RoleCommand extends Command {
          * Returns {@code Optional#empty()} if {@code role} is null.
          */
         public Optional<Role> getRole() {
-            return (role != null) ? Optional.of(role) : Optional.empty();
+            return this.role;
         }
 
         @Override

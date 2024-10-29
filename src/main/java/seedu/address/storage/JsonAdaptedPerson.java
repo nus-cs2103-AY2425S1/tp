@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -68,7 +69,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        role = source.getRole().roleName;
+        role = source.getRole().map(r -> r.roleName).orElse(null);
         ownWedding = source.getOwnWedding() != null ? source.getOwnWedding().hashCode() : 0;
         weddingJobs.addAll(source.getWeddingJobs().stream()
                 .map(Wedding::hashCode)
@@ -113,12 +114,13 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        Role modelRole = null;
+        Optional<Role> modelRole = Optional.empty();
+
         if (role != null) {
             if (!Role.isValidRoleName(role)) {
                 throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
             }
-            modelRole = new Role(role);
+            modelRole = Optional.of(new Role(role));
         }
 
         Wedding modelOwnWedding = ownWedding != 0 ? lookupWeddingByHashCode(ownWedding, weddingList) : null;
