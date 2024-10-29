@@ -179,7 +179,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean getViewTransactions() {
+        public boolean getIsViewTransactions() {
             throw new AssertionError("This method should not be called.");
         }
     }

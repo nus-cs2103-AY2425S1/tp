@@ -133,6 +133,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
         setViewTransactions(false);
+        updateTransactionList(List.of());
     }
 
     //=========== Transaction =============================================================
@@ -158,7 +159,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean getViewTransactions() {
+    public boolean getIsViewTransactions() {
         return this.isViewTransactions;
     }
     @Override

@@ -112,7 +112,7 @@ public interface Model {
     /**
      * Determines if transaction view or person view is used.
      */
-    boolean getViewTransactions();
+    boolean getIsViewTransactions();
 
     /**
      * Updates the transaction list to contain the specified transactions.
