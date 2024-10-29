@@ -3,13 +3,12 @@ package seedu.address.testutil;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.StudentLessonInfo;
 import seedu.address.model.student.Student;
 
 /**
@@ -21,8 +20,7 @@ public class LessonBuilder {
     public static final String DEFAULT_TIME = "14:00";
     private Date date;
     private Time time;
-    private final List<Student> students;
-    private final Map<Student, Boolean> attendanceMap;
+    private final List<StudentLessonInfo> studentLessonInfoList;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -30,8 +28,7 @@ public class LessonBuilder {
     public LessonBuilder() {
         date = new Date(DEFAULT_DATE);
         time = new Time(DEFAULT_TIME);
-        students = new ArrayList<>();
-        attendanceMap = new HashMap<>();
+        studentLessonInfoList = new ArrayList<>();
     }
 
     /**
@@ -40,8 +37,7 @@ public class LessonBuilder {
     public LessonBuilder(Lesson lessonToCopy) {
         date = lessonToCopy.getDate();
         time = lessonToCopy.getTime();
-        students = new ArrayList<>(lessonToCopy.getStudents());
-        attendanceMap = new HashMap<>(lessonToCopy.getAttendanceMap());
+        studentLessonInfoList = new ArrayList<>(lessonToCopy.getStudentLessonInfoList());
     }
 
     /**
@@ -65,8 +61,7 @@ public class LessonBuilder {
      */
     public LessonBuilder withStudent(Student student) {
         requireNonNull(student);
-        this.students.add(student);
-        this.attendanceMap.put(student, false); // Student must also be added to the attendanceMap
+        studentLessonInfoList.add(StudentLessonInfo.initialise(student));
         return this;
     }
 
@@ -75,7 +70,8 @@ public class LessonBuilder {
      */
     public LessonBuilder withAttendance(Student student, boolean attendance) {
         requireNonNull(student);
-        this.attendanceMap.put(student, attendance);
+        studentLessonInfoList.removeIf(x -> x.isForStudent(student));
+        studentLessonInfoList.add(new StudentLessonInfo(student, attendance, 0));
         return this;
     }
 
@@ -83,6 +79,6 @@ public class LessonBuilder {
      * Builds and returns the Lesson.
      */
     public Lesson build() {
-        return new Lesson(date, time, students, attendanceMap);
+        return new Lesson(date, time, studentLessonInfoList);
     }
 }
