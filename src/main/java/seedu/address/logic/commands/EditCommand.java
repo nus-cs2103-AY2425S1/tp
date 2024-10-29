@@ -147,12 +147,12 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        ApptList updatesAppt = patientToEdit.getAppointments();
+        ApptList updatedAppt = patientToEdit.getAppointments();
 
         // I changed the updatedAllergy, you will need to change it later @yuanch
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, new HashSet<>(), updatedBloodType, updatedHealthRisk,
-                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatesAppt);
+                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppt);
     }
 
     @Override
