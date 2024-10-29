@@ -231,13 +231,14 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 * `settle 1 amount/500.00`
 
 **Output:**
+
 ![settleResult.jpg](images%2FsettleResult.jpg)
 
 <box type="important" header="#### Constraints">
 
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Amount must be a positive value and must not be more than owed amount.
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX** **must be a positive integer** 1, 2, 3, …​
+* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
 
