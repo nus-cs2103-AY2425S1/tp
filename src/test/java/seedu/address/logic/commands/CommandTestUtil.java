@@ -101,8 +101,10 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY_BOB;
     public static final String HEALTHRISK_DESC_AMY = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_AMY;
     public static final String HEALTHRISK_DESC_BOB = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_BOB;
-    public static final String EXISTINGCONDITION_DESC_AMY = " " + PREFIX_EXISTINGCONDITION + VALID_EXISTINGCONDITION_AMY;
-    public static final String EXISTINGCONDITION_DESC_BOB = " " + PREFIX_EXISTINGCONDITION + VALID_EXISTINGCONDITION_BOB;
+    public static final String EXISTINGCONDITION_DESC_AMY = " " + PREFIX_EXISTINGCONDITION
+            + VALID_EXISTINGCONDITION_AMY;
+    public static final String EXISTINGCONDITION_DESC_BOB = " " + PREFIX_EXISTINGCONDITION
+            + VALID_EXISTINGCONDITION_BOB;
     public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
     public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
@@ -130,16 +132,14 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withBloodType(VALID_BLOODTYPE_AMY).withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY)
                 .withAllergy(VALID_ALLERGY_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
-                .withExistingCondition(VALID_EXISTINGCONDITION_AMY).withAppts(VALID_APPOINTMENT_AMY)
-                .withNote(VALID_NOTE_AMY).build();
+                .withExistingCondition(VALID_EXISTINGCONDITION_AMY).withNote(VALID_NOTE_AMY).build();
 
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB).withBirthDate(VALID_BIRTHDATE_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withBloodType(VALID_BLOODTYPE_BOB).withNokName(VALID_NOKNAME_BOB).withNokPhone(VALID_NOKPHONE_BOB)
                 .withAllergy(VALID_ALLERGY_BOB).withHealthRisk(VALID_HEALTHRISK_BOB)
-                .withExistingCondition(VALID_EXISTINGCONDITION_BOB).withAppts(VALID_APPOINTMENT_BOB)
-                .withNote(VALID_NOTE_BOB).build();
+                .withExistingCondition(VALID_EXISTINGCONDITION_BOB).withNote(VALID_NOTE_BOB).build();
     }
 
     /**

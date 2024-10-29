@@ -1,16 +1,8 @@
 package seedu.address.testutil;
 
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Allergy;
-import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.Email;
@@ -53,10 +45,9 @@ public class EditPatientDescriptorBuilder {
         descriptor.setBloodType(patient.getBloodType());
         descriptor.setNokName(patient.getNokName());
         descriptor.setNokPhone(patient.getNokPhone());
-        descriptor.setAllergy(patient.getAllergies());
+        //descriptor.setAllergy(patient.getAllergies());
         descriptor.setHealthRisk(patient.getHealthRisk());
         descriptor.setExistingCondition(patient.getExistingCondition());
-        descriptor.setAppts(patient.getAppts());
         descriptor.setNote(patient.getNote());
     }
 
@@ -165,19 +156,6 @@ public class EditPatientDescriptorBuilder {
      */
     public EditPatientDescriptorBuilder withExistingCondition(String existingCondition) {
         descriptor.setExistingCondition(new ExistingCondition(existingCondition));
-        return this;
-    }
-
-    /**
-     * Parses the {@code Appts} into a {@code List<Appt>}
-     * and set it to the {@code EditPatientDescriptor}
-     * that we are building.
-     */
-    public EditPatientDescriptorBuilder withAppts(String... appts) {
-        List<Appt> appointmentSet = Stream.of(appts)
-                .map(apptString -> LocalDateTime.parse(apptString, DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .map(Appt::new).collect(Collectors.toList());
-        descriptor.setAppts(appointmentSet);
         return this;
     }
 
