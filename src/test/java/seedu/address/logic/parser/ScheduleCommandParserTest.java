@@ -60,7 +60,7 @@ public class ScheduleCommandParserTest {
 
     @Test
     public void parse_dateDoNotExist_failure() {
-        String userInput = VALID_NAME + " d/" + NON_EXISTENT_DATE;
+        String userInput = VALID_NAME + " d/" + NON_EXISTENT_DATE + " note/" + VALID_NOTE;
         assertParseFailure(parser, userInput, MESSAGE_INVALID_DATE);
     }
 }
