@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.shortcut.ShortCut;
@@ -19,7 +20,7 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    ObservableList<Person> getFilteredPersonList(Set<Tag> tagList);
+    ObservableList<Person> getFilteredPersonList(Set<Tag> tagList) throws CommandException;
 
     ObservableList<Order> getOrderList();
     ObservableList<ShortCut> getShortCutList();

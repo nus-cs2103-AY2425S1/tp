@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -96,7 +97,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) {
+    public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) throws CommandException {
         return addressBook.getFilteredPersonList(tagList);
     }
 

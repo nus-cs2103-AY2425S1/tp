@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.person.Name;
@@ -163,7 +164,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList(Set<Tag> tagList) {
+    public ObservableList<Person> getFilteredPersonList(Set<Tag> tagList) throws CommandException {
         return persons.asUnmodifiableFilteredObservableList(tagList);
     }
 

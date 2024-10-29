@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -20,6 +21,7 @@ public class DownloadCommand extends Command {
 
     public static final String COMMAND_WORD = "download";
     public static final String MESSAGE_SUCCESS = "Downloaded the csv file.";
+    public static final String MESSAGE_NO_ROWS = "No rows to download.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports JSON data to CSV format. "
             + "If no tags are specified, all rows are downloaded. "
@@ -44,10 +46,11 @@ public class DownloadCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> addressBookJson = model.getFilteredPersonListFromAddressBook(this.tagList);
         String addressBookCsv = CsvUtil.convertObservableListToCsv(addressBookJson);
+        System.out.println(addressBookJson);
         StorageManager.saveCsvToFile(addressBookCsv);
         return new CommandResult(MESSAGE_SUCCESS);
     }
