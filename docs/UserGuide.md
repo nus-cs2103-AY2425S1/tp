@@ -144,9 +144,6 @@ Below is a detailed overview of the main sections within this User Guide and wha
 - [Installation](#installation): If you're new to TrackMate or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
 
-- [Getting Started](#getting-started): Designed for beginners, this section provides an introductory overview of TrackMate, covering essential information such as the [Layout](#graphical-user-interface-layout) and [Command format](#command-format).
-
-
 - [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
 
 
@@ -167,45 +164,70 @@ For first-time users of the application, it is highly recommended for you to rea
 ### 3.1 Installation
 <a id="installation"></a>
 
-TO BE CHANGED
+1. Ensure that you have Java `17` installed on your Computer. TrackMate works the best for the version,
+   while there may be other versions that it can function on as well.
 
-1. Ensure you have Java `17` or above installed on your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `TrackMate.jar` file from the [link](https://github.com/AY2425S1-CS2103T-W08-1/tp/releases) here.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Move the file to the directory that you have as the home folder
+   that you want to keep your `TrackMate.jar` file in.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+4. Go to your command terminal by pressing Windows Key + R. A small window should pop up.
+
+
+5. Then type in cmd into the box and press enter. A command terminal should pop up.
+
+
+6. Navigate to the directory that holds the `TrackMate.jar` application by using the [cd command](https://www.ibm.com/docs/en/aix/7.1?topic=directories-changing-another-directory-cd-command).
+
+
+7. After navigating to the directory, enter the `java -jar TrackMate.jar` command to run the application.
+
+
+8. Wait a few seconds and a GUI should pop up, similar to the one shown below.
+
+![startingGUI.png](images/startingGUI.png)
+
+
+9. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-  * `list` : Lists all contacts.
-  * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-  * `delete 3` : Deletes the 3rd contact shown in the current list.
-  * `clear` : Deletes all contacts.
-  * `exit` : Exits the app.
+* `list` : Lists all contacts.
+* `addTut c/CS2103T id/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
+* `add n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
+* `addAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the da
+  date `2024-01-24`.
+* `clear` : Deletes all contacts.
+* `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+10. Refer to the [Command Section](#commands) below for details of
+    all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
 
 ### 3.2 Graphical User Interface Layout:
 <a id="graphical-user-interface-layout"></a>
 
 #### 3.2.1 User Interface Overview:
 <a id="user-interface-overview"></a>
+TO BE DONE 
+## To update UI component picture here:
+![startingGUI.png](images/startingGUI.png)
 
-TO BE DONE
+### Add UI Components descriptions here
 
 #### 3.2.2 Additional UI Components:
-<a id="additional-ui-components"></a>
 
-TO BE DONE
+<a id="additional-ui-components"></a>
+![startingGUI.png](images/startingGUI.png)
+
+### Add additiona UI Components description here
 
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
 
+TO BE DONE 
 TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the
 Commands section, let’s familiarize ourselves with the basic components and format of a command.
 
@@ -390,8 +412,8 @@ Command Details & Constraints:
 * Duplicate assignment titles are not allowed.
 
 Example:
-1. `addAsg n/CS2103T Assignment 2 d/25-10-2024 2359`
-2. `addAsg n/CS2101 CA1 d/23-09-2024 1200`
+1. `addAsg n/CS2103T Assignment 2 d/2024-10-25 2359`
+2. `addAsg n/CS2101 CA1 d/2024-09-23 1200`
 
 
 #### 4.3.2 Delete an assigment: `deleteAsg`
@@ -492,7 +514,7 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `markAtt s/1001 c/1001 d/2024/02/21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+1. `markAtt s/1001 c/1001 d/2024-02-21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
 2. `markAtt s/1001 c/1001` marks the attendance of student 1001 in tutorial class 1001 on today's date.
 
 #### 4.4.2 Unmarking an attendance: `deleteAtt`
@@ -507,7 +529,7 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `deleteAtt s/1001 c/1001 d/2024/02/21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
+1. `deleteAtt s/1001 c/1001 d/2024-02-21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
 2. `deleteAtt s/1001 c/1001` deletes the attendance of student 1001 in tutorial class 1001 on today's date.
 
 
@@ -626,8 +648,8 @@ TO BE DONE
 | **Add Assignment**  | `addAsg n/[ASSIGNMENT TITLE] d/[DUE DATE]`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                                                                      |
 | **Delete Assignment**| `deleteAsg [ASSIGNMENT TITLE]`<br> e.g., `deleteAsg Assignment 1`                                                                                                   |
 | **List Assignments**| `listAsg`                                                                                                                                                           |
-| **Mark Attendance** | `markAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024/02/21`                                                            |
-| **Unmark Attendance**| `deletedAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `deleteAtd s/1001 c/1001 d/2024/02/21`                                                      |
+| **Mark Attendance** | `markAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `attend s/1001 c/1001 d/2024-02-21`                                                            |
+| **Unmark Attendance**| `deletedAtt s/[STUDENT ID] c/[TUTORIAL ID] d/[TUTORIAL DATE]`<br> e.g., `deleteAtd s/1001 c/1001 d/2024-02-21`                                                      |
 | **Mark Assignment** | `markAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `markAsg 1 n/Assignment 1`                                                                                         |
 | **Unmark Assignment**| `unmarkAsg [INDEX] n/[ASSIGNMENT TITLE]`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                                                                     |
 | **Check Assignment**| `checkAsg n/[ASSIGNMENT TITLE]`<br> e.g., `checkAsg n/Assignment 1`                                                                                                 |

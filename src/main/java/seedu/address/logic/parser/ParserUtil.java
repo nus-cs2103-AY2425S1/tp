@@ -4,8 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 
 import seedu.address.commons.core.index.Index;
@@ -110,12 +114,13 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         try {
-            return new SimpleDateFormat("yyyy/MM/dd").parse(date);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            format.setLenient(false);
+            return format.parse(date);
         } catch (java.text.ParseException e) {
             throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
         }
     }
-
 
     /**
      * Parses a due date string into a {@link LocalDateTime} object.
@@ -126,11 +131,20 @@ public class ParserUtil {
      */
     public static LocalDateTime parseDueDate(String dueDateString) throws ParseException {
         requireNonNull(dueDateString);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern(DATE_TIME_FORMAT)
+                .parseDefaulting(ChronoField.ERA, 1)
+                .toFormatter()
+                .withChronology(IsoChronology.INSTANCE)
+                .withResolverStyle(ResolverStyle.STRICT);
+        if (!dueDateString.matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")) {
+            throw new ParseException("Invalid date-time format. Expected format: yyyy-MM-dd HHmm");
+        }
         try {
             return LocalDateTime.parse(dueDateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Failed to parse date time: " + e.getMessage());
+            throw new ParseException("The specified date and time does not exist, please check again!"
+                    + e.getMessage());
         }
     }
 }

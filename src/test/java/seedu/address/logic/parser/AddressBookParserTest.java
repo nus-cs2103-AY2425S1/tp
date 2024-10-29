@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AttendCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -46,6 +47,18 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
+    public void parseCommand_exceedCharLimit_throwsParseException() {
+        String testString1 = "0".repeat(501);
+        String testString2 = "a".repeat(10000);
+        assertThrows(ParseException.class, Messages.MESSAGE_EXCEED_MAX_LENGTH, () -> {
+            parser.parseCommand(testString1);
+        });
+        assertThrows(ParseException.class, Messages.MESSAGE_EXCEED_MAX_LENGTH, () -> {
+            parser.parseCommand(testString2);
+        });
+    }
+
+    @Test
     public void parseCommand_add() throws Exception {
         Student student = new StudentBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
@@ -70,13 +83,13 @@ public class AddressBookParserTest {
         String userInput = AttendCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENTID + "A1001000U "
                 + PREFIX_TUTORIALID + "T1001 "
-                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+                + PREFIX_ATTENDANCEDATE + "2024-02-21";
 
         Command command = parser.parseCommand(userInput);
 
         StudentId expectedStudentId = new StudentId("A1001000U");
         TutorialId expectedTutorialId = TutorialId.of("T1001");
-        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+        Date expectedDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-21");
 
         AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialId, expectedDate);
 
@@ -88,13 +101,13 @@ public class AddressBookParserTest {
         String userInput = UnattendCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENTID + "A1001000U "
                 + PREFIX_TUTORIALID + "T1001 "
-                + PREFIX_ATTENDANCEDATE + "2024/02/21";
+                + PREFIX_ATTENDANCEDATE + "2024-02-21";
 
         Command command = parser.parseCommand(userInput);
 
         StudentId expectedStudentId = new StudentId("A1001000U");
         TutorialId expectedTutorialId = TutorialId.of("T1001");
-        Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
+        Date expectedDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-02-21");
 
         UnattendCommand expectedCommand = new UnattendCommand(expectedStudentId, expectedTutorialId, expectedDate);
 

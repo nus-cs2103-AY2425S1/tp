@@ -57,10 +57,10 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -133,13 +133,13 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -229,8 +229,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -349,4 +349,73 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.attendanceFlowPane {
+    -fx-padding: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #2a2a2a; /* Example background color */
+}
+
+.attendance-date-label {
+    -fx-background-color: #000000; /* Black background */
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-padding: 3px 6px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-font-size: 11px;
+    -fx-border-color: #ffffff; /* White border */
+}
+
+#cardPane, #profilePane {
+    -fx-background-color: #2e2e2e; /* Dark grey background */
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #4d4d4d; /* Subtle border for a refined look */
+    -fx-border-width: 1px;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #eeeeee; /* Light grey text for better readability */
+}
+
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: #cccccc; /* Slightly lighter grey for secondary information */
+}
+
+.studentDetailsEntries {
+    -fx-background-color: #3a3a3a; /* Dark grey for the background of details */
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-spacing: 5px;
+}
+
+.studentDetailsLabels {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #a0a0a0; /* Dimmer grey for labels within the details */
+}
+
+.attendanceFlowPane {
+    -fx-hgap: 7px;
+    -fx-vgap: 5px;
+    -fx-padding: 5px;
+    -fx-background-color: #3a3a3a; /* Dark grey background for the attendance section */
+    -fx-background-radius: 5px;
+}
+
+.attendance-date-label {
+    -fx-background-color: #4a4a4a; /* Dark grey for individual date labels */
+    -fx-text-fill: #cccccc; /* Light grey text */
+    -fx-padding: 3px 6px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-color: #5a5a5a; /* Medium grey border for a subtle highlight */
+    -fx-font-size: 12px;
 }

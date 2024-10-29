@@ -34,11 +34,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         String dueDateString = argMultimap.getValue(PREFIX_DUEDATE).get();
 
         LocalDateTime dueDate;
-        try {
-            dueDate = ParserUtil.parseDueDate(dueDateString);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
-        }
+        dueDate = ParserUtil.parseDueDate(dueDateString);
 
         Assignment assignment = new Assignment(title, dueDate);
         return new AddAssignmentCommand(assignment);

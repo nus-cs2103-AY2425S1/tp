@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
 
 /**
@@ -15,16 +12,20 @@ import seedu.address.model.student.Student;
  */
 public class StudentListPanel extends UiPart<Region> {
     private static final String FXML = "StudentListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
     @FXML
     private ListView<Student> studentListView;
 
+    private final StudentProfile studentProfile;
+
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
+     * @param studentList The list of students to display.
+     * @param studentProfile The profile to update when a student is selected.
      */
-    public StudentListPanel(ObservableList<Student> studentList) {
+    public StudentListPanel(ObservableList<Student> studentList, StudentProfile studentProfile) {
         super(FXML);
+        this.studentProfile = studentProfile;
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
     }
@@ -41,9 +42,8 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                setGraphic(new StudentCard(student, getIndex() + 1, studentProfile).getRoot());
             }
         }
     }
-
 }
