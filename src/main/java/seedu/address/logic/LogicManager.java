@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
@@ -18,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.storage.Storage;
 
 /**
@@ -67,7 +69,7 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
-        logger.info("Current Wedding: " + model.getCurrentWeddingName());
+        logger.info("Current Wedding: " + model.getCurrentWeddingName().getValue());
 
         return commandResult;
     }
@@ -92,6 +94,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return model.getFilteredWeddingList();
+    }
+
+    @Override
+    public ObjectProperty<WeddingName> getCurrentWeddingName() {
+        return model.getCurrentWeddingName();
     }
 
     @Override
