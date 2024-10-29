@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
@@ -15,6 +16,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    public Map<String, String> colorTagMap = Map.ofEntries(
+            Map.entry("photographer", "#a5494f"),
+            Map.entry("florist", "#ad7e48"),
+            Map.entry("videographer", "a7a15a"),
+            Map.entry("caterer", "#48864d"),
+            Map.entry("musician", "#4a57ba"),
+            Map.entry("bernice", "#5f388b")
+    );
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -55,6 +64,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
     }
+
+    public Map<String, String> getColorTagMap() { return colorTagMap; }
 
     @Override
     public boolean equals(Object other) {
