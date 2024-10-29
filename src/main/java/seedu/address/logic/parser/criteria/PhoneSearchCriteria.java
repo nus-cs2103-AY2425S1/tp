@@ -35,4 +35,8 @@ public class PhoneSearchCriteria implements SearchCriteria {
         PhoneSearchCriteria otherPhoneSearchCriteria = (PhoneSearchCriteria) other;
         return phones.equals(otherPhoneSearchCriteria.phones);
     }
+    @Override
+    public String toString() {
+        return "PhoneCriteria{phones=" + phones + "}";
+    }
 }

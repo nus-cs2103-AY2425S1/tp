@@ -23,7 +23,7 @@ public class NricSearchCriteria implements SearchCriteria {
     }
     @Override
     public String toString() {
-        return "NricCriteria{ages=" + nrics + "}";
+        return "NricCriteria{nrics=" + nrics + "}";
     }
 
     @Override

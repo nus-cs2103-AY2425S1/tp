@@ -27,7 +27,7 @@ public class NricSearchCriteriaTest {
     @Test
     public void test_toString() {
         NricSearchCriteria criteria = new NricSearchCriteria(List.of("S1234567D", "S6482983A"));
-        assertEquals("NricCriteria{ages=[S6482983A, S1234567D]}", criteria.toString());
+        assertEquals("NricCriteria{nrics=[S6482983A, S1234567D]}", criteria.toString());
     }
 
     @Test

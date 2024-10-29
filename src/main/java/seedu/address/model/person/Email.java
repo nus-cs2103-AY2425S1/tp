@@ -53,7 +53,7 @@ public class Email {
 
     @Override
     public String toString() {
-        return value;
+        return value.toLowerCase();
     }
 
     @Override

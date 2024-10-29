@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +11,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.criteria.EmailSearchCriteria;
 import seedu.address.logic.parser.criteria.NameSearchCriteria;
+import seedu.address.logic.parser.criteria.PhoneSearchCriteria;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -76,6 +81,74 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " n/bob /",
                 "You have entered an invalid name!\n"
                         + Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_singleEmailSearchCriteria_success() throws Exception {
+        // Test with single email criteria
+        FindCommand command = parser.parse(" e/alice@example.com ");
+        ContainsKeywordsPredicate expectedPredicate = new ContainsKeywordsPredicate(
+                List.of(new EmailSearchCriteria(List.of("alice@example.com")))
+        );
+        assertEquals(new FindCommand(expectedPredicate), command);
+    }
+
+    @Test
+    public void parse_singlePhoneSearchCriteria_success() throws Exception {
+        // Test with single phone criteria
+        FindCommand command = parser.parse(" p/12345678 ");
+        ContainsKeywordsPredicate expectedPredicate = new ContainsKeywordsPredicate(
+                List.of(new PhoneSearchCriteria(List.of("12345678")))
+        );
+        assertEquals(new FindCommand(expectedPredicate), command);
+    }
+
+    @Test
+    public void parse_combinedEmailAndPhoneSearchCriteria_success() throws Exception {
+        // Test with combined email and phone criteria
+        FindCommand command = parser.parse(" e/alice@example.com p/12345678 ");
+        ContainsKeywordsPredicate expectedPredicate = new ContainsKeywordsPredicate(
+                List.of(
+                        new PhoneSearchCriteria(List.of("12345678")),
+                        new EmailSearchCriteria(List.of("alice@example.com"))
+                )
+        );
+        assertEquals(new FindCommand(expectedPredicate), command);
+    }
+
+    @Test
+    public void parse_multipleEmailsAndPhones_success() throws Exception {
+        // Test with multiple emails and multiple phones
+        FindCommand command = parser.parse(" e/alice@example.com e/bob@example.com p/12345678 p/87654321 ");
+        ContainsKeywordsPredicate expectedPredicate = new ContainsKeywordsPredicate(
+                List.of(
+                        new PhoneSearchCriteria(List.of("12345678", "87654321")),
+                        new EmailSearchCriteria(List.of("alice@example.com", "bob@example.com"))
+                )
+        );
+        assertEquals(new FindCommand(expectedPredicate), command);
+    }
+
+    @Test
+    public void parse_phoneSearchCriteria_success() throws Exception {
+        // Test case with hyphenated or formatted phone numbers if supported
+        FindCommand command = parser.parse(" p/1234567890 ");
+        ContainsKeywordsPredicate expectedPredicate = new ContainsKeywordsPredicate(
+                List.of(new PhoneSearchCriteria(List.of("1234567890")))
+        );
+        assertEquals(new FindCommand(expectedPredicate), command);
+    }
+
+    @Test
+    public void parse_invalidEmailFormat_failure() {
+        // Test invalid email format
+        assertThrows(ParseException.class, () -> parser.parse(" e/alice(at)example(dot)com "));
+    }
+
+    @Test
+    public void parse_emptyEmailAndPhone_failure() {
+        // Test empty input for email and phone prefixes
+        assertThrows(ParseException.class, () -> parser.parse(" e/ p/ "));
     }
 
 }
