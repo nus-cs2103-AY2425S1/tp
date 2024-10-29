@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC1 - Add Patient
 
 **MSS:**
-1. User request to add patient details.
+1. User requests to add patient details.
 2. User provides the patient details.
 3. MB3 adds the patient and displays a success message.
 
@@ -340,13 +340,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 3b. User provides a field that is not in the expected format.
-    * 3b1. MediBase3 inform the user that the field is not in the expected format.<br>
+    * 3b1. MediBase3 informs the user that the field is not in the expected format.<br>
     * MediBase3 provides the expected format for the field.<br>
     Use case resumes at step 2.
 
 
-* 3c. User provide multiple same fields for the patient.
-    * 3b1. MediBase3 inform the user that multiple fields are present.<br>
+* 3c. User provides multiple instances of the same field for the patient.
+    * 3b1. MediBase3 informs the user that multiple fields are present.<br>
     Use case resumes at step 2.
 
 ---
