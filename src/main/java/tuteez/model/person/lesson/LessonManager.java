@@ -84,10 +84,10 @@ public class LessonManager {
         Map<Person, ArrayList<Lesson>> clashingLessonMap = new HashMap<>();
         Iterator<Person> students = studentList.iterator();
         while (students.hasNext()) {
-            Person stu = students.next();
-            ArrayList<Lesson> clashedLessons = stu.getLessonsThatClash(lesson);
+            Person studentToCheck = students.next();
+            ArrayList<Lesson> clashedLessons = studentToCheck.getLessonsThatClash(lesson);
             if (!clashedLessons.isEmpty()) {
-                clashingLessonMap.put(stu, clashedLessons);
+                clashingLessonMap.put(studentToCheck, clashedLessons);
             }
         }
         return clashingLessonMap;
