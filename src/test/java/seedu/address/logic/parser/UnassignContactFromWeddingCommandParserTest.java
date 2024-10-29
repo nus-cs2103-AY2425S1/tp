@@ -15,22 +15,22 @@ public class UnassignContactFromWeddingCommandParserTest {
 
     @Test
     public void parse_validArgs_success() throws ParseException {
-        String userInput = "1 c/1 2";
+        String userInput = " c/1 2";
         UnassignContactFromWeddingCommand actualCommand = parser.parse(userInput);
         assertNotNull(actualCommand); // Check that the command object is not null
     }
 
     @Test
     public void parse_invalidWeddingIndex_failure() {
-        String userInput = "abc c/1 2";
+        String userInput = "1 c/1 2";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                UnassignContactFromWeddingCommand.MESSAGE_USAGE);
+                "You cannot include an index in the unassign command.");
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_noContactPrefix_failure() {
-        String userInput = "1 ";
+        String userInput = "";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 UnassignContactFromWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
@@ -38,7 +38,7 @@ public class UnassignContactFromWeddingCommandParserTest {
 
     @Test
     public void parse_duplicateContactPrefix_failure() {
-        String userInput = "1 c/1 c/2";
+        String userInput = " c/1 c/2";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 "Please only include one prefix c/ !");
         assertParseFailure(parser, userInput, expectedMessage);

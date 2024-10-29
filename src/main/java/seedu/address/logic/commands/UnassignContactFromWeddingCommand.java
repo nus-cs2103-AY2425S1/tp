@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,17 +28,17 @@ public class UnassignContactFromWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns contacts from a specific wedding "
-            + "where the wedding & contacts are identified by their index number.\n"
-            + "Parameters: unassign WeddingIndex (must be a positive integer) "
+            + "where the contacts are identified by their index number.\n"
+            + "Parameters: unassign "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_CONTACT + "1 2 3";
 
     public static final String MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS =
             "Unssigned the following people from %1$s's wedding: %2$s";
 
 
-    private final Index specificWeddingIndex;
+    //private final Index specificWeddingIndex;
 
     private final Set<Index> unassignedPersonIndexList;
 
@@ -45,11 +46,9 @@ public class UnassignContactFromWeddingCommand extends Command {
     /**
      * This constructor initialises the specific wedding index and the
      * index's of the contacts to unassign from that wedding
-     * @param specificWeddingIndex
      * @param unassignedPersonIndexList
      */
-    public UnassignContactFromWeddingCommand(Index specificWeddingIndex, Set<Index> unassignedPersonIndexList) {
-        this.specificWeddingIndex = specificWeddingIndex;
+    public UnassignContactFromWeddingCommand(Set<Index> unassignedPersonIndexList) {
         this.unassignedPersonIndexList = unassignedPersonIndexList;
     }
 
@@ -58,13 +57,21 @@ public class UnassignContactFromWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownWeddingList = model.getFilteredWeddingList();
 
+        ObjectProperty<WeddingName> specific_wedding_name = model.getCurrentWeddingName();
 
-        if (specificWeddingIndex.getZeroBased() >= lastShownWeddingList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
+        if (specific_wedding_name.get() == null) {
+            throw new CommandException("You need to be viewing a wedding to unassign contacts.");
         }
 
-
-        Wedding weddingToModify = lastShownWeddingList.get(specificWeddingIndex.getZeroBased());
+        // trialing not referencing index in unassign command
+        Wedding weddingToModify = new Wedding(null, null);
+        List<PersonId> existingPersonsInWedding = new ArrayList<>();
+        for (Wedding w : lastShownWeddingList) {
+            if (w.getWeddingName().equals(specific_wedding_name.get())) {
+                weddingToModify = w;
+                existingPersonsInWedding = w.getAssignees();
+            }
+        }
 
         // get a list of all the Persons that the user is trying to unassign from the wedding
         ArrayList<Person> unassignedContacts = new ArrayList<>();
@@ -79,8 +86,6 @@ public class UnassignContactFromWeddingCommand extends Command {
                 unassignedContacts.add(personToRemove);
             }
         }
-
-        List<PersonId> existingPersonsInWedding = weddingToModify.getAssignees();
 
         for (Person person : unassignedContacts) {
             if (!existingPersonsInWedding.contains(person.getId())) {
@@ -97,14 +102,9 @@ public class UnassignContactFromWeddingCommand extends Command {
 
         String unassignedPersonNames = parsePersonListToString(unassignedContacts);
 
-        //new code from view wedding command
-        Wedding targetWedding = lastShownWeddingList.get(specificWeddingIndex.getZeroBased());
-        WeddingName targetWeddingName = targetWedding.getWeddingName();
+        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(newWedding);
 
-        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
         model.updateFilteredPersonList(predicate);
-
-        model.setCurrentWeddingName(targetWeddingName);
 
         return new CommandResult(String.format(MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), unassignedPersonNames));

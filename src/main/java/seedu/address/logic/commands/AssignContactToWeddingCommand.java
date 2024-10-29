@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.ParserUtil.parsePersonListToString;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
-import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
-import seedu.address.model.wedding.WeddingName;
 
 
 /**
@@ -73,8 +70,6 @@ public class AssignContactToWeddingCommand extends Command {
         // get a list of all the Persons that the user is trying to assign to the wedding
         ArrayList<Person> newContactsAssignedToWedding = new ArrayList<>();
 
-        // new line added so that the user is essentially in 'list' mode before assigning people to wedding
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Index i : assignedPersonIndexList) {
@@ -90,10 +85,6 @@ public class AssignContactToWeddingCommand extends Command {
 
         for (Person person : newContactsAssignedToWedding) {
             if (existingPersonsInWedding.contains(person.getId())) {
-                // this keeps the user in that wedding view
-                Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
-                PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
-                model.updateFilteredPersonList(predicate);
                 throw new CommandException(person.getName().toString() + " has already been assigned to this wedding.");
             } else {
                 existingPersonsInWedding.add(person.getId());
@@ -106,13 +97,6 @@ public class AssignContactToWeddingCommand extends Command {
         model.setWedding(weddingToModify, newWedding);
 
         String assignedPersonNames = parsePersonListToString(newContactsAssignedToWedding);
-
-        //new code from view wedding command
-        Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
-        WeddingName targetWeddingName = targetWedding.getWeddingName();
-        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
-        model.updateFilteredPersonList(predicate);
-        model.setCurrentWeddingName(targetWeddingName);
 
         return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), assignedPersonNames));
