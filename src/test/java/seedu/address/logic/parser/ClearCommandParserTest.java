@@ -30,6 +30,7 @@ public class ClearCommandParserTest {
         assertParseFailure(parser, " -x", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
 
         // Extra arguments provided
-        assertParseFailure(parser, " -p extra", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " -p extra", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ClearCommand.MESSAGE_USAGE));
     }
 }
