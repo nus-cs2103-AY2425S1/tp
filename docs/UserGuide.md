@@ -105,6 +105,7 @@ Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CA
 * Edits the elderly at the specified `INDEX` or `NRIC`. 
 * The `INDEX` refers to the number displayed in the current person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly must exist in the current person list.
 * At least one of the optional fields must be provided.
 * The existing values will be replaced with the new input values.
 * When editing tags, all the existing tags of the elderly will be removed i.e adding tags is not cumulative.
@@ -144,8 +145,8 @@ Format: `delete INDEX/NRIC`
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the number displayed in the current person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` must be a valid, government issued NRIC.
+* The `NRIC` used to select the elderly must exist in the current person list.
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
-* The `NRIC` used to select the elderly to delete must exist in the person list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
@@ -153,7 +154,7 @@ Examples:
 
 ### Marking an elderly : `mark`
 
-Marks the specified elderly from ContactMate as called. 
+Marks the specified elderly from the current person list as called. 
 
 ContactMate will update the list to show the new next contact date of the elderly and sort the list accordingly.
 You can also mark the specified elderly as called on a specific date and add notes.
@@ -163,7 +164,7 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 * Marks the person at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the number displayed in the current person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly to mark must exist in the person list.
+* The `NRIC` used to select the elderly to mark must exist in the current person list.
 
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
@@ -173,20 +174,22 @@ Examples:
 * `mark 1 d/2021-10-01 o/This person is sad`
 * `mark S6878830G d/2021-10-01`
 * `list` followed by `mark 2` Marks the 2nd person in the list with the current date and no notes.
+* `find Betsy` followed by `mark 1 d/2021-10-01 o/This person is sad` Marks the 1st person in the results of the `find` command with the specified date and note.
 
 ### Getting call history : `history`
 
-Shows a list of call dates and corresponding notes for the specified elderly.
+Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date.
 
 Format: `history INDEX/NRIC`
 
 * Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the number displayed in the current person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` must be a valid, government issued NRIC.
-* The `NRIC` used to select the elderly must exist in the person list.
+* The `NRIC` used to select the elderly must exist in the current person list.
 
 Examples:
 * `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
+* `find Betsy` followed by `history 1` shows the call history of the 1st elderly in the results of the `find` command.
 * `history S6878830G` shows the call history of the elderly with NRIC S6878830G.
   ![result for 'history S6878830G'](images/historyAlice.png)
 
