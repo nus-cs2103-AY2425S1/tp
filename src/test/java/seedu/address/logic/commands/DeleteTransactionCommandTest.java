@@ -49,7 +49,7 @@ public class DeleteTransactionCommandTest {
     }
 
     @Test
-    public void execute_emptyFilteredTransactionList() {
+    public void execute_emptyFilteredTransactionList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         List<Transaction> transactions = new ArrayList<>();
         model.updateTransactionList(transactions);
@@ -61,17 +61,26 @@ public class DeleteTransactionCommandTest {
     }
 
     @Test
-    public void execute_unfilteredListFailure() {
+    public void execute_unfilteredListFailure_throwsCommandException() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        model.setViewTransactions(true);
 
         String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertCommandFailure(deleteTransactionCommand, model, expectedMessage);
     }
+
+    @Test
+    public void execute_personListView_throwsCommandException() {
+        DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, "deletet");
+        assertCommandFailure(deleteTransactionCommand, model, expectedMessage);
+    }
+
     @Test
     public void equals() {
         DeleteTransactionCommand deleteFirstCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);

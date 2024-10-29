@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -83,6 +84,15 @@ public class FindTransactionCommandTest {
         expectedModel.updateTransactionListPredicate(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(CARL.getTransactions(), model.getFilteredTransactionList());
+    }
+
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
+        model.setViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "findt");
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test

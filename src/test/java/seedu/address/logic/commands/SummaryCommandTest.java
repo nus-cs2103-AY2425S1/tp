@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateTimeUtil.DEFAULT_DATE_FORMATTER;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -13,6 +14,7 @@ import java.time.YearMonth;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -84,5 +86,13 @@ public class SummaryCommandTest {
                         YearMonth.parse("2024-08").atDay(1).format(DEFAULT_DATE_FORMATTER),
                         YearMonth.parse("2024-11").atEndOfMonth().format(DEFAULT_DATE_FORMATTER), -1100.0),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_personListView_throwsCommandException() {
+        SummaryCommand summaryCommand = new SummaryCommand(YearMonth.parse("2024-08"),
+                YearMonth.parse("2024-08"));
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, "summary");
+        assertCommandFailure(summaryCommand, model, expectedMessage);
     }
 }
