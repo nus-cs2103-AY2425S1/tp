@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -25,11 +24,10 @@ import seedu.address.storage.Storage;
 public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final Storage storage;
-    private final BackupManager backupManager; // Add this if not already present
+    private final BackupManager backupManager;
     private final FilteredList<Person> filteredPersons;
     private final Calendar calendar;
 
@@ -103,7 +101,6 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
         this.calendar.setAppointments(addressBook);
-        triggerBackup(); // Trigger backup after setting new data
     }
 
     @Override
@@ -129,9 +126,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        triggerBackup("delete", target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
-        triggerBackup(); // Trigger backup after deletion
     }
 
     @Override
@@ -139,7 +136,6 @@ public class ModelManager implements Model {
         addressBook.addPerson(person);
         calendar.addAppointment(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        triggerBackup(); // Trigger backup after addition
     }
 
     @Override
@@ -147,7 +143,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         calendar.setAppointment(target, editedPerson);
-        triggerBackup(); // Trigger backup after editing
     }
 
     /*@Override
@@ -177,10 +172,11 @@ public class ModelManager implements Model {
     }*/
 
     // Automatically trigger backup after operations
-    protected void triggerBackup() {
+    protected void triggerBackup(String action, Person target) {
         try {
-            logger.info("Automatic backup triggered.");
-            backupManager.triggerBackup(storage.getAddressBookFilePath());
+            String backupName = action + " " + target.getName();
+            backupManager.triggerBackup(storage.getAddressBookFilePath(), backupName);
+            logger.info("Backup triggered: " + backupName);
         } catch (IOException e) {
             logger.warning("Backup failed: " + e.getMessage());
         }
