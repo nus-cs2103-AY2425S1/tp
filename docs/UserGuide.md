@@ -732,7 +732,8 @@ This means that your machine is running Java version 17.0.12, which means that J
 
 1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
 > ```
->     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+>     /bin/bash -c "$(curl -fsSL \
+>     https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 > ```
 2. Install Java 17 by typing:
 > ```
@@ -740,7 +741,8 @@ This means that your machine is running Java version 17.0.12, which means that J
 > ```
 3. Link the installed JDK:
 > ```
->    sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+>    sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk \
+>    /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 > ```
 4. Verify the installation by typing:
 > ```
