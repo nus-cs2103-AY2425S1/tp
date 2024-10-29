@@ -117,6 +117,25 @@ public class DeleteRemarkCommandTest {
     }
 
     @Test
+    public void execute_deleteRemark_updatesLastViewedPerson() throws Exception {
+        Person personToUpdate = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        RemarkList updatedRemarkList = new RemarkList(Arrays.asList(new Remark("First Remark"), new Remark("Second Remark")));
+        Person personWithRemarks = new PersonBuilder(personToUpdate).withRemarks(updatedRemarkList).build();
+        model.setPerson(personToUpdate, personWithRemarks);
+
+        DeleteRemarkCommand deleteRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON, Index.fromZeroBased(0));
+
+        RemarkList expectedRemarkList = new RemarkList(Arrays.asList(new Remark("Second Remark")));
+        Person expectedPerson = new PersonBuilder(personToUpdate).withRemarks(expectedRemarkList).build();
+
+        deleteRemarkCommand.execute(model);
+
+        assertTrue(model.getLastViewedPerson().get().isPresent(), "Expected lastViewedPerson to be set");
+        assertTrue(model.getLastViewedPerson().get().get().equals(expectedPerson),
+                "Expected lastViewedPerson to match the person with the updated remark list");
+    }
+
+    @Test
     public void equals() {
         DeleteRemarkCommand deleteFirstRemarkCommand = new DeleteRemarkCommand(INDEX_FIRST_PERSON,
                 Index.fromOneBased(1));
