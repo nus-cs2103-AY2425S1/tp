@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
  */
 public class FindAppointmentCommand extends Command {
 

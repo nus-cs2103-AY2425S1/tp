@@ -17,6 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_PATIENT = new Prefix("patient/");
     public static final Prefix PREFIX_CAREGIVER = new Prefix("caregiver/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("sdate/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("edate/");
     public static final Prefix PREFIX_START_TIME = new Prefix("start/");
     public static final Prefix PREFIX_END_TIME = new Prefix("end/");
     public static final Prefix PREFIX_NOTE = new Prefix("note/");
