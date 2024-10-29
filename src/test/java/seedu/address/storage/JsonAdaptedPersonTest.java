@@ -1,14 +1,21 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.model.person.Student.STUDENT_TYPE;
 import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedPerson.createJsonAdaptedPerson;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
 import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +26,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PersonTest;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -47,10 +56,26 @@ public class JsonAdaptedPersonTest {
             .map(String::toString)
             .collect(Collectors.toList());
 
+
+    private static final PersonTest.PersonStub personStubAmy = new PersonTest.PersonStub(new Name(VALID_NAME_AMY),
+        new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
+        new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validPersonDetails_returnsTeacher() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(TEACHER_DANIEL);
         assertEquals(TEACHER_DANIEL, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPersonDetails_returnsStudent() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(STUDENT_BENSON);
+        assertEquals(STUDENT_BENSON, person.toModelType());
+    }
+
+    @Test
+    public void createJsonAdaptedPerson_invalidType_throwsInvalidPersonTypeException() {
+        assertThrows(InvalidPersonTypeException.class, () -> createJsonAdaptedPerson(personStubAmy));
     }
 
     @Test
