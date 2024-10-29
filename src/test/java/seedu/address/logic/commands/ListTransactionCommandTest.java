@@ -32,7 +32,7 @@ public class ListTransactionCommandTest {
     @Test
     public void execute_transactionListView_throwsCommandException() {
         ListTransactionCommand command = new ListTransactionCommand(INDEX_FIRST_PERSON);
-        model.setViewTransactions(true);
+        model.setIsViewTransactions(true);
         String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "listt");
         assertCommandFailure(command, model, expectedMessage);
     }

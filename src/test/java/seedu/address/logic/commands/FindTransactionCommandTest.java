@@ -90,7 +90,7 @@ public class FindTransactionCommandTest {
     public void execute_transactionListView_throwsCommandException() {
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
-        model.setViewTransactions(true);
+        model.setIsViewTransactions(true);
         String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "findt");
         assertCommandFailure(command, model, expectedMessage);
     }

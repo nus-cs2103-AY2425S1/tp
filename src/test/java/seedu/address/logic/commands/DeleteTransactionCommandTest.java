@@ -66,7 +66,7 @@ public class DeleteTransactionCommandTest {
 
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        model.setViewTransactions(true);
+        model.setIsViewTransactions(true);
 
         String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 
