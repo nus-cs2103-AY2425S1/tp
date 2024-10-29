@@ -7,10 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -72,9 +72,14 @@ public class CommandTestUtil {
             LocalDate.parse(VALID_DATE_APPOINTMENT_AMY, DATE_FORMATTER),
             LocalTime.parse(VALID_END_TIME_APPOINTMENT_AMY, TIME_FORMATTER));
     public static final String VALID_DATE_APPOINTMENT_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_AMY;
+    public static final String VALID_NEW_DATE_APPOINTMENT_DESC_AMY = " " + PREFIX_NEW_DATE + VALID_DATE_APPOINTMENT_AMY;
     public static final String VALID_START_TIME_APPOINTMENT_DESC_AMY = " " + PREFIX_START_TIME
             + VALID_START_TIME_APPOINTMENT_AMY;
+    public static final String VALID_NEW_START_TIME_APPOINTMENT_DESC_AMY = " " + PREFIX_NEW_START_TIME
+            + VALID_START_TIME_APPOINTMENT_AMY;
     public static final String VALID_END_TIME_APPOINTMENT_DESC_AMY = " " + PREFIX_END_TIME
+            + VALID_END_TIME_APPOINTMENT_AMY;
+    public static final String VALID_NEW_END_TIME_APPOINTMENT_DESC_AMY = " " + PREFIX_NEW_END_TIME
             + VALID_END_TIME_APPOINTMENT_AMY;
 
     public static final String VALID_DATE_APPOINTMENT_BOB = "19/10/2025";
@@ -106,13 +111,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
-    public static final String FIND_NRIC_DESC_AMY = " " + PREFIX_FIND_NRIC + VALID_NRIC_AMY;
-    public static final String FIND_NRIC_DESC_BOB = " " + PREFIX_FIND_NRIC + VALID_NRIC_BOB;
-    public static final String FIND_DATE_DESC_AMY = " " + PREFIX_FIND_DATE + VALID_DATE_APPOINTMENT_AMY;
-    public static final String FIND_DATE_DESC_BOB = " " + PREFIX_FIND_DATE + VALID_DATE_APPOINTMENT_BOB;
-    public static final String FIND_START_TIME_DESC_AMY = " " + PREFIX_FIND_START_TIME
+    public static final String FIND_NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_AMY;
+    public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT_BOB;
+    public static final String START_TIME_DESC_AMY = " " + PREFIX_START_TIME
             + VALID_START_TIME_APPOINTMENT_AMY;
-    public static final String FIND_START_TIME_DESC_BOB = " " + PREFIX_FIND_START_TIME
+    public static final String START_TIME_DESC_BOB = " " + PREFIX_START_TIME
             + VALID_START_TIME_APPOINTMENT_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -181,13 +185,11 @@ public class CommandTestUtil {
 
         DESC_APPOINTMENT_AMY = new EditAppointmentDescriptorBuilder()
                 .withName(VALID_NAME_AMY)
-                .withNric(VALID_NRIC_AMY)
                 .withDate(VALID_DATE_APPOINTMENT_AMY)
                 .withStartTime(VALID_START_TIME_APPOINTMENT_AMY)
                 .withEndTime(VALID_END_TIME_APPOINTMENT_AMY).build();
         DESC_APPOINTMENT_BOB = new EditAppointmentDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
-                .withNric(VALID_NRIC_BOB)
                 .withDate(VALID_DATE_APPOINTMENT_BOB)
                 .withStartTime(VALID_START_TIME_APPOINTMENT_BOB)
                 .withEndTime(VALID_END_TIME_APPOINTMENT_BOB).build();

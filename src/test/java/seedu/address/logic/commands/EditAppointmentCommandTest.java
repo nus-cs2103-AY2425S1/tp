@@ -44,17 +44,17 @@ public class EditAppointmentCommandTest {
     @Test
     public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
         Model modelStub = new ModelManager();
-        Person testPerson = new PersonBuilder().build();
+        Person testPerson = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
         modelStub.addPerson(testPerson);
 
-        CommandResult commandResult = new AddAppointmentCommand(VALID_NRIC, VALID_DATE,
+        CommandResult commandResult = new AddAppointmentCommand(new Nric(VALID_NRIC_BOB), VALID_DATE,
                 VALID_START_TIME, VALID_END_TIME)
                 .execute(modelStub);
 
         Appointment editedAppointment = new Appointment(VALID_NAME_BOB, new Nric(VALID_NRIC_BOB),
                 VALID_START_DATE_TIME_APPOINTMENT_BOB, VALID_END_DATE_TIME_APPOINTMENT_BOB);
 
-        CommandResult editCommandResult = new EditAppointmentCommand(VALID_NRIC,
+        CommandResult editCommandResult = new EditAppointmentCommand(new Nric(VALID_NRIC_BOB),
                 startDateTime,
                 DESC_APPOINTMENT_BOB).execute(modelStub);
 
