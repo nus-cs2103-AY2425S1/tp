@@ -158,7 +158,58 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Tag Feature - Level and Subject Tagging
+This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and 
+subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can 
+manage student profiles more efficiently.
+
+- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
+  tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
+- **Invalid Input**: If an invalid student name, level, or subject is provided, the system displays the constraints and 
+  guidelines for tag parameters.
+- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
+  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
+  duplication.
+
+#### Implementation - Sequence Diagrams
+The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note 
+that while the TagCommandParser lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
+lifeline till the diagram's end.
+
+<puml src="diagrams/TagSequenceDiagram-Logic.puml" alt="TagSequenceDiagram-Logic" />
+
+<puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
+
+#### Design Considerations
+**Parsing Tag Input**
+
+- **Current Implementation (Alternative 1):**
+    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved 
+      maintainability and modularity.
+    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a 
+      consistent approach across commands.
+    - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
+
+- **Alternative 2**:
+    - **Description**: Validation occurs directly within TagCommandParser.
+    - **Pros**: Keeps validation localized within the tag command, reducing dependencies on external classes.
+    - **Cons**: Creates inconsistency across the codebase, making validation logic less reusable and harder to maintain.
+
+**Design of Tag Constraints**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and 
+      `s1 na` are treated as identical, and `math` and `MATH` are treated as identical).
+    - **Pros**: Enforces a standardized format for tags, ensuring brevity and uniformity.
+    - **Cons**: Reduces user flexibility in customizing tags.
+
+- **Alternative 2**:
+    - **Description**: Users can create tags without specific constraints.
+    - **Pros**: Provides greater flexibility for users to create custom tags. 
+    - **Cons**: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
+
+***
+
+### \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
@@ -249,13 +300,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -287,22 +331,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                                            | So that I can…​                                                                                  |
-|----------|-----------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `* * *`  | tuition teacher | add a student                                                                           |                                                                                                  |
-| `* * *`  | tuition teacher | delete a student                                                                        | ensure that my address book remains clutter free                                                 |
-| `* * *`  | tuition teacher | list all students                                                                       | have a quick overview of all my students                                                         |
-| `* * *`  | tuition teacher | update a student's details                                                              | maintain accurate and up-to-date records                                                         |
-| `* * *`  | tuition teacher | tag students based by their school level and subject                                    | filter students based on their school level and subjects when preparing for lessons              |
-| `* * *`  | tuition teacher | quickly access my student's emergency contact                                           | contact them in an emergency                                                                     |
-| `* * *`  | tuition teacher | record notes on each student's progress                                                 | provide personalised attention and address their specific learning needs in future lessons       |
-| `* * *`  | tuition teacher | search for students based on their name, school level or subject                        | save time during lesson preparation and while teaching                                           |
-| `* *`    | tuition teacher | add tasks for each student                                                              | keep track of outstanding tasks that need to be done for that student (e.g. marking assignments) |
-| `* *`    | tuition teacher | view tasks for a specific student                                                       | have an overview of outstanding tasks that need to be done for that student                      |
-| `* *`    | tuition teacher | delete tasks for a specific student                                                     | ensure only outstanding tasks are displayed                                                      |
-| `* *`    | tuition teacher | set reminders for follow-ups, assessments or feedback sessions with individual students | remember not miss important checkpoints in their learning journey                                |
-| `* *`    | tuition teacher | receive notifications when a student's performance drops below a certain threshold      | proactively address any learning challenges they might be facing                                 |
-| `*`      | tuition teacher | be able to see a picture of them                                                        | easily remember and identify them                                                                |
+| Priority | As a …​             | I want to …​                                                                                | So that I can…​                                                                                                      |
+|----------|---------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | tuition teacher     | add a student                                                                               |                                                                                                                      |
+| `* * *`  | tuition teacher     | delete a student                                                                            | ensure that my address book remains clutter free                                                                     |
+| `* * *`  | tuition teacher     | list all students                                                                           | have a quick overview of all my students                                                                             |
+| `* * *`  | tuition teacher     | update a student's details                                                                  | maintain accurate and up-to-date records                                                                             |
+| `* * *`  | tuition teacher     | tag students based by their school level and subject                                        | filter students based on their school level and subjects when preparing for lessons                                  |
+| `* * *`  | tuition teacher     | quickly access my student's emergency contact                                               | contact them in an emergency                                                                                         |
+| `* * *`  | tuition teacher     | record notes on each student's progress                                                     | provide personalised attention and address their specific learning needs in future lessons                           |
+| `* * *`  | tuition teacher     | search for students based on their name, school level or subject                            | save time during lesson preparation and while teaching                                                               |
+| `* *`    | tuition teacher     | add tasks for each student                                                                  | keep track of outstanding tasks that need to be done for that student (e.g. marking assignments)                     |
+| `* *`    | tuition teacher     | view tasks for a specific student                                                           | have an overview of outstanding tasks that need to be done for that student                                          |
+| `* *`    | tuition teacher     | view all tasks of all students                                                              | have a comprehensive overview of all tasks, ensuring I can prioritize effectively and manage my workload efficiently |
+| `* *`    | tuition teacher     | delete tasks for a specific student                                                         | ensure only outstanding tasks are displayed                                                                          |
+| `* *`    | tuition teacher     | update the details of a task for a specific student                                         | ensure that each task is accurate and reflects the latest progress or changes                                        |
+| `* *`    | ~~tuition teacher~~ | ~~set reminders for follow-ups, assessments or feedback sessions with individual students~~ | ~~remember not miss important checkpoints in their learning journey~~                                                |
+| `* *`    | ~~tuition teacher~~ | ~~receive notifications when a student's performance drops below a certain threshold~~      | ~~proactively address any learning challenges they might be facing~~                                                 |
+| `*`      | ~~tuition teacher~~ | ~~be able to see a picture of them~~                                                        | ~~easily remember and identify them~~                                                                                |
 
 
 ### Use cases
@@ -509,8 +555,6 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -518,7 +562,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
     3. Test case: `delete 0`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
@@ -526,12 +570,30 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+### Finding specific students
 
-### Saving data
+1. Finding specific students while all students are being shown
 
-1. Dealing with missing/corrupted data files
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. Valid Test Cases
 
-2. _{ more test cases …​ }_
+        1. Find by name:`find n/Alex`<br>
+           Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
+
+        2. Find by level: `find l/S1 NA`<br>
+           Expected: Only students tagged with the level `S1 NA` are displayed. Number of students found is reflected in the status message.
+
+        3. Find by subject: `find s/MATH`<br>
+           Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
+
+    3. Invalid Test Cases
+
+       1. Find by name:`find n/!@!`, `find n/1234`, `...`<br>
+          Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
+
+       2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
+          Expected: Similar to previous.
+    
+       3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
+          Expected: Similar to previous.
