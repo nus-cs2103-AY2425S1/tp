@@ -430,49 +430,10 @@ Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks ins
       Use case ends.
 
 ### **Use case: UC05 — Create a Wedding**
-Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a wedding to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
 ### **Use case: UC06 — Create a Task**
-Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a task to WedLinker instead of a Contact
-
-### **Use case: UC08 — Create a Tag**
-Similar to [<ins>UC04](#use-case-uc04add-a-contact) except adding a tag to WedLinker instead of a Contact
-
-
----
-
-### **Use case: UC09 — Add Tag to Contact**
-
-**MSS**
-
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User adds the tag to the contact.
-3. System informs the user the contact is tagged.
-4. System shows the user the final result of the contact.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-* 2a. System detects that the tag does not exist.
-
-    * 2a1. System <ins>creates a new tag (UC08)</ins>.
-
-      Use case resumes at step 3.
-
-* 2b. The given index is invalid.
-
-    * 2b1. System shows an error message prompting the user to enter a valid index.
-
-      Use case resumes at step 1.
-
-### **Use case: UC09 — Add Wedding to Contact**
-Similar to [UC010](#use-case-uc010search-for-contacts-by-name) except add wedding to contact.
-
+Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to WedLinker instead of a Contact
 
 ### **Use case: UC07 — Add Phone Number to Contact**
 
@@ -491,15 +452,12 @@ Similar to [UC010](#use-case-uc010search-for-contacts-by-name) except add weddin
 **Extensions**
 
 * 1a. The list is empty.
-
   Use case ends.
-
 
 * 2a. The system detects an error in the entered data.
     * 2a1. The system displays an error message
 
       Use case resumes at step 1.
-
 
 ### **Use case: UC08 — Add Address to Contact** 
 Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated addresses are allowed
@@ -543,7 +501,7 @@ Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searchi
 
 ---
 
-### **Use case: UC10 — Delete Contact**
+### **Use case: UC18 — Delete Contact**
 
 **MSS**
 
@@ -556,24 +514,22 @@ Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searchi
 **Extensions**
 
 * 1a. The list is empty.
-
   Use case ends.
 
-
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message prompting the user to enter a valid index.
-
       Use case resumes at step 1.
 
-### **Use case: UC10 — Delete Wedding**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting wedding.
+### **Use case: UC19 — Delete Wedding**
+Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting wedding.
 
-### **Use case: UC10 — Delete Task**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting task.
+### **Use case: UC20 — Delete Task**
+Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting task.
 
-### **Use case: UC10 — Delete Tag**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except deleting tag.
+### **Use case: UC21 — Delete Tag**
+Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
+
+---
 
 ### **Use case: UCSH01 - Edit details for a contact**
 
