@@ -1,0 +1,29 @@
+{
+  "listings" : [ {
+    "price" : "21312",
+    "area" : "100",
+    "region" : "WEST",
+    "address" : "134 Clementi Ave",
+    "seller" : {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "appointment" : {
+        "date" : {
+          "value" : ""
+        },
+        "from" : {
+          "value" : ""
+        },
+        "to" : {
+          "value" : ""
+        }
+      },
+      "property" : "",
+      "tags" : [ "friends" ],
+      "role" : "seller"
+    },
+    "buyers" : [ ],
+    "listingName" : "Invalid listingName: A!A!!"
+  } ]
+}

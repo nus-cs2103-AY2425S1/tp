@@ -1,0 +1,316 @@
+{
+  "_comment": "AddressBook save file containing typical persons from TypicalPersons#getTypicalAddressBook()",
+  "listings": [
+    {
+      "name": "Pasir Ris Condo",
+      "address": "543 Pasir Ris Street 11",
+      "region" : "EAST",
+      "area": 75,
+      "price": "700000",
+      "seller": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "property": "Pasir Ris",
+        "appointment": {
+          "date": { "value": "01/01/2024" },
+          "from": { "value": "0800" },
+          "to": { "value": "0900" }
+        },
+        "tags": ["friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "Daniel Meier",
+          "phone": "87652533",
+          "email": "cornelia@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        },
+        {
+          "name": "George Best",
+          "phone": "9482442",
+          "email": "anna@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Tampines HDB",
+      "address": "456 Tampines Street 21",
+      "region" : "EAST",
+      "area": 90,
+      "price": "600000",
+      "seller": {
+        "name": "Benson Meier",
+        "phone": "98765432",
+        "email": "benson@example.com",
+        "property": "Tampines",
+        "appointment": {
+          "date": { "value": "14/12/2020" },
+          "from": { "value": "1000" },
+          "to": { "value": "2330" }
+        },
+        "tags": ["owesMoney", "friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "Daniel Meier",
+          "phone": "87652533",
+          "email": "cornelia@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        },
+        {
+          "name": "Elle Meyer",
+          "phone": "9482224",
+          "email": "elle@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Kent Ridge Condo",
+      "address": "543 Kent Ridge Avenue 12",
+      "area": 90,
+      "region" : "WEST",
+      "price": "400000",
+      "seller": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "property": "Pasir Ris",
+        "appointment": {
+          "date": { "value": "01/01/2024" },
+          "from": { "value": "0800" },
+          "to": { "value": "0900" }
+        },
+        "tags": ["friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "Elle Meyer",
+          "phone": "9482224",
+          "email": "elle@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Buona Vista Residences",
+      "address": "246 Buona Vista Dr 2",
+      "region" : "WEST",
+      "area": 90,
+      "price": "400000",
+      "seller": {
+        "name": "Benson Meier",
+        "phone": "98765432",
+        "email": "benson@example.com",
+        "property": "Tampines",
+        "appointment": {
+          "date": { "value": "14/12/2020" },
+          "from": { "value": "1000" },
+          "to": { "value": "2330" }
+        },
+        "tags": ["owesMoney", "friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "George Best",
+          "phone": "9482442",
+          "email": "anna@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        },
+        {
+          "name": "Fiona Kunz",
+          "phone": "9482427",
+          "email": "fiona@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Sengkang HDB",
+      "address": "516 Sengkang Street 21",
+      "region" : "NORTHEAST",
+      "area": 90,
+      "price": "400000",
+      "seller": {
+        "name": "Benson Meier",
+        "phone": "98765432",
+        "email": "benson@example.com",
+        "property": "Tampines",
+        "appointment": {
+          "date": { "value": "14/12/2020" },
+          "from": { "value": "1000" },
+          "to": { "value": "2330" }
+        },
+        "tags": ["owesMoney", "friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "Fiona Kunz",
+          "phone": "9482427",
+          "email": "fiona@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Punggol Condo",
+      "address": "223 Punggol Dr 4",
+      "region" : "NORTHEAST",
+      "area": 90,
+      "price": "400000",
+      "seller": {
+        "name": "Carl Kurz",
+        "phone": "95352563",
+        "email": "carl@example.com",
+        "property": "Orchard Road",
+        "appointment": {
+          "date": { "value": "01/01/2024" },
+          "from": { "value": "0800" },
+          "to": { "value": "0900" }
+        },
+        "tags": ["friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "Fiona Kunz",
+          "phone": "9482427",
+          "email": "fiona@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        },
+        {
+          "name": "Elle Meyer",
+          "phone": "9482224",
+          "email": "elle@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    },
+    {
+      "name": "Sentosa Cove",
+      "address": "46 Sentosa Cove",
+      "region" : "SOUTH",
+      "area": 90,
+      "price": "400000",
+      "seller": {
+        "name": "Carl Kurz",
+        "phone": "95352563",
+        "email": "carl@example.com",
+        "property": "Orchard Road",
+        "appointment": {
+          "date": { "value": "01/01/2024" },
+          "from": { "value": "0800" },
+          "to": { "value": "0900" }
+        },
+        "tags": ["friends"],
+        "role": "seller"
+      },
+      "buyers": [
+        {
+          "name": "George Best",
+          "phone": "9482442",
+          "email": "anna@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        },
+        {
+          "name": "Daniel Meier",
+          "phone": "87652533",
+          "email": "cornelia@example.com",
+          "property": "",
+          "appointment": {
+            "date": { "value": "01/01/2024" },
+            "from": { "value": "0800" },
+            "to": { "value": "0900" }
+          },
+          "tags": ["friends"],
+          "role": "buyer"
+        }
+      ]
+    }
+  ]
+
+}

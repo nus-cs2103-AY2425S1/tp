@@ -1,2 +1,4 @@
-package seedu.address.storage;public class JsonAdaptedListingTest {
+package seedu.address.storage;
+
+public class JsonAdaptedListingTest {
 }
