@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Data Requirements**
 1. All the data should be stored in human-editable files and must not be stored using DBMS. 
-2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
+1. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
 
 **Performance Requirements**
 1. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. 
@@ -436,16 +436,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
-3. The application should provide clear help sections for users, explaining how to use its features.
+1. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
+1. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
 1. Should only be used by one student at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
 
 **Testability**
 1. The software should not depend on any remote server and should be able to run at any time. 
-2. The application should be able to launch without an installer.
-3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+1. The application should be able to launch without an installer.
+1. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
 
 **Security Requirements**
 1. The application is assumed to be used locally without creating any user account.
@@ -453,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Maintainability Requirements**
 1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
-2. The application must use a version control system to track changes and maintain multiple versions of the software.
+1. The application must use a version control system to track changes and maintain multiple versions of the software.
 
 **Logging**
 1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
