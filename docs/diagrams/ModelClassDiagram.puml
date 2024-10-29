@@ -49,7 +49,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person --> Role
+Person --> "0..1" Role
 Client --> Person
 Wedding *--> Name
 Wedding *--> Client
