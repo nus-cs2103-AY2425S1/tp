@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,7 +35,7 @@ public class MatchCommandParser implements Parser<MatchCommand> {
             jobIndex = ParserUtil.parseIndex(inputJobIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE), pe);
+                    String.format(Messages.MESSAGE_INVALID_DISPLAYED_INDEX), pe);
         }
 
         return new MatchCommand(contactIndex, jobIndex);
