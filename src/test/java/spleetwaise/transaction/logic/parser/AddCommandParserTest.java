@@ -58,6 +58,12 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_nonExistentPhone_exceptionThrown() {
+        String userInput = " p/99999999 amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
+    }
+
+    @Test
     public void parse_invalidAmount_exceptionThrown() {
         String userInput = " per/1 amt/1.234 desc/description date/01012024";
         assertParseFailure(parser, userInput, Amount.MESSAGE_CONSTRAINTS);

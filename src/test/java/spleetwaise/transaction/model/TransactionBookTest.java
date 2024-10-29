@@ -22,7 +22,9 @@ import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.model.transaction.exceptions.DuplicateTransactionException;
+import spleetwaise.transaction.model.transaction.exceptions.TransactionNotFoundException;
 import spleetwaise.transaction.testutil.TransactionBuilder;
+import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class TransactionBookTest {
 
@@ -127,14 +129,14 @@ public class TransactionBookTest {
     }
 
     @Test
-    public void setTransaction_null_exceptionThrown() {
+    public void setTransactionBook_null_exceptionThrown() {
         TransactionBook book = new TransactionBook();
 
-        assertThrows(NullPointerException.class, () -> book.setTransactions(null));
+        assertThrows(NullPointerException.class, () -> book.setTransactionBook(null));
     }
 
     @Test
-    public void setTransaction_validParams_success() {
+    public void setTransactionBook_validParams_success() {
         TransactionBook book = new TransactionBook();
         book.addTransaction(testTxn);
 
@@ -142,11 +144,33 @@ public class TransactionBookTest {
         replacementBook.addTransaction(testTxn2);
         replacementBook.addTransaction(testTxn3);
 
-        book.setTransactions(replacementBook);
+        book.setTransactionBook(replacementBook);
 
         assertFalse(book.containsTransaction(testTxn));
         assertTrue(book.containsTransaction(testTxn2));
         assertTrue(book.containsTransaction(testTxn3));
+    }
+
+    @Test
+    public void setTransaction_null_throws() {
+        TransactionBook book = TypicalTransactions.getTypicalTransactionBook();
+        Transaction someTransaction = book.getTransactionList().get(0);
+
+        assertThrows(NullPointerException.class, () -> book.setTransaction(null, null));
+        assertThrows(NullPointerException.class, () -> book.setTransaction(someTransaction, null));
+        assertThrows(NullPointerException.class, () -> book.setTransaction(null, someTransaction));
+        assertThrows(TransactionNotFoundException.class, () -> book.setTransaction(testTxn, testTxn2));
+    }
+
+    @Test
+    public void setTransaction_validParams_success() {
+        TransactionBook book = TypicalTransactions.getTypicalTransactionBook();
+        Transaction someTransaction = book.getTransactionList().get(0);
+
+        book.setTransaction(someTransaction, testTxn);
+
+        assertEquals(book.getTransactionList().get(0), testTxn);
+
     }
 
     @Test
