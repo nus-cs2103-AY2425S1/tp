@@ -37,6 +37,13 @@ public class SubjectTest {
     }
 
     @Test
+    public void isValidSubjectName_SubjectName_success() {
+        assertTrue(Subject.isValidSubjectName("MATH"));
+        assertTrue(Subject.isValidSubjectName("mATh"));
+        assertTrue(Subject.isValidSubjectName("math"));
+    }
+
+    @Test
     public void isValidSubjectNameByLevel_invalidLevel_failure() {
         assertFalse(Subject.isValidSubjectNameByLevel(
                 new Level("NONE NONE"), VALID_SUBJECT_ENGLISH));

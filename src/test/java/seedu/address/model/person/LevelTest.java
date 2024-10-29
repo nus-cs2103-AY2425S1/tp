@@ -53,7 +53,18 @@ public class LevelTest {
         assertTrue(Level.isValidLevelName("S4 IP"));
 
         assertTrue(Level.isValidLevelName("S5 NA"));
+
+        //case insensitive
+        assertTrue(Level.isValidLevelName("s4 express"));
+        assertTrue(Level.isValidLevelName("s4 exPRess"));
+        assertTrue(Level.isValidLevelName("S4 exPRess"));
+        assertTrue(Level.isValidLevelName("s4 EXPRESS"));
+
+        //ignore different spacing
+        assertTrue(Level.isValidLevelName("S4    EXPRESS"));
+        assertTrue(Level.isValidLevelName("S4  EXPRESS"));
     }
+
 
     @Test
     public void equals() {
