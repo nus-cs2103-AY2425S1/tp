@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.MoreInfoController" spacing="30"
+      alignment="TOP_CENTER" stylesheets="@MoreInfoWindow.css" styleClass="vbox">
+
+    <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header">
+        <ImageView fx:id="profilePicture" styleClass="profile-picture" />
+        <Label fx:id="clientNameLabel" styleClass="label-title" />
+    </HBox>
+
+    <VBox alignment="CENTER_LEFT" spacing="12" styleClass="info-box">
+        <Label fx:id="clientEmailLabel" styleClass="label-info" />
+        <Label fx:id="clientPhoneLabel" styleClass="label-info" />
+        <Label fx:id="clientAppointmentLabel" styleClass="label-info" />
+        <Label fx:id="clientRoleLabel" styleClass="label-info" />
+    </VBox>
+
+    <VBox alignment="CENTER_LEFT" spacing="8" styleClass="remarks-box">
+        <Label text="Remarks:" styleClass="label-section-title" />
+        <Label fx:id="clientRemarksLabel" wrapText="true" styleClass="label-remarks" />
+        <TextArea fx:id="remarkInput" promptText="Type a remark for this client..." wrapText="true"
+                  styleClass="text-area-remark" prefHeight="80" />
+    </VBox>
+
+    <Button text="Close" onAction="#handleClose" styleClass="button-close" />
+</VBox>
+

@@ -32,7 +32,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AppointmentCommandTest {
 
-    private static final String VALID_DATE = "20/12/2024";
+    private static final String VALID_DATE = "20-12-24";
     private static final String VALID_FROM = "0800";
     private static final String VALID_TO = "1000";
 
@@ -218,6 +218,16 @@ public class AppointmentCommandTest {
 
         @Override
         public void setListing(Listing target, Listing editedListing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Listing getListingByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasListingsForSeller(Person seller) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -13,6 +13,7 @@ import seedu.address.model.appointment.To;
  */
 public class JsonAdaptedTo {
 
+    private static final String EMPTY_TO_PLACEHOLDER = "EMPTY_TO";
     private final String value;
 
     /**
@@ -27,7 +28,7 @@ public class JsonAdaptedTo {
      * Converts a given {@code From} into this class for Jackson use.
      */
     public JsonAdaptedTo(To source) {
-        this.value = source.toString();
+        this.value = (source == To.EMPTY_TO) ? EMPTY_TO_PLACEHOLDER : source.toString();
     }
 
 
@@ -40,6 +41,9 @@ public class JsonAdaptedTo {
     public To toModelType() throws IllegalValueException {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, To.class.getSimpleName()));
+        }
+        if (value.equals(EMPTY_TO_PLACEHOLDER)) {
+            return To.EMPTY_TO;
         }
         return new To(value);
     }

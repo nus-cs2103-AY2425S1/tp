@@ -66,11 +66,13 @@ public class AddPropertyCommand extends Command {
         Person editedPerson;
         if (personToEdit instanceof Buyer) {
             editedPerson = new Buyer(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+                    personToEdit.getTags(), personToEdit.getAppointment(),
+                    personToEdit.getProperty()
             );
         } else {
             editedPerson = new Seller(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+                    personToEdit.getTags(), personToEdit.getAppointment(),
+                    personToEdit.getProperty()
             );
         }
         model.setPerson(personToEdit, editedPerson);

@@ -88,11 +88,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void initializeAppointment() {
-        if (person.getAppointment().isEmpty()) {
-            appointment.setText("");
-        } else {
-            appointment.setText(person.getAppointment().toString());
-        }
+        appointment.setText(person.getAppointment().toString());
     }
 
     private void initializeProperty() {

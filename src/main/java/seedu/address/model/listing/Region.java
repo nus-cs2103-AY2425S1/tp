@@ -1,5 +1,7 @@
 package seedu.address.model.listing;
 
+import java.util.HashMap;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -7,6 +9,21 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public enum Region {
     NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, CENTRAL;
+
+    private static final HashMap<Region, String> hm = new HashMap<>();
+
+    // Static initializer to assign colors to each region
+    static {
+        hm.put(EAST, "green");
+        hm.put(WEST, "green");
+        hm.put(NORTHEAST, "purple");
+        hm.put(SOUTH, "red");
+        hm.put(NORTH, "red");
+        hm.put(NORTHWEST, "red");
+        hm.put(SOUTHEAST, "orange");
+        hm.put(SOUTHWEST, "orange");
+        hm.put(CENTRAL, "orange");
+    }
 
     public static final String MESSAGE_CONSTRAINTS = "Region should be a direction (NSEW, etc)";
 
@@ -27,6 +44,15 @@ public enum Region {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid region: " + regionString, e);
         }
+    }
+
+    /**
+     * Gets the color associated with the region.
+     *
+     * @return the color as a String.
+     */
+    public String getColor() {
+        return hm.get(this);
     }
 
     /**

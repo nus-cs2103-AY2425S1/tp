@@ -8,7 +8,7 @@
       "property": "Pasir Ris",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
@@ -22,7 +22,7 @@
       "property": "Tampines",
       "remark": "",
       "appointment": {
-        "date": { "value": "14/12/2020" },
+        "date": { "value": "14-12-20" },
         "from": { "value": "1000" },
         "to": { "value": "2330" }
       },
@@ -36,7 +36,7 @@
       "property": "",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
@@ -50,7 +50,7 @@
       "property": "",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
@@ -64,7 +64,7 @@
       "property": "",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
@@ -78,7 +78,7 @@
       "property": "",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
@@ -92,7 +92,7 @@
       "property": "",
       "remark": "",
       "appointment": {
-        "date": { "value": "01/01/2024" },
+        "date": { "value": "01-01-24" },
         "from": { "value": "0800" },
         "to": { "value": "0900" }
       },
