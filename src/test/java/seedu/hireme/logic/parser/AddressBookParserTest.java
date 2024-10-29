@@ -2,7 +2,6 @@ package seedu.hireme.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
@@ -100,7 +99,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
             -> parser.parseCommand(""));
     }
 
