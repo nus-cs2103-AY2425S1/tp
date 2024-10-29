@@ -24,7 +24,7 @@ public class GradeAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the score of the assignment belonging to a "
             + "student by the student's index number used in the displayed student list, and the assignment's index"
-            + " belonging to the student."
+            + " belonging to the student. "
             + "The assignment will also be marked as Submitted.\n"
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
@@ -47,6 +47,8 @@ public class GradeAssignmentCommand extends Command {
      * @param score of the assignment
      */
     public GradeAssignmentCommand(Index studentIndex, Index assignmentIndex, int score) {
+        assert studentIndex != null;
+        assert assignmentIndex != null;
         requireNonNull(studentIndex);
         requireNonNull(assignmentIndex);
         this.studentIndex = studentIndex;
