@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMYWEDDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMYWEDDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_AMYWEDDING;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -22,8 +25,8 @@ public class TypicalWeddings {
     public static final Wedding ALICE_WEDDING = new WeddingBuilder().withName("Alice Adam Wedding")
             .withVenue("Marina Bay Sands").withDate("2024-12-12").withClient(ALICE).build();
 
-    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName("Amy Jack Wedding")
-            .withDate("2025-12-25").withClient(AMY).build();
+    public static final Wedding AMY_WEDDING = new WeddingBuilder().withName(VALID_NAME_AMYWEDDING)
+            .withDate(VALID_DATE_AMYWEDDING).withVenue(VALID_VENUE_AMYWEDDING).withClient(AMY).build();
 
     public static final Wedding ELLE_WEDDING = new WeddingBuilder().withName("Elle George Wedding")
             .withClient(ELLE).build();
