@@ -41,14 +41,12 @@ public class NameMatchesKeywordPredicateTest {
 
     @Test
     public void test_nameMatchesName_returnsTrue() {
-        // Name with one word, partial name keyword
         NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         predicate = new NameMatchesKeywordPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Bob Alice").build()));
 
-        // Name with multiple words
         predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
