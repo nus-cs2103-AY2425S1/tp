@@ -21,9 +21,25 @@ public class Seller extends Person {
      * @param appointment The appointment associated with the seller.
      * @param property The property associated with the seller.
      */
-
-    public Seller(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
+    public Seller(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment, Property property) {
         super(name, phone, email, tags, appointment, property);
+    }
+
+    /**
+     * Creates a Seller with the specified details.
+     *
+     * @param name The name of the seller.
+     * @param phone The phone number of the seller.
+     * @param email The email address of the seller.
+     * @param tags The tags associated with the seller.
+     * @param appointment The appointment associated with the seller.
+     * @param property The property associated with the seller.
+     * @param remark The remark associated with the seller.
+     */
+    public Seller(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment, Property property, String remark) {
+        super(name, phone, email, tags, appointment, property, remark);
     }
 
     @Override

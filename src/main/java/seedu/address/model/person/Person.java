@@ -23,6 +23,7 @@ public abstract class Person {
     private final Email email;
 
     // Data fields
+    private String remark = "No remarks yet.";
     private final Property property;
     private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
@@ -30,7 +31,8 @@ public abstract class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment, Property property) {
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
@@ -38,7 +40,21 @@ public abstract class Person {
         this.appointment = appointment;
         this.property = property;
         this.tags.addAll(tags);
+    }
 
+    /**
+     * Every field must be present and not null, excluding remark.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment, Property property, String remark) {
+        requireAllNonNull(name, phone, appointment, property);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.appointment = appointment;
+        this.property = property;
+        this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     /*
@@ -82,6 +98,10 @@ public abstract class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public String getRemark() {
+        return remark;
+    }
+    public void updateRemark(String newRemark) { remark = newRemark; }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -129,7 +149,7 @@ public abstract class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, appointment, property, tags);
+        return Objects.hash(name, phone, email, appointment, property, tags, remark);
     }
 
     @Override
@@ -141,6 +161,7 @@ public abstract class Person {
                 .add("tags", tags)
                 .add("appointment", appointment)
                 .add("property", property)
+                .add("remark", remark)
                 .toString();
     }
 
