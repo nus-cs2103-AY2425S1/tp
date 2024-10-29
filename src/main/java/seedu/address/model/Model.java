@@ -75,6 +75,16 @@ public interface Model {
     public List<Student> getClashingStudents(Student student);
 
     /**
+     * Retrieves the list of students, adds up their paid amount, and returns the total paid amount
+     */
+    public double getTotalPaidAmount();
+
+    /**
+     * Retrieves the list of students, adds up their owed amonut, and returns the total owed amount
+     */
+    public double getTotalOwedAmount();
+
+    /**
      * Retrieves a list of students with whom {@code student} has lessons on the day.
      * @param day The day to check for.
      * @return List of students scheduled to have lesson on that day.

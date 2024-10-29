@@ -109,6 +109,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public double getTotalPaidAmount() {
+        double totalPaidAmount = 0;
+        ObservableList<Student> studentList = getFilteredStudentList();
+
+        for (Student student: studentList) {
+            totalPaidAmount += student.getPaidAmountValue();
+        }
+        return totalPaidAmount;
+    }
+
+    @Override
+    public double getTotalOwedAmount() {
+        double totalOwedAmount = 0;
+        ObservableList<Student> studentList = getFilteredStudentList();
+
+        for (Student student: studentList) {
+            totalOwedAmount += student.getOwedAmountValue();
+        }
+        return totalOwedAmount;
+    }
+
+    @Override
     public List<Student> getScheduledStudents(Days day) {
         requireNonNull(day);
         return addressBook.getScheduledStudents(day);

@@ -172,6 +172,15 @@ public class AddCommandTest {
         public List<Student> getScheduledStudents(Days day) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public double getTotalPaidAmount() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public double getTotalOwedAmount() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void deleteStudent(Student target) {

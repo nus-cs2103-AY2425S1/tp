@@ -130,6 +130,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getTotalPaidAmount_nullStudent_returnZeroPaidAmount() {
+        assertEquals(modelManager.getTotalPaidAmount(), 0);
+    }
+
+    @Test
+    public void getTotalPaidAmount_someStudents_returnCorrectTotalPaidAmount() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getTotalPaidAmount(), ALICE.getPaidAmountValue());
+    }
+
+    @Test
+    public void getTotalOwedAmount_nullStudent_returnZeroPaidAmount() {
+        assertEquals(modelManager.getTotalOwedAmount(), 0);
+    }
+
+    @Test
+    public void getTotalOwedAmount_someStudents_returnCorrectTotalPaidAmount() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getTotalOwedAmount(), ALICE.getOwedAmountValue());
+    }
+
+    @Test
     public void getScheduledStudents_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.getScheduledStudents(null));
     }
