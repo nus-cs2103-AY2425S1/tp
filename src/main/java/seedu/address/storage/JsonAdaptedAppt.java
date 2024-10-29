@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Appt;
 
 /**
@@ -14,10 +15,13 @@ import seedu.address.model.patient.Appt;
  */
 public class JsonAdaptedAppt {
     private final String dateTime;
+    private final String healthService;
 
     @JsonCreator
-    public JsonAdaptedAppt(@JsonProperty("dateTime") String dateTime) {
+    public JsonAdaptedAppt(@JsonProperty("dateTime") String dateTime, 
+        @JsonProperty("healthService") String healthService) {
         this.dateTime = dateTime;
+        this.healthService = healthService;
     }
 
     /**
@@ -27,6 +31,15 @@ public class JsonAdaptedAppt {
      */
     public JsonAdaptedAppt(Appt source) {
         this.dateTime = source.getDateTime().toString();
+        this.healthService = source.getHealthService().toString();
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public String getHealthServiceName() {
+        return healthService;
     }
 
     /**
@@ -37,6 +50,9 @@ public class JsonAdaptedAppt {
         if (!Appt.isValidAppt(dateTime)) {
             throw new IllegalValueException(Appt.MESSAGE_CONSTRAINTS);
         }
-        return new Appt(LocalDateTime.parse(dateTime));
+        if (!HealthService.isValidHealthserviceName(healthService) || healthService == null) {
+            throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
+        }
+        return new Appt(LocalDateTime.parse(dateTime), new HealthService(healthService));
     }
 }

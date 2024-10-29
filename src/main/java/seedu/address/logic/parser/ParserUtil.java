@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -355,23 +356,39 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into an {@code Appt}.
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static Appt parseSingleAppt(LocalDateTime dateTime) {
-        requireNonNull(dateTime);
-        return new Appt(dateTime);
+    public static Appt parseSingleAppt(LocalDateTime dateTime, HealthService healthService) throws ParseException {
+        requireAllNonNull(dateTime, healthService);
+        return new Appt(dateTime, healthService);
     }
 
     /**
-     * Parses {@code Collection<String> dates} into a {@code ApptList}.
-     */
-    public static ApptList parseAppts(Collection<String> dates) throws ParseException {
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code dateTime} is invalid.
+    */
+    public static ApptList parseAppts(Collection<String> dates, Collection<HealthService> healthServices) throws ParseException {
         requireNonNull(dates);
         final ApptList apptList = new ApptList();
+        int i = 0;
         for (String date : dates) {
+            String trimmedDate = date.trim();
+            if (!Appt.isValidAppt(trimmedDate)) {
+                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+            }
+            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            apptList.addAppt(parseSingleAppt(trimmedDateTime, healthServices.toArray(new HealthService[0])[i]));
+            i++;
+        }
+        return apptList;
+    }
+}
+
+/*
+for (String date : dates) {
             String trimmedDate = date.trim();
             if (!Appt.isValidAppt(trimmedDate)) {
                 throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
@@ -381,4 +398,4 @@ public class ParserUtil {
         }
         return apptList;
     }
-}
+ */

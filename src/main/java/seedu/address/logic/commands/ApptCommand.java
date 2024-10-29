@@ -9,35 +9,40 @@ import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Appt;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 
 /**
- * Changes the remark of an existing patient in the address book.
+ * Adds an appointment to the patient with the given NRIC.
+ * Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC
  */
 public class ApptCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Nric: %1$s";
+    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Healthservice: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "appt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds an appointment to the patient with the given NRIC. "
-        + "Format: appt dt/YYYY-MM-DDTHH:MM i/NRIC \n"
-        + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 i/S1234567A";
+        + "Format: appt dt/YYYY-MM-DDTHH:MM h/HEALTHSERVICE i/NRIC \n"
+        + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 h/Blood Test i/S1234567A";
 
     private final LocalDateTime dateTime;
+    private final HealthService healthService;
     private final Nric nric;
 
     /**
      * @param dateTime of the appointment
+     * @param healthService of the appointment
      * @param nric of the patient
      */
-    public ApptCommand(LocalDateTime dateTime, Nric nric) {
-        requireAllNonNull(dateTime, nric);
+    public ApptCommand(LocalDateTime dateTime, HealthService healthService, Nric nric) {
+        requireAllNonNull(dateTime, healthService, nric);
         this.dateTime = dateTime;
+        this.healthService = healthService;
         this.nric = nric;
     }
 
@@ -72,7 +77,7 @@ public class ApptCommand extends Command {
         }
 
         // Add the appointment to the patient's list of appointments
-        patient.addAppt(new Appt(dateTime));
+        patient.addAppt(new Appt(dateTime, healthService));
 
         return new CommandResult(generateSuccessMessage(patient));
     }

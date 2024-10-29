@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Nric;
 
 /**
@@ -29,9 +31,10 @@ public class ApptCommandParser implements Parser<ApptCommand> {
      */
     public ApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_NRIC);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, 
+            PREFIX_HEALTHSERVICE, PREFIX_NRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_NRIC)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_HEALTHSERVICE, PREFIX_NRIC)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ApptCommand.MESSAGE_USAGE));
@@ -49,9 +52,10 @@ public class ApptCommandParser implements Parser<ApptCommand> {
                 ApptCommand.MESSAGE_USAGE), e);
         }
 
+        HealthService healthService = new HealthService(argMultimap.getValue(PREFIX_HEALTHSERVICE).get());
         Nric nric = new Nric(argMultimap.getValue(PREFIX_NRIC).get());
 
-        return new ApptCommand(dateTime, nric);
+        return new ApptCommand(dateTime, healthService, nric);
     }
 
     /**

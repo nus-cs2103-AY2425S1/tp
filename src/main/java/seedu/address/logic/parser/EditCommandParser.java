@@ -22,9 +22,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.deser.std.CollectionDeserializer;
+
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.ApptList;
 import seedu.address.model.patient.Nric;
 
@@ -106,11 +109,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
 
-        parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).ifPresent(editPatientDescriptor::setAppts);
+        // @yc, to be removed? since we are not editing appointments
+        /* 
+        parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT),).ifPresent(editPatientDescriptor::setAppts);
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
             editPatientDescriptor.setAppts(parseApptsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).get());
         }
-
+        */
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -118,12 +123,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(nric, editPatientDescriptor);
     }
 
+    // @yc, to be removed? since we are not editing appointments
     /**
      * Parses {@code Collection<String> dateTime} into a {@code List<Appt>} if {@code dateTime} is non-empty.
      * If {@code dateTime} contain only one element which is an empty string, it will be parsed into a
      * {@code List<Appt>} containing zero appointments.
      */
-    public Optional<ApptList> parseApptsForEdit(Collection<String> dateTime) throws ParseException {
+    /* 
+    public Optional<ApptList> parseApptsForEdit(Collection<String> dateTime, Collection<HealthService> healthServices) throws ParseException {
         assert dateTime != null;
 
         if (dateTime.isEmpty()) {
@@ -131,8 +138,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> datesList = dateTime.size() == 1 && dateTime.contains("")
                 ? Collections.emptyList() : dateTime;
-        return Optional.of(ParserUtil.parseAppts(datesList));
+        Collection<HealthService> healthServicesList = healthServices.size() == 1 && healthServices.contains("")
+                ? Collections.emptyList() : healthServices;
+        return Optional.of(ParserUtil.parseAppts(datesList, healthServicesList));
     }
-
-
+    */
 }
