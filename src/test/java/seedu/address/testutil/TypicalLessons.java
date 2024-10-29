@@ -43,7 +43,6 @@ public class TypicalLessons {
     public static final Lesson LESSON_5 = new LessonBuilder()
             .withDate("2024-11-09")
             .withTime("16:00")
-            .withStudent(CARL)
             .build();
 
     private TypicalLessons() {} // prevents instantiation
