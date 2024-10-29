@@ -39,6 +39,13 @@ public class NameTest {
     }
 
     @Test
+    public void start_case_test() {
+        assertTrue((new Name("valid name")).toString().equals("Valid Name"));
+        assertTrue((new Name("VALID NAME")).toString().equals("Valid Name"));
+        assertTrue((new Name("vAlId nAme")).toString().equals("Valid Name"));
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 

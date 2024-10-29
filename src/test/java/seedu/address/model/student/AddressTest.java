@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -52,5 +53,21 @@ public class AddressTest {
 
         // different values -> returns false
         assertFalse(address.equals(new Address("Other Valid Address")));
+
+        //case-insensitive
+        assertTrue(address.equals(new Address("valid address")));
+
+        // Ignores differences in whitespaces
+        assertTrue(address.equals(new Address("Valid  Address")));
+    }
+
+    @Test
+    public void hashcode_equivalents() {
+        Address address = new Address("bedok reservoir");
+
+        //differnt in cases -> return true
+        assertEquals(address.hashCode(), (new Address("Bedok Reservoir")).hashCode());
+        //different in spaces -> return true
+        assertEquals(address.hashCode(), (new Address("bedok   reservoir")).hashCode());
     }
 }

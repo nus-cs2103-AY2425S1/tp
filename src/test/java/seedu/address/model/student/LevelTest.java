@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -52,6 +53,16 @@ public class LevelTest {
         assertTrue(Level.isValidLevelName("S4 IP"));
 
         assertTrue(Level.isValidLevelName("S5 NA"));
+
+        //case insensitive
+        assertTrue(Level.isValidLevelName("s4 express"));
+        assertTrue(Level.isValidLevelName("s4 exPRess"));
+        assertTrue(Level.isValidLevelName("S4 exPRess"));
+        assertTrue(Level.isValidLevelName("s4 EXPRESS"));
+
+        //ignore different spacing
+        assertTrue(Level.isValidLevelName("S4    EXPRESS"));
+        assertTrue(Level.isValidLevelName("S4  EXPRESS"));
     }
 
     @Test
@@ -72,5 +83,20 @@ public class LevelTest {
 
         // different values -> returns false
         assertFalse(level.equals(new Level("S2 EXPRESS")));
+
+        // case-insensitive ->  returns true
+        assertTrue(level.equals(new Level("s1 express")));
+
+        // Ignore multi-spacing ->  returns true
+        assertTrue(level.equals(new Level("s1   express")));
+    }
+
+    @Test
+    public void toStringTest() {
+        Level l = new Level("S1 EXPRESS");
+        Level l2 = new Level("s1 express");
+        String expected = "S1 EXPRESS";
+        assertEquals(l.toString(), expected);
+        assertEquals(l2.toString(), expected);
     }
 }
