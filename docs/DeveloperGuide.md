@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# UGTeach Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,8 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 The `Model` component,
 
@@ -132,7 +131,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
 
 </box>
 
@@ -329,16 +328,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
     * 1a2. User enters new command.
-
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+* Use case resumes from step 2.
 
 
 * 1b. System detects error in parameters.
     * 1b1. System displays error message and does not clear command line.
     * 1b2. User enters command with correct parameters.
 * Steps 1b1-1b2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+* Use case resumes from step 2.
 
 
 **Use case: UC02 - Read all entries**
@@ -354,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays error message and does not clear command line.
     * 1a2. User enters new command.
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+* Use case resumes from step 2.
 
 * 1b. System detects the list is empty.
     * 1b1. System shows an empty list.
@@ -375,14 +373,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays error message and does not clear command line.
     * 1a2. User enters new command.
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+* Use case resumes from step 2.
 
 
 **Use case: UC04 - Delete a student entry**
 
 **MSS**
 
-1. User requests to <ins>list students(UC01)</ins>.
+1. User requests to <ins>list students(UC02)</ins>.
 2. User enters command to delete a specific student.
 3. System displays list with specified student deleted from the list.
 
@@ -394,13 +392,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System displays error message and does not clear command line.
     * 2a2. User enters command with new index.
 * Steps 2a1-2a2 are repeated until index entered is correct.
-* Use cases resumes from step 3.
+* Use case resumes from step 3.
+
 
 * 2b. System detects error in format of entered command.
     * 2b1. System displays error message and does not clear command line.
     * 2b2. User enters new command.
 * Steps 2b1-2b2 are repeated until all details entered are correct.
-* Use cases resumes from step 3.
+* Use case resumes from step 3.
+
+**Use case: UC06 - Receiving tuition fee from a student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+2. User enters command to record payment received from the specified student after a lesson.
+3. System calculates the tuition fee paid by the student for the lesson.
+4. System updates the total tuition fee paid by the student.
+5. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
+* Use case resumes from step 1.
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
+* Use case resumes from step 3.
+
+**Use case: UC05 - Find student entries**
+
+**MSS**
+
+1. User enters command to find students.
+1. System displays list with students with matching details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use case resumes from step 2.
 
 *{More to be added}*
 
