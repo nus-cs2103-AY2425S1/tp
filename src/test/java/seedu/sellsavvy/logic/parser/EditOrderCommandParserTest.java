@@ -88,7 +88,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_QUANTITY_ZERO, Quantity.MESSAGE_CONSTRAINTS); // invalid quantity
         assertParseFailure(parser, "1" + INVALID_QUANTITY_STRING, Quantity.MESSAGE_CONSTRAINTS); // invalid quantity
 
-        // invalid date followed by valid count
+        // invalid date followed by valid quantity
         assertParseFailure(parser, "1" + INVALID_DATE_VALUE + QUANTITY_DESC_ATLAS, Date.MESSAGE_INVALID_DATE);
 
         // multiple invalid values, but only the first invalid value is captured

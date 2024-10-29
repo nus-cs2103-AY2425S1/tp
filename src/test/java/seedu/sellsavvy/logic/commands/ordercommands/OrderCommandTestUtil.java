@@ -25,20 +25,13 @@ import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
  * Contains helper methods for testing Order commands.
  */
 public class OrderCommandTestUtil {
-
-<<<<<<< HEAD
-    public static final String VALID_COUNT_ATLAS = "5";
-    public static final String VALID_COUNT_BOTTLE = "1";
     public static final String VALID_DATE_ATLAS = "02-12-2025";
-=======
-    public static final String VALID_QUANTITY_ATLAS = "5";
-    public static final String VALID_QUANTITY_BOTTLE = "1";
-    public static final String VALID_DATE_ATLAS = "02-12-2024";
->>>>>>> master
     public static final String VALID_DATE_BOTTLE = "05-06-2027";
     public static final String VALID_DATE_OUTDATED = "02-02-2002";
     public static final String VALID_ITEM_ATLAS = "Atlas A";
     public static final String VALID_ITEM_BOTTLE = "Bottle B";
+    public static final String VALID_QUANTITY_ATLAS = "5";
+    public static final String VALID_QUANTITY_BOTTLE = "1";
 
     public static final String QUANTITY_DESC_ATLAS = " " + PREFIX_QUANTITY + VALID_QUANTITY_ATLAS;
     public static final String QUANTITY_DESC_BOTTLE = " " + PREFIX_QUANTITY + VALID_QUANTITY_BOTTLE;
@@ -51,17 +44,10 @@ public class OrderCommandTestUtil {
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "a";
     public static final String INVALID_DATE_NO_HYPHEN = " " + PREFIX_DATE + "02/12/2024";
     public static final String INVALID_DATE_DIGIT = " " + PREFIX_DATE + "2/1/2024";
-<<<<<<< HEAD
     public static final String INVALID_DATE_VALUE = " " + PREFIX_DATE + "30-02-2024";
-    public static final String INVALID_COUNT_ZERO = " " + PREFIX_COUNT + "0";
-    public static final String INVALID_COUNT_NEGATIVE = " " + PREFIX_COUNT + "-2";
-    public static final String INVALID_COUNT_STRING = " " + PREFIX_COUNT + "2 some random string";
-=======
-    public static final String INVALID_DATE_VALUE = " " + PREFIX_DATE + "32-01-2024";
     public static final String INVALID_QUANTITY_ZERO = " " + PREFIX_QUANTITY + "0";
     public static final String INVALID_QUANTITY_NEGATIVE = " " + PREFIX_QUANTITY + "-2";
     public static final String INVALID_QUANTITY_STRING = " " + PREFIX_QUANTITY + "2 some random string";
->>>>>>> master
 
     public static final EditOrderCommand.EditOrderDescriptor DESC_ATLAS;
     public static final EditOrderCommand.EditOrderDescriptor DESC_BOTTLE;
