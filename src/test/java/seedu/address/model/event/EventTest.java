@@ -246,6 +246,62 @@ public class EventTest {
         } catch (Exception e) {
             assert false;
         }
+    }
 
+    @Test
+    public void removePerson_fromMultipleRoles_success() {
+        Event event = new Event("Event1");
+        Person person = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer").build();
+
+        try {
+            // Adding person to all roles
+            event.addPerson(person, "attendee");
+            event.addPerson(person, "vendor");
+            event.addPerson(person, "sponsor");
+            event.addPerson(person, "volunteer");
+
+            // Removing person from all roles
+            event.removePerson(person);
+
+            // Assert that person has been removed from all roles
+            assertFalse(event.getAttendees().contains(person));
+            assertFalse(event.getVendors().contains(person));
+            assertFalse(event.getSponsors().contains(person));
+            assertFalse(event.getVolunteers().contains(person));
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void editPerson_inMultipleRoles_success() {
+        Event event = new Event("Event1");
+        Person personToEdit = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer").build();
+        Person editedPerson = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer")
+                .withName("Edited Name").build();
+
+        try {
+            // Adding person to all roles
+            event.addPerson(personToEdit, "attendee");
+            event.addPerson(personToEdit, "vendor");
+            event.addPerson(personToEdit, "sponsor");
+            event.addPerson(personToEdit, "volunteer");
+
+            // Editing person
+            event.editPerson(personToEdit, editedPerson);
+
+            // Assert that editedPerson is present and personToEdit is removed
+            assertTrue(event.getAttendees().contains(editedPerson));
+            assertTrue(event.getVendors().contains(editedPerson));
+            assertTrue(event.getSponsors().contains(editedPerson));
+            assertTrue(event.getVolunteers().contains(editedPerson));
+
+            assertFalse(event.getAttendees().contains(personToEdit));
+            assertFalse(event.getVendors().contains(personToEdit));
+            assertFalse(event.getSponsors().contains(personToEdit));
+            assertFalse(event.getVolunteers().contains(personToEdit));
+        } catch (Exception e) {
+            assert false;
+        }
     }
 }
