@@ -5,8 +5,9 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -26,10 +27,30 @@ public class Lesson {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+    /**
+     * Maps various string representations of days (e.g., "monday", "mon") to their corresponding Day enum values.
+     * All keys are stored in lowercase.
+     */
+    private static final Map<String, Day> DAY_NAME_MAP = new HashMap<>();
+    static {
+        DAY_NAME_MAP.put("monday", Day.MONDAY);
+        DAY_NAME_MAP.put("mon", Day.MONDAY);
+        DAY_NAME_MAP.put("tuesday", Day.TUESDAY);
+        DAY_NAME_MAP.put("tue", Day.TUESDAY);
+        DAY_NAME_MAP.put("wednesday", Day.WEDNESDAY);
+        DAY_NAME_MAP.put("wed", Day.WEDNESDAY);
+        DAY_NAME_MAP.put("thursday", Day.THURSDAY);
+        DAY_NAME_MAP.put("thu", Day.THURSDAY);
+        DAY_NAME_MAP.put("friday", Day.FRIDAY);
+        DAY_NAME_MAP.put("fri", Day.FRIDAY);
+        DAY_NAME_MAP.put("saturday", Day.SATURDAY);
+        DAY_NAME_MAP.put("sat", Day.SATURDAY);
+        DAY_NAME_MAP.put("sunday", Day.SUNDAY);
+        DAY_NAME_MAP.put("sun", Day.SUNDAY);
+    }
     private final Day lessonDay;
     private final LocalTime startTime;
     private final LocalTime endTime;
-
 
     /**
      * Constructs a {@code Lesson}.
@@ -39,7 +60,7 @@ public class Lesson {
     public Lesson(String lesson) {
         requireNonNull(lesson);
         checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
-        String[] lessonDayTimeArr = lesson.split(" ");
+        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
         String[] timeArr = lessonDayTimeArr[1].split("-");
         this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
         this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
@@ -53,8 +74,7 @@ public class Lesson {
      * @return true if the day is valid.
      */
     private static boolean isValidDay(String day) {
-        return Arrays.stream(Day.values())
-                .anyMatch(d -> d.name().equalsIgnoreCase(day));
+        return DAY_NAME_MAP.containsKey(day.toLowerCase());
     }
 
     /**
@@ -96,7 +116,7 @@ public class Lesson {
      *          false otherwise.
      */
     public static boolean isValidLesson(String lesson) {
-        String[] parts = lesson.split(" ", 2);
+        String[] parts = lesson.split("\\s+", 2);
         if (parts.length != 2) {
             return false;
         }
@@ -146,7 +166,7 @@ public class Lesson {
      *
      * @param other The object to compare for equality.
      * @return {@code true} if the other object is a {@code Lesson} and has the same
-     *         start and end times as this lesson, {@code false} otherwise.
+     *         say, start and end times as this lesson, {@code false} otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -159,7 +179,9 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.startTime.equals(this.startTime) && otherLesson.endTime.equals(this.endTime);
+        return otherLesson.lessonDay.equals(this.lessonDay)
+                && otherLesson.startTime.equals(this.startTime)
+                && otherLesson.endTime.equals(this.endTime);
     }
 
     @Override

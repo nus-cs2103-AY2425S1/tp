@@ -108,6 +108,52 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_deleteLastViewedPerson_removesLastViewedPerson() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        model.updateLastViewedPerson(personToDelete);
+        expectedModel.updateLastViewedPerson(personToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        expectedModel.deletePerson(personToDelete);
+        expectedModel.removeLastViewedPerson();
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+        // Verify last viewed person was removed
+        assertFalse(model.getLastViewedPerson().get().isPresent(),
+                "Expected last viewed person to be removed after deleting the viewed person");
+    }
+
+    @Test
+    public void execute_deleteNonLastViewedPerson_keepsLastViewedPerson() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person lastViewedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        model.updateLastViewedPerson(lastViewedPerson);
+        expectedModel.updateLastViewedPerson(lastViewedPerson);
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+        // Verify last viewed person was not removed
+        assertTrue(model.getLastViewedPerson().get().isPresent(),
+                "Expected last viewed person to be retained when deleting a different person");
+        assertEquals(lastViewedPerson, model.getLastViewedPerson().get().get(),
+                "Expected last viewed person to remain unchanged");
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
