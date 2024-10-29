@@ -34,6 +34,7 @@ public class PersonBuilder {
     public static final int DEFAULT_FAMILY_SIZE = 1;
     public static final LocalDateTime DEFAULT_UPDATED_AT =
             LocalDateTime.of(2024, 1, 1, 0, 0);
+    public static final boolean DEFAULT_IS_ARCHIVED = false;
 
     private Name name;
     private Phone phone;
@@ -46,6 +47,7 @@ public class PersonBuilder {
     private FamilySize familySize;
     private Set<Tag> tags;
     private UpdatedAt updatedAt;
+    private boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -62,6 +64,7 @@ public class PersonBuilder {
         familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
         tags = new HashSet<>();
         updatedAt = new UpdatedAt(DEFAULT_UPDATED_AT);
+        isArchived = DEFAULT_IS_ARCHIVED;
     }
 
     /**
@@ -79,6 +82,7 @@ public class PersonBuilder {
         familySize = personToCopy.getFamilySize();
         tags = new HashSet<>(personToCopy.getTags());
         updatedAt = personToCopy.getUpdatedAt();
+        isArchived = personToCopy.isArchived();
     }
 
     /**
@@ -170,10 +174,18 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code isArchived} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
+    /**
      * Builds the {@code Person}.
      */
     public Person build() {
         return new Person(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt);
+                dateOfBirth, income, familySize, tags, updatedAt, isArchived);
     }
 }

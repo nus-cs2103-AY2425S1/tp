@@ -47,7 +47,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(PREDICATE_SHOW_CURRENT_PERSONS);
 
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority

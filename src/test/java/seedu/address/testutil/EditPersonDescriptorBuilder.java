@@ -43,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPriority(person.getPriority());
         descriptor.setRemark(person.getRemark());
         descriptor.setDateOfBirth(person.getDateOfBirth());
+        descriptor.setIncome(person.getIncome());
         descriptor.setTags(person.getTags());
     }
 

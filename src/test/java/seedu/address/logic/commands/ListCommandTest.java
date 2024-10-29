@@ -30,12 +30,40 @@ public class ListCommandTest {
 
     @Test
     public void execute_list_showsSameList() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_CURRENT_PERSONS);
         assertCommandSuccess(ListCommand.ofCurrent(), model, ListCommand.MESSAGE_SUCCESS_CURRENT, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_CURRENT_PERSONS);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(ListCommand.ofCurrent(), model, ListCommand.MESSAGE_SUCCESS_CURRENT, expectedModel);
+    }
+
+    @Test
+    public void execute_listArchive_showsSameList() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ARCHIVED_PERSONS);
+        assertCommandSuccess(ListCommand.ofArchive(), model, ListCommand.MESSAGE_SUCCESS_ARCHIVE, expectedModel);
+    }
+
+    @Test
+    public void execute_listArchiveIsFiltered_showsEverything() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ARCHIVED_PERSONS);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(ListCommand.ofArchive(), model, ListCommand.MESSAGE_SUCCESS_ARCHIVE, expectedModel);
+    }
+
+    @Test
+    public void execute_listAll_showsSameList() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        assertCommandSuccess(ListCommand.ofAll(), model, ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+    }
+
+    @Test
+    public void execute_listAllIsFiltered_showsEverything() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(ListCommand.ofAll(), model, ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 }
