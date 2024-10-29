@@ -205,7 +205,8 @@ Action     | Format, Examples
 **Delete Person** | `delete INDEX`<br> e.g., `delete 3`
 **Edit Person**   | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-rs RELATIONSHIP]`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear Person**  | `clear`
+**Clear Person**  | `clear -p`
 **List Events**   | `list -e`
+**Clear Event**  | `clear -e`
 **Help**   | `help`
 **Exit**   | `exit`
