@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableMap;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -139,6 +140,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableMap<String, String> getTagColorMap() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -170,7 +176,7 @@ public class AddCommandTest {
 
         @Override
         public ActiveTags getActiveTags() {
-            return new ActiveTags(new HashMap<>());
+            return new ActiveTags(new HashMap<>(), new String[]{});
         }
 
         @Override
