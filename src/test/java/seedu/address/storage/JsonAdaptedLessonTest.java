@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
