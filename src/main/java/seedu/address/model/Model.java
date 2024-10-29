@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
@@ -49,7 +50,7 @@ public interface Model {
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
-    Map<String, String> getColorTagMap();
+    ObservableMap<String, String> getTagColorMap();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
