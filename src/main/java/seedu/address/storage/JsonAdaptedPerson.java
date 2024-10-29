@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Leave;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final Boolean isFavorite;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String department;
+    private final String leave;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -43,7 +45,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("isFavorite") Boolean isFavorite,
-                             @JsonProperty("department") String department) {
+                             @JsonProperty("department") String department,
+                             @JsonProperty("leave") String leave) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +56,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.department = department;
+        this.leave = leave;
     }
 
     /**
@@ -68,6 +72,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         department = source.getDepartment().department;
+        leave = source.getLeave().value;
     }
 
     /**
@@ -124,7 +129,16 @@ class JsonAdaptedPerson {
         }
         final Department modelDepartment = new Department(department);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, isFavorite, modelDepartment);
+        if (leave == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Leave.class.getSimpleName()));
+        }
+        if (!Leave.isValidLeave(leave)) {
+            throw new IllegalValueException(Leave.MESSAGE_CONSTRAINTS);
+        }
+        final Leave modelLeave = new Leave(leave);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                isFavorite, modelDepartment, modelLeave);
     }
 
 }
