@@ -48,13 +48,13 @@ import seedu.address.model.util.SampleDataUtil;
 
 public class PersonTest {
 
-    public static class PersonStub extends Person {
+    public class PersonStub extends Person {
         public PersonStub(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                           Set<Subject> subjects, Set<String> classes) {
             super(name, gender, phone, email, address, tags, subjects, classes);
         }
     }
-    private static final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
+    private final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
         new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
         new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
 

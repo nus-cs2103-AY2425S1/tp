@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PersonTest;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
+import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -57,7 +60,17 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
 
 
-    private static final PersonTest.PersonStub personStubAmy = new PersonTest.PersonStub(new Name(VALID_NAME_AMY),
+    public class PersonStub extends Person {
+        public PersonStub(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
+                          Set<Subject> subjects, Set<String> classes) {
+            super(name, gender, phone, email, address, tags, subjects, classes);
+        }
+        @Override
+        public String getType() {
+            return "stub";
+        }
+    }
+    private final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
         new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
         new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
 
