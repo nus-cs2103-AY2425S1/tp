@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.commands.UnmarkAttendanceByStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
@@ -30,14 +29,14 @@ public class UnmarkAttendanceByStudentCommandParser implements Parser<UnmarkAtte
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE), e);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceByStudentCommand.MESSAGE_USAGE), e);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE, PREFIX_TUTORIAL);
 
         if (argMultimap.getValue(PREFIX_ATTENDANCE).isEmpty() || argMultimap.getValue(PREFIX_TUTORIAL).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceByStudentCommand.MESSAGE_USAGE));
         }
 
         Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
