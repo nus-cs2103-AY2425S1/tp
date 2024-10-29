@@ -43,7 +43,7 @@ public class EnrollCommand extends Command {
         requireNonNull(index);
         requireNonNull(subject);
         this.index = index;
-        this.subject = subject;
+        this.subject = subject.toLowerCase();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EnrollCommand extends Command {
         List<Tutorial> lastShownTutorialList = model.getFilteredTutorialList();
 
         Optional<Tutorial> optionalTutorial = lastShownTutorialList.stream()
-                .filter(tut -> tut.getSubject().equals(subject))
+                .filter(tut -> tut.getSubject().toLowerCase().equals(subject))
                 .findFirst();
         if (optionalTutorial.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT);
