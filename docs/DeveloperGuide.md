@@ -261,8 +261,34 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The archive and load feature is achieved through `ArchiveCommand` and `LoadCommand` which both extend the `Command` class. When such command is executed, the LogicManager will update the Storage when necessary.
 
+#### The Following UML Object Diagrams will illustrate how archive and load are done
+
+Before the archiving or loading
+
+We will use a simple case where there is one working AddressBook named `addressBook.json` in `data` folder and one archived AddressBook named `archivedFile1.json` in `archived` folder
+
+![ArchiveAndLoadInitialState](images/ArchiveAndLoadInitialState.png)
+
+Scenario 1 Archive to a new file
+
+In this scenario, the user is trying to archive the current address book into a new file named `archiveFile2.json`. He enters the command `archive pa/archiveFile2.json` A new file names `archiveFile2.json` will be created and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
+
+![ArchiveToNewFile](images/ArchiveToNewFile.png)
+
+Scenario 2 Archive to a existing file
+
+In this scenario, the user is trying to archive the current address book into the existing file named `archiveFile1.json`. He enters the command `archive pa/archiveFile1.json` A file names `archiveFile1.json` will be overwritten and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
+
+![ArchiveToNExistingFile](images/ArchiveToExistingFile.png)
+
+Scenario 3 Loading from a file
+
+In this scenario, the user is trying to load the an address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
+![Load](images/Load.png)
+
+{Sequence Diagram will be added later}
 
 --------------------------------------------------------------------------------------------------------------------
 

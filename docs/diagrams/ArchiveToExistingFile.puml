@@ -4,21 +4,21 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After Command "archive pa/archiveFile1"
+title After Command "archive pa/archiveFile1.json"
 
 package data as DataPkg {
-    class State1 as "<u>ab0:AddressBook</u>"
+    class State1 as "<u>addressBook.json:File</u>"
 }
 
 package archive as ArchivePkg {
-    class State2 as "<u>archiveFile1:AddressBook</u>"
+    class State2 as "<u>archiveFile1.json:File</u>"
 }
 
 
 class Pointer1 as "The data here is cleared" #FFFFFF
 Pointer1 -up-> State1
 
-class Pointer2 as "Containing data of original ab0" #FFFFFF
+class Pointer2 as "Containing data from addressBook.json" #FFFFFF
 Pointer2 -up-> State2
 note right on link: The original data in this file \n will be overwritten.
 @end

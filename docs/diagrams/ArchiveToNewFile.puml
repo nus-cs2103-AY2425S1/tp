@@ -4,10 +4,10 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After Command "archive pa/archiveFile2"
+title After Command "archive pa/archiveFile2.json"
 
 package data as DataPkg {
-    class State1 as "<u>ab0:AddressBook</u>"
+    class State1 as "<u>addressBook:File</u>"
 }
 
 package archive as ArchivePkg {
@@ -16,8 +16,9 @@ package archive as ArchivePkg {
 }
 
 
-class Pointer1 as "The data here is cleared" #FFFFFF
+class Pointer1 as "Current working addressBook" #FFFFFF
 Pointer1 -up-> State1
+note right on link: The original data in this file \n will be discarded.
 
 class Pointer2 as "Containing data of original ab0" #FFFFFF
 Pointer2 -up-> State3

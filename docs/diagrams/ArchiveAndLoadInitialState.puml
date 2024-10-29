@@ -7,11 +7,11 @@ skinparam ClassBackgroundColor #FFFFAA
 title Initial State
 
 package data as DataPkg {
-    class State1 as "<u>ab0:AddressBook</u>"
+    class State1 as "<u>addressBook.json:File</u>"
 }
 
 package archive as ArchivePkg {
-    class State2 as "<u>archiveFile1:AddressBook</u>"
+    class State2 as "<u>archiveFile1.json:File</u>"
 }
 
 class Pointer as "Current Working AddressBook" #FFFFFF
