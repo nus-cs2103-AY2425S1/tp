@@ -319,50 +319,37 @@ public class ModelManagerTest {
                 "Cleaning old backups with valid storage should not throw any exception.");
     }
 
-    /**
-     * Tests that the triggerBackup method handles IOException gracefully when backup fails.
-     */
     @Test
-    public void triggerBackup_backupFails_logsWarning() throws Exception {
-        // Set up the modelManager with valid storage
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+    public void triggerBackup_backupSucceeds_createsBackupFile() throws Exception {
+        // Set up the storage with a valid address book file path
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         UserPrefs userPrefs = new UserPrefs();
-        AddressBook addressBook = new AddressBook();
-        ModelManager modelManager = new ModelManager(addressBook, userPrefs, storage);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        // Use reflection to set the backupManager to a mock that throws IOException
-        BackupManager mockBackupManager = new BackupManager(Paths.get("backups")) {
-            @Override
-            public void triggerBackup(Path sourceFilePath, String backupName) throws IOException {
-                throw new IOException("Simulated IO Exception");
-            }
-        };
+        // Initialize ModelManager with storage and userPrefs
+        ModelManager modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
 
-        // Inject the mockBackupManager into modelManager using reflection
-        Field backupManagerField = ModelManager.class.getDeclaredField("backupManager");
-        backupManagerField.setAccessible(true);
-        backupManagerField.set(modelManager, mockBackupManager);
-
-        // Add a person to trigger a backup on deletion
+        // Add a person to the address book
         Person person = new PersonBuilder().withName("Test Person").build();
         modelManager.addPerson(person);
 
-        // Delete the person, which will trigger the backup and the simulated IOException
-        assertDoesNotThrow(() -> modelManager.deletePerson(person),
-                "Deleting person should not throw an exception even if backup fails.");
+        // **Save the address book to ensure the file exists**
+        storage.saveAddressBook(modelManager.getAddressBook());
 
-        // No backup file should be created due to the simulated IOException
+        // Delete the person to trigger the backup
+        modelManager.deletePerson(person);
+
+        // Verify that the backup directory exists
         Path backupDir = Paths.get("backups");
-        if (Files.exists(backupDir)) {
-            try (Stream<Path> paths = Files.walk(backupDir)) {
-                List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
-                assertTrue(backupFiles.isEmpty(), "No backup files should exist due to simulated exception.");
-            }
+        assertTrue(Files.exists(backupDir), "Backup directory should exist.");
+
+        // Verify that at least one backup file exists
+        try (Stream<Path> paths = Files.walk(backupDir)) {
+            List<Path> backupFiles = paths.filter(Files::isRegularFile).collect(Collectors.toList());
+            assertFalse(backupFiles.isEmpty(), "Backup files should exist.");
         }
     }
 
