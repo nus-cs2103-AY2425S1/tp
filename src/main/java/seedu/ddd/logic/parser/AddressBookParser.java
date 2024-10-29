@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.Command;
 import seedu.ddd.logic.commands.DeleteCommand;
