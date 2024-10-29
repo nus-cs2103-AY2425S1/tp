@@ -30,10 +30,8 @@
       <Label fx:id="supplierName" styleClass="cell_small_label" />
       <Label fx:id="minStockLevel" styleClass="cell_small_label" />
       <Label fx:id="maxStockLevel" styleClass="cell_small_label" />
-      
       <!-- New label for tags -->
       <Label fx:id="tags" styleClass="cell_small_label" />
-      
     </VBox>
   </GridPane>
 </HBox>

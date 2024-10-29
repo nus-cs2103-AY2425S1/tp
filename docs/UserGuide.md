@@ -74,30 +74,22 @@ You can now start using the application by typing commands into the command box.
 
 Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
-<box type="info" seamless>
-
-**Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+> **Notes about the command format:**<br>
+> * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
+> * Items in square brackets are optional.<br>
+ e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+> * Items with `…`​ after them can be used multiple times including zero times.<br>
+ e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc. 
+> * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+> * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+> * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing help : `help`
@@ -199,7 +191,7 @@ Updates the minimum and maximum stock level for a product.
 Format: `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL max/MAX_STOCK_LEVEL`
 
 > **Note:**
-> At least one of the prefixes is mandatory: min/ OR max/
+> At least one of the prefixes is mandatory: min/ OR max/ <br>
 > (Prefixes min/ AND max/ can be used together also, see examples)
 
 Examples:
@@ -223,7 +215,7 @@ Displays:
 1. all the suppliers currently present in the supplier list
 2. specified suppliers with the keyword provided
 
-Format: 
+Format:
 
 ` view_supplier ` (For displaying details of all suppliers)
 
@@ -263,10 +255,6 @@ Format: `delete_product pr/PRODUCT_NAME stk/STOCK_LEVEL`
 Examples:
 * `delete_product n/sweater`
 
-### Locating suppliers and products by name: `view`
-
-### Locating suppliers and products by name: `view`
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -287,12 +275,9 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+> **Caution:**
+> If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+> Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 ### Archiving data files `[coming in v2.0]`
 
