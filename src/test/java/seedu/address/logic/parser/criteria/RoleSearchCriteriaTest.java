@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.criteria;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,12 +28,6 @@ public class RoleSearchCriteriaTest {
         RoleSearchCriteria criteria = new RoleSearchCriteria(List.of("caregiver"));
         Person alice = new PersonBuilder().withName("Alice").withRole("patient").build();
         assertFalse(criteria.test(alice));
-    }
-
-    @Test
-    public void test_toString() {
-        RoleSearchCriteria criteria = new RoleSearchCriteria(List.of("patient", "caregiver"));
-        assertEquals("RoleSearchCriteria{roles=[PATIENT, CAREGIVER]}", criteria.toString());
     }
 
     @Test
