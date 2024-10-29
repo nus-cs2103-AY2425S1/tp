@@ -403,7 +403,7 @@ Command Format: `bar`
 * If no payments were made in a given month, the value for that month will be zero.
 
 *Input: User enters the bar command.*  
-![Ui](images/bar.png)
+![Ui](images/barcommand.png)
 
 Tips:
 
@@ -452,7 +452,7 @@ Displaying the detailed command window can be done in two ways:
 Method 1:
 **Example Usage:**
 *Input: User enters the `info 1` command to display detailed information for the first student.*
-![Ui](images/infocommandinput.png)
+![Ui](images/infocommand1.png)
 
 *Output: A window pops up with the detailed information of the student.*
 ![Ui](images/infocommandoutput.png)
