@@ -7,10 +7,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 /**
  * Manages reminders for upcoming and overdue deadlines of persons in the address book.
@@ -90,17 +90,12 @@ public class ReminderManager {
         // Add the first names (up to the limit)
         for (int i = 0; i < namesToShow; i++) {
             if (i > 0) {
-                // If this is the last name to show and there are more names hidden
                 if (i == namesToShow - 1 && persons.size() > MAX_NAMES_TO_SHOW) {
                     names.append(String.format(MORE_SUFFIX, persons.size() - MAX_NAMES_TO_SHOW + 1));
                     break;
-                }
-                // If this is the last name overall
-                else if (i == namesToShow - 1) {
+                } else if (i == namesToShow - 1) {
                     names.append(AND);
-                }
-                // If this is a middle name
-                else {
+                } else {
                     names.append(COMMA);
                 }
             }
@@ -139,9 +134,9 @@ public class ReminderManager {
                 long daysOverdue = ChronoUnit.DAYS.between(mostOverdueDate, now);
                 String dayMessage = daysOverdue == 1 ? DAY_SINGULAR : daysOverdue + DAY_PLURAL;
 
-                reminders.add(names +
-                        (overduePersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_OVERDUE : MESSAGE_DEADLINE_OVERDUE) +
-                        dayMessage + PERIOD);
+                reminders.add(names
+                        + (overduePersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_OVERDUE : MESSAGE_DEADLINE_OVERDUE)
+                        + dayMessage + PERIOD);
                 return reminders;
             }
         }
@@ -165,14 +160,14 @@ public class ReminderManager {
                 String names = formatNames(upcomingPersons);
 
                 if (nearestDate.isEqual(now)) {
-                    reminders.add(names +
-                            (upcomingPersons.size() == 1 ? SINGLE_DUE_TODAY : DUE_TODAY));
+                    reminders.add(names
+                            + (upcomingPersons.size() == 1 ? SINGLE_DUE_TODAY : DUE_TODAY));
                 } else {
                     long daysUntil = ChronoUnit.DAYS.between(now, nearestDate);
                     String dayMessage = daysUntil == 1 ? DAY_SINGULAR : daysUntil + DAY_PLURAL;
-                    reminders.add(names +
-                            (upcomingPersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_IN : MESSAGE_DEADLINE_IN) +
-                            dayMessage + PERIOD);
+                    reminders.add(names
+                            + (upcomingPersons.size() == 1 ? MESSAGE_SINGLE_DEADLINE_IN : MESSAGE_DEADLINE_IN)
+                            + dayMessage + PERIOD);
                 }
             }
         }
