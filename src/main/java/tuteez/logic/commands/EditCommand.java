@@ -33,6 +33,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 
 /**
@@ -146,9 +147,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
+        RemarkList originalRemarkList = personToEdit.getRemarkList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
-                updatedLessons);
+                updatedLessons, originalRemarkList);
     }
 
     @Override
