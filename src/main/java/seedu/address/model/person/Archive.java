@@ -49,4 +49,24 @@ public class Archive {
     public String toString() {
         return "Archive: " + value;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Address)) {
+            return false;
+        }
+
+        Archive otherArchive = (Archive) other;
+        return value.equals(otherArchive.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 }
