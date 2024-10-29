@@ -54,6 +54,8 @@ public class DeleteCommand extends Command {
                 .map(Messages::format)
                 .collect(Collectors.joining("\n"));
 
+        model.addHistoryCommand(this);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, resultMessage));
     }
 

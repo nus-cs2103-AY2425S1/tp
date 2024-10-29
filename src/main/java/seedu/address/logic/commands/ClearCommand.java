@@ -21,6 +21,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+        model.addHistoryCommand(this);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

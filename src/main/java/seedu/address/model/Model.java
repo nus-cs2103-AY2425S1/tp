@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,6 +52,14 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Adds the given command that is executed without throwing exception.
+     */
+    void addHistoryCommand(Command command);
+
+    /** Returns an unmodifiable view of the history command list */
+    ObservableList<Command> getHistoryCommandList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
