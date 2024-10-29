@@ -41,6 +41,7 @@ public class AddLessonCommandTest {
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
             -> addLessonCommand.execute(modelStub));
     }
+
     @Test
     public void execute_guardian_throwsCommandException() throws ParseException {
         ModelStub modelStub = new ModelStubAcceptingLessonAdded();
@@ -83,6 +84,18 @@ public class AddLessonCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(validLesson, modelStub.lessonsAdded.get(0));
     }
+
+    @Test
+    public void execute_invalidStudentId_throwsCommandException() throws ParseException {
+        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+        Lesson validLesson = new LessonBuilder().build();
+        StudentId studentId = new StudentId("1");
+        AddLessonCommand addLessonCommand = new AddLessonCommand(studentId, validLesson.getFee(),
+                validLesson.getStartDateTime(), validLesson.getEndDateTime());
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                addLessonCommand.execute(modelStub));
+    }
+
     @Test
     public void equals() throws ParseException {
         Lesson lesson = new LessonBuilder().build();
@@ -116,6 +129,7 @@ public class AddLessonCommandTest {
                 lesson.getStartDateTime(), lesson.getEndDateTime());
         assertFalse(addLessonCommand.equals(addDifferentStudentIdCommand));
     }
+
     @Test
     public void toString_validLesson_returnsString() throws ParseException {
         Lesson lesson = new LessonBuilder().build();

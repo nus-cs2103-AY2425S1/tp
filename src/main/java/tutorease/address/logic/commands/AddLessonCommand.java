@@ -85,7 +85,7 @@ public class AddLessonCommand extends LessonCommand {
     }
 
     private void validateStudentId(ObservableList<Person> personList) throws CommandException {
-        if (studentId.getValue() > personList.size()) {
+        if (studentId.getValue() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
