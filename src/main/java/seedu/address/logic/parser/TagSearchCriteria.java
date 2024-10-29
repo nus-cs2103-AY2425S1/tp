@@ -26,4 +26,17 @@ public class TagSearchCriteria implements SearchCriteria {
     public String toString() {
         return "AgeCriteria{ages=" + tags + "}";
     }
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof TagSearchCriteria)) {
+            return false;
+        }
+
+        TagSearchCriteria otherTagSearchCriteria = (TagSearchCriteria) other;
+        return tags.equals(otherTagSearchCriteria.tags);
+    }
 }
