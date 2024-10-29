@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.UniquePersonList;
 
 /**
@@ -20,7 +22,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
@@ -63,6 +64,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Optional<Person> getPersonById(String id) {
         requireNonNull(id);
         return persons.getPersonById(id);
+    }
+
+    public Optional<Person> getPersonByPhone(Phone phone) {
+        requireNonNull(phone);
+
+        FilteredList<Person> filteredPersonList = getPersonList().filtered((p) -> p.getPhone().equals(phone));
+        if (filteredPersonList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(filteredPersonList.get(0));
     }
 
     /**

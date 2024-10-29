@@ -21,6 +21,7 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -168,6 +169,11 @@ public class AddCommandTest {
 
         @Override
         public Optional<Person> getPersonById(String id) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Person> getPersonByPhone(Phone phone) {
             return Optional.empty();
         }
     }

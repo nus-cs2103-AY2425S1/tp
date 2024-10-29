@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.commands.FilterCommand;
@@ -72,7 +71,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidPersonField_failure() {
         String userInput = " p/9435125";
-        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
     }
 
     @Test

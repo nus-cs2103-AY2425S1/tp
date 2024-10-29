@@ -10,6 +10,7 @@ import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
 import spleetwaise.transaction.logic.commands.DeleteCommand;
+import spleetwaise.transaction.logic.commands.EditCommand;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.logic.commands.ListCommand;
 
@@ -57,6 +58,8 @@ public class TransactionParser {
             return new FilterCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
         default:
             return null;
         }

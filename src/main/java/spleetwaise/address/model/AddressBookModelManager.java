@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.address.model.person.Phone;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -136,6 +137,12 @@ public class AddressBookModelManager implements AddressBookModel {
     public Optional<Person> getPersonById(String id) {
         requireNonNull(id);
         return addressBook.getPersonById(id);
+    }
+
+    @Override
+    public Optional<Person> getPersonByPhone(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.getPersonByPhone(phone);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package spleetwaise.commons.model;
 
 import static java.util.Objects.requireNonNull;
+import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.address.model.person.Phone;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -144,6 +146,13 @@ public class CommonModel implements Model {
         return addressBookModel.getPersonById(id);
     }
 
+    @Override
+    public Optional<Person> getPersonByPhone(Phone phone) {
+        requireNonNull(addressBookModel, "AddressBook model cannot be null");
+        requireNonNull(phone);
+        return addressBookModel.getPersonByPhone(phone);
+    }
+
     // TransactionBook
     @Override
     public ReadOnlyTransactionBook getTransactionBook() {
@@ -191,5 +200,12 @@ public class CommonModel implements Model {
     public void deleteTransaction(Transaction target) {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         transactionBookModel.deleteTransaction(target);
+    }
+
+    @Override
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
+        requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
+        requireAllNonNull(target, editedTransaction);
+        transactionBookModel.setTransaction(target, editedTransaction);
     }
 }
