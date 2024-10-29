@@ -14,6 +14,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -65,7 +66,7 @@ class JsonAdaptedStudent {
         assignments.addAll(source.getAssignmentList().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(Collectors.toList()));
-        remark = source.getRemark();
+        remark = source.getRemark().remarkName;
     }
 
     /**
@@ -104,12 +105,13 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         final Set<Tag> modelTags = new HashSet<>(studentTags);
+        final Remark modelRemark = new Remark(remark);
 
         Student student;
         if (remark == null) {
             student = new Student(modelName, modelPhone, modelEmail, modelTags);
         } else {
-            student = new Student(modelName, modelPhone, modelEmail, modelTags, remark);
+            student = new Student(modelName, modelPhone, modelEmail, modelTags, modelRemark);
         }
         // Deserialize and associate assignments with the student
         for (JsonAdaptedAssignment jsonAssignment : assignments) {

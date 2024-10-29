@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Remark;
 
 /**
  * Parses input arguments and creates a new RemarkCommand object.
@@ -23,9 +25,11 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_REMARK);
 
-        if (!argMultimap.getValue(PREFIX_STUDENT_INDEX).isPresent()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_REMARK)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_REMARK);
 
         // Parse student index
         Index studentIndex;
@@ -35,15 +39,8 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE)));
-        }
-
         // Extract remark, ensuring it is non-empty and trimmed
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("").trim();
-        if (remark.isEmpty()) {
-            throw new ParseException(RemarkCommand.MESSAGE_NO_REMARK);
-        }
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
         return new RemarkCommand(studentIndex, remark);
     }

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignments;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,6 +67,9 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+    public static final EditCommand.EditStudentDescriptor DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -74,6 +78,16 @@ public class CommandTestUtil {
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_FRIEND).withAssignmentList(getTypicalAssignments()).build();
+        DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_FRIEND).withRemark(REMARK_DESC_AMY).build();
+        DESC_BOB_WITH_ASSIGNMENT_WITH_REMARK = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(REMARK_DESC_BOB)
+                .withAssignmentList(getTypicalAssignments()).build();
     }
 
     /**

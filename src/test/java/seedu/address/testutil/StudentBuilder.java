@@ -9,6 +9,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -22,13 +23,15 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_TAG = "friends";
+    public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
     private List<Assignment> assignments;
-    private String remark;
+    private Remark remark;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -39,7 +42,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         assignments = new ArrayList<>();
         tags = new HashSet<>();
-        remark = "";
+        remark = new Remark(DEFAULT_REMARK);
     }
 
     /**
@@ -98,7 +101,7 @@ public class StudentBuilder {
      * Sets the {@code remark} of the {@code Student} that we are building.
      */
     public StudentBuilder withRemark(String remark) {
-        this.remark = remark;
+        this.remark = new Remark(remark);
         return this;
     }
 

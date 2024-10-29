@@ -12,6 +12,10 @@ public class AssignmentName {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
+    public static final int MAXIMUM_NAME_LENGTH = 55;
+    public static final String MESSAGE_NAME_TOO_LONG = "The assignment name should not "
+            + "exceed the maximum length of %d characters";
+
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
