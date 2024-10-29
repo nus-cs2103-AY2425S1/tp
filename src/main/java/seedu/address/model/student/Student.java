@@ -189,10 +189,18 @@ public class Student {
      * Deletes the Assignment at {@code index} in the student's assignmentList
      */
     public void deleteAssignment(int index) {
-        if (assignmentList.size() < (index - 1) || index <= 0) {
+        if (assignmentList.size() < (index) || index <= 0) {
             throw new AssignmentIndexOutOfRangeException();
         }
         assignmentList.remove(index - 1);
+    }
+    /**
+     * Creates a new Student that has the same existing data, but with an updated {@code assignmentList}
+     * @return a new {@code Student} object with the updated assignmentList.
+     */
+    public Student setAssignmentList(List<Assignment> assignmentList) {
+        Objects.requireNonNull(assignmentList);
+        return new Student(this.name, this.phone, this.email, this.tags, assignmentList, this.remark);
     }
 
 }

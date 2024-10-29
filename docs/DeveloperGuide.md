@@ -274,8 +274,7 @@ In order to add a remark to a student, the user must provide a number representi
 <puml src="diagrams/RemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark` Command" />
 
 #### Example activity diagram for RemarkCommand
-<puml src="diagrams/add-remark/RemarkCommandActivityDiagram.puml" alt="Activities inside the Logic Component for the 
-`remark` Command" />
+<puml src="diagrams/add-remark/RemarkCommandActivityDiagram.puml" alt="Activities inside the Logic Component for the `remark` Command" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -699,7 +698,7 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Each student must be uniquely identifiable by their full name, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the Teacher
+- Business/domain rules: Assignments must have deadlines that  cannot be set on a date that has passed, Assignments must be submitted by students up to the deadline set by the Teacher
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.

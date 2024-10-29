@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -10,9 +11,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignments;
+import static seedu.address.testutil.TypicalAssignments.MATH_HOMEWORK;
+import static seedu.address.testutil.TypicalAssignments.PHYSICS_HOMEWORK;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.student.exceptions.AssignmentIndexOutOfRangeException;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -91,5 +102,65 @@ public class StudentTest {
                 + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags() + ", assignments="
                 + ALICE.getAssignmentList() + ", remark=" + ALICE.getRemark() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void hasAssignment() {
+        Student studentWithAssignment = new StudentBuilder(ALICE)
+                .withAssignments(List.of(MATH_HOMEWORK))
+                .buildWithAssignment();
+
+        System.out.println(studentWithAssignment);
+        // same assignment -> returns true
+        assertTrue(studentWithAssignment.hasAssignment(MATH_HOMEWORK));
+
+        // different assignment -> returns false
+        assertFalse(studentWithAssignment.hasAssignment(PHYSICS_HOMEWORK));
+    }
+
+    @Test
+    public void addAssignment() {
+        Student student = new StudentBuilder(ALICE).build();
+
+        // add assignment -> assignment should be in assignment list
+        Student studentWithAssignment = student.addAssignment(MATH_HOMEWORK);
+        assertTrue(studentWithAssignment.hasAssignment(MATH_HOMEWORK));
+        // original student remains unchanged
+        assertFalse(student.hasAssignment(MATH_HOMEWORK));
+    }
+
+    @Test
+    public void deleteAssignment_validIndex() {
+        List<Assignment> assignments = new ArrayList<Assignment>(Arrays.asList(MATH_HOMEWORK, PHYSICS_HOMEWORK));
+        Student student = new StudentBuilder(ALICE).withAssignments(assignments).buildWithAssignment();
+
+        // delete first assignment
+        student.deleteAssignment(1);
+
+        // assignment list should contain only the second assignment
+        assertEquals(1, student.getAssignmentList().size());
+        assertEquals(PHYSICS_HOMEWORK, student.getAssignmentList().get(0));
+    }
+
+    @Test
+    public void deleteAssignment_invalidIndex_throwsAssignmentIndexOutOfRangeException() {
+        Student student = new StudentBuilder(ALICE).withAssignments(
+                new ArrayList<Assignment>(Arrays.asList(MATH_HOMEWORK, PHYSICS_HOMEWORK))).buildWithAssignment();
+
+        // invalid index -> throws AssignmentIndexOutOfRangeException
+        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(3));
+        assertThrows(AssignmentIndexOutOfRangeException.class, () -> student.deleteAssignment(0));
+    }
+    @Test
+    public void setAssignmentList() {
+        Student student = new StudentBuilder(ALICE).withAssignments(Arrays.asList(PHYSICS_HOMEWORK)).build();
+
+        // set assignment list to a new list with different assignments
+        List<Assignment> newAssignments = Arrays.asList(MATH_HOMEWORK);
+        Student updatedStudent = student.setAssignmentList(newAssignments);
+
+        // original student remains unchanged
+        assertNotEquals(student.getAssignmentList(), updatedStudent.getAssignmentList());
+        assertEquals(newAssignments, updatedStudent.getAssignmentList());
     }
 }
