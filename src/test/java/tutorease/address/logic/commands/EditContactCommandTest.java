@@ -223,7 +223,7 @@ public class EditContactCommandTest {
         tempModel.addLesson(lesson);
         tempModel.addPerson(person);
         tempModel.setPerson(person, editedPerson);
-        assertEquals(tempModel.getLessonScheduleSize(), 0);
+        assertEquals(tempModel.getLessonScheduleSize(), 1);
     }
 
 }
