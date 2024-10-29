@@ -48,7 +48,7 @@ administrators.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edututu.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/real_ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -68,7 +68,6 @@ administrators.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ## 2. Command Instructions
 ### Command Format Guidelines
@@ -91,7 +90,6 @@ administrators.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.1 Viewing Help: `help`
 
@@ -103,7 +101,6 @@ Shows a message explaining how to access the help page.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.2 Adding a Person: `add`
 
@@ -147,7 +144,6 @@ Adds a person to EduTuTu with their name, phone number, email, address, fees, an
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.3 Deleting a Person: `delete`
 
@@ -187,9 +183,7 @@ Deletes the specified person from the address book.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.4 Marking a Payment Date: `markpaid`
 
@@ -232,7 +226,6 @@ Updates the payment status of a student to completed.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.5 Editing a Person: `edit`
 
@@ -275,7 +268,6 @@ Edits an existing person in the address book.
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.6 Listing All Persons: `list`
 
@@ -309,7 +301,6 @@ After entering the `list` command, all persons stored in the address book will b
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.7 Finding A Person: `find`
 
@@ -350,7 +341,6 @@ The `find` command allows you to list persons by their names, class IDs, or paym
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.8 Clearing All Entries: `clear`
 
@@ -386,7 +376,6 @@ Upon entering the command, all entries will be cleared from EduTuTu. A message
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.9 Undo/Redo Commands: `undo` and `redo`
 
@@ -419,7 +408,6 @@ The UI updates to reflect the reapplication of the previously undone change*
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.10 Displaying Pie Chart of Class Distribution: `pie`
 
@@ -454,7 +442,6 @@ For example, given the following data set with 4 students:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.11 Displaying Bar Chart: `bar`
 
@@ -488,9 +475,7 @@ Displays a bar chart showing the number of students who made payments for each m
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.12 Viewing Command History: `Arrow Keys`
 
@@ -505,7 +490,6 @@ Allows users to quickly access previously entered commands using the up and down
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.13 View Student Details: `info`
 
@@ -559,7 +543,6 @@ Displaying the detailed command window can be done in two ways:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.14 Editing the Data File
 
@@ -572,7 +555,6 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.15 Saving the Data
 
@@ -581,7 +563,6 @@ EduTuTu data are saved in the hard disk automatically after any command that cha
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ### 2.16 Exiting the Program: `exit`
 
@@ -619,7 +600,6 @@ Method 2:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 # 3. FAQ
 
@@ -681,7 +661,6 @@ Method 2:
 [Back to Table of Contents](#table-of-contents)
 
 ***
-<div style="page-break-after: always;"></div>
 
 ## Known issues
 
