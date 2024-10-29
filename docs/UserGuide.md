@@ -123,6 +123,17 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Remark a person : `remark`
+
+Add or edit remark to an existing person in the address book.
+
+Format: `remark INDEX r/REMARK`
+
+* Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -140,6 +151,28 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Marking a person as favourite: `favourite`
+
+Mark a specific person from the address book as favourite by assigning a special favourite label.
+
+Format: `favourite INDEX`
+
+* Mark the person at the specified `INDEX` as favourite.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `favourite 2` marks the 2nd person in the address book as favourite.
+  ![result for 'favourite 2'](images/wxy2003-xy.png)
+
+Format: `favourite`
+
+* Bring all persons marked as favourite to the front.
+
+Examples:
+* `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
+  ![result for 'find alex david'](images/wxy2003-xy.png)
 
 ### Deleting a person : `delete`
 
