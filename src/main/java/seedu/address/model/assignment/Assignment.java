@@ -129,7 +129,20 @@ public class Assignment {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
-        return title + " due on " + formatter.format(dueDate)
-                + " (" + numOfCompletedStudents + " students have completed!)";
+        if (numOfCompletedStudents > 1) {
+            return title + " due on " + formatter.format(dueDate)
+                    + " (" + numOfCompletedStudents + " students have completed!)";
+        } else {
+            return title + " due on " + formatter.format(dueDate)
+                    + " (" + numOfCompletedStudents + " student has completed!)";
+        }
+    }
+
+    /**
+     * Returns formatted string of the assignment with only title and due date, without completion statistics.
+     */
+    public String toStringWithoutStats() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        return title + " due on " + formatter.format(dueDate);
     }
 }

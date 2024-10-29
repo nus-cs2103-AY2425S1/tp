@@ -35,7 +35,6 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
 
         Tutorial tutorial = Tutorial.of(tutName, id);
 
-
         return new AddTutCommand(tutorial);
     }
 

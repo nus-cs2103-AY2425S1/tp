@@ -14,7 +14,9 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,6 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -35,8 +38,21 @@ import seedu.address.testutil.StudentBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            new AssignmentList(), new TutorialList());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new AssignmentList(), getTypicalTutorialList());
+
+        // Assign students to their tutorials in the model
+        for (Student student : model.getAddressBook().getStudentList()) {
+            TutorialId tutorialId = student.getTutorialId();
+            if (model.hasTutorial(tutorialId)) {
+                model.assignStudent(student, tutorialId);
+            }
+        }
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -223,6 +239,33 @@ public class EditCommandTest {
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editStudentDescriptor="
                 + editStudentDescriptor + "}";
         assertEquals(expected, editCommand.toString());
+    }
+
+    @Test
+    public void execute_editWithoutChangingTutorialId_unassignNotCalled() {
+        Index indexFirstStudent = Index.fromOneBased(1);
+        Student firstStudent = model.getFilteredStudentList().get(indexFirstStudent.getZeroBased());
+
+        // Create an edited student without changing tutorial ID
+        Student editedStudent = new StudentBuilder(firstStudent).withName(VALID_NAME_BOB).build();
+
+        // Create the descriptor with only the name changed
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build();
+
+        // Create the EditCommand
+        EditCommand editCommand = new EditCommand(indexFirstStudent, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                Messages.format(editedStudent));
+
+        // Expected model remains the same except for the student's name
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new AssignmentList(), getTypicalTutorialList());
+        expectedModel.setStudent(firstStudent, editedStudent);
+
+        // No need to unassign or assign since tutorial ID hasn't changed
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
 }

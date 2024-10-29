@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -43,6 +44,22 @@ public class MarkAssignmentCommandTest {
 
         assertThrows(CommandException.class, MarkAssignmentCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {
             markCommand.execute(model);
+        });
+    }
+
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
+        AssignmentList assignmentList = new AssignmentList();
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new TutorialList());
+        MarkAssignmentCommand markCommand1 = new MarkAssignmentCommand(-1, ASSIGNMENT1);
+        MarkAssignmentCommand markCommand2 = new MarkAssignmentCommand(10000, ASSIGNMENT1);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> {
+            markCommand1.execute(model);
+        });
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> {
+            markCommand2.execute(model);
         });
     }
 

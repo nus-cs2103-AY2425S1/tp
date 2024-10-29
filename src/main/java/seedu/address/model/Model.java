@@ -161,6 +161,14 @@ public interface Model {
     void setAssignments(AssignmentList assignments);
 
     /**
+     * Assigns the old student's assignment status to the new student and sets the old
+     * student's assignment status to false if the old student has completed any assignment.
+     * @param oldStudent The student to be edited.
+     * @param newStudent The edited student with different tutorial id.
+     */
+    void reassignAssignmentStatuses(Student oldStudent, Student newStudent);
+
+    /**
      * Delete the specified tutorial class.
      * The tutorial class must exist in the tutorial list.
      *

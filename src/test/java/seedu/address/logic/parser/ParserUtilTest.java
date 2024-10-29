@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -83,6 +85,29 @@ public class ParserUtilTest {
         String tutorialIdWithWhitespace = WHITESPACE + VALID_TUTORIAL_ID + WHITESPACE;
         TutorialId expectedTutorialId = TutorialId.of(VALID_TUTORIAL_ID);
         assertEquals(expectedTutorialId, ParserUtil.parseTutorialId(tutorialIdWithWhitespace));
+    }
+
+    @Test
+    public void testValidDateTime() throws ParseException {
+        String validDate = "2024-10-23 1230";
+        LocalDateTime expected = LocalDateTime.of(2024, 10, 23, 12, 30);
+        assertEquals(expected, ParserUtil.parseDueDate(validDate));
+    }
+
+    @Test
+    public void testInvalidDate() {
+        String invalidDate = "2024-02-30 1230";
+        assertThrows(ParseException.class, () -> {
+            ParserUtil.parseDueDate(invalidDate);
+        });
+    }
+
+    @Test
+    public void testInvalidFormat() {
+        String invalidFormat = "23-10-2024 1230";
+        assertThrows(ParseException.class, () -> {
+            ParserUtil.parseDueDate(invalidFormat);
+        });
     }
 
 }
