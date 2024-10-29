@@ -29,7 +29,8 @@ public class Listing {
      * @param price    Price of the listing.
      * @param area     Area of the listing in square meters.
      * @param region   Region of the listing, represented by a {@code Region} enum.
-     * @param seller   Seller of the listing, represented by a {@code Person}.
+     * @param seller   Seller of the listing, represented by a {@code Seller}.
+     * @param buyers   Buyers of the listing, represented by a {@code Buyer}.
      */
     public Listing(Name name, Address address, Price price,
                    Area area, Region region, Person seller, Set<Person> buyers) {
@@ -88,11 +89,10 @@ public class Listing {
         if (this == otherListing) {
             return true;
         }
-
         return otherListing != null
-                && otherListing.name == this.name
-                && otherListing.address == this.address
-                && otherListing.seller == this.seller;
+                && otherListing.name.equals(this.name)
+                && otherListing.address.equals(this.address)
+                && otherListing.seller.equals(this.seller);
     }
 
     @Override

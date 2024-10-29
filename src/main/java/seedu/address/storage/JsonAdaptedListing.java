@@ -90,31 +90,35 @@ public class JsonAdaptedListing {
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
-        // Can add check for price
-        //if (!Phone.isValidPhone(phone)) {
-        //  throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        //}
+        if (!Price.isValidPrice(price)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+
         final Price modelPrice = new Price(price, new BigDecimal(price));
 
         if (area == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Area.class.getSimpleName()));
         }
-        // Can implement check for area
-        //if (!Email.isValidEmail(area)) {
-        //  throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        //}
+        if (!Area.isValidArea(area)) {
+            throw new IllegalValueException(Area.MESSAGE_CONSTRAINTS);
+        }
 
-        //Throws NUmberFormatException (need better errorhandling)
         final Area modelArea = new Area(Integer.parseInt(area));
 
         if (region == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Region.class.getSimpleName()));
+        }
+        if (!Region.isValidRegion(region)) {
+            throw new IllegalValueException(Region.MESSAGE_CONSTRAINTS);
         }
 
         final Region modelRegion = Region.fromString(region);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
         final Address modelAddress = new Address(address);

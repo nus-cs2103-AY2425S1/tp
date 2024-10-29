@@ -1,6 +1,8 @@
 package seedu.address.model.listing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -40,5 +42,34 @@ public class RegionTest {
         assertThrows(IllegalArgumentException.class, () -> Region.fromString(null));
         assertThrows(IllegalArgumentException.class, () -> Region.fromString(""));
         assertThrows(IllegalArgumentException.class, () -> Region.fromString("   "));
+    }
+
+    @Test
+    public void isValidRegion_validRegions_returnTrue() {
+        // Test with exact match
+        assertTrue(Region.isValidRegion("NORTH"));
+
+        // Test with different cases
+        assertTrue(Region.isValidRegion("south"));
+        assertTrue(Region.isValidRegion("East"));
+        assertTrue(Region.isValidRegion("WEST"));
+
+        // Test with whitespace trimming
+        assertTrue(Region.isValidRegion(" northeast "));
+    }
+
+    @Test
+    public void isValidRegion_invalidRegions_returnFalse() {
+        // Test with invalid region names
+        assertFalse(Region.isValidRegion("NORTHWESTERN"));
+        assertFalse(Region.isValidRegion("Southern Singapore"));
+        assertFalse(Region.isValidRegion(""));
+        assertFalse(Region.isValidRegion("middle"));
+    }
+
+    @Test
+    public void isValidRegion_nullRegion_returnFalse() {
+        // Test with null input
+        assertFalse(Region.isValidRegion(null));
     }
 }
