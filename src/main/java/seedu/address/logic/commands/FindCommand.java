@@ -3,13 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
@@ -31,16 +28,24 @@ public class FindCommand extends Command {
             + " 2. " + COMMAND_WORD + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "owesMoney\n"
             + " 3. " + COMMAND_WORD + " alice " + PREFIX_TAG + "isRich";
 
-    private final Predicate<Person> predicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final TagContainsKeywordsPredicate tagPredicate;
 
+    /**
+     * Creates a {@code FindCommand} with the specified name and tag predicates.
+     *
+     * @param namePredicate The predicate used to match persons by name.
+     * @param tagPredicate The predicate used to match persons by tag.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, TagContainsKeywordsPredicate tagPredicate) {
-        this.predicate = person -> namePredicate.test(person) || tagPredicate.test(person);
+        this.namePredicate = namePredicate;
+        this.tagPredicate = tagPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList(namePredicate.or(tagPredicate));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -57,13 +62,14 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return namePredicate.equals(otherFindCommand.namePredicate)
+                && tagPredicate.equals(otherFindCommand.tagPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicates", " " + namePredicate + ", " + tagPredicate)
                 .toString();
     }
 }
