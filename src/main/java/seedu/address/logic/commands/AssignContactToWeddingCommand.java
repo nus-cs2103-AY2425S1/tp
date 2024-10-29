@@ -14,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
-import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
 
 
@@ -86,10 +85,6 @@ public class AssignContactToWeddingCommand extends Command {
 
         for (Person person : newContactsAssignedToWedding) {
             if (existingPersonsInWedding.contains(person.getId())) {
-                // this keeps the user in that wedding view
-                Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
-                PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
-                model.updateFilteredPersonList(predicate);
                 throw new CommandException(person.getName().toString() + " has already been assigned to this wedding.");
             } else {
                 existingPersonsInWedding.add(person.getId());
@@ -102,11 +97,6 @@ public class AssignContactToWeddingCommand extends Command {
         model.setWedding(weddingToModify, newWedding);
 
         String assignedPersonNames = parsePersonListToString(newContactsAssignedToWedding);
-
-        //new code from view wedding command
-        Wedding targetWedding = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
-        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
-        model.updateFilteredPersonList(predicate);
 
         return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), assignedPersonNames));

@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * This UnassignContactFromWeddingCommand class unassigns contacts in the addressbook
@@ -36,7 +37,7 @@ public class UnassignContactFromWeddingCommand extends Command {
             "Unssigned the following people from %1$s's wedding: %2$s";
 
 
-    private final Index specificWeddingIndex;
+    //private final Index specificWeddingIndex;
 
     private final Set<Index> unassignedPersonIndexList;
 
@@ -44,11 +45,10 @@ public class UnassignContactFromWeddingCommand extends Command {
     /**
      * This constructor initialises the specific wedding index and the
      * index's of the contacts to unassign from that wedding
-     * @param specificWeddingIndex
      * @param unassignedPersonIndexList
      */
-    public UnassignContactFromWeddingCommand(Index specificWeddingIndex, Set<Index> unassignedPersonIndexList) {
-        this.specificWeddingIndex = specificWeddingIndex;
+    public UnassignContactFromWeddingCommand(Set<Index> unassignedPersonIndexList) {
+        //this.specificWeddingIndex = specificWeddingIndex;
         this.unassignedPersonIndexList = unassignedPersonIndexList;
     }
 
@@ -57,13 +57,21 @@ public class UnassignContactFromWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownWeddingList = model.getFilteredWeddingList();
 
+        WeddingName specific_wedding_name = model.getCurrentWeddingName();
 
-        if (specificWeddingIndex.getZeroBased() >= lastShownWeddingList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
+        if (specific_wedding_name == null) {
+            throw new CommandException("You need to be viewing a wedding to unassign contacts.");
         }
 
-
-        Wedding weddingToModify = lastShownWeddingList.get(specificWeddingIndex.getZeroBased());
+        // trialing not referencing index in unassign command
+        Wedding weddingToModify = new Wedding(null, null);
+        List<PersonId> existingPersonsInWedding = new ArrayList<>();
+        for (Wedding w : lastShownWeddingList) {
+            if (w.getWeddingName().equals(specific_wedding_name)) {
+                weddingToModify = w;
+                existingPersonsInWedding = w.getAssignees();
+            }
+        }
 
         // get a list of all the Persons that the user is trying to unassign from the wedding
         ArrayList<Person> unassignedContacts = new ArrayList<>();
@@ -78,8 +86,6 @@ public class UnassignContactFromWeddingCommand extends Command {
                 unassignedContacts.add(personToRemove);
             }
         }
-
-        List<PersonId> existingPersonsInWedding = weddingToModify.getAssignees();
 
         for (Person person : unassignedContacts) {
             if (!existingPersonsInWedding.contains(person.getId())) {
@@ -96,9 +102,8 @@ public class UnassignContactFromWeddingCommand extends Command {
 
         String unassignedPersonNames = parsePersonListToString(unassignedContacts);
 
-        //new code from view wedding command
-        Wedding targetWedding = lastShownWeddingList.get(specificWeddingIndex.getZeroBased());
-        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(targetWedding);
+
+        PersonInWeddingPredicate predicate = new PersonInWeddingPredicate(newWedding);
         model.updateFilteredPersonList(predicate);
 
         return new CommandResult(String.format(MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS,
