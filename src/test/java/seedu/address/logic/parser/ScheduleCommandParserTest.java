@@ -26,7 +26,8 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_invalidDate_failure() {
         // invalid date format
-        assertParseFailure(parser, VALID_NAME + " d/" + INVALID_DATE + " note/" + VALID_NOTE, MESSAGE_INVALID_DATE_FORMAT);
+        assertParseFailure(parser, VALID_NAME + " d/" + INVALID_DATE + " note/" + VALID_NOTE,
+                MESSAGE_INVALID_DATE_FORMAT);
     }
 
     @Test
