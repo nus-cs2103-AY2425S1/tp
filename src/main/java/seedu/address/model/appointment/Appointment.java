@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateUtil.isCorrectDateFormat;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class Appointment implements Comparable<Appointment> {
 
     public static final String MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT = "Appointment date should be in the format"
                                                                             + " of yyyy-MM-dd";
+    public static final String MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s = "Appointment date [%s] does not exist";
     public static final String MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT = "Appointment time period should be"
                                                                                    + " in 24-Hour Format with start "
                                                                                    + "and end times: HHMM-HHMM";
@@ -51,7 +53,9 @@ public class Appointment implements Comparable<Appointment> {
         this.appointmentName = appointmentName;
 
         requireNonNull(appointmentDate);
-        checkArgument(isValidDate(appointmentDate), MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
+        checkArgument(isCorrectDateFormat(appointmentDate), MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
+        checkArgument(isValidDate(appointmentDate), String.format(MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s,
+                                                                  appointmentDate));
         this.appointmentDate = appointmentDate;
 
         requireNonNull(appointmentTimePeriod);
