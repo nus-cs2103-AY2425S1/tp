@@ -217,6 +217,30 @@
     -fx-font-size: 20px;
 }
 
+.price_label {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
+    -fx-padding: 1 10;  /* Space inside the label */
+    -fx-font-size: 20px;
+}
+
+.area_label {
+    -fx-background-color: orange;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
+    -fx-padding: 1 10;  /* Space inside the label */
+    -fx-font-size: 20px;
+}
+
+.region_label {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
+    -fx-padding: 1 10;  /* Space inside the label */
+    -fx-font-size: 20px;
+}
+
 .bookmark {
     -fx-background-color: #2eb774;
     -fx-text-fill: white;
