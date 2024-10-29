@@ -3,16 +3,18 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -96,5 +98,6 @@ public class PersonCard extends UiPart<Region> {
             break;
         }
         Tooltip.install(paymentStatus, paymentTooltip);
+        HBox.setMargin(cardPane, new Insets(10, 10, 10, 10));
     }
 }
