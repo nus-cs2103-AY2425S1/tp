@@ -23,10 +23,10 @@ public class AddMedConCommand extends Command {
     public static final String COMMAND_WORD = "addMedCon";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns "
-            + "one or more medical conditions to a patient in the address book.\n"
+            + "one or more medical conditions to a patient in MediBase3. \n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_MEDCON + "CONDITION...\n"
+            + "[" + PREFIX_MEDCON + "CONDITION]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "T0123456F "
             + PREFIX_MEDCON + "Diabetes "

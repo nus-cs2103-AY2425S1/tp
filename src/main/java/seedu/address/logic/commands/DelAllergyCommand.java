@@ -23,9 +23,10 @@ public class DelAllergyCommand extends Command {
 
     public static final String COMMAND_WORD = "delAllergy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes allergy from patient in the address book. "
-            + "Parameters: NRIC (must be a valid NRIC in the system) "
-            + "[" + PREFIX_ALLERGY + "Allergy]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes allergy from patient in MediBase3. \n"
+            + "Parameters: "
+            + PREFIX_NRIC + "NRIC "
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S1234567A "
             + PREFIX_ALLERGY + "Pollen "
