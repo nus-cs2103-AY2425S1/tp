@@ -62,7 +62,7 @@ public class Messages {
         StringBuilder attendeesString = new StringBuilder();
 
         for (Person attendee : event.getAttendees()) {
-            attendeesString.append('\n').append(attendee.toString());
+            attendeesString.append('\n').append(attendee.toDisplayString());
         }
 
         builder.append(event.getEventName())

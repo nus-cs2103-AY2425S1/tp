@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -15,6 +17,7 @@ import seedu.address.model.event.Event;
 public class EventDetailView extends UiPart<Region> implements DetailView<Event> {
     private static final String FXML = "EventDetailView.fxml";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d, yyyy");
+    private ObservableList<Event> eventsList;
 
     @FXML
     private Label title;
@@ -28,8 +31,28 @@ public class EventDetailView extends UiPart<Region> implements DetailView<Event>
     @FXML
     private VBox attendees;
 
-    public EventDetailView() {
+    /**
+     * Constructs an {@code EventDetailView} to display detailed information
+     * about a {@code Event}, including the event name, date, location, and
+     * event attendees. The view updates automatically when there are changes
+     * in the provided list of {@code Event}s.
+     *
+     * @param eventsList The event list of the EventBook.
+     */
+    public EventDetailView(ObservableList<Event> eventsList) {
         super(FXML);
+        this.eventsList = eventsList;
+        if (eventsList.isEmpty()) {
+            this.getRoot().setVisible(false);
+        }
+
+        this.eventsList.addListener((Observable observable) -> {
+            if (eventsList.isEmpty()) {
+                this.getRoot().setVisible(false);
+            } else {
+                this.update(eventsList.get(0));
+            }
+        });
     }
 
     /**
@@ -39,6 +62,7 @@ public class EventDetailView extends UiPart<Region> implements DetailView<Event>
      */
     @Override
     public void update(Event event) {
+        this.getRoot().setVisible(true);
         title.setText(event.getEventName());
         date.setText(event.getDate().format(DATE_FORMATTER));
         locationLabel.setText(event.getLocation().value);
