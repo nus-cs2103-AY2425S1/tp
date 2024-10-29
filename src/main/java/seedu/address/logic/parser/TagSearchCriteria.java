@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -10,14 +12,14 @@ import seedu.address.model.tag.Tag;
  */
 public class TagSearchCriteria implements SearchCriteria {
 
-    private final List<String> tags;
+    private final Set<Tag> tags;
 
     public TagSearchCriteria(List<String> tags) {
-        this.tags = tags;
+        this.tags = tags.stream().map(Tag::new).collect(Collectors.toSet());
     }
     @Override
     public boolean test(Person person) {
-        return tags.stream().anyMatch(tag -> person.hasTag(new Tag(tag)));
+        return tags.stream().anyMatch(tag -> person.hasTag(tag));
     }
 
     @Override
