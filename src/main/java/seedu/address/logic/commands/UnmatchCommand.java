@@ -80,9 +80,6 @@ public class UnmatchCommand extends Command {
         // Update the model with the unmatched contact and job
         model.setPerson(contactToUnmatch, unmatchedContact);
 
-        //todo see if this can be removed
-//        model.setJob(jobToUnmatch, unmatchedJob);
-
         return new CommandResult(
                 String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact), Messages.format(jobToUnmatch))
         );
@@ -99,19 +96,6 @@ public class UnmatchCommand extends Command {
         Set<Skill> skills = contact.getSkills();
         return new Person(name, phone, email, role, skills);
     }
-
-    //TODO SEE IF THIS CAN BE REMOVED
-//    /**
-//     * Removes the contact from the job's match list.
-//     */
-//    private static Job unmatchJobFromContact(Job job, String contactIdentifier) {
-//        Name name = job.getName();
-//        JobCompany company = job.getCompany();
-//        JobSalary salary = job.getSalary();
-//        JobDescription description = job.getDescription();
-//        Set<Tag> requirements = job.getRequirements();;
-//        return new Job(name, company, salary, description, requirements);
-//    }
 
     /**
      * Validates that the contact and job are matched to each other and that both

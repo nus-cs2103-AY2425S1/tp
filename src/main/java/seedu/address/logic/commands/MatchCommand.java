@@ -62,15 +62,6 @@ public class MatchCommand extends Command {
         return new Person(name, phone, email, role, skills, jobIdentifier);
     }
 
-    private static Job matchJobToContact(Job job, String contactIdentifier) {
-        Name name = job.getName();
-        JobCompany company = job.getCompany();
-        JobSalary salary = job.getSalary();
-        JobDescription description = job.getDescription();
-        Set<Tag> requirements = job.getRequirements();
-        return new Job(name, company, salary, description, requirements);
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -104,10 +95,6 @@ public class MatchCommand extends Command {
         }
 
         Person matchedContact = matchContactToJob(contactToMatch, jobIdentifier);
-
-        // TODO SEE IF I CAN REMOVE THIS
-//        final String contactIdentifier = contactToMatch.getIdentifier();
-//        Job matchedJob = matchJobToContact(jobToMatch, contactIdentifier);
 
         model.setPerson(contactToMatch, matchedContact);
 

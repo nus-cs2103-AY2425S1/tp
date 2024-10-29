@@ -262,7 +262,7 @@ public class ModelManager implements Model {
      */
     public Predicate<Person> getPersonLinkedToCompanyPredicate(Company targetCompany) {
         return person -> person.isMatchPresent()
-                && person.getMatch().startsWith(targetCompany.getName().toString() + "::");
+                && person.getMatch().orElse("").startsWith(targetCompany.getName().toString() + "::");
     }
 
     /**
