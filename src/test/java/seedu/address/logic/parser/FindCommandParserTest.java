@@ -45,11 +45,22 @@ public class FindCommandParserTest {
     public void parse_validFindNameArgs_returnsFindNameCommand() {
         // no leading and trailing whitespaces
         FindNameCommand expectedFindCommand =
-                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "find n/Alice Bob", expectedFindCommand);
+                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice")));
+        assertParseSuccess(parser, "find n/Alice", expectedFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "find n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+        // search multiple names using multiple prefixes
+        assertParseSuccess(parser, "find n/ \n Alice \n \t  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validMultipleFindNameArgs_returnsFindNameCommand() {
+        // no leading and trailing whitespaces
+        FindNameCommand expectedFindCommand =
+                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, "find n/Alice n/Bob", expectedFindCommand);
+
+        // search multiple names using multiple prefixes
+        assertParseSuccess(parser, "find n/ \n Alice \n \t n/ \tBob  \t", expectedFindCommand);
     }
 
     @Test
@@ -144,6 +155,17 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_validMultipleFindPhoneArgs_returnsFindPhoneCommand() {
+        // no leading and trailing whitespaces
+        FindPhoneCommand expectedFindCommand =
+                new FindPhoneCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("91234567", "285")));
+        assertParseSuccess(parser, "find p/91234567 p/285", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find p/ \n91234567 \t p/\t 285", expectedFindCommand);
+    }
+
+    @Test
     public void parse_missingPhoneAfterPrefix_throwsParseException() {
         String input = "find p/"; // Nothing after phone prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
@@ -176,6 +198,19 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "find e/ \t carlos@gmail.com", expectedFindCommand);
     }
+
+    @Test
+    public void parse_validMultipleFindEmailArgs_returnsFindEmailCommand() {
+        // no leading and trailing whitespaces
+        FindEmailCommand expectedFindCommand =
+                new FindEmailCommand(new EmailContainsKeywordsPredicate(Arrays.asList("carlos@gmail.com",
+                        "lisa@example.com")));
+        assertParseSuccess(parser, "find e/carlos@gmail.com e/lisa@example.com", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find e/ \t carlos@gmail.com e/ \t lisa@example.com", expectedFindCommand);
+    }
+
 
     @Test
     public void parse_missingEmailAfterPrefix_throwsParseException() {
@@ -212,6 +247,17 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_validMultipleFindTagArgs_returnsFindTagCommand() {
+        // no leading and trailing whitespaces
+        FindTagCommand expectedFindCommand =
+                new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("florist", "DJ")));
+        assertParseSuccess(parser, "find t/florist t/DJ", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find t/ \t florist t/ \t DJ", expectedFindCommand);
+    }
+
+    @Test
     public void parse_missingTagAfterPrefix_throwsParseException() {
         String input = "find t/"; // Nothing after tag prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
@@ -237,11 +283,12 @@ public class FindCommandParserTest {
     public void parse_validFindWeddingArgs_returnsFindWeddingCommand() {
         // no leading and trailing whitespaces
         FindWeddingCommand expectedFindCommand =
-                new FindWeddingCommand(new WeddingContainsKeywordsPredicate(Arrays.asList("Dave's", "wedding")));
-        assertParseSuccess(parser, "find w/Dave's wedding", expectedFindCommand);
+                new FindWeddingCommand(new WeddingContainsKeywordsPredicate(Arrays.asList("Dave's wedding",
+                        "Wedding 2")));
+        assertParseSuccess(parser, "find w/Dave's wedding w/Wedding 2", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "find w/ \t Dave's wedding", expectedFindCommand);
+        assertParseSuccess(parser, "find w/ \t Dave's wedding w/ \t Wedding 2", expectedFindCommand);
     }
 
     @Test

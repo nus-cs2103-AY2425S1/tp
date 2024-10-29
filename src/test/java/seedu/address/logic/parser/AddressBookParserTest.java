@@ -106,9 +106,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findName() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("foo");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " n/ foo");
+        assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleName() throws Exception {
+        List<String> keywords = Arrays.asList("Amy", "Bob", "Clarissa");
+        FindNameCommand command = (FindNameCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " n/Amy n/Bob n/Clarissa");
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -116,15 +124,31 @@ public class AddressBookParserTest {
     public void parseCommand_findAddress() throws Exception {
         List<String> keywords = Arrays.asList("Jurong West Street");
         FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " a/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " a/Jurong West Street");
+        assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleAddress() throws Exception {
+        List<String> keywords = Arrays.asList("Jurong West Street", "Tampines East");
+        FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " a/Jurong West Street a/Tampines East");
         assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findEmail() throws Exception {
+        List<String> keywords = Arrays.asList("sally@gmail.com");
+        FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " e/sally@gmail.com");
+        assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleEmails() throws Exception {
         List<String> keywords = Arrays.asList("sally@gmail.com", "bob@example.com");
         FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " e/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " e/sally@gmail.com e/bob@example.com");
         assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -132,7 +156,15 @@ public class AddressBookParserTest {
     public void parseCommand_findPhone() throws Exception {
         List<String> keywords = Arrays.asList("99394835");
         FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " p/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " p/99394835");
+        assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultiplePhone() throws Exception {
+        List<String> keywords = Arrays.asList("99394835", "283384");
+        FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " p/99394835 p/283384");
         assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -140,15 +172,31 @@ public class AddressBookParserTest {
     public void parseCommand_findTag() throws Exception {
         List<String> keywords = Arrays.asList("florist");
         FindTagCommand command = (FindTagCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " t/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " t/florist");
+        assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleTags() throws Exception {
+        List<String> keywords = Arrays.asList("florist", "photographer");
+        FindTagCommand command = (FindTagCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " t/florist t/photographer");
         assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findWedding() throws Exception {
-        List<String> keywords = Arrays.asList("Snoopy's", "wedding");
+        List<String> keywords = Arrays.asList("Snoopy's wedding");
         FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " w/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " w/ Snoopy's wedding");
+        assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleWeddings() throws Exception {
+        List<String> keywords = Arrays.asList("Snoopy's wedding", "Wedding 2029");
+        FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " w/Snoopy's wedding w/Wedding 2029");
         assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
     }
 
