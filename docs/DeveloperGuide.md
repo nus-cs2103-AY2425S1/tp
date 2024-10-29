@@ -303,15 +303,17 @@ allowing flexibility to tailor the address book to specific needs.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                                        | So that I can…​                                                  |
-|----------|----------------------------------------|-----------------------------------------------------|------------------------------------------------------------------|
-| `* * *`  | new user                               | see usage instructions                              | refer to instructions when I forget how to use the App           |
-| `* * *`  | physiotherapist                        | add new client contact information                  | retrieve client details when needed.                             |
-| `* * *`  | physiotherapist                        | delete outdated or irrelevant patient information   | keep my database clean and relevant                              |
-| `* * *`  | physiotherapist                        | search for client contact information by name or ID | quickly access the required client’s details                     |
-| `* * *`  | physiotherapist                        | schedule appointments for my clients                | keep track of my daily sessions and avoid double bookings        |
-| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no patient is missed                                 |
-| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top         | prominently see what I need to do in order to manage my schedule |
+| Priority | As a …​                                | I want to …​                                         | So that I can…​                                                  |
+|----------|----------------------------------------|------------------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                               | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information                   | retrieve client details when needed.                             |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant patient information    | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name        | enables swift retrieval of specific client details               |
+| `* * *`  | physiotherapist                        | search for client contact information by number      | access the client’s details when name is not readily recalled    |
+| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients                 | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments  | ensure that no patient is missed                                 |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top          | prominently see what I need to do in order to manage my schedule |
 
 ### Use cases
 
@@ -495,6 +497,23 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Locating Persons
+
+1. Locating a person by name while all clients are being shown.
+
+    1. **Prerequisites**: Ensure at least one contact with the name "John Doe" exists in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "John" (case-insensitive) should appear in the results, e.g., "John Doe." The search should be able to display "john" and "John Doe" regardless of casing.
+
+    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "Alex Yeoh" and "David Li." The results should display all contacts that match at least one keyword in a case-insensitive manner.
+
+    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if only partial matches exist, such as "Hans," since the system only matches full words.
+
+2. Locating a person by phone number while all clients are being shown.
+
+    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "John Doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
+
+
 ### Scheduling an appointment
 
 1. Scheduling an appointment for a client while all clients are being shown.
@@ -506,6 +525,28 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
     1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
+
+### Viewing a Person
+
+1. Viewing a person’s details in the address book.
+
+    1. **Prerequisites**: Ensure that the contact with the exact name exists in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
+
+    2. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for John Doe, including:
+        - Name
+        - Phone Number
+        - Email
+        - Address
+        - Condition
+        - Schedule
+        - Reminder
+
+    3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays Betsy Crowe’s details with all specified fields shown.
+
+    4. **Test case**: `view John`<br>**Expected**: An error message appears, as the name entered does not match the full name exactly.
+
+    5. **Test case**: `view Nonexistent Name`<br>**Expected**: An error message appears indicating that no matching contact is found.
+
 
 ### Saving data
 
