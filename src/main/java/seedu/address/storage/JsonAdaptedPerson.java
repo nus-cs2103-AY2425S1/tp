@@ -90,6 +90,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedPolicies policy: policies) {
             policiesTags.add(policy.toModelType());
         }
+
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
