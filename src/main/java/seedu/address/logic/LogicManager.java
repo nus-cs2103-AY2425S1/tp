@@ -57,6 +57,7 @@ public class LogicManager implements Logic {
             tempVersionHistory = new VersionHistory();
         }
         this.versionHistory = tempVersionHistory;
+        model.setStatus();
     }
 
     @Override
@@ -70,8 +71,9 @@ public class LogicManager implements Logic {
         ReadOnlyAddressBook tempAddressBook = versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
         ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
         model.setAddressBook(currentAddressBook);
+        model.setStatus();
         try {
-            storage.saveAddressBook(currentAddressBook);
+            storage.saveAddressBook(model.getAddressBook());
             storage.saveUserPrefs(model.getUserPrefs());
             versionHistoryStorage.saveVersionHistory(versionHistory);
         } catch (AccessDeniedException e) {
@@ -79,7 +81,7 @@ public class LogicManager implements Logic {
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
-        //command.updateTaskStatus(model);
+
         return commandResult;
     }
 
