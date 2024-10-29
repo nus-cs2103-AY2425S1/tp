@@ -18,7 +18,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-Class RSVP
+Class Rsvp
 
 Class I #FFFFFF
 }
@@ -41,7 +41,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> "*" Tag
-Person *--> RSVP
+Person *--> Rsvp
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
