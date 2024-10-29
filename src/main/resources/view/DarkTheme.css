@@ -3,8 +3,8 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
-/* Styles for archived delivery card */
-.delivery-card.archived {
+/* Styles for archived delivery card and person card */
+.card.archived {
     -fx-background-color: derive(#383838, 80%); /* Lighten the background */
     -fx-text-fill: derive(#555555, 50%); /* Darken the text color */
     -fx-opacity: 0.2; /* Make it less visible */

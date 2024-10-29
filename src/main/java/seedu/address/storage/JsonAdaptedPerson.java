@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.person.Archive;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedDelivery> deliveries = new ArrayList<>();
+    private final String archive;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +49,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("worker") JsonAdaptedWorker worker,
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("deliveries") List<JsonAdaptedDelivery> deliveries) {
+                             @JsonProperty("deliveries") List<JsonAdaptedDelivery> deliveries,
+                             @JsonProperty("archive") String archive) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,6 +63,7 @@ class JsonAdaptedPerson {
         if (deliveries != null) {
             this.deliveries.addAll(deliveries);
         }
+        this.archive = archive;
     }
 
     /**
@@ -78,6 +82,7 @@ class JsonAdaptedPerson {
         deliveries.addAll(source.getUnmodifiableDeliveryList().stream()
                 .map(JsonAdaptedDelivery::new)
                 .collect(Collectors.toList()));
+        archive = source.getArchive().value;
     }
 
     /**
@@ -140,7 +145,15 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person person = new Person(modelName, modelPhone, modelEmail, modelRole, modelAddress, modelTags);
+        if (archive == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Archive.class.getSimpleName()));
+        }
+        if (!Archive.isValidArchive(archive)) {
+            throw new IllegalValueException(Archive.MESSAGE_CONSTRAINTS);
+        }
+        final Archive modelArchive = new Archive(archive);
+
+        Person person = new Person(modelName, modelPhone, modelEmail, modelRole, modelAddress, modelTags, modelArchive);
         person.setDeliveryList(personDeliveries);
         person.setWorker(modelWorker);
 

@@ -36,18 +36,20 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
+    private Archive archive;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Role role, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Role role, Address address, Set<Tag> tags, Archive archive) {
+        requireAllNonNull(name, phone, email, address, tags, archive);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
         this.address = address;
         this.tags.addAll(tags);
+        this.archive = archive;
     }
 
     public Name getName() {
@@ -72,6 +74,14 @@ public class Person {
 
     public Worker getWorker() {
         return worker;
+    }
+
+    public Archive getArchive() {
+        return archive;
+    }
+
+    public boolean isArchived() {
+        return archive.isArchived();
     }
 
     /**
@@ -212,7 +222,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && archive.equals(otherPerson.archive);
     }
 
     @Override
@@ -229,6 +240,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("archive", archive)
                 .toString();
     }
 

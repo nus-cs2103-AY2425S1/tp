@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
@@ -65,7 +64,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             );
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, role, address, tagList);
+            Person person = new Person(name, phone, email, role, address, tagList,
+                    new seedu.address.model.person.Archive(false));
 
             return new AddCommand(person);
         } else {
@@ -97,7 +97,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             Set<ItemName> itemList = ParserUtil.parseItems(argMultimap.getAllValues(PREFIX_ITEMS));
             Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("not delivered"));
             Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            Delivery delivery = new Delivery(itemList, address, cost, eta, status, tags, new Archive(false));
+            Delivery delivery = new Delivery(itemList, address, cost, eta, status, tags,
+                    new seedu.address.model.delivery.Archive(false));
             return new AddCommand(delivery);
         }
     }
