@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public static final String EMAIL_CANNOT_BE_EMPTY = "Email address cannot be empty!";
     public static final String ADDRESS_CANNOT_BE_EMPTY = "Address cannot be empty!";
     public static final String TAG_CANNOT_BE_EMPTY = "Tag cannot be empty!";
-
+    public static final String WEDDING_CANNOT_BE_EMPTY = "Wedding cannot be empty!";
 
 
     /**
@@ -52,8 +52,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TAG, PREFIX_WEDDING);
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -70,34 +68,42 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasWeddingPrefix = argMultimap.getValue(PREFIX_WEDDING).isPresent();
 
         if (hasNamePrefix) {
-            String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
-            if (nameInput.isEmpty()) {
-                throw new ParseException(NAME_CANNOT_BE_EMPTY);
+            List<String> nameKeywords = new ArrayList<>();
+            for (String address : argMultimap.getAllValues(PREFIX_NAME)) {
+                String nameInput = address.trim();
+                if (nameInput.isEmpty()) {
+                    throw new ParseException(NAME_CANNOT_BE_EMPTY);
+                }
+                nameKeywords.add(nameInput);
             }
-            List<String> nameKeywords = Arrays.asList(nameInput.split("\\s+"));
             return new FindNameCommand(new NameContainsKeywordsPredicate(nameKeywords));
         }
 
         if (hasPhonePrefix) {
-            String phoneNumberInput = argMultimap.getValue(PREFIX_PHONE).get().trim(); // Get the actual phone input
-            if (phoneNumberInput.isEmpty()) {
-                throw new ParseException(PHONE_NUMBER_CANNOT_BE_EMPTY);
+            List<String> phoneKeywords = new ArrayList<>();
+            for (String phoneNumber : argMultimap.getAllValues(PREFIX_PHONE)) {
+                String phoneNumberInput = phoneNumber.trim();
+                if (phoneNumberInput.isEmpty()) {
+                    throw new ParseException(PHONE_NUMBER_CANNOT_BE_EMPTY);
+                }
+                phoneKeywords.add(phoneNumberInput);
             }
-            List<String> phoneKeywords = Arrays.asList(phoneNumberInput.split("\\s+"));
             return new FindPhoneCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
 
         if (hasEmailPrefix) {
-            String emailInput = argMultimap.getValue(PREFIX_EMAIL).get().trim(); // Get the actual email input
-            if (emailInput.isEmpty()) {
-                throw new ParseException(EMAIL_CANNOT_BE_EMPTY);
+            List<String> emailKeywords = new ArrayList<>();
+            for (String email : argMultimap.getAllValues(PREFIX_EMAIL)) {
+                String emailInput = email.trim();
+                if (emailInput.isEmpty()) {
+                    throw new ParseException(EMAIL_CANNOT_BE_EMPTY);
+                }
+                emailKeywords.add(emailInput);
             }
-            List<String> emailKeywords = Arrays.asList(emailInput.split("\\s+"));
             return new FindEmailCommand(new EmailContainsKeywordsPredicate(emailKeywords));
         }
 
         if (hasAddressPrefix) {
-            // Collect all address inputs
             List<String> addressKeywords = new ArrayList<>();
             for (String address : argMultimap.getAllValues(PREFIX_ADDRESS)) {
                 String addressInput = address.trim();
@@ -110,7 +116,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (hasTagPrefix) {
-            String tagInput = argMultimap.getValue(PREFIX_TAG).get().trim(); // Get the actual tag input
+            String tagInput = argMultimap.getValue(PREFIX_TAG).get().trim();
             if (tagInput.isEmpty()) {
                 throw new ParseException(TAG_CANNOT_BE_EMPTY);
             }
@@ -119,9 +125,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (hasWeddingPrefix) {
-            String weddingInput = argMultimap.getValue(PREFIX_WEDDING).get().trim(); // Get the actual wedding input
+            String weddingInput = argMultimap.getValue(PREFIX_WEDDING).get().trim();
             if (weddingInput.isEmpty()) {
-                throw new ParseException("Wedding cannot be empty!");
+                throw new ParseException(WEDDING_CANNOT_BE_EMPTY);
             }
             List<String> weddingKeywords = Arrays.asList(weddingInput.split("\\s+"));
             return new FindWeddingCommand(new WeddingContainsKeywordsPredicate(weddingKeywords));
