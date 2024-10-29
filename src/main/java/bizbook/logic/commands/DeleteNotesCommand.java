@@ -85,7 +85,7 @@ public class DeleteNotesCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         ObjectProperty<Person> focusedPerson = model.getFocusedPerson();
-        focusedPerson.set(personToEdit);
+        focusedPerson.set(editedPerson);
 
         return new CommandResult(String.format(generateSuccessMessage(editedPerson), index.getOneBased()),
                 false, false);

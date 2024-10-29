@@ -62,8 +62,13 @@ public class ContactDetails extends UiPart<Region> {
      * @param person The person object to be updated onto the panel.
     */
     private void displayPerson(Person person) {
-        logger.info("Displaying info of " + person.toString());
         clearPanel();
+
+        if (person == null) {
+            return;
+        }
+
+        logger.info("Displaying info of " + person.toString());
 
         name.setText(person.getName().fullName);
         phoneNo.setText("Mobile: " + person.getPhone().toString());
