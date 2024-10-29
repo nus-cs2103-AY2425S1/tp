@@ -38,12 +38,12 @@
                <children>
                   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="39.0" styleClass="label-header" text="AB3 My Guest">
                      <VBox.margin>
-                        <Insets />
+                        <Insets bottom="5.0"/>
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" styleClass="label-subtitle" text="Your One-Stop Wedding Planner">
                      <VBox.margin>
-                        <Insets />
+                        <Insets bottom="3.0"/>
                      </VBox.margin>
                   </Label>
                </children>
