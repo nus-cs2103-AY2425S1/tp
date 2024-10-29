@@ -15,8 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.editcommands.EditTaskCommand;
-import seedu.address.logic.commands.editcommands.EditTaskCommand.EditTaskDescriptor;
+import seedu.address.logic.commands.editcommands.EditTaskAllGroupCommand;
+import seedu.address.logic.commands.editcommands.EditTaskAllGroupCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,9 +26,8 @@ import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
+public class EditTaskAllGroupCommandTest {
 
-
-public class EditTaskCommandTest {
     private Model model;
     private Task taskToEdit;
     private Task editedTask;
@@ -48,18 +47,19 @@ public class EditTaskCommandTest {
         editTaskDescriptor = new EditTaskDescriptor();
         editTaskDescriptor.setTaskName(new TaskName("Revised Task"));
         editTaskDescriptor.setDeadline(new Deadline(LocalDateTime.of(2025, 12, 31, 23, 59)));
-
     }
+
     @Test
     public void execute_allFieldsSpecified_success() throws CommandException {
-        EditTaskCommand command = new EditTaskCommand(new GroupName(TEAM_FIVE), INDEX_FIRST_TASK, editTaskDescriptor);
+        EditTaskAllGroupCommand command = new EditTaskAllGroupCommand(INDEX_FIRST_TASK, editTaskDescriptor);
         CommandResult result = command.execute(model);
-        assertEquals(String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, Messages.format(editedTask),
-                Messages.format(group)), result.getFeedbackToUser());
+        assertEquals(String.format(EditTaskAllGroupCommand.MESSAGE_EDIT_TASK_SUCCESS, Messages.format(editedTask),
+            Messages.format(group)), result.getFeedbackToUser());
     }
+
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
-        EditTaskCommand command = new EditTaskCommand(new GroupName(TEAM_FIVE), INVALID_INDEX_TASK, editTaskDescriptor);
+        EditTaskAllGroupCommand command = new EditTaskAllGroupCommand(INVALID_INDEX_TASK, editTaskDescriptor);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DISPLAYED_INDEX, ()->command.execute(model));
     }
 
@@ -73,16 +73,13 @@ public class EditTaskCommandTest {
         descriptorTwo.setTaskName(new TaskName("Task B"));
         descriptorTwo.setDeadline(new Deadline(LocalDateTime.of(2025, 11, 11, 11, 11)));
 
-        EditTaskCommand commandOne = new EditTaskCommand(group.getGroupName(), INDEX_FIRST_TASK, descriptorOne);
-        EditTaskCommand commandTwo = new EditTaskCommand(group.getGroupName(), INVALID_INDEX_TASK, descriptorTwo);
-        EditTaskCommand commandOneCopy = new EditTaskCommand(group.getGroupName(), INDEX_FIRST_TASK, descriptorOne);
+        EditTaskAllGroupCommand commandOne = new EditTaskAllGroupCommand(INDEX_FIRST_TASK, descriptorOne);
+        EditTaskAllGroupCommand commandTwo = new EditTaskAllGroupCommand(INVALID_INDEX_TASK, descriptorTwo);
+        EditTaskAllGroupCommand commandOneCopy = new EditTaskAllGroupCommand(INDEX_FIRST_TASK, descriptorOne);
         assertTrue(commandOne.equals(commandOne));
         assertTrue(commandOne.equals(commandOneCopy));
         assertFalse(commandTwo.equals(commandOne));
         assertFalse(commandOne.equals(null));
         assertFalse(commandOne.equals(2));
     }
-
-
-
 }
