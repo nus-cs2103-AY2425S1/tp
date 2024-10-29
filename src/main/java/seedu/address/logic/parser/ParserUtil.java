@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -39,7 +40,9 @@ public class ParserUtil {
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
 
-    public static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm");
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format HH:mm";
+
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
             "dd MMMM yyyy",
@@ -198,6 +201,14 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(trimmedAppointment);
+    }
+
+    public static LocalTime parseTime(String time) throws ParseException {
+        try {
+            return LocalTime.parse(time, TIME_FORMATTER);
+        } catch (DateTimeParseException ignored) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+        }
     }
 
     /**

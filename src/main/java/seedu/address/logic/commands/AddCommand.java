@@ -50,6 +50,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_APPOINTMENT_TAKEN = "There is an existing appointment at that timeslot";
+    public static final String MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS = "Appointment is outside operating hours.";
 
     private final Person toAdd;
 
@@ -65,12 +66,18 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        System.out.println(model.getOperatingHours());
+
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_APPOINTMENT_TAKEN);
+        }
+
+        if (!model.appointmentWithinOperatingHours(toAdd.getAppointment())) {
+            throw new CommandException(MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS);
         }
 
         model.addPerson(toAdd);

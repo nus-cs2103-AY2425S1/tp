@@ -1,0 +1,59 @@
+package seedu.address.logic.commands;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.OperatingHours;
+
+import static java.util.Objects.requireNonNull;
+
+public class UpdateOperatingHoursCommand extends Command{
+
+    public static final String COMMAND_WORD = "hours";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Updates operating hours in the address book";
+
+    public static final String MESSAGE_SUCCESS = "Operating Hours updated: ";
+    public static final String MESSAGE_FAILED = "There are some appointments are "
+            + "outside the new operating hours given";
+
+    public final OperatingHours toUpdate;
+
+    public UpdateOperatingHoursCommand(OperatingHours operatingHours) {
+        requireNonNull(operatingHours);
+        toUpdate = operatingHours;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        if (model.setOperatingHours(toUpdate.openingHour, toUpdate.closingHour)) {
+            return new CommandResult(MESSAGE_SUCCESS + toUpdate);
+        } else {
+            throw new CommandException(MESSAGE_FAILED);
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UpdateOperatingHoursCommand)) {
+            return false;
+        }
+
+        UpdateOperatingHoursCommand otherUpdateOperatingHoursCommand = (UpdateOperatingHoursCommand) other;
+        return toUpdate.equals(otherUpdateOperatingHoursCommand.toUpdate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toUpdate", toUpdate)
+                .toString();
+    }
+}

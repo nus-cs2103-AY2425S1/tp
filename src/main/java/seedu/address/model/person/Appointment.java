@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.isNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT_WITH_TIME;
-import static seedu.address.logic.parser.ParserUtil.TIME;
+import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.parseDateTime;
 
 import java.time.LocalDate;
@@ -110,7 +110,7 @@ public class Appointment {
             return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
                                 .toLocalTime()
                                 .plusMinutes(15)
-                                .format(TIME);
+                                .format(TIME_FORMATTER);
         }
     }
 

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.BackupManager;
 import seedu.address.storage.Storage;
@@ -33,6 +35,7 @@ public class ModelManager implements Model {
     private final BackupManager backupManager;
     private final FilteredList<Person> filteredPersons;
     private final Calendar calendar;
+    private OperatingHours operatingHours;
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
@@ -57,6 +60,7 @@ public class ModelManager implements Model {
         this.backupManager = new BackupManager(Paths.get("backups"));
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.calendar = new Calendar(this.addressBook);
+        this.operatingHours = new OperatingHours(); // TBC currently only sets default
     }
 
     public ModelManager() throws IOException {
@@ -122,6 +126,8 @@ public class ModelManager implements Model {
         return calendar;
     }
 
+
+
     @Override
     public boolean hasAppointment(Person person) {
         return calendar.hasAppointment(person);
@@ -146,6 +152,27 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         calendar.setAppointment(target, editedPerson);
+    }
+
+    @Override
+    public OperatingHours getOperatingHours() {
+        return operatingHours;
+    }
+
+    @Override
+    public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
+        OperatingHours newOperatingHours = new OperatingHours(openingHour, closingHour);
+        if (newOperatingHours.isCalenderValid(calendar.getAppointments())) {
+            operatingHours = newOperatingHours;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean appointmentWithinOperatingHours(Appointment appointment) {
+        requireNonNull(appointment);
+        return operatingHours.isValid(appointment);
     }
 
     protected void triggerBackup(String action, Person target) {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS;
 import static seedu.address.logic.commands.AddCommand.MESSAGE_APPOINTMENT_TAKEN;
 import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -159,6 +160,10 @@ public class UpdateCommand extends Command {
         if (!personToEdit.getAppointment().equals(editedPerson.getAppointment())
                 && model.hasAppointment(editedPerson)) {
             throw new CommandException(MESSAGE_APPOINTMENT_TAKEN);
+        }
+
+        if (!model.appointmentWithinOperatingHours(editedPerson.getAppointment())) {
+            throw new CommandException(MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS);
         }
 
         model.setPerson(personToEdit, editedPerson);
