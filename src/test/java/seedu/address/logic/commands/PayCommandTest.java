@@ -87,6 +87,16 @@ public class PayCommandTest {
     }
 
     @Test
+    public void execute_invalidPaidAmountFilteredList_failure() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        double invalidPaidAmount = 10000000;
+
+        PayCommand payCommand = new PayCommand(INDEX_FIRST_STUDENT, invalidPaidAmount);
+
+        assertCommandFailure(payCommand, model, Messages.MESSAGE_LIMIT);
+    }
+
+    @Test
     public void equals() {
         final PayCommand standardCommand = new PayCommand(INDEX_FIRST_STUDENT, 2.0);
 
