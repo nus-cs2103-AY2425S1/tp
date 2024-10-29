@@ -2,9 +2,12 @@ package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -51,7 +54,11 @@ public class DeleteModuleRoleOperationTest {
         ModuleRoleMap expectedMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
 
-        assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        try {
+            assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        } catch (CommandException e) {
+            fail("CommandException should not be thrown.");
+        }
 
         // Delete multiple module role pairs
         initialMap = new ModuleRoleMap(
@@ -66,31 +73,34 @@ public class DeleteModuleRoleOperationTest {
         expectedMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("MA1522")}, new RoleType[]{RoleType.PROFESSOR});
 
-        assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        try {
+            assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        } catch (CommandException e) {
+            fail("CommandException should not be thrown.");
+        }
     }
 
     @Test
     public void execute_deletesModuleRolePairs_failure() {
-        // Delete non-existent module role pairs -> returns the same map
+        // Delete non-existent module role pairs -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
 
-        ModuleRoleMap mapToDelete = new ModuleRoleMap(
+        final ModuleRoleMap mapToDelete1 = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS2103T")}, new RoleType[]{RoleType.TUTOR});
-        ModuleRoleMap expectedMap = initialMap;
 
-        assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        assertThrows(CommandException.class, () -> new DeleteModuleRoleOperation(mapToDelete1).execute(initialMap));
 
         // Delete module role pair having same module code but different role as pre-existing one -> returns same map
-        mapToDelete = new ModuleRoleMap(
+        final ModuleRoleMap mapToDelete2 = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.TUTOR});
 
-        assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        assertThrows(CommandException.class, () -> new DeleteModuleRoleOperation(mapToDelete2).execute(initialMap));
     }
 
     @Test
-    public void execute_deletesModuleRolePairs_partialSuccess() {
-        // Delete multiple module role pairs, some do not exist
+    public void execute_deletesModuleRolePairs_partialFailure() {
+        // Delete multiple module role pairs, some do not exist -> throws CommandException
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S"), new ModuleCode("CS2103T"), new ModuleCode("MA1522")},
                 new RoleType[]{RoleType.STUDENT, RoleType.TUTOR, RoleType.PROFESSOR});
@@ -103,7 +113,7 @@ public class DeleteModuleRoleOperationTest {
                 new ModuleCode[]{new ModuleCode("CS2103T"), new ModuleCode("MA1522")},
                 new RoleType[]{RoleType.TUTOR, RoleType.PROFESSOR});
 
-        assertEquals(expectedMap, new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
+        assertThrows(CommandException.class, () -> new DeleteModuleRoleOperation(mapToDelete).execute(initialMap));
     }
 
     @Test
