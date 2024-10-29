@@ -20,7 +20,6 @@ package Storage as StoragePackage {
         Class JsonSerializableAddressBook
         Class JsonAdaptedPerson
         Class JsonAdaptedWedding
-        Class JsonAdaptedRole
     }
 }
 
@@ -39,6 +38,5 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonSerializableAddressBook --> "*" JsonAdaptedWedding
-JsonAdaptedPerson --> "1" JsonAdaptedRole
 
 @enduml

@@ -50,7 +50,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person --> Role
-Person --> Client
+Client --> Person
 Wedding *--> Name
 Wedding *--> Client
 Wedding *--> Date
