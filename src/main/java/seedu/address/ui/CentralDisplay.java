@@ -79,6 +79,7 @@ public class CentralDisplay extends UiPart<Region> {
         System.out.println(personIndex);
         sessionLogPanel = new SessionLogPanel(logic.getSessionLog(personIndex));
 
+
         sessionLogPanelPlaceholder.getChildren().add(sessionLogPanel.getRoot());
         showSessionLogPanel();
     }

@@ -3,7 +3,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="logListView" VBox.vgrow="ALWAYS" />
-</VBox>
+<?import javafx.scene.control.SplitPane?>
+<SplitPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" orientation="HORIZONTAL">
+    <VBox>
+        <ListView fx:id="logListView" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <VBox fx:id="detailedSessionLogContainer" />
+</SplitPane>
 

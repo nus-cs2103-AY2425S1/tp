@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="detailsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10" padding="10">
-    <Label fx:id="detailId" styleClass="detail_big_label" text="Person ID" />
-    <Label fx:id="detailName" styleClass="detail_big_label" text="Person Name" />
+<VBox fx:id="detailsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="detailDate" styleClass="detail_small_label" text="Appointment Date" />
     <Label fx:id="detailSessionEntry" styleClass="detail_small_label" text="Session Entry" />
-    <FlowPane fx:id="detailTags" />
 </VBox>

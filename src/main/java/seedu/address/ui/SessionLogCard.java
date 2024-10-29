@@ -17,7 +17,6 @@ public class SessionLogCard extends UiPart<Region> {
     @FXML
     private Label sessionEntry;
 
-
     /**
      * Creates a {@code SessionLogCard} with the given {@code log}.
      */
