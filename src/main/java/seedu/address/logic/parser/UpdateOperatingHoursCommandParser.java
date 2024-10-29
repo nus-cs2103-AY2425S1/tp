@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSINGHOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENINGHOURS;
+import static seedu.address.logic.parser.ParserUtil.parseTime;
+
 import seedu.address.logic.commands.UpdateOperatingHoursCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.OperatingHours;
 
 import java.time.LocalTime;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSINGHOURS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENINGHOURS;
-import static seedu.address.logic.parser.ParserUtil.parseTime;
-
+/**
+ * Parses input arguments and creates a new UpdateOperatingHoursCommand object.
+ */
 public class UpdateOperatingHoursCommandParser implements Parser<UpdateOperatingHoursCommand> {
 
     @Override

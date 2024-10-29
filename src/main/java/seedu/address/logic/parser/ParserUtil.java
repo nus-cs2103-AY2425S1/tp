@@ -203,6 +203,10 @@ public class ParserUtil {
         return new Appointment(trimmedAppointment);
     }
 
+    /**
+     * Parses a String {@code time} into a LocalTime. Leading and trailing whitspaces will be trimmed.
+     * @throws ParseException - if given {@code time} is invalid
+     */
     public static LocalTime parseTime(String time) throws ParseException {
         try {
             return LocalTime.parse(time, TIME_FORMATTER);
@@ -215,7 +219,7 @@ public class ParserUtil {
      * Parses a {@code String date} into an {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
     public static LocalDate parseDate(String date) throws ParseException {
         for (DateTimeFormatter formatter : DATE_FORMATTERS) {

@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.OperatingHours;
 
-import static java.util.Objects.requireNonNull;
-
-public class UpdateOperatingHoursCommand extends Command{
+/**
+ * Updates operating hours in addressbook
+ */
+public class UpdateOperatingHoursCommand extends Command {
 
     public static final String COMMAND_WORD = "hours";
 
@@ -19,6 +22,9 @@ public class UpdateOperatingHoursCommand extends Command{
 
     public final OperatingHours toUpdate;
 
+    /**
+     * creates an UpdateOperatingHoursCommand to update the  operating hours in addressbook
+     */
     public UpdateOperatingHoursCommand(OperatingHours operatingHours) {
         requireNonNull(operatingHours);
         toUpdate = operatingHours;
@@ -28,7 +34,7 @@ public class UpdateOperatingHoursCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.setOperatingHours(toUpdate.openingHour, toUpdate.closingHour)) {
+        if (model.setOperatingHours(toUpdate.getOpeningHour(), toUpdate.getClosingHour())) {
             return new CommandResult(MESSAGE_SUCCESS + toUpdate);
         } else {
             throw new CommandException(MESSAGE_FAILED);
