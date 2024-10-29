@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -255,6 +256,35 @@ public class Event {
 
         if (volunteers.contains(personToRemove)) {
             volunteers.remove(personToRemove);
+        }
+    }
+
+    /**
+     * Edits person in all roles if they are present in that role
+     * @param personToEdit Person that will be removed
+     * @param editedPerson Person that will replace personToEdit
+     */
+    public void editPerson(Person personToEdit, Person editedPerson) {
+        requireAllNonNull(personToEdit, editedPerson);
+        // check each set and see it contains the person to edit
+        if (attendees.contains(personToEdit)) {
+            attendees.remove(personToEdit);
+            attendees.add(editedPerson);
+        }
+
+        if (vendors.contains(personToEdit)) {
+            vendors.remove(personToEdit);
+            vendors.add(editedPerson);
+        }
+
+        if (sponsors.contains(personToEdit)) {
+            sponsors.remove(personToEdit);
+            sponsors.add(editedPerson);
+        }
+
+        if (volunteers.contains(personToEdit)) {
+            volunteers.remove(personToEdit);
+            volunteers.add(editedPerson);
         }
     }
     @Override
