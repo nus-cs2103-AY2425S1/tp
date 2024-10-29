@@ -63,6 +63,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        setWindowMinimumSize(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -135,6 +136,14 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets the minimum size based on {@code guiSettings}.
+     */
+    private void setWindowMinimumSize(GuiSettings guiSettings) {
+        primaryStage.setMinHeight(guiSettings.getWindowMinHeight());
+        primaryStage.setMinWidth(guiSettings.getWindowMinWidth());
     }
 
     /**

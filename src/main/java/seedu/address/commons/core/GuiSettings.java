@@ -12,8 +12,10 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 600;
-    private static final double DEFAULT_WIDTH = 740;
+    private static final double DEFAULT_HEIGHT = 980;
+    private static final double DEFAULT_WIDTH = 1440;
+    private static final double MIN_HEIGHT = 980;
+    private static final double MIN_WIDTH = 1440;
 
     private final double windowWidth;
     private final double windowHeight;
@@ -47,6 +49,14 @@ public class GuiSettings implements Serializable {
 
     public Point getWindowCoordinates() {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
+    }
+
+    public double getWindowMinHeight() {
+        return MIN_HEIGHT;
+    }
+
+    public double getWindowMinWidth() {
+        return MIN_WIDTH;
     }
 
     @Override
