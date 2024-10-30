@@ -2,13 +2,16 @@ package tuteez.model.person;
 
 import static tuteez.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import tuteez.commons.util.ToStringBuilder;
+import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
@@ -53,6 +56,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags,
                   Set<Lesson> lessons, RemarkList remarkList) {
+                  List<Lesson> lessons, RemarkList remarkList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -104,6 +108,8 @@ public class Person {
      */
     public Set<Lesson> getLessons() {
         return Collections.unmodifiableSet(lessons);
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessons);
     }
 
     public ArrayList<Lesson> getLessonsThatClash(Lesson otherLesson) {
@@ -128,6 +134,7 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
     /**
      * Determines whether the specified lesson is already present in the student's schedule.
      *
@@ -136,6 +143,30 @@ public class Person {
      */
     public boolean isLessonScheduled(Lesson lesson) {
         return lessons.contains(lesson);
+    }
+
+    /**
+     * Determines a student's next lesson based on the current date and time.
+     *
+     * <p>This method iterates through all lessons and calculates the time remaining
+     * until each lesson starts, selecting the lesson with the shortest time until its
+     * start. The lesson that begins the soonest after the current time is returned.</p>
+     *
+     * @return The {@code Lesson} object that represents the next upcoming lesson
+     *         relative to the current date and time, or {@code null} if no lessons are scheduled.
+     */
+    public Lesson nextLessonBasedOnCurrentTime() {
+        Lesson nextLesson = null;
+        Duration shortestDuration = Duration.ofDays(Day.values().length);
+
+        for (Lesson ls : lessons) {
+            Duration durationTillLesson = ls.durationTillLesson();
+            if (durationTillLesson.compareTo(shortestDuration) < 0) {
+                nextLesson = ls;
+                shortestDuration = durationTillLesson;
+            }
+        }
+        return nextLesson;
     }
 
     public boolean hasSameName(Person otherStudent) {

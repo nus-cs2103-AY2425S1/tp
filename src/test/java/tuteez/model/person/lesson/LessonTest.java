@@ -1,5 +1,9 @@
 package tuteez.model.person.lesson;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -113,5 +117,72 @@ public class LessonTest {
         Lesson l3 = new Lesson("Tuesday 1400-1500");
         assertEquals(-1, lessonComparator.compare(l1, l2));
         assertEquals(-1, lessonComparator.compare(l2, l3));
+    }
+
+    @Test
+    public void durationTillLessonTest() {
+        // 30th October 2024 is a Wednesday
+        LocalDateTime currentTimePlaceholder = LocalDateTime.of(2024, 10, 30, 11, 0);
+
+        LessonStub lesson = new LessonStub("wednesday 1000-1030");
+        Duration correctDuration = Duration.ofDays(6)
+                .plusHours(23)
+                .plusMinutes(0);
+        Duration durationTillLesson = lesson.durationTillLesson(currentTimePlaceholder);
+        assertEquals(correctDuration, durationTillLesson);
+    }
+
+    @Test
+    public void durationTillLessonTest_currentlyOngoing() {
+        LocalDateTime currentTimePlaceholder = LocalDateTime.of(2024, 10, 30, 11, 0);
+
+        LessonStub lesson1 = new LessonStub("wednesday 1100-1130");
+        LessonStub lesson2 = new LessonStub("wednesday 1030-1100");
+        Duration correctDuration = Duration.ofDays(0).plusMinutes(0).plusSeconds(0);
+        Duration durationTillFirstLesson = lesson1.durationTillLesson(currentTimePlaceholder);
+        assertEquals(durationTillFirstLesson, correctDuration);
+
+        Duration durationTillSecondLesson = lesson2.durationTillLesson(currentTimePlaceholder);
+        assertEquals(durationTillSecondLesson, correctDuration);
+    }
+
+    private static class LessonStub extends Lesson {
+
+        /**
+         * Constructs a {@code Lesson}.
+         *
+         * @param lesson A valid lesson string containing day and time range.
+         */
+        public LessonStub(String lesson) {
+            super(lesson);
+        }
+
+        public Duration durationTillLesson(LocalDateTime currentTimePlaceholder) {
+            if (this.isCurrentlyOngoing(currentTimePlaceholder)) {
+                return Duration.ofDays(0).plusHours(0).plusMinutes(0);
+            }
+
+            Day currentDay = Day.convertDayToEnum(currentTimePlaceholder.getDayOfWeek().toString().toLowerCase());
+            LocalTime currentTime = currentTimePlaceholder.toLocalTime();
+
+            int daysUntilLesson = (this.getLessonDay().getValue() - currentDay.getValue() + 7) % 7;
+            if (currentDay == this.getLessonDay() && currentTime.isAfter(this.getEndTime())) {
+                daysUntilLesson = 7;
+            }
+
+            LocalDateTime nextLessonDateTime = currentTimePlaceholder
+                    .plusDays(daysUntilLesson)
+                    .withHour(this.getStartTime().getHour())
+                    .withMinute(this.getStartTime().getMinute());
+            return Duration.between(currentTimePlaceholder, nextLessonDateTime);
+        }
+
+        public boolean isCurrentlyOngoing(LocalDateTime currentTimePlaceholder) {
+            Day currentDay = Day.convertDayToEnum(currentTimePlaceholder.getDayOfWeek().toString().toLowerCase());
+            LocalTime currentTime = currentTimePlaceholder.toLocalTime();
+            return currentDay.equals(this.getLessonDay())
+                    && currentTime.isAfter(this.getStartTime())
+                    && currentTime.isBefore(this.getEndTime().plusMinutes(1));
+        }
     }
 }

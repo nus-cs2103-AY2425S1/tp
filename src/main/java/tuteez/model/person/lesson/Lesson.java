@@ -3,6 +3,8 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -151,12 +153,72 @@ public class Lesson {
     }
 
     /**
+     * Calculates the duration until the next occurrence of the lesson.
+     * If the lesson is currently ongoing, this method returns a zero duration.
+     *
+     * <p>The duration calculation considers both the day of the week and the time of day.
+     * If the current day matches the lesson day but the current time is after the lesson's end time,
+     * the method assumes the next lesson will occur in one week from the current day.</p>
+     *
+     * @return A {@code Duration} representing the time left until the next lesson,
+     *         or zero if the lesson is currently ongoing.
+     */
+    public Duration durationTillLesson() {
+        if (this.isCurrentlyOngoing()) {
+            return Duration.ofDays(0).plusHours(0).plusMinutes(0);
+        }
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Day currentDay = Day.convertDayToEnum(currentDateTime.getDayOfWeek().toString().toLowerCase());
+        LocalTime currentTime = currentDateTime.toLocalTime();
+
+        int daysUntilLesson = (lessonDay.getValue() - currentDay.getValue() + 7) % 7;
+        if (currentDay == lessonDay && currentTime.isAfter(endTime)) {
+            daysUntilLesson = 7;
+        }
+
+        LocalDateTime nextLessonDateTime = currentDateTime
+                .plusDays(daysUntilLesson)
+                .withHour(startTime.getHour())
+                .withMinute(startTime.getMinute());
+        return Duration.between(currentDateTime, nextLessonDateTime);
+    }
+
+
+    /**
+     * Determines if the lesson is currently ongoing.
+     *
+     * <p>A lesson is considered ongoing if the current day matches the lesson's scheduled day,
+     * and the current time is between the lesson's start time and end time. If the current time
+     * coincides exactly with either the lesson's start time or end time, it is still considered
+     * to be ongoing, providing flexibility for timing precision.</p>
+     *
+     * @return {@code true} if the lesson is ongoing; {@code false} otherwise.
+     */
+    public boolean isCurrentlyOngoing() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Day currentDay = Day.convertDayToEnum(currentDateTime.getDayOfWeek().toString().toLowerCase());
+        LocalTime currentTime = currentDateTime.toLocalTime();
+        return currentDay.equals(lessonDay)
+                && currentTime.isAfter(startTime)
+                && currentTime.isBefore(endTime.plusMinutes(1));
+    }
+
+    /**
      * Returns the day on which this lesson occurs.
      *
      * @return The {@code Day} enum representing the day of the week for this lesson.
      */
     public Day getLessonDay() {
         return lessonDay;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
     /**
