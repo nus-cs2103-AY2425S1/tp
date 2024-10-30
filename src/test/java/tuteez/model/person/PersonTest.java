@@ -69,7 +69,7 @@ public class PersonTest {
         LocalDateTime lesson2EndTime = lesson2DateTime.plusHours(1);
 
         LocalDateTime lesson3DateTime = currentTime.plusHours(1).plusHours(3).plusMinutes(0);
-        LocalDateTime lesson3EndTime = lesson2DateTime.plusHours(1);
+        LocalDateTime lesson3EndTime = lesson3DateTime.plusHours(1);
 
         DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
@@ -77,20 +77,24 @@ public class PersonTest {
         String lesson1Str = lesson1DateTime.format(dayFormatter) + " "
                 + lesson1DateTime.format(timeFormatter) + "-"
                 + lesson1EndTime.format(timeFormatter);
+        lesson1Str = lesson1Str.toLowerCase();
 
         String lesson2Str = lesson2DateTime.format(dayFormatter) + " "
                 + lesson2DateTime.format(timeFormatter) + "-"
                 + lesson2EndTime.format(timeFormatter);
+        lesson2Str = lesson2Str.toLowerCase();
 
         String lesson3Str = lesson3DateTime.format(dayFormatter) + " "
                 + lesson3DateTime.format(timeFormatter) + "-"
                 + lesson3EndTime.format(timeFormatter);
+        lesson3Str = lesson3Str.toLowerCase();
 
         Lesson lesson3 = new Lesson(lesson3Str);
 
         Person student = new PersonBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withLessons(lesson1Str, lesson2Str, lesson3Str).build();
+
         assertEquals(student.nextLessonBasedOnCurrentTime(), lesson3);
 
     }
