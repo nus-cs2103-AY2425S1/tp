@@ -414,8 +414,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - The response to any use action should become visible within 3 seconds.
    - Should not crash when the input is too long.
 3. Quality: 
-   - Should be easy to use for a novice who has never use CLI before
-   - The product is offered as a free online service.
+   - Should be easy to learn for a novice who has never used CLI before.
+   - The product is offered as a free downloadable application.
 
 Note to project: Security measures like encryption will not be implemented in this project 
 
@@ -441,35 +441,99 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Ensure data is saved
+
+   1. Launch and close the app without carrying out any commands.
+    
+   1. Re-launch the app.<br>
+      Expected: List of contacts are the same as before.
+
+### Adding a person
+1. Adding a person
+
+   1. Prerequisites: List all persons using `list` command. Multiple persons in the list.
+
+   2. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: Bryan Lim is added to the list.
+
+   3. Test case: `add n/Bryan_Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding name should be shown.
+
+   4. Test case: `add n/Bryan Lim p/000 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding phone number should be shown.
+   
+   5. Test case: `add n/Bryan Lim p/98765432 e/bryan a/5 Hilly Road b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding email should be shown.
+
+   6. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/ b/23 s/Male`<br>
+      Expected: No contact is added to the list, error message regarding address should be shown.
+
+   7. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/twelve s/Male`<br>
+      Expected: No contact is added to the list, error message regarding age should be shown.
+
+   8. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/`<br>
+      Expected: No contact is added to the list, error message regarding gender should be shown.
+
+2. Adding a duplicate person
+    1. Prerequisites: List all persons using `list` command. Multiple persons in the list.<br>
+       Person with name `Bryan Lim` should already be in list.
+
+    2. Test case: `add n/Bryan Lim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+       Expected: No contact is added to the list, error message regarding person already existing should be shown.
+
+    3. Test case: `add n/Bryan Sim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
+       Expected: Bryan Lim is added to the list.
+
+### Clearing the address book
+1. Clearing the address book
+
+    1. Test case: `clear`<br>
+       Expected: Alert pop up confirming whether you want to clear the address book.
+    
+    2. Test case: Click on `OKAY`<br>
+       Expected: Address book is cleared
+ 
+    3. Test case: Click on `Cancel`<br>
+       Expected: Address book is unchanged
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person via index while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person via name while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+       John Doe is an existing contact
+
+    1. Test case: `delete John Doe`<br>
+       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
+
+    1. Test case: `delete Jane Doe`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
 
 ### Saving data
 
