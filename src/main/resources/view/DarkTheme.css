@@ -409,15 +409,15 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 4);
 }
 
-#cardPane.consultation-card-past-even {
+#cardPane.consultation-card-past-even, #cardPane.lesson-card-past-even {
     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #B03434, #7D1515);
 }
 
-#cardPane.consultation-card-past-odd {
+#cardPane.consultation-card-past-odd, #cardPane.lesson-card-past-odd {
     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #6B0808, #8D1C1C);
 }
 
-.consultation-card-strikethrough .text {
+.consultation-card-strikethrough .text, .lesson-card-strikethrough .text {
     -fx-strikethrough: true;
 }
 
