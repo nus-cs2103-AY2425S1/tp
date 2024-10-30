@@ -2,6 +2,7 @@ package keycontacts.model.lesson;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Objects;
 
 import keycontacts.commons.util.ToStringBuilder;
@@ -70,6 +71,16 @@ public class RegularLesson extends Lesson {
      */
     public boolean isOnDayAndTime(Day day, Time time) {
         return this.getStartTime().equals(time) && this.getLessonDay().equals(day);
+    }
+
+    /**
+     * Returns the date for a regular lesson in a week, given the Monday date for that week.
+     */
+    public Date getDateForWeek(Date mondayDate) {
+        assert(mondayDate.value.getDayOfWeek() == DayOfWeek.MONDAY);
+
+        int daysToAdd = lessonDay.value.getValue() - DayOfWeek.MONDAY.getValue();
+        return new Date(mondayDate.value.plusDays(daysToAdd));
     }
 
     @Override

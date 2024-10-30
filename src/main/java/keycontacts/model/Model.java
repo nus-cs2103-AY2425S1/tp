@@ -95,6 +95,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns an unmodifiable view of the students list, unaffected by any search filters.
+     */
+    ObservableList<Student> getUnfilteredStudentList();
+
     void filterStudentList(Predicate<Student> predicate);
 
     /**

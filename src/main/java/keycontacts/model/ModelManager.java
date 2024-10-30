@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final StudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
     private final ObservableList<Student> studentList;
+    private final ObservableList<Student> unfilteredStudentList;
     private final FilteredList<Student> filteredStudents;
     private final SortedList<Student> sortedFilteredStudents;
 
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
         sortedFilteredStudents = new SortedList<>(filteredStudents);
 
         studentList = sortedFilteredStudents;
+        unfilteredStudentList = this.studentDirectory.getStudentList();
     }
 
     public ModelManager() {
@@ -144,6 +146,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getStudentList() {
         return studentList;
+    }
+
+    @Override
+    public ObservableList<Student> getUnfilteredStudentList() {
+        return unfilteredStudentList;
     }
 
     @Override
