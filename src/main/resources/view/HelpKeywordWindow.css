@@ -1,4 +1,4 @@
-#helpKeywordContainer {
+#helpKeywordContainer, #scrollPane {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
@@ -9,14 +9,14 @@
     -fx-text-fill: #87CEEB;
 }
 
-#parametersHeader, #usageHeader, #exampleHeader {
+#description {
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
     -fx-text-fill: white;
 }
 
-#description {
+#parametersHeader, #usageHeader, #exampleHeader {
     -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-text-fill: white;
 }
 
