@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private RestaurantListPanel restaurantListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -72,6 +72,14 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    /**
+     * Executes a default command when the application starts.
+     */
+    public void executeDefaultCommand() throws CommandException, ParseException {
+        String defaultCommand = "welcome";
+        executeCommand(defaultCommand);
+    }
+
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
@@ -110,8 +118,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        restaurantListPanel = new RestaurantListPanel(logic.getFilteredRestaurantList());
+        personListPanelPlaceholder.getChildren().add(restaurantListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -147,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the application window.
+     */
     void show() {
         primaryStage.show();
     }
@@ -163,8 +174,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public RestaurantListPanel getPersonListPanel() {
+        return restaurantListPanel;
     }
 
     /**

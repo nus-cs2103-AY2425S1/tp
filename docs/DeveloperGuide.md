@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Restaurant` object residing in the `Model`.
 
 ### Logic component
 
@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a restaurant).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Restaurant` objects (which are contained in a `UniqueRestaurantList` object).
+* stores the currently 'selected' `Restaurant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Restaurant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Restaurant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Restaurant` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -173,11 +173,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th restaurant in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new restaurant. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -185,7 +185,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the restaurant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -234,7 +234,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the restaurant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -273,28 +273,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​               | I want to …​ | So that I can…​         |
-|----------|-----------------------| - |-------------------------|
-| `* * *`  | Tourist               | find the best local delicacies | clear my itinerary       |
-| `* * *`  | Muslim                | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions |
-| `* * *`  | Person with Allergies  | find eateries that meet my restrictions | not worry about searching far and wide for every meal |
-| `* * *`  | Hungry person with cravings | find restaurants with the cuisine I'm craving for | fulfill my cravings      |
-| `* * *`  | Foodie                | review restaurant ratings and reviews | make an informed decision based on other diners' experiences |
-| `* *`    | Frequent Traveler      | find reliable and high-quality restaurants in new cities | enjoy great meals without extensive research |
-| `* *`    | thrifty individual     | find the cheapest food | survive the day          |
-| `* *`    | Deal Seeker           | find discounts and special offers at nearby restaurants | enjoy eating out without overspending |
-| `* *`    | Health-Conscious Diner | find restaurants that serve nutritious and diet-specific meals | maintain my healthy lifestyle while dining out |
-| `* *`    | Pet lover             | find restaurants that allow and accommodate for pets | enjoy my meal with my furry companion |
-| `*`      | Person with Disabilities | find accessible restaurants with features like ramps | dine out comfortably and independently |
-| `*`      | Crippled Person       | find a wheelchair-friendly restaurant | eat like a normal person |
-| `*`      | Office Worker         | plan what to eat given my 1hr lunch | fit lunch into my busy schedule |
-| `*`      | Food Connoisseur      | save my favorite restaurants | quickly access them later |
-| `*`      | Influencer            | find an atas restaurant | post them on Instagram   |
-| `*`      | introvert             | filter eateries based on delivery options | find places that offer food delivery and enjoy meals at home |
-| `*`      | Food Journalist       | discover restaurants to try and write opinion pieces | write engaging blogs to recommend to others |
-| `*`      | Carouser              | find the bars that offer happy hours | drink riotously          |
-| `*`      | Chef                  | eat at my competitors' restaurants | compare the quality of my food against theirs |
-| `*`      | Student               | find student deals for food | know places to eat that are affordable for me |
+| Priority | As a …​                     | I want to …​                                                        | So that I can…​                                              |
+|----------|-----------------------------|---------------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
+| `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
+| `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
+| `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
+| `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
+| `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
+| `* *`    | thrifty individual          | find the cheapest food                                              | survive the day                                              |
+| `* *`    | Deal Seeker                 | find discounts and special offers at nearby restaurants             | enjoy eating out without overspending                        |
+| `* *`    | Health-Conscious Diner      | find restaurants that serve nutritious and diet-specific meals      | maintain my healthy lifestyle while dining out               |
+| `* *`    | Pet lover                   | find restaurants that allow and accommodate for pets                | enjoy my meal with my furry companion                        |
+| `*`      | Person with Disabilities    | find accessible restaurants with features like ramps                | dine out comfortably and independently                       |
+| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                 |
+| `*`      | Office Worker               | plan what to eat given my 1hr lunch                                 | fit lunch into my busy schedule                              |
+| `*`      | Food Connoisseur            | save my favorite restaurants                                        | quickly access them later                                    |
+| `*`      | Influencer                  | find an atas restaurant                                             | post them on Instagram                                       |
+| `*`      | introvert                   | filter eateries based on delivery options                           | find places that offer food delivery and enjoy meals at home |
+| `*`      | Food Journalist             | discover restaurants to try and write review                        | write engaging review to recommend to others                 |
+| `*`      | Carouser                    | find the bars that offer happy hours                                | drink riotously                                              |
+| `*`      | Chef                        | eat at my competitors' restaurants                                  | compare the quality of my food against theirs                |
+| `*`      | Student                     | find student deals for food                                         | know places to eat that are affordable for me                |
 
 ### Use cases
 
@@ -431,6 +432,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3b1-3b3 are repeated until user identifies the right vendor
     * Use case resumes at step 4.
 
+**Use Case:** UC7 - Getting Help
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. User enters a command for help.
+3. GAB displays a window with a link to the user guide. 
+4. Use case ends.
+
+
 ### Non-Functional Requirements
 
 1. **Compatibility Requirement**: Should be compatible with any system where Java 17 and the corresponding JavaFX version is installed.
@@ -456,13 +466,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   A shop, typically a restaurant, that is listed on the app.
 
 * **Affordable Price ($)**:  
-  Expected price per meal per person to be \( x <= \$10 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
 * **Moderate Price ($$)**:  
-  Expected price per meal per person to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
 * **Premium Price ($$$)**:  
-  Expected price per meal per person to be \( x > \$20 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( x > \$20 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -492,17 +502,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a restaurant
 
-1. Deleting a person while all persons are being shown
+1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

@@ -6,44 +6,58 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.restaurant.Address;
+import seedu.address.model.restaurant.Email;
+import seedu.address.model.restaurant.Name;
+import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Rating;
+import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+    /**
+     * Returns an array of pre-defined sample restaurants.
+     * @return
+     */
+    public static Restaurant[] getSampleRestaurants() {
+        return new Restaurant[] {
+            new Restaurant(new Name("Swenswen"), new Phone("87438807"), new Email("sowhen@idk.com"),
+                new Address("Blk 30 Geylang Street 29, #06-40"), new Rating(null),
+                getTagSet("western", "family", "$$")),
+            new Restaurant(new Name("Hai Shang Lao"), new Phone("99272758"), new Email("ilovexjp@ccpno1.com"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Rating(1),
+                getTagSet("chinese", "family", "$$$$")),
+            new Restaurant(new Name("Mala Hideaway"), new Phone("93210283"), new Email("buyaola@buyaoma.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Rating(2),
+                getTagSet("chinese", "$")),
+            new Restaurant(new Name("Heavens Kitchen"), new Phone("91031282"), new Email("idiotsandwich@gr.com"),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Rating(3),
+                getTagSet("chinese", "family", "$$$")),
+            new Restaurant(new Name("McDonkey"), new Phone("92492021"), new Email("parapapapa@mcdonkey.com"),
+                new Address("Blk 47 Tampines Street 20, #17-35"), new Rating(4),
+                getTagSet("fastfood", "family", "halal", "$")),
+            new Restaurant(new Name("Mookantang"), new Phone("92624417"), new Email("moomoo@moomookt.com"),
+                new Address("Blk 45 Aljunied Street 85, #11-31"), new Rating(5),
+                getTagSet("thai", "$$$")),
+            new Restaurant(new Name("Pizza Heart"), new Phone("82242099"), new Email("pizza@pheart.com"),
+                new Address("78 Airport Boulevard, #03-01"), new Rating(5),
+                getTagSet("fastfood", "family", "halal", "$$")),
+            new Restaurant(new Name("EightyFive Tampanies"), new Phone("62454523"),
+                new Email("parapapapa@mcdonkey.com"), new Address("Blk 85 Tampines Street, #01-09"),
+                new Rating(1), getTagSet("western", "halal", "$$$$")),
         };
     }
 
+    /**
+     * Returns an address book containing the sample data.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Restaurant sampleRestaurant : getSampleRestaurants()) {
+            sampleAb.addRestaurant(sampleRestaurant);
         }
         return sampleAb;
     }
