@@ -74,15 +74,10 @@ public abstract class OrderList<T extends Order> {
         return null;  // Return null if not found
     }
 
-    /**
-     * Removes an order by the phone number.
-     *
-     * @param phoneNumber The phone number associated with the order.
-     * @return True if the order was successfully removed, false otherwise.
-     */
-    public boolean removeOrder(String phoneNumber) {
-        assert phoneNumber != null : "Phone number cannot be null";
-        return orders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
+
+    public void removeOrder(int index) {
+        assert index < orders.size() : "Index out of bound";
+        orders.remove(index);
     }
 
     /**
