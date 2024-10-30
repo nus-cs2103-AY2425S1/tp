@@ -12,8 +12,6 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces and hyphens.\n"
                     + "Only 1 space or hyphen is allowed between each alphanumeric character. It should not be blank.";
-
-    public static final String NO_NAME = "__No_Name__";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -29,12 +27,8 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        if (name.equals(NO_NAME)) {
-            fullName = "";
-        } else {
-            checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-            fullName = name;
-        }
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        fullName = name;
     }
 
     /**
