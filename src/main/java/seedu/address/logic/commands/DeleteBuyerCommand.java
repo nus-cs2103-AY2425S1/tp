@@ -49,6 +49,7 @@ public class DeleteBuyerCommand extends DeleteClientCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
         // Search for the person with the specified phone number
         logger.info("Executing DeleteBuyer command with phone number: " + phoneNumber);
         Client personToDelete = model.getFilteredClientList().stream()
