@@ -19,9 +19,16 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class OrderTracker
 Class PostalCode
 
 Class I #FFFFFF
+
+Class OrderTracker
+Class Order
+Class OrderHistory
+Class UniqueOrderList
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -44,6 +51,7 @@ Person *--> Email
 Person *--> Address
 Person *--> PostalCode
 Person *--> "*" Tag
+Person *--> OrderTracker
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,6 +59,9 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+OrderHistory -up-> "0...1" Order
+OrderTracker -up-> "*" OrderHistory
+UniqueOrderList -up-> "*" Order
 
 ModelManager --> "~* filtered" Person
 @enduml
