@@ -63,7 +63,7 @@ public class StringUtil {
         String[] prefixesInPreppedSentence = preppedSentence.split("\\s+");
 
         return Arrays.stream(prefixesInPreppedSentence)
-                .anyMatch(preppedSentenceWord -> preppedSentenceWord.contains(preppedPrefix));
+                .anyMatch(preppedSentenceWord -> preppedSentenceWord.startsWith(preppedPrefix));
     }
 
     /**

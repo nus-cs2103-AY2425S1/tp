@@ -106,7 +106,6 @@ class JsonAdaptedInternship {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
 
-
         Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);

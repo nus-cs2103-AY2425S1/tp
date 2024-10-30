@@ -91,7 +91,7 @@ public interface Model {
     /**
      * Provides status insights of items in the list
      */
-    Map<Status, Integer> getInsights();
+    Map<Status, Integer> getChartData();
 
     /**
      * Sorts the filtered list using the given {@code comparator}.
