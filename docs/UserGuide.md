@@ -261,7 +261,7 @@ Two Clients Due Today:
 * `John and Alice have deadlines due today.` This shows that John and Alice, both active clients, have deadlines due today.
 
 More Than Three Clients Due Today:
-* `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, and Charlie (all active clients) have deadlines due today.
+* `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, Charlie, and one additional active client have deadlines due today.
 
 ## Data Management:
 ### Saving the Data
