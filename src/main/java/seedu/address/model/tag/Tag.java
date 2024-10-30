@@ -14,9 +14,11 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+(-\\p{Alnum}+)*";
 
     public final String tagName;
+    private TagCategory tagCategory;
 
     /**
      * Constructs a {@code Tag}.
+     * Category of the tag is {@code GENERAL} by default.
      *
      * @param tagName A valid tag name.
      */
@@ -24,6 +26,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagCategory = TagCategory.GENERAL;
     }
 
     /**
@@ -32,6 +35,32 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Set the tag category.
+     * @param tagCategory
+     */
+    public void setTagCategory(TagCategory tagCategory) {
+        assert tagCategory != null;
+        this.tagCategory = tagCategory;
+    }
+
+    /**
+     * Returns the tag category.
+     */
+    public TagCategory getTagCategory() {
+        return this.tagCategory;
+    }
+
+    /**
+     * Returns the colour code corresponding to the tag category.
+     * @return String containing the hex code for the colour.
+     */
+    public String getTagColour() {
+        return this.tagCategory.getColorCode();
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
