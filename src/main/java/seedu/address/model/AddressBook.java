@@ -163,9 +163,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Event> getSortedEventList() {
+        events.sortByStartTime();
+        return events.asUnmodifiableObservableList();
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
-        events.sortByStartTime();
         return events.asUnmodifiableObservableList();
     }
 
