@@ -4,6 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
@@ -14,7 +19,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new TagCommand object
  */
 public class TagCommandParser implements Parser<TagCommand> {
-    public static final int MAX_LENGTH = 50;
+    public static final String VALIDATION_REGEX = "\\d+";
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
@@ -25,32 +30,57 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        Index index;
+        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new HashSet<>();
+        List<String> tagStrings = argMultimap.getAllValues(PREFIX_TAG);
+        if (tagStrings.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
-        }
+            List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
+            boolean isValidIndexes = indexStrings.size() != 1 || !indexStrings.get(0).isEmpty();
+            if (!isValidIndexes) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
+            checkIndexLength(indexStrings);
 
-        if (!argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            for (String indexStr : indexStrings) {
+                if (!indexStr.isEmpty()) {
+                    checkIndex(indexStr);
+                    indexSet.add(ParserUtil.parseIndex(indexStr.trim()));
+                }
+            }
+        } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        String trimmedTagName = argMultimap.getValue(PREFIX_TAG).get().trim().toLowerCase();
-        boolean isEmpty = trimmedTagName.isEmpty();
-        boolean isTooLong = trimmedTagName.length() > MAX_LENGTH;
-
-        if (isEmpty) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        for (String tagString : tagStrings) {
+            tagString = tagString.trim().toLowerCase();
+            boolean isEmpty = tagString.isEmpty();
+            boolean isTooLong = tagString.length() > Tag.MAX_CHARACTER_LENGTH;
+            if (isEmpty) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            } else if (isTooLong) {
+                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED,
+                        Tag.MAX_CHARACTER_LENGTH));
+            }
+            tagSet.add(new Tag(tagString));
         }
 
-        if (isTooLong) {
-            throw new ParseException(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED);
+        return new TagCommand(new ArrayList<>(indexSet), tagSet);
+    }
+
+    private void checkIndex(String indexStr) throws ParseException {
+        if (!indexStr.matches(VALIDATION_REGEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TagCommand.MESSAGE_USAGE));
         }
+    }
 
-        Tag tag = new Tag(trimmedTagName);
-
-        return new TagCommand(index, tag);
+    private void checkIndexLength(List<String> indexStrings) throws ParseException {
+        if (indexStrings.size() > Index.MAX_INDEXES) {
+            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
+        }
     }
 }

@@ -38,6 +38,7 @@ public class TagListPanel extends UiPart<Region> {
     private void updateTagsDisplay(ObservableList<Tag> tags) {
         tagListFlowPane.getChildren().clear();
         initialiseLabel();
+
         tags.stream()
                 .sorted(Comparator.comparing(tag -> tag.getTagName().toLowerCase()))
                 .forEach(tag -> {
@@ -52,6 +53,7 @@ public class TagListPanel extends UiPart<Region> {
 
                     tagListFlowPane.getChildren().add(tagLabel);
                 });
+        tagListFlowPane.requestLayout();
     }
 
     private void setUpListener(ObservableList<Tag> tags) {

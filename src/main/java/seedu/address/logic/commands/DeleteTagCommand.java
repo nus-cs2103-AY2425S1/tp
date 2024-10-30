@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -17,12 +19,14 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing tag (case insensitive).\n"
-            + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
-            + "Example: " + COMMAND_WORD + " t/bride's friend t/groom's friend";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes existing tag(s) in tag list(case insensitive). Maximum of 50 alphanumeric characters,"
+            + "spaces, parenthesis and apostrophes per tag.\n"
+            + "Parameters: " + PREFIX_TAG + "TAG...\n"
+            + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "Tag(s) deleted: ";
-    public static final String YOUR_TAGS_PREFIX = "Your tags: ";
+    public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
     public static final String MESSAGE_NONEXISTENT = "Some tag(s) provided have not been added before.\n";
     private final List<Tag> tags;
 
@@ -47,7 +51,7 @@ public class DeleteTagCommand extends Command {
         }
 
         String successMessage = MESSAGE_SUCCESS + tags + "\n";
-        String currentTags = YOUR_TAGS_PREFIX + model.getTagList();
+        String currentTags = MESSAGE_TAGLIST_PREFIX + model.getTagList();
         return new CommandResult(successMessage + currentTags);
     }
 
@@ -63,5 +67,12 @@ public class DeleteTagCommand extends Command {
 
         DeleteTagCommand otherCommand = (DeleteTagCommand) other;
         return tags.equals(otherCommand.tags);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tags", tags)
+                .toString();
     }
 }

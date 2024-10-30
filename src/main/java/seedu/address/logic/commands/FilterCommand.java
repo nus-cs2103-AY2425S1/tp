@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the address book with the given criteria\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed list with the given criteria\n"
             + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
             + "Example: " + COMMAND_WORD + " s/1 t/bride's side";
     public static final String MESSAGE_TAG_NOT_CREATED = "must be created before being used to filter.";
@@ -71,5 +71,20 @@ public class FilterCommand extends Command {
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return this.tagSet.equals(otherFilterCommand.tagSet) && this.statusSet.equals(otherFilterCommand.statusSet);
     }
 }

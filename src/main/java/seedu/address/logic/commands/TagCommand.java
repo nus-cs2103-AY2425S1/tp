@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,30 +24,31 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the index number used in the displayed person list "
-                + "with a predefined tag. \n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_TAG + "TAG] (must be defined using 'newtag' command first\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "bride's side";
+            + ": Tags the guest(s) identified by the index number(s) used in the displayed guest list "
+                + "with the predefined tag(s). \n"
+            + "Parameters: INDEX... (must be a positive integer(s))\n"
+            + "[" + PREFIX_TAG + "TAG]... (must be created using 'newtag' command first)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 "
+            + PREFIX_TAG + "bride's side" + " "
+            + PREFIX_TAG + "groom's side";
 
-    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
-    public static final String MESSAGE_TAG_NOT_CREATED = "Tag must be created first using (newtag) command. \n";
-    public static final String MESSAGE_DUPLICATE_TAG = "This person already has this tag.";
+    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged guest(s):\n";
+    public static final String MESSAGE_TAG_NOT_CREATED = "Tag(s) must be created first using 'newtag' command: ";
+    public static final String MESSAGE_DUPLICATE_TAG = "Some guest(s) already have tag(s): ";
 
-    private final Index targetIndex;
-    private final Tag tag;
+    private final List<Index> targetIndexes;
+    private final Set<Tag> tags;
 
     /**
-     * @param targetIndex of the person in the filtered person list to tag
-     * @param tag to tag the person with
+     * @param targetIndexes of the guest in the filtered person list to tag
+     * @param tags set of tags to tag the guest with
      */
-    public TagCommand(Index targetIndex, Tag tag) {
-        requireNonNull(targetIndex);
-        requireNonNull(tag);
+    public TagCommand(List<Index> targetIndexes, Set<Tag> tags) {
+        requireNonNull(targetIndexes);
+        requireNonNull(tags);
 
-        this.targetIndex = targetIndex;
-        this.tag = tag;
+        this.targetIndexes = targetIndexes;
+        this.tags = tags;
     }
 
     @Override
@@ -54,28 +56,42 @@ public class TagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Set<Tag> missingTags = new HashSet<>();
+        Set<Tag> duplicateTags = new HashSet<>();
+        StringBuilder successMessage = new StringBuilder();
+        StringBuilder finalMessage = new StringBuilder();
+
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+            Set<Tag> newTags = new HashSet<>(personToTag.getTags());
+            boolean isUpdated = false;
+
+            for (Tag tag : tags) {
+                if (!model.hasTag(tag)) {
+                    missingTags.add(tag);
+                } else if (newTags.contains(tag)) {
+                    duplicateTags.add(tag);
+                } else {
+                    newTags.add(tag);
+                    isUpdated = true;
+                }
+            }
+
+            if (isUpdated) {
+                Person updatedPerson = setPerson(model, personToTag, newTags);
+                updateSuccessMessage(successMessage, updatedPerson);
+            }
         }
-
-        Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-
-        if (!model.hasTag(tag)) {
-            throw new CommandException(tag + " " + MESSAGE_TAG_NOT_CREATED);
+        if (!successMessage.isEmpty()) {
+            finalMessage.append(MESSAGE_TAG_PERSON_SUCCESS).append(successMessage);
         }
-
-        if (personToTag.getTags().contains(tag)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        if (!missingTags.isEmpty() || !duplicateTags.isEmpty()) {
+            updateFinalMessage(finalMessage, duplicateTags, missingTags);
         }
-
-        Set<Tag> newTags = new HashSet<>(personToTag.getTags());
-        newTags.add(tag);
-
-        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
-                personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
-        model.setPerson(personToTag, updatedPerson);
-
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(updatedPerson)));
+        return new CommandResult(finalMessage.toString());
     }
 
     @Override
@@ -90,14 +106,49 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex) && tag.equals(otherTagCommand.tag);
+        return targetIndexes.equals(otherTagCommand.targetIndexes) && tags.equals(otherTagCommand.tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("tag", tag)
+                .add("targetIndexes", targetIndexes)
+                .add("tags", tags)
                 .toString();
+    }
+
+    private Person setPerson(Model model, Person personToTag, Set<Tag> newTags) {
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
+                personToTag.getEmail(), personToTag.getRsvpStatus(), newTags);
+        model.setPerson(personToTag, updatedPerson);
+        return updatedPerson;
+    }
+
+    private void updateSuccessMessage(StringBuilder successMessage, Person updatedPerson) {
+        if (!successMessage.isEmpty()) {
+            successMessage.append("\n");
+        }
+        successMessage.append(Messages.format(updatedPerson));
+    }
+
+    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> duplicateTags, Set<Tag> missingTags) {
+        if (!finalMessage.isEmpty()) {
+            finalMessage.append("\n");
+        }
+        if (!missingTags.isEmpty()) {
+            finalMessage.append(MESSAGE_TAG_NOT_CREATED)
+                    .append(missingTags.stream()
+                            .map(Tag::toString)
+                            .collect(Collectors.joining(", ")));
+        }
+        if (!duplicateTags.isEmpty()) {
+            if (!missingTags.isEmpty()) {
+                finalMessage.append("\n");
+            }
+            finalMessage.append(MESSAGE_DUPLICATE_TAG)
+                    .append(duplicateTags.stream()
+                            .map(Tag::toString)
+                            .collect(Collectors.joining(", ")));
+        }
     }
 }

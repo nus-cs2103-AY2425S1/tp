@@ -192,6 +192,10 @@ public class AddCommandTest {
         public boolean deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean renameTag(Tag existingTag, String newName) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasTag(Tag tag) {

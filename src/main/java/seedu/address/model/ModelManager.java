@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
 
     /**
@@ -138,7 +139,15 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+
+        @SuppressWarnings("unchecked")
+        Predicate<Person> currentPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+
+        if (currentPredicate == null || predicate.equals(PREDICATE_SHOW_ALL_PERSONS)) {
+            filteredPersons.setPredicate(predicate);
+        } else {
+            filteredPersons.setPredicate(currentPredicate.and(predicate));
+        }
     }
 
     //=========== Tags ================================================================================
@@ -163,6 +172,12 @@ public class ModelManager implements Model {
         for (Tag tag : tags) {
             isSuccessful &= addressBook.deleteTag(tag);
         }
+        return isSuccessful;
+    }
+
+    @Override
+    public boolean renameTag(Tag existingTag, String newTagName) {
+        boolean isSuccessful = addressBook.renameTag(existingTag, newTagName);
         return isSuccessful;
     }
 
@@ -201,7 +216,9 @@ public class ModelManager implements Model {
 
     @Override
     public void updateTagList() {
-        tagList = this.addressBook.getTagList();
+        ObservableList<Tag> tl = this.addressBook.getTagList();
+        tagList.setAll(FXCollections.observableArrayList(tl));
+        System.out.println(tagList);
     }
 
     @Override

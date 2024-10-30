@@ -18,7 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INPUT_LENGTH_EXCEEDED = "The input length cannot exceed 50 characters";
+    public static final String MESSAGE_INPUT_LENGTH_EXCEEDED = "The tag length cannot exceed %d characters.";
+    public static final String MESSAGE_TOO_MANY_INDEXES = "The number of target guests cannot exceed %d.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -43,7 +45,12 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        if (!person.getTags().isEmpty()) {
+            String tagsString = person.getTags().stream()
+                    .map(tag -> tag.toString())
+                    .collect(Collectors.joining(", "));
+            builder.append(tagsString);
+        }
         return builder.toString();
     }
 
