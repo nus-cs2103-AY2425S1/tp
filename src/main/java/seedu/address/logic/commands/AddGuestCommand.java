@@ -39,7 +39,7 @@ public class AddGuestCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the guest list!";
 
     private final Guest toAdd;
 

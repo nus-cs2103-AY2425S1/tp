@@ -53,7 +53,7 @@ public class EditGuestCommand extends Command {
 
     public static final String MESSAGE_EDIT_GUEST_SUCCESS = "Edited Guest: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the guest list!.";
 
     private final Index index;
     private final EditGuestDescriptor editGuestDescriptor;
