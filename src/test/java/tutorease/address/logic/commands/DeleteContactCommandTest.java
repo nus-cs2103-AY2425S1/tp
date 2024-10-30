@@ -211,6 +211,11 @@ class DeleteContactCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getLessonScheduleSize() {
             throw new AssertionError("This method should not be called.");
         }

@@ -192,6 +192,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Lesson getFilteredLesson(int index) {
+        return filteredLesson.get(index);
+    }
+
+    @Override
     public boolean hasLessons(Lesson lesson) {
         requireNonNull(lesson);
         return lessonSchedule.hasLesson(lesson);

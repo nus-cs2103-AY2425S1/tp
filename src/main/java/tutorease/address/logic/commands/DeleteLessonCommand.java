@@ -50,7 +50,7 @@ public class DeleteLessonCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        Lesson lesson = model.getFilteredLessonList().get(listIndex);
+        Lesson lesson = model.getFilteredLesson(listIndex);
         model.deleteLesson(lesson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
     }

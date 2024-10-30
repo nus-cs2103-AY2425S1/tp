@@ -128,6 +128,14 @@ public interface Model {
     Lesson getLesson(int index);
 
     /**
+     * Returns lesson at the specified index from the filtered list.
+     *
+     * @param index The index of the lesson to get from the filtered list.
+     * @return The lesson at the specified index.
+     */
+    Lesson getFilteredLesson(int index);
+
+    /**
      * Returns size of lesson schedule.
      *
      * @return The size of the lesson schedule

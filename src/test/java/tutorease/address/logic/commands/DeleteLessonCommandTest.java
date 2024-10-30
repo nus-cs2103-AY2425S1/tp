@@ -54,12 +54,18 @@ public class DeleteLessonCommandTest {
         public void deleteLesson(Lesson lesson) {
             requireNonNull(lesson);
             lessonsAdded.remove(lesson);
+            lessons.remove(lesson);
         }
 
         @Override
         public Lesson getLesson(int index) {
             return lessonsAdded.get(index);
         }
+
+        @Override
+        public Lesson getFilteredLesson(int index) {
+            return lessons.get(index);
+        }deegit a
 
         @Override
         public int getLessonScheduleSize() {
@@ -247,6 +253,11 @@ public class DeleteLessonCommandTest {
 
         @Override
         public Lesson getLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getFilteredLesson(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
