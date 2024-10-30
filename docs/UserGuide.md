@@ -151,12 +151,12 @@ Adds an employee to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
 
-- Employee Id must be: Numeric, no spaces, unique
+- Employee Id must be: [Numeric](#numeric), no spaces, unique
 - Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 - Phone Number must be: [Numeric](#numeric), no spaces, at least 3 digits long
 - Email must be: A valid email address
 - Address must be: Any characters are valid
-- Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces
+- Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces, not more than 50 characters in length
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
