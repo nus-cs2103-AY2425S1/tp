@@ -22,7 +22,7 @@ public class ViewStudentCommandParser implements Parser<ViewStudentCommand> {
             return new ViewStudentCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStudentCommand.MESSAGE_USAGE), pe);
+                    String.format(pe.getMessage(), ViewStudentCommand.MESSAGE_USAGE), pe);
         }
     }
 

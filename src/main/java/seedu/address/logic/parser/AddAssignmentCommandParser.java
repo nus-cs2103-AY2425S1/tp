@@ -42,7 +42,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
             maxScore = ParserUtil.parseMaxScore(argMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE), pe);
+                    String.format(pe.getMessage(), AddAssignmentCommand.MESSAGE_USAGE), pe);
         }
 
         AddAssignmentCommand.AssignmentDescriptor assignmentDescriptor =
