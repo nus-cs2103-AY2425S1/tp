@@ -25,7 +25,7 @@ public class Medication {
         this.value = medication;
     }
     public static boolean isValidMedication(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.isEmpty();
     }
     @Override
     public String toString() {
