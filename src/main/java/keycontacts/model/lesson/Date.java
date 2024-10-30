@@ -3,8 +3,10 @@ package keycontacts.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.AppUtil.checkArgument;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * Represents a student's lesson date in the student directory.
@@ -28,6 +30,14 @@ public class Date implements Comparable<Date> {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(date, DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * Constructs a {@code Date} object by directly wrapping around a {@code LocalDate} object.
+     */
+    public Date(LocalDate value) {
+        requireNonNull(value);
+        this.value = value;
     }
 
     public static boolean isValidDate(String test) {
@@ -71,10 +81,25 @@ public class Date implements Comparable<Date> {
         return this.value.compareTo(other.value);
     }
 
+    // util functions
     /**
      * Returns a {@code Day} object which the date falls on.
      */
     public Day convertToDay() {
         return new Day(value.getDayOfWeek().name());
+    }
+
+    /**
+     * Returns a {@code Date} object representing the Monday of the week of this date.
+     */
+    public Date getFirstDayOfWeek() {
+        return new Date(value.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)));
+    }
+
+    /**
+     * Returns a {@code Date} object representing the Sunday of the week of this date.
+     */
+    public Date getLastDayOfWeek() {
+        return new Date(value.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)));
     }
 }

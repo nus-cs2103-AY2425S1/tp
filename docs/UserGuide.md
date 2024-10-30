@@ -168,7 +168,20 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
-### Locating students: `find`
+### Viewing the schedule : `view`
+
+Displays the lesson schedule for the specified week.
+
+Format: `view [dt/DATE]`
+
+* If no date is provided, the current date will be used.
+* `DATE` must be in the format `DD-MM-YYYY`.
+
+Examples:
+* `view` Displays the schedule for the current week.
+* `view dt/01-11-2024` Displays the schedule for 28 Oct 2024 (Monday) to 3 Nov 2024 (Sunday).
+
+### Finding students: `find`
 
 Finds students whose personal details match inputs
 
@@ -188,7 +201,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Sort students
+### Sorting students : `sort`
 
 Sorts students with personal details
 
@@ -271,15 +284,17 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
 **List**   | `list`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL]`<br> e.g.,`edit 2 n/James Lee p/81234567`
-**Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
-**Unassign** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g, `unassign 1 pn/Moonlight Sonata pn/Canon in D`
-**Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
-**Cancel** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g., `cancel 1 dt/14-10-2024 st/12:00`
-**Makeup** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.,`makeup 1 d/25-12-2022 st/12:00 et/14:00`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL]`<br> e.g.`edit 2 n/James Lee p/81234567`
+**Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
+**Unassign** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
+**Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
+**Cancel** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
+**Makeup** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**View**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Find**   | `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD] [g/GROUP_KEYWORD]`<br> e.g. `find n/James gl/ABRSM`
+**Sort**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **Clear**  | `clear`
 **Exit**   | `exit`

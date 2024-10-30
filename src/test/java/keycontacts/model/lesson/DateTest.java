@@ -1,6 +1,7 @@
 package keycontacts.model.lesson;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,5 +24,32 @@ public class DateTest {
         assertTrue(new Date(VALID_DATE).compareTo(newerDate) < 0);
         assertTrue(new Date(VALID_DATE).compareTo(olderDate) > 0);
         assertTrue(new Date(VALID_DATE).compareTo(new Date(VALID_DATE)) == 0);
+    }
+
+    @Test
+    public void getFirstDayOfWeek() {
+        Date startDate = new Date("28-10-2024");
+        Date middleDate = new Date("30-10-2024");
+        Date endDate = new Date("03-11-2024");
+
+        Date firstDayOfWeek = new Date("28-10-2024");
+
+        assertEquals(firstDayOfWeek, startDate.getFirstDayOfWeek());
+        assertEquals(firstDayOfWeek, middleDate.getFirstDayOfWeek());
+        assertEquals(firstDayOfWeek, endDate.getFirstDayOfWeek());
+    }
+
+
+    @Test
+    public void getLastDayOfWeek() {
+        Date startDate = new Date("28-10-2024");
+        Date middleDate = new Date("30-10-2024");
+        Date endDate = new Date("03-11-2024");
+
+        Date lastDayOfWeek = new Date("03-11-2024");
+
+        assertEquals(lastDayOfWeek, startDate.getLastDayOfWeek());
+        assertEquals(lastDayOfWeek, middleDate.getLastDayOfWeek());
+        assertEquals(lastDayOfWeek, endDate.getLastDayOfWeek());
     }
 }

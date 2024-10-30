@@ -1,9 +1,11 @@
 package keycontacts.ui;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +19,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
+import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
+import keycontacts.model.student.Student;
 
 /**
  * The calendar view
@@ -26,6 +35,21 @@ public class CalendarView extends UiPart<Region> {
 
     private static final int NUM_ROWS = 7;
     private static final int NUM_MINUTES = 24 * 60;
+
+    private static final List<Color> CALENDAR_COLORS = List.of(
+            Color.DARKBLUE,
+            Color.DARKRED,
+            Color.SLATEBLUE,
+            Color.SLATEGREY,
+            Color.MEDIUMSLATEBLUE,
+            Color.GOLDENROD,
+            Color.OLIVEDRAB,
+            Color.TEAL,
+            Color.CORNFLOWERBLUE,
+            Color.INDIANRED,
+            Color.STEELBLUE,
+            Color.ORANGERED
+    );
 
     @SuppressWarnings("unchecked")
     private final List<TimeBlock>[] timeBlocks = (ArrayList<TimeBlock>[]) new ArrayList[NUM_ROWS];
@@ -59,16 +83,24 @@ public class CalendarView extends UiPart<Region> {
     @FXML
     private Label calendarHeader;
 
+    private final ObservableList<Student> students;
+    private Date startDate;
+    private Date endDate;
+
     /**
      * Default constructor to initialize the {@code CalendarView}
      */
-    public CalendarView() {
+    public CalendarView(ObservableList<Student> students) {
         super(FXML);
         addHBoxes();
         generateGrid();
 
-        // TODO remove
-        update();
+        this.students = students;
+        // view schedule for today by default
+        update(new Date(LocalDate.now()));
+
+        // when student data changes, update calendar based on student data
+        students.addListener((ListChangeListener<Student>) unused -> update(startDate));
     }
 
     private void addHBoxes() {
@@ -87,20 +119,21 @@ public class CalendarView extends UiPart<Region> {
         }
     }
 
-    private void createBlock(int day, LocalTime startTime, LocalTime endTime, Color color, String name) {
+    private void createBlock(Day day, Time startTime, Time endTime, Color color, String name) {
         assert endTime.isAfter(startTime);
 
         TimeBlock timeBlock = new TimeBlock(startTime, endTime);
+        int dayValue = day.value.getValue() - 1;
 
-        List<TimeBlock> currentDayBlocks = timeBlocks[day];
+        List<TimeBlock> currentDayBlocks = timeBlocks[dayValue];
 
         TimeBlock previousTimeBlock = new TimeBlock(0, 0);
         for (int i = 0; i <= currentDayBlocks.size(); i++) {
             if (i == currentDayBlocks.size()) {
                 // attach
-                dayVBoxes.get(day).getChildren().add(i * 2,
+                dayVBoxes.get(dayValue).getChildren().add(i * 2,
                         timeBlock.createPadding(previousTimeBlock));
-                dayVBoxes.get(day).getChildren().add(i * 2 + 1,
+                dayVBoxes.get(dayValue).getChildren().add(i * 2 + 1,
                         timeBlock.createBlock(color, name));
                 currentDayBlocks.add(i, timeBlock);
 
@@ -111,9 +144,9 @@ public class CalendarView extends UiPart<Region> {
             assert !currentTimeBlock.isIntersecting(timeBlock);
             if (currentTimeBlock.isAfter(timeBlock)) {
                 // attach
-                dayVBoxes.get(day).getChildren().add(i * 2,
+                dayVBoxes.get(dayValue).getChildren().add(i * 2,
                         timeBlock.createPadding(previousTimeBlock));
-                dayVBoxes.get(day).getChildren().add(i * 2 + 1,
+                dayVBoxes.get(dayValue).getChildren().add(i * 2 + 1,
                         timeBlock.createBlock(color, name));
                 currentDayBlocks.add(i, timeBlock);
 
@@ -126,29 +159,68 @@ public class CalendarView extends UiPart<Region> {
         }
     }
 
+    private void clearBlocks() {
+        for (int i = 0; i < NUM_ROWS; i++) {
+            dayVBoxes.get(i).getChildren().clear();
+            timeBlocks[i].clear();
+        }
+    }
+
     /**
-     * Updates the calendar view with pre-inputted data
-     * TODO change this method to take some data as input to update the calendar
+     * Updates the calendar view for a new date.
+     * Generates the schedule for the week of the date based on current student data.
      */
-    public void update() {
-        createBlock(2, LocalTime.of(1, 0, 0), LocalTime.of(3, 0, 0),
-                Color.DARKBLUE, "Poppy Ulys");
-        createBlock(2, LocalTime.of(6, 0, 0), LocalTime.of(8, 0, 0),
-                Color.DARKRED, "Ben Atis");
-        createBlock(0, LocalTime.of(3, 45, 0), LocalTime.of(5, 45, 0),
-                Color.SLATEBLUE, "Lye Pistro");
-        createBlock(0, LocalTime.of(7, 0, 0), LocalTime.of(8, 30, 0),
-                Color.MEDIUMSLATEBLUE, "Diene Slich");
-        createBlock(1, LocalTime.of(5, 0, 0), LocalTime.of(6, 30, 0),
-                Color.SLATEGRAY, "Vin Polaris");
-        createBlock(3, LocalTime.of(4, 0, 0), LocalTime.of(5, 30, 0),
-                Color.SLATEGRAY, "Ches Lia");
-        createBlock(4, LocalTime.of(12, 0, 0), LocalTime.of(23, 59, 0),
-                Color.DARKGOLDENROD, "Easen Lee");
-        createBlock(5, LocalTime.of(2, 0, 0), LocalTime.of(3, 0, 0),
-                Color.SLATEGRAY, "Britz Yela");
-        createBlock(6, LocalTime.of(0, 0, 0), LocalTime.of(23, 59, 0),
-                Color.SLATEBLUE, "Feri Mona");
+    public void update(Date date) {
+        startDate = date.getFirstDayOfWeek();
+        endDate = date.getLastDayOfWeek();
+
+        // update header
+        calendarHeader.setText(startDate.toDisplay() + " - " + endDate.toDisplay());
+
+        clearBlocks();
+
+        ArrayList<Student> uniqueGroupStudents = new ArrayList<>();
+        for (Student student : students) {
+            boolean groupPresent = false;
+            for (Student uniqueGroupStudent: uniqueGroupStudents) {
+                if (student.getGroup().isSameGroup(uniqueGroupStudent.getGroup())) {
+                    groupPresent = true;
+                }
+            }
+
+            if (!groupPresent && (student.getRegularLessonOptional().isPresent()
+                    || !student.getMakeupLessons().isEmpty())) {
+                uniqueGroupStudents.add(student);
+            }
+        }
+
+        for (int i = 0; i < uniqueGroupStudents.size(); i++) {
+            Color groupColor = CALENDAR_COLORS.get(i % CALENDAR_COLORS.size());
+
+            Student student = uniqueGroupStudents.get(i);
+            String name = student.getGroup().isNoGroup() ? student.getName().fullName : student.getGroup().groupName;
+
+            RegularLesson regularLesson = student.getRegularLesson();
+            if (regularLesson != null) {
+                // only show the regular lesson if it is not cancelled
+                Date regularLessonDate = regularLesson.getDateForWeek(startDate);
+                if (!student.getCancelledLessons().contains(new CancelledLesson(regularLessonDate))) {
+                    createBlock(regularLesson.getLessonDay(), regularLesson.getStartTime(), regularLesson.getEndTime(),
+                            groupColor, name);
+                }
+            }
+
+
+            for (MakeupLesson makeupLesson: student.getMakeupLessons()) {
+                if (makeupLesson.getLessonDate().value.isAfter(endDate.value)
+                        || makeupLesson.getLessonDate().value.isBefore(startDate.value)) {
+                    continue;
+                }
+
+                createBlock(makeupLesson.getLessonDate().convertToDay(), makeupLesson.getStartTime(),
+                        makeupLesson.getEndTime(), groupColor, name);
+            }
+        }
     }
 
     class TimeBlock {
@@ -162,8 +234,9 @@ public class CalendarView extends UiPart<Region> {
         private int paddingWidth;
         private int blockWidth;
 
-        public TimeBlock(LocalTime startTime, LocalTime endTime) {
-            this(startTime.getHour() * 60 + startTime.getMinute(), endTime.getHour() * 60 + endTime.getMinute());
+        public TimeBlock(Time startTime, Time endTime) {
+            this(startTime.value.getHour() * 60 + startTime.value.getMinute(),
+                    endTime.value.getHour() * 60 + endTime.value.getMinute());
         }
 
         private TimeBlock(int startTimeMinutes, int endTimeMinutes) {
@@ -204,7 +277,7 @@ public class CalendarView extends UiPart<Region> {
          * Returns true if the given time block intersects with this time block
          */
         public boolean isIntersecting(TimeBlock other) {
-            return startTimeMinutes <= other.endTimeMinutes && other.startTimeMinutes <= endTimeMinutes;
+            return startTimeMinutes < other.endTimeMinutes && other.startTimeMinutes < endTimeMinutes;
         }
 
         /**

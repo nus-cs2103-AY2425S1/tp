@@ -95,6 +95,12 @@ public class RegularLessonTest {
     }
 
     @Test
+    public void getDateForWeek() {
+        RegularLesson regularLesson = new RegularLesson(new Day("Tuesday"), new Time("10:00"), new Time("11:00"));
+        assertEquals(new Date("29-10-2024"), regularLesson.getDateForWeek(new Date("28-10-2024")));
+    }
+
+    @Test
     public void isClashing() {
         RegularLesson regularLesson = ALICE.getRegularLesson();
         MakeupLesson makeupLesson = new MakeupLesson(new Date("14-10-2024"), new Time("14:00"), new Time("16:00"));
