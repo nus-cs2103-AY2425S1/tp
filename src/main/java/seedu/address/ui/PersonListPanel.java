@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -21,7 +21,7 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private static final int DISPLAYED_INDEX_OFFSET = 1;
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
-    private final List<Integer> personsBeingViewed;
+    private final Set<Integer> personsBeingViewed;
 
     @FXML
     private ListView<Person> personListView;
@@ -31,7 +31,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
-        personsBeingViewed = new ArrayList<>();
+        personsBeingViewed = new HashSet<>();
         personListView.setItems(personList);
         // cell factory creates new ListCell objects for each item in the ListView.
         personListView.setCellFactory(listView -> new PersonListViewCell());
