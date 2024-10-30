@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -64,7 +66,7 @@ public class ExportCommandTest {
 
     @Test
     public void execute_validPathNameFilteredList_success() throws IOException {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
 
         Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
         Path expectedExportListPath = TEST_DATA_FOLDER.resolve("expectedExportFilteredList.txt");
@@ -77,7 +79,7 @@ public class ExportCommandTest {
         String expectedMessage = ExportCommand.MESSAGE_SUCCESS + exportFile.getAbsolutePath();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
         Long match = Files.mismatch(exportFile.toPath(), expectedExport.toPath());

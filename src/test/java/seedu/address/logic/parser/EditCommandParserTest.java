@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMOVE_TAG_DESC_1A;
 import static seedu.address.logic.commands.CommandTestUtil.STUDY_GROUP_TAG_DESC_1A;
 import static seedu.address.logic.commands.CommandTestUtil.STUDY_GROUP_TAG_DESC_2B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_AMY;
@@ -106,14 +107,15 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + GENDER_DESC_BOB + STUDY_GROUP_TAG_DESC_1A
-                + EMAIL_DESC_AMY + AGE_DESC_AMY + NAME_DESC_AMY + DETAIL_DESC_BOB + STUDY_GROUP_TAG_DESC_2B;
+                + EMAIL_DESC_AMY + AGE_DESC_AMY + NAME_DESC_AMY + DETAIL_DESC_BOB + STUDY_GROUP_TAG_DESC_2B
+                + REMOVE_TAG_DESC_1A;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withEmail(VALID_EMAIL_AMY).withGender(VALID_GENDER_BOB).withAge(VALID_AGE_AMY)
                 .withDetail(VALID_DETAIL_BOB).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A, VALID_STUDY_GROUP_TAG_2B)
+                .withTagsToRemove(VALID_STUDY_GROUP_TAG_1A)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

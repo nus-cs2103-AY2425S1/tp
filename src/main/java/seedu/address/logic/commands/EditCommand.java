@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -40,6 +41,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list.\n"
             + "- Study group tags: Input values will be appended to the existing tag set.\n"
+            + "   (to delete specific tags, use the special -t/ prefix followed by the name of "
+            + "the tag you want to delete.)\n"
             + "- Other fields: Input values will overwrite existing values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -47,11 +50,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_DETAIL + "DETAIL]"
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG]...\n"
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG]...\n"
+            + "[" + PREFIX_REMOVE_TAG + "TAG_TO_REMOVE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited successfully! Edited participant: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited successfully!\n"
+            + "Edited participant: %1$s";
+
     public static final String MESSAGE_NOT_EDITED = "Provide at least one field to edit!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
 
@@ -92,8 +98,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -108,6 +114,7 @@ public class EditCommand extends Command {
         Set<StudyGroupTag> updatedStudyGroups = new HashSet<>();
         updatedStudyGroups.addAll(personToEdit.getStudyGroupTags());
         updatedStudyGroups.addAll(editPersonDescriptor.getStudyGroupTags().orElse(new HashSet<>()));
+        editPersonDescriptor.getTagsToRemove().ifPresent(updatedStudyGroups::removeAll);
 
         return new Person(updatedName, updatedEmail, updatedGender, updatedAge, updatedDetail, updatedStudyGroups);
     }
@@ -137,8 +144,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
+     * of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -147,6 +154,7 @@ public class EditCommand extends Command {
         private Age age;
         private Detail detail;
         private Set<StudyGroupTag> studyGroupTags;
+        private Set<StudyGroupTag> tagsToRemove;
 
         public EditPersonDescriptor() {
         }
@@ -163,13 +171,14 @@ public class EditCommand extends Command {
             setAge(toCopy.age);
             setDetail(toCopy.detail);
             setStudyGroupTags(toCopy.studyGroupTags);
+            setTagsToRemove(toCopy.tagsToRemove);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroupTags);
+            return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroupTags, tagsToRemove);
         }
 
         public void setName(Name name) {
@@ -213,21 +222,39 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code studyGroupTags} to this object's {@code studyGroupTags}. A defensive
-         * copy of {@code studyGroupTags} is used internally.
+         * Sets this object's {@code studyGroupTags} to {@code studyGroupTags} . A defensive copy of
+         * {@code studyGroupTags} is used internally.
          */
         public void setStudyGroupTags(Set<StudyGroupTag> studyGroupTags) {
             this.studyGroupTags = (studyGroupTags != null) ? new HashSet<>(studyGroupTags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code studyGroupTags} is null.
+         * Returns an unmodifiable tag set of existing and added tags, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns {@code Optional#empty()} if
+         * {@code studyGroupTags} is null.
          */
         public Optional<Set<StudyGroupTag>> getStudyGroupTags() {
             return (studyGroupTags != null)
                     ? Optional.of(Collections.unmodifiableSet(studyGroupTags))
+                    : Optional.empty();
+        }
+
+        /**
+         * Sets this object's {@code tagsToRemove} to {@code tagsToRemove} . A defensive copy of {@code studyGroupTags}
+         * is used internally.
+         */
+        public void setTagsToRemove(Set<StudyGroupTag> studyGroupTags) {
+            this.tagsToRemove = (studyGroupTags != null) ? new HashSet<>(studyGroupTags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set to remove, which throws {@code UnsupportedOperationException} if modification
+         * is attempted. Returns {@code Optional#empty()} if {@code tagsToRemove} is null.
+         */
+        public Optional<Set<StudyGroupTag>> getTagsToRemove() {
+            return (tagsToRemove != null)
+                    ? Optional.of(Collections.unmodifiableSet(tagsToRemove))
                     : Optional.empty();
         }
 
@@ -248,7 +275,8 @@ public class EditCommand extends Command {
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(age, otherEditPersonDescriptor.age)
                     && Objects.equals(detail, otherEditPersonDescriptor.detail)
-                    && Objects.equals(studyGroupTags, otherEditPersonDescriptor.studyGroupTags);
+                    && Objects.equals(studyGroupTags, otherEditPersonDescriptor.studyGroupTags)
+                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove);
         }
 
         @Override
@@ -260,6 +288,7 @@ public class EditCommand extends Command {
                     .add("age", age)
                     .add("detail", detail)
                     .add("study groups", studyGroupTags)
+                    .add("to remove", tagsToRemove)
                     .toString();
         }
     }
