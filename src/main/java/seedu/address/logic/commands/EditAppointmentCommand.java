@@ -51,23 +51,43 @@ public class EditAppointmentCommand extends EditCommand {
 
     /**
      * Creates an EditPersonCommand to add the specified {@code Person}
+     * @param index The index of the appointment to edit.
+     * @param editAppointmentDescriptor Details to edit the appointment with.
      */
     public EditAppointmentCommand(Index index, EditAppointmentDescriptor editAppointmentDescriptor) {
         super(index, editAppointmentDescriptor);
     }
 
-    /*
+    /**
      * Returns the message to display when the person ID does not exist.
+     * @return A string indicating that the person ID does not exist.
      */
     protected String getPersonIdDoesNotExistMessage() {
         return MESSAGE_PERSON_NOT_FOUND;
     };
 
+    /**
+     * Checks if the given entity exists within the model.
+     *
+     * @param model The model to check against.
+     * @param entity The entity to verify its existence.
+     * @return true if the model contains the specified entity, false otherwise.
+     * @throws CommandException if there is an error during the existence check.
+     */
     @Override
     protected boolean hasEntity(Model model, Object entity) throws CommandException {
         return model.hasAppointment((Appointment) entity);
     }
 
+    /**
+     * Checks if the edited entity is not the same as the entity to edit.
+     *
+     * @param model The model that contains the entities.
+     * @param editedEntity The entity after the edit.
+     * @param entityToEdit The original entity to be edited.
+     * @return true if the edited entity is different from the entity to edit, false otherwise.
+     * @throws CommandException if there is an error during the comparison.
+     */
     @Override
     protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
             throws CommandException {
@@ -75,6 +95,12 @@ public class EditAppointmentCommand extends EditCommand {
         return !(entityToEditCasted.isSameAppointment((Appointment) editedEntity));
     }
 
+    /**
+     * Retrieves the list of filtered appointments from the model.
+     *
+     * @param model The model containing the filtered list.
+     * @return A list of filtered appointments.
+     */
     @Override
     protected List<Appointment> getFilteredList(Model model) {
         return model.getFilteredAppointmentList();
@@ -247,11 +273,10 @@ public class EditAppointmentCommand extends EditCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditAppointmentDescriptor)) {
+            if (!(other instanceof EditAppointmentDescriptor otherEditAppointmentDescriptor)) {
                 return false;
             }
 
-            EditAppointmentDescriptor otherEditAppointmentDescriptor = (EditAppointmentDescriptor) other;
             return Objects.equals(appointmentType, otherEditAppointmentDescriptor.appointmentType)
                     && Objects.equals(appointmentDateTime, otherEditAppointmentDescriptor.appointmentDateTime)
                     && Objects.equals(medicine, otherEditAppointmentDescriptor.medicine)

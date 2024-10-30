@@ -24,12 +24,12 @@ public abstract class ClearCommand extends Command {
         return new CommandResult(getSuccessMessage());
     }
 
-    /*
+    /**
      * Clears a specified model.
      */
     protected abstract void clearEntity(Model model);
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected abstract String getSuccessMessage();

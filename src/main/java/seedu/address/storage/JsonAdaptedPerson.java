@@ -59,7 +59,7 @@ class JsonAdaptedPerson {
         personId = source.getPersonId();
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
+        email = source.getEmail().emailValue;
         address = source.getAddress().value;
         status = source.getStatus().value;
         tags.addAll(source.getTags().stream()

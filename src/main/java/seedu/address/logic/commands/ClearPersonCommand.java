@@ -13,7 +13,7 @@ public class ClearPersonCommand extends ClearCommand {
         model.setAddressBook(new AddressBook());
     }
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected String getSuccessMessage() {
@@ -22,6 +22,9 @@ public class ClearPersonCommand extends ClearCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof ClearPersonCommand);
+        boolean isSameInstance = other == this;
+        boolean isClearPersonCommand = other instanceof ClearPersonCommand;
+
+        return isSameInstance || isClearPersonCommand;
     }
 }

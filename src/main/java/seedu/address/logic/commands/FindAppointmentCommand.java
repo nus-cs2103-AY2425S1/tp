@@ -59,10 +59,9 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof FindAppointmentCommand)) {
+        if (!(other instanceof FindAppointmentCommand otherFindAppointmentCommand)) {
             return false;
         }
-        FindAppointmentCommand otherFindAppointmentCommand = (FindAppointmentCommand) other;
         return predicate.equals(otherFindAppointmentCommand.predicate);
     }
 }

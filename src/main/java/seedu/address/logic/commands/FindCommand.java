@@ -45,11 +45,10 @@ public abstract class FindCommand<T> extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand<?> otherFindCommand)) {
             return false;
         }
 
-        FindCommand<?> otherFindCommand = (FindCommand<?>) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 

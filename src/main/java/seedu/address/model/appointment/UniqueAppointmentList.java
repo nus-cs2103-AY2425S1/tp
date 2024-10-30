@@ -33,29 +33,29 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     /**
      * Returns true if the list contains an equivalent appointment as the given argument.
      */
-    public boolean contains(Appointment toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameAppointment);
+    public boolean containsAppointment(Appointment appointmentToCheck) {
+        requireNonNull(appointmentToCheck);
+        return internalList.stream().anyMatch(appointmentToCheck::isSameAppointment);
     }
 
     /**
      * Returns true if the list contains an equivalent appointment as the given argument.
      */
-    public boolean contains(AppointmentDescriptor toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameAppointment);
+    public boolean containsAppointment(AppointmentDescriptor appointmentDescriptorToCheck) {
+        requireNonNull(appointmentDescriptorToCheck);
+        return internalList.stream().anyMatch(appointmentDescriptorToCheck::isSameAppointment);
     }
 
     /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
-    public void add(Appointment toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
+    public void addAppointment(Appointment appointmentToAdd) {
+        requireNonNull(appointmentToAdd);
+        if (containsAppointment(appointmentToAdd)) {
             throw new DuplicateAppointmentException();
         }
-        internalList.add(toAdd);
+        internalList.add(appointmentToAdd);
     }
 
     /**
@@ -72,7 +72,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
             throw new AppointmentNotFoundException();
         }
 
-        if (!target.isSameAppointment(editedAppointment) && contains(editedAppointment)) {
+        if (!target.isSameAppointment(editedAppointment) && containsAppointment(editedAppointment)) {
             throw new DuplicateAppointmentException();
         }
 
@@ -83,16 +83,16 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      * Removes the equivalent appointment from the list.
      * The appointment must exist in the list.
      */
-    public void remove(Appointment toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+    public void removeAppointment(Appointment appointmentToRemove) {
+        requireNonNull(appointmentToRemove);
+        if (!internalList.remove(appointmentToRemove)) {
             throw new AppointmentNotFoundException();
         }
     }
 
-    public void setAppointments(UniqueAppointmentList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+    public void setAppointments(UniqueAppointmentList appointmentToReplace) {
+        requireNonNull(appointmentToReplace);
+        internalList.setAll(appointmentToReplace.internalList);
     }
 
     /**
@@ -127,11 +127,10 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueAppointmentList)) {
+        if (!(other instanceof UniqueAppointmentList otherUniqueAppointmentList)) {
             return false;
         }
 
-        UniqueAppointmentList otherUniqueAppointmentList = (UniqueAppointmentList) other;
         return internalList.equals(otherUniqueAppointmentList.internalList);
     }
 

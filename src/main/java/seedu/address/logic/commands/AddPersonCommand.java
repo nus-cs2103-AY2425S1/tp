@@ -51,26 +51,52 @@ public class AddPersonCommand extends AddCommand {
         toAdd = personDescriptor;
     }
 
+    /**
+     * Checks if the person already exists in the model.
+     *
+     * @param model The model containing the list of persons.
+     * @return true if the person already exists in the model, false otherwise.
+     */
     @Override
     protected boolean alreadyExists(Model model) {
         return model.hasPerson(toAdd);
     }
 
+    /**
+     * Adds the person entity to the model.
+     *
+     * @param model The model to add the person to.
+     */
     @Override
     protected void addEntity(Model model) {
         personId = model.addPerson(toAdd).getPersonId();
     }
 
+    /**
+     * Returns the message to be displayed upon successfully adding the person.
+     *
+     * @return A success message indicating that the person was added.
+     */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     }
 
+    /**
+     * Returns the message to be displayed if the person already exists.
+     *
+     * @return A message indicating that the person is a duplicate.
+     */
     @Override
     protected String getDuplicateEntityMessage() {
         return MESSAGE_DUPLICATE_PERSON;
     }
 
+    /**
+     * Formats the entity details into a string representation.
+     *
+     * @return A formatted string representing the person.
+     */
     @Override
     protected String formatEntity() {
         return Messages.formatPerson(toAdd);

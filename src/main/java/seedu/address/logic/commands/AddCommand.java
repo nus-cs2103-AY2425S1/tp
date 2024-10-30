@@ -37,9 +37,9 @@ public abstract class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney \n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " "
+            + PREFIX_PERSON_ID + "1 "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
-            + PREFIX_PERSON_ID + "1 "
             + PREFIX_SICKNESS + "Common Cold "
             + PREFIX_MEDICINE + "Paracetamol";
 
@@ -55,22 +55,22 @@ public abstract class AddCommand extends Command {
         return new CommandResult(String.format(getSuccessMessage(), formatEntity()));
     }
 
-    /*
+    /**
      * Checks if the entity being added to model already exists.
      */
     protected abstract boolean alreadyExists(Model model);
 
-    /*
+    /**
      * Adds the entity to the model.
      */
     protected abstract void addEntity(Model model) throws CommandException;
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected abstract String getSuccessMessage();
 
-    /*
+    /**
      * Returns the message to display when there is a duplicate.
      */
     protected abstract String getDuplicateEntityMessage();
