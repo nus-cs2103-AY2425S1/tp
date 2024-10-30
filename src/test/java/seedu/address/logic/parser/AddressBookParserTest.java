@@ -22,8 +22,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SortByDateCommand;
-import seedu.address.logic.commands.SortByPriorityCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompoundedPredicate;
 import seedu.address.model.person.DateDistantToRecentComparator;
@@ -122,35 +121,35 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_sortDate() throws Exception {
-        SortByDateCommand command = (SortByDateCommand) parser.parseCommand(
-                SortByDateCommand.COMMAND_WORD + " recent");
+    public void parseCommand_sort() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " recent");
 
-        assertEquals(new SortByDateCommand(new DateRecentToDistantComparator()), command);
+        assertEquals(new SortCommand(new DateRecentToDistantComparator()), command);
     }
 
     @Test
     public void parseCommand_sortDate_alt() throws Exception {
-        SortByDateCommand command = (SortByDateCommand) parser.parseCommand(
-                SortByDateCommand.ALT_COMMAND_WORD + " distant");
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.ALT_COMMAND_WORD + " distant");
 
-        assertEquals(new SortByDateCommand(new DateDistantToRecentComparator()), command);
+        assertEquals(new SortCommand(new DateDistantToRecentComparator()), command);
     }
 
     @Test
     public void parseCommand_sortPriority() throws Exception {
-        SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
-                SortByPriorityCommand.COMMAND_WORD + " high");
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " high");
 
-        assertEquals(new SortByPriorityCommand(new PriorityHighToLowComparator()), command);
+        assertEquals(new SortCommand(new PriorityHighToLowComparator()), command);
     }
 
     @Test
     public void parseCommand_sortPriority_alt() throws Exception {
-        SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
-                SortByPriorityCommand.ALT_COMMAND_WORD + " high");
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.ALT_COMMAND_WORD + " high");
 
-        assertEquals(new SortByPriorityCommand(new PriorityHighToLowComparator()), command);
+        assertEquals(new SortCommand(new PriorityHighToLowComparator()), command);
     }
 
     @Test

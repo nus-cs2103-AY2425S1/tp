@@ -7,18 +7,18 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Sorts all Persons by priority
+ * Sorts all Persons by preference
  */
-public class SortByPriorityCommand extends Command {
+public class SortCommand extends Command {
 
-    public static final String MESSAGE_SUCCESS = "Persons list has been sorted by priority.";
+    public static final String MESSAGE_SUCCESS = "Persons list has been sorted.";
 
-    public static final String COMMAND_WORD = "sort_priority";
-    public static final String ALT_COMMAND_WORD = "sp";
+    public static final String COMMAND_WORD = "sort";
+    public static final String ALT_COMMAND_WORD = "s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all Persons by priority High to Low "
-            + "or Low To High based on the paramater.\n"
-            + "Parameters: high/low\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all Persons by priority High to Low or Low to High "
+            + "or by last seen date Recent to Distant or Distant to Recent based on the paramater.\n"
+            + "Parameters: high/low/recent/distant\n"
             + "Example: " + COMMAND_WORD + " high";
 
     private final Comparator<Person> comparator;
@@ -26,7 +26,7 @@ public class SortByPriorityCommand extends Command {
     /**
      * @param comparator comparator to be used to sort persons
      */
-    public SortByPriorityCommand(Comparator<Person> comparator) {
+    public SortCommand(Comparator<Person> comparator) {
         this.comparator = comparator;
     }
 
@@ -43,11 +43,11 @@ public class SortByPriorityCommand extends Command {
             return true;
         }
         // instanceof handles nulls
-        if (!(o instanceof SortByPriorityCommand)) {
+        if (!(o instanceof SortCommand)) {
             return false;
         }
 
-        SortByPriorityCommand e = (SortByPriorityCommand) o;
+        SortCommand e = (SortCommand) o;
         return comparator.equals(e.comparator);
     }
 }
