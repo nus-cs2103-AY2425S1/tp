@@ -2,16 +2,12 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the relation of a person to the wedding.
  * The relation can be one of the following: "H" for husband, "W" for wife, "U" for unknown.
  * This class enforces the following constraints:
  * Relation should be either "H", "W", or "U".</li>
- * The relation should be represented with only one of the aforementioned characters.</li>
  */
 public class Relation {
 
@@ -89,8 +85,10 @@ public class Relation {
     public String toString() {
         if (relation.equals("U")) {
             return "Unknown";
+
         } else if (relation.equals("H")) {
             return "Husband";
+
         } else {
             return "Wife";
         }
@@ -125,5 +123,4 @@ public class Relation {
     public int hashCode() {
         return relation.hashCode();
     }
-
 }
