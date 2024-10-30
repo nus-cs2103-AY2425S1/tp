@@ -150,6 +150,12 @@ be able to revert and get back your saved data once this command is executed.
 
 Format: `/clear`
 
+### Viewing status chart: `/chart`
+
+Opens a new window that displays a pie chart with summary data of the statuses of the internship applications
+
+Format: `/chart`
+
 ### Exiting the program : `/exit`
 
 Exits the program.
