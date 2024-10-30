@@ -33,7 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG, PREFIX_TUTORIAL
         );
 
-        // Ensure there are no duplicated prefixes except for prefix of name, prefix of address and prefix of tags
+        // Ensure there are no duplicated prefixes except for prefix of tags and prefix of tutorial
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_PAYMENT, PREFIX_ATTENDANCE);
 
