@@ -132,7 +132,7 @@ public class BackupManager {
         }
     }
 
-    private int extractIndex(Path backupPath) {
+    protected int extractIndex(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
         if (matcher.matches()) {
@@ -143,7 +143,7 @@ public class BackupManager {
         }
     }
 
-    private String extractActionDescription(Path backupPath) {
+    protected String extractActionDescription(Path backupPath) {
         String filename = backupPath.getFileName().toString();
         Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
         if (matcher.matches()) {

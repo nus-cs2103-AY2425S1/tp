@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,16 +56,19 @@ public class ModelManagerTest {
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
-        Files.list(backupDirectoryPath)
-                .filter(Files::isRegularFile)
-                .forEach(path -> {
-                    try {
-                        Files.deleteIfExists(path);
-                    } catch (IOException e) {
-                        System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
-                    }
-                });
+    public void cleanUpDefaultBackupDirectory() throws IOException {
+        Path defaultBackupDirectory = Paths.get("backups");
+        if (Files.exists(defaultBackupDirectory)) {
+            Files.walk(defaultBackupDirectory)
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                        }
+                    });
+        }
     }
 
     @Test

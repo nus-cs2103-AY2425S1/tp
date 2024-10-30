@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -12,6 +15,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.BackupManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -23,6 +27,22 @@ public class RestoreCommandTest {
 
     @TempDir
     public Path temporaryFolder;
+
+    @AfterEach
+    public void cleanUpDefaultBackupDirectory() throws IOException {
+        Path defaultBackupDirectory = Paths.get("backups");
+        if (Files.exists(defaultBackupDirectory)) {
+            Files.walk(defaultBackupDirectory)
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                        }
+                    });
+        }
+    }
 
     @Test
     public void execute_restoreSuccessful() throws Exception {
@@ -39,6 +59,7 @@ public class RestoreCommandTest {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
 
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage.setBackupManager(new BackupManager(backupDirectoryPath));
 
         Model model = new ModelManager(new AddressBook(), userPrefs, storage);
 

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,16 +42,19 @@ public class BackupManagerTest {
      * Cleans up the backup directory after each test by deleting any files created.
      */
     @AfterEach
-    public void tearDown() throws IOException {
-        Files.list(backupDirectory)
-                .filter(Files::isRegularFile)
-                .forEach(path -> {
-                    try {
-                        Files.deleteIfExists(path);
-                    } catch (IOException e) {
-                        System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
-                    }
-                });
+    public void cleanUpDefaultBackupDirectory() throws IOException {
+        Path defaultBackupDirectory = Paths.get("backups");
+        if (Files.exists(defaultBackupDirectory)) {
+            Files.walk(defaultBackupDirectory)
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path + " - " + e.getMessage());
+                        }
+                    });
+        }
     }
 
     @Test
@@ -122,4 +126,57 @@ public class BackupManagerTest {
     public void backupManager_initializationWithNullPath_throwsIoException() {
         assertThrows(IOException.class, () -> new BackupManager(null));
     }
+
+    @Test
+    public void getFormattedBackupList_withBackups_returnsFormattedList() throws IOException {
+        // Create a few backups with different descriptions
+        backupManager.createIndexedBackup(sourceFile, "backup1");
+        backupManager.createIndexedBackup(sourceFile, "backup2");
+        backupManager.createIndexedBackup(sourceFile, "backup3");
+
+        String formattedList = backupManager.getFormattedBackupList();
+
+        // Check that the formatted list contains each description in the correct format
+        assertTrue(formattedList.contains("[backup1]"));
+        assertTrue(formattedList.contains("[backup2]"));
+        assertTrue(formattedList.contains("[backup3]"));
+        assertTrue(formattedList.contains("Created on:")); // Ensure timestamp is included
+    }
+
+    @Test
+    public void extractIndex_validFilename_returnsCorrectIndex() {
+        // Manually create paths to simulate different backup files
+        Path backupPath = backupDirectory.resolve("3_testAction_2024-10-30_15-45-00-000.json");
+        int index = backupManager.extractIndex(backupPath);
+
+        assertEquals(3, index, "Extracted index should be 3");
+    }
+
+    @Test
+    public void extractIndex_invalidFilename_returnsNegativeOne() {
+        // Provide an incorrectly formatted filename
+        Path invalidPath = backupDirectory.resolve("invalid_backup_name.json");
+        int index = backupManager.extractIndex(invalidPath);
+
+        assertEquals(-1, index, "Invalid filenames should return -1 as index");
+    }
+
+    @Test
+    public void extractActionDescription_validFilename_returnsCorrectDescription() {
+        Path backupPath = backupDirectory.resolve("2_actionDescription_2024-10-30_15-45-00-000.json");
+        String actionDescription = backupManager.extractActionDescription(backupPath);
+
+        assertEquals("actionDescription", actionDescription, "Extracted description should match");
+    }
+
+    @Test
+    public void extractActionDescription_invalidFilename_returnsUnknown() {
+        Path invalidPath = backupDirectory.resolve("wrong_format.json");
+        String actionDescription = backupManager.extractActionDescription(invalidPath);
+
+        assertEquals("Unknown", actionDescription, "Invalid filenames should return 'Unknown' as action description");
+    }
+
+
+
 }
