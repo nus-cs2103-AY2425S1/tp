@@ -21,21 +21,55 @@ public class DateTest {
 
     @Test
     public void isValidDate() {
-        // null date
-        assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> Date.isValidDate(null)); // null date
 
-        // invalid dates
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("2024/01/01")); // wrong format
-        assertFalse(Date.isValidDate("01-01-2024")); // wrong format
-        assertFalse(Date.isValidDate("2024-2-30")); // invalid day
-        assertFalse(Date.isValidDate("2024-13-01")); // invalid month
-        assertFalse(Date.isValidDate("date")); // non-numeric characters
 
-        // valid dates
-        assertTrue(Date.isValidDate("2024-01-01")); // valid date
-        assertTrue(Date.isValidDate("1999-12-31")); // another valid date
+        assertFalse(Date.isValidDate("2024/01/01")); // wrong format
+        assertFalse(Date.isValidDate("date")); // wrong format
+
+        // invalid dates for format dd-MM-uuuu
+        assertFalse(Date.isValidDate("32-02-2001")); // invalid day
+        assertFalse(Date.isValidDate("10-13-2001")); // invalid month
+        assertFalse(Date.isValidDate("10-3-186")); // invalid year
+
+        // valid dates for format dd-MM-uuuu
+        assertTrue(Date.isValidDate("10-03-2023")); // valid date
+        assertTrue(Date.isValidDate("26-10-1900")); // another valid date
+
+        // invalid dates for format uuuu-MM-dd
+        assertFalse(Date.isValidDate("2001-02-32")); // invalid day
+        assertFalse(Date.isValidDate("2001-13-10")); // invalid month
+        assertFalse(Date.isValidDate("201-3-10")); // invalid year
+
+        // valid dates for format uuuu-MM-dd
+        assertTrue(Date.isValidDate("2024-02-10")); // valid date
+        assertTrue(Date.isValidDate("1900-10-26")); // another valid date
+
+        // invalid dates for format dd MMM uuuu
+        assertFalse(Date.isValidDate("10-Dec-2020")); // wrong format
+        assertFalse(Date.isValidDate("10/Dec/2020")); // wrong format
+        assertFalse(Date.isValidDate("31 Feb 2014")); // invalid day
+        assertFalse(Date.isValidDate("05 Mno 2001")); // invalid month
+        assertFalse(Date.isValidDate("05 Jan 190")); // invalid year
+
+        // valid dates for format dd MMM uuuu
+        assertTrue(Date.isValidDate("10 Feb 2013"));
+        assertTrue(Date.isValidDate("24 May 2004"));
+        assertTrue(Date.isValidDate("24 jUl 2004")); // capitalisation doesn't affect parse
+
+        // invalid dates for format dd MMMM uuuu
+        assertFalse(Date.isValidDate("10-December-2020")); // wrong format
+        assertFalse(Date.isValidDate("10/December/2020")); // wrong format
+        assertFalse(Date.isValidDate("10December2020")); // wrong format
+        assertFalse(Date.isValidDate("31 February 2014")); // invalid day
+        assertFalse(Date.isValidDate("05 Augus 2001")); // invalid month
+        assertFalse(Date.isValidDate("05 April 120")); // invalid year
+
+        // valid dates for format dd MMMM uuuu
+        assertTrue(Date.isValidDate("10 March 2013"));
+        assertTrue(Date.isValidDate("24 SepTEMber 2004")); // capitalisation doesn't affect parse
     }
 
     @Test

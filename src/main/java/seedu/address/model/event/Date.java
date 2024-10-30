@@ -23,6 +23,7 @@ public class Date {
             4. dd MMMM uuuu
             """;
 
+    // The 'uuuu' format is used instead of 'yyyy' to avoid errors when parsing a year  with the strict revolver style.
     private static final DateTimeFormatter INPUT_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendOptional(DateTimeFormatter.ofPattern("dd-MM-uuuu"))
@@ -30,7 +31,7 @@ public class Date {
             .appendOptional(DateTimeFormatter.ofPattern("dd MMM uuuu", Locale.ENGLISH))
             .appendOptional(DateTimeFormatter.ofPattern("dd MMMM uuuu", Locale.ENGLISH))
             .toFormatter()
-            .withResolverStyle(ResolverStyle.STRICT) ;
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu");
     private final LocalDate date;
 
