@@ -279,3 +279,4 @@ Action            | Format, Examples
 **Mark Assignment** | `mark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `mark studentIndex/1 assignmentIndex/1`
 **Unmark Assignment** | `unmark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `unmark studentIndex/1 assignmentIndex/1`
 **Grade Assignment** | `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`<br> e.g., `grade studentIndex/1 assignmentIndex/1 score/100`
+**Add Remark** | `remark studentIndex/INDEX r/REMARK` <br> e.g., `remark studentIndex/1 r/Weak in Math`
