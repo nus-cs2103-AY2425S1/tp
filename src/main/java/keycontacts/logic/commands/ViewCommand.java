@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.model.Model;
 import keycontacts.model.lesson.Date;
 
@@ -31,5 +32,26 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         return new CommandResult(MESSAGE_SUCCESS, false, date, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewCommand otherViewCommand)) {
+            return false;
+        }
+
+        return date.equals(otherViewCommand.date);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("date", date)
+                .toString();
     }
 }

@@ -1,6 +1,7 @@
 package keycontacts.logic.commands;
 
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
@@ -62,6 +63,7 @@ public class CommandTestUtil {
     public static final String VALID_DAY_DESC = " " + PREFIX_DAY + VALID_DAY;
     public static final String VALID_START_TIME_DESC = " " + PREFIX_START_TIME + VALID_START_TIME;
     public static final String VALID_END_TIME_DESC = " " + PREFIX_END_TIME + VALID_END_TIME;
+    public static final String VALID_DATE_DESC = " " + PREFIX_DATE + VALID_DATE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -72,6 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + "10am"; // not in 24 hour format
     public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + "10pm"; // not in 24 hour format
     public static final String INVALID_DATE = "13-13-2024"; // invalid month
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "13-13-2024";
     public static final String INVALID_PIANO_PIECE_DESC = " " + PREFIX_PIECE_NAME + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
