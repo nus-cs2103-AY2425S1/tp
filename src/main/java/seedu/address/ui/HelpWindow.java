@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    // TODO: Remove hardcoding of message, find a way to pass in the help
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t10-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE =
             "Add a person: add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]\n"
@@ -23,7 +22,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Editing a person: edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]\n"
             + "Marking a person as attended: mark INDEX tut/TUTORIAL\n"
             + "Marking a person as absent: unmark INDEX tut/TUTORIAL\n"
-            + "Locating a person by name: find KEYWORD [MORE_KEYWORDS]\n"
+            + "Locating a person: find KEYWORD [MORE_KEYWORDS] [t/TAG] OR find [KEYWORDS] t/TAG\n"
             + "Deleting a person: delete INDEX\n"
             + "Clearing all entries: clear\n"
             + "Exiting the program: exit\n"

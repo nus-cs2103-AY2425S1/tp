@@ -191,23 +191,26 @@ Examples:
 
 ### Locating persons by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names or tags contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS] [t/TAG]` or `find [KEYWORDS] t/TAG`
 
+- At least one field of `KEYWORD` or `TAG` is required for the search.
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
+- The name as well as the tags will be searched.
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Searching for both name and tags will return all results that have either the name or the respective tag, which is basically the union of both groups.
 
 Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find an` returns `armin` and `brian`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find alex david` returns `Alex Yeoh`, `David Li`<br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
+- `find alex t/colleagues` returns `Alex Yeoh` and all contacts marked with tag `colleagues`<br>
+  ![result for 'find alex t/colleagues'](images/findAlexColleaguesResult.png)
 ### Sorting persons : `sort`
 
 Sorts the displayed list of persons by either name, student id or tutorial attendance.
