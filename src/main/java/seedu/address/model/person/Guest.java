@@ -64,7 +64,7 @@ public class Guest extends Person {
      */
     public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Relation relation) {
         super(name, phone, email, address, tags);
-        this.rsvp = new Rsvp("PENDING");
+        this.rsvp = new Rsvp("P");
         this.relation = relation;
     }
 
@@ -82,7 +82,7 @@ public class Guest extends Person {
      */
     public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        this.rsvp = new Rsvp("PENDING");
+        this.rsvp = new Rsvp("P");
         this.relation = new Relation("U");
     }
 

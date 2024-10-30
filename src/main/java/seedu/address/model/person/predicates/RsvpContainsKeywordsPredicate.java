@@ -25,7 +25,7 @@ public class RsvpContainsKeywordsPredicate implements Predicate<Person> {
         }
         Guest guest = (Guest) person;
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(guest.getRsvp().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(guest.getRsvp().rsvp, keyword));
     }
 
     @Override

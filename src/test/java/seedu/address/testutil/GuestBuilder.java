@@ -8,7 +8,7 @@ import seedu.address.model.person.Rsvp;
  * A utility class to help with building Guest objects.
  */
 public class GuestBuilder extends PersonBuilder<GuestBuilder> {
-    public static final String DEFAULT_RSVP = "PENDING";
+    public static final String DEFAULT_RSVP = "P";
     public static final String DEFAULT_RELATION = "U";
 
     private Rsvp rsvp;

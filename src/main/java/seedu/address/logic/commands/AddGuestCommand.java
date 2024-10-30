@@ -31,13 +31,15 @@ public class AddGuestCommand extends Command {
             + "[" + PREFIX_RSVP + "RSVP] "
             + "[" + PREFIX_RELATION + "RELATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "RSVP should be 'P' for pending, 'A' for accepted or 'D' for declined!\n"
+            + "Relation should be 'H' for husband, 'W' for wife or 'U' for unknown!\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_RSVP + "accepted "
-            + PREFIX_RELATION + "unknown"
+            + PREFIX_RSVP + "A "
+            + PREFIX_RELATION + "U "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
