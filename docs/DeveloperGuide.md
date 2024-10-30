@@ -71,6 +71,10 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
+The UI is managed by the `UiManager` class, which serves as the main controller for managing the UI in EduContacts. 
+It serves as the interface layer between the application's backend logic and the JavaFX UI components, ensuring a smooth
+and consistent user experience.
+
 The UI consists of a `MainWindow` that is made up of the following parts: 
 * `CommandBox`
   * Where the user types in his desired command
@@ -84,11 +88,14 @@ The UI consists of a `MainWindow` that is made up of the following parts:
   * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
 * `PersonCard`
   * Shows simple and brief details about a person
+* `HelpWindow`
+  * Displayed by clicking the "Help" button at the top right hand of the screen
 
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between 
+classes that represent parts of the visible GUI.
 
-
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that 
+are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -97,7 +104,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-The main stylesheet for the UI can be found in `src/main/java/resources/view/LightTheme.css`.
+The stylesheet used for the UI can be found in `src/main/java/resources/view/LightTheme.css`.
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
