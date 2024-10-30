@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
@@ -109,8 +110,11 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         // Check month-day combinations, including leap year validation
         if (month == 2) {
-            if (day > 29 || (day == 29 && year % 4 != 0)) {
-                throw new ParseException("Invalid date: February " + day + " is only valid in leap years.");
+            if (day == 29 && !Year.of(year).isLeap()) {
+                throw new ParseException("Invalid date: " + Month.of(month) + " "
+                        + day + " is only valid in leap years.");
+            } else if (day > 29) {
+                throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 29 days.");
             }
         } else if (month == 4 || month == 6 || month == 9 || month == 11) {
             if (day > 30) {
