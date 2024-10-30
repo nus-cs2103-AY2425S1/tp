@@ -37,7 +37,7 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ")
+        builder.append(" Name: ")
                 .append(person.getName())
                 .append("\n ID: ")
                 .append(person.getId())
@@ -47,9 +47,9 @@ public class Messages {
                 .append(person.getDiagnosis())
                 .append("\n Medication: ")
                 .append(person.getMedication())
-                .append("\n\n Notes: ")
+                .append("\n Notes: ")
                 .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes())
-                .append("\n\n Appointment: ")
+                .append("\n Appointment: ")
                 .append(person.getAppointment() == null ? "-" : person.getAppointment().toString());
         // .append("; Tags: ");
 

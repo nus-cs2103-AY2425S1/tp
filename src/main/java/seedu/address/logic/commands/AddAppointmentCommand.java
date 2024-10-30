@@ -36,7 +36,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_END + " 21-12-2024-23-59 "
             + "\n Datetime is in the form of dd-MM-yyyy-HH-mm";
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: %1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: \n\n%1$s";
     private final Index index;
     private final Appointment appointment;
     /**
@@ -74,7 +74,7 @@ public class AddAppointmentCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
 
         //return new CommandResult(null);
-        return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
