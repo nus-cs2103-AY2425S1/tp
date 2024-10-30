@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import seedu.address.model.person.LessonTime;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -89,6 +90,14 @@ public class EditCommandTest {
         descriptorWithParentFields.setParentName(new Name("BOBBY"));
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptorWithParentFields);
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_ADD_PARENT_TO_NON_STUDENT);
+    }
+
+    @Test
+    public void execute_addLessonTimeFieldToNonStudent_failure() {
+        EditPersonDescriptor descriptorWithLessonTimeFields = new EditPersonDescriptor();
+        descriptorWithLessonTimeFields.setLessonTime(new LessonTime("mon:12:00"));
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptorWithLessonTimeFields);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_ADD_LESSON_TIME_TO_NON_STUDENT);
     }
 
     @Test

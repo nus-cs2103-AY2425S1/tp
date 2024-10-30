@@ -65,14 +65,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("education") String education, @JsonProperty("grade") String grade,
-            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail,
+            @JsonProperty("lessonTime") String lessonTime, @JsonProperty("education") String education,
+            @JsonProperty("grade") String grade, @JsonProperty("parentName") String parentName,
+            @JsonProperty("parentPhone") String parentPhone, @JsonProperty("parentEmail") String parentEmail,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
             @JsonProperty("isArcived") boolean isArchived) {
         if (parentName != null) {
-            return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, parentPhone,
-                    parentEmail, tags, isPinned, isArchived);
+            return new JsonAdaptedStudent(name, phone, email, address, lessonTime, education, grade, parentName,
+                    parentPhone, parentEmail, tags, isPinned, isArchived);
         }
         return new JsonAdaptedPerson(name, phone, email, address, tags, isPinned, isArchived);
     }

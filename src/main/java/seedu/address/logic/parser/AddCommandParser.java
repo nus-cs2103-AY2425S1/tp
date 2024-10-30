@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,17 +41,21 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_EDUCATION, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL);
+                        PREFIX_LESSON_TIME, PREFIX_EDUCATION, PREFIX_PARENT_NAME,
+                        PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EDUCATION, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_EDUCATION, PREFIX_NAME,
+                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LESSON_TIME, PREFIX_PARENT_NAME,
+                PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)
                 && (arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME)
                         || arePrefixesPresent(argMultimap, PREFIX_PARENT_PHONE)
-                        || arePrefixesPresent(argMultimap, PREFIX_PARENT_EMAIL))) {
+                        || arePrefixesPresent(argMultimap, PREFIX_PARENT_EMAIL)
+                        || arePrefixesPresent(argMultimap, PREFIX_LESSON_TIME))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MISSING_PARENT_FIELDS));
         }
 
@@ -83,8 +89,15 @@ public class AddCommandParser implements Parser<AddCommand> {
             parentEmail = null;
         }
 
-        Person person = new Student(name, phone, email, address, education, grade, parentName, parentPhone, parentEmail,
-                tagList);
+        LessonTime lessonTime;
+        if (arePrefixesPresent(argMultimap, PREFIX_LESSON_TIME)) {
+            lessonTime = ParserUtil.parseLessonTime(argMultimap.getValue(PREFIX_LESSON_TIME).get());
+        } else {
+            lessonTime = null;
+        }
+
+        Person person = new Student(name, phone, email, address, lessonTime,
+                education, grade, parentName, parentPhone, parentEmail, tagList);
 
         return new AddCommand(person);
     }

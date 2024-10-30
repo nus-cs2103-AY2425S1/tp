@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private final LessonTime lessonTime;
     private final Education education;
     private final Grade grade;
     private final Name parentName;
@@ -24,9 +25,10 @@ public class Student extends Person {
      * Constructs a {@code Student} with the given details.
      * Students constructed with this constructor will have isPinned set to false by default.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
-                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, LessonTime lessonTime, Education education,
+                   Grade grade, Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -37,10 +39,11 @@ public class Student extends Person {
     /**
      * Constructs a {@code Student} with the given details.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
-                   Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags, boolean isPinned,
+    public Student(Name name, Phone phone, Email email, Address address, LessonTime lessonTime, Education education,
+                   Grade grade, Name parentName, Phone parentPhone, Email parentEmail, Set<Tag> tags, boolean isPinned,
                    boolean isArchived) {
         super(name, phone, email, address, tags, isPinned, isArchived);
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -51,9 +54,10 @@ public class Student extends Person {
     /**
      * Constructs a {@code Student} with the given {@code Person} as a base.
      */
-    public Student(Person person, Education education, Grade grade, Name parentName, Phone parentPhone,
-                   Email parentEmail) {
+    public Student(Person person, LessonTime lessonTime, Education education, Grade grade, Name parentName,
+                   Phone parentPhone, Email parentEmail) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -61,6 +65,9 @@ public class Student extends Person {
         this.parentEmail = parentEmail;
     }
 
+    public LessonTime getLessonTime() {
+        return lessonTime;
+    }
     public Education getEducation() {
         return education;
     }
@@ -93,16 +100,17 @@ public class Student extends Person {
         }
 
         Student otherStudent = (Student) other;
-        return super.equals(otherStudent) && education.equals(otherStudent.education)
+        return super.equals(otherStudent) && lessonTime.equals(otherStudent.lessonTime)
+                && education.equals(otherStudent.education)
                 && grade.equals(otherStudent.grade) && parentName.equals(otherStudent.parentName)
                 && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getEducation(),
-                this.getGrade(), this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getTags(),
-                this.getPinned(), this.isArchived());
+        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getLessonTime(),
+                this.getEducation(), this.getGrade(), this.getParentName(), this.getParentPhone(),
+                this.getParentEmail(), this.getTags(), this.getPinned(), this.isArchived());
     }
 
     @Override
@@ -112,6 +120,7 @@ public class Student extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
+                .add("lesson time", this.getLessonTime())
                 .add("education", this.getEducation())
                 .add("grade", this.getGrade())
                 .add("parent name", this.getParentName())
@@ -131,6 +140,8 @@ public class Student extends Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Lesson Time: ")
+                .append(getLessonTime())
                 .append("; Education: ")
                 .append(getEducation())
                 .append("; Grade: ")
