@@ -33,7 +33,7 @@ public class UnmatchCommand extends Command {
             COMMAND_WORD + ": Unmatch a contact to a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
                     + COMMAND_WORD + " 2 1";
 
-    public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
+    public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job:";
     public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
     public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with any job";
 
@@ -69,21 +69,16 @@ public class UnmatchCommand extends Command {
         Person contactToUnmatch = lastShownPersonList.get(contactIndex.getZeroBased());
         Job jobToUnmatch = lastShownJobList.get(jobIndex.getZeroBased());
 
-        assert contactToUnmatch != null;
-        assert jobToUnmatch != null;
-
         validateMatching(contactToUnmatch, jobToUnmatch);
 
         // Proceed with unmatching the contact from the job
         Person unmatchedContact = unmatchContactFromJob(contactToUnmatch);
-        Job unmatchedJob = unmatchJobFromContact(jobToUnmatch, contactToUnmatch.getIdentifier());
 
         // Update the model with the unmatched contact and job
         model.setPerson(contactToUnmatch, unmatchedContact);
-        model.setJob(jobToUnmatch, unmatchedJob);
 
         return new CommandResult(
-                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact), Messages.format(unmatchedJob))
+                String.format(MESSAGE_UNMATCH_SUCCESS, Messages.format(unmatchedContact))
         );
     }
 
@@ -124,14 +119,9 @@ public class UnmatchCommand extends Command {
         }
 
         boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
-        boolean hasJobMatchedContact = jobToUnmatch.hasMatched(contactToUnmatch.getIdentifier());
-
-        // Assert to ensure that both entities are symmetrically matched (this should never happen in the system)
-        assert hasContactMatchedJob == hasJobMatchedContact
-              : "Mismatched state: Contact and job matching is asymmetric";
 
         // Check and ensure the contact and job are matched to each other before unmatching
-        if (!(hasContactMatchedJob && hasJobMatchedContact)) {
+        if (!hasContactMatchedJob) {
             throw new CommandException(MESSAGE_CONTACT_NOT_MATCHED);
         }
     }
