@@ -5,10 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyEventTory" as ReadOnlyEventTory
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class EventTory
 Class ModelManager
 Class UserPrefs
 
@@ -18,6 +18,7 @@ Class Description
 Class Name
 Class Phone
 Class Tag
+Class UniqueId
 
 Class UniqueEventList
 Class Event
@@ -29,26 +30,28 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+EventTory .up.|> ReadOnlyEventTory
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyEventTory
+ModelManager -left-> "1" EventTory
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueVendorList
-AddressBook *--> "1" UniqueEventList
+EventTory *--> "1" UniqueVendorList
+EventTory *--> "1" UniqueEventList
 UniqueVendorList --> "~* all" Vendor
 Vendor *--> Name
 Vendor *--> Phone
 Vendor *--> Description
+Vendor *--> UniqueId
 Vendor *--> "*" Tag
 
 UniqueEventList -->  "~* all" Event
 Event *--> Name
 Event *--> Date
+Event *--> UniqueId
 Event *-->  "*" Tag
 
 Vendor -[hidden]up--> I
@@ -57,7 +60,8 @@ UniqueEventList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Description
-Description -[hidden]right-> Date
+Description -[hidden]right-> UniqueId
+UniqueId -[hidden]right-> Date
 
 ModelManager --> "~* filtered" Vendor
 ModelManager --> "~* filtered" Event
