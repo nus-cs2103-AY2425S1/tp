@@ -52,7 +52,7 @@ public class LessonCard extends UiPart<Region> {
                     }
 
                     // Student Participation
-                    Label participationLabel = new Label(String.valueOf(1));
+                    Label participationLabel = new Label(String.valueOf(lesson.getParticipation(student)));
                     participationLabel.getStyleClass().add("participation-score");
 
                     // Combine All Details into Student Box
