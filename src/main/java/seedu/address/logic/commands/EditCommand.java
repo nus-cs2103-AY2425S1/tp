@@ -29,7 +29,6 @@ import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.NotesWindow;
 
 /**
  * Edits the details of an existing person in the address book.
