@@ -71,24 +71,23 @@ public class DaysAttended {
     /**
      * Increments the days attended by 1.
      */
-    public void increment() {
-        daysAttended.set(getDaysAttended() + 1);
+    public DaysAttended incremented() {
+        return new DaysAttended(getDaysAttended() + 1);
     }
 
     /**
      * Decrements the days attended by 1.
      */
-    public void decrement() {
-        if (getDaysAttended() > 0) {
-            daysAttended.set(getDaysAttended() - 1);
-        }
+    public DaysAttended decremented() {
+        int newDays = Math.max(getDaysAttended() - 1, 0);
+        return new DaysAttended(newDays);
     }
 
     /**
      * Resets the days attended to 0.
      */
-    public void reset() {
-        daysAttended.set(0);
+    public DaysAttended reset() {
+        return new DaysAttended(0);
     }
 
     /**

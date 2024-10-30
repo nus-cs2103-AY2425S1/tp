@@ -4,6 +4,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,6 +94,38 @@ public class Teacher extends Person {
     public int hashCode() {
         return Objects.hash(getName(), getGender(), getPhone(), getEmail(), getAddress(),
             getTags(), getSubjects(), getClasses());
+    }
+
+    /**
+     * Returns a new {@code Person} object with incremented attendance.
+     * This operation is unsupported for teachers, and will not affect attendance.
+     *
+     * @return A new {@code Person} instance identical to the current one, as attendance is not tracked for teachers.
+     */
+    public Person withIncrementedAttendance() {
+        return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
+                getTags(), getSubjects(), getClasses(), getDaysAttended());
+    }
+
+    /**
+     * Attempts to decrement attendance, but throws a {@code CommandException} as this operation
+     * is unsupported for teachers. Teachers do not have attendance to unmark.
+     *
+     * @throws CommandException Always thrown to indicate that attendance cannot be decremented for a teacher.
+     */
+    public Person withDecrementedAttendance() throws CommandException {
+        throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+    }
+
+    /**
+     * Returns a new {@code Person} object with reset attendance.
+     * This operation is unsupported for teachers, and will not affect attendance.
+     *
+     * @return A new {@code Person} instance identical to the current one, as attendance is not tracked for teachers.
+     */
+    public Person withResetAttendance() {
+        return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
+                getTags(), getSubjects(), getClasses(), getDaysAttended());
     }
 
     /**

@@ -101,7 +101,7 @@ public interface Model {
     /**
      * Unmarks the attendance of a particular student.
      */
-    void unmarkAttendance(Person targetIndex);
+    void unmarkAttendance(Person targetIndex) throws CommandException;
 
     /**
      * Resets the attendance of all students.

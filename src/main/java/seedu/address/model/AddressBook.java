@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Teacher;
 import seedu.address.model.person.UniquePersonList;
@@ -142,15 +143,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void markAttendance() {
         for (Person person : persons) {
-            person.markAttendance();
+            Person updatedPerson = person.withIncrementedAttendance();
+            setPerson(person, updatedPerson);
         }
     }
 
     /**
      * Unmarks the attendance of a particular student.
      */
-    public void unmarkAttendance(Person personToUnmark) {
-        personToUnmark.unmarkAttendance();
+    public void unmarkAttendance(Person personToUnmark) throws CommandException {
+        Person updatedPerson = personToUnmark.withDecrementedAttendance();
+        setPerson(personToUnmark, updatedPerson);
     }
 
     /**
@@ -158,7 +161,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetAttendance() {
         for (Person person : persons) {
-            person.resetAttendance();
+            Person updatedPerson = person.withResetAttendance();
+            setPerson(person, updatedPerson);
         }
     }
 }
