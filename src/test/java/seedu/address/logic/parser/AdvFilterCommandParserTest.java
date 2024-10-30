@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AdvFilterCommand;
-import seedu.address.logic.commands.AdvFilterCommand.Operator;;
+import seedu.address.logic.commands.AdvFilterCommand.Operator;
 
 public class AdvFilterCommandParserTest {
 
