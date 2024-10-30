@@ -16,8 +16,8 @@ public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String MESSAGE_SUCCESS = "There are %d guests. (%d pending, %d coming, %d not coming)\n"
-                    + "There are %d vendors.";
+    public static final String MESSAGE_SUCCESS_GUEST = "There %s %d guest%s. (%d pending, %d coming, %d not coming)\n";
+    public static final String MESSAGE_SUCCESS_VENDOR = "There %s %d vendor%s.";
 
     @Override
     public CommandResult execute(Model model) {
@@ -30,17 +30,30 @@ public class StatsCommand extends Command {
         int guestsPending = (int) guestList.stream()
                 .filter(person -> rsvpPredicate(person, "P"))
                 .count();
+
         int guestsComing = (int) guestList.stream()
                 .filter(person -> rsvpPredicate(person, "A"))
                 .count();
+
         int guestsNotComing = (int) guestList.stream()
                 .filter(person -> rsvpPredicate(person, "D"))
                 .count();
+
         int vendorCount = vendorList.size();
 
+        String guestMessage = String.format(MESSAGE_SUCCESS_GUEST,
+                guestCount == 1 ? "is" : "are",
+                guestCount,
+                guestCount == 1 ? "" : "s",
+                guestsPending, guestsComing, guestsNotComing);
+
+        String vendorMessage = String.format(MESSAGE_SUCCESS_VENDOR,
+                vendorCount == 1 ? "is" : "are",
+                vendorCount,
+                vendorCount == 1 ? "" : "s");
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                guestCount, guestsPending, guestsComing, guestsNotComing, vendorCount));
+        return new CommandResult(guestMessage + vendorMessage);
     }
 
     /**
