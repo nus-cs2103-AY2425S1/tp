@@ -16,10 +16,10 @@ import seedu.address.ui.UiState;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluates to true */
     Predicate<Vendor> PREDICATE_SHOW_ALL_VENDORS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluates to true */
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
@@ -43,42 +43,41 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' EventTory file path.
      */
-    Path getAddressBookFilePath();
+    Path getEventToryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' EventTory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setEventToryFilePath(Path eventToryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces EventTory data with the data in {@code eventTory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setEventTory(ReadOnlyEventTory eventTory);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEventTory getEventTory();
 
     /**
-     * Returns true if a vendor with the same identity as {@code vendor} exists in the address book.
+     * Returns true if a vendor with the same identity as {@code vendor} exists in EventTory.
      */
     boolean hasVendor(Vendor vendor);
 
     /**
-     * Deletes the given vendor. The vendor must exist in the address book.
+     * Deletes the given vendor. The vendor must exist in EventTory.
      */
     void deleteVendor(Vendor target) throws AssociationDeleteException;
 
     /**
-     * Adds the given vendor. {@code vendor} must not already exist in the address book.
+     * Adds the given vendor. {@code vendor} must not already exist in EventTory.
      */
     void addVendor(Vendor vendor);
 
     /**
-     * Replaces the given vendor {@code target} with {@code editedVendor}. {@code target} must exist in the address
-     * book. The vendor identity of {@code editedVendor} must not be the same as another existing vendor in the address
-     * book.
+     * Replaces the given vendor {@code target} with {@code editedVendor}. {@code target} must exist in EventTory.
+     * The vendor identity of {@code editedVendor} must not be the same as another existing vendor in EventTory.
      */
     void setVendor(Vendor target, Vendor editedVendor);
 
@@ -93,7 +92,7 @@ public interface Model {
 
     /**
      * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
-     * {@code event} must exist in the address book.
+     * {@code event} must exist in EventTory.
      */
     boolean isVendorAssignedToEvent(Vendor vendor, Event event);
 
@@ -133,24 +132,23 @@ public interface Model {
     void viewVendor(Vendor vendor);
 
     /*
-     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in EventTory.
      */
     boolean hasEvent(Event event);
 
     /**
-     * Deletes the given event. The event must exist in the address book.
+     * Deletes the given event. The event must exist in EventTory.
      */
     void deleteEvent(Event target) throws AssociationDeleteException;
 
     /**
-     * Adds the given event. {@code event} must not already exist in the address book.
+     * Adds the given event. {@code event} must not already exist in EventTory.
      */
     void addEvent(Event event);
 
     /**
-     * Replaces the given event {@code target} with {@code editedEvent}. {@code target} must exist in the address
-     * book. The event identity of {@code editedEvent} must not be the same as another existing event in the address
-     * book.
+     * Replaces the given event {@code target} with {@code editedEvent}. {@code target} must exist in EventTory.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in EventTory.
      */
     void setEvent(Event target, Event editedEvent);
 

@@ -20,10 +20,10 @@ import seedu.address.model.vendor.UniqueVendorList;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameVendor comparison)
+ * Wraps all data at the EventTory level
+ * Duplicates are not allowed (by .isSameVendor & .isSameEvent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class EventTory implements ReadOnlyEventTory {
 
     private final UniqueVendorList vendors;
     private final UniqueEventList events;
@@ -42,12 +42,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         events = new UniqueEventList();
     }
 
-    public AddressBook() {}
+    public EventTory() {}
 
     /**
-     * Creates an AddressBook using the Vendors in the {@code toBeCopied}
+     * Creates an EventTory using the date in {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public EventTory(ReadOnlyEventTory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -79,9 +79,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code EventTory} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEventTory newData) {
         requireNonNull(newData);
 
         setVendors(newData.getVendorList());
@@ -92,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// vendor-level operations
 
     /**
-     * Returns true if a vendor with the same identity as {@code vendor} exists in the address book.
+     * Returns true if a vendor with the same identity as {@code vendor} exists in EventTory.
      */
     public boolean hasVendor(Vendor vendor) {
         requireNonNull(vendor);
@@ -100,8 +100,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a vendor to the address book.
-     * The vendor must not already exist in the address book.
+     * Adds a vendor to EventTory.
+     * The vendor must not already exist in EventTory.
      */
     public void addVendor(Vendor p) {
         vendors.add(p);
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given vendor {@code target} in the list with {@code editedVendor}.
-     * {@code target} must exist in the address book.
-     * The vendor identity of {@code editedVendor} must not be the same as another existing vendor in the address book.
+     * {@code target} must exist in EventTory.
+     * The vendor identity of {@code editedVendor} must not be the same as another existing vendor in EventTory.
      */
     public void setVendor(Vendor target, Vendor editedVendor) {
         requireNonNull(editedVendor);
@@ -119,8 +119,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code EventTory}.
+     * {@code key} must exist in EventTory.
      * @throws AssociationDeleteException if the vendor is not deletable (e.g. it is associated with an event)
      */
     public void removeVendor(Vendor key) throws AssociationDeleteException {
@@ -135,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
-     * {@code vendor} and {@code event} must exist in the address book.
+     * {@code vendor} and {@code event} must exist in EventTory.
      */
     public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Assigns the given {@code vendor} in the list to {@code event}.
-     * {@code vendor} and {@code event} must exist in the address book.
+     * {@code vendor} and {@code event} must exist in EventTory.
      */
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
@@ -165,7 +165,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Unassigns the given {@code vendor} in the list from {@code event}.
-     * {@code vendor} and {@code event} must exist in the address book.
+     * {@code vendor} and {@code event} must exist in EventTory.
      */
     void unassignVendorFromEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
@@ -210,7 +210,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// event-level operations
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     * Returns true if a event with the same identity as {@code event} exists in EventTory.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -219,7 +219,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds an event to the address book.
-     * The event must not already exist in the address book.
+     * The event must not already exist in EventTory.
      */
     public void addEvent(Event event) {
         events.add(event);
@@ -227,8 +227,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in EventTory.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in EventTory.
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
@@ -237,8 +237,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code EventTory}.
+     * {@code key} must exist in EventTory.
      * @throws AssociationDeleteException if the event is not deletable (e.g. it is associated with a vendor)
      */
     public void removeEvent(Event key) throws AssociationDeleteException {
@@ -282,12 +282,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof EventTory)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return vendors.equals(otherAddressBook.vendors) && events.equals(otherAddressBook.events);
+        EventTory otherEventTory = (EventTory) other;
+        return vendors.equals(otherEventTory.vendors) && events.equals(otherEventTory.events);
     }
 
     @Override

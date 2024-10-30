@@ -8,7 +8,7 @@ import seedu.address.model.vendor.Vendor;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyEventTory {
 
     /**
      * Returns an unmodifiable view of the vendors list.
