@@ -60,6 +60,19 @@ public class Event {
         this.volunteers = volunteers != null ? volunteers : new HashSet<>();
     }
 
+    /**
+     * Constructor to create a defensive copy of {@code Event}.
+     *
+     * @param event {@code Event} that we want to copy.
+     */
+    public Event(Event event) {
+        this.name = event.getName();
+        this.attendees = event.getAttendees();
+        this.vendors = event.getVendors();
+        this.sponsors = event.getSponsors();
+        this.volunteers = event.getVolunteers();
+    }
+
     public String getName() {
         return name;
     }

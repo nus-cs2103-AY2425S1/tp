@@ -97,9 +97,14 @@ public class EventManager implements ReadOnlyEventManager {
      */
     public PersonInEventPredicate getPersonInEventPredicate(Event event) {
         assert this.eventList.contains(event): "This method should only take in events that exist in the eventList.";
+
+        // Search through the unmodifiable list for the event, else throw EventNotFoundException
+        // Unmodifiable List is not strong enough to ensure that the event is not modified
         Event equalEvent = this.eventList.asUnmodifiableObservableList().stream().filter(event::equals)
                 .findFirst().orElseThrow(EventNotFoundException::new);
-        return new PersonInEventPredicate(equalEvent);
+
+        // Use a defensive copy of the event in the predicate.
+        return new PersonInEventPredicate(new Event(equalEvent));
     }
 
     /**
