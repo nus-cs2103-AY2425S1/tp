@@ -78,7 +78,7 @@ Adds a person to the address book.
 
 Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
 
-* Gender and study group tags are **case-insensitive**
+* Email, gender and study group tags are **case-insensitive**
 * Valid entries for gender are M/m/F/f
 * Age must be a positive integer less than 150
 * Two contacts are considered **duplicates** if they share the same **email** address
@@ -139,9 +139,9 @@ Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
-* `delete 2` deletes the 2nd person in the address book.
+* `delete 2` deletes the 2nd person in the displayed list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 3 5-7` deletes the 1st, 3rd, and persons from the 5th to the 7th
+* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and  7th person in the displayed list.
 
 ### Clearing all entries : `clear`
 
