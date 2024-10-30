@@ -74,7 +74,6 @@ public class LogicManagerTest {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
-    /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
@@ -85,8 +84,7 @@ public class LogicManagerTest {
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
-}
-    */
+    }
     @Test
     public void testSomeModelManagerBehavior() {
         ModelManager expectedModel = new ModelManager();
@@ -183,7 +181,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + WORKEXP_DESC_AMY + UNIVERSITY_DESC_AMY + MAJOR_DESC_AMY
                 + INTERESTS_DESC_AMY;
 
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withInterests().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withInterests("Reading").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

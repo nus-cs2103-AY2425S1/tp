@@ -18,6 +18,11 @@ public class FindByMajorCommandParser implements Parser<FindByMajorCommand> {
      */
     public FindByMajorCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        // Check if the input is empty or doesn't start with the correct format ("m/")
+        if (trimmedArgs.isEmpty() || !trimmedArgs.startsWith("m/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindByMajorCommand.MESSAGE_USAGE));
+        }
         String keyword = trimmedArgs.substring(2).trim();
         if (keyword.isEmpty()) {
             throw new ParseException(
