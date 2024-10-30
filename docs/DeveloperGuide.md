@@ -388,7 +388,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
-3. Staff marks the elderly as called and takes notes of the call with mark command.  
+3. Staff marks the elderly as called and takes notes of the call with mark command. 
+   * Command is only allowed in `personList` view.
 4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
@@ -396,16 +397,19 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
   * Use case ends.  
-* 3a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
+* 3a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
   * 3a1. ContactMate shows an error message.  
   * Use case resumes from step 3\.
+* 3b. ContactMate detects the command is attempted in `historyList` view.
+  * 3b1. ContactMate shows an error message.  
+  * Use case resumes from step 1\.
 
 **System: ContactMate**  
 **Use case: UC02 \- List elderly contacts by priority**  
 **Actor: Staff**  
 **Guarantees:** 
 
-* List of elderly sorted by priority will be shown.
+* List of elderly sorted by priority of who to call next will be shown.
 
 **MSS:**
 
@@ -432,7 +436,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX or NRIC or incorrect command syntax.  
+* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
 	* 2a1. ContactMate shows an error message.  
 	* Use case resumes from step 2\.
 
@@ -447,6 +451,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
+    * Command is only allowed in `personList` view.
 3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
@@ -454,9 +459,12 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
-	* 2a1. ContactMate shows an error message.  
+* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
+    * 2a1. ContactMate shows an error message.  
 	* Use case resumes from step 2\.
+* 2b. ContactMate detects the command is attempted in `historyList` view.
+    * 3b1. ContactMate shows an error message.
+    * Use case resumes from step 1\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -473,7 +481,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
       Use case ends.
 
 **Extensions:**  
-* 1a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
+* 1a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
 	* 1a1. ContactMate shows an error message.  
 	* Use case resumes from step 1\.  
 * 1b. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
@@ -529,18 +537,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all people are listed in the `personList`.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all people using the `list` command. There must be at least one person in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person shown in the list is deleted from the list. Details of the deleted person are displayed in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details is displayed in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
+      Expected: Similar to the previous case.
 
 1. _{ more test cases …​ }_
 
