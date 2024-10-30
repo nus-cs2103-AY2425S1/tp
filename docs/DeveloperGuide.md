@@ -461,6 +461,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
       Use case resumes from step 2.
 
+**Use case: UC04 - Setting a reminder for an appointment**
+
+**Preconditions: Client must have at least one appointment.**
+
+**MSS**
+
+1. Physiotherapists sets a reminder for an appointment made for a client.
+2. PhysioPal creates a reminder for the client with the reminder time provided.
+3. PhysioPal confirms creation of reminder and displays a success message.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1c. PhysioPal detects an empty input for reminder time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data
+    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist. Use case resumes from step 2.
+
+**Use Case: UC05 - Displaying upcoming appointments on launch screen**
+
+**MSS**
+1. Physiotherapist launches PhysioPal.
+2. PhysioPal retrieves the top three upcoming appointments.
+3. PhysioPal displays the top three upcoming appointments in the result display box.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No upcoming appointments are found.
+    * 2a1. PhysioPal displays a message indicating no upcoming appointments.
+  
+        Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should be able to handle  all operations of at least 100 clients without a delay of more than 0.5 seconds
