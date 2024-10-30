@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,8 @@ public class AgeContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("11");
-        List<String> secondPredicateKeywordList = Arrays.asList("11", "12");
+        Set<String> firstPredicateKeywordList = Set.of("11");
+        Set<String> secondPredicateKeywordList = Set.of("11", "12");
 
         AgeContainsKeywordsPredicate firstPredicate = new AgeContainsKeywordsPredicate(firstPredicateKeywordList);
         AgeContainsKeywordsPredicate secondPredicate = new AgeContainsKeywordsPredicate(secondPredicateKeywordList);
@@ -43,11 +42,11 @@ public class AgeContainsKeywordsPredicateTest {
     public void test_ageContainsKeywords_returnsTrue() {
         // One keyword
         AgeContainsKeywordsPredicate predicate = new AgeContainsKeywordsPredicate(
-                Collections.singletonList("11"));
+                Set.of("11"));
         assertTrue(predicate.test(new PersonBuilder().withAge("11").build()));
 
         // Only one matching keyword
-        predicate = new AgeContainsKeywordsPredicate(Arrays.asList("11", "12"));
+        predicate = new AgeContainsKeywordsPredicate(Set.of("11", "12"));
         assertTrue(predicate.test(new PersonBuilder().withAge("11").build()));
     }
 
@@ -55,17 +54,17 @@ public class AgeContainsKeywordsPredicateTest {
     public void test_ageDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         AgeContainsKeywordsPredicate predicate = new AgeContainsKeywordsPredicate(
-                Collections.emptyList());
+                Collections.emptySet());
         assertFalse(predicate.test(new PersonBuilder().withAge("11").build()));
 
         // Non-matching keyword
-        predicate = new AgeContainsKeywordsPredicate(Arrays.asList("12", "13"));
+        predicate = new AgeContainsKeywordsPredicate(Set.of("12", "13"));
         assertFalse(predicate.test(new PersonBuilder().withAge("11").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("1", "2-3");
+        Set<String> keywords = Set.of("1", "2-3");
         AgeContainsKeywordsPredicate predicate = new AgeContainsKeywordsPredicate(keywords);
 
         String expected = AgeContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

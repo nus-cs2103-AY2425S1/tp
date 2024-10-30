@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,8 @@ public class DetailContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Set<String> firstPredicateKeywordList = Set.of("first");
+        Set<String> secondPredicateKeywordList = Set.of("first", "second");
 
         DetailContainsKeywordsPredicate firstPredicate = new DetailContainsKeywordsPredicate(
                 firstPredicateKeywordList);
@@ -46,36 +45,36 @@ public class DetailContainsKeywordsPredicateTest {
     public void test_detailsContainsKeywords_returnsTrue() {
         // One keyword
         DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(
-                Collections.singletonList("details"));
+                Set.of("details"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Multiple keywords
-        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("this", "details"));
+        predicate = new DetailContainsKeywordsPredicate(Set.of("this", "details"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Only one matching keyword
-        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("this", "nonsense"));
+        predicate = new DetailContainsKeywordsPredicate(Set.of("this", "nonsense"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Mixed-case keywords
-        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("tHiS", "DEtaIlS"));
+        predicate = new DetailContainsKeywordsPredicate(Set.of("tHiS", "DEtaIlS"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
     }
 
     @Test
     public void test_detailsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(Collections.emptyList());
+        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(Collections.emptySet());
         assertFalse(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Non-matching keyword
-        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("detail"));
+        predicate = new DetailContainsKeywordsPredicate(Set.of("detail"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
+        Set<String> keywords = Set.of("keyword1", "keyword2");
         DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(keywords);
 
         String expected = DetailContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

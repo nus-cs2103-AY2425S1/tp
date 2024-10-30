@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,8 @@ public class StudyGroupsContainKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Set<String> firstPredicateKeywordList = Set.of("first");
+        Set<String> secondPredicateKeywordList = Set.of("first", "second");
 
         StudyGroupsContainKeywordsPredicate firstPredicate = new StudyGroupsContainKeywordsPredicate(
                 firstPredicateKeywordList);
@@ -46,19 +45,19 @@ public class StudyGroupsContainKeywordsPredicateTest {
     public void test_studyGroupsContainKeywords_returnsTrue() {
         // One keyword
         StudyGroupsContainKeywordsPredicate predicate = new StudyGroupsContainKeywordsPredicate(
-                Collections.singletonList("Group1"));
+                Set.of("Group1"));
         assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Multiple keywords
-        predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group1", "Group2"));
+        predicate = new StudyGroupsContainKeywordsPredicate(Set.of("Group1", "Group2"));
         assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Only one matching keyword
-        predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group1", "NotGroup"));
+        predicate = new StudyGroupsContainKeywordsPredicate(Set.of("Group1", "NotGroup"));
         assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Mixed-case keywords
-        predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("gRoUP1", "GRouP2"));
+        predicate = new StudyGroupsContainKeywordsPredicate(Set.of("gRoUP1", "GRouP2"));
         assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
     }
 
@@ -66,17 +65,17 @@ public class StudyGroupsContainKeywordsPredicateTest {
     public void test_studyGroupsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         StudyGroupsContainKeywordsPredicate predicate = new StudyGroupsContainKeywordsPredicate(
-                Collections.emptyList());
+                Collections.emptySet());
         assertFalse(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Non-matching keyword
-        predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group3", "Group4"));
+        predicate = new StudyGroupsContainKeywordsPredicate(Set.of("Group3", "Group4"));
         assertFalse(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
+        Set<String> keywords = Set.of("keyword1", "keyword2");
         StudyGroupsContainKeywordsPredicate predicate = new StudyGroupsContainKeywordsPredicate(keywords);
 
         String expected = StudyGroupsContainKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

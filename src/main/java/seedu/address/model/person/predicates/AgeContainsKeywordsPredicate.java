@@ -2,7 +2,7 @@ package seedu.address.model.person.predicates;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -19,14 +19,14 @@ public class AgeContainsKeywordsPredicate implements Predicate<Person> {
             + "in the format 'number' or 'number-number'!";
 
     private static final Pattern RANGE_PATTERN = Pattern.compile("(\\d+)-(\\d+)");
-    private final List<String> keywords;
+    private final Set<String> keywords;
 
     /**
      * Constructs a {@code AgeContainsKeywordsPredicate}.
      *
      * @param keywords A list of valid keywords
      */
-    public AgeContainsKeywordsPredicate(List<String> keywords) {
+    public AgeContainsKeywordsPredicate(Set<String> keywords) {
         for (String k : keywords) {
             checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
         }

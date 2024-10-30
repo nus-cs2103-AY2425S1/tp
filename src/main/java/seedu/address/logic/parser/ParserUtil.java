@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Detail;
@@ -18,8 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.StudyGroupTag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser
- * classes.
+ * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
@@ -27,11 +27,10 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_FILE_NAME = "File name should not be empty.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
-     * and trailing whitespaces will be trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero
-     *                        unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -42,8 +41,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code filePath} into an {@code File} and returns it. Leading
-     * and trailing whitespaces will be trimmed.
+     * Parses {@code filePath} into an {@code File} and returns it. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the specified filePath is invalid (empty string filePath or null filePath).
      */
@@ -58,9 +56,9 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_FILE_NAME);
         }
     }
+
     /**
-     * Parses a {@code String name} into a {@code Name}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -74,8 +72,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -89,8 +86,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String gender} into a {@code Gender}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String gender} into a {@code Gender}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code gender} is invalid.
      */
@@ -104,8 +100,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String age} into an {@code Age}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String age} into an {@code Age}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code age} is invalid.
      */
@@ -119,8 +114,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String detail} into a {@code Detail}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String detail} into a {@code Detail}. Leading and trailing whitespaces will be trimmed.
      */
     public static Detail parseDetail(String detail) {
         requireNonNull(detail);
@@ -129,8 +123,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String studyGroup} into a {@code StudyGroupTag}. Leading and
-     * trailing whitespaces will be trimmed.
+     * Parses a {@code String studyGroup} into a {@code StudyGroupTag}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code studyGroup} is invalid.
      */
@@ -144,8 +138,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> studyGroups} into a
-     * {@code Set<StudyGroupTag>}.
+     * Parses {@code Collection<String> studyGroups} into a {@code Set<StudyGroupTag>}.
      */
     public static Set<StudyGroupTag> parseStudyGroups(Collection<String> studyGroups)
             throws ParseException {
@@ -155,5 +148,53 @@ public class ParserUtil {
             studyGroupSet.add(parseStudyGroup(tagName));
         }
         return studyGroupSet;
+    }
+
+    /**
+     * Parses input {@code String keywords} into a {@code Set<String>}. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the given {@code studyGroup} is invalid.
+     */
+    public static Set<String> parseKeywords(String keywords, Prefix prefix)
+            throws ParseException {
+        requireNonNull(keywords);
+        String trimmedKeywords = keywords.trim();
+        if (trimmedKeywords.length() == 0) {
+            throw new ParseException(String.format(FindCommand.MESSAGE_EMPTY_CRITERIA, prefix));
+        }
+        return new HashSet<String>(Set.of(trimmedKeywords.split("\\s+")));
+    }
+
+    /**
+     * Parses input {@code String agekeywords} into a {@code Set<String>}.
+     *
+     * @throws ParseException if any of the given {@code keywords} is invalid.
+     */
+    public static Set<String> parseAgeKeywords(String ageKeywords, Prefix prefix)
+            throws ParseException {
+        Set<String> ageKeywordSet = parseKeywords(ageKeywords, prefix);
+        for (String keyword : ageKeywordSet) {
+            // if (!AgeContainsKeywordsPredicate.isValidInput(keyword)) {
+            // throw new ParseException(AgeContainsKeywordsPredicate.MESSAGE_CONSTRAINTS);
+            // }
+        }
+        return ageKeywordSet;
+    }
+
+    /**
+     * Parses input {@code String keywords} into a {@code Set<String>}.
+     *
+     * @throws ParseException if any of the given {@code keywords} is invalid.
+     */
+    public static Set<String> parseGenderKeywords(String genderKeywords, Prefix prefix)
+            throws ParseException {
+        Set<String> genderKeywordSet = parseKeywords(genderKeywords, prefix);
+        for (String keyword : genderKeywordSet) {
+            // if (!GenderMatchesKeywordsPredicate.isValidInput(keyword)) {
+            // throw new ParseException(GenderMatchesKeywordsPredicate.MESSAGE_CONSTRAINTS);
+            // }
+        }
+        return genderKeywordSet;
     }
 }
