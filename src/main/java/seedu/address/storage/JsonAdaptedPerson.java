@@ -114,6 +114,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
         }
+
         final Appointment modelAppointment = appointment.toModelType();
 
         if (property == null) {
