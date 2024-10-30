@@ -80,6 +80,7 @@ public class ArgumentPredicate implements Predicate<Person> {
         addIfPresent("deadline", p -> inputParameters.get("deadline")
                 .equals(p.getDeadline()), person, validParameters);
 
+        @SuppressWarnings("unchecked")
         Set<Tag> tags = (Set<Tag>) inputParameters.get("tags");
         addIfTagPresent(tags, p -> tags.stream()
                 .anyMatch(p.getTags()::contains), person, validParameters);
