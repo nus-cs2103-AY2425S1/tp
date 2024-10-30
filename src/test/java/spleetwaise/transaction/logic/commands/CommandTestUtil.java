@@ -63,11 +63,6 @@ public class CommandTestUtil {
         // only do so by copying its components.
         TransactionBook expectedTransactionBook = new TransactionBook(actualModel.getTransactionBook());
         List<Transaction> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTransactionList());
-
-        try {
-            CommandResult cr = command.execute();
-        } catch (CommandException ce) {
-        }
         Assert.assertThrows(CommandException.class, expectedMessage, command::execute);
         assertEquals(expectedTransactionBook, actualModel.getTransactionBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredTransactionList());
