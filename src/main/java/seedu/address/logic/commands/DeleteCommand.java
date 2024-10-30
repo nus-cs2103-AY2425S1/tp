@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,14 +28,29 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final IdentityNumber identityNumber;
+    private final Index targetIndex;
 
     public DeleteCommand(IdentityNumber identityNumber) {
         this.identityNumber = identityNumber;
+        this.targetIndex = null;
+    }
+
+    public DeleteCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+        this.identityNumber = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (identityNumber == null) {
+            return deleteByIndex(model);
+        } else {
+            return deleteByIdentityNumber(model);
+        }
+    }
+
+    private CommandResult deleteByIdentityNumber(Model model) throws CommandException{
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
@@ -51,6 +67,16 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private CommandResult deleteByIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -73,6 +99,7 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
                 .add("identityNumber", identityNumber)
                 .toString();
     }
