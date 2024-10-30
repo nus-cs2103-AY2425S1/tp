@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.commons.util.ToStringBuilder;
@@ -31,6 +32,7 @@ import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -113,7 +115,28 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(AddressBookModel.PREDICATE_SHOW_ALL_PERSONS);
+
+        updatePersonsInTransactions(model, personToEdit, editedPerson);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private void updatePersonsInTransactions(
+            CommonModel model, Person oldPerson,
+            Person updatedPerson
+    ) {
+        requireNonNull(model);
+        requireNonNull(oldPerson);
+        requireNonNull(updatedPerson);
+        ObservableList<Transaction> txnList = model.getFilteredTransactionList();
+
+        txnList.forEach(txn -> {
+            if (txn.getPerson().equals(oldPerson)) {
+                model.setTransaction(txn, new Transaction(txn.getId(), updatedPerson, txn.getAmount(),
+                        txn.getDescription(), txn.getDate(), txn.getCategories()
+                ).setStatus(txn.getStatus()));
+            }
+        });
     }
 
     @Override
