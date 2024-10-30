@@ -165,7 +165,7 @@ The find command allows the user to filter the list of contacts by (at least one
 
 </div>
 
-The user executes an find command with some inputs, for e.g. `find n/Alex Bernice t/1A`, which goes through the `Logic` component as shown by the following sequence diagram:
+The user executes a find command with some inputs, for e.g. `find n/Alex Bernice t/1A`, which goes through the `Logic` component as shown by the following sequence diagram:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram-Logic.png)
 
