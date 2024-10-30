@@ -1,0 +1,257 @@
+/* General Background */
+.background {
+    -fx-background-color: #cfe1b9;
+}
+
+/* background */
+.stack-pane {
+    -fx-background-color: #f9f9f9;
+}
+
+.menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+
+/* Menu Text */
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #333333;
+}
+
+/* Menu Item */
+.menu-item {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
+    -fx-text-fill: #333333;
+}
+
+.menu-item:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.logo-container {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+/* footer */
+.status-bar {
+    -fx-background-color: #cfe1b9;
+}
+
+/* Used in file, help and student details */
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #333333;
+    -fx-opacity: 0.9;
+}
+
+.label-bright, .label-header {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
+/* Headers and Bright Text */
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #333333;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #f4f4f4;
+    -fx-text-fill: #333333;
+    -fx-border-color: #cccccc;
+}
+
+/* Tab Pane */
+.tab-pane {
+    -fx-padding: 0;
+    -fx-background-color: #ffffff;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+    -fx-background-color: #e0e0e0;
+}
+
+/* Table View */
+.table-view {
+    -fx-base: #ffffff;
+    -fx-control-inner-background: #ffffff;
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: #dddddd;
+    -fx-table-header-border-color: #dddddd;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #333333;
+    -fx-alignment: center-left;
+}
+
+/* List View IMPORTANT SHUD REMOVE*/
+.list-view {
+    -fx-background-color: #f9f9f9;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #d1eaff;
+}
+
+.list-cell .label {
+    -fx-text-fill: #333333;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #e0e0e0;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #333333;
+    -fx-border-color: #cccccc;
+}
+.button:hover {
+    -fx-background-color: #d0d0d0;
+}
+.button:pressed {
+    -fx-background-color: #c0c0c0;
+    -fx-text-fill: #333333;
+}
+.button:disabled {
+    -fx-opacity: 0.6;
+}
+
+/* Dialog Pane */
+.dialog-pane {
+    -fx-background-color: #ffffff;
+}
+.dialog-pane .label.content {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+.dialog-pane:header .header-panel .label {
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-text-fill: #333333;
+}
+
+/* Scroll Bar */
+.scroll-bar {
+    -fx-background-color: #e0e0e0;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #cccccc;
+}
+
+/* Specific Elements Boxes Conatiner*/
+
+#profilePane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #ff0000;
+}
+
+#commandTextField {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: #333333;
+    -fx-background-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+#filterField, #studentListPanel, #studentWebpage {
+    -fx-effect: innershadow(gaussian, gray, 10, 0, 0, 0);
+}
+
+#resultDisplay {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #f9f9f9;
+}
+#resultDisplay .content {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+#tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+}
+
+.attendanceFlowPane {
+    -fx-background-color: #f2f2f2;
+    -fx-padding: 5px;
+}
+
+.attendance-date-label {
+    -fx-text-fill: #333333;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 10px;
+}
+
+.studentListPanelPlaceholder {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
