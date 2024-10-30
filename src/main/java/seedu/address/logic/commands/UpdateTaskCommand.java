@@ -38,8 +38,8 @@ public class UpdateTaskCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_TASK_INDEX + "TASK_INDEX "
-            + "[" + PREFIX_TASK_DESCRIPTION + "TASK] "
-            + "[" + PREFIX_TASK_DEADLINE + "DEADLINE] \n"
+            + "[" + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION] "
+            + "[" + PREFIX_TASK_DEADLINE + "TASK_DEADLINE] \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Cristiano Ronaldo "
             + PREFIX_TASK_INDEX + "1 " + PREFIX_TASK_DESCRIPTION + "Handle MC";
 

@@ -22,8 +22,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students based on name, subject or level, "
             + "using the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + "[" + PREFIX_NAME + "KEYWORD] "
-            + "[" + PREFIX_LEVEL + "KEYWORD] "
-            + "[" + PREFIX_SUBJECT + "KEYWORD] " + "\n"
+            + "[" + PREFIX_LEVEL + "LEVEL] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] " + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice";
     // todo: CHANGE MESSAGE
 
