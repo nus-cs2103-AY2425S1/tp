@@ -130,7 +130,6 @@ class JsonAdaptedStudent {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof JsonAdaptedStudent)) {
             return false;
         }

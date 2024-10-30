@@ -25,6 +25,7 @@ public enum CommandType {
     ADDTOCONSULT,
     LISTCONSULT,
     EXPORTCONSULT,
+    IMPORTCONSULT,
 
     // Command Type for Lesson
     ADDLESSON,

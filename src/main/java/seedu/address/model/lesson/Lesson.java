@@ -5,9 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.model.datetime.Date;
@@ -25,38 +23,41 @@ public class Lesson {
 
     private final Date date;
     private final Time time;
-    private final List<Student> students;
-    private final Map<Student, Boolean> attendanceMap;
+    private final List<StudentLessonInfo> studentLessonInfoList;
 
     /**
      * Constructs a {@code Lesson} with the given arguments.
-     * The students in the student list must be present in the attendanceMap.
-     * If the attendanceMap contains extra students not present in the list, they are ignored.
      *
      * @param date The date of the lesson.
      * @param time The time of the lesson.
-     * @param students A list of students attending the lesson. The list may be empty, but not null.
-     * @param attendanceMap A map of students to their attendance, represented by a boolean.
      */
-    public Lesson(Date date, Time time, List<Student> students, Map<Student, Boolean> attendanceMap) {
-        requireAllNonNull(date, time, students, attendanceMap);
+    public Lesson(Date date, Time time) {
+        requireAllNonNull(date, time);
         this.date = date;
         this.time = time;
-        this.students = new ArrayList<>();
-        this.attendanceMap = new HashMap<>();
+        this.studentLessonInfoList = new ArrayList<>();
+    }
 
-        for (Student student : students) {
-            assert attendanceMap.containsKey(student); // students in list must exist in attendanceMap
-            this.students.add(student);
-            this.attendanceMap.put(student, attendanceMap.get(student));
-        }
+    /**
+     * Constructs a {@code Lesson} with the given arguments.
+     *
+     * @param date The date of the lesson.
+     * @param time The time of the lesson.
+     * @param studentLessonInfoList A list of student lesson info objects that may be empty but not null.
+     * @throws NullPointerException if any of the arguments are null.
+     */
+    public Lesson(Date date, Time time, List<StudentLessonInfo> studentLessonInfoList) {
+        requireAllNonNull(date, time, studentLessonInfoList);
+        studentLessonInfoList.forEach(Objects::requireNonNull);
+        this.date = date;
+        this.time = time;
+        this.studentLessonInfoList = new ArrayList<>(studentLessonInfoList);
     }
 
     /**
      * Constructs a copy of the given lesson.
-     * Creates new instances of date, time, and the student list (not the students)
-     * to
-     * reduce the risk of accidental mutation.
+     * Creates new instances of date, time, and the studentLessonInfo list (not the entries themselves)
+     * to reduce the risk of accidental mutation.
      *
      * @param lesson The lesson to copy.
      */
@@ -64,8 +65,7 @@ public class Lesson {
         requireNonNull(lesson);
         this.date = new Date(lesson.getDate().getValue());
         this.time = new Time(lesson.getTime().getValue());
-        this.students = new ArrayList<>(lesson.getStudents());
-        this.attendanceMap = new HashMap<>(lesson.getAttendanceMap());
+        this.studentLessonInfoList = new ArrayList<>(lesson.getStudentLessonInfoList());
     }
 
     /**
@@ -92,16 +92,17 @@ public class Lesson {
      * @return A list of students attending the lesson.
      */
     public List<Student> getStudents() {
-        return Collections.unmodifiableList(students);
+        // IntelliJ says wrapping with Collections.unmodifiableList is redundant
+        return studentLessonInfoList.stream().map(StudentLessonInfo::getStudent).toList();
     }
 
     /**
-     * Returns an immutable map of students to their attendance, represented by a boolean.
+     * Returns an immutable list of students attending the lesson.
      *
-     * @return A map of students to their attendance.
+     * @return A list of students attending the lesson.
      */
-    public Map<Student, Boolean> getAttendanceMap() {
-        return Collections.unmodifiableMap(attendanceMap);
+    public List<StudentLessonInfo> getStudentLessonInfoList() {
+        return Collections.unmodifiableList(studentLessonInfoList);
     }
 
     /**
@@ -112,7 +113,21 @@ public class Lesson {
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return students.contains(student);
+        return studentLessonInfoList.stream()
+                .anyMatch(studentLessonInfo -> studentLessonInfo.isForStudent(student));
+    }
+
+    /**
+     * Helper method to get the StudentLessonInfo wrapper object for the given student.
+     *
+     * @param student The student to find with.
+     * @return The StudentLessonInfo object associated with the given student.
+     * @throws StudentNotFoundException if the student is not in this lesson.
+     */
+    private StudentLessonInfo getStudentLessonInfo(Student student) throws StudentNotFoundException {
+        return studentLessonInfoList.stream()
+                .filter(studentLessonInfo -> studentLessonInfo.isForStudent(student))
+                .findAny().orElseThrow(StudentNotFoundException::new);
     }
 
     /**
@@ -121,35 +136,36 @@ public class Lesson {
      * @param student The student to add.
      */
     public void addStudent(Student student) {
+        requireNonNull(student);
         if (hasStudent(student)) {
             throw new DuplicateStudentException();
         }
-        students.add(student);
-        this.attendanceMap.put(student, false); // also set default attendance as false
+        studentLessonInfoList.add(StudentLessonInfo.initialise(student));
     }
 
     /**
-     * Removes a student from the lesson.
+     * Removes a student from the lesson. If the student is not present, do nothing.
      *
      * @param student The student to remove.
      */
     public void removeStudent(Student student) {
-        students.remove(student);
-        this.attendanceMap.remove(student);
+        requireNonNull(student);
+        studentLessonInfoList.removeIf(studentLessonInfo -> studentLessonInfo.isForStudent(student));
     }
 
     /**
      * Sets the attendance of the student to the specified value.
      *
      * @param student The student to mark.
-     * @param isAttending True if the student is attending this lesson, false otherwise.
+     * @param attendance True if the student is attending this lesson, false otherwise.
      * @throws StudentNotFoundException if the student is not in the attendance map.
      */
-    public void setAttendance(Student student, boolean isAttending) throws StudentNotFoundException {
-        if (!this.attendanceMap.containsKey(student)) {
-            throw new StudentNotFoundException();
-        }
-        this.attendanceMap.put(student, isAttending);
+    public void setAttendance(Student student, boolean attendance) throws StudentNotFoundException {
+        requireNonNull(student);
+        StudentLessonInfo oldEntry = getStudentLessonInfo(student);
+        studentLessonInfoList.remove(oldEntry);
+        StudentLessonInfo newEntry = oldEntry.setAttendance(attendance);
+        studentLessonInfoList.add(newEntry);
     }
 
     /**
@@ -159,10 +175,33 @@ public class Lesson {
      * @return True if the student is marked as having attended the lesson.
      */
     public boolean getAttendance(Student student) throws StudentNotFoundException {
-        if (!this.attendanceMap.containsKey(student)) {
-            throw new StudentNotFoundException();
-        }
-        return this.attendanceMap.get(student);
+        return getStudentLessonInfo(student).getAttendance();
+    }
+
+    /**
+     * Sets the participation of the student to the specified value.
+     *
+     * @param student The student to mark.
+     * @param participationScore Number representing the student's participation.
+     * @throws StudentNotFoundException if the student is not in the lesson.
+     */
+    public void setParticipation(Student student, int participationScore) throws StudentNotFoundException {
+        requireNonNull(student);
+        StudentLessonInfo oldEntry = getStudentLessonInfo(student);
+        studentLessonInfoList.remove(oldEntry);
+        StudentLessonInfo newEntry = oldEntry.setParticipationScore(participationScore);
+        studentLessonInfoList.add(newEntry);
+    }
+
+    /**
+     * Returns the number representing the student's participation for this lesson.
+     *
+     * @param student The student to check.
+     * @return Number representing the student's participation.
+     * @throws StudentNotFoundException if the student is not in the lesson.
+     */
+    public int getParticipation(Student student) throws StudentNotFoundException {
+        return getStudentLessonInfo(student).getParticipationScore();
     }
 
     /**
@@ -184,18 +223,17 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
         return date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
-                && students.equals(otherLesson.students)
-                && attendanceMap.equals(otherLesson.attendanceMap);
+                && studentLessonInfoList.equals(otherLesson.studentLessonInfoList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, time, students, attendanceMap);
+        return Objects.hash(date, time, studentLessonInfoList);
     }
 
     @Override
     public String toString() {
-        return String.format("Lesson[date=%s, time=%s, students=%s, attendanceMap=%s]",
-                date, time, students, attendanceMap);
+        return String.format("Lesson[date=%s, time=%s, studentLessonInfoList=%s]",
+                date, time, studentLessonInfoList);
     }
 }

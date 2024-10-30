@@ -33,6 +33,7 @@ import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
 import seedu.address.logic.commands.consultation.ExportConsultCommand;
+import seedu.address.logic.commands.consultation.ImportConsultCommand;
 import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.commands.lesson.AddLessonCommand;
@@ -243,6 +244,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_import() throws Exception {
+        String fileName = "import.csv";
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ImportCommand(fileName), command);
+    }
+
+    @Test
     public void parseCommand_exportConsult() throws Exception {
         String fileName = "consultations";
         ExportConsultCommand command = (ExportConsultCommand) parser.parseCommand(
@@ -256,11 +265,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_import() throws Exception {
-        String fileName = "import.csv";
-        ImportCommand command = (ImportCommand) parser.parseCommand(
-                ImportCommand.COMMAND_WORD + " " + fileName);
-        assertEquals(new ImportCommand(fileName), command);
+    public void parseCommand_importConsult() throws Exception {
+        String filePath = "consultations.csv";
+        ImportConsultCommand command = (ImportConsultCommand) parser.parseCommand(
+                ImportConsultCommand.COMMAND_WORD + " " + filePath);
+        assertEquals(new ImportConsultCommand(filePath), command);
+
+        // Test with home directory path
+        String homeFilePath = "~/Documents/consultations.csv";
+        ImportConsultCommand homeCommand = (ImportConsultCommand) parser.parseCommand(
+                ImportConsultCommand.COMMAND_WORD + " " + homeFilePath);
+        assertEquals(new ImportConsultCommand(homeFilePath), homeCommand);
     }
 
     @Test
