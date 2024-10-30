@@ -13,15 +13,14 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.ddd.model.Model;
+
 /**
- * Lists all contacts in the address book to the user.
+ * Lists either Contacts or Events in the address book to the user.
  */
-public interface ListCommand {
+public abstract class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
-    public static final String FLAG_PARSE_ERROR = "to list client contacts, vendor contacts, or events respectively.";
-
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": lists contacts with optional filters";
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " [{"
             + FLAG_CLIENT + " | "
@@ -49,4 +48,5 @@ public interface ListCommand {
             + CLIENT_EXAMPLE_USAGE + "\n"
             + VENDOR_EXAMPLE_USAGE + "\n"
             + EVENT_EXAMPLE_USAGE + "\n";
+    public abstract CommandResult execute(Model model);
 }

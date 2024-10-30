@@ -11,9 +11,9 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
 /**
- * Lists all events in the address book to the user.
+ * Lists events in the address book to the user.
  */
-public class ListEventCommand extends Command implements ListCommand {
+public class ListEventCommand extends ListCommand {
 
     public static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
 

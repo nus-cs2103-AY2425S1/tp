@@ -93,26 +93,7 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case ListCommand.COMMAND_WORD:
-
-            if (commandFlag == null) {
-                return new ListContactCommandParser().parse(arguments);
-            }
-
-            switch(commandFlag) {
-
-            case CLIENT:
-                return new ListClientCommandParser().parse(arguments);
-
-            case VENDOR:
-                return new ListVendorCommandParser().parse(arguments);
-
-            case EVENT:
-                return new ListEventCommandParser().parse(arguments);
-            // Will never reach this case as my commandFlag can only be of those three above.
-            default:
-                assert false : "Unexpected commandFlag: " + commandFlag;
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            }
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

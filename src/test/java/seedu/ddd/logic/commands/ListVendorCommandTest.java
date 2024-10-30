@@ -25,9 +25,9 @@ import seedu.ddd.model.contact.common.predicate.VendorTypePredicate;
 
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListContactCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListVendorCommand.
  */
-public class ListContactCommandTest {
+public class ListVendorCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -40,23 +40,8 @@ public class ListContactCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListContactCommand(Model.PREDICATE_SHOW_ALL_CONTACTS),
-                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                        expectedModel.getFilteredContactListSize()), expectedModel);
-    }
-
-    @Test
-    public void executeFilterListByClient() {
-        expectedModel.updateFilteredContactList(new ClientTypePredicate());
-        assertCommandSuccess(new ListContactCommand(new ClientTypePredicate()),
-                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                        expectedModel.getFilteredContactListSize()), expectedModel);
-    }
-
-    @Test
-    public void executeFilterListByVendor() {
         expectedModel.updateFilteredContactList(new VendorTypePredicate());
-        assertCommandSuccess(new ListContactCommand(new VendorTypePredicate()),
+        assertCommandSuccess(new ListVendorCommand(new VendorTypePredicate()),
                 model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                         expectedModel.getFilteredContactListSize()), expectedModel);
     }
@@ -67,31 +52,31 @@ public class ListContactCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        ListContactCommand listContactFirstCommand = new ListContactCommand(firstPredicate);
-        ListContactCommand listContactSecondCommand = new ListContactCommand(secondPredicate);
+        ListVendorCommand listVendorFirstCommand = new ListVendorCommand(firstPredicate);
+        ListVendorCommand listVendorSecondCommand = new ListVendorCommand(secondPredicate);
 
         // same object -> return true
-        assertTrue(listContactFirstCommand.equals(listContactFirstCommand));
+        assertTrue(listVendorFirstCommand.equals(listVendorFirstCommand));
 
         // same values -> return true
-        ListContactCommand listFirstContactCommandCopy = new ListContactCommand(firstPredicate);
-        assertTrue(listContactFirstCommand.equals(listFirstContactCommandCopy));
+        ListVendorCommand listFirstVendorCommandCopy = new ListVendorCommand(firstPredicate);
+        assertTrue(listVendorFirstCommand.equals(listFirstVendorCommandCopy));
 
         // different types -> return false
-        assertFalse(listContactFirstCommand.equals(1));
+        assertFalse(listVendorFirstCommand.equals(1));
 
         // null -> return false
-        assertFalse(listContactFirstCommand.equals(null));
+        assertFalse(listVendorFirstCommand.equals(null));
 
         // different person -> return false
-        assertFalse(listContactFirstCommand.equals(listContactSecondCommand));
+        assertFalse(listVendorFirstCommand.equals(listVendorSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        ListContactCommand command = new ListContactCommand(predicate);
+        ListVendorCommand command = new ListVendorCommand(predicate);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
@@ -100,7 +85,7 @@ public class ListContactCommandTest {
     public void execute_multipleKeywords_multipleContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        ListContactCommand command = new ListContactCommand(predicate);
+        ListVendorCommand command = new ListVendorCommand(predicate);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredContactList());
@@ -110,12 +95,12 @@ public class ListContactCommandTest {
         NameContainsKeywordsPredicate predicateOne = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         ClientTypePredicate predicateTwo = new ClientTypePredicate();
         VendorTypePredicate predicateThree = new VendorTypePredicate();
-        ListContactCommand listCommandOne = new ListContactCommand(predicateOne);
-        ListContactCommand listCommandTwo = new ListContactCommand(predicateTwo);
-        ListContactCommand listCommandThree = new ListContactCommand(predicateThree);
-        String expectedOne = ListContactCommand.class.getCanonicalName() + "{predicate=" + predicateOne + "}";
-        String expectedTwo = ListContactCommand.class.getCanonicalName() + "{predicate=" + predicateTwo + "}";
-        String expectedThree = ListContactCommand.class.getCanonicalName() + "{predicate=" + predicateThree + "}";
+        ListVendorCommand listCommandOne = new ListVendorCommand(predicateOne);
+        ListVendorCommand listCommandTwo = new ListVendorCommand(predicateTwo);
+        ListVendorCommand listCommandThree = new ListVendorCommand(predicateThree);
+        String expectedOne = ListVendorCommand.class.getCanonicalName() + "{predicate=" + predicateOne + "}";
+        String expectedTwo = ListVendorCommand.class.getCanonicalName() + "{predicate=" + predicateTwo + "}";
+        String expectedThree = ListVendorCommand.class.getCanonicalName() + "{predicate=" + predicateThree + "}";
 
         assertEquals(expectedOne, listCommandOne.toString());
         assertEquals(expectedTwo, listCommandTwo.toString());

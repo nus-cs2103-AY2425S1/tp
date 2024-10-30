@@ -10,53 +10,39 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
-
 /**
- * Lists all contacts in the address book to the user.
+ * Lists Vendors in the address book to the user.
  */
-public class ListContactCommand extends ListCommand {
-
-
-    public static final String MESSAGE_SUCCESS = "Listed all contacts";
+public class ListVendorCommand extends ListContactCommand {
 
     private static final Predicate<Event> CLEAR_EVENTS = any -> false;
-
-    private final Predicate<Contact> predicate;
-
-    public ListContactCommand(Predicate<Contact> predicate) {
-        this.predicate = predicate;
+    public ListVendorCommand(Predicate<Contact> predicate) {
+        super(predicate);
     }
-
-    public Predicate<Contact> getPredicate() {
-        return this.predicate;
-    }
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredEventList(CLEAR_EVENTS);
-        model.updateFilteredContactList(predicate);
+        model.updateFilteredContactList(this.getPredicate());
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactList().size()));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof ListContactCommand)) {
+        if (!(other instanceof ListVendorCommand)) {
             return false;
         }
-        ListContactCommand otherListContactCommand = (ListContactCommand) other;
-        return predicate.equals(otherListContactCommand.predicate);
+        ListVendorCommand otherListVendorCommand = (ListVendorCommand) other;
+        return this.getPredicate().equals(otherListVendorCommand.getPredicate());
     }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", this.getPredicate())
                 .toString();
     }
 }
-
