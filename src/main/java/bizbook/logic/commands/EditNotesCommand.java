@@ -61,8 +61,7 @@ public class EditNotesCommand extends Command {
 
         if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
-        }
-        else if (noteIndex.getZeroBased() >= notesList.size()) {
+        } else if (noteIndex.getZeroBased() >= notesList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
 
