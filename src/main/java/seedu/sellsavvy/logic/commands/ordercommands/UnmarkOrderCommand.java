@@ -31,7 +31,7 @@ public class UnmarkOrderCommand extends Command {
 
     public static final String MESSAGE_UNMARK_ORDER_SUCCESS =
             "The order has been reverted to the pending status: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_UNMARKED = "The order is currently not marked as completed";
+    public static final String MESSAGE_ORDER_ALREADY_UNMARKED = "The order has not been marked as completed.";
 
     private final Index index;
 
