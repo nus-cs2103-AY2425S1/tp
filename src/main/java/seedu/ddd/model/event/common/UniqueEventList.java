@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.common.Id;
-import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
 import seedu.ddd.model.event.exceptions.EventNotFoundException;
 
