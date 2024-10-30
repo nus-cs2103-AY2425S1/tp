@@ -14,19 +14,19 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "del";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Deletes the person identified by the name used in the address book.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: n/NAME\n"
+            + "\nParameters: n/NAME\n"
             + "Example: " + COMMAND_WORD + " n/Li Sirui";
 
     public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found.";
     public static final String MESSAGE_MISSING_NAME = "Contact name is required.";
     public static final String MESSAGE_CONFIRMATION_PROMPT = """
             Are you sure you want to delete the following contact?
-            Enter 'delete-y' to confirm, or 'delete-n' to cancel.
+            Enter 'y' to confirm, or 'n' to cancel.
             Name: %1$s
             Phone: %2$s
             Email: %3$s
