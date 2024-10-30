@@ -44,7 +44,7 @@ activate LoadCommand
 LoadCommand --> LogicManager : result
 deactivate LoadCommand
 LoadCommand -[hidden]-> LogicManager : result
-destroy LoadCommand
+
 
 LogicManager -> LogicManager : UpdateModelWithStorage()
 activate LogicManager
@@ -63,6 +63,8 @@ deactivate Model
 
 LogicManager --> LogicManager
 deactivate LogicManager
+
+destroy LoadCommand
 
 [<--LogicManager
 deactivate LogicManager

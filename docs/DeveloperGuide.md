@@ -283,14 +283,24 @@ In this scenario, the user is trying to archive the current address book into th
 
 ![ArchiveToNExistingFile](images/ArchiveToExistingFile.png)
 
+The following sequence diagram illustrate how an archive operation is processed under `Logic` component.
+
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Scenario 3 Loading from a file
 
 In this scenario, the user is trying to load the an address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
 ![Load](images/Load.png)
 
-{Sequence Diagram will be added later}
+The following sequence diagram illustrate how an archive operation is processed under `Logic` component.
 
---------------------------------------------------------------------------------------------------------------------
+![LoadSequenceDiagram](images/LoadSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `LoadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+-------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
