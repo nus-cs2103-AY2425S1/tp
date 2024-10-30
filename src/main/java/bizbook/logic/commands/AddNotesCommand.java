@@ -59,17 +59,17 @@ public class AddNotesCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         // Update notes with new note
-        ArrayList<Note> notesToEdit = new ArrayList<>(personToEdit.getNotes());
+        ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
-        if (notesToEdit.contains(note)) {
+        if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
 
-        notesToEdit.add(note);
+        notesList.add(note);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), notesToEdit);
+                personToEdit.getAddress(), personToEdit.getTags(), notesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
