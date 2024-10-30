@@ -12,8 +12,8 @@ public enum CommandKeywords {
     edit,
     exit,
     find,
-    view,
-    list;
+    home,
+    view;
 
     /**
      * Checks if the given keyword is a valid command keyword.
