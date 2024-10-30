@@ -15,9 +15,9 @@ import seedu.address.model.assignment.exceptions.ScoreExceedsMaxScoreException;
 public class Assignment {
 
     public static final String MAX_SCORE_MESSAGE_CONSTRAINTS =
-            "The maximum score should be greater than or equal to the minimum score of 0";
+            "The maximum score should be greater than 0 and should not be blank.";
     public static final String SCORE_MESSAGE_CONSTRAINTS =
-            "The score should be between (inclusive) of the minimum and maximum score";
+            "The score should be between (inclusive) of the minimum and maximum score.";
 
     private static final int MIN_SCORE = 0;
 
