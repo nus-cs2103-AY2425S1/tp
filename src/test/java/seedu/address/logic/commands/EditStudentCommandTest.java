@@ -47,9 +47,8 @@ public class EditStudentCommandTest {
         tags.add(new Tag("GoodAtUI"));
 
         editPersonDescriptorDuplicate = new EditPersonDescriptor();
-        editPersonDescriptorDuplicate.setName(new Name("Bob"));
-        editPersonDescriptorDuplicate.setTags(tags);
-        editPersonDescriptorDuplicate.setEmail(new Email("bob@u.nus.edu"));
+        editPersonDescriptorDuplicate.setName(new Name("Amy"));
+        editPersonDescriptorDuplicate.setEmail(new Email("amy@u.nus.edu"));
         validDescriptor = new EditPersonDescriptor();
         validDescriptor.setName(new Name("NONE"));
         editedStudent = new Student(new Name("NONE"),
