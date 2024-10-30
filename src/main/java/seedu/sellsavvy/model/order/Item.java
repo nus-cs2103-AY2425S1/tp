@@ -10,7 +10,7 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 public class Item {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Item can contain any printable characters, but it should not be blank";
+            "Item can contain any printable characters, but it should not be blank.";
 
     /*
      * The first character of the item must not be a whitespace,
