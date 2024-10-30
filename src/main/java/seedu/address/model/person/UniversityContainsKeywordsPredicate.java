@@ -12,6 +12,9 @@ public class UniversityContainsKeywordsPredicate implements Predicate<Person> {
         this.keyword = keyword.toLowerCase();
     }
 
+    public String getKeyword() {
+        return keyword;
+    }
     @Override
     public boolean test(Person person) {
         return person.getUniversity().value.toLowerCase().contains(keyword.toLowerCase());

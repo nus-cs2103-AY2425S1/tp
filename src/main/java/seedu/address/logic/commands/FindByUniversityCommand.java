@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_UNIVERSITY;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_FOUND_UNIVERSITY;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.UniversityContainsKeywordsPredicate;
 
@@ -28,8 +30,18 @@ public class FindByUniversityCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int count = model.getFilteredPersonList().size();
+        String university = predicate.getKeyword();
+        university = university.toUpperCase();
+        String message;
+        if (count == 0) {
+            message = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        } else if (count == 1) {
+            message = String.format(MESSAGE_PERSON_FOUND_UNIVERSITY, university);
+        } else {
+            message = String.format(MESSAGE_PERSONS_FOUND_UNIVERSITY, count, university);
+        }
+        return new CommandResult(message);
     }
 
     @Override

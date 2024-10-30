@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_MAJOR;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -67,7 +68,7 @@ public class FindByMajorCommandTest {
 
     @Test
     public void execute_singleKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_MAJOR, 3, "Computer Science");
         MajorContainsKeywordsPredicate predicate = new MajorContainsKeywordsPredicate("Computer Science");
         FindByMajorCommand command = new FindByMajorCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
