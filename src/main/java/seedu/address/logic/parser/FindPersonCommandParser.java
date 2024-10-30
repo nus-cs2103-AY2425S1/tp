@@ -27,6 +27,9 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindPersonCommand
      * and returns an FindPersonCommand object for execution.
+     *
+     * @param args user input
+     * @return FindPersonCommand object for execution
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindPersonCommand parse(String args) throws ParseException {
@@ -39,6 +42,10 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
      * Returns a composed {@code Predicate}, given the argument multimap.
+     *
+     * @param argMultimap the argument multimap
+     * @return a composed {@code Predicate}
+     * @throws ParseException if the user input does not conform the expected format
      */
     private Predicate<Person> parsePredicate(ArgumentMultimap argMultimap) throws ParseException {
         if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME)) {
@@ -58,6 +65,10 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
     /**
      * Returns true if any of the prefixes contains non-empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap the argument multimap
+     * @param prefixes the prefixes
+     * @return true if any of the prefixes contains non-empty {@code Optional} values
      */
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

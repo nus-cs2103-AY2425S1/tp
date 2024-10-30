@@ -25,6 +25,7 @@ public class FindPersonCommand extends FindCommand<Person> {
 
     /**
      * Finds all persons with names matching the predicate in the address book to the user.
+     *
      * @param model {@code Model} which the FindPersonCommand should operate on.
      * */
     @Override
