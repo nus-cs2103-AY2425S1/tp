@@ -33,7 +33,7 @@ public class MarkPaidCommandTest {
         MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_SECOND_PERSON, new Fees("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
-                Messages.format(markedPerson));
+                markedPerson.getFullName(), markedPerson.getPayment().toString());
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(1), markedPerson);
@@ -57,7 +57,7 @@ public class MarkPaidCommandTest {
         MarkPaidCommand markPaidCommand = new MarkPaidCommand(INDEX_FIRST_PERSON, new Fees("0"));
 
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKED_PAID_SUCCESS,
-                Messages.format(markedPerson));
+                markedPerson.getFullName(), markedPerson.getPayment().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
