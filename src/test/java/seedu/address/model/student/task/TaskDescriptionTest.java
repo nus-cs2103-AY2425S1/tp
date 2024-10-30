@@ -1,5 +1,6 @@
 package seedu.address.model.student.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -38,6 +39,15 @@ public class TaskDescriptionTest {
         // same values -> returns true
         assertTrue(taskDescription.equals(new TaskDescription("Mark work")));
 
+        // same values, different cases -> returns true
+        assertTrue(taskDescription.equals(new TaskDescription("MARK WORK")));
+
+        // same values, different spacing -> returns true
+        assertTrue(taskDescription.equals(new TaskDescription("Mark  work")));
+
+        // same values, different spacing and cases-> returns true
+        assertTrue(taskDescription.equals(new TaskDescription("Mark  WORk ")));
+
         // same object -> returns true
         assertTrue(taskDescription.equals(taskDescription));
 
@@ -49,5 +59,19 @@ public class TaskDescriptionTest {
 
         // different values -> returns false
         assertFalse(taskDescription.equals(new TaskDescription("Grade assignment")));
+    }
+
+    @Test
+    public void hashcode_equivalents() {
+        TaskDescription taskDescription = new TaskDescription("Mark work");
+
+        // different in cases -> return true
+        assertEquals(taskDescription.hashCode(), (new TaskDescription("MARK WORK")).hashCode());
+
+        // different in spaces -> return true
+        assertEquals(taskDescription.hashCode(), (new TaskDescription("MARK    WORK ")).hashCode());
+
+        // different values -> return false
+        assertFalse(taskDescription.hashCode() == (new TaskDescription("Grade assignment")).hashCode());
     }
 }

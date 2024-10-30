@@ -109,6 +109,14 @@ public class AddTaskCommandTest {
         // null -> returns false
         assertFalse(addTask1Command.equals(null));
 
+        // different name -> returns false
+        AddTaskCommand addTask1DifferentName = new AddTaskCommand(name2, task1);
+        assertFalse(addTask1DifferentName.equals(addTask1Command));
+
+        // different tasks -> returns false
+        AddTaskCommand addTask1DifferentTask = new AddTaskCommand(name1, task2);
+        assertFalse(addTask1DifferentTask.equals(addTask1Command));
+
         // different task and name -> returns false
         assertFalse(addTask1Command.equals(addTask2Command));
     }

@@ -44,9 +44,9 @@ public class NoteTest {
     public void hashcode_equivalents() {
         Note note = new Note("Paid for fees");
 
-        //differnt in cases -> return true
+        // different in cases -> return true
         assertEquals(note.hashCode(), (new Note("PAID for fEEs")).hashCode());
-        //different in spaces -> return true
+        // different in spaces -> return true
         assertEquals(note.hashCode(), (new Note("Paid  for    fees")).hashCode());
     }
 }

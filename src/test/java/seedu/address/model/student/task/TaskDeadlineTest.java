@@ -1,5 +1,6 @@
 package seedu.address.model.student.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -52,5 +53,16 @@ public class TaskDeadlineTest {
 
         // different values -> returns false
         assertFalse(taskDeadline.equals(new TaskDeadline("2023-01-01")));
+    }
+
+    @Test
+    public void hashcode_equivalents() {
+        TaskDeadline taskDeadline = new TaskDeadline("2024-12-25");
+
+        // same date -> return true
+        assertEquals(taskDeadline.hashCode(), (new TaskDeadline("2024-12-25")).hashCode());
+
+        // different values -> return false
+        assertFalse(taskDeadline.hashCode() == (new TaskDeadline("2023-12-25")).hashCode());
     }
 }
