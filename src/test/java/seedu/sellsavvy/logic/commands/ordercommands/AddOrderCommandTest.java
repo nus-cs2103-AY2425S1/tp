@@ -23,7 +23,10 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class AddOrderCommandTest {
 
@@ -57,7 +60,7 @@ public class AddOrderCommandTest {
     }
 
     @Test
-    public void execute_duplicateOrder_warningGiven() {
+    public void execute_duplicatePendingOrder_warningGiven() {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
         // add the first order to the person's order list
         model.getFilteredPersonList().get(0).getOrderList().add(ABACUS);
@@ -67,6 +70,21 @@ public class AddOrderCommandTest {
         personToAddUnder.getOrderList().add(ABACUS);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
                 + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
+
+        assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateCompletedOrder_success() {
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
+        Order completedAbacus = new OrderBuilder(ABACUS).withStatus(Status.COMPLETED).build();
+        model.getFilteredPersonList().get(0).getOrderList().add(completedAbacus);
+
+        Model expectedModel = model.createCopy();
+        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        personToAddUnder.getOrderList().add(ABACUS);
+        String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
+                personToAddUnder.getName(), Messages.format(ABACUS));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }

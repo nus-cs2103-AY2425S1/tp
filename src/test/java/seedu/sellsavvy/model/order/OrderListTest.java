@@ -46,6 +46,24 @@ public class OrderListTest {
     }
 
     @Test
+    public void hasPendingDuplicateOrderOf_nullOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.hasPendingDuplicateOrderOf(null));
+    }
+
+    @Test
+    public void hasPendingDuplicateOrderOf_hasPendingDuplicate_returnsTrue() {
+        orderList.add(ATLAS);
+        assertTrue(orderList.hasPendingDuplicateOrderOf(ATLAS));
+    }
+
+    @Test
+    public void hasPendingDuplicateOrderOf_noPendingDuplicate_returnsFalse() {
+        Order completedBottle = new OrderBuilder(ATLAS).withStatus(Status.COMPLETED).build();
+        orderList.add(completedBottle);
+        assertFalse(orderList.hasPendingDuplicateOrderOf(BOTTLE));
+    }
+
+    @Test
     public void add_nullOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.add(null));
     }

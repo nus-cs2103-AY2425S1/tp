@@ -61,6 +61,18 @@ public class Order {
     }
 
     /**
+     * Returns true if the order has the same item and date as the given {@code Order}
+     * and this order is currently pending.
+     */
+    public boolean isPendingDuplicateOf(Order otherOrder) {
+        if (status != Status.PENDING) {
+            return false;
+        }
+
+        return item.equals(otherOrder.item) && date.equals(otherOrder.date);
+    }
+
+    /**
      * Returns if order date has passed.
      */
     public boolean hasDateElapsed() {

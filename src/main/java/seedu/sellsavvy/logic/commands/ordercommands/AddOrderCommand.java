@@ -36,11 +36,11 @@ public class AddOrderCommand extends Command {
             + PREFIX_ITEM + "Lamp "
             + PREFIX_DATE + "20-12-2024 "
             + PREFIX_QUANTITY + "2\n"
-            + "If [" + PREFIX_QUANTITY + "QUANTITY] is not provided, the quantity will be set to 1";
+            + "If [" + PREFIX_QUANTITY + "QUANTITY] is not provided, the quantity will be set to 1.";
 
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
-            + "This customer already has an order for this item, "
+            + "This customer already has a pending order for this item to be delivered on the same day, "
             + "verify if this is a mistake\n";
 
     private final Index index;
@@ -69,7 +69,7 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd)
+        String feedbackToUser = orderList.hasPendingDuplicateOrderOf(toAdd)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
         feedbackToUser += toAdd.hasDateElapsed()

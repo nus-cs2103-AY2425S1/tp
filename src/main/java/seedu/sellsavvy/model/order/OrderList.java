@@ -29,6 +29,14 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
+     * Returns true if the list contains an order with the same item, date and is in pending status.
+     */
+    public boolean hasPendingDuplicateOrderOf(Order toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(order -> order.isPendingDuplicateOf(toCheck));
+    }
+
+    /**
      * Replaces the first instance of an equivalent order {@code target} in the list with {@code editedOrder}.
      * {@code target} must exist in the list.
      */
