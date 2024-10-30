@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AdvFilterCommand;
+import seedu.address.logic.commands.AdvFilterCommand.Operator;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input for sort and creates an instance of SortCommand
@@ -33,12 +34,19 @@ public class AdvFilterCommandParser implements Parser<AdvFilterCommand> {
         String operator = matcher.group("operator");
         String value = matcher.group("value");
 
-        if ((tag == null || tag.isEmpty())
-                && (operator == null || operator.isEmpty()) && (value == null || value.isEmpty())) {
+        if ((tag == null || tag.isEmpty()) || (operator == null || operator.isEmpty())
+                || (value == null || value.isEmpty())) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AdvFilterCommand.MESSAGE_USAGE));
         }
 
-        return new AdvFilterCommand(tag, operator, value);
+        Operator operatorType = AdvFilterCommand.matchOperator(operator);
+
+        if (operatorType == null) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AdvFilterCommand.MESSAGE_USAGE));
+        }
+
+        return new AdvFilterCommand(tag, operatorType, value);
     }
 }

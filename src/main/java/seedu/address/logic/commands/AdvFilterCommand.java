@@ -28,12 +28,32 @@ public class AdvFilterCommand extends Command {
 
     private final String tagName;
     private final String tagValue;
-    private final String operator;
+    private final Operator operator;
+
+    public static enum Operator {
+        GREATER_THAN(">"),
+        GREATER_THAN_OR_EQUAL(">="),
+        LESS_THAN("<"),
+        LESS_THAN_OR_EQUAL("<="),
+        EQUAL("="),
+        NOT_EQUAL("!=");
+
+        private final String keyword;
+
+        Operator(String keyword) {
+            this.keyword = keyword;
+        }
+
+        public String getKeyword() {
+            return this.keyword;
+        }
+
+    }
 
     /**
      * Class that handles SortCommand
      */
-    public AdvFilterCommand(String tagName, String operator, String tagValue) {
+    public AdvFilterCommand(String tagName, Operator operator, String tagValue) {
         this.tagName = tagName;
         this.operator = operator;
         this.tagValue = tagValue;
@@ -44,13 +64,8 @@ public class AdvFilterCommand extends Command {
         requireNonNull(model);
 
         Predicate<Person> predicate = person -> {
-            boolean tagValueMatches = tagValue == null || tagValue.isEmpty()
-                    || person.getTags().stream()
-                            .anyMatch(tag -> tag.tagValue != null ? compare(operator, tag, tagValue) : false);
-            boolean tagMatches = tagName == null || tagName.isEmpty()
-                    || person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
-            return tagValueMatches
-                    && tagMatches;
+            boolean tagMatches = person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName) && tag.tagValue != null ? compare(operator, tag, tagValue) : false);
+            return tagMatches;
         };
 
         model.updateFilteredPersonList(predicate);
@@ -61,7 +76,7 @@ public class AdvFilterCommand extends Command {
             return new CommandResult(MESSAGE_NO_CONTACT_FOUND);
         }
 
-        return new CommandResult(constructSuccessMessage(this.tagName, this.operator, this.tagValue));
+        return new CommandResult(constructSuccessMessage(this.tagName, this.operator.getKeyword(), this.tagValue));
     }
 
     /**
@@ -114,44 +129,87 @@ public class AdvFilterCommand extends Command {
                 .toString();
     }
 
-    boolean compare(String operator, Tag tag, String tagValue) {
+    private boolean compare(Operator operator, Tag tag, String tagValue) {
         return switch (operator) {
-        case "=" -> tag.tagValue.equalsIgnoreCase(tagValue);
-        case "!=" -> !tag.tagValue.equalsIgnoreCase(tagValue);
-        case ">" -> {
-            Double currentTagValue = tryParseDouble(tag.tagValue);
-            Double testTagValue = tryParseDouble(tagValue);
-            yield (currentTagValue != null && testTagValue != null)
-                    ? Double.compare(currentTagValue, testTagValue) > 0
-                    : false;
+        case EQUAL -> tag.tagValue.equalsIgnoreCase(tagValue);
+        case NOT_EQUAL -> !tag.tagValue.equalsIgnoreCase(tagValue);
+        case GREATER_THAN-> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult > 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult > 0;
+            }
+            yield false;
         }
-        case "<" -> {
-            Double currentTagValue = tryParseDouble(tag.tagValue);
-            Double testTagValue = tryParseDouble(tagValue);
-            yield (currentTagValue != null && testTagValue != null)
-                    ? Double.compare(currentTagValue, testTagValue) < 0
-                    : false;
+        case LESS_THAN -> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult < 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult < 0;
+            }
+            yield false;
         }
-        case "<=" -> {
-            Double currentTagValue = tryParseDouble(tag.tagValue);
-            Double testTagValue = tryParseDouble(tagValue);
-            yield (currentTagValue != null && testTagValue != null)
-                    ? Double.compare(currentTagValue, testTagValue) <= 0
-                    : false;
+        case LESS_THAN_OR_EQUAL -> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult <= 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult <= 0;
+            }
+            yield false;
         }
-        case ">=" -> {
-            Double currentTagValue = tryParseDouble(tag.tagValue);
-            Double testTagValue = tryParseDouble(tagValue);
-            yield (currentTagValue != null && testTagValue != null)
-                    ? Double.compare(currentTagValue, testTagValue) >= 0
-                    : false;
+        case GREATER_THAN_OR_EQUAL -> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult >= 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult >= 0;
+            }
+            yield false;
         }
         default -> throw new IllegalArgumentException("Unknown operator");
 
         };
     }
 
-    Double tryParseDouble(String value) {
+    private Integer compareDouble(String currentValue, String testValue) {
+        Double currentValueDouble = tryParseDouble(currentValue);
+        Double testValueDouble = tryParseDouble(testValue);
+        if (currentValueDouble == null || testValueDouble == null) {
+            return null;
+        }
+        return Double.compare(currentValueDouble, testValueDouble);
+    }
+
+    private Integer compareString(String currentValue, String testValue) {
+        if (tryParseDouble(currentValue) != null || tryParseDouble(testValue) != null) {
+            return null;
+        }
+        return currentValue.compareTo(testValue);
+    }
+
+    public static Operator matchOperator(String string) {
+        Operator operatorType = null;
+        for (Operator operator : Operator.values()) {
+            if (string.equalsIgnoreCase(operator.getKeyword())) {
+                operatorType = operator;
+                break;
+            }
+        }
+        return operatorType;
+    }
+
+    private Double tryParseDouble(String value) {
         try {
             double d = Double.parseDouble(value);
             return d;
