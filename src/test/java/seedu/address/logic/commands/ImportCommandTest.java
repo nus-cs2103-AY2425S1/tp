@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -84,5 +85,26 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(validPath);
         assertEquals(ImportCommand.class.getCanonicalName() + "{filepath: =" + validPath + "}",
             importCommand.toString());
+    }
+
+    @Test
+    public void equals() {
+        Path validPath = Path.of("src/test/data/ImportCommandTest/valid_noDups_importFile.csv");
+        ImportCommand importCommand1 = new ImportCommand(validPath);
+        ImportCommand importCommand2 = new ImportCommand(validPath);
+
+        // same object
+        assertEquals(importCommand1, importCommand1);
+
+        // different object, same path
+        assertEquals(importCommand1, importCommand2);
+
+        // null
+        assertNotEquals(importCommand1, null);
+
+        // different object, different path
+        Path differentPath = Path.of("src/test/data/ImportCommandTest/different.csv");
+        ImportCommand importCommand3 = new ImportCommand(differentPath);
+        assertNotEquals(importCommand1, importCommand3);
     }
 }
