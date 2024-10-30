@@ -144,11 +144,11 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         usageHeader.setText("Command Usage:");
         usage.setText("addf n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.] e/[EMAIL] "
                 + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
-                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] hr/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
+                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
         exampleHeader.setText("Example:");
         example.setText("addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666 e/abrahamtan@gmail.com "
                 + "a/Blk 123, NUS Road, S123123 b/A+ nokn/Lincoln Tan nokp/91234567 "
-                + "al/nuts al/shellfish rl/HIGH hr/Diabetes no/Patient needs extra care");
+                + "al/nuts al/shellfish rl/HIGH ec/Diabetes no/Patient needs extra care");
     }
 
     /**
@@ -230,11 +230,11 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         usageHeader.setText("Command Usage (all details are edited):");
         usage.setText("edit [NRIC] n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.] e/[EMAIL] "
                 + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
-                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] hr/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
+                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
         exampleHeader.setText("Example (all details are edited):");
         example.setText("edit S9758366N n/Keanu Reeves i/S9975483H s/M d/1997-11-30 p/86526969 "
                 + "e/keanureeves@gmail.com a/Blk 512 Ang Mo Kio Ave 2 b/O+ nokn/Mila Kunis nokp/84126990 "
-                + "al/nuts al/shellfish rl/LOW hr/diabetes no/Patient has previous gunshot wound to chest");
+                + "al/nuts al/shellfish rl/LOW ec/diabetes no/Patient has previous gunshot wound to chest");
     }
 
     /**
