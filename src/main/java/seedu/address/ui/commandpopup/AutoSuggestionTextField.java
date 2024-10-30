@@ -100,6 +100,16 @@ public class AutoSuggestionTextField extends TextField {
             }
         };
 
+        suggestionList.setOnMouseClicked(event -> {
+            TextFlow selectedTextFlow = suggestionList.getSelectionModel().getSelectedItem();
+            if (selectedTextFlow instanceof CommandTextFlow) {
+                CommandTextFlow commandFlow = (CommandTextFlow) selectedTextFlow;
+                setText(commandFlow.getCommandText());
+                this.positionCaret(commandFlow.getCommandText().length());
+                suggestionPopup.hide();
+            }
+        });
+
         // Add the handler to both the TextField and ListView
         this.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
         suggestionList.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
