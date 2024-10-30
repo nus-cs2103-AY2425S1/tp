@@ -351,18 +351,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case:** UC3 - Filter by Price Range  
+**Use Case:** UC3 - Filter by Price Label  
 **Actor:** User  
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters a price range.
-4. GAB returns a list of vendors within the price range.
+3. User enters a price label.
+4. GAB returns a list of vendors within the price label.
 5. Use case ends.
 
 **Extensions:**
 * 4a. No vendor found.  
-   * 4a1. GAB responds that there are no vendors within the price range.  
+   * 4a1. GAB responds that there are no vendors within the price label.  
    * 4a2. User enters new data.  
    * Steps 4a1-4a2 are repeated until a vendor can be found.  
    * Use case resumes at step 5.
@@ -465,14 +465,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Vendor**:  
   A shop, typically a restaurant, that is listed on the app.
 
-* **Affordable Price ($)**:  
+* **Affordable Price Label ($)**:  
   Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
-* **Moderate Price ($$)**:  
+* **Moderate Price Label ($$)**:  
   Expected price per meal per restaurant to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
-* **Premium Price ($$$)**:  
-  Expected price per meal per restaurant to be \( x > \$20 \). This is a subjective estimate based on human input.
+* **Premium Price Label ($$$)**:  
+  Expected price per meal per restaurant to be \( \$20 < x <= \$50 \). This is a subjective estimate based on human input.
+
+  * **Very Premium Price Label ($$$$)**:  
+  Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 
