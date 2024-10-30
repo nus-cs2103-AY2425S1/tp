@@ -3,15 +3,22 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+
+
 
 
 /**
@@ -24,19 +31,28 @@ public class MarkAttendanceCommand extends Command {
             + ": Marks the attendance of a student for a specific date.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (Optional) "
             + PREFIX_DATE + "DATE "
             + PREFIX_PRESENT + "STATUS : 'p' or 'a'\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
+            + PREFIX_NAME + "John Doe "
             + PREFIX_DATE + "2019-10-09 "
             + PREFIX_PRESENT + "p";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
+            + "Their student numbers are as follows: %s" + "\n"
+            + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_PRESENT + "STATUS : 'p' or 'a' to mark the attendance.";
+
     private final Name name;
     private final LocalDate date;
     private final Attendance attendance;
+    private final Optional<StudentNumber> studentNumber;
     private Attendance previousAttendance;
 
 
@@ -48,18 +64,41 @@ public class MarkAttendanceCommand extends Command {
      * @param date The date for which to mark attendance.
      * @param attendance The attendance status (present/absent).
      */
-    public MarkAttendanceCommand(Name name, LocalDate date, Attendance attendance) {
+    public MarkAttendanceCommand(Name name, Optional<StudentNumber> studentNumber,
+                                 LocalDate date, Attendance attendance) {
         this.name = name;
         this.date = date;
         this.attendance = attendance;
+        this.studentNumber = studentNumber;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // Find the student by name
-        Student student = model.getStudentByName(name);
-        if (student == null) {
+
+        List<Student> studentList = model.getAllStudentsByName(name);
+
+        if (studentList.isEmpty()) {
             throw new CommandException("Student not found: " + name);
+        }
+
+        Student student;
+        if (studentNumber.isPresent()) {
+            List<Student> filteredStudentList = studentList.stream()
+                    .filter(s -> s.getStudentNumber().equals(studentNumber.get()))
+                    .collect(Collectors.toList());
+            if (filteredStudentList.isEmpty()) {
+                throw new CommandException("Student not found: " + name + " with Student Number: "
+                        + studentNumber.get());
+            }
+            student = filteredStudentList.get(0);
+        } else {
+            if (studentList.size() > 1) {
+                String duplicateStudentNumbers = studentList.stream()
+                        .map(s -> s.getStudentNumber().toString())
+                        .collect(Collectors.joining(", "));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
+            }
+            student = studentList.get(0);
         }
 
 
