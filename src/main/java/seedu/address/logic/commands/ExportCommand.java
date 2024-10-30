@@ -34,7 +34,7 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports the address book in CSV format. "
+            + ": Exports the address book in CSV format.\n"
             + "Example: " + COMMAND_WORD + " "
             + "format/csv";
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "

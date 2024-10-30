@@ -29,7 +29,6 @@ public class AdvFilterCommand extends Command {
             + "Example 2: " + COMMAND_WORD + " "
             + PREFIX_TAG + "priority != low";
 
-
     public static final String MESSAGE_NO_CONTACT_FOUND = "No contacts match the filter criteria.";
 
     private final String tagName;

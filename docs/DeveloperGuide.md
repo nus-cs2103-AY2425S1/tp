@@ -109,7 +109,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="700"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
 
@@ -274,37 +274,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* salespeople who make recurring sales
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * frequently uses contacts for work (business)
+* has a need to manage multiple pieces of information about each contact
 
 
 **Value proposition**:
 
 * manage contacts faster than a typical mouse/GUI driven app
 * prioritise contacts for scheduling and work efficiency
+* consolidates many different pieces of information about contacts
+* get an overview of all contacts easily
+* can search and filter for specific types or pieces of information quickly
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                            |
+|----------|--------------------------------------------|------------------------------|-------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App            |
+| `* * *`  | user                                       | add a new person             | keep my contact list up to date                                   |
+| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                              |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | user with many persons in the address book | filter a person by tags      | locate persons by category without having to go through the entire list|
-| `* *`    | user with many persons in the address book | export contacts to csv       | share and combine address books                                        |
-| `*`      | user with many persons in the address book | import contacts from csv     | combine and update existing address books easily                       |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* * *`  | user with clients who need prioritization  | filter clients by contract value or last contact | identify clients that need attention to hit my KPIs|
+| `* *`    | user with many clients                     | filter persons by tags       | locate persons by category without having to go through the entire list |
+| `* *`    | user who handles client renewals           | filter clients by renewal date | focus on those whose contracts are renewing soon                  |
+| `* *`    | user with many clients                     | export contacts to csv       | share address books                                        |
+| `* *`    | user with busy schedules                   | sort persons by priority metrics | prioritize the most critical clients easily                       |
+| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                            |
+| `* *`    | stressed admin personnel                   | access quick help            | get command assistance without losing time when I forget the commands |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -361,8 +367,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to filter persons by tag
 2.  AddressBook shows a input search bar
-3.  User enters input related to key or value of a tag
-4.  AddressBook shows a list of persons with matching tag key or value
+3.  User enters input related to key of a tag
+4.  AddressBook shows a list of persons with matching tag key 
 
     Use case ends.
 
@@ -372,6 +378,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Advanced Filter by Tag**
+
+**MSS**
+1.  User requests to advanced filter persons by tag
+2.  AddressBook shows a input search bar
+3.  User enters input related to a key, an operator and a value of a tag
+4.  AddressBook shows a list of persons with tags matching the criterion
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The list is empty.
+
+  Use case ends.
 
 **Use case: Export to CSV**
 
@@ -393,7 +414,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      Use case ends.
 
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -403,20 +423,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Should automatically save changes to the local data file, and it should be able to recover from unexpected shutdowns or power failures without data loss.
 6.  Should have a responsive and intuitive user interface that works well across different screen resolutions (1920 x 1080 or higher).
-7.  Should be easy to use and provide clear instructions and feedback to the user for common tasks like adding, filtering, and exporting contacts.
+7.  Should be easy to use and provide clear instructions and feedback to the user for common tasks like adding, editing, filtering, and exporting contacts.
 8.  Should be designed to accommodate future growth in the number of persons and additional features without major rewriting of code.
-9.  Should not store or transmit sensitive data  insecurely.
-10. Should be modular and easy to test to support automated unit testing.
-
-*{More to be added}*
+9.  Should be modular and easy to test.
 
 ### Glossary
-.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
+
+* **Mainstream OS**: Windows, Linux, MacOS
 * **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands, as opposed to a Graphical User Interface (GUI).
 * **Typical Usage**: The expected day-to-day usage of the application by the target user, which should not cause significant performance degradation.
-* **Above-average Typing Speed**: A typing speed that is higher than the average user, allowing the user to input commands and data more efficiently.
+* **Above-average Typing Speed**: A typing speed that is higher than the average user (40 words per minute), allowing the user to input commands and data more efficiently.
 * **Platform-specific dependencies**:  Additional software required to run the application due to differences in Mainstream OS.
 * **Local data file**: File stored on and only on the user's computer/device running the application.
 * **Sensitive Data**: Data in any form (often text) that may harm the user or persons if exposed to unwanted parties (e.g. financial data, credit card info)
@@ -424,7 +440,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CSV**: Type of format of file that stores data in an ordered fashion using rows and columns. Often used in third-party spreadsheet software such as Microsoft Excel.
 * **Tag**: Form of text-based labelling to categorise persons or data for organisation.
 
-*{More to be added}*
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
