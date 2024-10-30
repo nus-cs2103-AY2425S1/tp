@@ -105,7 +105,8 @@ public class Student {
         }
 
         return otherStudent != null
-            && otherStudent.getStudentNumber().equals(getStudentNumber());
+            && otherStudent.getStudentNumber().equals(getStudentNumber())
+            && otherStudent.getName().equals(getName());
 
     }
 
