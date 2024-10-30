@@ -160,7 +160,7 @@ You can also mark the specified elderly as called on a specific date and add not
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
-* Marks the person at the specified `INDEX` or `NRIC`.
+* Marks the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the number displayed in the current person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` must be a valid, government issued NRIC.
 * The `NRIC` used to select the elderly to mark must exist in the person list.
