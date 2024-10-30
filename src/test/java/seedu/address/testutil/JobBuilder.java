@@ -98,7 +98,7 @@ public class JobBuilder {
      * @return Job object.
      */
     public Job build() {
-        return new Job(name, company, salary, description, requirements, new HashSet<>());
+        return new Job(name, company, salary, description, requirements);
     }
 
 }

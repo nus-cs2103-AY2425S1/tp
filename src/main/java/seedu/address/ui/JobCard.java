@@ -34,8 +34,6 @@ public class JobCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane requirements;
-    @FXML
-    private Label matches;
 
     /**
      * Creates a {@code JobCode} with the given {@code Job} and index to display.
@@ -51,6 +49,5 @@ public class JobCard extends UiPart<Region> {
         job.getRequirements().stream()
                 .sorted(Comparator.comparing(requirement -> requirement.tagName))
                 .forEach(requirement -> requirements.getChildren().add(new Label(requirement.tagName)));
-        matches.setText("Employee count - " + job.getMatches().size());
     }
 }

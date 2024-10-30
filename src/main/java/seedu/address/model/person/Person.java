@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private Optional<String> match;
+    private final Optional<String> match;
 
     /**
      * Every parameter must be present and not null.
@@ -45,13 +45,13 @@ public class Person {
      * Creates a person with the matching job.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
-        requireAllNonNull(name, phone, email, role, skills);
+        requireAllNonNull(name, phone, email, role, skills, match);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = Optional.ofNullable(match);
+        this.match = Optional.of(match);
     }
 
     public Name getName() {
@@ -82,8 +82,8 @@ public class Person {
      * Returns a {@code String} representing a single association between {@code Job} and {@code Person} if it exists,
      * null otherwise.
      */
-    public String getMatch() {
-        return match.orElse(null);
+    public Optional<String> getMatch() {
+        return match;
     }
 
     /**
@@ -103,17 +103,19 @@ public class Person {
     }
 
     /**
-     * Returns the phone number as a string, which uniquely identifies the Person object.
+     * Returns a string of the person's employment status to be used within a UI component.
      */
-    public String getIdentifier() {
-        return phone.toString();
-    }
-
-    /**
-     * Removes the association between the Person object and its matched Job.
-     */
-    public void removeMatch() {
-        match = Optional.empty();
+    public String getMatchToUiText() {
+        if (!isMatchPresent()) {
+            return "Unemployed";
+        }
+        String[] jobIdentifierComponents = match.get().split("::");
+        assert(jobIdentifierComponents.length == 2);
+        String companyName = jobIdentifierComponents[0];
+        String jobName = jobIdentifierComponents[1];
+        // The company and job should not be empty strings
+        assert(!(companyName.isEmpty() || jobName.isEmpty()));
+        return ("Employed @ " + companyName + " - " + jobName);
     }
 
     /**

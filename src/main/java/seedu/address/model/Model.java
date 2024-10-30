@@ -75,7 +75,7 @@ public interface Model {
     boolean hasCompany(Company company);
 
     /**
-     * Deletes the given person as well as any existing association with a job.
+     * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);

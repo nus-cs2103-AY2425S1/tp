@@ -63,6 +63,6 @@ public class BillingDate {
 
     @Override
     public String toString() {
-        return this.date;
+        return "day " + this.date + " of the month";
     }
 }
