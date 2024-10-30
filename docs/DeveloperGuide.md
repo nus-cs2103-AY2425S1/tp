@@ -344,14 +344,17 @@ Extensions:
 
 **Use case: UC2 - Delete Client (Buyer or Seller)**
 
+Guarantees:
+* If the buyer/ seller was in the database originally, it would be removed from client database with no side effects.
+
 MSS:
-1. Real estate agent requests to delete a buyer or seller based on their phone number.
-2. ClientGrid will delete the respective client based on the phone number.
+1. Real estate agent requests to delete a buyer/ seller and passes in the buyer/ seller's phone number.
+2. ClientGrid will delete the buyer/ seller with the phone number provided by the real estate agent.
 Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the phone number format provided by the real estate agent .
+* 1a. ClientGrid detects an error in the phone number format provided by the real estate agent.
 
    * 1a1. ClientGrid requests for the correct data 
 
