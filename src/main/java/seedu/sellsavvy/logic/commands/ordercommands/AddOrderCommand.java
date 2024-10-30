@@ -76,6 +76,7 @@ public class AddOrderCommand extends Command {
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
         orderList.add(toAdd);
+        model.updateSelectedPerson(personToAddUnder);
         personToAddUnder.resetFilteredOrderList();
 
         return new CommandResult(feedbackToUser

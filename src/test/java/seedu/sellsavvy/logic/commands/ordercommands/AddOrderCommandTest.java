@@ -46,6 +46,7 @@ public class AddOrderCommandTest {
         String firstExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
         personToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedPerson(personToAddUnder);
 
         // First order
         assertCommandSuccess(addFirstOrder, model, firstExpectedMessage, expectedModel);
@@ -68,6 +69,7 @@ public class AddOrderCommandTest {
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
         personToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedPerson(personToAddUnder);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
                 + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
 
@@ -98,6 +100,7 @@ public class AddOrderCommandTest {
         String expectedMessage = String.format(MESSAGE_OUTDATED_WARNING + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(CAMERA));
         personToAddUnder.getOrderList().add(CAMERA);
+        expectedModel.updateSelectedPerson(personToAddUnder);
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -121,6 +124,7 @@ public class AddOrderCommandTest {
         String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
         personToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedPerson(personToAddUnder);
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }

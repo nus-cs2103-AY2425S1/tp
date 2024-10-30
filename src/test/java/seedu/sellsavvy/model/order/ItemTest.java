@@ -27,15 +27,15 @@ public class ItemTest {
         // invalid item
         assertFalse(Item.isValidItem("")); // empty string
         assertFalse(Item.isValidItem(" ")); // spaces only
-        assertFalse(Item.isValidItem("^")); // only non-alphanumeric characters
-        assertFalse(Item.isValidItem("peter*")); // contains non-alphanumeric characters
 
         // valid item
-        assertTrue(Item.isValidItem("peter jack")); // alphabets only
+        assertTrue(Item.isValidItem("^")); // only non-alphanumeric characters
+        assertTrue(Item.isValidItem("abacus*")); // contains non-alphanumeric characters
+        assertTrue(Item.isValidItem("abacus \\0 \\n +x test")); // contains non-punctuation characters
+        assertTrue(Item.isValidItem("world Map")); // alphabets only
         assertTrue(Item.isValidItem("12345")); // numbers only
-        assertTrue(Item.isValidItem("peter the 2nd")); // alphanumeric characters
-        assertTrue(Item.isValidItem("Capital Tan")); // with capital letters
-        assertTrue(Item.isValidItem("David Roger Jackson Ray Jr 2nd")); // long item description
+        assertTrue(Item.isValidItem("Encyclopedia 25th edition")); // alphanumeric characters
+        assertTrue(Item.isValidItem("Encyclopedia <edited by John> [25th edition]")); // long item description
     }
 
     @Test
