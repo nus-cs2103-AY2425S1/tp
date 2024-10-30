@@ -7,13 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.person.Person;
@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
  * Adds an appointment to the appointment book.
  */
 public class AddAppointmentCommand extends AddCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING
             + ": Adds an appointment to the appointment book. \n"
             + "Parameters: "
             + PREFIX_PERSON_ID + "PERSON_ID "
@@ -30,7 +30,7 @@ public class AddAppointmentCommand extends AddCommand {
             + PREFIX_DATETIME + "DATE_TIME "
             + "[" + PREFIX_SICKNESS + "SICKNESS] "
             + "[" + PREFIX_MEDICINE + "MEDICINE] \n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " "
+            + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
             + PREFIX_PERSON_ID + "1 "

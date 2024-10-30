@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
@@ -14,8 +15,8 @@ public abstract class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all entities of a given type \n"
             + "Parameters: ENTITY_TYPE (person/appt) \n"
-            + "Example: list " + ParserUtil.PERSON_ENTITY_STRING + "\n"
-            + "Example: list " + ParserUtil.APPOINTMENT_ENTITY_STRING;
+            + "Example: list " + PERSON_ENTITY_STRING + "\n"
+            + "Example: list " + APPOINTMENT_ENTITY_STRING;
 
     @Override
     public CommandResult execute(Model model) {

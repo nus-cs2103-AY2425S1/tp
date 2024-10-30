@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
@@ -20,8 +21,8 @@ public abstract class DeleteCommand extends Command {
             + "Parameters: "
             + "ENTITY_TYPE (person/appt) "
             + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " 1\n"
-            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " 1";
+            + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " 1\n"
+            + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " 1";
 
     protected final Index targetIndex;
 

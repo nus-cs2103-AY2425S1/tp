@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
@@ -25,7 +25,7 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
         + "Parameters: "
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_DATETIME + "DATE]\n"
-        + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice d/2024-10-20";
+        + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " n/alice d/2024-10-20";
 
     /**
      * Creates the command
