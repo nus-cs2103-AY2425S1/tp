@@ -174,7 +174,7 @@ public class ParserUtil {
         if (!Time.isValidTime(fromDate, toDate)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        
+
         return new Time(fromDate, toDate);
     }
 
