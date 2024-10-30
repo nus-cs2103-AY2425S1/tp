@@ -156,4 +156,35 @@ public class PersonEventManager {
         }
         return linkedPersonsEntries;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Event, ArrayList<Person>> entry : eventPersonMap.entrySet()) {
+            Event event = entry.getKey();
+            ArrayList<Person> persons = entry.getValue();
+            sb.append(event.getName().fullName).append(": ");
+            for (Person person : persons) {
+                sb.append(person.getName().fullName).append(", ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other instanceof PersonEventManager) {
+            PersonEventManager otherManager = (PersonEventManager) other;
+            return otherManager.eventPersonMap.equals(eventPersonMap);
+        } else {
+            return false;
+        }
+    }
+
+    public Map<Event, ArrayList<Person>> getEventPersonMap() {
+        return eventPersonMap;
+    }
 }
