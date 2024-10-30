@@ -68,8 +68,8 @@ public class Task {
     public void setStatus() {
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (deadline.time.compareTo(currentTime) < 0 &&
-                (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
+        if (deadline.time.compareTo(currentTime) < 0
+                && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
             this.status = Status.OVERDUE;
         }
     }

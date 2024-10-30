@@ -1,5 +1,8 @@
 package seedu.address.ui.cards;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,9 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
 import seedu.address.ui.UiPart;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 /**
  * An UI component that displays information of a {@code Task}.

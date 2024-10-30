@@ -1,6 +1,5 @@
 package seedu.address.ui.panels;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;

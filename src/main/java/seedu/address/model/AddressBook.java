@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;

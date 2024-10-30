@@ -126,7 +126,7 @@ public class Group {
         for (Task t: tasks) {
             t.setStatus();
         }
-     }
+    }
 
     /**
      * Deletes {@code student} from {@code Group}.
