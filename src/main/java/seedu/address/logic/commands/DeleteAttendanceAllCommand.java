@@ -74,6 +74,21 @@ public class DeleteAttendanceAllCommand extends Command{
     }
 
     @Override
+    public boolean undo(Model model) {
+        requireNonNull(model);
+        List<Student> studentsFromSpecifiedTutorialGroup = model.getStudentsByTutorialGroup(tutorialGroup);
+        if (studentsFromSpecifiedTutorialGroup.isEmpty()) return false;
+
+        for (Student student : studentsFromSpecifiedTutorialGroup) {
+            Attendance previousAttendance = previousAttendances.get(student);
+            if (previousAttendance != null) {
+                student.markAttendance(date, previousAttendance.value);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
