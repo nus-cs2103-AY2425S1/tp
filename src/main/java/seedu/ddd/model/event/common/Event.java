@@ -17,6 +17,7 @@ import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
@@ -123,6 +124,32 @@ public class Event implements Displayable {
         Set<Event> events = vendor.getEvents();
         if (!events.contains(this)) {
             vendor.addEvent(this);
+        }
+    }
+
+    /**
+     * Removes a {@code Contact} from an {@code Event}
+     * Removes the association of the current event in the contact as well.
+     */
+    public void removeContact(Contact contact) {
+        if (contact instanceof Client client) {
+            if (!clients.contains(client)) {
+                throw new ContactNotFoundException();
+            }
+            Set<Event> clientEvents = client.getEvents();
+            if (clientEvents.contains(this)) {
+                client.removeEvent(this);
+            }
+            clients.remove(client);
+        } else if (contact instanceof Vendor vendor) {
+            if (!vendors.contains(vendor)) {
+                throw new ContactNotFoundException();
+            }
+            Set<Event> vendorEvents = vendor.getEvents();
+            if (vendorEvents.contains(this)) {
+                vendor.removeEvent(this);
+            }
+            vendors.remove(vendor);
         }
     }
 

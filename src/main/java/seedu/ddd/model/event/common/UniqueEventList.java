@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
+import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
 import seedu.ddd.model.event.exceptions.EventNotFoundException;
 
@@ -41,7 +42,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a event to the list.
+     * Adds an event to the list.
      * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
@@ -50,6 +51,15 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Gets an event from the list.
+     * If event has not been created or does not exist, a null object will be returned.
+     */
+    public Event get(Id eventId) {
+        requireNonNull(eventId);
+        return internalList.stream().filter(event -> eventId.equals(event.getEventId())).findFirst().orElse(null);
     }
 
     /**

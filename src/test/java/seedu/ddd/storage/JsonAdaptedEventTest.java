@@ -20,25 +20,13 @@ import seedu.ddd.model.common.Id;
 import seedu.ddd.model.event.common.Description;
 
 public class JsonAdaptedEventTest {
-
     private static final List<JsonAdaptedId> VALID_JSON_CLIENT_CONTACT_IDS =
             List.of(new JsonAdaptedId(DEFAULT_CLIENT_ID));
     private static final List<JsonAdaptedId> VALID_JSON_VENDOR_CONTACT_IDS =
             List.of(new JsonAdaptedId(DEFAULT_VENDOR_ID));
 
-    // @Test
-    // public void toModelType_validEventDetails_returnsEvent() throws Exception {
-    //     JsonAdaptedEvent event = new JsonAdaptedEvent(
-    //         VALID_EVENT_NAME,
-    //         VALID_EVENT_DESCRIPTION_1,
-    //         VALID_EVENT_DATE,
-    //         DEFAULT_JSON_CLIENT_CONTACT_ID_LIST,
-    //         DEFAULT_JSON_VENDOR_CONTACT_ID_LIST,
-    //         Integer.parseInt(VALID_EVENT_ID)
-    //     );
-    //     assertEquals(VALID_EVENT, event.toModelType());
-    // }
-
+    // There is no test for a valid event, since the logic to add clients and vendors to an event
+    // is heavily dependent on how address book is implemented.
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(

@@ -166,6 +166,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeContact(Contact key) {
         contacts.remove(key);
+        List<Event> contactEvents = key.getEvents().stream().toList();
+        for (Event event: contactEvents) {
+            events.get(event.getEventId()).removeContact(key);
+        }
     }
 
     /**
