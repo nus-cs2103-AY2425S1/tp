@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the relation of a person to the wedding.
@@ -84,7 +87,13 @@ public class Relation {
      */
     @Override
     public String toString() {
-        return relation;
+        if (relation.equals("U")) {
+            return "Unknown";
+        } else if (relation.equals("H")) {
+            return "Husband";
+        } else {
+            return "Wife";
+        }
     }
 
     /**
