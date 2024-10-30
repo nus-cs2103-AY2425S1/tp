@@ -188,7 +188,7 @@ Format: `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
 Examples:
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
-* `find n/Alex d/Friday` returns `Alex Yeoh`<br>
+* `find n/Alex d/Friday` returns `Alex Tan`<br>
   ![result for `find n/Alex d/Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
@@ -208,13 +208,11 @@ Examples:
 * The order of the parameters does not matter. 
 <br/>e.g. `find d/Friday n/Alex` will return the same result as `find n/Alex d/Friday`
 * The search finds all the students whose 
-    1. names matches at least one of the keywords **AND** 
-    2. the tuition day matches the days.
-
-  e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
-
-* while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
-* only `Alex Tan` has a tuition on `Friday`.
+    * names matches at least one of the keywords **AND** 
+    * the tuition day matches the days.
+    * e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
+        * while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
+        * only `Alex Tan` has a tuition on `Friday`.
 </markdown>
 </box>
 
