@@ -137,6 +137,11 @@ public class AddCarCommandTest {
         }
 
         @Override
+        public int getCarsWithSameVrnOrVinCount(Car car) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }

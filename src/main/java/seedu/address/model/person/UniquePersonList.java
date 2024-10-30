@@ -50,6 +50,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns total number of cars with the same VRN or VIN as {@code car}.
+     * @param car the car to check
+     */
+    public int getCarsWithSameVrnOrVinCount(Car car) {
+        requireNonNull(car);
+        return (int) internalList.stream().filter(person -> {
+            Car personCar = person.getCar();
+            return personCar != null && personCar.hasMatchingVrnOrVin(car);
+        }).count();
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
