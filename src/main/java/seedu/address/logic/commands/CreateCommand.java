@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 /**
  * Parent abstract class for create commands.
- * Contains the index of the target to be deleted.
  */
 public abstract class CreateCommand extends Command {
 

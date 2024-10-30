@@ -13,8 +13,8 @@ import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Finds and lists all vendors in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all vendors in EventTory whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindVendorCommand extends FindCommand {
 

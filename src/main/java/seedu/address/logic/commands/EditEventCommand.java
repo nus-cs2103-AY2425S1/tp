@@ -25,12 +25,12 @@ import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 
 /**
- * Edits an event identified using it's displayed index from the address book.
+ * Edits an event identified using it's displayed index from EventTory.
  */
 public class EditEventCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in EventTory.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "

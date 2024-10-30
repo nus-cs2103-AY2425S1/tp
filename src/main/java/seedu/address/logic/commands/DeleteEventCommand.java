@@ -13,7 +13,7 @@ import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 
 /**
- * Deletes an event identified using it's displayed index from the address book.
+ * Deletes an event identified using it's displayed index from EventTory.
  */
 public class DeleteEventCommand extends DeleteCommand {
 

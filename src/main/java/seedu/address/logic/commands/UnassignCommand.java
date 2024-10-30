@@ -12,7 +12,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Unassigns a vendor to an event.
+ * Unassigns a vendor from an event.
  */
 public class UnassignCommand extends Command {
 

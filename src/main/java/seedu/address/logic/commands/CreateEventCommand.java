@@ -13,10 +13,10 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Creates an event in the address book.
+ * Creates an event in EventTory.
  */
 public class CreateEventCommand extends CreateCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new event in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new event in EventTory.\n"
             + "Parameters: "
             + PREFIX_EVENT + " "
             + PREFIX_NAME + "NAME "
@@ -29,7 +29,7 @@ public class CreateEventCommand extends CreateCommand {
             + PREFIX_TAG + "celebration";
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in EventTory";
     private final Event toAdd;
 
     /**

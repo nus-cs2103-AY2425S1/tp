@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.ui.UiState;
 
 /**
- * Lists all vendors in the address book to the user.
+ * Lists all vendors in EventTory to the user.
  */
 public class ListVendorCommand extends ListCommand {
 

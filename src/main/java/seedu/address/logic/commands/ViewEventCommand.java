@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
 import seedu.address.ui.UiState;
 
 /**
- * Display details of an event in the eventTory to the user.
+ * Display details of an event in EventTory to the user.
  */
 public class ViewEventCommand extends ViewCommand {
 

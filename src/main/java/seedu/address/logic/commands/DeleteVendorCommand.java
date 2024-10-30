@@ -13,7 +13,7 @@ import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Deletes a vendor identified using it's displayed index from the address book.
+ * Deletes a vendor identified using it's displayed index from EventTory.
  */
 public class DeleteVendorCommand extends DeleteCommand {
 

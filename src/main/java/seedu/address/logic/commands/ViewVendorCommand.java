@@ -13,7 +13,7 @@ import seedu.address.model.vendor.Vendor;
 import seedu.address.ui.UiState;
 
 /**
- * Display details of a vendor in the eventTory to the user.
+ * Display details of a vendor in EventTory to the user.
  */
 public class ViewVendorCommand extends ViewCommand {
 

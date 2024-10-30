@@ -14,11 +14,11 @@ import seedu.address.model.Model;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Adds a vendor to the address book.
+ * Adds a vendor to EventTory.
  */
 public class CreateVendorCommand extends CreateCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to EventTory.\n"
             + "Parameters: "
             + PREFIX_VENDOR + "<empty> "
             + PREFIX_NAME + "NAME "
@@ -34,7 +34,7 @@ public class CreateVendorCommand extends CreateCommand {
             + PREFIX_TAG + "fast";
 
     public static final String MESSAGE_SUCCESS = "New vendor added: %1$s";
-    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in EventTory";
 
     private final Vendor toAdd;
 

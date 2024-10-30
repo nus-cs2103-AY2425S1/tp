@@ -28,12 +28,12 @@ import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Edits a vendor identified using it's displayed index from the address book.
+ * Edits a vendor identified using it's displayed index from EventTory.
  */
 public class EditVendorCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_VENDOR_SUCCESS = "Edited Vendor: %1$s";
-    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in EventTory.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the vendor identified "
             + "by the index number used in the displayed vendor list. "
