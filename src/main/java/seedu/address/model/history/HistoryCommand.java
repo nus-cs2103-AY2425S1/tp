@@ -6,9 +6,9 @@ import seedu.address.logic.commands.Command;
  * Stores the original command text from user and the command that have been executed.
  */
 public class HistoryCommand {
+    private static int value = 0;
     private final Command command;
     private final String commandText;
-    private static int value = 0;
     private int index;
 
     private HistoryCommand(Command command, String commandText, int index) {

@@ -16,8 +16,8 @@ import seedu.address.logic.commands.edit.EditCommand;
  * A list of history commands.
  */
 public class HistoryCommandList implements Iterable<HistoryCommand> {
-    private final ObservableList<HistoryCommand> internalList = FXCollections.observableArrayList();
     private static String originalCommandText;
+    private final ObservableList<HistoryCommand> internalList = FXCollections.observableArrayList();
 
     public HistoryCommandList() {
     }
