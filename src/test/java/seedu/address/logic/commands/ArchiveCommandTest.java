@@ -44,10 +44,13 @@ public class ArchiveCommandTest {
 
     @Test
     public void execute_unarchivePerson_success() throws Exception {
-        Person personToUnarchive = new PersonBuilder(model.getFilteredPersonList().get(0)).withArchived(true).build();
+        // ensure first person is archived;
+        Person personToUnarchive = new PersonBuilder(model.getFilteredPersonList().get(0)).withArchived(true)
+                .build();
         model.setPerson(model.getFilteredPersonList().get(0), personToUnarchive);
-        ArchiveCommand unarchiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON, false);
+        expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), personToUnarchive);
 
+        ArchiveCommand unarchiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON, false);
         Person unarchivedPerson = new PersonBuilder(personToUnarchive).withArchived(false).build();
         expectedModel.setPerson(personToUnarchive, unarchivedPerson);
 

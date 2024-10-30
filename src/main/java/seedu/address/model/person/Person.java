@@ -152,7 +152,8 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
                 && familySize.equals(otherPerson.familySize)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override
