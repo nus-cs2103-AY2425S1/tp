@@ -37,6 +37,12 @@ public class ReminderManager {
     private ObservableList<Person> persons;
     private final StringProperty currentReminder = new SimpleStringProperty();
 
+    /**
+     * Initializes the ReminderManager with a list of persons to track.
+     * Sets up change listeners and creates initial reminders.
+     *
+     * @param persons An observable list of persons to monitor for deadlines
+     */
     public ReminderManager(ObservableList<Person> persons) {
         this.persons = persons;
         setupChangeListener();
