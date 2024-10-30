@@ -11,7 +11,7 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
 /**
- * Lists Vendors in the address book to the user.
+ * Lists vendors in the address book to the user.
  */
 public class ListVendorCommand extends ListContactCommand {
 
@@ -25,7 +25,7 @@ public class ListVendorCommand extends ListContactCommand {
         model.updateFilteredEventList(CLEAR_EVENTS);
         model.updateFilteredContactList(this.getPredicate());
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                model.getFilteredContactList().size()));
+                model.getFilteredContactListSize()));
     }
     @Override
     public boolean equals(Object other) {

@@ -37,7 +37,7 @@ public class ListContactCommand extends ListCommand {
         model.updateFilteredEventList(CLEAR_EVENTS);
         model.updateFilteredContactList(predicate);
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                model.getFilteredContactList().size()));
+                model.getFilteredContactListSize()));
     }
 
     @Override
