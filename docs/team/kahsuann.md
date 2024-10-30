@@ -5,7 +5,7 @@
 
 ### Project: Eventory
 
-Eventory is an innovative address book designed to simplify tasks for event planners. It offers an intuitive platform to organize vendors and events, providing powerful tools to categorize, track, and manage every detail. With Eventory, planners can easily tag vendors based on services, budgets, and ratings, allowing for quick access to the right contacts.
+EventTory is an innovative application designed to simplify tasks for event planners. It offers an intuitive platform to organize vendors and events, providing powerful tools to categorize, track, and manage every detail. With Eventory, planners can easily tag vendors based on services, budgets, and ratings, allowing for quick access to the right contacts.
 
 Given below are my contributions to the project.
 
