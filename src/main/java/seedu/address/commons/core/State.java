@@ -14,7 +14,7 @@ public class State {
 
     public State(String state) {
         this.state = state;
-    }    
+    }
 
     public boolean equals(State other) {
         return this.state.equals(other.state);
