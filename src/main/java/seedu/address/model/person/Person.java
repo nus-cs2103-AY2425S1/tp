@@ -103,6 +103,22 @@ public class Person {
     }
 
     /**
+     *
+     */
+    public String getMatchToUiText() {
+        if (!isMatchPresent()) {
+            return "Unemployed";
+        }
+        String[] jobIdentifierComponents = match.get().split("::");
+        assert(jobIdentifierComponents.length == 2);
+        String companyName = jobIdentifierComponents[0];
+        String jobName = jobIdentifierComponents[1];
+        // The company and job should not be empty strings
+        assert(!(companyName.isEmpty() || jobName.isEmpty()));
+        return ("Employed @ " + companyName + " - " + jobName);
+    }
+
+    /**
      * Returns true if both persons have the same contact or email.
      * This defines a weaker notion of equality between two persons.
      */
