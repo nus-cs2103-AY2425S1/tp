@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private HBox menuBar;
 
     @FXML
     private HBox contactLists;

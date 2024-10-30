@@ -21,9 +21,9 @@
       </stylesheets>
 
       <VBox fx:id="mainContainer">
-          <HBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
-              <Button text="Help" onAction="#handleHelp" />
-              <Button text="Exit" onAction="#handleExit" />
+          <HBox fx:id="menuBar" alignment="BASELINE_LEFT" spacing="0" VBox.vgrow="NEVER">
+              <Button text="Exit" id="exitButton" onAction="#handleExit" />
+              <Button text="Help" id="helpButton" onAction="#handleHelp" />
           </HBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
