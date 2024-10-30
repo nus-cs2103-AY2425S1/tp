@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 
 import java.util.List;
 
@@ -47,14 +49,14 @@ public class DeleteEmergencyContactCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() == null
-                || (personToEdit.getEmergencyContact().contactName.equals(new Name("No Name Entered"))
-                && personToEdit.getEmergencyContact().contactNumber.equals(new Phone("000")))) {
+                || (personToEdit.getEmergencyContact().contactName.equals(new Name(NO_NAME))
+                && personToEdit.getEmergencyContact().contactNumber.equals(new Phone(NO_NUMBER)))) {
             return new CommandResult(generateNoEmergencyContactMessage(personToEdit));
         }
 
         EmergencyContact toBeDeleted = personToEdit.getEmergencyContact();
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), new EmergencyContact(new Name("No Name Entered"), new Phone("000")),
+                personToEdit.getAddress(), new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER)),
                 personToEdit.getTags(), personToEdit.getPriorityLevel());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

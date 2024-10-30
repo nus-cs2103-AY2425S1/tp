@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -24,14 +26,12 @@ import seedu.address.testutil.PersonBuilder;
 
 public class DeleteEmergencyContactCommandTest {
 
-    private static final String NO_NAME = "No Name Entered";
-    private static final String NO_PHONE = "000";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_deleteEmergencyContactUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(NO_NAME, NO_PHONE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(NO_NAME, NO_NUMBER).build();
         EmergencyContact firstPersonEmergencyContact = firstPerson.getEmergencyContact();
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_FIRST_PERSON);
@@ -45,7 +45,7 @@ public class DeleteEmergencyContactCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(NO_NAME, NO_PHONE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(NO_NAME, NO_NUMBER).build();
         EmergencyContact firstPersonEmergencyContact = firstPerson.getEmergencyContact();
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_FIRST_PERSON);

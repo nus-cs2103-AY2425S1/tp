@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,12 +46,12 @@ public class TypicalPersons {
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withEmergencyContact("Rich", "000")
+            .withEmergencyContact("Rich", NO_NUMBER)
             .withTags("friends").withPriorityLevel(3)
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withEmergencyContact("No Name Entered", "99999999")
+            .withEmergencyContact(NO_NAME, "99999999")
             .withPriorityLevel(3)
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")

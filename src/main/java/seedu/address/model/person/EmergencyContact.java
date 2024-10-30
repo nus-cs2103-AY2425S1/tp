@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class EmergencyContact {
+    public static final String NO_NAME = "No Name Entered";
+    public static final String NO_NUMBER = "000";
     public final Name contactName;
     public final Phone contactNumber;
 
@@ -33,7 +35,7 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        if (contactName.equals(new Name("No Name Entered")) || contactNumber.equals(new Phone("000"))) {
+        if (contactName.equals(new Name(NO_NAME)) || contactNumber.equals(new Phone(NO_NUMBER))) {
             return "No Emergency Contact";
         }
         return "Emergency Contact: " + contactName + ", " + contactNumber;

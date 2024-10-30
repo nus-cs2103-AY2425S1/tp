@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 
 import java.util.List;
 
@@ -58,14 +60,14 @@ public class EmergencyContactCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (emergencyContact.contactNumber.equals(new Phone("000"))
-                || emergencyContact.contactName.equals(new Name("No Name Entered"))) {
+        if (emergencyContact.contactNumber.equals(new Phone(NO_NUMBER))
+                || emergencyContact.contactName.equals(new Name(NO_NAME))) {
             throw new CommandException(MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() != null
-                && !personToEdit.getEmergencyContact().contactName.equals(new Name("No Name Entered"))
-                && !personToEdit.getEmergencyContact().contactNumber.equals(new Phone("000"))) {
+                && !personToEdit.getEmergencyContact().contactName.equals(new Name(NO_NAME))
+                && !personToEdit.getEmergencyContact().contactNumber.equals(new Phone(NO_NUMBER))) {
             return new CommandResult(generateEmergencyContactExistsMessage(personToEdit));
         }
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),

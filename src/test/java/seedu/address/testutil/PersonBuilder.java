@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +15,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-
 
 /**
  * A utility class to help with building Person objects.
@@ -41,7 +43,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        emergencyContact = new EmergencyContact(new Name("No Name Entered"), new Phone("000"));
+        emergencyContact = new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER));
         tags = new HashSet<>();
         priorityLevel = new PriorityLevel(DEFAULT_PRIORITY_LEVEL);
     }

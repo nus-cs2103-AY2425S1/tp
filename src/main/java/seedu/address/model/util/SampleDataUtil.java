@@ -1,5 +1,8 @@
 package seedu.address.model.util;
 
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final EmergencyContact EMPTY_EMERGENCY_CONTACT =
-            new EmergencyContact(new Name("No Name Entered"), new Phone("000"));
+            new EmergencyContact(new Name(NO_NAME), new Phone(NO_NUMBER));
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),

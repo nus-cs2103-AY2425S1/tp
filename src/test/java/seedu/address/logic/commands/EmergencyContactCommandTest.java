@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTA
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
@@ -34,8 +36,6 @@ public class EmergencyContactCommandTest {
 
     private static final String EMERGENCY_CONTACT_NAME_STUB = "Some name";
     private static final String EMERGENCY_CONTACT_NUMBER_STUB = "123";
-    private static final String NO_NAME = "No Name Entered";
-    private static final String NO_PHONE = "000";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -103,7 +103,7 @@ public class EmergencyContactCommandTest {
     public void execute_addEmergencyContactWithOnlyNameUnfilteredList_failure() {
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
-                NO_PHONE).build();
+                NO_NUMBER).build();
         EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
@@ -127,7 +127,7 @@ public class EmergencyContactCommandTest {
     public void execute_addEmergencyContactWithNoNameAndNumberUnfilteredList_failure() {
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact(NO_NAME,
-                NO_PHONE).build();
+                NO_NUMBER).build();
         EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
