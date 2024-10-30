@@ -28,6 +28,8 @@ public class WelcomeCommand extends Command {
             + "\n\t"
             + "fav:\t\tSet the specified restaurant from the address book as favourite."
             + "\n\t"
+            + "price:\tFinds restaurants who belong in any of the given price labels"
+            + "\n\t"
             + "\nFor the full list, refer to the user guide: " + USERGUIDE_URL;
 
 
