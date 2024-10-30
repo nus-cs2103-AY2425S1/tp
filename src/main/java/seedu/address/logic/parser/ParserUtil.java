@@ -125,6 +125,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static Date parseDate(String date) throws ParseException {
+        if (date == null) {
+            return null;
+        }
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
@@ -139,6 +142,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code venue} is invalid.
      */
     public static Venue parseVenue(String venue) throws ParseException {
+        if (venue == null) {
+            return null;
+        }
         String trimmedVenue = venue.trim();
         if (!Venue.isValidVenue(trimmedVenue)) {
             throw new ParseException(Venue.MESSAGE_CONSTRAINTS);

@@ -154,6 +154,7 @@ public class ParserUtilTest {
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
     }
 
     @Test
@@ -201,8 +202,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    public void parseDate_null_success() throws Exception {
+        assertEquals(null, ParserUtil.parseDate((String) null));
     }
 
     @Test
@@ -224,8 +225,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseVenue_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue((String) null));
+    public void parseVenue_null_success() throws Exception {
+        assertEquals(null, ParserUtil.parseVenue((String) null));
     }
 
     @Test
@@ -320,5 +321,4 @@ public class ParserUtilTest {
         VALID_LIST_OF_JOBS_WITH_WHITESPACE.add(WHITESPACE + "1" + WHITESPACE);
         VALID_LIST_OF_JOBS_WITH_WHITESPACE.add(WHITESPACE + "3" + WHITESPACE);
     }
-
 }
