@@ -97,8 +97,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         case "filter":
             setTextFilterCommand();
             break;
-        case "list":
-            setTextListCommand();
+        case "home":
+            setTextHomeCommand();
             break;
         case "view":
             setTextViewCommand();
@@ -275,15 +275,15 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     /**
      * Sets the content of the help window based on the list keyword.
      */
-    private void setTextListCommand() {
-        header.setText("List Command: Returns to home page.");
+    private void setTextHomeCommand() {
+        header.setText("Home Command: Returns to home page.");
         description.setText("Lists all existing patient records in the system.");
         parametersHeader.setText("Parameters:");
         parameters.setText("NIL");
         usageHeader.setText("Command Usage:");
-        usage.setText("list");
+        usage.setText("home");
         exampleHeader.setText("Example:");
-        example.setText("list");
+        example.setText("home");
     }
 
     /**

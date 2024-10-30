@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "For more information on any specific command, type help <command keyword>";
     private static final String KEYWORDS_HEADER = "Command Keywords";
     private static final String FUNCTIONS_HEADER = "Functions";
-    private static final String HELP_KEYWORDS = "add\naddf\nappt\nclear\ndeleteappt\ndelete\nedit\nexit\nfilter\nlist"
+    private static final String HELP_KEYWORDS = "add\naddf\nappt\nclear\ndeleteappt\ndelete\nedit\nexit\nfilter\nhome"
             + "\nview";
     private static final String HELP_FUNCTIONS = """
             Adds a new patient record into the system
