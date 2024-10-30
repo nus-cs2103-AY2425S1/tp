@@ -52,7 +52,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonEventToryStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonEventToryStorageTest} class.
          */
         EventTory original = getTypicalEventTory();
         storageManager.saveEventTory(original);

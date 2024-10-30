@@ -90,7 +90,7 @@ public class ModelManager implements Model {
         userPrefs.setEventToryFilePath(eventToryFilePath);
     }
 
-    // =========== AddressBook ================================================================================
+    // =========== EventTory ================================================================================
 
     @Override
     public void setEventTory(ReadOnlyEventTory eventTory) {

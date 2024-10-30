@@ -57,7 +57,7 @@ public interface Model {
      */
     void setEventTory(ReadOnlyEventTory eventTory);
 
-    /** Returns the AddressBook */
+    /** Returns the EventTory */
     ReadOnlyEventTory getEventTory();
 
     /**

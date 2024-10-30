@@ -47,7 +47,7 @@ public class JsonSerializableEventTory {
     /**
      * Converts a given {@code ReadOnlyEventTory} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableEventTory}.
      */
     public JsonSerializableEventTory(ReadOnlyEventTory source) {
         vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).toList());

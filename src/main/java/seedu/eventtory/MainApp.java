@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing EventTory ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -86,7 +86,7 @@ public class MainApp extends Application {
             initialData = eventToryOptional.orElseGet(SampleDataUtil::getSampleEventTory);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getEventToryFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty EventTory.");
             initialData = new EventTory();
         }
 

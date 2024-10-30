@@ -15,7 +15,7 @@ import seedu.eventtory.commons.util.JsonUtil;
 import seedu.eventtory.model.ReadOnlyEventTory;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access EventTory data stored as a json file on the hard disk.
  */
 public class JsonEventToryStorage implements EventToryStorage {
 

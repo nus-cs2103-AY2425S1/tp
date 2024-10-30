@@ -119,7 +119,7 @@ public class CreateVendorCommandTest {
         }
 
         @Override
-        public void setEventToryFilePath(Path addressBookFilePath) {
+        public void setEventToryFilePath(Path eventToryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

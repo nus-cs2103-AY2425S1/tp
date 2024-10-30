@@ -46,7 +46,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ EventTory methods ==============================
 
     @Override
     public Path getEventToryFilePath() {
