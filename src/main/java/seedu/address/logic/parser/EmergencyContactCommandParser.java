@@ -10,6 +10,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 
 /**
  * Parses input arguments and creates a new {@code EmergencyContactCommand} object
@@ -30,8 +32,22 @@ public class EmergencyContactCommandParser implements Parser<EmergencyContactCom
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EmergencyContactCommand.MESSAGE_USAGE), ive);
         }
-        String contactName = argMultimap.getValue(PREFIX_NAME).orElse("");
-        String contactNumber = argMultimap.getValue(PREFIX_PHONE).orElse("");
-        return new EmergencyContactCommand(index, new EmergencyContact(contactName, contactNumber));
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
+        Name name;
+        Phone phone;
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        } else {
+            name = new Name("");
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        } else {
+            phone = new Phone("");
+        }
+
+        return new EmergencyContactCommand(index, new EmergencyContact(name.toString(), phone.toString()));
     }
 }
