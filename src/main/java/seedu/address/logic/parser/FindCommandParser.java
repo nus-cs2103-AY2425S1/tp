@@ -19,7 +19,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.ArgumentPredicate;
+import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -71,31 +79,33 @@ public class FindCommandParser implements Parser<FindCommand> {
         Optional<String> optionalDeadline = argMultimap.getValue(PREFIX_DEADLINE);
 
         if (optionalName.isPresent()) {
-            parameterMap.put("name", ParserUtil.parseName(optionalName.get()));
+            parameterMap.put(Name.NAME_KEY, ParserUtil.parseName(optionalName.get()));
         }
         if (optionalPhone.isPresent()) {
-            parameterMap.put("phone", ParserUtil.parsePhone(optionalPhone.get()));
+            parameterMap.put(Phone.PHONE_KEY, ParserUtil.parsePhone(optionalPhone.get()));
         }
         if (optionalEmail.isPresent()) {
-            parameterMap.put("email", ParserUtil.parseEmail(optionalEmail.get()));
+            parameterMap.put(Email.EMAIL_KEY, ParserUtil.parseEmail(optionalEmail.get()));
         }
         if (optionalAddress.isPresent()) {
-            parameterMap.put("address", ParserUtil.parseAddress(optionalAddress.get()));
+            parameterMap.put(Address.ADDRESS_KEY, ParserUtil.parseAddress(optionalAddress.get()));
         }
         if (optionalProjectStatus.isPresent()) {
-            parameterMap.put("project status", ParserUtil.parseProjectStatus(optionalProjectStatus.get()));
+            parameterMap.put(ProjectStatus.PROJECT_STATUS_KEY,
+                    ParserUtil.parseProjectStatus(optionalProjectStatus.get()));
         }
         if (optionalPaymentStatus.isPresent()) {
-            parameterMap.put("payment status", ParserUtil.parsePaymentStatus(optionalPaymentStatus.get()));
+            parameterMap.put(PaymentStatus.PAYMENT_STATUS_KEY,
+                    ParserUtil.parsePaymentStatus(optionalPaymentStatus.get()));
         }
         if (optionalClientStatus.isPresent()) {
-            parameterMap.put("client status", ParserUtil.parseClientStatus(optionalClientStatus.get()));
+            parameterMap.put(ClientStatus.CLIENT_STATUS_KEY, ParserUtil.parseClientStatus(optionalClientStatus.get()));
         }
         if (optionalDeadline.isPresent()) {
-            parameterMap.put("deadline", ParserUtil.parseDeadline(optionalDeadline.get()));
+            parameterMap.put(Deadline.DEADLINE_KEY, ParserUtil.parseDeadline(optionalDeadline.get()));
         }
 
-        parameterMap.put("tags", tagList);
+        parameterMap.put(Tag.TAG_KEY, tagList);
 
         return new FindCommand(new ArgumentPredicate(parameterMap));
     }

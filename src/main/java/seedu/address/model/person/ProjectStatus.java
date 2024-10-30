@@ -11,9 +11,9 @@ public class ProjectStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Project status must be either 'in progress' or 'completed' (case insensitive)";
+    public static final String PROJECT_STATUS_KEY = "project status";
     private static final String IN_PROGRESS = "in progress";
     private static final String COMPLETE = "completed";
-
     public final boolean isComplete;
 
     /**

@@ -11,11 +11,13 @@ public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Payment Status should be 'pending', 'partial', 'paid', 'late' (case insensitive)";
+    public static final String PAYMENT_STATUS_KEY = "payment status";
     private static final String LATE = "late";
     private static final String PAID = "paid";
     private static final String PARTIAL = "partial";
     private static final String PENDING = "pending";
     public final String value;
+
 
     /**
      * Constructs a {@code PaymentStatus}.
