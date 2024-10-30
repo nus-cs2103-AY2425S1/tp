@@ -188,6 +188,21 @@ Format: `fav INDEX`
 Examples:
 *  `fav 1` Favourite the 1st restaurant.
 
+### Searching for restaurants by price: `price`
+
+Finds restaurants of a specific price label.
+
+Format: `price PRICE_LABEL [MORE_PRICE_LABELS]`
+
+* Multiple price labels can be entered, and the search will return restaurants that match any one of the labels (i.e. `OR` search).
+   (e.g. `price $ $$` will return restaurants that are either `$` or `$$`)
+* The order of the keywords does not matter. e.g. `$ $$` will match `$$ $`
+* Refer to the glossary for details on the price labels.
+
+Examples:
+* `price $ $$` returns restaurants that are either `$` or `$$`
+* `price $$` returns restaurants that are `$$`<br>
+
 ### Un-favourite a restaurant : `unfav`
 
 Remove the specified restaurant from the favourites list.

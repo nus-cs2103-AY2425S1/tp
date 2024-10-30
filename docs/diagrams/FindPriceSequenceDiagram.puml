@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindPriceCommandParser" as FindPriceCommandParser LOGIC_COLOR
+participant "f:FindPriceCommand" as FindPriceCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "t:PriceContainsKeywordsPredicate" as PriceContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("price $$")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("price $$")
+activate AddressBookParser
+
+create FindPriceCommandParser
+AddressBookParser -> FindPriceCommandParser
+activate FindPriceCommandParser
+
+FindPriceCommandParser --> AddressBookParser
+deactivate FindPriceCommandParser
+
+AddressBookParser -> FindPriceCommandParser : parse("$$")
+activate FindPriceCommandParser
+
+create PriceContainsKeywordsPredicate
+FindPriceCommandParser -> PriceContainsKeywordsPredicate
+activate PriceContainsKeywordsPredicate
+
+PriceContainsKeywordsPredicate --> FindPriceCommandParser : t
+deactivate PriceContainsKeywordsPredicate
+
+create FindPriceCommand
+FindPriceCommandParser -> FindPriceCommand
+activate FindPriceCommand
+
+FindPriceCommand --> FindPriceCommandParser : f
+deactivate FindPriceCommand
+
+FindPriceCommandParser --> AddressBookParser : f
+deactivate FindPriceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindPriceCommandParser -[hidden]-> AddressBookParser
+destroy FindPriceCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> FindPriceCommand : execute(m)
+activate FindPriceCommand
+
+FindPriceCommand -> Model : updateFilteredRestaurantList(t)
+activate Model
+
+Model --> FindPriceCommand
+deactivate Model
+
+create CommandResult
+FindPriceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindPriceCommand
+deactivate CommandResult
+
+FindPriceCommand --> LogicManager : r
+deactivate FindPriceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
