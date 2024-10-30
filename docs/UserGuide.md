@@ -158,7 +158,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Filtering contacts `filter`
+### Filtering contacts: `filter`
 
 Filters the contact list by name and/or tags.
 
@@ -182,6 +182,29 @@ Examples:
 **Tip:** Use the command buttons provided to get command template
 <div style="text-align: center;">
     <img src="images/v1.4/FilterGUIButton.png" alt="Using filter button" width=545 />
+</div>
+
+</box>
+
+### Advanced filtering of your contacts: `advfilter`
+
+Filters contacts by tag values, with an operator.
+Format: `advfilter [t/TAG] [operator] [value]`
+* Filters the contact list by tags values, comparing with the operator.
+* Available operators include: `=, !=, <, <=, >, >=`
+
+Examples:
+* `advfilter t/premium > 1000` would show all contacts that have the tag of premium, and a value of more than 1000 for that tag
+* `advfilter t/client != VIP` would show all contacts that have the tag of client, other than those with the value of VIP
+* `advfilter t/highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
+* `advfilter t/neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater.
+  ![result for 'advfilter t/neighbours >= 5](images/advfilterEg.png)
+
+<box type="tip" seamless>
+
+**Tip:** Use the command button for Advanced Filter provided to get command template
+<div style="text-align: left;">
+    <img src="images/advFilterGUIEg.png" alt="Using filter button" width=545 />
 </div>
 
 </box>
