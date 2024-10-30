@@ -6,14 +6,11 @@ import static bizbook.testutil.TypicalPersons.CHARLIE;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,11 +21,11 @@ import bizbook.commons.util.FileUtil;
 import bizbook.logic.commands.exporter.exceptions.EmptyAddressBookException;
 import bizbook.model.AddressBook;
 import bizbook.model.UserPrefs;
-
+import bizbook.testutil.TestUtil;
 
 public class CsvExporterTest {
-    private static final String CHARLIE_VCF_FILE_PATH = "charlie.csv";
-    private static final String PEOPLE_VCF_FILE_PATH = "people.csv";
+    private static final String CHARLIE_VCF_FILE_PATH = "CsvExporterTest/charlie.csv";
+    private static final String PEOPLE_VCF_FILE_PATH = "CsvExporterTest/people.csv";
 
     @TempDir
     public Path temporaryFolder;
@@ -40,27 +37,6 @@ public class CsvExporterTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setExportDirectoryPath(temporaryFolder.resolve("exports"));
         csvExporter = new CsvExporter(userPrefs);
-    }
-
-    private Path getTestFilePath(String fileName) {
-        String path = "CsvExporterTest/" + fileName;
-        try {
-            URL url = CsvExporterTest.class.getResource(path);
-            assertNotNull(url, path + " does not exist.");
-            return Path.of(url.toURI());
-        } catch (URISyntaxException e) {
-            fail("Failed to get URI for resource: " + path);
-            return null;
-        }
-    }
-
-    private String readTestFile(String fileName) {
-        try {
-            return FileUtil.readFromFile(getTestFilePath(fileName));
-        } catch (IOException ie) {
-            fail("Failed to load resource: " + fileName);
-            return null;
-        }
     }
 
     @Test
@@ -88,7 +64,7 @@ public class CsvExporterTest {
         // Assert that the file exists now
         assertTrue(FileUtil.isFileExists(exportPath));
         try {
-            String expectedValue = readTestFile(CHARLIE_VCF_FILE_PATH);
+            String expectedValue = TestUtil.readResourceFile(CsvExporterTest.class, CHARLIE_VCF_FILE_PATH);
             String actualValue = FileUtil.readFromFile(exportPath);
 
             assertEquals(expectedValue, actualValue);
@@ -113,7 +89,7 @@ public class CsvExporterTest {
         // Assert that the file exists now
         assertTrue(FileUtil.isFileExists(exportPath));
         try {
-            String expectedValue = readTestFile(PEOPLE_VCF_FILE_PATH);
+            String expectedValue = TestUtil.readResourceFile(CsvExporterTest.class, PEOPLE_VCF_FILE_PATH);
             String actualValue = FileUtil.readFromFile(exportPath);
 
             assertEquals(expectedValue, actualValue);
