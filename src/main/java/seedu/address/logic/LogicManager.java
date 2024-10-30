@@ -68,7 +68,8 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
         this.versionHistory = command.updateVersionHistory(versionHistory, model);
         try {
-            ReadOnlyAddressBook tempAddressBook = versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
+            ReadOnlyAddressBook tempAddressBook =
+                    versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
             ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
             model.setAddressBook(currentAddressBook);
             storage.saveAddressBook(currentAddressBook);
