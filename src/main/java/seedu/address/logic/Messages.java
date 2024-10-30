@@ -74,9 +74,7 @@ public class Messages {
     public static String formatTutorial(Tutorial tutorial) {
         final StringBuilder builder = new StringBuilder();
         builder.append("Tutorial Class Name: ")
-                .append(tutorial.getSubject())
-                .append("; Participation: ")
-                .append(tutorial.getParticipationList());
+                .append(tutorial.getSubject());
         return builder.toString();
     }
 
