@@ -1,3 +1,5 @@
+.root { -fx-font: 13 "Consolas"; }
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
 }

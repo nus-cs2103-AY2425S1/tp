@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -68,9 +69,13 @@ public class HelpWindow extends UiPart<Stage> {
                          UndoCommand.COMMAND_SUMMARY_EXAMPLES}
     );
 
+    @FXML
     private TableView table = new TableView();
     @FXML
     private Button copyButton;
+
+    @FXML
+    private Button closeButton;
 
     @FXML
     private Label helpMessage;
@@ -95,53 +100,41 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Shows the help window.
      * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
+     * If this method is called on a thread other than the JavaFX Application Thread.
      */
     public void show() {
-        // Creating this scene to 420 results in just a nice enough padding
-        Scene scene = new Scene(new Group(), 420, 400);
+        Scene scene = new Scene(new Group(), 600, 600);
         logger.fine("Showing help page about the application.");
         table.setEditable(true);
+
+        // Clear existing columns to prevent duplicates
+        table.getColumns().clear();
 
         TableColumn<String[], String> action = new TableColumn<>("Action");
         action.setMinWidth(100);
         action.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
 
         TableColumn<String[], String> format = new TableColumn<>("Format");
-        format.setMinWidth(100);
+        format.setMinWidth(200);
         format.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
 
         TableColumn<String[], String> examples = new TableColumn<>("Examples");
-        examples.setMinWidth(200);
+        examples.setMinWidth(250);
         examples.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[2]));
 
+        // Set the resize policy to automatically adjust columns
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        table.setFixedCellSize(25); // Adjust 25 to match the height of your table rows
-        table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(data.size()));
-        table.setMaxHeight(Region.USE_PREF_SIZE); // Shows all rows without vertical scrollbar
-
         table.getColumns().addAll(action, format, examples);
         table.setItems(data);
 
-        final VBox vbox = new VBox();
+        VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
+        vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.getChildren().addAll(table);
 
+        vbox.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        VBox.setVgrow(table, Priority.ALWAYS);
 
         // Create a Hyperlink
         Hyperlink userGuideLink = new Hyperlink("Click here for our User Guide!");
@@ -154,8 +147,13 @@ public class HelpWindow extends UiPart<Stage> {
         });
 
         // Add the hyperlink to the VBox
-        vbox.getChildren().add(userGuideLink); (
-        (Group) scene.getRoot()).getChildren().addAll(vbox);
+        vbox.getChildren().addAll(userGuideLink, copyButton, closeButton);
+
+        // Make VBox resizable
+        vbox.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        vbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
 
         this.getRoot().setScene(scene);
         getRoot().show();
@@ -192,5 +190,13 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Closes the help window.
+     */
+    @FXML
+    private void closeHelpWindow() {
+        getRoot().close();
     }
 }
