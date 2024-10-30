@@ -41,7 +41,8 @@ public class ViewEventCommand extends Command{
             throw new CommandException(EVENT_DOES_NOT_EXIST);
         }
 
-        throw new CommandException("This command has not been implemented yet!");
+        model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(eventToView));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
     }
 
     @Override

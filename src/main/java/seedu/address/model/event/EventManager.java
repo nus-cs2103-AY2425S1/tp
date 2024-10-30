@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInEventPredicate;
 
 /**
  * Wraps all {@code Event} and abstracts away
@@ -84,6 +87,19 @@ public class EventManager implements ReadOnlyEventManager {
     @Override
     public ObservableList<Event> getEventList() {
         return eventList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns a {@PersonInEventPredicate} that tests if a {@code person} is inside a specified {@code event}.
+     *
+     * @param event Event that you want to test whether the person is in.
+     * @return {@code PersonInEventPredicate} object.
+     */
+    public PersonInEventPredicate getPersonInEventPredicate(Event event) {
+        assert this.eventList.contains(event): "This method should only take in events that exist in the eventList.";
+        Event equalEvent = this.eventList.asUnmodifiableObservableList().stream().filter(event::equals)
+                .findFirst().orElseThrow(EventNotFoundException::new);
+        return new PersonInEventPredicate(equalEvent);
     }
 
     /**

@@ -187,4 +187,15 @@ public class Event {
                 || (other instanceof Event // instanceof handles nulls
                 && name.equals(((Event) other).name));
     }
+
+    /**
+     * Checks if a person is in this event.
+     *
+     * @param person Person to check.
+     * @return {@code True} if person in event, else {@code false}
+     */
+    public boolean isPersonInEvent(Person person) {
+        return attendees.contains(person) || volunteers.contains(person)
+                || sponsors.contains(person) || vendors.contains(person);
+    }
 }
