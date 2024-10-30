@@ -29,9 +29,10 @@ public class ImportCommand extends Command {
             + "Parameters: FILE_NAME.json\n"
             + "Example: " + COMMAND_WORD + " addressbook.json ";
     public static final String MESSAGE_IMPORT_SUCCESS = "Data successfully imported into MediContact";
-    public static final String MESSAGE_IMPORT_FAIL = "Error reading or writing %1$s";
-    public static final String MESSAGE_FILE_NOT_FOUND = "%1$s not found in the same directory as the application jar";
-    public static final String MESSAGE_FILE_NOT_JSON = "%1$s is not a json file";
+    public static final String MESSAGE_IMPORT_FAIL = "Error reading or writing '%1$s'";
+    public static final String MESSAGE_FILE_NOT_FOUND = "'%1$s' not found in the same directory as the " +
+            "application JAR file";
+    public static final String MESSAGE_FILE_NOT_JSON = "'%1$s' is not a JSON file";
     public static final String MESSAGE_FILE_FORMAT_FAIL_NO_PERSONS = "Invalid file format: 'persons' array is missing";
     public static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_JSON = "Invalid file format: invalid JSON format";
     public static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT = "Invalid file format: data does not follow "
