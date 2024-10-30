@@ -21,7 +21,8 @@ public class Date {
             + "1. The day \"dd\" should be a 2-digit number representing a valid day the specified calender month\n"
             + "2. The month \"mm\" should be a 2-digit number representing a valid month in the calender year\n"
             + "3. The year \"yyyy\" should be a 4-digit number representing a valid year within the 21st century\n"
-            + "4. The day, month and year are separated by a hyphen '-'.";
+            + "4. The day, month and year are separated by a hyphen '-'."
+            + "e.g. 31-03-2024";
     public static final String MESSAGE_INVALID_DATE = "Date provided is not a valid calendar date";
     public static final String MESSAGE_OUTDATED_WARNING = "Note: "
             + "The date provided has already passed, "
