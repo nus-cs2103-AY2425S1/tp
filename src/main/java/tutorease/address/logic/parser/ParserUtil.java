@@ -2,6 +2,8 @@ package tutorease.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorease.address.logic.Messages.MISSING_PREFIX;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -204,5 +206,45 @@ public class ParserUtil {
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 
+    /**
+     * Validates that the prefixes are present in the {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to check.
+     * @param usage            The usage message to display.
+     * @param prefixes         The prefixes to check.
+     * @throws ParseException  If the prefixes are missing.
+     */
+    public static void validatePrefixesPresent(ArgumentMultimap argumentMultimap, String usage, Prefix... prefixes)
+            throws ParseException {
+        checkMissingAllPrefixes(argumentMultimap, usage);
+        findMissingPrefix(argumentMultimap, usage, prefixes);
+    }
 
+    /**
+     * Finds the missing prefixes in the {@code ArgumentMultimap}.
+     * @param argumentMultimap The {@code ArgumentMultimap} to check.
+     * @param usage            The usage message to display.
+     * @param prefixes         The prefixes to check.
+     * @throws ParseException  If the prefixes are missing.
+     */
+    private static void findMissingPrefix(ArgumentMultimap argumentMultimap, String usage, Prefix[] prefixes) throws ParseException {
+        for (Prefix prefix : prefixes) {
+            if (!argumentMultimap.getValue(prefix).isPresent()) {
+                throw new ParseException(String.format(MISSING_PREFIX, prefix, usage));
+            }
+        }
+    }
+
+    /**
+     * Checks if all prefixes are missing in the {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to check.
+     * @param usage            The usage message to display.
+     * @throws ParseException  If all prefixes are missing.
+     */
+    private static void checkMissingAllPrefixes(ArgumentMultimap argumentMultimap, String usage) throws ParseException {
+        if (argumentMultimap.isMissingAllPrefix()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
+        }
+    }
 }

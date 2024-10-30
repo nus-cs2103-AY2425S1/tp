@@ -2,6 +2,7 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeNowString;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
@@ -31,6 +32,9 @@ public class AddLessonCommand extends LessonCommand {
             + PREFIX_FEE + "10 "
             + PREFIX_START_DATE + dateTimeNowString() + " "
             + PREFIX_DURATION + "1\n";
+
+    public static final String INVALID_ADD_LESSON_COMMAND_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MESSAGE_USAGE);
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s.";
     public static final String MESSAGE_OVERLAP_LESSON = "This lesson overlaps with another lesson.";
