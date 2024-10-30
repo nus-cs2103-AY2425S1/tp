@@ -1,6 +1,8 @@
 /* light blue color: #99DDF8 */
 /* dark blue color: #005b96 */
 /* lighter blue color: #e0f7fa */
+/* picton blue color: #5FA8D3 */
+/* columbia blue color: #CAE9FF */
 
 .background {
     -fx-background-color: #f0f0f0; /* Light background */
@@ -48,13 +50,13 @@
     -fx-base: white;
     -fx-control-inner-background: white;
     -fx-background-color: white;
-    -fx-table-cell-border-color: #dddddd; /* Light borders */
-    -fx-table-header-border-color: #dddddd; /* Light header borders */
+    -fx-table-cell-border-color: #dddddd;
+    -fx-table-header-border-color: #dddddd;
     -fx-padding: 5;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #e0f7fa; /* Light blue header background */
+    -fx-background-color: #e0f7fa;
 }
 
 .table-view .column-header, .table-view .filler {
@@ -73,12 +75,12 @@
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: derive(#99DDF8, 30%); /* Light highlight */
+    -fx-background-color: #CAE9FF;
 }
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: derive(#f0f0f0, 20%);
-    -fx-border-color: transparent transparent transparent #cccccc; /* Light border */
+    -fx-border-color: transparent transparent transparent #cccccc;
 }
 
 .split-pane {
@@ -101,7 +103,7 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #e0f7fa; /* Light blue */
+    -fx-background-color: #e0f7fa;
     -fx-background-radius: 20px;
     -fx-border-color: #005b96;
     -fx-border-width: 2;
@@ -133,62 +135,62 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #99DDF8; /* Primary blue */
+    -fx-background-color: #CAE9FF;
     -fx-background-radius: 20px;
 }
 
 .list-cell .label {
-    -fx-text-fill: #005b96; /* Dark blue text */
+    -fx-text-fill: #005b96;
     -fx-background-radius: 20px;
 }
 
 .cell_big_label {
     -fx-font-family: "Roboto Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #005b96; /* Dark blue */
+    -fx-text-fill: #005b96;
 }
 
 .cell_small_label {
     -fx-font-family: "Roboto";
     -fx-font-size: 13px;
-    -fx-text-fill: #005b96; /* Dark blue */
+    -fx-text-fill: #005b96;
 }
 
 .stack-pane {
-    -fx-background-color: #f0f0f0; /* Light background */
+    -fx-background-color: #f0f0f0;
 }
 
 .pane-with-border {
-    -fx-background-color: white; /* White */
-    -fx-border-color: #dddddd; /* Light border */
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
     -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: #f0f0f0; /* Light background */
+    -fx-background-color: #f0f0f0;
 }
 
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Roboto Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #005b96; /* Dark blue text */
+    -fx-text-fill: #005b96;
 }
 
 .result-display .label {
-    -fx-text-fill: #005b96; /* Dark blue text */
+    -fx-text-fill: #005b96;
 }
 
 .status-bar .label {
     -fx-font-family: "Roboto Light";
-    -fx-text-fill: #005b96; /* Dark blue text */
+    -fx-text-fill: #005b96;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: #f0f0f0; /* Light background */
-    -fx-border-color: #dddddd; /* Light border */
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #dddddd;
     -fx-border-width: 1px;
 }
 
@@ -229,6 +231,16 @@
     -fx-background-color: white;
 }
 
+.menu:hover {
+    -fx-background-color: #5FA8D3;
+    -fx-text-fill: black;
+}
+
+.menu-item:hover {
+    -fx-background-color: #5FA8D3;
+    -fx-text-fill: black;
+}
+
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #cccccc;
@@ -241,11 +253,11 @@
 }
 
 .button:hover {
-    -fx-background-color: derive(#99DDF8, -10%); /* Slightly darker on hover */
+    -fx-background-color: #5FA8D3;
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: derive(#99DDF8, -20%); /* Even darker on press */
+    -fx-background-color: derive(#5FA8D3, -20%);
     -fx-text-fill: black;
 }
 
@@ -269,7 +281,7 @@
 }
 
 .button:default:hover {
-    -fx-background-color: derive(#99DDF8, -10%); /* Lighten on hover */
+    -fx-background-color: derive(#5FA8D3, -10%);
 }
 
 .dialog-pane {

@@ -4,6 +4,7 @@
 
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+    -fx-font-size: 16;
 }
 
 #copyButton {
@@ -22,7 +23,41 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+
+.table-view .column-header-background .label {
+    -fx-padding: 2 2 2 2;
+    -fx-text-fill: black;
+    -fx-font-size: 20; /* header */
+}
+
 .table-cell {
-    -fx-alignment: TOP-LEFT;
+    -fx-alignment: CENTER;
     -fx-wrap-text: true;
+    -fx-text-fill: #0B2545;
+    -fx-font-size: 18;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:odd:filled {
+    -fx-background-color: #CAE9FF;
+}
+
+.table-row-cell:even:filled {
+    -fx-background-color: white;
+}
+
+.table-row-cell:hover:filled {
+    -fx-background-color: #5FA8D3;
+}
+
+.table-row-cell:hover:empty {
+    -fx-background-color: white;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #62B6CB;
+    -fx-background-insets: 3;
 }
