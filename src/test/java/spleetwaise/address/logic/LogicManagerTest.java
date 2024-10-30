@@ -102,7 +102,7 @@ public class LogicManagerTest {
         CommonModel.initialise(addressBookModel, transactionModel);
 
         // TODO: add a TransactionUtil class to handle generation of commands and expected messages
-        String addTxnCommand = "addTxn p/94351253 amt/12.3 desc/Test date/01012024";
+        String addTxnCommand = "addTxn 1 amt/12.3 desc/Test date/01012024";
         String expectedMessageSuccess = String.format(
                 spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
                 "[test-uuid] Alice Pauline [Not Done] (94351253): Test on 01/01/2024 for $12.30 with categories: []"

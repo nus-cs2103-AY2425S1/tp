@@ -85,6 +85,25 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+* The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs.
+  * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), commas (`,`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
+    - `John Doe` (letters and space)
+    - `Betsy O'Connor` (apostrophe)
+    - `Jean-Luc` (hyphen)
+    - `J.P. Morgan` (period)
+    - `John s/o Tan` (slash)
+    - `Anne-Marie & Sons` (ampersand and hyphen)
+    - `John "Johnny" Doe` (quotation marks)
+    - `Richard (Rick) Roe` (parentheses)
+  * Invalid inputs include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or any characters from Arabic, or Latin scripts like `Æ` or Chinese characters.
+    - `peter*` (contains `*`)
+    - `john@doe` (contains `@`)
+    - `王小明` (non-Latin characters like Chinese)
+    - `X Æ A-12` (non-Latin characters like `Æ` or Arabic `عبد العزيز`)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+</div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>

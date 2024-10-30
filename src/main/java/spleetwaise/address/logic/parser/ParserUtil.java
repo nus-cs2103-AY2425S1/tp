@@ -45,7 +45,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+
+        // Replace escaped delimiters (\/)
+        String processedName = trimmedName.replace("\\/", "/");
+
+        if (!Name.isValidName(processedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
