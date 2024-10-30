@@ -8,6 +8,7 @@ import java.util.List;
 import seedu.address.model.Listings;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Region;
+import seedu.address.model.person.Name;
 
 /**
  * A utility class containing a list of {@code Listing} objects to be used in tests.
@@ -78,6 +79,12 @@ public class TypicalListings {
             listings.addListing(l);
         }
         return listings;
+    }
+
+    public static List<Name> getTypicalNames() {
+        return new ArrayList<>(Arrays.asList(PASIR_RIS.getName(), TAMPINES.getName(), KENT_RIDGE.getName(),
+                BUONA_VISTA.getName(), SENGKANG.getName(), PUNGGOL.getName(),
+                SENTOSA.getName()));
     }
 
     public static List<Listing> getTypicalPropertyListing() {
