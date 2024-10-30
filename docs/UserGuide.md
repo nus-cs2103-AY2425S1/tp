@@ -193,7 +193,7 @@ Clears all entries from the edulog.
 
 Format: `clear`
 
-### Marking a student's attendance: `mark'
+### Marking a student as paid: `mark'
 
 Denotes an existing student as paid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
@@ -204,9 +204,18 @@ Examples:
 * `mark 3`
 * `mark Alex Yeoh`
 
-### Marking all students' attendance: `markall'
+### Marking all students' as paid: `markall'
 
-	@@ -171,39 +210,46 @@ Examples:
+Denotes all existing students as paid.
+
+Format: `markall`
+
+Examples:
+* `markall`
+* `markall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
+### Unmarking a student as paid: `unmark'
+
 Denotes an existing student as unpaid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
 
@@ -216,7 +225,7 @@ Examples:
 * `unmark 3`
 * `unmark Alex Yeoh`
 
-### Unmarking all students' attendance: `unmarkall'
+### Unmarking all students' as paid: `unmarkall'
 
 Denotes all existing students as unpaid.
 
@@ -257,6 +266,14 @@ Examples:
 
 * `deletec Secondary 4 Chemistry Class`
 
+## Gift Command
+
+### Get a random gift idea: `gift`
+
+Generates a random gift idea.
+
+Format: gift
+
 ## Data Files
 
 ### Saving the data
@@ -266,6 +283,7 @@ EduLog data are saved in the hard disk automatically after any command that chan
 ### Editing the data file
 
 EduLog data are saved automatically as a JSON file `[JAR file location]/data/edulog.json`. Advanced users are welcome to update data directly by editing that data file.
+Gift suggestion data is saved automatically as a JSON file `[JAR file location]/src/main/gifts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 **Caution:**
@@ -303,4 +321,5 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Gift**   | `gift`
 
