@@ -1,7 +1,6 @@
 package seedu.edulog.logic.commands;
 
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLogWithCopiedStudents;
 
 import org.junit.jupiter.api.Test;
