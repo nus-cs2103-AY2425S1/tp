@@ -28,8 +28,8 @@ public class UnmarkAttendanceByStudentCommand extends Command {
             + ": Unmarks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]"
-            + "[" + PREFIX_TUTORIAL + "TUTORIAL]\n"
+            + PREFIX_ATTENDANCE + "ATTENDANCE"
+            + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ATTENDANCE + " 20/10/2024 "
             + PREFIX_TUTORIAL + " Math";
