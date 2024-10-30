@@ -4,13 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DAY;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_CHAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_NEGATIVE;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_TWENTY_FIVE;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_TWENTY_FIVE_POINT_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_ZERO;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_HOUR;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_MINUTE;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_MONTH;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION_LOWER_BOUND;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION_UPPER_BOUND;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION_WITH_DECIMALS;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION_WITH_POINT_FIVE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.testutil.Assert.assertThrows;
 
@@ -77,7 +84,15 @@ public class EndDateTimeTest {
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_CHAR));
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_ZERO));
         assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_TWENTY_FIVE));
+        assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_TWENTY_FIVE_POINT_FIVE));
+        assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_NOT_MULTIPLE_OF_POINT_FIVE));
+        assertFalse(EndDateTime.isValidHoursToAdd(INVALID_DURATION_NEGATIVE));
+
         // valid hours
         assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION));
+        assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION_WITH_POINT_FIVE));
+        assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION_LOWER_BOUND));
+        assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION_UPPER_BOUND));
+        assertTrue(EndDateTime.isValidHoursToAdd(VALID_DURATION_WITH_DECIMALS));
     }
 }

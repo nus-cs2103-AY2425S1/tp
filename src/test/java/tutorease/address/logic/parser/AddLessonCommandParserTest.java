@@ -26,6 +26,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE_LEAP_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE_LEAP_YEAR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -107,11 +108,11 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, INVALID_START_DATE_MINUTE + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_START_DATE));
         // invalid duration followed by valid duration
-        assertParseFailure(parser, INVALID_DURATION_CHAR + validExpectedLessonString,
+        assertParseFailure(parser, " " + PREFIX_DURATION + INVALID_DURATION_CHAR + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DURATION));
-        assertParseFailure(parser, INVALID_DURATION_ZERO + validExpectedLessonString,
+        assertParseFailure(parser, " " + PREFIX_DURATION + INVALID_DURATION_ZERO + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DURATION));
-        assertParseFailure(parser, INVALID_DURATION_TWENTY_FIVE + validExpectedLessonString,
+        assertParseFailure(parser, " " + PREFIX_DURATION + INVALID_DURATION_TWENTY_FIVE + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DURATION));
     }
 
@@ -149,13 +150,13 @@ public class AddLessonCommandParserTest {
 
         // invalid duration
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
-                        + INVALID_DURATION_CHAR,
+                        + " " + PREFIX_DURATION + INVALID_DURATION_CHAR,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
-                        + INVALID_DURATION_ZERO,
+                        + " " + PREFIX_DURATION + INVALID_DURATION_ZERO,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC
-                        + INVALID_DURATION_TWENTY_FIVE,
+                        + " " + PREFIX_DURATION + INVALID_DURATION_TWENTY_FIVE,
                 EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
     }
 

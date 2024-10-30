@@ -60,6 +60,8 @@ public abstract class Person {
     }
 
     public abstract Role getRole();
+    public abstract boolean isGuardian();
+    public abstract boolean isStudent();
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

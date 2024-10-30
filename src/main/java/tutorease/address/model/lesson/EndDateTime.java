@@ -5,6 +5,7 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT_MESSAGE;
 import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;
+import static tutorease.address.model.lesson.StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +16,8 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Represents the end date and time of a lesson.
  */
 public class EndDateTime extends DateTime {
-    public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be between 0 and 24.";
+    public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be in multiples of 0.5. "
+            + "They also have to be more than 0 and be at most 24";
     public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT_MESSAGE, "End");
 
     private EndDateTime(LocalDateTime dateTime) throws ParseException {
@@ -62,7 +64,9 @@ public class EndDateTime extends DateTime {
     public static boolean isValidHoursToAdd(String hoursToAdd) {
         try {
             double parsedHoursToAdd = NumbersUtil.parseDouble(hoursToAdd, HOURS_MESSAGE_CONSTRAINTS);
-            return parsedHoursToAdd > 0 && parsedHoursToAdd <= 24;
+            boolean isWithinRange = parsedHoursToAdd > 0 && parsedHoursToAdd <= 24;
+            boolean isMultipleOfPointFive = (parsedHoursToAdd * 2) % 1 == 0;
+            return isWithinRange && isMultipleOfPointFive;
         } catch (ParseException e) {
             return false;
         }
