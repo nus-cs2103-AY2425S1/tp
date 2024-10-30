@@ -98,7 +98,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
-Another (more concise) sequence diagram below illustrates some interactions within the `Logic` component when **arguments** are involved, taking `execute("mark 1 d/2020-01-01")` API call as an example.
+Another (more concise) sequence diagram below illustrates some interactions within the `Logic` component when **arguments** are involved, taking `execute("mark 1 d/2024-10-25")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `mark 1 d/2024-10-25` Command](images/MarkSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommandParser` and `ArgumentMultimap` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -109,7 +109,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. When a command is executed, it will communicate with `Model` to add the command to the command history.
-1. The command will also communicate with `Model` to perform other operations (e.g. to delete a person).<br>
+1. The command will also communicate with `Model` to perform other operations (e.g. to delete an elderly).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -181,11 +181,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th elderly in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new elderly. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -193,7 +193,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the elderly was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -242,7 +242,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the elderly being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -302,6 +302,7 @@ The following activity diagram summarizes what happens when a user interacts wit
 #### Future Improvements:
 
 * Implement a feature to clear the command history.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -334,42 +335,45 @@ The following activity diagram summarizes what happens when a user interacts wit
 
 Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlikely to have) - `**`, Super Low (won't have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
- | `****` | User | Mark elderly as called | I can easily keep track of who has been contacted |
- | `****` | New user | list elderly contacts by priority (prioritised by last called date) | I know whom to contact first | 
+| Priority | As a …​ | I want to …​           | So that…​                                           |
+| -------- |------|------------------------|-----------------------------------------------------|
+ | `****` | User | Mark elderly as called | I can easily keep track of who has been contacted   |
+ | `****` | New user | List elderly contacts by priority (prioritised by last called date) | I know whom to contact first                        | 
  | `****` | Frequent User | Remove elderly from the call list | Any elderly who has passed away or left the program will no longer be on the list | 
- | `****` | User | Record details of the elderly (NRIC etc.) | I know who I'm calling | 
+ | `****` | User | Record details of the elderly (NRIC etc.) | I know who I'm calling                              | 
  | `****` | Frequent User | Add new elderly who have joined the Befriending Program | I can keep track of these new elderly and call them regularly | 
  | `****` | Expert User | Take notes regarding the call | I can keep track of things which should be followed up on | 
- | `****` | Frequent User | Update elderly contact information | I can keep the elderly information up to date | 
- | `****` | Frequent User | Search elderly by name | I can find this specific person if they were to call me and I can log it as a call | 
+ | `****` | Frequent User | Update elderly contact information | I can keep the elderly information up to date       | 
+ | `****` | Frequent User | Search elderly by name | I can find this specific elderly if they were to call me and I can log it as a call | 
+ | `****` | User | Search elderly by Nric | I can find this specific elderly given their Nric   | 
+ | `****` | Forgetful User | Mark calls with a specific date | I can mark a call that I previously forgot to mark  | 
+ | `****` | User | View the next contact date for each elderly | I can quickly see which day the next call should be made to better plan my work | 
  | `****` | Expert User | Generate a monthly report to AIC / excel sheet | show the progress and outcome of the Befriending Program | 
- | `****` | Frequent User | Check if the same elderly has been added multiple times | I don't call the same person multiple times | 
- | `**` | Frequent User | Make changes to the style of my address book | I can be happy when I use the address book :) | 
- | `**` | Frequent user | Mark contacted elderly quickly using shortcuts | I can work efficiently to contact the entire list | 
+ | `****` | Frequent User | Check if the same elderly has been added multiple times | I don't call the same elderly multiple times        | 
+ | `**` | Frequent User | Make changes to the style of my address book | I can be happy when I use the address book :)       | 
+ | `**` | Frequent user | Mark contacted elderly quickly using shortcuts | I can work efficiently to contact the entire list   | 
  | `**` | Detail-orientated user | Add tags to each elderly | I can keep track of details that are important when taking the call. | 
- | `**` | Expert User | Add custom fields | I can add details of elderly which are not currently in the system | 
+ | `**` | Expert User | Add custom fields      | I can add details of elderly which are not currently in the system | 
  | `**` | Expert User | Visualise how many and which elderly to be called in a calendar | I can plan accordingly if any elderly needs to switch dates | 
  | `**` | Expert User | Filter through certain details added for the elderly | I can keep track of how the elderly are doing easily | 
- | `**` | Frequent User | receive notifications for the contacts that are due in the next hour | I can prioritize and complete the calls on time | 
+ | `**` | Frequent User | receive notifications for the contacts that are due in the next hour | I can prioritize and complete the calls on time     | 
  | `**` | New User | Receive feedback on the commands I have given if they are incorrect | I can easily correct the errors in the commands given | 
- | `***` | Frequent User | Use my up and down arrow keys to go back and forth between commands | I don't have to retype the same commands | 
+ | `***` | Frequent User | Use my up and down arrow keys to go back and forth between commands | I don't have to retype the same commands            | 
  | `***` | New user | Receive a list of commands that the address book uses | I can familiarise myself with the commands and shortcuts | 
- | `***` | Frequent User | I can undo my actions | I can correct my mistakes | 
- | `***` | Expert User | Quickly update the status of multiple elderly contacts | I can efficiently manage my tasks | 
+ | `***` | Frequent User | I can undo my actions  | I can correct my mistakes                           | 
+ | `***` | Expert User | Quickly update the status of multiple elderly contacts | I can efficiently manage my tasks                   | 
  | `***` | New user | Try out the app with sample data | I can familiarise myself with it without worrying about the data I am playing around with | 
- | `***` | Onboarded user | Purge all sample data | The app is ready to be used | 
- | `***` | Frequent User | I can view a history of calls made to an elderly contact | I can track past interactions | 
- | `***` | Frequent User | Change the frequency of calls needed to be made for each elderly | I can track when I need to make calls | 
- | `***` | Expert User | Archive elderly contacts who are temporarily not part of the program | Keep my contact list organised | 
+ | `***` | Onboarded user | Purge all sample data  | The app is ready to be used                         | 
+ | `***` | Frequent User | I can view a history of calls made to an elderly contact | I can track past interactions                       | 
+ | `***` | Frequent User | Change the frequency of calls needed to be made for each elderly | I can track when I need to make calls               | 
+ | `***` | Expert User | Archive elderly contacts who are temporarily not part of the program | Keep my contact list organised                      | 
  | `***` | Frequent User | Export/Import my data across computers | If I would like to work using separate computers, e.g. a laptop and desktop, I can keep them updated | 
  | `***` | Expert User | Set multiple contacts as emergency contacts | I can call their next of kin in the event the elderly do not pick up or needs help | 
- | `***` | Frequent User | Export a specific elderly's details and history (All information) | So I can share it with another employee | 
+ | `***` | Frequent User | Export a specific elderly's details and history (All information) | So I can share it with another employee             | 
  | `*` | Expert user | Be notified by the app when too many elderly calls are scheduled on one day | I will not overwork myself or spend too little time calling each elderly | 
  | `*` | Expert User | I can see a dashboard of my weekly or monthly call stats | I can track my productivity and ensure that I hit my KPI | 
- | `*` | Expert User | Set up automated messages for elderly contacts that are not reachable | I can have an alternative communication method | 
- | `*` | Expert User | Use AI to calculate the priority list for elderly based on their information | The correct eldelry are being prioritised  | 
+ | `*` | Expert User | Set up automated messages for elderly contacts that are not reachable | I can have an alternative communication method      | 
+ | `*` | Expert User | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised           | 
 
 ### Use cases
 
@@ -500,15 +504,16 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 ### Glossary
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
-* **Befriending** Program: Program which elderly signs up for to receive support from an AAC.
+* **Befriending Program**: Program which elderly signs up for to receive support from an AAC.
 * **personList**: A list of elderly individuals registered in the Befriending Program.
 * **historyList**: A list of all previous contact records, including dates and notes related to the elderly.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. It is preferred to follow the order of the test cases as they are written as some test cases may depend on the state of the app after the previous test case.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -520,39 +525,100 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file. <br>
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
 
-### Deleting a person
+1. Adding a person without a tag
+   1. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
+      Expected: A new person is added to the list. The details of the person are shown in the list.
 
-1. Deleting a person while all people are listed in the `personList`.
+2. Adding a person with a tag
+   1. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
+      Expected: A new person is added to the list. The details of the person are shown in the list and the "wheelchairBound" tag is shown.
 
-   1. Prerequisites: List all people using the `list` command. There must be at least one person in the list.
+3. Adding a person with a duplicate NRIC
+   1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
+      Expected: No new person is added. Error message is shown in the status bar.
+
+### Deleting an elderly
+
+1. Deleting an elderly while all people are listed in the `personList`.
+
+   1. Prerequisites: List all people using the `list` command. There must be at least one elderly in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First person shown in the list is deleted from the list. Details of the deleted person are displayed in the status message. Timestamp in the status bar is updated.
+      Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details is displayed in the status message. Status bar remains the same.
+      Expected: No elderly is deleted. Error details is displayed in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
       Expected: Similar to the previous case.
 
-1. _{ more test cases …​ }_
+### Finding a person
+1. Finding a person by name
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `find Alice`<br>
+       Expected: Persons with the name Alice are shown in the list. Other persons are hidden.
 
-### Saving data
+2. Finding a person by NRIC
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `find S6516486H`<br>
+        Expected: The person with the NRIC S6516486H is shown in the list. Other persons are hidden.
 
-1. Dealing with missing/corrupted data files
+### Marking a person as called
+1. Mark a person as called by index
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `mark 1`<br>
+    Expected: The person at index 1 is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
+2. Mark a person as called by NRIC
+    1. Test case: `mark S1486256J o/My test note`<br>
+       Expected: The person with NRIC S1486256J is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Call history of a person
+1. Viewing call history of a person by index
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `history 2`<br>
+      Expected: The list is updated to show the call history of the person at index 2.
+2. Viewing call history of a person by NRIC
+   1. Test case: `history S1486256J`<br>
+      Expected: The list is updated to show the call history of the person with NRIC S1486256J. One of which contains the note "My test note".
 
-1. _{ more test cases …​ }_
+### Navigating through command history
+1. Navigating to previous command
+   1. Test case: Press the `UP` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` again will show the previous command in the command history. (`history S1486256J` if followed in order)
+
+2. Navigating to next command
+   1. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history 2` followed by `history S1486256J` in the status bar.
+
+### Data management
+
+1. Data is saved after shutdown
+
+   1. Clear data with the `clear` command.
+   2. Add a new person. Refer to the [Adding a person](#adding-a-person) section.
+   3. Close the app.
+   4. Re-launch the app.<br>
+       Expected: The newly added person is still present.
+
+2. Dealing with missing/corrupted data files
+
+   1. Edit the `data/contactmate.json` file to have a person with an empty NRIC `""`.
+   2. Launch the app.<br>
+       Expected: The app should show an empty list and upon closing the app, the data file should be overwritten with an empty list.
+
+3. Loading sample data
+
+   1. Delete the `data/contactmate.json` file.
+   2. Launch the app.<br>
+       Expected: The app should show a list of sample persons.
