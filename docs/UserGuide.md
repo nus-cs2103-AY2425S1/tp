@@ -1,4 +1,4 @@
----
+e---
 layout: page
 title: User Guide
 ---
@@ -108,6 +108,25 @@ Examples:
 *  `edit 1 p/98765432 e/swensens@plsreply.com` Edits the phone number and email address of the 1st restaurant to be `98765432` and `swensens@plsreply.com` respectively.
 *  `edit 2 n/Mala Hot Pot t/` Edits the name of the 2nd restaurant to be `Mala Hot Pot` and clears all existing tags.
 
+
+### Locating restaurants by tags: `tags`
+
+Find and filters restaurants that contains the given list of tags
+
+Format: `tags KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `halal` will match `Halal`
+* The order of the keywords does not matter. e.g. `Chinese Halal` will match `Halal Chinese`
+* Only the tags are searched.
+* Only full words will be matched e.g. `Hal` will not match `Halal`
+* Restaurants matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Chinese Western` will return `Swensens`, `Mala Hot Pot`
+
+Examples:
+* `tags Halal` returns `Swensens` and `Mala Hot Pot`
+* `tags Chinese` returns `Mala Hot Pot`
+* `tags Halal Chinese` returns `Swensens` and `Mala Hot Pot`<br>
+
 ### Locating restaurants by name: `find`
 
 Finds restaurants whose names contain any of the given keywords.
@@ -125,22 +144,6 @@ Examples:
 * `find Swensens Mala` returns `Swensens` and `Mala Hot Pot`
 * `find mala` returns `Mala Hot Pot`<br>
 
-### Locating restaurants by tags: `tags`
-
-Finds restaurants whose tags contain any of the given keywords.
-
-Format: `tags KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `halal` will match `Halal`
-* The order of the keywords does not matter. e.g. `Chinese Halal` will match `Halal Chinese`
-* Only the tags are searched.
-* Only full words will be matched e.g. `Hal` will not match `Halal`
-* Restaurants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Chinese Western` will return `Swensens`, `Mala Hot Pot`
-
-Examples:
-* `tags Halal` returns `Swensens` and `Mala Hot Pot`
-* `tags Chinese` returns `Mala Hot Pot`<br>
 
 ### Deleting a restaurant : `delete`
 
@@ -174,10 +177,11 @@ Examples:
 ### Favourite a restaurant : `fav`
 
 Set the specified restaurant from the address book as favourite.
+Favourite items will be highlighted with a yellow outline and pushed to the top of the list. 
 
 Format: `fav INDEX`
 
-* Deletes the restaurant at the specified `INDEX`.
+* Favourites the restaurant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -198,6 +202,20 @@ Format: `price PRICE_LABEL [MORE_PRICE_LABELS]`
 Examples:
 * `price $ $$` returns restaurants that are either `$` or `$$`
 * `price $$` returns restaurants that are `$$`<br>
+
+### Un-favourite a restaurant : `unfav`
+
+Remove the specified restaurant from the favourites list.
+Un-favourite items will not be highlighted and will be re-added to the list.
+
+Format: `unfav INDEX`
+
+* Un-favourite's the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `unfav 1` Un-favourites the 1st restaurant.
 
 ### Clearing all entries : `clear`
 
