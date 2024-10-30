@@ -381,8 +381,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-    
-*{More to be added}*
+
+**Use case: Help to find list of contacts**
+
+**MSS**
+
+1.  New user requests to see the list of commands
+2.  Data_coNdUctorS shows help list and URL to our User Guide
+3.  User goes to the User Guide link
+
+    Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 

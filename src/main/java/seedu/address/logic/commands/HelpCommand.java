@@ -13,15 +13,51 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Command List: add, delete, edit, find, list\n"
-            + "Example for Add command: `add n/[NAME] th/[TELEGRAM HANDLE] e/[EMAIL] s/[STUDENT_STATUS] r/[ROLE]`\n"
-            + "Example for Delete command: `delete [INDEX]` OR `delete [NAME]`\n"
-            + "Example for Edit command: `edit [INDEX] [PREFIX] [new description]`\n"
-            + "Example for Find command: `find [KEYWORD]`\n"
-            + "Example for List command: `list` OR `list all` OR `list contacts` OR `list all contacts`\n"
-            + "For more details, visit our user guide on the popup screen\n";
+            + "For more details, type `help [COMMAND_WORD]` with the words found in the command list above\n"
+            + "Alternatively, visit our user guide on the popup screen\n";
+
+    public static final String HELP_ADD = "`add n/[NAME] th/[TELEGRAM HANDLE] e/[EMAIL] s/[STUDENT_STATUS] r/[ROLE]`\n"
+            + "Example: add n/ John Doe th/ John_Doe "
+            + "e/ johndoe123@gmail.com s/ Undergraduate 2 r/ President\n"
+            + "For Student Status, the accepted ones are: Undergraduate 1 to 6, Masters or PhD\n"
+            + "For Role, the accepted ones are: President, Vice President, Admin, Marketing, Events (Internal),"
+            + " Events (External), or External Relations";
+
+    public static final String HELP_DELETE = "`delete [INDEX]` OR `delete [NAME]`\n"
+            + "Example One: delete 1\n"
+            + "Example Two: delete n/ John Doe\n";
+    public static final String HELP_EDIT = "Example for Edit command: `edit [INDEX] [PREFIX] [new description]`\n"
+            + "Example One: edit 1 n/ Jane Doe"
+            + "Example Two: edit 2 n/John Doe nn/ johnny";
+    public static final String HELP_FIND = "`find [PREFIX] [KEYWORD]`\n"
+            + "Example One: find n/ Jane Doe"
+            + "Example Two: find nn/ johnny";
+    public static final String HELP_LIST = "`list`\n"
+            + "Alternative One: `list all`\n"
+            + "Alternative Two: `list contacts`\n"
+            + "Alternative Three: `list all contacts`\n";
+
+    public static final String HELP_CLEAR = "`clear`\n"
+            + "Clears all the contacts";
+    private final String message;
+    private final boolean isHelp;
+
+    public HelpCommand(String message) {
+        this.message = message;
+        this.isHelp = false;
+    }
+
+    public HelpCommand() {
+        this.message = SHOWING_HELP_MESSAGE;
+        this.isHelp = true;
+    }
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (isHelp) {
+            return new CommandResult(this.message, true, false);
+        } else {
+            return new CommandResult(this.message, false, false);
+        }
     }
 }
