@@ -92,7 +92,9 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
         }
 
-        Person person = model.getPerson(personName).orElseThrow(() -> new CommandException("Person " + personName + " not in address book"));
+        Person person = model.getPerson(personName)
+                .orElseThrow(() ->
+                        new CommandException("Person " + personName + " not in address book"));
 
         model.setPerson(person, createGradeToAddToPerson(person, model.getAssignmentName(assignmentName), score));
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName));
