@@ -22,6 +22,9 @@ public class NewtagCommandTest {
 
     private Model model = new ModelManager();
 
+    /**
+     * EP: Valid tag name(s) that do(es) not already exist(s).
+     */
     @Test
     public void execute_newTag_success() {
         Tag newTag = TypicalTags.BRIDES_SIDE;
@@ -32,8 +35,7 @@ public class NewtagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
-                + "Your tags: " + expectedModel.getTagList();
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
@@ -51,13 +53,14 @@ public class NewtagCommandTest {
         expectedModel.addTag(tagBridesFriend);
         expectedModel.addTag(tagColleagues);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
-
-                + "Your tags: " + expectedModel.getTagList();
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Valid tag name(s) that already exist.
+     */
     @Test
     public void execute_duplicateTag_failure() {
         Tag duplicateTag = TypicalTags.BRIDES_SIDE;
@@ -72,11 +75,52 @@ public class NewtagCommandTest {
     }
 
     @Test
+    public void execute_mixedNewAndDuplicateTags_failure() {
+        Tag duplicateTag = TypicalTags.BRIDES_SIDE;
+        Tag newTag = TypicalTags.COLLEAGUES;
+        List<Tag> mixedTags = List.of(duplicateTag, newTag);
+        model.addTag(duplicateTag);
+
+        NewtagCommand newTagCommand = new NewtagCommand(mixedTags);
+        String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
+
+        assertCommandFailure(newTagCommand, model, expectedMessage);
+    }
+
+    /**
+     * EP: Tags that almost exceed the tag list size limit.
+     */
+    @Test
+    public void execute_maximumNumberOfTags_success() {
+        Tag newTag = TypicalTags.BRIDES_SIDE;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        // Just below boundary value
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE - 1; i++) {
+            model.addTag(new Tag(String.valueOf(i)));
+            expectedModel.addTag(new Tag(String.valueOf(i)));
+        }
+
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        expectedModel.addTag(newTag);
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * EP: Tags that exceed the tag list size limit.
+     */
+    @Test
     public void execute_tooManyTags_failure() {
         Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
 
+        // Boundary value
         for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE; i++) {
             model.addTag(new Tag(String.valueOf(i)));
         }

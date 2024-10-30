@@ -203,6 +203,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeTagFromPersons(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editTagInPersons(Tag existingTag, String newTagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean checkAcceptableTagListSize(int additionalTags) {
             throw new AssertionError("This method should not be called.");
         }

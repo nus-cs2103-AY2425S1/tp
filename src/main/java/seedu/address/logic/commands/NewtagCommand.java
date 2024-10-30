@@ -22,9 +22,8 @@ public class NewtagCommand extends Command {
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "New tag(s) created: ";
+    public static final String MESSAGE_SUCCESS = "New tag(s) created.\n";
     public static final String MESSAGE_DUPLICATE = "Some tag(s) already exists.\n";
-    public static final String MESSAGE_TAGLIST_PREFIX = "Your tags: ";
     public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
             + " tags.\nPlease remove some using 'deletetag'.\n";
 
@@ -32,6 +31,7 @@ public class NewtagCommand extends Command {
 
 
     /**
+     * Constructs a NewtagCommand to add the specified {@code tags}.
      * @param tags The {@code List} of tags to be added.
      */
     public NewtagCommand(List<Tag> tags) {
@@ -39,24 +39,36 @@ public class NewtagCommand extends Command {
         this.tags = tags;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireAllNonNull(model);
+    /**
+     * @throws CommandException if the number of defined tags in the system will exceed the maximum
+     *      * allowable number if the new tags were to be added.
+     */
+    private void validateTagListSize(Model model) throws CommandException {
         if (!model.checkAcceptableTagListSize(tags.size())) {
             throw new CommandException(MESSAGE_TOO_MANY_TAGS);
         }
+    }
 
-        boolean isSuccessful = model.addTags(tags);
-
-        if (!isSuccessful) {
+    /**
+     * Adds the tags to the model and checks for duplicates.
+     * @param model The model to which tags will be added.
+     * @throws CommandException if any tag already exists.
+     */
+    private void addTagsToModel(Model model) throws CommandException {
+        if (!model.addTags(tags)) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
-        String successMessage = MESSAGE_SUCCESS + tags + "\n";
+    }
 
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireAllNonNull(model);
+
+        validateTagListSize(model);
+        addTagsToModel(model);
         model.updateTagList();
 
-        String currentTags = MESSAGE_TAGLIST_PREFIX + model.getTagList();
-        return new CommandResult(successMessage + currentTags);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

@@ -137,8 +137,15 @@ public interface Model {
     void removeTagFromPersons(Tag tag);
 
     /**
+     * Edits the specified all persons in the address book with the tag.
+     * @param existingTag The existing tag to be renamed.
+     * @param newTagName The new tag name after renaming.
+     */
+    public void editTagInPersons(Tag existingTag, String newTagName);
+
+    /**
      * Checks if the size of the tag list is below or equal
-     * to the maximum size allowed.
+     * to the maximum size acceptable.
      *
      * @return true if the size is acceptable, false otherwise.
      */

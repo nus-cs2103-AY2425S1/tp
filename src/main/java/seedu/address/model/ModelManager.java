@@ -205,6 +205,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void editTagInPersons(Tag existingTag, String newTagName) {
+        List<Person> persons = getFullPersonList();
+        for (Person person : persons) {
+            Set<Tag> tags = new HashSet<>(person.getTags());
+            for (Tag tag : tags) {
+                if (tag.equals(existingTag)) {
+                    tag.setTagName(newTagName);
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean checkAcceptableTagListSize(int additionalTags) {
         return addressBook.checkAcceptableTagListSize(additionalTags);
     }
@@ -218,7 +231,6 @@ public class ModelManager implements Model {
     public void updateTagList() {
         ObservableList<Tag> tl = this.addressBook.getTagList();
         tagList.setAll(FXCollections.observableArrayList(tl));
-        System.out.println(tagList);
     }
 
     @Override
