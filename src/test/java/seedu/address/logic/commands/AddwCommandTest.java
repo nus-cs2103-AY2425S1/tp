@@ -1,7 +1,21 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,19 +28,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.WeddingBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 public class AddwCommandTest {
 
     @Test
@@ -35,8 +36,9 @@ public class AddwCommandTest {
     }
 
     @Test
-    public void execute_indexBased_weddingAcceptedByModel_addSuccessful() throws Exception {
-        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub = new AddwCommandTest.ModelStubAcceptingWeddingAdded();
+    public void execute_indexBasedWeddingAcceptedByModel_addSuccessful() throws Exception {
+        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub =
+                new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         Wedding weddingToAdd = new WeddingBuilder().build();
         Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -50,27 +52,29 @@ public class AddwCommandTest {
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
     }
 
-//    @Test
-//    public void execute_nameBased_weddingAcceptedByModel_addSuccessful() throws Exception {
-//        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub = new AddwCommandTest.ModelStubAcceptingWeddingAdded();
-//        Wedding weddingToAdd = new WeddingBuilder().build();
-//
-//        // single word keyword
-//        String keyword = "Alice";
-//        NameMatchesKeywordPredicate predicate =
-//                new NameMatchesKeywordPredicate(Arrays.asList(keyword.split("\\s+")));
-//
-//        Person tobeClient = modelStub.getFilteredPersonList().filtered(predicate).get(INDEX_FIRST_PERSON.getZeroBased());
-//
-//        AddwCommand addwCommand = new AddwCommand(null, predicate, weddingToAdd);
-//        CommandResult commandResult = addwCommand.execute(modelStub);
-//
-//        weddingToAdd.setClient(tobeClient);
-//
-//        assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
-//                commandResult.getFeedbackToUser());
-//        assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
-//    }
+    //    @Test
+    //    public void execute_nameBasedWeddingAcceptedByModel_addSuccessful() throws Exception {
+    //        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub =
+    //        new AddwCommandTest.ModelStubAcceptingWeddingAdded();
+    //        Wedding weddingToAdd = new WeddingBuilder().build();
+    //
+    //        // single word keyword
+    //        String keyword = "Alice";
+    //        NameMatchesKeywordPredicate predicate =
+    //                new NameMatchesKeywordPredicate(Arrays.asList(keyword.split("\\s+")));
+    //
+    //        Person tobeClient = modelStub.getFilteredPersonList()
+    //        .filtered(predicate).get(INDEX_FIRST_PERSON.getZeroBased());
+    //
+    //        AddwCommand addwCommand = new AddwCommand(null, predicate, weddingToAdd);
+    //        CommandResult commandResult = addwCommand.execute(modelStub);
+    //
+    //        weddingToAdd.setClient(tobeClient);
+    //
+    //        assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
+    //                commandResult.getFeedbackToUser());
+    //        assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
+    //    }
 
     @Test
     public void execute_duplicateWedding_throwsCommandException() {
@@ -82,7 +86,8 @@ public class AddwCommandTest {
 
         AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
 
-        assertThrows(CommandException.class, AddwCommand.MESSAGE_DUPLICATE_WEDDING, () -> addwCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddwCommand.MESSAGE_DUPLICATE_WEDDING, () -> addwCommand.execute(modelStub));
     }
 
     @Test
