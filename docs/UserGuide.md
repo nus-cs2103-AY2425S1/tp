@@ -81,13 +81,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
 * A person can have any number of tags (including 0)
 * `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
-* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`)
-* `NAME` must not exist in Clientele+ already.
-* `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
-* `EMAIL`  Standard email format “user@example.com”
-* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case insensitive.
-* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
-* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
+* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`).
+* `PHONE_NUMBER` should be **numeric** digits, may include “-” or spaces. Example: `555-1234` or `555 1234`.
+* `EMAIL`  Standard email format: “user@example.com”.
+* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case-insensitive.
+* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case-insensitive.
+* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case-insensitive.
 * `TAG` Should be alphanumeric. May contain spaces.
 * `DEADLINE` Should be in the following format: `DD-MM-YYYY`. Example: `10-10-2024` represents **10th October 2024**
 
