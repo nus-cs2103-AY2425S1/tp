@@ -47,7 +47,7 @@ public class DeleteEmergencyContactCommand extends Command {
         if (personToEdit.getEmergencyContact() == null
                 || (personToEdit.getEmergencyContact().contactName.isEmpty()
                 && personToEdit.getEmergencyContact().contactNumber.isEmpty())) {
-            throw new CommandException(generateNoEmergencyContactMessage(personToEdit));
+            return new CommandResult(generateNoEmergencyContactMessage(personToEdit));
         }
 
         String nameToBeDeleted = personToEdit.getEmergencyContact().contactName;

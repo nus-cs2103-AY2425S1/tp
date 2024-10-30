@@ -58,22 +58,23 @@ public class DeleteEmergencyContactCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteEmergencyContactCommand deleteEmergencyContactCommand =
-                new DeleteEmergencyContactCommand(outOfBoundIndex);
-        assertCommandFailure(deleteEmergencyContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_noSavedEmergencyContact_failure() {
+    public void execute_noSavedEmergencyContactErrorMessage_success() {
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson).build();
         DeleteEmergencyContactCommand deleteEmergencyContactCommand =
                 new DeleteEmergencyContactCommand(INDEX_THIRD_PERSON);
         String expectedMessage = String.format(DeleteEmergencyContactCommand.MESSAGE_NO_EMERGENCY_CONTACT,
                 editedPerson.getName());
-        assertCommandFailure(deleteEmergencyContactCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        assertCommandSuccess(deleteEmergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteEmergencyContactCommand deleteEmergencyContactCommand =
+                new DeleteEmergencyContactCommand(outOfBoundIndex);
+        assertCommandFailure(deleteEmergencyContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
