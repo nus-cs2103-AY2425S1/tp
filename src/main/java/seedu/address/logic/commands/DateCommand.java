@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,16 +25,16 @@ import seedu.address.model.person.Person;
 public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the appointment date of the person identified "
-            + "by their name, phone and/or email "
-            + "Existing date will be overwritten by the input.\n"
+            + ": Edits the appointment date and time of the person identified "
+            + "by their name, phone and/or email. "
+            + "Existing date and time will be overwritten by the input.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_DATE + "[DATE]\n"
-            + "Example: " + COMMAND_WORD + " n/John Doe"
-            + PREFIX_DATE + "12 October 2024";
+            + "Example: " + COMMAND_WORD + " n/John Doe "
+            + PREFIX_DATE + "12/10/2024 1800";
 
     public static final String MESSAGE_ARGUMENTS = "Person: %1$s, Date: %2$s";
     public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
@@ -117,7 +118,7 @@ public class DateCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !date.value.isEmpty() ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
+        String message = !(date.value == LocalDateTime.MIN) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
         return String.format(message, personToEdit);
     }
 

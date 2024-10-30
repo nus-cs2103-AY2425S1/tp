@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Date;
@@ -20,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TAG = "Low Risk";
     public static final String DEFAULT_ALLERGY = "Peanuts";
-    public static final String DEFAULT_DATE = "";
+    public static final LocalDateTime DEFAULT_DATE = LocalDateTime.MIN;
 
     private Name name;
     private Phone phone;
@@ -107,7 +109,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Date} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDate(String date) {
+    public PersonBuilder withDate(LocalDateTime date) {
         this.date = new Date(date);
         return this;
     }
