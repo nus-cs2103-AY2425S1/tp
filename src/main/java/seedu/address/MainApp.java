@@ -84,19 +84,19 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (initialData.getRestaurantList().isEmpty()) {
+                throw new DataLoadingException(new Exception("Mismatch"));
+            }
             storage.saveAddressBook(initialData);
         } catch (DataLoadingException | IOException e) {
             try {
-                addressBookOptional = storage.readAddressBook();
-                if (!addressBookOptional.isPresent()) {
-                    logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                            + " populated with a sample AddressBook.");
-                }
-                initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-                storage.saveAddressBook(initialData);
-            } catch (DataLoadingException | IOException f) {
                 logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                        + " Will be starting with an empty AddressBook.");
+                        + " Will be starting with an Sample AddressBook.");
+                initialData = SampleDataUtil.getSampleAddressBook();
+                storage.saveAddressBook(initialData);
+            } catch (IOException f) {
+                logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                        + " Will be starting with an Blank AddressBook.");
                 initialData = new AddressBook();
             }
         }
