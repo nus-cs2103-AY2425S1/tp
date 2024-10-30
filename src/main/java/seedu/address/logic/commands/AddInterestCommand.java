@@ -33,7 +33,7 @@ public class AddInterestCommand extends Command {
             + PREFIX_INTEREST + "Hiking\n";
 
     public static final String MESSAGE_SUCCESS = "New interests added to %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_INTERESTS = "This person already has some of the interests: %1$s";
+    public static final String MESSAGE_DUPLICATE_INTERESTS = "Cannot have duplicate interests: %s";
     public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
 
     private final Index index;

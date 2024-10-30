@@ -10,7 +10,7 @@
       "tags" : [ "friends" ],
       "university" : "NUS",
       "major" : "Computer Science",
-      "interests": ["Reading", "Swimming"]
+      "interests": [ "Swimming" ]
     },
     {
       "name" : "Benson Meier",
@@ -21,7 +21,7 @@
       "tags" : [ "owesMoney", "friends" ],
       "university" : "NTU",
       "major" : "Computer Science",
-      "interests": ["Football", "Gaming"]
+      "interests": [ "Football", "Gaming" ]
     },
     {
       "name" : "Carl Kurz",
@@ -32,7 +32,7 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Computer Science",
-      "interests": ["Cycling"]
+      "interests": [ "Reading", "Writing" ]
     },
     {
       "name" : "Daniel Meier",
@@ -43,7 +43,7 @@
       "tags" : [ "friends" ],
       "university" : "NTU",
       "major" : "Business",
-      "interests": ["Traveling"]
+      "interests": [ "Traveling" ]
     },
     {
       "name" : "Elle Meyer",
@@ -54,7 +54,7 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Engineering",
-      "interests": ["Photography"]
+      "interests": [ "Reading", "Writing" ]
     },
     {
       "name" : "Fiona Kunz",
@@ -65,7 +65,7 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Architecture",
-      "interests": ["Painting", "Yoga"]
+      "interests": [ "Painting", "Yoga" ]
     },
     {
       "name" : "George Best",
@@ -76,7 +76,7 @@
       "tags" : [],
       "university" : "NTU",
       "major" : "Economics",
-      "interests": ["Running", "Chess"]
+      "interests": [ "Running", "Chess" ]
     }
   ]
 }

@@ -94,7 +94,7 @@ public class AddInterestCommandTest {
         Set<Interest> interests = Set.of(new Interest("Swimming"), new Interest("swimming"));
         AddInterestCommand addInterestCommand = new AddInterestCommand(INDEX_FIRST_PERSON, interests);
 
-        String expectedMessage = "This person already has some of the interests: [swimming, Swimming]";
+        String expectedMessage = "Cannot have duplicate interests: [swimming, Swimming]";
 
         assertCommandFailure(addInterestCommand, model, expectedMessage);
     }
