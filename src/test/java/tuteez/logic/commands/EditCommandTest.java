@@ -194,38 +194,56 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_editLastViewedPerson_success() {
-        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(originalPerson).withName(VALID_NAME_BOB).build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+    public void execute_editPersonOnDisplay_updatesLastViewedPerson() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.updateLastViewedPerson(personToEdit);
+
+        Person editedPerson = new PersonBuilder(personToEdit)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(originalPerson, editedPerson);
+        expectedModel.setPerson(personToEdit, editedPerson);
         expectedModel.updateLastViewedPerson(editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertEquals(editedPerson, model.getLastViewedPerson().get().get());
     }
 
     @Test
-    public void execute_editNonLastViewedPerson_noUpdateLastViewed() {
-        Person lastViewedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        model.updateLastViewedPerson(lastViewedPerson);
+    public void execute_editPersonNotOnDisplay_lastViewedPersonUnchanged() {
+        Person personOnDisplay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.updateLastViewedPerson(personOnDisplay);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personToEdit).withName(VALID_NAME_BOB).build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        Person editedPerson = new PersonBuilder(personToEdit)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-        expectedModel.updateLastViewedPerson(lastViewedPerson);
+        expectedModel.updateLastViewedPerson(personOnDisplay);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertEquals(personOnDisplay, model.getLastViewedPerson().get().get());
     }
 
     @Test
