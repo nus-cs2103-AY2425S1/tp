@@ -16,7 +16,7 @@ import java.util.Locale;
  */
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = """
-            Date must be a valid date in any of the following formats:
+            Date must be in any of the following formats:
             1. dd-MM-uuuu
             2. uuuu-MM-dd
             3. dd MMM uuuu
