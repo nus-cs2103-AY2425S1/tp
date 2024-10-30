@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.personcommands.LinkPersonCommand;
-import seedu.address.model.types.common.Name;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOOK_FAIR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.personcommands.LinkPersonCommand;
+import seedu.address.model.types.common.Name;
 
 public class LinkCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =

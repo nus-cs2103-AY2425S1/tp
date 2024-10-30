@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * A utility class containing a list of {@code Person} linked to {@code Event} objects to be used in tests.
@@ -51,6 +51,9 @@ public class TypicalPersonEventManager {
         return pem;
     }
 
+    /**
+     * Returns a string representation of the current date and time plus x days.
+     */
     public static String nowPlusDays(long x) {
         LocalDateTime added = LocalDateTime.now().plusDays(x);
         return added.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
