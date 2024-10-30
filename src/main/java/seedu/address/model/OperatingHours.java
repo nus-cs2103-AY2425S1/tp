@@ -49,7 +49,7 @@ public class OperatingHours {
     /**
      * Checks if {@code appointment} timing is within operating hours
      */
-    public boolean isValid(Appointment appointment) {
+    public boolean isWithinOperatingHours(Appointment appointment) {
         try {
             LocalTime dateTime = parseDateTime(appointment.dateTime).toLocalTime();
             System.out.println(dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour));
@@ -67,7 +67,7 @@ public class OperatingHours {
      */
     public boolean isCalenderValid(List<Appointment> appointments) {
         for (Appointment appointment : appointments) {
-            if (!isValid(appointment)) {
+            if (!isWithinOperatingHours(appointment)) {
                 return false;
             }
         }

@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
+import seedu.address.model.OperatingHours;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Appointment;
@@ -68,6 +71,29 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(BOB);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_APPOINTMENT_TAKEN, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_appointmentNotWithinOperatingHours_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withAppointment(BOB.getAppointment().dateTime).build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(ALICE);
+        modelStub.setOperatingHours(LocalTime.of(22, 30), LocalTime.of(23, 30));
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_appointmentWithinOperatingHours_addSuccessful() throws Exception {
+        Person validPerson = new PersonBuilder().withAppointment(BOB.getAppointment().dateTime).build();
+        ModelStub modelStub = new ModelStubWithPerson(ALICE);
+        modelStub.setOperatingHours(LocalTime.of(12, 30), LocalTime.of(23, 30));
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -176,6 +202,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public OperatingHours getOperatingHours() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean appointmentWithinOperatingHours(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -201,7 +242,9 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final ArrayList<Person> personsAdded = new ArrayList<>();
         private final List<Appointment> calendar;
+        private OperatingHours operatingHours = new OperatingHours();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
@@ -217,8 +260,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
         public boolean hasAppointment(Person person) {
             return calendar.contains(person.getAppointment());
+        }
+
+        @Override
+        public OperatingHours getOperatingHours() {
+            return operatingHours;
+        }
+
+        @Override
+        public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
+            requireAllNonNull(openingHour, closingHour);
+            operatingHours = new OperatingHours(openingHour, closingHour);
+            return true;
+        }
+
+        @Override
+        public boolean appointmentWithinOperatingHours(Appointment appointment) {
+            requireNonNull(appointment);
+            return operatingHours.isWithinOperatingHours(appointment);
         }
     }
 
@@ -228,6 +295,7 @@ public class AddCommandTest {
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
         final ArrayList<Appointment> calendar = new ArrayList<>();
+        final OperatingHours operatingHours = new OperatingHours();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -245,6 +313,23 @@ public class AddCommandTest {
         public boolean hasAppointment(Person person) {
             requireNonNull(person);
             return calendar.stream().anyMatch(x -> x.equals(person.getAppointment()));
+        }
+
+        @Override
+        public OperatingHours getOperatingHours() {
+            return operatingHours;
+        }
+
+        @Override
+        public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
+            requireAllNonNull(openingHour, closingHour);
+            return true;
+        }
+
+        @Override
+        public boolean appointmentWithinOperatingHours(Appointment appointment) {
+            requireNonNull(appointment);
+            return operatingHours.isWithinOperatingHours(appointment);
         }
 
         @Override

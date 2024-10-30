@@ -172,7 +172,7 @@ public class ModelManager implements Model {
     @Override
     public boolean appointmentWithinOperatingHours(Appointment appointment) {
         requireNonNull(appointment);
-        return operatingHours.isValid(appointment);
+        return operatingHours.isWithinOperatingHours(appointment);
     }
 
     protected void triggerBackup(String action, Person target) {

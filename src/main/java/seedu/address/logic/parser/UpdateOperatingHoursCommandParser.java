@@ -4,11 +4,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSINGHOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENINGHOURS;
 import static seedu.address.logic.parser.ParserUtil.parseTime;
 
+import java.time.LocalTime;
+
 import seedu.address.logic.commands.UpdateOperatingHoursCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.OperatingHours;
-
-import java.time.LocalTime;
 
 /**
  * Parses input arguments and creates a new UpdateOperatingHoursCommand object.
