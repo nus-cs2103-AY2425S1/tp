@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
-import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Address;
 import seedu.sellsavvy.model.person.Email;
@@ -24,13 +24,13 @@ import seedu.sellsavvy.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    private static final Order ABACUS = new Order(new Item("Abacus"), new Count("2"),
+    private static final Order ABACUS = new Order(new Item("Abacus"), new Quantity("2"),
             new Date("10-10-2025"), Status.PENDING);
-    private static final Order BLOCKS = new Order(new Item("Blocks"), new Count("101"),
+    private static final Order BLOCKS = new Order(new Item("Blocks"), new Quantity("101"),
             new Date("05-05-2025"), Status.COMPLETED);
-    private static final Order CAMERA = new Order(new Item("Camera with spare lens"), new Count("1"),
+    private static final Order CAMERA = new Order(new Item("Camera with spare lens"), new Quantity("1"),
             new Date("03-03-2025"), Status.PENDING);
-    private static final Order DAGGER = new Order(new Item("Damascus daggers"), new Count("5"),
+    private static final Order DAGGER = new Order(new Item("Damascus daggers"), new Quantity("5"),
             new Date("12-12-2025"), Status.PENDING);
 
     public static Person[] getSamplePersons() {
