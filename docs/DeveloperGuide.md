@@ -534,6 +534,51 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete Jane Doe`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
+### Editing a person
+
+1. Editing a person's fields
+
+    1. Prerequisites: Person named `John Doe` must exist.
+
+    2. Test case: `edit John Doe n/Jane Doe`<br>
+       Expected: Contact with name `John Doe` is changed to `Jane Doe`
+
+    3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
+       Expected: Similar to previous results with relevant fields changed
+
+2. Editing a non-existent person's field
+
+    1. Prerequisites: Person named `John Doe` must not exist.
+
+    2. Test case: `edit John Doe n/Jane Doe`<br>
+       Expected: Error message reflecting provided name is invalid
+ 
+    3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
+       Expected: Similar to previous results.
+
+3. Editing a person with no fields
+
+    1. Test case: `edit John Doe`<br>
+       Expected: Error message reflecting at least one field must be provided.
+
+    2. Test case: `edit Non Existent Person`<br>
+       Expected: Similar to previous results.
+
+4. Clearing a persons appointments and tags
+
+    1. Prerequisites: Person named `John Doe` must exist.
+
+    2. Test case: `edit John Doe t/`<br>
+       Expected: Contact with name `John Doe` has all existing tags cleared
+
+    3. Test case: `edit John Doe ap/`<br>
+       Expected: Contact with name `John Doe` has all existing appointments cleared
+
+### Export
+
+1. Exporting Data
+    1. Test case: `export`<br>
+       Expected: A .json file under `data` folder should be created in the folder where the MediContact.jar file is stored
 
 ### Saving data
 
