@@ -115,9 +115,12 @@ Adds a student to the address book.
 
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
-* **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+* **START_TIME** and **END_TIME** are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
-* **RATE**, **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
+* **RATE** is the tuition fee per hour. It must meet the following criteria:
+  * Minimum: $0.01 (must be a positive value)
+  * Maximum: $1000.00 (two decimal places allowed)
+* **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
@@ -129,7 +132,6 @@ Adds a student to the address book.
 
 
 * New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
-* <b>RATE</b> is the tuition fee per hour.
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
 
@@ -167,8 +169,8 @@ Edits an existing student in the address book.
 
 <box type="tip" header="##### Tips">
 
-* You may refer to [`pay`](#receiving-payment-from-a-student-pay), 
-[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+* You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settle-payments-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
 
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
