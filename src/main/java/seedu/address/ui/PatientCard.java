@@ -88,7 +88,7 @@ public class PatientCard extends UiPart<Region> {
         if (appointmentSet.isEmpty()) {
             appointments.setPrefHeight(0);
         } else {
-            appointments.setPrefHeight(50);
+            appointments.setPrefHeight(60);
         }
     }
 }
