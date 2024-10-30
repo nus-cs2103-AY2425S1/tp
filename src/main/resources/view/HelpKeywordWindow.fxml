@@ -4,57 +4,39 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<fx:root resizable="false" title="Help Page" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help Page" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
-    <scene>
-        <Scene>
-            <stylesheets>
-                <URL value="@HelpKeywordWindow.css" />
-            </stylesheets>
-
-            <VBox fx:id="helpKeywordContainer" spacing="10">
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="header" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="parametersHeader" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="parameters" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="usageHeader" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="usage" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="exampleHeader" wrapText="true"/>
-                </HBox>
-
-                <HBox alignment="TOP_LEFT">
-                    <Label fx:id="example" wrapText="true"/>
-                </HBox>
-
-                <opaqueInsets>
-                    <Insets bottom="20.0" left="10.0" right="20.0" top="10.0" />
-                </opaqueInsets>
-                <padding>
-                    <Insets bottom="20.0" left="10.0" right="20.0" top="10.0" />
-                </padding>
-            </VBox>
-        </Scene>
-    </scene>
+   <scene>
+      <Scene>
+         <stylesheets>
+                 <URL value="@HelpKeywordWindow.css" />
+         </stylesheets>
+         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="400.0" prefWidth="500.0" >
+            <content>
+               <VBox fx:id="helpKeywordContainer" maxHeight="1.7976931348623157E308" spacing="10.0">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+                  <children>
+                     <Label fx:id="header" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="description" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="parametersHeader" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="parameters" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="usageHeader" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="usage" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="exampleHeader" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                     <Label fx:id="example" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="500.0" text="Label" wrapText="true" minHeight="-Infinity"/>
+                  </children>
+               </VBox>
+            </content>
+         </ScrollPane>
+      </Scene>
+   </scene>
 </fx:root>
