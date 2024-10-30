@@ -61,7 +61,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setEmail(Email.makeEmail(email));
         return this;
     }
 
@@ -69,7 +69,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setMajor(new Major(address));
+        descriptor.setMajor(Major.makeMajor(address));
         return this;
     }
 
@@ -87,7 +87,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Year} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withYear(String year) {
-        descriptor.setYear(new Year(year));
+        descriptor.setYear(Year.makeYear(year));
         return this;
     }
 
