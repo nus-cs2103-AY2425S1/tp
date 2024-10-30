@@ -9,7 +9,7 @@ import tutorease.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson implements Comparable<Lesson> {
-    private final Person student;
+    private Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
