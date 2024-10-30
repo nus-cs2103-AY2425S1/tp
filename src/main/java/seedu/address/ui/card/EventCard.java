@@ -72,7 +72,11 @@ public class EventCard extends UiPart<Region> {
         tag.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE, new CornerRadii(5), null)));
         tag.setTextFill(Color.WHITE);
         tag.setPadding(new javafx.geometry.Insets(2, 5, 2, 5));
-        contactCard.getChildren().addAll(tag, new Label(contact.getName().fullName),
+        tag.setAlignment(javafx.geometry.Pos.CENTER);
+        tag.setPrefWidth(100);
+        Label name = new Label(contact.getName().fullName);
+        name.setPrefWidth(120);
+        contactCard.getChildren().addAll(tag, name,
                 new Label(contact.getPhone().value));
         contactCard.setPadding(new javafx.geometry.Insets(5, 0, 0, 0));
         return contactCard;

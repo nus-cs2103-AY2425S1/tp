@@ -316,8 +316,9 @@
 
 .underline {
     -fx-border-color: #3e7b91;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 0 0 3 0;
     underline-position: bottom;
+    -fx-font-weight: bold;
 }
 
 #cardPane {
