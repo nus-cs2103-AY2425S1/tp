@@ -15,8 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.TutorialGroup;
-
 
 /**
  * Parses input arguments and creates a new MarkAttendanceCommand object

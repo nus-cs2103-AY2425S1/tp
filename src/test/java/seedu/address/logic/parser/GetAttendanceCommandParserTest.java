@@ -18,7 +18,7 @@ public class GetAttendanceCommandParserTest {
     @Test
     public void parse_validArgs_returnsGetAttendanceCommand() throws Exception {
         String userInput = " n/John Doe d/2023-10-09";
-        GetAttendanceCommand expectedCommand = new GetAttendanceCommand(new Name("John Doe"),
+        GetAttendanceCommand expectedCommand = new GetAttendanceCommand(new Name("John Doe"), null,
                 LocalDate.parse("2023-10-09"));
         GetAttendanceCommand command = parser.parse(userInput);
         assertEquals(expectedCommand, command);

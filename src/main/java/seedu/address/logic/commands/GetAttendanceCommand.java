@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,7 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+
 
 /**
  * Retrieves the attendance of a student for a specific date.
@@ -73,7 +76,8 @@ public class GetAttendanceCommand extends Command {
                     .filter(s -> s.getStudentNumber().equals(studentNumber.get()))
                     .collect(Collectors.toList());
             if (filteredStudentList.isEmpty()) {
-                throw new CommandException("Student not found: " + name + " with student number: " + studentNumber.get());
+                throw new CommandException("Student not found: " + name + " with student number: "
+                        + studentNumber.get());
             }
             student = filteredStudentList.get(0);
         } else {

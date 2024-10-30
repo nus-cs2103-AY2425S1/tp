@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -13,7 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+
 
 
 /**
@@ -82,7 +87,8 @@ public class MarkAttendanceCommand extends Command {
                     .filter(s -> s.getStudentNumber().equals(studentNumber.get()))
                     .collect(Collectors.toList());
             if (filteredStudentList.isEmpty()) {
-                throw new CommandException("Student not found: " + name + " with Student Number: " + studentNumber.get());
+                throw new CommandException("Student not found: " + name + " with Student Number: "
+                        + studentNumber.get());
             }
             student = filteredStudentList.get(0);
         } else {
