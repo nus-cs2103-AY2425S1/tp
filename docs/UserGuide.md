@@ -154,6 +154,31 @@ Format: `remark INDEX r/REMARK`
 Examples:
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
 
+### Single page person view: `view`
+
+Shows all the information related to a contact on a single page.
+
+Format: `view INDEX`
+
+* The search is based on the most updated contact list.
+* Opening a new window will automatically close the previously opened window.
+* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*   `view 1` Shows the person located as index position 1 in the address book.
+    ![result for 'viewWindow'](images/viewWindow.png)
+
+### Closing single page person view: `close`
+
+Closes the UI page that shows the information of the person.
+
+Format: `close`
+
+* This will close the last opened window.
+
+Examples:
+*   `close` Will close the window that is currently open, and do nothing if there is no window open.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
