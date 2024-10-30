@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -109,5 +111,23 @@ public class ArchiveCommandTest {
     public void getCommandWord_isUnarchive_true() {
         ArchiveCommand unarchiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON, false);
         assertEquals(ArchiveCommand.COMMAND_WORD_UNARCHIVE, unarchiveCommand.getCommandWord());
+    }
+
+    @Test
+    public void equals() {
+        ArchiveCommand archiveCommand1 = new ArchiveCommand(INDEX_FIRST_PERSON, true);
+        ArchiveCommand archiveCommand2 = new ArchiveCommand(INDEX_SECOND_PERSON, true);
+        ArchiveCommand unarchiveCommand1 = new ArchiveCommand(INDEX_FIRST_PERSON, false);
+        ArchiveCommand unarchiveCommand2 = new ArchiveCommand(INDEX_SECOND_PERSON, false);
+
+        assertEquals(archiveCommand1, archiveCommand1);
+        assertEquals(archiveCommand2, archiveCommand2);
+        assertEquals(archiveCommand1, new ArchiveCommand(INDEX_FIRST_PERSON, true));
+        assertEquals(unarchiveCommand1, new ArchiveCommand(INDEX_FIRST_PERSON, false));
+
+        assertNotEquals(archiveCommand1, null);
+        assertNotEquals(archiveCommand1, archiveCommand2);
+        assertNotEquals(archiveCommand1, unarchiveCommand1);
+        assertNotEquals(unarchiveCommand1, unarchiveCommand2);
     }
 }

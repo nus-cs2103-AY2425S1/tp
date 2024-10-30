@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -65,5 +67,20 @@ public class ListCommandTest {
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(ListCommand.ofAll(), model, ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        Object object = ListCommand.ofCurrent();
+
+        assertEquals(object, object);
+        assertEquals(ListCommand.ofCurrent(), ListCommand.ofCurrent());
+        assertEquals(ListCommand.ofAll(), ListCommand.ofAll());
+        assertEquals(ListCommand.ofArchive(), ListCommand.ofArchive());
+
+        assertNotEquals(ListCommand.ofCurrent(), null);
+        assertNotEquals(ListCommand.ofCurrent(), 0);
+        assertNotEquals(ListCommand.ofCurrent(), ListCommand.ofAll());
+        assertNotEquals(ListCommand.ofAll(), ListCommand.ofArchive());
     }
 }

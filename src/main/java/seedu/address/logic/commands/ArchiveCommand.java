@@ -119,4 +119,19 @@ public class ArchiveCommand extends Command {
     public String getCommandWord() {
         return isArchive ? COMMAND_WORD_ARCHIVE : COMMAND_WORD_UNARCHIVE;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // handles null
+        if (!(other instanceof ArchiveCommand otherArchiveCommand)) {
+            return false;
+        }
+
+        return this.index.equals(otherArchiveCommand.index)
+                && this.isArchive == otherArchiveCommand.isArchive;
+    }
 }

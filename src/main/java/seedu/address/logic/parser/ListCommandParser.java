@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_ARCHIVE;
 
@@ -23,7 +24,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()
                 && argMultimap.getValue(PREFIX_LIST_ARCHIVE).isPresent()) {
-            throw new ParseException(ListCommand.INVALID_MULTIPLE_ARGUMENTS_MESSAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()) {
@@ -44,8 +45,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String trimmedArgumentValue = argumentValue.trim();
 
         if (!trimmedArgumentValue.isEmpty()) {
-            throw new ParseException(String.format(
-                    ListCommand.INVALID_NON_EMPTY_ARGUMENT_VALUE_MESSAGE_FORMAT, prefix));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
         return supplier.get();

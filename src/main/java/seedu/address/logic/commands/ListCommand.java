@@ -18,17 +18,12 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists current/archived/all persons in the address book as a list with index numbers.\n"
+            + "Should not be used with both " + PREFIX_LIST_ARCHIVE + " and " + PREFIX_LIST_ALL + " concurrently.\n"
+            + PREFIX_LIST_ARCHIVE + " and " + PREFIX_LIST_ALL + " should not have a parameter value.\n"
             + "Parameters: "
             + "[" + PREFIX_LIST_ARCHIVE + "] "
             + "[" + PREFIX_LIST_ALL + "]\n"
             + "Example: " + COMMAND_WORD;
-
-    public static final String INVALID_MULTIPLE_ARGUMENTS_MESSAGE =
-            String.format("%s should not have multiple arguments (%s and %s) at the same time",
-                    COMMAND_WORD, PREFIX_LIST_ARCHIVE, PREFIX_LIST_ALL);
-
-    public static final String INVALID_NON_EMPTY_ARGUMENT_VALUE_MESSAGE_FORMAT =
-            "%s should not have a value right after it";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
     public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons";
@@ -52,6 +47,21 @@ public class ListCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // handles null
+        if (!(other instanceof ListCommand otherListCommand)) {
+            return false;
+        }
+
+        return this.predicate.equals(otherListCommand.predicate)
+                && this.successMessage.equals(otherListCommand.successMessage);
     }
 
     public static ListCommand ofCurrent() {
