@@ -27,20 +27,10 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <GridPane vgap="5" hgap="5">
-        <Label text="Phone:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <Label fx:id="phone" styleClass="cell_small_label" text="$phone" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
-        <Label text="Address:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <Label fx:id="address" styleClass="cell_small_label" text="$address" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-        <Label text="Email:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <Label fx:id="email" styleClass="cell_small_label" text="$email" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-        <Label text="Remarks:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <Label fx:id="remark" styleClass="cell_small_label" text="$remark" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-      </GridPane>
+      <FlowPane fx:id="status" />
+      <Label fx:id="phone" styleClass="cell_small_label" text="phone" />
+      <Label fx:id="date" styleClass="cell_small_label" text="date" />
+      <Label fx:id="items" styleClass="cell_small_label" text="items" />
     </VBox>
   </GridPane>
 </HBox>
