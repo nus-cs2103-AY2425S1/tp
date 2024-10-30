@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.edit;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -55,27 +56,27 @@ public abstract class EditModuleRoleOperation {
             ModuleRoleMap moduleRoleMapBefore, ModuleRoleMap moduleRoleMapAfter) {
 
         StringBuilder stringBuilderAdded = new StringBuilder();
-        boolean hasAdded = false;
-        for (ModuleRolePair moduleRolePair : moduleRoleMapAfter.getData()) {
-            if (!moduleRoleMapBefore.containsModuleRolePair(moduleRolePair)) {
-                hasAdded = true;
-                stringBuilderAdded.append(moduleRolePair).append(" ");
-            }
-        }
+        moduleRoleMapAfter.getData().stream()
+                .sorted(Comparator.comparing(ModuleRolePair::toString))
+                .forEach(moduleRolePair -> {
+                    if (!moduleRoleMapBefore.containsModuleRolePair(moduleRolePair)) {
+                        stringBuilderAdded.append(moduleRolePair).append(" ");
+                    }
+                });
 
         StringBuilder stringBuilderDeleted = new StringBuilder();
-        boolean hasDeleted = false;
-        for (ModuleRolePair moduleRolePair : moduleRoleMapBefore.getData()) {
-            if (!moduleRoleMapAfter.containsModuleRolePair(moduleRolePair)) {
-                hasDeleted = true;
-                stringBuilderDeleted.append(moduleRolePair).append(" ");
-            }
-        }
+        moduleRoleMapBefore.getData().stream()
+                .sorted(Comparator.comparing(ModuleRolePair::toString))
+                .forEach(moduleRolePair -> {
+                    if (!moduleRoleMapAfter.containsModuleRolePair(moduleRolePair)) {
+                        stringBuilderDeleted.append(moduleRolePair).append(" ");
+                    }
+                });
         List<String> finalDescription = new ArrayList<>();
-        if (hasAdded) {
+        if (!stringBuilderAdded.toString().isEmpty()) {
             finalDescription.add("Module role(s) added: " + stringBuilderAdded.toString().strip());
         }
-        if (hasDeleted) {
+        if (!stringBuilderDeleted.toString().isEmpty()) {
             finalDescription.add("Module role(s) deleted: " + stringBuilderDeleted.toString().strip());
         }
 
