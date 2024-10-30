@@ -24,7 +24,6 @@ import seedu.address.model.skill.Skill;
  * Unmatches a contact from their job.
  */
 public class UnmatchCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(UnmatchCommand.class);
     public static final int CONTACT_INDEX_POS = 0;
     public static final int JOB_INDEX_POS = 1;
     public static final String COMMAND_WORD = "unmatch";
@@ -36,8 +35,10 @@ public class UnmatchCommand extends Command {
     public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
     public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with any job";
 
+    private static final Logger logger = LogsCenter.getLogger(UnmatchCommand.class);
     private final Index contactIndex;
     private final Index jobIndex;
+
 
     /**
      * @param contactIndex Index of the contact in the filtered person list to unmatch.
