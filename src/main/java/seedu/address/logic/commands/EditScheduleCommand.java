@@ -113,7 +113,7 @@ public class EditScheduleCommand extends Command {
         List<Meeting> lastShownMeetingList = model.getWeeklySchedule();
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        List<Index> contactIndex = editScheduleDescriptor.getContactIndexes().orElseThrow();
+        List<Index> contactIndex = editScheduleDescriptor.getContactIndexes().orElse(List.of());
 
         // check if any of the contact indexes are invalid
         for (Index i : contactIndex) {
