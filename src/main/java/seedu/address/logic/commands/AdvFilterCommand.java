@@ -133,7 +133,7 @@ public class AdvFilterCommand extends Command {
                 .toString();
     }
 
-    private boolean compare(Operator operator, Tag tag, String tagValue) {
+    public boolean compare(Operator operator, Tag tag, String tagValue) {
         return switch (operator) {
         case EQUAL -> tag.tagValue.equalsIgnoreCase(tagValue);
         case NOT_EQUAL -> !tag.tagValue.equalsIgnoreCase(tagValue);
@@ -217,7 +217,7 @@ public class AdvFilterCommand extends Command {
         return operatorType;
     }
 
-    private Double tryParseDouble(String value) {
+    public Double tryParseDouble(String value) {
         try {
             double d = Double.parseDouble(value);
             return d;

@@ -20,6 +20,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AdvFilterCommand.Operator;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -42,14 +43,14 @@ public class AdvFilterCommandTest {
 
     @Test
     public void equals() {
-        AdvFilterCommand sortFirstCommand = new AdvFilterCommand("friend", ">=", "1");
-        AdvFilterCommand sortSecondCommand = new AdvFilterCommand("friend", "!=", "1");
+        AdvFilterCommand sortFirstCommand = new AdvFilterCommand("friend", Operator.GREATER_THAN_OR_EQUAL, "1");
+        AdvFilterCommand sortSecondCommand = new AdvFilterCommand("friend", Operator.NOT_EQUAL, "1");
 
         // same object -> returns true
         assertTrue(sortFirstCommand.equals(sortFirstCommand));
 
         // same values -> returns true
-        AdvFilterCommand sortFirstCommandCopy = new AdvFilterCommand("friend", ">=", "1");
+        AdvFilterCommand sortFirstCommandCopy = new AdvFilterCommand("friend", Operator.GREATER_THAN_OR_EQUAL, "1");
         assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
 
         // different types -> returns false
@@ -65,7 +66,7 @@ public class AdvFilterCommandTest {
     //Test case for sorting using tag value more than (numeric)
     public void execute_tagValue_moreThanOne() {
         String expectedMessage = AdvFilterCommand.constructSuccessMessage("friend", ">=", "1");
-        AdvFilterCommand command = new AdvFilterCommand("friend", ">=", "1");
+        AdvFilterCommand command = new AdvFilterCommand("friend", Operator.GREATER_THAN_OR_EQUAL, "1");
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BOB_CLONE), model.getFilteredPersonList());
@@ -75,7 +76,7 @@ public class AdvFilterCommandTest {
     @Test
     public void execute_tagValue_equalsHigh() {
         String expectedMessage = AdvFilterCommand.constructSuccessMessage("priority", "=", "high");
-        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", Operator.EQUAL, "high");
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(AMY_CLONE), model.getFilteredPersonList());
@@ -83,7 +84,7 @@ public class AdvFilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", Operator.EQUAL, "high");
         String expected = AdvFilterCommand.class.getCanonicalName() + "{tagName=priority, operator==, tagValue=high}";
         assertEquals(expected, command.toString());
     }
@@ -92,35 +93,35 @@ public class AdvFilterCommandTest {
     public void compareTest() {
         Tag numericTag = new Tag("priority", "5");
         Tag stringTag = new Tag("priority", "high");
-        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", Operator.EQUAL, "high");
 
         // Test for '='
-        assertTrue(command.compare("=", stringTag, "high"));
-        assertFalse(command.compare("=", stringTag, "low"));
+        assertTrue(command.compare(Operator.EQUAL, stringTag, "high"));
+        assertFalse(command.compare(Operator.EQUAL, stringTag, "low"));
 
         // Test for '!='
-        assertTrue(command.compare("!=", stringTag, "low"));
+        assertTrue(command.compare(Operator.NOT_EQUAL, stringTag, "low"));
 
         // Test for '>'
-        assertTrue(command.compare(">", numericTag, "4"));
-        assertFalse(command.compare(">", numericTag, "6"));
+        assertTrue(command.compare(Operator.GREATER_THAN, numericTag, "4"));
+        assertFalse(command.compare(Operator.GREATER_THAN, numericTag, "6"));
 
         // Test for '<'
-        assertTrue(command.compare("<", numericTag, "6"));
-        assertFalse(command.compare("<", numericTag, "4"));
+        assertTrue(command.compare(Operator.LESS_THAN, numericTag, "6"));
+        assertFalse(command.compare(Operator.LESS_THAN, numericTag, "4"));
 
         // Test for '>='
-        assertTrue(command.compare(">=", numericTag, "5"));
-        assertFalse(command.compare(">=", numericTag, "6"));
+        assertTrue(command.compare(Operator.GREATER_THAN_OR_EQUAL, numericTag, "5"));
+        assertFalse(command.compare(Operator.GREATER_THAN_OR_EQUAL, numericTag, "6"));
 
         // Test for '<='
-        assertTrue(command.compare("<=", numericTag, "5"));
-        assertFalse(command.compare("<=", numericTag, "4"));
+        assertTrue(command.compare(Operator.LESS_THAN_OR_EQUAL, numericTag, "5"));
+        assertFalse(command.compare(Operator.LESS_THAN_OR_EQUAL, numericTag, "4"));
     }
 
     @Test
     public void tryParseDoubleTest() {
-        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", Operator.EQUAL, "high");
 
         // Valid double
         assertEquals(5.0, command.tryParseDouble("5"));
@@ -134,7 +135,7 @@ public class AdvFilterCommandTest {
 
     @Test
     public void execute_noContactsFound() {
-        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "nonexistent");
+        AdvFilterCommand command = new AdvFilterCommand("priority", Operator.EQUAL, "nonexistent");
         CommandResult result = command.execute(model);
 
         assertEquals(AdvFilterCommand.MESSAGE_NO_CONTACT_FOUND, result.getFeedbackToUser());

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AdvFilterCommand;
+import seedu.address.logic.commands.AdvFilterCommand.Operator;;
 
 public class AdvFilterCommandParserTest {
 
@@ -23,7 +24,7 @@ public class AdvFilterCommandParserTest {
     @Test
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        AdvFilterCommand expectedAdvFilterCommand = new AdvFilterCommand("friend", "=", "yes");
+        AdvFilterCommand expectedAdvFilterCommand = new AdvFilterCommand("friend", Operator.EQUAL, "yes");
         assertParseSuccess(parser, "t/friend = yes", expectedAdvFilterCommand);
 
         // multiple whitespaces between filters
@@ -67,9 +68,9 @@ public class AdvFilterCommandParserTest {
     @Test
     public void parse_differentOperators_returnsFilterCommand() {
         // Test different valid operators
-        assertParseSuccess(parser, "t/age > 18", new AdvFilterCommand("age", ">", "18"));
-        assertParseSuccess(parser, "t/salary < 5000", new AdvFilterCommand("salary", "<", "5000"));
-        assertParseSuccess(parser, "t/name != John", new AdvFilterCommand("name", "!=", "John"));
+        assertParseSuccess(parser, "t/age > 18", new AdvFilterCommand("age", Operator.GREATER_THAN, "18"));
+        assertParseSuccess(parser, "t/salary < 5000", new AdvFilterCommand("salary", Operator.LESS_THAN, "5000"));
+        assertParseSuccess(parser, "t/name != John", new AdvFilterCommand("name", Operator.NOT_EQUAL, "John"));
     }
 
     @Test
@@ -113,7 +114,7 @@ public class AdvFilterCommandParserTest {
     }
     @Test
     public void parse_extraSpacesBetweenOperatorAndValue_returnsFilterCommand() {
-        AdvFilterCommand expectedCommand = new AdvFilterCommand("age", "=", "25");
+        AdvFilterCommand expectedCommand = new AdvFilterCommand("age", Operator.EQUAL, "25");
         assertParseSuccess(parser, "t/age =   25", expectedCommand);
     }
 }
