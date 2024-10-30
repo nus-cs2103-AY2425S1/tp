@@ -83,14 +83,13 @@ public class SampleDataUtil {
         );
 
         AddressBook sampleAb = new AddressBook();
-        sampleAb.addEvent(sampleEvent);
 
         // contacts added only after event has been created
         List<Contact> contacts = List.of(sampleClient, sampleVendor);
         for (Contact contact : contacts) {
-            contact.addEvent(sampleEvent);
             sampleAb.addContact(contact);
         }
+        sampleAb.addEvent(sampleEvent);
 
         AddressBook.setNextContactId(SAMPLE_NEXT_CONTACT_ID);
         AddressBook.setNextEventId(SAMPLE_NEXT_EVENT_ID);
