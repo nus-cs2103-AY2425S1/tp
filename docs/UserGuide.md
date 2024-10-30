@@ -177,8 +177,7 @@ Examples:
 ### Favourite a restaurant : `fav`
 
 Set the specified restaurant from the address book as favourite.
-It displays the list of favourite restaurant to the top of the display list
-favourite restaurants boxes are also highlighted with a yellow outline
+Favourite items will be highlighted with a yellow outline and pushed to the top of the list. 
 
 Format: `fav INDEX`
 
@@ -191,7 +190,8 @@ Examples:
 
 ### Un-favourite a restaurant : `unfav`
 
-Removes the restaurant from the favourite list.
+Remove the specified restaurant from the favourites list.
+Un-favourite items will not be highlighted and will be re-added to the list.
 
 Format: `unfav INDEX`
 
@@ -201,7 +201,6 @@ Format: `unfav INDEX`
 
 Examples:
 *  `unfav 1` Un-favourites the 1st restaurant.
-
 
 ### Clearing all entries : `clear`
 
