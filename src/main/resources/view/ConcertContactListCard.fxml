@@ -25,6 +25,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
+                <Label fx:id="description" text="\$description" styleClass="cell_big_label" />
             </HBox>
 
             <HBox fx:id="personConcertContainer" minWidth="680" prefWidth="680" VBox.vgrow="ALWAYS">
