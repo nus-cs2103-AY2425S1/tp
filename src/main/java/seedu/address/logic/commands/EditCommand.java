@@ -136,11 +136,9 @@ public class EditCommand extends Command {
         Education updatedEducation = editPersonDescriptor.getEducation().orElse(personToEdit.getEducation());
         Grade updatedGrade = personToEdit.getGrade(); // edit command does not allow editing grade
         Name updatedParentName = editPersonDescriptor.getParentName().orElse(personToEdit.getParentName());
-        Phone updatedParentPhone = editPersonDescriptor.getParentPhone().orElse(personToEdit.getParentPhone());
-        Email updatedParentEmail = editPersonDescriptor.getParentEmail().orElse(personToEdit.getParentEmail());
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEducation, updatedGrade,
-                updatedParentName, updatedParentPhone, updatedParentEmail, updatedTags);
+                updatedParentName, updatedTags);
     }
 
     @Override
@@ -178,8 +176,6 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Name parentName;
-        private Phone parentPhone;
-        private Email parentEmail;
         private Education education;
 
         public EditPersonDescriptor() {}
@@ -195,8 +191,6 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setParentName(toCopy.parentName);
-            setParentPhone(toCopy.parentPhone);
-            setParentEmail(toCopy.parentEmail);
             setEducation(toCopy.education);
         }
 
@@ -204,15 +198,14 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, parentName, parentPhone, parentEmail,
-                    education);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, parentName, education);
         }
 
         /**
          * Returns true if at least one parent field is edited.
          */
         public boolean containsParentField() {
-            return CollectionUtil.isAnyNonNull(parentName, parentPhone, parentEmail);
+            return CollectionUtil.isAnyNonNull(parentName);
         }
 
         public void setName(Name name) {
@@ -272,22 +265,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(parentName);
         }
 
-        public void setParentPhone(Phone phone) {
-            this.parentPhone = phone;
-        }
-
-        public Optional<Phone> getParentPhone() {
-            return Optional.ofNullable(parentPhone);
-        }
-
-        public void setParentEmail(Email email) {
-            this.parentEmail = email;
-        }
-
-        public Optional<Email> getParentEmail() {
-            return Optional.ofNullable(parentEmail);
-        }
-
         public void setEducation(Education education) {
             this.education = education;
         }
@@ -314,9 +291,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(education, otherEditPersonDescriptor.education)
-                    && Objects.equals(parentName, otherEditPersonDescriptor.parentName)
-                    && Objects.equals(parentPhone, otherEditPersonDescriptor.parentPhone)
-                    && Objects.equals(parentEmail, otherEditPersonDescriptor.parentEmail);
+                    && Objects.equals(parentName, otherEditPersonDescriptor.parentName);
         }
 
         @Override
@@ -328,8 +303,6 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("education", education)
                     .add("parent name", parentName)
-                    .add("parent phone", parentPhone)
-                    .add("parent email", parentEmail)
                     .add("tags", tags)
                     .toString();
         }

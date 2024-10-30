@@ -28,28 +28,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("Alex dad"), new Phone("91111111"), new Email("alexdad@example.com"),
-                    getTagSet("hyperactive")),
+                    new Name("Alex dad"), getTagSet("hyperactive")),
             new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("Bernice dad"), new Phone("92222222"), new Email("bernicedad@example.com"),
-                    getTagSet("dyslexic")),
+                    new Name("Bernice dad"), getTagSet("dyslexic")),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("Charlotte mom"), new Phone("93333333"), new Email("charlottemom@example.com"),
-                    getTagSet("ambitious")),
+                    new Name("Charlotte mom"), getTagSet("ambitious")),
             new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("David mom"), new Phone("94444444"), new Email("davidmom@example.com"),
-                    getTagSet("adaptable")),
+                    new Name("David mom"), getTagSet("adaptable")),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("Irfan mom"), new Phone("95555555"), new Email("irfanmom@example.com"),
-                    getTagSet("adept")),
+                    new Name("Irfan mom"), getTagSet("adept")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), DEFAULT_EDUCATION, EMPTY_GRADE,
-                    new Name("Roy mom"), new Phone("96666666"), new Email("roydad@example.com"),
-                    getTagSet("determined"))
+                    new Name("Roy mom"), getTagSet("determined"))
         };
     }
 

@@ -83,8 +83,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             parentEmail = null;
         }
 
-        Person person = new Student(name, phone, email, address, education, grade, parentName, parentPhone, parentEmail,
-                tagList);
+        Person person = new Student(name, phone, email, address, education, grade, parentName, tagList);
 
         return new AddCommand(person);
     }

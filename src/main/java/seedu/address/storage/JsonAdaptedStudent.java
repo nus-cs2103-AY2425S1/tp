@@ -28,8 +28,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     private final String education;
     private final String grade;
     private final String parentName;
-    private final String parentPhone;
-    private final String parentEmail;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given details.
@@ -38,15 +36,12 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("education") String education, @JsonProperty("grade") String grade,
-            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("parentName") String parentName,  @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
         super(name, phone, email, address, tags, isPinned, isArchived);
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
-        this.parentEmail = parentEmail;
-        this.parentPhone = parentPhone;
     }
 
     /**
@@ -57,8 +52,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         education = source.getEducation() == null ? null : source.getEducation().educationLevel;
         grade = source.getGrade() == null ? null : source.getGrade().gradeIndex;
         parentName = source.getParentName() == null ? null : source.getParentName().fullName;
-        parentPhone = source.getParentPhone() == null ? null : source.getParentPhone().value;
-        parentEmail = source.getParentEmail() == null ? null : source.getParentEmail().value;
     }
 
     @Override
@@ -134,24 +127,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Name modelParentName = new Name(parentName);
 
-        if (parentPhone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(parentPhone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelParentPhone = new Phone(parentPhone);
-
-        if (parentEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(parentEmail)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelParentEmail = new Email(parentEmail);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelEducation, modelGrade, modelParentName,
-                modelParentPhone, modelParentEmail, modelTags, isPinned, isArchived);
+                modelTags, isPinned, isArchived);
     }
 }

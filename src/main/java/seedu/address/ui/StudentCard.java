@@ -34,10 +34,8 @@ public class StudentCard extends PersonCard {
         parentName.setText("");
         parentPhone.setText("");
         parentEmail.setText("");
-        if (person.getParentName() != null && person.getParentPhone() != null && person.getParentEmail() != null) {
+        if (person.getParentName() != null) {
             parentName.setText(person.getParentName().fullName);
-            parentPhone.setText(person.getParentPhone().value);
-            parentEmail.setText(person.getParentEmail().value);
         }
     }
 

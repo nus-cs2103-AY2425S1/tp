@@ -71,8 +71,8 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
             @JsonProperty("isArcived") boolean isArchived) {
         if (parentName != null) {
-            return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, parentPhone,
-                    parentEmail, tags, isPinned, isArchived);
+            return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, tags, isPinned,
+                    isArchived);
         }
         return new JsonAdaptedPerson(name, phone, email, address, tags, isPinned, isArchived);
     }

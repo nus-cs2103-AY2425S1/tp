@@ -10,30 +10,26 @@ import seedu.address.model.tag.Tag;
  * Represents a parent in the address book
  */
 public class Parent extends Person {
-    private Student child = null;
+    private final Name childName;
 
     /**
      * Constructs a {@code Parent} with the given details.
      */
-    public Parent(Name name, Phone phone, Email email, Address address, Student child, Set<Tag> tags) {
+    public Parent(Name name, Phone phone, Email email, Address address, Name childName, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        this.child = child;
+        this.childName = childName;
     }
 
     /**
      * Constructs a {@code Parent} with the given {@code Person} as a base.
      */
-    public Parent(Person person, Student child) {
+    public Parent(Person person, Name childName) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
-        this.child = child;
+        this.childName = childName;
     }
 
-    public void setChild(Student child) {
-        this.child = child;
-    }
-
-    public Student getChild() {
-        return child;
+    public Name getChildName() {
+        return childName;
     }
 
     @Override
@@ -48,13 +44,13 @@ public class Parent extends Person {
         }
 
         Parent otherParent = (Parent) other;
-        return super.equals(otherParent) && getChild().equals(otherParent.getChild());
+        return super.equals(otherParent) && getChildName().equals(otherParent.getChildName());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
-                this.getChild(), this.getTags());
+                this.getChildName(), this.getTags());
     }
 
     @Override
@@ -64,7 +60,7 @@ public class Parent extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("child", this.getChild())
+                .add("child", this.getChildName())
                 .add("tags", this.getTags())
                 .toString();
     }
@@ -80,7 +76,7 @@ public class Parent extends Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Child: ")
-                .append(getChild())
+                .append(getChildName())
                 .append("; Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

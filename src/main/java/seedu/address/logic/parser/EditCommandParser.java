@@ -70,12 +70,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PARENT_NAME).isPresent()) {
             editPersonDescriptor.setParentName(ParserUtil.parseName(argMultimap.getValue(PREFIX_PARENT_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_PARENT_PHONE).isPresent()) {
-            editPersonDescriptor.setParentPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PARENT_EMAIL).isPresent()) {
-            editPersonDescriptor.setParentEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PARENT_EMAIL).get()));
-        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
