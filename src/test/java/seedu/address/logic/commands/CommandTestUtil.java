@@ -130,7 +130,7 @@ public class CommandTestUtil {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new FieldContainsKeywordsPredicate<>(
-                Arrays.asList(splitName[0]), Person::getFullName, true));
+                Arrays.asList(splitName[0]), Person::getFullName, true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

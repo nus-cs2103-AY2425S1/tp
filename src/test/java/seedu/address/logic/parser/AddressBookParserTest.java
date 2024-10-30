@@ -79,10 +79,12 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
 
-        assertNotEquals(new FindCommand(
+        assertEquals(new FindCommand(
                 Arrays.asList(
-                        new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName, true),
-                        new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue, false),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName,
+                                true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue,
+                                false, FieldContainsKeywordsPredicate.PHONE_IDENTIFIER),
                         new StudentHasPaidPredicate(true)
                         ), new ArrayList<>()
         ), command);

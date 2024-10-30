@@ -122,7 +122,8 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new FieldContainsKeywordsPredicate<>(
                 Arrays.asList(keywords),
                 Person::getFullName,
-                true
+                true,
+                FieldContainsKeywordsPredicate.NAME_IDENTIFIER
                 ));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

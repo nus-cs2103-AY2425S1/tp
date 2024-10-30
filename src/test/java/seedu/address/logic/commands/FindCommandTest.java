@@ -32,13 +32,17 @@ public class FindCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private final FieldContainsKeywordsPredicate<Person> firstNamePredicate =
-            new FieldContainsKeywordsPredicate<>(Collections.singletonList("first"), Person::getFullName, true);
+            new FieldContainsKeywordsPredicate<>(Collections.singletonList("first"), Person::getFullName,
+                    true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
     private final FieldContainsKeywordsPredicate<Person> secondNamePredicate =
-            new FieldContainsKeywordsPredicate<>(Collections.singletonList("second"), Person::getFullName, true);
+            new FieldContainsKeywordsPredicate<>(Collections.singletonList("second"), Person::getFullName,
+                    true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
     private final FieldContainsKeywordsPredicate<Person> thirdNamePredicate =
-            new FieldContainsKeywordsPredicate<>(Collections.singletonList("Second"), Person::getFullName, true);
+            new FieldContainsKeywordsPredicate<>(Collections.singletonList("Second"), Person::getFullName,
+                    true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
     private final FieldContainsKeywordsPredicate<Person> thirdAddressPredicate =
-            new FieldContainsKeywordsPredicate<>(Collections.singletonList("second"), Person::getAddressValue, true);
+            new FieldContainsKeywordsPredicate<>(Collections.singletonList("second"), Person::getAddressValue,
+                    true, FieldContainsKeywordsPredicate.ADDRESS_IDENTIFIER);
     private final TagContainsKeywordPredicate firstTagPredicate = new TagContainsKeywordPredicate("friends");
     private final TagContainsKeywordPredicate secondTagPredicate = new TagContainsKeywordPredicate("friend");
 
@@ -115,7 +119,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_exceptionThrown() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         FieldContainsKeywordsPredicate<Person> predicate = new FieldContainsKeywordsPredicate<>(Arrays.asList(" "),
-                Person::getPhoneValue, false);
+                Person::getPhoneValue, false, FieldContainsKeywordsPredicate.PHONE_IDENTIFIER);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             expectedModel.updateFilteredPersonList(predicate);
@@ -127,7 +131,8 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         FieldContainsKeywordsPredicate<Person> predicate =
-                new FieldContainsKeywordsPredicate<>(Arrays.asList("Kurz", "Elle", "Kunz"), Person::getFullName, true);
+                new FieldContainsKeywordsPredicate<>(Arrays.asList("Kurz", "Elle", "Kunz"), Person::getFullName,
+                        true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
         FindCommand command = new FindCommand(List.of(predicate), new ArrayList<>());
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -137,7 +142,8 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         FieldContainsKeywordsPredicate<Person> predicate =
-                new FieldContainsKeywordsPredicate<>(Collections.singletonList("keyword"), Person::getFullName, true);
+                new FieldContainsKeywordsPredicate<>(Collections.singletonList("keyword"), Person::getFullName,
+                        true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
         FindCommand findCommand = new FindCommand(List.of(predicate), new ArrayList<>());
         String expected = FindCommand.class.getCanonicalName() + "{person predicates=" + "[" + predicate + "]" + ", "
                 + "participation predicates=" + "[" + "]" + "}";
