@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,8 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback",
+                CommandResult.NO_INDEX_TO_VIEW, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -28,14 +30,17 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
-        // different shouldView value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+        // different indexToView value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                INDEX_FIRST_PERSON, false, false)));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                CommandResult.NO_INDEX_TO_VIEW, true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                CommandResult.NO_INDEX_TO_VIEW, false, true)));
     }
 
     @Test
@@ -49,10 +54,12 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandResult.NO_INDEX_TO_VIEW, true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandResult.NO_INDEX_TO_VIEW, false, true).hashCode());
     }
 
     @Test
@@ -60,9 +67,9 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName()
                 + "{feedbackToUser=" + commandResult.getFeedbackToUser()
-                + ", shouldView=" + commandResult.isView()
+                + ", indexToView=" + commandResult.getIndexToView()
                 + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", shouldExit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

@@ -32,7 +32,8 @@ public class ViewCommandTest {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_SUCCESS, Messages.format(personToView));
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                INDEX_FIRST_PERSON, false, false);
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, model);
     }
