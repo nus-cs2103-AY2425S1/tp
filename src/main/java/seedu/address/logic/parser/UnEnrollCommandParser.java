@@ -3,9 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UnEnrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -13,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new EnrollCommand object
  */
 public class UnEnrollCommandParser implements Parser<UnEnrollCommand> {
+    private static final Logger logger = LogsCenter.getLogger(UnEnrollCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the EnrollCommand
@@ -25,6 +29,7 @@ public class UnEnrollCommandParser implements Parser<UnEnrollCommand> {
         Index index;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnEnrollCommandParser.class));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnEnrollCommand.MESSAGE_USAGE));
         }
         try {

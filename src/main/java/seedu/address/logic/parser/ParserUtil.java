@@ -12,9 +12,12 @@ import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -31,7 +34,7 @@ import seedu.address.model.tutorial.Tutorial;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -42,6 +45,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -114,6 +118,7 @@ public class ParserUtil {
     public static Payment parsePayment(String payment) throws ParseException {
         String trimmedPayment = payment.trim();
         if (!Payment.isValidPayment(trimmedPayment)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
         return new Payment(trimmedPayment);
@@ -126,6 +131,7 @@ public class ParserUtil {
     public static Fees parseFees(String payment) throws ParseException {
         String trimmedFees = payment.trim().toLowerCase();
         if (!Fees.isValidFees(trimmedFees)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, ParserUtil.class));
             throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
         }
         return new Fees(trimmedFees);

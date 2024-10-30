@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.UnEnrollCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Fees;
@@ -20,8 +23,9 @@ import seedu.address.model.person.Person;
  * Marks the payment for a person as true
  */
 public class MarkPaidCommand extends Command {
-    public static final String COMMAND_WORD = "markpaid";
+    private static final Logger logger = LogsCenter.getLogger(MarkPaidCommand.class);
 
+    public static final String COMMAND_WORD = "markpaid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records amount of fees the student has paid\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -46,6 +50,7 @@ public class MarkPaidCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, MarkPaidCommand.class));
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

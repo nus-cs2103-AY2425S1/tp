@@ -6,11 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.UnEnrollCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
@@ -20,6 +23,7 @@ import seedu.address.model.tutorial.Tutorial;
  * Assign a student to a tutorial by creating an tutorial object.
  */
 public class UnEnrollCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(UnEnrollCommand.class);
 
     public static final String COMMAND_WORD = "unenroll";
 
@@ -52,6 +56,7 @@ public class UnEnrollCommand extends Command {
         List<Person> lastShownStudentList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownStudentList.size()) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnEnrollCommand.class));
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -63,12 +68,14 @@ public class UnEnrollCommand extends Command {
                 .filter(tut -> tut.getSubject().toLowerCase().equals(subject))
                 .findFirst();
         if (optionalTutorial.isEmpty()) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnEnrollCommand.class));
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT);
         }
         Tutorial tutorial = optionalTutorial.get();
 
         Participation p = new seedu.address.model.participation.Participation(student, tutorial, new ArrayList<>());
         if (!model.hasParticipation(p)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UnEnrollCommand.class));
             throw new CommandException(MESSAGE_NO_SUCH_PARTICIPATION);
         }
 

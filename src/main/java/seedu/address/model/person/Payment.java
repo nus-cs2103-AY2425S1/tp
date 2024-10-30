@@ -8,8 +8,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Payment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Payment (marked by 'pay/') should be an negative, zero, or "
-            + "positive integer \n'$' is not required \n Leading zero are allowed but not recommended";
+    public static final String MESSAGE_CONSTRAINTS = "Payment should be an negative, zero, or "
+            + "positive integer \n'$' is not required \nLeading zero are allowed but not recommended";
     public static final String VALIDATION_REGEX = "^-?[0-9]\\d*|0$\n";
     public final String overdueAmount;
 

@@ -5,9 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
+import seedu.address.logic.parser.UnEnrollCommandParser;
 import seedu.address.model.participation.exceptions.DuplicateParticipationException;
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
 
@@ -25,6 +29,7 @@ import seedu.address.model.participation.exceptions.ParticipationNotFoundExcepti
  * @see seedu.address.model.participation.Participation#isSameParticipation(Participation)
  */
 public class UniqueParticipationList implements Iterable<Participation> {
+    private static final Logger logger = LogsCenter.getLogger(UniqueParticipationList.class);
 
     public static final String MESSAGE_PARTICIPATION_NOT_FOUND = "No such participation exists in EduVault now";
 
@@ -47,6 +52,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     public void add(Participation toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new DuplicateParticipationException();
         }
         internalList.add(toAdd);
@@ -63,10 +69,12 @@ public class UniqueParticipationList implements Iterable<Participation> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new ParticipationNotFoundException(MESSAGE_PARTICIPATION_NOT_FOUND);
         }
 
         if (!target.isSameParticipation(editedParticipation) && contains(editedParticipation)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new DuplicateParticipationException();
         }
 
@@ -85,6 +93,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     public void setParticipation(List<Participation> participation) {
         requireAllNonNull(participation);
         if (!participationAreUnique(participation)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new DuplicateParticipationException();
         }
 
@@ -98,6 +107,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     public void remove(Participation toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, UniqueParticipationList.class));
             throw new ParticipationNotFoundException(MESSAGE_PARTICIPATION_NOT_FOUND);
         }
     }
