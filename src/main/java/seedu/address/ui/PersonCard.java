@@ -3,12 +3,19 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
@@ -67,35 +74,68 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getGames().values().stream()
                 .sorted(Comparator.comparing(game -> game.gameName))
-                .forEach(game -> games.getChildren().add(gameLabel(game)));
+                .forEach(game -> games.getChildren().add(gameTextFlow(game)));
         person.getPreferredTimes().stream()
                 .sorted(Comparator.comparing(preferredTime -> preferredTime.preferredTime))
-                .forEach(preferredTime -> preferredTimes.getChildren().add(new Label(preferredTime.preferredTime)));
+                .forEach(preferredTime -> preferredTimes.getChildren().add(new Label("Preferred time: "
+                        + preferredTime.preferredTime)));
     }
 
-    private static Label gameLabel(Game game) {
+    private static Label gameTextFlow(Game game) {
+        // Create the main label that will hold everything
+        Label label = new Label();
+
+        // Image for favorite status
+        ImageView imageView = null;
+        if (game.getFavouriteStatus()) {
+            Image image = new Image(String.valueOf(PersonCard.class.getResource("/images/star.png")));
+            imageView = new ImageView(image);
+            imageView.setFitHeight(20); // Adjust size as needed
+            imageView.setPreserveRatio(true);
+        }
+
+        // Create styled "Game: gamename" part with a larger font
+        Text gameLabel = new Text("Game: " + game.getGameName() + "\n");
+        gameLabel.setFont(Font.font("Comfortaa", FontWeight.BOLD, 20)); // Larger font for game name
+        gameLabel.setFill(Color.WHITE);
+
+        // Build details text
         StringBuilder sb = new StringBuilder();
         Username username = game.getUsername();
         SkillLevel skillLevel = game.getSkillLevel();
         Role role = game.getRole();
-        boolean isFavourite = game.getFavouriteStatus();
-        sb.append(game.getGameName()).append("\n");
+
         if (!username.getUsername().toString().isEmpty()) {
-            sb.append("Username: ").append(game.getUsername()).append("\n");
+            sb.append("Username: ").append(username);
         }
         if (!skillLevel.toString().isEmpty()) {
-            sb.append("Skill Lvl: ").append(game.getSkillLevel()).append("\n");
+            sb.append("\n").append("Skill Lvl: ").append(skillLevel);
         }
         if (!role.toString().isEmpty()) {
-            sb.append("Role: ").append(game.getRole()).append("\n");
+            sb.append("\n").append("Role: ").append(role);
         }
-        if (isFavourite) {
-            Image image = new Image(String.valueOf(PersonCard.class.getResource("/images/star.png")));
-            ImageView iw = new ImageView(image);
-            return new Label(sb.toString(), iw);
-        }
-        assert !sb.isEmpty();
-        return new Label(sb.toString());
-    }
 
+        // Add the details text
+        Text detailsText = new Text(sb.toString());
+        detailsText.setFont(Font.font("System", FontWeight.NORMAL, 14)); // Regular font for other details
+        detailsText.setFill(Color.WHITE);
+
+        // Create a TextFlow and add both game name and details texts
+        TextFlow textFlow = new TextFlow(gameLabel, detailsText);
+
+        // Set up an HBox to hold the ImageView and TextFlow side-by-side
+        HBox hbox = new HBox(5); // Add spacing between image and text
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setPadding(new Insets(5));
+        if (imageView != null) {
+            hbox.getChildren().add(imageView); // Add star image on the left if favorite
+        }
+
+        hbox.getChildren().add(textFlow); // Add the text to the right of the image
+
+        // Set HBox as the graphic of the label
+        label.setGraphic(hbox);
+        label.setPrefHeight(textFlow.getHeight());
+        return label;
+    }
 }
