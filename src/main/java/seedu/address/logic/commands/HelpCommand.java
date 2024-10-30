@@ -42,11 +42,21 @@ public class HelpCommand extends Command {
     private final String message;
     private final boolean isHelp;
 
+    /**
+     * Constructs a {@code HelpCommand} with a custom help message.
+     * This constructor is used when a specific help message is needed.
+     *
+     * @param message the custom help message to be shown when the command is executed
+     */
     public HelpCommand(String message) {
         this.message = message;
         this.isHelp = false;
     }
 
+    /**
+     * Constructs a {@code HelpCommand} with the default help message.
+     * This constructor is used when general help information is requested.
+     */
     public HelpCommand() {
         this.message = SHOWING_HELP_MESSAGE;
         this.isHelp = true;
