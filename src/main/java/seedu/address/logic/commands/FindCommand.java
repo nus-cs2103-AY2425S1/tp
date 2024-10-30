@@ -59,8 +59,8 @@ public class FindCommand extends Command {
             + PREFIX_TAG + "colleague "
             + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
     private final List<Predicate<Person>> personPredicates;
-    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
     private final List<Predicate<Participation>> participationPredicates;
+    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
     /**
      * Constructs a {@code FindCommand} with specified predicates for filtering {@code Person}

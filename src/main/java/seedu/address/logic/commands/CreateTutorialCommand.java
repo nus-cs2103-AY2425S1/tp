@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CreateTutorialCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -56,5 +58,27 @@ public class CreateTutorialCommand extends Command {
         model.createTutorial(toAdd);
         logger.info(" - Tutorial successfully created: " + toAdd.getSubject());
         return new CommandResult(String.format(MESSAGE_SUCCESS_TUTORIAL, Messages.formatTutorial(toAdd)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CreateTutorialCommand)) {
+            return false;
+        }
+
+        CreateTutorialCommand otherCreateTutorialCommand = (CreateTutorialCommand) other;
+        return this.toAdd.equals(otherCreateTutorialCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Create Tutorial: ", toAdd)
+                .toString();
     }
 }

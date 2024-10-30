@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,7 +27,7 @@ public class CloseTutorialCommand extends Command {
             + ": Closes the tutorial identified by the tutorial name.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIAL + "Chemistry";
 
     public static final String MESSAGE_CLOSE_TUTORIAL_SUCCESS = "Successfully closed tutorial.\n%1$s";
@@ -82,5 +83,27 @@ public class CloseTutorialCommand extends Command {
                 MESSAGE_CLOSE_TUTORIAL_SUCCESS,
                 Messages.formatTutorial(tutorialToCloseFromList))
         );
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CloseTutorialCommand)) {
+            return false;
+        }
+
+        CloseTutorialCommand otherCloseTutorialCommand = (CloseTutorialCommand) other;
+        return this.toCloseTutorial.equals(otherCloseTutorialCommand.toCloseTutorial);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Close Tutorial: ", toCloseTutorial)
+                .toString();
     }
 }
