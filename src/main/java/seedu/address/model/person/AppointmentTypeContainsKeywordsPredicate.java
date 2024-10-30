@@ -31,7 +31,8 @@ public class AppointmentTypeContainsKeywordsPredicate implements Predicate<Appoi
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentTypeContainsKeywordsPredicate otherAppointmentTypeContainsKeywordsPredicate)) {
+        if (!(other instanceof AppointmentTypeContainsKeywordsPredicate
+                otherAppointmentTypeContainsKeywordsPredicate)) {
             return false;
         }
 
