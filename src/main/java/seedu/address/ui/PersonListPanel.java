@@ -20,7 +20,10 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private static final int DISPLAYED_INDEX_OFFSET = 1;
+
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+
+    /** Tracks all the persons that the user has requested to view all the information on. */
     private final Set<Integer> personsBeingViewed;
 
     @FXML
@@ -55,7 +58,9 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person}.
+     * Graphics may be displayed as a {@code PersonCard} or a {@code PersonCardFull},
+     * depending on whether the user has requested to view all information on that {@code Person}.
      */
     class PersonListViewCell extends ListCell<Person> {
         @Override
@@ -66,6 +71,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else if (personsBeingViewed.contains(currCellIndexInt)) {
+                // if the user had requested this person to be viewed in full, return a PersonCardFull instead
                 setGraphic(new PersonCardFull(person, getIndex() + DISPLAYED_INDEX_OFFSET).getRoot());
             } else {
                 setGraphic(new PersonCard(person, currCellIndexInt + DISPLAYED_INDEX_OFFSET).getRoot());
