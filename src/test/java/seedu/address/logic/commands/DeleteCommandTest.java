@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetings;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,8 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithSchedule = new ModelManager(getTypicalAddressBook(),
+            new UserPrefs(), getTypicalMeetings());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -77,6 +80,13 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_hasPersonInMeeting_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertCommandFailure(deleteCommand, modelWithSchedule,
+                DeleteCommand.MESSAGE_PERSON_IN_SCHEDULE);
     }
 
     @Test
