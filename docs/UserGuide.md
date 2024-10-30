@@ -28,10 +28,10 @@ If you can type fast, HireMe can get your internship tracking tasks done faster 
     * `/delete 1` : Deletes the 1st internship application shown in the current list.
 
     * `/clear` : Deletes all internship applications.
-
-    * `/exit` : Exits the app.
    
     * `/chart` : Shows an pie chart with your applications statistics.
+
+    * `/exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,6 +65,9 @@ Adds an internship application to HireMe.
 
 Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
+* The `DATE` must be within the year 2000 and 2099. It also cannot be a future date which means that the date used must be before today or today's date.
+* It must be in the format `dd/mm/yy`.
+
 Examples:
 * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 * `/add n/Facebook r/Data Scientist Intern e/fb@example.com d/21/10/24`
@@ -74,6 +77,22 @@ Examples:
 Shows a list of all internship applications in HireMe.
 
 Format: `/list`
+
+### Deleting an internship application : `/delete`
+
+Deletes the specified internship application from HireMe.
+
+Format: `/delete INDEX`
+
+* Deletes the internship application at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed internship application list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications)
+
+Examples:
+* `/list` followed by `/delete 2` deletes the 2nd application in the list.
+* `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
+* `/list` followed by `/delete 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
 ### Finding applications by company name: `/find`
 
@@ -93,20 +112,6 @@ Examples:
 * `/find app` returns `Apple`, but not `CashApp`
 * `/find young` returns `Ernest & Young`
 
-### Filtering internship applications by status: `/filter`
-
-Filters internship applications with specified status.
-
-Format: `/filter STATUS`
-
-* Valid statuses are `pending`, `accepted` or `rejected`.
-* The status is case-insensitive. (e.g. `"Pending"`, `"pending"` and `"PENDING"` are all allowed.)
-
-Examples:
-* `/filter Pending`
-* `/filter Accepted`
-* `/filter Rejected`
-
 ### Changing the status of an internship application : `/accept`, `/pending`, `/reject`
 
 Updates the status of the specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
@@ -121,38 +126,54 @@ Formats:
 * The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications)
 
 Examples:
-* `/list` followed by `/accept 2` marks the 2nd application in the list as accepted.
-* `/pending 3` changes the 3rd application in the current list to pending.
-* `/reject 1` changes the 1st application in the the current list to rejected.
+* `/list` followed by `/accept 2` marks the status of the 2nd application in the list as accepted.
+* `/pending 3` changes the status of the 3rd application in the current list to pending.
+* `/reject 1` changes the status of the 1st application in the current list to rejected.
 * `/list` followed by `/accept 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
-### Deleting an internship application : `/delete`
+### Filtering internship applications by status: `/filter`
 
-Deletes the specified internship application from HireMe.
+Filters internship applications with the specified status.
 
-Format: `/delete INDEX`
+Format: `/filter STATUS`
 
-* Deletes the internship application at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed internship application list.
-* The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications)
+* Valid statuses are `pending`, `accepted` or `rejected` only.
+* The status is case-insensitive. (e.g. `"pending"`, `"PenDiNg"` and `"PENDING"` are all allowed.)
 
 Examples:
-* `/list` followed by `/delete 2` deletes the 2nd application in the list.
-* `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
-* `/list` followed by `/delete 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
+* `/filter pending` displays all the internship applications that have a status of pending.
+* `/filter accepted` displays all the internship applications that have a status of accepted.
+* `/filter rejected` displays all the internship applications that have a status of rejected.
+
+### Sorting internship applications: `/sort`
+
+Sorts the internship application list according to the date of application with the specified order.
+
+Format: `/sort ORDER`
+
+* There are only 2 orders that are valid: `earliest` or `latest` only.
+* The order is case-insensitive. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
+* Once you sort the list, even if you exit the application and reopen it, the list remains sorted unless you add more internship applications.
+
+Examples:
+* `/sort earliest` displays the internship application list sorted according to the earliest applications first.
+* `/sort latest` displays the internship application list sorted according to the latest applications first.
 
 ### Clearing all entries : `/clear`
 
-[!WARNING]
-Clears all entries from HireMe. This removes all the internship applications that you have been tracking. You will not
-be able to revert and get back your saved data once this command is executed.
+Clears all internship application entries from the HireMe application.
+
+<box type="warning" seamless>
+
+**Caution:**
+This removes all the internship applications that you have been tracking. You will not be able to revert and get back your saved data once this command is executed.
+</box>
 
 Format: `/clear`
 
 ### Exiting the program : `/exit`
 
-Exits the program.
+Exits the HireMe application.
 
 Format: `/exit`
 
@@ -177,13 +198,16 @@ Furthermore, certain edits can cause HireMe to behave in unexpected ways (e.g., 
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `/help`
 **Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
-**Clear**  | `/clear`
+**List**   | `/list`
 **Delete** | `/delete INDEX`<br> e.g., `/delete 3`
 **Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
-**List**   | `/list`
-**Help**   | `/help`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
 **Pending**| `/pending INDEX`<br> e.g., `/pending 3`
 **Reject** | `/reject INDEX`<br> e.g., `/reject 1`
+**Filter** | `/filter STATUS`<br> e.g., `/filter pending`
+**Sort**   | `/sort ORDER`<br> e.g., `/sort earliest`
+**Clear**  | `/clear`
 **Chart**  | `/chart`
+**Exit**   | `/exit`

@@ -35,6 +35,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" InternshipApplicationListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" ChartWindow
 
 InternshipApplicationListPanel -down-> "*" InternshipApplicationCard
 
@@ -46,6 +47,7 @@ InternshipApplicationListPanel --|> UiPart
 InternshipApplicationCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ChartWindow --|> UiPart
 
 InternshipApplicationCard ..> Model
 UiManager -right-> Logic
