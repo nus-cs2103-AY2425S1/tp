@@ -29,7 +29,7 @@ public class PriceContainsKeywordsPredicate implements Predicate<Restaurant> {
         String filterBy = keywords.get(0);
 
         return keywords.stream()
-                    .anyMatch(keyword -> restaurant.getTags().stream()
+                    .anyMatch(keyword -> restaurant.getPriceTags().stream()
                            .anyMatch(tag -> {
                                String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
                                return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
