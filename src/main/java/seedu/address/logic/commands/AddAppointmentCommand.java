@@ -13,6 +13,7 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.person.Person;
@@ -21,16 +22,15 @@ import seedu.address.model.person.Person;
  * Adds an appointment to the appointment book.
  */
 public class AddAppointmentCommand extends AddCommand {
-    public static final String COMMAND_WORD = "add appt ";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING
             + ": Adds an appointment to the appointment book. \n"
             + "Parameters: "
-            + PREFIX_APPOINTMENT_TYPE + "AppointmentType "
-            + PREFIX_DATETIME + "Date "
-            + PREFIX_PERSON_ID + "PersonId "
-            + PREFIX_SICKNESS + "Sickness "
-            + PREFIX_MEDICINE + "Medicine \n"
-            + "Example: " + COMMAND_WORD
+            + PREFIX_PERSON_ID + "PERSON_ID "
+            + PREFIX_APPOINTMENT_TYPE + "APPOINTMENT_TYPE "
+            + PREFIX_DATETIME + "DATE_TIME "
+            + "[" + PREFIX_SICKNESS + "SICKNESS] "
+            + "[" + PREFIX_MEDICINE + "MEDICINE] \n"
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
             + PREFIX_PERSON_ID + "1 "

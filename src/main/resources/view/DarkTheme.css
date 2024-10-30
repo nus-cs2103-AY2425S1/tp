@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #3C3C3C; /* Used in the default.html file */
 }
 
 .label {
@@ -97,14 +97,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-text-color: #3C3C3C;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #7F96FF;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color:#9AD1D4
 }
 
 .list-cell:filled:selected {
@@ -117,7 +118,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #3C3C3C;
 }
 
 .cell_big_label {
@@ -288,7 +289,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#3c3c3c, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -335,14 +336,16 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #ECE2D0;
+    -fx-background-radius: 20px;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #ffffff;
     -fx-border-insets: 0;
     -fx-border-width: 1;
+    -fx-border-radius: 20px;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -350,7 +353,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: #3C3C3C;
     -fx-background-radius: 0;
 }
 

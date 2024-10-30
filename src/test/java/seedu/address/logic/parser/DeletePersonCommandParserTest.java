@@ -29,6 +29,14 @@ public class DeletePersonCommandParserTest {
     }
 
     @Test
+    public void parse_nullPersonIndex_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE);
+
+        // null person index
+        assertParseFailure(parser, PERSON_ENTITY_STRING, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

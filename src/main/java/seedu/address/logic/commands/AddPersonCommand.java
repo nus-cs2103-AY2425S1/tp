@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonDescriptor;
 
@@ -18,7 +19,7 @@ import seedu.address.model.person.PersonDescriptor;
  */
 public class AddPersonCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + "person"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING
         + ": Adds a person to the address book. \n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
@@ -27,7 +28,7 @@ public class AddPersonCommand extends AddCommand {
         + PREFIX_ADDRESS + "ADDRESS "
         + PREFIX_STATUS + "STATUS "
         + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + "person" + " "
+        + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " "
         + PREFIX_NAME + "John Doe "
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "

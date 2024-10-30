@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.DateUtil.convertToDateList;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
@@ -21,6 +22,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDateIsOnPredicate;
 import seedu.address.model.appointment.AppointmentPersonContainsNamePredicate;
 
 /**
@@ -49,7 +51,7 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
     private Predicate<Appointment> parsePredicate(ArgumentMultimap argMultimap) throws ParseException {
         Predicate<Appointment> predicate = PREDICATE_SHOW_ALL_APPOINTMENTS;
 
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATETIME)) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAppointmentCommand.MESSAGE_USAGE));
         }
@@ -58,6 +60,12 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
             String args = argMultimap.getValue(PREFIX_NAME).get();
             predicate = predicate.and(new AppointmentPersonContainsNamePredicate(
                 Arrays.asList(args.split("\\s+"))));
+        }
+
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            String args = argMultimap.getValue(PREFIX_DATETIME).get();
+            predicate = predicate.and(new AppointmentDateIsOnPredicate(
+                convertToDateList(args)));
         }
 
         return predicate;

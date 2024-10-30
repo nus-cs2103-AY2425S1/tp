@@ -1,17 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
@@ -28,23 +27,16 @@ public abstract class EditCommand extends Command {
             "This appointment already exists in the appointment book.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of an entity (person or appointment) identified "
-            + "by the index number used in the displayed person list. "
+            + ": Edits the details of an entity identified "
+            + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "ENTITY_TYPE "
-            + "INDEX "
-            + "ENTITY_ARGUMENTS...\n"
-            + "Example: " + COMMAND_WORD + " " + "person" + " " + "1"
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " person 1 "
+            + "Parameters: ENTITY_TYPE (person/appt) INDEX (must be a positive integer) [DATA_FIELDS]...\n"
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " 1 "
+            + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
+            + PREFIX_MEDICINE + "Panadol";
 
     protected final Index targetIndex;
     protected final EditEntityDescriptor editEntityDescriptor;

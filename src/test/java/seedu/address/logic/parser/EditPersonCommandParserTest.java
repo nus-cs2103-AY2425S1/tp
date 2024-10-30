@@ -38,7 +38,6 @@ public class EditPersonCommandParserTest {
 
     private final EditCommandParser parser = new EditCommandParser();
 
-
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
@@ -53,6 +52,14 @@ public class EditPersonCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, PERSON_ENTITY_STRING + "1 i/ string", EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void parse_nullPersonIndex_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE);
+
+        // null person index
+        assertParseFailure(parser, PERSON_ENTITY_STRING, expectedMessage);
     }
 
     @Test

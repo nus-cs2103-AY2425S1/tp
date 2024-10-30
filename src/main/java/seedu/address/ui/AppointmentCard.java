@@ -58,9 +58,8 @@ public class AppointmentCard extends UiPart<Region> {
         personId.setText(String.valueOf(appointment.getPersonId()));
         appointmentType.setText(appointment.getAppointmentType().value);
         dateTime.setText(appointment.getAppointmentDateTime().format(formatter));
-        //TODO: don't talk to strangers
         personName.setText(appointment.getPerson().getName().fullName);
-        sickness.setText(appointment.getSickness().value);
-        medicine.setText(appointment.getMedicine().value);
+        sickness.setText(appointment.getSickness() != null ? appointment.getSickness().value : "null");
+        medicine.setText(appointment.getMedicine() != null ? appointment.getMedicine().value : "null");
     }
 }
