@@ -1,2 +1,2 @@
 ignore:
-  - "src/main/java/seedu/address/ui"
+  - "src/main/java/seedu/eventtory/ui"
