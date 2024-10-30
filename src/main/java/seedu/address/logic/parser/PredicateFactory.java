@@ -46,7 +46,7 @@ public class PredicateFactory {
         processFieldPredicates(argMultimap, personPredicates);
         processPaymentPredicate(argMultimap, personPredicates);
         processTagPredicate(argMultimap, personPredicates);
-        processSubjectPredicate(argMultimap, participationPredicates);
+        processTutorialPredicate(argMultimap, participationPredicates);
         processAttendancePredicate(argMultimap, participationPredicates);
         return new FindCommand(personPredicates, participationPredicates);
     }
@@ -101,7 +101,7 @@ public class PredicateFactory {
         }
     }
 
-    private static void processSubjectPredicate(ArgumentMultimap argMultimap,
+    private static void processTutorialPredicate(ArgumentMultimap argMultimap,
                                                 List<Predicate<Participation>> participationPredicates)
             throws ParseException {
         if (!argMultimap.getAllValues(PREFIX_TUTORIAL).isEmpty()) {
