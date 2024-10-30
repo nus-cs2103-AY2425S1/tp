@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,6 @@ public class GroupCard extends UiPart<Region> {
     private Label groupName;
     @FXML
     private Label id;
-
     @FXML
     private FlowPane membersPane; // A FlowPane to display members
 
@@ -40,15 +38,23 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         groupName.setText(group.getName());
 
-        // Retrieve the first 3 members of the group
-        List<Person> firstThreeMembers = group.asUnmodifiableObservableList().stream()
+        // Retrieve the list of members in the group
+        List<Person> members = group.asUnmodifiableObservableList();
+
+        // Display the first 3 members in the FlowPane
+        List<Person> firstThreeMembers = members.stream()
                 .limit(3)
                 .collect(Collectors.toList());
 
-        // Display each member in the FlowPane
         firstThreeMembers.forEach(member -> {
             Label memberLabel = new Label(member.getName().fullName);
             membersPane.getChildren().add(memberLabel);
         });
+
+        // If there are more than 3 members, add a "..." at the back
+        if (members.size() > 3) {
+            Label moreLabel = new Label("...");
+            membersPane.getChildren().add(moreLabel);
+        }
     }
 }
