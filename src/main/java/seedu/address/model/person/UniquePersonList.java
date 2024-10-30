@@ -62,19 +62,6 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the index of the first archived person in the list.
-     */
-    private int getFirstArchivedIndex() {
-        for (int i = 0; i < internalList.size(); i++) {
-            Person person = internalList.get(i);
-            if (person.isArchived()) {
-                return i;
-            }
-        }
-        return internalList.size();
-    }
-
-    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -87,7 +74,8 @@ public class UniquePersonList implements Iterable<Person> {
         if (toAdd.isArchived()) {
             internalList.add(toAdd);
         } else {
-            internalList.add(getFirstArchivedIndex(), toAdd);
+            int targetIndex = getFirstArchivedIndex().getZeroBased();
+            internalList.add(targetIndex, toAdd);
         }
     }
 
