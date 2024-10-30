@@ -62,9 +62,8 @@ public class AddStudentToGroupCommand extends Command {
 
         Student student;
         Group group;
-        try {
-            group = model.getGroupByName(toAddInto);
-        } catch (GroupNotFoundException e) {
+        group = model.getGroupByName(toAddInto);
+        if (group == null) {
             throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
         }
         try {
