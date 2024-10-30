@@ -131,9 +131,15 @@ public class AddwCommand extends Command {
         }
 
         AddwCommand otherAddwCommand = (AddwCommand) other;
-        return (index == null && otherAddwCommand.index == null || index.equals(otherAddwCommand.index))
-            && (predicate == null || otherAddwCommand.predicate == null || predicate.equals(otherAddwCommand.predicate))
-            && toAdd.equals(otherAddwCommand.toAdd);
+
+        boolean indexEqual = (index == null && otherAddwCommand.index == null)
+                || (index != null && index.equals(otherAddwCommand.index));
+
+        boolean predicateEqual = (predicate == null && otherAddwCommand.predicate == null)
+                || (predicate != null && predicate.equals(otherAddwCommand.predicate));
+
+        return indexEqual && predicateEqual && toAdd.equals(otherAddwCommand.toAdd);
+
     }
 
     @Override

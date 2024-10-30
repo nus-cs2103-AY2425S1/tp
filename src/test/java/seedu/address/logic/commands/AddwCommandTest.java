@@ -122,8 +122,22 @@ public class AddwCommandTest {
         // different formats
         assertFalse(addAliceIndexWedding.equals(addAliceNameWedding));
 
-        // different person -> returns false
+        // different wedding -> returns false
         assertFalse(addAliceIndexWedding.equals(addBobIndexWedding));
+
+        AddwCommand nullIndexAddwCommand1 = new AddwCommand(null, predicate, aliceWedding);
+        AddwCommand nullIndexAddwCommand2 = new AddwCommand(null, predicate, aliceWedding);
+        AddwCommand nullPredicateAddwCommand1 = new AddwCommand(INDEX_FIRST_PERSON, null, aliceWedding);
+        AddwCommand nullPredicateAddwCommand2 = new AddwCommand(INDEX_FIRST_PERSON, null, aliceWedding);
+
+        // null indexes -> return true
+        assertTrue(nullIndexAddwCommand1.equals(nullIndexAddwCommand2));
+
+        // null predicates -> return true
+        assertTrue(nullPredicateAddwCommand1.equals(nullPredicateAddwCommand2));
+
+        // null index and null predicate with same wedding -> return false
+        assertFalse(nullIndexAddwCommand1.equals(nullPredicateAddwCommand1));
     }
 
     @Test
