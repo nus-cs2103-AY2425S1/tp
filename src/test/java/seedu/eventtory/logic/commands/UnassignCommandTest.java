@@ -18,6 +18,7 @@ import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.testutil.TypicalEvents;
 import seedu.eventtory.testutil.TypicalVendors;
+import seedu.eventtory.ui.UiState;
 
 class UnassignCommandTest {
 
@@ -32,6 +33,54 @@ class UnassignCommandTest {
         event = TypicalEvents.ALICE; // Use the predefined event
         model.addEvent(event);
         model.assignVendorToEvent(vendor, event);
+    }
+
+    @Test
+    public void execute_vendorDetailsView_validAssignment() throws Exception {
+        model.viewVendor(vendor); // Sets UiState to VENDOR_DETAILS
+        model.setUiState(UiState.VENDOR_DETAILS);
+
+        UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        CommandResult result = unassignCommand.execute(model);
+
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()), result.getFeedbackToUser());
+        assertFalse(model.isVendorAssignedToEvent(vendor, event));
+    }
+
+    @Test
+    public void execute_vendorDetailsView_invalidVendorFallbackToMainView() throws CommandException {
+        model.viewVendor(TypicalVendors.BOB); // View a different vendor
+        model.setUiState(UiState.VENDOR_DETAILS);
+
+        UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        CommandResult result = unassignCommand.execute(model);
+
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, 1, 1), result.getFeedbackToUser());
+        assertFalse(model.isVendorAssignedToEvent(vendor, event));
+    }
+
+    @Test
+    public void execute_eventDetailsView_validAssignment() throws CommandException {
+        model.viewEvent(event); // Sets UiState to EVENT_DETAILS
+        model.setUiState(UiState.EVENT_DETAILS);
+
+        UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        CommandResult result = unassignCommand.execute(model);
+
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()), result.getFeedbackToUser());
+        assertFalse(model.isVendorAssignedToEvent(vendor, event));
+    }
+
+    @Test
+    public void execute_eventDetailsView_invalidEventFallbackToMainView() throws CommandException {
+        model.viewEvent(TypicalEvents.BENSON); // View a different event
+        model.setUiState(UiState.EVENT_DETAILS);
+
+        UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        CommandResult result = unassignCommand.execute(model);
+
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, 1, 1), result.getFeedbackToUser());
+        assertFalse(model.isVendorAssignedToEvent(vendor, event));
     }
 
     @Test
