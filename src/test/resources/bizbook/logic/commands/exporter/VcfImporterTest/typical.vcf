@@ -1,0 +1,77 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Alice Pauline
+TEL:94351253
+EMAIL:alice@example.com
+ADR:;;123\, Jurong West Ave 6\, #08-111
+CATEGORIES:friends
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Benson Meier
+TEL:98765432
+EMAIL:johnd@example.com
+ADR:;;311\, Clementi Ave 2\, #02-25
+CATEGORIES:owesMoney,friends
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Carl Kurz
+TEL:95352563
+EMAIL:heinz@example.com
+ADR:;;wall street
+CATEGORIES:
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Daniel Meier
+TEL:87652533
+EMAIL:cornelia@example.com
+ADR:;;10th street
+CATEGORIES:friends
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Elle Meyer
+TEL:94822245
+EMAIL:werner@example.com
+ADR:;;michegan ave
+CATEGORIES:
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:Fiona Kunz
+TEL:94824275
+EMAIL:lydia@example.com
+ADR:;;little tokyo
+CATEGORIES:
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+PRODID:ez-vcard 0.12.1
+FN:George Best
+TEL:94824423
+EMAIL:anna@example.com
+ADR:;;4th street
+CATEGORIES:
+NOTE:High profile client
+NOTE:Likes dumplings
+END:VCARD
