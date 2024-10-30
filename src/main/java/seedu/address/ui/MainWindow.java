@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -138,16 +140,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the view window or focuses on it if it's already opened.
+     * Updates the displayed person list for the user.
      */
     @FXML
-    public void handleView() {
-        viewWindow.view(logic.getFilteredPersonList());
-        if (!viewWindow.isShowing()) {
-            viewWindow.show();
-        } else {
-            viewWindow.focus();
-        }
+    public void handleView(Optional<Index> indexToView) {
+        assert indexToView.isPresent() : "This method should not be called if indexToView is empty";
+
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel.updateViewedPersons(indexToView);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -194,8 +195,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setSuccessFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isView()) {
-                handleView();
+            if (commandResult.isViewCommand()) {
+                handleView(commandResult.getIndexToView());
             }
 
             if (commandResult.isShowHelp()) {
