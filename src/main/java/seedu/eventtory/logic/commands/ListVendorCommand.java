@@ -20,4 +20,9 @@ public class ListVendorCommand extends ListCommand {
         model.updateFilteredVendorList(PREDICATE_SHOW_ALL_VENDORS);
         return new CommandResult(MESSAGE_LIST_VENDOR_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof ListVendorCommand);
+    }
 }
