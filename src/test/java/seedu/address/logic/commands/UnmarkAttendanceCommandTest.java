@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
 import seedu.address.testutil.StudentBuilder;
@@ -28,20 +28,23 @@ public class UnmarkAttendanceCommandTest {
 
     @Test
     public void execute_validIndex_success() throws Exception {
-        Student testStudent = new StudentBuilder().withName("Test Student").withDaysAttended(5).build();
+        int initialDays = 5;
+        Student testStudent = new StudentBuilder().withName("Test Student").withDaysAttended(initialDays).build();
         model.addPerson(testStudent);
 
         Index studentIndex = Index.fromZeroBased(model.getFilteredPersonList().indexOf(testStudent));
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(studentIndex);
 
+        // Attendance should be 6 now
         model.markAttendance();
-        int initialDays = testStudent.getDaysAttended().getDaysAttended();
-        String expectedMessage = UnmarkAttendanceCommand.MESSAGE_SUCCESS;
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.unmarkAttendance(testStudent);
 
+        String expectedMessage = UnmarkAttendanceCommand.MESSAGE_SUCCESS;
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(testStudent);
+
+        // Attendance should return to 5 after unmark
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(initialDays - 2, testStudent.getDaysAttended().getDaysAttended());
+        assertEquals(initialDays, testStudent.getDaysAttended().getValue());
     }
 
     @Test
@@ -64,7 +67,7 @@ public class UnmarkAttendanceCommandTest {
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(indexNonStudent);
 
         // Act & Assert
-        assertThrows(UnsupportedOperationException.class, () -> command.executeCommand(model),
+        assertThrows(CommandException.class, () -> command.executeCommand(model),
                 Messages.MESSAGE_INVALID_STUDENT_INDEX);
     }
 

@@ -42,6 +42,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -52,6 +53,21 @@ public class PersonTest {
         public PersonStub(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                           Set<Subject> subjects, Set<String> classes) {
             super(name, gender, phone, email, address, tags, subjects, classes);
+        }
+
+        @Override
+        public Person withIncrementedAttendance() {
+            return null;
+        }
+
+        @Override
+        public Person withDecrementedAttendance() throws CommandException {
+            return null;
+        }
+
+        @Override
+        public Person withResetAttendance() {
+            return null;
         }
     }
     private final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
@@ -157,23 +173,6 @@ public class PersonTest {
             + ", subject=[]"
             + ", classes=[]" + "}";
         assertEquals(expectedTeacher, personStubAmy.toString());
-    }
-
-    @Test
-    public void markAttendance_marksAttendance_success() {
-        personStubAmy.markAttendance();
-        // Add assertions based on the actual implementation of markAttendance
-    }
-
-    @Test
-    public void unmarkAttendance_unmarksAttendance_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> personStubAmy.unmarkAttendance());
-    }
-
-    @Test
-    public void resetAttendance_resetsAttendance_success() {
-        personStubAmy.resetAttendance();
-        // Add assertions based on the actual implementation of resetAttendance
     }
 
     @Test

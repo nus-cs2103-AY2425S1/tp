@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
@@ -125,21 +126,21 @@ public class AddressBookTest {
         List<Person> persons = addressBook.getPersonList();
         persons.stream()
                 .filter(person -> person instanceof Student)
-                .forEach(person -> assertEquals(1, ((Student) person).getDaysAttended().getDaysAttended()));
+                .forEach(person -> assertEquals(1, ((Student) person).getDaysAttended().getValue()));
     }
 
     @Test
-    public void unmarkAttendance_unmarksStudentAttendance_success() {
+    public void unmarkAttendance_unmarksStudentAttendance_success() throws CommandException {
         // Arrange
-        Student student = new StudentBuilder().withName("Student One").build();
+        Person student = new StudentBuilder().withName("Student One").build();
+        student = student.withIncrementedAttendance();
         addressBook.addPerson(student);
-        student.markAttendance(); // Mark attendance to set it to 1
 
         // Act
         addressBook.unmarkAttendance(student);
 
         // Assert
-        assertEquals(0, student.getDaysAttended().getDaysAttended());
+        assertEquals(0, addressBook.getPersonList().get(0).getDaysAttended().getValue());
     }
 
     @Test
@@ -160,7 +161,7 @@ public class AddressBookTest {
         List<Person> persons = addressBook.getPersonList();
         persons.stream()
                 .filter(person -> person instanceof Student)
-                .forEach(person -> assertEquals(0, ((Student) person).getDaysAttended().getDaysAttended()));
+                .forEach(person -> assertEquals(0, ((Student) person).getDaysAttended().getValue()));
     }
 
 }

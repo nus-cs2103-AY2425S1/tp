@@ -85,15 +85,15 @@ public class StudentTest {
         assertEquals(5, student.daysAttendedProperty().get(), "Initial daysAttended value should be 5");
 
         // Increment attendance and verify if property reflects the updated value
-        student.getDaysAttended().increment();
+        student = (Student) student.withIncrementedAttendance();
         assertEquals(6, student.daysAttendedProperty().get(), "daysAttended value should update to 6 after increment");
 
         // Decrement attendance and verify if property reflects the updated value
-        student.getDaysAttended().decrement();
+        student = (Student) student.withDecrementedAttendance();
         assertEquals(5, student.daysAttendedProperty().get(), "daysAttended value should revert to 5 after decrement");
 
         // Reset attendance and verify if property reflects the reset value
-        student.getDaysAttended().reset();
+        student = (Student) student.withResetAttendance();
         assertEquals(0, student.daysAttendedProperty().get(), "daysAttended value should reset to 0");
     }
 
