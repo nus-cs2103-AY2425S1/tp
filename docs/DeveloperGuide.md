@@ -585,7 +585,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Navigating to next command
    1. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
-      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history 1` followed by `history S1486256J` in the status bar.
+      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history 2` followed by `history S1486256J` in the status bar.
 
 ### Data management
 
