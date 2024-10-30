@@ -34,4 +34,16 @@ public class GoodsNamePredicateTest {
         boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
     }
+
+    @Test
+    public void goodsNamePredicateTest_checkCapitalization_success() {
+        GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
+                new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
+
+        GoodsNamePredicate testLowerPredicate = new GoodsNamePredicate("bread");
+        GoodsNamePredicate testUpperPredicate = new GoodsNamePredicate("BREAD");
+        boolean lowerResult = testLowerPredicate.test(testReceipt);
+        boolean upperResult = testUpperPredicate.test(testReceipt);
+        assertTrue(lowerResult && upperResult);
+    }
 }
