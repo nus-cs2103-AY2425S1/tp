@@ -21,11 +21,11 @@ public class SortCommandParser implements Parser<SortCommand> {
         String args = userInput.trim().toLowerCase();
 
         return switch (args) {
-            case "high" -> new SortCommand(new PriorityHighToLowComparator());
-            case "low" -> new SortCommand(new PriorityLowToHighComparator());
-            case "recent" -> new SortCommand(new DateRecentToDistantComparator());
-            case "distant" -> new SortCommand(new DateDistantToRecentComparator());
-            default -> throw new ParseException(
+        case "high" -> new SortCommand(new PriorityHighToLowComparator());
+        case "low" -> new SortCommand(new PriorityLowToHighComparator());
+        case "recent" -> new SortCommand(new DateRecentToDistantComparator());
+        case "distant" -> new SortCommand(new DateDistantToRecentComparator());
+        default -> throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         };
     }

@@ -16,7 +16,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String ALT_COMMAND_WORD = "s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all Persons by priority High to Low or Low to High "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all Persons "
+            + "by priority High to Low or Low to High "
             + "or by last seen date Recent to Distant or Distant to Recent based on the paramater.\n"
             + "Parameters: high/low/recent/distant\n"
             + "Example: " + COMMAND_WORD + " high";
