@@ -28,7 +28,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
-   ![Ui](images/UGTeach.png)
+   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
