@@ -4,12 +4,34 @@
   pageNav: 3
 ---
 
+<br>
+
 # EduContacts User Guide
 
-EduContacts is a **desktop app for Educators in Tertiary Institution to manage contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<br> 
 
+EduContacts is a **desktop app for Educators in Tertiary Institution to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
+
+<br>
 <!-- * Table of Contents -->
 <page-nav-print />
+
+## Table of Contents
+1. [Quick start](#quick-start)
+2. [Features](#features)
+    - [Viewing help : `help`](#viewing-help-help)
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Listing all persons : `list`](#listing-all-persons-list)
+    - [Editing a person : `edit`](#editing-a-person-edit)
+    - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
+    - [Deleting a person : `delete`](#deleting-a-person-delete)
+    - [Clearing all entries : `clear`](#clearing-all-entries-clear)
+    - [Exiting the program : `exit`](#exiting-the-program-exit)
+3. [FAQ](#faq)
+4. [Known issues](#known-issues)
+5. [Command summary](#command-summary)
+
+---
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,11 +40,17 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 1. Ensure you have Java `17` or above installed in your Computer.
 [Download Java here](https://www.oracle.com/sg/java/technologies/downloads/) if you haven't already.
 
+<box type="tip" seamless>
+
+**Tip:**  After downloading, you can confirm installation by typing `java -version` in your command terminal.
+
+</box>
+
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the home folder for your EduContacts.
 
-1. Open a command terminal.
+1. To run EduContacts, open a command terminal.
 
    To navigate to the folder where you placed the `.jar` file, use the `cd` command. For example, if you placed the file in a folder named `EduContacts` on your Desktop, you would enter:
 
@@ -95,19 +123,18 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
-Format
+Format:
 ```bash 
 help
 ```
 ![help message](images/helpMessage.png)
 
 
-
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person contact to the EduContacts.
 
 Format: 
 ```bash
@@ -115,12 +142,13 @@ add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG
 ```
 
 Examples:
-* `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
 * `add 87654321 n/Betsy Crowe t/ Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
+* `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+  ![result for 'add command result'](images/addCommandResult.png)
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in EduContacts.
 
 Format: 
 ```bash
@@ -129,7 +157,7 @@ list
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in EduContacts.
 
 Format:
 ```bash
@@ -142,7 +170,7 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 
 
 Examples:
-*  `edit 12345678 m/CS2103T CS2101`
+*  To edit the module CS2103T to CS2101 of a student with ID 12345678, type  `edit 12345678 m/CS2103T CS2101` utilizing the `m/` prefix for modules
 
 ### Listing students by certain attributes : `filter`
 
@@ -154,6 +182,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 ```
 
 * **For filtering by Names:**
+  * Use prefix `n/`.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -163,12 +192,14 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 
 * **For filtering by Module:**
 
-  * Partial matching is supported, allowing users to input parts of module codes. e.g. `CS21` will return modules like "CS2103T" and "CS2101."
+  * Use prefix `m/`.
+  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will return modules like "CS2103T" and "CS2101."
 
 <!-- -->
 
 * **For filtering by Course:**
 
+  * Use prefix `c/`
   * Partial matching is supported, but the first keyword must match the beginning of the course name. 
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
@@ -187,7 +218,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from EduContacts.
 
 Format: 
 ```bash
@@ -201,12 +232,19 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from EduContacts.
 
 Format: 
 ```bash
 clear
 ```
+
+<box type="warning" seamless>
+
+**Warning:**
+The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
+
+</box>
 
 ### Exiting the program : `exit`
 
@@ -217,17 +255,23 @@ Format:
 exit
 ```
 
+<box type="tip" seamless>
+
+**Tip:**  UP and DOWN arrow to Navigate Command History
+Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster to correct or repeat commands.
+</box>
+
 ### Saving the data
 
 EduContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-EduContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EduContacts data are saved automatically as a JSON file `[JAR file location]/data/educontacts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, EduContacts will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the EduContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -240,8 +284,17 @@ _Details coming soon ..._
 
 ## FAQ
 
+**Q**: I am unfamiliar with command-line interfaces. How should I begin using EduContacts?<br>
+**A**: We recommend starting with the **Quick Start** section of the user guide, which provides essential steps for setup and installation. Once you have the application running, utilize the `help` command or Help button to view a comprehensive list of available commands and their functions. Additionally, the **Features** section offers detailed instructions and examples for each command. We recommend familiarizing yourself with these resources as it will enhance your experience with EduContacts.
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduContacts home folder.
+
+**Q**: Is there a way to recover accidentally deleted contacts?<br>
+**A**: Unfortunately, once deleted, a contact cannot be recovered unless you have a backup of the JSON file from before deletion. Regular backups are recommended for this reason.
+
+**Q**: Can I export my contacts to Excel or another format?<br>
+**A**: EduContacts data is stored in JSON format. You can convert JSON files to Excel or CSV using an external tool or script to make data compatible with spreadsheet applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
