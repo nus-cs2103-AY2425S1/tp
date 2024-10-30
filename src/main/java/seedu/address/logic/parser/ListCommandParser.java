@@ -28,18 +28,17 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()) {
-            return build(argMultimap.getValue(PREFIX_LIST_ALL).get(), PREFIX_LIST_ALL, ListCommand::ofAll);
+            return build(argMultimap.getValue(PREFIX_LIST_ALL).get(), ListCommand::ofAll);
         }
 
         if (argMultimap.getValue(PREFIX_LIST_ARCHIVE).isPresent()) {
-            return build(argMultimap.getValue(PREFIX_LIST_ARCHIVE).get(), PREFIX_LIST_ARCHIVE, ListCommand::ofArchive);
+            return build(argMultimap.getValue(PREFIX_LIST_ARCHIVE).get(), ListCommand::ofArchive);
         }
 
         return ListCommand.ofCurrent();
     }
 
-    private ListCommand build(String argumentValue, Prefix prefix,
-                              Supplier<ListCommand> supplier) throws ParseException {
+    private ListCommand build(String argumentValue, Supplier<ListCommand> supplier) throws ParseException {
         requireNonNull(argumentValue);
 
         String trimmedArgumentValue = argumentValue.trim();
