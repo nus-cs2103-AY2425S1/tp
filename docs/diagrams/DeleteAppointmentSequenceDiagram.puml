@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteAppointmentCommandParser" as DeleteAppointmentCommandParser LOGIC_COLOR
+participant "s:DeleteAppointmentCommand" as DeleteAppointmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("appointment-delete\nJohn Doe d/2024-10-28 1200")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("appointment-delete\nJohn Doe d/2024-10-28 1200")
+activate AddressBookParser
+
+create DeleteAppointmentCommandParser
+AddressBookParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+
+DeleteAppointmentCommandParser --> AddressBookParser
+deactivate DeleteAppointmentCommandParser
+
+AddressBookParser -> DeleteAppointmentCommandParser : parse("appointment-delete\nJohn Doe d/2024-10-28 1200")
+activate DeleteAppointmentCommandParser
+
+create DeleteAppointmentCommand
+DeleteAppointmentCommandParser -> DeleteAppointmentCommand
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand --> DeleteAppointmentCommandParser :
+deactivate DeleteAppointmentCommand
+
+DeleteAppointmentCommandParser --> AddressBookParser : s
+deactivate DeleteAppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteAppointmentCommandParser -[hidden]-> AddressBookParser
+destroy DeleteAppointmentCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> DeleteAppointmentCommand : execute(m)
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand -> Model : deleteAppointment(Person target, Schedule appointment)
+activate Model
+
+Model --> DeleteAppointmentCommand
+deactivate Model
+
+DeleteAppointmentCommand -> Model : updateFilteredPersonList(Predicate)
+activate Model
+
+Model --> DeleteAppointmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteAppointmentCommand
+deactivate CommandResult
+
+DeleteAppointmentCommand --> LogicManager : r
+deactivate DeleteAppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
