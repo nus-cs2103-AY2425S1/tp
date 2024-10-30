@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * Represents an appointment date in the log.
  */
-public class AppointmentDate {
+public class AppointmentDate implements Comparable<AppointmentDate> {
     public static final String MESSAGE_CONSTRAINTS = "Invalid date format! Please use 'dd MMM yyyy'.";
     private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
@@ -64,6 +64,11 @@ public class AppointmentDate {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    @Override
+    public int compareTo(AppointmentDate o) {
+        return date.compareTo(o.date);
     }
 
     /**

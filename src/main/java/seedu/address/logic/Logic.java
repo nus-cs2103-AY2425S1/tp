@@ -34,7 +34,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered list of logs */
+    /** Returns an unmodifiable view of the sorted list of logs */
     ObservableList<Log> getSessionLog(int personIndex);
 
     /**

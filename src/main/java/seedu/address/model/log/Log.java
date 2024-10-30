@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Represents a log in the address book.
  */
-public class Log {
+public class Log implements Comparable<Log> {
 
     public static final String MESSAGE_CONSTRAINTS = "A Log requires a date in the format of dd MMM yyyy,"
             + "and a log description that can take any characters, including symbols, numbers, etc.\n"
@@ -94,6 +94,11 @@ public class Log {
     public String toDetailedString() {
         return String.format("Appointment Date: %s\nEntry: %s",
                 getAppointmentDate(), getEntry());
+    }
+
+    @Override
+    public int compareTo(Log other) {
+        return this.appointmentDate.compareTo(other.getAppointmentDate());
     }
 
     /**
