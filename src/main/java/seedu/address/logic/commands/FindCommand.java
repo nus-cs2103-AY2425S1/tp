@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.InFilteredListPredicate;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -38,15 +40,29 @@ public class FindCommand extends Command {
 
     private final List<Predicate<Person>> predicates;
 
+    private final boolean isChained;
+
     /**
      * Creates a FindCommand to find persons that match the specified predicates.
      *
      * @param predicates A list of predicates that specify the conditions to match.
      */
     public FindCommand(List<Predicate<Person>> predicates) {
+        this(predicates, false); // constructor delegation
+    }
+
+    /**
+     * Creates a FindCommand to find persons that match the specified predicates.
+     *
+     * @param predicates A list of predicates that specify the conditions to match.
+     * @param isChained If true, this command will further filter the results of the current filtered list.
+     *                  If false, this command will search on the full list of persons.
+     */
+    public FindCommand(List<Predicate<Person>> predicates, boolean isChained) {
         // For now we only support 1 or 2 predicates
         assert predicates.size() == 1 || predicates.size() == 2;
         this.predicates = predicates;
+        this.isChained = isChained;
     }
 
     @Override
@@ -55,13 +71,24 @@ public class FindCommand extends Command {
         Predicate<Person> combinedPredicate = predicates.stream()
                 .reduce(Predicate::and)
                 .orElse(t -> false);
+
+        if (isChained) {
+            // We HAVE to copy the list here, or it will have been emptied by the time Predicate.test() is called
+            Predicate<Person> inFilteredListPredicate = new InFilteredListPredicate(
+                    new ArrayList<>(model.getFilteredPersonList()));
+            combinedPredicate = combinedPredicate.and(inFilteredListPredicate);
+        }
+
         model.updateFilteredPersonList(combinedPredicate);
-        String formattedKeywords = getAllKeywordsFromPredicates(predicates);
+        String conditions = getAllKeywordsFromPredicates(predicates);
+        if (isChained) {
+            conditions = conditions + ", among the previously displayed results";
+        }
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
                         model.getFilteredPersonList().size(),
-                        formattedKeywords
+                        conditions
                 )
         );
     }
