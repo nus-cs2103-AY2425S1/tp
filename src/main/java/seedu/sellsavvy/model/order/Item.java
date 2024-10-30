@@ -10,7 +10,7 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 public class Item {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Item should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Item should only contain alphanumeric characters and spaces, and it should not be blank.";
 
     /*
      * The first character of the address must not be a whitespace,
