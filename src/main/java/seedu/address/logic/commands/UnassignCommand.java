@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * Unassigns a vendor to an event.
@@ -58,19 +60,23 @@ public class UnassignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        ObservableValue<UiState> uiState = model.getUiState();
+        switch (uiState.getValue()) {
+            case VENDOR_DETAILS:
+                return handleVendorDetailsView(model);
+            case EVENT_DETAILS:
+                return handleEventDetailsView(model);
+            default:
+                return handleMainView(model);
+        }
+    }
+
+    private CommandResult handleMainView(Model model) throws CommandException {
         List<Vendor> vendorList = model.getFilteredVendorList();
         List<Event> eventList = model.getFilteredEventList();
 
-        if (vendorIndex.getZeroBased() >= vendorList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-
-        if (eventIndex.getZeroBased() >= eventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
-        Vendor vendor = vendorList.get(vendorIndex.getZeroBased());
-        Event event = eventList.get(eventIndex.getZeroBased());
+        Vendor vendor = getVendorByIndex(vendorList, vendorIndex);
+        Event event = getEventByIndex(eventList, eventIndex);
 
         if (!model.isVendorAssignedToEvent(vendor, event)) {
             throw new CommandException(Messages.MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT);
@@ -79,8 +85,64 @@ public class UnassignCommand extends Command {
         model.unassignVendorFromEvent(vendor, event);
 
         return new CommandResult(
-                String.format(MESSAGE_UNASSIGN_SUCCESS,
-                        vendorIndex.getOneBased(),
-                        eventIndex.getOneBased()));
+                String.format(MESSAGE_UNASSIGN_SUCCESS, vendorIndex.getOneBased(), eventIndex.getOneBased()));
+    }
+
+    private CommandResult handleVendorDetailsView(Model model) throws CommandException {
+        Vendor vendor = model.getViewedVendor().getValue();
+        List<Vendor> vendorList = model.getFilteredVendorList();
+
+        Vendor vendorToUnassign = getVendorByIndex(vendorList, vendorIndex);
+
+        if (!vendor.equals(vendorToUnassign)) {
+            // Treat as if the user is in main view, to unassign other vendor from main list indexed event
+            // Or should it throw an error?
+            return handleMainView(model);
+        }
+
+        Event event = getEventByIndex(model.getAssociatedEvents(vendor), eventIndex);
+
+        assert model.isVendorAssignedToEvent(vendor, event) : "Vendor is not assigned to event although in association";
+
+        model.unassignVendorFromEvent(vendor, event);
+
+        return new CommandResult(
+                String.format(MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()));
+    }
+
+    private CommandResult handleEventDetailsView(Model model) throws CommandException {
+        Event event = model.getViewedEvent().getValue();
+        List<Event> eventList = model.getFilteredEventList();
+
+        Event eventToUnassign = getEventByIndex(eventList, eventIndex);
+
+        if (!event.equals(eventToUnassign)) {
+            // Treat as if the user is in main view, to unassign other event from main list indexed vendor
+            // Or should it throw an error?
+            return handleMainView(model);
+        }
+
+        Vendor vendor = getVendorByIndex(model.getAssociatedVendors(event), vendorIndex);
+
+        assert model.isVendorAssignedToEvent(vendor, event) : "Vendor is not assigned to event although in association";
+
+        model.unassignVendorFromEvent(vendor, event);
+
+        return new CommandResult(
+                String.format(MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()));
+    }
+
+    private Vendor getVendorByIndex(List<Vendor> vendorList, Index index) throws CommandException {
+        if (index.getZeroBased() >= vendorList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
+        }
+        return vendorList.get(index.getZeroBased());
+    }
+
+    private Event getEventByIndex(List<Event> eventList, Index index) throws CommandException {
+        if (index.getZeroBased() >= eventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+        return eventList.get(index.getZeroBased());
     }
 }
