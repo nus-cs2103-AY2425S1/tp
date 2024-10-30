@@ -131,17 +131,17 @@ Adds a student to the address book.
 <box type="tip" header="##### Tips">
 
 
-* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit).
+* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
 
-### Listing all students : `list`
+### Listing all students: `list`
 
 Shows a list of all students in the address book.
 
 Format: `list`
 
-### Editing a student : `edit`
+### Editing a student: `edit`
 
 Edits an existing student in the address book.
 
@@ -169,8 +169,8 @@ Edits an existing student in the address book.
 
 <box type="tip" header="##### Tips">
 
-* You may refer to [`pay`](#receiving-payment-from-a-student--pay), 
-[`owe`](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle`](#settle-payments-from-students-settle) commands 
+* You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settle-payments-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
 
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
@@ -218,7 +218,7 @@ Examples:
 </markdown>
 </box>
 
-### Receiving payment from a student : `pay`
+### Receiving payment from a student: `pay`
 
 Updates the amount of tuition fee paid by the specified student after a lesson.
 
@@ -294,7 +294,7 @@ Deletes the specified student from the address book.
 
 </box>
 
-### Getting a reminder for today : `remind`
+### Getting a reminder for today: `remind`
 
 Reminds you of all your lessons scheduled for `today`. UGTeach automatically reminds you when you launch it.
 
