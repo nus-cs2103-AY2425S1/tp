@@ -144,7 +144,7 @@ Examples:
 
 Lists all upcoming appointments in the order of the earliest next upcoming appointment.
 
-Format: `appointment-list [d/DATE_AND_TIME]`
+Format: `appointment-list [d/DATE][TIME]`
 
 * This will only show appointments that are in the future (compared to local time now).
 * The optional date and time fields act as filters.
@@ -313,7 +313,7 @@ Action | Format, Examples
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
 **Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
-**Appointment List** | `appointment-list [d/DATE_AND_TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
+**Appointment List** | `appointment-list [d/DATE][TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
 **View** | `view [NAME]`
