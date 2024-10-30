@@ -30,7 +30,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `view 2` : Displays all the information on the 2nd contact shown in the current list.
+   * `view 2` : Toggles the view on the 2nd contact shown in the current list with more/less information.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/06-01-2024` : Adds a contact named `John Doe` to the SocialBook.
 
@@ -109,16 +109,19 @@ Format: `list`
 
 ### Viewing a person : `view`
 
-Pops up a window containing all the information that has been saved on this person. Also filters the current listed persons to just this specific person.
+Toggles the contact card on the specified person, switching between more and less information. <br>
+The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
 
 Format: `view INDEX`
 
-* This command only allows the user to `view` one person at a time. Trying to key in more than 1 index will result in an error message.
+* This command permits the user to `view` multiple contacts at once. Using the `view` command on an already-expanded contact will shrink it back down to the less-information state.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
 
 Examples:
-* `view 1` will bring up the view window for the first person in the displayed list. <br>
- ![result of `view 1`](images/viewOneResult.png)
+* `view 2` will expand the contact card for the second person in the contact list. <br>
+ ![result of `view 2`](images/viewTwoResult.png)
+* Using `view 2` again will shrink the contact card back down to its concise form. <br>
+ ![result of second `view 2`](images/secondViewTwoResult.png)
 
 
 ### Editing a person : `edit`
