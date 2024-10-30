@@ -69,7 +69,8 @@ public class JsonClinicConnectSystemStorage implements ClinicConnectSystemStorag
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem, Path filePath) throws IOException {
+    public void saveClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem, Path filePath)
+            throws IOException {
         requireNonNull(clinicConnectSystem);
         requireNonNull(filePath);
 

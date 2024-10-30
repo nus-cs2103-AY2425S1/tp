@@ -42,7 +42,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
                 Messages.format(editedPatient));
 
-        Model expectedModel = new ModelManager(new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
         expectedModel.setPatient(targetPatient, editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +65,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
                 Messages.format(editedPatient));
 
-        Model expectedModel = new ModelManager(new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
         expectedModel.setPatient(targetPatient, editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

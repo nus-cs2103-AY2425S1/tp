@@ -15,10 +15,14 @@ import seedu.address.testutil.TypicalPatients;
 
 public class JsonSerializableClinicConnectSystemTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableClinicConnectSystemTest");
-    private static final Path TYPICAL_PATIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalPatientsClinicConnectSystem.json");
-    private static final Path INVALID_PATIENT_FILE = TEST_DATA_FOLDER.resolve("invalidPatientClinicConnectSystem.json");
-    private static final Path DUPLICATE_PATIENT_FILE = TEST_DATA_FOLDER.resolve("duplicatePatientClinicConnectSystem.json");
+    private static final Path TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonSerializableClinicConnectSystemTest");
+    private static final Path TYPICAL_PATIENTS_FILE =
+            TEST_DATA_FOLDER.resolve("typicalPatientsClinicConnectSystem.json");
+    private static final Path INVALID_PATIENT_FILE =
+            TEST_DATA_FOLDER.resolve("invalidPatientClinicConnectSystem.json");
+    private static final Path DUPLICATE_PATIENT_FILE =
+            TEST_DATA_FOLDER.resolve("duplicatePatientClinicConnectSystem.json");
 
     @Test
     public void toModelType_typicalPatientsFile_success() throws Exception {

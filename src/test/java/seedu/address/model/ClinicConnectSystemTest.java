@@ -82,7 +82,8 @@ public class ClinicConnectSystemTest {
 
     @Test
     public void toStringMethod() {
-        String expected = ClinicConnectSystem.class.getCanonicalName() + "{patients=" + clinicConnectSystem.getPatientList() + "}";
+        String expected = ClinicConnectSystem.class.getCanonicalName()
+                + "{patients=" + clinicConnectSystem.getPatientList() + "}";
         assertEquals(expected, clinicConnectSystem.toString());
     }
 

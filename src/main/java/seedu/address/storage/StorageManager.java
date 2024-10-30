@@ -70,7 +70,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem, Path filePath) throws IOException {
+    public void saveClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem, Path filePath)
+            throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         clinicConnectSystemStorage.saveClinicConnectSystem(clinicConnectSystem, filePath);
     }

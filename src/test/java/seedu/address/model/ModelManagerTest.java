@@ -95,7 +95,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ClinicConnectSystem clinicConnectSystem = new ClinicConnectSystemBuilder().withPatient(ALICE).withPatient(BENSON).build();
+        ClinicConnectSystem clinicConnectSystem = new ClinicConnectSystemBuilder()
+                .withPatient(ALICE).withPatient(BENSON).build();
         ClinicConnectSystem differentClinicConnectSystem = new ClinicConnectSystem();
         UserPrefs userPrefs = new UserPrefs();
 

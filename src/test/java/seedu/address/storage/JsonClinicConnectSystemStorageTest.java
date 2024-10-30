@@ -20,7 +20,8 @@ import seedu.address.model.ClinicConnectSystem;
 import seedu.address.model.ReadOnlyClinicConnectSystem;
 
 public class JsonClinicConnectSystemStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonClinicConnectSystemStorageTest");
+    private static final Path TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonClinicConnectSystemStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -31,7 +32,8 @@ public class JsonClinicConnectSystemStorageTest {
     }
 
     private java.util.Optional<ReadOnlyClinicConnectSystem> readClinicConnectSystem(String filePath) throws Exception {
-        return new JsonClinicConnectSystemStorage(Paths.get(filePath)).readClinicConnectSystem(addToTestDataPathIfNotNull(filePath));
+        return new JsonClinicConnectSystemStorage(
+                Paths.get(filePath)).readClinicConnectSystem(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -47,17 +49,20 @@ public class JsonClinicConnectSystemStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readClinicConnectSystem("notJsonFormatClinicConnectSystem.json"));
+        assertThrows(DataLoadingException.class, () ->
+                readClinicConnectSystem("notJsonFormatClinicConnectSystem.json"));
     }
 
     @Test
     public void readClinicConnectSystem_invalidPatientClinicConnectSystem_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readClinicConnectSystem("invalidPatientClinicConnectSystem.json"));
+        assertThrows(DataLoadingException.class, () ->
+                readClinicConnectSystem("invalidPatientClinicConnectSystem.json"));
     }
 
     @Test
     public void readClinicConnectSystem_invalidAndValidPatientClinicConnectSystem_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readClinicConnectSystem("invalidAndValidPatientClinicConnectSystem.json"));
+        assertThrows(DataLoadingException.class, () ->
+                readClinicConnectSystem("invalidAndValidPatientClinicConnectSystem.json"));
     }
 
     @Test
@@ -88,7 +93,8 @@ public class JsonClinicConnectSystemStorageTest {
 
     @Test
     public void saveClinicConnectSystem_nullClinicConnectSystem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveClinicConnectSystem(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () ->
+                saveClinicConnectSystem(null, "SomeFile.json"));
     }
 
     /**

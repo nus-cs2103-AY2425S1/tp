@@ -57,7 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ClinicConnectSystemStorage clinicConnectSystemStorage = new JsonClinicConnectSystemStorage(userPrefs.getClinicConnectSystemFilePath());
+        ClinicConnectSystemStorage clinicConnectSystemStorage =
+                new JsonClinicConnectSystemStorage(userPrefs.getClinicConnectSystemFilePath());
         storage = new StorageManager(clinicConnectSystemStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
