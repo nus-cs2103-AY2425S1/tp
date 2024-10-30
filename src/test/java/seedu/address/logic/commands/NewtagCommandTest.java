@@ -59,7 +59,7 @@ public class NewtagCommandTest {
     }
 
     /**
-     * EP: Valid tag name(s) that already exist.
+     * EP: Valid tag name(s) that already exist (ie. duplicate).
      */
     @Test
     public void execute_duplicateTag_successWithWarning() {
