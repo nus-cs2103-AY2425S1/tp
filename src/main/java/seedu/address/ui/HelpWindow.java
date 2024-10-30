@@ -185,7 +185,7 @@ public class HelpWindow extends UiPart<Stage> {
                     textArea.setText(item);
                     textArea.setWrapText(true);
                     textArea.setEditable(false);
-                    textArea.setPrefHeight(90);
+                    textArea.setPrefHeight(70);
                     textArea.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-font-size: 16;");
                     setGraphic(textArea);
                 }

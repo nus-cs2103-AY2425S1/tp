@@ -27,7 +27,7 @@
 .table-view .column-header-background .label {
     -fx-padding: 2 2 2 2;
     -fx-text-fill: black;
-    -fx-font-size: 20;
+    -fx-font-size: 20; /* header */
 }
 
 .table-cell {
@@ -37,12 +37,24 @@
     -fx-font-size: 18;
 }
 
-.table-row-cell:odd {
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:odd:filled {
     -fx-background-color: #CAE9FF;
 }
 
-.table-row-cell:hover {
+.table-row-cell:even:filled {
+    -fx-background-color: white;
+}
+
+.table-row-cell:hover:filled {
     -fx-background-color: #5FA8D3;
+}
+
+.table-row-cell:hover:empty {
+    -fx-background-color: white;
 }
 
 .scroll-bar .thumb {
