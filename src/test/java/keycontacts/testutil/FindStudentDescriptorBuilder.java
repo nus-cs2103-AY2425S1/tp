@@ -1,7 +1,6 @@
 package keycontacts.testutil;
 
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
-import keycontacts.model.student.Student;
 
 /**
  * A utility class to help with building FindStudentDescriptor objects.
@@ -11,22 +10,6 @@ public class FindStudentDescriptorBuilder {
 
     public FindStudentDescriptorBuilder() {
         descriptor = new FindStudentDescriptor();
-    }
-
-    public FindStudentDescriptorBuilder(FindStudentDescriptor descriptor) {
-        this.descriptor = new FindStudentDescriptor(descriptor);
-    }
-
-    /**
-     * Returns a {@code FindStudentDescriptor} with fields containing
-     * {@code student}'s details
-     */
-    public FindStudentDescriptorBuilder(Student student) {
-        descriptor = new FindStudentDescriptor();
-        descriptor.setName(student.getName().fullName);
-        descriptor.setPhone(student.getPhone().value);
-        descriptor.setAddress(student.getAddress().value);
-        descriptor.setGradeLevel(student.getGradeLevel().value);
     }
 
     /**
@@ -64,6 +47,16 @@ public class FindStudentDescriptorBuilder {
         descriptor.setGradeLevel(gradeLevel);
         return this;
     }
+
+    /**
+     * Sets the {@code Group} of the {@code FindStudentDescriptor} that we are
+     * building.
+     */
+    public FindStudentDescriptorBuilder withGroup(String group) {
+        descriptor.setGroup(group);
+        return this;
+    }
+
 
     public FindStudentDescriptor build() {
         return descriptor;

@@ -23,6 +23,13 @@ public class JsonSerializableStudentDirectoryTest {
             TEST_DATA_FOLDER.resolve("invalidStudentStudentDirectory.json");
     private static final Path DUPLICATE_STUDENT_FILE =
             TEST_DATA_FOLDER.resolve("duplicateStudentStudentDirectory.json");
+    private static final Path REGULAR_LESSON_SYNC_ERROR_FILE =
+            TEST_DATA_FOLDER.resolve("GroupSyncErrorStudentDirectoryTest/regularLessonSyncErrorStudentDirectory.json");
+    private static final Path CANCELLED_LESSONS_SYNC_ERROR_FILE = TEST_DATA_FOLDER.resolve(
+                    "GroupSyncErrorStudentDirectoryTest/cancelledLessonsSyncErrorStudentDirectory.json");
+    private static final Path MAKEUP_LESSONS_SYNC_ERROR_FILE =
+            TEST_DATA_FOLDER.resolve("GroupSyncErrorStudentDirectoryTest/makeupLessonsSyncErrorStudentDirectory.json");
+
 
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
@@ -45,6 +52,30 @@ public class JsonSerializableStudentDirectoryTest {
         JsonSerializableStudentDirectory dataFromFile = JsonUtil.readJsonFile(DUPLICATE_STUDENT_FILE,
                 JsonSerializableStudentDirectory.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableStudentDirectory.MESSAGE_DUPLICATE_STUDENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_regularLessonSyncError_throwsIllegalValueException() throws Exception {
+        JsonSerializableStudentDirectory dataFromFile = JsonUtil.readJsonFile(REGULAR_LESSON_SYNC_ERROR_FILE,
+                JsonSerializableStudentDirectory.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableStudentDirectory.MESSAGE_GROUP_SYNC_ERROR,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_cancelledLessonsSyncError_throwsIllegalValueException() throws Exception {
+        JsonSerializableStudentDirectory dataFromFile = JsonUtil.readJsonFile(CANCELLED_LESSONS_SYNC_ERROR_FILE,
+                JsonSerializableStudentDirectory.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableStudentDirectory.MESSAGE_GROUP_SYNC_ERROR,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_makeupLessonsSyncError_throwsIllegalValueException() throws Exception {
+        JsonSerializableStudentDirectory dataFromFile = JsonUtil.readJsonFile(MAKEUP_LESSONS_SYNC_ERROR_FILE,
+                JsonSerializableStudentDirectory.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableStudentDirectory.MESSAGE_GROUP_SYNC_ERROR,
                 dataFromFile::toModelType);
     }
 

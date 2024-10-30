@@ -7,7 +7,7 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
  * Represents a Student's group in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
  */
-public class Group {
+public class Group implements Comparable<Group> {
     public static final String NO_GROUP_STRING = "";
     public static final String MESSAGE_CONSTRAINTS = "Group name must not begin with a whitespace";
     /*
@@ -86,5 +86,17 @@ public class Group {
     @Override
     public String toString() {
         return groupName;
+    }
+
+    @Override
+    public int compareTo(Group o) {
+        if (isNoGroup() && o.isNoGroup()) {
+            return 0;
+        } else if (isNoGroup()) {
+            return 1;
+        } else if (o.isNoGroup()) {
+            return -1;
+        }
+        return groupName.compareTo(o.groupName);
     }
 }

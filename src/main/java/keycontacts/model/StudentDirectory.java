@@ -233,7 +233,7 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
                     }
 
                     // check cancelled lessons
-                    if (!student.getMakeupLessons().equals(otherStudent.getMakeupLessons())) {
+                    if (!student.getCancelledLessons().equals(otherStudent.getCancelledLessons())) {
                         return true;
                     }
 
