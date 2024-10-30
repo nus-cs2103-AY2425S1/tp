@@ -24,7 +24,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment:" + assignmentName + " " + score;
+        return "Assignment: " + assignmentName + " " + score;
     }
 
     public float getScore() {
