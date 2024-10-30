@@ -116,7 +116,7 @@ public class EditVendorCommandTest {
     public void execute_duplicateVendorFilteredList_failure() {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
-        // edit vendor in filtered list into a duplicate in eventtory book
+        // edit vendor in filtered list into a duplicate in EventTory
         Vendor vendorInList = model.getEventTory().getVendorList().get(INDEX_SECOND_VENDOR.getZeroBased());
         EditVendorCommand editVendorCommand = new EditVendorCommand(INDEX_FIRST_VENDOR,
                 new EditVendorDescriptorBuilder(vendorInList).build());

@@ -6,7 +6,7 @@ import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
 
 /**
- * Unmodifiable view of an eventtory book
+ * Unmodifiable view of an EventTory
  */
 public interface ReadOnlyEventTory {
 

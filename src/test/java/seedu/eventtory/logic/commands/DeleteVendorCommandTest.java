@@ -72,7 +72,7 @@ public class DeleteVendorCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
         Index outOfBoundIndex = INDEX_SECOND_VENDOR;
-        // ensures that outOfBoundIndex is still in bounds of eventTory book list
+        // ensures that outOfBoundIndex is still in bounds of EventTory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getVendorList().size());
 
         DeleteVendorCommand deleteCommand = new DeleteVendorCommand(outOfBoundIndex);

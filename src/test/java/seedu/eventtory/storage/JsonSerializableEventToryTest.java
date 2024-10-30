@@ -35,7 +35,7 @@ public class JsonSerializableEventToryTest {
                 JsonSerializableEventTory.class).get();
         EventTory eventToryFromFile = dataFromFile.toModelType();
 
-        // Verify that the loaded eventtory book contains the expected vendors, events, and associations
+        // Verify that the loaded EventTory contains the expected vendors, events, and associations
         assertEquals(2, eventToryFromFile.getVendorList().size());
         assertEquals(2, eventToryFromFile.getEventList().size());
         assertEquals(2, eventToryFromFile.getAssociationList().size());

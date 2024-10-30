@@ -112,7 +112,7 @@ public class EditEventCommandTest {
     public void execute_duplicateEventFilteredList_failure() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
-        // edit event in filtered list into a duplicate in eventtory book
+        // edit event in filtered list into a duplicate in EventTory
         Event eventInList = model.getEventTory().getEventList().get(INDEX_SECOND_EVENT.getZeroBased());
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
                 new EditEventDescriptorBuilder(eventInList).build());
@@ -131,13 +131,13 @@ public class EditEventCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of eventtory book
+     * but smaller than size of EventTory
      */
     @Test
     public void execute_invalidEventIndexFilteredList_failure() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
-        // ensures that outOfBoundIndex is still in bounds of eventtory book list
+        // ensures that outOfBoundIndex is still in bounds of EventTory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getEventTory().getEventList().size());
 
         EditEventCommand editEventCommand = new EditEventCommand(outOfBoundIndex,

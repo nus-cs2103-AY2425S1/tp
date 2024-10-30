@@ -128,7 +128,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the eventtory book, filtered vendor list and selected vendor in
+     * - the EventTory, filtered vendor list and selected vendor in
      * {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
@@ -145,7 +145,7 @@ public class CommandTestUtil {
     /**
      * Updates {@code model}'s filtered list to show only the vendor at the given
      * {@code targetIndex} in the
-     * {@code model}'s eventtory book.
+     * {@code model}'s EventTory.
      */
     public static void showVendorAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredVendorList().size());
@@ -160,7 +160,7 @@ public class CommandTestUtil {
     /**
      * Updates {@code model}'s filtered list to show only the event at the given
      * {@code targetIndex} in the
-     * {@code model}'s eventtory book.
+     * {@code model}'s EventTory.
      */
     public static void showEventAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());

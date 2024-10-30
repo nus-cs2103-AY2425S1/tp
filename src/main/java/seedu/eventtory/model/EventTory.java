@@ -218,7 +218,7 @@ public class EventTory implements ReadOnlyEventTory {
     }
 
     /**
-     * Adds an event to the eventtory book.
+     * Adds an event to the EventTory.
      * The event must not already exist in EventTory.
      */
     public void addEvent(Event event) {
