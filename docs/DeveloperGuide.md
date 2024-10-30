@@ -155,6 +155,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+
+#### Implementation
+
+The find command allows the user to filter the list of contacts by (at least one) criteria applied to data field(s) (`Name`, `Email`, `Gender`, `Age`, `Detail` and/or `StudyGroupTags`). Each field correspond to one criteria, and can consist of one or more keywords. The list of persons in the `AddressBook` is filtered, then displayed to the user.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `n/Alice Bob` is a single criteria, while `n/Alice e/@example.com` is two criteria.
+
+</div>
+
+The user executes an find command with some inputs, for e.g. `find n/Alex Bernice t/1A`, which goes through the `Logic` component as shown by the following sequence diagram:
+
+![FindSequenceDiagram](images/FindSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+For each criteria, a `Predicate` is initialised in the `Model` component as shown below:
+
+![FindSequenceDiagram](images/FindSequenceDiagram-PredicateModel.png)
+
+The `PredicateGroup` consist of one or more `Predicate`. The following sequence diagram shows how a `PredicateGroup` is used to test a `Person` record:
+
+![PredicateGroupSequenceDiagram](images/PredicateGroupSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: Handling multiple criteria**<br>
+Criteria are segregated by data field, and each criteria is independently evaluated.
+
+* **Alternative 1 (current choice):**  For a person to be included, they must _satisfy all criteria_.
+  * Pros: Allow the find command to filter very specific criteria that must all be fulfilled, enabling more accurate results.
+  * Cons: May return fewer results, especially when using multiple criteria.
+
+* **Alternative 2:** For a person to be included, they only need to _satisfy one criteria_.
+  * Pros: Returns wider range of results, potentially finding more relevant person records.
+  * Cons: Less specific when finding for exact match.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -273,8 +312,8 @@ Researchers who,
 
 **Value proposition**:
 
-As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to 
-* have all participants consolidated in a single program 
+As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to
+* have all participants consolidated in a single program
 * consolidate a list of contact details based on **specific experimental criteria**
 * export it to an easy-to-read format for better data organization
 
