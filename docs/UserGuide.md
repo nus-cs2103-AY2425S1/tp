@@ -123,6 +123,31 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Single page person view: `view`
+
+Shows all the information related to a contact on a single page.
+
+Format: `view INDEX`
+
+* The search is based on the most updated contact list.
+* Opening a new window will automatically close the previously opened window.
+* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*   `view 1` Shows the person located as index position 1 in the address book.
+    ![result for 'viewWindow'](images/viewWindow.png)
+
+### Closing single page person view: `close`
+
+Closes the UI page that shows the information of the person.
+
+Format: `close`
+
+* This will close the last opened window.
+
+Examples:
+*   `close` Will close the window that is currently open, and do nothing if there is no window open.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
