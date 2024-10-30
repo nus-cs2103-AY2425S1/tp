@@ -43,7 +43,7 @@ public class VcfExporterTest {
     }
 
     private Path getTestFilePath(String fileName) {
-        String path = "/logic/commands/exporter/VcfExporterTest/" + fileName;
+        String path = "VcfExporterTest/" + fileName;
         try {
             URL url = VcfExporterTest.class.getResource(path);
             assertNotNull(url, path + " does not exist.");

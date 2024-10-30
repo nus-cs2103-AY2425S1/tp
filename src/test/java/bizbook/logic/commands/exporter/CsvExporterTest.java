@@ -43,7 +43,7 @@ public class CsvExporterTest {
     }
 
     private Path getTestFilePath(String fileName) {
-        String path = "/logic/commands/exporter/CsvExporterTest/" + fileName;
+        String path = "CsvExporterTest/" + fileName;
         try {
             URL url = CsvExporterTest.class.getResource(path);
             assertNotNull(url, path + " does not exist.");
