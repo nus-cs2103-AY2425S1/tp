@@ -1,6 +1,5 @@
 package tuteez.logic.parser;
 
-import static tuteez.logic.Messages.MESSAGE_EMPTY_REMARK;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_REMARK_INDEX_FORMAT;
@@ -92,10 +91,10 @@ public class RemarkCommandParserTest {
     @Test
     public void parse_emptyRemarkContent_throwsParseException() {
         assertParseFailure(parser, "1 " + AddRemarkCommand.ADD_REMARK_PARAM + "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EMPTY_REMARK));
+                Remark.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, "1 " + AddRemarkCommand.ADD_REMARK_PARAM + " ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EMPTY_REMARK));
+                Remark.MESSAGE_CONSTRAINTS);
     }
 
     @Test

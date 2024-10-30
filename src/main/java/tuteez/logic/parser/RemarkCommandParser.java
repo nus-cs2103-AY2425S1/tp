@@ -1,7 +1,6 @@
 package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.Messages.MESSAGE_EMPTY_REMARK;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_REMARK_INDEX_FORMAT;
@@ -96,11 +95,9 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
 
         String remarkString = argMultimap.getValue(PREFIX_ADD_REMARK).get();
 
-        if (remarkString.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EMPTY_REMARK));
-        }
+        Remark remark = ParserUtil.parseRemark(remarkString);
 
-        return new AddRemarkCommand(personIndex, new Remark(remarkString));
+        return new AddRemarkCommand(personIndex, remark);
     }
 
     private DeleteRemarkCommand createDeleteRemarkCommand(Index personIndex, ArgumentMultimap argMultimap)

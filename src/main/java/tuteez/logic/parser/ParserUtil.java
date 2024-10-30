@@ -15,6 +15,7 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.Remark;
 import tuteez.model.tag.Tag;
 
 /**
@@ -173,5 +174,20 @@ public class ParserUtil {
             lessonSet.add(parseLesson(lesson));
         }
         return lessonSet;
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }
