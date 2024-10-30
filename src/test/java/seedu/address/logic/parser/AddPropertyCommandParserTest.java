@@ -133,4 +133,147 @@ public class AddPropertyCommandParserTest {
                 + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
                 expectedMessageBid);
     }
+
+    @Test
+    public void parse_excessPrefixes_failure() {
+        String excessPrefixErrorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddPropertyCommand.MESSAGE_USAGE);
+
+        Prefix prefix = new Prefix("z/");
+
+        // excess prefix before postalcode prefix
+        assertParseFailure(parser, " " + prefix + POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess prefix before unit prefix
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + " " + prefix + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess prefix before type prefix
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + " " + prefix
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess prefix before type ask
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + " " + prefix + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess prefix before type bid
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + " " + prefix + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess prefix after commands
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY + " " + prefix,
+                excessPrefixErrorMessage);
+
+
+        Prefix nonCommandPrefix = new Prefix("/");
+        // excess invalid non-command prefix before PostalCode prefix ->
+        // throws primary command specific error message because not command
+        assertParseFailure(parser, " " + nonCommandPrefix + POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // excess invalid non-command prefix before unit prefix ->
+        // throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + " " + nonCommandPrefix + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                PostalCode.MESSAGE_CONSTRAINTS);
+
+        // excess invalid non-command prefix before type prefix ->
+        // throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + " " + nonCommandPrefix
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                Unit.MESSAGE_CONSTRAINTS);
+
+        // excess invalid non-command prefix before type ask -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + " " + nonCommandPrefix + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                Type.MESSAGE_CONSTRAINTS);
+
+        // excess invalid non-command prefix before type bid -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + " " + nonCommandPrefix + BID_DESC_ADMIRALTY,
+                Ask.MESSAGE_CONSTRAINTS);
+
+        // excess invalid non-command prefix after type bid -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY + " " + nonCommandPrefix,
+                Bid.MESSAGE_CONSTRAINTS);
+
+
+
+        // slotted invalid prefix in postal code
+        assertParseFailure(parser, " " + PREFIX_POSTALCODE + "123 z/456" + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // slotted invalid prefix in unit
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + " " + PREFIX_UNITNUMBER + "11 z/11"
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // slotted invalid prefix in type
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY
+                        + " " + PREFIX_TYPE + "H z/DB" + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // slotted invalid prefix in ask
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + " " + PREFIX_ASK + "200 z/00" + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // slotted invalid prefix in bid
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + " " + PREFIX_BID + "200 z/00",
+                excessPrefixErrorMessage);
+
+
+
+
+        // slotted invalid non-command prefix in postal code -> throws prefix specific error message because not command
+        assertParseFailure(parser, " " + PREFIX_POSTALCODE + "123 /456" + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                PostalCode.MESSAGE_CONSTRAINTS);
+
+        // slotted invalid non-command prefix in unit -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + " " + PREFIX_UNITNUMBER + "11 /11"
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                Unit.MESSAGE_CONSTRAINTS);
+
+        // slotted invalid non-command prefix in type -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY
+                        + " " + PREFIX_TYPE + "H /DB" + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                Type.MESSAGE_CONSTRAINTS);
+
+        // slotted invalid non-command prefix in ask -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + " " + PREFIX_ASK + "200 /00" + BID_DESC_ADMIRALTY,
+                Ask.MESSAGE_CONSTRAINTS);
+
+        // slotted invalid non-command prefix in bid -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + ASK_DESC_ADMIRALTY + " " + PREFIX_BID + "200 /00",
+                Bid.MESSAGE_CONSTRAINTS);
+
+
+
+
+        // invalid non-command prefix in postalcode param specifier
+        // -> throws prefix specific error message because not command
+        assertParseFailure(parser, " /" + PREFIX_POSTALCODE + "123456" + UNIT_DESC_ADMIRALTY
+                        + TYPE_DESC_ADMIRALTY + ASK_DESC_ADMIRALTY + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+
+        // invalid non-command prefix in ask param specifier
+        // -> throws prefix specific error message because not command
+        assertParseFailure(parser, POSTALCODE_DESC_ADMIRALTY + UNIT_DESC_ADMIRALTY + TYPE_DESC_ADMIRALTY
+                        + " /" + PREFIX_ASK + "20000" + BID_DESC_ADMIRALTY,
+                excessPrefixErrorMessage);
+    }
 }

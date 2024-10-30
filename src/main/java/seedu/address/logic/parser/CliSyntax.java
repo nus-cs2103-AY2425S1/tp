@@ -21,7 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ASK = new Prefix("a/");
     public static final Prefix PREFIX_GTE = new Prefix("gte/");
     public static final Prefix PREFIX_LTE = new Prefix("lte/");
-
     public static final Prefix PREFIX_BUYER_PHONE = new Prefix("bp/");
     public static final Prefix PREFIX_SELLER_PHONE = new Prefix("sp/");
 }

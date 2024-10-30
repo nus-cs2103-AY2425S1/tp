@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterPropertyCommand;
@@ -32,44 +34,88 @@ public class FilterPropertyCommandParser implements Parser<FilterPropertyCommand
         logger.info("Parsing filter property command: " + args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE);
+        if (hasExcessToken(argMultimap, args, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE)) {
+            logger.warning("Excess prefixes.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FilterPropertyCommand.MESSAGE_USAGE));
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            logger.warning("Wrong prefixes.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FilterPropertyCommand.MESSAGE_USAGE));
+        }
 
         String type = argMultimap.getValue(PREFIX_TYPE).orElse("");
         String lte = argMultimap.getValue(PREFIX_LTE).orElse("");
         String gte = argMultimap.getValue(PREFIX_GTE).orElse("");
-        if (type.isEmpty() && lte.isEmpty() && gte.isEmpty()) {
+
+        List<String> typeLst = argMultimap.getAllValues(PREFIX_TYPE);
+        List<String> lteLst = argMultimap.getAllValues(PREFIX_LTE);
+        List<String> gteLst = argMultimap.getAllValues(PREFIX_GTE);
+
+        boolean isTypeEmpty = typeLst.size() == 0;
+        boolean isLteEmpty = lteLst.size() == 0;
+        boolean isGteEmpty = gteLst.size() == 0;
+        if (isTypeEmpty && isLteEmpty && isGteEmpty) {
             logger.warning("Command to filter property contains no boolean expression to evaluate");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPropertyCommand.MESSAGE_USAGE));
         }
-        if (!type.isEmpty() && !PropertyType.isValidEnumValue(type)) {
+        if (!isTypeEmpty && !PropertyType.isValidEnumValue(type)) {
             logger.warning(String.format("Invalid Type: %s", type));
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, Type.MESSAGE_CONSTRAINTS));
+                    String.format(Type.MESSAGE_CONSTRAINTS));
         }
-        if (!lte.isEmpty() && !MatchingPrice.isValidMatchingPrice(lte)) {
+        if (!isLteEmpty && !MatchingPrice.isValidMatchingPrice(lte)) {
             logger.warning(String.format("Invalid upper bound price: %s", lte));
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchingPrice.MESSAGE_CONSTRAINTS));
+                    String.format(MatchingPrice.MESSAGE_CONSTRAINTS));
         }
-        if (!gte.isEmpty() && !MatchingPrice.isValidMatchingPrice(gte)) {
+        if (!isGteEmpty && !MatchingPrice.isValidMatchingPrice(gte)) {
             logger.warning(String.format("Invalid lower bound price: %s", gte));
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchingPrice.MESSAGE_CONSTRAINTS));
+                    String.format(MatchingPrice.MESSAGE_CONSTRAINTS));
         }
 
         Type typeObj = null;
         MatchingPrice lteObj = null;
         MatchingPrice gteObj = null;
-        if (!type.isEmpty()) {
-            typeObj = new Type(type);
+        if (!isTypeEmpty) {
+            typeObj = new Type(typeLst.get(0));
         }
-        if (!lte.isEmpty()) {
-            lteObj = new MatchingPrice(lte);
+        if (!isLteEmpty) {
+            lteObj = new MatchingPrice(lteLst.get(0));
         }
-        if (!gte.isEmpty()) {
-            gteObj = new MatchingPrice(gte);
+        if (!isGteEmpty) {
+            gteObj = new MatchingPrice(gteLst.get(0));
         }
         logger.info(String.format("Successfully parsed filter property command: %s. Sending for execution.", args));
         return new FilterPropertyCommand(typeObj, lteObj, gteObj);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    private boolean hasExcessToken(ArgumentMultimap argumentMultimap, String args, Prefix... prefixes) {
+        int prefixPresentCounter = 0;
+        for (int i = 0; i < prefixes.length; i++) {
+            if (argumentMultimap.getAllValues(prefixes[i]).size() > 0) {
+                prefixPresentCounter++;
+            }
+        }
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixPresentCounter;
     }
 }
