@@ -131,8 +131,8 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex yeo` returns `Alex Yeoh`
 
-Result for `find n/alex`:
-![result for 'find alex david'](images/findAlexDavidResult.png) // need to change this image
+Result for `find n/roy`:
+![result for 'find n/roy'](images/FindRoyResult.png) // need to change this image
 
 
 #### Locating by phone number: `find p/PHONE_NUMBER`
@@ -145,10 +145,10 @@ A **valid** `PHONE_NUMBER` should:
     * For eg. Just typing `find p/` without providing any `KEYWORD` will throw an error.
 
 Examples:
-* `find p/8433` returns `8433 4567`
+* `find p/9103` returns `91031282`
 
-Result for `find p/9234`:
-![result for 'find 9234'](images/find9234Result.png)
+Result for `find p/9103`:
+![result for 'find 9103'](images/Find9103Result.png)
 
 
 #### Locating by address: `find a/ADDRESS`
@@ -164,7 +164,7 @@ Examples:
 * `find a/Blk 47` returns `Blk 47 Tampines Street 20`
 
 Result for `find a/tampines`:
-![result for 'fa tampines`](images/findTampines.png)
+![result for 'fa tampines`](images/FindTampinesResult.png)
 
 
 #### Locating by client type: `find c/CLIENT_TYPE`
@@ -182,10 +182,9 @@ A **valid** `CLIENT_TYPE` should:
 Examples:
 * `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
 * `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
-* `find c/Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
 
-Result for `fc Investment Plan`:
-![result for 'fc Investment Plan`](images/FindClientType.png)
+Result for `find c/Investment`:
+![result for 'find c/Investment`](images/FindInvestmentresult.png)
 
 
 ### Shortcuts for `find` command
@@ -291,8 +290,8 @@ Examples:
 * `view John Doe` shows the contact named `John Doe`
 * `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
 
-Result for `view Liurui`:
-    ![result for 'view Liurui`](images/viewCommandExample.png)
+Result for `view jeremy`:
+    ![result for 'view jeremy`](images/ViewCommandExample.png)
 
 
 ### Clearing all entries : `clear`
