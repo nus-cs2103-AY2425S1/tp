@@ -21,7 +21,6 @@ public class ListCommand extends Command {
             + "This means that the first person added appears at the top of the list, "
             + "while the most recently added person appears at the bottom.";
 
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
