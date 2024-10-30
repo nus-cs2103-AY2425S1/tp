@@ -104,7 +104,7 @@ Format: `exit`
 
 Adds a student to the edulog.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]... [f/fee]`
 
 <box type="tip" seamless>
 **Tip:** A person can have any number of tags (including 0)
@@ -114,7 +114,7 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
+* `add n/Ben Lim p/98765432 e/ben@example.com a/John street, block 123, #01-01 f/100`
 ### Listing all students : `list`
 
 Shows a list of all students in the edulog.
@@ -137,7 +137,7 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-
+* `edit 2 f/50` Edits the tuition fee of the 2nd student to $50
 ### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
@@ -274,6 +274,18 @@ Generates a random gift idea.
 
 Format: gift
 
+## Revenue
+
+Calculates the total amount of money earned from student who has paid
+
+Format: `revenue`
+
+Example
+* `revenue`
+
+If the command is successful, the total amount of money will be displayed in this format: `Total revenue is $X`, where 
+X is the money earned
+
 ## Data Files
 
 ### Saving the data
@@ -322,4 +334,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Gift**   | `gift`
+**Revenue**| `revenue`
 
