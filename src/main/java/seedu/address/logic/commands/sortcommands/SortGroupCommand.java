@@ -31,6 +31,7 @@ public class SortGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.sortGroupList(new Comparator<Group>() {
             @Override
             public int compare(Group g1, Group g2) {
