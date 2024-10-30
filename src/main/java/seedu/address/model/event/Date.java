@@ -5,26 +5,44 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.Locale;
 
 /**
  * Represents a Date for an Event in EventTory.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS = "Date must be a valid date in the format YYYY-MM-DD!";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final String MESSAGE_CONSTRAINTS = """
+            Date must be a valid date in any of the following formats:
+            1. dd-MM-uuuu
+            2. uuuu-MM-dd
+            3. dd MMM uuuu
+            4. dd MMMM uuuu
+            """;
+
+    private static final DateTimeFormatter INPUT_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendOptional(DateTimeFormatter.ofPattern("dd-MM-uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMM uuuu", Locale.ENGLISH))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMMM uuuu", Locale.ENGLISH))
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT) ;
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu");
     private final LocalDate date;
 
     /**
      * Constructs a {@code Date}.
      *
-     * @param date A valid date string in the format YYYY-MM-DD.
+     * @param date A date string in any of the accepted formats.
      */
     public Date(String date) {
         requireAllNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, DATE_FORMATTER);
+        this.date = LocalDate.parse(date, INPUT_FORMATTER);
     }
 
     /**
@@ -32,7 +50,7 @@ public class Date {
      */
     public static boolean isValidDate(String date) {
         try {
-            LocalDate.parse(date, DATE_FORMATTER);
+            LocalDate.parse(date, INPUT_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -41,7 +59,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return date.format(DATE_FORMATTER);
+        return date.format(OUTPUT_FORMATTER);
     }
 
     @Override
