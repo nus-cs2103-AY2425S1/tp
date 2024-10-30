@@ -31,7 +31,7 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -56,6 +56,10 @@ public class CommandResult {
 
     public Optional<Index> getIndexToView() {
         return indexToView;
+    }
+
+    public boolean isViewCommand() {
+        return indexToView.isPresent();
     }
 
     public boolean isShowHelp() {
