@@ -56,7 +56,7 @@ public class AppointmentCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
-                new Appointment(this.appointmentString));
+                new Appointment(this.appointmentString), personToEdit.getLogEntries());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult("Set appointment for " + personToEdit.getName() + " on " + this.appointmentString);
