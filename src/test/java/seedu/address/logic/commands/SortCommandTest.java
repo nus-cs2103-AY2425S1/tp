@@ -63,7 +63,8 @@ public class SortCommandTest {
 
     @Test
     public void execute_nullSortOption_resetsToDefaultOrder() {
-        SortCommand sortCommand = new SortCommand(null); // Passing null instead of SortOption
+        // Passing null instead of SortOption
+        SortCommand sortCommand = new SortCommand(null);
 
         // Prepare the expected default list (insertion order)
         List<Person> expectedDefaultList = new ArrayList<>(model.getAddressBook().getPersonList());
