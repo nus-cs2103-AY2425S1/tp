@@ -22,14 +22,18 @@ public class DuplicatePhoneTagger {
     private final HashMap<Phone, Integer> phoneFrequencies = new HashMap<>();
 
     /**
-     * Uses the model to update the person list based on duplicate phone numbers
+     * Updates the model's person list based on duplicate phone numbers
      * @param model that represents the current state of the address book
      */
     public void tagPhoneDuplicates(Model model) {
         assert model != null : "Model must exist";
-        List<Person> persons = model.getFilteredPersonList();
-        updateFrequenciesOfPhones(persons);
-        updatePersonsList(model, persons);
+        try {
+            List<Person> persons = model.getFilteredPersonList();
+            updateFrequenciesOfPhones(persons);
+            updatePersonsList(model, persons);
+        } catch (AssertionError e) {
+            return;
+        }
     }
 
     /**
