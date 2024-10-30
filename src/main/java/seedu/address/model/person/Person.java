@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -49,6 +50,13 @@ public class Person {
         return name;
     }
 
+    /**
+     * Returns the full name of the person
+     */
+    public String getFullName() {
+        return getName().fullName;
+    }
+
     public StudentId getStudentId() {
         return studentId;
     }
@@ -67,6 +75,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns the string list of tag names associated with the person
+     */
+    public List<String> getTagNames() {
+        return getTags().stream().map(t -> t.tagName).toList();
     }
 
     /**
