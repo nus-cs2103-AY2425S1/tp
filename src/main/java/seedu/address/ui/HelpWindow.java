@@ -190,7 +190,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpCards.add(clearCommandCard);
 
         CommandHelpCard deleteCommandCard = new CommandHelpCard(
-            DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE, "delete 1"
+            DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE, "delete 1 2"
         );
         helpCards.add(deleteCommandCard);
 
@@ -244,7 +244,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpCards.add(archiveCommandCard);
 
         CommandHelpCard deleteCommandCard = new CommandHelpCard(
-            DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE_DELIVERY, "delete 1"
+            DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE_DELIVERY, "delete 1 2"
         );
         helpCards.add(deleteCommandCard);
 
