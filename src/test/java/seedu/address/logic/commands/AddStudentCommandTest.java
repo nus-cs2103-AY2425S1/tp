@@ -255,12 +255,12 @@ public class AddStudentCommandTest {
      * A Model stub that always accept the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Person> studentsAdded = new ArrayList<>();
+        final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
+            return studentsAdded.stream().anyMatch(student::isSameStudent);
         }
 
         @Override

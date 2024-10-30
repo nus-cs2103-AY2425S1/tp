@@ -241,7 +241,7 @@ public class DeleteAllStudentsCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return students.stream().anyMatch(student::isSamePerson);
+            return students.stream().anyMatch(student::isSameStudent);
         }
 
         @Override

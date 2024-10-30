@@ -355,14 +355,14 @@ public class DeleteStudentCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return students.stream().anyMatch(student::isSamePerson);
+            return students.stream().anyMatch(student::isSameStudent);
         }
 
         @Override
         public int deleteStudent(Student target) {
             requireNonNull(target);
             for (int i = 0; i < students.size(); i++) {
-                if (students.get(i).isSamePerson(target)) {
+                if (students.get(i).isSameStudent(target)) {
                     students.remove(i);
                     return i;
                 }

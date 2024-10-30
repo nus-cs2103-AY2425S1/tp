@@ -5,10 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -19,27 +17,20 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Student in teletutor.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Student extends Person {
-
-    private static final Email DUMMY_EMAIL = new Email("dummy@example.com");
-    private static final Address DUMMY_ADDRESS = new Address("dummy address");
-    private static final Set<Tag> DUMMY_TAG = new HashSet<>();
+public class Student {
 
     private final List<AttendanceRecord> attendanceRecords = new ArrayList<>();
 
-
     // Identity fields
+    private final Name name;
+    private final Phone phone;
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
     private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
@@ -48,8 +39,9 @@ public class Student extends Person {
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber) {
-        super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
-        requireAllNonNull(tutorialGroup, studentNumber);
+        requireAllNonNull(name, phone, tutorialGroup, studentNumber);
+        this.name = name;
+        this.phone = phone;
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
     }
@@ -60,12 +52,21 @@ public class Student extends Person {
     public Student(Name name, Phone phone, TutorialGroup tutorialGroup,
                    StudentNumber studentNumber, ObservableList<Assignment> assignments,
                    List<AttendanceRecord> attendanceRecords) {
-        super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
-        requireAllNonNull(tutorialGroup, studentNumber);
+        requireAllNonNull(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
+        this.name = name;
+        this.phone = phone;
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
         this.assignments.addAll(assignments);
         this.attendanceRecords.addAll(attendanceRecords);
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
     }
 
     public TutorialGroup getTutorialGroup() {
@@ -107,8 +108,8 @@ public class Student extends Person {
             return false;
         }
 
-        return otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
+        return otherStudent.name.equals(name)
+                && otherStudent.phone.equals(phone)
                 && otherStudent.tutorialGroup.equals(tutorialGroup)
                 && otherStudent.studentNumber.equals(studentNumber)
                 && otherStudent.attendanceRecords.equals(attendanceRecords);
@@ -117,8 +118,8 @@ public class Student extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", getName())
-                .add("contactNumber", getPhone())
+                .add("name", name)
+                .add("contactNumber", phone)
                 .add("tutorialGroup", tutorialGroup)
                 .add("studentNumber", studentNumber)
                 .add("assignments", assignments)
