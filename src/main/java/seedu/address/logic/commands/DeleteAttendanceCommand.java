@@ -74,10 +74,9 @@ public class DeleteAttendanceCommand extends Command {
             return false;
         }
 
-        if (previousAttendance == null) {
-            student.deleteAttendance(date);
+        if (previousAttendance != null) {
+            student.markAttendance(date, previousAttendance.value);
         }
-        student.markAttendance(date, previousAttendance.value);
         return true;
     }
 

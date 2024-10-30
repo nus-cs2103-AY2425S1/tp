@@ -141,6 +141,7 @@ public class Student extends Person {
         }
         AttendanceRecord record = new AttendanceRecord(date, attendance);
         attendanceRecords.add(record);
+        record.notifyListeners();
     }
 
     //getters
@@ -240,6 +241,7 @@ public class Student extends Person {
             AttendanceRecord record = iterator.next();
             if (record.getDate().equals(date)) {
                 iterator.remove();
+                record.notifyListeners();
                 return;
             }
         }

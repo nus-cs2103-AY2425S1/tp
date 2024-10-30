@@ -22,6 +22,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
@@ -101,6 +102,12 @@ public class AttendanceWindow {
                     }
                     refreshTable(model);
                 }
+                if (change.wasRemoved()) {
+                    for (AttendanceRecord removedRecord : change.getRemoved()) {
+                        attendanceDates.remove(removedRecord.getDate());
+                        removeDateColumn(removedRecord.getDate());
+                    }
+                }
             }
         });
     }
@@ -113,6 +120,11 @@ public class AttendanceWindow {
             return new SimpleStringProperty(row.getAttendanceForDate(date));
         });
         table.getColumns().add(dateColumn);
+    }
+
+    private void removeDateColumn(LocalDate date) {
+        String columnHeader = DateTimeFormatter.ofPattern("MMM d yyyy").format(date);
+        table.getColumns().removeIf(column -> column.getText().equals(columnHeader));
     }
 
     public Set<LocalDate> getAllAttendanceDates(Model model) {

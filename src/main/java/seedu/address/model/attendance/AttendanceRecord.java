@@ -49,7 +49,7 @@ public class AttendanceRecord implements Observable {
         listeners.remove(listener);
     }
 
-    private void notifyListeners() {
+    public void notifyListeners() {
         List<InvalidationListener> listenersCopy = new ArrayList<>(listeners);
         for (InvalidationListener listener : listenersCopy) {
             listener.invalidated(this);
