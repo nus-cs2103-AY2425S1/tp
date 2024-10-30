@@ -13,7 +13,7 @@ public abstract class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all entities of a certain type. \n"
-            + "Parameters: ENTITY_TYPE (person/appt)\n "
+            + "Parameters: ENTITY_TYPE (person/appt)\n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + "\n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING;
 

@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
@@ -28,9 +31,12 @@ public abstract class EditCommand extends Command {
             + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: ENTITY_TYPE (person/appt) INDEX (must be a positive integer) [DATA_FIELDS]...\n"
-            + "Example: " + COMMAND_WORD + " person 1 "
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n" 
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " 1 "
+            + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
+            + PREFIX_MEDICINE + "Panadol";
 
     protected final Index targetIndex;
     protected final EditEntityDescriptor editEntityDescriptor;

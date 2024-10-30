@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 /**
  * Finds and lists all persons or appointments in address book whose name contains any of the argument keywords.
@@ -18,7 +19,8 @@ public abstract class FindCommand<T> extends Command {
         + ": Finds all entities whose names contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: ENTITY_TYPE (person/appt) KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + "person n/alice bob charlie";
+        + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice bob charlie"
+        + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " alice bob charlie";
 
     protected final Predicate<T> predicate;
 

@@ -28,7 +28,7 @@ public class AddPersonCommand extends AddCommand {
         + PREFIX_ADDRESS + "ADDRESS "
         + PREFIX_STATUS + "STATUS "
         + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + "person" + " "
+        + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " "
         + PREFIX_NAME + "John Doe "
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "

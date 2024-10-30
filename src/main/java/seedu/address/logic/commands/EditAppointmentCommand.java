@@ -17,6 +17,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentType;
@@ -34,7 +35,7 @@ public class EditAppointmentCommand extends EditCommand {
             "This appointment already exists in the appointment book.";
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "This person ID does not belong to anyone in the address book";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " appt"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING
             + ": Edits the details of an appointment identified "
             + "by the index number used in the displayed appointment list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -44,7 +45,7 @@ public class EditAppointmentCommand extends EditCommand {
             + "[" + PREFIX_DATETIME + "DATE_TIME] "
             + "[" + PREFIX_SICKNESS + "SICKNESS] "
             + "[" + PREFIX_MEDICINE + "MEDICINE] \n"
-            + "Example: " + COMMAND_WORD + " appt 1 "
+            + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " 1 "
             + PREFIX_APPOINTMENT_TYPE + "Health Checkup "
             + PREFIX_MEDICINE + "Panadol";
 
