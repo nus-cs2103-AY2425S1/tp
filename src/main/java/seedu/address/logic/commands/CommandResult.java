@@ -12,7 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-    private static final Index NO_INDEX_TO_VIEW = null;
+    public static final Index NO_INDEX_TO_VIEW = null;
 
     private final String feedbackToUser;
 
