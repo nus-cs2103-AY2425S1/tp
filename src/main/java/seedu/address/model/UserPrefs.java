@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
+import seedu.address.model.task.Task;
 
 /**
  * Represents User's preferences.
@@ -22,6 +23,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private static final State GROUP_TASK_STATE = new State("GroupTask");
     private static final State TASK_STATE = new State("Tasks");
     private String mostRecentGroupTaskDisplay = "";
+    private Task mostRecentTaskDisplay = new Task(null, null);
     private State guiState = GROUP_STATE;
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data", "addressbook.json");
@@ -77,6 +79,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setMostRecentGroupTaskDisplay(newUserPrefs.getMostRecentGroupTaskDisplay());
+        setMostRecentTaskDisplay(newUserPrefs.getMostRecentTaskDisplay());
         this.guiState = newUserPrefs.getState();
     }
 
@@ -90,6 +93,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setMostRecentGroupTaskDisplay(String groupName) {
         this.mostRecentGroupTaskDisplay = groupName;
+    }
+
+    public Task getMostRecentTaskDisplay() {
+        return this.mostRecentTaskDisplay;
+    }
+
+    public void setMostRecentTaskDisplay(Task task) {
+        this.mostRecentTaskDisplay = task;
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {
