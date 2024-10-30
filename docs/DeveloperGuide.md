@@ -176,17 +176,9 @@ On execution, `AddCommand` first queries the supplied model if it contains a stu
 
 Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-On execution, the new created `Student` is then be checked if it is a duplicate of any `Student` in the current `AddressBook`, i.e. it has the exactly same `Name` **and** `Phone` with any of the current `Student`s. A `CommandException` will be thrown if it is a duplicate.
-
-Else, the `Schedule` of the new `Student` is checked if it clashes with any current `Schedule`s so that a warning message will be sent together with the successful message afterward.
-
 Below is an activity diagram when [Adding a new student](#add-a-new-student)
 
 <puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
-
-<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram"/>
-
-
 
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:

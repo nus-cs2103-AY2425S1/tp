@@ -7,20 +7,19 @@ activityDiagram {
     BorderColor #33668E
     FontColor #000000
     FontName arial
+    FontSize 25
   }
 
   diamond {
     BackgroundColor yellow
     LineColor #000000
-    FontColor green
-    FontName arial
-    FontSize 15
   }
 
   arrow {
     FontColor blue
     FontName arial
-    FontSize 15
+    FontSize 20
+    FontStyle bold
   }
 }
 document {
@@ -38,9 +37,9 @@ if () then ([invalid command format])
 else ([else])
     :Parse the arguments;
     if () then ([else])
+        :Create a student to be added;
         :Create an AddCommand object;
         :Execute AddCommand;
-        :Create a student to be added;
         :Check duplicates;
         if () then ([else])
             :Add the student to the address book;
@@ -53,7 +52,7 @@ else ([else])
             endif
             :Show MESSAGE_SUCCESS of AddCommand;
              stop
-        else ([student is already in the address book])
+        else ([is duplicate])
             :Show MESSAGE_DUPLICATE;
         stop
         endif
