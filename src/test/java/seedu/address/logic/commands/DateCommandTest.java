@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,8 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for DateCommand.
  */
 public class DateCommandTest {
-    private static final String DATE_STUB = "Some date";
+    private static final LocalDateTime DATE_STUB =
+            LocalDateTime.of(2025, 6, 24, 14, 15);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -50,7 +52,7 @@ public class DateCommandTest {
     @Test
     public void execute_deleteDate_success() {
         Person personToEdit = ALICE;
-        Person editedPerson = new PersonBuilder(personToEdit).withDate("").build();
+        Person editedPerson = new PersonBuilder(personToEdit).withDate(LocalDateTime.MIN).build();
         DateCommand dateCommand = new DateCommand(Optional.of(editedPerson.getName().toString()),
                 Optional.of(editedPerson.getPhone().toString()), Optional.of(editedPerson.getEmail().toString()),
                 new Date(editedPerson.getDate().value));

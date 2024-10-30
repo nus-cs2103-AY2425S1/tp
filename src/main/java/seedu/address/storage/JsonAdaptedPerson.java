@@ -26,7 +26,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final JsonAdaptedTag tag;
     private final JsonAdaptedAllergy allergy;
-    private final String date;
+    private final JsonAdaptedDate date;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +36,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") JsonAdaptedTag tag,
                              @JsonProperty("allergy") JsonAdaptedAllergy allergy,
-                             @JsonProperty("date") String date) {
+                             @JsonProperty("date") JsonAdaptedDate date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,7 +56,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tag = new JsonAdaptedTag(source.getTag());
         allergy = new JsonAdaptedAllergy(source.getAllergy());
-        date = source.getDate().value;
+        date = new JsonAdaptedDate(source.getDate());
     }
 
     /**
@@ -103,15 +103,17 @@ class JsonAdaptedPerson {
         personTag = tag.toModelType();
         final Address modelAddress = new Address(address);
         final Tag finalPersonTag = personTag;
+
         if (allergy == null) {
             throw new IllegalValueException(Allergy.MESSAGE_FIELD_MISSING_FORMAT);
         }
         personAllergy = allergy.toModelType();
         final Allergy modelAllergy = personAllergy;
+
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        final Date modelDate = new Date(date);
+        final Date modelDate = date.toModelType();
         return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelAllergy, modelDate);
     }
 }
