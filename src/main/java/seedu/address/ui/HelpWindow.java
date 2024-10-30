@@ -65,10 +65,10 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Adding a Client: add",
                         "Add a new client to your database with detailed information.",
-                        "add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...",
-                        "add n/Acme Corp p/91234567 e/contact@acme.com a/123 Business Ave, Suite 100, "
-                                + "\n Metropolis t/industry:tech t/size:enterprise "
-                                + "fi/Annual contract: €50,000 s/@acmecorp"
+                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [t/TAG]...",
+                        "add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, "
+                                + "\n Metropolis t\\industry:tech t\\size:enterprise "
+                                + "fi\\Annual contract: €50,000 s\\@acmecorp"
                 ),
                 createFeature(
                         "Listing Clients: list",
@@ -78,33 +78,33 @@ public class HelpWindow extends UiPart<Stage> {
                 ),
                 createFeature(
                         "Finding Clients: find",
-                        "Search for clients using keywords.",
+                        "Search for clients using keywords.                                                          ",
                         "find KEYWORD [MORE_KEYWORDS]",
                         "find Acme Corp"
                 ),
                 createFeature(
                         "Smart Filtering: filter",
-                        "Quickly identify client groups based on specific criteria.",
+                        "Quickly identify client groups based on tags or name.",
                         "filter [CRITERIA]",
-                        "filter t/contract_value>100000 t/last_contact<30days"
+                        "filter t\\friend n\\John"
                 ),
                 createFeature(
                         "Editing Client Information: edit",
                         "Update existing client details.",
-                        "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...",
-                        "edit 1 p/98765432 e/newemail@acme.com"
+                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [t\\TAG]...",
+                        "edit 1 p\\98765432 e\\newemail@acme.com"
                 ),
                 createFeature(
                         "Deleting a Client: delete",
-                        "Remove a client from your database.",
+                        "Remove a client from your database.                                       ",
                         "delete INDEX",
                         "delete 1"
                 ),
                 createFeature(
                         "Advanced Filtering: advfilter",
                         "Organize your client list based on custom priority metrics.",
-                        "advfilter [CRITERIA]",
-                        "advfilter t/renewal_date <= 90days t/contract_value desc"
+                        "advfilter [t\\tag] [OPERATOR] [VALUE]",
+                        "advfilter t\\renewal_date <= 90days "
                 ),
                 createFeature(
                         "Data Export: export",

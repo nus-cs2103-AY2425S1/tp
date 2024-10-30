@@ -23,7 +23,7 @@ public class FilterCommandParserTest {
         Set<Tag> expectedTags = new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("colleague")));
         Set<String> expectedNames = new HashSet<>(List.of("Alice"));
         FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, expectedTags);
-        assertParseSuccess(parser, " n/Alice t/friend t/colleague", expectedFilterCommand);
+        assertParseSuccess(parser, " n\\Alice t\\friend t\\colleague", expectedFilterCommand);
     }
 
     @Test
@@ -31,18 +31,18 @@ public class FilterCommandParserTest {
         Set<Tag> expectedTags = new HashSet<>(List.of(new Tag("friend")));
         Set<String> expectedNames = new HashSet<>(List.of("Alice"));
         FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, expectedTags);
-        assertParseSuccess(parser, " n/Alice t/friend t/friend", expectedFilterCommand);
+        assertParseSuccess(parser, " n\\Alice t\\friend t\\friend", expectedFilterCommand);
     }
 
     @Test
     public void parse_invalidTagFormat_throwsParseException() {
-        assertParseFailure(parser, " n/Alice t/fr!end",
+        assertParseFailure(parser, " n\\Alice t\\fr!end",
                 Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_emptyTag_throwsParseException() {
-        assertParseFailure(parser, " n/Alice t/",
+        assertParseFailure(parser, " n\\Alice t\\",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
@@ -50,21 +50,21 @@ public class FilterCommandParserTest {
     public void parse_multipleNames_returnsFilterCommand() {
         Set<String> expectedNames = new HashSet<>(Arrays.asList("ali", "bo"));
         FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
-        assertParseSuccess(parser, " n/ali n/bo", expectedFilterCommand);
+        assertParseSuccess(parser, " n\\ali n\\bo", expectedFilterCommand);
     }
 
     @Test
     public void parse_duplicateNames_returnsFilterCommandWithUniqueNameSet() {
         Set<String> expectedNames = new HashSet<>(List.of("Alice"));
         FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
-        assertParseSuccess(parser, " n/Alice n/Alice", expectedFilterCommand);
+        assertParseSuccess(parser, " n\\Alice n\\Alice", expectedFilterCommand);
     }
 
     @Test
     public void parse_nameWithTrailingSpaces_returnsFilterCommand() {
         Set<String> expectedNames = new HashSet<>(List.of("Alice"));
         FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
-        assertParseSuccess(parser, " n/Alice  ", expectedFilterCommand);
+        assertParseSuccess(parser, " n\\Alice  ", expectedFilterCommand);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidPrefix_throwsParseException() {
-        assertParseFailure(parser, " x/Alice",
+        assertParseFailure(parser, " x\\Alice",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 }

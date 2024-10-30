@@ -53,25 +53,25 @@ public class AddCommandParserTest {
         // Single tag, with financial info and social media handle
         Person expectedPerson = new PersonBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND)
-                .withFinancialInfo("some financial info sm/@bob_handle")
+                .withFinancialInfo("some financial info sm\\@bob_handle")
                 .withSocialMediaHandle("")
                 .build();
 
         // Test with whitespace only preamble and all fields present
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + " fi/some financial info sm/@bob_handle",
+                        + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + " fi\\some financial info sm\\@bob_handle",
                 new AddCommand(expectedPerson));
 
         // Multiple tags, with financial info and social media handle
         Person expectedPersonMultipleTags = new PersonBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withFinancialInfo("some financial info sm/@bob_handle")
+                .withFinancialInfo("some financial info sm\\@bob_handle")
                 .withSocialMediaHandle("")
                 .build();
 
         // Test with multiple tags, financial info, and social media handle
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + " fi/some financial info sm/@bob_handle",
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + " fi\\some financial info sm\\@bob_handle",
                 new AddCommand(expectedPersonMultipleTags));
     }
 
