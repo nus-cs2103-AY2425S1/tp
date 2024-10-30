@@ -27,6 +27,8 @@ class JsonSerializableAddressBook {
             "Concerts list contains duplicate concert(s).";
     public static final String MESSAGE_DUPLICATE_CONCERT_CONTACT =
             "ConcertContacts list contains duplicate association(s).";
+    public static final String MESSAGE_INVALID_CONCERT_CONTACT =
+            "Invalid concert contact person and/ or concert does not exist.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedConcert> concerts = new ArrayList<>();
@@ -82,6 +84,10 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedConcertContact jsonAdaptedConcertContact : concertContacts) {
             ConcertContact concertContact = jsonAdaptedConcertContact.toModelType();
+            if (!addressBook.hasConcert(concertContact.getConcert())
+                    || !addressBook.hasPerson(concertContact.getPerson())) {
+                throw new IllegalValueException(MESSAGE_INVALID_CONCERT_CONTACT);
+            }
             if (addressBook.hasConcertContact(concertContact)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONCERT_CONTACT);
             }
