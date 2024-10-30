@@ -52,6 +52,7 @@
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           <StackPane fx:id="findPersonPanelPlaceholder" VBox.vgrow="ALWAYS" visible="false"/>
+          <StackPane fx:id="findAppointmentPanelPlaceholder" VBox.vgrow="ALWAYS" visible="false"/>
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
