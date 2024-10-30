@@ -364,14 +364,9 @@ Format: `paid <INDEX> pon/<POLICY_NAME>`
   - `POLICY_NAME`: The name of the policy to be marked as paid.
   - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
   - The policy name is case-sensitive and must be an exact match.
-  - The policy must be assigned to the client.
-  - The policy must have a payment due date before the current date.
-  - The policy must have an amount due greater than 0.
-  - The payment due date of the policy will be updated to the next scheduled date (ie. one year later).
-  - The amount due will be set to 0 once the final installment of the insurance payment is completed.
   
 - **Usage**:
-  - **Updating Payment Due Date**: The payment due date of the policy will be updated to the next scheduled date.
+  - **Updating Payment Due Date**: The payment due date of the policy will be updated to the next scheduled date (ie. one year later).
   - **Setting Amount Due to 0**: The amount due will be set to 0 once the final installment of the insurance payment is completed.
 
 Examples:
