@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Random;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -48,13 +49,13 @@ public class RandomCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         int sizeOfCurrentList = model.getFilteredPersonList().size();
 
         if (sizeOfCurrentList < 2) {
-            return new CommandResult(MESSAGE_RANDOM_INSUFFICIENT_STUDENTS);
+            throw new CommandException(MESSAGE_RANDOM_INSUFFICIENT_STUDENTS);
         }
 
         int randomIndex = random.nextInt(sizeOfCurrentList);
