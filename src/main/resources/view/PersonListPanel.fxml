@@ -3,6 +3,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" >
+    <placeholder>
+      <HBox styleClass="pane-with-border" minWidth="340" prefWidth="340" alignment="TOP_CENTER">
+              <Label styleClass="cell_big_label" text="No persons available" />
+      </HBox>
+    </placeholder>
+  </ListView>
 </VBox>
