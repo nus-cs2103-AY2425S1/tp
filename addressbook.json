@@ -1,0 +1,24 @@
+{
+  "persons" : [ {
+    "name" : "Anselm",
+    "phone" : "",
+    "email" : "",
+    "address" : "",
+    "remark" : "",
+    "tags" : [ ]
+  }, {
+    "name" : "Dom",
+    "phone" : "",
+    "email" : "",
+    "address" : "",
+    "remark" : "",
+    "tags" : [ ]
+  }, {
+    "name" : "Michell",
+    "phone" : "1212412",
+    "email" : "asdasd@gmail.com",
+    "address" : "",
+    "remark" : "",
+    "tags" : [ ]
+  } ]
+}

@@ -27,7 +27,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -204,7 +204,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic"></puml>
 
 <box type="info" seamless>
 
@@ -287,7 +287,61 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: More user-friendly as the user can specify the name.
     * Cons: Requires additional logic to handle duplicate names.
 
---------------------------------------------------------------------------------------------------------------------
+### Export Feature
+#### Implementation
+
+The `ExportCommand` class is responsible for exporting address book data to a user-specified location in `JSON` format. It provides flexibility in its usage by allowing a destination to be selected via a file chooser or by setting a predetermined destination file, which is particularly useful for testing purposes. The data to be exported is encrypted, and the `ExportCommand` handles decryption, export location selection, and file I/O operations. The following outlines its components and workflow.
+
+
+The `ExportCommand` class facilitates this export functionality and manages file I/O operations in a structured, asynchronous workflow.
+
+Constructor Variants:
+
+- `ExportCommand()`: The default constructor for regular use, opening a file chooser dialog to select the export 
+destination.
+- `ExportCommand(File destinationFile, File sourceFile, String keyPath)`: An overloaded constructor that allows 
+  specifying a destination file and encryption key path directly, which is particularly useful for testing.
+
+Attributes:
+
+- `destinationFile`: The file chosen or set as the target for the export.
+- `sourceFile`: A temporary file that holds the JSON data to be exported.
+- `keyPath`: The path to the decryption key required for decrypting the address book data.
+  
+
+Given below is an example usage scenario and how the export process behaves at each step.
+
+Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data 
+before exporting it.
+
+<puml src="diagrams/ExportCommand.puml" alt="ExportCommand"></puml>
+
+Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with 
+`EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
+
+Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays 
+a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process 
+is aborted with an error message.
+
+Step 4. The `performExport(File sourceFile, File destinationFile)` method copies the decrypted data to the specified `destinationFile`, using `Files.copy()` with `StandardCopyOption.REPLACE_EXISTING` to overwrite any existing file. The temporary file is then deleted.
+
+Note: The `performExport` method is asynchronous, leveraging `CompletableFuture` to manage successful completion or error handling, ensuring smooth performance without blocking the main application thread.
+
+The following sequence diagram explains how the export operation works:
+
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram"></puml>
+
+Design Considerations:
+Aspect: Export Execution and Destination Selection
+
+Alternative 1 (current choice): Use a file chooser dialog to allow the user to select the export location.
+
+- Pros: User-friendly, provides flexibility in specifying the export location.
+- Cons: Requires user interaction, which may be cumbersome for repeated exports.
+Alternative 2: Set a default export location without user input.
+
+- Pros: Streamlined and faster for frequent exports.
+- Cons: Less flexible, as it may overwrite existing files without warning.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
