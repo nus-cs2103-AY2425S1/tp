@@ -20,7 +20,8 @@ public class BlacklistCommand extends Command {
 
     public static final String COMMAND_WORD = "blacklist";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " index : adds person to the blacklist";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX : adds a person to the blacklist."
+            + "\nExample: '" + COMMAND_WORD + " 2' blacklists the 2nd client in the list.";
 
     public static final String MESSAGE_BLACKLIST_PERSON_SUCCESS = "Blacklisted Person: %1$s";
 

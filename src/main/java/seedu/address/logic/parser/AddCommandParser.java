@@ -71,6 +71,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Deadline deadline = ParserUtil.parseDeadline(
                 argMultimap.getValue(PREFIX_DEADLINE).get());
 
+        if (clientStatus.isBlacklisted()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
         Person person = new Person(name, phone, email, address, tagList, projectStatus, paymentStatus,
                         clientStatus, deadline);
 

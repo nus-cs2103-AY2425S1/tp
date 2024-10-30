@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,8 +77,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).get()));
         }
         if (argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
-            editPersonDescriptor.setClientStatus(ParserUtil
-                    .parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get()));
+            ClientStatus newClientStatus = ParserUtil.parseClientStatus(
+                argMultimap.getValue(PREFIX_CLIENT_STATUS).get());
+
+            if (newClientStatus.isBlacklisted()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            } else {
+                editPersonDescriptor.setClientStatus(newClientStatus);
+            }
         }
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
             editPersonDescriptor.setDeadline(ParserUtil
