@@ -28,7 +28,7 @@ public class PersonDescriptor {
      */
     public PersonDescriptor(Name name, Phone phone, Email email, Address address,
                             Status status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, status, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
