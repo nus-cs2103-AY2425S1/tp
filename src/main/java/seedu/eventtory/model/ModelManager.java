@@ -35,7 +35,7 @@ public class ModelManager implements Model {
     private final ObjectProperty<UiState> currentUiState;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given eventTory and userPrefs.
      */
     public ModelManager(ReadOnlyEventTory eventTory, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(eventTory, userPrefs);
