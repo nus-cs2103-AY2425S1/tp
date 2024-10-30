@@ -150,14 +150,24 @@ public class MainWindow extends UiPart<Stage> {
         personVBox.setSpacing(5);
         appointmentVBox.setSpacing(5);
 
+        VBox.setVgrow(personListPanel.getRoot(), Priority.ALWAYS);
+        VBox.setVgrow(appointmentListPanel.getRoot(), Priority.ALWAYS);
+
         personVBox.setMaxWidth(Double.MAX_VALUE);
         personVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        personVBox.setMaxHeight(Double.MAX_VALUE);
         appointmentVBox.setMaxWidth(Double.MAX_VALUE);
         appointmentVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         resultDisplay.getRoot().setStyle("-fx-background-color: #f2e1b3;");
+
+        hbox.getChildren().add(personVBox);
+        hbox.getChildren().add(appointmentVBox);
+        hbox.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(hbox, Priority.ALWAYS);
 
         StatusBarFooter addressBookFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
