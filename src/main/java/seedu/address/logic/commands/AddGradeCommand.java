@@ -46,6 +46,7 @@ public class AddGradeCommand extends Command {
                     + "Ex09 "
                     + PREFIX_SCORE
                     + "9 ";
+    public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
 
     private final Name personName;
     private final Float score;
@@ -91,14 +92,10 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
         }
 
-        if (!model.hasName(personName)) {
-            throw new CommandException("Person " + personName + " not in address book");
-        }
-
-        Person person = model.getPerson(personName).orElseThrow();
+        Person person = model.getPerson(personName).orElseThrow(() -> new CommandException("Person " + personName + " not in address book"));
 
         model.setPerson(person, createGradeToAddToPerson(person, model.getAssignmentName(assignmentName), score));
-        return new CommandResult(""); // placeholder string to be added
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName));
     }
 
     @Override
@@ -112,7 +109,6 @@ public class AddGradeCommand extends Command {
             return otherCommand.personName.equals(personName)
                     && Objects.equals(otherCommand.assignmentName, assignmentName)
                     && Objects.equals(otherCommand.score, score);
-
         }
         return false;
     }
