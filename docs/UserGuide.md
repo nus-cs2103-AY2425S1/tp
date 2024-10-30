@@ -17,6 +17,7 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
     - [Listing all patients](#listing-all-patients--list)
     - [Editing a patient](#editing-a-patient--edit)
     - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
+    - [Deleting notes from a patient](#deleting-notes-from-a-patient--delnotes)
     - [Searching patients by field](#searching-patients-by-field--find)
     - [Deleting a person](#deleting-a-person--delete)
     - [Adding an appointment to a person](#adding-an-appointment-to-a-person--make_appt)
@@ -166,6 +167,20 @@ Format: `addNotes INDEX pn/NOTES`
 Examples:
 *  `addNotes 1 pn/Patient is prone to falling`
 *  `addNotes 2 pn/Patient requires frequent checkups`
+
+[Back to Table of Contents](#table-of-contents)
+
+### Deleting notes from a patient : `delNotes`
+
+Deletes notes from an existing person in the address book.
+
+Format: `delNotes INDEX`
+
+* Deletes notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ 
+* The person specified must have notes for this command to work.
+
+Examples:
+*  `delNotes 1`
 
 [Back to Table of Contents](#table-of-contents)
 
