@@ -117,11 +117,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         header.setText("Add Command: Adds a new patient record into the system.");
         description.setText("All parameters are compulsory and can be typed in any order.");
         parametersHeader.setText("Parameters:");
-        parameters.setText("""
-                NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.
-                
-                SEX - M / F
-                DATE OF BIRTH - YYYY-MM-DD""");
+        parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.\n\n"
+                        + "SEX - M / F\n" + "DATE OF BIRTH - YYYY-MM-DD");
         usageHeader.setText("Command Usage:");
         usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
         exampleHeader.setText("Example:");
