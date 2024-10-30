@@ -114,9 +114,16 @@ public class EditClientCommand extends Command {
             if (carToEdit.equals(editedCar) && isCarEdited) {
                 throw new CommandException(MESSAGE_FIELD_VALUES_SAME);
             }
+            // if one or more fields is edited
             if ((!carToEdit.hasMatchingVrnAndVin(editedCar))
+                // if there are more than one car with the same VRN or VIN
                 && (model.getCarsWithSameVrnOrVinCount(editedCar) > 1
-                || model.hasCarWithSameVrnAndVin(editedCar)) && isCarEdited) {
+                // if there is a car with the same VRN and VIN
+                || model.hasCarWithSameVrnAndVin(editedCar)
+                // if both VRN and VIN are edited check if there is a car with the same VRN and VIN
+                || (!carToEdit.hasMatchingVrnOrVin(editedCar) && model.hasCar(editedCar)))
+                // check if car was edited
+                && isCarEdited) {
                 throw new CommandException(MESSAGE_DUPLICATE_CAR);
             }
         }
