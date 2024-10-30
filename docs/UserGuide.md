@@ -31,7 +31,7 @@ The user guide contains formatting to highlight important info. The standards us
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding an employee: `add`](#adding-an-employee-add)
-  - [Listing all employees : `list`](#listing-all-employees--list)
+  - [Listing all employees : `listemployees`](#listing-all-employees--list)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
   - [Filtering employees by skills: `filter`](#filtering-employees-by-skills-filter)
   - [Locating employees by name: `find`](#locating-employees-by-name-find)
@@ -173,11 +173,11 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `list`
+### Listing all employees : `listemployees`
 
 Shows a list of all employees in the address book.
 
-Format: `list`
+Format: `listemployees`
 
 Expected output:
 
