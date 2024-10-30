@@ -16,8 +16,8 @@ public class GenderMatchesKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        List<String> firstPredicateKeywordList = Collections.singletonList("m");
+        List<String> secondPredicateKeywordList = Arrays.asList("M", "F");
 
         GenderMatchesKeywordsPredicate firstPredicate = new GenderMatchesKeywordsPredicate(firstPredicateKeywordList);
         GenderMatchesKeywordsPredicate secondPredicate = new GenderMatchesKeywordsPredicate(
@@ -70,7 +70,7 @@ public class GenderMatchesKeywordsPredicateTest {
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
+        List<String> keywords = List.of("M", "F");
         GenderMatchesKeywordsPredicate predicate = new GenderMatchesKeywordsPredicate(keywords);
 
         String expected = GenderMatchesKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "pg:PredicateGroup" as PredicateGroup MODEL_COLOR
+participant ":XYZPredicate" as Predicate MODEL_COLOR
+end box
+
+activate FindCommandParser
+group sd initialise predicates
+    create PredicateGroup
+    FindCommandParser -> PredicateGroup : new PredicateGroup()
+    activate PredicateGroup
+    PredicateGroup --> FindCommandParser : pg
+    deactivate PredicateGroup
+
+    loop for each criteria
+        create Predicate
+        FindCommandParser -> Predicate : new XYZPredicate(keywords)
+        activate Predicate
+        Predicate --> FindCommandParser : p
+        deactivate Predicate
+
+        FindCommandParser -> PredicateGroup : add(p)
+        activate PredicateGroup
+        PredicateGroup --> FindCommandParser
+        deactivate PredicateGroup
+    end loop
+end
+@enduml

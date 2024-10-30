@@ -65,7 +65,7 @@ public class AgeContainsKeywordsPredicateTest {
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
+        List<String> keywords = List.of("1", "2-3");
         AgeContainsKeywordsPredicate predicate = new AgeContainsKeywordsPredicate(keywords);
 
         String expected = AgeContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";

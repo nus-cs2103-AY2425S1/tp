@@ -14,8 +14,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.predicates.PredicateGroup;
 
 /**
- * Finds and lists all persons in address book whose field(s) satisfy all
- * criteria provided. Criteria are given in a {@code PredicateGroup}.
+ * Finds and lists all persons in address book whose field(s) satisfy all criteria provided. Criteria are given in a
+ * {@code PredicateGroup}.
  */
 public class FindCommand extends Command {
 
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER ...] "
             + "[" + PREFIX_AGE + "AGE ...] "
             + "[" + PREFIX_DETAIL + "DETAIL ...]"
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG ...]\n"
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG ...]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
     public static final String MESSAGE_NO_CRITERIA = "Provide at least one criteria to find!";

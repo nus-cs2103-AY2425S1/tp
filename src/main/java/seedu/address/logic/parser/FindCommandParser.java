@@ -26,8 +26,8 @@ import seedu.address.model.person.predicates.StudyGroupsContainKeywordsPredicate
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * FindCommand and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindCommand and returns a FindCommand object
+     * for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -41,7 +41,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER,
                 PREFIX_AGE, PREFIX_DETAIL, PREFIX_STUDY_GROUP_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE, PREFIX_DETAIL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE,
+                PREFIX_STUDY_GROUP_TAG, PREFIX_DETAIL);
 
         PredicateGroup predicateGroup = new PredicateGroup();
 
