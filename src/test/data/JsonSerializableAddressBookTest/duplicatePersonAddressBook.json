@@ -1,6 +1,7 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
+    "status": "HIGH",
     "identity number": "S6647054G",
     "phone": "94351253",
     "email": "alice@example.com",
@@ -8,6 +9,7 @@
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
+    "status": "HIGH",
     "identity number": "S6647054G",
     "phone": "94351253",
     "email": "pauline@example.com",

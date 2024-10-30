@@ -18,12 +18,11 @@ import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-
+import seedu.address.model.person.Status;
 /**
  * Jackson-friendly version of {@link Person}.
  */
-@JsonPropertyOrder({ "name", "identityNumber", "phone", "email", "address", "tags", "logs" })
+@JsonPropertyOrder({ "name", "identityNumber", "phone", "email", "address", "status", "logs" })
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -33,7 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String status;
     private final List<JsonAdaptedLog> logs = new ArrayList<>();
 
     /**
@@ -42,16 +41,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("identity number") String identityNumber,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("address") String address, @JsonProperty("status") String status,
             @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.identityNumber = identityNumber;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.status = status;
         if (logs != null) {
             this.logs.addAll(logs);
         }
@@ -66,9 +63,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        status = source.getStatus().statusType;
         logs.addAll(source.getLogs().stream()
                 .map(JsonAdaptedLog::new)
                 .collect(Collectors.toList()));
@@ -80,10 +75,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
 
         final List<Log> personLogs = new ArrayList<>();
         for (JsonAdaptedLog log : logs) {
@@ -131,9 +122,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        if (!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        final Status modelStatus = new Status(status);
+
         final Set<Log> modelLogs = new HashSet<>(personLogs);
-        return new Person(modelName, modelIdentityNumber, modelPhone, modelEmail, modelAddress, modelTags, modelLogs);
+        return new Person(modelName, modelIdentityNumber, modelPhone, modelEmail, modelAddress, modelStatus, modelLogs);
     }
 
 }

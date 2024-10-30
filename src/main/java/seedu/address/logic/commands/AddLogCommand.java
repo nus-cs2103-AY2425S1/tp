@@ -58,7 +58,7 @@ public class AddLogCommand extends Command {
                 personToUpdate.getPhone(),
                 personToUpdate.getEmail(),
                 personToUpdate.getAddress(),
-                personToUpdate.getTags(),
+                personToUpdate.getStatus(),
                 updatedLogs // Updated logs set
         );
 
