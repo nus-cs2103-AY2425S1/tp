@@ -89,6 +89,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a car with the same VRN and VIN as {@code car} exists in the address book.
+     * @param car the car to check
+     */
+    public boolean hasCarWithSameVrnAndVin(Car car) {
+        requireNonNull(car);
+        return persons.carWithSameVrnAndVin(car);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

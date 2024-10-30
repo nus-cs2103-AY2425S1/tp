@@ -109,6 +109,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasCarWithSameVrnAndVin(Car car) {
+        requireNonNull(car);
+        return addressBook.hasCarWithSameVrnAndVin(car);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

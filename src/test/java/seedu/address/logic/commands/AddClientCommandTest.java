@@ -117,6 +117,11 @@ public class AddClientCommandTest {
         }
 
         @Override
+        public boolean hasCarWithSameVrnAndVin(Car car) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
