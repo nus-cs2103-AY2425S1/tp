@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -29,7 +29,8 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
      */
     public EditClaimCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX, PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
+                ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX,
+                        PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
         if (argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()
                 || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {

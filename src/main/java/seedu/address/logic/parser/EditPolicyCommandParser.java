@@ -94,7 +94,8 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
      * @param editPolicyDescriptor the EditPolicyDescriptor to set fields on.
      * @throws ParseException if there is an error parsing the optional fields.
      */
-    private void setOptionalFields(ArgumentMultimap argMultimap, EditPolicyDescriptor editPolicyDescriptor) throws ParseException {
+    private void setOptionalFields(ArgumentMultimap argMultimap, EditPolicyDescriptor editPolicyDescriptor)
+            throws ParseException {
         if (argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).isPresent()) {
             editPolicyDescriptor.setPremiumAmount(ParserUtil.parsePremiumAmount(
                     argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).get()));

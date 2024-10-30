@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 
 import java.util.List;
 import java.util.Set;
@@ -189,7 +189,8 @@ public class EditClaimCommand extends Command {
         }
 
         return Policy.makePolicy(
-                policy.getType(), policy.getPremiumAmount(), policy.getCoverageAmount(), policy.getExpiryDate(), updatedClaims);
+                policy.getType(), policy.getPremiumAmount(), policy.getCoverageAmount(),
+                policy.getExpiryDate(), updatedClaims);
     }
 
     /**
