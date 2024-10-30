@@ -113,11 +113,11 @@ Examples:
 *  `edit 1 p/91234567` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons or groups by name: `find`
+### Locating persons by name: `find`
 
-Finds persons or groups whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]` or `find /g KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -131,7 +131,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-* `find /group StudyGroup returns all members of the group StudyGroup.`
+### Locating groups by name: `findGroup`
+
+Finds groups whose names contain any of the given keywords.
+
+Format: `findGroup KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `class` will match `Class`
+* The order of the keywords does not matter. e.g. `class A` will match `A class`
+* Only the group name is searched.
+* Only full words will be matched e.g. `class` will not match `clas`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `class` will return `class A`, `class B`
+
+Examples:
+* `findGroup 19S13` returns `19S13` 
+* `findGroup GroupA GroupB` returns `GroupA`, `GroupB<br>
 
 ### Adding a tag : `tag`
 
