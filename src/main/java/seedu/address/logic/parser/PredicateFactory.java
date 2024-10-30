@@ -15,7 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.participation.Participation;
@@ -31,7 +33,7 @@ import seedu.address.model.predicate.TagContainsKeywordPredicate;
  * various fields such as name, phone, email, address, payment status, and tags.
  */
 public class PredicateFactory {
-
+    private static final Logger logger = LogsCenter.getLogger(PredicateFactory.class);
     /**
      * Creates a list of predicates based on the input fields provided in ArgumentMultimap.
      * Fields could include name, phone, email, address, payment, attendance and tags.
@@ -48,6 +50,7 @@ public class PredicateFactory {
         processTagPredicate(argMultimap, personPredicates);
         processTutorialPredicate(argMultimap, participationPredicates);
         processAttendancePredicate(argMultimap, participationPredicates);
+        logger.info(" - Predicates successfully created, creating FindCommand object now. ");
         return new FindCommand(personPredicates, participationPredicates);
     }
 

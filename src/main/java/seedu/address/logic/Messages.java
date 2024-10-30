@@ -31,6 +31,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE = "At least one of the dates is not in the right format."
             + " Please check the correct usage. \n%1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
+    public static final String MESSAGE_LOGGER_FOR_EXCEPTION = "An exception is thrown in: %s ";
 
 
     /**

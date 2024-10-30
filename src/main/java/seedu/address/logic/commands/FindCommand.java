@@ -14,7 +14,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -32,18 +34,15 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find students matching the given "
-            + "keywords across specified fields. "
-            + "You can search by name, address, attendance, tags, and more.\n"
+            + "keywords across specified fields.\n"
             + "1. Name, address, and tutorial searches support multiple word inputs; "
             + "tag and tutorial searches support duplicate prefixes; "
             + "other fields accept only a single word and single prefix.\n"
-            + "2. Exact matching is required for tutorial field. E.g. Doing find tut/math WILL NOT match a student "
+            + "2. Exact matching is required for tutorial field. "
             + "with a tutorial named mathematics.\n3. Payment field will require a true/false input. "
-            + "E.g. find pay/true "
             + "matches all students who have paid fees.\n4. Attendance field require a date range input with the format"
-            + "of dd/MM/yyyy:dd/MM/yyyy. E.g. find attend/24/10/2024:27/10/2024 matches all students who have "
-            + "attended class between October 24 2024 and October 27 2024 inclusive.\n5. Otherwise for other fields, "
-            + "partial matching is allowed. E.g. Doing find n/dav will match a student with the name David. \n"
+            + "of dd/MM/yyyy:dd/MM/yyyy.\n5. Otherwise for other fields, "
+            + "partial matching is allowed.\n"
             + "6. Search is case-insensitive, and multiple conditions are combined with logical AND.\n"
             + "7. Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -60,6 +59,7 @@ public class FindCommand extends Command {
             + PREFIX_TAG + "colleague "
             + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
     private final List<Predicate<Person>> personPredicates;
+    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
     private final List<Predicate<Participation>> participationPredicates;
 
     /**
@@ -84,6 +84,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info(" - Running execute(Model model) in " + FindCommand.class);
         requireNonNull(model);
 
         // PredicateAdapter converts Predicate<Participation> to Predicate<Person>
@@ -94,6 +95,7 @@ public class FindCommand extends Command {
         Predicate<Person> combinedPredicate = this.personPredicates.stream().reduce(x -> true, Predicate::and);
 
         model.updateFilteredPersonList(combinedPredicate);
+        logger.info(" - Successfully updated filtered person list");
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
