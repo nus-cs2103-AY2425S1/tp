@@ -1,0 +1,24 @@
+@startuml
+start
+
+:User inputs "findGroup" command with keywords;
+:Create FindGroupCommand with GroupContainsKeywordsPredicate;
+
+:Execute FindGroupCommand;
+:requireNonNull(model);
+
+if (model is null) then (no)
+    :Throw NullPointerException;
+else (yes)
+    if (groupPredicate is not null) then (yes)
+        :model.updateFilteredGroupList(groupPredicate);
+    endif
+    :Retrieve the size of model.getFilteredGroupList();
+    :Format message with the number of groups listed;
+    :Return CommandResult with formatted message;
+endif
+
+:End of execute method;
+
+stop
+@enduml

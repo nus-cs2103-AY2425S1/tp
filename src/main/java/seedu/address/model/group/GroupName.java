@@ -19,7 +19,7 @@ public class GroupName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String groupName;
+    private final String groupName;
 
     /**
      * Constructs a {@code groupName}.

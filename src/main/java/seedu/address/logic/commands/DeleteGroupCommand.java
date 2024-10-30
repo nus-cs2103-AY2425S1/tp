@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -34,17 +36,17 @@ public class DeleteGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        ObservableList<Group> lastShownList = model.getFilteredGroupList();
 
-        // Use the predicate to search for groups by name
         GroupContainsKeywordsPredicate groupPredicate =
-                new GroupContainsKeywordsPredicate(List.of(groupName.groupName));
-        List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
+                new GroupContainsKeywordsPredicate(List.of(groupName.toString()));
+
+        FilteredList<Group> matchingGroups = lastShownList.filtered(groupPredicate);
 
         if (matchingGroups.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_GROUP_NOT_FOUND, groupName));
         }
 
-        // Assuming there's only one group with the exact name, delete it
         Group groupToDelete = matchingGroups.get(0);
         model.deleteGroup(groupToDelete);
 

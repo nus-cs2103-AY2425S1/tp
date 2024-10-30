@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -29,7 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final List<Group> groups = new ArrayList<>();
+    private final FilteredList<Group> groups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.groups = new FilteredList<>(this.addressBook.getGroupList());
     }
 
     public ModelManager() {
@@ -166,7 +164,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void addGroup(Group group) {
-        groups.add(group);
+        addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     /**
@@ -179,12 +178,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group groupToDelete) {
         requireNonNull(groupToDelete);
-
-        boolean isRemoved = groups.remove(groupToDelete);
-
-        if (!isRemoved) {
-            throw new IllegalArgumentException("Group not found: " + groupToDelete.getGroupName());
-        }
+        addressBook.removeGroup(groupToDelete);
     }
 
     /**
@@ -203,11 +197,18 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean hasGroupName(Group group) {
-        if (group == null) {
-            throw new NullPointerException();
-        }
-        return groups.stream().anyMatch(existingGroup -> existingGroup.getGroupName().equals(group
-                .getGroupName()));
+        requireNonNull(group);
+        return addressBook.hasGroup(group);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the
+     * internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return groups;
     }
 
     @Override
@@ -228,17 +229,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
+    public void updateFilteredGroupList(Predicate<Group> groupPredicate) {
         requireNonNull(groupPredicate);
 
-        // Filter and collect the matching groups based on the predicate
-        List<Group> matchingGroups = groups.stream()
-                .filter(group -> groupPredicate.getKeywords().stream()
-                        .anyMatch(keyword -> group.getGroupName().groupName.equalsIgnoreCase(keyword)))
-                .toList();
+        groups.setPredicate(groupPredicate);
 
-        // Return the list of matching groups
-        return matchingGroups;
     }
 
 }

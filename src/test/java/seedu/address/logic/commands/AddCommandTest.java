@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -25,7 +24,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -198,7 +196,11 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> groupPredicate) {
             throw new AssertionError("This method should not be called");
         }
     }
