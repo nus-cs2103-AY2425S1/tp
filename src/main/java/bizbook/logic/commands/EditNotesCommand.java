@@ -4,9 +4,7 @@ import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
 import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
@@ -59,16 +57,15 @@ public class EditNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        // Update notes with new note
-        Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
+        ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
-        if (notesToEdit.contains(note)) {
+        if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
+        } else if (noteIndex.getZeroBased() >= notesList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_INDEX);
         }
-        if (noteIndex.getZeroBased() >= notesToEdit.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_NOTED_INDEX);
-        }
-        Person editedPerson = updateNote(personToEdit, notesToEdit);
+
+        Person editedPerson = updateNote(personToEdit, notesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -91,11 +88,11 @@ public class EditNotesCommand extends Command {
      * Updates the notes of the given person with the given notes
      * {@code personToEdit, notesToEdit}.
      */
-    private Person updateNote(Person personToEdit, Set<Note> notesToEdit) {
+    private Person updateNote(Person personToEdit, ArrayList<Note> notesToEdit) {
         // Convert Set to List for indexed access
         List<Note> notesList = new ArrayList<>(notesToEdit);
         notesList.set(noteIndex.getZeroBased(), note);
-        Set<Note> editedNotes = new LinkedHashSet<>(notesList);
+        ArrayList<Note> editedNotes = new ArrayList<>(notesList);
 
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),

@@ -3,9 +3,8 @@ package bizbook.logic.commands;
 import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
 import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
@@ -59,18 +58,17 @@ public class AddNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        // Update notes with new note
-        Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
+        ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
-        if (notesToEdit.contains(note)) {
+        if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
 
-        notesToEdit.add(note);
+        notesList.add(note);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), notesToEdit);
+                personToEdit.getAddress(), personToEdit.getTags(), notesList);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
