@@ -181,7 +181,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean isSamePersonAsPersonOnDisplay(Person person) {
-        if (isLastViewPersonAvailable()){
+        if (isLastViewPersonAvailable()) {
             return lastViewedPerson.get().get().equals(person);
         }
 
