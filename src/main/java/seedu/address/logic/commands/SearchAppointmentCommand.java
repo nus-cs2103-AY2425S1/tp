@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIMERANGE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_START_DATETIME_AFTER_END_DATETIME;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_APPOINTMENT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,21 +21,13 @@ import seedu.address.model.person.Person;
  * Searches for clients who have appointments on the specified date and time.
  */
 public class SearchAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "search a/";
+    public static final String COMMAND_WORD = "search " + PREFIX_SEARCH_APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for clients who have appointments on the specified date and time.\n"
             + "Parameters: DATE TIME (must be in yyyy-MM-dd HH:mm format)\n"
             + "Example: " + COMMAND_WORD + " 2023-12-31 14:30\n"
             + "Example: " + COMMAND_WORD + "2023-12-31 14:30 to 2024-01-01 16:00";
-
-    public static final String MESSAGE_SUCCESS = "Listed all clients with appointments %s";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. "
-            + "Please use yyyy-MM-dd HH:mm format.";
-
-    public static final String MESSAGE_INVALID_DATERANGE_FORMAT = "The date-time range format is invalid. "
-            + "Please use 'yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm' format.";
-    public static final String MESSAGE_START_DATE_AFTER_END_DATE = "Start date-time cannot be after end date-time.";
 
     private final String startDateTime;
     private final String endDateTime;
@@ -45,31 +42,29 @@ public class SearchAppointmentCommand extends Command {
         requireNonNull(dateTimeInput);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        // check if the command has "to" in the command
         if (dateTimeInput.contains("to")) {
             String[] dateTimes = dateTimeInput.split("to");
-            // Ensure there are exactly two date-times
             if (dateTimes.length != 2) {
-                throw new CommandException(MESSAGE_INVALID_DATERANGE_FORMAT);
+                throw new CommandException(MESSAGE_INVALID_DATETIMERANGE_FORMAT);
             }
             startDateTime = dateTimes[0].trim();
             endDateTime = dateTimes[1].trim();
 
             if (!isValidDateTime(startDateTime) || !isValidDateTime(endDateTime)) {
-                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+                throw new CommandException(MESSAGE_INVALID_DATETIME_FORMAT);
             }
 
             LocalDateTime start = LocalDateTime.parse(startDateTime, formatter);
             LocalDateTime end = LocalDateTime.parse(endDateTime, formatter);
 
             if (start.isAfter(end)) {
-                throw new CommandException(MESSAGE_START_DATE_AFTER_END_DATE);
+                throw new CommandException(MESSAGE_START_DATETIME_AFTER_END_DATETIME);
             }
 
         } else {
             String dateTimeStr = dateTimeInput.trim();
             if (!isValidDateTime(dateTimeStr)) {
-                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+                throw new CommandException(MESSAGE_INVALID_DATETIME_FORMAT);
             }
             startDateTime = dateTimeInput;
             endDateTime = startDateTime;
@@ -105,7 +100,7 @@ public class SearchAppointmentCommand extends Command {
         } else {
             dateTimeRangeMessage = "from " + startDateTime + " to " + endDateTime;
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, dateTimeRangeMessage));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT, dateTimeRangeMessage));
     }
 
     /**

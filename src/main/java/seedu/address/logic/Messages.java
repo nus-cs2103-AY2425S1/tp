@@ -19,10 +19,24 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_POLICY_FORMAT = "Invalid policy format!";
+    public static final String MESSAGE_INVALID_POLICY_FORMAT = "The policy name format is invalid.";
     public static final String MESSAGE_INVALID_POLICY_DISPLAYED_INDEX = "The policy index provided is invalid";
     public static final String MESSAGE_DUPLICATE_POLICY_NAME = "The policy name provided is duplicated";
     public static final String MESSAGE_DUPLICATE_POLICY_INDEX = "Multiple identical policy index specified to edit";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. "
+            + "Please use yyyy-MM-dd format.";
+    public static final String MESSAGE_INVALID_DATERANGE_FORMAT = "The date range format is invalid. "
+            + "Please use yyyy-MM-dd to yyyy-MM-dd format.";
+    public static final String MESSAGE_START_DATE_AFTER_END_DATE = "Start date cannot be after end date.";
+    public static final String MESSAGE_SUCCESS_SEARCH_BIRTHDAY = "Listed all clients with birthdays %s";
+    public static final String MESSAGE_SUCCESS_SEARCH_APPOINTMENT = "Listed all clients with appointments %s";
+    public static final String MESSAGE_INVALID_DATETIME_FORMAT = "The date format is invalid. "
+            + "Please use yyyy-MM-dd HH:mm format.";
+    public static final String MESSAGE_INVALID_DATETIMERANGE_FORMAT = "The date-time range format is invalid. "
+            + "Please use 'yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm' format.";
+    public static final String MESSAGE_START_DATETIME_AFTER_END_DATETIME = "Start date-time cannot be "
+            + "after end date-time.";
+    public static final String MESSAGE_SUCCESS_SEARCH_POLICY = "Listed all clients with policy: %s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

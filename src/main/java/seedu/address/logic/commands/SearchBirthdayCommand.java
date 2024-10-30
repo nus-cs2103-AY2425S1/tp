@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATERANGE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_START_DATE_AFTER_END_DATE;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,20 +21,13 @@ import seedu.address.model.person.Person;
  * Searches for clients whose birthdays are on the specified date.
  */
 public class SearchBirthdayCommand extends Command {
-    public static final String COMMAND_WORD = "search b/";
+    public static final String COMMAND_WORD = "search " + PREFIX_BIRTHDAY;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for clients whose birthdays are on the specified date.\n"
             + "Parameters: DATE (must be in yyyy-MM-dd format)\n"
             + "Example: " + COMMAND_WORD + " 2000-04-25\n"
             + "Example: " + COMMAND_WORD + " 2000-04-25 to 2000-05-25";
-
-    public static final String MESSAGE_SUCCESS = "Listed all clients with birthdays %s";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. "
-            + "Please use yyyy-MM-dd format.";
-    public static final String MESSAGE_INVALID_DATERANGE_FORMAT = "The date range format is invalid. "
-            + "Please use yyyy-MM-dd to yyyy-MM-dd format.";
-    public static final String MESSAGE_START_DATE_AFTER_END_DATE = "Start date cannot be after end date.";
 
     private final String startDate;
     private final String endDate;
@@ -43,7 +41,6 @@ public class SearchBirthdayCommand extends Command {
     public SearchBirthdayCommand(String dateInput) throws CommandException {
         requireNonNull(dateInput);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         // checks if the date input contains to (means it is a range)
         if (dateInput.contains("to")) {
             String [] dates = dateInput.split("to");
@@ -62,7 +59,6 @@ public class SearchBirthdayCommand extends Command {
                 throw new CommandException(MESSAGE_START_DATE_AFTER_END_DATE);
             }
         } else {
-            // if the date is a single date
             String date = dateInput.trim();
             if (!isValidDate(date)) {
                 throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
@@ -98,7 +94,7 @@ public class SearchBirthdayCommand extends Command {
             dateRangeMessage = "from " + startDate + " to " + endDate;
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, dateRangeMessage));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, dateRangeMessage));
     }
 
     /**
@@ -119,17 +115,14 @@ public class SearchBirthdayCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // Short circuit if the same object
         if (other == this) {
             return true;
         }
 
-        // Instance of handles nulls and type check
         if (!(other instanceof SearchBirthdayCommand)) {
             return false;
         }
 
-        // Cast and compare the date attribute
         SearchBirthdayCommand otherCommand = (SearchBirthdayCommand) other;
         return this.startDate.equals(otherCommand.startDate) && this.endDate.equals(otherCommand.endDate);
     }
