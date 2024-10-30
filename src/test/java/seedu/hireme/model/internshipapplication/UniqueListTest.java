@@ -174,9 +174,63 @@ public class UniqueListTest {
     }
 
     @Test
+    public void sortItems_nullUniqueList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.sortItems(null));
+    }
+
+    @Test
+    public void countItems_nullUniqueList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.countItems(null));
+    }
+
+    @Test
+    public void countItems_validUniqueList_success() {
+        assertEquals(0, uniqueList.countItems(unused -> true));
+        uniqueList.add(GOOGLE);
+        assertEquals(1, uniqueList.countItems(unused -> true));
+
+        // Only count the internship applications that have the pending status
+        assertEquals(1, uniqueList.countItems(i -> i.getStatus().equals(Status.PENDING)));
+        // Only count the internship applications that have the accepted status
+        assertEquals(0, uniqueList.countItems(i -> i.getStatus().equals(Status.ACCEPTED)));
+
+        uniqueList.remove(GOOGLE);
+        assertEquals(0, uniqueList.countItems(unused -> true));
+        assertEquals(0, uniqueList.countItems(i -> i.getStatus().equals(Status.PENDING)));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> uniqueList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        UniqueList list = new UniqueList();
+
+        // same values -> returns true
+        assertTrue(uniqueList.equals(list));
+
+        list.add(GOOGLE);
+        uniqueList.add(GOOGLE);
+
+        // same values -> returns true
+        assertTrue(uniqueList.equals(list));
+
+        // same object -> returns true
+        assertTrue(uniqueList.equals(uniqueList));
+
+        // null -> returns false
+        assertFalse(uniqueList.equals(null));
+
+        // different types -> returns false
+        assertFalse(uniqueList.equals(5.0f));
+
+        UniqueList differentList = new UniqueList();
+
+        // different values -> returns false
+        assertFalse(uniqueList.equals(differentList));
     }
 
     @Test
