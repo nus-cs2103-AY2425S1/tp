@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Reminder {
-    private final String person;
+    private final String personName;
     private final LocalDateTime dateTime;
     private final ReminderDescription description;
 
@@ -21,13 +21,13 @@ public class Reminder {
      * @param description  the description of the reminder
      */
     public Reminder(String person, LocalDateTime dateTime, ReminderDescription description) {
-        this.person = Objects.requireNonNull(person, "Person cannot be null");
+        this.personName = Objects.requireNonNull(person, "Person name cannot be null");
         this.dateTime = Objects.requireNonNull(dateTime, "DateTime cannot be null");
         this.description = Objects.requireNonNull(description, "Description cannot be null");
     }
 
-    public String getPerson() {
-        return person;
+    public String getPersonName() {
+        return personName;
     }
 
     public LocalDateTime getDateTime() {
@@ -56,7 +56,7 @@ public class Reminder {
         }
 
         Reminder otherReminder = (Reminder) other;
-        return person.equals(otherReminder.person)
+        return personName.equals(otherReminder.personName)
                 && dateTime.equals(otherReminder.dateTime)
                 && description.equals(otherReminder.description);
     }
@@ -79,13 +79,13 @@ public class Reminder {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(person, dateTime, description);
+        return Objects.hash(personName, dateTime, description);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", person)
+                .add("name", personName)
                 .add("Date and time", dateTime)
                 .add("description", description)
                 .toString();
