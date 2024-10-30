@@ -17,8 +17,7 @@ import seedu.address.model.event.EventManager;
 public class ViewEventCommand extends Command{
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View list of persons in an event."
-            + "Parameters: EVENT NAME\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT NAME: View list of persons in an event.\n"
             + "e.g. view sumobot festival";
 
     public static final String MESSAGE_SUCCESS = "Viewing event: %1$s";
