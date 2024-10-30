@@ -173,9 +173,24 @@ public class ModuleRoleMap {
      * Returns a list of strings representing module role pairs for the GUI.
      */
     public List<ModuleRolePair> getData() {
-        return roles.entrySet().stream()
-                .map(entry -> new ModuleRolePair(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
+        return getData(false);
+    }
+
+    /**
+     * Returns a list of strings representing module role pairs for the GUI.
+     * @param sorted whether to sort the list based on the {@code ModuleRolePair}'s natural ordering.
+     */
+    public List<ModuleRolePair> getData(boolean sorted) {
+        if (sorted) {
+            return roles.entrySet().stream()
+                    .map(entry -> new ModuleRolePair(entry.getKey(), entry.getValue()))
+                    .sorted()
+                    .collect(Collectors.toList());
+        } else {
+            return roles.entrySet().stream()
+                    .map(entry -> new ModuleRolePair(entry.getKey(), entry.getValue()))
+                    .collect(Collectors.toList());
+        }
     }
 
     /**
