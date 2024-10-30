@@ -50,8 +50,8 @@ public class Person {
     /**
      * Builds a person given a personId and a personDescriptor.
      *
-     * @param personId
-     * @param personDescriptor
+     * @param personId The personId of the person.
+     * @param personDescriptor The personDescriptor of the person.
      */
     public Person(int personId, PersonDescriptor personDescriptor) {
         requireAllNonNull(personId, personDescriptor);
@@ -138,7 +138,6 @@ public class Person {
 
     @Override
     public String toString() {
-        // return personDescriptor.toString();
         return new ToStringBuilder(this)
                 .add("personId", personId)
                 .add("name", getName())

@@ -53,7 +53,8 @@ public class EditAppointmentCommandTest {
         EditCommand editCommand = new EditAppointmentCommand(indexLastAppointment, descriptor);
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS, Messages.formatAppointment(editedAppointment));
+            EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+                Messages.formatAppointment(editedAppointment));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(),
             new AppointmentBook(model.getAppointmentBook()), new UserPrefs());
@@ -68,7 +69,8 @@ public class EditAppointmentCommandTest {
         Appointment editedAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS, Messages.formatAppointment(editedAppointment));
+            EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+                Messages.formatAppointment(editedAppointment));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(),
             new AppointmentBook(model.getAppointmentBook()), new UserPrefs());
@@ -88,7 +90,8 @@ public class EditAppointmentCommandTest {
             new EditAppointmentDescriptorBuilder().withAppointmentType(VALID_APPOINTMENT_TYPE_BOB).build());
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS, Messages.formatAppointment(editedAppointment));
+            EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+                Messages.formatAppointment(editedAppointment));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(),
             new AppointmentBook(model.getAppointmentBook()), new UserPrefs());

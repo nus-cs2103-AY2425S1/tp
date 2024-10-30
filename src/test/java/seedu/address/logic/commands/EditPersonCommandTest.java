@@ -43,7 +43,7 @@ public class EditPersonCommandTest {
         EditCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
             new AddressBook(model.getAddressBook()),
@@ -68,7 +68,7 @@ public class EditPersonCommandTest {
         EditCommand editCommand = new EditPersonCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
             new AddressBook(model.getAddressBook()),
@@ -85,7 +85,7 @@ public class EditPersonCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
             new AddressBook(model.getAddressBook()),
@@ -105,7 +105,7 @@ public class EditPersonCommandTest {
             new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
             new AddressBook(model.getAddressBook()),
@@ -122,7 +122,7 @@ public class EditPersonCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditPersonCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class EditPersonCommandTest {
         EditCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON,
             new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
