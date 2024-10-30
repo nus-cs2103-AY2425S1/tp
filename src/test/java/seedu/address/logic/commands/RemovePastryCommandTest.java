@@ -39,7 +39,7 @@ public class RemovePastryCommandTest {
     @Test
     public void execute_removeExistingPastry_success() {
         // Add a pastry to the model to simulate existing state
-        Pastry existingPastry = new Pastry(7, PASTRY_NAME, PASTRY_COST, ingredients);
+        Pastry existingPastry = new Pastry(4, PASTRY_NAME, PASTRY_COST, ingredients);
         model.getPastryCatalogue().addPastry(PASTRY_NAME, PASTRY_COST, ingredients);
 
         // Create the RemovePastryCommand
