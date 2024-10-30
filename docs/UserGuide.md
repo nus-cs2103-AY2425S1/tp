@@ -241,11 +241,11 @@ Examples:
 Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
 </div>
 
-### Project Deadline Reminder
+### Deadline Reminder
 
-The Project Reminder feature automatically tracks upcoming and overdue deadlines for active clients and displays them in the status bar footer. This system runs without the need for any command input from the user.
+The Deadline Reminder feature automatically tracks upcoming and overdue deadlines for active clients and displays them in the footer. This system runs without the need for any command input from the user.
 
-![reminder](images/Reminder.png)
+![reminder](images/reminder.png)
 
 * Reminders are only shown for clients with an `active` status.
 * The system does not track `completed` projects.
