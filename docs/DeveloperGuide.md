@@ -557,6 +557,18 @@ Use case resumes from Step 2.
 
 Use case ends.
 
+## UC10: Display gift
+
+**System:** EduLog
+**Actor:** Teacher
+**Precondition:** The teacher is logged into the app.
+
+**MSS:**
+
+1. Teacher requests to see a suggested gift.  
+2. System displays a suggested gift.
+Use case ends.
+
 
 
 ### Non-Functional Requirements
