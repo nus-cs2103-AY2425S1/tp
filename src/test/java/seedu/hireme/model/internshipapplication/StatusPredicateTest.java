@@ -68,18 +68,18 @@ public class StatusPredicateTest {
     @Test
     public void toStringMethod() {
         String pending = "PENDING";
-        StatusPredicate predicate = new StatusPredicate(Status.PENDING);
+        StatusPredicate pendingPredicate = new StatusPredicate(Status.PENDING);
         String expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + pending + "}";
-        assertEquals(expected, predicate.toString());
+        assertEquals(expected, pendingPredicate.toString());
 
         String accepted = "ACCEPTED";
-        predicate = new StatusPredicate(Status.ACCEPTED);
+        StatusPredicate acceptedPredicate = new StatusPredicate(Status.ACCEPTED);
         expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + accepted + "}";
-        assertEquals(expected, predicate.toString());
+        assertEquals(expected, acceptedPredicate.toString());
 
         String rejected = "REJECTED";
-        predicate = new StatusPredicate(Status.REJECTED);
+        StatusPredicate rejectedPredicate = new StatusPredicate(Status.REJECTED);
         expected = StatusPredicate.class.getCanonicalName() + "{statusToFilterBy=" + rejected + "}";
-        assertEquals(expected, predicate.toString());
+        assertEquals(expected, rejectedPredicate.toString());
     }
 }
