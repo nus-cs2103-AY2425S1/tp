@@ -81,20 +81,26 @@ public class EditTaskAllGroupCommand extends Command {
         }
         for (Group group : groups) {
             if (group.hasTask(taskToEdit)) {
-                model.setTask(taskToEdit, editedTask, group);
-                model.decreaseGroupWithTask(taskToEdit);
-                System.out.println("find group alr");
-                if (!model.hasTask(editedTask)) {
-                    model.addTask(editedTask);
-                } else {
-                    model.increaseGroupWithTask(editedTask);
-                }
-                System.out.println("increment");
+                updateTaskInGroup(model, group, taskToEdit, editedTask);
             }
         }
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
             Messages.format(editedTask)));
+    }
+
+    private void updateTaskInGroup(Model model, Group group, Task taskToEdit, Task editedTask) {
+        model.setTask(taskToEdit, editedTask, group);
+        model.decreaseGroupWithTask(taskToEdit);
+        addOrUpdateEditedTask(model, editedTask);
+    }
+
+    private void addOrUpdateEditedTask(Model model, Task editedTask) {
+        if (!model.hasTask(editedTask)) {
+            model.addTask(editedTask);
+        } else {
+            model.increaseGroupWithTask(editedTask);
+        }
     }
 
     @Override
