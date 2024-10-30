@@ -30,14 +30,17 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagDeleteCommand;
+import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -176,6 +179,15 @@ public class AddressBookParserTest {
         FilterCommand jobCommand = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " j/" + String.join(" ", jobKeywords));
         assertEquals(new FilterCommand(new NameOrJobContainsKeywordsPredicate(List.of(), jobKeywords)), jobCommand);
+    }
+
+    @Test
+    public void parseCommand_viewWedding() throws Exception {
+        List<String> nameKeywords = List.of("Alice&Bob"); // have to restrict the spacing
+
+        ViewWeddingCommand command = (ViewWeddingCommand) parser.parseCommand(
+                ViewWeddingCommand.COMMAND_WORD + " n/" + String.join(" ", nameKeywords));
+        assertEquals(new ViewWeddingCommand(new TagContainsKeywordsPredicate(nameKeywords)), command);
     }
 
     @Test

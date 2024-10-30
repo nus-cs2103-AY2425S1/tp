@@ -199,10 +199,13 @@ public class MainWindow extends UiPart<Stage> {
             if (commandText.startsWith(ListWeddingCommand.COMMAND_WORD)) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+            } else if (commandText.startsWith("view-wed")) {
+                // to fill
             } else {
                 personListPanel = new PersonListPanel(logic.getFilteredPersonList());
                 listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             }
+
 
             return commandResult;
         } catch (CommandException | ParseException e) {
