@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
@@ -37,6 +40,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String university;
     private final String major;
+    private final LocalDate birthday;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +52,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("university") String university,
                              @JsonProperty("major") String major,
-                             @JsonProperty("interests") List<String> interests) {
+                             @JsonProperty("interests") List<String> interests,
+                             @JsonProperty("birthday") LocalDate birthday) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,7 +61,7 @@ class JsonAdaptedPerson {
         this.workExp = workExp;
         this.university = university;
         this.major = major;
-
+        this.birthday = birthday;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -74,7 +79,7 @@ class JsonAdaptedPerson {
         this.workExp = source.getWorkExp().value;
         this.university = source.getUniversity().value;
         this.major = source.getMajor().value;
-
+        this.birthday = source.getBirthday().value;
         this.tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -180,8 +185,18 @@ class JsonAdaptedPerson {
         final Set<Interest> modelInterests = new HashSet<>(personInterests);
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        // Correctly handle Birthday validation
+
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))) {
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = new Birthday(birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags, modelUniversity,
-                modelMajor, modelInterests);
+                modelMajor, modelInterests, modelBirthday);
     }
 
 }

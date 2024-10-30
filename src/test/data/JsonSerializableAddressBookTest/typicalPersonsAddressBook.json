@@ -10,7 +10,8 @@
       "tags" : [ "friends" ],
       "university" : "NUS",
       "major" : "Computer Science",
-      "interests": ["Reading", "Swimming"]
+      "interests": ["Reading", "Swimming"],
+      "birthday" : "2000-12-11"
     },
     {
       "name" : "Benson Meier",
@@ -21,7 +22,8 @@
       "tags" : [ "owesMoney", "friends" ],
       "university" : "NTU",
       "major" : "Computer Science",
-      "interests": ["Football", "Gaming"]
+      "interests": ["Football", "Gaming"],
+      "birthday" : "2002-11-01"
     },
     {
       "name" : "Carl Kurz",
@@ -32,7 +34,8 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Computer Science",
-      "interests": ["Cycling"]
+      "interests": ["Cycling"],
+      "birthday" : "2005-04-20"
     },
     {
       "name" : "Daniel Meier",
@@ -43,7 +46,8 @@
       "tags" : [ "friends" ],
       "university" : "NTU",
       "major" : "Business",
-      "interests": ["Traveling"]
+      "interests": ["Traveling"],
+      "birthday" : "2003-05-11"
     },
     {
       "name" : "Elle Meyer",
@@ -54,7 +58,8 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Engineering",
-      "interests": ["Photography"]
+      "interests": ["Photography"],
+      "birthday" : "2003-12-12"
     },
     {
       "name" : "Fiona Kunz",
@@ -65,7 +70,8 @@
       "tags" : [],
       "university" : "NUS",
       "major" : "Architecture",
-      "interests": ["Painting", "Yoga"]
+      "interests": ["Painting", "Yoga"],
+      "birthday" : "2003-12-12"
     },
     {
       "name" : "George Best",
@@ -76,7 +82,8 @@
       "tags" : [],
       "university" : "NTU",
       "major" : "Economics",
-      "interests": ["Running", "Chess"]
+      "interests": ["Running", "Chess"],
+      "birthday" : "2004-09-23"
     }
   ]
 }

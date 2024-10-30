@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
@@ -117,9 +118,9 @@ public class EditCommand extends Command {
         University updatedUniversity = editPersonDescriptor.getUniversity().orElse(personToEdit.getUniversity());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
         Set<Interest> updatedInterests = editPersonDescriptor.getInterests().orElse(personToEdit.getInterests());
-
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedWorkExp, updatedTags,
-                updatedUniversity, updatedMajor, updatedInterests);
+                updatedUniversity, updatedMajor, updatedInterests, updatedBirthday);
 
     }
 
@@ -161,6 +162,7 @@ public class EditCommand extends Command {
         private Set<Interest> interests;
         private University university;
         private Major major;
+        private Birthday birthday;
 
         public EditPersonDescriptor() {}
 
@@ -178,6 +180,7 @@ public class EditCommand extends Command {
             setUniversity(toCopy.university);
             setMajor(toCopy.major);
             setInterests(toCopy.interests);
+            setBirthday(toCopy.birthday);
         }
 
         /**
@@ -185,7 +188,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, workExp, tags, university, major,
-                    interests);
+                    interests, birthday);
         }
 
         public void setName(Name name) {
@@ -278,6 +281,22 @@ public class EditCommand extends Command {
         public Optional<Major> getMajor() {
             return Optional.ofNullable(major);
         }
+        /**
+         * Constructs a {@code Birthday} from an existing {@code Birthday} object formatted as "dd-MM-yyyy".
+         *
+         * @param birthday The birthday object to format and copy.
+         */
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+        /**
+         * Returns an Birthday object, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code birthday} is null.
+         */
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -299,7 +318,8 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(interests, otherEditPersonDescriptor.interests)
                     && Objects.equals(university, otherEditPersonDescriptor.university)
-                    && Objects.equals(major, otherEditPersonDescriptor.major);
+                    && Objects.equals(major, otherEditPersonDescriptor.major)
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday);
         }
 
         @Override
@@ -314,6 +334,7 @@ public class EditCommand extends Command {
                     .add("interests", interests)
                     .add("university", university)
                     .add("major", major)
+                    .add("birthday", birthday)
                     .toString();
         }
     }

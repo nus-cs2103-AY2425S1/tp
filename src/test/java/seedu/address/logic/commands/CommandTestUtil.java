@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -48,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_MAJOR_BOB = "Business";
     public static final String VALID_INTEREST_BOB = "Swimming";
     public static final String VALID_INTEREST_AMY = "Reading";
+    public static final String VALID_BIRTHDAY_BOB = "12-12-2000";
+    public static final String VALID_BIRTHDAY_AMY = "10-10-2003";
 
 
 
@@ -70,7 +73,8 @@ public class CommandTestUtil {
     public static final String MAJOR_DESC_BOB = " " + PREFIX_MAJOR + VALID_MAJOR_BOB;
     public static final String INTERESTS_DESC_BOB = " " + PREFIX_INTEREST + VALID_INTEREST_BOB;
     public static final String INTERESTS_DESC_AMY = " " + PREFIX_INTEREST + VALID_INTEREST_AMY;
-
+    public static final String BIRTHDAY_DESC_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
+    public static final String BIRTHDAY_DESC_AMY = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

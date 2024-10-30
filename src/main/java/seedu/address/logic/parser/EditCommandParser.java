@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -38,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_WORKEXP, PREFIX_TAG, PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
+                        PREFIX_WORKEXP, PREFIX_TAG, PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST, PREFIX_BIRTHDAY);
 
         Index index;
 
@@ -49,7 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_WORKEXP, PREFIX_UNIVERSITY, PREFIX_MAJOR);
+                PREFIX_WORKEXP, PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_BIRTHDAY);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -70,6 +71,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_UNIVERSITY).isPresent()) {
             editPersonDescriptor.setUniversity(ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY)
+                    .get()));
+        }
+        if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
+            editPersonDescriptor.setBirthday(ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY)
                     .get()));
         }
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {

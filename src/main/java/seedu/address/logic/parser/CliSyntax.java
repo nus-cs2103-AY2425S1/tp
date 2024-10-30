@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_MAJOR = new Prefix("m/");
     public static final Prefix PREFIX_INTEREST = new Prefix("i/");
     public static final Prefix PREFIX_INDEX = new Prefix("in/");
+    public static final Prefix PREFIX_BIRTHDAY = new Prefix(("b/"));
 }

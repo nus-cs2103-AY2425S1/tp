@@ -35,6 +35,7 @@
       <!-- Add university and major here -->
       <Label fx:id="university" styleClass="cell_small_label" text="\$university" />
       <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
       <!-- FlowPane for interests (replaces Label) -->
       <Label fx:id="interests" styleClass="cell_small_label" />
     </VBox>
