@@ -14,6 +14,10 @@ public class MajorContainsKeywordsPredicate implements Predicate<Person> {
         this.keyword = keyword;
     }
 
+    public String getKeyword() {
+        return keyword;
+    }
+
     @Override
     public boolean test(Person person) {
         return person.getMajor().value.toLowerCase().contains(keyword.toLowerCase());
