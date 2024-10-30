@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -13,25 +13,29 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+  * If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar goonbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   
+   Examples: 
+   * cd /users/desktop/goonbook/goonbook.jar
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all students.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/Song Si Mew c/W08 p/10110011 t/Japanese` : Adds a student named `Song Si Mew` to the GoonBook.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st student shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all students.
 
    * `exit` : Exits the app.
 
@@ -76,15 +80,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Song Si Mew c/W08 p/10110011 t/Japanese`
+* `add n/Aaron Tan c/G12 p/11110011 t/Trivial t/CS `
 
 ### Listing all persons : `list`
 
@@ -106,14 +110,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons or groups by name: `find`
+### Locating persons by name: `find`
 
-Finds persons or groups whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]` or `find /g KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -127,7 +131,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-* `find /group Study Group returns all members of the group Study Group.`
+### Locating groups by name: `findGroup`
+
+Finds groups whose names contain any of the given keywords.
+
+Format: `findGroup KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `class` will match `Class`
+* The order of the keywords does not matter. e.g. `class A` will match `A class`
+* Only the group name is searched.
+* Only full words will be matched e.g. `class` will not match `clas`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `class` will return `class A`, `class B`
+
+Examples:
+* `findGroup 19S13` returns `19S13` 
+* `findGroup GroupA GroupB` returns `GroupA`, `GroupB<br>
 
 ### Adding a tag : `tag`
 
@@ -135,12 +154,17 @@ Adds a tag to a specified person.
 
 Format: `tag INDEX t/TAG`
 
+* Ability to add more than one tag at once by doing another `t/TAG` after.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 ### Deleting a tag : `untag`
 
 Deletes a tag of a specified person.
 
 Format: `untag INDEX t/TAG`
 
+* Removes specified tag from that person.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 ### Deleting a person : `delete`
 
@@ -168,6 +192,33 @@ Format: `deleteGroup GROUPNAME`
 Examples:
 * `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
 
+## Import students: `import CSV_FILE_LOCATION`
+
+Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
+
+* Only adds NON-DUPLICATE students (students primary key is their name).
+* Does not update existing users with the new imported data.
+* Will notify user of all duplicate students found and not imported.
+* Csv file location must be absolute path and valid.
+* Csv files must be properly formatted to GoonBook style (see exported_data.csv).
+* Csv files are to have 4 columns: `[name, class, phone number, tags]`.
+* Tags in the csv file are to be seperated with a space.
+* Will show user data corrupted error if parse or data is not formatted right.
+* Will show user cannot find error if no or invalid file location is given.
+
+Examples:
+`import /users/shaun/desktop/tp/test_students.csv`
+
+## Export students: `export`
+
+Exports all students in GoonBook to a .csv file.
+
+Format: `export`
+
+* Exports all students to fixed location as exported_data.csv
+* Location can be found at `[JAR FILE LOCATION]/exported_data.csv`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -182,11 +233,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+GoonBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+GoonBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+## Exported csv data file location
+
+GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -220,7 +275,14 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Export** | `export`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Group** | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`
+**Group** | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie Martin Jianbing Shaun Wenjie`
+**Import**| `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`
 **List** | `list`
+**Tag** | `tag [s/STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`
 **Help** | `help`
+

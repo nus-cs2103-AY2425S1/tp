@@ -1,22 +1,22 @@
 @startuml
 start
 
-:Execute FindCommand;
+:User inputs "find" command with keywords;
+:Create FindCommand with NameContainsKeywordsPredicate;
 
-if () then ([NameContainsKeywordsPredicate])
-  :Call model.updateFilteredPersonList(predicate);
-else ([else])
-  if () then ([GroupContainsKeywordsPredicate])
-    :Call model.updateFilteredGroupList(groupPredicate);
-    :Get matching groups;
-    :Filter persons based on group membership;
-    :Call model.updateFilteredPersonList(person);
-  else ([else])
-    :No matching groups or predicates;
-  endif
+:Execute FindCommand;
+:requireNonNull(model);
+
+if (model is null) then (no)
+    :Throw NullPointerException;
+else (yes)
+    :model.updateFilteredPersonList(predicate);
+    :Retrieve the size of model.getFilteredPersonList();
+    :Format message with number of persons listed;
+    :Return CommandResult with formatted message;
 endif
 
-:Return CommandResult with filtered person list size;
+:End of execute method;
 
 stop
 @enduml
