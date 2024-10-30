@@ -382,8 +382,14 @@
 .note_label {
     -fx-text-fill: black;
     -fx-background-color: white;
-    /*-fx-padding: 1 3 1 3;*/
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
-    -fx-font-size: 11;
+    -fx-padding: 6 9 6 9;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-font-size: 13;
+    -fx-line-spacing: 5;
+    -fx-min-width: 200;   /* Minimum width to allow expansion */
+    -fx-min-height: 100;   /* Minimum height to allow expansion */
+
+    -fx-alignment: TOP_LEFT;
+    -fx-wrap-text: true;
 }

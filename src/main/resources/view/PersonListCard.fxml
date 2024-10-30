@@ -9,10 +9,12 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TextArea?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="60" prefWidth="150" />
+      <ColumnConstraints hgrow="ALWAYS" percentWidth="40" prefWidth="150" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -36,7 +38,12 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
       <Label fx:id="sex" styleClass="cell_small_label" text="\$sex" />
-      <Label fx:id="note" styleClass="note_label" text="\$note" />
+    </VBox>
+    <VBox minHeight="105" GridPane.columnIndex="1">
+      <padding>
+        <Insets top="5" />
+      </padding>
+      <Label fx:id="note" styleClass="note_label" text="\$note" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>

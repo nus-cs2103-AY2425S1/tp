@@ -96,7 +96,7 @@ public class NoteTest {
 
         Note note = new Note(appointmentSet, remarksSet, medicationSet);
 
-        String expectedString = "Previous Appointments: [01/01/2025 0000]\n"
+        String expectedString = "Previous Appointments: 01/01/2025 0000\n"
                                 + "Medications: Test medications\n"
                                 + "Remarks: Test remark";
 

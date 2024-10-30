@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    public static boolean displayNote = false;
+    private static boolean displayNote = false;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -152,6 +152,12 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filter of the filtered person list to include only the specified target person.
+     *
+     * @param targetPerson given person.
+     * @throws NullPointerException if {@code targetPerson} is null.
+     */
     public void updateFilteredPersonList(Person targetPerson) {
         requireNonNull(targetPerson);
         Predicate<Person> predicate = new Predicate<>() {
@@ -162,8 +168,6 @@ public class ModelManager implements Model {
         };
         filteredPersons.setPredicate(predicate);
     }
-
-
 
     @Override
     public boolean equals(Object other) {
@@ -180,6 +184,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    /**
+     * Returns the current display status of note.
+     *
+     * @return {@code true} if the note is set to be displayed; {@code false} otherwise.
+     */
+    public static boolean getDisplayNote() {
+        return displayNote;
     }
 
 }

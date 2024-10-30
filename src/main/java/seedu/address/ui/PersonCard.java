@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.ModelManager.displayNote;
+import static seedu.address.model.ModelManager.getDisplayNote;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -72,16 +72,8 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        note.setVisible(displayNote);
+        note.setVisible(getDisplayNote());
         note.setText(person.getNote().toString());
-//        person.getNote().previousAppointments.stream()
-//                .sorted(Comparator.comparing(appointment -> appointment.appointment.toString()))
-//                .forEach(appointment -> note.getChildren()
-//                        .add(new Label(appointment.appointment.format(FORMATTER))));
-//        person.getNote().medications.stream()
-//                .forEach(medication -> note.getChildren().add(new Label(medication)));
-//        person.getNote().remarks.stream()
-//                .forEach(remark -> note.getChildren().add(new Label(remark)));
 
     }
 }

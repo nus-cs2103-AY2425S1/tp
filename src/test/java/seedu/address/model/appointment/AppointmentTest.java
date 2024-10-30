@@ -60,6 +60,6 @@ public class AppointmentTest {
     @Test
     public void toStringTest() {
         Appointment appointment = new Appointment("11/11/2025 1100");
-        assertEquals("[11/11/2025 1100]", appointment.toString());
+        assertEquals("11/11/2025 1100", appointment.toString());
     }
 }
