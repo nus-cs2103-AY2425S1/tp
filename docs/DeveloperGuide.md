@@ -576,6 +576,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+* 4a. The given input only specifies one sample group.
+
+    * 4a1. ResearchRoster assigns the list of persons into this single sample group by adding study group tags to each record.
+
+      Use case ends.
 
 #### **Use Case: UC12 - Undo last action**
 * *Preconditions:* user has performed an action
