@@ -57,7 +57,7 @@
                      <font>
                         <Font size="52.0" />
                      </font></Label>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="supplierListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
           <VBox fx:id="deliveryList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="pane-with-border">

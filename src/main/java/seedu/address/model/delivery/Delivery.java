@@ -5,8 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.supplier.Supplier;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents a Delivery in the application.

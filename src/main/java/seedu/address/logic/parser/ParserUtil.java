@@ -14,6 +14,7 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.DeliverySortBy;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Company;
 import seedu.address.model.supplier.Email;
@@ -21,7 +22,6 @@ import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Phone;
 import seedu.address.model.supplier.SupplierSortBy;
 import seedu.address.model.supplier.SupplierStatus;
-import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 /**

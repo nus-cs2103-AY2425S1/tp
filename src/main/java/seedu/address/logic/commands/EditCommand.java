@@ -96,7 +96,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Supplier} with the details of {@code supplierToEdit}
      * edited with {@code editSupplierDescriptor}.
      */
-    private static Supplier createEditedSupplier(Supplier supplierToEdit, EditSupplierDescriptor editSupplierDescriptor) {
+    private static Supplier createEditedSupplier(Supplier supplierToEdit,
+                                                 EditSupplierDescriptor editSupplierDescriptor) {
         assert supplierToEdit != null;
 
         Name updatedName = editSupplierDescriptor.getName().orElse(supplierToEdit.getName());
