@@ -194,11 +194,6 @@ Criteria are segregated by data field, and each criteria is independently evalua
   * Pros: Returns wider range of results, potentially finding more relevant person records.
   * Cons: Less specific when finding for exact match.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
