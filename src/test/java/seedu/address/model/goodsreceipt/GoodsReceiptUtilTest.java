@@ -25,8 +25,11 @@ public class GoodsReceiptUtilTest {
     public void sumTotals_success() {
         double total = GoodsReceiptUtil.sumTotals(GOODS_LIST);
         assertTrue(total == GOODS_PRICE_TOTAL);
+    }
 
-        double total2 = GoodsReceiptUtil.sumTotals(new ArrayList<GoodsReceipt>());
-        assertTrue(total2 == 0);
+    @Test
+    public void sumTotals_emptyList_success() {
+        double total = GoodsReceiptUtil.sumTotals(new ArrayList<GoodsReceipt>());
+        assertTrue(total == 0.0);
     }
 }
