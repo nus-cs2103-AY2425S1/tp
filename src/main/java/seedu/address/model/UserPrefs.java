@@ -16,7 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     // used to define strictness of FuzzyWuzzy ratio
     // higher means must match more
-    public static final int MATCH_RATIO = 75;
+    public static final int MATCH_RATIO = 80;
     private static final State DEFAULT_STATE = new State("Students");
     private static final State GROUP_STATE = new State("Groups");
     private static final State GROUP_TASK_STATE = new State("GroupTask");
