@@ -28,11 +28,11 @@ public class UndoCommandTest {
     public void setUp() {
         commandStack = CommandStack.getInstance();
         model = new ModelStub();
+        commandStack.clear();
     }
 
     @Test
     public void execute_emptyStack() {
-        commandStack.clear();
         assertEquals("There are no commands to undo",
                 new UndoCommand().execute(model).getFeedbackToUser());
     }
