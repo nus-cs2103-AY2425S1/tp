@@ -82,7 +82,7 @@ public class Participation {
 
     @Override
     public String toString() {
-        return String.format("%s Attends: %s", student.toString(), tutorial.toString());
+        return String.format("%s attends: %s", student.getFullName(), tutorial.getSubject());
     }
 
     @Override

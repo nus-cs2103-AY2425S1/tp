@@ -119,7 +119,7 @@ public class UnenrollCommandTest {
     public void execute_nullModel_throwsNullPointerException() {
         UnenrollCommand command = new UnenrollCommand(Index.fromZeroBased(0), "physics");
 
-        assertThrows(NullPointerException.class, () -> command.execute(null));
+        assertThrows(AssertionError.class, () -> command.execute(null));
     }
 
     @Test

@@ -119,7 +119,7 @@ public class EnrollCommandTest {
     public void execute_nullModel_throwsNullPointerException() {
         EnrollCommand command = new EnrollCommand(Index.fromZeroBased(0), "physics");
 
-        assertThrows(NullPointerException.class, () -> command.execute(null));
+        assertThrows(AssertionError.class, () -> command.execute(null));
     }
 
     @Test
