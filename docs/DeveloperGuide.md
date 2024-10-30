@@ -505,6 +505,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
 * **Befriending Program**: Program which elderly signs up for to receive support from an AAC.
+* **personList**: A list of elderly individuals registered in the Befriending Program.
+* **historyList**: A list of all previous contact records, including dates and notes related to the elderly.
 
 
 --------------------------------------------------------------------------------------------------------------------
