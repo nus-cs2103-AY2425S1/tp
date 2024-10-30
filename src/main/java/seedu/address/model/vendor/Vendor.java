@@ -13,7 +13,7 @@ import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.id.UniqueId;
 
 /**
- * Represents a Vendor in the description book.
+ * Represents a Vendor in EventTory.
  * Guarantees: details are present and not null, field values are validated,
  * immutable.
  */

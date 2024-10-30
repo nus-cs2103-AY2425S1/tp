@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Vendor's description in the description book.
+ * Represents a Vendor's description in EventTory.
  * Guarantees: immutable; is valid as declared in
  * {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_CONSTRAINTS = "Descriptiones can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
 
     /*
      * The first character of the description must not be a whitespace,

@@ -5,7 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventTory;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventTory;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.vendor.Description;
@@ -13,7 +15,7 @@ import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code EventTory} with sample data.
  */
 public class SampleDataUtil {
     public static Vendor[] getSampleVendors() {
@@ -39,12 +41,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyEventTory getSampleEventTory() {
+        EventTory sampleEt = new EventTory();
         for (Vendor sampleVendor : getSampleVendors()) {
-            sampleAb.addVendor(sampleVendor);
+            sampleEt.addVendor(sampleVendor);
         }
-        return sampleAb;
+        return sampleEt;
     }
 
     /**
