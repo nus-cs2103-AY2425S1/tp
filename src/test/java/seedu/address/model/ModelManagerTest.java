@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,8 +9,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -137,16 +138,30 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void triggerBackup_validActionAndPerson_noExceptionThrown() {
-        // Setup
-        Person testPerson = new PersonBuilder().withName("John Doe").build();
-        modelManager.addPerson(testPerson);
-        String actionDescription = "add_" + testPerson.getName().fullName;
+    public void triggerBackup_successfulBackup() throws IOException {
+        // Setup test person and description
+        Person testPerson = new PersonBuilder().withName("Test Person").build();
+        String actionDescription = "test_action";
 
-        // Execute
-        assertDoesNotThrow(() -> modelManager.triggerBackup(actionDescription, testPerson));
+        // Ensure the address book is saved so the source file exists
+        storage.saveAddressBook(modelManager.getAddressBook());
 
-        // Assertion is implicit in the absence of exception
+        // Trigger backup
+        modelManager.triggerBackup(actionDescription, testPerson);
+
+        // Verify if backup file exists in the backup directory
+        boolean backupCreated = false;
+        try (Stream<Path> files = Files.list(backupDirectoryPath)) {
+            // Look for a file containing the action description to ensure it was created
+            backupCreated = files
+                    .anyMatch(path -> path.getFileName().toString().contains(actionDescription));
+        } catch (IOException e) {
+            Assertions.fail("IOException occurred during backup file existence check: " + e.getMessage());
+        }
+
+        // Assert that the backup file was indeed created
+        assertTrue(backupCreated, "A new backup file should be created.");
     }
+
 
 }
