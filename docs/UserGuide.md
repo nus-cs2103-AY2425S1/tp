@@ -27,7 +27,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `list` : Lists all clients' contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client contact named `John Doe` to Clientele+.
+    * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan py/pending cs/active d/09-09-2024` : Adds a client contact named `John Dimon` to Clientele+.
 
     * `delete id/3` : Deletes the 3rd client contact shown in the current list.
 
@@ -57,12 +57,16 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
+  e.g. if you specify p/12341234 p/56785678, only p/56785678 will be taken.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+## General Commands
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -71,6 +75,25 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Listing all Client : `list`
+
+Show a list of all clients contacts in Clientele+.
+
+Format: `list`
+
+### Clearing All Entries : `clear`
+
+Clears all entries from Clientele+.
+
+Format: `clear`
+
+### Exiting the Program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## Client Management:
 ### Add Client Details: `add`
 
 Allows the user to add a new client with details including client name and contact details, payment status, client status, project status and project deadline.
@@ -92,22 +115,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * `DEADLINE` Should be in the following format: `DD-MM-YYYY`. Example: `10-10-2024` represents **10th October 2024**
 
 Examples:
-* `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01
-t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
-* `add n/Betsy Crowe t/SoftEng Inc. e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
+* `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
+* `add n/Betsy Crowe t/SoftEng Inc e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 1. The deadline could be the date you need to submit the project to the client
 2. The deadline could be the date by which you need to follow up with a potential client
 </div>
-
-
-### View Client List : `list`
-
-Displays a list of all clients and their details.
-
-Format: `list`
 
 ### Update Client Details : `edit`
 
@@ -197,7 +212,7 @@ Examples:
 
 Whitelists a previously-blacklisted client.
 
-Format: `blacklist index cs/NEW_CLIENT_STATUS`
+Format: `whitelist index cs/NEW_CLIENT_STATUS`
 
 * Changes the status of the client specified by the index `index` from "blacklisted" to `NEW_CLIENT_STATUS`.
 * `index` refers to the index number shown in the displayed person list.
@@ -205,8 +220,8 @@ Format: `blacklist index cs/NEW_CLIENT_STATUS`
 * `NEW_CLIENT_STATUS` refers to the new status of the client. Acceptable values are `potential`, `unresponsive`, `old` and `active`.
 
 Examples:
-* `blacklist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
-* `blacklist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
+* `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
+* `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
 ### Sort Clients list : `sort`
 
@@ -225,18 +240,30 @@ Examples:
 Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
 </div>
 
-### Clearing All Entries : `clear`
+### Project Deadline Reminder
 
-Clears all entries from Clientele+.
+The Project Reminder feature automatically tracks upcoming and overdue deadlines for active clients and displays them in the status bar footer. This system runs without the need for any command input from the user.
 
-Format: `clear`
+![reminder](images/Reminder.png)
 
-### Exiting the Program : `exit`
+* Reminders are only shown for clients with an `active` status.
+* The system does not track `completed` projects.
+* It tracks overdue deadlines, but the client status must still be `active`.
+* If there are `overdue` deadlines, only overdue projects are shown; upcoming deadlines will not be displayed
+* `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
 
-Exits the program.
+Examples:
 
-Format: `exit`
+Single Client Due Today:
+* `John has deadline due today.` This shows that John, an active client, has a deadline due today.
 
+Two Clients Due Today:
+* `John and Alice have deadlines due today.` This shows that John and Alice, both active clients, have deadlines due today.
+
+More Than Three Clients Due Today:
+* `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, and Charlie (all active clients) have deadlines due today.
+
+## Data Management:
 ### Saving the Data
 
 Clientele+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
