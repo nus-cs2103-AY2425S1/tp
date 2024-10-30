@@ -57,12 +57,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             String genderKeywords = argMultimap.getValue(PREFIX_GENDER).get();
             predicateGroup.add(new GenderMatchesKeywordsPredicate(
-                    ParserUtil.parseKeywords(genderKeywords, PREFIX_GENDER)));
+                    ParserUtil.parseGenderKeywords(genderKeywords, PREFIX_GENDER)));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             String ageKeywords = argMultimap.getValue(PREFIX_AGE).get();
             predicateGroup.add(new AgeContainsKeywordsPredicate(
-                    ParserUtil.parseKeywords(ageKeywords, PREFIX_AGE)));
+                    ParserUtil.parseAgeKeywords(ageKeywords, PREFIX_AGE)));
         }
         if (argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).isPresent()) {
             String tagKeywords = argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).get();

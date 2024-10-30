@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
     public static final String VALIDATION_REGEX = "^[FfMm]$";
-    public static final String MESSAGE_CONSTRAINTS = "Gender should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
+    public static final String MESSAGE_CONSTRAINTS = "Each gender criteria should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
 
     private final Set<String> keywords;
 

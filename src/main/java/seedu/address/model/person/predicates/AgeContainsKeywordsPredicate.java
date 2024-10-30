@@ -16,7 +16,8 @@ import seedu.address.model.person.Person;
 public class AgeContainsKeywordsPredicate implements Predicate<Person> {
     public static final String VALIDATION_REGEX = "\\d+|(\\d+-\\d+)";
     public static final String MESSAGE_CONSTRAINTS = "Each age criteria should contain non-negative integers, "
-            + "in the format 'number' or 'number-number'!";
+            + "in the format 'number' or 'number-number'!\n"
+            + "Example: a/23 30-34";
 
     private static final Pattern RANGE_PATTERN = Pattern.compile("(\\d+)-(\\d+)");
     private final Set<String> keywords;

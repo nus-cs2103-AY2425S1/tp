@@ -6,7 +6,10 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.AppParameters;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
@@ -16,6 +19,8 @@ import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 import seedu.address.model.tag.StudyGroupTag;
 
 /**
@@ -175,9 +180,9 @@ public class ParserUtil {
             throws ParseException {
         Set<String> ageKeywordSet = parseKeywords(ageKeywords, prefix);
         for (String keyword : ageKeywordSet) {
-            // if (!AgeContainsKeywordsPredicate.isValidInput(keyword)) {
-            // throw new ParseException(AgeContainsKeywordsPredicate.MESSAGE_CONSTRAINTS);
-            // }
+            if (!AgeContainsKeywordsPredicate.isValidInput(keyword)) {
+                throw new ParseException(AgeContainsKeywordsPredicate.MESSAGE_CONSTRAINTS);
+            }
         }
         return ageKeywordSet;
     }
@@ -190,10 +195,12 @@ public class ParserUtil {
     public static Set<String> parseGenderKeywords(String genderKeywords, Prefix prefix)
             throws ParseException {
         Set<String> genderKeywordSet = parseKeywords(genderKeywords, prefix);
+        Logger logger = LogsCenter.getLogger(AppParameters.class);
         for (String keyword : genderKeywordSet) {
-            // if (!GenderMatchesKeywordsPredicate.isValidInput(keyword)) {
-            // throw new ParseException(GenderMatchesKeywordsPredicate.MESSAGE_CONSTRAINTS);
-            // }
+            logger.warning(keyword);
+            if (!GenderMatchesKeywordsPredicate.isValidInput(keyword)) {
+                throw new ParseException(GenderMatchesKeywordsPredicate.MESSAGE_CONSTRAINTS);
+            }
         }
         return genderKeywordSet;
     }
