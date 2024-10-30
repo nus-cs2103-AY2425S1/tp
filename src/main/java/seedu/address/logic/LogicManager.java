@@ -67,10 +67,11 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
         this.versionHistory = command.updateVersionHistory(versionHistory, model);
-        ReadOnlyAddressBook tempAddressBook = versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
-        ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
-        model.setAddressBook(currentAddressBook);
         try {
+            ReadOnlyAddressBook tempAddressBook =
+                    versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
+            ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
+            model.setAddressBook(currentAddressBook);
             storage.saveAddressBook(currentAddressBook);
             storage.saveUserPrefs(model.getUserPrefs());
             versionHistoryStorage.saveVersionHistory(versionHistory);
@@ -78,6 +79,8 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        } catch (IndexOutOfBoundsException iob) {
+            return commandResult;
         }
 
         return commandResult;
