@@ -30,6 +30,9 @@ public class AdvFilterCommand extends Command {
     private final String tagValue;
     private final Operator operator;
 
+    /**
+     * Class that handles Operator enum type used in SortCommand
+     */
     public static enum Operator {
         GREATER_THAN(">"),
         GREATER_THAN_OR_EQUAL(">="),
@@ -64,7 +67,8 @@ public class AdvFilterCommand extends Command {
         requireNonNull(model);
 
         Predicate<Person> predicate = person -> {
-            boolean tagMatches = person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName) && tag.tagValue != null ? compare(operator, tag, tagValue) : false);
+            boolean tagMatches = person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName)
+                    && tag.tagValue != null ? compare(operator, tag, tagValue) : false);
             return tagMatches;
         };
 
@@ -198,6 +202,10 @@ public class AdvFilterCommand extends Command {
         return currentValue.compareTo(testValue);
     }
 
+    /**
+     * Checks if user's command input contains a valid operator.
+     * Returns matching Operator object if valid, null otherwise.
+     */
     public static Operator matchOperator(String string) {
         Operator operatorType = null;
         for (Operator operator : Operator.values()) {
