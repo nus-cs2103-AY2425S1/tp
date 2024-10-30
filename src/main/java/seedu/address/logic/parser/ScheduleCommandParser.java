@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
@@ -118,12 +117,6 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                 throw new ParseException("Invalid date: " + Month.of(month) + " cannot have more than 30 days.");
             }
         }
-
-        try {
-            return LocalDateTime.parse(date, FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date and time format! Please use the format 'd/M/yyyy HHmm'. "
-                    + "For example, '2/12/2024 1800'. Ensure day, month, hour, and minute ranges are correct.");
-        }
+        return LocalDateTime.parse(date, FORMATTER);
     }
 }

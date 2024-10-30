@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -71,13 +70,8 @@ class JsonAdaptedDate {
             }
         }
 
-        try {
-            return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Invalid date and time value! Ensure day, month, hour, and minute ranges "
-                    + "are correct in the format d/M/yyyy HHmm. "
-                    + "For example, '2/12/2024 1800'");
-        }
+
+        return new Date(LocalDateTime.parse(dateString, DATE_FORMATTER));
     }
 
     /**

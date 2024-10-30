@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -154,11 +153,8 @@ public class DateCommandParser implements Parser<DateCommand> {
             }
         }
 
-        try {
-            return LocalDateTime.parse(date, FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date and time format! Please use the format 'd/M/yyyy HHmm'. "
-                    + "For example, '2/12/2024 1800'. Ensure day, month, hour, and minute ranges are correct.");
-        }
+
+        return LocalDateTime.parse(date, FORMATTER);
+
     }
 }
