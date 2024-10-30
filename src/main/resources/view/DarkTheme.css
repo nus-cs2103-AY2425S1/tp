@@ -84,20 +84,20 @@
 
 .cell_big_label {
     -fx-font-family: "Raleway Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 24px;
     -fx-text-fill: derive(#757575, -50%);
 }
 
 .cell_small_label {
     -fx-font-family: "Raleway";
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-text-fill: derive(#757575, -50%);
 }
 
 .card_big_label {
     -fx-font-family: "Raleway Black";
-        -fx-font-size: 26px;
-        -fx-text-fill: derive(#757575, -50%);
+    -fx-font-size: 26px;
+    -fx-text-fill: derive(#757575, -50%);
     -fx-padding: 8 0 5 0;
 }
 
@@ -330,7 +330,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 12;
+    -fx-font-size: 16;
 }
 
 #lessons {
@@ -345,7 +345,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 12;
+    -fx-font-size: 16;
 }
 
 #remarks {
@@ -356,7 +356,7 @@
 #remarks .label {
     -fx-font-family: "Raleway";
     -fx-font-style: italic;
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-text-fill: derive(#e8def8, -50%);
     -fx-background-color: #fdf5f5;
     -fx-padding: 3 5 3 5;
