@@ -7,10 +7,12 @@ import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSA
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
+import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
+import static seedu.sellsavvy.testutil.TypicalOrders.CAMERA;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -65,6 +67,19 @@ public class AddOrderCommandTest {
         personToAddUnder.getOrderList().add(ABACUS);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
                 + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
+
+        assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_orderDateHasElapsed_warningGiven() {
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, CAMERA);
+
+        Model expectedModel = model.createCopy();
+        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        String expectedMessage = String.format(MESSAGE_OUTDATED_WARNING + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
+                personToAddUnder.getName(), Messages.format(CAMERA));
+        personToAddUnder.getOrderList().add(CAMERA);
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
