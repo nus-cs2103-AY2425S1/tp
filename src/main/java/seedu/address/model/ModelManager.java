@@ -226,4 +226,23 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Updates the model with a newly edited person and refreshes the task and person lists.
+     *
+     * @param target The original person to replace.
+     * @param editedPerson The new edited person to update in the model.
+     */
+    @Override
+    public void updatePersonAndTasks(Person target, Person editedPerson) {
+        requireNonNull(target);
+        requireNonNull(editedPerson);
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        setPerson(target, editedPerson);
+        updateTasksForPerson(target, editedPerson);
+
+    }
+
+
 }
