@@ -16,7 +16,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.contact.ContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

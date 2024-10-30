@@ -62,7 +62,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Except for `list` command, extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
-  Refer to [listing all persons](#listing-all-persons-list) section for more details about `list` command.
+  Refer to [listing all contacts](#listing-all-contacts-list) section for more details about `list` command.
 
 * The first word of the command is case-insensitive. 
 
@@ -78,9 +78,9 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book. (labels do not need to be in order, NICKNAME is optional)
+Adds a contact to the address book. (labels do not need to be in order, NICKNAME is optional)
 
 Format: 
 * `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE nn/NICKNAME`
@@ -88,7 +88,7 @@ Format:
 
 <box type="tip" seamless>
 
-**Tip:** A person can have one to many roles which match one of the following
+**Tip:** A contact can have one to many roles which match one of the following
 1. President
 2. Vice President
 3. Admin
@@ -102,9 +102,9 @@ Examples:
 * `add n/John Doe th/johndoe e/johnd@example.com s/undergraduate 3 r/Admin r/President nn/altName`
 * `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com s/masters r/President r/Admin`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
@@ -114,24 +114,24 @@ Possible example of slight variations:
 * `list contacts`
 * `list all contacts`
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
+* When editing roles, the existing roles of the contact will be removed i.e adding of roles is not cumulative.
 
 Examples:
-*  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st person to be `johndoe123` and `johndoe@example.com` respectively.
-*  `edit 2 r/Admin r/President` Edits the roles of the 2nd person to be Admin and President, this removes all existing roles user has.
+*  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st contact to be `johndoe123` and `johndoe@example.com` respectively.
+*  `edit 2 r/Admin r/President` Edits the roles of the 2nd contact to be Admin and President, this removes all existing roles user has.
 
-### Locating persons by name : `find`
+### Locating contacts by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -148,19 +148,19 @@ Examples:
 * `find adele` returns `Adele Yang`, `Adelene Neo`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find alex` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
   ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 ### Clearing all entries : `clear`

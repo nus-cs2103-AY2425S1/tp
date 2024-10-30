@@ -1,0 +1,17 @@
+{
+  "contacts": [ {
+    "name": "Alice Pauline",
+    "telegramHandle": "94351253",
+    "email": "alice@example.com",
+    "studentStatus": "undergraduate 1",
+    "roles": [ "Admin" ],
+    "nickname": ""
+  }, {
+    "name": "Alice Pauline",
+    "telegramHandle": "94351253",
+    "email": "pauline@example.com",
+    "studentStatus": "undergraduate 2",
+    "roles": [ "Admin" ],
+    "nickname": ""
+  } ]
+}
