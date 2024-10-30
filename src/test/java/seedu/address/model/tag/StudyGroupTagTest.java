@@ -46,6 +46,16 @@ public class StudyGroupTagTest {
     public void isValidStudyGroupName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> StudyGroupTag.isValidStudyGroupName(null));
+
+        // valid tag name
+        assertTrue(StudyGroupTag.isValidStudyGroupName("studyGroup"));
+        assertTrue(StudyGroupTag.isValidStudyGroupName("study-Group"));
+        assertTrue(StudyGroupTag.isValidStudyGroupName("12345"));
+        assertTrue(StudyGroupTag.isValidStudyGroupName("studyGroup12345"));
+
+        // invalid tag name
+        assertFalse(StudyGroupTag.isValidStudyGroupName("study Group")); // space within tag name
+        assertFalse(StudyGroupTag.isValidStudyGroupName("study_Group")); // underscore within tag name
     }
 
 }
