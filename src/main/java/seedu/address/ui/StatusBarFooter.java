@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,12 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 import seedu.address.model.person.ReminderManager;
 
 /**
  * A UI component that displays the status bar footer with reminders.
- * The footer shows an icon and text that rotates through upcoming deadlines.
+ * Automatically updates when reminders change.
  */
 public class StatusBarFooter extends UiPart<GridPane> {
 
@@ -43,12 +40,11 @@ public class StatusBarFooter extends UiPart<GridPane> {
         reminderIcon.setFitWidth(DEFAULT_ICON_SIZE);
 
         Platform.runLater(this::initializeReminderIcon);
-        startReminderRotation();
+        setupReminderBinding();
     }
 
     /**
-     * Loads and configures the reminder icon to be displayed next to the reminder text.
-     * The icon's size adjusts relative to the parent HBox's height.
+     * Loads and configures the reminder icon.
      */
     private void initializeReminderIcon() {
         try {
@@ -59,7 +55,7 @@ public class StatusBarFooter extends UiPart<GridPane> {
             reminderIcon.fitHeightProperty().bind(parentHBox.heightProperty().multiply(0.8));
 
             reminderIcon.setPreserveRatio(true);
-            reminderIcon.setSmooth(false);
+            reminderIcon.setSmooth(true);
 
         } catch (Exception e) {
             System.err.println("Could not load reminder icon: " + e.getMessage());
@@ -68,21 +64,16 @@ public class StatusBarFooter extends UiPart<GridPane> {
     }
 
     /**
-     * Starts the reminder rotation by updating the text every 3 seconds with the next upcoming reminder.
-     * If no reminders are found, it displays "No upcoming reminders".
+     * Sets up binding between the reminder manager and the UI label.
      */
-    private void startReminderRotation() {
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), event -> {
-                    String nextReminder = reminderManager.getNextReminder();
-                    if (nextReminder != null && !nextReminder.isEmpty()) {
-                        upcomingReminder.setText(nextReminder);
-                    } else {
-                        upcomingReminder.setText("No upcoming reminders");
-                    }
-                })
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+    private void setupReminderBinding() {
+        reminderManager.currentReminderProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                upcomingReminder.setText(newValue);
+            });
+        });
+
+        // Set initial value
+        upcomingReminder.setText(reminderManager.currentReminderProperty().get());
     }
 }

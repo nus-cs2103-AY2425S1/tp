@@ -8,12 +8,14 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReminderManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private SortedList<Person> sortedPersons;
     private Comparator<Person> currentComparator = null;
+    private final ReminderManager reminderManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
+        reminderManager = new ReminderManager(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -146,6 +150,18 @@ public class ModelManager implements Model {
         assert sortedPersons.size() == initialSize;
 
         addressBook.setPersons(sortedPersons);
+    }
+
+    //=========== Reminder Manager ==========================================================================
+
+    @Override
+    public ReminderManager getReminderManager() {
+        return reminderManager;
+    }
+
+    @Override
+    public StringProperty getCurrentReminderProperty() {
+        return reminderManager.currentReminderProperty();
     }
 
     @Override
