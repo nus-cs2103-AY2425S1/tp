@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -29,11 +30,22 @@ public class UniquePersonList implements Iterable<Person> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the filteredList contains an equivalent person as the toCheck person.
+     */
+    private boolean contains(Person toCheck, ObservableList<Person> filteredList) {
+        requireNonNull(toCheck);
+        return filteredList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Public facing method to check if list contains a particular person.
+     * As it integrates better with the existing codebase (no need to add as much code to support this).
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        Class<? extends Person> personType = getPersonType(toCheck);
+        ObservableList<Person> filteredList = getFilteredList(personType);
+        return contains(toCheck, filteredList);
     }
 
     /**
@@ -42,10 +54,40 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        Class<? extends Person> personType = getPersonType(toAdd);
+        ObservableList<Person> filteredList = getFilteredList(personType);
+
+        if (contains(toAdd, filteredList)) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Gets the type of a person in the list.
+     */
+    public Class<? extends Person> getPersonType(Person person) {
+        requireNonNull(person);
+        if (person instanceof Guest) {
+            return Guest.class;
+        } else {
+            assert(person instanceof Vendor);
+            return Vendor.class;
+        }
+    }
+
+    /**
+     * Gets the filtered list, containing only persons of a particular type.
+     */
+    public <T extends Person> ObservableList<Person> getFilteredList(Class<T> type) {
+        return new FilteredList<>(internalUnmodifiableList, type::isInstance);
+    }
+
+    /**
+     * Overloaded version for private use.
+     */
+    private <T extends Person> ObservableList<Person> getFilteredList(Class<T> type, List<Person> baseList) {
+        return new FilteredList<>(FXCollections.observableArrayList(baseList), type::isInstance);
     }
 
     /**
@@ -61,7 +103,9 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        Class<? extends Person> personType = getPersonType(editedPerson);
+        ObservableList<Person> filteredList = getFilteredList(personType);
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson, filteredList)) {
             throw new DuplicatePersonException();
         }
 
@@ -90,7 +134,9 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+        ObservableList<Person> guestsOnlyList = getFilteredList(Guest.class, persons);
+        ObservableList<Person> vendorsOnlyList = getFilteredList(Vendor.class, persons);
+        if (!personsAreUnique(guestsOnlyList) || !personsAreUnique(vendorsOnlyList)) {
             throw new DuplicatePersonException();
         }
 

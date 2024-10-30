@@ -27,7 +27,6 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Guest} objects to be used in tests.
  */
 public class TypicalGuests {
-
     public static final Guest AVA = new GuestBuilder().withName("Ava Johnson")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("ava.johnson@example.com")
