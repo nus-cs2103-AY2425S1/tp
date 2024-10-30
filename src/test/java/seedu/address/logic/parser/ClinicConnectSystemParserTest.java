@@ -29,9 +29,9 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PatientUtil;
 
-public class AddressBookParserTest {
+public class ClinicConnectSystemParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ClinicConnectSystemParser parser = new ClinicConnectSystemParser();
 
     @Test
     public void parseCommand_add() throws Exception {

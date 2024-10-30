@@ -17,7 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClinicConnectSystem;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.patient.Patient;
@@ -99,22 +99,22 @@ public class AddFCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getClinicConnectSystemFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setClinicConnectSystemFilePath(Path clinicConnectSystemFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        public void setClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyClinicConnectSystem getClinicConnectSystem() {
             throw new AssertionError("This method should not be called.");
         }
 

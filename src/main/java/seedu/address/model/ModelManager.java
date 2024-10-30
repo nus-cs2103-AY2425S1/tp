@@ -22,27 +22,27 @@ import seedu.address.model.patient.Patient;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ClinicConnectSystem clinicConnectSystem;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
     private final TreeSet<FilteredAppointment> filteredAppts;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given clinicConnectSystem and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyClinicConnectSystem clinicConnectSystem, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(clinicConnectSystem, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + clinicConnectSystem + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.clinicConnectSystem = new ClinicConnectSystem(clinicConnectSystem);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
+        filteredPatients = new FilteredList<>(this.clinicConnectSystem.getPatientList());
         this.filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ClinicConnectSystem(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -70,42 +70,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getClinicConnectSystemFilePath() {
+        return userPrefs.getClinicConnectSystemFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setClinicConnectSystemFilePath(Path clinicConnectSystemFilePath) {
+        requireNonNull(clinicConnectSystemFilePath);
+        userPrefs.setClinicConnectSystemFilePath(clinicConnectSystemFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ClinicConnectSystem ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem) {
+        this.clinicConnectSystem.resetData(clinicConnectSystem);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyClinicConnectSystem getClinicConnectSystem() {
+        return clinicConnectSystem;
     }
 
     @Override
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPatient(patient);
+        return clinicConnectSystem.hasPatient(patient);
     }
 
     @Override
     public void deletePatient(Patient target) {
-        addressBook.removePatient(target);
+        clinicConnectSystem.removePatient(target);
     }
 
     @Override
     public void addPatient(Patient patient) {
-        addressBook.addPatient(patient);
+        clinicConnectSystem.addPatient(patient);
         updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
@@ -113,14 +113,14 @@ public class ModelManager implements Model {
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPatient(target, editedPatient);
+        clinicConnectSystem.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Patient List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedClinicConnectSystem}
      */
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return clinicConnectSystem.equals(otherModelManager.clinicConnectSystem)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPatients.equals(otherModelManager.filteredPatients);
     }

@@ -39,20 +39,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getClinicConnectSystemFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setClinicConnectSystemFilePath(Path clinicConnectSystemFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code clinicConnectSystem}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the ClinicConnectSystem */
+    ReadOnlyClinicConnectSystem getClinicConnectSystem();
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the address book.
