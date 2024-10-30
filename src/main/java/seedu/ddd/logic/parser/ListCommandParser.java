@@ -1,25 +1,17 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.logic.parser.ParserUtil.parseFlags;
 
 import seedu.ddd.logic.commands.ListCommand;
-import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.contact.common.predicate.ContactPredicateBuilder;
-import seedu.ddd.model.event.common.predicate.EventPredicateBuilder;
 
 /**
- * Parses input arguments and creates a new ListCommand object
+ * Parses input arguments and decides which parser to use.
  */
 public class ListCommandParser implements Parser<ListCommand> {
     /**
@@ -29,15 +21,26 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DESC, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
-        if (argMultimap.getValue(FLAG_EVENT).isEmpty()) {
-            ContactPredicateBuilder combinedPredicate = new ContactPredicateBuilder(argMultimap);
-            return new ListCommand(combinedPredicate.build());
+        ArgumentMultimap flagMultimap = ArgumentTokenizer.tokenize(args, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+        CommandFlag commandFlag = parseFlags(flagMultimap);
+        if (commandFlag == null) {
+            return new ListContactCommandParser().parse(args);
         }
-        EventPredicateBuilder combinedPredicate = new EventPredicateBuilder(argMultimap);
-        return new ListEventCommand(combinedPredicate.build());
+        switch(commandFlag) {
 
+        case CLIENT:
+            return new ListClientCommandParser().parse(args);
+
+        case VENDOR:
+            return new ListVendorCommandParser().parse(args);
+
+        case EVENT:
+            return new ListEventCommandParser().parse(args);
+        // Will never reach this case as my commandFlag can only be of those three above.
+        default:
+            assert false : "Unexpected commandFlag: " + commandFlag;
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
     }
+
 }

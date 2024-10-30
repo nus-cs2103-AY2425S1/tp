@@ -11,7 +11,7 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.event.common.Event;
 
 /**
- * Lists all events in the address book to the user.
+ * Lists events in the address book to the user.
  */
 public class ListEventCommand extends ListCommand {
 
@@ -28,8 +28,6 @@ public class ListEventCommand extends ListCommand {
      * @param predicate comparing two events.
      */
     public ListEventCommand(Predicate<Event> predicate) {
-        //I will never input a Predicate<Contact> if I have a ListEventCommand.
-        super(null);
         this.predicate = predicate;
     }
 
@@ -39,7 +37,7 @@ public class ListEventCommand extends ListCommand {
         model.updateFilteredContactList(CLEAR_CONTACTS);
         model.updateFilteredEventList(predicate);
         return new CommandResult(String.format(MESSAGE_EVENTS_LISTED_OVERVIEW,
-                model.getFilteredEventList().size()));
+                model.getFilteredEventListSize()));
     }
 
     @Override

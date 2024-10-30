@@ -7,9 +7,6 @@ import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
-//import java.util.Arrays;
-//import java.util.List;
-//import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.commands.ClearCommand;
@@ -19,6 +16,8 @@ import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.HelpCommand;
 import seedu.ddd.logic.commands.ListCommand;
+import seedu.ddd.logic.commands.ListContactCommand;
+import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
@@ -82,6 +81,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " -c") instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " -v") instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " -e") instanceof ListEventCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
     }
 

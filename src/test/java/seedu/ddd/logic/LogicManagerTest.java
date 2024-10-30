@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.ddd.logic.commands.CommandResult;
-import seedu.ddd.logic.commands.ListCommand;
+import seedu.ddd.logic.commands.ListContactCommand;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
@@ -56,9 +56,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
+        String listContactCommand = ListContactCommand.COMMAND_WORD;
         int size = model.getFilteredContactList().size();
-        assertCommandSuccess(listCommand, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), model);
+        assertCommandSuccess(listContactCommand, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), model);
     }
 
     // @Test
