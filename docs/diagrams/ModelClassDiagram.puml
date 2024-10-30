@@ -15,6 +15,7 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
+Class AppointmentDate
 Class Email
 Class Name
 Class Phone
@@ -42,6 +43,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> AppointmentDate
 Person *--> "*" Tag
 Person *--> "*" Log
 
@@ -51,6 +53,7 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> AppointmentDate
 
 ModelManager --> "~* filtered" Person
 @enduml
