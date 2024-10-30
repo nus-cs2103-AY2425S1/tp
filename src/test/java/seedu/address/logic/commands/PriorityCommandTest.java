@@ -67,15 +67,13 @@ public class PriorityCommandTest {
 
         assertThrows(CommandException.class, () -> priorityCommand.execute(model));
     }
+
     @Test
     public void equals() {
-        // Updated to include false for the reset flag in all PriorityCommand constructors
-        final PriorityCommand standardCommand = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1,
-                false);
+        final PriorityCommand standardCommand = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 1, false);
 
         // same values -> returns true
-        PriorityCommand commandWithSameValues = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1,
-                false);
+        PriorityCommand commandWithSameValues = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 1, false);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -88,11 +86,33 @@ public class PriorityCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_SECOND_PERSON.getZeroBased(), 1,
-                false)));
+        PriorityCommand commandWithDifferentIndex =
+                new PriorityCommand(INDEX_SECOND_PERSON.getOneBased(), 1, false);
+        assertFalse(standardCommand.equals(commandWithDifferentIndex));
 
         // different priorityLevel -> returns false
-        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 2,
-                false)));
+        PriorityCommand commandWithDifferentPriorityLevel =
+                new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 2, false);
+        assertFalse(standardCommand.equals(commandWithDifferentPriorityLevel));
+
+        // different reset flag -> returns false
+        PriorityCommand commandWithResetFlag = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 1, true);
+        assertFalse(standardCommand.equals(commandWithResetFlag));
     }
+
+    @Test
+    public void execute_resetPriorityLevelUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withPriorityLevel(3).build();
+
+        PriorityCommand priorityCommand = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), 3, true);
+
+        String expectedMessage = String.format(PriorityCommand.MESSAGE_SUCCESS_RESET, editedPerson.getName());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(priorityCommand, model, expectedMessage, expectedModel);
+    }
+
 }
