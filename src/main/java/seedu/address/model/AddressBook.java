@@ -195,7 +195,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeJob(Job key) {
         String jobIdentifier = key.getIdentifier();
         for (Person person: persons) {
-            if (person.getMatch().filter(match -> match.equals(jobIdentifier)).isPresent()) {
+            if (!person.isMatchPresent()) {
+                continue;
+            }
+            if (person.getMatch().get().equals(jobIdentifier)) {
                 Name name = person.getName();
                 Phone phone = person.getPhone();
                 Email email = person.getEmail();

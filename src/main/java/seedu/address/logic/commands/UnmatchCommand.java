@@ -106,7 +106,7 @@ public class UnmatchCommand extends Command {
         boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
 
         // Check and ensure the contact and job are matched to each other before unmatching
-        if (!(hasContactMatchedJob)) {
+        if (!hasContactMatchedJob) {
             throw new CommandException(MESSAGE_CONTACT_NOT_MATCHED);
         }
     }

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -58,11 +59,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(skill -> skill.skillName))
                 .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
 
-        String jobIdentifier = person.getMatch().orElse("Unemployed");
-        if (jobIdentifier == "Unemployed") {
+
+        Optional<String> jobIdentifier = person.getMatch();
+        if (jobIdentifier.isEmpty()) {
             match.setText("Unemployed");
         } else {
-            String[] jobIdentifierComponents = jobIdentifier.split("::");
+            String[] jobIdentifierComponents = jobIdentifier.get().split("::");
             assert(jobIdentifierComponents.length == 2);
             String companyName = jobIdentifierComponents[0];
             String jobName = jobIdentifierComponents[1];

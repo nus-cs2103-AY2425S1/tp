@@ -45,7 +45,7 @@ public class Person {
      * Creates a person with the matching job.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
-        requireAllNonNull(name, phone, email, role, skills);
+        requireAllNonNull(name, phone, email, role, skills, match);
         this.name = name;
         this.phone = phone;
         this.email = email;

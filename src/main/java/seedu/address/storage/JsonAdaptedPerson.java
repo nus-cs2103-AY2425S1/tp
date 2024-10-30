@@ -60,8 +60,7 @@ class JsonAdaptedPerson {
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
-        // During the reconstruction toModelType, have to perform a String.isEmpty() check here
-        match = source.getMatch().orElse("");
+        match = source.getMatch().orElse(null);
     }
 
     /**
@@ -112,7 +111,7 @@ class JsonAdaptedPerson {
         // TODO - Discuss if we should have an overloaded Person method taking in (Person person, String match)
         //  which does a check within for an empty string. This can help us to reduce code in AddressBook, match and
         //  unmatch command and other stuff.
-        if (match.isEmpty()) {
+        if (match == null) {
             return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills);
         } else {
             final String modelMatch = match;
