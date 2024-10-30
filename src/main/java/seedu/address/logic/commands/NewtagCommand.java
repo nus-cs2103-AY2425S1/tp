@@ -23,7 +23,8 @@ public class NewtagCommand extends Command {
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "New tag(s) created.\n";
-    public static final String MESSAGE_DUPLICATE = "Some tag(s) already exists.\n";
+    public static final String MESSAGE_DUPLICATE = "Some tag(s) already exist(s).\n"
+            + "Non-duplicate tags (if any) have been added successfully.\n";
     public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
             + " tags.\nPlease remove some using 'deletetag'.\n";
 
@@ -52,23 +53,32 @@ public class NewtagCommand extends Command {
     /**
      * Adds the tags to the model and checks for duplicates.
      * @param model The model to which tags will be added.
-     * @throws CommandException if any tag already exists.
      */
-    private void addTagsToModel(Model model) throws CommandException {
-        if (!model.addTags(tags)) {
-            throw new CommandException(MESSAGE_DUPLICATE);
+    private boolean addTagsToModel(Model model) {
+        boolean isSuccessful = model.addTags(tags);
+        model.updateTagList();
+        return isSuccessful;
+    }
+
+    /**
+     * Creates a CommandResult based on the success of adding tags to the model.
+     *
+     * @param isSuccessful Indicates if the tags were successfully added.
+     * @return The corresponding CommandResult.
+     */
+    private CommandResult createCommandResult(boolean isSuccessful) {
+        if (!isSuccessful) {
+            return new CommandResult(MESSAGE_DUPLICATE);
         }
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-
         validateTagListSize(model);
-        addTagsToModel(model);
-        model.updateTagList();
-
-        return new CommandResult(MESSAGE_SUCCESS);
+        boolean isSuccessful = addTagsToModel(model);
+        return createCommandResult(isSuccessful);
     }
 
     @Override

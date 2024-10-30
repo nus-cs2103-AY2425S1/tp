@@ -62,7 +62,7 @@ public class NewtagCommandTest {
      * EP: Valid tag name(s) that already exist.
      */
     @Test
-    public void execute_duplicateTag_failure() {
+    public void execute_duplicateTag_successWithWarning() {
         Tag duplicateTag = TypicalTags.BRIDES_SIDE;
         List<Tag> duplicateTags = new ArrayList<>();
         duplicateTags.add(duplicateTag);
@@ -71,20 +71,29 @@ public class NewtagCommandTest {
         NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
         String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
 
-        assertCommandFailure(newTagCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTags(duplicateTags);
+
+        // No exception thrown, but user will be informed of duplicate(s).
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_mixedNewAndDuplicateTags_failure() {
+    public void execute_mixedNewAndDuplicateTags_successWithWarning() {
         Tag duplicateTag = TypicalTags.BRIDES_SIDE;
-        Tag newTag = TypicalTags.COLLEAGUES;
-        List<Tag> mixedTags = List.of(duplicateTag, newTag);
+        Tag newColleaguesTag = TypicalTags.COLLEAGUES;
+        Tag newFriendsTag = TypicalTags.FRIENDS;
+        List<Tag> mixedTags = List.of(newFriendsTag, duplicateTag, newColleaguesTag);
         model.addTag(duplicateTag);
 
         NewtagCommand newTagCommand = new NewtagCommand(mixedTags);
         String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
 
-        assertCommandFailure(newTagCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTags(mixedTags);
+
+        // The list should still be updated, but the user will be notified of duplicate(s).
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
 
     /**
