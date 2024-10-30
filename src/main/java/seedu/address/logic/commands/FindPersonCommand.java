@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
@@ -14,9 +16,10 @@ public class FindPersonCommand extends FindCommand<Person> {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " person : Finds all persons matching the following parameters.\n"
-            + "To specify name, use the parameter n/[NAME] where [NAME] is a list of names, non-case-sensitive,"
+            + "To specify name, use the parameter n/[NAME] where [NAME] is a list of person names, non-case-sensitive,"
             + "separated by spaces.\n"
-            + "Parameters: n/[NAME]\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.PERSON_ENTITY_STRING + " n/alice bob";
 
     public FindPersonCommand(Predicate<Person> predicate) {
