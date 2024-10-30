@@ -4,12 +4,16 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.util.logging.Logger;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -37,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel vendorListPanel;
 
     private ResultDisplay resultDisplay;
+
     @FXML
     private HBox cardPane;
 
@@ -142,11 +147,22 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
+    private void handleExit(Event event) {
+        event.consume();
+        handleExit();
+    }
+
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        primaryStage.hide();
+
+        // Sets a 2-second delay before exiting
+        // To make exiting the application feel less abrupt
+        resultDisplay.setFeedbackToUser("BridalBuddy is closing now... See you again!");
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(unused -> Platform.exit());
+        pause.play();
     }
 
     /**
