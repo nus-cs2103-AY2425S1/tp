@@ -9,12 +9,8 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows commands that ClinicConnect provides.\n"
-            + "Example: " + COMMAND_WORD
-            + "\n\n" + "OR" + "\n\n"
-            + COMMAND_WORD + " <keyword>: Shows usage of the command of the specific keyword.\n"
-            + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " add";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows commands that ClinicConnect provides\n"
+            + "Please fix the command keyword typo";
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
