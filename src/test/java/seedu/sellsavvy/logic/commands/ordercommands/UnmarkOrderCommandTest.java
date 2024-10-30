@@ -68,21 +68,11 @@ public class UnmarkOrderCommandTest {
     }
 
     @Test
-    public void execute_orderAlreadyUnmarked_warningGiven() {
-        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
+    public void execute_orderAlreadyUnmarked_throwsCommandException() {
+        Index targetIndex = INDEX_FIRST_ORDER;
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(targetIndex);
 
-        Model expectedModel = model.createCopy();
-        Order orderToBeUnmarked = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased())
-                .getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
-        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarked);
-
-        expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased()).getOrderList()
-                .setOrder(orderToBeUnmarked, unmarkedOrder);
-        String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_ORDER_ALREADY_UNMARKED_WARNING
-                        + UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
-                Messages.format(unmarkedOrder));
-
-        assertCommandSuccess(unmarkOrderCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(unmarkOrderCommand, model, UnmarkOrderCommand.MESSAGE_ORDER_ALREADY_UNMARKED);
     }
 
     @Test

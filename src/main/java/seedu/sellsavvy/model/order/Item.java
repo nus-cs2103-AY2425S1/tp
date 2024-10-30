@@ -13,7 +13,7 @@ public class Item {
             "Item can contain any printable characters, but it should not be blank.";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the item must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^(?!\\s*$)[\\p{Print}]+$";
