@@ -7,11 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -169,6 +165,8 @@ public class ModelManager implements Model {
             logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
         } catch (IOException e) {
             logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
+        }
+    }
 
     @Override
     public OperatingHours getOperatingHours() {

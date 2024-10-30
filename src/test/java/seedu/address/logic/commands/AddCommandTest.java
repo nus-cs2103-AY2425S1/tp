@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,7 @@ import seedu.address.model.Model;
 import seedu.address.model.OperatingHours;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 import seedu.address.testutil.PersonBuilder;
@@ -257,13 +260,11 @@ public class AddCommandTest {
         private final List<Appointment> calendar;
         private OperatingHours operatingHours = new OperatingHours();
 
-
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
-            AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(person);
-            this.calendar = new Calendar(addressBook);
+            this.calendar = new ArrayList<>();
+            calendar.add(person.getAppointment());
         }
 
         @Override
@@ -280,13 +281,7 @@ public class AddCommandTest {
 
         @Override
         public boolean hasAppointment(Person person) {
-            requireNonNull(person);
-            return calendar.hasAppointment(person);
-        }
-
-        @Override
-        public Calendar getCalendar() {
-            return calendar;
+            return calendar.contains(person.getAppointment());
         }
 
         @Override
@@ -326,15 +321,13 @@ public class AddCommandTest {
         @Override
         public void addPerson(Person person) {
             requireNonNull(person);
-            addressBook.addPerson(person);
             personsAdded.add(person);
-            calendar.addAppointment(person);
         }
 
         @Override
         public boolean hasAppointment(Person person) {
             requireNonNull(person);
-            return calendar.hasAppointment(person);
+            return calendar.stream().anyMatch(x -> x.equals(person.getAppointment()));
         }
 
         @Override
@@ -359,9 +352,5 @@ public class AddCommandTest {
             return addressBook;
         }
 
-        @Override
-        public Calendar getCalendar() {
-            return calendar;
-        }
     }
 }
