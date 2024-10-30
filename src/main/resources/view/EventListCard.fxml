@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
+<?import javafx.scene.text.Text?>
 <HBox id="cardPane" fx:id="cardPane" styleClass="eventListCard" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -42,6 +43,7 @@
                     <Image url="@/images/calendar_light.png"/>
                 </ImageView>
                 <Label fx:id="startDate" styleClass="cell_small_label" text="\$date" />
+                <Text styleClass="detail-contents"> - </Text>
                 <Label fx:id="endDate" styleClass="cell_small_label" text="\$date" />
             </HBox>
 

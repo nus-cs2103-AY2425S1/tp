@@ -81,7 +81,7 @@
                     <children>
                         <Text styleClass="detail-grid-header" text="Name" GridPane.columnIndex="0" />
                         <Text styleClass="detail-grid-header" text="Location" GridPane.columnIndex="1" />
-                        <Text styleClass="detail-grid-header" text="Date" GridPane.columnIndex="2" />
+                        <Text styleClass="detail-grid-header" text="Start Date" GridPane.columnIndex="2" />
                     </children>
 
                     <!-- Separator Line -->

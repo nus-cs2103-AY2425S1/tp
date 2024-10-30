@@ -40,9 +40,20 @@
                                 <Image url="@/images/calendar.png" />
                             </image>
                         </ImageView>
-                        <Text styleClass="detail-contents"> Date </Text>
+                        <Text styleClass="detail-contents"> Start Date </Text>
                     </HBox>
                     <Label fx:id="startDate" styleClass="detail-contents" text="\$date"/>
+                </HBox>
+
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <HBox spacing="15" prefWidth="150" alignment="CENTER_LEFT">
+                        <ImageView>
+                            <image>
+                                <Image url="@/images/calendar.png" />
+                            </image>
+                        </ImageView>
+                        <Text styleClass="detail-contents"> End Date </Text>
+                    </HBox>
                     <Label fx:id="endDate" styleClass="detail-contents" text="\$date"/>
                 </HBox>
 

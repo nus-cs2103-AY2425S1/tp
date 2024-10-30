@@ -99,7 +99,8 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
                 Label eventLocation = new Label(event.getLocation().toString());
                 eventLocation.getStyleClass().add("grid-content-location");
                 Label eventStartDate = new Label(event.getStartDate().format(DATE_FORMATTER));
-                eventStartDate.getStyleClass().add("grid-content-date");
+                eventStartDate.getStyleClass().add("grid-content-startDate");
+                eventStartDate.setWrapText(true);
 
 
                 eventsAttending.add(eventName, 0, rowIndex);
