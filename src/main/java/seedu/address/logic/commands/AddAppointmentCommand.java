@@ -31,9 +31,9 @@ public class AddAppointmentCommand extends AddCommand {
             + "[" + PREFIX_SICKNESS + "SICKNESS] "
             + "[" + PREFIX_MEDICINE + "MEDICINE] \n"
             + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " "
+            + PREFIX_PERSON_ID + "1 "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
-            + PREFIX_PERSON_ID + "1 "
             + PREFIX_SICKNESS + "Common Cold "
             + PREFIX_MEDICINE + "Paracetamol";
 
