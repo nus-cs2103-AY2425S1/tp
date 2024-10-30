@@ -66,19 +66,22 @@ public class StudentComparator implements Comparator<Student> {
         if (sortOrder.isAscending()) {
             return new StudentComparatorByField(Comparator.comparing(Student::getPhone), MESSAGE_PHONE_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(), MESSAGE_PHONE_DESCENDING);
+        return new StudentComparatorByField(Comparator.comparing(Student::getPhone).reversed(),
+                MESSAGE_PHONE_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForAddress(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
             return new StudentComparatorByField(Comparator.comparing(Student::getAddress), MESSAGE_ADDRESS_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getAddress).reversed(), MESSAGE_ADDRESS_DESCENDING);
+        return new StudentComparatorByField(Comparator.comparing(Student::getAddress).reversed(),
+                MESSAGE_ADDRESS_DESCENDING);
     }
 
     public static StudentComparatorByField getComparatorForGradeLevel(SortOrder sortOrder) {
         if (sortOrder.isAscending()) {
-            return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel), MESSAGE_GRADE_LEVEL_ASCENDING);
+            return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel),
+                    MESSAGE_GRADE_LEVEL_ASCENDING);
         }
         return new StudentComparatorByField(Comparator.comparing(Student::getGradeLevel).reversed(),
                 MESSAGE_GRADE_LEVEL_DESCENDING);
@@ -88,7 +91,8 @@ public class StudentComparator implements Comparator<Student> {
         if (sortOrder.isAscending()) {
             return new StudentComparatorByField(Comparator.comparing(Student::getGroup), MESSAGE_GROUP_ASCENDING);
         }
-        return new StudentComparatorByField(Comparator.comparing(Student::getGroup).reversed(), MESSAGE_GROUP_DESCENDING);
+        return new StudentComparatorByField(Comparator.comparing(Student::getGroup).reversed(),
+                MESSAGE_GROUP_DESCENDING);
     }
 
     /**

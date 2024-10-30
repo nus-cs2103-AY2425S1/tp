@@ -150,7 +150,8 @@ public class StudentComparatorTest {
         comparator.addComparator(StudentComparator.getComparatorForName(new StudentComparator.SortOrder("ASC")));
         comparator.addComparator(StudentComparator.getComparatorForPhone(new StudentComparator.SortOrder("DESC")));
 
-        assertEquals(String.join(", ", MESSAGE_NAME_ASCENDING, MESSAGE_PHONE_DESCENDING), comparator.getSortDescription());
+        assertEquals(String.join(", ", MESSAGE_NAME_ASCENDING, MESSAGE_PHONE_DESCENDING),
+                comparator.getSortDescription());
     }
 
     @Test
