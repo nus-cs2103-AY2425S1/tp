@@ -25,6 +25,7 @@ import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.commands.MarkAttendanceByTutorialCommand;
 import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.commands.UnEnrollCommand;
+import seedu.address.logic.commands.UnmarkAttendanceByStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -93,6 +94,9 @@ public class AddressBookParser {
 
         case MarkAttendanceByTutorialCommand.COMMAND_WORD:
             return new MarkAttendanceByTutorialCommandParser().parse(arguments);
+
+        case UnmarkAttendanceByStudentCommand.COMMAND_WORD:
+            return new UnmarkAttendanceByStudentCommandParser().parse(arguments);
 
         case FilterPaidCommand.COMMAND_WORD:
             return new FilterPaidCommandParser().parse(arguments);

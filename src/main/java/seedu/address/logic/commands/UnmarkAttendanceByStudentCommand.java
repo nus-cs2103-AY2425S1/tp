@@ -19,24 +19,24 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a person identified using it's displayed index from the address book.
+ * Marks the attendance of a person identified using it's displayed index from the addres book as absent.
  */
-public class MarkAttendanceByStudentCommand extends Command {
+public class UnmarkAttendanceByStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "mas";
-
+    public static final String COMMAND_WORD = "umas";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of the student identified "
+            + ": Unmarks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ATTENDANCE + "ATTENDANCE"
             + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024"
-            + PREFIX_TUTORIAL + "Math";
+            + PREFIX_ATTENDANCE + " 20/10/2024 "
+            + PREFIX_TUTORIAL + " Math";
 
-    public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
-            "Marked attendance of %1$s student for %2$s tutorial on %3$s";
+    public static final String MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS =
+            "Unmarked attendance of %1$s student for %2$s tutorial on %3$s";
+
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
 
@@ -49,7 +49,7 @@ public class MarkAttendanceByStudentCommand extends Command {
      * @param attendance Attendance of the person specified by index
      * @param tutorial Tutorial the student attended
      */
-    public MarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, Tutorial tutorial) {
+    public UnmarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, Tutorial tutorial) {
         requireAllNonNull(targetIndex, attendance, tutorial);
         this.targetIndex = targetIndex;
         this.attendance = attendance;
@@ -65,24 +65,22 @@ public class MarkAttendanceByStudentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
+        Person studentToUnmarkAttendance = lastShownList.get(targetIndex.getZeroBased());
         Participation currentParticipation = model.getParticipationList().stream()
-                .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
-                        && participation.getTutorial().equals(this.tutorial))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(
-                        String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
+                .filter(participation -> participation.getStudent().equals(studentToUnmarkAttendance)
+                        && participation.getTutorial().equals(this.tutorial)).findFirst()
+                .orElseThrow(() -> new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(attendance);
+        updatedAttendance.remove(attendance);
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
 
         model.setParticipation(currentParticipation, updatedParticipation);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
-                studentToMarkAttendance.getName(), tutorial.getSubject(), attendance));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS,
+                studentToUnmarkAttendance.getName(), tutorial.getSubject(), attendance));
     }
 
     @Override
@@ -91,15 +89,15 @@ public class MarkAttendanceByStudentCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof MarkAttendanceByStudentCommand)) {
+        //instanceof handles null
+        if (!(other instanceof UnmarkAttendanceByStudentCommand)) {
             return false;
         }
 
-        MarkAttendanceByStudentCommand otherMarkAttendanceCommand = (MarkAttendanceByStudentCommand) other;
-        return targetIndex.equals(otherMarkAttendanceCommand.targetIndex)
-                && attendance.equals(otherMarkAttendanceCommand.attendance)
-                && tutorial.equals(otherMarkAttendanceCommand.tutorial);
+        UnmarkAttendanceByStudentCommand otherUnmarkAttendanceCommand = (UnmarkAttendanceByStudentCommand) other;
+        return targetIndex.equals(otherUnmarkAttendanceCommand.targetIndex)
+                && attendance.equals(otherUnmarkAttendanceCommand.attendance)
+                && tutorial.equals(otherUnmarkAttendanceCommand.tutorial);
     }
 
     @Override
