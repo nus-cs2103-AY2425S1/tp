@@ -22,14 +22,17 @@ public class CommandResult {
 
     private Person personToShow;
 
+    private final boolean export;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean export) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.personToShow = null;
+        this.export = export;
     }
 
     /**
@@ -37,7 +40,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false);
     }
 
     //@@author tayxuenye-reused
@@ -46,7 +53,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with a person to display in the UI.
      */
     public CommandResult(String feedbackToUser, Person personToShow) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
         this.personToShow = requireNonNull(personToShow);
     }
     //@@author
@@ -65,6 +72,10 @@ public class CommandResult {
 
     public Person getPersonToShow() {
         return personToShow;
+    }
+
+    public boolean isExport() {
+        return export;
     }
 
     @Override

@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -17,23 +19,29 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class MultiFormatAddressBookStorage implements AddressBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(MultiFormatAddressBookStorage.class);
 
-    private Path filePath;
+    private Path saveFilePath;
+    private Path exportFilePath;
 
-    public JsonAddressBookStorage(Path filePath) {
-        this.filePath = filePath;
+    public MultiFormatAddressBookStorage(Path saveFilePath, Path exportFilePath) {
+        this.saveFilePath = saveFilePath;
+        this.exportFilePath = exportFilePath;
     }
 
-    public Path getAddressBookFilePath() {
-        return filePath;
+    public Path getAddressBookSaveFilePath() {
+        return saveFilePath;
+    }
+
+    public Path getAddressBookExportFilePath() {
+        return exportFilePath;
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(filePath);
+        return readAddressBook(saveFilePath);
     }
 
     /**
@@ -61,7 +69,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+        saveAddressBook(addressBook, saveFilePath);
     }
 
     /**
@@ -73,8 +81,19 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-        FileUtil.createIfMissing(filePath);
+        FileUtil.createSaveFileIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+    }
+
+    @Override
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        exportAddressBook(addressBook, exportFilePath);
+    }
+
+    @Override
+    public void exportAddressBook(ReadOnlyAddressBook addressBook, Path exportFilePath) throws IOException {
+        FileUtil.createExportFileIfMissing(exportFilePath);
+        CsvUtil.exportCsvFile(addressBook, exportFilePath);
     }
 
 }
