@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Deletes a wedding identified using its displayed index from the address book.
@@ -40,7 +41,13 @@ public class DeleteWeddingCommand extends Command {
         }
 
         Wedding weddingToDelete = lastShownList.get(targetIndex.getZeroBased());
+        WeddingName weddingToDeleteName = weddingToDelete.getWeddingName();
         model.removeWedding(weddingToDelete);
+
+        if (weddingToDeleteName.equals(model.getCurrentWeddingName().getValue())) {
+            model.setCurrentWeddingName(null);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        }
 
         return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
                 Messages.formatWedding(weddingToDelete)));
