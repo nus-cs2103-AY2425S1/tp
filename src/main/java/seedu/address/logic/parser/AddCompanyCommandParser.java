@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BILLING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.common.Address;
@@ -23,18 +21,6 @@ import seedu.address.model.person.Phone;
 public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
 
     /**
-     * Returns true if none of the prefixes contain empty {@code Optional} values in the given
-     * {@code ArgumentMultiMap}.
-     *
-     * @param argumentMultiMap Supplied ArgumentMultiMap
-     * @param prefixes Prefixes to check for
-     * @return true if all prefixes present
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultiMap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultiMap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Parses the given {@code String} of arguments in the context of the AddCompanyCommand
      * and returns an AddCompanyCommand object for execution.
      *
@@ -44,7 +30,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_BILLING_DATE, PREFIX_PHONE);
 
-        if (!arePrefixesPresent(argMultiMap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_BILLING_DATE, PREFIX_PHONE)
+        if (!ParserUtil.arePrefixesPresent(argMultiMap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_BILLING_DATE, PREFIX_PHONE)
                 || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCompanyCommand.MESSAGE_USAGE));
         }
