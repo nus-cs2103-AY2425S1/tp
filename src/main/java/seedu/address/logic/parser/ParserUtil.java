@@ -120,7 +120,7 @@ public class ParserUtil {
     public static int parseMaxScore(String maxScore) throws ParseException {
         requireNonNull(maxScore);
         String trimmedMaxScore = maxScore.trim();
-        if (!StringUtil.isUnsignedInteger(trimmedMaxScore)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMaxScore)) {
             throw new ParseException(Assignment.MAX_SCORE_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMaxScore);
