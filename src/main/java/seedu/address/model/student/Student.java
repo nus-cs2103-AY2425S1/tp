@@ -3,7 +3,6 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -36,7 +35,7 @@ public class Student extends Person {
     private static final Address DUMMY_ADDRESS = new Address("dummy address");
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
 
-    private final List<AttendanceRecord> attendanceRecords = new ArrayList<>();
+    private final ObservableList<AttendanceRecord> attendanceRecords = FXCollections.observableArrayList();
 
 
     // Identity fields
@@ -146,7 +145,7 @@ public class Student extends Person {
 
     //getters
 
-    public List<AttendanceRecord> getAttendanceRecord() {
+    public ObservableList<AttendanceRecord> getAttendanceRecord() {
         return attendanceRecords;
     }
 
