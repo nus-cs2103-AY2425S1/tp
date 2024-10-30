@@ -19,7 +19,7 @@ import seedu.address.model.event.Date;
 
 public class JsonAdaptedEventTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_DATE = "10 Oct 2024";
+    private static final String INVALID_DATE = "10 Octo 2024";
     private static final String INVALID_TAG = "#hiking";
 
     private static final String VALID_NAME = FIONA.getName().toString();

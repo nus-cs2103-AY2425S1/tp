@@ -117,11 +117,11 @@ public class EventTest {
     @Test
     public void toString_checkFormat() {
         Name name = new Name("Conference");
-        Date date = new Date("2024-10-10");
+        Date date = new Date("2024-12-10");
 
         Event event = new Event(name, date, tags);
 
-        String expected = Event.class.getCanonicalName() + "{name=Conference, date=2024-10-10, tags=[]}";
+        String expected = Event.class.getCanonicalName() + "{name=Conference, date=10-12-2024, tags=[]}";
         assertEquals(expected, event.toString());
     }
 }
