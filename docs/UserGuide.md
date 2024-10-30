@@ -149,6 +149,27 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by time range: `findtime`
+
+Finds persons whose preferred time ranges overlap with any of given time range.
+
+Format: `findtime RANGE [MORE_RANGE]`
+
+<box type="tip" seamless>
+
+**Tip:** RANGE should be in the form of "HHmm-HHmm" with no extra space 
+and `HHmm` should be valid 0000-2359 4-digit number, while the first time should be before the second time
+</box>
+
+* The search is border-insensitive. e.g. `1200-1300` will not match `1300-1400`
+* The order of ranges does not matter.
+* Persons matching at least one range will be returned(i.e. `OR` search).
+
+Examples:
+* `findtime 2030-2100` returns persons who have at least one preferred time range overlaps with the specified range.
+* `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any 
+one of the specified ranges<br>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
