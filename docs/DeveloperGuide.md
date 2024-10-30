@@ -427,24 +427,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Data Requirements**
 1. All the data should be stored in human-editable files and must not be stored using DBMS. 
-2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
+2. Data should be saved permanently and must not be affected by power outage.
 
 **Performance Requirements**
-1. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. 
+1. Should be able to hold up to 1000 students without any noticeable sluggishness in performance for typical usage. 
 2. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
+2. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
 3. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
-1. Should only be used by one student at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+1. Should only be used by one user at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
 
 **Testability**
 1. The software should not depend on any remote server and should be able to run at any time. 
 2. The application should be able to launch without an installer.
-3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+3. Features should be testable without any external access e.g., remote APIs, audio players, user accounts, internet connection, after the initial download of the application's jar file.
 
 **Security Requirements**
 1. The application is assumed to be used locally without creating any user account.
