@@ -75,8 +75,8 @@ public class DoctorCard extends UiPart<Region> {
         appointmentsLabel.setText("Appointments: " + appointmentSet.size());
 
         ObservableList<String> appointmentStrings = FXCollections.observableArrayList(appointmentSet.stream()
-                .map(appointment -> "Appointment " + appointment.getId() + ": With Patient "
-                        + appointment.getPatientName() + " on "
+                .map(appointment -> appointment.getId() + " - Patient "
+                        + appointment.getPatientName() + " | Date: "
                         + appointment.getDate().toString() + " (" + appointment.getTime().toString() + "hrs)")
                 .toArray(String[]::new));
 
