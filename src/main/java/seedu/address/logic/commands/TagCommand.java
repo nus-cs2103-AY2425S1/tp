@@ -42,7 +42,7 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_SUBJECT + "MATH "
-            + PREFIX_LEVEL + "JC1";
+            + PREFIX_LEVEL + "S1 NT";
 
     public static final String MESSAGE_TAG_STUDENT_SUCCESS = "Tagged Student: %1$s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in address book.";
