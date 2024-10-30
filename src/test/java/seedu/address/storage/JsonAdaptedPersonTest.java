@@ -25,7 +25,9 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_DATE_FORMAT = "12-31-2024 12 00";
     private static final String INVALID_DATE_VALUE_LEAP = "29/2/2025 1200";
 
-    private static final String INVALID_DATE_VALUE_EDGE = "31/4/2024 1200";
+    private static final String INVALID_DATE_VALUE_APRIL = "31/4/2024 1200";
+    private static final String INVALID_DATE_VALUE_FEBRUARY = "31/2/2024 1200";
+
     private static final String INVALID_DATE_VALUE = "32/5/2024 1200";
 
 
@@ -174,11 +176,17 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidDateValue_throwsIllegalValueException() {
-        JsonAdaptedDate invalidAprilDate = new JsonAdaptedDate(INVALID_DATE_VALUE_EDGE);
+        JsonAdaptedDate invalidAprilDate = new JsonAdaptedDate(INVALID_DATE_VALUE_APRIL);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidAprilDate);
         String expectedMessage = "Invalid date: APRIL cannot have more than 30 days.";
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+
+        JsonAdaptedDate invalidFebDate = new JsonAdaptedDate(INVALID_DATE_VALUE_FEBRUARY);
+        JsonAdaptedPerson personFeb = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAG, VALID_ALLERGY, invalidFebDate);
+        String expectedMessageFeb = "Invalid date: FEBRUARY cannot have more than 29 days.";
+        assertThrows(IllegalValueException.class, expectedMessageFeb, personFeb::toModelType);
 
         JsonAdaptedDate invalidMayDate = new JsonAdaptedDate(INVALID_DATE_VALUE);
         JsonAdaptedPerson personTemp = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,

@@ -62,6 +62,13 @@ public class DateCommandParserTest {
         assertEquals("Invalid date: JUNE cannot have more than 30 days.", thrown.getMessage());
     }
 
+    @Test
+    public void parseDateTime_invalid31stFeb_throwsParseException() {
+        ParseException thrown =
+                assertThrows(ParseException.class, () -> parser.parseDateString("31/2/2024 1200"));
+        assertEquals("Invalid date: FEBRUARY cannot have more than 29 days.", thrown.getMessage());
+    }
+
     // Invalid formats
     @Test
     public void parseDateTime_invalidFormat_throwsParseException() {

@@ -95,6 +95,10 @@ public class ScheduleCommandParserTest {
                 assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDateTemp));
         assertEquals("Invalid date or time values! Ensure day, month, hour, and minute ranges are correct.",
                 thrownTemp.getMessage());
+
+        String invalidDateFeb = "31/2/2024 1800"; // February has only 29 days
+        ParseException thrownFeb = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDateFeb));
+        assertEquals("Invalid date: FEBRUARY cannot have more than 29 days.", thrownFeb.getMessage());
     }
 
 
