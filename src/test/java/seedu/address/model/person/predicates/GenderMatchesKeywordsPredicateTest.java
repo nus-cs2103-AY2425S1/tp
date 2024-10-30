@@ -2,6 +2,7 @@ package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
@@ -12,6 +13,29 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class GenderMatchesKeywordsPredicateTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new GenderMatchesKeywordsPredicate(null));
+    }
+
+    @Test
+    public void isValidInput() {
+        // null gender
+        assertThrows(NullPointerException.class, () -> GenderMatchesKeywordsPredicate.isValidInput(null));
+
+        // invalid gender
+        assertFalse(GenderMatchesKeywordsPredicate.isValidInput("")); // empty string
+        assertFalse(GenderMatchesKeywordsPredicate.isValidInput(" ")); // spaces only
+        assertFalse(GenderMatchesKeywordsPredicate.isValidInput("G")); // invalid character
+        assertFalse(GenderMatchesKeywordsPredicate.isValidInput("Female")); // invalid characters
+
+        // valid gender
+        assertTrue(GenderMatchesKeywordsPredicate.isValidInput("F"));
+        assertTrue(GenderMatchesKeywordsPredicate.isValidInput("M"));
+        assertTrue(GenderMatchesKeywordsPredicate.isValidInput("f"));
+        assertTrue(GenderMatchesKeywordsPredicate.isValidInput("m"));
+    }
 
     @Test
     public void equals() {

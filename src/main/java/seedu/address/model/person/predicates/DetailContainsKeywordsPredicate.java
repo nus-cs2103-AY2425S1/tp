@@ -1,5 +1,7 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -13,7 +15,13 @@ import seedu.address.model.person.Person;
 public class DetailContainsKeywordsPredicate implements Predicate<Person> {
     private final Set<String> keywords;
 
+    /**
+     * Constructs a {@code DetailContainsKeywordsPredicate}.
+     *
+     * @param keywords A set of valid keywords.
+     */
     public DetailContainsKeywordsPredicate(Set<String> keywords) {
+        requireNonNull(keywords);
         this.keywords = keywords;
     }
 

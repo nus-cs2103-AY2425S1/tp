@@ -1,5 +1,6 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Set;
@@ -25,9 +26,10 @@ public class AgeContainsKeywordsPredicate implements Predicate<Person> {
     /**
      * Constructs a {@code AgeContainsKeywordsPredicate}.
      *
-     * @param keywords A list of valid keywords
+     * @param keywords A list of valid age keywords
      */
     public AgeContainsKeywordsPredicate(Set<String> keywords) {
+        requireNonNull(keywords);
         for (String k : keywords) {
             checkArgument(isValidInput(k), MESSAGE_CONSTRAINTS);
         }
