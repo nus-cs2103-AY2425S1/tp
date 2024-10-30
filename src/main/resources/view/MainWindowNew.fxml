@@ -32,9 +32,7 @@
                     <MenuBar id="menu_bar" maxHeight="30.0" maxWidth="1200.0" minHeight="30.0" minWidth="1200.0" prefHeight="30.0" prefWidth="1200.0" style="-fx-background-color: #141a21" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                         <menus>
                             <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="File">
-                                    <MenuItem fx:id="closeMenuItem" text="Close" />
-                            </Menu>
-                            <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="Summary">
+                                    <MenuItem fx:id="closeMenuItem" text="Close" mnemonicParsing="false" onAction="#handleExit" />
                                 <MenuItem fx:id="summaryMenuItem" mnemonicParsing="false" onAction="#handleSummary" text="Summary" />
                             </Menu>
                             <Menu id="menu" mnemonicParsing="false" style="-fx-background-color: #0b0f14;" text="Help">
