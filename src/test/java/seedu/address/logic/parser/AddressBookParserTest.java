@@ -35,8 +35,10 @@ import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -109,7 +111,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_emergencyContact() throws Exception {
-        final EmergencyContact emergencyContact = new EmergencyContact("Lily", "12345678");
+        final EmergencyContact emergencyContact = new EmergencyContact(new Name("Lily"), new Phone("12345678"));
         EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
                 EmergencyContactCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContact.getName() + " "
@@ -139,7 +141,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 
     @Test
@@ -165,7 +168,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listIncomplete() throws Exception {
         assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD) instanceof ListIncompleteCommand);
-        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD + " 3") instanceof ListIncompleteCommand);
+        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD + " 3")
+                instanceof ListIncompleteCommand);
     }
 
     @Test

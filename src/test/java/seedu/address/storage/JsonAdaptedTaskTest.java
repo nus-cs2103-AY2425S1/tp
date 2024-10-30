@@ -15,9 +15,11 @@ public class JsonAdaptedTaskTest {
 
     private static final String VALID_DESCRIPTION = "Buy medication";
     private static final JsonAdaptedPerson VALID_PATIENT = new JsonAdaptedPerson(BENSON);
-    private static final JsonAdaptedPerson INVALID_PATIENT = new JsonAdaptedPerson("R@chel", BENSON.getPhone().value,
-            BENSON.getEmail().value, BENSON.getAddress().value, BENSON.getEmergencyContact().getName(),
-            BENSON.getEmergencyContact().getNumber(), BENSON.getTags().stream().map(JsonAdaptedTag::new).toList(),
+    private static final JsonAdaptedPerson INVALID_PATIENT = new JsonAdaptedPerson("R@chel",
+            BENSON.getPhone().value,
+            BENSON.getEmail().value, BENSON.getAddress().value, BENSON.getEmergencyContact().getName().toString(),
+            BENSON.getEmergencyContact().getNumber().toString(),
+            BENSON.getTags().stream().map(JsonAdaptedTag::new).toList(),
             BENSON.getPriorityLevel().getValue());
 
     @Test

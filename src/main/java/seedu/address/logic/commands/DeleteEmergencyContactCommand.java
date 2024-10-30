@@ -47,8 +47,8 @@ public class DeleteEmergencyContactCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() == null
-                || (personToEdit.getEmergencyContact().contactName == null
-                && personToEdit.getEmergencyContact().contactNumber == null)) {
+                || (personToEdit.getEmergencyContact().contactName.equals(new Name("No Name Entered"))
+                && personToEdit.getEmergencyContact().contactNumber.equals(new Phone("000")))) {
             return new CommandResult(generateNoEmergencyContactMessage(personToEdit));
         }
 

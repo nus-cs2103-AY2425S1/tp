@@ -23,8 +23,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "Billy";
-    public static final String DEFAULT_EMERGENCY_CONTACT_NUMBER = "77777777";
     public static final int DEFAULT_PRIORITY_LEVEL = 3;
 
     private Name name;
@@ -43,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        emergencyContact = new EmergencyContact("", "");
+        emergencyContact = new EmergencyContact(new Name("No Name Entered"), new Phone("000"));
         tags = new HashSet<>();
         priorityLevel = new PriorityLevel(DEFAULT_PRIORITY_LEVEL);
     }
@@ -105,7 +103,7 @@ public class PersonBuilder {
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmergencyContact(String emergencyContactName, String emergencyContactNumber) {
-        this.emergencyContact = new EmergencyContact(emergencyContactName, emergencyContactNumber);
+        this.emergencyContact = new EmergencyContact(new Name(emergencyContactName), new Phone(emergencyContactNumber));
         return this;
     }
 

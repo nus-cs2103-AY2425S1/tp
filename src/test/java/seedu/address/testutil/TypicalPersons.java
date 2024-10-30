@@ -44,12 +44,13 @@ public class TypicalPersons {
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withEmergencyContact("Rich", "")
+            .withEmergencyContact("Rich", "000")
             .withTags("friends").withPriorityLevel(3)
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withEmergencyContact("", "99999999").withPriorityLevel(3)
+            .withEmergencyContact("No Name Entered", "99999999")
+            .withPriorityLevel(3)
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withPriorityLevel(3)

@@ -12,11 +12,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 
 public class EmergencyContactCommandParserTest {
+    private static final Name NO_NAME = new Name("No Name Entered");
+    private static final Phone NO_PHONE = new Phone("000");
     private EmergencyContactCommandParser parser = new EmergencyContactCommandParser();
-    private final String nonEmptyEmergencyContactName = "Lily";
-    private final String nonEmptyEmergencyContactNumber = "12345678";
+    private final Name nonEmptyEmergencyContactName = new Name("Lily");
+    private final Phone nonEmptyEmergencyContactNumber = new Phone("12345678");
     @Test
     public void parse_indexSpecified_success() {
         // have remark
@@ -27,9 +31,9 @@ public class EmergencyContactCommandParserTest {
                 new EmergencyContact(nonEmptyEmergencyContactName, nonEmptyEmergencyContactNumber));
         assertParseSuccess(parser, userInput, expectedCommand);
         // no remark
-        userInput = targetIndex.getOneBased() + " " + PREFIX_NAME + " " + PREFIX_PHONE;
+        userInput = targetIndex.getOneBased() + " " + PREFIX_NAME + NO_NAME + " " + PREFIX_PHONE + NO_PHONE;
         expectedCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                new EmergencyContact("", ""));
+                new EmergencyContact(NO_NAME, NO_PHONE));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
