@@ -225,6 +225,36 @@ public class AddCommandTest {
         public void addDelivery(Person person, Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortByDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByName() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByPhone() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByEmail() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByRole() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void reversePersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

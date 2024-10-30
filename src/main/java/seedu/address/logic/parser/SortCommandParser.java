@@ -20,23 +20,32 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
-        if (AddressBookParser.getInspect()) {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_SORT);
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_SORT);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_SORT)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, (isAscending
-                        ? SortCommand.MESSAGE_USAGE_ASCENDING : SortCommand.MESSAGE_USAGE_DESCENDING)));
+        boolean isInspect = AddressBookParser.getInspect();
+        if (!arePrefixesPresent(argMultimap, PREFIX_SORT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            String messageUsage;
+            if (isInspect) {
+                messageUsage = isAscending
+                        ? SortCommand.MESSAGE_USAGE_ASCENDING_INSPECT
+                        : SortCommand.MESSAGE_USAGE_DESCENDING_INSPECT;
+            } else {
+                messageUsage = isAscending
+                        ? SortCommand.MESSAGE_USAGE_ASCENDING_MAIN
+                        : SortCommand.MESSAGE_USAGE_DESCENDING_MAIN;
+
             }
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT);
-
-            String attribute = ParserUtil.parseAttribute(argMultimap.getValue(PREFIX_SORT).get());
-            return new SortCommand(attribute, isAscending);
-        } else {
-            // Dummy string to trigger MESSAGE_FAILURE error in CommandResult instead of parsing error.
-            return new SortCommand("", isAscending);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT);
+
+        String attribute = isInspect
+                         ? ParserUtil.parseDeliveryAttribute(argMultimap.getValue(PREFIX_SORT).get())
+                         : ParserUtil.parseContactAttribute(argMultimap.getValue(PREFIX_SORT).get());
+
+        return new SortCommand(attribute, isAscending);
     }
 
     public static void setAscending(boolean isAscending) {

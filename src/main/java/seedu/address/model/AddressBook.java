@@ -92,6 +92,48 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sorts the address book by date and time, in ascending order.
+     */
+    public void sortByDate() {
+        persons.sortByDate();
+    }
+
+    /**
+     * Sorts the address book by name, in ascending order.
+     */
+    public void sortByName() {
+        persons.sortByName();
+    }
+
+    /**
+     * Sorts the address book by phone number, in ascending order.
+     */
+    public void sortByPhone() {
+        persons.sortByPhone();
+    }
+
+    /**
+     * Sorts the address book by email, in ascending order.
+     */
+    public void sortByEmail() {
+        persons.sortByEmail();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void sortByRole() {
+        persons.sortByRole();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void reversePersonList() {
+        persons.reversePersonList();
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

@@ -269,11 +269,11 @@ public class HelpWindow extends UiPart<Stage> {
         helpCards.add(listCommandCard);
 
         CommandHelpCard sortAscendingCommandCard = new CommandHelpCard(
-            SortCommand.COMMAND_WORD_ASCENDING, SortCommand.MESSAGE_USAGE_ASCENDING, "asort by/ cost"
+            SortCommand.COMMAND_WORD_ASCENDING, SortCommand.MESSAGE_USAGE_ASCENDING_INSPECT, "asort by/ cost"
         );
         helpCards.add(sortAscendingCommandCard);
         CommandHelpCard sortDescendingCommandCard = new CommandHelpCard(
-            SortCommand.COMMAND_WORD_DESCENDING, SortCommand.MESSAGE_USAGE_DESCENDING, "dsort by/ cost"
+            SortCommand.COMMAND_WORD_DESCENDING, SortCommand.MESSAGE_USAGE_DESCENDING_INSPECT, "dsort by/ cost"
         );
         helpCards.add(sortDescendingCommandCard);
 

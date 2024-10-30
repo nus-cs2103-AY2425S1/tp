@@ -19,7 +19,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+        setGuiSettings(new GuiSettings(1087, 732, 178, 79));
+        setAddressBookFilePath(Path.of("data/addressbook.json"));
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.

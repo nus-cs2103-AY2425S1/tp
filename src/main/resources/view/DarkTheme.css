@@ -1,6 +1,10 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: #ae8e75;
+    background-color: #ae8e75; /* Used in the default.html file */
+}
+
+.root {
+    -fx-background-color: #ae8e75; /*linear-gradient(to top, derive(#344969, 20%), #68b2a0);*/
 }
 
 /* Styles for archived delivery card */
@@ -13,7 +17,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
@@ -47,9 +51,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #344969;
+    -fx-control-inner-background: #344969;
+    -fx-background-color: #344969;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -84,80 +88,84 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent transparent rgba(255, 255, 255, 0.4);
+    -fx-border-width: 0 0 0 2;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-radius: 18;
+    -fx-border-width: 2;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: grey;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: transparent;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: transparent;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: transparent;
+     -fx-border-color: rgba(255, 255, 255, 0.4);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: grey;
 }
 
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .result-display .label {
@@ -172,8 +180,8 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: grey;
+    -fx-border-color: rgba(255, 255, 255, 0.4);
     -fx-border-width: 1px;
 }
 
@@ -182,17 +190,16 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;;
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: grey;
 }
 
 .context-menu .label {
@@ -200,7 +207,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: grey;
 }
 
 .menu-bar .label {
@@ -211,7 +218,7 @@
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: grey;
 }
 
 /*
@@ -221,10 +228,10 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #5e829a;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: grey;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
@@ -250,7 +257,7 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: grey;
     -fx-text-fill: white;
 }
 
@@ -264,11 +271,11 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: transparent;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: transparent;
 }
 
 .dialog-pane > *.label.content {
@@ -278,7 +285,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: transparent;
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -289,11 +296,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: rgba(255, 255, 255, 0.4);
     -fx-background-insets: 3;
 }
 
@@ -314,16 +321,30 @@
     -fx-padding: 8 1 8 1;
 }
 
+.personInfoTitle {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-padding: 10 0 10 15;
+}
+
 .personInfo {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 1;
-    -fx-padding: 10;
+    -fx-padding: 10 0 10 0;
 }
 
 #cardPane {
-    -fx-background-color: transparent;
+    -fx-background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.5),
+                                                     rgba(255, 255, 255, 0.45),
+                                                     rgba(255, 255, 255, 0.4),
+                                                     rgba(255, 255, 255, 0.35),
+                                                     rgba(255, 255, 255, 0.3));
+    -fx-background-radius: 20;
     -fx-border-width: 0;
 }
 
@@ -333,14 +354,25 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.5),
+                                                     rgba(255, 255, 255, 0.45),
+                                                     rgba(255, 255, 255, 0.4),
+                                                     rgba(255, 255, 255, 0.35),
+                                                     rgba(255, 255, 255, 0.3));
+    -fx-background-radius: 5;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #6b3202 #6b3202 #ffffff #6b3202;
     -fx-border-insets: 0;
     -fx-border-width: 1;
+    -fx-border-radius: 4;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: black;
+}
+
+#commandTextField:focused {
+    -fx-prompt-text-fill: transparent;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -348,8 +380,15 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: linear-gradient(to bottom, derive(#ae8e75, 50%),
+                                                     derive(#ae8e75, 55%),
+                                                     derive(#ae8e75, 50%),
+                                                     derive(#ae8e75, 45%),
+                                                     derive(#ae8e75, 40%));
     -fx-background-radius: 0;
+    -fx-border-color: #6b3202 #6b3202 #ffffff #6b3202;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
 }
 
 #tags {
@@ -359,11 +398,12 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: grey;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+    -fx-font-weight: bold;
 }
 
 #items {
@@ -373,9 +413,20 @@
 
 #items .label {
     -fx-text-fill: white;
-    -fx-background-color: #3B8132;
+    -fx-background-color: #6e401a;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+    -fx-font-weight: bold;
+}
+
+#personInfoPlaceholder {
+    -fx-background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.5),
+                                                     rgba(255, 255, 255, 0.45),
+                                                     rgba(255, 255, 255, 0.4),
+                                                     rgba(255, 255, 255, 0.35),
+                                                     rgba(255, 255, 255, 0.3));
+    -fx-background-radius: 20;
+    -fx-padding: 20 0 0 0;
 }

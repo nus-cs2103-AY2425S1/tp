@@ -58,6 +58,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role: " + getValue();
+        return String.valueOf(value);
     }
 }

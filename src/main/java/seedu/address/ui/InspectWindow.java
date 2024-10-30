@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The Inspect Window. Provides information about the contact being inspected
@@ -75,7 +79,6 @@ public class InspectWindow extends UiPart<Stage> {
     public InspectWindow(Stage primaryStage, Logic logic, Person person) {
         super(FXML, primaryStage);
 
-        //this.person = person;
         InspectWindow.person = person;
 
         // Set dependencies
@@ -135,18 +138,14 @@ public class InspectWindow extends UiPart<Stage> {
         VBox personInfoBox = new VBox();
         personInfoBox.setSpacing(20);
 
-        Label nameLabel = new Label("Name: " + InspectWindow.person.getName());
-        Label phoneLabel = new Label("Phone: " + InspectWindow.person.getPhone());
-        Label emailLabel = new Label("Email: " + InspectWindow.person.getEmail());
-        Label addressLabel = new Label("Address: " + InspectWindow.person.getAddress());
-        Label tagsLabel = new Label("Tags: " + InspectWindow.person.getTags());
-        nameLabel.getStyleClass().add("personInfo");
-        phoneLabel.getStyleClass().add("personInfo");
-        emailLabel.getStyleClass().add("personInfo");
-        addressLabel.getStyleClass().add("personInfo");
-        tagsLabel.getStyleClass().add("personInfo");
+        HBox nameField = createNormalField("Name", InspectWindow.person.getName().toString());
+        HBox phoneField = createNormalField("Phone", InspectWindow.person.getPhone().toString());
+        HBox emailField = createNormalField("Email", InspectWindow.person.getEmail().toString());
+        HBox addressField = createNormalField("Address", InspectWindow.person.getAddress().toString());
+        HBox tagsField = createTagField("Tags", InspectWindow.person.getTags());
+        HBox roleField = createNormalField("Role", InspectWindow.person.getRole().toString());
 
-        personInfoBox.getChildren().addAll(nameLabel, phoneLabel, emailLabel, addressLabel, tagsLabel);
+        personInfoBox.getChildren().addAll(nameField, phoneField, emailField, addressField, tagsField, roleField);
 
         DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getUnmodifiableDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
@@ -163,6 +162,50 @@ public class InspectWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         this.commandBox = commandBox;
+    }
+
+    /**
+     * Returns an HBox than has the format "fieldName: value" to be displayed on the UI
+     * @param fieldName name of the field to be displayed
+     * @param value value to be displayed
+     * @return HBox to be displayed
+     */
+    private HBox createNormalField(String fieldName, String value) {
+        HBox hBox = new HBox();
+        Label fieldNameLabel = new Label(fieldName + ": ");
+        Label valueLabel = new Label(value);
+
+        fieldNameLabel.getStyleClass().add("personInfoTitle");
+        fieldNameLabel.setMinWidth(80);
+        valueLabel.getStyleClass().add("personInfo");
+
+        hBox.getChildren().addAll(fieldNameLabel, valueLabel);
+        return hBox;
+    }
+
+    /**
+     * Returns an HBox than has the format "fieldName: tags" to be displayed on the UI
+     * @param fieldName name of the field to be displayed
+     * @param tags tags to be displayed
+     * @return HBox to be displayed
+     */
+    private HBox createTagField(String fieldName, Set<Tag> tags) {
+        HBox hBox = new HBox();
+        Label fieldNameLabel = new Label(fieldName + ": ");
+        FlowPane flowPane = new FlowPane();
+
+        fieldNameLabel.getStyleClass().add("personInfoTitle");
+        fieldNameLabel.setMinWidth(80);
+        flowPane.setId("tags");
+        flowPane.setStyle("-fx-padding: 10 0 10 0");
+
+        for (Tag tag : tags) {
+            Label tagLabel = new Label(tag.tagName);
+            flowPane.getChildren().add(tagLabel);
+        }
+
+        hBox.getChildren().addAll(fieldNameLabel, flowPane);
+        return hBox;
     }
 
     /**
@@ -229,6 +272,12 @@ public class InspectWindow extends UiPart<Stage> {
         windowY = primaryStage.getY();
         isMaximized = primaryStage.isMaximized();
         isFullScreen = primaryStage.isFullScreen();
+        System.out.println(windowWidth);
+        System.out.println(windowHeight);
+        System.out.println(windowX);
+        System.out.println(windowY);
+        System.out.println(isMaximized);
+        System.out.println(isFullScreen);
     }
 
     /**
