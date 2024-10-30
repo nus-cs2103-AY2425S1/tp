@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 import seedu.address.storage.Storage;
 
@@ -67,11 +66,6 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyPawPatrol getPawPatrol() {
         return model.getPawPatrol();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
     }
 
     @Override

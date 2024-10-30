@@ -4,10 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
+import static seedu.address.testutil.TypicalOwners.ALICE;
+import static seedu.address.testutil.TypicalOwners.getTypicalPawPatrol;
 import static seedu.address.testutil.TypicalPets.BELLA;
 
 import java.util.Arrays;
@@ -21,10 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.owner.exceptions.DuplicateOwnerException;
 import seedu.address.model.pet.Pet;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.TypicalOwners;
 
 public class PawPatrolTest {
@@ -33,7 +31,7 @@ public class PawPatrolTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), pawPatrol.getPersonList());
+        assertEquals(Collections.emptyList(), pawPatrol.getOwnerList());
     }
 
     @Test
@@ -51,36 +49,34 @@ public class PawPatrolTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-            .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        Owner editedAlice = new OwnerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        List<Owner> newPersons = Arrays.asList(ALICE, editedAlice);
         PawPatrolStub newData = new PawPatrolStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> pawPatrol.resetData(newData));
+        assertThrows(DuplicateOwnerException.class, () -> pawPatrol.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> pawPatrol.hasPerson(null));
+    public void hasOwner_nullOwner_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> pawPatrol.hasOwner(null));
     }
 
     @Test
-    public void hasPerson_personNotInPawPatrol_returnsFalse() {
-        assertFalse(pawPatrol.hasPerson(ALICE));
+    public void hasOwner_ownerNotInPawPatrol_returnsFalse() {
+        assertFalse(pawPatrol.hasOwner(ALICE));
     }
 
     @Test
-    public void hasPerson_personInPawPatrol_returnsTrue() {
-        pawPatrol.addPerson(ALICE);
-        assertTrue(pawPatrol.hasPerson(ALICE));
+    public void hasOwner_ownerInPawPatrol_returnsTrue() {
+        pawPatrol.addOwner(ALICE);
+        assertTrue(pawPatrol.hasOwner(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInPawPatrol_returnsTrue() {
-        pawPatrol.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-            .build();
-        assertTrue(pawPatrol.hasPerson(editedAlice));
+    public void hasPerson_ownerWithSameIdentityFieldsInPawPatrol_returnsTrue() {
+        pawPatrol.addOwner(ALICE);
+        Owner editedAlice = new OwnerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(pawPatrol.hasOwner(editedAlice));
     }
 
     @Test
@@ -113,15 +109,14 @@ public class PawPatrolTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> pawPatrol.getPersonList().remove(0));
+    public void getOwnerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> pawPatrol.getOwnerList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = PawPatrol.class.getCanonicalName() + "{persons=" + pawPatrol.getPersonList()
-            + ", owners=" + pawPatrol.getOwnerList() + ", pets=" + pawPatrol.getPetList()
-            + ", links=" + pawPatrol.getLinkList() + "}";
+        String expected = PawPatrol.class.getCanonicalName() + "{owners=" + pawPatrol.getOwnerList()
+            + ", pets=" + pawPatrol.getPetList() + ", links=" + pawPatrol.getLinkList() + "}";
         assertEquals(expected, pawPatrol.toString());
     }
 
@@ -130,18 +125,12 @@ public class PawPatrolTest {
      * constraints.
      */
     private static class PawPatrolStub implements ReadOnlyPawPatrol {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Owner> owners = FXCollections.observableArrayList();
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();
         private final ObservableList<Link> links = FXCollections.observableArrayList();
 
-        PawPatrolStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
-        }
-
-        @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        PawPatrolStub(Collection<Owner> persons) {
+            this.owners.setAll(persons);
         }
 
         @Override

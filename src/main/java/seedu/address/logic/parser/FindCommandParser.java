@@ -6,11 +6,9 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindPetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 
 /**
@@ -40,16 +38,12 @@ public class FindCommandParser implements Parser<FindCommand<?>> {
         String[] keywords = Arrays.copyOfRange(splitArgs, 1, splitArgs.length); // gets the rest of the args
 
         switch (entityType.toLowerCase()) {
-
         case "owner":
             return new FindOwnerCommand(new OwnerNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         case "pet":
             return new FindPetCommand(new PetNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         default:
-            // consider removing next 2 lines when PawPatrol is fully functional?
-            String[] nameKeywords = trimmedArgs.split("\\s+");
-            return new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 }

@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
+import static seedu.address.testutil.TypicalOwners.ALICE;
+import static seedu.address.testutil.TypicalOwners.HOON;
+import static seedu.address.testutil.TypicalOwners.IDA;
+import static seedu.address.testutil.TypicalOwners.getTypicalPawPatrol;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonPawPatrolStorageTest {
     }
 
     @Test
-    public void readPawPatrol_invalidPersonPawPatrol_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readPawPatrol("invalidPersonPawPatrol.json"));
+    public void readPawPatrol_invalidOwnerPawPatrol_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readPawPatrol("invalidOwnerPawPatrol.json"));
     }
 
     @Test
-    public void readPawPatrol_invalidAndValidPersonPawPatrol_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readPawPatrol("invalidAndValidPersonPawPatrol.json"));
+    public void readPawPatrol_invalidAndValidOwnerPawPatrol_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readPawPatrol("invalidAndValidOwnerPawPatrol.json"));
     }
 
     @Test
@@ -72,14 +72,14 @@ public class JsonPawPatrolStorageTest {
         assertEquals(original, new PawPatrol(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addOwner(HOON);
+        original.removeOwner(ALICE);
         jsonPawPatrolStorage.savePawPatrol(original, filePath);
         readBack = jsonPawPatrolStorage.readPawPatrol(filePath).get();
         assertEquals(original, new PawPatrol(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addOwner(IDA);
         jsonPawPatrolStorage.savePawPatrol(original); // file path not specified
         readBack = jsonPawPatrolStorage.readPawPatrol().get(); // file path not specified
         assertEquals(original, new PawPatrol(readBack));

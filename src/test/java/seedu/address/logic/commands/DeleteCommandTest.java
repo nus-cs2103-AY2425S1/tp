@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -162,18 +163,15 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteOwnerCommand = new DeleteOwnerCommand(targetIndex);
-        DeleteCommand deletePetCommand = new DeletePetCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-    }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(targetIndex);
+        String expectedOwnerCOmmand = DeleteOwnerCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        DeletePetCommand deletePetCommand = new DeletePetCommand(targetIndex);
+        String expectedPetCommand = DeletePetCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+
+        assertEquals(expectedOwnerCOmmand, deleteOwnerCommand.toString());
+        assertEquals(expectedPetCommand, deletePetCommand.toString());
     }
 
     /**

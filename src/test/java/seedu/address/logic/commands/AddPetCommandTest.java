@@ -24,7 +24,6 @@ import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PetBuilder;
 
@@ -98,11 +97,6 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
-
-        }
-
-        @Override
         public void setOwner(Owner target, Owner editedOwner) {
 
         }
@@ -148,11 +142,6 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            return false;
-        }
-
-        @Override
         public boolean hasOwner(Owner owner) {
             return false;
         }
@@ -165,11 +154,6 @@ public class AddPetCommandTest {
         @Override
         public boolean hasLink(Link link) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-
         }
 
         @Override
@@ -190,11 +174,6 @@ public class AddPetCommandTest {
         @Override
         public void deleteLinksWithId(String id) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-
         }
 
         @Override
@@ -223,11 +202,6 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return null;
-        }
-
-        @Override
         public ObservableList<Owner> getFilteredOwnerList() {
             return null;
         }
@@ -240,11 +214,6 @@ public class AddPetCommandTest {
         @Override
         public ObservableList<Link> getFilteredLinkList() {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-
         }
 
         @Override

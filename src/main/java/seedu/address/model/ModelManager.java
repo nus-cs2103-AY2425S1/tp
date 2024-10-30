@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -24,7 +23,6 @@ public class ModelManager implements Model {
 
     private final PawPatrol pawPatrol;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Owner> filteredOwners;
     private final FilteredList<Pet> filteredPets;
 
@@ -40,7 +38,6 @@ public class ModelManager implements Model {
 
         this.pawPatrol = new PawPatrol(pawPatrol);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.pawPatrol.getPersonList());
         filteredOwners = new FilteredList<>(this.pawPatrol.getOwnerList());
         filteredPets = new FilteredList<>(this.pawPatrol.getPetList());
         filteredLinks = new FilteredList<>(this.pawPatrol.getLinkList());
@@ -98,12 +95,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return pawPatrol.hasPerson(person);
-    }
-
-    @Override
     public boolean hasOwner(Owner owner) {
         requireNonNull(owner);
         return pawPatrol.hasOwner(owner);
@@ -119,11 +110,6 @@ public class ModelManager implements Model {
     public boolean hasLink(Link link) {
         requireNonNull(link);
         return pawPatrol.hasLink(link);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        pawPatrol.removePerson(target);
     }
 
     @Override
@@ -152,12 +138,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
-        pawPatrol.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
     public void addOwner(Owner owner) {
         pawPatrol.addOwner(owner);
         updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
@@ -175,13 +155,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        pawPatrol.setPerson(target, editedPerson);
-    }
-
-    @Override
     public void setOwner(Owner target, Owner editedOwner) {
         requireAllNonNull(target, editedOwner);
 
@@ -193,17 +166,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPet);
 
         pawPatrol.setPet(target, editedPet);
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedPawPatrol}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
     }
 
     /**
@@ -231,17 +193,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Link> getFilteredLinkList() {
         return filteredLinks;
-    }
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedPawPatrol}
-     */
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
     }
 
     /**
@@ -284,7 +235,6 @@ public class ModelManager implements Model {
 
         return pawPatrol.equals(otherModelManager.pawPatrol)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredOwners.equals(otherModelManager.filteredOwners)
                 && filteredPets.equals(otherModelManager.filteredPets);
     }

@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -21,7 +19,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            FindPersonCommand.MESSAGE_USAGE));
+            FindOwnerCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -37,17 +35,6 @@ public class FindCommandParserTest {
         // Test with an empty input string
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validArgs_returnsFindCommandForPerson() {
-        // no leading and trailing whitespaces
-        FindPersonCommand expectedFindCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
     @Test

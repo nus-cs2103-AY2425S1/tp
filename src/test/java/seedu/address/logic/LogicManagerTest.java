@@ -5,10 +5,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.IC_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalOwners.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,7 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddOwnerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListOwnerCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,11 +28,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.owner.Owner;
 import seedu.address.storage.JsonPawPatrolStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.OwnerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -80,11 +81,6 @@ public class LogicManagerTest {
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
-    }
-
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
     @Test
@@ -175,11 +171,11 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddOwnerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + IC_NUMBER_DESC_AMY;
+        Owner expectedOwner = new OwnerBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addOwner(expectedOwner);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
