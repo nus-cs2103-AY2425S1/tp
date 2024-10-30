@@ -228,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleAdvancedFilterByTags() {
-        fillCommandBox("advfilter t/[TAG] [OPERATOR] [VALUE]");
+        fillCommandBox("advfilter t/TAG OPERATOR VALUE");
     }
 
     /**

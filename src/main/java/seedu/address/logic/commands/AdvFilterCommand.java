@@ -19,7 +19,7 @@ public class AdvFilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by tag values.\n"
-            + "Parameters: [t/TAG OPERATOR VALUE]\n"
+            + "Parameters: t/TAG OPERATOR VALUE\n"
             + "Available Operators: [=, !=, <, <=, >, >=]\n"
             + "Example 1: " + COMMAND_WORD + " t/friends >= 1\n"
             + "Example 2: " + COMMAND_WORD + " t/priority != low\n";
