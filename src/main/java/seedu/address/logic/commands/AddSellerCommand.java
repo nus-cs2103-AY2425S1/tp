@@ -62,6 +62,7 @@ public class AddSellerCommand extends AddClientCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
 
         // Defensive programming: Ensure that toAdd is a valid seller and not null
         assert toAdd != null : "Seller to be added cannot be null";

@@ -16,6 +16,8 @@ public class MatchingPrice {
             "Matching price must be a non-negative integer smaller than 1,000,000 (thousand) "
             + "with only numeric characters";
     public static final String VALIDATION_REGEX = "\\d+";
+    public static final String REMOVE_ZERO_PADDING_REGEX = "^0+(?!$)";
+    public static final int MAX_PRICE = 999999;
     private static final Logger logger = LogsCenter.getLogger(MatchingPrice.class);
     public final String value;
 
@@ -31,7 +33,7 @@ public class MatchingPrice {
         checkArgument(isValidMatchingPrice(matchingPrice), MESSAGE_CONSTRAINTS);
         assert isValidMatchingPrice(matchingPrice) != false : "Bid string must be non-negative integer";
         logger.info("Matching Price object created: " + matchingPrice);
-        value = matchingPrice;
+        value = matchingPrice.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
     }
 
     /**
@@ -53,7 +55,19 @@ public class MatchingPrice {
      * Returns true if a given string is a valid Matching Price.
      */
     public static boolean isValidMatchingPrice(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        test = test.replaceFirst(REMOVE_ZERO_PADDING_REGEX, "");
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        if (Integer.parseInt(test) > MAX_PRICE) {
+            return false;
+        }
+        return true;
     }
 
     @Override

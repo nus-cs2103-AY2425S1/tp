@@ -37,7 +37,12 @@ public class UnitTest {
         assertFalse(Unit.isValidUnit("0-0")); // few digits in unit and level
         assertFalse(Unit.isValidUnit("149-1111")); // Too tall structure
         assertFalse(Unit.isValidUnit("148-111111")); // Too many units, limited to 6
-        assertFalse(Unit.isValidUnit("149-11111119")); // Too tall structure and too many units
+        assertFalse(Unit.isValidUnit("009-11111119")); // Too much padding in level for single digit number
+        assertFalse(Unit.isValidUnit("099-11111119")); // Too much padding in level for non-single digit number
+        assertFalse(Unit.isValidUnit("09-009")); // Too much padding in unit for single digit number
+        assertFalse(Unit.isValidUnit("09-099")); // Too much padding in unit for non-single digit number
+        assertFalse(Unit.isValidUnit("9-099")); // No padding in level for single digit number
+        assertFalse(Unit.isValidUnit("09-9")); // No padding in unit for single digit number
 
         // valid name
         assertTrue(Unit.isValidUnit("00-00")); // alphabets only
