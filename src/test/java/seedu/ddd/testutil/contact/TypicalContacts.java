@@ -48,6 +48,7 @@ public class TypicalContacts {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
+            .withTags()
             .withId(3)
             .build();
     public static final Vendor DANIEL = new VendorBuilder()
@@ -64,6 +65,7 @@ public class TypicalContacts {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
+            .withTags()
             .withId(5)
             .build();
     public static final Client FIONA = new ClientBuilder()
@@ -71,6 +73,7 @@ public class TypicalContacts {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
+            .withTags()
             .withId(6)
             .build();
     public static final Vendor GEORGE = new VendorBuilder()
@@ -79,6 +82,7 @@ public class TypicalContacts {
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withService("catering")
+            .withTags()
             .withId(7)
             .build();
 
@@ -88,12 +92,14 @@ public class TypicalContacts {
             .withPhone("8482424")
             .withEmail("stefan@example.com")
             .withAddress("little india")
+            .withTags()
             .withId(8)
             .build();
     public static final Client IDA = new ClientBuilder()
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
+            .withTags()
             .withId(9)
             .build();
 

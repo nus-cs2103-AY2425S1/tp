@@ -26,6 +26,14 @@ public class TypicalAddressBook {
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
         }
+        int maxContactId = getTypicalContacts().stream()
+                .map(Contact::getId).map(id -> id.id)
+                .max(Integer::compareTo).orElse(-1);
+        int maxEventId = getTypicalEvents().stream()
+                .map(Event::getEventId).map(id -> id.id)
+                .max(Integer::compareTo).orElse(-1);
+        AddressBook.setNextContactId(maxContactId + 1);
+        AddressBook.setNextEventId(maxEventId + 1);
         return ab;
     }
 }
