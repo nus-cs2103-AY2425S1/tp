@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays all the information about a {@code Person}.
  */
 public class PersonCardFull extends UiPart<Region> {
 
@@ -49,7 +49,7 @@ public class PersonCardFull extends UiPart<Region> {
     private Label remark;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCardFull} with the given {@code Person} and index to display.
      */
     public PersonCardFull(Person person, int displayedIndex) {
         super(FXML);
@@ -109,7 +109,7 @@ public class PersonCardFull extends UiPart<Region> {
 
     private void setEmailLabel(Person personToView) {
         if (personToView.hasEmail()) {
-            email.setText(personToView.getEmail().get().value);
+            email.setText("Email: " + personToView.getEmail().get().value);
             email.setManaged(true);
         } else {
             email.setText("");
@@ -119,7 +119,7 @@ public class PersonCardFull extends UiPart<Region> {
 
     private void setAddressLabel(Person personToView) {
         if (personToView.hasAddress()) {
-            address.setText(personToView.getAddress().get().value);
+            address.setText("Address: " + personToView.getAddress().get().value);
             address.setManaged(true);
         } else {
             address.setText("");
@@ -128,7 +128,7 @@ public class PersonCardFull extends UiPart<Region> {
     }
 
     private void setPhoneLabel(Person personToView) {
-        phone.setText(personToView.getPhone().value);
+        phone.setText("Phone Number: " + personToView.getPhone().value);
     }
 
     private void setNameLabel(Person personToView) {
