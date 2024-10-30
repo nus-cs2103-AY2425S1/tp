@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -10,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -80,7 +81,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -93,21 +94,14 @@ public class EditCommand extends Command {
         List<Participation> participationsToDelete = model.getParticipationList()
                 .filtered(participation -> participation.getStudent().equals(personToEdit));
 
-        //Make list of participations with updated details
-        List<Participation> participationsToAdd = new ArrayList<Participation>();
-        for (int i = 0; i < participationsToDelete.size(); i++) {
-            participationsToAdd.add(new Participation(editedPerson, participationsToDelete.get(i).getTutorial(),
-                    participationsToDelete.get(i).getAttendanceList()));
+        if (participationsToDelete.size() < 1) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToEdit.getName()));
         }
 
-        //Remove participations with corresponding student from participations list
-        for (int i = 0; i < participationsToDelete.size(); i++) {
-            model.deleteParticipation(participationsToDelete.get(i));
-        }
-
-        //Add new participations to participations list
-        for (int i = 0; i < participationsToAdd.size(); i++) {
-            model.addParticipation(participationsToAdd.get(i));
+        for (Participation participation: participationsToDelete) {
+            Participation updatedParticipation = new Participation(editedPerson, participation.getTutorial(),
+                    participation.getAttendanceList());
+            model.setParticipation(participation, updatedParticipation);
         }
 
         model.setPerson(personToEdit, editedPerson);

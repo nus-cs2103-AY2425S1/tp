@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -60,21 +60,14 @@ public class MarkPaidCommand extends Command {
         List<Participation> participationsToDelete = model.getParticipationList()
                 .filtered(participation -> participation.getStudent().equals(personToMarkPayment));
 
-        //Make list of participations with updated payment
-        List<Participation> participationsToAdd = new ArrayList<Participation>();
-        for (int i = 0; i < participationsToDelete.size(); i++) {
-            participationsToAdd.add(new Participation(markedPerson, participationsToDelete.get(i).getTutorial(),
-                    participationsToDelete.get(i).getAttendanceList()));
+        if (participationsToDelete.size() < 1) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToMarkPayment.getName()));
         }
 
-        //Remove participations with corresponding student from participations list
-        for (int i = 0; i < participationsToDelete.size(); i++) {
-            model.deleteParticipation(participationsToDelete.get(i));
-        }
-
-        //Add new participations to participations list
-        for (int i = 0; i < participationsToAdd.size(); i++) {
-            model.addParticipation(participationsToAdd.get(i));
+        for (Participation participation : participationsToDelete) {
+            Participation updatedParticipation = new Participation(markedPerson,
+                    participation.getTutorial(), participation.getAttendanceList());
+            model.setParticipation(participation, updatedParticipation);
         }
 
         model.setPerson(personToMarkPayment, markedPerson);
