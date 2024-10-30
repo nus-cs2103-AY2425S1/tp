@@ -177,15 +177,15 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 Parameter | Requirements | Explanation
 --- | --- | ---
-`n/NAME` | Required | Client's name.
-`p/PHONE_NUMBER` | Required | Client's phone number.
+`n/NAME` | Required; Must alphanumeric and be at most 40 characters; Must be unique | Client's name.
+`p/PHONE_NUMBER` | Required; Must be between 3 and 15 digits | Client's phone number.
 `e/EMAIL` | Required | Client's email address.
-`a/ADDRESS` | Required | Client's address.
+`a/ADDRESS` | Required; Must be at most 80 characters | Client's address.
 `vrn/CAR_VRN` | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
 `vin/CAR_VIN` | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
-`make/CAR_MAKE` | Optional; Required if adding a car; First letter must be capitalized | Car's make.
-`model/CAR_MODEL` | Optional; Required if adding a car; First letter must be capitalized | Car's model.
-`i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.
+`make/CAR_MAKE` | Optional; Required if adding a car; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
+`model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
+`i/ISSUE` | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.
 
 **Notes:**
 
@@ -225,8 +225,8 @@ Parameter | Requirements | Explanation
 `INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
 `vrn/CAR_VRN` | Required; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
 `vin/CAR_VIN` | Required; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
-`make/CAR_MAKE` | Required; First letter must be capitalized | Car's make.
-`model/CAR_MODEL` | Required; First letter must be capitalized | Car's model.
+`make/CAR_MAKE` | Required; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
+`model/CAR_MODEL` | Required; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
 
 **Notes:**
 
@@ -329,15 +329,15 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 Parameter | Requirements | Explanation
 --- | --- | ---
 `INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
-`n/NAME` | Optional | New name of the client.
-`p/PHONE` | Optional | New phone number of the client.
+`n/NAME` | Optional; Must alphanumeric and be at most 40 characters; Must be unique | New name of the client.
+`p/PHONE` | Optional; Must be between 3 and 15 digits | New phone number of the client.
 `e/EMAIL` | Optional | New email address of the client.
-`a/ADDRESS` | Optional | New address of the client.
+`a/ADDRESS` | Optional; Must be at most 80 characters | New address of the client.
 `vrn/CAR_VRN` | Optional; Must follow [VRN format](#glossary) and be unique | New [Vehicle Registration Number](#glossary) of the client's car.
 `vin/CAR_VIN` | Optional; Must be a unique 17-character alphanumeric string | New [Vehicle Identification Number](#glossary) of the client's car.
-`make/CAR_MAKE` | Optional; First letter must be capitalized | New make of the client's car.
-`model/CAR_MODEL` | Optional; First letter must be capitalized | New model of the client's car.
-`i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.
+`make/CAR_MAKE` | Optional; First letter must be capitalized; Must be at most 40 characters; No spaces | New make of the client's car.
+`model/CAR_MODEL` | Optional; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | New model of the client's car.
+`i/ISSUE` | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.
 
 **Notes:**
 
@@ -532,18 +532,18 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 <h2 style="color: #2980B9;"> <i class="fas fa-terminal icon"></i> Command Summary</h2>
 
-Action             | Format & Examples
--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br> e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br> e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
-**Add Car**   | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ` <br>e.g., `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
-**Delete Car**   | `del-car INDEX`<br>e.g., `del-car 1`
-**List Clients**   | `list`
-**Edit Client**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit 2 n/Betsy Crower i/`
-**Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH9514P`
-**View Client**   | `view INDEX`<br>e.g., `view 1`
-**Delete Client**  | `del-client INDEX`<br>e.g., `del-client 3`
-**Clear**          | `clear`
-**Exit**           | `exit`
-**Help**           | `help`
+| Action            | Format         | Examples              |
+|-------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Client**    | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>`add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels` |
+| **Add Car**       | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL`   | `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`           |
+| **Delete Car**    | `del-car INDEX`            | `del-car 1`    |
+| **List Clients**  | `list` |   |
+| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/johndoe@example.com`<br>`edit 2 n/Betsy Crower i/`    |
+| **Find Clients**  | `find KEYWORD [MORE_KEYWORDS]`      | `find John`<br>`find SJH9514P`             |
+| **View Client**   | `view INDEX`                    | `view 1`     |
+| **Delete Client** | `del-client INDEX`   | `del-client 3`          |
+| **Clear**         | `clear`       |              |
+| **Exit**          | `exit`                |                 |
+| **Help**          | `help`               |                 |
 
 Back to Features [section](#features).

@@ -38,7 +38,12 @@ public class CarMakeTest {
         assertTrue(CarMake.isValidCarMake("Hyundai")); // alphabets only
         assertTrue(CarMake.isValidCarMake("Bu94t1")); // alphanumeric characters
         assertTrue(CarMake.isValidCarMake("HYUNDAI")); // all capital letters
-        assertTrue(CarMake.isValidCarMake("SuperLongCarMakeNameTest")); // long makes
+
+        // test for length of make (40 characters)
+        assertTrue(CarMake.isValidCarMake("SuperLongCarMakeNameTest")); // 24
+        assertTrue(CarMake.isValidCarMake("A12345678901234567890123456789012345678")); // 39 characters
+        assertTrue(CarMake.isValidCarMake("A123456789012345678901234567890123456789")); // 40 characters
+        assertFalse(CarMake.isValidCarMake("A1234567890123456789012345678901234567890")); // 41 characters
     }
 
     @Test

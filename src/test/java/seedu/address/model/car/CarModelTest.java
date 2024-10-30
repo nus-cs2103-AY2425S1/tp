@@ -38,7 +38,14 @@ public class CarModelTest {
         assertTrue(CarModel.isValidCarModel("370z")); // alphanumeric characters
         assertTrue(CarModel.isValidCarModel("Kona 1.6T")); // alphanumeric characters
         assertTrue(CarModel.isValidCarModel("KONA")); // all capital letters
-        assertTrue(CarModel.isValidCarModel("Super Long Car Model Name For Test-123.456")); // long models
+
+        // test for length of model
+        assertTrue(CarModel.isValidCarModel("A12345678901234567890123456789012345678")); // 39 characters
+        assertTrue(CarModel.isValidCarModel("A123456789012345678901234567890123456789")); // 40 characters
+        assertFalse(CarModel.isValidCarModel("A1234567890123456789012345678901234567890")); // 41 characters
+        assertFalse(CarModel.isValidCarModel("A12345678901234567890123456789012345678901")); // 42 characters
+        assertFalse(CarModel.isValidCarModel("A123456789012345678901234567890123456789012")); // 43 characters
+        assertFalse(CarModel.isValidCarModel("Super Long Car Model Name For Test-123.456")); // long models
     }
 
     @Test
