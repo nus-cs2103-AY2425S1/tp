@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Supplier extends Person {
 
-    private final List<SupplyOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
+    private final List<SupplierOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
     private final Ingredients ingredientsSupplied; // list of ingredients supplied by the supplier
 
     /**
@@ -29,15 +29,15 @@ public class Supplier extends Person {
         this.openSupplyOrders = new ArrayList<>();
     }
 
-    public List<SupplyOrder> getOpenSupplyOrders() {
+    public List<SupplierOrder> getOpenSupplyOrders() {
         return openSupplyOrders;
     }
 
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
+    public void addSupplyOrder(SupplierOrder supplyOrder) {
         openSupplyOrders.add(supplyOrder);
     }
 
-    public void removeSupplyOrder(SupplyOrder supplyOrder) {
+    public void removeSupplyOrder(SupplierOrder supplyOrder) {
         openSupplyOrders.remove(supplyOrder);
     }
 

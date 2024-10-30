@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.order.SupplierOrderList;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.product.Ingredient;
@@ -39,7 +39,7 @@ public class MarkSupplierOrderCommand extends Command {
         }
 
         // Retrieve the supplier order at the target index
-        SupplyOrder supplyOrder = supplierOrderList.getOrders().get(targetIndex - 1);
+        SupplierOrder supplyOrder = supplierOrderList.getOrders().get(targetIndex - 1);
 
         // Check if the order is already completed
         if (supplyOrder.getStatus() == OrderStatus.COMPLETED) {

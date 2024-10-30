@@ -6,25 +6,24 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplierOrder;
 
 import java.util.logging.Logger;
 
 /**
  * Panel containing the list of persons.
  */
-public class SupplyOrderListPanel extends UiPart<Region> {
-    private static final String FXML = "SupplyOrderListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(SupplyOrderListPanel.class);
+public class SupplierOrderListPanel extends UiPart<Region> {
+    private static final String FXML = "SupplierOrderListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(SupplierOrderListPanel.class);
 
     @FXML
-    private ListView<SupplyOrder> orderListView;
+    private ListView<SupplierOrder> orderListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public SupplyOrderListPanel(ObservableList<SupplyOrder> orderList) {
+    public SupplierOrderListPanel(ObservableList<SupplierOrder> orderList) {
         super(FXML);
         orderListView.setItems(orderList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
@@ -33,16 +32,16 @@ public class SupplyOrderListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class OrderListViewCell extends ListCell<SupplyOrder> {
+    class OrderListViewCell extends ListCell<SupplierOrder> {
         @Override
-        protected void updateItem(SupplyOrder order, boolean empty) {
+        protected void updateItem(SupplierOrder order, boolean empty) {
             super.updateItem(order, empty);
 
             if (empty || order == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SupplyOrderCard(order, getIndex() + 1).getRoot());
+                setGraphic(new SupplierOrderCard(order, getIndex() + 1).getRoot());
             }
         }
     }

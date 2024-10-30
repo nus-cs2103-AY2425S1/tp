@@ -8,7 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.SupplierOrderList;
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplierOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.*;
 
@@ -100,10 +100,10 @@ public interface Model {
 
     void addCustomerOrder(CustomerOrder customerOrder);
 
-    void addSupplyOrder(SupplyOrder supplyOrder);
+    void addSupplyOrder(SupplierOrder supplyOrder);
 
 
-    ObservableList<SupplyOrder> getSupplyOrderObservableList();
+    ObservableList<SupplierOrder> getSupplyOrderObservableList();
 
     ObservableList<CustomerOrder> getCustomerOrderObservableList();
 

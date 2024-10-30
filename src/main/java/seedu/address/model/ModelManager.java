@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.*;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
@@ -33,7 +32,7 @@ public class ModelManager implements Model {
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
     private final SupplierOrderList supplierOrderList;
     private final CustomerOrderList customerOrderList;
-    private final ObservableList<SupplyOrder> supplyOrderObservableList;
+    private final ObservableList<SupplierOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory = new Inventory(ingredientCatalogue);
 
@@ -148,7 +147,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
+    public void addSupplyOrder(SupplierOrder supplyOrder) {
         supplierOrderList.addOrder(supplyOrder);
     }
 
@@ -162,7 +161,7 @@ public class ModelManager implements Model {
         return supplierOrderList;
     }
 
-    public ObservableList<SupplyOrder> getSupplyOrderObservableList() {
+    public ObservableList<SupplierOrder> getSupplyOrderObservableList() {
         return supplyOrderObservableList;
     }
 
